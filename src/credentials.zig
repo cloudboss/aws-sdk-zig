@@ -5,6 +5,7 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 const imds = @import("imds.zig");
+const ecs = @import("ecs.zig");
 
 /// AWS credentials for request signing
 pub const Credentials = struct {
@@ -31,6 +32,8 @@ pub const CredentialsProvider = union(enum) {
     file: FileProvider,
     /// Load from EC2 instance metadata service
     imds: ImdsProvider,
+    /// Load from ECS container metadata service
+    ecs: EcsProvider,
     /// Automatic credential chain (environment -> file -> imds -> ecs)
     chain: ChainProvider,
 
@@ -41,6 +44,7 @@ pub const CredentialsProvider = union(enum) {
             .environment => getFromEnvironment(),
             .file => |*f| f.load(allocator),
             .imds => |*i| i.load(allocator),
+            .ecs => |*e| e.load(allocator),
             .chain => |*c| c.getCredentials(allocator),
         };
     }
@@ -101,6 +105,39 @@ pub const ImdsProvider = struct {
         if (self.client) |*client| {
             client.deinit();
         }
+    }
+};
+
+/// ECS container credential provider
+pub const EcsProvider = struct {
+    provider: ?ecs.Provider = null,
+
+    const Self = @This();
+
+    /// Load credentials from ECS container metadata service
+    pub fn load(self: *Self, allocator: Allocator) !Credentials {
+        if (self.provider == null) {
+            self.provider = ecs.Provider.init(allocator);
+        }
+
+        var ecs_creds = try self.provider.?.getCredentials();
+        defer ecs_creds.deinit();
+
+        // Copy strings since ecs_creds will be freed
+        const access_key = try allocator.dupe(u8, ecs_creds.access_key_id);
+        errdefer allocator.free(access_key);
+
+        const secret_key = try allocator.dupe(u8, ecs_creds.secret_access_key);
+        errdefer allocator.free(secret_key);
+
+        const token = try allocator.dupe(u8, ecs_creds.token);
+
+        return Credentials{
+            .access_key_id = access_key,
+            .secret_access_key = secret_key,
+            .session_token = token,
+            .expiration = ecs_creds.expiration,
+        };
     }
 };
 
@@ -176,14 +213,16 @@ pub const ChainProvider = struct {
     profile: ?[]const u8 = null,
     /// IMDS provider (reused across calls)
     imds_provider: ?ImdsProvider = null,
+    /// ECS provider (reused across calls)
+    ecs_provider: ?EcsProvider = null,
 
     const Self = @This();
 
     const ProviderType = enum {
         environment,
         file,
+        ecs,
         imds,
-        // Future: ecs
     };
 
     /// Get credentials, using cache if valid
@@ -207,7 +246,7 @@ pub const ChainProvider = struct {
         }
 
         // Try each provider in order
-        const providers = [_]ProviderType{ .environment, .file, .imds };
+        const providers = [_]ProviderType{ .environment, .file, .ecs, .imds };
         for (providers) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
                 self.cached = creds;
@@ -228,6 +267,12 @@ pub const ChainProvider = struct {
             .file => blk: {
                 var fp = FileProvider{ .profile = self.profile };
                 break :blk fp.load(allocator);
+            },
+            .ecs => blk: {
+                if (self.ecs_provider == null) {
+                    self.ecs_provider = EcsProvider{};
+                }
+                break :blk self.ecs_provider.?.load(allocator);
             },
             .imds => blk: {
                 if (self.imds_provider == null) {
