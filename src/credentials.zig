@@ -28,20 +28,22 @@ pub const CredentialsProvider = union(enum) {
     environment: void,
     /// Load from shared credentials file (~/.aws/credentials)
     file: FileProvider,
-    // Future: imds, ecs, chain, etc.
+    /// Automatic credential chain (environment -> file -> imds -> ecs)
+    chain: ChainProvider,
 
     /// Retrieve credentials from this provider
     pub fn getCredentials(self: *CredentialsProvider, allocator: Allocator) !Credentials {
         return switch (self.*) {
             .static => |creds| creds,
             .environment => getFromEnvironment(),
-            .file => |*f| try f.load(allocator),
+            .file => |*f| f.load(allocator),
+            .chain => |*c| c.getCredentials(allocator),
         };
     }
 };
 
 /// Load credentials from environment variables
-fn getFromEnvironment() !Credentials {
+pub fn getFromEnvironment() !Credentials {
     const access_key = std.posix.getenv("AWS_ACCESS_KEY_ID") orelse
         return error.CredentialsNotFound;
     const secret_key = std.posix.getenv("AWS_SECRET_ACCESS_KEY") orelse
@@ -112,6 +114,76 @@ pub const FileProvider = struct {
 
         // 3. Default
         return "default";
+    }
+};
+
+/// Automatic credential chain provider
+/// Tries providers in order: environment -> file -> imds -> ecs
+pub const ChainProvider = struct {
+    /// Cached credentials from last successful retrieval
+    cached: ?Credentials = null,
+    /// Which provider succeeded last time (for efficiency on refresh)
+    successful_provider: ?ProviderType = null,
+    /// Profile for file provider
+    profile: ?[]const u8 = null,
+
+    const Self = @This();
+
+    const ProviderType = enum {
+        environment,
+        file,
+        // Future: imds, ecs
+    };
+
+    /// Get credentials, using cache if valid
+    pub fn getCredentials(self: *Self, allocator: Allocator) !Credentials {
+        // Return cached credentials if still valid
+        if (self.cached) |creds| {
+            if (!creds.isExpired()) {
+                return creds;
+            }
+        }
+
+        // If we previously succeeded with a provider, try it first
+        if (self.successful_provider) |provider| {
+            if (self.tryProvider(allocator, provider)) |creds| {
+                self.cached = creds;
+                return creds;
+            } else |_| {
+                // Provider failed, clear it and try the full chain
+                self.successful_provider = null;
+            }
+        }
+
+        // Try each provider in order
+        const providers = [_]ProviderType{ .environment, .file };
+        for (providers) |provider| {
+            if (self.tryProvider(allocator, provider)) |creds| {
+                self.cached = creds;
+                self.successful_provider = provider;
+                return creds;
+            } else |_| {
+                // Continue to next provider
+            }
+        }
+
+        return error.CredentialsNotFound;
+    }
+
+    /// Try a specific provider
+    fn tryProvider(self: *Self, allocator: Allocator, provider: ProviderType) !Credentials {
+        return switch (provider) {
+            .environment => getFromEnvironment(),
+            .file => blk: {
+                var fp = FileProvider{ .profile = self.profile };
+                break :blk fp.load(allocator);
+            },
+        };
+    }
+
+    /// Clear cached credentials (forces refresh on next call)
+    pub fn clearCache(self: *Self) void {
+        self.cached = null;
     }
 };
 
@@ -292,4 +364,46 @@ test "parseCredentialsFile with comments and whitespace" {
     const creds = try parseCredentialsFile(content, "default");
     try std.testing.expectEqualStrings("AKIAIOSFODNN7EXAMPLE", creds.access_key_id);
     try std.testing.expectEqualStrings("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY", creds.secret_access_key);
+}
+
+test "chain provider caches credentials" {
+    var chain = ChainProvider{};
+
+    // Manually set cached credentials
+    chain.cached = Credentials{
+        .access_key_id = "CACHED_KEY",
+        .secret_access_key = "CACHED_SECRET",
+        .expiration = std.time.timestamp() + 3600, // Valid for 1 hour
+    };
+
+    const creds = try chain.getCredentials(std.testing.allocator);
+    try std.testing.expectEqualStrings("CACHED_KEY", creds.access_key_id);
+}
+
+test "chain provider refreshes expired credentials" {
+    var chain = ChainProvider{};
+
+    // Set expired cached credentials
+    chain.cached = Credentials{
+        .access_key_id = "EXPIRED_KEY",
+        .secret_access_key = "EXPIRED_SECRET",
+        .expiration = 0, // Already expired
+    };
+
+    // This should try to refresh - will fail without env vars or file
+    const result = chain.getCredentials(std.testing.allocator);
+    try std.testing.expectError(error.CredentialsNotFound, result);
+}
+
+test "chain provider clear cache" {
+    var chain = ChainProvider{};
+
+    chain.cached = Credentials{
+        .access_key_id = "test",
+        .secret_access_key = "test",
+    };
+
+    try std.testing.expect(chain.cached != null);
+    chain.clearCache();
+    try std.testing.expect(chain.cached == null);
 }

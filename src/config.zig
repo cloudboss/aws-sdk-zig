@@ -5,7 +5,9 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
-const CredentialsProvider = @import("credentials.zig").CredentialsProvider;
+const credentials_mod = @import("credentials.zig");
+const CredentialsProvider = credentials_mod.CredentialsProvider;
+const ChainProvider = credentials_mod.ChainProvider;
 
 /// Options for Config.load()
 pub const LoadOptions = struct {
@@ -45,9 +47,10 @@ pub const Config = struct {
         const region = try resolveRegion(allocator, options);
         errdefer allocator.free(region);
 
-        // Default to environment credentials for now
-        // TODO: Use credential chain when implemented
-        const credentials = options.credentials orelse CredentialsProvider{ .environment = {} };
+        // Default to credential chain (environment -> file -> imds -> ecs)
+        const credentials = options.credentials orelse CredentialsProvider{
+            .chain = ChainProvider{ .profile = options.profile },
+        };
 
         return Self{
             .region = region,
