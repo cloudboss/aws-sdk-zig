@@ -9,12 +9,14 @@ pub const signing = @import("signing.zig");
 pub const http = @import("http.zig");
 pub const config = @import("config.zig");
 pub const errors = @import("errors.zig");
+pub const imds = @import("imds.zig");
 
 // Re-exports
 pub const Credentials = credentials.Credentials;
 pub const CredentialsProvider = credentials.CredentialsProvider;
 pub const Config = config.Config;
 pub const Diagnostic = errors.Diagnostic;
+pub const ImdsClient = imds.Client;
 
 test {
     std.testing.refAllDecls(@This());

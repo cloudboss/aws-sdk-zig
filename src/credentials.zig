@@ -4,6 +4,7 @@
 
 const std = @import("std");
 const Allocator = std.mem.Allocator;
+const imds = @import("imds.zig");
 
 /// AWS credentials for request signing
 pub const Credentials = struct {
@@ -28,6 +29,8 @@ pub const CredentialsProvider = union(enum) {
     environment: void,
     /// Load from shared credentials file (~/.aws/credentials)
     file: FileProvider,
+    /// Load from EC2 instance metadata service
+    imds: ImdsProvider,
     /// Automatic credential chain (environment -> file -> imds -> ecs)
     chain: ChainProvider,
 
@@ -37,6 +40,7 @@ pub const CredentialsProvider = union(enum) {
             .static => |creds| creds,
             .environment => getFromEnvironment(),
             .file => |*f| f.load(allocator),
+            .imds => |*i| i.load(allocator),
             .chain => |*c| c.getCredentials(allocator),
         };
     }
@@ -55,6 +59,50 @@ pub fn getFromEnvironment() !Credentials {
         .session_token = std.posix.getenv("AWS_SESSION_TOKEN"),
     };
 }
+
+/// IMDS-based credential provider (EC2 instance metadata)
+pub const ImdsProvider = struct {
+    client: ?imds.Client = null,
+    endpoint: []const u8 = imds.default_endpoint,
+
+    const Self = @This();
+
+    /// Load credentials from IMDS
+    pub fn load(self: *Self, allocator: Allocator) !Credentials {
+        // Initialize client if needed
+        if (self.client == null) {
+            self.client = imds.Client.init(allocator, .{
+                .endpoint = self.endpoint,
+            });
+        }
+
+        var client = &self.client.?;
+        var iam_creds = try client.getIamCredentials();
+        defer iam_creds.deinit();
+
+        // Copy strings since iam_creds will be freed
+        const access_key = try allocator.dupe(u8, iam_creds.access_key_id);
+        errdefer allocator.free(access_key);
+
+        const secret_key = try allocator.dupe(u8, iam_creds.secret_access_key);
+        errdefer allocator.free(secret_key);
+
+        const token = try allocator.dupe(u8, iam_creds.token);
+
+        return Credentials{
+            .access_key_id = access_key,
+            .secret_access_key = secret_key,
+            .session_token = token,
+            .expiration = iam_creds.expiration,
+        };
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.client) |*client| {
+            client.deinit();
+        }
+    }
+};
 
 /// File-based credential provider (~/.aws/credentials)
 pub const FileProvider = struct {
@@ -126,13 +174,16 @@ pub const ChainProvider = struct {
     successful_provider: ?ProviderType = null,
     /// Profile for file provider
     profile: ?[]const u8 = null,
+    /// IMDS provider (reused across calls)
+    imds_provider: ?ImdsProvider = null,
 
     const Self = @This();
 
     const ProviderType = enum {
         environment,
         file,
-        // Future: imds, ecs
+        imds,
+        // Future: ecs
     };
 
     /// Get credentials, using cache if valid
@@ -156,7 +207,7 @@ pub const ChainProvider = struct {
         }
 
         // Try each provider in order
-        const providers = [_]ProviderType{ .environment, .file };
+        const providers = [_]ProviderType{ .environment, .file, .imds };
         for (providers) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
                 self.cached = creds;
@@ -178,12 +229,25 @@ pub const ChainProvider = struct {
                 var fp = FileProvider{ .profile = self.profile };
                 break :blk fp.load(allocator);
             },
+            .imds => blk: {
+                if (self.imds_provider == null) {
+                    self.imds_provider = ImdsProvider{};
+                }
+                break :blk self.imds_provider.?.load(allocator);
+            },
         };
     }
 
     /// Clear cached credentials (forces refresh on next call)
     pub fn clearCache(self: *Self) void {
         self.cached = null;
+    }
+
+    /// Clean up resources
+    pub fn deinit(self: *Self) void {
+        if (self.imds_provider) |*provider| {
+            provider.deinit();
+        }
     }
 };
 
