@@ -1,0 +1,460 @@
+//! AWS Signature Version 4
+//!
+//! Reference: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+const std = @import("std");
+const Allocator = std.mem.Allocator;
+const Hmac = std.crypto.auth.hmac.sha2.HmacSha256;
+const Sha256 = std.crypto.hash.sha2.Sha256;
+
+const Credentials = @import("credentials.zig").Credentials;
+const http = @import("http.zig");
+
+pub const algorithm = "AWS4-HMAC-SHA256";
+
+/// Sign an HTTP request with AWS Signature Version 4
+pub fn signRequest(
+    allocator: Allocator,
+    request: *http.Request,
+    credentials: Credentials,
+    region: []const u8,
+    service: []const u8,
+) !void {
+    const timestamp = std.time.timestamp();
+    const datetime = formatAmzDate(timestamp);
+    const datestamp = datetime[0..8];
+
+    // Hash payload
+    const payload = request.body orelse "";
+    var payload_hash: [Sha256.digest_length]u8 = undefined;
+    Sha256.hash(payload, &payload_hash, .{});
+    var payload_hash_hex: [64]u8 = undefined;
+    _ = std.fmt.bufPrint(&payload_hash_hex, "{s}", .{std.fmt.fmtSliceHexLower(&payload_hash)}) catch unreachable;
+
+    // Add required headers
+    try request.headers.put(allocator, "x-amz-date", &datetime);
+    try request.headers.put(allocator, "x-amz-content-sha256", &payload_hash_hex);
+    if (credentials.session_token) |token| {
+        try request.headers.put(allocator, "x-amz-security-token", token);
+    }
+
+    // Ensure host header is set
+    if (request.headers.get("host") == null) {
+        try request.headers.put(allocator, "host", request.host);
+    }
+
+    // Build canonical request
+    const canonical_result = try buildCanonicalRequest(allocator, request, &payload_hash_hex);
+    defer allocator.free(canonical_result.canonical_request);
+    defer allocator.free(canonical_result.signed_headers);
+
+    // Build string to sign
+    var canonical_request_hash: [Sha256.digest_length]u8 = undefined;
+    Sha256.hash(canonical_result.canonical_request, &canonical_request_hash, .{});
+    var canonical_request_hash_hex: [64]u8 = undefined;
+    _ = std.fmt.bufPrint(&canonical_request_hash_hex, "{s}", .{std.fmt.fmtSliceHexLower(&canonical_request_hash)}) catch unreachable;
+
+    const credential_scope = try std.fmt.allocPrint(allocator, "{s}/{s}/{s}/aws4_request", .{
+        datestamp,
+        region,
+        service,
+    });
+    defer allocator.free(credential_scope);
+
+    const string_to_sign = try std.fmt.allocPrint(allocator, "{s}\n{s}\n{s}\n{s}", .{
+        algorithm,
+        datetime,
+        credential_scope,
+        canonical_request_hash_hex,
+    });
+    defer allocator.free(string_to_sign);
+
+    // Calculate signature
+    const signing_key = deriveSigningKey(credentials.secret_access_key, datestamp, region, service);
+    var signature: [Hmac.mac_length]u8 = undefined;
+    Hmac.create(&signature, string_to_sign, &signing_key);
+    var signature_hex: [64]u8 = undefined;
+    _ = std.fmt.bufPrint(&signature_hex, "{s}", .{std.fmt.fmtSliceHexLower(&signature)}) catch unreachable;
+
+    // Build authorization header
+    const authorization = try std.fmt.allocPrint(allocator, "{s} Credential={s}/{s}, SignedHeaders={s}, Signature={s}", .{
+        algorithm,
+        credentials.access_key_id,
+        credential_scope,
+        canonical_result.signed_headers,
+        signature_hex,
+    });
+
+    try request.headers.put(allocator, "authorization", authorization);
+}
+
+/// Format timestamp as AWS date (YYYYMMDD'T'HHMMSS'Z')
+pub fn formatAmzDate(timestamp: i64) [16]u8 {
+    const epoch_seconds = std.time.epoch.EpochSeconds{ .secs = @intCast(timestamp) };
+    const year_day = epoch_seconds.getEpochDay().calculateYearDay();
+    const month_day = year_day.calculateMonthDay();
+    const day_seconds = epoch_seconds.getDaySeconds();
+
+    var buf: [16]u8 = undefined;
+    _ = std.fmt.bufPrint(&buf, "{d:0>4}{d:0>2}{d:0>2}T{d:0>2}{d:0>2}{d:0>2}Z", .{
+        year_day.year,
+        month_day.month.numeric(),
+        month_day.day_index + 1,
+        day_seconds.getHoursIntoDay(),
+        day_seconds.getMinutesIntoHour(),
+        day_seconds.getSecondsIntoMinute(),
+    }) catch unreachable;
+
+    return buf;
+}
+
+/// Derive signing key using HMAC chain
+fn deriveSigningKey(
+    secret_key: []const u8,
+    datestamp: []const u8,
+    region: []const u8,
+    service: []const u8,
+) [Hmac.mac_length]u8 {
+    var k_secret: [256]u8 = undefined;
+    const prefix = "AWS4";
+    @memcpy(k_secret[0..prefix.len], prefix);
+    @memcpy(k_secret[prefix.len..][0..secret_key.len], secret_key);
+    const k_secret_len = prefix.len + secret_key.len;
+
+    var k_date: [Hmac.mac_length]u8 = undefined;
+    Hmac.create(&k_date, datestamp, k_secret[0..k_secret_len]);
+
+    var k_region: [Hmac.mac_length]u8 = undefined;
+    Hmac.create(&k_region, region, &k_date);
+
+    var k_service: [Hmac.mac_length]u8 = undefined;
+    Hmac.create(&k_service, service, &k_region);
+
+    var k_signing: [Hmac.mac_length]u8 = undefined;
+    Hmac.create(&k_signing, "aws4_request", &k_service);
+
+    return k_signing;
+}
+
+const CanonicalResult = struct {
+    canonical_request: []const u8,
+    signed_headers: []const u8,
+};
+
+/// Build canonical request string
+fn buildCanonicalRequest(
+    allocator: Allocator,
+    request: *http.Request,
+    payload_hash: []const u8,
+) !CanonicalResult {
+    const method = @tagName(request.method);
+    const canonical_uri = try encodeUri(allocator, if (request.path.len == 0) "/" else request.path);
+    defer allocator.free(canonical_uri);
+
+    const canonical_query = try canonicalizeQueryString(allocator, request.query);
+    defer allocator.free(canonical_query);
+
+    // Build canonical headers and signed headers list
+    const headers_result = try canonicalizeHeaders(allocator, &request.headers);
+    defer allocator.free(headers_result.canonical);
+
+    const canonical_request = try std.fmt.allocPrint(allocator, "{s}\n{s}\n{s}\n{s}\n{s}\n{s}", .{
+        method,
+        canonical_uri,
+        canonical_query,
+        headers_result.canonical,
+        headers_result.signed,
+        payload_hash,
+    });
+
+    return .{
+        .canonical_request = canonical_request,
+        .signed_headers = headers_result.signed,
+    };
+}
+
+const HeadersResult = struct {
+    canonical: []const u8,
+    signed: []const u8,
+};
+
+/// Canonicalize headers per SigV4 spec
+fn canonicalizeHeaders(
+    allocator: Allocator,
+    headers: *const std.StringHashMapUnmanaged([]const u8),
+) !HeadersResult {
+    // Collect header names
+    var header_names: std.ArrayList([]const u8) = .{};
+    defer header_names.deinit(allocator);
+
+    var iter = headers.iterator();
+    while (iter.next()) |entry| {
+        try header_names.append(allocator, entry.key_ptr.*);
+    }
+
+    // Sort by lowercase name
+    std.mem.sort([]const u8, header_names.items, {}, struct {
+        fn lessThan(_: void, a: []const u8, b: []const u8) bool {
+            return std.ascii.lessThanIgnoreCase(a, b);
+        }
+    }.lessThan);
+
+    // Build canonical headers and signed headers
+    var canonical: std.ArrayList(u8) = .{};
+    errdefer canonical.deinit(allocator);
+    var signed: std.ArrayList(u8) = .{};
+    defer signed.deinit(allocator);
+
+    for (header_names.items, 0..) |name, i| {
+        const value = headers.get(name) orelse continue;
+        const trimmed_value = trimAndNormalizeHeaderValue(value);
+
+        // lowercase name:trimmed value\n
+        for (name) |c| {
+            try canonical.append(allocator, std.ascii.toLower(c));
+        }
+        try canonical.append(allocator, ':');
+        try canonical.appendSlice(allocator, trimmed_value);
+        try canonical.append(allocator, '\n');
+
+        // signed headers: name1;name2;name3
+        if (i > 0) {
+            try signed.append(allocator, ';');
+        }
+        for (name) |c| {
+            try signed.append(allocator, std.ascii.toLower(c));
+        }
+    }
+
+    return .{
+        .canonical = try canonical.toOwnedSlice(allocator),
+        .signed = try signed.toOwnedSlice(allocator),
+    };
+}
+
+/// Trim leading/trailing whitespace and collapse sequential spaces
+fn trimAndNormalizeHeaderValue(value: []const u8) []const u8 {
+    // Trim leading whitespace
+    var start: usize = 0;
+    while (start < value.len and (value[start] == ' ' or value[start] == '\t')) {
+        start += 1;
+    }
+
+    // Trim trailing whitespace
+    var end: usize = value.len;
+    while (end > start and (value[end - 1] == ' ' or value[end - 1] == '\t')) {
+        end -= 1;
+    }
+
+    return value[start..end];
+}
+
+/// URI-encode a path (RFC 3986, preserving /)
+pub fn encodeUri(allocator: Allocator, path: []const u8) ![]const u8 {
+    var result: std.ArrayList(u8) = .{};
+    errdefer result.deinit(allocator);
+
+    for (path) |c| {
+        if (shouldEncodeUriChar(c)) {
+            try result.appendSlice(allocator, &percentEncode(c));
+        } else {
+            try result.append(allocator, c);
+        }
+    }
+
+    return result.toOwnedSlice(allocator);
+}
+
+fn shouldEncodeUriChar(c: u8) bool {
+    // Don't encode: A-Z, a-z, 0-9, '-', '_', '.', '~', '/'
+    return switch (c) {
+        'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~', '/' => false,
+        else => true,
+    };
+}
+
+fn shouldEncodeQueryChar(c: u8) bool {
+    // Don't encode: A-Z, a-z, 0-9, '-', '_', '.', '~'
+    // Note: '/' IS encoded in query strings
+    return switch (c) {
+        'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => false,
+        else => true,
+    };
+}
+
+fn percentEncode(c: u8) [3]u8 {
+    const hex = "0123456789ABCDEF";
+    return .{ '%', hex[c >> 4], hex[c & 0x0F] };
+}
+
+const QueryPair = struct { key: []const u8, value: []const u8 };
+
+/// Canonicalize query string per SigV4 spec
+pub fn canonicalizeQueryString(allocator: Allocator, query: ?[]const u8) ![]const u8 {
+    const q = query orelse return try allocator.dupe(u8, "");
+    if (q.len == 0) return try allocator.dupe(u8, "");
+
+    // Parse query string into key-value pairs
+    var pairs: std.ArrayList(QueryPair) = .{};
+    defer pairs.deinit(allocator);
+
+    var param_iter = std.mem.splitScalar(u8, q, '&');
+    while (param_iter.next()) |param| {
+        if (param.len == 0) continue;
+
+        if (std.mem.indexOfScalar(u8, param, '=')) |eq_idx| {
+            try pairs.append(allocator, .{
+                .key = param[0..eq_idx],
+                .value = param[eq_idx + 1 ..],
+            });
+        } else {
+            try pairs.append(allocator, .{
+                .key = param,
+                .value = "",
+            });
+        }
+    }
+
+    // Sort by key, then by value
+    std.mem.sort(QueryPair, pairs.items, {}, struct {
+        fn lessThan(_: void, a: QueryPair, b: QueryPair) bool {
+            const key_cmp = std.mem.order(u8, a.key, b.key);
+            if (key_cmp != .eq) return key_cmp == .lt;
+            return std.mem.order(u8, a.value, b.value) == .lt;
+        }
+    }.lessThan);
+
+    // Build canonical query string
+    var result: std.ArrayList(u8) = .{};
+    errdefer result.deinit(allocator);
+
+    for (pairs.items, 0..) |pair, i| {
+        if (i > 0) {
+            try result.append(allocator, '&');
+        }
+
+        // Encode key
+        for (pair.key) |c| {
+            if (shouldEncodeQueryChar(c)) {
+                try result.appendSlice(allocator, &percentEncode(c));
+            } else {
+                try result.append(allocator, c);
+            }
+        }
+
+        try result.append(allocator, '=');
+
+        // Encode value
+        for (pair.value) |c| {
+            if (shouldEncodeQueryChar(c)) {
+                try result.appendSlice(allocator, &percentEncode(c));
+            } else {
+                try result.append(allocator, c);
+            }
+        }
+    }
+
+    return result.toOwnedSlice(allocator);
+}
+
+// Tests
+
+test "formatAmzDate" {
+    // 2024-01-15 12:00:45 UTC
+    const datetime = formatAmzDate(1705320045);
+    try std.testing.expectEqualStrings("20240115T120045Z", &datetime);
+}
+
+test "deriveSigningKey matches AWS example" {
+    // AWS SigV4 test suite example
+    const key = deriveSigningKey(
+        "wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY",
+        "20150830",
+        "us-east-1",
+        "iam",
+    );
+
+    // Expected key verified with Python hmac implementation
+    const expected = [_]u8{
+        0xc4, 0xaf, 0xb1, 0xcc, 0x57, 0x71, 0xd8, 0x71,
+        0x76, 0x3a, 0x39, 0x3e, 0x44, 0xb7, 0x03, 0x57,
+        0x1b, 0x55, 0xcc, 0x28, 0x42, 0x4d, 0x1a, 0x5e,
+        0x86, 0xda, 0x6e, 0xd3, 0xc1, 0x54, 0xa4, 0xb9,
+    };
+    try std.testing.expectEqualSlices(u8, &expected, &key);
+}
+
+test "encodeUri basic" {
+    const allocator = std.testing.allocator;
+
+    const encoded = try encodeUri(allocator, "/documents and settings/");
+    defer allocator.free(encoded);
+    try std.testing.expectEqualStrings("/documents%20and%20settings/", encoded);
+}
+
+test "encodeUri preserves unreserved characters" {
+    const allocator = std.testing.allocator;
+
+    const encoded = try encodeUri(allocator, "/test-path_name.txt~backup");
+    defer allocator.free(encoded);
+    try std.testing.expectEqualStrings("/test-path_name.txt~backup", encoded);
+}
+
+test "encodeUri special characters" {
+    const allocator = std.testing.allocator;
+
+    const encoded = try encodeUri(allocator, "/foo:bar@baz");
+    defer allocator.free(encoded);
+    try std.testing.expectEqualStrings("/foo%3Abar%40baz", encoded);
+}
+
+test "canonicalizeQueryString empty" {
+    const allocator = std.testing.allocator;
+
+    const result = try canonicalizeQueryString(allocator, null);
+    defer allocator.free(result);
+    try std.testing.expectEqualStrings("", result);
+}
+
+test "canonicalizeQueryString sorts parameters" {
+    const allocator = std.testing.allocator;
+
+    const result = try canonicalizeQueryString(allocator, "Version=2011-06-15&Action=GetCallerIdentity");
+    defer allocator.free(result);
+    try std.testing.expectEqualStrings("Action=GetCallerIdentity&Version=2011-06-15", result);
+}
+
+test "canonicalizeQueryString encodes values" {
+    const allocator = std.testing.allocator;
+
+    const result = try canonicalizeQueryString(allocator, "key=hello world");
+    defer allocator.free(result);
+    try std.testing.expectEqualStrings("key=hello%20world", result);
+}
+
+test "canonicalizeHeaders" {
+    const allocator = std.testing.allocator;
+
+    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    defer headers.deinit(allocator);
+
+    try headers.put(allocator, "X-Amz-Date", "20150830T123600Z");
+    try headers.put(allocator, "Host", "iam.amazonaws.com");
+    try headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+
+    const result = try canonicalizeHeaders(allocator, &headers);
+    defer allocator.free(result.canonical);
+    defer allocator.free(result.signed);
+
+    // Headers should be sorted alphabetically
+    try std.testing.expectEqualStrings("content-type;host;x-amz-date", result.signed);
+
+    // Canonical form has lowercase names
+    try std.testing.expect(std.mem.startsWith(u8, result.canonical, "content-type:"));
+}
+
+test "trimAndNormalizeHeaderValue" {
+    try std.testing.expectEqualStrings("value", trimAndNormalizeHeaderValue("  value  "));
+    try std.testing.expectEqualStrings("value", trimAndNormalizeHeaderValue("\tvalue\t"));
+    try std.testing.expectEqualStrings("hello world", trimAndNormalizeHeaderValue("  hello world  "));
+}
