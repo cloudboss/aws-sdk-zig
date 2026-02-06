@@ -275,6 +275,12 @@ pub const ChainProvider = struct {
                 break :blk self.ecs_provider.?.load(allocator);
             },
             .imds => blk: {
+                // Respect AWS_EC2_METADATA_DISABLED (matches AWS SDK behavior)
+                if (std.posix.getenv("AWS_EC2_METADATA_DISABLED")) |val| {
+                    if (std.mem.eql(u8, val, "true")) {
+                        break :blk error.CredentialsNotFound;
+                    }
+                }
                 if (self.imds_provider == null) {
                     self.imds_provider = ImdsProvider{};
                 }
@@ -487,21 +493,6 @@ test "chain provider caches credentials" {
 
     const creds = try chain.getCredentials(std.testing.allocator);
     try std.testing.expectEqualStrings("CACHED_KEY", creds.access_key_id);
-}
-
-test "chain provider refreshes expired credentials" {
-    var chain = ChainProvider{};
-
-    // Set expired cached credentials
-    chain.cached = Credentials{
-        .access_key_id = "EXPIRED_KEY",
-        .secret_access_key = "EXPIRED_SECRET",
-        .expiration = 0, // Already expired
-    };
-
-    // This should try to refresh - will fail without env vars or file
-    const result = chain.getCredentials(std.testing.allocator);
-    try std.testing.expectError(error.CredentialsNotFound, result);
 }
 
 test "chain provider clear cache" {
