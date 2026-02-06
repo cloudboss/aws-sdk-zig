@@ -4,7 +4,7 @@ const aws = @import("aws");
 
 test "IMDS client retrieves instance ID" {
     const allocator = std.testing.allocator;
-    var client = aws.imds.Client.init(allocator, .{});
+    var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
     const instance_id = try client.getInstanceId();
@@ -15,7 +15,7 @@ test "IMDS client retrieves instance ID" {
 
 test "IMDS client retrieves IAM credentials" {
     const allocator = std.testing.allocator;
-    var client = aws.imds.Client.init(allocator, .{});
+    var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
     var creds = try client.getIamCredentials();
@@ -29,7 +29,7 @@ test "IMDS client retrieves IAM credentials" {
 
 test "IMDS client retrieves region" {
     const allocator = std.testing.allocator;
-    var client = aws.imds.Client.init(allocator, .{});
+    var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
     const region = try client.getRegion();
@@ -40,7 +40,7 @@ test "IMDS client retrieves region" {
 
 test "IMDS client returns error for unknown path" {
     const allocator = std.testing.allocator;
-    var client = aws.imds.Client.init(allocator, .{});
+    var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
     const result = client.getMetadata("/latest/meta-data/nonexistent");

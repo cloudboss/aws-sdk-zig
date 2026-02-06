@@ -8,11 +8,32 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
-/// Default IMDS endpoint (link-local address)
-pub const default_endpoint = "http://169.254.169.254";
+/// Default IMDS IPv4 endpoint (link-local address)
+pub const default_ipv4_endpoint = "http://169.254.169.254";
+
+/// Default IMDS IPv6 endpoint
+pub const default_ipv6_endpoint = "http://[fd00:ec2::254]";
 
 /// Default token TTL in seconds (6 hours max)
 pub const default_token_ttl: u32 = 21600;
+
+pub const EndpointMode = enum {
+    ipv4,
+    ipv6,
+
+    pub fn fromString(str: []const u8) error{InvalidEndpointMode}!EndpointMode {
+        if (std.ascii.eqlIgnoreCase(str, "IPv4")) return .ipv4;
+        if (std.ascii.eqlIgnoreCase(str, "IPv6")) return .ipv6;
+        return error.InvalidEndpointMode;
+    }
+
+    pub fn endpoint(self: EndpointMode) []const u8 {
+        return switch (self) {
+            .ipv4 => default_ipv4_endpoint,
+            .ipv6 => default_ipv6_endpoint,
+        };
+    }
+};
 
 /// IMDS client for querying EC2 instance metadata
 pub const Client = struct {
@@ -28,16 +49,34 @@ pub const Client = struct {
     const Self = @This();
 
     pub const Options = struct {
-        endpoint: []const u8 = default_endpoint,
+        endpoint: ?[]const u8 = null,
+        endpoint_mode: ?EndpointMode = null,
         token_ttl: u32 = default_token_ttl,
     };
 
-    pub fn init(allocator: Allocator, options: Options) Self {
+    pub fn init(allocator: Allocator, options: Options) !Self {
         return .{
             .allocator = allocator,
-            .endpoint = options.endpoint,
+            .endpoint = try resolveEndpoint(options),
             .token_ttl = options.token_ttl,
         };
+    }
+
+    /// Resolve endpoint following AWS SDK precedence:
+    /// 1. Programmatic endpoint URL
+    /// 2. AWS_EC2_METADATA_SERVICE_ENDPOINT env var
+    /// 3. Programmatic endpoint mode
+    /// 4. AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE env var
+    /// 5. Default: IPv4
+    fn resolveEndpoint(options: Options) ![]const u8 {
+        if (options.endpoint) |ep| return ep;
+        if (std.posix.getenv("AWS_EC2_METADATA_SERVICE_ENDPOINT")) |ep| return ep;
+        if (options.endpoint_mode) |mode| return mode.endpoint();
+        if (std.posix.getenv("AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE")) |mode_str| {
+            if (mode_str.len == 0) return default_ipv4_endpoint;
+            return (try EndpointMode.fromString(mode_str)).endpoint();
+        }
+        return default_ipv4_endpoint;
     }
 
     pub fn deinit(self: *Self) void {
@@ -546,15 +585,15 @@ test "IamCredentials deinit frees all allocated strings" {
 }
 
 test "Client init with default options" {
-    const client = Client.init(std.testing.allocator, .{});
-    try std.testing.expectEqualStrings(default_endpoint, client.endpoint);
+    const client = try Client.init(std.testing.allocator, .{});
+    try std.testing.expectEqualStrings(default_ipv4_endpoint, client.endpoint);
     try std.testing.expectEqual(default_token_ttl, client.token_ttl);
     try std.testing.expect(client.session_token == null);
     try std.testing.expectEqual(@as(i64, 0), client.token_expiry);
 }
 
 test "Client init with custom options" {
-    const client = Client.init(std.testing.allocator, .{
+    const client = try Client.init(std.testing.allocator, .{
         .endpoint = "http://custom:1234",
         .token_ttl = 3600,
     });
@@ -562,13 +601,29 @@ test "Client init with custom options" {
     try std.testing.expectEqual(@as(u32, 3600), client.token_ttl);
 }
 
+test "Client init with endpoint mode" {
+    const client_v4 = try Client.init(std.testing.allocator, .{ .endpoint_mode = .ipv4 });
+    try std.testing.expectEqualStrings(default_ipv4_endpoint, client_v4.endpoint);
+
+    const client_v6 = try Client.init(std.testing.allocator, .{ .endpoint_mode = .ipv6 });
+    try std.testing.expectEqualStrings(default_ipv6_endpoint, client_v6.endpoint);
+}
+
+test "Client init explicit endpoint overrides endpoint mode" {
+    const client = try Client.init(std.testing.allocator, .{
+        .endpoint = "http://custom:1234",
+        .endpoint_mode = .ipv6,
+    });
+    try std.testing.expectEqualStrings("http://custom:1234", client.endpoint);
+}
+
 test "Client deinit with null token does not crash" {
-    var client = Client.init(std.testing.allocator, .{});
+    var client = try Client.init(std.testing.allocator, .{});
     client.deinit();
 }
 
 test "Client deinit frees cached session token" {
-    var client = Client.init(std.testing.allocator, .{});
+    var client = try Client.init(std.testing.allocator, .{});
     client.session_token = try std.testing.allocator.dupe(u8, "test-token");
     // If deinit leaks, the testing allocator will catch it
     client.deinit();

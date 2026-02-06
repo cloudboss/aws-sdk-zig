@@ -67,7 +67,7 @@ pub fn getFromEnvironment() !Credentials {
 /// IMDS-based credential provider (EC2 instance metadata)
 pub const ImdsProvider = struct {
     client: ?imds.Client = null,
-    endpoint: []const u8 = imds.default_endpoint,
+    endpoint: ?[]const u8 = null,
 
     const Self = @This();
 
@@ -75,7 +75,7 @@ pub const ImdsProvider = struct {
     pub fn load(self: *Self, allocator: Allocator) !Credentials {
         // Initialize client if needed
         if (self.client == null) {
-            self.client = imds.Client.init(allocator, .{
+            self.client = try imds.Client.init(allocator, .{
                 .endpoint = self.endpoint,
             });
         }
