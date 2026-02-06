@@ -1,2 +1,11 @@
 .zig-cache/
 zig-out/
+
+# Build output
+_output/
+
+# Generated TLS certificates
+tests/integration/certs/ca.*
+tests/integration/certs/server.*
+
+PHASE*.md

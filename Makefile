@@ -1,0 +1,99 @@
+PROJECT = $(shell basename ${PWD})
+DIR_ROOT = $(realpath $(CURDIR))
+DIR_OUT = _output
+
+ZIG_VERSION = 0.15.2
+GRADLE_VERSION = 8.7
+CTR_IMAGE_BASE = alpine:3.21
+LOCALSTACK_IMG = localstack/localstack:4.3.0
+
+# The Dockerfile and its args are hashed to create a unique tag. The image
+# will be rebuilt if the hash changes, as the dependency file will change.
+UID = $(shell id -u)
+GID = $(shell id -g)
+UID_SHA256 = $(shell echo -n $(UID) | sha256sum | awk '{print $$1}')
+GID_SHA256 = $(shell echo -n $(GID) | sha256sum | awk '{print $$1}')
+CTR_IMAGE_BASE_SHA256 = $(shell echo -n $(CTR_IMAGE_BASE) | sha256sum | awk '{print $$1}')
+ZIG_VERSION_SHA256 = $(shell echo -n $(ZIG_VERSION) | sha256sum | awk '{print $$1}')
+GRADLE_VERSION_SHA256 = $(shell echo -n $(GRADLE_VERSION) | sha256sum | awk '{print $$1}')
+DOCKERFILE_SHA256 = $(shell sha256sum Dockerfile.build | awk '{print $$1}')
+DOCKER_INPUTS_SHA256 = $(shell echo -n $(UID_SHA256)$(GID_SHA256)$(CTR_IMAGE_BASE_SHA256)$(ZIG_VERSION_SHA256)$(GRADLE_VERSION_SHA256)$(DOCKERFILE_SHA256) | \
+	sha256sum | awk '{print $$1}' | cut -c 1-40)
+CTR_IMAGE_LOCAL = $(PROJECT):$(DOCKER_INPUTS_SHA256)
+HAS_IMAGE_LOCAL = $(DIR_OUT)/.image-local-$(DOCKER_INPUTS_SHA256)
+
+ZIG_BUILD_FLAGS = --cache-dir $(DIR_OUT)/zig-cache --global-cache-dir $(DIR_OUT)/zig-cache
+
+DOCKER_GID = $(shell getent group docker | cut -d: -f3)
+
+.DEFAULT_GOAL = build
+
+$(DIR_OUT):
+	@mkdir -p $(DIR_OUT)
+
+$(DIR_OUT)/%/:
+	@mkdir -p $(DIR_OUT)/$*
+
+$(HAS_IMAGE_LOCAL): | $(DIR_OUT)/dockerbuild/
+	@docker build \
+		--build-arg FROM=$(CTR_IMAGE_BASE) \
+		--build-arg GID=$(GID) \
+		--build-arg UID=$(UID) \
+		--build-arg ZIG_VERSION=$(ZIG_VERSION) \
+		--build-arg GRADLE_VERSION=$(GRADLE_VERSION) \
+		-f $(DIR_ROOT)/Dockerfile.build \
+		-t $(CTR_IMAGE_LOCAL) \
+		$(DIR_OUT)/dockerbuild
+	@touch $(HAS_IMAGE_LOCAL)
+
+build: $(HAS_IMAGE_LOCAL)
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-w /code \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build $(ZIG_BUILD_FLAGS)"
+
+test: $(HAS_IMAGE_LOCAL)
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-w /code \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build test $(ZIG_BUILD_FLAGS)"
+
+test-integration: $(HAS_IMAGE_LOCAL)
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		--group-add $(DOCKER_GID) \
+		--security-opt label=type:container_runtime_t \
+		--network host \
+		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
+		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
+		-e SCENARIO=$(SCENARIO) \
+		-w /code \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh"
+
+test-integration-tls: $(HAS_IMAGE_LOCAL) certs
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		--group-add $(DOCKER_GID) \
+		--security-opt label=type:container_runtime_t \
+		--network host \
+		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
+		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
+		-e SCENARIO=$(SCENARIO) \
+		-w /code \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh --tls"
+
+codegen: $(HAS_IMAGE_LOCAL)
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-w /code \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "cd codegen && gradle build"
+
+certs:
+	@bash tests/integration/certs/generate.sh
+
+clean:
+	@rm -rf $(DIR_OUT)
+
+.PHONY: build test test-integration test-integration-tls codegen certs clean

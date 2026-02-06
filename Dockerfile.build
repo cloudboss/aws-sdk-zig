@@ -1,0 +1,36 @@
+ARG FROM=alpine:3.21
+FROM ${FROM}
+
+ARG UID=1000
+ARG GID=1000
+ARG ZIG_VERSION=0.15.2
+ARG GRADLE_VERSION=8.7
+
+RUN apk add --no-cache \
+    aws-cli \
+    bash \
+    ca-certificates \
+    curl \
+    docker-cli \
+    openjdk17-jre-headless \
+    openssl \
+    tar \
+    unzip \
+    xz
+
+RUN curl -L -o /tmp/zig.tar.xz \
+    "https://ziglang.org/download/${ZIG_VERSION}/zig-x86_64-linux-${ZIG_VERSION}.tar.xz" && \
+    tar -xJf /tmp/zig.tar.xz -C /usr/local && \
+    ln -s /usr/local/zig-x86_64-linux-${ZIG_VERSION}/zig /usr/local/bin/zig && \
+    rm /tmp/zig.tar.xz
+
+RUN curl -L -o /tmp/gradle.zip \
+    "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" && \
+    unzip -q /tmp/gradle.zip -d /opt && \
+    ln -s /opt/gradle-${GRADLE_VERSION}/bin/gradle /usr/local/bin/gradle && \
+    rm /tmp/gradle.zip
+
+RUN addgroup -g ${GID} build && \
+    adduser -u ${UID} -G build -D build
+
+USER build

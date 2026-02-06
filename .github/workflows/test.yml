@@ -1,0 +1,57 @@
+name: aws-sdk-zig-test
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    outputs:
+      scenarios: ${{ steps.list.outputs.scenarios }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: make --debug build
+      - name: Run unit tests
+        run: make --debug test
+      - id: list
+        name: List integration scenarios
+        run: |
+          scenarios=$(ls -d tests/integration/scenarios/*/ \
+            | xargs -I{} basename {} \
+            | jq -R -s -c 'split("\n") | map(select(. != ""))')
+          echo "scenarios=${scenarios}" >> "$GITHUB_OUTPUT"
+      - name: Save docker build image
+        run: |
+          image=$(docker images --format '{{.Repository}}:{{.Tag}}' | grep aws-sdk-zig | head -1)
+          docker save "${image}" | gzip > _output/docker-image.tar.gz
+      - name: Archive outputs
+        run: tar czf _output.tar.gz _output
+      - name: Upload outputs
+        uses: actions/upload-artifact@v6
+        with:
+          name: unit-output
+          path: _output.tar.gz
+
+  test-integration:
+    runs-on: ubuntu-24.04
+    needs:
+      - test
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: ${{ fromJson(needs.test.outputs.scenarios) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download outputs
+        uses: actions/download-artifact@v7
+        with:
+          name: unit-output
+      - name: Unarchive outputs
+        run: tar xzf _output.tar.gz
+      - name: Load build container image
+        run: gunzip -c _output/docker-image.tar.gz | docker load
+      - name: Run integration test
+        run: make --debug test-integration SCENARIO=${{ matrix.scenario }}
