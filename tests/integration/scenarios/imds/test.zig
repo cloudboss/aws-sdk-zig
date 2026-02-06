@@ -7,7 +7,7 @@ test "IMDS client retrieves instance ID" {
     var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
-    const instance_id = try client.getInstanceId();
+    const instance_id = try client.getInstanceId(.{});
     defer allocator.free(instance_id);
 
     try std.testing.expectEqualStrings("i-test12345", instance_id);
@@ -18,7 +18,7 @@ test "IMDS client retrieves IAM credentials" {
     var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
-    var creds = try client.getIamCredentials();
+    var creds = try client.getIamCredentials(.{});
     defer creds.deinit();
 
     try std.testing.expectEqualStrings("ASIAIOSFODNN7EXAMPLE", creds.access_key_id);
@@ -32,7 +32,7 @@ test "IMDS client retrieves region" {
     var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
-    const region = try client.getRegion();
+    const region = try client.getRegion(.{});
     defer allocator.free(region);
 
     try std.testing.expectEqualStrings("us-east-1", region);
@@ -43,6 +43,18 @@ test "IMDS client returns error for unknown path" {
     var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
-    const result = client.getMetadata("/latest/meta-data/nonexistent");
-    try std.testing.expectError(error.ImdsNotFound, result);
+    const result = client.getMetadata("/latest/meta-data/nonexistent", .{});
+    try std.testing.expectError(error.HttpError, result);
+}
+
+test "IMDS client fills diagnostic on error" {
+    const allocator = std.testing.allocator;
+    var client = try aws.imds.Client.init(allocator, .{});
+    defer client.deinit();
+
+    var diag: aws.errors.Diagnostic = .{};
+    const result = client.getMetadata("/latest/meta-data/nonexistent", .{ .diagnostic = &diag });
+    try std.testing.expectError(error.HttpError, result);
+    try std.testing.expectEqual(@as(u16, 404), diag.http_status);
+    try std.testing.expectEqualStrings("metadata request failed", diag.message);
 }

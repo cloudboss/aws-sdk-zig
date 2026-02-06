@@ -8,6 +8,9 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
+const errors = @import("errors.zig");
+const http = @import("http.zig");
+
 /// Default IMDS IPv4 endpoint (link-local address)
 pub const default_ipv4_endpoint = "http://169.254.169.254";
 
@@ -35,11 +38,18 @@ pub const EndpointMode = enum {
     }
 };
 
+/// Per-call options for IMDS requests
+pub const RequestOptions = struct {
+    /// Optional diagnostic to fill on error
+    diagnostic: ?*errors.Diagnostic = null,
+};
+
 /// IMDS client for querying EC2 instance metadata
 pub const Client = struct {
     allocator: Allocator,
     endpoint: []const u8,
     token_ttl: u32,
+    http_client: http.HttpClient,
 
     /// Cached session token for IMDSv2
     session_token: ?[]const u8 = null,
@@ -59,6 +69,12 @@ pub const Client = struct {
             .allocator = allocator,
             .endpoint = try resolveEndpoint(options),
             .token_ttl = options.token_ttl,
+            .http_client = http.HttpClient.initWithOptions(allocator, .{
+                .max_attempts = 3,
+                .base_delay_ms = 100,
+                .max_delay_ms = 1_000,
+                .max_response_size = 64 * 1024,
+            }),
         };
     }
 
@@ -83,33 +99,33 @@ pub const Client = struct {
         if (self.session_token) |token| {
             self.allocator.free(token);
         }
+        self.http_client.deinit();
     }
 
     /// Get metadata from an arbitrary path
     /// Path should start with / (e.g., "/latest/meta-data/instance-id")
-    pub fn getMetadata(self: *Self, path: []const u8) ![]const u8 {
-        const token = try self.getToken();
-        return self.doGetRequest(path, token);
+    pub fn getMetadata(self: *Self, path: []const u8, options: RequestOptions) ![]const u8 {
+        const token = try self.getToken(options);
+        return self.doGetRequest(path, token, options);
     }
 
     /// Get the AWS region from instance identity document
-    pub fn getRegion(self: *Self) ![]const u8 {
-        const doc = try self.getMetadata("/latest/dynamic/instance-identity/document");
+    pub fn getRegion(self: *Self, options: RequestOptions) ![]const u8 {
+        const doc = try self.getMetadata("/latest/dynamic/instance-identity/document", options);
         defer self.allocator.free(doc);
 
-        // Parse JSON to extract region
         return parseJsonField(self.allocator, doc, "region");
     }
 
     /// Get the instance ID
-    pub fn getInstanceId(self: *Self) ![]const u8 {
-        return self.getMetadata("/latest/meta-data/instance-id");
+    pub fn getInstanceId(self: *Self, options: RequestOptions) ![]const u8 {
+        return self.getMetadata("/latest/meta-data/instance-id", options);
     }
 
     /// Get IAM credentials for the instance's role
-    pub fn getIamCredentials(self: *Self) !IamCredentials {
+    pub fn getIamCredentials(self: *Self, options: RequestOptions) !IamCredentials {
         // First, get the role name
-        const role_name = try self.getMetadata("/latest/meta-data/iam/security-credentials/");
+        const role_name = try self.getMetadata("/latest/meta-data/iam/security-credentials/", options);
         defer self.allocator.free(role_name);
 
         // Trim any trailing newline/whitespace
@@ -124,7 +140,7 @@ pub const Client = struct {
         defer self.allocator.free(creds_path);
 
         // Get credentials JSON
-        const creds_json = try self.getMetadata(creds_path);
+        const creds_json = try self.getMetadata(creds_path, options);
         defer self.allocator.free(creds_json);
 
         // Parse credentials
@@ -132,7 +148,7 @@ pub const Client = struct {
     }
 
     /// Get or refresh the IMDSv2 session token
-    fn getToken(self: *Self) ![]const u8 {
+    fn getToken(self: *Self, options: RequestOptions) ![]const u8 {
         const now = std.time.timestamp();
 
         // Return cached token if still valid (with 5 minute buffer)
@@ -146,84 +162,152 @@ pub const Client = struct {
         }
 
         // Request new token via PUT
-        const token = try self.doPutTokenRequest();
+        const token = try self.doPutTokenRequest(options);
         self.session_token = token;
         self.token_expiry = now + @as(i64, self.token_ttl);
         return token;
     }
 
+    /// Invalidate the cached session token
+    fn invalidateToken(self: *Self) void {
+        if (self.session_token) |token| {
+            self.allocator.free(token);
+            self.session_token = null;
+            self.token_expiry = 0;
+        }
+    }
+
     /// PUT request to get IMDSv2 session token
-    fn doPutTokenRequest(self: *Self) ![]const u8 {
+    fn doPutTokenRequest(self: *Self, options: RequestOptions) ![]const u8 {
         const ttl_str = try std.fmt.allocPrint(self.allocator, "{d}", .{self.token_ttl});
         defer self.allocator.free(ttl_str);
 
-        const uri_str = try std.fmt.allocPrint(self.allocator, "{s}/latest/api/token", .{self.endpoint});
-        defer self.allocator.free(uri_str);
+        const ep = try parseEndpoint(self.endpoint);
 
-        const uri = std.Uri.parse(uri_str) catch return error.ImdsRequestFailed;
+        var request = http.Request.init(ep.host);
+        defer request.deinit(self.allocator);
 
-        var client = std.http.Client{ .allocator = self.allocator };
-        defer client.deinit();
+        request.method = .PUT;
+        request.path = "/latest/api/token";
+        request.port = ep.port;
+        request.tls = ep.tls;
+        request.body = "";
 
-        var req = client.request(.PUT, uri, .{
-            .extra_headers = &.{
-                .{ .name = "X-aws-ec2-metadata-token-ttl-seconds", .value = ttl_str },
-            },
-        }) catch return error.ImdsConnectionFailed;
-        defer req.deinit();
+        request.headers.put(self.allocator, "X-aws-ec2-metadata-token-ttl-seconds", ttl_str) catch
+            return error.OutOfMemory;
 
-        // PUT requires a body in Zig's HTTP client; send empty body
-        var empty: [0]u8 = .{};
-        req.sendBodyComplete(&empty) catch return error.ImdsRequestFailed;
+        var response = self.http_client.sendRequest(&request) catch |err| {
+            fillDiagnosticFromError(options.diagnostic, err, "token request failed");
+            return err;
+        };
+        defer response.deinit();
 
-        var redirect_buf: [1024]u8 = undefined;
-        var response = req.receiveHead(&redirect_buf) catch return error.ImdsRequestFailed;
-
-        if (response.head.status != .ok) {
-            return error.ImdsRequestFailed;
+        if (!response.isSuccess()) {
+            fillDiagnosticFromStatus(options.diagnostic, @intCast(response.status), "token request failed");
+            return error.HttpError;
         }
 
-        var transfer_buf: [1024]u8 = undefined;
-        const body_reader = response.reader(&transfer_buf);
-        const body = body_reader.allocRemaining(self.allocator, std.Io.Limit.limited(4096)) catch return error.ImdsRequestFailed;
-        return body;
+        return self.allocator.dupe(u8, response.body) catch return error.OutOfMemory;
     }
 
     /// GET request with session token
-    fn doGetRequest(self: *Self, path: []const u8, token: []const u8) ![]const u8 {
-        const uri_str = try std.fmt.allocPrint(self.allocator, "{s}{s}", .{ self.endpoint, path });
-        defer self.allocator.free(uri_str);
+    fn doGetRequest(self: *Self, path: []const u8, token: []const u8, options: RequestOptions) ![]const u8 {
+        return self.doGetRequestInner(path, token, options) catch |err| {
+            // On 401, invalidate token and retry once
+            if (err == error.HttpError) {
+                if (options.diagnostic) |diag| {
+                    if (diag.http_status == 401) {
+                        self.invalidateToken();
 
-        const uri = std.Uri.parse(uri_str) catch return error.ImdsRequestFailed;
+                        // Get fresh token
+                        const new_token = self.doPutTokenRequest(options) catch return err;
+                        self.session_token = new_token;
+                        self.token_expiry = std.time.timestamp() + @as(i64, self.token_ttl);
 
-        var client = std.http.Client{ .allocator = self.allocator };
-        defer client.deinit();
+                        // Retry with new token
+                        return self.doGetRequestInner(path, new_token, options);
+                    }
+                }
+            }
+            return err;
+        };
+    }
 
-        var req = client.request(.GET, uri, .{
-            .extra_headers = &.{
-                .{ .name = "X-aws-ec2-metadata-token", .value = token },
-            },
-        }) catch return error.ImdsConnectionFailed;
-        defer req.deinit();
+    /// Inner GET request (used by doGetRequest for retry logic)
+    fn doGetRequestInner(self: *Self, path: []const u8, token: []const u8, options: RequestOptions) ![]const u8 {
+        const ep = try parseEndpoint(self.endpoint);
 
-        req.sendBodiless() catch return error.ImdsRequestFailed;
+        var request = http.Request.init(ep.host);
+        defer request.deinit(self.allocator);
 
-        var redirect_buf: [1024]u8 = undefined;
-        var response = req.receiveHead(&redirect_buf) catch return error.ImdsRequestFailed;
+        request.method = .GET;
+        request.path = path;
+        request.port = ep.port;
+        request.tls = ep.tls;
 
-        if (response.head.status == .not_found) {
-            return error.ImdsNotFound;
+        request.headers.put(self.allocator, "X-aws-ec2-metadata-token", token) catch
+            return error.OutOfMemory;
+
+        var response = self.http_client.sendRequest(&request) catch |err| {
+            fillDiagnosticFromError(options.diagnostic, err, "metadata request failed");
+            return err;
+        };
+        defer response.deinit();
+
+        if (!response.isSuccess()) {
+            fillDiagnosticFromStatus(options.diagnostic, @intCast(response.status), "metadata request failed");
+            return error.HttpError;
         }
-        if (response.head.status != .ok) {
-            return error.ImdsRequestFailed;
-        }
 
-        var transfer_buf: [4096]u8 = undefined;
-        const body_reader = response.reader(&transfer_buf);
-        const body = body_reader.allocRemaining(self.allocator, std.Io.Limit.limited(64 * 1024)) catch return error.ImdsRequestFailed;
-        return body;
+        return self.allocator.dupe(u8, response.body) catch return error.OutOfMemory;
+    }
+
+    /// Parse endpoint into host, port, and TLS fields for http.Request
+    const EndpointInfo = struct {
+        host: []const u8,
+        port: ?u16,
+        tls: bool,
+    };
+
+    fn parseEndpoint(endpoint: []const u8) !EndpointInfo {
+        const uri = std.Uri.parse(endpoint) catch return error.RequestFailed;
+        const host = if (uri.host) |h| switch (h) {
+            .raw => |r| r,
+            .percent_encoded => |p| p,
+        } else return error.RequestFailed;
+        return .{
+            .host = host,
+            .port = uri.port,
+            .tls = std.mem.eql(u8, uri.scheme, "https"),
+        };
     }
 };
+
+/// Fill diagnostic from an HTTP-layer error
+fn fillDiagnosticFromError(diagnostic: ?*errors.Diagnostic, err: http.RequestError, message: []const u8) void {
+    if (diagnostic) |diag| {
+        diag.* = .{
+            .message = message,
+            .http_status = switch (err) {
+                error.ConnectionFailed => 0,
+                error.RequestFailed => 0,
+                error.ResponseTooLarge => 0,
+                error.MaxRetriesExceeded => 0,
+                error.OutOfMemory => 0,
+            },
+        };
+    }
+}
+
+/// Fill diagnostic from a non-success HTTP status
+fn fillDiagnosticFromStatus(diagnostic: ?*errors.Diagnostic, status: u16, message: []const u8) void {
+    if (diagnostic) |diag| {
+        diag.* = .{
+            .http_status = status,
+            .message = message,
+        };
+    }
+}
 
 /// IAM credentials returned by IMDS
 pub const IamCredentials = struct {
@@ -256,10 +340,7 @@ fn parseIamCredentials(allocator: Allocator, json: []const u8) !IamCredentials {
     const expiration_str = try parseJsonField(allocator, json, "Expiration");
     defer allocator.free(expiration_str);
 
-    const expiration = parseIso8601(expiration_str) catch |err| blk: {
-        std.log.warn("failed to parse IMDS credential expiration '{s}': {s}", .{ expiration_str, @errorName(err) });
-        break :blk 0;
-    };
+    const expiration = try parseIso8601(expiration_str);
 
     return IamCredentials{
         .access_key_id = access_key,
@@ -555,7 +636,7 @@ test "parseIamCredentials returns error when Token is missing" {
     try std.testing.expectError(error.JsonFieldNotFound, parseIamCredentials(allocator, json));
 }
 
-test "parseIamCredentials falls back to 0 for invalid expiration" {
+test "parseIamCredentials returns error for invalid expiration" {
     const allocator = std.testing.allocator;
     const json =
         \\{
@@ -565,10 +646,7 @@ test "parseIamCredentials falls back to 0 for invalid expiration" {
         \\  "Expiration" : "not-a-date"
         \\}
     ;
-    var creds = try parseIamCredentials(allocator, json);
-    defer creds.deinit();
-
-    try std.testing.expectEqual(@as(i64, 0), creds.expiration);
+    try std.testing.expectError(error.InvalidTimestamp, parseIamCredentials(allocator, json));
 }
 
 test "IamCredentials deinit frees all allocated strings" {
@@ -585,7 +663,8 @@ test "IamCredentials deinit frees all allocated strings" {
 }
 
 test "Client init with default options" {
-    const client = try Client.init(std.testing.allocator, .{});
+    var client = try Client.init(std.testing.allocator, .{});
+    defer client.deinit();
     try std.testing.expectEqualStrings(default_ipv4_endpoint, client.endpoint);
     try std.testing.expectEqual(default_token_ttl, client.token_ttl);
     try std.testing.expect(client.session_token == null);
@@ -593,27 +672,31 @@ test "Client init with default options" {
 }
 
 test "Client init with custom options" {
-    const client = try Client.init(std.testing.allocator, .{
+    var client = try Client.init(std.testing.allocator, .{
         .endpoint = "http://custom:1234",
         .token_ttl = 3600,
     });
+    defer client.deinit();
     try std.testing.expectEqualStrings("http://custom:1234", client.endpoint);
     try std.testing.expectEqual(@as(u32, 3600), client.token_ttl);
 }
 
 test "Client init with endpoint mode" {
-    const client_v4 = try Client.init(std.testing.allocator, .{ .endpoint_mode = .ipv4 });
+    var client_v4 = try Client.init(std.testing.allocator, .{ .endpoint_mode = .ipv4 });
+    defer client_v4.deinit();
     try std.testing.expectEqualStrings(default_ipv4_endpoint, client_v4.endpoint);
 
-    const client_v6 = try Client.init(std.testing.allocator, .{ .endpoint_mode = .ipv6 });
+    var client_v6 = try Client.init(std.testing.allocator, .{ .endpoint_mode = .ipv6 });
+    defer client_v6.deinit();
     try std.testing.expectEqualStrings(default_ipv6_endpoint, client_v6.endpoint);
 }
 
 test "Client init explicit endpoint overrides endpoint mode" {
-    const client = try Client.init(std.testing.allocator, .{
+    var client = try Client.init(std.testing.allocator, .{
         .endpoint = "http://custom:1234",
         .endpoint_mode = .ipv6,
     });
+    defer client.deinit();
     try std.testing.expectEqualStrings("http://custom:1234", client.endpoint);
 }
 
@@ -627,6 +710,55 @@ test "Client deinit frees cached session token" {
     client.session_token = try std.testing.allocator.dupe(u8, "test-token");
     // If deinit leaks, the testing allocator will catch it
     client.deinit();
+}
+
+test "Client invalidateToken clears cached token" {
+    var client = try Client.init(std.testing.allocator, .{});
+    defer client.deinit();
+
+    client.session_token = try std.testing.allocator.dupe(u8, "test-token");
+    client.token_expiry = 99999;
+
+    client.invalidateToken();
+    try std.testing.expect(client.session_token == null);
+    try std.testing.expectEqual(@as(i64, 0), client.token_expiry);
+}
+
+test "Client invalidateToken with null token is safe" {
+    var client = try Client.init(std.testing.allocator, .{});
+    defer client.deinit();
+
+    client.invalidateToken();
+    try std.testing.expect(client.session_token == null);
+}
+
+test "fillDiagnosticFromStatus sets fields" {
+    var diag: errors.Diagnostic = .{};
+    fillDiagnosticFromStatus(&diag, 404, "not found");
+    try std.testing.expectEqual(@as(u16, 404), diag.http_status);
+    try std.testing.expectEqualStrings("not found", diag.message);
+    try std.testing.expectEqualStrings("", diag.code);
+    try std.testing.expectEqualStrings("", diag.request_id);
+}
+
+test "fillDiagnosticFromStatus with null diagnostic is safe" {
+    fillDiagnosticFromStatus(null, 500, "error");
+}
+
+test "fillDiagnosticFromError sets fields" {
+    var diag: errors.Diagnostic = .{};
+    fillDiagnosticFromError(&diag, error.ConnectionFailed, "connection failed");
+    try std.testing.expectEqual(@as(u16, 0), diag.http_status);
+    try std.testing.expectEqualStrings("connection failed", diag.message);
+}
+
+test "fillDiagnosticFromError with null diagnostic is safe" {
+    fillDiagnosticFromError(null, error.RequestFailed, "error");
+}
+
+test "RequestOptions defaults" {
+    const opts = RequestOptions{};
+    try std.testing.expect(opts.diagnostic == null);
 }
 
 test "yearDayToEpochDay for epoch year" {

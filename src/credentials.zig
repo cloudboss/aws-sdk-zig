@@ -81,7 +81,7 @@ pub const ImdsProvider = struct {
         }
 
         var client = &self.client.?;
-        var iam_creds = try client.getIamCredentials();
+        var iam_creds = try client.getIamCredentials(.{});
         defer iam_creds.deinit();
 
         // Copy strings since iam_creds will be freed

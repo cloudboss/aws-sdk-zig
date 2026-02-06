@@ -7,13 +7,13 @@ const std = @import("std");
 /// Base diagnostic information for AWS service errors
 pub const Diagnostic = struct {
     /// Error code from AWS (e.g., "ExpiredTokenException")
-    code: []const u8,
+    code: []const u8 = "",
     /// Human-readable error message
-    message: []const u8,
+    message: []const u8 = "",
     /// AWS request ID for debugging
-    request_id: []const u8,
+    request_id: []const u8 = "",
     /// HTTP status code
-    http_status: u16,
+    http_status: u16 = 0,
 
     /// Check if this error is retryable
     pub fn isRetryable(self: *const Diagnostic) bool {
