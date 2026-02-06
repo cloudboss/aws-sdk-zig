@@ -14,6 +14,7 @@ RUN apk add --no-cache \
     docker-cli \
     openjdk17-jre-headless \
     openssl \
+    python3 \
     tar \
     unzip \
     xz

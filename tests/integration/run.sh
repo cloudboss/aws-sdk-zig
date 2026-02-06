@@ -129,6 +129,12 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
         fi
     fi
 
+    # Source per-scenario environment if present
+    if [[ -f "${scenario_dir}/env.sh" ]]; then
+        echo "  Sourcing env.sh..."
+        source "${scenario_dir}/env.sh"
+    fi
+
     # Build and run test
     echo "  Building and running test..."
     if zig build "integration-test-${scenario}" ${ZIG_BUILD_FLAGS} 2>&1; then
@@ -138,6 +144,12 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
         echo "  FAIL: ${scenario}"
         ERRORS+=("${scenario}")
         FAIL=$((FAIL + 1))
+    fi
+
+    # Run per-scenario teardown if present
+    if [[ -f "${scenario_dir}/teardown.sh" ]]; then
+        echo "  Running teardown..."
+        bash "${scenario_dir}/teardown.sh" || true
     fi
 
     echo ""
