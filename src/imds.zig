@@ -133,7 +133,9 @@ pub const Client = struct {
         }) catch return error.ImdsConnectionFailed;
         defer req.deinit();
 
-        req.sendBodiless() catch return error.ImdsRequestFailed;
+        // PUT requires a body in Zig's HTTP client; send empty body
+        var empty: [0]u8 = .{};
+        req.sendBodyComplete(&empty) catch return error.ImdsRequestFailed;
 
         var redirect_buf: [1024]u8 = undefined;
         var response = req.receiveHead(&redirect_buf) catch return error.ImdsRequestFailed;
@@ -215,7 +217,10 @@ fn parseIamCredentials(allocator: Allocator, json: []const u8) !IamCredentials {
     const expiration_str = try parseJsonField(allocator, json, "Expiration");
     defer allocator.free(expiration_str);
 
-    const expiration = parseIso8601(expiration_str) catch 0;
+    const expiration = parseIso8601(expiration_str) catch |err| blk: {
+        std.log.warn("failed to parse IMDS credential expiration '{s}': {s}", .{ expiration_str, @errorName(err) });
+        break :blk 0;
+    };
 
     return IamCredentials{
         .access_key_id = access_key,
@@ -258,6 +263,11 @@ fn parseIso8601(timestamp: []const u8) !i64 {
     // Format: 2024-01-15T12:00:00Z
     if (timestamp.len < 19) return error.InvalidTimestamp;
 
+    // Validate separators
+    if (timestamp[4] != '-' or timestamp[7] != '-' or
+        timestamp[10] != 'T' or timestamp[13] != ':' or timestamp[16] != ':')
+        return error.InvalidTimestamp;
+
     const year = std.fmt.parseInt(u16, timestamp[0..4], 10) catch return error.InvalidTimestamp;
     const month = std.fmt.parseInt(u4, timestamp[5..7], 10) catch return error.InvalidTimestamp;
     const day = std.fmt.parseInt(u5, timestamp[8..10], 10) catch return error.InvalidTimestamp;
@@ -266,7 +276,7 @@ fn parseIso8601(timestamp: []const u8) !i64 {
     const second = std.fmt.parseInt(u6, timestamp[17..19], 10) catch return error.InvalidTimestamp;
 
     // Calculate epoch day manually (days since 1970-01-01)
-    const epoch_day = yearDayToEpochDay(year, dayOfYear(year, month, day));
+    const epoch_day = yearDayToEpochDay(year, try dayOfYear(year, month, day));
 
     const day_seconds = @as(i64, hour) * 3600 + @as(i64, minute) * 60 + @as(i64, second);
     return epoch_day * 86400 + day_seconds;
@@ -293,7 +303,8 @@ fn yearDayToEpochDay(year: u16, day_of_year: u9) i64 {
 }
 
 /// Calculate day of year (0-indexed)
-fn dayOfYear(year: u16, month: u4, day: u5) u9 {
+fn dayOfYear(year: u16, month: u4, day: u5) error{InvalidTimestamp}!u9 {
+    if (month == 0 or month > 12 or day == 0) return error.InvalidTimestamp;
     const days_before_month = [_]u16{ 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
     var result: u16 = days_before_month[month - 1] + day - 1;
 
@@ -345,13 +356,13 @@ test "parseIso8601" {
 
 test "dayOfYear" {
     // Jan 1 = day 0
-    try std.testing.expectEqual(@as(u9, 0), dayOfYear(2024, 1, 1));
+    try std.testing.expectEqual(@as(u9, 0), try dayOfYear(2024, 1, 1));
     // Feb 1 = day 31
-    try std.testing.expectEqual(@as(u9, 31), dayOfYear(2024, 2, 1));
+    try std.testing.expectEqual(@as(u9, 31), try dayOfYear(2024, 2, 1));
     // Mar 1 in leap year = day 60
-    try std.testing.expectEqual(@as(u9, 60), dayOfYear(2024, 3, 1));
+    try std.testing.expectEqual(@as(u9, 60), try dayOfYear(2024, 3, 1));
     // Mar 1 in non-leap year = day 59
-    try std.testing.expectEqual(@as(u9, 59), dayOfYear(2023, 3, 1));
+    try std.testing.expectEqual(@as(u9, 59), try dayOfYear(2023, 3, 1));
 }
 
 test "isLeapYear" {
@@ -359,4 +370,244 @@ test "isLeapYear" {
     try std.testing.expect(!isLeapYear(2023));
     try std.testing.expect(!isLeapYear(1900));
     try std.testing.expect(isLeapYear(2000));
+}
+
+test "parseJsonField returns error for missing field" {
+    const allocator = std.testing.allocator;
+    const json =
+        \\{ "Name" : "value" }
+    ;
+    try std.testing.expectError(error.JsonFieldNotFound, parseJsonField(allocator, json, "Missing"));
+}
+
+test "parseJsonField extracts empty string value" {
+    const allocator = std.testing.allocator;
+    const json =
+        \\{ "Key" : "" }
+    ;
+    const val = try parseJsonField(allocator, json, "Key");
+    defer allocator.free(val);
+    try std.testing.expectEqualStrings("", val);
+}
+
+test "parseJsonField returns error for empty JSON" {
+    const allocator = std.testing.allocator;
+    try std.testing.expectError(error.JsonFieldNotFound, parseJsonField(allocator, "", "Key"));
+}
+
+test "parseJsonField returns error for truncated JSON missing closing quote" {
+    const allocator = std.testing.allocator;
+    const json =
+        \\{ "Key" : "no closing quote
+    ;
+    try std.testing.expectError(error.JsonFieldNotFound, parseJsonField(allocator, json, "Key"));
+}
+
+test "parseJsonField returns error for field without colon" {
+    const allocator = std.testing.allocator;
+    // Field name present but no colon follows
+    const json =
+        \\"Key"
+    ;
+    try std.testing.expectError(error.JsonFieldNotFound, parseJsonField(allocator, json, "Key"));
+}
+
+test "parseJsonField matches first occurrence of field name" {
+    const allocator = std.testing.allocator;
+    // When "Token" appears before "SecurityToken", verify it gets the right one
+    const json =
+        \\{
+        \\  "Token" : "first_value",
+        \\  "SecurityToken" : "second_value"
+        \\}
+    ;
+    const val = try parseJsonField(allocator, json, "Token");
+    defer allocator.free(val);
+    try std.testing.expectEqualStrings("first_value", val);
+}
+
+test "parseIso8601 exact epoch value" {
+    // Unix epoch: 1970-01-01T00:00:00Z = 0
+    const ts = try parseIso8601("1970-01-01T00:00:00Z");
+    try std.testing.expectEqual(@as(i64, 0), ts);
+}
+
+test "parseIso8601 known timestamp" {
+    // 2024-01-15T12:00:00Z = 1705320000 (verified externally)
+    const ts = try parseIso8601("2024-01-15T12:00:00Z");
+    try std.testing.expectEqual(@as(i64, 1705320000), ts);
+}
+
+test "parseIso8601 end of day" {
+    // 1970-01-01T23:59:59Z = 86399
+    const ts = try parseIso8601("1970-01-01T23:59:59Z");
+    try std.testing.expectEqual(@as(i64, 86399), ts);
+}
+
+test "parseIso8601 returns error for too-short string" {
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("2024-01-15"));
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601(""));
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("short"));
+}
+
+test "parseIso8601 returns error for invalid separators" {
+    // Missing dashes
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("20240115T12:00:00Z"));
+    // Missing T
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("2024-01-15 12:00:00Z"));
+    // Missing colons
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("2024-01-15T120000Z_"));
+}
+
+test "parseIso8601 returns error for zero month" {
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("2024-00-15T12:00:00Z"));
+}
+
+test "parseIso8601 returns error for zero day" {
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("2024-01-00T12:00:00Z"));
+}
+
+test "parseIso8601 returns error for non-numeric fields" {
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("XXXX-01-15T12:00:00Z"));
+    try std.testing.expectError(error.InvalidTimestamp, parseIso8601("2024-XX-15T12:00:00Z"));
+}
+
+test "parseIamCredentials parses valid IMDS JSON" {
+    const allocator = std.testing.allocator;
+    const json =
+        \\{
+        \\  "Code" : "Success",
+        \\  "AccessKeyId" : "ASIAXXX",
+        \\  "SecretAccessKey" : "secretXXX",
+        \\  "Token" : "tokenXXX",
+        \\  "Expiration" : "2024-01-15T12:00:00Z"
+        \\}
+    ;
+    var creds = try parseIamCredentials(allocator, json);
+    defer creds.deinit();
+
+    try std.testing.expectEqualStrings("ASIAXXX", creds.access_key_id);
+    try std.testing.expectEqualStrings("secretXXX", creds.secret_access_key);
+    try std.testing.expectEqualStrings("tokenXXX", creds.token);
+    try std.testing.expectEqual(@as(i64, 1705320000), creds.expiration);
+}
+
+test "parseIamCredentials returns error when AccessKeyId is missing" {
+    const allocator = std.testing.allocator;
+    const json =
+        \\{
+        \\  "SecretAccessKey" : "secretXXX",
+        \\  "Token" : "tokenXXX",
+        \\  "Expiration" : "2024-01-15T12:00:00Z"
+        \\}
+    ;
+    try std.testing.expectError(error.JsonFieldNotFound, parseIamCredentials(allocator, json));
+}
+
+test "parseIamCredentials returns error when Token is missing" {
+    const allocator = std.testing.allocator;
+    const json =
+        \\{
+        \\  "AccessKeyId" : "ASIAXXX",
+        \\  "SecretAccessKey" : "secretXXX",
+        \\  "Expiration" : "2024-01-15T12:00:00Z"
+        \\}
+    ;
+    try std.testing.expectError(error.JsonFieldNotFound, parseIamCredentials(allocator, json));
+}
+
+test "parseIamCredentials falls back to 0 for invalid expiration" {
+    const allocator = std.testing.allocator;
+    const json =
+        \\{
+        \\  "AccessKeyId" : "ASIAXXX",
+        \\  "SecretAccessKey" : "secretXXX",
+        \\  "Token" : "tokenXXX",
+        \\  "Expiration" : "not-a-date"
+        \\}
+    ;
+    var creds = try parseIamCredentials(allocator, json);
+    defer creds.deinit();
+
+    try std.testing.expectEqual(@as(i64, 0), creds.expiration);
+}
+
+test "IamCredentials deinit frees all allocated strings" {
+    const allocator = std.testing.allocator;
+    var creds = IamCredentials{
+        .access_key_id = try allocator.dupe(u8, "access"),
+        .secret_access_key = try allocator.dupe(u8, "secret"),
+        .token = try allocator.dupe(u8, "token"),
+        .expiration = 12345,
+        .allocator = allocator,
+    };
+    // If deinit leaks, the testing allocator will catch it
+    creds.deinit();
+}
+
+test "Client init with default options" {
+    const client = Client.init(std.testing.allocator, .{});
+    try std.testing.expectEqualStrings(default_endpoint, client.endpoint);
+    try std.testing.expectEqual(default_token_ttl, client.token_ttl);
+    try std.testing.expect(client.session_token == null);
+    try std.testing.expectEqual(@as(i64, 0), client.token_expiry);
+}
+
+test "Client init with custom options" {
+    const client = Client.init(std.testing.allocator, .{
+        .endpoint = "http://custom:1234",
+        .token_ttl = 3600,
+    });
+    try std.testing.expectEqualStrings("http://custom:1234", client.endpoint);
+    try std.testing.expectEqual(@as(u32, 3600), client.token_ttl);
+}
+
+test "Client deinit with null token does not crash" {
+    var client = Client.init(std.testing.allocator, .{});
+    client.deinit();
+}
+
+test "Client deinit frees cached session token" {
+    var client = Client.init(std.testing.allocator, .{});
+    client.session_token = try std.testing.allocator.dupe(u8, "test-token");
+    // If deinit leaks, the testing allocator will catch it
+    client.deinit();
+}
+
+test "yearDayToEpochDay for epoch year" {
+    // Day 0 of 1970 = epoch day 0
+    try std.testing.expectEqual(@as(i64, 0), yearDayToEpochDay(1970, 0));
+    // Day 1 of 1970 = epoch day 1
+    try std.testing.expectEqual(@as(i64, 1), yearDayToEpochDay(1970, 1));
+    // Day 364 of 1970 (Dec 31) = epoch day 364
+    try std.testing.expectEqual(@as(i64, 364), yearDayToEpochDay(1970, 364));
+}
+
+test "yearDayToEpochDay for 1971" {
+    // 1970 has 365 days, so day 0 of 1971 = epoch day 365
+    try std.testing.expectEqual(@as(i64, 365), yearDayToEpochDay(1971, 0));
+}
+
+test "yearDayToEpochDay for 2000 known value" {
+    // 2000-01-01 = epoch day 10957 (well-known value)
+    const epoch_day = yearDayToEpochDay(2000, 0);
+    try std.testing.expectEqual(@as(i64, 10957), epoch_day);
+}
+
+test "dayOfYear last day of non-leap year" {
+    // Dec 31 in non-leap year = day 364
+    try std.testing.expectEqual(@as(u9, 364), try dayOfYear(2023, 12, 31));
+}
+
+test "dayOfYear last day of leap year" {
+    // Dec 31 in leap year = day 365
+    try std.testing.expectEqual(@as(u9, 365), try dayOfYear(2024, 12, 31));
+}
+
+test "dayOfYear returns error for month zero" {
+    try std.testing.expectError(error.InvalidTimestamp, dayOfYear(2024, 0, 1));
+}
+
+test "dayOfYear returns error for day zero" {
+    try std.testing.expectError(error.InvalidTimestamp, dayOfYear(2024, 1, 0));
 }
