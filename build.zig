@@ -4,6 +4,8 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    const zest = b.dependency("zest", .{});
+
     // AWS Runtime Library module
     const aws_module = b.createModule(.{
         .root_source_file = b.path("src/root.zig"),
@@ -20,6 +22,10 @@ pub fn build(b: *std.Build) void {
 
     const aws_tests = b.addTest(.{
         .root_module = test_module,
+        .test_runner = .{
+            .path = zest.path("src/root.zig"),
+            .mode = .simple,
+        },
     });
 
     const run_aws_tests = b.addRunArtifact(aws_tests);

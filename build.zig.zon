@@ -14,5 +14,10 @@
         "LICENSE",
     },
 
-    .dependencies = .{},
+    .dependencies = .{
+        .zest = .{
+            .url = "git+https://github.com/cloudboss/zest#9c7afe2d8a99620c8c7351c4ceda68da7d5ade64",
+            .hash = "zest-0.1.0-2zk2nkQgAAA5KJn4xngp-phdFTPgTmPCP04kCdelH6pP",
+        },
+    },
 }
