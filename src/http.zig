@@ -250,7 +250,7 @@ pub const Backoff = struct {
             std.crypto.random.intRangeLessThan(u64, 0, max_wait)
         else
             0;
-        std.time.sleep(wait_ms * std.time.ns_per_ms);
+        std.Thread.sleep(wait_ms * std.time.ns_per_ms);
         self.attempt = self.attempt +| 1;
     }
 

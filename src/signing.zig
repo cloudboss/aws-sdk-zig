@@ -28,8 +28,7 @@ pub fn signRequest(
     const payload = request.body orelse "";
     var payload_hash: [Sha256.digest_length]u8 = undefined;
     Sha256.hash(payload, &payload_hash, .{});
-    var payload_hash_hex: [64]u8 = undefined;
-    _ = std.fmt.bufPrint(&payload_hash_hex, "{s}", .{std.fmt.fmtSliceHexLower(&payload_hash)}) catch unreachable;
+    const payload_hash_hex = std.fmt.bytesToHex(&payload_hash, .lower);
 
     // Add required headers
     try request.headers.put(allocator, "x-amz-date", &datetime);
@@ -51,8 +50,7 @@ pub fn signRequest(
     // Build string to sign
     var canonical_request_hash: [Sha256.digest_length]u8 = undefined;
     Sha256.hash(canonical_result.canonical_request, &canonical_request_hash, .{});
-    var canonical_request_hash_hex: [64]u8 = undefined;
-    _ = std.fmt.bufPrint(&canonical_request_hash_hex, "{s}", .{std.fmt.fmtSliceHexLower(&canonical_request_hash)}) catch unreachable;
+    const canonical_request_hash_hex = std.fmt.bytesToHex(&canonical_request_hash, .lower);
 
     const credential_scope = try std.fmt.allocPrint(allocator, "{s}/{s}/{s}/aws4_request", .{
         datestamp,
@@ -73,8 +71,7 @@ pub fn signRequest(
     const signing_key = deriveSigningKey(credentials.secret_access_key, datestamp, region, service);
     var signature: [Hmac.mac_length]u8 = undefined;
     Hmac.create(&signature, string_to_sign, &signing_key);
-    var signature_hex: [64]u8 = undefined;
-    _ = std.fmt.bufPrint(&signature_hex, "{s}", .{std.fmt.fmtSliceHexLower(&signature)}) catch unreachable;
+    const signature_hex = std.fmt.bytesToHex(&signature, .lower);
 
     // Build authorization header
     const authorization = try std.fmt.allocPrint(allocator, "{s} Credential={s}/{s}, SignedHeaders={s}, Signature={s}", .{
