@@ -32,6 +32,7 @@ class StructureGenerator(
             writer.openBlock("pub const \$L = struct {", symbol.name)
 
             val members = shape.allMembers
+            var firstField = true
             for ((memberName, memberShape) in members) {
                 val fieldName = NamingUtil.toSnakeCase(memberName)
                 val memberSymbol = symbolProvider.toSymbol(memberShape)
@@ -40,13 +41,14 @@ class StructureGenerator(
                     .map { it.value }
                     .orElse(null)
 
-                writer.writeField(fieldName, memberSymbol.name, memberDocs)
+                writer.writeField(fieldName, memberSymbol.name, memberDocs, blankBefore = !firstField)
+                firstField = false
             }
 
             if (hasAllocatableFields()) {
-                writer.write("")
+                writer.blankLine()
                 writer.write("allocator: std.mem.Allocator,")
-                writer.write("")
+                writer.blankLine()
                 writer.openBlock("pub fn deinit(self: *const \$L) void {", symbol.name)
                 writer.write("_ = self;")
                 writer.closeBlock("}")

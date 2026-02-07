@@ -14,6 +14,7 @@ import software.amazon.smithy.codegen.core.directed.GenerateStructureDirective
 import software.amazon.smithy.codegen.core.directed.GenerateUnionDirective
 import software.amazon.smithy.zig.generators.EnumGenerator
 import software.amazon.smithy.zig.generators.IntEnumGenerator
+import software.amazon.smithy.zig.generators.ServiceGenerator
 import software.amazon.smithy.zig.generators.StructureGenerator
 import software.amazon.smithy.zig.generators.UnionGenerator
 
@@ -48,7 +49,11 @@ class DirectedZigCodegen :
     override fun generateService(
         directive: GenerateServiceDirective<ZigContext, ZigSettings>,
     ) {
-        // Service client generation will be added in a later phase
+        ServiceGenerator(
+            directive.context(),
+            directive.service(),
+            directive.model(),
+        ).run()
     }
 
     override fun generateStructure(

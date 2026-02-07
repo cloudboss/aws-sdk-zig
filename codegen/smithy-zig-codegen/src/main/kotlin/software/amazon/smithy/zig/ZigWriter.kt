@@ -10,6 +10,10 @@ class ZigWriter(private val fileName: String) :
         trimTrailingSpaces()
     }
 
+    fun blankLine() {
+        write("")
+    }
+
     fun writeDocs(docs: String?) {
         val lines = DocConverter.convert(docs)
         for (line in lines) {
@@ -21,7 +25,10 @@ class ZigWriter(private val fileName: String) :
         }
     }
 
-    fun writeField(name: String, type: String, docs: String? = null) {
+    fun writeField(name: String, type: String, docs: String? = null, blankBefore: Boolean = false) {
+        if (blankBefore) {
+            blankLine()
+        }
         if (docs != null) {
             writeDocs(docs)
         }
