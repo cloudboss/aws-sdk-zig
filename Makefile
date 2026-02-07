@@ -7,6 +7,8 @@ GRADLE_VERSION = 8.7
 CTR_IMAGE_BASE = alpine:3.21
 LOCALSTACK_IMG = localstack/localstack:4.3.0
 
+AWS_MODELS_COMMIT = fc44394485733bfdbe094a708e4b3963d31bd75d
+
 # The Dockerfile and its args are hashed to create a unique tag. The image
 # will be rebuilt if the hash changes, as the dependency file will change.
 UID = $(shell id -u)
@@ -84,9 +86,18 @@ test-integration-tls: $(HAS_IMAGE_LOCAL) certs
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh --tls"
 
-codegen: $(HAS_IMAGE_LOCAL)
+fetch-models: | $(DIR_OUT)
+	@curl -sL -o $(DIR_OUT)/api-models-aws.zip \
+		"https://codeload.github.com/aws/api-models-aws/zip/$(AWS_MODELS_COMMIT)"
+	@unzip -qo $(DIR_OUT)/api-models-aws.zip -d $(DIR_OUT)
+	@mkdir -p codegen/sdk-codegen/model
+	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/sts/service/2011-06-15/sts-2011-06-15.json \
+		codegen/sdk-codegen/model/sts.json
+
+codegen: $(HAS_IMAGE_LOCAL) fetch-models
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
+		-v $(DIR_OUT)/gradle-cache:/home/build/.gradle \
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "cd codegen && gradle build"
 
@@ -96,4 +107,4 @@ certs:
 clean:
 	@rm -rf $(DIR_OUT)
 
-.PHONY: build test test-integration test-integration-tls codegen certs clean
+.PHONY: build test test-integration test-integration-tls fetch-models codegen certs clean

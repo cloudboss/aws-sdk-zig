@@ -8,4 +8,7 @@ _output/
 tests/integration/certs/ca.*
 tests/integration/certs/server.*
 
+# Fetched AWS service models
+codegen/sdk-codegen/model/
+
 PHASE*.md

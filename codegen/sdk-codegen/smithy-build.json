@@ -1,0 +1,10 @@
+{
+    "version": "1.0",
+    "sources": ["model"],
+    "plugins": {
+        "zig-codegen": {
+            "service": "com.amazonaws.sts#AWSSecurityTokenServiceV20110615",
+            "package": "sts"
+        }
+    }
+}
