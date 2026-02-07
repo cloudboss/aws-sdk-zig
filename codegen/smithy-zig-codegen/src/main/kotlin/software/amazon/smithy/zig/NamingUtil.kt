@@ -5,69 +5,79 @@ object NamingUtil {
         if (name.isEmpty()) return name
 
         val result = StringBuilder()
-        var i = 0
 
+        var i = 0
         while (i < name.length) {
             val c = name[i]
 
-            if (i == 0) {
-                result.append(c.lowercaseChar())
-                i++
-                continue
-            }
-
             if (c == '_' || c == '-') {
-                result.append('_')
+                if (result.isNotEmpty() && result.last() != '_') {
+                    result.append('_')
+                }
                 i++
                 continue
             }
 
             if (c.isUpperCase()) {
-                // Check if this is part of an acronym (consecutive uppercase)
-                if (i + 1 < name.length && name[i + 1].isUpperCase()) {
-                    // Find the end of the acronym
-                    var end = i
-                    while (end < name.length && name[end].isUpperCase()) {
-                        end++
-                    }
-                    // If the acronym is followed by a lowercase letter, the last
-                    // uppercase char is the start of the next word
-                    if (end < name.length && name[end].isLowerCase()) {
-                        end--
-                    }
-                    if (result.isNotEmpty() && result.last() != '_') {
-                        result.append('_')
-                    }
-                    for (j in i until end) {
-                        result.append(name[j].lowercaseChar())
-                    }
-                    i = end
-                } else {
-                    // Single uppercase letter -- start of a new word
+                // Count consecutive uppercase chars
+                var upperEnd = i
+                while (upperEnd < name.length && name[upperEnd].isUpperCase()) {
+                    upperEnd++
+                }
+                val upperLen = upperEnd - i
+
+                if (upperLen == 1) {
+                    // Single uppercase: start of camelCase word
                     if (result.isNotEmpty() && result.last() != '_') {
                         result.append('_')
                     }
                     result.append(c.lowercaseChar())
-                    i++
+                } else {
+                    // Multiple uppercase: acronym
+                    // If followed by lowercase, the last uppercase starts the next word
+                    val acronymEnd = if (upperEnd < name.length && name[upperEnd].isLowerCase()) {
+                        upperEnd - 1
+                    } else {
+                        upperEnd
+                    }
+
+                    if (result.isNotEmpty() && result.last() != '_') {
+                        result.append('_')
+                    }
+                    for (j in i until acronymEnd) {
+                        result.append(name[j].lowercaseChar())
+                    }
+
+                    // Include trailing digits as part of the acronym (e.g. EC2)
+                    var digitEnd = acronymEnd
+                    while (digitEnd < name.length && name[digitEnd].isDigit()) {
+                        result.append(name[digitEnd])
+                        digitEnd++
+                    }
+
+                    // If the last uppercase char starts a new word (followed by lowercase),
+                    // don't consume it here -- let the next iteration handle it
+                    i = digitEnd
+                    continue
                 }
-            } else if (c.isDigit() && i > 0 && !name[i - 1].isDigit()) {
-                // Digit boundary
-                if (result.isNotEmpty() && result.last() != '_') {
+            } else if (c.isDigit()) {
+                // If transitioning from non-digit to digit, add underscore
+                if (i > 0 && result.isNotEmpty() && result.last() != '_' &&
+                    !name[i - 1].isDigit() && name[i - 1] != '_' && name[i - 1] != '-'
+                ) {
                     result.append('_')
                 }
                 result.append(c)
-                i++
-            } else if (!c.isDigit() && i > 0 && name[i - 1].isDigit()) {
-                // After digits, start new word
-                if (result.isNotEmpty() && result.last() != '_') {
+            } else {
+                // Lowercase letter
+                // If transitioning from digit to letter, add underscore
+                if (i > 0 && name[i - 1].isDigit() && result.isNotEmpty() && result.last() != '_') {
                     result.append('_')
                 }
                 result.append(c.lowercaseChar())
-                i++
-            } else {
-                result.append(c.lowercaseChar())
-                i++
             }
+
+            i++
         }
 
         return result.toString()

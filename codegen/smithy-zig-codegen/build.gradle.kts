@@ -1,13 +1,13 @@
 plugins {
-    val kotlinVersion: String by project
-    kotlin("jvm") version kotlinVersion
+    kotlin("jvm")
+    `java-library`
 }
 
 val smithyVersion: String by project
 
 dependencies {
-    implementation("software.amazon.smithy:smithy-codegen-core:$smithyVersion")
-    implementation("software.amazon.smithy:smithy-model:$smithyVersion")
+    api("software.amazon.smithy:smithy-codegen-core:$smithyVersion")
+    api("software.amazon.smithy:smithy-model:$smithyVersion")
     implementation("software.amazon.smithy:smithy-rules-engine:$smithyVersion")
     implementation("software.amazon.smithy:smithy-waiters:$smithyVersion")
 

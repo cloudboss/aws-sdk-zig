@@ -78,8 +78,8 @@ class ZigSymbolVisitor(private val model: Model, private val packageName: String
     override fun documentShape(shape: DocumentShape): Symbol = simpleSymbol("[]const u8")
 
     override fun listShape(shape: ListShape): Symbol {
-        val memberSymbol = toSymbol(shape.member)
-        return simpleSymbol("[]const ${memberSymbol.name}")
+        val targetSymbol = toSymbol(model.expectShape(shape.member.target))
+        return simpleSymbol("[]const ${targetSymbol.name}")
     }
 
     override fun mapShape(shape: MapShape): Symbol {

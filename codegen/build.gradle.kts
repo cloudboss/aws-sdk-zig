@@ -1,6 +1,5 @@
 plugins {
-    val kotlinVersion: String by project
-    kotlin("jvm") version kotlinVersion apply false
+    kotlin("jvm") apply false
 }
 
 allprojects {

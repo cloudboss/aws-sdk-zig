@@ -1,7 +1,13 @@
 pluginManagement {
+    val kotlinVersion: String by settings
+    val smithyGradleVersion: String by settings
     repositories {
         mavenCentral()
         gradlePluginPortal()
+    }
+    plugins {
+        kotlin("jvm") version kotlinVersion
+        id("software.amazon.smithy.gradle.smithy-base") version smithyGradleVersion
     }
 }
 

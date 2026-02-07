@@ -4,6 +4,7 @@ import software.amazon.smithy.codegen.core.SymbolProvider
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.codegen.core.directed.CreateContextDirective
 import software.amazon.smithy.codegen.core.directed.CreateSymbolProviderDirective
+import software.amazon.smithy.codegen.core.directed.CustomizeDirective
 import software.amazon.smithy.codegen.core.directed.DirectedCodegen
 import software.amazon.smithy.codegen.core.directed.GenerateEnumDirective
 import software.amazon.smithy.codegen.core.directed.GenerateErrorDirective
@@ -37,6 +38,7 @@ class DirectedZigCodegen :
             model = directive.model(),
             settings = directive.settings(),
             symbolProvider = directive.symbolProvider(),
+            fileManifest = directive.fileManifest(),
             writerDelegator = delegator,
             integrations = directive.integrations(),
             service = directive.service(),
@@ -58,7 +60,6 @@ class DirectedZigCodegen :
     override fun generateError(
         directive: GenerateErrorDirective<ZigContext, ZigSettings>,
     ) {
-        // Errors are structures; generate them the same way
         StructureGenerator(
             directive.context(),
             directive.shape(),
@@ -85,7 +86,9 @@ class DirectedZigCodegen :
         IntEnumGenerator(directive).run()
     }
 
-    override fun customizeAfterIntegrations(context: ZigContext) {
-        context.writerDelegator().flushWriters()
+    override fun customizeAfterIntegrations(
+        directive: CustomizeDirective<ZigContext, ZigSettings>,
+    ) {
+        directive.context().writerDelegator().flushWriters()
     }
 }

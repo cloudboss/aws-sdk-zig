@@ -1,5 +1,6 @@
 package software.amazon.smithy.zig
 
+import software.amazon.smithy.build.FileManifest
 import software.amazon.smithy.codegen.core.CodegenContext
 import software.amazon.smithy.codegen.core.SymbolProvider
 import software.amazon.smithy.codegen.core.WriterDelegator
@@ -11,6 +12,7 @@ class ZigContext(
     private val model: Model,
     private val settings: ZigSettings,
     private val symbolProvider: SymbolProvider,
+    private val fileManifest: FileManifest,
     private val writerDelegator: WriterDelegator<ZigWriter>,
     private val integrations: List<ZigIntegration>,
     val service: ServiceShape,
@@ -22,9 +24,9 @@ class ZigContext(
 
     override fun symbolProvider(): SymbolProvider = symbolProvider
 
-    override fun fileManifest() = writerDelegator().fileManifest
+    override fun fileManifest(): FileManifest = fileManifest
 
-    override fun sharedFileManifest() = Optional.empty<Nothing>()
+    override fun sharedFileManifest(): Optional<FileManifest> = Optional.empty()
 
     override fun writerDelegator(): WriterDelegator<ZigWriter> = writerDelegator
 

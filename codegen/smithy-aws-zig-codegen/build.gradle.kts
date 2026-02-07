@@ -1,6 +1,5 @@
 plugins {
-    val kotlinVersion: String by project
-    kotlin("jvm") version kotlinVersion
+    kotlin("jvm")
 }
 
 val smithyVersion: String by project
