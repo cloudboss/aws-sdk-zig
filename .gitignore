@@ -14,4 +14,5 @@ codegen/.gradle/
 # Fetched AWS service models
 codegen/sdk-codegen/model/
 
+PLAN.md
 PHASE*.md
