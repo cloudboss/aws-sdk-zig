@@ -94,12 +94,11 @@ fetch-models: | $(DIR_OUT)
 	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/sts/service/2011-06-15/sts-2011-06-15.json \
 		codegen/sdk-codegen/model/sts.json
 
-codegen: $(HAS_IMAGE_LOCAL) fetch-models | $(DIR_OUT)/gradle-cache/
+codegen: $(HAS_IMAGE_LOCAL) fetch-models
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
-		-v $(DIR_ROOT)/$(DIR_OUT)/gradle-cache:/home/build/.gradle \
 		-w /code \
-		$(CTR_IMAGE_LOCAL) /bin/sh -c "cd codegen && gradle build"
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "cd codegen && gradle build --gradle-user-home /code/$(DIR_OUT)/gradle-home --project-cache-dir /code/$(DIR_OUT)/codegen/.gradle"
 
 certs:
 	@bash tests/integration/certs/generate.sh
