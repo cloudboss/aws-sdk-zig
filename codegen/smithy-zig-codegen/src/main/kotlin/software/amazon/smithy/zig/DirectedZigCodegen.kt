@@ -51,10 +51,14 @@ class DirectedZigCodegen :
     override fun generateService(
         directive: GenerateServiceDirective<ZigContext, ZigSettings>,
     ) {
+        val protocol = directive.context().integrations()
+            .firstNotNullOfOrNull { it.resolveProtocol(directive.service(), directive.model()) }
+            ?: error("No protocol found for ${directive.service().id}")
         ServiceGenerator(
             directive.context(),
             directive.service(),
             directive.model(),
+            protocol,
         ).run()
     }
 

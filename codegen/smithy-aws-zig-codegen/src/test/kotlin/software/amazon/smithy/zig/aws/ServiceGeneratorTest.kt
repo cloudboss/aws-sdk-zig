@@ -1,4 +1,4 @@
-package software.amazon.smithy.zig.generators
+package software.amazon.smithy.zig.aws
 
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -16,6 +16,8 @@ import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
 import software.amazon.smithy.zig.ZigSymbolVisitor
 import software.amazon.smithy.zig.ZigWriter
+import software.amazon.smithy.zig.aws.protocols.AwsQueryProtocol
+import software.amazon.smithy.zig.generators.ServiceGenerator
 import java.nio.file.Path
 
 class ServiceGeneratorTest {
@@ -138,7 +140,7 @@ class ServiceGeneratorTest {
             ServiceShape::class.java,
         )
 
-        ServiceGenerator(context, service, model).run()
+        ServiceGenerator(context, service, model, AwsQueryProtocol()).run()
         context.writerDelegator().flushWriters()
 
         val files = mutableMapOf<String, String>()

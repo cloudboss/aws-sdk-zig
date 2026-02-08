@@ -4,11 +4,13 @@ import software.amazon.smithy.model.Model
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.zig.ZigContext
+import software.amazon.smithy.zig.protocols.ProtocolGenerator
 
 class ServiceGenerator(
     private val context: ZigContext,
     private val service: ServiceShape,
     private val model: Model,
+    private val protocol: ProtocolGenerator,
 ) {
     fun run() {
         val apiVersion = service.version
@@ -24,7 +26,7 @@ class ServiceGenerator(
         for (operationId in service.allOperations) {
             val opShape = model.expectShape(operationId, OperationShape::class.java)
             OperationGenerator(
-                context, context.settings(), service, model, opShape, apiVersion, errorInfos,
+                context, context.settings(), service, model, opShape, apiVersion, errorInfos, protocol,
             ).run()
         }
 
