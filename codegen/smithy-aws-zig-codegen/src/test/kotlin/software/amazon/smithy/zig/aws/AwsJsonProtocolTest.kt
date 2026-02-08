@@ -1,0 +1,468 @@
+package software.amazon.smithy.zig.aws
+
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
+import software.amazon.smithy.build.FileManifest
+import software.amazon.smithy.codegen.core.WriterDelegator
+import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.OperationShape
+import software.amazon.smithy.model.shapes.ServiceShape
+import software.amazon.smithy.model.shapes.ShapeId
+import software.amazon.smithy.model.shapes.StructureShape
+import software.amazon.smithy.model.traits.ErrorTrait
+import software.amazon.smithy.zig.ZigContext
+import software.amazon.smithy.zig.ZigSettings
+import software.amazon.smithy.zig.ZigSymbolVisitor
+import software.amazon.smithy.zig.ZigWriter
+import software.amazon.smithy.zig.aws.protocols.AwsJsonProtocol
+import software.amazon.smithy.zig.generators.ServiceGenerator
+import java.nio.file.Path
+
+class AwsJsonProtocolTest {
+
+    @TempDir
+    lateinit var tempDir: Path
+
+    private fun buildTestModel(): Model {
+        return Model.assembler()
+            .addShape(
+                StructureShape.builder()
+                    .id("test#ResourceNotFoundException")
+                    .addTrait(ErrorTrait("client"))
+                    .addMember("message", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#PutItemInput")
+                    .addMember("TableName", ShapeId.from("smithy.api#String"))
+                    .addMember("ItemCount", ShapeId.from("smithy.api#Integer"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#PutItemOutput")
+                    .addMember("ConsumedCapacity", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                OperationShape.builder()
+                    .id("test#PutItem")
+                    .input(ShapeId.from("test#PutItemInput"))
+                    .output(ShapeId.from("test#PutItemOutput"))
+                    .addError(ShapeId.from("test#ResourceNotFoundException"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#ListTablesInput")
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#ListTablesOutput")
+                    .addMember("TableCount", ShapeId.from("smithy.api#Integer"))
+                    .build()
+            )
+            .addShape(
+                OperationShape.builder()
+                    .id("test#ListTables")
+                    .input(ShapeId.from("test#ListTablesInput"))
+                    .output(ShapeId.from("test#ListTablesOutput"))
+                    .build()
+            )
+            .addShape(
+                ServiceShape.builder()
+                    .id("test#DynamoDB_20120810")
+                    .version("2012-08-10")
+                    .addOperation(ShapeId.from("test#PutItem"))
+                    .addOperation(ShapeId.from("test#ListTables"))
+                    .build()
+            )
+            .assemble()
+            .unwrap()
+    }
+
+    private fun createContext(model: Model): ZigContext {
+        val settings = ZigSettings(
+            ShapeId.from("test#DynamoDB_20120810"),
+            "dynamodb",
+            ".",
+        )
+        val symbolProvider = ZigSymbolVisitor(model, settings.packageName)
+        val fileManifest = FileManifest.create(tempDir)
+        val delegator = WriterDelegator(fileManifest, symbolProvider, ZigWriter.factory())
+        val service = model.expectShape(settings.service, ServiceShape::class.java)
+
+        return ZigContext(
+            model = model,
+            settings = settings,
+            symbolProvider = symbolProvider,
+            fileManifest = fileManifest,
+            writerDelegator = delegator,
+            integrations = listOf(),
+            service = service,
+        )
+    }
+
+    private fun generateFiles(version: String): Map<String, String> {
+        val model = buildTestModel()
+        val context = createContext(model)
+        val service = model.expectShape(
+            ShapeId.from("test#DynamoDB_20120810"),
+            ServiceShape::class.java,
+        )
+
+        ServiceGenerator(context, service, model, AwsJsonProtocol(version)).run()
+        context.writerDelegator().flushWriters()
+
+        val files = mutableMapOf<String, String>()
+        for (file in context.fileManifest().files) {
+            files[file.fileName.toString()] = file.toFile().readText()
+        }
+        return files
+    }
+
+    // ---- Content-Type tests ----
+
+    @Test
+    fun contentTypeJson10() {
+        val protocol = AwsJsonProtocol("1.0")
+        assertTrue(
+            protocol.contentType() == "application/x-amz-json-1.0",
+            "AWS JSON 1.0 should use application/x-amz-json-1.0",
+        )
+    }
+
+    @Test
+    fun contentTypeJson11() {
+        val protocol = AwsJsonProtocol("1.1")
+        assertTrue(
+            protocol.contentType() == "application/x-amz-json-1.1",
+            "AWS JSON 1.1 should use application/x-amz-json-1.1",
+        )
+    }
+
+    // ---- X-Amz-Target header tests ----
+
+    @Test
+    fun serializerSetsXAmzTargetHeader() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("X-Amz-Target"),
+            "Missing X-Amz-Target header",
+        )
+        assertTrue(
+            op.contains("DynamoDB_20120810.PutItem"),
+            "X-Amz-Target should be ServiceName.OperationName",
+        )
+    }
+
+    @Test
+    fun serializerSetsContentType() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("application/x-amz-json-1.0"),
+            "Missing JSON 1.0 content type in generated code",
+        )
+    }
+
+    @Test
+    fun json11UsesCorrectContentType() {
+        val files = generateFiles("1.1")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("application/x-amz-json-1.1"),
+            "Missing JSON 1.1 content type in generated code",
+        )
+    }
+
+    // ---- JSON serialization tests ----
+
+    @Test
+    fun serializerBuildsJsonBody() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(op.contains("fn serializeRequest("), "Missing serializeRequest")
+        assertTrue(op.contains("body_buf"), "Missing body buffer")
+        assertTrue(op.contains("\"{\""), "Missing JSON open brace")
+        assertTrue(op.contains("\"}\""), "Missing JSON close brace")
+    }
+
+    @Test
+    fun serializerEncodesStringFields() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("TableName"),
+            "Missing TableName field in serializer",
+        )
+        assertTrue(
+            op.contains("appendJsonEscaped"),
+            "Missing JSON string escaping call",
+        )
+    }
+
+    @Test
+    fun serializerEncodesIntFields() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("ItemCount"),
+            "Missing ItemCount field in serializer",
+        )
+    }
+
+    @Test
+    fun emptyInputDiscardsInput() {
+        val files = generateFiles("1.0")
+        val op = files["list_tables.zig"]!!
+
+        assertTrue(
+            op.contains("_ = input;"),
+            "Empty input should be discarded",
+        )
+    }
+
+    // ---- Deserialization tests ----
+
+    @Test
+    fun deserializerUsesFindJsonValue() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(op.contains("fn deserializeResponse("), "Missing deserializeResponse")
+        assertTrue(op.contains("findJsonValue"), "Missing findJsonValue usage")
+        assertTrue(
+            op.contains("findJsonValue(body, \"ConsumedCapacity\")"),
+            "Should search for PascalCase JSON key",
+        )
+    }
+
+    @Test
+    fun deserializerParsesIntegers() {
+        val files = generateFiles("1.0")
+        val op = files["list_tables.zig"]!!
+
+        assertTrue(
+            op.contains("findJsonValue(body, \"TableCount\")"),
+            "Should search for TableCount JSON key",
+        )
+        assertTrue(
+            op.contains("parseInt"),
+            "Should parse integer from JSON value",
+        )
+    }
+
+    // ---- Error parsing tests ----
+
+    @Test
+    fun errorParserUsesUnderscoreType() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(op.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
+        assertTrue(
+            op.contains("__type"),
+            "Should extract error code from __type field",
+        )
+    }
+
+    @Test
+    fun errorParserStripsNamespacePrefix() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("lastIndexOfScalar"),
+            "Should strip namespace prefix from __type using '#' delimiter",
+        )
+    }
+
+    @Test
+    fun errorParserMatchesErrorCodes() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("\"ResourceNotFoundException\""),
+            "Missing error code matching",
+        )
+    }
+
+    @Test
+    fun errorParserChecksMessageAndMessageCase() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("\"message\""),
+            "Should check lowercase 'message' field",
+        )
+        assertTrue(
+            op.contains("\"Message\""),
+            "Should check uppercase 'Message' field as fallback",
+        )
+    }
+
+    @Test
+    fun errorParserDoesNotUseXmlElements() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertFalse(
+            op.contains("findElement"),
+            "JSON protocol should NOT use XML findElement",
+        )
+        assertFalse(
+            op.contains("<Code>"),
+            "JSON protocol should NOT reference XML tags",
+        )
+    }
+
+    // ---- Helper functions tests ----
+
+    @Test
+    fun helperFunctionsPresent() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(op.contains("fn findJsonValue("), "Missing findJsonValue helper")
+        assertTrue(op.contains("fn appendJsonEscaped("), "Missing appendJsonEscaped helper")
+        assertTrue(op.contains("fn parseHost("), "Missing parseHost helper")
+        assertTrue(op.contains("fn parsePort("), "Missing parsePort helper")
+    }
+
+    // ---- JSON escaping tests ----
+
+    @Test
+    fun appendJsonEscapedHandlesDoubleQuote() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        // Double-quote (0x22) should be escaped with backslash (0x5C) + quote (0x22)
+        assertTrue(
+            op.contains("0x22 =>") && op.contains("try buf.append(alloc, 0x5C); try buf.append(alloc, 0x22);"),
+            "appendJsonEscaped should handle double-quote escaping via hex codes",
+        )
+    }
+
+    @Test
+    fun appendJsonEscapedHandlesBackslash() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        // Backslash (0x5C) should be escaped with backslash + backslash
+        assertTrue(
+            op.contains("0x5C => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x5C);"),
+            "appendJsonEscaped should handle backslash escaping via hex codes",
+        )
+    }
+
+    @Test
+    fun appendJsonEscapedHandlesControlChars() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        // Newline (0x0A), CR (0x0D), tab (0x09) should have specific escape sequences
+        assertTrue(op.contains("0x0A =>"), "appendJsonEscaped should handle newline")
+        assertTrue(op.contains("0x0D =>"), "appendJsonEscaped should handle carriage return")
+        assertTrue(op.contains("0x09 =>"), "appendJsonEscaped should handle tab")
+        // Other control chars < 0x20 should use \u00XX escape
+        assertTrue(
+            op.contains("if (c < 0x20)"),
+            "appendJsonEscaped should handle other control chars with unicode escape",
+        )
+    }
+
+    @Test
+    fun findJsonValueBuildsSearchPattern() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        // findJsonValue should build "key" search pattern using 0x22 (double-quote)
+        assertTrue(
+            op.contains("buf[0] = 0x22;") && op.contains("buf[key.len + 1] = 0x22;"),
+            "findJsonValue should construct quoted key pattern using hex 0x22",
+        )
+    }
+
+    @Test
+    fun findJsonValueHandlesStringValues() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        // Should detect string values by checking for 0x22 (double-quote)
+        assertTrue(
+            op.contains("json[pos] == 0x22"),
+            "findJsonValue should detect string values by quote character (0x22)",
+        )
+    }
+
+    @Test
+    fun findJsonValueHandlesNonStringValues() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        // Should handle booleans/numbers by reading until delimiter
+        assertTrue(
+            op.contains("json[pos] == ','") || op.contains("json[pos] == '}'"),
+            "findJsonValue should read non-string values until delimiter",
+        )
+    }
+
+    // ---- No XML helpers ----
+
+    @Test
+    fun noXmlHelpers() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertFalse(
+            op.contains("fn findElement("),
+            "JSON protocol should NOT include XML findElement helper",
+        )
+        assertFalse(
+            op.contains("fn appendUrlEncoded("),
+            "JSON protocol should NOT include URL encoding helper",
+        )
+    }
+
+    // ---- Method is always POST, path is always / ----
+
+    @Test
+    fun requestIsPostToRoot() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(op.contains("request.method = .POST;"), "Method should be POST")
+        assertTrue(op.contains("request.path = \"/\";"), "Path should be /")
+    }
+
+    // ---- File list test ----
+
+    @Test
+    fun allExpectedFilesGenerated() {
+        val files = generateFiles("1.0")
+        val expectedFiles = listOf(
+            "errors.zig",
+            "client.zig",
+            "root.zig",
+            "put_item.zig",
+            "list_tables.zig",
+        )
+        for (expected in expectedFiles) {
+            assertTrue(files.containsKey(expected), "Missing generated file: $expected")
+        }
+    }
+}

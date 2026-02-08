@@ -10,6 +10,8 @@ class AwsProtocolProvider : AwsZigIntegration {
         return when {
             service.hasTrait("aws.protocols#awsQuery") -> AwsQueryProtocol()
             service.hasTrait("aws.protocols#ec2Query") -> Ec2QueryProtocol()
+            service.hasTrait("aws.protocols#awsJson1_0") -> AwsJsonProtocol("1.0")
+            service.hasTrait("aws.protocols#awsJson1_1") -> AwsJsonProtocol("1.1")
             else -> null
         }
     }
