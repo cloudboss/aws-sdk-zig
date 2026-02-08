@@ -99,6 +99,9 @@ codegen: $(HAS_IMAGE_LOCAL) fetch-models
 		-v $(DIR_ROOT):/code \
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "cd codegen && gradle build --gradle-user-home /code/$(DIR_OUT)/gradle-home --project-cache-dir /code/$(DIR_OUT)/codegen/.gradle"
+	@rm -rf service/sts
+	@mkdir -p service/sts
+	@cp $(DIR_OUT)/codegen/sdk-codegen/smithyprojections/sdk-codegen/source/zig-codegen/*.zig service/sts/
 
 certs:
 	@bash tests/integration/certs/generate.sh

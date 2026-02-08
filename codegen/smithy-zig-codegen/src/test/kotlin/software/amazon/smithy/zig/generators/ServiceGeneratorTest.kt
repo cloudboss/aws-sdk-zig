@@ -25,6 +25,14 @@ class ServiceGeneratorTest {
 
     private fun buildTestModel(): Model {
         return Model.assembler()
+            // Shared structure type used in operation output
+            .addShape(
+                StructureShape.builder()
+                    .id("test#Credentials")
+                    .addMember("AccessKeyId", ShapeId.from("smithy.api#String"))
+                    .addMember("SecretAccessKey", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
             // Error shapes
             .addShape(
                 StructureShape.builder()
@@ -41,7 +49,7 @@ class ServiceGeneratorTest {
                     .addMember("message", ShapeId.from("smithy.api#String"))
                     .build()
             )
-            // GetCallerIdentity operation (no input fields, simple output)
+            // GetCallerIdentity operation (no input fields, simple output with shared type)
             .addShape(
                 StructureShape.builder()
                     .id("test#GetCallerIdentityRequest")
@@ -53,6 +61,7 @@ class ServiceGeneratorTest {
                     .addMember("Account", ShapeId.from("smithy.api#String"))
                     .addMember("Arn", ShapeId.from("smithy.api#String"))
                     .addMember("UserId", ShapeId.from("smithy.api#String"))
+                    .addMember("Credentials", ShapeId.from("test#Credentials"))
                     .build()
             )
             .addShape(
@@ -344,7 +353,33 @@ class ServiceGeneratorTest {
         )
     }
 
-    // ---- Helper to dump files for debugging ----
+    // ---- Shared Type Import Tests ----
+
+    @Test
+    fun operationFileImportsSharedTypes() {
+        val files = generateAndGetFiles()
+        val op = files["get_caller_identity.zig"]!!
+
+        assertTrue(
+            op.contains("const Credentials = @import(\"credentials.zig\").Credentials;"),
+            "Missing Credentials import in operation file",
+        )
+    }
+
+    // ---- Service Name Parameterization Tests ----
+
+    @Test
+    fun operationUsesPackageNameForSigning() {
+        val files = generateAndGetFiles()
+        val op = files["get_caller_identity.zig"]!!
+
+        assertTrue(
+            op.contains("\"test_service\""),
+            "Operation should use package name for signing/endpoint",
+        )
+    }
+
+    // ---- File List Test ----
 
     @Test
     fun allExpectedFilesGenerated() {

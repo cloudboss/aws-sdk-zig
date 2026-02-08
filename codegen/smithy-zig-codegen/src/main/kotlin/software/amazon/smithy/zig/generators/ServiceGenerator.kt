@@ -24,7 +24,7 @@ class ServiceGenerator(
         for (operationId in service.allOperations) {
             val opShape = model.expectShape(operationId, OperationShape::class.java)
             OperationGenerator(
-                context, service, model, opShape, apiVersion, errorInfos,
+                context, context.settings(), service, model, opShape, apiVersion, errorInfos,
             ).run()
         }
 

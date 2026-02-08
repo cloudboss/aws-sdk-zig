@@ -11,10 +11,12 @@ import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
+import software.amazon.smithy.zig.ZigSettings
 import software.amazon.smithy.zig.ZigWriter
 
 class OperationGenerator(
     private val context: ZigContext,
+    private val settings: ZigSettings,
     private val service: ServiceShape,
     private val model: Model,
     private val operation: OperationShape,
@@ -36,6 +38,16 @@ class OperationGenerator(
             // Intra-service imports written after standard imports
             writer.write("const Client = @import(\"client.zig\").Client;")
             writer.write("const ServiceError = @import(\"errors.zig\").ServiceError;")
+
+            // Import shared types referenced by input/output members
+            val sharedTypes = collectSharedStructureTypes()
+            for (shapeId in sharedTypes) {
+                val shape = model.expectShape(shapeId, StructureShape::class.java)
+                val symbolName = shape.id.name
+                val fileName = NamingUtil.toZigFileName(symbolName)
+                writer.write("const \$L = @import(\"\$L\").\$L;", symbolName, fileName, symbolName)
+            }
+
             writer.blankLine()
 
             writeInputStruct(writer)
@@ -121,18 +133,27 @@ class OperationGenerator(
         writer.blankLine()
         writer.openBlock("pub fn deinit(self: *const \$L) void {", outputName)
 
-        for ((memberName, memberShape) in outputShape.allMembers) {
-            val fieldName = NamingUtil.toSnakeCase(memberName)
+        val hasStringFields = outputShape.allMembers.values.any { memberShape ->
             val targetShape = model.expectShape(memberShape.target)
-            val zigType = resolveBaseZigType(targetShape)
+            resolveBaseZigType(targetShape) == "[]const u8"
+        }
 
-            if (zigType == "[]const u8") {
-                if (memberShape.isRequired) {
-                    writer.write("self.allocator.free(self.\$L);", fieldName)
-                } else {
-                    writer.openBlock("if (self.\$L) |v| {", fieldName)
-                    writer.write("self.allocator.free(v);")
-                    writer.closeBlock("}")
+        if (!hasStringFields) {
+            writer.write("_ = self;")
+        } else {
+            for ((memberName, memberShape) in outputShape.allMembers) {
+                val fieldName = NamingUtil.toSnakeCase(memberName)
+                val targetShape = model.expectShape(memberShape.target)
+                val zigType = resolveBaseZigType(targetShape)
+
+                if (zigType == "[]const u8") {
+                    if (memberShape.isRequired) {
+                        writer.write("self.allocator.free(self.\$L);", fieldName)
+                    } else {
+                        writer.openBlock("if (self.\$L) |v| {", fieldName)
+                        writer.write("self.allocator.free(v);")
+                        writer.closeBlock("}")
+                    }
                 }
             }
         }
@@ -167,8 +188,8 @@ class OperationGenerator(
         writer.blankLine()
 
         // Sign
-        writer.write("var creds = try client.config.credentials.getCredentials(alloc);")
-        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"sts\");")
+        writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
+        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.packageName)
         writer.blankLine()
 
         // Send
@@ -199,8 +220,13 @@ class OperationGenerator(
             inputName,
         )
 
+        // Discard input if no fields to serialize
+        if (inputShape.allMembers.isEmpty()) {
+            writer.write("_ = input;")
+        }
+
         // Build endpoint
-        writer.write("const endpoint = try config.getEndpoint(\"sts\", alloc);")
+        writer.write("const endpoint = try config.getEndpoint(\"\$L\", alloc);", settings.packageName)
         writer.blankLine()
 
         // Parse host from endpoint
@@ -374,66 +400,77 @@ class OperationGenerator(
     private fun writeDeserializeResponse(writer: ZigWriter) {
         val outputName = "${operationName}Output"
 
+        // Check if any members are deserializable scalar types
+        val hasDeserializableFields = outputShape.allMembers.values.any { memberShape ->
+            val targetShape = model.expectShape(memberShape.target)
+            val zigType = resolveBaseZigType(targetShape)
+            zigType in listOf("[]const u8", "i32", "i64", "bool")
+        }
+
         writer.openBlock(
             "fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !\$L {",
             outputName,
         )
 
-        writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
+        if (!hasDeserializableFields) {
+            writer.write("_ = body;")
+            writer.write("const result: \$L = .{ .allocator = alloc };", outputName)
+        } else {
+            writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
 
-        for ((memberName, memberShape) in outputShape.allMembers) {
-            val fieldName = NamingUtil.toSnakeCase(memberName)
-            val targetShape = model.expectShape(memberShape.target)
-            val xmlName = memberShape.getTrait(XmlNameTrait::class.java)
-                .map { it.value }
-                .orElse(memberName)
-            val zigType = resolveBaseZigType(targetShape)
+            for ((memberName, memberShape) in outputShape.allMembers) {
+                val fieldName = NamingUtil.toSnakeCase(memberName)
+                val targetShape = model.expectShape(memberShape.target)
+                val xmlName = memberShape.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }
+                    .orElse(memberName)
+                val zigType = resolveBaseZigType(targetShape)
 
-            when (zigType) {
-                "[]const u8" -> {
-                    writer.openBlock(
-                        "if (findElement(body, \"\$L\")) |content| {",
-                        xmlName,
-                    )
-                    writer.write("result.\$L = try alloc.dupe(u8, content);", fieldName)
-                    writer.closeBlock("}")
-                }
-                "i32" -> {
-                    writer.openBlock(
-                        "if (findElement(body, \"\$L\")) |content| {",
-                        xmlName,
-                    )
-                    writer.write(
-                        "result.\$L = std.fmt.parseInt(i32, content, 10) catch null;",
-                        fieldName,
-                    )
-                    writer.closeBlock("}")
-                }
-                "i64" -> {
-                    writer.openBlock(
-                        "if (findElement(body, \"\$L\")) |content| {",
-                        xmlName,
-                    )
-                    writer.write(
-                        "result.\$L = std.fmt.parseInt(i64, content, 10) catch null;",
-                        fieldName,
-                    )
-                    writer.closeBlock("}")
-                }
-                "bool" -> {
-                    writer.openBlock(
-                        "if (findElement(body, \"\$L\")) |content| {",
-                        xmlName,
-                    )
-                    writer.write(
-                        "result.\$L = std.mem.eql(u8, content, \"true\");",
-                        fieldName,
-                    )
-                    writer.closeBlock("}")
-                }
-                else -> {
-                    // Nested struct types -- skip for now.
-                    // Full deserialization of nested types can be added incrementally.
+                when (zigType) {
+                    "[]const u8" -> {
+                        writer.openBlock(
+                            "if (findElement(body, \"\$L\")) |content| {",
+                            xmlName,
+                        )
+                        writer.write("result.\$L = try alloc.dupe(u8, content);", fieldName)
+                        writer.closeBlock("}")
+                    }
+                    "i32" -> {
+                        writer.openBlock(
+                            "if (findElement(body, \"\$L\")) |content| {",
+                            xmlName,
+                        )
+                        writer.write(
+                            "result.\$L = std.fmt.parseInt(i32, content, 10) catch null;",
+                            fieldName,
+                        )
+                        writer.closeBlock("}")
+                    }
+                    "i64" -> {
+                        writer.openBlock(
+                            "if (findElement(body, \"\$L\")) |content| {",
+                            xmlName,
+                        )
+                        writer.write(
+                            "result.\$L = std.fmt.parseInt(i64, content, 10) catch null;",
+                            fieldName,
+                        )
+                        writer.closeBlock("}")
+                    }
+                    "bool" -> {
+                        writer.openBlock(
+                            "if (findElement(body, \"\$L\")) |content| {",
+                            xmlName,
+                        )
+                        writer.write(
+                            "result.\$L = std.mem.eql(u8, content, \"true\");",
+                            fieldName,
+                        )
+                        writer.closeBlock("}")
+                    }
+                    else -> {
+                        // Nested struct types -- skip for now.
+                    }
                 }
             }
         }
@@ -565,5 +602,34 @@ class OperationGenerator(
                 "std.fmt.allocPrint(alloc, \"{d}\", .{$varName}) catch \"\""
             else -> varName
         }
+    }
+
+    /**
+     * Collect unique StructureShape IDs referenced by input/output members
+     * (directly or through ListShape -> member -> StructureShape).
+     * Excludes the input/output shapes themselves.
+     */
+    private fun collectSharedStructureTypes(): Set<software.amazon.smithy.model.shapes.ShapeId> {
+        val result = mutableSetOf<software.amazon.smithy.model.shapes.ShapeId>()
+
+        fun collectFromMembers(struct: StructureShape) {
+            for ((_, memberShape) in struct.allMembers) {
+                val targetShape = model.expectShape(memberShape.target)
+                when (targetShape) {
+                    is StructureShape -> result.add(targetShape.id)
+                    is ListShape -> {
+                        val listTarget = model.expectShape(targetShape.member.target)
+                        if (listTarget is StructureShape) {
+                            result.add(listTarget.id)
+                        }
+                    }
+                }
+            }
+        }
+
+        collectFromMembers(inputShape)
+        collectFromMembers(outputShape)
+
+        return result
     }
 }

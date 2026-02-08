@@ -45,23 +45,7 @@ class StructureGenerator(
                 firstField = false
             }
 
-            if (hasAllocatableFields()) {
-                writer.blankLine()
-                writer.write("allocator: std.mem.Allocator,")
-                writer.blankLine()
-                writer.openBlock("pub fn deinit(self: *const \$L) void {", symbol.name)
-                writer.write("_ = self;")
-                writer.closeBlock("}")
-            }
-
             writer.closeBlock("};")
-        }
-    }
-
-    private fun hasAllocatableFields(): Boolean {
-        return shape.allMembers.values.any { member ->
-            val sym = symbolProvider.toSymbol(member)
-            sym.name.startsWith("[]") || sym.name.startsWith("?[]")
         }
     }
 }
