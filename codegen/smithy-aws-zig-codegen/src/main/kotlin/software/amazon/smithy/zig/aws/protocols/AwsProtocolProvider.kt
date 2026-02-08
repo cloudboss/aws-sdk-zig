@@ -9,6 +9,7 @@ class AwsProtocolProvider : AwsZigIntegration {
     override fun resolveProtocol(service: ServiceShape, model: Model): ProtocolGenerator? {
         return when {
             service.hasTrait("aws.protocols#awsQuery") -> AwsQueryProtocol()
+            service.hasTrait("aws.protocols#ec2Query") -> Ec2QueryProtocol()
             else -> null
         }
     }

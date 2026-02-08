@@ -10,7 +10,7 @@ import software.amazon.smithy.zig.ZigWriter
 import software.amazon.smithy.zig.protocols.OperationContext
 import software.amazon.smithy.zig.protocols.ProtocolGenerator
 
-class AwsQueryProtocol : ProtocolGenerator {
+open class AwsQueryProtocol : ProtocolGenerator {
 
     override fun contentType(): String = "application/x-www-form-urlencoded"
 
@@ -285,7 +285,7 @@ class AwsQueryProtocol : ProtocolGenerator {
         writer.closeBlock("}")
     }
 
-    override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
+    override open fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
         writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16) ServiceError {")
 
         writer.write("const error_code = findElement(body, \"Code\") orelse \"Unknown\";")
@@ -315,6 +315,10 @@ class AwsQueryProtocol : ProtocolGenerator {
         writer.blankLine()
 
         // Helper functions
+        writeHelperFunctions(writer)
+    }
+
+    protected fun writeHelperFunctions(writer: ZigWriter) {
         writeFindElementHelper(writer)
         writer.blankLine()
         writeUrlEncodeHelper(writer)

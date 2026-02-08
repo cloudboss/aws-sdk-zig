@@ -1,0 +1,40 @@
+package software.amazon.smithy.zig.aws.protocols
+
+import software.amazon.smithy.zig.ZigWriter
+import software.amazon.smithy.zig.protocols.OperationContext
+
+class Ec2QueryProtocol : AwsQueryProtocol() {
+
+    override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
+        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16) ServiceError {")
+
+        writer.write("const error_code = findElement(body, \"Code\") orelse \"Unknown\";")
+        writer.write("const error_message = findElement(body, \"Message\") orelse \"\";")
+        writer.write("const request_id = findElement(body, \"RequestID\") orelse \"\";")
+        writer.blankLine()
+
+        // Match error codes to ServiceError variants
+        for (info in ctx.errorInfos) {
+            writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
+            writer.write("return .{ .\$L = .{", info.variantName)
+            writer.write("    .message = error_message,")
+            writer.write("    .request_id = request_id,")
+            writer.write("} };")
+            writer.closeBlock("}")
+        }
+
+        writer.blankLine()
+        writer.write("return .{ .unknown = .{")
+        writer.write("    .code = error_code,")
+        writer.write("    .message = error_message,")
+        writer.write("    .request_id = request_id,")
+        writer.write("    .http_status = status,")
+        writer.write("} };")
+
+        writer.closeBlock("}")
+        writer.blankLine()
+
+        // Helper functions
+        writeHelperFunctions(writer)
+    }
+}
