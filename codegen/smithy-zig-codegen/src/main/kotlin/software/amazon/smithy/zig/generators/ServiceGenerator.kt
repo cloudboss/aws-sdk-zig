@@ -1,7 +1,7 @@
 package software.amazon.smithy.zig.generators
 
 import software.amazon.smithy.model.Model
-import software.amazon.smithy.model.shapes.OperationShape
+import software.amazon.smithy.model.knowledge.TopDownIndex
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.protocols.ProtocolGenerator
@@ -22,9 +22,9 @@ class ServiceGenerator(
         // 2. Generate errors.zig
         errorGenerator.run()
 
-        // 3. Generate one file per operation
-        for (operationId in service.allOperations) {
-            val opShape = model.expectShape(operationId, OperationShape::class.java)
+        // 3. Generate one file per operation (including resource-bound operations)
+        val topDownIndex = TopDownIndex.of(model)
+        for (opShape in topDownIndex.getContainedOperations(service)) {
             OperationGenerator(
                 context, context.settings(), service, model, opShape, apiVersion, errorInfos, protocol,
             ).run()

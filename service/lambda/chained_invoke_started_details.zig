@@ -1,0 +1,20 @@
+const EventInput = @import("event_input.zig").EventInput;
+
+/// Contains details about a chained function invocation that has started
+/// execution, including start time and execution context.
+pub const ChainedInvokeStartedDetails = struct {
+    /// The Amazon Resource Name (ARN) that identifies the durable execution.
+    durable_execution_arn: ?[]const u8,
+
+    /// The version of the function that was executed.
+    executed_version: ?[]const u8,
+
+    /// The name or ARN of the Lambda function being invoked.
+    function_name: []const u8,
+
+    /// The JSON input payload provided to the chained invocation.
+    input: ?EventInput,
+
+    /// The tenant identifier for the chained invocation.
+    tenant_id: ?[]const u8,
+};

@@ -1,7 +1,9 @@
 package software.amazon.smithy.zig.aws.protocols
 
+import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.Shape
+import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.HttpHeaderTrait
 import software.amazon.smithy.model.traits.HttpLabelTrait
 import software.amazon.smithy.model.traits.HttpPayloadTrait
@@ -119,7 +121,7 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.blankLine()
 
         // Build query string
-        writeQueryBuilder(writer, bindings)
+        writeQueryBuilder(writer, ctx, bindings)
 
         // Build body
         writeBodyBuilder(writer, ctx, bindings)
@@ -206,7 +208,7 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.write("const path = try path_buf.toOwnedSlice(alloc);")
     }
 
-    private fun writeQueryBuilder(writer: ZigWriter, bindings: InputBindings) {
+    private fun writeQueryBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings) {
         if (bindings.queryParams.isEmpty()) return
 
         writer.write("var query_buf: std.ArrayList(u8) = .{};")
@@ -219,13 +221,13 @@ class RestJsonProtocol : ProtocolGenerator {
             if (memberShape.isRequired) {
                 writer.write("if (query_has_prev) try query_buf.appendSlice(alloc, \"&\");")
                 writer.write("try query_buf.appendSlice(alloc, \"\$L=\");", queryKey)
-                writer.write("try appendUrlEncoded(alloc, &query_buf, input.\$L);", fieldName)
+                writeQueryValueAppend(writer, ctx, memberShape, "input.$fieldName")
                 writer.write("query_has_prev = true;")
             } else {
                 writer.openBlock("if (input.\$L) |v| {", fieldName)
                 writer.write("if (query_has_prev) try query_buf.appendSlice(alloc, \"&\");")
                 writer.write("try query_buf.appendSlice(alloc, \"\$L=\");", queryKey)
-                writer.write("try appendUrlEncoded(alloc, &query_buf, v);")
+                writeQueryValueAppend(writer, ctx, memberShape, "v")
                 writer.write("query_has_prev = true;")
                 writer.closeBlock("}")
             }
@@ -233,6 +235,38 @@ class RestJsonProtocol : ProtocolGenerator {
 
         writer.write("const query = try query_buf.toOwnedSlice(alloc);")
         writer.blankLine()
+    }
+
+    /**
+     * Generate code to append a query parameter value, handling type conversion for
+     * enums, integers, and booleans.
+     */
+    private fun writeQueryValueAppend(writer: ZigWriter, ctx: OperationContext, memberShape: MemberShape, varName: String) {
+        val targetShape = ctx.model.expectShape(memberShape.target)
+        val isEnum = targetShape is EnumShape ||
+            (targetShape is software.amazon.smithy.model.shapes.StringShape && targetShape.hasTrait(EnumTrait::class.java))
+        val zigType = ctx.resolveBaseZigType(targetShape)
+
+        when {
+            zigType == "[]const u8" -> {
+                writer.write("try appendUrlEncoded(alloc, &query_buf, \$L);", varName)
+            }
+            isEnum -> {
+                writer.write("try appendUrlEncoded(alloc, &query_buf, @tagName(\$L));", varName)
+            }
+            zigType in listOf("i32", "i64", "i16", "i8") -> {
+                writer.openBlock("{")
+                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", varName)
+                writer.write("try query_buf.appendSlice(alloc, num_str);")
+                writer.closeBlock("}")
+            }
+            zigType == "bool" -> {
+                writer.write("try query_buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", varName)
+            }
+            else -> {
+                writer.write("try appendUrlEncoded(alloc, &query_buf, \$L);", varName)
+            }
+        }
     }
 
     private fun writeBodyBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings) {
@@ -387,6 +421,17 @@ class RestJsonProtocol : ProtocolGenerator {
                 writer.write("result.\$L = @intCast(status);", fieldName)
             } else {
                 writer.write("_ = status;")
+            }
+
+            // Check if body will actually be used
+            val payloadUsesBody = bindings.payload != null && run {
+                val (_, ms) = bindings.payload
+                val ts = ctx.model.expectShape(ms.target)
+                ctx.resolveBaseZigType(ts) == "[]const u8"
+            }
+            val bodyUsed = payloadUsesBody || hasDeserializableBodyFields
+            if (!bodyUsed) {
+                writer.write("_ = body;")
             }
 
             // @httpPayload

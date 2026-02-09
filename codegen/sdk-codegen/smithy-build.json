@@ -17,6 +17,14 @@
                     "package": "dynamodb"
                 }
             }
+        },
+        "lambda": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lambda#AWSGirApiService",
+                    "package": "lambda"
+                }
+            }
         }
     }
 }

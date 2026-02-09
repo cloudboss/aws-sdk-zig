@@ -12,7 +12,7 @@ import software.amazon.smithy.codegen.core.directed.GenerateIntEnumDirective
 import software.amazon.smithy.codegen.core.directed.GenerateServiceDirective
 import software.amazon.smithy.codegen.core.directed.GenerateStructureDirective
 import software.amazon.smithy.codegen.core.directed.GenerateUnionDirective
-import software.amazon.smithy.model.shapes.OperationShape
+import software.amazon.smithy.model.knowledge.TopDownIndex
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.zig.generators.EnumGenerator
 import software.amazon.smithy.zig.generators.IntEnumGenerator
@@ -101,13 +101,37 @@ class DirectedZigCodegen :
         directive.context().writerDelegator().flushWriters()
     }
 
+    /**
+     * Collect operation I/O shape IDs that should be generated inline by OperationGenerator
+     * rather than as standalone files by StructureGenerator.
+     *
+     * Only skip shapes that are used exclusively as I/O. If a shape is used as I/O AND
+     * referenced as a member type by other shapes, it must be generated as a standalone file.
+     */
     private fun getOperationIoShapeIds(context: ZigContext): Set<ShapeId> {
-        val ids = mutableSetOf<ShapeId>()
-        for (operationId in context.service.allOperations) {
-            val op = context.model().expectShape(operationId, OperationShape::class.java)
-            ids.add(op.inputShape)
-            ids.add(op.outputShape)
+        val topDownIndex = TopDownIndex.of(context.model())
+        val ioShapeIds = mutableSetOf<ShapeId>()
+        for (opShape in topDownIndex.getContainedOperations(context.service)) {
+            ioShapeIds.add(opShape.inputShape)
+            ioShapeIds.add(opShape.outputShape)
         }
-        return ids
+
+        // Find shapes referenced as member types by any structure in the model
+        val referencedAsMembers = mutableSetOf<ShapeId>()
+        for (shape in context.model().toSet()) {
+            if (shape is software.amazon.smithy.model.shapes.StructureShape) {
+                for ((_, memberShape) in shape.allMembers) {
+                    referencedAsMembers.add(memberShape.target)
+                    // Also check list member targets
+                    val targetShape = context.model().getShape(memberShape.target).orElse(null)
+                    if (targetShape is software.amazon.smithy.model.shapes.ListShape) {
+                        referencedAsMembers.add(targetShape.member.target)
+                    }
+                }
+            }
+        }
+
+        // Only skip shapes that are I/O AND not referenced as member types
+        return ioShapeIds.filter { it !in referencedAsMembers }.toSet()
     }
 }

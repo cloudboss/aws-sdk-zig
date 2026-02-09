@@ -1,7 +1,7 @@
 package software.amazon.smithy.zig.generators
 
 import software.amazon.smithy.model.Model
-import software.amazon.smithy.model.shapes.OperationShape
+import software.amazon.smithy.model.knowledge.TopDownIndex
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.zig.NamingUtil
@@ -46,9 +46,9 @@ class ClientGenerator(
     }
 
     private fun collectOperations(): List<OperationInfo> {
-        return service.allOperations
-            .map { opId ->
-                val opShape = model.expectShape(opId, OperationShape::class.java)
+        val topDownIndex = TopDownIndex.of(model)
+        return topDownIndex.getContainedOperations(service)
+            .map { opShape ->
                 val operationName = opShape.id.name
                 val methodName = NamingUtil.toSnakeCase(operationName)
                     .let { toCamelCase(it) }

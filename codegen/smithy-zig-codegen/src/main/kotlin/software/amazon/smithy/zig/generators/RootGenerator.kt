@@ -1,7 +1,7 @@
 package software.amazon.smithy.zig.generators
 
 import software.amazon.smithy.model.Model
-import software.amazon.smithy.model.shapes.OperationShape
+import software.amazon.smithy.model.knowledge.TopDownIndex
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
@@ -12,9 +12,9 @@ class RootGenerator(
     private val model: Model,
 ) {
     fun run() {
-        val operations = service.allOperations
-            .map { opId ->
-                val opShape = model.expectShape(opId, OperationShape::class.java)
+        val topDownIndex = TopDownIndex.of(model)
+        val operations = topDownIndex.getContainedOperations(service)
+            .map { opShape ->
                 val name = opShape.id.name
                 NamingUtil.toSnakeCase(name)
             }

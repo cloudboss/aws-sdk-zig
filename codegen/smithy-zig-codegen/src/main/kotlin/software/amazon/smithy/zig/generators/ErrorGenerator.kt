@@ -1,7 +1,7 @@
 package software.amazon.smithy.zig.generators
 
 import software.amazon.smithy.model.Model
-import software.amazon.smithy.model.shapes.OperationShape
+import software.amazon.smithy.model.knowledge.TopDownIndex
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
@@ -45,8 +45,8 @@ class ErrorGenerator(
 
     fun collectErrors(): List<ErrorInfo> {
         val errorShapeIds = mutableSetOf<ShapeId>()
-        for (operationId in service.allOperations) {
-            val opShape = model.expectShape(operationId, OperationShape::class.java)
+        val topDownIndex = TopDownIndex.of(model)
+        for (opShape in topDownIndex.getContainedOperations(service)) {
             for (errorId in opShape.errors) {
                 errorShapeIds.add(errorId)
             }
