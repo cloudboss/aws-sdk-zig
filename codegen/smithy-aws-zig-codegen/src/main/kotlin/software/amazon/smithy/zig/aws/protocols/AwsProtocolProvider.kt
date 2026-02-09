@@ -13,6 +13,7 @@ class AwsProtocolProvider : AwsZigIntegration {
             service.hasTrait("aws.protocols#awsJson1_0") -> AwsJsonProtocol("1.0")
             service.hasTrait("aws.protocols#awsJson1_1") -> AwsJsonProtocol("1.1")
             service.hasTrait("aws.protocols#restJson1") -> RestJsonProtocol()
+            service.hasTrait("aws.protocols#restXml") -> RestXmlProtocol()
             else -> null
         }
     }
