@@ -18,6 +18,7 @@ class ClientGenerator(
         val methodName: String,
         val moduleFileName: String,
         val moduleName: String,
+        val constName: String,
         val inputType: String,
         val outputType: String,
         val docs: String?,
@@ -35,7 +36,7 @@ class ClientGenerator(
             for (op in operations) {
                 writer.write(
                     "const \$L = @import(\"\$L\");",
-                    op.moduleName, op.moduleFileName,
+                    op.constName, op.moduleFileName,
                 )
             }
             writer.blankLine()
@@ -58,11 +59,15 @@ class ClientGenerator(
                     .map { it.value }
                     .orElse(null)
 
+                // Avoid name collision between import const and method name
+                val constName = if (methodName == moduleName) "${moduleName}_" else moduleName
+
                 OperationInfo(
                     operationName = operationName,
                     methodName = methodName,
                     moduleFileName = moduleFileName,
                     moduleName = moduleName,
+                    constName = constName,
                     inputType = "${operationName}Input",
                     outputType = "${operationName}Output",
                     docs = docs,
@@ -105,11 +110,11 @@ class ClientGenerator(
             writer.openBlock(
                 "pub fn \$L(self: *Self, input: \$L.\$L, options: \$L.Options) !\$L.\$L {",
                 op.methodName,
-                op.moduleName, op.inputType,
-                op.moduleName,
-                op.moduleName, op.outputType,
+                op.constName, op.inputType,
+                op.constName,
+                op.constName, op.outputType,
             )
-            writer.write("return \$L.execute(self, input, options);", op.moduleName)
+            writer.write("return \$L.execute(self, input, options);", op.constName)
             writer.closeBlock("}")
         }
 

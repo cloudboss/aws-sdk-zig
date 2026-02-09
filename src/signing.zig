@@ -30,16 +30,25 @@ pub fn signRequest(
     Sha256.hash(payload, &payload_hash, .{});
     const payload_hash_hex = std.fmt.bytesToHex(&payload_hash, .lower);
 
-    // Add required headers
-    try request.headers.put(allocator, "x-amz-date", &datetime);
-    try request.headers.put(allocator, "x-amz-content-sha256", &payload_hash_hex);
+    // Add required headers (dupe stack values onto heap so they survive after return)
+    try request.headers.put(allocator, "x-amz-date", try allocator.dupe(u8, &datetime));
+    try request.headers.put(allocator, "x-amz-content-sha256", try allocator.dupe(u8, &payload_hash_hex));
     if (credentials.session_token) |token| {
         try request.headers.put(allocator, "x-amz-security-token", token);
     }
 
-    // Ensure host header is set
+    // Ensure host header is set (include port for non-default ports)
     if (request.headers.get("host") == null) {
-        try request.headers.put(allocator, "host", request.host);
+        const is_default_port = if (request.port) |port|
+            (request.tls and port == 443) or (!request.tls and port == 80)
+        else
+            true;
+        if (!is_default_port) {
+            const host_with_port = try std.fmt.allocPrint(allocator, "{s}:{d}", .{ request.host, request.port.? });
+            try request.headers.put(allocator, "host", host_with_port);
+        } else {
+            try request.headers.put(allocator, "host", request.host);
+        }
     }
 
     // Build canonical request

@@ -14,6 +14,8 @@ dependencies {
     implementation("software.amazon.smithy:smithy-aws-cloudformation-traits:$smithyVersion")
     implementation("software.amazon.smithy:smithy-model:$smithyVersion")
     implementation("software.amazon.smithy:smithy-rules-engine:$smithyVersion")
+    implementation("software.amazon.smithy:smithy-smoke-test-traits:$smithyVersion")
+    implementation("software.amazon.smithy:smithy-aws-smoke-test-model:$smithyVersion")
 }
 
 java {

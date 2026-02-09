@@ -1,10 +1,22 @@
 {
     "version": "1.0",
     "sources": ["model"],
-    "plugins": {
-        "zig-codegen": {
-            "service": "com.amazonaws.sts#AWSSecurityTokenServiceV20110615",
-            "package": "sts"
+    "projections": {
+        "sts": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sts#AWSSecurityTokenServiceV20110615",
+                    "package": "sts"
+                }
+            }
+        },
+        "dynamodb": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.dynamodb#DynamoDB_20120810",
+                    "package": "dynamodb"
+                }
+            }
         }
     }
 }

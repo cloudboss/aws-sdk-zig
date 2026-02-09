@@ -24,7 +24,7 @@ class UnionGenerator(
             writer.openBlock("pub const \$L = union(enum) {", symbol.name)
 
             for (member in shape.members()) {
-                val variantName = NamingUtil.toSnakeCase(member.memberName)
+                val variantName = NamingUtil.toFieldName(member.memberName)
                 val targetSymbol = symbolProvider.toSymbol(member)
 
                 val memberDocs = member.getTrait(DocumentationTrait::class.java)

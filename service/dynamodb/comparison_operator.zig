@@ -1,0 +1,15 @@
+pub const ComparisonOperator = enum {
+    eq,
+    ne,
+    in,
+    le,
+    lt,
+    ge,
+    gt,
+    between,
+    not_null,
+    @"null",
+    contains,
+    not_contains,
+    begins_with,
+};

@@ -86,4 +86,25 @@ object NamingUtil {
     fun toZigFileName(name: String): String {
         return toSnakeCase(name) + ".zig"
     }
+
+    /** Convert a Smithy member name to a Zig field name (snake_case + keyword escaping). */
+    fun toFieldName(name: String): String {
+        return escapeKeyword(toSnakeCase(name))
+    }
+
+    /** Escape Zig keywords with @"..." syntax. */
+    fun escapeKeyword(name: String): String {
+        return if (name in ZIG_KEYWORDS) "@\"$name\"" else name
+    }
+
+    private val ZIG_KEYWORDS = setOf(
+        "addrspace", "align", "allowzero", "and", "anyframe", "anytype",
+        "asm", "async", "await", "break", "callconv", "catch", "comptime",
+        "const", "continue", "defer", "else", "enum", "errdefer", "error",
+        "export", "extern", "false", "fn", "for", "if", "inline",
+        "noreturn", "nosuspend", "null", "opaque", "or", "orelse",
+        "packed", "pub", "resume", "return", "struct", "suspend",
+        "switch", "test", "threadlocal", "true", "try", "type",
+        "undefined", "union", "unreachable", "var", "volatile", "while",
+    )
 }

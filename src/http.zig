@@ -192,6 +192,8 @@ pub const HttpClient = struct {
 
         var iter = request.headers.iterator();
         while (iter.next()) |entry| {
+            // Skip host header -- std.http.Client sets it from the URI
+            if (std.ascii.eqlIgnoreCase(entry.key_ptr.*, "host")) continue;
             extra_headers_list.append(self.allocator, .{
                 .name = entry.key_ptr.*,
                 .value = entry.value_ptr.*,

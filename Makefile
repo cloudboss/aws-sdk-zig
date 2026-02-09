@@ -86,6 +86,8 @@ test-integration-tls: $(HAS_IMAGE_LOCAL) certs
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh --tls"
 
+SERVICES = sts dynamodb
+
 fetch-models: | $(DIR_OUT)
 	@curl -sL -o $(DIR_OUT)/api-models-aws.zip \
 		"https://codeload.github.com/aws/api-models-aws/zip/$(AWS_MODELS_COMMIT)"
@@ -93,15 +95,19 @@ fetch-models: | $(DIR_OUT)
 	@mkdir -p codegen/sdk-codegen/model
 	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/sts/service/2011-06-15/sts-2011-06-15.json \
 		codegen/sdk-codegen/model/sts.json
+	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/dynamodb/service/2012-08-10/dynamodb-2012-08-10.json \
+		codegen/sdk-codegen/model/dynamodb.json
 
 codegen: $(HAS_IMAGE_LOCAL) fetch-models
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "cd codegen && gradle build --gradle-user-home /code/$(DIR_OUT)/gradle-home --project-cache-dir /code/$(DIR_OUT)/codegen/.gradle"
-	@rm -rf service/sts
-	@mkdir -p service/sts
-	@cp $(DIR_OUT)/codegen/sdk-codegen/smithyprojections/sdk-codegen/source/zig-codegen/*.zig service/sts/
+	@for svc in $(SERVICES); do \
+		rm -rf service/$${svc}; \
+		mkdir -p service/$${svc}; \
+		cp $(DIR_OUT)/codegen/sdk-codegen/smithyprojections/sdk-codegen/$${svc}/zig-codegen/*.zig service/$${svc}/; \
+	done
 
 certs:
 	@bash tests/integration/certs/generate.sh

@@ -21,7 +21,12 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
             inputName,
         )
 
-        if (ctx.inputShape.allMembers.isEmpty()) {
+        val hasScalarMembers = ctx.inputShape.allMembers.values.any { memberShape ->
+            val targetShape = ctx.model.expectShape(memberShape.target)
+            ctx.isScalarType(targetShape)
+        }
+
+        if (!hasScalarMembers) {
             writer.write("_ = input;")
         }
 
@@ -37,7 +42,9 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
         // Build JSON body
         writer.write("var body_buf: std.ArrayList(u8) = .{};")
-        writer.write("var has_prev = false;")
+        if (hasScalarMembers) {
+            writer.write("var has_prev = false;")
+        }
         writer.write("try body_buf.appendSlice(alloc, \"{\");")
         writer.blankLine()
 
@@ -74,7 +81,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         targetShape: Shape,
         accessor: String,
     ) {
-        val fieldName = NamingUtil.toSnakeCase(smithyName)
+        val fieldName = NamingUtil.toFieldName(smithyName)
 
         if (!ctx.isScalarType(targetShape)) {
             // Skip non-scalar types for now
@@ -171,7 +178,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
             writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
 
             for ((memberName, memberShape) in ctx.outputShape.allMembers) {
-                val fieldName = NamingUtil.toSnakeCase(memberName)
+                val fieldName = NamingUtil.toFieldName(memberName)
                 val targetShape = ctx.model.expectShape(memberShape.target)
                 val zigType = ctx.resolveBaseZigType(targetShape)
 

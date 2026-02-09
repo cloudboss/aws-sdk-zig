@@ -1,11 +1,16 @@
 package software.amazon.smithy.zig.generators
 
 import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.EnumShape
+import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
+import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.shapes.StructureShape
+import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
+import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
@@ -56,12 +61,10 @@ class OperationGenerator(
             writer.write("const ServiceError = @import(\"errors.zig\").ServiceError;")
 
             // Import shared types referenced by input/output members
-            val sharedTypes = collectSharedStructureTypes()
-            for (shapeId in sharedTypes) {
-                val shape = model.expectShape(shapeId, StructureShape::class.java)
-                val symbolName = shape.id.name
-                val fileName = NamingUtil.toZigFileName(symbolName)
-                writer.write("const \$L = @import(\"\$L\").\$L;", symbolName, fileName, symbolName)
+            val sharedTypes = collectSharedTypes()
+            for (typeName in sharedTypes) {
+                val fileName = NamingUtil.toZigFileName(typeName)
+                writer.write("const \$L = @import(\"\$L\").\$L;", typeName, fileName, typeName)
             }
 
             writer.blankLine()
@@ -95,7 +98,7 @@ class OperationGenerator(
 
         var firstField = true
         for ((memberName, memberShape) in inputShape.allMembers) {
-            val fieldName = NamingUtil.toSnakeCase(memberName)
+            val fieldName = NamingUtil.toFieldName(memberName)
             val targetShape = model.expectShape(memberShape.target)
             val zigType = ctx.resolveZigType(memberShape, targetShape)
 
@@ -124,7 +127,7 @@ class OperationGenerator(
 
         var firstField = true
         for ((memberName, memberShape) in outputShape.allMembers) {
-            val fieldName = NamingUtil.toSnakeCase(memberName)
+            val fieldName = NamingUtil.toFieldName(memberName)
             val targetShape = model.expectShape(memberShape.target)
             val zigType = ctx.resolveZigType(memberShape, targetShape)
 
@@ -158,7 +161,7 @@ class OperationGenerator(
             writer.write("_ = self;")
         } else {
             for ((memberName, memberShape) in outputShape.allMembers) {
-                val fieldName = NamingUtil.toSnakeCase(memberName)
+                val fieldName = NamingUtil.toFieldName(memberName)
                 val targetShape = model.expectShape(memberShape.target)
                 val zigType = ctx.resolveBaseZigType(targetShape)
 
@@ -229,30 +232,43 @@ class OperationGenerator(
     }
 
     /**
-     * Collect unique StructureShape IDs referenced by input/output members
-     * (directly or through ListShape -> member -> StructureShape).
+     * Collect unique named type names referenced by input/output members
+     * (enums, structs, unions -- directly or through ListShape targets).
      * Excludes the input/output shapes themselves.
      */
-    private fun collectSharedStructureTypes(): Set<software.amazon.smithy.model.shapes.ShapeId> {
-        val result = mutableSetOf<software.amazon.smithy.model.shapes.ShapeId>()
+    private fun collectSharedTypes(): Set<String> {
+        val result = mutableSetOf<String>()
+
+        fun addIfNamed(shape: software.amazon.smithy.model.shapes.Shape) {
+            when (shape) {
+                is StructureShape -> result.add(shape.id.name)
+                is EnumShape -> result.add(shape.id.name)
+                is IntEnumShape -> result.add(shape.id.name)
+                is UnionShape -> result.add(shape.id.name)
+                is StringShape -> {
+                    if (shape.hasTrait(EnumTrait::class.java)) {
+                        result.add(shape.id.name)
+                    }
+                }
+            }
+        }
 
         fun collectFromMembers(struct: StructureShape) {
             for ((_, memberShape) in struct.allMembers) {
                 val targetShape = model.expectShape(memberShape.target)
-                when (targetShape) {
-                    is StructureShape -> result.add(targetShape.id)
-                    is ListShape -> {
-                        val listTarget = model.expectShape(targetShape.member.target)
-                        if (listTarget is StructureShape) {
-                            result.add(listTarget.id)
-                        }
-                    }
+                addIfNamed(targetShape)
+                if (targetShape is ListShape) {
+                    addIfNamed(model.expectShape(targetShape.member.target))
                 }
             }
         }
 
         collectFromMembers(inputShape)
         collectFromMembers(outputShape)
+
+        // Don't import input/output shapes themselves
+        result.remove(inputShape.id.name)
+        result.remove(outputShape.id.name)
 
         return result
     }

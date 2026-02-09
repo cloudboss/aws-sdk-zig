@@ -77,7 +77,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         targetShape: Shape,
         accessor: String,
     ) {
-        val fieldName = NamingUtil.toSnakeCase(smithyName)
+        val fieldName = NamingUtil.toFieldName(smithyName)
 
         when {
             targetShape is StructureShape -> {
@@ -130,7 +130,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
     ) {
         for ((memberName, memberShape) in structShape.allMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
-            val fieldName = NamingUtil.toSnakeCase(memberName)
+            val fieldName = NamingUtil.toFieldName(memberName)
             val qualifiedName = "$prefix.$memberName"
 
             when {
@@ -166,7 +166,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         if (elementShape is StructureShape) {
             for ((memberName, memberShape) in elementShape.allMembers) {
                 val targetShape = ctx.model.expectShape(memberShape.target)
-                val fieldName = NamingUtil.toSnakeCase(memberName)
+                val fieldName = NamingUtil.toFieldName(memberName)
 
                 if (ctx.isScalarType(targetShape)) {
                     // Use a block scope to avoid variable name conflicts across struct fields
@@ -224,7 +224,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
             writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
 
             for ((memberName, memberShape) in ctx.outputShape.allMembers) {
-                val fieldName = NamingUtil.toSnakeCase(memberName)
+                val fieldName = NamingUtil.toFieldName(memberName)
                 val targetShape = ctx.model.expectShape(memberShape.target)
                 val xmlName = memberShape.getTrait(XmlNameTrait::class.java)
                     .map { it.value }

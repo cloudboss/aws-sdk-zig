@@ -2,9 +2,15 @@ package software.amazon.smithy.zig.generators
 
 import software.amazon.smithy.codegen.core.Symbol
 import software.amazon.smithy.codegen.core.SymbolProvider
-import software.amazon.smithy.codegen.core.directed.GenerateStructureDirective
+import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.EnumShape
+import software.amazon.smithy.model.shapes.IntEnumShape
+import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.StructureShape
+import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
+import software.amazon.smithy.model.traits.EnumTrait
+import software.amazon.smithy.codegen.core.directed.GenerateStructureDirective
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
@@ -14,16 +20,28 @@ class StructureGenerator(
     private val shape: StructureShape,
     private val symbolProvider: SymbolProvider,
     private val symbol: Symbol,
+    private val model: Model,
 ) {
     constructor(directive: GenerateStructureDirective<ZigContext, ZigSettings>) : this(
         directive.context(),
         directive.shape(),
         directive.symbolProvider(),
         directive.symbol(),
+        directive.model(),
     )
 
     fun run() {
         context.writerDelegator().useShapeWriter(shape) { writer ->
+            // Import referenced named types (enums, structs, unions)
+            val referencedTypes = collectReferencedNamedTypes()
+            for (typeName in referencedTypes) {
+                val fileName = NamingUtil.toZigFileName(typeName)
+                writer.write("const \$L = @import(\"\$L\").\$L;", typeName, fileName, typeName)
+            }
+            if (referencedTypes.isNotEmpty()) {
+                writer.blankLine()
+            }
+
             val docs = shape.getTrait(DocumentationTrait::class.java)
                 .map { it.value }
                 .orElse(null)
@@ -34,7 +52,7 @@ class StructureGenerator(
             val members = shape.allMembers
             var firstField = true
             for ((memberName, memberShape) in members) {
-                val fieldName = NamingUtil.toSnakeCase(memberName)
+                val fieldName = NamingUtil.toFieldName(memberName)
                 val memberSymbol = symbolProvider.toSymbol(memberShape)
 
                 val memberDocs = memberShape.getTrait(DocumentationTrait::class.java)
@@ -47,5 +65,42 @@ class StructureGenerator(
 
             writer.closeBlock("};")
         }
+    }
+
+    /**
+     * Collect type names of named shapes (enums, structs, unions) referenced by members,
+     * excluding the current shape itself. Handles list member targets too.
+     */
+    private fun collectReferencedNamedTypes(): Set<String> {
+        val result = mutableSetOf<String>()
+
+        for ((_, memberShape) in shape.allMembers) {
+            val targetShape = model.expectShape(memberShape.target)
+            when (targetShape) {
+                is StructureShape -> result.add(targetShape.id.name)
+                is EnumShape -> result.add(targetShape.id.name)
+                is IntEnumShape -> result.add(targetShape.id.name)
+                is UnionShape -> result.add(targetShape.id.name)
+                is ListShape -> {
+                    val listTarget = model.expectShape(targetShape.member.target)
+                    when (listTarget) {
+                        is StructureShape -> result.add(listTarget.id.name)
+                        is EnumShape -> result.add(listTarget.id.name)
+                        is IntEnumShape -> result.add(listTarget.id.name)
+                        is UnionShape -> result.add(listTarget.id.name)
+                    }
+                }
+            }
+            // Also check for legacy string enums with @enum trait
+            if (targetShape is software.amazon.smithy.model.shapes.StringShape &&
+                targetShape.hasTrait(EnumTrait::class.java)) {
+                result.add(targetShape.id.name)
+            }
+        }
+
+        // Don't import ourselves
+        result.remove(shape.id.name)
+
+        return result
     }
 }

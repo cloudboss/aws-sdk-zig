@@ -24,7 +24,7 @@ class IntEnumGenerator(
             writer.openBlock("pub const \$L = enum(i32) {", symbol.name)
 
             for ((name, value) in shape.enumValues) {
-                val variantName = NamingUtil.toSnakeCase(name)
+                val variantName = NamingUtil.toFieldName(name)
                 writer.write("\$L = \$L,", variantName, value)
             }
 
