@@ -144,7 +144,7 @@ pub fn execute(client: *Client, input: AssumeRootInput, options: Options) !Assum
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRootInput, config: *aws.Config) !aws.http.Request {
@@ -181,7 +181,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRootInput, config: *a
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !AssumeRootOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !AssumeRootOutput {
+    _ = status;
     var result: AssumeRootOutput = .{ .allocator = alloc };
     if (findElement(body, "SourceIdentity")) |content| {
         result.source_identity = try alloc.dupe(u8, content);

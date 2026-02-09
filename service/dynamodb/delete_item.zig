@@ -269,7 +269,7 @@ pub fn execute(client: *Client, input: DeleteItemInput, options: Options) !Delet
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteItemInput, config: *aws.Config) !aws.http.Request {
@@ -337,7 +337,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteItemInput, config: *a
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !DeleteItemOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteItemOutput {
+    _ = status;
     var result: DeleteItemOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "Attributes")) |content| {
         result.attributes = try alloc.dupe(u8, content);

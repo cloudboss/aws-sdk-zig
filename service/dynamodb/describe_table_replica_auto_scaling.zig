@@ -49,7 +49,7 @@ pub fn execute(client: *Client, input: DescribeTableReplicaAutoScalingInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeTableReplicaAutoScalingInput, config: *aws.Config) !aws.http.Request {
@@ -84,7 +84,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeTableReplicaAutoSca
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !DescribeTableReplicaAutoScalingOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DescribeTableReplicaAutoScalingOutput {
+    _ = status;
     _ = body;
     const result: DescribeTableReplicaAutoScalingOutput = .{ .allocator = alloc };
 

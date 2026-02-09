@@ -74,7 +74,7 @@ pub fn execute(client: *Client, input: ListTablesInput, options: Options) !ListT
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListTablesInput, config: *aws.Config) !aws.http.Request {
@@ -120,7 +120,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTablesInput, config: *a
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !ListTablesOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ListTablesOutput {
+    _ = status;
     var result: ListTablesOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "LastEvaluatedTableName")) |content| {
         result.last_evaluated_table_name = try alloc.dupe(u8, content);

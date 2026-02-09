@@ -551,7 +551,7 @@ pub fn execute(client: *Client, input: AssumeRoleInput, options: Options) !Assum
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleInput, config: *aws.Config) !aws.http.Request {
@@ -666,7 +666,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleInput, config: *a
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !AssumeRoleOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !AssumeRoleOutput {
+    _ = status;
     var result: AssumeRoleOutput = .{ .allocator = alloc };
     if (findElement(body, "PackedPolicySize")) |content| {
         result.packed_policy_size = std.fmt.parseInt(i32, content, 10) catch null;

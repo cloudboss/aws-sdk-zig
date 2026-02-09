@@ -99,7 +99,7 @@ pub fn execute(client: *Client, input: UpdateGlobalTableSettingsInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateGlobalTableSettingsInput, config: *aws.Config) !aws.http.Request {
@@ -143,7 +143,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateGlobalTableSettingsIn
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !UpdateGlobalTableSettingsOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UpdateGlobalTableSettingsOutput {
+    _ = status;
     var result: UpdateGlobalTableSettingsOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "GlobalTableName")) |content| {
         result.global_table_name = try alloc.dupe(u8, content);

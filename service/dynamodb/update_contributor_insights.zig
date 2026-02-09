@@ -90,7 +90,7 @@ pub fn execute(client: *Client, input: UpdateContributorInsightsInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateContributorInsightsInput, config: *aws.Config) !aws.http.Request {
@@ -132,7 +132,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateContributorInsightsIn
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !UpdateContributorInsightsOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UpdateContributorInsightsOutput {
+    _ = status;
     var result: UpdateContributorInsightsOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "IndexName")) |content| {
         result.index_name = try alloc.dupe(u8, content);

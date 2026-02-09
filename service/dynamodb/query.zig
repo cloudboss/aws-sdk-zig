@@ -519,7 +519,7 @@ pub fn execute(client: *Client, input: QueryInput, options: Options) !QueryOutpu
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: QueryInput, config: *aws.Config) !aws.http.Request {
@@ -638,7 +638,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: QueryInput, config: *aws.Co
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !QueryOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !QueryOutput {
+    _ = status;
     var result: QueryOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "Count")) |content| {
         result.count = std.fmt.parseInt(i32, content, 10) catch null;

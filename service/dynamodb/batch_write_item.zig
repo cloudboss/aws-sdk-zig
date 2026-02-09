@@ -273,7 +273,7 @@ pub fn execute(client: *Client, input: BatchWriteItemInput, options: Options) !B
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: BatchWriteItemInput, config: *aws.Config) !aws.http.Request {
@@ -308,7 +308,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchWriteItemInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !BatchWriteItemOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !BatchWriteItemOutput {
+    _ = status;
     var result: BatchWriteItemOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "ItemCollectionMetrics")) |content| {
         result.item_collection_metrics = try alloc.dupe(u8, content);

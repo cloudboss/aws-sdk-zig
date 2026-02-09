@@ -95,7 +95,7 @@ pub fn execute(client: *Client, input: UpdateTimeToLiveInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateTimeToLiveInput, config: *aws.Config) !aws.http.Request {
@@ -130,7 +130,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateTimeToLiveInput, conf
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !UpdateTimeToLiveOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UpdateTimeToLiveOutput {
+    _ = status;
     _ = body;
     const result: UpdateTimeToLiveOutput = .{ .allocator = alloc };
 

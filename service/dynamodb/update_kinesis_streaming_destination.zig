@@ -71,7 +71,7 @@ pub fn execute(client: *Client, input: UpdateKinesisStreamingDestinationInput, o
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateKinesisStreamingDestinationInput, config: *aws.Config) !aws.http.Request {
@@ -111,7 +111,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateKinesisStreamingDesti
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !UpdateKinesisStreamingDestinationOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UpdateKinesisStreamingDestinationOutput {
+    _ = status;
     var result: UpdateKinesisStreamingDestinationOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "StreamArn")) |content| {
         result.stream_arn = try alloc.dupe(u8, content);

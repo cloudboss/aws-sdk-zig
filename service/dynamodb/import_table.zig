@@ -88,7 +88,7 @@ pub fn execute(client: *Client, input: ImportTableInput, options: Options) !Impo
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ImportTableInput, config: *aws.Config) !aws.http.Request {
@@ -125,7 +125,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportTableInput, config: *
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !ImportTableOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ImportTableOutput {
+    _ = status;
     _ = body;
     const result: ImportTableOutput = .{ .allocator = alloc };
 

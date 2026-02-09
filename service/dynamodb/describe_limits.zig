@@ -145,7 +145,7 @@ pub fn execute(client: *Client, input: DescribeLimitsInput, options: Options) !D
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeLimitsInput, config: *aws.Config) !aws.http.Request {
@@ -175,7 +175,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeLimitsInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !DescribeLimitsOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DescribeLimitsOutput {
+    _ = status;
     var result: DescribeLimitsOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "AccountMaxReadCapacityUnits")) |content| {
         result.account_max_read_capacity_units = std.fmt.parseInt(i64, content, 10) catch null;

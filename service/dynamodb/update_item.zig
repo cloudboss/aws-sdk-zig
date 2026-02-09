@@ -374,7 +374,7 @@ pub fn execute(client: *Client, input: UpdateItemInput, options: Options) !Updat
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateItemInput, config: *aws.Config) !aws.http.Request {
@@ -456,7 +456,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateItemInput, config: *a
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !UpdateItemOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UpdateItemOutput {
+    _ = status;
     var result: UpdateItemOutput = .{ .allocator = alloc };
     if (findJsonValue(body, "Attributes")) |content| {
         result.attributes = try alloc.dupe(u8, content);

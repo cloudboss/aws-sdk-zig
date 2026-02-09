@@ -47,7 +47,7 @@ pub fn execute(client: *Client, input: DescribeExportInput, options: Options) !D
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeExportInput, config: *aws.Config) !aws.http.Request {
@@ -82,7 +82,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeExportInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !DescribeExportOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DescribeExportOutput {
+    _ = status;
     _ = body;
     const result: DescribeExportOutput = .{ .allocator = alloc };
 

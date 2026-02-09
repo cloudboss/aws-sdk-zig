@@ -50,7 +50,7 @@ pub fn execute(client: *Client, input: DescribeBackupInput, options: Options) !D
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, client.allocator);
+    return try deserializeResponse(response.body, response.status, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeBackupInput, config: *aws.Config) !aws.http.Request {
@@ -85,7 +85,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeBackupInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, alloc: std.mem.Allocator) !DescribeBackupOutput {
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DescribeBackupOutput {
+    _ = status;
     _ = body;
     const result: DescribeBackupOutput = .{ .allocator = alloc };
 
