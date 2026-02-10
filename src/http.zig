@@ -206,14 +206,19 @@ pub const HttpClient = struct {
         defer req.deinit();
 
         // Send request with or without body
-        if (request.body) |body| {
-            req.transfer_encoding = .{ .content_length = body.len };
-            var body_writer = req.sendBodyUnflushed(&.{}) catch return error.RequestFailed;
-            body_writer.writer.writeAll(body) catch return error.RequestFailed;
-            body_writer.end() catch return error.RequestFailed;
-            req.connection.?.flush() catch return error.RequestFailed;
-        } else {
-            req.sendBodiless() catch return error.RequestFailed;
+        {
+            const req_body = request.body orelse "";
+            if (req_body.len > 0 or request.method.toStd().requestHasBody()) {
+                req.transfer_encoding = .{ .content_length = req_body.len };
+                var body_writer = req.sendBodyUnflushed(&.{}) catch return error.RequestFailed;
+                if (req_body.len > 0) {
+                    body_writer.writer.writeAll(req_body) catch return error.RequestFailed;
+                }
+                body_writer.end() catch return error.RequestFailed;
+                req.connection.?.flush() catch return error.RequestFailed;
+            } else {
+                req.sendBodiless() catch return error.RequestFailed;
+            }
         }
 
         // Receive response head

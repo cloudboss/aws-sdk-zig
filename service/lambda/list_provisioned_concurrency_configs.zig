@@ -80,11 +80,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListProvisionedConcurrencyC
     var path_buf: std.ArrayList(u8) = .{};
     try path_buf.appendSlice(alloc, "/2019-09-30/functions/");
     try path_buf.appendSlice(alloc, input.function_name);
-    try path_buf.appendSlice(alloc, "/provisioned-concurrency?List=ALL");
+    try path_buf.appendSlice(alloc, "/provisioned-concurrency");
     const path = try path_buf.toOwnedSlice(alloc);
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
+    try query_buf.appendSlice(alloc, "List=ALL");
+    query_has_prev = true;
     if (input.marker) |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "Marker=");

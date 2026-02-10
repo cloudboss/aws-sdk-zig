@@ -1,0 +1,15 @@
+pub const ObjectStorageClass = enum {
+    standard,
+    reduced_redundancy,
+    glacier,
+    standard_ia,
+    onezone_ia,
+    intelligent_tiering,
+    deep_archive,
+    outposts,
+    glacier_ir,
+    snow,
+    express_onezone,
+    fsx_openzfs,
+    fsx_ontap,
+};

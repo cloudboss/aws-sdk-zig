@@ -86,7 +86,7 @@ test-integration-tls: $(HAS_IMAGE_LOCAL) certs
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh --tls"
 
-SERVICES = sts dynamodb lambda
+SERVICES = sts dynamodb lambda s3
 
 fetch-models: | $(DIR_OUT)
 	@curl -sL -o $(DIR_OUT)/api-models-aws.zip \
@@ -99,6 +99,8 @@ fetch-models: | $(DIR_OUT)
 		codegen/sdk-codegen/model/dynamodb.json
 	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/lambda/service/2015-03-31/lambda-2015-03-31.json \
 		codegen/sdk-codegen/model/lambda.json
+	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/s3/service/2006-03-01/s3-2006-03-01.json \
+		codegen/sdk-codegen/model/s3.json
 
 codegen: $(HAS_IMAGE_LOCAL) fetch-models
 	@docker run --rm \

@@ -1,0 +1,18 @@
+pub const InventoryOptionalField = enum {
+    size,
+    last_modified_date,
+    storage_class,
+    e_tag,
+    is_multipart_uploaded,
+    replication_status,
+    encryption_status,
+    object_lock_retain_until_date,
+    object_lock_mode,
+    object_lock_legal_hold_status,
+    intelligent_tiering_access_tier,
+    bucket_key_status,
+    checksum_algorithm,
+    object_access_control_list,
+    object_owner,
+    lifecycle_expiration_date,
+};

@@ -107,10 +107,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetLayerVersionByArnInput, 
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = parsePort(endpoint);
 
-    const path = "/2018-10-31/layers?find=LayerVersion";
+    const path = "/2018-10-31/layers";
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
+    try query_buf.appendSlice(alloc, "find=LayerVersion");
+    query_has_prev = true;
     if (query_has_prev) try query_buf.appendSlice(alloc, "&");
     try query_buf.appendSlice(alloc, "Arn=");
     try appendUrlEncoded(alloc, &query_buf, input.arn);

@@ -116,12 +116,19 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.write("const port = parsePort(endpoint);")
         writer.blankLine()
 
+        // Split URI pattern into path and static query
+        val uriString = httpTrait.uri.toString()
+        val questionMark = uriString.indexOf('?')
+        val pathPattern = if (questionMark >= 0) uriString.substring(0, questionMark) else uriString
+        val staticQuery = if (questionMark >= 0) uriString.substring(questionMark + 1) else null
+
         // Build URI path
-        writeUriBuilder(writer, httpTrait, bindings)
+        writeUriBuilder(writer, pathPattern, bindings)
         writer.blankLine()
 
         // Build query string
-        writeQueryBuilder(writer, ctx, bindings)
+        val hasQuery = bindings.queryParams.isNotEmpty() || staticQuery != null
+        writeQueryBuilder(writer, ctx, bindings, staticQuery)
 
         // Build body
         writeBodyBuilder(writer, ctx, bindings)
@@ -134,7 +141,7 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.write("request.port = port;")
         writer.write("request.body = body;")
 
-        if (bindings.queryParams.isNotEmpty()) {
+        if (hasQuery) {
             writer.write("request.query = query;")
         }
 
@@ -146,10 +153,10 @@ class RestJsonProtocol : ProtocolGenerator {
             val fieldName = NamingUtil.toFieldName(memberName)
 
             if (memberShape.isRequired) {
-                writer.write("try request.headers.put(alloc, \"\$L\", \$L);", headerName, "input.$fieldName")
+                writeHeaderValuePut(writer, ctx, memberShape, headerName, "input.$fieldName")
             } else {
                 writer.openBlock("if (input.\$L) |v| {", fieldName)
-                writer.write("try request.headers.put(alloc, \"\$L\", v);", headerName)
+                writeHeaderValuePut(writer, ctx, memberShape, headerName, "v")
                 writer.closeBlock("}")
             }
         }
@@ -159,12 +166,38 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.closeBlock("}")
     }
 
-    private fun writeUriBuilder(writer: ZigWriter, httpTrait: HttpTrait, bindings: InputBindings) {
-        val uriPattern = httpTrait.uri.toString()
+    private fun writeHeaderValuePut(writer: ZigWriter, ctx: OperationContext, memberShape: MemberShape, headerName: String, varName: String) {
+        val targetShape = ctx.model.expectShape(memberShape.target)
+        val isEnum = targetShape is EnumShape ||
+            (targetShape is software.amazon.smithy.model.shapes.StringShape && targetShape.hasTrait(EnumTrait::class.java))
+        val zigType = ctx.resolveBaseZigType(targetShape)
 
+        when {
+            zigType == "[]const u8" -> {
+                writer.write("try request.headers.put(alloc, \"\$L\", \$L);", headerName, varName)
+            }
+            isEnum -> {
+                writer.write("try request.headers.put(alloc, \"\$L\", @tagName(\$L));", headerName, varName)
+            }
+            zigType in listOf("i32", "i64", "i16", "i8") -> {
+                writer.openBlock("{")
+                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", varName)
+                writer.write("try request.headers.put(alloc, \"\$L\", num_str);", headerName)
+                writer.closeBlock("}")
+            }
+            zigType == "bool" -> {
+                writer.write("try request.headers.put(alloc, \"\$L\", if (\$L) \"true\" else \"false\");", headerName, varName)
+            }
+            else -> {
+                writer.write("try request.headers.put(alloc, \"\$L\", \$L);", headerName, varName)
+            }
+        }
+    }
+
+    private fun writeUriBuilder(writer: ZigWriter, pathPattern: String, bindings: InputBindings) {
         if (bindings.labels.isEmpty()) {
             // Static path, no substitution needed
-            writer.write("const path = \"\$L\";", uriPattern)
+            writer.write("const path = \"\$L\";", pathPattern)
             return
         }
 
@@ -173,7 +206,7 @@ class RestJsonProtocol : ProtocolGenerator {
 
         // Split URI into segments around {labels}
         val parts = mutableListOf<Any>() // String for literal, Pair<String,MemberShape> for label
-        var remaining = uriPattern
+        var remaining = pathPattern
         while (remaining.isNotEmpty()) {
             val openBrace = remaining.indexOf('{')
             if (openBrace == -1) {
@@ -184,7 +217,8 @@ class RestJsonProtocol : ProtocolGenerator {
                 parts.add(remaining.substring(0, openBrace))
             }
             val closeBrace = remaining.indexOf('}', openBrace)
-            val labelName = remaining.substring(openBrace + 1, closeBrace)
+            // Strip '+' suffix from greedy labels (e.g., {Key+} -> Key)
+            val labelName = remaining.substring(openBrace + 1, closeBrace).removeSuffix("+")
             val memberShape = bindings.labels[labelName]
             if (memberShape != null) {
                 parts.add(labelName to memberShape)
@@ -208,11 +242,16 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.write("const path = try path_buf.toOwnedSlice(alloc);")
     }
 
-    private fun writeQueryBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings) {
-        if (bindings.queryParams.isEmpty()) return
+    private fun writeQueryBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings, staticQuery: String? = null) {
+        if (bindings.queryParams.isEmpty() && staticQuery == null) return
 
         writer.write("var query_buf: std.ArrayList(u8) = .{};")
         writer.write("var query_has_prev = false;")
+
+        if (staticQuery != null) {
+            writer.write("try query_buf.appendSlice(alloc, \"\$L\");", staticQuery)
+            writer.write("query_has_prev = true;")
+        }
 
         for ((memberName, memberShape) in bindings.queryParams) {
             val queryKey = memberShape.expectTrait(HttpQueryTrait::class.java).value
@@ -407,7 +446,16 @@ class RestJsonProtocol : ProtocolGenerator {
             outputName,
         )
 
-        if (!hasDeserializableBodyFields && bindings.responseCode == null && bindings.headers.isEmpty() && bindings.payload == null) {
+        // Determine if result will actually be mutated
+        val payloadUsesBody = bindings.payload != null && run {
+            val (_, ms) = bindings.payload!!
+            val ts = ctx.model.expectShape(ms.target)
+            ctx.resolveBaseZigType(ts) == "[]const u8"
+        }
+        val bodyUsed = payloadUsesBody || hasDeserializableBodyFields
+        val resultMutated = hasDeserializableBodyFields || bindings.responseCode != null || payloadUsesBody
+
+        if (!resultMutated) {
             writer.write("_ = body;")
             writer.write("_ = status;")
             writer.write("const result: \$L = .{ .allocator = alloc };", outputName)
@@ -423,13 +471,6 @@ class RestJsonProtocol : ProtocolGenerator {
                 writer.write("_ = status;")
             }
 
-            // Check if body will actually be used
-            val payloadUsesBody = bindings.payload != null && run {
-                val (_, ms) = bindings.payload
-                val ts = ctx.model.expectShape(ms.target)
-                ctx.resolveBaseZigType(ts) == "[]const u8"
-            }
-            val bodyUsed = payloadUsesBody || hasDeserializableBodyFields
             if (!bodyUsed) {
                 writer.write("_ = body;")
             }

@@ -1,0 +1,15 @@
+pub const StorageClass = enum {
+    standard,
+    reduced_redundancy,
+    standard_ia,
+    onezone_ia,
+    intelligent_tiering,
+    glacier,
+    deep_archive,
+    outposts,
+    glacier_ir,
+    snow,
+    express_onezone,
+    fsx_openzfs,
+    fsx_ontap,
+};

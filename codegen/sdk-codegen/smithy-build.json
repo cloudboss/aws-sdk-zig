@@ -25,6 +25,14 @@
                     "package": "lambda"
                 }
             }
+        },
+        "s3": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.s3#AmazonS3",
+                    "package": "s3"
+                }
+            }
         }
     }
 }

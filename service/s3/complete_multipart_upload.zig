@@ -1,0 +1,863 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ChecksumType = @import("checksum_type.zig").ChecksumType;
+const CompletedMultipartUpload = @import("completed_multipart_upload.zig").CompletedMultipartUpload;
+const RequestPayer = @import("request_payer.zig").RequestPayer;
+const RequestCharged = @import("request_charged.zig").RequestCharged;
+const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEncryption;
+
+/// Completes a multipart upload by assembling previously uploaded parts.
+///
+/// You first initiate the multipart upload and then upload all parts using the
+/// [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) operation or the
+/// [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
+/// operation. After successfully uploading all relevant parts of an upload, you
+/// call this
+/// `CompleteMultipartUpload` operation to complete the upload. Upon receiving
+/// this request,
+/// Amazon S3 concatenates all the parts in ascending order by part number to
+/// create a new object. In the
+/// CompleteMultipartUpload request, you must provide the parts list and ensure
+/// that the parts list is
+/// complete. The CompleteMultipartUpload API operation concatenates the parts
+/// that you provide in the list.
+/// For each part in the list, you must provide the `PartNumber` value and the
+/// `ETag`
+/// value that are returned after that part was uploaded.
+///
+/// The processing of a CompleteMultipartUpload request could take several
+/// minutes to finalize. After
+/// Amazon S3 begins processing the request, it sends an HTTP response header
+/// that specifies a `200
+/// OK` response. While processing is in progress, Amazon S3 periodically sends
+/// white space characters to
+/// keep the connection from timing out. A request could fail after the initial
+/// `200 OK` response
+/// has been sent. This means that a `200 OK` response can contain either a
+/// success or an error.
+/// The error response might be embedded in the `200 OK` response. If you call
+/// this API operation
+/// directly, make sure to design your application to parse the contents of the
+/// response and handle it
+/// appropriately. If you use Amazon Web Services SDKs, SDKs handle this
+/// condition. The SDKs detect the embedded error and
+/// apply error handling per your configuration settings (including
+/// automatically retrying the request as
+/// appropriate). If the condition persists, the SDKs throw an exception (or,
+/// for the SDKs that don't use
+/// exceptions, they return an error).
+///
+/// Note that if `CompleteMultipartUpload` fails, applications should be
+/// prepared to retry
+/// any failed requests (including 500 error responses). For more information,
+/// see [Amazon S3 Error Best
+/// Practices](https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html).
+///
+/// **Important:**
+///
+/// You can't use `Content-Type: application/x-www-form-urlencoded` for the
+/// CompleteMultipartUpload requests. Also, if you don't provide a
+/// `Content-Type` header,
+/// `CompleteMultipartUpload` can still return a `200 OK` response.
+///
+/// For more information about multipart uploads, see [Uploading Objects Using
+/// Multipart
+/// Upload](https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in
+/// the *Amazon S3 User Guide*.
+///
+/// **Note:**
+///
+/// **Directory buckets** - For directory buckets, you must make requests for
+/// this API operation to the Zonal endpoint. These endpoints support
+/// virtual-hosted-style requests in the format
+/// `https://*amzn-s3-demo-bucket*.s3express-*zone-id*.*region-code*.amazonaws.com/*key-name*
+/// `. Path-style requests are not supported. For more information about
+/// endpoints in Availability Zones, see [Regional and Zonal endpoints for
+/// directory buckets in Availability
+/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+/// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+/// see [Concepts for directory buckets in Local
+/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+/// *Amazon S3 User Guide*.
+///
+/// **Permissions**
+///
+/// * **General purpose bucket permissions** - For information
+/// about permissions required to use the multipart upload API, see [Multipart
+/// Upload and
+/// Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) in
+/// the *Amazon S3 User Guide*.
+///
+/// If you provide an [additional checksum
+/// value](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html) in
+/// your `MultipartUpload` requests and the
+/// object is encrypted with Key Management Service, you must have permission to
+/// use the
+/// `kms:Decrypt` action for the `CompleteMultipartUpload` request to
+/// succeed.
+///
+/// * **Directory bucket permissions** - To grant access to this API operation
+///   on a directory bucket, we recommend that you use the [
+/// `CreateSession`
+/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
+/// API operation for session-based authorization. Specifically, you grant the
+/// `s3express:CreateSession` permission to the directory bucket in a bucket
+/// policy or an IAM identity-based policy. Then, you make the `CreateSession`
+/// API call on the bucket to obtain a session token. With the session token in
+/// your request header, you can make API requests to this operation. After the
+/// session token expires, you make another `CreateSession` API call to generate
+/// a new session token for use.
+/// Amazon Web Services CLI or SDKs create session and refresh the session token
+/// automatically to avoid service interruptions when a session expires. For
+/// more information about authorization, see [
+/// `CreateSession`
+/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html).
+///
+/// If the object is encrypted with SSE-KMS, you must also have the
+/// `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
+/// identity-based policies and KMS key policies for the KMS key.
+///
+/// **Special errors**
+///
+/// * Error Code: `EntityTooSmall`
+///
+/// * Description: Your proposed upload is smaller than the minimum allowed
+///   object size.
+/// Each part must be at least 5 MB in size, except the last part.
+///
+/// * HTTP Status Code: 400 Bad Request
+///
+/// * Error Code: `InvalidPart`
+///
+/// * Description: One or more of the specified parts could not be found. The
+///   part might not
+/// have been uploaded, or the specified ETag might not have matched the
+/// uploaded part's
+/// ETag.
+///
+/// * HTTP Status Code: 400 Bad Request
+///
+/// * Error Code: `InvalidPartOrder`
+///
+/// * Description: The list of parts was not in ascending order. The parts list
+///   must be
+/// specified in order by part number.
+///
+/// * HTTP Status Code: 400 Bad Request
+///
+/// * Error Code: `NoSuchUpload`
+///
+/// * Description: The specified multipart upload does not exist. The upload ID
+///   might be
+/// invalid, or the multipart upload might have been aborted or completed.
+///
+/// * HTTP Status Code: 404 Not Found
+///
+/// **HTTP Host header syntax**
+///
+/// **Directory buckets ** - The HTTP Host header syntax is `
+/// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
+///
+/// The following operations are related to `CompleteMultipartUpload`:
+///
+/// *
+///   [CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
+///
+/// *
+///   [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
+///
+/// *
+///   [AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
+///
+/// *
+///   [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+///
+/// *
+///   [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
+///
+/// **Important:**
+///
+/// You must URL encode any signed header values that contain spaces. For
+/// example, if your header value is `my file.txt`, containing two spaces after
+/// `my`, you must URL encode this value to `my%20%20file.txt`.
+pub const CompleteMultipartUploadInput = struct {
+    /// Name of the bucket to which the multipart upload was initiated.
+    ///
+    /// **Directory buckets** - When you use this operation with a directory bucket,
+    /// you must use virtual-hosted-style requests in the format `
+    /// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`. Path-style
+    /// requests are not supported. Directory bucket names must be unique in the
+    /// chosen Zone (Availability Zone or Local Zone). Bucket names must follow the
+    /// format `
+    /// *bucket-base-name*--*zone-id*--x-s3` (for example, `
+    /// *amzn-s3-demo-bucket*--*usw2-az1*--x-s3`). For information about bucket
+    /// naming
+    /// restrictions, see [Directory bucket naming
+    /// rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **Access points** - When you use this action with an access point for
+    /// general purpose buckets, you must provide the alias of the access point in
+    /// place of the bucket name or specify the access point ARN. When you use this
+    /// action with an access point for directory buckets, you must provide the
+    /// access point name in place of the bucket name. When using the access point
+    /// ARN, you must direct requests to the access point hostname. The access point
+    /// hostname takes the form
+    /// *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com. When
+    /// using this action with an access point through the Amazon Web Services SDKs,
+    /// you provide the access point ARN in place of the bucket name. For more
+    /// information about access point ARNs, see [Using access
+    /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **Note:**
+    ///
+    /// Object Lambda access points are not supported by directory buckets.
+    ///
+    /// **S3 on Outposts** - When you use this action with S3 on Outposts, you must
+    /// direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    /// takes the
+    /// form `
+    /// *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com`. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see [What is S3 on Outposts?](https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the *Amazon S3 User Guide*.
+    bucket: []const u8,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data that was originally sent.
+    /// This header specifies the Base64 encoded, 32-bit `CRC32` checksum of the
+    /// object. For more information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the
+    /// *Amazon S3 User Guide*.
+    checksum_crc32: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data that was originally sent.
+    /// This header specifies the Base64 encoded, 32-bit `CRC32C` checksum of the
+    /// object. For more information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the
+    /// *Amazon S3 User Guide*.
+    checksum_crc32_c: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
+    /// `CRC64NVME`
+    /// checksum of the object. The `CRC64NVME` checksum is always a full object
+    /// checksum. For more
+    /// information, see [Checking object integrity in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_crc64_nvme: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data that was originally sent.
+    /// This header specifies the Base64 encoded, 160-bit `SHA1` digest of the
+    /// object. For more information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the
+    /// *Amazon S3 User Guide*.
+    checksum_sha1: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data that was originally sent.
+    /// This header specifies the Base64 encoded, 256-bit `SHA256` digest of the
+    /// object. For more information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the
+    /// *Amazon S3 User Guide*.
+    checksum_sha256: ?[]const u8 = null,
+
+    /// This header specifies the checksum type of the object, which determines how
+    /// part-level checksums are
+    /// combined to create an object-level checksum for multipart objects. You can
+    /// use this header as a data
+    /// integrity check to verify that the checksum type that is received is the
+    /// same checksum that was
+    /// specified. If the checksum type doesn’t match the checksum type that was
+    /// specified for the object during
+    /// the `CreateMultipartUpload` request, it’ll result in a `BadDigest` error.
+    /// For more
+    /// information, see Checking object integrity in the Amazon S3 User Guide.
+    checksum_type: ?ChecksumType = null,
+
+    /// The account ID of the expected bucket owner. If the account ID that you
+    /// provide does not match the actual owner of the bucket, the request fails
+    /// with the HTTP status code `403 Forbidden` (access denied).
+    expected_bucket_owner: ?[]const u8 = null,
+
+    /// Uploads the object only if the ETag (entity tag) value provided during the
+    /// WRITE operation matches
+    /// the ETag of the object in S3. If the ETag values do not match, the operation
+    /// returns a `412
+    /// Precondition Failed` error.
+    ///
+    /// If a conflicting operation occurs during the upload S3 returns a `409
+    /// ConditionalRequestConflict` response. On a 409 failure you should fetch the
+    /// object's ETag,
+    /// re-initiate the multipart upload with `CreateMultipartUpload`, and re-upload
+    /// each
+    /// part.
+    ///
+    /// Expects the ETag value as a string.
+    ///
+    /// For more information about conditional requests, see [RFC
+    /// 7232](https://tools.ietf.org/html/rfc7232), or [Conditional
+    /// requests](https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html) in the
+    /// *Amazon S3 User Guide*.
+    if_match: ?[]const u8 = null,
+
+    /// Uploads the object only if the object key name does not already exist in the
+    /// bucket specified.
+    /// Otherwise, Amazon S3 returns a `412 Precondition Failed` error.
+    ///
+    /// If a conflicting operation occurs during the upload S3 returns a `409
+    /// ConditionalRequestConflict` response. On a 409 failure you should
+    /// re-initiate the multipart
+    /// upload with `CreateMultipartUpload` and re-upload each part.
+    ///
+    /// Expects the '*' (asterisk) character.
+    ///
+    /// For more information about conditional requests, see [RFC
+    /// 7232](https://tools.ietf.org/html/rfc7232), or [Conditional
+    /// requests](https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html) in the
+    /// *Amazon S3 User Guide*.
+    if_none_match: ?[]const u8 = null,
+
+    /// Object key for which the multipart upload was initiated.
+    key: []const u8,
+
+    /// The expected total object size of the multipart upload request. If there’s a
+    /// mismatch between the
+    /// specified object size value and the actual object size value, it results in
+    /// an `HTTP 400
+    /// InvalidRequest` error.
+    mpu_object_size: ?i64 = null,
+
+    /// The container for the multipart upload request information.
+    multipart_upload: ?CompletedMultipartUpload = null,
+
+    request_payer: ?RequestPayer = null,
+
+    /// The server-side encryption (SSE) algorithm used to encrypt the object. This
+    /// parameter is required
+    /// only when the object was created using a checksum algorithm or if your
+    /// bucket policy requires the use of
+    /// SSE-C. For more information, see [Protecting data using SSE-C
+    /// keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html#ssec-require-condition-key) in the *Amazon S3 User Guide*.
+    ///
+    /// **Note:**
+    ///
+    /// This functionality is not supported for directory buckets.
+    sse_customer_algorithm: ?[]const u8 = null,
+
+    /// The server-side encryption (SSE) customer managed key. This parameter is
+    /// needed only when the object was created using a checksum algorithm.
+    /// For more information, see
+    /// [Protecting data using SSE-C
+    /// keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
+    /// **Note:**
+    ///
+    /// This functionality is not supported for directory buckets.
+    sse_customer_key: ?[]const u8 = null,
+
+    /// The MD5 server-side encryption (SSE) customer managed key. This parameter is
+    /// needed only when the object was created using a checksum
+    /// algorithm. For more information,
+    /// see [Protecting data using SSE-C
+    /// keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
+    /// **Note:**
+    ///
+    /// This functionality is not supported for directory buckets.
+    sse_customer_key_md5: ?[]const u8 = null,
+
+    /// ID for the initiated multipart upload.
+    upload_id: []const u8,
+};
+
+pub const CompleteMultipartUploadOutput = struct {
+    /// The name of the bucket that contains the newly created object. Does not
+    /// return the access point ARN or access point
+    /// alias if used.
+    ///
+    /// **Note:**
+    ///
+    /// Access points are not supported by directory buckets.
+    bucket: ?[]const u8 = null,
+
+    /// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
+    /// encryption with
+    /// Key Management Service (KMS) keys (SSE-KMS).
+    bucket_key_enabled: ?bool = null,
+
+    /// The Base64 encoded, 32-bit `CRC32 checksum` of the object. This checksum is
+    /// only present if the checksum was uploaded
+    /// with the object. When you use an API operation on an object that was
+    /// uploaded using multipart uploads, this value may not be a direct checksum
+    /// value of the full object. Instead, it's a calculation based on the checksum
+    /// values of each individual part. For more information about how checksums are
+    /// calculated
+    /// with multipart uploads, see [
+    /// Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
+    checksum_crc32: ?[]const u8 = null,
+
+    /// The Base64 encoded, 32-bit `CRC32C` checksum of the object. This checksum is
+    /// only present if the checksum was uploaded
+    /// with the object. When you use an API operation on an object that was
+    /// uploaded using multipart uploads, this value may not be a direct checksum
+    /// value of the full object. Instead, it's a calculation based on the checksum
+    /// values of each individual part. For more information about how checksums are
+    /// calculated
+    /// with multipart uploads, see [
+    /// Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
+    checksum_crc32_c: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
+    /// `CRC64NVME`
+    /// checksum of the object. The `CRC64NVME` checksum is always a full object
+    /// checksum. For more
+    /// information, see [Checking object integrity in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_crc64_nvme: ?[]const u8 = null,
+
+    /// The Base64 encoded, 160-bit `SHA1` digest of the object. This checksum is
+    /// only present if the checksum was uploaded
+    /// with the object. When you use the API operation on an object that was
+    /// uploaded using multipart uploads, this value may not be a direct checksum
+    /// value of the full object. Instead, it's a calculation based on the checksum
+    /// values of each individual part. For more information about how checksums are
+    /// calculated
+    /// with multipart uploads, see [
+    /// Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
+    checksum_sha1: ?[]const u8 = null,
+
+    /// The Base64 encoded, 256-bit `SHA256` digest of the object. This checksum is
+    /// only present if the checksum was uploaded
+    /// with the object. When you use an API operation on an object that was
+    /// uploaded using multipart uploads, this value may not be a direct checksum
+    /// value of the full object. Instead, it's a calculation based on the checksum
+    /// values of each individual part. For more information about how checksums are
+    /// calculated
+    /// with multipart uploads, see [
+    /// Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
+    checksum_sha256: ?[]const u8 = null,
+
+    /// The checksum type, which determines how part-level checksums are combined to
+    /// create an object-level
+    /// checksum for multipart objects. You can use this header as a data integrity
+    /// check to verify that the
+    /// checksum type that is received is the same checksum type that was specified
+    /// during the
+    /// `CreateMultipartUpload` request. For more information, see [Checking object
+    /// integrity in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_type: ?ChecksumType = null,
+
+    /// Entity tag that identifies the newly created object's data. Objects with
+    /// different object data will
+    /// have different entity tags. The entity tag is an opaque string. The entity
+    /// tag may or may not be an MD5
+    /// digest of the object data. If the entity tag is not an MD5 digest of the
+    /// object data, it will contain
+    /// one or more nonhexadecimal characters and/or will consist of less than 32 or
+    /// more than 32 hexadecimal
+    /// digits. For more information about how the entity tag is calculated, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    e_tag: ?[]const u8 = null,
+
+    /// If the object expiration is configured, this will contain the expiration
+    /// date
+    /// (`expiry-date`) and rule ID (`rule-id`). The value of `rule-id` is
+    /// URL-encoded.
+    ///
+    /// **Note:**
+    ///
+    /// This functionality is not supported for directory buckets.
+    expiration: ?[]const u8 = null,
+
+    /// The object key of the newly created object.
+    key: ?[]const u8 = null,
+
+    /// The URI that identifies the newly created object.
+    location: ?[]const u8 = null,
+
+    request_charged: ?RequestCharged = null,
+
+    /// The server-side encryption algorithm used when storing this object in Amazon
+    /// S3.
+    ///
+    /// **Note:**
+    ///
+    /// When accessing data stored in Amazon FSx file systems using S3 access
+    /// points, the only valid server side
+    /// encryption option is `aws:fsx`.
+    server_side_encryption: ?ServerSideEncryption = null,
+
+    /// If present, indicates the ID of the KMS key that was used for object
+    /// encryption.
+    ssekms_key_id: ?[]const u8 = null,
+
+    /// Version ID of the newly created object, in case the bucket has versioning
+    /// turned on.
+    ///
+    /// **Note:**
+    ///
+    /// This functionality is not supported for directory buckets.
+    version_id: ?[]const u8 = null,
+
+    allocator: std.mem.Allocator,
+
+    pub fn deinit(self: *const CompleteMultipartUploadOutput) void {
+        if (self.bucket) |v| {
+            self.allocator.free(v);
+        }
+        if (self.checksum_crc32) |v| {
+            self.allocator.free(v);
+        }
+        if (self.checksum_crc32_c) |v| {
+            self.allocator.free(v);
+        }
+        if (self.checksum_crc64_nvme) |v| {
+            self.allocator.free(v);
+        }
+        if (self.checksum_sha1) |v| {
+            self.allocator.free(v);
+        }
+        if (self.checksum_sha256) |v| {
+            self.allocator.free(v);
+        }
+        if (self.e_tag) |v| {
+            self.allocator.free(v);
+        }
+        if (self.expiration) |v| {
+            self.allocator.free(v);
+        }
+        if (self.key) |v| {
+            self.allocator.free(v);
+        }
+        if (self.location) |v| {
+            self.allocator.free(v);
+        }
+        if (self.ssekms_key_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.version_id) |v| {
+            self.allocator.free(v);
+        }
+    }
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, input: CompleteMultipartUploadInput, options: Options) !CompleteMultipartUploadOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status);
+        }
+        return error.ServiceError;
+    }
+
+    return try deserializeResponse(response.body, response.status, client.allocator);
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CompleteMultipartUploadInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpoint("s3", alloc);
+
+    const host = parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/");
+    try path_buf.appendSlice(alloc, input.bucket);
+    try path_buf.appendSlice(alloc, "/");
+    try path_buf.appendSlice(alloc, input.key);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+    try query_buf.appendSlice(alloc, "uploadId=");
+    try appendUrlEncoded(alloc, &query_buf, input.upload_id);
+    query_has_prev = true;
+    const query = try query_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(alloc, "Content-Type", "application/xml");
+    if (input.checksum_crc32) |v| {
+        try request.headers.put(alloc, "x-amz-checksum-crc32", v);
+    }
+    if (input.checksum_crc32_c) |v| {
+        try request.headers.put(alloc, "x-amz-checksum-crc32c", v);
+    }
+    if (input.checksum_crc64_nvme) |v| {
+        try request.headers.put(alloc, "x-amz-checksum-crc64nvme", v);
+    }
+    if (input.checksum_sha1) |v| {
+        try request.headers.put(alloc, "x-amz-checksum-sha1", v);
+    }
+    if (input.checksum_sha256) |v| {
+        try request.headers.put(alloc, "x-amz-checksum-sha256", v);
+    }
+    if (input.checksum_type) |v| {
+        try request.headers.put(alloc, "x-amz-checksum-type", @tagName(v));
+    }
+    if (input.expected_bucket_owner) |v| {
+        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+    }
+    if (input.if_match) |v| {
+        try request.headers.put(alloc, "If-Match", v);
+    }
+    if (input.if_none_match) |v| {
+        try request.headers.put(alloc, "If-None-Match", v);
+    }
+    if (input.mpu_object_size) |v| {
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try request.headers.put(alloc, "x-amz-mp-object-size", num_str);
+        }
+    }
+    if (input.request_payer) |v| {
+        try request.headers.put(alloc, "x-amz-request-payer", @tagName(v));
+    }
+    if (input.sse_customer_algorithm) |v| {
+        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-algorithm", v);
+    }
+    if (input.sse_customer_key) |v| {
+        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key", v);
+    }
+    if (input.sse_customer_key_md5) |v| {
+        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key-MD5", v);
+    }
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CompleteMultipartUploadOutput {
+    var result: CompleteMultipartUploadOutput = .{ .allocator = alloc };
+    _ = status;
+    if (findElement(body, "Bucket")) |content| {
+        result.bucket = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "ChecksumCRC32")) |content| {
+        result.checksum_crc32 = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "ChecksumCRC32C")) |content| {
+        result.checksum_crc32_c = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "ChecksumCRC64NVME")) |content| {
+        result.checksum_crc64_nvme = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "ChecksumSHA1")) |content| {
+        result.checksum_sha1 = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "ChecksumSHA256")) |content| {
+        result.checksum_sha256 = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "ETag")) |content| {
+        result.e_tag = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "Key")) |content| {
+        result.key = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "Location")) |content| {
+        result.location = try alloc.dupe(u8, content);
+    }
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+    const error_code = findElement(body, "Code") orelse "Unknown";
+    const error_message = findElement(body, "Message") orelse "";
+    const request_id = findElement(body, "RequestId") orelse "";
+
+    if (std.mem.eql(u8, error_code, "AccessDenied")) {
+        return .{ .access_denied = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "BucketAlreadyExists")) {
+        return .{ .bucket_already_exists = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "BucketAlreadyOwnedByYou")) {
+        return .{ .bucket_already_owned_by_you = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "EncryptionTypeMismatch")) {
+        return .{ .encryption_type_mismatch = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "IdempotencyParameterMismatch")) {
+        return .{ .idempotency_parameter_mismatch = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidObjectState")) {
+        return .{ .invalid_object_state = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRequest")) {
+        return .{ .invalid_request = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidWriteOffset")) {
+        return .{ .invalid_write_offset = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "NoSuchBucket")) {
+        return .{ .no_such_bucket = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "NoSuchKey")) {
+        return .{ .no_such_key = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "NoSuchUpload")) {
+        return .{ .no_such_upload = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "NotFound")) {
+        return .{ .not_found = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "ObjectAlreadyInActiveTierError")) {
+        return .{ .object_already_in_active_tier_error = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "ObjectNotInActiveTierError")) {
+        return .{ .object_not_in_active_tier_error = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyParts")) {
+        return .{ .too_many_parts = .{
+            .message = error_message,
+            .request_id = request_id,
+        } };
+    }
+
+    return .{ .unknown = .{
+        .code = error_code,
+        .message = error_message,
+        .request_id = request_id,
+        .http_status = status,
+    } };
+}
+
+fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
+    var buf: [256]u8 = undefined;
+
+    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
+    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
+    const content_start = start + open_tag.len;
+
+    var close_buf: [256]u8 = undefined;
+    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
+    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+
+    return xml[content_start..end];
+}
+
+fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            '&' => try buf.appendSlice(alloc, "&amp;"),
+            '<' => try buf.appendSlice(alloc, "&lt;"),
+            '>' => try buf.appendSlice(alloc, "&gt;"),
+            else => try buf.append(alloc, c),
+        }
+    }
+}
+
+fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
+            ' ' => try buf.append(alloc, '+'),
+            else => {
+                const hex = "0123456789ABCDEF";
+                try buf.append(alloc, '%');
+                try buf.append(alloc, hex[c >> 4]);
+                try buf.append(alloc, hex[c & 0x0F]);
+            }
+        }
+    }
+}
+
+fn parseHost(endpoint: []const u8) []const u8 {
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
+    return after_scheme[0..end];
+}
+
+fn parsePort(endpoint: []const u8) ?u16 {
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
+    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
+    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
+}
