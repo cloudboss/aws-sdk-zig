@@ -1,0 +1,348 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const Tenancy = @import("tenancy.zig").Tenancy;
+const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const VpcEncryptionControlConfiguration = @import("vpc_encryption_control_configuration.zig").VpcEncryptionControlConfiguration;
+const Vpc = @import("vpc.zig").Vpc;
+
+/// Creates a VPC with the specified CIDR blocks.
+///
+/// A VPC must have an associated IPv4 CIDR block. You can choose an IPv4 CIDR
+/// block or an
+/// IPAM-allocated IPv4 CIDR block. You can optionally associate an IPv6 CIDR
+/// block with a
+/// VPC. You can choose an IPv6 CIDR block, an Amazon-provided IPv6 CIDR block,
+/// an
+/// IPAM-allocated IPv6 CIDR block, or an IPv6 CIDR block that you brought to
+/// Amazon Web Services. For
+/// more information, see [IP addressing for your VPCs and
+/// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html) in the *Amazon VPC User Guide*.
+///
+/// By default, each instance that you launch in the VPC has the default DHCP
+/// options, which
+/// include only a default DNS server that we provide (AmazonProvidedDNS). For
+/// more
+/// information, see [DHCP option
+/// sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the *Amazon VPC User Guide*.
+///
+/// You can specify DNS options and tenancy for a VPC when you create it. You
+/// can't change
+/// the tenancy of a VPC after you create it. For more information, see [VPC
+/// configuration
+/// options](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc-options.html) in the
+/// *Amazon VPC User Guide*.
+pub const CreateVpcInput = struct {
+    /// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the
+    /// VPC.
+    /// You cannot specify the range of IP addresses, or the size of the CIDR block.
+    amazon_provided_ipv_6_cidr_block: ?bool = null,
+
+    /// The IPv4 network range for the VPC, in CIDR notation. For example,
+    /// `10.0.0.0/16`. We modify the specified CIDR block to its canonical form; for
+    /// example, if you specify `100.68.0.18/18`, we modify it to `100.68.0.0/18`.
+    cidr_block: ?[]const u8 = null,
+
+    /// Checks whether you have the required permissions for the action, without
+    /// actually making the request,
+    /// and provides an error response. If you have the required permissions, the
+    /// error response is `DryRunOperation`.
+    /// Otherwise, it is `UnauthorizedOperation`.
+    dry_run: ?bool = null,
+
+    /// The tenancy options for instances launched into the VPC. For `default`,
+    /// instances
+    /// are launched with shared tenancy by default. You can launch instances with
+    /// any tenancy into a
+    /// shared tenancy VPC. For `dedicated`, instances are launched as dedicated
+    /// tenancy
+    /// instances by default. You can only launch instances with a tenancy of
+    /// `dedicated`
+    /// or `host` into a dedicated tenancy VPC.
+    ///
+    /// **Important:** The `host` value cannot be used with this parameter. Use the
+    /// `default` or `dedicated` values only.
+    ///
+    /// Default: `default`
+    instance_tenancy: ?Tenancy = null,
+
+    /// The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR.
+    /// For more information, see [What is
+    /// IPAM?](https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
+    /// the *Amazon VPC IPAM User Guide*.
+    ipv_4_ipam_pool_id: ?[]const u8 = null,
+
+    /// The netmask length of the IPv4 CIDR you want to allocate to this VPC from an
+    /// Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM,
+    /// see [What is
+    /// IPAM?](https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
+    /// the *Amazon VPC IPAM User Guide*.
+    ipv_4_netmask_length: ?i32 = null,
+
+    /// The IPv6 CIDR block from the IPv6 address pool. You must also specify
+    /// `Ipv6Pool` in the request.
+    ///
+    /// To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
+    ipv_6_cidr_block: ?[]const u8 = null,
+
+    /// The name of the location from which we advertise the IPV6 CIDR block. Use
+    /// this parameter to limit the address to this location.
+    ///
+    /// You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this parameter.
+    ipv_6_cidr_block_network_border_group: ?[]const u8 = null,
+
+    /// The ID of an IPv6 IPAM pool which will be used to allocate this VPC an IPv6
+    /// CIDR. IPAM is a VPC feature that you can use to automate your IP address
+    /// management workflows including assigning, tracking, troubleshooting, and
+    /// auditing IP addresses across Amazon Web Services Regions and accounts
+    /// throughout your Amazon Web Services Organization. For more information, see
+    /// [What is
+    /// IPAM?](https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
+    /// the *Amazon VPC IPAM User Guide*.
+    ipv_6_ipam_pool_id: ?[]const u8 = null,
+
+    /// The netmask length of the IPv6 CIDR you want to allocate to this VPC from an
+    /// Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM,
+    /// see [What is
+    /// IPAM?](https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
+    /// the *Amazon VPC IPAM User Guide*.
+    ipv_6_netmask_length: ?i32 = null,
+
+    /// The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
+    ipv_6_pool: ?[]const u8 = null,
+
+    /// The tags to assign to the VPC.
+    tag_specifications: ?[]const TagSpecification = null,
+
+    /// Specifies the encryption control configuration to apply to the VPC during
+    /// creation. VPC Encryption Control enables you to enforce encryption for all
+    /// data in transit within and between VPCs to meet compliance requirements.
+    ///
+    /// For more information, see [Enforce VPC encryption in
+    /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
+    vpc_encryption_control: ?VpcEncryptionControlConfiguration = null,
+};
+
+pub const CreateVpcOutput = struct {
+    /// Information about the VPC.
+    vpc: ?Vpc = null,
+
+    allocator: std.mem.Allocator,
+
+    pub fn deinit(self: *const CreateVpcOutput) void {
+        _ = self;
+    }
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, input: CreateVpcInput, options: Options) !CreateVpcOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ec2");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status);
+        }
+        return error.ServiceError;
+    }
+
+    return try deserializeResponse(response.body, response.status, client.allocator);
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpoint("ec2", alloc);
+
+    const host = parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = parsePort(endpoint);
+
+    var body_buf: std.ArrayList(u8) = .{};
+
+    try body_buf.appendSlice(alloc, "Action=CreateVpc&Version=2016-11-15");
+    if (input.amazon_provided_ipv_6_cidr_block) |v| {
+        try body_buf.appendSlice(alloc, "&AmazonProvidedIpv6CidrBlock=");
+        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.cidr_block) |v| {
+        try body_buf.appendSlice(alloc, "&CidrBlock=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.dry_run) |v| {
+        try body_buf.appendSlice(alloc, "&DryRun=");
+        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.instance_tenancy) |v| {
+        try body_buf.appendSlice(alloc, "&InstanceTenancy=");
+        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+    }
+    if (input.ipv_4_ipam_pool_id) |v| {
+        try body_buf.appendSlice(alloc, "&Ipv4IpamPoolId=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.ipv_4_netmask_length) |v| {
+        try body_buf.appendSlice(alloc, "&Ipv4NetmaskLength=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    if (input.ipv_6_cidr_block) |v| {
+        try body_buf.appendSlice(alloc, "&Ipv6CidrBlock=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.ipv_6_cidr_block_network_border_group) |v| {
+        try body_buf.appendSlice(alloc, "&Ipv6CidrBlockNetworkBorderGroup=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.ipv_6_ipam_pool_id) |v| {
+        try body_buf.appendSlice(alloc, "&Ipv6IpamPoolId=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.ipv_6_netmask_length) |v| {
+        try body_buf.appendSlice(alloc, "&Ipv6NetmaskLength=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    if (input.ipv_6_pool) |v| {
+        try body_buf.appendSlice(alloc, "&Ipv6Pool=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.tag_specifications) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.resource_type) |v| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                }
+            }
+        }
+    }
+    if (input.vpc_encryption_control) |v| {
+        if (v.egress_only_internet_gateway_exclusion) |sv| {
+            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.EgressOnlyInternetGatewayExclusion=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        if (v.elastic_file_system_exclusion) |sv| {
+            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.ElasticFileSystemExclusion=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        if (v.internet_gateway_exclusion) |sv| {
+            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.InternetGatewayExclusion=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        if (v.lambda_exclusion) |sv| {
+            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.LambdaExclusion=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        try body_buf.appendSlice(alloc, "&VpcEncryptionControl.Mode=");
+        try appendUrlEncoded(alloc, &body_buf, @tagName(v.mode));
+        if (v.nat_gateway_exclusion) |sv| {
+            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.NatGatewayExclusion=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        if (v.virtual_private_gateway_exclusion) |sv| {
+            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VirtualPrivateGatewayExclusion=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        if (v.vpc_lattice_exclusion) |sv| {
+            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VpcLatticeExclusion=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        if (v.vpc_peering_exclusion) |sv| {
+            try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VpcPeeringExclusion=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+    }
+
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateVpcOutput {
+    _ = status;
+    _ = body;
+    const result: CreateVpcOutput = .{ .allocator = alloc };
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+    const error_code = findElement(body, "Code") orelse "Unknown";
+    const error_message = findElement(body, "Message") orelse "";
+    const request_id = findElement(body, "RequestID") orelse "";
+
+
+    return .{ .unknown = .{
+        .code = error_code,
+        .message = error_message,
+        .request_id = request_id,
+        .http_status = status,
+    } };
+}
+
+fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
+    var buf: [256]u8 = undefined;
+
+    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
+    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
+    const content_start = start + open_tag.len;
+
+    var close_buf: [256]u8 = undefined;
+    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
+    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+
+    return xml[content_start..end];
+}
+
+fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
+            ' ' => try buf.append(alloc, '+'),
+            else => {
+                const hex = "0123456789ABCDEF";
+                try buf.append(alloc, '%');
+                try buf.append(alloc, hex[c >> 4]);
+                try buf.append(alloc, hex[c & 0x0F]);
+            }
+        }
+    }
+}
+
+fn parseHost(endpoint: []const u8) []const u8 {
+    // Strip scheme
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    // Strip port and path
+    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
+    return after_scheme[0..end];
+}
+
+fn parsePort(endpoint: []const u8) ?u16 {
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
+    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
+    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
+}

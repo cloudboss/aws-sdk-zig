@@ -119,6 +119,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreTableFromBackupInput
     try appendJsonEscaped(alloc, &body_buf, input.backup_arn);
     try body_buf.appendSlice(alloc, "\"");
     has_prev = true;
+    if (input.billing_mode_override) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"BillingModeOverride\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"TargetTableName\":\"");
     try appendJsonEscaped(alloc, &body_buf, input.target_table_name);

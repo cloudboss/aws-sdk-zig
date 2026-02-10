@@ -18,7 +18,7 @@ pub const DescribeImportOutput = struct {
     /// import. The import parameters include import status, how many items were
     /// processed, and
     /// how many errors were encountered.
-    import_table_description: ImportTableDescription,
+    import_table_description: ?ImportTableDescription = null,
 
     allocator: std.mem.Allocator,
 

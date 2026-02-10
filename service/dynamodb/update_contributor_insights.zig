@@ -104,6 +104,18 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateContributorInsightsIn
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"ContributorInsightsAction\":\"");
+    try body_buf.appendSlice(alloc, @tagName(input.contributor_insights_action));
+    try body_buf.appendSlice(alloc, "\"");
+    has_prev = true;
+    if (input.contributor_insights_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ContributorInsightsMode\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.index_name) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"IndexName\":\"");

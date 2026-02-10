@@ -1,0 +1,15 @@
+pub const ImageAttributeName = enum {
+    description,
+    kernel,
+    ramdisk,
+    launch_permission,
+    product_codes,
+    block_device_mapping,
+    sriov_net_support,
+    boot_mode,
+    tpm_support,
+    uefi_data,
+    last_launched_time,
+    imds_support,
+    deregistration_protection,
+};

@@ -43,7 +43,7 @@ pub const CheckpointDurableExecutionOutput = struct {
     /// Updated execution state information that includes any changes that occurred
     /// since the last checkpoint, such as completed callbacks or expired timers.
     /// This allows the SDK to update its internal state during replay.
-    new_execution_state: CheckpointUpdatedExecutionState,
+    new_execution_state: ?CheckpointUpdatedExecutionState = null,
 
     allocator: std.mem.Allocator,
 

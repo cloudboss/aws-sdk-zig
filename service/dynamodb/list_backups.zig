@@ -131,6 +131,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListBackupsInput, config: *
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.backup_type) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"BackupType\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.exclusive_start_backup_arn) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"ExclusiveStartBackupArn\":\"");

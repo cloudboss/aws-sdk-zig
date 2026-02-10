@@ -1,0 +1,493 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const SnapshotLocationEnum = @import("snapshot_location_enum.zig").SnapshotLocationEnum;
+const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const SSEType = @import("sse_type.zig").SSEType;
+const SnapshotState = @import("snapshot_state.zig").SnapshotState;
+const StorageTier = @import("storage_tier.zig").StorageTier;
+const Tag = @import("tag.zig").Tag;
+const TransferType = @import("transfer_type.zig").TransferType;
+
+/// Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use
+/// snapshots for
+/// backups, to make copies of EBS volumes, and to save data before shutting
+/// down an
+/// instance.
+///
+/// The location of the source EBS volume determines where you can create the
+/// snapshot.
+///
+/// * If the source volume is in a Region, you must create the snapshot in the
+///   same
+/// Region as the volume.
+///
+/// * If the source volume is in a Local Zone, you can create the snapshot in
+///   the same Local
+/// Zone or in its parent Amazon Web Services Region.
+///
+/// * If the source volume is on an Outpost, you can create the snapshot on the
+///   same
+/// Outpost or in its parent Amazon Web Services Region.
+///
+/// When a snapshot is created, any Amazon Web Services Marketplace product
+/// codes that are associated with the
+/// source volume are propagated to the snapshot.
+///
+/// You can take a snapshot of an attached volume that is in use. However,
+/// snapshots only
+/// capture data that has been written to your Amazon EBS volume at the time the
+/// snapshot command is
+/// issued; this might exclude any data that has been cached by any applications
+/// or the operating
+/// system. If you can pause any file systems on the volume long enough to take
+/// a snapshot, your
+/// snapshot should be complete. However, if you cannot pause all file writes to
+/// the volume, you
+/// should unmount the volume from within the instance, issue the snapshot
+/// command, and then
+/// remount the volume to ensure a consistent and complete snapshot. You may
+/// remount and use your
+/// volume while the snapshot status is `pending`.
+///
+/// When you create a snapshot for an EBS volume that serves as a root device,
+/// we recommend
+/// that you stop the instance before taking the snapshot.
+///
+/// Snapshots that are taken from encrypted volumes are automatically encrypted.
+/// Volumes that
+/// are created from encrypted snapshots are also automatically encrypted. Your
+/// encrypted volumes
+/// and any associated snapshots always remain protected. For more information,
+/// see [Amazon EBS
+/// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
+/// in the *Amazon EBS User Guide*.
+pub const CreateSnapshotInput = struct {
+    /// A description for the snapshot.
+    description: ?[]const u8 = null,
+
+    /// Checks whether you have the required permissions for the action, without
+    /// actually making the request,
+    /// and provides an error response. If you have the required permissions, the
+    /// error response is `DryRunOperation`.
+    /// Otherwise, it is `UnauthorizedOperation`.
+    dry_run: ?bool = null,
+
+    /// **Note:**
+    ///
+    /// Only supported for volumes in Local Zones. If the source volume is not in a
+    /// Local Zone,
+    /// omit this parameter.
+    ///
+    /// * To create a local snapshot in the same Local Zone as the source volume,
+    ///   specify
+    /// `local`.
+    ///
+    /// * To create a regional snapshot in the parent Region of the Local Zone,
+    ///   specify
+    /// `regional` or omit this parameter.
+    ///
+    /// Default value: `regional`
+    location: ?SnapshotLocationEnum = null,
+
+    /// **Note:**
+    ///
+    /// Only supported for volumes on Outposts. If the source volume is not on an
+    /// Outpost,
+    /// omit this parameter.
+    ///
+    /// * To create the snapshot on the same Outpost as the source volume, specify
+    ///   the
+    /// ARN of that Outpost. The snapshot must be created on the same Outpost as the
+    /// volume.
+    ///
+    /// * To create the snapshot in the parent Region of the Outpost, omit this
+    ///   parameter.
+    ///
+    /// For more information, see [Create local snapshots from volumes on an
+    /// Outpost](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-snapshot) in the *Amazon EBS User Guide*.
+    outpost_arn: ?[]const u8 = null,
+
+    /// The tags to apply to the snapshot during creation.
+    tag_specifications: ?[]const TagSpecification = null,
+
+    /// The ID of the Amazon EBS volume.
+    volume_id: []const u8,
+};
+
+pub const CreateSnapshotOutput = struct {
+    /// The Availability Zone or Local Zone of the snapshot. For example,
+    /// `us-west-1a`
+    /// (Availability Zone) or `us-west-2-lax-1a` (Local Zone).
+    availability_zone: ?[]const u8 = null,
+
+    /// **Note:**
+    ///
+    /// Only for snapshot copies created with time-based snapshot copy operations.
+    ///
+    /// The completion duration requested for the time-based snapshot copy
+    /// operation.
+    completion_duration_minutes: ?i32 = null,
+
+    /// The time stamp when the snapshot was completed.
+    completion_time: ?i64 = null,
+
+    /// The data encryption key identifier for the snapshot. This value is a unique
+    /// identifier
+    /// that corresponds to the data encryption key that was used to encrypt the
+    /// original volume or
+    /// snapshot copy. Because data encryption keys are inherited by volumes created
+    /// from snapshots,
+    /// and vice versa, if snapshots share the same data encryption key identifier,
+    /// then they belong
+    /// to the same volume/snapshot lineage. This parameter is only returned by
+    /// DescribeSnapshots.
+    data_encryption_key_id: ?[]const u8 = null,
+
+    /// The description for the snapshot.
+    description: ?[]const u8 = null,
+
+    /// Indicates whether the snapshot is encrypted.
+    encrypted: ?bool = null,
+
+    /// The full size of the snapshot, in bytes.
+    ///
+    /// **Important:**
+    ///
+    /// This is **not** the incremental size of the snapshot.
+    /// This is the full snapshot size and represents the size of all the blocks
+    /// that were
+    /// written to the source volume at the time the snapshot was created.
+    full_snapshot_size_in_bytes: ?i64 = null,
+
+    /// The Amazon Resource Name (ARN) of the KMS key that was used to protect the
+    /// volume encryption key for the parent volume.
+    kms_key_id: ?[]const u8 = null,
+
+    /// The ARN of the Outpost on which the snapshot is stored. For more
+    /// information, see [Amazon EBS local snapshots on
+    /// Outposts](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html) in the
+    /// *Amazon EBS User Guide*.
+    outpost_arn: ?[]const u8 = null,
+
+    /// The Amazon Web Services owner alias, from an Amazon-maintained list
+    /// (`amazon`). This is not
+    /// the user-configured Amazon Web Services account alias set using the IAM
+    /// console.
+    owner_alias: ?[]const u8 = null,
+
+    /// The ID of the Amazon Web Services account that owns the EBS snapshot.
+    owner_id: ?[]const u8 = null,
+
+    /// The progress of the snapshot, as a percentage.
+    progress: ?[]const u8 = null,
+
+    /// Only for archived snapshots that are temporarily restored. Indicates the
+    /// date and
+    /// time when a temporarily restored snapshot will be automatically re-archived.
+    restore_expiry_time: ?i64 = null,
+
+    /// The ID of the snapshot. Each snapshot receives a unique identifier when it
+    /// is
+    /// created.
+    snapshot_id: ?[]const u8 = null,
+
+    /// Reserved for future use.
+    sse_type: ?SSEType = null,
+
+    /// The time stamp when the snapshot was initiated.
+    start_time: ?i64 = null,
+
+    /// The snapshot state.
+    state: ?SnapshotState = null,
+
+    /// Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy
+    /// operation fails
+    /// (for example, if the proper KMS permissions are not obtained) this field
+    /// displays error
+    /// state details to help you diagnose why the error occurred. This parameter is
+    /// only returned by
+    /// DescribeSnapshots.
+    state_message: ?[]const u8 = null,
+
+    /// The storage tier in which the snapshot is stored. `standard` indicates
+    /// that the snapshot is stored in the standard snapshot storage tier and that
+    /// it is ready
+    /// for use. `archive` indicates that the snapshot is currently archived and
+    /// that
+    /// it must be restored before it can be used.
+    storage_tier: ?StorageTier = null,
+
+    /// Any tags assigned to the snapshot.
+    tags: ?[]const Tag = null,
+
+    /// **Note:**
+    ///
+    /// Only for snapshot copies.
+    ///
+    /// Indicates whether the snapshot copy was created with a standard or
+    /// time-based
+    /// snapshot copy operation. Time-based snapshot copy operations complete within
+    /// the
+    /// completion duration specified in the request. Standard snapshot copy
+    /// operations
+    /// are completed on a best-effort basis.
+    ///
+    /// * `standard` - The snapshot copy was created with a standard
+    /// snapshot copy operation.
+    ///
+    /// * `time-based` - The snapshot copy was created with a time-based
+    /// snapshot copy operation.
+    transfer_type: ?TransferType = null,
+
+    /// The ID of the volume that was used to create the snapshot. Snapshots created
+    /// by a copy
+    /// snapshot operation have an arbitrary volume ID that you should not use for
+    /// any purpose.
+    volume_id: ?[]const u8 = null,
+
+    /// The size of the volume, in GiB.
+    volume_size: ?i32 = null,
+
+    allocator: std.mem.Allocator,
+
+    pub fn deinit(self: *const CreateSnapshotOutput) void {
+        if (self.availability_zone) |v| {
+            self.allocator.free(v);
+        }
+        if (self.data_encryption_key_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.description) |v| {
+            self.allocator.free(v);
+        }
+        if (self.kms_key_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.outpost_arn) |v| {
+            self.allocator.free(v);
+        }
+        if (self.owner_alias) |v| {
+            self.allocator.free(v);
+        }
+        if (self.owner_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.progress) |v| {
+            self.allocator.free(v);
+        }
+        if (self.snapshot_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.state_message) |v| {
+            self.allocator.free(v);
+        }
+        if (self.volume_id) |v| {
+            self.allocator.free(v);
+        }
+    }
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, input: CreateSnapshotInput, options: Options) !CreateSnapshotOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ec2");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status);
+        }
+        return error.ServiceError;
+    }
+
+    return try deserializeResponse(response.body, response.status, client.allocator);
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateSnapshotInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpoint("ec2", alloc);
+
+    const host = parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = parsePort(endpoint);
+
+    var body_buf: std.ArrayList(u8) = .{};
+
+    try body_buf.appendSlice(alloc, "Action=CreateSnapshot&Version=2016-11-15");
+    if (input.description) |v| {
+        try body_buf.appendSlice(alloc, "&Description=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.dry_run) |v| {
+        try body_buf.appendSlice(alloc, "&DryRun=");
+        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.location) |v| {
+        try body_buf.appendSlice(alloc, "&Location=");
+        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+    }
+    if (input.outpost_arn) |v| {
+        try body_buf.appendSlice(alloc, "&OutpostArn=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.tag_specifications) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.resource_type) |v| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                }
+            }
+        }
+    }
+    try body_buf.appendSlice(alloc, "&VolumeId=");
+    try appendUrlEncoded(alloc, &body_buf, input.volume_id);
+
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateSnapshotOutput {
+    _ = status;
+    var result: CreateSnapshotOutput = .{ .allocator = alloc };
+    if (findElement(body, "availabilityZone")) |content| {
+        result.availability_zone = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "completionDurationMinutes")) |content| {
+        result.completion_duration_minutes = std.fmt.parseInt(i32, content, 10) catch null;
+    }
+    if (findElement(body, "completionTime")) |content| {
+        result.completion_time = std.fmt.parseInt(i64, content, 10) catch null;
+    }
+    if (findElement(body, "dataEncryptionKeyId")) |content| {
+        result.data_encryption_key_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "description")) |content| {
+        result.description = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "encrypted")) |content| {
+        result.encrypted = std.mem.eql(u8, content, "true");
+    }
+    if (findElement(body, "fullSnapshotSizeInBytes")) |content| {
+        result.full_snapshot_size_in_bytes = std.fmt.parseInt(i64, content, 10) catch null;
+    }
+    if (findElement(body, "kmsKeyId")) |content| {
+        result.kms_key_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "outpostArn")) |content| {
+        result.outpost_arn = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "ownerAlias")) |content| {
+        result.owner_alias = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "ownerId")) |content| {
+        result.owner_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "progress")) |content| {
+        result.progress = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "restoreExpiryTime")) |content| {
+        result.restore_expiry_time = std.fmt.parseInt(i64, content, 10) catch null;
+    }
+    if (findElement(body, "snapshotId")) |content| {
+        result.snapshot_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "startTime")) |content| {
+        result.start_time = std.fmt.parseInt(i64, content, 10) catch null;
+    }
+    if (findElement(body, "statusMessage")) |content| {
+        result.state_message = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "volumeId")) |content| {
+        result.volume_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "volumeSize")) |content| {
+        result.volume_size = std.fmt.parseInt(i32, content, 10) catch null;
+    }
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+    const error_code = findElement(body, "Code") orelse "Unknown";
+    const error_message = findElement(body, "Message") orelse "";
+    const request_id = findElement(body, "RequestID") orelse "";
+
+
+    return .{ .unknown = .{
+        .code = error_code,
+        .message = error_message,
+        .request_id = request_id,
+        .http_status = status,
+    } };
+}
+
+fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
+    var buf: [256]u8 = undefined;
+
+    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
+    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
+    const content_start = start + open_tag.len;
+
+    var close_buf: [256]u8 = undefined;
+    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
+    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+
+    return xml[content_start..end];
+}
+
+fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
+            ' ' => try buf.append(alloc, '+'),
+            else => {
+                const hex = "0123456789ABCDEF";
+                try buf.append(alloc, '%');
+                try buf.append(alloc, hex[c >> 4]);
+                try buf.append(alloc, hex[c & 0x0F]);
+            }
+        }
+    }
+}
+
+fn parseHost(endpoint: []const u8) []const u8 {
+    // Strip scheme
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    // Strip port and path
+    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
+    return after_scheme[0..end];
+}
+
+fn parsePort(endpoint: []const u8) ?u16 {
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
+    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
+    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
+}

@@ -115,8 +115,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutFunctionRecursionConfigI
     const path = try path_buf.toOwnedSlice(alloc);
 
     var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"RecursiveLoop\":\"");
+    try body_buf.appendSlice(alloc, @tagName(input.recursive_loop));
+    try body_buf.appendSlice(alloc, "\"");
+    has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");
     const body = try body_buf.toOwnedSlice(alloc);

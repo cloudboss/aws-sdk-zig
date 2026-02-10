@@ -129,7 +129,14 @@ class OperationGenerator(
         for ((memberName, memberShape) in outputShape.allMembers) {
             val fieldName = NamingUtil.toFieldName(memberName)
             val targetShape = model.expectShape(memberShape.target)
-            val zigType = ctx.resolveZigType(memberShape, targetShape)
+            val baseType = ctx.resolveBaseZigType(targetShape)
+            val isScalar = ctx.isScalarType(targetShape)
+
+            // For output structs, make non-scalar required members optional since
+            // the deserializer may not populate them
+            val isOptional = !memberShape.isRequired || !isScalar
+            val zigType = if (isOptional) "?$baseType" else baseType
+            val defaultValue = if (isOptional) " = null" else ""
 
             val memberDocs = memberShape.getTrait(DocumentationTrait::class.java)
                 .map { it.value }
@@ -142,7 +149,6 @@ class OperationGenerator(
                 writer.writeDocs(memberDocs)
             }
 
-            val defaultValue = if (!memberShape.isRequired) " = null" else ""
             writer.write("\$L: \$L\$L,", fieldName, zigType, defaultValue)
             firstField = false
         }

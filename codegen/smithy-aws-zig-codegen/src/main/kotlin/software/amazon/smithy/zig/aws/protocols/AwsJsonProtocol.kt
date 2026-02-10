@@ -89,15 +89,16 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         }
 
         val zigType = ctx.resolveBaseZigType(targetShape)
+        val isEnum = ctx.isEnumType(targetShape)
 
         if (memberShape.isRequired) {
             writer.write("if (has_prev) try body_buf.appendSlice(alloc, \",\");")
-            writeJsonKeyValue(writer, smithyName, zigType, "$accessor.$fieldName")
+            writeJsonKeyValue(writer, smithyName, zigType, "$accessor.$fieldName", isEnum)
             writer.write("has_prev = true;")
         } else {
             writer.openBlock("if (\$L.\$L) |v| {", accessor, fieldName)
             writer.write("if (has_prev) try body_buf.appendSlice(alloc, \",\");")
-            writeJsonKeyValueForOptional(writer, smithyName, zigType, "v")
+            writeJsonKeyValue(writer, smithyName, zigType, "v", isEnum)
             writer.write("has_prev = true;")
             writer.closeBlock("}")
         }
@@ -108,48 +109,27 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         jsonKey: String,
         zigType: String,
         accessor: String,
+        isEnum: Boolean = false,
     ) {
-        when (zigType) {
-            "[]const u8" -> {
+        when {
+            isEnum -> {
+                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\\\"\");", jsonKey)
+                writer.write("try body_buf.appendSlice(alloc, @tagName(\$L));", accessor)
+                writer.write("try body_buf.appendSlice(alloc, \"\\\"\");")
+            }
+            zigType == "[]const u8" -> {
                 writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\\\"\");", jsonKey)
                 writer.write("try appendJsonEscaped(alloc, &body_buf, \$L);", accessor)
                 writer.write("try body_buf.appendSlice(alloc, \"\\\"\");")
             }
-            "bool" -> {
+            zigType == "bool" -> {
                 writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\");", jsonKey)
                 writer.write("try body_buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", accessor)
             }
-            "i32", "i64", "i16", "i8" -> {
+            zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\");", jsonKey)
                 writer.write("{")
                 writer.write("    const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", accessor)
-                writer.write("    try body_buf.appendSlice(alloc, num_str);")
-                writer.write("}")
-            }
-            else -> {}
-        }
-    }
-
-    private fun writeJsonKeyValueForOptional(
-        writer: ZigWriter,
-        jsonKey: String,
-        zigType: String,
-        varName: String,
-    ) {
-        when (zigType) {
-            "[]const u8" -> {
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\\\"\");", jsonKey)
-                writer.write("try appendJsonEscaped(alloc, &body_buf, \$L);", varName)
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\");")
-            }
-            "bool" -> {
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\");", jsonKey)
-                writer.write("try body_buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", varName)
-            }
-            "i32", "i64", "i16", "i8" -> {
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\");", jsonKey)
-                writer.write("{")
-                writer.write("    const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", varName)
                 writer.write("    try body_buf.appendSlice(alloc, num_str);")
                 writer.write("}")
             }

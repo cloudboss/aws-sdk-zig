@@ -30,7 +30,7 @@ pub const ListFunctionUrlConfigsInput = struct {
 
 pub const ListFunctionUrlConfigsOutput = struct {
     /// A list of function URL configurations.
-    function_url_configs: []const FunctionUrlConfig,
+    function_url_configs: ?[]const FunctionUrlConfig = null,
 
     /// The pagination token that's included if more results are available.
     next_marker: ?[]const u8 = null,

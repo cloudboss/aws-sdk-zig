@@ -1,0 +1,363 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const DestinationOptionsRequest = @import("destination_options_request.zig").DestinationOptionsRequest;
+const LogDestinationType = @import("log_destination_type.zig").LogDestinationType;
+const FlowLogsResourceType = @import("flow_logs_resource_type.zig").FlowLogsResourceType;
+const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const TrafficType = @import("traffic_type.zig").TrafficType;
+const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
+
+/// Creates one or more flow logs to capture information about IP traffic for a
+/// specific network interface,
+/// subnet, or VPC.
+///
+/// Flow log data for a monitored network interface is recorded as flow log
+/// records, which are log events
+/// consisting of fields that describe the traffic flow. For more information,
+/// see
+/// [Flow log
+/// records](https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html)
+/// in the *Amazon VPC User Guide*.
+///
+/// When publishing to CloudWatch Logs, flow log records are published to a log
+/// group, and each network
+/// interface has a unique log stream in the log group. When publishing to
+/// Amazon S3, flow log records for all
+/// of the monitored network interfaces are published to a single log file
+/// object that is stored in the specified
+/// bucket.
+///
+/// For more information, see [VPC Flow
+/// Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html)
+/// in the *Amazon VPC User Guide*.
+pub const CreateFlowLogsInput = struct {
+    /// Unique, case-sensitive identifier that you provide to ensure the idempotency
+    /// of the
+    /// request. For more information, see [How to ensure
+    /// idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+    client_token: ?[]const u8 = null,
+
+    /// The ARN of the IAM role that allows Amazon EC2 to publish flow logs across
+    /// accounts.
+    deliver_cross_account_role: ?[]const u8 = null,
+
+    /// The ARN of the IAM role that allows Amazon EC2 to publish flow logs to the
+    /// log destination.
+    ///
+    /// This parameter is required if the destination type is `cloud-watch-logs`,
+    /// or if the destination type is `kinesis-data-firehose` and the delivery
+    /// stream
+    /// and the resources to monitor are in different accounts.
+    deliver_logs_permission_arn: ?[]const u8 = null,
+
+    /// The destination options.
+    destination_options: ?DestinationOptionsRequest = null,
+
+    /// Checks whether you have the required permissions for the action, without
+    /// actually making the request,
+    /// and provides an error response. If you have the required permissions, the
+    /// error response is `DryRunOperation`.
+    /// Otherwise, it is `UnauthorizedOperation`.
+    dry_run: ?bool = null,
+
+    /// The destination for the flow log data. The meaning of this parameter depends
+    /// on the destination type.
+    ///
+    /// * If the destination type is `cloud-watch-logs`, specify the ARN of a
+    ///   CloudWatch Logs log group. For example:
+    ///
+    /// arn:aws:logs:*region*:*account_id*:log-group:*my_group*
+    ///
+    /// Alternatively, use the `LogGroupName` parameter.
+    ///
+    /// * If the destination type is `s3`, specify the ARN of an S3 bucket. For
+    ///   example:
+    ///
+    /// arn:aws:s3:::*my_bucket*/*my_subfolder*/
+    ///
+    /// The subfolder is optional. Note that you can't use `AWSLogs` as a subfolder
+    /// name.
+    ///
+    /// * If the destination type is `kinesis-data-firehose`, specify the ARN of a
+    ///   Kinesis Data Firehose delivery stream. For example:
+    ///
+    /// arn:aws:firehose:*region*:*account_id*:deliverystream:*my_stream*
+    log_destination: ?[]const u8 = null,
+
+    /// The type of destination for the flow log data.
+    ///
+    /// Default: `cloud-watch-logs`
+    log_destination_type: ?LogDestinationType = null,
+
+    /// The fields to include in the flow log record. List the fields in the order
+    /// in which
+    /// they should appear. If you omit this parameter, the flow log is created
+    /// using the
+    /// default format. If you specify this parameter, you must include at least one
+    /// field. For more information about the available fields, see [Flow log
+    /// records](https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html)
+    /// in the *Amazon VPC User Guide* or [Transit Gateway Flow Log
+    /// records](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records) in the *Amazon Web Services Transit Gateway Guide*.
+    ///
+    /// Specify the fields using the `${field-id}` format, separated by spaces.
+    log_format: ?[]const u8 = null,
+
+    /// The name of a new or existing CloudWatch Logs log group where Amazon EC2
+    /// publishes your flow logs.
+    ///
+    /// This parameter is valid only if the destination type is `cloud-watch-logs`.
+    log_group_name: ?[]const u8 = null,
+
+    /// The maximum interval of time during which a flow of packets is captured and
+    /// aggregated into a flow log record.
+    /// The possible values are 60 seconds (1 minute) or 600 seconds (10 minutes).
+    /// This parameter must be 60 seconds for transit gateway resource types.
+    ///
+    /// When a network interface is attached to a [Nitro-based
+    /// instance](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html), the aggregation interval is always 60 seconds or less, regardless
+    /// of the value that you specify.
+    ///
+    /// Default: 600
+    max_aggregation_interval: ?i32 = null,
+
+    /// The IDs of the resources to monitor. For example, if the resource type is
+    /// `VPC`, specify the IDs of the VPCs.
+    ///
+    /// Constraints: Maximum of 25 for transit gateway resource types. Maximum of
+    /// 1000 for the
+    /// other resource types.
+    resource_ids: []const []const u8,
+
+    /// The type of resource to monitor.
+    resource_type: FlowLogsResourceType,
+
+    /// The tags to apply to the flow logs.
+    tag_specifications: ?[]const TagSpecification = null,
+
+    /// The type of traffic to monitor (accepted traffic, rejected traffic, or all
+    /// traffic).
+    /// This parameter is not supported for transit gateway resource types. It is
+    /// required for
+    /// the other resource types.
+    traffic_type: ?TrafficType = null,
+};
+
+pub const CreateFlowLogsOutput = struct {
+    /// Unique, case-sensitive identifier that you provide to ensure the idempotency
+    /// of the
+    /// request.
+    client_token: ?[]const u8 = null,
+
+    /// The IDs of the flow logs.
+    flow_log_ids: ?[]const []const u8 = null,
+
+    /// Information about the flow logs that could not be created successfully.
+    unsuccessful: ?[]const UnsuccessfulItem = null,
+
+    allocator: std.mem.Allocator,
+
+    pub fn deinit(self: *const CreateFlowLogsOutput) void {
+        if (self.client_token) |v| {
+            self.allocator.free(v);
+        }
+    }
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, input: CreateFlowLogsInput, options: Options) !CreateFlowLogsOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ec2");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status);
+        }
+        return error.ServiceError;
+    }
+
+    return try deserializeResponse(response.body, response.status, client.allocator);
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateFlowLogsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpoint("ec2", alloc);
+
+    const host = parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = parsePort(endpoint);
+
+    var body_buf: std.ArrayList(u8) = .{};
+
+    try body_buf.appendSlice(alloc, "Action=CreateFlowLogs&Version=2016-11-15");
+    if (input.client_token) |v| {
+        try body_buf.appendSlice(alloc, "&ClientToken=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.deliver_cross_account_role) |v| {
+        try body_buf.appendSlice(alloc, "&DeliverCrossAccountRole=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.deliver_logs_permission_arn) |v| {
+        try body_buf.appendSlice(alloc, "&DeliverLogsPermissionArn=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.destination_options) |v| {
+        if (v.file_format) |sv| {
+            try body_buf.appendSlice(alloc, "&DestinationOptions.FileFormat=");
+            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        if (v.hive_compatible_partitions) |sv| {
+            try body_buf.appendSlice(alloc, "&DestinationOptions.HiveCompatiblePartitions=");
+            try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+        }
+        if (v.per_hour_partition) |sv| {
+            try body_buf.appendSlice(alloc, "&DestinationOptions.PerHourPartition=");
+            try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+        }
+    }
+    if (input.dry_run) |v| {
+        try body_buf.appendSlice(alloc, "&DryRun=");
+        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.log_destination) |v| {
+        try body_buf.appendSlice(alloc, "&LogDestination=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.log_destination_type) |v| {
+        try body_buf.appendSlice(alloc, "&LogDestinationType=");
+        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+    }
+    if (input.log_format) |v| {
+        try body_buf.appendSlice(alloc, "&LogFormat=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.log_group_name) |v| {
+        try body_buf.appendSlice(alloc, "&LogGroupName=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.max_aggregation_interval) |v| {
+        try body_buf.appendSlice(alloc, "&MaxAggregationInterval=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    for (input.resource_ids, 0..) |item, idx| {
+        const n = idx + 1;
+        var prefix_buf: [256]u8 = undefined;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceIds.item.{d}=", .{n}) catch continue;
+        try body_buf.appendSlice(alloc, field_prefix);
+        try appendUrlEncoded(alloc, &body_buf, item);
+    }
+    try body_buf.appendSlice(alloc, "&ResourceType=");
+    try appendUrlEncoded(alloc, &body_buf, @tagName(input.resource_type));
+    if (input.tag_specifications) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.resource_type) |v| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                }
+            }
+        }
+    }
+    if (input.traffic_type) |v| {
+        try body_buf.appendSlice(alloc, "&TrafficType=");
+        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+    }
+
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateFlowLogsOutput {
+    _ = status;
+    var result: CreateFlowLogsOutput = .{ .allocator = alloc };
+    if (findElement(body, "clientToken")) |content| {
+        result.client_token = try alloc.dupe(u8, content);
+    }
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+    const error_code = findElement(body, "Code") orelse "Unknown";
+    const error_message = findElement(body, "Message") orelse "";
+    const request_id = findElement(body, "RequestID") orelse "";
+
+
+    return .{ .unknown = .{
+        .code = error_code,
+        .message = error_message,
+        .request_id = request_id,
+        .http_status = status,
+    } };
+}
+
+fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
+    var buf: [256]u8 = undefined;
+
+    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
+    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
+    const content_start = start + open_tag.len;
+
+    var close_buf: [256]u8 = undefined;
+    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
+    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+
+    return xml[content_start..end];
+}
+
+fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
+            ' ' => try buf.append(alloc, '+'),
+            else => {
+                const hex = "0123456789ABCDEF";
+                try buf.append(alloc, '%');
+                try buf.append(alloc, hex[c >> 4]);
+                try buf.append(alloc, hex[c & 0x0F]);
+            }
+        }
+    }
+}
+
+fn parseHost(endpoint: []const u8) []const u8 {
+    // Strip scheme
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    // Strip port and path
+    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
+    return after_scheme[0..end];
+}
+
+fn parsePort(endpoint: []const u8) ?u16 {
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
+    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
+    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
+}

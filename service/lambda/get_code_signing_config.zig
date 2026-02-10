@@ -13,7 +13,7 @@ pub const GetCodeSigningConfigInput = struct {
 
 pub const GetCodeSigningConfigOutput = struct {
     /// The code signing configuration
-    code_signing_config: CodeSigningConfig,
+    code_signing_config: ?CodeSigningConfig = null,
 
     allocator: std.mem.Allocator,
 

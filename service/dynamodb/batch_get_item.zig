@@ -271,6 +271,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchGetItemInput, config: 
     try appendJsonEscaped(alloc, &body_buf, input.request_items);
     try body_buf.appendSlice(alloc, "\"");
     has_prev = true;
+    if (input.return_consumed_capacity) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnConsumedCapacity\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(alloc, "}");
     const body = try body_buf.toOwnedSlice(alloc);

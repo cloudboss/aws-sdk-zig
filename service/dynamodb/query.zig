@@ -533,6 +533,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: QueryInput, config: *aws.Co
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.conditional_operator) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ConditionalOperator\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.consistent_read) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"ConsistentRead\":");
@@ -611,10 +618,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: QueryInput, config: *aws.Co
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.return_consumed_capacity) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnConsumedCapacity\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.scan_index_forward) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"ScanIndexForward\":");
         try body_buf.appendSlice(alloc, if (v) "true" else "false");
+        has_prev = true;
+    }
+    if (input.select) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Select\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");

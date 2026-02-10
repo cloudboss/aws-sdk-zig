@@ -54,7 +54,7 @@ pub const ImportTableOutput = struct {
     /// import. The import parameters include import status, how many items were
     /// processed, and
     /// how many errors were encountered.
-    import_table_description: ImportTableDescription,
+    import_table_description: ?ImportTableDescription = null,
 
     allocator: std.mem.Allocator,
 
@@ -109,6 +109,18 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportTableInput, config: *
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.input_compression_type) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"InputCompressionType\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"InputFormat\":\"");
+    try body_buf.appendSlice(alloc, @tagName(input.input_format));
+    try body_buf.appendSlice(alloc, "\"");
+    has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");
     const body = try body_buf.toOwnedSlice(alloc);

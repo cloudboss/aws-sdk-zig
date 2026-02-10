@@ -195,6 +195,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetItemInput, config: *aws.
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.return_consumed_capacity) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnConsumedCapacity\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"TableName\":\"");
     try appendJsonEscaped(alloc, &body_buf, input.table_name);

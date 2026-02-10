@@ -24,7 +24,7 @@ pub const ListFunctionVersionsByCapacityProviderOutput = struct {
     capacity_provider_arn: []const u8,
 
     /// A list of function versions that use the specified capacity provider.
-    function_versions: []const FunctionVersionsByCapacityProviderListItem,
+    function_versions: ?[]const FunctionVersionsByCapacityProviderListItem = null,
 
     /// The pagination token that's included if more results are available.
     next_marker: ?[]const u8 = null,

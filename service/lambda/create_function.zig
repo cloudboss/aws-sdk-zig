@@ -557,10 +557,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateFunctionInput, config
         }
         has_prev = true;
     }
+    if (input.package_type) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"PackageType\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.publish) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Publish\":");
         try body_buf.appendSlice(alloc, if (v) "true" else "false");
+        has_prev = true;
+    }
+    if (input.publish_to) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"PublishTo\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
@@ -568,6 +582,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateFunctionInput, config
     try appendJsonEscaped(alloc, &body_buf, input.role);
     try body_buf.appendSlice(alloc, "\"");
     has_prev = true;
+    if (input.runtime) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Runtime\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Tags\":\"");

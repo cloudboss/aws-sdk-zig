@@ -353,6 +353,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PublishVersionInput, config
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.publish_to) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"PublishTo\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.revision_id) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"RevisionId\":\"");

@@ -41,7 +41,7 @@ pub const GetDurableExecutionStateOutput = struct {
     /// An array of operations that represent the current state of the durable
     /// execution. Operations are ordered by their start sequence number in
     /// ascending order and include information needed for replay processing.
-    operations: []const Operation,
+    operations: ?[]const Operation = null,
 
     allocator: std.mem.Allocator,
 

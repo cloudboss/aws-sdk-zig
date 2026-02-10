@@ -446,6 +446,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ScanInput, config: *aws.Con
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.conditional_operator) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ConditionalOperator\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.consistent_read) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"ConsistentRead\":");
@@ -503,6 +510,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ScanInput, config: *aws.Con
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.return_consumed_capacity) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnConsumedCapacity\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.scan_filter) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"ScanFilter\":\"");
@@ -517,6 +531,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ScanInput, config: *aws.Con
             const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
             try body_buf.appendSlice(alloc, num_str);
         }
+        has_prev = true;
+    }
+    if (input.select) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Select\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");

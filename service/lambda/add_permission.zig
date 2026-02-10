@@ -171,6 +171,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AddPermissionInput, config:
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.function_url_auth_type) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"FunctionUrlAuthType\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.invoked_via_function_url) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"InvokedViaFunctionUrl\":");

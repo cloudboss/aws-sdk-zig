@@ -163,9 +163,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRootInput, config: *a
     }
     try body_buf.appendSlice(alloc, "&TargetPrincipal=");
     try appendUrlEncoded(alloc, &body_buf, input.target_principal);
-    if (input.task_policy_arn.arn) |v| {
+    if (input.task_policy_arn.arn) |sv| {
         try body_buf.appendSlice(alloc, "&TaskPolicyArn.arn=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try appendUrlEncoded(alloc, &body_buf, sv);
     }
 
     const body = try body_buf.toOwnedSlice(alloc);

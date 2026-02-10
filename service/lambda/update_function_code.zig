@@ -402,6 +402,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionCodeInput, co
         try body_buf.appendSlice(alloc, if (v) "true" else "false");
         has_prev = true;
     }
+    if (input.publish_to) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"PublishTo\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.revision_id) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"RevisionId\":\"");

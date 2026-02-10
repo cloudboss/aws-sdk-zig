@@ -500,6 +500,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionConfiguration
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.runtime) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Runtime\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.timeout) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Timeout\":");

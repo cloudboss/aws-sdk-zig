@@ -222,10 +222,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateTableInput, config: *
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.billing_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"BillingMode\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.deletion_protection_enabled) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"DeletionProtectionEnabled\":");
         try body_buf.appendSlice(alloc, if (v) "true" else "false");
+        has_prev = true;
+    }
+    if (input.multi_region_consistency) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"MultiRegionConsistency\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (input.table_class) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"TableClass\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");

@@ -33,6 +33,22 @@
                     "package": "s3"
                 }
             }
+        },
+        "ec2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ec2#AmazonEC2",
+                    "package": "ec2"
+                }
+            }
+        },
+        "iam": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iam#AWSIdentityManagementV20100508",
+                    "package": "iam"
+                }
+            }
         }
     }
 }

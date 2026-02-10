@@ -1,0 +1,422 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const InstanceAttributeName = @import("instance_attribute_name.zig").InstanceAttributeName;
+const InstanceBlockDeviceMappingSpecification = @import("instance_block_device_mapping_specification.zig").InstanceBlockDeviceMappingSpecification;
+const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
+const BlobAttributeValue = @import("blob_attribute_value.zig").BlobAttributeValue;
+
+/// Modifies the specified attribute of the specified instance. You can specify
+/// only one
+/// attribute at a time.
+///
+/// **Note: **Using this action to change the security groups
+/// associated with an elastic network interface (ENI) attached to an instance
+/// can
+/// result in an error if the instance has more than one ENI. To change the
+/// security groups
+/// associated with an ENI attached to an instance that has multiple ENIs, we
+/// recommend that
+/// you use the ModifyNetworkInterfaceAttribute action.
+///
+/// To modify some attributes, the instance must be stopped. For more
+/// information, see
+/// [Modify a stopped
+/// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html) in the
+/// *Amazon EC2 User Guide*.
+pub const ModifyInstanceAttributeInput = struct {
+    /// The name of the attribute to modify.
+    ///
+    /// **Note:**
+    ///
+    /// When changing the instance type: If the original instance type is configured
+    /// for
+    /// configurable bandwidth, and the desired instance type doesn't support
+    /// configurable
+    /// bandwidth, first set the existing bandwidth configuration to `default`
+    /// using the ModifyInstanceNetworkPerformanceOptions
+    /// operation.
+    ///
+    /// **Important:**
+    ///
+    /// You can modify the following attributes only: `disableApiTermination` |
+    /// `instanceType` | `kernel` | `ramdisk` |
+    /// `instanceInitiatedShutdownBehavior` | `blockDeviceMapping`
+    /// | `userData` | `sourceDestCheck` | `groupSet` |
+    /// `ebsOptimized` | `sriovNetSupport` |
+    /// `enaSupport` | `nvmeSupport` | `disableApiStop`
+    /// | `enclaveOptions`
+    attribute: ?InstanceAttributeName = null,
+
+    /// Modifies the `DeleteOnTermination` attribute for volumes that are currently
+    /// attached. The volume must be owned by the caller. If no value is specified
+    /// for
+    /// `DeleteOnTermination`, the default is `true` and the volume is
+    /// deleted when the instance is terminated. You can't modify the
+    /// `DeleteOnTermination`
+    /// attribute for volumes that are attached to Amazon Web Services-managed
+    /// resources.
+    ///
+    /// To add instance store volumes to an Amazon EBS-backed instance, you must add
+    /// them when
+    /// you launch the instance. For more information, see [Update the block device
+    /// mapping when launching an
+    /// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM) in the
+    /// *Amazon EC2 User Guide*.
+    block_device_mappings: ?[]const InstanceBlockDeviceMappingSpecification = null,
+
+    /// Indicates whether an instance is enabled for stop protection. For more
+    /// information,
+    /// see [Enable stop
+    /// protection for your
+    /// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html).
+    disable_api_stop: ?AttributeBooleanValue = null,
+
+    /// Enable or disable termination protection for the instance. If the value is
+    /// `true`,
+    /// you can't terminate the instance using the Amazon EC2 console, command line
+    /// interface, or API.
+    /// You can't enable termination protection for Spot Instances.
+    disable_api_termination: ?AttributeBooleanValue = null,
+
+    /// Checks whether you have the required permissions for the operation, without
+    /// actually making the
+    /// request, and provides an error response. If you have the required
+    /// permissions, the error response is
+    /// `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    dry_run: ?bool = null,
+
+    /// Specifies whether the instance is optimized for Amazon EBS I/O. This
+    /// optimization
+    /// provides dedicated throughput to Amazon EBS and an optimized configuration
+    /// stack to
+    /// provide optimal EBS I/O performance. This optimization isn't available with
+    /// all instance
+    /// types. Additional usage charges apply when using an EBS Optimized instance.
+    ebs_optimized: ?AttributeBooleanValue = null,
+
+    /// Set to `true` to enable enhanced networking with ENA for the
+    /// instance.
+    ///
+    /// This option is supported only for HVM instances. Specifying this option with
+    /// a PV
+    /// instance can make it unreachable.
+    ena_support: ?AttributeBooleanValue = null,
+
+    /// Replaces the security groups of the instance with the specified security
+    /// groups.
+    /// You must specify the ID of at least one security group, even if it's just
+    /// the default
+    /// security group for the VPC.
+    groups: ?[]const []const u8 = null,
+
+    /// The ID of the instance.
+    instance_id: []const u8,
+
+    /// Specifies whether an instance stops or terminates when you initiate shutdown
+    /// from the
+    /// instance (using the operating system command for system shutdown).
+    instance_initiated_shutdown_behavior: ?AttributeValue = null,
+
+    /// Changes the instance type to the specified value. For more information, see
+    /// [Instance
+    /// types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*. If the instance type is
+    /// not valid, the error returned is `InvalidInstanceAttributeValue`.
+    instance_type: ?AttributeValue = null,
+
+    /// Changes the instance's kernel to the specified value. We recommend that you
+    /// use
+    /// PV-GRUB instead of kernels and RAM disks. For more information, see
+    /// [PV-GRUB](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html).
+    kernel: ?AttributeValue = null,
+
+    /// Changes the instance's RAM disk to the specified value. We recommend that
+    /// you use
+    /// PV-GRUB instead of kernels and RAM disks. For more information, see
+    /// [PV-GRUB](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html).
+    ramdisk: ?AttributeValue = null,
+
+    /// Enable or disable source/destination checks, which ensure that the instance
+    /// is either
+    /// the source or the destination of any traffic that it receives. If the value
+    /// is
+    /// `true`, source/destination checks are enabled; otherwise, they are
+    /// disabled. The default value is `true`. You must disable source/destination
+    /// checks if the instance runs services such as network address translation,
+    /// routing, or
+    /// firewalls.
+    source_dest_check: ?AttributeBooleanValue = null,
+
+    /// Set to `simple` to enable enhanced networking with the Intel 82599 Virtual
+    /// Function interface for the instance.
+    ///
+    /// There is no way to disable enhanced networking with the Intel 82599 Virtual
+    /// Function
+    /// interface at this time.
+    ///
+    /// This option is supported only for HVM instances. Specifying this option with
+    /// a PV
+    /// instance can make it unreachable.
+    sriov_net_support: ?AttributeValue = null,
+
+    /// Changes the instance's user data to the specified value. User data must be
+    /// base64-encoded.
+    /// Depending on the tool or SDK that you're using, the base64-encoding might be
+    /// performed for you.
+    /// For more information, see [Work with instance user
+    /// data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html).
+    user_data: ?BlobAttributeValue = null,
+
+    /// A new value for the attribute. Use only with the `kernel`,
+    /// `ramdisk`, `userData`, `disableApiTermination`, or
+    /// `instanceInitiatedShutdownBehavior` attribute.
+    value: ?[]const u8 = null,
+};
+
+pub const ModifyInstanceAttributeOutput = struct {
+
+    allocator: std.mem.Allocator,
+
+    pub fn deinit(self: *const ModifyInstanceAttributeOutput) void {
+        _ = self;
+    }
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, input: ModifyInstanceAttributeInput, options: Options) !ModifyInstanceAttributeOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ec2");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status);
+        }
+        return error.ServiceError;
+    }
+
+    return try deserializeResponse(response.body, response.status, client.allocator);
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceAttributeInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpoint("ec2", alloc);
+
+    const host = parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = parsePort(endpoint);
+
+    var body_buf: std.ArrayList(u8) = .{};
+
+    try body_buf.appendSlice(alloc, "Action=ModifyInstanceAttribute&Version=2016-11-15");
+    if (input.attribute) |v| {
+        try body_buf.appendSlice(alloc, "&Attribute=");
+        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+    }
+    if (input.block_device_mappings) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.item.{d}.DeviceName=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.device_name) |v| {
+                    try appendUrlEncoded(alloc, &body_buf, v);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.item.{d}.NoDevice=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.no_device) |v| {
+                    try appendUrlEncoded(alloc, &body_buf, v);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.item.{d}.VirtualName=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.virtual_name) |v| {
+                    try appendUrlEncoded(alloc, &body_buf, v);
+                }
+            }
+        }
+    }
+    if (input.disable_api_stop) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&DisableApiStop.Value=");
+            try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+        }
+    }
+    if (input.disable_api_termination) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&DisableApiTermination.Value=");
+            try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+        }
+    }
+    if (input.dry_run) |v| {
+        try body_buf.appendSlice(alloc, "&DryRun=");
+        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.ebs_optimized) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&EbsOptimized.Value=");
+            try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+        }
+    }
+    if (input.ena_support) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&EnaSupport.Value=");
+            try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+        }
+    }
+    if (input.groups) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Groups.groupId.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    try body_buf.appendSlice(alloc, "&InstanceId=");
+    try appendUrlEncoded(alloc, &body_buf, input.instance_id);
+    if (input.instance_initiated_shutdown_behavior) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&InstanceInitiatedShutdownBehavior.Value=");
+            try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+    }
+    if (input.instance_type) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&InstanceType.Value=");
+            try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+    }
+    if (input.kernel) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&Kernel.Value=");
+            try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+    }
+    if (input.ramdisk) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&Ramdisk.Value=");
+            try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+    }
+    if (input.source_dest_check) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&SourceDestCheck.Value=");
+            try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+        }
+    }
+    if (input.sriov_net_support) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&SriovNetSupport.Value=");
+            try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+    }
+    if (input.user_data) |v| {
+        if (v.value) |sv| {
+            try body_buf.appendSlice(alloc, "&UserData.Value=");
+            try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+    }
+    if (input.value) |v| {
+        try body_buf.appendSlice(alloc, "&Value=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ModifyInstanceAttributeOutput {
+    _ = status;
+    _ = body;
+    const result: ModifyInstanceAttributeOutput = .{ .allocator = alloc };
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+    const error_code = findElement(body, "Code") orelse "Unknown";
+    const error_message = findElement(body, "Message") orelse "";
+    const request_id = findElement(body, "RequestID") orelse "";
+
+
+    return .{ .unknown = .{
+        .code = error_code,
+        .message = error_message,
+        .request_id = request_id,
+        .http_status = status,
+    } };
+}
+
+fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
+    var buf: [256]u8 = undefined;
+
+    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
+    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
+    const content_start = start + open_tag.len;
+
+    var close_buf: [256]u8 = undefined;
+    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
+    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+
+    return xml[content_start..end];
+}
+
+fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
+            ' ' => try buf.append(alloc, '+'),
+            else => {
+                const hex = "0123456789ABCDEF";
+                try buf.append(alloc, '%');
+                try buf.append(alloc, hex[c >> 4]);
+                try buf.append(alloc, hex[c & 0x0F]);
+            }
+        }
+    }
+}
+
+fn parseHost(endpoint: []const u8) []const u8 {
+    // Strip scheme
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    // Strip port and path
+    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
+    return after_scheme[0..end];
+}
+
+fn parsePort(endpoint: []const u8) ?u16 {
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
+    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
+    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
+}

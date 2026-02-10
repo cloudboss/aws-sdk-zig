@@ -26,7 +26,7 @@ pub const UpdateCodeSigningConfigInput = struct {
 
 pub const UpdateCodeSigningConfigOutput = struct {
     /// The code signing configuration
-    code_signing_config: CodeSigningConfig,
+    code_signing_config: ?CodeSigningConfig = null,
 
     allocator: std.mem.Allocator,
 

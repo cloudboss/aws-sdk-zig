@@ -86,7 +86,7 @@ pub const GetObjectTaggingInput = struct {
 
 pub const GetObjectTaggingOutput = struct {
     /// Contains the tag set.
-    tag_set: []const Tag,
+    tag_set: ?[]const Tag = null,
 
     /// The versionId of the object for which you got the tagging information.
     version_id: ?[]const u8 = null,

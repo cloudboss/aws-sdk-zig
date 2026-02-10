@@ -149,6 +149,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExportTableToPointInTimeInp
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.export_format) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ExportFormat\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.export_time) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"ExportTime\":");
@@ -156,6 +163,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExportTableToPointInTimeInp
             const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
             try body_buf.appendSlice(alloc, num_str);
         }
+        has_prev = true;
+    }
+    if (input.export_type) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ExportType\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
@@ -174,6 +188,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExportTableToPointInTimeInp
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"S3Prefix\":\"");
         try appendJsonEscaped(alloc, &body_buf, v);
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (input.s_3_sse_algorithm) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"S3SseAlgorithm\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }

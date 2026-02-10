@@ -17,7 +17,7 @@ pub const UpdateCapacityProviderInput = struct {
 
 pub const UpdateCapacityProviderOutput = struct {
     /// Information about the updated capacity provider.
-    capacity_provider: CapacityProvider,
+    capacity_provider: ?CapacityProvider = null,
 
     allocator: std.mem.Allocator,
 

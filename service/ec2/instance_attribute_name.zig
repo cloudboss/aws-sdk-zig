@@ -1,0 +1,18 @@
+pub const InstanceAttributeName = enum {
+    instance_type,
+    kernel,
+    ramdisk,
+    user_data,
+    disable_api_termination,
+    instance_initiated_shutdown_behavior,
+    root_device_name,
+    block_device_mapping,
+    product_codes,
+    source_dest_check,
+    group_set,
+    ebs_optimized,
+    sriov_net_support,
+    ena_support,
+    enclave_options,
+    disable_api_stop,
+};

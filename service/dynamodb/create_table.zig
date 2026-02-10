@@ -349,10 +349,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateTableInput, config: *
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.billing_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"BillingMode\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.deletion_protection_enabled) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"DeletionProtectionEnabled\":");
         try body_buf.appendSlice(alloc, if (v) "true" else "false");
+        has_prev = true;
+    }
+    if (input.global_table_settings_replication_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"GlobalTableSettingsReplicationMode\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
     if (input.global_table_source_arn) |v| {
@@ -366,6 +380,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateTableInput, config: *
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"ResourcePolicy\":\"");
         try appendJsonEscaped(alloc, &body_buf, v);
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (input.table_class) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"TableClass\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }

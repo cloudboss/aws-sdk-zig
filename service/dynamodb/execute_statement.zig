@@ -172,6 +172,20 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExecuteStatementInput, conf
         try body_buf.appendSlice(alloc, "\"");
         has_prev = true;
     }
+    if (input.return_consumed_capacity) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnConsumedCapacity\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (input.return_values_on_condition_check_failure) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnValuesOnConditionCheckFailure\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"Statement\":\"");
     try appendJsonEscaped(alloc, &body_buf, input.statement);

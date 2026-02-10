@@ -69,6 +69,21 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.closeBlock("}")
     }
 
+    private fun hasSerializableScalarFields(ctx: OperationContext, shape: Shape): Boolean {
+        return when (shape) {
+            is StructureShape -> shape.allMembers.values.any { ms ->
+                val ts = ctx.model.expectShape(ms.target)
+                ctx.isScalarType(ts)
+            }
+            is ListShape -> {
+                val elementShape = ctx.model.expectShape(shape.member.target)
+                if (elementShape is StructureShape) hasSerializableScalarFields(ctx, elementShape)
+                else ctx.isScalarType(elementShape)
+            }
+            else -> ctx.isScalarType(shape)
+        }
+    }
+
     private fun writeFieldSerializer(
         writer: ZigWriter,
         ctx: OperationContext,
@@ -81,6 +96,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
         when {
             targetShape is StructureShape -> {
+                if (!hasSerializableScalarFields(ctx, targetShape)) return
                 if (memberShape.isRequired) {
                     writeStructFieldSerializers(writer, ctx, smithyName, targetShape, "$accessor.$fieldName")
                 } else {
@@ -92,6 +108,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
             targetShape is ListShape -> {
                 val listMemberShape = targetShape.member
                 val listTargetShape = ctx.model.expectShape(listMemberShape.target)
+                if (!hasSerializableScalarFields(ctx, listTargetShape)) return
                 val xmlName = listMemberShape.getTrait(XmlNameTrait::class.java)
                     .map { it.value }
                     .orElse("member")
@@ -140,10 +157,10 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
                             ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                     } else {
-                        writer.openBlock("if (\$L.\$L) |v| {", accessor, fieldName)
+                        writer.openBlock("if (\$L.\$L) |sv| {", accessor, fieldName)
                         writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", qualifiedName)
                         writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
-                            ctx.scalarFormatExprForOptional(targetShape, "v"))
+                            ctx.scalarFormatExprForOptional(targetShape, "sv"))
                         writer.closeBlock("}")
                     }
                 }
@@ -160,36 +177,45 @@ open class AwsQueryProtocol : ProtocolGenerator {
         elementShape: Shape,
         accessor: String,
     ) {
-        writer.openBlock("for (\$L, 0..) |item, idx| {", accessor)
-        writer.write("const n = idx + 1;")
-
         if (elementShape is StructureShape) {
-            for ((memberName, memberShape) in elementShape.allMembers) {
+            // Check if any members are serializable scalars
+            val serializableMembers = elementShape.allMembers.filter { (_, ms) ->
+                val ts = ctx.model.expectShape(ms.target)
+                ctx.isScalarType(ts)
+            }
+            if (serializableMembers.isEmpty()) return
+
+            writer.openBlock("for (\$L, 0..) |item, idx| {", accessor)
+            writer.write("const n = idx + 1;")
+
+            for ((memberName, memberShape) in serializableMembers) {
                 val targetShape = ctx.model.expectShape(memberShape.target)
                 val fieldName = NamingUtil.toFieldName(memberName)
 
-                if (ctx.isScalarType(targetShape)) {
-                    // Use a block scope to avoid variable name conflicts across struct fields
-                    writer.openBlock("{")
-                    writer.write("var prefix_buf: [256]u8 = undefined;")
-                    writer.write(
-                        "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.\$L.{d}.\$L=\", .{n}) catch continue;",
-                        prefix, xmlName, memberName,
-                    )
-                    writer.write("try body_buf.appendSlice(alloc, field_prefix);")
-                    if (memberShape.isRequired) {
-                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
-                            ctx.scalarFormatExpr(targetShape, fieldName, "item"))
-                    } else {
-                        writer.openBlock("if (item.\$L) |v| {", fieldName)
-                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
-                            ctx.scalarFormatExprForOptional(targetShape, "v"))
-                        writer.closeBlock("}")
-                    }
+                // Use a block scope to avoid variable name conflicts across struct fields
+                writer.openBlock("{")
+                writer.write("var prefix_buf: [256]u8 = undefined;")
+                writer.write(
+                    "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.\$L.{d}.\$L=\", .{n}) catch continue;",
+                    prefix, xmlName, memberName,
+                )
+                writer.write("try body_buf.appendSlice(alloc, field_prefix);")
+                if (memberShape.isRequired) {
+                    writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                        ctx.scalarFormatExpr(targetShape, fieldName, "item"))
+                } else {
+                    writer.openBlock("if (item.\$L) |v| {", fieldName)
+                    writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                        ctx.scalarFormatExprForOptional(targetShape, "v"))
                     writer.closeBlock("}")
                 }
+                writer.closeBlock("}")
             }
+
+            writer.closeBlock("}")
         } else {
+            writer.openBlock("for (\$L, 0..) |item, idx| {", accessor)
+            writer.write("const n = idx + 1;")
             writer.write("var prefix_buf: [256]u8 = undefined;")
             writer.write(
                 "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.\$L.{d}=\", .{n}) catch continue;",
@@ -197,9 +223,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
             )
             writer.write("try body_buf.appendSlice(alloc, field_prefix);")
             writer.write("try appendUrlEncoded(alloc, &body_buf, item);")
+            writer.closeBlock("}")
         }
-
-        writer.closeBlock("}")
     }
 
     override fun writeDeserializeResponse(writer: ZigWriter, ctx: OperationContext) {

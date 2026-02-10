@@ -41,7 +41,7 @@ pub const CreateCapacityProviderInput = struct {
 
 pub const CreateCapacityProviderOutput = struct {
     /// Information about the capacity provider that was created.
-    capacity_provider: CapacityProvider,
+    capacity_provider: ?CapacityProvider = null,
 
     allocator: std.mem.Allocator,
 

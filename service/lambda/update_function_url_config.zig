@@ -147,8 +147,23 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionUrlConfigInpu
     const query = try query_buf.toOwnedSlice(alloc);
 
     var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.auth_type) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"AuthType\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (input.invoke_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"InvokeMode\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(alloc, "}");
     const body = try body_buf.toOwnedSlice(alloc);

@@ -42,7 +42,7 @@ pub const GetDurableExecutionHistoryOutput = struct {
     /// `ReverseOrder` is set to `true`. Each event represents a significant
     /// occurrence during the execution, such as step completion or callback
     /// resolution.
-    events: []const Event,
+    events: ?[]const Event = null,
 
     /// If present, indicates that more history events are available. Use this value
     /// as the `Marker` parameter in a subsequent request to retrieve the next page

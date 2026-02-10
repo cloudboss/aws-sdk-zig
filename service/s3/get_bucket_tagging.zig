@@ -51,7 +51,7 @@ pub const GetBucketTaggingInput = struct {
 
 pub const GetBucketTaggingOutput = struct {
     /// Contains the tag set.
-    tag_set: []const Tag,
+    tag_set: ?[]const Tag = null,
 
     allocator: std.mem.Allocator,
 

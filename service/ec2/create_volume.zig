@@ -1,0 +1,585 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const OperatorRequest = @import("operator_request.zig").OperatorRequest;
+const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const VolumeType = @import("volume_type.zig").VolumeType;
+const VolumeAttachment = @import("volume_attachment.zig").VolumeAttachment;
+const OperatorResponse = @import("operator_response.zig").OperatorResponse;
+const SSEType = @import("sse_type.zig").SSEType;
+const VolumeState = @import("volume_state.zig").VolumeState;
+const Tag = @import("tag.zig").Tag;
+
+/// Creates an EBS volume that can be attached to an instance in the same
+/// Availability Zone.
+///
+/// You can create a new empty volume or restore a volume from an EBS snapshot.
+/// Any Amazon Web Services Marketplace product codes from the snapshot are
+/// propagated to the volume.
+///
+/// You can create encrypted volumes. Encrypted volumes must be attached to
+/// instances that
+/// support Amazon EBS encryption. Volumes that are created from encrypted
+/// snapshots are also automatically
+/// encrypted. For more information, see [Amazon EBS
+/// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
+/// in the *Amazon EBS User Guide*.
+///
+/// You can tag your volumes during creation. For more information, see [Tag
+/// your Amazon EC2
+/// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the *Amazon EC2 User Guide*.
+///
+/// For more information, see [Create an Amazon EBS
+/// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-creating-volume.html) in the
+/// *Amazon EBS User Guide*.
+pub const CreateVolumeInput = struct {
+    /// The ID of the Availability Zone in which to create the volume. For example,
+    /// `us-east-1a`.
+    ///
+    /// Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    /// but not both.
+    availability_zone: ?[]const u8 = null,
+
+    /// The ID of the Availability Zone in which to create the volume. For example,
+    /// `use1-az1`.
+    ///
+    /// Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    /// but not both.
+    availability_zone_id: ?[]const u8 = null,
+
+    /// Unique, case-sensitive identifier that you provide to ensure the idempotency
+    /// of the request. For more information, see [Ensure
+    /// Idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+    client_token: ?[]const u8 = null,
+
+    /// Checks whether you have the required permissions for the action, without
+    /// actually making the request,
+    /// and provides an error response. If you have the required permissions, the
+    /// error response is `DryRunOperation`.
+    /// Otherwise, it is `UnauthorizedOperation`.
+    dry_run: ?bool = null,
+
+    /// Indicates whether the volume should be encrypted.
+    /// The effect of setting the encryption state to `true` depends on
+    /// the volume origin (new or from a snapshot), starting encryption state,
+    /// ownership, and whether encryption by default is enabled.
+    /// For more information, see [Encryption by
+    /// default](https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default)
+    /// in the *Amazon EBS User Guide*.
+    ///
+    /// Encrypted Amazon EBS volumes must be attached to instances that support
+    /// Amazon EBS encryption.
+    /// For more information, see [Supported
+    /// instance
+    /// types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances).
+    encrypted: ?bool = null,
+
+    /// The number of I/O operations per second (IOPS) to provision for the volume.
+    /// Required for `io1` and `io2` volumes. Optional for `gp3`
+    /// volumes. Omit for all other volume types.
+    ///
+    /// Valid ranges:
+    ///
+    /// * gp3: `3,000 `(*default*)` - 80,000` IOPS
+    ///
+    /// * io1: `100 - 64,000` IOPS
+    ///
+    /// * io2: `100 - 256,000` IOPS
+    ///
+    /// **Note:**
+    ///
+    /// [
+    /// Instances built on the Nitro
+    /// System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html) can support up to 256,000 IOPS. Other instances can support up to 32,000
+    /// IOPS.
+    iops: ?i32 = null,
+
+    /// The identifier of the KMS key to use for Amazon EBS encryption.
+    /// If this parameter is not specified, your KMS key for Amazon EBS is used. If
+    /// `KmsKeyId` is
+    /// specified, the encrypted state must be `true`.
+    ///
+    /// You can specify the KMS key using any of the following:
+    ///
+    /// * Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
+    ///
+    /// * Key alias. For example, alias/ExampleAlias.
+    ///
+    /// * Key ARN. For example,
+    ///   arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
+    ///
+    /// * Alias ARN. For example,
+    ///   arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
+    ///
+    /// Amazon Web Services authenticates the KMS key asynchronously. Therefore, if
+    /// you specify an ID, alias, or ARN that is not valid,
+    /// the action can appear to complete, but eventually fails.
+    kms_key_id: ?[]const u8 = null,
+
+    /// Indicates whether to enable Amazon EBS Multi-Attach. If you enable
+    /// Multi-Attach, you can attach the
+    /// volume to up to 16 [Instances built on the Nitro
+    /// System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html) in the same Availability Zone. This parameter is
+    /// supported with `io1` and `io2` volumes only. For more information,
+    /// see [
+    /// Amazon EBS
+    /// Multi-Attach](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html) in the *Amazon EBS User Guide*.
+    multi_attach_enabled: ?bool = null,
+
+    /// Reserved for internal use.
+    operator: ?OperatorRequest = null,
+
+    /// The Amazon Resource Name (ARN) of the Outpost on which to create the volume.
+    ///
+    /// If you intend to use a volume with an instance running on an outpost, then
+    /// you must
+    /// create the volume on the same outpost as the instance. You can't use a
+    /// volume created
+    /// in an Amazon Web Services Region with an instance on an Amazon Web Services
+    /// outpost, or the other way around.
+    outpost_arn: ?[]const u8 = null,
+
+    /// The size of the volume, in GiBs. You must specify either a snapshot ID or a
+    /// volume size.
+    /// If you specify a snapshot, the default is the snapshot size, and you can
+    /// specify a volume size
+    /// that is equal to or larger than the snapshot size.
+    ///
+    /// Valid sizes:
+    ///
+    /// * gp2: `1 - 16,384` GiB
+    ///
+    /// * gp3: `1 - 65,536` GiB
+    ///
+    /// * io1: `4 - 16,384` GiB
+    ///
+    /// * io2: `4 - 65,536` GiB
+    ///
+    /// * st1 and sc1: `125 - 16,384` GiB
+    ///
+    /// * standard: `1 - 1024` GiB
+    size: ?i32 = null,
+
+    /// The snapshot from which to create the volume. You must specify either a
+    /// snapshot ID or a volume size.
+    snapshot_id: ?[]const u8 = null,
+
+    /// The tags to apply to the volume during creation.
+    tag_specifications: ?[]const TagSpecification = null,
+
+    /// The throughput to provision for the volume, in MiB/s. Supported for `gp3`
+    /// volumes only. Omit for all other volume types.
+    ///
+    /// Valid Range: `125 - 2000` MiB/s
+    throughput: ?i32 = null,
+
+    /// Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume
+    /// initialization rate), in MiB/s, at which to download
+    /// the snapshot blocks from Amazon S3 to the volume. This is also known as
+    /// *volume
+    /// initialization*. Specifying a volume initialization rate ensures that the
+    /// volume is
+    /// initialized at a predictable and consistent rate after creation.
+    ///
+    /// This parameter is supported only for volumes created from snapshots. Omit
+    /// this parameter
+    /// if:
+    ///
+    /// * You want to create the volume using fast snapshot restore. You must
+    ///   specify a snapshot
+    /// that is enabled for fast snapshot restore. In this case, the volume is fully
+    /// initialized at
+    /// creation.
+    ///
+    /// **Note:**
+    ///
+    /// If you specify a snapshot that is enabled for fast snapshot restore and a
+    /// volume initialization rate,
+    /// the volume will be initialized at the specified rate instead of fast
+    /// snapshot restore.
+    ///
+    /// * You want to create a volume that is initialized at the default rate.
+    ///
+    /// For more information, see [
+    /// Initialize Amazon EBS
+    /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html) in the *Amazon EC2 User Guide*.
+    ///
+    /// Valid range: 100 - 300 MiB/s
+    volume_initialization_rate: ?i32 = null,
+
+    /// The volume type. This parameter can be one of the following values:
+    ///
+    /// * General Purpose SSD: `gp2` | `gp3`
+    ///
+    /// * Provisioned IOPS SSD: `io1` | `io2`
+    ///
+    /// * Throughput Optimized HDD: `st1`
+    ///
+    /// * Cold HDD: `sc1`
+    ///
+    /// * Magnetic: `standard`
+    ///
+    /// **Important:**
+    ///
+    /// Throughput Optimized HDD (`st1`) and Cold HDD (`sc1`) volumes can't be used
+    /// as boot volumes.
+    ///
+    /// For more information, see [Amazon EBS volume
+    /// types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the
+    /// *Amazon EBS User Guide*.
+    ///
+    /// Default: `gp2`
+    volume_type: ?VolumeType = null,
+};
+
+pub const CreateVolumeOutput = struct {
+    /// **Note:**
+    ///
+    /// This parameter is not returned by CreateVolume.
+    ///
+    /// Information about the volume attachments.
+    attachments: ?[]const VolumeAttachment = null,
+
+    /// The Availability Zone for the volume.
+    availability_zone: ?[]const u8 = null,
+
+    /// The ID of the Availability Zone for the volume.
+    availability_zone_id: ?[]const u8 = null,
+
+    /// The time stamp when volume creation was initiated.
+    create_time: ?i64 = null,
+
+    /// Indicates whether the volume is encrypted.
+    encrypted: ?bool = null,
+
+    /// **Note:**
+    ///
+    /// This parameter is not returned by CreateVolume.
+    ///
+    /// Indicates whether the volume was created using fast snapshot restore.
+    fast_restored: ?bool = null,
+
+    /// The number of I/O operations per second (IOPS). For `gp3`, `io1`, and `io2`
+    /// volumes, this represents
+    /// the number of IOPS that are provisioned for the volume. For `gp2` volumes,
+    /// this represents the baseline
+    /// performance of the volume and the rate at which the volume accumulates I/O
+    /// credits for bursting.
+    iops: ?i32 = null,
+
+    /// The Amazon Resource Name (ARN) of the KMS key that was used to protect the
+    /// volume encryption key for the volume.
+    kms_key_id: ?[]const u8 = null,
+
+    /// Indicates whether Amazon EBS Multi-Attach is enabled.
+    multi_attach_enabled: ?bool = null,
+
+    /// The service provider that manages the volume.
+    operator: ?OperatorResponse = null,
+
+    /// The Amazon Resource Name (ARN) of the Outpost.
+    outpost_arn: ?[]const u8 = null,
+
+    /// The size of the volume, in GiBs.
+    size: ?i32 = null,
+
+    /// The snapshot from which the volume was created, if applicable.
+    snapshot_id: ?[]const u8 = null,
+
+    /// The ID of the source volume from which the volume copy was created. Only for
+    /// volume copies.
+    source_volume_id: ?[]const u8 = null,
+
+    /// **Note:**
+    ///
+    /// This parameter is not returned by CreateVolume.
+    ///
+    /// Reserved for future use.
+    sse_type: ?SSEType = null,
+
+    /// The volume state.
+    state: ?VolumeState = null,
+
+    /// Any tags assigned to the volume.
+    tags: ?[]const Tag = null,
+
+    /// The throughput that the volume supports, in MiB/s.
+    throughput: ?i32 = null,
+
+    /// The ID of the volume.
+    volume_id: ?[]const u8 = null,
+
+    /// The Amazon EBS Provisioned Rate for Volume Initialization (volume
+    /// initialization rate) specified for the volume during creation,
+    /// in MiB/s. If no volume initialization rate was specified, the value is
+    /// `null`.
+    volume_initialization_rate: ?i32 = null,
+
+    /// The volume type.
+    volume_type: ?VolumeType = null,
+
+    allocator: std.mem.Allocator,
+
+    pub fn deinit(self: *const CreateVolumeOutput) void {
+        if (self.availability_zone) |v| {
+            self.allocator.free(v);
+        }
+        if (self.availability_zone_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.kms_key_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.outpost_arn) |v| {
+            self.allocator.free(v);
+        }
+        if (self.snapshot_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.source_volume_id) |v| {
+            self.allocator.free(v);
+        }
+        if (self.volume_id) |v| {
+            self.allocator.free(v);
+        }
+    }
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, input: CreateVolumeInput, options: Options) !CreateVolumeOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ec2");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status);
+        }
+        return error.ServiceError;
+    }
+
+    return try deserializeResponse(response.body, response.status, client.allocator);
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateVolumeInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpoint("ec2", alloc);
+
+    const host = parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = parsePort(endpoint);
+
+    var body_buf: std.ArrayList(u8) = .{};
+
+    try body_buf.appendSlice(alloc, "Action=CreateVolume&Version=2016-11-15");
+    if (input.availability_zone) |v| {
+        try body_buf.appendSlice(alloc, "&AvailabilityZone=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.availability_zone_id) |v| {
+        try body_buf.appendSlice(alloc, "&AvailabilityZoneId=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.client_token) |v| {
+        try body_buf.appendSlice(alloc, "&ClientToken=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.dry_run) |v| {
+        try body_buf.appendSlice(alloc, "&DryRun=");
+        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.encrypted) |v| {
+        try body_buf.appendSlice(alloc, "&Encrypted=");
+        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.iops) |v| {
+        try body_buf.appendSlice(alloc, "&Iops=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    if (input.kms_key_id) |v| {
+        try body_buf.appendSlice(alloc, "&KmsKeyId=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.multi_attach_enabled) |v| {
+        try body_buf.appendSlice(alloc, "&MultiAttachEnabled=");
+        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.operator) |v| {
+        if (v.principal) |sv| {
+            try body_buf.appendSlice(alloc, "&Operator.Principal=");
+            try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+    }
+    if (input.outpost_arn) |v| {
+        try body_buf.appendSlice(alloc, "&OutpostArn=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.size) |v| {
+        try body_buf.appendSlice(alloc, "&Size=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    if (input.snapshot_id) |v| {
+        try body_buf.appendSlice(alloc, "&SnapshotId=");
+        try appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.tag_specifications) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.resource_type) |v| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                }
+            }
+        }
+    }
+    if (input.throughput) |v| {
+        try body_buf.appendSlice(alloc, "&Throughput=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    if (input.volume_initialization_rate) |v| {
+        try body_buf.appendSlice(alloc, "&VolumeInitializationRate=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    if (input.volume_type) |v| {
+        try body_buf.appendSlice(alloc, "&VolumeType=");
+        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+    }
+
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateVolumeOutput {
+    _ = status;
+    var result: CreateVolumeOutput = .{ .allocator = alloc };
+    if (findElement(body, "availabilityZone")) |content| {
+        result.availability_zone = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "availabilityZoneId")) |content| {
+        result.availability_zone_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "createTime")) |content| {
+        result.create_time = std.fmt.parseInt(i64, content, 10) catch null;
+    }
+    if (findElement(body, "encrypted")) |content| {
+        result.encrypted = std.mem.eql(u8, content, "true");
+    }
+    if (findElement(body, "fastRestored")) |content| {
+        result.fast_restored = std.mem.eql(u8, content, "true");
+    }
+    if (findElement(body, "iops")) |content| {
+        result.iops = std.fmt.parseInt(i32, content, 10) catch null;
+    }
+    if (findElement(body, "kmsKeyId")) |content| {
+        result.kms_key_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "multiAttachEnabled")) |content| {
+        result.multi_attach_enabled = std.mem.eql(u8, content, "true");
+    }
+    if (findElement(body, "outpostArn")) |content| {
+        result.outpost_arn = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "size")) |content| {
+        result.size = std.fmt.parseInt(i32, content, 10) catch null;
+    }
+    if (findElement(body, "snapshotId")) |content| {
+        result.snapshot_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "sourceVolumeId")) |content| {
+        result.source_volume_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "throughput")) |content| {
+        result.throughput = std.fmt.parseInt(i32, content, 10) catch null;
+    }
+    if (findElement(body, "volumeId")) |content| {
+        result.volume_id = try alloc.dupe(u8, content);
+    }
+    if (findElement(body, "volumeInitializationRate")) |content| {
+        result.volume_initialization_rate = std.fmt.parseInt(i32, content, 10) catch null;
+    }
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+    const error_code = findElement(body, "Code") orelse "Unknown";
+    const error_message = findElement(body, "Message") orelse "";
+    const request_id = findElement(body, "RequestID") orelse "";
+
+
+    return .{ .unknown = .{
+        .code = error_code,
+        .message = error_message,
+        .request_id = request_id,
+        .http_status = status,
+    } };
+}
+
+fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
+    var buf: [256]u8 = undefined;
+
+    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
+    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
+    const content_start = start + open_tag.len;
+
+    var close_buf: [256]u8 = undefined;
+    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
+    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+
+    return xml[content_start..end];
+}
+
+fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
+            ' ' => try buf.append(alloc, '+'),
+            else => {
+                const hex = "0123456789ABCDEF";
+                try buf.append(alloc, '%');
+                try buf.append(alloc, hex[c >> 4]);
+                try buf.append(alloc, hex[c & 0x0F]);
+            }
+        }
+    }
+}
+
+fn parseHost(endpoint: []const u8) []const u8 {
+    // Strip scheme
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    // Strip port and path
+    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
+    return after_scheme[0..end];
+}
+
+fn parsePort(endpoint: []const u8) ?u16 {
+    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
+    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
+    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
+}

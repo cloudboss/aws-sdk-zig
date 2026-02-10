@@ -26,7 +26,6 @@ class ErrorGenerator(
 
     fun run() {
         val errorInfos = collectErrors()
-        if (errorInfos.isEmpty()) return
 
         context.writerDelegator().useFileWriter("errors.zig") { writer ->
             writer.importContainer.addImport("std", "std")

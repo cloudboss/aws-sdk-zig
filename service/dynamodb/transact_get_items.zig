@@ -100,7 +100,6 @@ pub fn execute(client: *Client, input: TransactGetItemsInput, options: Options) 
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: TransactGetItemsInput, config: *aws.Config) !aws.http.Request {
-    _ = input;
     const endpoint = try config.getEndpoint("dynamodb", alloc);
 
     const host = parseHost(endpoint);
@@ -108,8 +107,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: TransactGetItemsInput, conf
     const port = parsePort(endpoint);
 
     var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.return_consumed_capacity) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnConsumedCapacity\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(alloc, "}");
     const body = try body_buf.toOwnedSlice(alloc);

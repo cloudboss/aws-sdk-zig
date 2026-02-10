@@ -15,7 +15,7 @@ pub const GetCapacityProviderInput = struct {
 pub const GetCapacityProviderOutput = struct {
     /// Information about the capacity provider, including its configuration and
     /// current state.
-    capacity_provider: CapacityProvider,
+    capacity_provider: ?CapacityProvider = null,
 
     allocator: std.mem.Allocator,
 

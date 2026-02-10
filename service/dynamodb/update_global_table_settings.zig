@@ -113,6 +113,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateGlobalTableSettingsIn
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.global_table_billing_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"GlobalTableBillingMode\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"GlobalTableName\":\"");
     try appendJsonEscaped(alloc, &body_buf, input.global_table_name);

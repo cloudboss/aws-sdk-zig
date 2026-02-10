@@ -1,0 +1,15 @@
+pub const TransitGatewayAttachmentState = enum {
+    initiating,
+    initiating_request,
+    pending_acceptance,
+    rolling_back,
+    pending,
+    available,
+    modifying,
+    deleting,
+    deleted,
+    failed,
+    rejected,
+    rejecting,
+    failing,
+};

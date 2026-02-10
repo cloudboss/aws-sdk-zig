@@ -14,7 +14,7 @@ pub const DescribeEndpointsInput = struct {
 
 pub const DescribeEndpointsOutput = struct {
     /// List of endpoints.
-    endpoints: []const Endpoint,
+    endpoints: ?[]const Endpoint = null,
 
     allocator: std.mem.Allocator,
 

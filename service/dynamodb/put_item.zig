@@ -322,6 +322,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutItemInput, config: *aws.
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.conditional_operator) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ConditionalOperator\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.condition_expression) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"ConditionExpression\":\"");
@@ -355,6 +362,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutItemInput, config: *aws.
     try appendJsonEscaped(alloc, &body_buf, input.item);
     try body_buf.appendSlice(alloc, "\"");
     has_prev = true;
+    if (input.return_consumed_capacity) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnConsumedCapacity\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (input.return_item_collection_metrics) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnItemCollectionMetrics\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (input.return_values) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnValues\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
+    if (input.return_values_on_condition_check_failure) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ReturnValuesOnConditionCheckFailure\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"TableName\":\"");
     try appendJsonEscaped(alloc, &body_buf, input.table_name);

@@ -274,7 +274,7 @@ pub const CreateSessionOutput = struct {
     bucket_key_enabled: ?bool = null,
 
     /// The established temporary security credentials for the created session.
-    credentials: SessionCredentials,
+    credentials: ?SessionCredentials = null,
 
     /// The server-side encryption algorithm used when you store objects in the
     /// directory bucket.

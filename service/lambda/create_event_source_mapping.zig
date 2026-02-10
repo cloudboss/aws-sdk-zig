@@ -569,6 +569,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateEventSourceMappingInp
         }
         has_prev = true;
     }
+    if (input.starting_position) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"StartingPosition\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.starting_position_timestamp) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"StartingPositionTimestamp\":");

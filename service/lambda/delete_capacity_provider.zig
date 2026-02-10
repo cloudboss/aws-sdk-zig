@@ -14,7 +14,7 @@ pub const DeleteCapacityProviderInput = struct {
 
 pub const DeleteCapacityProviderOutput = struct {
     /// Information about the deleted capacity provider.
-    capacity_provider: CapacityProvider,
+    capacity_provider: ?CapacityProvider = null,
 
     allocator: std.mem.Allocator,
 

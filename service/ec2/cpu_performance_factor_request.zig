@@ -1,0 +1,18 @@
+const PerformanceFactorReferenceRequest = @import("performance_factor_reference_request.zig").PerformanceFactorReferenceRequest;
+
+/// The CPU performance to consider, using an instance family as the baseline
+/// reference.
+pub const CpuPerformanceFactorRequest = struct {
+    /// Specify an instance family to use as the baseline reference for CPU
+    /// performance. All
+    /// instance types that match your specified attributes will be compared against
+    /// the CPU
+    /// performance of the referenced instance family, regardless of CPU
+    /// manufacturer or
+    /// architecture differences.
+    ///
+    /// **Note:**
+    ///
+    /// Currently, only one instance family can be specified in the list.
+    references: ?[]const PerformanceFactorReferenceRequest,
+};

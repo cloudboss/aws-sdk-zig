@@ -151,6 +151,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreTableToPointInTimeIn
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.billing_mode_override) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"BillingModeOverride\":\"");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "\"");
+        has_prev = true;
+    }
     if (input.restore_date_time) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"RestoreDateTime\":");

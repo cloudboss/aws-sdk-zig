@@ -21,7 +21,7 @@ pub const ListCapacityProvidersInput = struct {
 
 pub const ListCapacityProvidersOutput = struct {
     /// A list of capacity providers in your account.
-    capacity_providers: []const CapacityProvider,
+    capacity_providers: ?[]const CapacityProvider = null,
 
     /// The pagination token that's included if more results are available.
     next_marker: ?[]const u8 = null,
