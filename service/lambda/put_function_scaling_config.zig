@@ -94,8 +94,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutFunctionScalingConfigInp
     const query = try query_buf.toOwnedSlice(alloc);
 
     var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.function_scaling_config) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"FunctionScalingConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(alloc, "}");
     const body = try body_buf.toOwnedSlice(alloc);
@@ -432,31 +439,6 @@ fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
         if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;
     }
     return json[start..pos];
-}
-
-fn appendJsonEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            0x22 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x22); },
-            0x5C => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x5C); },
-            0x0A => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'n'); },
-            0x0D => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'r'); },
-            0x09 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 't'); },
-            else => {
-                if (c < 0x20) {
-                    const hex = "0123456789abcdef";
-                    try buf.append(alloc, 0x5C);
-                    try buf.append(alloc, 'u');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, hex[c >> 4]);
-                    try buf.append(alloc, hex[c & 0x0F]);
-                } else {
-                    try buf.append(alloc, c);
-                }
-            }
-        }
-    }
 }
 
 fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {

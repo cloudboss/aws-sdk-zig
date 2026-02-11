@@ -521,7 +521,6 @@ class RestJsonProtocolTest {
         val op = files["invoke.zig"]!!
 
         assertTrue(op.contains("fn findJsonValue("), "Missing findJsonValue helper")
-        assertTrue(op.contains("fn appendJsonEscaped("), "Missing appendJsonEscaped helper")
         assertTrue(op.contains("fn appendUrlEncoded("), "Missing appendUrlEncoded helper")
         assertTrue(op.contains("fn parseHost("), "Missing parseHost helper")
         assertTrue(op.contains("fn parsePort("), "Missing parsePort helper")

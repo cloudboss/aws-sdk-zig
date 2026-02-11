@@ -34,7 +34,27 @@ class EnumGenerator(
                 writer.write("\$L,", variantName)
             }
 
+            // Emit json_field_names for JSON protocol services
+            if (isJsonProtocol(context)) {
+                if (shape.members().isNotEmpty()) {
+                    writer.blankLine()
+                    writer.openBlock("pub const json_field_names = .{")
+                    for (member in shape.members()) {
+                        val variantName = NamingUtil.toFieldName(member.memberName)
+                        writer.write(".\$L = \"\$L\",", variantName, member.memberName)
+                    }
+                    writer.closeBlock("};")
+                }
+            }
+
             writer.closeBlock("};")
         }
+    }
+
+    private fun isJsonProtocol(context: ZigContext): Boolean {
+        val service = context.service
+        return service.hasTrait("aws.protocols#awsJson1_0") ||
+            service.hasTrait("aws.protocols#awsJson1_1") ||
+            service.hasTrait("aws.protocols#restJson1")
     }
 }

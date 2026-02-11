@@ -274,7 +274,7 @@ fn jsonKeyForField(comptime T: type, comptime field_name: []const u8) []const u8
 // Serialization
 // ---------------------------------------------------------------------------
 
-fn writeValue(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) !void {
+pub fn writeValue(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) !void {
     const info = @typeInfo(T);
     switch (info) {
         .optional => {

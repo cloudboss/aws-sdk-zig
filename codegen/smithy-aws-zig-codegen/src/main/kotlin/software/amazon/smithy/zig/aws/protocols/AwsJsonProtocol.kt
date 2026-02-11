@@ -1,8 +1,5 @@
 package software.amazon.smithy.zig.aws.protocols
 
-import software.amazon.smithy.model.shapes.MemberShape
-import software.amazon.smithy.model.shapes.Shape
-import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigWriter
 import software.amazon.smithy.zig.protocols.OperationContext
 import software.amazon.smithy.zig.protocols.ProtocolGenerator
@@ -21,12 +18,9 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
             inputName,
         )
 
-        val hasScalarMembers = ctx.inputShape.allMembers.values.any { memberShape ->
-            val targetShape = ctx.model.expectShape(memberShape.target)
-            ctx.isScalarType(targetShape)
-        }
+        val hasMembers = ctx.inputShape.allMembers.isNotEmpty()
 
-        if (!hasScalarMembers) {
+        if (!hasMembers) {
             writer.write("_ = input;")
         }
 
@@ -41,21 +35,11 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.blankLine()
 
         // Build JSON body
-        writer.write("var body_buf: std.ArrayList(u8) = .{};")
-        if (hasScalarMembers) {
-            writer.write("var has_prev = false;")
+        if (hasMembers) {
+            writer.write("const body = try aws.json.jsonStringify(input, alloc);")
+        } else {
+            writer.write("const body = \"{}\";")
         }
-        writer.write("try body_buf.appendSlice(alloc, \"{\");")
-        writer.blankLine()
-
-        for ((memberName, memberShape) in ctx.inputShape.allMembers) {
-            val targetShape = ctx.model.expectShape(memberShape.target)
-            writeJsonFieldSerializer(writer, ctx, memberName, memberShape, targetShape, "input")
-        }
-
-        writer.blankLine()
-        writer.write("try body_buf.appendSlice(alloc, \"}\");")
-        writer.write("const body = try body_buf.toOwnedSlice(alloc);")
         writer.blankLine()
 
         // Build request
@@ -71,70 +55,6 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
         writer.write("return request;")
         writer.closeBlock("}")
-    }
-
-    private fun writeJsonFieldSerializer(
-        writer: ZigWriter,
-        ctx: OperationContext,
-        smithyName: String,
-        memberShape: MemberShape,
-        targetShape: Shape,
-        accessor: String,
-    ) {
-        val fieldName = NamingUtil.toFieldName(smithyName)
-
-        if (!ctx.isScalarType(targetShape)) {
-            // Skip non-scalar types for now
-            return
-        }
-
-        val zigType = ctx.resolveBaseZigType(targetShape)
-        val isEnum = ctx.isEnumType(targetShape)
-
-        if (memberShape.isRequired) {
-            writer.write("if (has_prev) try body_buf.appendSlice(alloc, \",\");")
-            writeJsonKeyValue(writer, smithyName, zigType, "$accessor.$fieldName", isEnum)
-            writer.write("has_prev = true;")
-        } else {
-            writer.openBlock("if (\$L.\$L) |v| {", accessor, fieldName)
-            writer.write("if (has_prev) try body_buf.appendSlice(alloc, \",\");")
-            writeJsonKeyValue(writer, smithyName, zigType, "v", isEnum)
-            writer.write("has_prev = true;")
-            writer.closeBlock("}")
-        }
-    }
-
-    private fun writeJsonKeyValue(
-        writer: ZigWriter,
-        jsonKey: String,
-        zigType: String,
-        accessor: String,
-        isEnum: Boolean = false,
-    ) {
-        when {
-            isEnum -> {
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\\\"\");", jsonKey)
-                writer.write("try body_buf.appendSlice(alloc, @tagName(\$L));", accessor)
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\");")
-            }
-            zigType == "[]const u8" -> {
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\\\"\");", jsonKey)
-                writer.write("try appendJsonEscaped(alloc, &body_buf, \$L);", accessor)
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\");")
-            }
-            zigType == "bool" -> {
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\");", jsonKey)
-                writer.write("try body_buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", accessor)
-            }
-            zigType in listOf("i32", "i64", "i16", "i8") -> {
-                writer.write("try body_buf.appendSlice(alloc, \"\\\"\$L\\\":\");", jsonKey)
-                writer.write("{")
-                writer.write("    const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", accessor)
-                writer.write("    try body_buf.appendSlice(alloc, num_str);")
-                writer.write("}")
-            }
-            else -> {}
-        }
     }
 
     override fun writeDeserializeResponse(writer: ZigWriter, ctx: OperationContext) {
@@ -203,8 +123,6 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
     private fun writeJsonHelperFunctions(writer: ZigWriter) {
         writeFindJsonValueHelper(writer)
         writer.blankLine()
-        writeAppendJsonEscapedHelper(writer)
-        writer.blankLine()
         writeHostParseHelpers(writer)
     }
 
@@ -247,40 +165,6 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.write("return json[start..pos];")
 
         writer.closeBlock("}")
-    }
-
-    private fun writeAppendJsonEscapedHelper(writer: ZigWriter) {
-        // Uses hex codes (0x22 = ", 0x5C = \, etc.) to avoid Kotlin/Zig escaping issues
-        writer.openBlock("fn appendJsonEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {")
-        writer.openBlock("for (value) |c| {")
-        writer.openBlock("switch (c) {")
-        // double-quote -> output backslash + double-quote
-        writer.write("0x22 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x22); },")
-        // backslash -> output backslash + backslash
-        writer.write("0x5C => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x5C); },")
-        // newline -> output backslash + n
-        writer.write("0x0A => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'n'); },")
-        // carriage return -> output backslash + r
-        writer.write("0x0D => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'r'); },")
-        // tab -> output backslash + t
-        writer.write("0x09 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 't'); },")
-        writer.openBlock("else => {")
-        writer.openBlock("if (c < 0x20) {")
-        writer.write("const hex = \"0123456789abcdef\";")
-        writer.write("try buf.append(alloc, 0x5C); // backslash")
-        writer.write("try buf.append(alloc, 'u');")
-        writer.write("try buf.append(alloc, '0');")
-        writer.write("try buf.append(alloc, '0');")
-        writer.write("try buf.append(alloc, hex[c >> 4]);")
-        writer.write("try buf.append(alloc, hex[c & 0x0F]);")
-        writer.dedent()
-        writer.openBlock("} else {")
-        writer.write("try buf.append(alloc, c);")
-        writer.closeBlock("}") // close else
-        writer.closeBlock("}") // close else => switch arm
-        writer.closeBlock("}") // close switch
-        writer.closeBlock("}") // close for
-        writer.closeBlock("}") // close fn
     }
 
     private fun writeHostParseHelpers(writer: ZigWriter) {

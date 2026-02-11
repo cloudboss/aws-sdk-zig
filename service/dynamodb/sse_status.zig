@@ -4,4 +4,12 @@ pub const SSEStatus = enum {
     disabling,
     disabled,
     updating,
+
+    pub const json_field_names = .{
+        .enabling = "ENABLING",
+        .enabled = "ENABLED",
+        .disabling = "DISABLING",
+        .disabled = "DISABLED",
+        .updating = "UPDATING",
+    };
 };

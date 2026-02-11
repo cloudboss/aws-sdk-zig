@@ -112,15 +112,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CheckpointDurableExecutionI
     try body_buf.appendSlice(alloc, "{");
 
     if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"CheckpointToken\":\"");
-    try appendJsonEscaped(alloc, &body_buf, input.checkpoint_token);
-    try body_buf.appendSlice(alloc, "\"");
+    try body_buf.appendSlice(alloc, "\"CheckpointToken\":");
+    try aws.json.writeValue(@TypeOf(input.checkpoint_token), input.checkpoint_token, alloc, &body_buf);
     has_prev = true;
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"ClientToken\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"ClientToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.updates) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Updates\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
 
@@ -458,31 +462,6 @@ fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
         if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;
     }
     return json[start..pos];
-}
-
-fn appendJsonEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            0x22 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x22); },
-            0x5C => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x5C); },
-            0x0A => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'n'); },
-            0x0D => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'r'); },
-            0x09 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 't'); },
-            else => {
-                if (c < 0x20) {
-                    const hex = "0123456789abcdef";
-                    try buf.append(alloc, 0x5C);
-                    try buf.append(alloc, 'u');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, hex[c >> 4]);
-                    try buf.append(alloc, hex[c & 0x0F]);
-                } else {
-                    try buf.append(alloc, c);
-                }
-            }
-        }
-    }
 }
 
 fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {

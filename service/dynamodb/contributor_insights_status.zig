@@ -4,4 +4,12 @@ pub const ContributorInsightsStatus = enum {
     disabling,
     disabled,
     failed,
+
+    pub const json_field_names = .{
+        .enabling = "ENABLING",
+        .enabled = "ENABLED",
+        .disabling = "DISABLING",
+        .disabled = "DISABLED",
+        .failed = "FAILED",
+    };
 };

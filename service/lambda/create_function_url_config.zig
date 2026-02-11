@@ -165,15 +165,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateFunctionUrlConfigInpu
     try body_buf.appendSlice(alloc, "{");
 
     if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"AuthType\":\"");
-    try body_buf.appendSlice(alloc, @tagName(input.auth_type));
-    try body_buf.appendSlice(alloc, "\"");
+    try body_buf.appendSlice(alloc, "\"AuthType\":");
+    try aws.json.writeValue(@TypeOf(input.auth_type), input.auth_type, alloc, &body_buf);
     has_prev = true;
+    if (input.cors) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Cors\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
     if (input.invoke_mode) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"InvokeMode\":\"");
-        try body_buf.appendSlice(alloc, @tagName(v));
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"InvokeMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
 
@@ -512,31 +516,6 @@ fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
         if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;
     }
     return json[start..pos];
-}
-
-fn appendJsonEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            0x22 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x22); },
-            0x5C => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x5C); },
-            0x0A => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'n'); },
-            0x0D => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'r'); },
-            0x09 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 't'); },
-            else => {
-                if (c < 0x20) {
-                    const hex = "0123456789abcdef";
-                    try buf.append(alloc, 0x5C);
-                    try buf.append(alloc, 'u');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, hex[c >> 4]);
-                    try buf.append(alloc, hex[c & 0x0F]);
-                } else {
-                    try buf.append(alloc, c);
-                }
-            }
-        }
-    }
 }
 
 fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {

@@ -187,39 +187,14 @@ class AwsJsonProtocolTest {
     // ---- JSON serialization tests ----
 
     @Test
-    fun serializerBuildsJsonBody() {
+    fun serializerUsesRuntimeJsonStringify() {
         val files = generateFiles("1.0")
         val op = files["put_item.zig"]!!
 
         assertTrue(op.contains("fn serializeRequest("), "Missing serializeRequest")
-        assertTrue(op.contains("body_buf"), "Missing body buffer")
-        assertTrue(op.contains("\"{\""), "Missing JSON open brace")
-        assertTrue(op.contains("\"}\""), "Missing JSON close brace")
-    }
-
-    @Test
-    fun serializerEncodesStringFields() {
-        val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
-
         assertTrue(
-            op.contains("TableName"),
-            "Missing TableName field in serializer",
-        )
-        assertTrue(
-            op.contains("appendJsonEscaped"),
-            "Missing JSON string escaping call",
-        )
-    }
-
-    @Test
-    fun serializerEncodesIntFields() {
-        val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
-
-        assertTrue(
-            op.contains("ItemCount"),
-            "Missing ItemCount field in serializer",
+            op.contains("aws.json.jsonStringify(input, alloc)"),
+            "Should use runtime JSON serializer",
         )
     }
 
@@ -231,6 +206,17 @@ class AwsJsonProtocolTest {
         assertTrue(
             op.contains("_ = input;"),
             "Empty input should be discarded",
+        )
+    }
+
+    @Test
+    fun emptyInputUsesEmptyJson() {
+        val files = generateFiles("1.0")
+        val op = files["list_tables.zig"]!!
+
+        assertTrue(
+            op.contains("\"{}\""),
+            "Empty input should use empty JSON object",
         )
     }
 
@@ -348,51 +334,8 @@ class AwsJsonProtocolTest {
         val op = files["put_item.zig"]!!
 
         assertTrue(op.contains("fn findJsonValue("), "Missing findJsonValue helper")
-        assertTrue(op.contains("fn appendJsonEscaped("), "Missing appendJsonEscaped helper")
         assertTrue(op.contains("fn parseHost("), "Missing parseHost helper")
         assertTrue(op.contains("fn parsePort("), "Missing parsePort helper")
-    }
-
-    // ---- JSON escaping tests ----
-
-    @Test
-    fun appendJsonEscapedHandlesDoubleQuote() {
-        val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
-
-        // Double-quote (0x22) should be escaped with backslash (0x5C) + quote (0x22)
-        assertTrue(
-            op.contains("0x22 =>") && op.contains("try buf.append(alloc, 0x5C); try buf.append(alloc, 0x22);"),
-            "appendJsonEscaped should handle double-quote escaping via hex codes",
-        )
-    }
-
-    @Test
-    fun appendJsonEscapedHandlesBackslash() {
-        val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
-
-        // Backslash (0x5C) should be escaped with backslash + backslash
-        assertTrue(
-            op.contains("0x5C => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x5C);"),
-            "appendJsonEscaped should handle backslash escaping via hex codes",
-        )
-    }
-
-    @Test
-    fun appendJsonEscapedHandlesControlChars() {
-        val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
-
-        // Newline (0x0A), CR (0x0D), tab (0x09) should have specific escape sequences
-        assertTrue(op.contains("0x0A =>"), "appendJsonEscaped should handle newline")
-        assertTrue(op.contains("0x0D =>"), "appendJsonEscaped should handle carriage return")
-        assertTrue(op.contains("0x09 =>"), "appendJsonEscaped should handle tab")
-        // Other control chars < 0x20 should use \u00XX escape
-        assertTrue(
-            op.contains("if (c < 0x20)"),
-            "appendJsonEscaped should handle other control chars with unicode escape",
-        )
     }
 
     @Test

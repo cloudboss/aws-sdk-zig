@@ -106,24 +106,41 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateCapacityProviderInput
     try body_buf.appendSlice(alloc, "{");
 
     if (has_prev) try body_buf.appendSlice(alloc, ",");
-    try body_buf.appendSlice(alloc, "\"CapacityProviderName\":\"");
-    try appendJsonEscaped(alloc, &body_buf, input.capacity_provider_name);
-    try body_buf.appendSlice(alloc, "\"");
+    try body_buf.appendSlice(alloc, "\"CapacityProviderName\":");
+    try aws.json.writeValue(@TypeOf(input.capacity_provider_name), input.capacity_provider_name, alloc, &body_buf);
     has_prev = true;
+    if (input.capacity_provider_scaling_config) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"CapacityProviderScalingConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.instance_requirements) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"InstanceRequirements\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
     if (input.kms_key_arn) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"KmsKeyArn\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"KmsKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"PermissionsConfig\":");
+    try aws.json.writeValue(@TypeOf(input.permissions_config), input.permissions_config, alloc, &body_buf);
+    has_prev = true;
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"Tags\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"Tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"VpcConfig\":");
+    try aws.json.writeValue(@TypeOf(input.vpc_config), input.vpc_config, alloc, &body_buf);
+    has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");
     const body = try body_buf.toOwnedSlice(alloc);
@@ -459,31 +476,6 @@ fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
         if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;
     }
     return json[start..pos];
-}
-
-fn appendJsonEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            0x22 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x22); },
-            0x5C => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x5C); },
-            0x0A => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'n'); },
-            0x0D => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'r'); },
-            0x09 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 't'); },
-            else => {
-                if (c < 0x20) {
-                    const hex = "0123456789abcdef";
-                    try buf.append(alloc, 0x5C);
-                    try buf.append(alloc, 'u');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, hex[c >> 4]);
-                    try buf.append(alloc, hex[c & 0x0F]);
-                } else {
-                    try buf.append(alloc, c);
-                }
-            }
-        }
-    }
 }
 
 fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {

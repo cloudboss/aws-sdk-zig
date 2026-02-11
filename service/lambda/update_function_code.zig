@@ -441,72 +441,70 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionCodeInput, co
     var has_prev = false;
     try body_buf.appendSlice(alloc, "{");
 
+    if (input.architectures) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Architectures\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
     if (input.dry_run) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"DryRun\":");
-        try body_buf.appendSlice(alloc, if (v) "true" else "false");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.image_uri) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"ImageUri\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"ImageUri\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.publish) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Publish\":");
-        try body_buf.appendSlice(alloc, if (v) "true" else "false");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.publish_to) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"PublishTo\":\"");
-        try body_buf.appendSlice(alloc, @tagName(v));
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"PublishTo\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.revision_id) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"RevisionId\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"RevisionId\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.s_3_bucket) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"S3Bucket\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"S3Bucket\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.s_3_key) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"S3Key\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"S3Key\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.s_3_object_version) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"S3ObjectVersion\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"S3ObjectVersion\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.source_kms_key_arn) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"SourceKMSKeyArn\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"SourceKMSKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
     if (input.zip_file) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
-        try body_buf.appendSlice(alloc, "\"ZipFile\":\"");
-        try appendJsonEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "\"");
+        try body_buf.appendSlice(alloc, "\"ZipFile\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
 
@@ -844,31 +842,6 @@ fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
         if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;
     }
     return json[start..pos];
-}
-
-fn appendJsonEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            0x22 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x22); },
-            0x5C => { try buf.append(alloc, 0x5C); try buf.append(alloc, 0x5C); },
-            0x0A => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'n'); },
-            0x0D => { try buf.append(alloc, 0x5C); try buf.append(alloc, 'r'); },
-            0x09 => { try buf.append(alloc, 0x5C); try buf.append(alloc, 't'); },
-            else => {
-                if (c < 0x20) {
-                    const hex = "0123456789abcdef";
-                    try buf.append(alloc, 0x5C);
-                    try buf.append(alloc, 'u');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, '0');
-                    try buf.append(alloc, hex[c >> 4]);
-                    try buf.append(alloc, hex[c & 0x0F]);
-                } else {
-                    try buf.append(alloc, c);
-                }
-            }
-        }
-    }
 }
 
 fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {

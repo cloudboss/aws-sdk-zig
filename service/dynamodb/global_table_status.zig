@@ -3,4 +3,11 @@ pub const GlobalTableStatus = enum {
     active,
     deleting,
     updating,
+
+    pub const json_field_names = .{
+        .creating = "CREATING",
+        .active = "ACTIVE",
+        .deleting = "DELETING",
+        .updating = "UPDATING",
+    };
 };

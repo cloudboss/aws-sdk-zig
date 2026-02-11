@@ -3,4 +3,11 @@ pub const TimeToLiveStatus = enum {
     disabling,
     enabled,
     disabled,
+
+    pub const json_field_names = .{
+        .enabling = "ENABLING",
+        .disabling = "DISABLING",
+        .enabled = "ENABLED",
+        .disabled = "DISABLED",
+    };
 };

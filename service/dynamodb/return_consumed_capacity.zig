@@ -21,4 +21,10 @@ pub const ReturnConsumedCapacity = enum {
     indexes,
     total,
     none,
+
+    pub const json_field_names = .{
+        .indexes = "INDEXES",
+        .total = "TOTAL",
+        .none = "NONE",
+    };
 };
