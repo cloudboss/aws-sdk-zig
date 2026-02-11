@@ -230,7 +230,11 @@ fn parseInt(comptime T: type, scanner: *Scanner) !T {
         .allocated_number => |s| s,
         else => return error.SyntaxError,
     };
-    return std.fmt.parseInt(T, str, 10) catch return error.SyntaxError;
+    // Try direct integer parse first; fall back to float->int for values like "1.7076E9"
+    return std.fmt.parseInt(T, str, 10) catch {
+        const f = std.fmt.parseFloat(f64, str) catch return error.SyntaxError;
+        return std.math.lossyCast(T, f);
+    };
 }
 
 fn parseFloat(comptime T: type, scanner: *Scanner) !T {
