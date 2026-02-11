@@ -151,10 +151,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListLayerVersionsInput, con
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListLayerVersionsOutput {
     var result: ListLayerVersionsOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "NextMarker")) |content| {
-        result.next_marker = try alloc.dupe(u8, content);
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(ListLayerVersionsOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

@@ -135,22 +135,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAliasInput, config: *aws
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAliasOutput {
     var result: GetAliasOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetAliasOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "AliasArn")) |content| {
-        result.alias_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Description")) |content| {
-        result.description = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "FunctionVersion")) |content| {
-        result.function_version = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Name")) |content| {
-        result.name = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "RevisionId")) |content| {
-        result.revision_id = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

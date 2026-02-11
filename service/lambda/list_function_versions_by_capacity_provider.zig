@@ -127,13 +127,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListFunctionVersionsByCapac
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListFunctionVersionsByCapacityProviderOutput {
     var result: ListFunctionVersionsByCapacityProviderOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(ListFunctionVersionsByCapacityProviderOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "CapacityProviderArn")) |content| {
-        result.capacity_provider_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "NextMarker")) |content| {
-        result.next_marker = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

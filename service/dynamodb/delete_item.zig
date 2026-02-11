@@ -395,12 +395,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteItemInput, config: *a
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteItemOutput {
     _ = status;
     _ = headers;
-    var result: DeleteItemOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "Attributes")) |content| {
-        result.attributes = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DeleteItemOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

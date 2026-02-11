@@ -327,58 +327,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetEventSourceMappingInput,
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetEventSourceMappingOutput {
     var result: GetEventSourceMappingOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetEventSourceMappingOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "BatchSize")) |content| {
-        result.batch_size = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "BisectBatchOnFunctionError")) |content| {
-        result.bisect_batch_on_function_error = std.mem.eql(u8, content, "true");
-    }
-    if (findJsonValue(body, "EventSourceArn")) |content| {
-        result.event_source_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "EventSourceMappingArn")) |content| {
-        result.event_source_mapping_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "FunctionArn")) |content| {
-        result.function_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "KMSKeyArn")) |content| {
-        result.kms_key_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LastModified")) |content| {
-        result.last_modified = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "LastProcessingResult")) |content| {
-        result.last_processing_result = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "MaximumBatchingWindowInSeconds")) |content| {
-        result.maximum_batching_window_in_seconds = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "MaximumRecordAgeInSeconds")) |content| {
-        result.maximum_record_age_in_seconds = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "MaximumRetryAttempts")) |content| {
-        result.maximum_retry_attempts = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "ParallelizationFactor")) |content| {
-        result.parallelization_factor = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "StartingPositionTimestamp")) |content| {
-        result.starting_position_timestamp = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "State")) |content| {
-        result.state = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "StateTransitionReason")) |content| {
-        result.state_transition_reason = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "TumblingWindowInSeconds")) |content| {
-        result.tumbling_window_in_seconds = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "UUID")) |content| {
-        result.uuid = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

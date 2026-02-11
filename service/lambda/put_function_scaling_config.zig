@@ -113,10 +113,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutFunctionScalingConfigInp
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutFunctionScalingConfigOutput {
-    _ = body;
+    var result: PutFunctionScalingConfigOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(PutFunctionScalingConfigOutput, body, alloc);
+    }
     _ = status;
     _ = headers;
-    const result: PutFunctionScalingConfigOutput = .{ .allocator = alloc };
 
     return result;
 }

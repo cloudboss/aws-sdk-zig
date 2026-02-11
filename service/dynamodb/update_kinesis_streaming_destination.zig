@@ -127,15 +127,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateKinesisStreamingDesti
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateKinesisStreamingDestinationOutput {
     _ = status;
     _ = headers;
-    var result: UpdateKinesisStreamingDestinationOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "StreamArn")) |content| {
-        result.stream_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "TableName")) |content| {
-        result.table_name = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(UpdateKinesisStreamingDestinationOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

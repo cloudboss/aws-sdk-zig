@@ -84,10 +84,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCodeSigningConfigInput, 
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCodeSigningConfigOutput {
-    _ = body;
+    var result: GetCodeSigningConfigOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetCodeSigningConfigOutput, body, alloc);
+    }
     _ = status;
     _ = headers;
-    const result: GetCodeSigningConfigOutput = .{ .allocator = alloc };
 
     return result;
 }

@@ -89,10 +89,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTagsInput, config: *aws
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListTagsOutput {
     var result: ListTagsOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "Tags")) |content| {
-        result.tags = try alloc.dupe(u8, content);
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(ListTagsOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

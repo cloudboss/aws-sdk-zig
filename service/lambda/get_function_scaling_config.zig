@@ -111,10 +111,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFunctionScalingConfigInp
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetFunctionScalingConfigOutput {
     var result: GetFunctionScalingConfigOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "FunctionArn")) |content| {
-        result.function_arn = try alloc.dupe(u8, content);
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetFunctionScalingConfigOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

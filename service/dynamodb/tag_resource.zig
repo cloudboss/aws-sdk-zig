@@ -119,9 +119,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     _ = status;
     _ = headers;
     _ = body;
-    const result: TagResourceOutput = .{ .allocator = alloc };
-
-    return result;
+    return .{ .allocator = alloc };
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

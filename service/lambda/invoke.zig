@@ -246,10 +246,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeInput, config: *aws.C
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InvokeOutput {
     var result: InvokeOutput = .{ .allocator = alloc };
-    result.status_code = @intCast(status);
     if (body.len > 0) {
         result.payload = try alloc.dupe(u8, body);
     }
+    result.status_code = @intCast(status);
     if (headers.get("x-amz-durable-execution-arn")) |value| {
         result.durable_execution_arn = try alloc.dupe(u8, value);
     }

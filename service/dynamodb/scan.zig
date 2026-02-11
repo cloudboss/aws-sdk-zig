@@ -600,18 +600,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ScanInput, config: *aws.Con
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ScanOutput {
     _ = status;
     _ = headers;
-    var result: ScanOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "Count")) |content| {
-        result.count = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "LastEvaluatedKey")) |content| {
-        result.last_evaluated_key = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "ScannedCount")) |content| {
-        result.scanned_count = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(ScanOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

@@ -111,8 +111,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeAsyncInput, config: *
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InvokeAsyncOutput {
     var result: InvokeAsyncOutput = .{ .allocator = alloc };
-    result.status = @intCast(status);
     _ = body;
+    result.status = @intCast(status);
     _ = headers;
 
     return result;

@@ -133,12 +133,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTablesInput, config: *a
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListTablesOutput {
     _ = status;
     _ = headers;
-    var result: ListTablesOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "LastEvaluatedTableName")) |content| {
-        result.last_evaluated_table_name = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(ListTablesOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

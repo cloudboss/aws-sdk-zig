@@ -170,13 +170,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AddLayerVersionPermissionIn
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AddLayerVersionPermissionOutput {
     var result: AddLayerVersionPermissionOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(AddLayerVersionPermissionOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "RevisionId")) |content| {
-        result.revision_id = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Statement")) |content| {
-        result.statement = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

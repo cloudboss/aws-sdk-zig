@@ -155,10 +155,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListEventSourceMappingsInpu
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListEventSourceMappingsOutput {
     var result: ListEventSourceMappingsOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "NextMarker")) |content| {
-        result.next_marker = try alloc.dupe(u8, content);
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(ListEventSourceMappingsOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

@@ -119,10 +119,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteTableInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteTableOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeleteTableOutput = .{ .allocator = alloc };
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DeleteTableOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

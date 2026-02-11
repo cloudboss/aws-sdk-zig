@@ -140,10 +140,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CheckpointDurableExecutionI
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CheckpointDurableExecutionOutput {
     var result: CheckpointDurableExecutionOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "CheckpointToken")) |content| {
-        result.checkpoint_token = try alloc.dupe(u8, content);
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(CheckpointDurableExecutionOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

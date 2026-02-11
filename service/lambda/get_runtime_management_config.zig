@@ -131,13 +131,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetRuntimeManagementConfigI
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetRuntimeManagementConfigOutput {
     var result: GetRuntimeManagementConfigOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetRuntimeManagementConfigOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "FunctionArn")) |content| {
-        result.function_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "RuntimeVersionArn")) |content| {
-        result.runtime_version_arn = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

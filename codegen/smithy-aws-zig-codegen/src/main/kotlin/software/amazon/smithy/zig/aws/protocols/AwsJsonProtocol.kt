@@ -139,12 +139,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
     override fun writeDeserializeResponse(writer: ZigWriter, ctx: OperationContext) {
         val outputName = "${ctx.operationName}Output"
-
-        val hasDeserializableFields = ctx.outputShape.allMembers.values.any { memberShape ->
-            val targetShape = ctx.model.expectShape(memberShape.target)
-            val zigType = ctx.resolveBaseZigType(targetShape)
-            zigType in listOf("[]const u8", "i32", "i64", "bool")
-        }
+        val hasMembers = ctx.outputShape.allMembers.isNotEmpty()
 
         writer.openBlock(
             "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
@@ -153,45 +148,14 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.write("_ = status;")
         writer.write("_ = headers;")
 
-        if (!hasDeserializableFields) {
+        if (!hasMembers) {
             writer.write("_ = body;")
-            writer.write("const result: \$L = .{ .allocator = alloc };", outputName)
+            writer.write("return .{ .allocator = alloc };")
         } else {
-            writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
-
-            for ((memberName, memberShape) in ctx.outputShape.allMembers) {
-                val fieldName = NamingUtil.toFieldName(memberName)
-                val targetShape = ctx.model.expectShape(memberShape.target)
-                val zigType = ctx.resolveBaseZigType(targetShape)
-
-                when (zigType) {
-                    "[]const u8" -> {
-                        writer.openBlock("if (findJsonValue(body, \"\$L\")) |content| {", memberName)
-                        writer.write("result.\$L = try alloc.dupe(u8, content);", fieldName)
-                        writer.closeBlock("}")
-                    }
-                    "i32" -> {
-                        writer.openBlock("if (findJsonValue(body, \"\$L\")) |content| {", memberName)
-                        writer.write("result.\$L = std.fmt.parseInt(i32, content, 10) catch null;", fieldName)
-                        writer.closeBlock("}")
-                    }
-                    "i64" -> {
-                        writer.openBlock("if (findJsonValue(body, \"\$L\")) |content| {", memberName)
-                        writer.write("result.\$L = std.fmt.parseInt(i64, content, 10) catch null;", fieldName)
-                        writer.closeBlock("}")
-                    }
-                    "bool" -> {
-                        writer.openBlock("if (findJsonValue(body, \"\$L\")) |content| {", memberName)
-                        writer.write("result.\$L = std.mem.eql(u8, content, \"true\");", fieldName)
-                        writer.closeBlock("}")
-                    }
-                    else -> {}
-                }
-            }
+            writer.write("if (body.len == 0) return .{ .allocator = alloc };")
+            writer.write("return aws.json.parseJsonObject(\$L, body, alloc);", outputName)
         }
 
-        writer.blankLine()
-        writer.write("return result;")
         writer.closeBlock("}")
     }
 

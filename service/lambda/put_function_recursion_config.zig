@@ -148,10 +148,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutFunctionRecursionConfigI
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutFunctionRecursionConfigOutput {
-    _ = body;
+    var result: PutFunctionRecursionConfigOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(PutFunctionRecursionConfigOutput, body, alloc);
+    }
     _ = status;
     _ = headers;
-    const result: PutFunctionRecursionConfigOutput = .{ .allocator = alloc };
 
     return result;
 }

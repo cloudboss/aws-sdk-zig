@@ -237,15 +237,14 @@ class AwsJsonProtocolTest {
     // ---- Deserialization tests ----
 
     @Test
-    fun deserializerUsesFindJsonValue() {
+    fun deserializerUsesJsonParser() {
         val files = generateFiles("1.0")
         val op = files["put_item.zig"]!!
 
         assertTrue(op.contains("fn deserializeResponse("), "Missing deserializeResponse")
-        assertTrue(op.contains("findJsonValue"), "Missing findJsonValue usage")
         assertTrue(
-            op.contains("findJsonValue(body, \"ConsumedCapacity\")"),
-            "Should search for PascalCase JSON key",
+            op.contains("aws.json.parseJsonObject(PutItemOutput, body, alloc)"),
+            "Should use runtime JSON parser for response deserialization",
         )
     }
 
@@ -265,17 +264,13 @@ class AwsJsonProtocolTest {
     }
 
     @Test
-    fun deserializerParsesIntegers() {
+    fun deserializerUsesJsonParserForListTables() {
         val files = generateFiles("1.0")
         val op = files["list_tables.zig"]!!
 
         assertTrue(
-            op.contains("findJsonValue(body, \"TableCount\")"),
-            "Should search for TableCount JSON key",
-        )
-        assertTrue(
-            op.contains("parseInt"),
-            "Should parse integer from JSON value",
+            op.contains("aws.json.parseJsonObject(ListTablesOutput, body, alloc)"),
+            "Should use runtime JSON parser for response deserialization",
         )
     }
 

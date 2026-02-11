@@ -200,19 +200,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionUrlConfigInpu
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateFunctionUrlConfigOutput {
     var result: UpdateFunctionUrlConfigOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(UpdateFunctionUrlConfigOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "CreationTime")) |content| {
-        result.creation_time = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "FunctionArn")) |content| {
-        result.function_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "FunctionUrl")) |content| {
-        result.function_url = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LastModifiedTime")) |content| {
-        result.last_modified_time = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

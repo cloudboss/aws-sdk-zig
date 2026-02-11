@@ -193,19 +193,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionEventInvokeCo
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateFunctionEventInvokeConfigOutput {
     var result: UpdateFunctionEventInvokeConfigOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(UpdateFunctionEventInvokeConfigOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "FunctionArn")) |content| {
-        result.function_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LastModified")) |content| {
-        result.last_modified = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "MaximumEventAgeInSeconds")) |content| {
-        result.maximum_event_age_in_seconds = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "MaximumRetryAttempts")) |content| {
-        result.maximum_retry_attempts = std.fmt.parseInt(i32, content, 10) catch null;
-    }
     _ = headers;
 
     return result;

@@ -241,12 +241,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetItemInput, config: *aws.
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetItemOutput {
     _ = status;
     _ = headers;
-    var result: GetItemOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "Item")) |content| {
-        result.item = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(GetItemOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

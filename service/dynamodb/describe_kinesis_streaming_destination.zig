@@ -101,12 +101,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeKinesisStreamingDes
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeKinesisStreamingDestinationOutput {
     _ = status;
     _ = headers;
-    var result: DescribeKinesisStreamingDestinationOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "TableName")) |content| {
-        result.table_name = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DescribeKinesisStreamingDestinationOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

@@ -180,8 +180,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeWithResponseStreamInp
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InvokeWithResponseStreamOutput {
     var result: InvokeWithResponseStreamOutput = .{ .allocator = alloc };
-    result.status_code = @intCast(status);
     _ = body;
+    result.status_code = @intCast(status);
     if (headers.get("x-amz-executed-version")) |value| {
         result.executed_version = try alloc.dupe(u8, value);
     }

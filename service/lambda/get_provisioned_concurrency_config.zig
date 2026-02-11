@@ -137,22 +137,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetProvisionedConcurrencyCo
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetProvisionedConcurrencyConfigOutput {
     var result: GetProvisionedConcurrencyConfigOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetProvisionedConcurrencyConfigOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "AllocatedProvisionedConcurrentExecutions")) |content| {
-        result.allocated_provisioned_concurrent_executions = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "AvailableProvisionedConcurrentExecutions")) |content| {
-        result.available_provisioned_concurrent_executions = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "LastModified")) |content| {
-        result.last_modified = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "RequestedProvisionedConcurrentExecutions")) |content| {
-        result.requested_provisioned_concurrent_executions = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "StatusReason")) |content| {
-        result.status_reason = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

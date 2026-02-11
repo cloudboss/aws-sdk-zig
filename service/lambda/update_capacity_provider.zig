@@ -94,10 +94,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateCapacityProviderInput
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateCapacityProviderOutput {
-    _ = body;
+    var result: UpdateCapacityProviderOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(UpdateCapacityProviderOutput, body, alloc);
+    }
     _ = status;
     _ = headers;
-    const result: UpdateCapacityProviderOutput = .{ .allocator = alloc };
 
     return result;
 }

@@ -115,10 +115,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateContinuousBackupsInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateContinuousBackupsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: UpdateContinuousBackupsOutput = .{ .allocator = alloc };
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(UpdateContinuousBackupsOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

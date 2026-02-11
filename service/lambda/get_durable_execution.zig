@@ -154,31 +154,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetDurableExecutionInput, c
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetDurableExecutionOutput {
     var result: GetDurableExecutionOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetDurableExecutionOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "DurableExecutionArn")) |content| {
-        result.durable_execution_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "DurableExecutionName")) |content| {
-        result.durable_execution_name = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "EndTimestamp")) |content| {
-        result.end_timestamp = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "FunctionArn")) |content| {
-        result.function_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "InputPayload")) |content| {
-        result.input_payload = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Result")) |content| {
-        result.result = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "StartTimestamp")) |content| {
-        result.start_timestamp = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "Version")) |content| {
-        result.version = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

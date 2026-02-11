@@ -435,64 +435,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PublishVersionInput, config
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PublishVersionOutput {
     var result: PublishVersionOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(PublishVersionOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "CodeSha256")) |content| {
-        result.code_sha_256 = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "CodeSize")) |content| {
-        result.code_size = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "ConfigSha256")) |content| {
-        result.config_sha_256 = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Description")) |content| {
-        result.description = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "FunctionArn")) |content| {
-        result.function_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "FunctionName")) |content| {
-        result.function_name = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Handler")) |content| {
-        result.handler = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "KMSKeyArn")) |content| {
-        result.kms_key_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LastModified")) |content| {
-        result.last_modified = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LastUpdateStatusReason")) |content| {
-        result.last_update_status_reason = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "MasterArn")) |content| {
-        result.master_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "MemorySize")) |content| {
-        result.memory_size = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "RevisionId")) |content| {
-        result.revision_id = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Role")) |content| {
-        result.role = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "SigningJobArn")) |content| {
-        result.signing_job_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "SigningProfileVersionArn")) |content| {
-        result.signing_profile_version_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "StateReason")) |content| {
-        result.state_reason = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Timeout")) |content| {
-        result.timeout = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findJsonValue(body, "Version")) |content| {
-        result.version = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

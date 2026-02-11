@@ -151,25 +151,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetLayerVersionByArnInput, 
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetLayerVersionByArnOutput {
     var result: GetLayerVersionByArnOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetLayerVersionByArnOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "CreatedDate")) |content| {
-        result.created_date = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Description")) |content| {
-        result.description = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LayerArn")) |content| {
-        result.layer_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LayerVersionArn")) |content| {
-        result.layer_version_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LicenseInfo")) |content| {
-        result.license_info = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "Version")) |content| {
-        result.version = std.fmt.parseInt(i64, content, 10) catch null;
-    }
     _ = headers;
 
     return result;

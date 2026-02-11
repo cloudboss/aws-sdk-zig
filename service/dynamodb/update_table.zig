@@ -294,10 +294,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateTableInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateTableOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: UpdateTableOutput = .{ .allocator = alloc };
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(UpdateTableOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

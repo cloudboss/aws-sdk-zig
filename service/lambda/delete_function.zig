@@ -122,8 +122,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteFunctionInput, config
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteFunctionOutput {
     var result: DeleteFunctionOutput = .{ .allocator = alloc };
-    result.status_code = @intCast(status);
     _ = body;
+    result.status_code = @intCast(status);
     _ = headers;
 
     return result;

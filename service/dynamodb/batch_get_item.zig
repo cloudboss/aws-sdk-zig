@@ -308,15 +308,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchGetItemInput, config: 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !BatchGetItemOutput {
     _ = status;
     _ = headers;
-    var result: BatchGetItemOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "Responses")) |content| {
-        result.responses = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "UnprocessedKeys")) |content| {
-        result.unprocessed_keys = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(BatchGetItemOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

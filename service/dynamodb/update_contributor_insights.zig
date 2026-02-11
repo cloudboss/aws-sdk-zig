@@ -161,15 +161,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateContributorInsightsIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateContributorInsightsOutput {
     _ = status;
     _ = headers;
-    var result: UpdateContributorInsightsOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "IndexName")) |content| {
-        result.index_name = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "TableName")) |content| {
-        result.table_name = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(UpdateContributorInsightsOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

@@ -148,12 +148,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteResourcePolicyInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteResourcePolicyOutput {
     _ = status;
     _ = headers;
-    var result: DeleteResourcePolicyOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "RevisionId")) |content| {
-        result.revision_id = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DeleteResourcePolicyOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

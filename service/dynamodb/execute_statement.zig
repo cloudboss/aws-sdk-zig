@@ -227,15 +227,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExecuteStatementInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ExecuteStatementOutput {
     _ = status;
     _ = headers;
-    var result: ExecuteStatementOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "LastEvaluatedKey")) |content| {
-        result.last_evaluated_key = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "NextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(ExecuteStatementOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

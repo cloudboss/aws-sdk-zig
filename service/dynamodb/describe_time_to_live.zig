@@ -94,10 +94,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeTimeToLiveInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeTimeToLiveOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeTimeToLiveOutput = .{ .allocator = alloc };
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DescribeTimeToLiveOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

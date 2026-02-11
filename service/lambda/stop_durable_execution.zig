@@ -91,10 +91,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StopDurableExecutionInput, 
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StopDurableExecutionOutput {
     var result: StopDurableExecutionOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "StopTimestamp")) |content| {
-        result.stop_timestamp = std.fmt.parseInt(i64, content, 10) catch null;
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(StopDurableExecutionOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

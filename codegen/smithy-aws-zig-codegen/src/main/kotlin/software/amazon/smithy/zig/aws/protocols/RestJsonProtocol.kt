@@ -421,26 +421,18 @@ class RestJsonProtocol : ProtocolGenerator {
         val outputName = "${ctx.operationName}Output"
         val bindings = resolveOutputBindings(ctx)
 
-        val hasDeserializableBodyFields = bindings.bodyMembers.values.any { ms ->
-            val ts = ctx.model.expectShape(ms.target)
-            val zigType = ctx.resolveBaseZigType(ts)
-            zigType in listOf("[]const u8", "i32", "i64", "bool")
-        }
-
-        // REST-JSON deserializer also takes status and headers
         writer.openBlock(
             "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
             outputName,
         )
 
-        // Determine if result will actually be mutated
+        val hasBodyMembers = bindings.bodyMembers.isNotEmpty()
         val payloadUsesBody = bindings.payload != null && run {
             val (_, ms) = bindings.payload!!
             val ts = ctx.model.expectShape(ms.target)
             ctx.resolveBaseZigType(ts) == "[]const u8"
         }
-        val bodyUsed = payloadUsesBody || hasDeserializableBodyFields
-        val resultMutated = hasDeserializableBodyFields || bindings.responseCode != null ||
+        val resultMutated = hasBodyMembers || bindings.responseCode != null ||
             payloadUsesBody || bindings.headers.isNotEmpty()
 
         if (!resultMutated) {
@@ -451,20 +443,7 @@ class RestJsonProtocol : ProtocolGenerator {
         } else {
             writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
 
-            // @httpResponseCode
-            if (bindings.responseCode != null) {
-                val (memberName, _) = bindings.responseCode
-                val fieldName = NamingUtil.toFieldName(memberName)
-                writer.write("result.\$L = @intCast(status);", fieldName)
-            } else {
-                writer.write("_ = status;")
-            }
-
-            if (!bodyUsed) {
-                writer.write("_ = body;")
-            }
-
-            // @httpPayload
+            // Body: @httpPayload, body members from JSON, or unused
             if (bindings.payload != null) {
                 val (memberName, memberShape) = bindings.payload
                 val fieldName = NamingUtil.toFieldName(memberName)
@@ -479,38 +458,24 @@ class RestJsonProtocol : ProtocolGenerator {
                         writer.write("result.\$L = try alloc.dupe(u8, body);", fieldName)
                         writer.closeBlock("}")
                     }
+                } else {
+                    writer.write("_ = body;")
                 }
+            } else if (hasBodyMembers) {
+                writer.openBlock("if (body.len > 0) {")
+                writer.write("result = try aws.json.parseJsonObject(\$L, body, alloc);", outputName)
+                writer.closeBlock("}")
             } else {
-                // Deserialize body members from JSON
-                for ((memberName, memberShape) in bindings.bodyMembers) {
-                    val fieldName = NamingUtil.toFieldName(memberName)
-                    val targetShape = ctx.model.expectShape(memberShape.target)
-                    val zigType = ctx.resolveBaseZigType(targetShape)
+                writer.write("_ = body;")
+            }
 
-                    when (zigType) {
-                        "[]const u8" -> {
-                            writer.openBlock("if (findJsonValue(body, \"\$L\")) |content| {", memberName)
-                            writer.write("result.\$L = try alloc.dupe(u8, content);", fieldName)
-                            writer.closeBlock("}")
-                        }
-                        "i32" -> {
-                            writer.openBlock("if (findJsonValue(body, \"\$L\")) |content| {", memberName)
-                            writer.write("result.\$L = std.fmt.parseInt(i32, content, 10) catch null;", fieldName)
-                            writer.closeBlock("}")
-                        }
-                        "i64" -> {
-                            writer.openBlock("if (findJsonValue(body, \"\$L\")) |content| {", memberName)
-                            writer.write("result.\$L = std.fmt.parseInt(i64, content, 10) catch null;", fieldName)
-                            writer.closeBlock("}")
-                        }
-                        "bool" -> {
-                            writer.openBlock("if (findJsonValue(body, \"\$L\")) |content| {", memberName)
-                            writer.write("result.\$L = std.mem.eql(u8, content, \"true\");", fieldName)
-                            writer.closeBlock("}")
-                        }
-                        else -> {}
-                    }
-                }
+            // @httpResponseCode
+            if (bindings.responseCode != null) {
+                val (memberName, _) = bindings.responseCode
+                val fieldName = NamingUtil.toFieldName(memberName)
+                writer.write("result.\$L = @intCast(status);", fieldName)
+            } else {
+                writer.write("_ = status;")
             }
 
             // @httpHeader - extract from response headers

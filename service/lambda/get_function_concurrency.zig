@@ -94,10 +94,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFunctionConcurrencyInput
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetFunctionConcurrencyOutput {
     var result: GetFunctionConcurrencyOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "ReservedConcurrentExecutions")) |content| {
-        result.reserved_concurrent_executions = std.fmt.parseInt(i32, content, 10) catch null;
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetFunctionConcurrencyOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

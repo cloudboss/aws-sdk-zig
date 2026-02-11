@@ -124,12 +124,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTagsOfResourceInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListTagsOfResourceOutput {
     _ = status;
     _ = headers;
-    var result: ListTagsOfResourceOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "NextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(ListTagsOfResourceOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

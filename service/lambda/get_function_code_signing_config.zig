@@ -106,13 +106,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFunctionCodeSigningConfi
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetFunctionCodeSigningConfigOutput {
     var result: GetFunctionCodeSigningConfigOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetFunctionCodeSigningConfigOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "CodeSigningConfigArn")) |content| {
-        result.code_signing_config_arn = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "FunctionName")) |content| {
-        result.function_name = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;

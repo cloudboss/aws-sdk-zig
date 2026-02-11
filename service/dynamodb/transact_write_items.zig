@@ -244,12 +244,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: TransactWriteItemsInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !TransactWriteItemsOutput {
     _ = status;
     _ = headers;
-    var result: TransactWriteItemsOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "ItemCollectionMetrics")) |content| {
-        result.item_collection_metrics = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(TransactWriteItemsOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

@@ -104,10 +104,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeGlobalTableInput, c
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeGlobalTableOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeGlobalTableOutput = .{ .allocator = alloc };
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DescribeGlobalTableOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

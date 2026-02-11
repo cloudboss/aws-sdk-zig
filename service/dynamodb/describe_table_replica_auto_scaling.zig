@@ -95,10 +95,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeTableReplicaAutoSca
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeTableReplicaAutoScalingOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeTableReplicaAutoScalingOutput = .{ .allocator = alloc };
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DescribeTableReplicaAutoScalingOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

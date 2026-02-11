@@ -185,21 +185,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeLimitsInput, config
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeLimitsOutput {
     _ = status;
     _ = headers;
-    var result: DescribeLimitsOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "AccountMaxReadCapacityUnits")) |content| {
-        result.account_max_read_capacity_units = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "AccountMaxWriteCapacityUnits")) |content| {
-        result.account_max_write_capacity_units = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "TableMaxReadCapacityUnits")) |content| {
-        result.table_max_read_capacity_units = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "TableMaxWriteCapacityUnits")) |content| {
-        result.table_max_write_capacity_units = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DescribeLimitsOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

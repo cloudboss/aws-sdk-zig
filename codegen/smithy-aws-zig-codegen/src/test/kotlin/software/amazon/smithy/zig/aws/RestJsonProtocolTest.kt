@@ -468,23 +468,8 @@ class RestJsonProtocolTest {
         val op = files["list_functions.zig"]!!
 
         assertTrue(
-            op.contains("findJsonValue(body, \"NextMarker\")"),
-            "Should search for NextMarker in JSON body",
-        )
-        assertTrue(
-            op.contains("findJsonValue(body, \"FunctionCount\")"),
-            "Should search for FunctionCount in JSON body",
-        )
-    }
-
-    @Test
-    fun listFunctionsDeserializesIntegers() {
-        val files = generateFiles()
-        val op = files["list_functions.zig"]!!
-
-        assertTrue(
-            op.contains("parseInt"),
-            "Should parse integer from JSON value",
+            op.contains("aws.json.parseJsonObject(ListFunctionsOutput, body, alloc)"),
+            "Should use runtime JSON parser for response deserialization",
         )
     }
 

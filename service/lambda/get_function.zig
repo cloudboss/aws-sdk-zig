@@ -139,10 +139,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFunctionInput, config: *
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetFunctionOutput {
     var result: GetFunctionOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "Tags")) |content| {
-        result.tags = try alloc.dupe(u8, content);
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetFunctionOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

@@ -162,18 +162,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeContributorInsights
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeContributorInsightsOutput {
     _ = status;
     _ = headers;
-    var result: DescribeContributorInsightsOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "IndexName")) |content| {
-        result.index_name = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "LastUpdateDateTime")) |content| {
-        result.last_update_date_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findJsonValue(body, "TableName")) |content| {
-        result.table_name = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(DescribeContributorInsightsOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

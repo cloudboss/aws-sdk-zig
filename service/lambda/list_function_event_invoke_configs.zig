@@ -133,10 +133,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListFunctionEventInvokeConf
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListFunctionEventInvokeConfigsOutput {
     var result: ListFunctionEventInvokeConfigsOutput = .{ .allocator = alloc };
-    _ = status;
-    if (findJsonValue(body, "NextMarker")) |content| {
-        result.next_marker = try alloc.dupe(u8, content);
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(ListFunctionEventInvokeConfigsOutput, body, alloc);
     }
+    _ = status;
     _ = headers;
 
     return result;

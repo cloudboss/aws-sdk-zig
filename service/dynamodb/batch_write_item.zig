@@ -337,15 +337,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchWriteItemInput, config
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !BatchWriteItemOutput {
     _ = status;
     _ = headers;
-    var result: BatchWriteItemOutput = .{ .allocator = alloc };
-    if (findJsonValue(body, "ItemCollectionMetrics")) |content| {
-        result.item_collection_metrics = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "UnprocessedItems")) |content| {
-        result.unprocessed_items = try alloc.dupe(u8, content);
-    }
-
-    return result;
+    if (body.len == 0) return .{ .allocator = alloc };
+    return aws.json.parseJsonObject(BatchWriteItemOutput, body, alloc);
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {

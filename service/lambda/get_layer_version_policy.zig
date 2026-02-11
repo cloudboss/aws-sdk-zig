@@ -101,13 +101,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetLayerVersionPolicyInput,
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetLayerVersionPolicyOutput {
     var result: GetLayerVersionPolicyOutput = .{ .allocator = alloc };
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetLayerVersionPolicyOutput, body, alloc);
+    }
     _ = status;
-    if (findJsonValue(body, "Policy")) |content| {
-        result.policy = try alloc.dupe(u8, content);
-    }
-    if (findJsonValue(body, "RevisionId")) |content| {
-        result.revision_id = try alloc.dupe(u8, content);
-    }
     _ = headers;
 
     return result;
