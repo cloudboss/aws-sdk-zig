@@ -93,6 +93,10 @@ pub fn build(b: *std.Build) void {
 
         const integration_test = b.addTest(.{
             .root_module = integration_module,
+            .test_runner = .{
+                .path = zest.path("src/root.zig"),
+                .mode = .simple,
+            },
         });
 
         const run_integration = b.addRunArtifact(integration_test);
