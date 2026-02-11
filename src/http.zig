@@ -189,6 +189,86 @@ pub const HttpClient = struct {
         return error.MaxRetriesExceeded;
     }
 
+    /// Send a request and return a streaming response (connection stays open for body reads).
+    /// No retry logic -- streaming responses cannot be replayed.
+    pub fn sendStreamingRequest(self: *Self, request: *const Request) RequestError!StreamingResponse {
+        const uri = request.getUri();
+
+        // Build extra headers from request
+        var extra_headers_list: std.ArrayListUnmanaged(std.http.Header) = .{};
+        defer extra_headers_list.deinit(self.allocator);
+
+        var iter = request.headers.iterator();
+        while (iter.next()) |entry| {
+            // Skip host header -- std.http.Client sets it from the URI
+            if (std.ascii.eqlIgnoreCase(entry.key_ptr.*, "host")) continue;
+            extra_headers_list.append(self.allocator, .{
+                .name = entry.key_ptr.*,
+                .value = entry.value_ptr.*,
+            }) catch return error.OutOfMemory;
+        }
+
+        // Heap-allocate Inner for pointer stability
+        const inner = self.allocator.create(StreamingBody.Inner) catch return error.OutOfMemory;
+        errdefer self.allocator.destroy(inner);
+        inner.allocator = self.allocator;
+
+        inner.http_request = self.inner.request(request.method.toStd(), uri, .{
+            .extra_headers = extra_headers_list.items,
+        }) catch return error.ConnectionFailed;
+        errdefer inner.http_request.deinit();
+
+        // Send request with or without body
+        {
+            const req_body = request.body orelse "";
+            if (req_body.len > 0 or request.method.toStd().requestHasBody()) {
+                inner.http_request.transfer_encoding = .{ .content_length = req_body.len };
+                var body_writer = inner.http_request.sendBodyUnflushed(&.{}) catch return error.RequestFailed;
+                if (req_body.len > 0) {
+                    body_writer.writer.writeAll(req_body) catch return error.RequestFailed;
+                }
+                body_writer.end() catch return error.RequestFailed;
+                inner.http_request.connection.?.flush() catch return error.RequestFailed;
+            } else {
+                inner.http_request.sendBodiless() catch return error.RequestFailed;
+            }
+        }
+
+        // Receive response head
+        var redirect_buf: [8192]u8 = undefined;
+        var response = inner.http_request.receiveHead(&redirect_buf) catch return error.RequestFailed;
+
+        // Extract status and response headers before calling reader()
+        // (reader() invalidates head string pointers)
+        const status = @intFromEnum(response.head.status);
+
+        var resp_headers = std.StringHashMapUnmanaged([]const u8){};
+        var header_iter = response.head.iterateHeaders();
+        while (header_iter.next()) |header| {
+            const key = std.ascii.allocLowerString(self.allocator, header.name) catch return error.OutOfMemory;
+            const value = self.allocator.dupe(u8, header.value) catch {
+                self.allocator.free(key);
+                return error.OutOfMemory;
+            };
+            resp_headers.put(self.allocator, key, value) catch {
+                self.allocator.free(key);
+                self.allocator.free(value);
+                return error.OutOfMemory;
+            };
+        }
+
+        // Initialize body reader -- this invalidates head strings but we've already duped them.
+        // The returned pointer lives inside inner.http_request and remains valid.
+        inner.body_reader = response.reader(&inner.transfer_buf);
+
+        return StreamingResponse{
+            .status = status,
+            .headers = resp_headers,
+            .body = StreamingBody{ ._inner = inner },
+            .allocator = self.allocator,
+        };
+    }
+
     /// Perform a single request attempt
     fn doRequest(self: *Self, request: *const Request, options: RequestOptions) RequestError!Response {
         const uri = request.getUri();
@@ -264,6 +344,64 @@ pub const HttpClient = struct {
             .headers = resp_headers,
             .allocator = self.allocator,
         };
+    }
+};
+
+/// Streaming body for responses where the HTTP connection stays open.
+/// Used for `@streaming` blob payloads (e.g., S3 GetObject).
+pub const StreamingBody = struct {
+    _inner: *Inner,
+
+    const Inner = struct {
+        http_request: std.http.Client.Request,
+        body_reader: *std.Io.Reader,
+        transfer_buf: [8192]u8,
+        allocator: Allocator,
+    };
+
+    /// Read entire remaining body into memory.
+    pub fn readAll(self: *StreamingBody, allocator: Allocator, max_size: usize) ![]const u8 {
+        return self._inner.body_reader.allocRemaining(
+            allocator,
+            std.Io.Limit.limited(max_size),
+        ) catch |err| {
+            return if (err == error.StreamTooLong) error.ResponseTooLarge else error.RequestFailed;
+        };
+    }
+
+    pub fn deinit(self: *StreamingBody) void {
+        self._inner.http_request.deinit();
+        self._inner.allocator.destroy(self._inner);
+    }
+};
+
+/// Streaming HTTP response -- keeps the connection open for body reads.
+pub const StreamingResponse = struct {
+    status: u16,
+    headers: std.StringHashMapUnmanaged([]const u8),
+    body: StreamingBody,
+    allocator: Allocator,
+
+    const Self = @This();
+
+    pub fn isSuccess(self: Self) bool {
+        return self.status >= 200 and self.status < 300;
+    }
+
+    /// Free headers only (body ownership transfers to output struct).
+    pub fn deinitHeaders(self: *Self) void {
+        var iter = self.headers.iterator();
+        while (iter.next()) |entry| {
+            self.allocator.free(entry.key_ptr.*);
+            self.allocator.free(entry.value_ptr.*);
+        }
+        self.headers.deinit(self.allocator);
+    }
+
+    /// Free everything including body connection.
+    pub fn deinit(self: *Self) void {
+        self.deinitHeaders();
+        self.body.deinit();
     }
 };
 

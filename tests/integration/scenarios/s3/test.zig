@@ -44,7 +44,7 @@ test "S3 CRUD: CreateBucket, PutObject, GetObject, DeleteObject, DeleteBucket" {
         defer result.deinit();
     }
 
-    // 3. GetObject -- verify the body matches what we put
+    // 3. GetObject -- verify the streaming body matches what we put
     {
         var result = try s3.get_object.execute(
             &client,
@@ -56,7 +56,8 @@ test "S3 CRUD: CreateBucket, PutObject, GetObject, DeleteObject, DeleteBucket" {
         );
         defer result.deinit();
 
-        const body = result.body orelse return error.MissingBody;
+        const body = try result.body.readAll(allocator, 10 * 1024 * 1024);
+        defer allocator.free(body);
         try std.testing.expectEqualStrings(object_body, body);
     }
 

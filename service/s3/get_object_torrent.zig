@@ -52,16 +52,14 @@ pub const GetObjectTorrentInput = struct {
 
 pub const GetObjectTorrentOutput = struct {
     /// A Bencoded dictionary as defined by the BitTorrent specification
-    body: ?[]const u8 = null,
+    body: aws.http.StreamingBody = undefined,
 
     request_charged: ?RequestCharged = null,
 
     allocator: std.mem.Allocator,
 
-    pub fn deinit(self: *const GetObjectTorrentOutput) void {
-        if (self.body) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetObjectTorrentOutput) void {
+        self.body.deinit();
     }
 };
 
@@ -71,26 +69,28 @@ pub const Options = struct {
 
 pub fn execute(client: *Client, input: GetObjectTorrentInput, options: Options) !GetObjectTorrentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
-    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
-    defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
     try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
 
-    var response = try client.http_client.sendRequest(&request);
-    defer response.deinit();
+    var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
-    if (!response.isSuccess()) {
+    arena.deinit();
+
+    if (!stream_resp.isSuccess()) {
+        defer stream_resp.deinit();
+        const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
+        defer client.allocator.free(error_body);
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status);
+            d.* = parseErrorResponse(error_body, stream_resp.status);
         }
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    return try deserializeStreamingResponse(&stream_resp, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectTorrentInput, config: *aws.Config) !aws.http.Request {
@@ -133,15 +133,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectTorrentInput, conf
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetObjectTorrentOutput {
+fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !GetObjectTorrentOutput {
     var result: GetObjectTorrentOutput = .{ .allocator = alloc };
-    _ = status;
-    if (body.len > 0) {
-        result.body = try alloc.dupe(u8, body);
-    }
-    if (headers.get("x-amz-request-charged")) |value| {
+    result.body = stream_resp.body;
+    if (stream_resp.headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
     }
+    stream_resp.deinitHeaders();
 
     return result;
 }

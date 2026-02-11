@@ -1,6 +1,7 @@
 package software.amazon.smithy.zig.generators
 
 import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.BlobShape
 import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.ListShape
@@ -11,6 +12,8 @@ import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.EnumTrait
+import software.amazon.smithy.model.traits.HttpPayloadTrait
+import software.amazon.smithy.model.traits.StreamingTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
@@ -35,6 +38,22 @@ class OperationGenerator(
     private val outputShape: StructureShape =
         model.expectShape(operation.outputShape, StructureShape::class.java)
 
+    /**
+     * Check if this operation has a streaming output payload:
+     * an output member with @httpPayload targeting a @streaming blob.
+     */
+    private fun hasStreamingOutputPayload(): Boolean {
+        for ((_, memberShape) in outputShape.allMembers) {
+            if (memberShape.hasTrait(HttpPayloadTrait::class.java)) {
+                val target = model.expectShape(memberShape.target)
+                if (target is BlobShape && target.hasTrait(StreamingTrait::class.java)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     private fun buildOperationContext(): OperationContext {
         return OperationContext(
             operation = operation,
@@ -51,6 +70,7 @@ class OperationGenerator(
 
     fun run() {
         val ctx = buildOperationContext()
+        val isStreaming = hasStreamingOutputPayload()
 
         context.writerDelegator().useFileWriter(fileName) { writer ->
             writer.importContainer.addImport("std", "std")
@@ -71,15 +91,23 @@ class OperationGenerator(
 
             writeInputStruct(writer, ctx)
             writer.blankLine()
-            writeOutputStruct(writer, ctx)
+            writeOutputStruct(writer, ctx, isStreaming)
             writer.blankLine()
             writeOptionsStruct(writer)
             writer.blankLine()
-            writeExecuteFunction(writer)
+            if (isStreaming) {
+                writeStreamingExecuteFunction(writer)
+            } else {
+                writeExecuteFunction(writer)
+            }
             writer.blankLine()
             protocol.writeSerializeRequest(writer, ctx)
             writer.blankLine()
-            protocol.writeDeserializeResponse(writer, ctx)
+            if (isStreaming) {
+                protocol.writeDeserializeStreamingResponse(writer, ctx)
+            } else {
+                protocol.writeDeserializeResponse(writer, ctx)
+            }
             writer.blankLine()
             protocol.writeParseErrorResponse(writer, ctx)
         }
@@ -100,7 +128,12 @@ class OperationGenerator(
         for ((memberName, memberShape) in inputShape.allMembers) {
             val fieldName = NamingUtil.toFieldName(memberName)
             val targetShape = model.expectShape(memberShape.target)
-            val zigType = ctx.resolveZigType(memberShape, targetShape)
+            // Override streaming blob input types to []const u8 (input streaming deferred)
+            val zigType = if (ctx.isStreamingBlob(targetShape)) {
+                if (memberShape.isRequired) "[]const u8" else "?[]const u8"
+            } else {
+                ctx.resolveZigType(memberShape, targetShape)
+            }
 
             val memberDocs = memberShape.getTrait(DocumentationTrait::class.java)
                 .map { it.value }
@@ -121,7 +154,7 @@ class OperationGenerator(
         writer.closeBlock("};")
     }
 
-    private fun writeOutputStruct(writer: ZigWriter, ctx: OperationContext) {
+    private fun writeOutputStruct(writer: ZigWriter, ctx: OperationContext, isStreaming: Boolean = false) {
         val outputName = "${operationName}Output"
         writer.openBlock("pub const \$L = struct {", outputName)
 
@@ -131,12 +164,18 @@ class OperationGenerator(
             val targetShape = model.expectShape(memberShape.target)
             val baseType = ctx.resolveBaseZigType(targetShape)
             val isScalar = ctx.isScalarType(targetShape)
+            val isStreamingBlobField = ctx.isStreamingBlob(targetShape)
 
-            // For output structs, make non-scalar required members optional since
-            // the deserializer may not populate them
-            val isOptional = !memberShape.isRequired || !isScalar
+            // Streaming blob fields are not optional -- they always hold the connection
+            // They use `= undefined` default since deserializeStreamingResponse sets them immediately
+            val isOptional = if (isStreamingBlobField) false
+                else !memberShape.isRequired || !isScalar
             val zigType = if (isOptional) "?$baseType" else baseType
-            val defaultValue = if (isOptional) " = null" else ""
+            val defaultValue = when {
+                isStreamingBlobField -> " = undefined"
+                isOptional -> " = null"
+                else -> ""
+            }
 
             val memberDocs = memberShape.getTrait(DocumentationTrait::class.java)
                 .map { it.value }
@@ -156,14 +195,24 @@ class OperationGenerator(
         writer.blankLine()
         writer.write("allocator: std.mem.Allocator,")
         writer.blankLine()
-        writer.openBlock("pub fn deinit(self: *const \$L) void {", outputName)
+
+        if (isStreaming) {
+            // For streaming outputs, deinit must close the HTTP connection
+            writer.openBlock("pub fn deinit(self: *\$L) void {", outputName)
+        } else {
+            writer.openBlock("pub fn deinit(self: *const \$L) void {", outputName)
+        }
 
         val hasStringFields = outputShape.allMembers.values.any { memberShape ->
             val targetShape = model.expectShape(memberShape.target)
             ctx.resolveBaseZigType(targetShape) == "[]const u8"
         }
+        val hasStreamingField = outputShape.allMembers.values.any { memberShape ->
+            val targetShape = model.expectShape(memberShape.target)
+            ctx.isStreamingBlob(targetShape)
+        }
 
-        if (!hasStringFields) {
+        if (!hasStringFields && !hasStreamingField) {
             writer.write("_ = self;")
         } else {
             for ((memberName, memberShape) in outputShape.allMembers) {
@@ -171,7 +220,9 @@ class OperationGenerator(
                 val targetShape = model.expectShape(memberShape.target)
                 val zigType = ctx.resolveBaseZigType(targetShape)
 
-                if (zigType == "[]const u8") {
+                if (zigType == "aws.http.StreamingBody") {
+                    writer.write("self.\$L.deinit();", fieldName)
+                } else if (zigType == "[]const u8") {
                     if (memberShape.isRequired) {
                         writer.write("self.allocator.free(self.\$L);", fieldName)
                     } else {
@@ -233,6 +284,54 @@ class OperationGenerator(
 
         // Deserialize
         writer.write("return try deserializeResponse(response.body, response.status, response.headers, client.allocator);")
+
+        writer.closeBlock("}")
+    }
+
+    private fun writeStreamingExecuteFunction(writer: ZigWriter) {
+        val inputName = "${operationName}Input"
+        val outputName = "${operationName}Output"
+
+        writer.openBlock(
+            "pub fn execute(client: *Client, input: \$L, options: Options) !\$L {",
+            inputName, outputName,
+        )
+
+        writer.write("var arena = std.heap.ArenaAllocator.init(client.allocator);")
+        writer.write("const alloc = arena.allocator();")
+        writer.blankLine()
+
+        // Serialize request
+        writer.write("var request = try serializeRequest(alloc, input, client.config);")
+        writer.blankLine()
+
+        // Sign
+        writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
+        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.packageName)
+        writer.blankLine()
+
+        // Send streaming request
+        writer.write("var stream_resp = try client.http_client.sendStreamingRequest(&request);")
+        writer.blankLine()
+
+        // Free arena -- request data already sent
+        writer.write("arena.deinit();")
+        writer.blankLine()
+
+        // Check for errors
+        writer.openBlock("if (!stream_resp.isSuccess()) {")
+        writer.write("defer stream_resp.deinit();")
+        writer.write("const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;")
+        writer.write("defer client.allocator.free(error_body);")
+        writer.openBlock("if (options.diagnostic) |d| {")
+        writer.write("d.* = parseErrorResponse(error_body, stream_resp.status);")
+        writer.closeBlock("}")
+        writer.write("return error.ServiceError;")
+        writer.closeBlock("}")
+        writer.blankLine()
+
+        // Deserialize
+        writer.write("return try deserializeStreamingResponse(&stream_resp, client.allocator);")
 
         writer.closeBlock("}")
     }

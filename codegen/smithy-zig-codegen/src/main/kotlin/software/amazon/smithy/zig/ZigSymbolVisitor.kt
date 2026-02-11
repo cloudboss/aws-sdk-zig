@@ -29,6 +29,7 @@ import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.TimestampShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.EnumTrait
+import software.amazon.smithy.model.traits.StreamingTrait
 
 class ZigSymbolVisitor(private val model: Model, private val packageName: String) :
     SymbolProvider, ShapeVisitor<Symbol> {
@@ -41,7 +42,12 @@ class ZigSymbolVisitor(private val model: Model, private val packageName: String
         return NamingUtil.toSnakeCase(shape.memberName)
     }
 
-    override fun blobShape(shape: BlobShape): Symbol = simpleSymbol("[]const u8")
+    override fun blobShape(shape: BlobShape): Symbol {
+        if (shape.hasTrait(StreamingTrait::class.java)) {
+            return simpleSymbol("aws.http.StreamingBody")
+        }
+        return simpleSymbol("[]const u8")
+    }
 
     override fun booleanShape(shape: BooleanShape): Symbol = simpleSymbol("bool")
 

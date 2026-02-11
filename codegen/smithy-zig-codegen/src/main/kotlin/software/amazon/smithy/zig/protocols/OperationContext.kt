@@ -2,6 +2,7 @@ package software.amazon.smithy.zig.protocols
 
 import software.amazon.smithy.codegen.core.SymbolProvider
 import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.BlobShape
 import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.MemberShape
@@ -11,6 +12,7 @@ import software.amazon.smithy.model.shapes.Shape
 import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.traits.EnumTrait
+import software.amazon.smithy.model.traits.StreamingTrait
 import software.amazon.smithy.zig.ZigSettings
 import software.amazon.smithy.zig.generators.ErrorGenerator
 
@@ -39,6 +41,10 @@ data class OperationContext(
     fun isEnumType(shape: Shape): Boolean {
         return shape is EnumShape || shape is IntEnumShape ||
             (shape is StringShape && shape.hasTrait(EnumTrait::class.java))
+    }
+
+    fun isStreamingBlob(shape: Shape): Boolean {
+        return shape is BlobShape && shape.hasTrait(StreamingTrait::class.java)
     }
 
     fun isScalarType(shape: Shape): Boolean {

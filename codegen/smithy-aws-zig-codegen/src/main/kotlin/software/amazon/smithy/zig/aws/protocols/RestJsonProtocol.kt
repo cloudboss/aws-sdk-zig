@@ -1,5 +1,6 @@
 package software.amazon.smithy.zig.aws.protocols
 
+import software.amazon.smithy.model.shapes.BlobShape
 import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.Shape
@@ -10,6 +11,7 @@ import software.amazon.smithy.model.traits.HttpPayloadTrait
 import software.amazon.smithy.model.traits.HttpQueryTrait
 import software.amazon.smithy.model.traits.HttpResponseCodeTrait
 import software.amazon.smithy.model.traits.HttpTrait
+import software.amazon.smithy.model.traits.StreamingTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigWriter
 import software.amazon.smithy.zig.protocols.OperationContext
@@ -316,7 +318,8 @@ class RestJsonProtocol : ProtocolGenerator {
             val targetShape = ctx.model.expectShape(memberShape.target)
             val zigType = ctx.resolveBaseZigType(targetShape)
 
-            if (zigType == "[]const u8") {
+            // Blob payloads (including @streaming blobs) are []const u8 in input structs
+            if (zigType == "[]const u8" || targetShape is BlobShape) {
                 if (memberShape.isRequired) {
                     writer.write("const body = input.\$L;", fieldName)
                 } else {
@@ -556,6 +559,75 @@ class RestJsonProtocol : ProtocolGenerator {
             }
             writer.closeBlock("}")
         }
+    }
+
+    override fun writeDeserializeStreamingResponse(writer: ZigWriter, ctx: OperationContext) {
+        val outputName = "${ctx.operationName}Output"
+        val bindings = resolveOutputBindings(ctx)
+
+        writer.openBlock(
+            "fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !\$L {",
+            outputName,
+        )
+
+        writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
+
+        // Transfer StreamingBody ownership to result for @httpPayload streaming blob
+        if (bindings.payload != null) {
+            val (memberName, memberShape) = bindings.payload
+            val fieldName = NamingUtil.toFieldName(memberName)
+            val targetShape = ctx.model.expectShape(memberShape.target)
+
+            if (ctx.isStreamingBlob(targetShape)) {
+                writer.write("result.\$L = stream_resp.body;", fieldName)
+            }
+        }
+
+        // @httpResponseCode
+        if (bindings.responseCode != null) {
+            val (memberName, _) = bindings.responseCode
+            val fieldName = NamingUtil.toFieldName(memberName)
+            writer.write("result.\$L = @intCast(stream_resp.status);", fieldName)
+        }
+
+        // @httpHeader - extract from response headers
+        if (bindings.headers.isNotEmpty()) {
+            for ((memberName, memberShape) in bindings.headers) {
+                val headerName = memberShape.expectTrait(HttpHeaderTrait::class.java).value.lowercase()
+                val fieldName = NamingUtil.toFieldName(memberName)
+                val targetShape = ctx.model.expectShape(memberShape.target)
+                val zigType = ctx.resolveBaseZigType(targetShape)
+                val isEnum = ctx.isEnumType(targetShape)
+
+                writer.openBlock("if (stream_resp.headers.get(\"\$L\")) |value| {", headerName)
+                when {
+                    zigType == "[]const u8" -> {
+                        writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                    }
+                    isEnum -> {
+                        val typeName = ctx.resolveBaseZigType(targetShape)
+                        writer.write("result.\$L = std.meta.stringToEnum(\$L, value);", fieldName, typeName)
+                    }
+                    zigType == "bool" -> {
+                        writer.write("result.\$L = std.mem.eql(u8, value, \"true\");", fieldName)
+                    }
+                    zigType in listOf("i32", "i64", "i16", "i8") -> {
+                        writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
+                    }
+                    else -> {
+                        writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                    }
+                }
+                writer.closeBlock("}")
+            }
+        }
+
+        // Free headers (values were duped above), but NOT the body
+        writer.write("stream_resp.deinitHeaders();")
+        writer.blankLine()
+
+        writer.write("return result;")
+        writer.closeBlock("}")
     }
 
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
