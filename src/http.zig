@@ -78,11 +78,18 @@ pub const Request = struct {
 pub const Response = struct {
     status: u16,
     body: []const u8,
+    headers: std.StringHashMapUnmanaged([]const u8),
     allocator: Allocator,
 
     const Self = @This();
 
     pub fn deinit(self: *Self) void {
+        var iter = self.headers.iterator();
+        while (iter.next()) |entry| {
+            self.allocator.free(entry.key_ptr.*);
+            self.allocator.free(entry.value_ptr.*);
+        }
+        self.headers.deinit(self.allocator);
         self.allocator.free(self.body);
     }
 
@@ -225,6 +232,22 @@ pub const HttpClient = struct {
         var redirect_buf: [8192]u8 = undefined;
         var response = req.receiveHead(&redirect_buf) catch return error.RequestFailed;
 
+        // Extract response headers (lowercase keys for case-insensitive lookup)
+        var resp_headers = std.StringHashMapUnmanaged([]const u8){};
+        var header_iter = response.head.iterateHeaders();
+        while (header_iter.next()) |header| {
+            const key = std.ascii.allocLowerString(self.allocator, header.name) catch return error.OutOfMemory;
+            const value = self.allocator.dupe(u8, header.value) catch {
+                self.allocator.free(key);
+                return error.OutOfMemory;
+            };
+            resp_headers.put(self.allocator, key, value) catch {
+                self.allocator.free(key);
+                self.allocator.free(value);
+                return error.OutOfMemory;
+            };
+        }
+
         // Read response body
         var transfer_buf: [8192]u8 = undefined;
         const body_reader = response.reader(&transfer_buf);
@@ -238,6 +261,7 @@ pub const HttpClient = struct {
         return Response{
             .status = @intFromEnum(response.head.status),
             .body = body,
+            .headers = resp_headers,
             .allocator = self.allocator,
         };
     }
@@ -315,20 +339,20 @@ test "Request getUri with port" {
 }
 
 test "Response status helpers" {
-    const success = Response{ .status = 200, .body = "", .allocator = std.testing.allocator };
+    const success = Response{ .status = 200, .body = "", .headers = .{}, .allocator = std.testing.allocator };
     try std.testing.expect(success.isSuccess());
     try std.testing.expect(!success.isServerError());
     try std.testing.expect(!success.isRetryable());
 
-    const server_error = Response{ .status = 503, .body = "", .allocator = std.testing.allocator };
+    const server_error = Response{ .status = 503, .body = "", .headers = .{}, .allocator = std.testing.allocator };
     try std.testing.expect(!server_error.isSuccess());
     try std.testing.expect(server_error.isServerError());
     try std.testing.expect(server_error.isRetryable());
 
-    const rate_limit = Response{ .status = 429, .body = "", .allocator = std.testing.allocator };
+    const rate_limit = Response{ .status = 429, .body = "", .headers = .{}, .allocator = std.testing.allocator };
     try std.testing.expect(rate_limit.isRetryable());
 
-    const not_found = Response{ .status = 404, .body = "", .allocator = std.testing.allocator };
+    const not_found = Response{ .status = 404, .body = "", .headers = .{}, .allocator = std.testing.allocator };
     try std.testing.expect(!not_found.isRetryable());
 }
 

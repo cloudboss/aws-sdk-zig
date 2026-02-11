@@ -69,7 +69,7 @@ pub fn execute(client: *Client, input: CancelCapacityReservationFleetsInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CancelCapacityReservationFleetsInput, config: *aws.Config) !aws.http.Request {
@@ -107,8 +107,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CancelCapacityReservationFl
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CancelCapacityReservationFleetsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CancelCapacityReservationFleetsOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: CancelCapacityReservationFleetsOutput = .{ .allocator = alloc };
 

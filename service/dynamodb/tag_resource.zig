@@ -75,7 +75,7 @@ pub fn execute(client: *Client, input: TagResourceInput, options: Options) !TagR
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: TagResourceInput, config: *aws.Config) !aws.http.Request {
@@ -110,8 +110,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: TagResourceInput, config: *
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !TagResourceOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !TagResourceOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: TagResourceOutput = .{ .allocator = alloc };
 

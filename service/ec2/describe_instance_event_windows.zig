@@ -126,7 +126,7 @@ pub fn execute(client: *Client, input: DescribeInstanceEventWindowsInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstanceEventWindowsInput, config: *aws.Config) !aws.http.Request {
@@ -187,8 +187,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstanceEventWindow
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DescribeInstanceEventWindowsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeInstanceEventWindowsOutput {
     _ = status;
+    _ = headers;
     var result: DescribeInstanceEventWindowsOutput = .{ .allocator = alloc };
     if (findElement(body, "nextToken")) |content| {
         result.next_token = try alloc.dupe(u8, content);

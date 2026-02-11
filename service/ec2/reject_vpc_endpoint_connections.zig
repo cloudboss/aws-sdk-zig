@@ -57,7 +57,7 @@ pub fn execute(client: *Client, input: RejectVpcEndpointConnectionsInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: RejectVpcEndpointConnectionsInput, config: *aws.Config) !aws.http.Request {
@@ -97,8 +97,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RejectVpcEndpointConnection
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !RejectVpcEndpointConnectionsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RejectVpcEndpointConnectionsOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: RejectVpcEndpointConnectionsOutput = .{ .allocator = alloc };
 

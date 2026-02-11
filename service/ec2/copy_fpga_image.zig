@@ -70,7 +70,7 @@ pub fn execute(client: *Client, input: CopyFpgaImageInput, options: Options) !Co
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CopyFpgaImageInput, config: *aws.Config) !aws.http.Request {
@@ -117,8 +117,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CopyFpgaImageInput, config:
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CopyFpgaImageOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CopyFpgaImageOutput {
     _ = status;
+    _ = headers;
     var result: CopyFpgaImageOutput = .{ .allocator = alloc };
     if (findElement(body, "fpgaImageId")) |content| {
         result.fpga_image_id = try alloc.dupe(u8, content);

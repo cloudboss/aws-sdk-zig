@@ -87,7 +87,7 @@ pub fn execute(client: *Client, input: GetPasswordDataInput, options: Options) !
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetPasswordDataInput, config: *aws.Config) !aws.http.Request {
@@ -120,8 +120,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetPasswordDataInput, confi
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetPasswordDataOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetPasswordDataOutput {
     _ = status;
+    _ = headers;
     var result: GetPasswordDataOutput = .{ .allocator = alloc };
     if (findElement(body, "instanceId")) |content| {
         result.instance_id = try alloc.dupe(u8, content);

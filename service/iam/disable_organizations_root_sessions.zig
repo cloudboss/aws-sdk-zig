@@ -58,7 +58,7 @@ pub fn execute(client: *Client, input: DisableOrganizationsRootSessionsInput, op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DisableOrganizationsRootSessionsInput, config: *aws.Config) !aws.http.Request {
@@ -86,8 +86,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisableOrganizationsRootSes
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DisableOrganizationsRootSessionsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DisableOrganizationsRootSessionsOutput {
     _ = status;
+    _ = headers;
     var result: DisableOrganizationsRootSessionsOutput = .{ .allocator = alloc };
     if (findElement(body, "OrganizationId")) |content| {
         result.organization_id = try alloc.dupe(u8, content);

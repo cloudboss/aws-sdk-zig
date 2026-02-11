@@ -147,10 +147,11 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         }
 
         writer.openBlock(
-            "fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !\$L {",
+            "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
             outputName,
         )
         writer.write("_ = status;")
+        writer.write("_ = headers;")
 
         if (!hasDeserializableFields) {
             writer.write("_ = body;")

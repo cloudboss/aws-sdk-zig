@@ -111,7 +111,7 @@ pub fn execute(client: *Client, input: ListSAMLProviderTagsInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListSAMLProviderTagsInput, config: *aws.Config) !aws.http.Request {
@@ -148,8 +148,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListSAMLProviderTagsInput, 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ListSAMLProviderTagsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListSAMLProviderTagsOutput {
     _ = status;
+    _ = headers;
     var result: ListSAMLProviderTagsOutput = .{ .allocator = alloc };
     if (findElement(body, "IsTruncated")) |content| {
         result.is_truncated = std.mem.eql(u8, content, "true");

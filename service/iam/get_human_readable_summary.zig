@@ -91,7 +91,7 @@ pub fn execute(client: *Client, input: GetHumanReadableSummaryInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetHumanReadableSummaryInput, config: *aws.Config) !aws.http.Request {
@@ -124,8 +124,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetHumanReadableSummaryInpu
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetHumanReadableSummaryOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetHumanReadableSummaryOutput {
     _ = status;
+    _ = headers;
     var result: GetHumanReadableSummaryOutput = .{ .allocator = alloc };
     if (findElement(body, "Locale")) |content| {
         result.locale = try alloc.dupe(u8, content);

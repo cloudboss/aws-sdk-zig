@@ -97,7 +97,7 @@ pub fn execute(client: *Client, input: GetFunctionUrlConfigInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetFunctionUrlConfigInput, config: *aws.Config) !aws.http.Request {
@@ -137,7 +137,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFunctionUrlConfigInput, 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetFunctionUrlConfigOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetFunctionUrlConfigOutput {
     var result: GetFunctionUrlConfigOutput = .{ .allocator = alloc };
     _ = status;
     if (findJsonValue(body, "CreationTime")) |content| {
@@ -152,6 +152,7 @@ fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) 
     if (findJsonValue(body, "LastModifiedTime")) |content| {
         result.last_modified_time = try alloc.dupe(u8, content);
     }
+    _ = headers;
 
     return result;
 }

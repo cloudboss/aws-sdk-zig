@@ -105,7 +105,7 @@ pub fn execute(client: *Client, input: ListPolicyTagsInput, options: Options) !L
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListPolicyTagsInput, config: *aws.Config) !aws.http.Request {
@@ -142,8 +142,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListPolicyTagsInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ListPolicyTagsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListPolicyTagsOutput {
     _ = status;
+    _ = headers;
     var result: ListPolicyTagsOutput = .{ .allocator = alloc };
     if (findElement(body, "IsTruncated")) |content| {
         result.is_truncated = std.mem.eql(u8, content, "true");

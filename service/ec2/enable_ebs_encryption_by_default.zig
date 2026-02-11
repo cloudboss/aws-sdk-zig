@@ -67,7 +67,7 @@ pub fn execute(client: *Client, input: EnableEbsEncryptionByDefaultInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: EnableEbsEncryptionByDefaultInput, config: *aws.Config) !aws.http.Request {
@@ -98,8 +98,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: EnableEbsEncryptionByDefaul
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !EnableEbsEncryptionByDefaultOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !EnableEbsEncryptionByDefaultOutput {
     _ = status;
+    _ = headers;
     var result: EnableEbsEncryptionByDefaultOutput = .{ .allocator = alloc };
     if (findElement(body, "ebsEncryptionByDefault")) |content| {
         result.ebs_encryption_by_default = std.mem.eql(u8, content, "true");

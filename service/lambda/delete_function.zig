@@ -72,7 +72,7 @@ pub fn execute(client: *Client, input: DeleteFunctionInput, options: Options) !D
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteFunctionInput, config: *aws.Config) !aws.http.Request {
@@ -111,10 +111,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteFunctionInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteFunctionOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteFunctionOutput {
     var result: DeleteFunctionOutput = .{ .allocator = alloc };
     result.status_code = @intCast(status);
     _ = body;
+    _ = headers;
 
     return result;
 }

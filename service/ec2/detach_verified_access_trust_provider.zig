@@ -68,7 +68,7 @@ pub fn execute(client: *Client, input: DetachVerifiedAccessTrustProviderInput, o
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DetachVerifiedAccessTrustProviderInput, config: *aws.Config) !aws.http.Request {
@@ -107,8 +107,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DetachVerifiedAccessTrustPr
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DetachVerifiedAccessTrustProviderOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DetachVerifiedAccessTrustProviderOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: DetachVerifiedAccessTrustProviderOutput = .{ .allocator = alloc };
 

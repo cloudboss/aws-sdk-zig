@@ -61,7 +61,7 @@ pub fn execute(client: *Client, input: GetAssociatedEnclaveCertificateIamRolesIn
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetAssociatedEnclaveCertificateIamRolesInput, config: *aws.Config) !aws.http.Request {
@@ -94,8 +94,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAssociatedEnclaveCertifi
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetAssociatedEnclaveCertificateIamRolesOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAssociatedEnclaveCertificateIamRolesOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: GetAssociatedEnclaveCertificateIamRolesOutput = .{ .allocator = alloc };
 

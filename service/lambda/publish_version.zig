@@ -319,7 +319,7 @@ pub fn execute(client: *Client, input: PublishVersionInput, options: Options) !P
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PublishVersionInput, config: *aws.Config) !aws.http.Request {
@@ -382,7 +382,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PublishVersionInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !PublishVersionOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PublishVersionOutput {
     var result: PublishVersionOutput = .{ .allocator = alloc };
     _ = status;
     if (findJsonValue(body, "CodeSha256")) |content| {
@@ -442,6 +442,7 @@ fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) 
     if (findJsonValue(body, "Version")) |content| {
         result.version = try alloc.dupe(u8, content);
     }
+    _ = headers;
 
     return result;
 }

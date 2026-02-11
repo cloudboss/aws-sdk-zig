@@ -107,7 +107,7 @@ pub fn execute(client: *Client, input: RestoreSnapshotFromRecycleBinInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: RestoreSnapshotFromRecycleBinInput, config: *aws.Config) !aws.http.Request {
@@ -140,8 +140,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreSnapshotFromRecycleB
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !RestoreSnapshotFromRecycleBinOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RestoreSnapshotFromRecycleBinOutput {
     _ = status;
+    _ = headers;
     var result: RestoreSnapshotFromRecycleBinOutput = .{ .allocator = alloc };
     if (findElement(body, "description")) |content| {
         result.description = try alloc.dupe(u8, content);

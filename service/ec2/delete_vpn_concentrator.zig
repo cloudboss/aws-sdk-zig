@@ -53,7 +53,7 @@ pub fn execute(client: *Client, input: DeleteVpnConcentratorInput, options: Opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteVpnConcentratorInput, config: *aws.Config) !aws.http.Request {
@@ -86,8 +86,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteVpnConcentratorInput,
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteVpnConcentratorOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteVpnConcentratorOutput {
     _ = status;
+    _ = headers;
     var result: DeleteVpnConcentratorOutput = .{ .allocator = alloc };
     if (findElement(body, "return")) |content| {
         result.@"return" = std.mem.eql(u8, content, "true");

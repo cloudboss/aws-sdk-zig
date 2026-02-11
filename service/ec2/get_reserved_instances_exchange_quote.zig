@@ -101,7 +101,7 @@ pub fn execute(client: *Client, input: GetReservedInstancesExchangeQuoteInput, o
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetReservedInstancesExchangeQuoteInput, config: *aws.Config) !aws.http.Request {
@@ -158,8 +158,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetReservedInstancesExchang
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetReservedInstancesExchangeQuoteOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetReservedInstancesExchangeQuoteOutput {
     _ = status;
+    _ = headers;
     var result: GetReservedInstancesExchangeQuoteOutput = .{ .allocator = alloc };
     if (findElement(body, "currencyCode")) |content| {
         result.currency_code = try alloc.dupe(u8, content);

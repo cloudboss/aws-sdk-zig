@@ -94,7 +94,7 @@ pub fn execute(client: *Client, input: GetCoipPoolUsageInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCoipPoolUsageInput, config: *aws.Config) !aws.http.Request {
@@ -148,8 +148,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCoipPoolUsageInput, conf
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetCoipPoolUsageOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCoipPoolUsageOutput {
     _ = status;
+    _ = headers;
     var result: GetCoipPoolUsageOutput = .{ .allocator = alloc };
     if (findElement(body, "coipPoolId")) |content| {
         result.coip_pool_id = try alloc.dupe(u8, content);

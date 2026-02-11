@@ -45,7 +45,7 @@ pub fn execute(client: *Client, input: DeleteCodeSigningConfigInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteCodeSigningConfigInput, config: *aws.Config) !aws.http.Request {
@@ -73,9 +73,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteCodeSigningConfigInpu
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteCodeSigningConfigOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteCodeSigningConfigOutput {
     _ = body;
     _ = status;
+    _ = headers;
     const result: DeleteCodeSigningConfigOutput = .{ .allocator = alloc };
 
     return result;

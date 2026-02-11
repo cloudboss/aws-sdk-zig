@@ -169,7 +169,7 @@ pub fn execute(client: *Client, input: InvokeInput, options: Options) !InvokeOut
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: InvokeInput, config: *aws.Config) !aws.http.Request {
@@ -224,11 +224,23 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeInput, config: *aws.C
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !InvokeOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InvokeOutput {
     var result: InvokeOutput = .{ .allocator = alloc };
     result.status_code = @intCast(status);
     if (body.len > 0) {
         result.payload = try alloc.dupe(u8, body);
+    }
+    if (headers.get("x-amz-durable-execution-arn")) |value| {
+        result.durable_execution_arn = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-executed-version")) |value| {
+        result.executed_version = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-function-error")) |value| {
+        result.function_error = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-log-result")) |value| {
+        result.log_result = try alloc.dupe(u8, value);
     }
 
     return result;

@@ -114,7 +114,7 @@ pub fn execute(client: *Client, input: ListSSHPublicKeysInput, options: Options)
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListSSHPublicKeysInput, config: *aws.Config) !aws.http.Request {
@@ -153,8 +153,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListSSHPublicKeysInput, con
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ListSSHPublicKeysOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListSSHPublicKeysOutput {
     _ = status;
+    _ = headers;
     var result: ListSSHPublicKeysOutput = .{ .allocator = alloc };
     if (findElement(body, "IsTruncated")) |content| {
         result.is_truncated = std.mem.eql(u8, content, "true");

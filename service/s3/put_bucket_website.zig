@@ -168,7 +168,7 @@ pub fn execute(client: *Client, input: PutBucketWebsiteInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PutBucketWebsiteInput, config: *aws.Config) !aws.http.Request {
@@ -212,9 +212,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutBucketWebsiteInput, conf
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !PutBucketWebsiteOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutBucketWebsiteOutput {
     _ = body;
     _ = status;
+    _ = headers;
     const result: PutBucketWebsiteOutput = .{ .allocator = alloc };
 
     return result;

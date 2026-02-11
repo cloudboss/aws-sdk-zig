@@ -80,7 +80,7 @@ pub fn execute(client: *Client, input: ModifyInstanceNetworkPerformanceOptionsIn
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceNetworkPerformanceOptionsInput, config: *aws.Config) !aws.http.Request {
@@ -115,8 +115,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceNetworkPerfor
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ModifyInstanceNetworkPerformanceOptionsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyInstanceNetworkPerformanceOptionsOutput {
     _ = status;
+    _ = headers;
     var result: ModifyInstanceNetworkPerformanceOptionsOutput = .{ .allocator = alloc };
     if (findElement(body, "instanceId")) |content| {
         result.instance_id = try alloc.dupe(u8, content);

@@ -73,7 +73,7 @@ pub fn execute(client: *Client, input: GetVpnConnectionDeviceSampleConfiguration
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetVpnConnectionDeviceSampleConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -116,8 +116,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetVpnConnectionDeviceSampl
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetVpnConnectionDeviceSampleConfigurationOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetVpnConnectionDeviceSampleConfigurationOutput {
     _ = status;
+    _ = headers;
     var result: GetVpnConnectionDeviceSampleConfigurationOutput = .{ .allocator = alloc };
     if (findElement(body, "vpnConnectionDeviceSampleConfiguration")) |content| {
         result.vpn_connection_device_sample_configuration = try alloc.dupe(u8, content);

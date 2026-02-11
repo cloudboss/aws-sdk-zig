@@ -71,7 +71,7 @@ pub fn execute(client: *Client, input: ListAliasesInput, options: Options) !List
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListAliasesInput, config: *aws.Config) !aws.http.Request {
@@ -126,12 +126,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListAliasesInput, config: *
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ListAliasesOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListAliasesOutput {
     var result: ListAliasesOutput = .{ .allocator = alloc };
     _ = status;
     if (findJsonValue(body, "NextMarker")) |content| {
         result.next_marker = try alloc.dupe(u8, content);
     }
+    _ = headers;
 
     return result;
 }

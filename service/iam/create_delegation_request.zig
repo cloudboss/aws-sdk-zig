@@ -137,7 +137,7 @@ pub fn execute(client: *Client, input: CreateDelegationRequestInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateDelegationRequestInput, config: *aws.Config) !aws.http.Request {
@@ -192,8 +192,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDelegationRequestInpu
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateDelegationRequestOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateDelegationRequestOutput {
     _ = status;
+    _ = headers;
     var result: CreateDelegationRequestOutput = .{ .allocator = alloc };
     if (findElement(body, "ConsoleDeepLink")) |content| {
         result.console_deep_link = try alloc.dupe(u8, content);

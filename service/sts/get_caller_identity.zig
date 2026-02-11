@@ -78,7 +78,7 @@ pub fn execute(client: *Client, input: GetCallerIdentityInput, options: Options)
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCallerIdentityInput, config: *aws.Config) !aws.http.Request {
@@ -106,8 +106,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCallerIdentityInput, con
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetCallerIdentityOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCallerIdentityOutput {
     _ = status;
+    _ = headers;
     var result: GetCallerIdentityOutput = .{ .allocator = alloc };
     if (findElement(body, "Account")) |content| {
         result.account = try alloc.dupe(u8, content);

@@ -485,6 +485,46 @@ class RestXmlProtocolTest {
         )
     }
 
+    // ---- @httpHeader in response tests ----
+
+    @Test
+    fun putObjectDeserializesResponseHeaders() {
+        val files = generateFiles()
+        val op = files["put_object.zig"]!!
+
+        assertTrue(
+            op.contains("headers.get(\"etag\")"),
+            "Should extract ETag from response header (lowercased)",
+        )
+        assertTrue(
+            op.contains("result.e_tag"),
+            "Should assign header value to e_tag field",
+        )
+    }
+
+    @Test
+    fun deserializeResponseAcceptsHeaders() {
+        val files = generateFiles()
+        val op = files["put_object.zig"]!!
+
+        assertTrue(
+            op.contains("fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator)"),
+            "deserializeResponse should accept headers parameter",
+        )
+    }
+
+    @Test
+    fun listObjectsUnusedHeaders() {
+        val files = generateFiles()
+        val op = files["list_objects.zig"]!!
+
+        // ListObjects has no @httpHeader members in output, so headers should be unused
+        assertTrue(
+            op.contains("_ = headers;"),
+            "Should mark headers as unused when no @httpHeader output members exist",
+        )
+    }
+
     // ---- @httpResponseCode tests ----
 
     @Test

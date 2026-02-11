@@ -54,7 +54,7 @@ pub fn execute(client: *Client, input: DeleteDhcpOptionsInput, options: Options)
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteDhcpOptionsInput, config: *aws.Config) !aws.http.Request {
@@ -87,8 +87,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteDhcpOptionsInput, con
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteDhcpOptionsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteDhcpOptionsOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: DeleteDhcpOptionsOutput = .{ .allocator = alloc };
 

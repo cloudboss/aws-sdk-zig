@@ -407,9 +407,31 @@ class RestJsonProtocolTest {
 
     // ---- @httpHeader in response tests ----
 
-    // Note: response header reading requires access to response headers,
-    // which isn't passed to deserializeResponse yet. For now we verify the
-    // payload deserialization works.
+    @Test
+    fun invokeDeserializesResponseHeaders() {
+        val files = generateFiles()
+        val op = files["invoke.zig"]!!
+
+        assertTrue(
+            op.contains("headers.get(\"x-amz-function-error\")"),
+            "Should extract FunctionError from x-amz-function-error response header (lowercased)",
+        )
+        assertTrue(
+            op.contains("result.function_error"),
+            "Should assign header value to function_error field",
+        )
+    }
+
+    @Test
+    fun deserializeResponseAcceptsHeaders() {
+        val files = generateFiles()
+        val op = files["invoke.zig"]!!
+
+        assertTrue(
+            op.contains("fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator)"),
+            "deserializeResponse should accept headers parameter",
+        )
+    }
 
     @Test
     fun invokeDeserializesPayloadResponse() {
@@ -423,6 +445,18 @@ class RestJsonProtocolTest {
         assertTrue(
             op.contains("alloc.dupe(u8, body)"),
             "Should dupe payload body for output",
+        )
+    }
+
+    @Test
+    fun listFunctionsUnusedHeaders() {
+        val files = generateFiles()
+        val op = files["list_functions.zig"]!!
+
+        // ListFunctions has no @httpHeader members in output, so headers should be unused
+        assertTrue(
+            op.contains("_ = headers;"),
+            "Should mark headers as unused when no @httpHeader output members exist",
         )
     }
 

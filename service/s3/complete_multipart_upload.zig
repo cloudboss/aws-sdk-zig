@@ -587,7 +587,7 @@ pub fn execute(client: *Client, input: CompleteMultipartUploadInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CompleteMultipartUploadInput, config: *aws.Config) !aws.http.Request {
@@ -671,7 +671,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CompleteMultipartUploadInpu
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CompleteMultipartUploadOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CompleteMultipartUploadOutput {
     var result: CompleteMultipartUploadOutput = .{ .allocator = alloc };
     _ = status;
     if (findElement(body, "Bucket")) |content| {
@@ -700,6 +700,24 @@ fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) 
     }
     if (findElement(body, "Location")) |content| {
         result.location = try alloc.dupe(u8, content);
+    }
+    if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {
+        result.bucket_key_enabled = std.mem.eql(u8, value, "true");
+    }
+    if (headers.get("x-amz-expiration")) |value| {
+        result.expiration = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-request-charged")) |value| {
+        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+    }
+    if (headers.get("x-amz-server-side-encryption")) |value| {
+        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-aws-kms-key-id")) |value| {
+        result.ssekms_key_id = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-version-id")) |value| {
+        result.version_id = try alloc.dupe(u8, value);
     }
 
     return result;

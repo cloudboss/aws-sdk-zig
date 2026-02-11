@@ -509,7 +509,7 @@ pub fn execute(client: *Client, input: RunInstancesInput, options: Options) !Run
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: RunInstancesInput, config: *aws.Config) !aws.http.Request {
@@ -1031,8 +1031,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RunInstancesInput, config: 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !RunInstancesOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RunInstancesOutput {
     _ = status;
+    _ = headers;
     var result: RunInstancesOutput = .{ .allocator = alloc };
     if (findElement(body, "ownerId")) |content| {
         result.owner_id = try alloc.dupe(u8, content);

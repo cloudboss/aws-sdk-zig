@@ -71,7 +71,7 @@ pub fn execute(client: *Client, input: CreatePublicIpv4PoolInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreatePublicIpv4PoolInput, config: *aws.Config) !aws.http.Request {
@@ -119,8 +119,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePublicIpv4PoolInput, 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreatePublicIpv4PoolOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreatePublicIpv4PoolOutput {
     _ = status;
+    _ = headers;
     var result: CreatePublicIpv4PoolOutput = .{ .allocator = alloc };
     if (findElement(body, "poolId")) |content| {
         result.pool_id = try alloc.dupe(u8, content);

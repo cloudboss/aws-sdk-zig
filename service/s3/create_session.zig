@@ -338,7 +338,7 @@ pub fn execute(client: *Client, input: CreateSessionInput, options: Options) !Cr
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateSessionInput, config: *aws.Config) !aws.http.Request {
@@ -388,10 +388,22 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateSessionInput, config:
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateSessionOutput {
-    _ = body;
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateSessionOutput {
+    var result: CreateSessionOutput = .{ .allocator = alloc };
     _ = status;
-    const result: CreateSessionOutput = .{ .allocator = alloc };
+    _ = body;
+    if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {
+        result.bucket_key_enabled = std.mem.eql(u8, value, "true");
+    }
+    if (headers.get("x-amz-server-side-encryption")) |value| {
+        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-context")) |value| {
+        result.ssekms_encryption_context = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-aws-kms-key-id")) |value| {
+        result.ssekms_key_id = try alloc.dupe(u8, value);
+    }
 
     return result;
 }

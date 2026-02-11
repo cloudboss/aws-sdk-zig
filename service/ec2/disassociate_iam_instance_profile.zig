@@ -50,7 +50,7 @@ pub fn execute(client: *Client, input: DisassociateIamInstanceProfileInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateIamInstanceProfileInput, config: *aws.Config) !aws.http.Request {
@@ -79,8 +79,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateIamInstanceProf
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DisassociateIamInstanceProfileOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DisassociateIamInstanceProfileOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: DisassociateIamInstanceProfileOutput = .{ .allocator = alloc };
 

@@ -61,7 +61,7 @@ pub fn execute(client: *Client, input: StartVpcEndpointServicePrivateDnsVerifica
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: StartVpcEndpointServicePrivateDnsVerificationInput, config: *aws.Config) !aws.http.Request {
@@ -94,8 +94,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartVpcEndpointServicePriv
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !StartVpcEndpointServicePrivateDnsVerificationOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StartVpcEndpointServicePrivateDnsVerificationOutput {
     _ = status;
+    _ = headers;
     var result: StartVpcEndpointServicePrivateDnsVerificationOutput = .{ .allocator = alloc };
     if (findElement(body, "return")) |content| {
         result.return_value = std.mem.eql(u8, content, "true");

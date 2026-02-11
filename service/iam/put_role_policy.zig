@@ -125,7 +125,7 @@ pub fn execute(client: *Client, input: PutRolePolicyInput, options: Options) !Pu
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PutRolePolicyInput, config: *aws.Config) !aws.http.Request {
@@ -158,8 +158,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutRolePolicyInput, config:
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !PutRolePolicyOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutRolePolicyOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: PutRolePolicyOutput = .{ .allocator = alloc };
 

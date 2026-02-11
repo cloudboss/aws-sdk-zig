@@ -85,7 +85,7 @@ pub fn execute(client: *Client, input: ModifyInstanceCpuOptionsInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCpuOptionsInput, config: *aws.Config) !aws.http.Request {
@@ -122,8 +122,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCpuOptionsInp
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ModifyInstanceCpuOptionsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyInstanceCpuOptionsOutput {
     _ = status;
+    _ = headers;
     var result: ModifyInstanceCpuOptionsOutput = .{ .allocator = alloc };
     if (findElement(body, "coreCount")) |content| {
         result.core_count = std.fmt.parseInt(i32, content, 10) catch null;

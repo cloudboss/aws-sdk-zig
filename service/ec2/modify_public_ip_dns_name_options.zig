@@ -76,7 +76,7 @@ pub fn execute(client: *Client, input: ModifyPublicIpDnsNameOptionsInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyPublicIpDnsNameOptionsInput, config: *aws.Config) !aws.http.Request {
@@ -111,8 +111,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyPublicIpDnsNameOption
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ModifyPublicIpDnsNameOptionsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyPublicIpDnsNameOptionsOutput {
     _ = status;
+    _ = headers;
     var result: ModifyPublicIpDnsNameOptionsOutput = .{ .allocator = alloc };
     if (findElement(body, "successful")) |content| {
         result.successful = std.mem.eql(u8, content, "true");

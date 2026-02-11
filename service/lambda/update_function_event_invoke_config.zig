@@ -111,7 +111,7 @@ pub fn execute(client: *Client, input: UpdateFunctionEventInvokeConfigInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionEventInvokeConfigInput, config: *aws.Config) !aws.http.Request {
@@ -175,7 +175,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionEventInvokeCo
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UpdateFunctionEventInvokeConfigOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateFunctionEventInvokeConfigOutput {
     var result: UpdateFunctionEventInvokeConfigOutput = .{ .allocator = alloc };
     _ = status;
     if (findJsonValue(body, "FunctionArn")) |content| {
@@ -190,6 +190,7 @@ fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) 
     if (findJsonValue(body, "MaximumRetryAttempts")) |content| {
         result.maximum_retry_attempts = std.fmt.parseInt(i32, content, 10) catch null;
     }
+    _ = headers;
 
     return result;
 }

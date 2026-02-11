@@ -56,7 +56,7 @@ pub fn execute(client: *Client, input: DisableAddressTransferInput, options: Opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DisableAddressTransferInput, config: *aws.Config) !aws.http.Request {
@@ -89,8 +89,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisableAddressTransferInput
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DisableAddressTransferOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DisableAddressTransferOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: DisableAddressTransferOutput = .{ .allocator = alloc };
 

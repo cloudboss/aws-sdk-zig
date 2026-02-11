@@ -57,7 +57,7 @@ pub fn execute(client: *Client, input: DisableSerialConsoleAccessInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DisableSerialConsoleAccessInput, config: *aws.Config) !aws.http.Request {
@@ -88,8 +88,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisableSerialConsoleAccessI
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DisableSerialConsoleAccessOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DisableSerialConsoleAccessOutput {
     _ = status;
+    _ = headers;
     var result: DisableSerialConsoleAccessOutput = .{ .allocator = alloc };
     if (findElement(body, "serialConsoleAccessEnabled")) |content| {
         result.serial_console_access_enabled = std.mem.eql(u8, content, "true");

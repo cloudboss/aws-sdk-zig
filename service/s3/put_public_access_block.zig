@@ -130,7 +130,7 @@ pub fn execute(client: *Client, input: PutPublicAccessBlockInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PutPublicAccessBlockInput, config: *aws.Config) !aws.http.Request {
@@ -174,9 +174,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutPublicAccessBlockInput, 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !PutPublicAccessBlockOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutPublicAccessBlockOutput {
     _ = body;
     _ = status;
+    _ = headers;
     const result: PutPublicAccessBlockOutput = .{ .allocator = alloc };
 
     return result;

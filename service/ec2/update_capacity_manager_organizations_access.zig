@@ -66,7 +66,7 @@ pub fn execute(client: *Client, input: UpdateCapacityManagerOrganizationsAccessI
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateCapacityManagerOrganizationsAccessInput, config: *aws.Config) !aws.http.Request {
@@ -103,8 +103,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateCapacityManagerOrgani
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UpdateCapacityManagerOrganizationsAccessOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateCapacityManagerOrganizationsAccessOutput {
     _ = status;
+    _ = headers;
     var result: UpdateCapacityManagerOrganizationsAccessOutput = .{ .allocator = alloc };
     if (findElement(body, "organizationsAccess")) |content| {
         result.organizations_access = std.mem.eql(u8, content, "true");

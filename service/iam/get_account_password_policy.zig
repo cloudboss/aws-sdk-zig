@@ -51,7 +51,7 @@ pub fn execute(client: *Client, input: GetAccountPasswordPolicyInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetAccountPasswordPolicyInput, config: *aws.Config) !aws.http.Request {
@@ -79,8 +79,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAccountPasswordPolicyInp
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetAccountPasswordPolicyOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAccountPasswordPolicyOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: GetAccountPasswordPolicyOutput = .{ .allocator = alloc };
 

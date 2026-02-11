@@ -58,7 +58,7 @@ pub fn execute(client: *Client, input: DeleteTrafficMirrorTargetInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteTrafficMirrorTargetInput, config: *aws.Config) !aws.http.Request {
@@ -91,8 +91,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteTrafficMirrorTargetIn
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteTrafficMirrorTargetOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteTrafficMirrorTargetOutput {
     _ = status;
+    _ = headers;
     var result: DeleteTrafficMirrorTargetOutput = .{ .allocator = alloc };
     if (findElement(body, "trafficMirrorTargetId")) |content| {
         result.traffic_mirror_target_id = try alloc.dupe(u8, content);

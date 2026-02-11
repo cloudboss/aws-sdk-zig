@@ -372,7 +372,7 @@ pub fn execute(client: *Client, input: CreateVolumeInput, options: Options) !Cre
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateVolumeInput, config: *aws.Config) !aws.http.Request {
@@ -474,8 +474,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVolumeInput, config: 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateVolumeOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateVolumeOutput {
     _ = status;
+    _ = headers;
     var result: CreateVolumeOutput = .{ .allocator = alloc };
     if (findElement(body, "availabilityZone")) |content| {
         result.availability_zone = try alloc.dupe(u8, content);

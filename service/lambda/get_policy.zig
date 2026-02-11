@@ -68,7 +68,7 @@ pub fn execute(client: *Client, input: GetPolicyInput, options: Options) !GetPol
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetPolicyInput, config: *aws.Config) !aws.http.Request {
@@ -108,7 +108,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetPolicyInput, config: *aw
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetPolicyOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetPolicyOutput {
     var result: GetPolicyOutput = .{ .allocator = alloc };
     _ = status;
     if (findJsonValue(body, "Policy")) |content| {
@@ -117,6 +117,7 @@ fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) 
     if (findJsonValue(body, "RevisionId")) |content| {
         result.revision_id = try alloc.dupe(u8, content);
     }
+    _ = headers;
 
     return result;
 }

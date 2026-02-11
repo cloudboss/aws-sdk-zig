@@ -55,7 +55,7 @@ pub fn execute(client: *Client, input: DeleteNetworkInsightsAccessScopeAnalysisI
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteNetworkInsightsAccessScopeAnalysisInput, config: *aws.Config) !aws.http.Request {
@@ -88,8 +88,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteNetworkInsightsAccess
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteNetworkInsightsAccessScopeAnalysisOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteNetworkInsightsAccessScopeAnalysisOutput {
     _ = status;
+    _ = headers;
     var result: DeleteNetworkInsightsAccessScopeAnalysisOutput = .{ .allocator = alloc };
     if (findElement(body, "networkInsightsAccessScopeAnalysisId")) |content| {
         result.network_insights_access_scope_analysis_id = try alloc.dupe(u8, content);

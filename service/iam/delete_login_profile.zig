@@ -80,7 +80,7 @@ pub fn execute(client: *Client, input: DeleteLoginProfileInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteLoginProfileInput, config: *aws.Config) !aws.http.Request {
@@ -111,8 +111,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteLoginProfileInput, co
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteLoginProfileOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteLoginProfileOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: DeleteLoginProfileOutput = .{ .allocator = alloc };
 

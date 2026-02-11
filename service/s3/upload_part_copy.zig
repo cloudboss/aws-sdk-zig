@@ -597,7 +597,7 @@ pub fn execute(client: *Client, input: UploadPartCopyInput, options: Options) !U
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UploadPartCopyInput, config: *aws.Config) !aws.http.Request {
@@ -694,10 +694,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UploadPartCopyInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UploadPartCopyOutput {
-    _ = body;
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UploadPartCopyOutput {
+    var result: UploadPartCopyOutput = .{ .allocator = alloc };
     _ = status;
-    const result: UploadPartCopyOutput = .{ .allocator = alloc };
+    _ = body;
+    if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {
+        result.bucket_key_enabled = std.mem.eql(u8, value, "true");
+    }
+    if (headers.get("x-amz-copy-source-version-id")) |value| {
+        result.copy_source_version_id = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-request-charged")) |value| {
+        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+    }
+    if (headers.get("x-amz-server-side-encryption")) |value| {
+        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-customer-algorithm")) |value| {
+        result.sse_customer_algorithm = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-customer-key-md5")) |value| {
+        result.sse_customer_key_md5 = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-aws-kms-key-id")) |value| {
+        result.ssekms_key_id = try alloc.dupe(u8, value);
+    }
 
     return result;
 }

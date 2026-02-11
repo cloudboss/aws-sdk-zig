@@ -83,7 +83,7 @@ pub fn execute(client: *Client, input: UploadSSHPublicKeyInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UploadSSHPublicKeyInput, config: *aws.Config) !aws.http.Request {
@@ -114,8 +114,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UploadSSHPublicKeyInput, co
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UploadSSHPublicKeyOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UploadSSHPublicKeyOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: UploadSSHPublicKeyOutput = .{ .allocator = alloc };
 

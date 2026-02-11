@@ -85,7 +85,7 @@ pub fn execute(client: *Client, input: ModifyFpgaImageAttributeInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyFpgaImageAttributeInput, config: *aws.Config) !aws.http.Request {
@@ -161,8 +161,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyFpgaImageAttributeInp
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ModifyFpgaImageAttributeOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyFpgaImageAttributeOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: ModifyFpgaImageAttributeOutput = .{ .allocator = alloc };
 

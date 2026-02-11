@@ -111,7 +111,7 @@ pub fn execute(client: *Client, input: GetBucketAclInput, options: Options) !Get
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketAclInput, config: *aws.Config) !aws.http.Request {
@@ -149,9 +149,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketAclInput, config: 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetBucketAclOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketAclOutput {
     _ = body;
     _ = status;
+    _ = headers;
     const result: GetBucketAclOutput = .{ .allocator = alloc };
 
     return result;

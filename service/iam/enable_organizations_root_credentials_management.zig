@@ -70,7 +70,7 @@ pub fn execute(client: *Client, input: EnableOrganizationsRootCredentialsManagem
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: EnableOrganizationsRootCredentialsManagementInput, config: *aws.Config) !aws.http.Request {
@@ -98,8 +98,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: EnableOrganizationsRootCred
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !EnableOrganizationsRootCredentialsManagementOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !EnableOrganizationsRootCredentialsManagementOutput {
     _ = status;
+    _ = headers;
     var result: EnableOrganizationsRootCredentialsManagementOutput = .{ .allocator = alloc };
     if (findElement(body, "OrganizationId")) |content| {
         result.organization_id = try alloc.dupe(u8, content);

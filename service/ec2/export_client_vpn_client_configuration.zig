@@ -58,7 +58,7 @@ pub fn execute(client: *Client, input: ExportClientVpnClientConfigurationInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ExportClientVpnClientConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -91,8 +91,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExportClientVpnClientConfig
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ExportClientVpnClientConfigurationOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ExportClientVpnClientConfigurationOutput {
     _ = status;
+    _ = headers;
     var result: ExportClientVpnClientConfigurationOutput = .{ .allocator = alloc };
     if (findElement(body, "clientConfiguration")) |content| {
         result.client_configuration = try alloc.dupe(u8, content);

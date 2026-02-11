@@ -72,7 +72,7 @@ pub fn execute(client: *Client, input: DescribeMacHostsInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeMacHostsInput, config: *aws.Config) !aws.http.Request {
@@ -129,8 +129,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeMacHostsInput, conf
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DescribeMacHostsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeMacHostsOutput {
     _ = status;
+    _ = headers;
     var result: DescribeMacHostsOutput = .{ .allocator = alloc };
     if (findElement(body, "nextToken")) |content| {
         result.next_token = try alloc.dupe(u8, content);

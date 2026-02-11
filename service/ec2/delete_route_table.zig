@@ -53,7 +53,7 @@ pub fn execute(client: *Client, input: DeleteRouteTableInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteRouteTableInput, config: *aws.Config) !aws.http.Request {
@@ -86,8 +86,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteRouteTableInput, conf
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteRouteTableOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteRouteTableOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: DeleteRouteTableOutput = .{ .allocator = alloc };
 

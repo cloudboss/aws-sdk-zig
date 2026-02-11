@@ -128,7 +128,7 @@ pub fn execute(client: *Client, input: StartDeclarativePoliciesReportInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: StartDeclarativePoliciesReportInput, config: *aws.Config) !aws.http.Request {
@@ -180,8 +180,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartDeclarativePoliciesRep
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !StartDeclarativePoliciesReportOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StartDeclarativePoliciesReportOutput {
     _ = status;
+    _ = headers;
     var result: StartDeclarativePoliciesReportOutput = .{ .allocator = alloc };
     if (findElement(body, "reportId")) |content| {
         result.report_id = try alloc.dupe(u8, content);

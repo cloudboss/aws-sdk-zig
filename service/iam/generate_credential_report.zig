@@ -54,7 +54,7 @@ pub fn execute(client: *Client, input: GenerateCredentialReportInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GenerateCredentialReportInput, config: *aws.Config) !aws.http.Request {
@@ -82,8 +82,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GenerateCredentialReportInp
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GenerateCredentialReportOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GenerateCredentialReportOutput {
     _ = status;
+    _ = headers;
     var result: GenerateCredentialReportOutput = .{ .allocator = alloc };
     if (findElement(body, "Description")) |content| {
         result.description = try alloc.dupe(u8, content);

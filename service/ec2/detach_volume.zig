@@ -152,7 +152,7 @@ pub fn execute(client: *Client, input: DetachVolumeInput, options: Options) !Det
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DetachVolumeInput, config: *aws.Config) !aws.http.Request {
@@ -197,8 +197,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DetachVolumeInput, config: 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DetachVolumeOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DetachVolumeOutput {
     _ = status;
+    _ = headers;
     var result: DetachVolumeOutput = .{ .allocator = alloc };
     if (findElement(body, "associatedResource")) |content| {
         result.associated_resource = try alloc.dupe(u8, content);

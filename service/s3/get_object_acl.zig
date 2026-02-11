@@ -132,7 +132,7 @@ pub fn execute(client: *Client, input: GetObjectAclInput, options: Options) !Get
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAclInput, config: *aws.Config) !aws.http.Request {
@@ -181,10 +181,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAclInput, config: 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetObjectAclOutput {
-    _ = body;
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetObjectAclOutput {
+    var result: GetObjectAclOutput = .{ .allocator = alloc };
     _ = status;
-    const result: GetObjectAclOutput = .{ .allocator = alloc };
+    _ = body;
+    if (headers.get("x-amz-request-charged")) |value| {
+        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+    }
 
     return result;
 }

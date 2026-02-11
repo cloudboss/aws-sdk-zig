@@ -118,7 +118,7 @@ pub fn execute(client: *Client, input: AssignPrivateIpAddressesInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssignPrivateIpAddressesInput, config: *aws.Config) !aws.http.Request {
@@ -177,8 +177,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssignPrivateIpAddressesInp
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !AssignPrivateIpAddressesOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssignPrivateIpAddressesOutput {
     _ = status;
+    _ = headers;
     var result: AssignPrivateIpAddressesOutput = .{ .allocator = alloc };
     if (findElement(body, "networkInterfaceId")) |content| {
         result.network_interface_id = try alloc.dupe(u8, content);

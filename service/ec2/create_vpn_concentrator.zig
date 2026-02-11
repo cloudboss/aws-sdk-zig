@@ -63,7 +63,7 @@ pub fn execute(client: *Client, input: CreateVpnConcentratorInput, options: Opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConcentratorInput, config: *aws.Config) !aws.http.Request {
@@ -113,8 +113,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConcentratorInput,
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateVpnConcentratorOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateVpnConcentratorOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: CreateVpnConcentratorOutput = .{ .allocator = alloc };
 

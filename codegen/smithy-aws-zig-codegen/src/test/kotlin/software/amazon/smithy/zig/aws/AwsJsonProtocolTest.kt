@@ -250,6 +250,21 @@ class AwsJsonProtocolTest {
     }
 
     @Test
+    fun deserializeResponseAcceptsHeaders() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator)"),
+            "deserializeResponse should accept headers parameter",
+        )
+        assertTrue(
+            op.contains("_ = headers;"),
+            "AWS JSON protocol should mark headers as unused",
+        )
+    }
+
+    @Test
     fun deserializerParsesIntegers() {
         val files = generateFiles("1.0")
         val op = files["list_tables.zig"]!!

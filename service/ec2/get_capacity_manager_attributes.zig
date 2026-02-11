@@ -81,7 +81,7 @@ pub fn execute(client: *Client, input: GetCapacityManagerAttributesInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityManagerAttributesInput, config: *aws.Config) !aws.http.Request {
@@ -112,8 +112,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityManagerAttribute
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetCapacityManagerAttributesOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCapacityManagerAttributesOutput {
     _ = status;
+    _ = headers;
     var result: GetCapacityManagerAttributesOutput = .{ .allocator = alloc };
     if (findElement(body, "dataExportCount")) |content| {
         result.data_export_count = std.fmt.parseInt(i32, content, 10) catch null;

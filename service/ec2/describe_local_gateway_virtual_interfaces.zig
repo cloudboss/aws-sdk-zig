@@ -91,7 +91,7 @@ pub fn execute(client: *Client, input: DescribeLocalGatewayVirtualInterfacesInpu
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeLocalGatewayVirtualInterfacesInput, config: *aws.Config) !aws.http.Request {
@@ -152,8 +152,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeLocalGatewayVirtual
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DescribeLocalGatewayVirtualInterfacesOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeLocalGatewayVirtualInterfacesOutput {
     _ = status;
+    _ = headers;
     var result: DescribeLocalGatewayVirtualInterfacesOutput = .{ .allocator = alloc };
     if (findElement(body, "nextToken")) |content| {
         result.next_token = try alloc.dupe(u8, content);

@@ -416,7 +416,7 @@ pub fn execute(client: *Client, input: GetObjectAttributesInput, options: Option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAttributesInput, config: *aws.Config) !aws.http.Request {
@@ -484,7 +484,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAttributesInput, c
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetObjectAttributesOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetObjectAttributesOutput {
     var result: GetObjectAttributesOutput = .{ .allocator = alloc };
     _ = status;
     if (findElement(body, "ETag")) |content| {
@@ -492,6 +492,18 @@ fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) 
     }
     if (findElement(body, "ObjectSize")) |content| {
         result.object_size = std.fmt.parseInt(i64, content, 10) catch null;
+    }
+    if (headers.get("x-amz-delete-marker")) |value| {
+        result.delete_marker = std.mem.eql(u8, value, "true");
+    }
+    if (headers.get("last-modified")) |value| {
+        result.last_modified = std.fmt.parseInt(i64, value, 10) catch null;
+    }
+    if (headers.get("x-amz-request-charged")) |value| {
+        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+    }
+    if (headers.get("x-amz-version-id")) |value| {
+        result.version_id = try alloc.dupe(u8, value);
     }
 
     return result;

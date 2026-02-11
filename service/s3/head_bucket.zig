@@ -237,7 +237,7 @@ pub fn execute(client: *Client, input: HeadBucketInput, options: Options) !HeadB
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: HeadBucketInput, config: *aws.Config) !aws.http.Request {
@@ -268,10 +268,25 @@ fn serializeRequest(alloc: std.mem.Allocator, input: HeadBucketInput, config: *a
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !HeadBucketOutput {
-    _ = body;
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !HeadBucketOutput {
+    var result: HeadBucketOutput = .{ .allocator = alloc };
     _ = status;
-    const result: HeadBucketOutput = .{ .allocator = alloc };
+    _ = body;
+    if (headers.get("x-amz-access-point-alias")) |value| {
+        result.access_point_alias = std.mem.eql(u8, value, "true");
+    }
+    if (headers.get("x-amz-bucket-arn")) |value| {
+        result.bucket_arn = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-bucket-location-name")) |value| {
+        result.bucket_location_name = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-bucket-location-type")) |value| {
+        result.bucket_location_type = std.meta.stringToEnum(LocationType, value);
+    }
+    if (headers.get("x-amz-bucket-region")) |value| {
+        result.bucket_region = try alloc.dupe(u8, value);
+    }
 
     return result;
 }

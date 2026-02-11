@@ -100,7 +100,7 @@ pub fn execute(client: *Client, input: PutRuntimeManagementConfigInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PutRuntimeManagementConfigInput, config: *aws.Config) !aws.http.Request {
@@ -158,7 +158,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutRuntimeManagementConfigI
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !PutRuntimeManagementConfigOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutRuntimeManagementConfigOutput {
     var result: PutRuntimeManagementConfigOutput = .{ .allocator = alloc };
     _ = status;
     if (findJsonValue(body, "FunctionArn")) |content| {
@@ -167,6 +167,7 @@ fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) 
     if (findJsonValue(body, "RuntimeVersionArn")) |content| {
         result.runtime_version_arn = try alloc.dupe(u8, content);
     }
+    _ = headers;
 
     return result;
 }

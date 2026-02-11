@@ -424,9 +424,9 @@ class RestJsonProtocol : ProtocolGenerator {
             zigType in listOf("[]const u8", "i32", "i64", "bool")
         }
 
-        // REST-JSON deserializer also takes status for @httpResponseCode
+        // REST-JSON deserializer also takes status and headers
         writer.openBlock(
-            "fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !\$L {",
+            "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
             outputName,
         )
 
@@ -437,11 +437,13 @@ class RestJsonProtocol : ProtocolGenerator {
             ctx.resolveBaseZigType(ts) == "[]const u8"
         }
         val bodyUsed = payloadUsesBody || hasDeserializableBodyFields
-        val resultMutated = hasDeserializableBodyFields || bindings.responseCode != null || payloadUsesBody
+        val resultMutated = hasDeserializableBodyFields || bindings.responseCode != null ||
+            payloadUsesBody || bindings.headers.isNotEmpty()
 
         if (!resultMutated) {
             writer.write("_ = body;")
             writer.write("_ = status;")
+            writer.write("_ = headers;")
             writer.write("const result: \$L = .{ .allocator = alloc };", outputName)
         } else {
             writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
@@ -507,11 +509,53 @@ class RestJsonProtocol : ProtocolGenerator {
                     }
                 }
             }
+
+            // @httpHeader - extract from response headers
+            if (bindings.headers.isNotEmpty()) {
+                writeHeaderDeserialization(writer, ctx, bindings.headers)
+            } else {
+                writer.write("_ = headers;")
+            }
         }
 
         writer.blankLine()
         writer.write("return result;")
         writer.closeBlock("}")
+    }
+
+    private fun writeHeaderDeserialization(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        headerBindings: Map<String, MemberShape>,
+    ) {
+        for ((memberName, memberShape) in headerBindings) {
+            val headerName = memberShape.expectTrait(HttpHeaderTrait::class.java).value.lowercase()
+            val fieldName = NamingUtil.toFieldName(memberName)
+            val targetShape = ctx.model.expectShape(memberShape.target)
+            val zigType = ctx.resolveBaseZigType(targetShape)
+            val isEnum = ctx.isEnumType(targetShape)
+
+            writer.openBlock("if (headers.get(\"\$L\")) |value| {", headerName)
+            when {
+                zigType == "[]const u8" -> {
+                    writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                }
+                isEnum -> {
+                    val typeName = ctx.resolveBaseZigType(targetShape)
+                    writer.write("result.\$L = std.meta.stringToEnum(\$L, value);", fieldName, typeName)
+                }
+                zigType == "bool" -> {
+                    writer.write("result.\$L = std.mem.eql(u8, value, \"true\");", fieldName)
+                }
+                zigType in listOf("i32", "i64", "i16", "i8") -> {
+                    writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
+                }
+                else -> {
+                    writer.write("result.\$L = try alloc.dupe(u8, value);", fieldName)
+                }
+            }
+            writer.closeBlock("}")
+        }
     }
 
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {

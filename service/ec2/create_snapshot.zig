@@ -315,7 +315,7 @@ pub fn execute(client: *Client, input: CreateSnapshotInput, options: Options) !C
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateSnapshotInput, config: *aws.Config) !aws.http.Request {
@@ -373,8 +373,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateSnapshotInput, config
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !CreateSnapshotOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateSnapshotOutput {
     _ = status;
+    _ = headers;
     var result: CreateSnapshotOutput = .{ .allocator = alloc };
     if (findElement(body, "availabilityZone")) |content| {
         result.availability_zone = try alloc.dupe(u8, content);

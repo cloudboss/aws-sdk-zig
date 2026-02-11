@@ -232,7 +232,7 @@ class OperationGenerator(
         writer.blankLine()
 
         // Deserialize
-        writer.write("return try deserializeResponse(response.body, response.status, client.allocator);")
+        writer.write("return try deserializeResponse(response.body, response.status, response.headers, client.allocator);")
 
         writer.closeBlock("}")
     }

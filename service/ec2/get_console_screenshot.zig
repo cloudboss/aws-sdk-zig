@@ -71,7 +71,7 @@ pub fn execute(client: *Client, input: GetConsoleScreenshotInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetConsoleScreenshotInput, config: *aws.Config) !aws.http.Request {
@@ -108,8 +108,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetConsoleScreenshotInput, 
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetConsoleScreenshotOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetConsoleScreenshotOutput {
     _ = status;
+    _ = headers;
     var result: GetConsoleScreenshotOutput = .{ .allocator = alloc };
     if (findElement(body, "imageData")) |content| {
         result.image_data = try alloc.dupe(u8, content);

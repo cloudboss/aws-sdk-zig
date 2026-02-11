@@ -90,7 +90,7 @@ pub fn execute(client: *Client, input: GetSAMLProviderInput, options: Options) !
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetSAMLProviderInput, config: *aws.Config) !aws.http.Request {
@@ -119,8 +119,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSAMLProviderInput, confi
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetSAMLProviderOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetSAMLProviderOutput {
     _ = status;
+    _ = headers;
     var result: GetSAMLProviderOutput = .{ .allocator = alloc };
     if (findElement(body, "CreateDate")) |content| {
         result.create_date = std.fmt.parseInt(i64, content, 10) catch null;

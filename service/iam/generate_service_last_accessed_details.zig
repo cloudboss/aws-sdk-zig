@@ -149,7 +149,7 @@ pub fn execute(client: *Client, input: GenerateServiceLastAccessedDetailsInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GenerateServiceLastAccessedDetailsInput, config: *aws.Config) !aws.http.Request {
@@ -182,8 +182,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GenerateServiceLastAccessed
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GenerateServiceLastAccessedDetailsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GenerateServiceLastAccessedDetailsOutput {
     _ = status;
+    _ = headers;
     var result: GenerateServiceLastAccessedDetailsOutput = .{ .allocator = alloc };
     if (findElement(body, "JobId")) |content| {
         result.job_id = try alloc.dupe(u8, content);

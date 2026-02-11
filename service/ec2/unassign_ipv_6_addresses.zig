@@ -62,7 +62,7 @@ pub fn execute(client: *Client, input: UnassignIpv6AddressesInput, options: Opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UnassignIpv6AddressesInput, config: *aws.Config) !aws.http.Request {
@@ -109,8 +109,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UnassignIpv6AddressesInput,
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !UnassignIpv6AddressesOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UnassignIpv6AddressesOutput {
     _ = status;
+    _ = headers;
     var result: UnassignIpv6AddressesOutput = .{ .allocator = alloc };
     if (findElement(body, "networkInterfaceId")) |content| {
         result.network_interface_id = try alloc.dupe(u8, content);

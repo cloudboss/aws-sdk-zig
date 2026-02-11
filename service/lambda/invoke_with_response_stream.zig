@@ -109,7 +109,7 @@ pub fn execute(client: *Client, input: InvokeWithResponseStreamInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: InvokeWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
@@ -161,10 +161,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeWithResponseStreamInp
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !InvokeWithResponseStreamOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InvokeWithResponseStreamOutput {
     var result: InvokeWithResponseStreamOutput = .{ .allocator = alloc };
     result.status_code = @intCast(status);
     _ = body;
+    if (headers.get("x-amz-executed-version")) |value| {
+        result.executed_version = try alloc.dupe(u8, value);
+    }
+    if (headers.get("content-type")) |value| {
+        result.response_stream_content_type = try alloc.dupe(u8, value);
+    }
 
     return result;
 }

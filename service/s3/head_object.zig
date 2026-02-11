@@ -852,7 +852,7 @@ pub fn execute(client: *Client, input: HeadObjectInput, options: Options) !HeadO
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: HeadObjectInput, config: *aws.Config) !aws.http.Request {
@@ -980,11 +980,122 @@ fn serializeRequest(alloc: std.mem.Allocator, input: HeadObjectInput, config: *a
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !HeadObjectOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !HeadObjectOutput {
     var result: HeadObjectOutput = .{ .allocator = alloc };
     _ = status;
     if (findElement(body, "Metadata")) |content| {
         result.metadata = try alloc.dupe(u8, content);
+    }
+    if (headers.get("accept-ranges")) |value| {
+        result.accept_ranges = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-archive-status")) |value| {
+        result.archive_status = std.meta.stringToEnum(ArchiveStatus, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {
+        result.bucket_key_enabled = std.mem.eql(u8, value, "true");
+    }
+    if (headers.get("cache-control")) |value| {
+        result.cache_control = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-crc32")) |value| {
+        result.checksum_crc32 = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-crc32c")) |value| {
+        result.checksum_crc32_c = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-crc64nvme")) |value| {
+        result.checksum_crc64_nvme = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-sha1")) |value| {
+        result.checksum_sha1 = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-sha256")) |value| {
+        result.checksum_sha256 = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-type")) |value| {
+        result.checksum_type = std.meta.stringToEnum(ChecksumType, value);
+    }
+    if (headers.get("content-disposition")) |value| {
+        result.content_disposition = try alloc.dupe(u8, value);
+    }
+    if (headers.get("content-encoding")) |value| {
+        result.content_encoding = try alloc.dupe(u8, value);
+    }
+    if (headers.get("content-language")) |value| {
+        result.content_language = try alloc.dupe(u8, value);
+    }
+    if (headers.get("content-length")) |value| {
+        result.content_length = std.fmt.parseInt(i64, value, 10) catch null;
+    }
+    if (headers.get("content-range")) |value| {
+        result.content_range = try alloc.dupe(u8, value);
+    }
+    if (headers.get("content-type")) |value| {
+        result.content_type = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-delete-marker")) |value| {
+        result.delete_marker = std.mem.eql(u8, value, "true");
+    }
+    if (headers.get("etag")) |value| {
+        result.e_tag = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-expiration")) |value| {
+        result.expiration = try alloc.dupe(u8, value);
+    }
+    if (headers.get("expires")) |value| {
+        result.expires = try alloc.dupe(u8, value);
+    }
+    if (headers.get("last-modified")) |value| {
+        result.last_modified = std.fmt.parseInt(i64, value, 10) catch null;
+    }
+    if (headers.get("x-amz-missing-meta")) |value| {
+        result.missing_meta = std.fmt.parseInt(i32, value, 10) catch null;
+    }
+    if (headers.get("x-amz-object-lock-legal-hold")) |value| {
+        result.object_lock_legal_hold_status = std.meta.stringToEnum(ObjectLockLegalHoldStatus, value);
+    }
+    if (headers.get("x-amz-object-lock-mode")) |value| {
+        result.object_lock_mode = std.meta.stringToEnum(ObjectLockMode, value);
+    }
+    if (headers.get("x-amz-object-lock-retain-until-date")) |value| {
+        result.object_lock_retain_until_date = std.fmt.parseInt(i64, value, 10) catch null;
+    }
+    if (headers.get("x-amz-mp-parts-count")) |value| {
+        result.parts_count = std.fmt.parseInt(i32, value, 10) catch null;
+    }
+    if (headers.get("x-amz-replication-status")) |value| {
+        result.replication_status = std.meta.stringToEnum(ReplicationStatus, value);
+    }
+    if (headers.get("x-amz-request-charged")) |value| {
+        result.request_charged = std.meta.stringToEnum(RequestCharged, value);
+    }
+    if (headers.get("x-amz-restore")) |value| {
+        result.restore = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-server-side-encryption")) |value| {
+        result.server_side_encryption = std.meta.stringToEnum(ServerSideEncryption, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-customer-algorithm")) |value| {
+        result.sse_customer_algorithm = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-customer-key-md5")) |value| {
+        result.sse_customer_key_md5 = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-server-side-encryption-aws-kms-key-id")) |value| {
+        result.ssekms_key_id = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-storage-class")) |value| {
+        result.storage_class = std.meta.stringToEnum(StorageClass, value);
+    }
+    if (headers.get("x-amz-tagging-count")) |value| {
+        result.tag_count = std.fmt.parseInt(i32, value, 10) catch null;
+    }
+    if (headers.get("x-amz-version-id")) |value| {
+        result.version_id = try alloc.dupe(u8, value);
+    }
+    if (headers.get("x-amz-website-redirect-location")) |value| {
+        result.website_redirect_location = try alloc.dupe(u8, value);
     }
 
     return result;

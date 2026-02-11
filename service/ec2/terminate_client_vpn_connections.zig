@@ -75,7 +75,7 @@ pub fn execute(client: *Client, input: TerminateClientVpnConnectionsInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: TerminateClientVpnConnectionsInput, config: *aws.Config) !aws.http.Request {
@@ -116,8 +116,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: TerminateClientVpnConnectio
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !TerminateClientVpnConnectionsOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !TerminateClientVpnConnectionsOutput {
     _ = status;
+    _ = headers;
     var result: TerminateClientVpnConnectionsOutput = .{ .allocator = alloc };
     if (findElement(body, "clientVpnEndpointId")) |content| {
         result.client_vpn_endpoint_id = try alloc.dupe(u8, content);

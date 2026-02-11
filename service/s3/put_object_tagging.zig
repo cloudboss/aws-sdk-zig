@@ -168,7 +168,7 @@ pub fn execute(client: *Client, input: PutObjectTaggingInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PutObjectTaggingInput, config: *aws.Config) !aws.http.Request {
@@ -223,10 +223,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutObjectTaggingInput, conf
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !PutObjectTaggingOutput {
-    _ = body;
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutObjectTaggingOutput {
+    var result: PutObjectTaggingOutput = .{ .allocator = alloc };
     _ = status;
-    const result: PutObjectTaggingOutput = .{ .allocator = alloc };
+    _ = body;
+    if (headers.get("x-amz-version-id")) |value| {
+        result.version_id = try alloc.dupe(u8, value);
+    }
 
     return result;
 }

@@ -113,7 +113,7 @@ pub fn execute(client: *Client, input: GetDeclarativePoliciesReportSummaryInput,
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetDeclarativePoliciesReportSummaryInput, config: *aws.Config) !aws.http.Request {
@@ -146,8 +146,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetDeclarativePoliciesRepor
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !GetDeclarativePoliciesReportSummaryOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetDeclarativePoliciesReportSummaryOutput {
     _ = status;
+    _ = headers;
     var result: GetDeclarativePoliciesReportSummaryOutput = .{ .allocator = alloc };
     if (findElement(body, "endTime")) |content| {
         result.end_time = std.fmt.parseInt(i64, content, 10) catch null;

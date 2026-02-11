@@ -52,7 +52,7 @@ pub fn execute(client: *Client, input: DeleteVpnConnectionRouteInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, client.allocator);
+    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteVpnConnectionRouteInput, config: *aws.Config) !aws.http.Request {
@@ -83,8 +83,9 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteVpnConnectionRouteInp
     return request;
 }
 
-fn deserializeResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !DeleteVpnConnectionRouteOutput {
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteVpnConnectionRouteOutput {
     _ = status;
+    _ = headers;
     _ = body;
     const result: DeleteVpnConnectionRouteOutput = .{ .allocator = alloc };
 
