@@ -32,6 +32,10 @@ pub const DescribeContinuousBackupsInput = struct {
     /// You can also provide the Amazon Resource Name (ARN) of the table in this
     /// parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .table_name = "TableName",
+    };
 };
 
 pub const DescribeContinuousBackupsOutput = struct {
@@ -44,6 +48,10 @@ pub const DescribeContinuousBackupsOutput = struct {
     pub fn deinit(self: *const DescribeContinuousBackupsOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .continuous_backups_description = "ContinuousBackupsDescription",
+    };
 };
 
 pub const Options = struct {

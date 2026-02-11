@@ -24,6 +24,11 @@ pub const GetAccountSettingsOutput = struct {
     pub fn deinit(self: *const GetAccountSettingsOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .account_limit = "AccountLimit",
+        .account_usage = "AccountUsage",
+    };
 };
 
 pub const Options = struct {

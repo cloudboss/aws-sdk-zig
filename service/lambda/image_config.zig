@@ -11,4 +11,10 @@ pub const ImageConfig = struct {
 
     /// Specifies the working directory.
     working_directory: ?[]const u8,
+
+    pub const json_field_names = .{
+        .command = "Command",
+        .entry_point = "EntryPoint",
+        .working_directory = "WorkingDirectory",
+    };
 };

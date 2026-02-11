@@ -16,4 +16,10 @@ pub const GlobalSecondaryIndexWarmThroughputDescription = struct {
     /// secondary
     /// index.
     write_units_per_second: ?i64,
+
+    pub const json_field_names = .{
+        .read_units_per_second = "ReadUnitsPerSecond",
+        .status = "Status",
+        .write_units_per_second = "WriteUnitsPerSecond",
+    };
 };

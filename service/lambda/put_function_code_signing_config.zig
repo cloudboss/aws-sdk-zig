@@ -21,6 +21,11 @@ pub const PutFunctionCodeSigningConfigInput = struct {
     /// The length constraint applies only to the full ARN. If you specify only the
     /// function name, it is limited to 64 characters in length.
     function_name: []const u8,
+
+    pub const json_field_names = .{
+        .code_signing_config_arn = "CodeSigningConfigArn",
+        .function_name = "FunctionName",
+    };
 };
 
 pub const PutFunctionCodeSigningConfigOutput = struct {
@@ -44,6 +49,11 @@ pub const PutFunctionCodeSigningConfigOutput = struct {
         self.allocator.free(self.code_signing_config_arn);
         self.allocator.free(self.function_name);
     }
+
+    pub const json_field_names = .{
+        .code_signing_config_arn = "CodeSigningConfigArn",
+        .function_name = "FunctionName",
+    };
 };
 
 pub const Options = struct {

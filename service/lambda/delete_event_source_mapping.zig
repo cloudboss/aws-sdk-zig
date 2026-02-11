@@ -26,6 +26,10 @@ const EventSourcePosition = @import("event_source_position.zig").EventSourcePosi
 pub const DeleteEventSourceMappingInput = struct {
     /// The identifier of the event source mapping.
     uuid: []const u8,
+
+    pub const json_field_names = .{
+        .uuid = "UUID",
+    };
 };
 
 pub const DeleteEventSourceMappingOutput = struct {
@@ -233,6 +237,42 @@ pub const DeleteEventSourceMappingOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .amazon_managed_kafka_event_source_config = "AmazonManagedKafkaEventSourceConfig",
+        .batch_size = "BatchSize",
+        .bisect_batch_on_function_error = "BisectBatchOnFunctionError",
+        .destination_config = "DestinationConfig",
+        .document_db_event_source_config = "DocumentDBEventSourceConfig",
+        .event_source_arn = "EventSourceArn",
+        .event_source_mapping_arn = "EventSourceMappingArn",
+        .filter_criteria = "FilterCriteria",
+        .filter_criteria_error = "FilterCriteriaError",
+        .function_arn = "FunctionArn",
+        .function_response_types = "FunctionResponseTypes",
+        .kms_key_arn = "KMSKeyArn",
+        .last_modified = "LastModified",
+        .last_processing_result = "LastProcessingResult",
+        .logging_config = "LoggingConfig",
+        .maximum_batching_window_in_seconds = "MaximumBatchingWindowInSeconds",
+        .maximum_record_age_in_seconds = "MaximumRecordAgeInSeconds",
+        .maximum_retry_attempts = "MaximumRetryAttempts",
+        .metrics_config = "MetricsConfig",
+        .parallelization_factor = "ParallelizationFactor",
+        .provisioned_poller_config = "ProvisionedPollerConfig",
+        .queues = "Queues",
+        .scaling_config = "ScalingConfig",
+        .self_managed_event_source = "SelfManagedEventSource",
+        .self_managed_kafka_event_source_config = "SelfManagedKafkaEventSourceConfig",
+        .source_access_configurations = "SourceAccessConfigurations",
+        .starting_position = "StartingPosition",
+        .starting_position_timestamp = "StartingPositionTimestamp",
+        .state = "State",
+        .state_transition_reason = "StateTransitionReason",
+        .topics = "Topics",
+        .tumbling_window_in_seconds = "TumblingWindowInSeconds",
+        .uuid = "UUID",
+    };
 };
 
 pub const Options = struct {

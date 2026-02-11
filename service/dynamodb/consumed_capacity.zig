@@ -35,4 +35,14 @@ pub const ConsumedCapacity = struct {
 
     /// The total number of write capacity units consumed by the operation.
     write_capacity_units: ?f64,
+
+    pub const json_field_names = .{
+        .capacity_units = "CapacityUnits",
+        .global_secondary_indexes = "GlobalSecondaryIndexes",
+        .local_secondary_indexes = "LocalSecondaryIndexes",
+        .read_capacity_units = "ReadCapacityUnits",
+        .table = "Table",
+        .table_name = "TableName",
+        .write_capacity_units = "WriteCapacityUnits",
+    };
 };

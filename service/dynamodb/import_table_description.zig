@@ -79,4 +79,26 @@ pub const ImportTableDescription = struct {
 
     /// The table id corresponding to the table created by import table process.
     table_id: ?[]const u8,
+
+    pub const json_field_names = .{
+        .client_token = "ClientToken",
+        .cloud_watch_log_group_arn = "CloudWatchLogGroupArn",
+        .end_time = "EndTime",
+        .error_count = "ErrorCount",
+        .failure_code = "FailureCode",
+        .failure_message = "FailureMessage",
+        .import_arn = "ImportArn",
+        .imported_item_count = "ImportedItemCount",
+        .import_status = "ImportStatus",
+        .input_compression_type = "InputCompressionType",
+        .input_format = "InputFormat",
+        .input_format_options = "InputFormatOptions",
+        .processed_item_count = "ProcessedItemCount",
+        .processed_size_bytes = "ProcessedSizeBytes",
+        .s_3_bucket_source = "S3BucketSource",
+        .start_time = "StartTime",
+        .table_arn = "TableArn",
+        .table_creation_parameters = "TableCreationParameters",
+        .table_id = "TableId",
+    };
 };

@@ -14,6 +14,11 @@ pub const ListCodeSigningConfigsInput = struct {
 
     /// Maximum number of items to return.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListCodeSigningConfigsOutput = struct {
@@ -30,6 +35,11 @@ pub const ListCodeSigningConfigsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .code_signing_configs = "CodeSigningConfigs",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

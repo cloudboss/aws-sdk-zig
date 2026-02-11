@@ -20,4 +20,9 @@ pub const GlobalTableWitnessGroupUpdate = struct {
     /// replica
     /// converts the remaining replica to a single-Region DynamoDB table.
     delete: ?DeleteGlobalTableWitnessGroupMemberAction,
+
+    pub const json_field_names = .{
+        .create = "Create",
+        .delete = "Delete",
+    };
 };

@@ -114,4 +114,38 @@ pub const Event = struct {
 
     /// Details about a wait operation that succeeded.
     wait_succeeded_details: ?WaitSucceededDetails,
+
+    pub const json_field_names = .{
+        .callback_failed_details = "CallbackFailedDetails",
+        .callback_started_details = "CallbackStartedDetails",
+        .callback_succeeded_details = "CallbackSucceededDetails",
+        .callback_timed_out_details = "CallbackTimedOutDetails",
+        .chained_invoke_failed_details = "ChainedInvokeFailedDetails",
+        .chained_invoke_started_details = "ChainedInvokeStartedDetails",
+        .chained_invoke_stopped_details = "ChainedInvokeStoppedDetails",
+        .chained_invoke_succeeded_details = "ChainedInvokeSucceededDetails",
+        .chained_invoke_timed_out_details = "ChainedInvokeTimedOutDetails",
+        .context_failed_details = "ContextFailedDetails",
+        .context_started_details = "ContextStartedDetails",
+        .context_succeeded_details = "ContextSucceededDetails",
+        .event_id = "EventId",
+        .event_timestamp = "EventTimestamp",
+        .event_type = "EventType",
+        .execution_failed_details = "ExecutionFailedDetails",
+        .execution_started_details = "ExecutionStartedDetails",
+        .execution_stopped_details = "ExecutionStoppedDetails",
+        .execution_succeeded_details = "ExecutionSucceededDetails",
+        .execution_timed_out_details = "ExecutionTimedOutDetails",
+        .id = "Id",
+        .invocation_completed_details = "InvocationCompletedDetails",
+        .name = "Name",
+        .parent_id = "ParentId",
+        .step_failed_details = "StepFailedDetails",
+        .step_started_details = "StepStartedDetails",
+        .step_succeeded_details = "StepSucceededDetails",
+        .sub_type = "SubType",
+        .wait_cancelled_details = "WaitCancelledDetails",
+        .wait_started_details = "WaitStartedDetails",
+        .wait_succeeded_details = "WaitSucceededDetails",
+    };
 };

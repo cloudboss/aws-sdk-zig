@@ -25,4 +25,11 @@ pub const LoggingConfig = struct {
     /// detail and lower, where `DEBUG` is the highest level and `WARN` is the
     /// lowest.
     system_log_level: ?SystemLogLevel,
+
+    pub const json_field_names = .{
+        .application_log_level = "ApplicationLogLevel",
+        .log_format = "LogFormat",
+        .log_group = "LogGroup",
+        .system_log_level = "SystemLogLevel",
+    };
 };

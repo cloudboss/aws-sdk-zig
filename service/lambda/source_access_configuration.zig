@@ -38,4 +38,9 @@ pub const SourceAccessConfiguration = struct {
     /// The value for your chosen configuration in `Type`. For example: `"URI":
     /// "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"`.
     uri: ?[]const u8,
+
+    pub const json_field_names = .{
+        .@"type" = "Type",
+        .uri = "URI",
+    };
 };

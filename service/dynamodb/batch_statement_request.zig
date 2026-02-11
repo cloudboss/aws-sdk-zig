@@ -22,4 +22,11 @@ pub const BatchStatementRequest = struct {
 
     /// A valid PartiQL statement.
     statement: []const u8,
+
+    pub const json_field_names = .{
+        .consistent_read = "ConsistentRead",
+        .parameters = "Parameters",
+        .return_values_on_condition_check_failure = "ReturnValuesOnConditionCheckFailure",
+        .statement = "Statement",
+    };
 };

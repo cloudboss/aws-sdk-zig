@@ -12,4 +12,8 @@ pub const CodeSigningPolicies = struct {
     ///
     /// Default value: `Warn`
     untrusted_artifact_on_deployment: ?CodeSigningPolicy,
+
+    pub const json_field_names = .{
+        .untrusted_artifact_on_deployment = "UntrustedArtifactOnDeployment",
+    };
 };

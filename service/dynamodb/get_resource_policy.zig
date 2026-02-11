@@ -45,6 +45,10 @@ pub const GetResourcePolicyInput = struct {
     /// is attached. The
     /// resources you can specify include tables and streams.
     resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+    };
 };
 
 pub const GetResourcePolicyOutput = struct {
@@ -67,6 +71,11 @@ pub const GetResourcePolicyOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .policy = "Policy",
+        .revision_id = "RevisionId",
+    };
 };
 
 pub const Options = struct {

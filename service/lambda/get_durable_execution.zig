@@ -12,6 +12,10 @@ const TraceHeader = @import("trace_header.zig").TraceHeader;
 pub const GetDurableExecutionInput = struct {
     /// The Amazon Resource Name (ARN) of the durable execution.
     durable_execution_arn: []const u8,
+
+    pub const json_field_names = .{
+        .durable_execution_arn = "DurableExecutionArn",
+    };
 };
 
 pub const GetDurableExecutionOutput = struct {
@@ -79,6 +83,20 @@ pub const GetDurableExecutionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .durable_execution_arn = "DurableExecutionArn",
+        .durable_execution_name = "DurableExecutionName",
+        .end_timestamp = "EndTimestamp",
+        .@"error" = "Error",
+        .function_arn = "FunctionArn",
+        .input_payload = "InputPayload",
+        .result = "Result",
+        .start_timestamp = "StartTimestamp",
+        .status = "Status",
+        .trace_header = "TraceHeader",
+        .version = "Version",
+    };
 };
 
 pub const Options = struct {

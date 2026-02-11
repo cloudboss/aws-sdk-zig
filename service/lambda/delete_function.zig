@@ -34,6 +34,11 @@ pub const DeleteFunctionInput = struct {
     /// Specify a version to delete. You can't delete a version that an alias
     /// references.
     qualifier: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const DeleteFunctionOutput = struct {
@@ -45,6 +50,10 @@ pub const DeleteFunctionOutput = struct {
     pub fn deinit(self: *const DeleteFunctionOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .status_code = "StatusCode",
+    };
 };
 
 pub const Options = struct {

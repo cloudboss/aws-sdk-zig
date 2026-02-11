@@ -24,6 +24,11 @@ pub const ListTagsOfResourceInput = struct {
     /// Resource
     /// Name (ARN).
     resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .resource_arn = "ResourceArn",
+    };
 };
 
 pub const ListTagsOfResourceOutput = struct {
@@ -42,6 +47,11 @@ pub const ListTagsOfResourceOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
 };
 
 pub const Options = struct {

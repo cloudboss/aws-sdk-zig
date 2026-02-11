@@ -24,6 +24,12 @@ pub const PutProvisionedConcurrencyConfigInput = struct {
 
     /// The version number or alias name.
     qualifier: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .provisioned_concurrent_executions = "ProvisionedConcurrentExecutions",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const PutProvisionedConcurrencyConfigOutput = struct {
@@ -59,6 +65,15 @@ pub const PutProvisionedConcurrencyConfigOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .allocated_provisioned_concurrent_executions = "AllocatedProvisionedConcurrentExecutions",
+        .available_provisioned_concurrent_executions = "AvailableProvisionedConcurrentExecutions",
+        .last_modified = "LastModified",
+        .requested_provisioned_concurrent_executions = "RequestedProvisionedConcurrentExecutions",
+        .status = "Status",
+        .status_reason = "StatusReason",
+    };
 };
 
 pub const Options = struct {

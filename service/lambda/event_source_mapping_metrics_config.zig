@@ -17,4 +17,8 @@ pub const EventSourceMappingMetricsConfig = struct {
     /// For more information about these metrics, see [ Event source mapping
     /// metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics).
     metrics: ?[]const EventSourceMappingMetric,
+
+    pub const json_field_names = .{
+        .metrics = "Metrics",
+    };
 };

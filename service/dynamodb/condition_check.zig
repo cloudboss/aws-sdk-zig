@@ -40,4 +40,13 @@ pub const ConditionCheck = struct {
     /// Amazon Resource Name (ARN) of
     /// the table in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .condition_expression = "ConditionExpression",
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .expression_attribute_values = "ExpressionAttributeValues",
+        .key = "Key",
+        .return_values_on_condition_check_failure = "ReturnValuesOnConditionCheckFailure",
+        .table_name = "TableName",
+    };
 };

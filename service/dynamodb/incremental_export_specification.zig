@@ -22,4 +22,10 @@ pub const IncrementalExportSpecification = struct {
     /// `NEW_AND_OLD_IMAGES` and `NEW_IMAGES`. The default value is
     /// `NEW_AND_OLD_IMAGES`.
     export_view_type: ?ExportViewType,
+
+    pub const json_field_names = .{
+        .export_from_time = "ExportFromTime",
+        .export_to_time = "ExportToTime",
+        .export_view_type = "ExportViewType",
+    };
 };

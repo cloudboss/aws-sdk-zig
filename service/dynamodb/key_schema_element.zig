@@ -38,4 +38,9 @@ pub const KeySchemaElement = struct {
     /// sort key
     /// value.
     key_type: KeyType,
+
+    pub const json_field_names = .{
+        .attribute_name = "AttributeName",
+        .key_type = "KeyType",
+    };
 };

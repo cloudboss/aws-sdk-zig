@@ -10,4 +10,10 @@ pub const S3BucketSource = struct {
 
     /// The key prefix shared by all S3 Objects that are being imported.
     s_3_key_prefix: ?[]const u8,
+
+    pub const json_field_names = .{
+        .s_3_bucket = "S3Bucket",
+        .s_3_bucket_owner = "S3BucketOwner",
+        .s_3_key_prefix = "S3KeyPrefix",
+    };
 };

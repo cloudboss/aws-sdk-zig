@@ -35,6 +35,14 @@ pub const GetDurableExecutionHistoryInput = struct {
     /// order (newest first). By default, events are returned in chronological order
     /// (oldest first).
     reverse_order: ?bool = null,
+
+    pub const json_field_names = .{
+        .durable_execution_arn = "DurableExecutionArn",
+        .include_execution_data = "IncludeExecutionData",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+        .reverse_order = "ReverseOrder",
+    };
 };
 
 pub const GetDurableExecutionHistoryOutput = struct {
@@ -56,6 +64,11 @@ pub const GetDurableExecutionHistoryOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .events = "Events",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

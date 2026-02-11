@@ -15,4 +15,10 @@ pub const ReplicaGlobalSecondaryIndex = struct {
     /// the source
     /// table GSI's read capacity settings.
     provisioned_throughput_override: ?ProvisionedThroughputOverride,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .on_demand_throughput_override = "OnDemandThroughputOverride",
+        .provisioned_throughput_override = "ProvisionedThroughputOverride",
+    };
 };

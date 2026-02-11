@@ -8,4 +8,8 @@
 pub const DeleteGlobalTableWitnessGroupMemberAction = struct {
     /// The witness Region name to be removed from the MRSC global table.
     region_name: []const u8,
+
+    pub const json_field_names = .{
+        .region_name = "RegionName",
+    };
 };

@@ -8,4 +8,8 @@ pub const KafkaSchemaValidationConfig = struct {
     /// you selected `JSON` as the `EventRecordFormat`, Lambda also deserializes the
     /// selected message attributes.
     attribute: ?KafkaSchemaValidationAttribute,
+
+    pub const json_field_names = .{
+        .attribute = "Attribute",
+    };
 };

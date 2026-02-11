@@ -5,4 +5,8 @@ const EventError = @import("event_error.zig").EventError;
 pub const CallbackFailedDetails = struct {
     /// An error object that contains details about the failure.
     @"error": EventError,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+    };
 };

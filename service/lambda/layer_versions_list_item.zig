@@ -33,4 +33,14 @@ pub const LayerVersionsListItem = struct {
 
     /// The version number.
     version: ?i64,
+
+    pub const json_field_names = .{
+        .compatible_architectures = "CompatibleArchitectures",
+        .compatible_runtimes = "CompatibleRuntimes",
+        .created_date = "CreatedDate",
+        .description = "Description",
+        .layer_version_arn = "LayerVersionArn",
+        .license_info = "LicenseInfo",
+        .version = "Version",
+    };
 };

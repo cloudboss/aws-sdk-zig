@@ -18,4 +18,8 @@ pub const OnSuccess = struct {
     /// details on this behavior, refer to [Retaining records of asynchronous
     /// invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html).
     destination: ?[]const u8,
+
+    pub const json_field_names = .{
+        .destination = "Destination",
+    };
 };

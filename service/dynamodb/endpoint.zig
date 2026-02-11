@@ -5,4 +5,9 @@ pub const Endpoint = struct {
 
     /// Endpoint cache time to live (TTL) value.
     cache_period_in_minutes: i64,
+
+    pub const json_field_names = .{
+        .address = "Address",
+        .cache_period_in_minutes = "CachePeriodInMinutes",
+    };
 };

@@ -24,4 +24,9 @@ pub const ItemCollectionMetrics = struct {
     /// precision
     /// or accuracy of the estimate.
     size_estimate_range_gb: ?[]const f64,
+
+    pub const json_field_names = .{
+        .item_collection_key = "ItemCollectionKey",
+        .size_estimate_range_gb = "SizeEstimateRangeGB",
+    };
 };

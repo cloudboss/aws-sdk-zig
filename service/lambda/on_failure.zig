@@ -28,4 +28,8 @@ pub const OnFailure = struct {
     /// [self-managed
     /// Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.
     destination: ?[]const u8,
+
+    pub const json_field_names = .{
+        .destination = "Destination",
+    };
 };

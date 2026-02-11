@@ -56,6 +56,15 @@ pub const UpdateGlobalTableSettingsInput = struct {
     /// Represents the settings for a global table in a Region that will be
     /// modified.
     replica_settings_update: ?[]const ReplicaSettingsUpdate = null,
+
+    pub const json_field_names = .{
+        .global_table_billing_mode = "GlobalTableBillingMode",
+        .global_table_global_secondary_index_settings_update = "GlobalTableGlobalSecondaryIndexSettingsUpdate",
+        .global_table_name = "GlobalTableName",
+        .global_table_provisioned_write_capacity_auto_scaling_settings_update = "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate",
+        .global_table_provisioned_write_capacity_units = "GlobalTableProvisionedWriteCapacityUnits",
+        .replica_settings_update = "ReplicaSettingsUpdate",
+    };
 };
 
 pub const UpdateGlobalTableSettingsOutput = struct {
@@ -72,6 +81,11 @@ pub const UpdateGlobalTableSettingsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .global_table_name = "GlobalTableName",
+        .replica_settings = "ReplicaSettings",
+    };
 };
 
 pub const Options = struct {

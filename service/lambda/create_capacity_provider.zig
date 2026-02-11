@@ -37,6 +37,16 @@ pub const CreateCapacityProviderInput = struct {
     /// The VPC configuration for the capacity provider, including subnet IDs and
     /// security group IDs where compute instances will be launched.
     vpc_config: CapacityProviderVpcConfig,
+
+    pub const json_field_names = .{
+        .capacity_provider_name = "CapacityProviderName",
+        .capacity_provider_scaling_config = "CapacityProviderScalingConfig",
+        .instance_requirements = "InstanceRequirements",
+        .kms_key_arn = "KmsKeyArn",
+        .permissions_config = "PermissionsConfig",
+        .tags = "Tags",
+        .vpc_config = "VpcConfig",
+    };
 };
 
 pub const CreateCapacityProviderOutput = struct {
@@ -48,6 +58,10 @@ pub const CreateCapacityProviderOutput = struct {
     pub fn deinit(self: *const CreateCapacityProviderOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .capacity_provider = "CapacityProvider",
+    };
 };
 
 pub const Options = struct {

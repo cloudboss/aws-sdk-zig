@@ -31,4 +31,14 @@ pub const Update = struct {
     /// to be
     /// performed on them, and new value(s) for them.
     update_expression: []const u8,
+
+    pub const json_field_names = .{
+        .condition_expression = "ConditionExpression",
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .expression_attribute_values = "ExpressionAttributeValues",
+        .key = "Key",
+        .return_values_on_condition_check_failure = "ReturnValuesOnConditionCheckFailure",
+        .table_name = "TableName",
+        .update_expression = "UpdateExpression",
+    };
 };

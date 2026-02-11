@@ -33,4 +33,13 @@ pub const Cors = struct {
     /// of a preflight request. By default, this is set to `0`, which means that the
     /// browser doesn't cache results.
     max_age: ?i32,
+
+    pub const json_field_names = .{
+        .allow_credentials = "AllowCredentials",
+        .allow_headers = "AllowHeaders",
+        .allow_methods = "AllowMethods",
+        .allow_origins = "AllowOrigins",
+        .expose_headers = "ExposeHeaders",
+        .max_age = "MaxAge",
+    };
 };

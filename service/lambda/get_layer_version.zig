@@ -15,6 +15,11 @@ pub const GetLayerVersionInput = struct {
 
     /// The version number.
     version_number: i64,
+
+    pub const json_field_names = .{
+        .layer_name = "LayerName",
+        .version_number = "VersionNumber",
+    };
 };
 
 pub const GetLayerVersionOutput = struct {
@@ -73,6 +78,18 @@ pub const GetLayerVersionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .compatible_architectures = "CompatibleArchitectures",
+        .compatible_runtimes = "CompatibleRuntimes",
+        .content = "Content",
+        .created_date = "CreatedDate",
+        .description = "Description",
+        .layer_arn = "LayerArn",
+        .layer_version_arn = "LayerVersionArn",
+        .license_info = "LicenseInfo",
+        .version = "Version",
+    };
 };
 
 pub const Options = struct {

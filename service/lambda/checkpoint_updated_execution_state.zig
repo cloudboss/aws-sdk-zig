@@ -9,4 +9,9 @@ pub const CheckpointUpdatedExecutionState = struct {
 
     /// A list of operations that have been updated since the last checkpoint.
     operations: ?[]const Operation,
+
+    pub const json_field_names = .{
+        .next_marker = "NextMarker",
+        .operations = "Operations",
+    };
 };

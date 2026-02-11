@@ -29,4 +29,11 @@ pub const KafkaSchemaRegistryConfig = struct {
     /// message attributes you want to validate and filter using your schema
     /// registry.
     schema_validation_configs: ?[]const KafkaSchemaValidationConfig,
+
+    pub const json_field_names = .{
+        .access_configs = "AccessConfigs",
+        .event_record_format = "EventRecordFormat",
+        .schema_registry_uri = "SchemaRegistryURI",
+        .schema_validation_configs = "SchemaValidationConfigs",
+    };
 };

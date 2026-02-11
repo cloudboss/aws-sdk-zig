@@ -36,6 +36,11 @@ pub const UntagResourceInput = struct {
     /// this list
     /// will be removed from the DynamoDB resource.
     tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tag_keys = "TagKeys",
+    };
 };
 
 pub const UntagResourceOutput = struct {

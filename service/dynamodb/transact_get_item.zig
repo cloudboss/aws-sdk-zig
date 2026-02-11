@@ -8,4 +8,8 @@ pub const TransactGetItem = struct {
     /// the item to
     /// retrieve.
     get: Get,
+
+    pub const json_field_names = .{
+        .get = "Get",
+    };
 };

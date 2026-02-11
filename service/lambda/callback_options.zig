@@ -8,4 +8,9 @@ pub const CallbackOptions = struct {
     /// The timeout for the callback operation in seconds. If not specified or set
     /// to 0, the callback has no timeout.
     timeout_seconds: ?i32,
+
+    pub const json_field_names = .{
+        .heartbeat_timeout_seconds = "HeartbeatTimeoutSeconds",
+        .timeout_seconds = "TimeoutSeconds",
+    };
 };

@@ -17,4 +17,12 @@ pub const ChainedInvokeStartedDetails = struct {
 
     /// The tenant identifier for the chained invocation.
     tenant_id: ?[]const u8,
+
+    pub const json_field_names = .{
+        .durable_execution_arn = "DurableExecutionArn",
+        .executed_version = "ExecutedVersion",
+        .function_name = "FunctionName",
+        .input = "Input",
+        .tenant_id = "TenantId",
+    };
 };

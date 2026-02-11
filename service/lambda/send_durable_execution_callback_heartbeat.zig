@@ -10,6 +10,10 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const SendDurableExecutionCallbackHeartbeatInput = struct {
     /// The unique identifier for the callback operation.
     callback_id: []const u8,
+
+    pub const json_field_names = .{
+        .callback_id = "CallbackId",
+    };
 };
 
 pub const SendDurableExecutionCallbackHeartbeatOutput = struct {

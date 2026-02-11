@@ -22,6 +22,11 @@ pub const GetPolicyInput = struct {
 
     /// Specify a version or alias to get the policy for that resource.
     qualifier: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const GetPolicyOutput = struct {
@@ -41,6 +46,11 @@ pub const GetPolicyOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .policy = "Policy",
+        .revision_id = "RevisionId",
+    };
 };
 
 pub const Options = struct {

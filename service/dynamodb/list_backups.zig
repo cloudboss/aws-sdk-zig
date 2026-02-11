@@ -62,6 +62,15 @@ pub const ListBackupsInput = struct {
     /// Only backups created before this time are listed. `TimeRangeUpperBound` is
     /// exclusive.
     time_range_upper_bound: ?i64 = null,
+
+    pub const json_field_names = .{
+        .backup_type = "BackupType",
+        .exclusive_start_backup_arn = "ExclusiveStartBackupArn",
+        .limit = "Limit",
+        .table_name = "TableName",
+        .time_range_lower_bound = "TimeRangeLowerBound",
+        .time_range_upper_bound = "TimeRangeUpperBound",
+    };
 };
 
 pub const ListBackupsOutput = struct {
@@ -90,6 +99,11 @@ pub const ListBackupsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .backup_summaries = "BackupSummaries",
+        .last_evaluated_backup_arn = "LastEvaluatedBackupArn",
+    };
 };
 
 pub const Options = struct {

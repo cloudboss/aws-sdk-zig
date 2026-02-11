@@ -83,4 +83,12 @@ pub const KeysAndAttributes = struct {
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html) in the *Amazon DynamoDB Developer
     /// Guide*.
     projection_expression: ?[]const u8,
+
+    pub const json_field_names = .{
+        .attributes_to_get = "AttributesToGet",
+        .consistent_read = "ConsistentRead",
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .keys = "Keys",
+        .projection_expression = "ProjectionExpression",
+    };
 };

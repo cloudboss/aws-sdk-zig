@@ -18,4 +18,10 @@ pub const ArchivalSummary = struct {
     /// to the table's KMS key being inaccessible for more than seven
     /// days. An On-Demand backup was created at the archival time.
     archival_reason: ?[]const u8,
+
+    pub const json_field_names = .{
+        .archival_backup_arn = "ArchivalBackupArn",
+        .archival_date_time = "ArchivalDateTime",
+        .archival_reason = "ArchivalReason",
+    };
 };

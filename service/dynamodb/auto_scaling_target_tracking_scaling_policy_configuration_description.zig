@@ -37,4 +37,11 @@ pub const AutoScalingTargetTrackingScalingPolicyConfigurationDescription = struc
     /// (Base 10)
     /// or 2e-360 to 2e360 (Base 2).
     target_value: f64,
+
+    pub const json_field_names = .{
+        .disable_scale_in = "DisableScaleIn",
+        .scale_in_cooldown = "ScaleInCooldown",
+        .scale_out_cooldown = "ScaleOutCooldown",
+        .target_value = "TargetValue",
+    };
 };

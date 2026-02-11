@@ -260,4 +260,11 @@ pub const ExpectedAttributeValue = struct {
     /// Types](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes) in the *Amazon DynamoDB Developer
     /// Guide*.
     value: ?AttributeValue,
+
+    pub const json_field_names = .{
+        .attribute_value_list = "AttributeValueList",
+        .comparison_operator = "ComparisonOperator",
+        .exists = "Exists",
+        .value = "Value",
+    };
 };

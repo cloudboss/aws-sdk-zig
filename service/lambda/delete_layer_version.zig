@@ -12,6 +12,11 @@ pub const DeleteLayerVersionInput = struct {
 
     /// The version number.
     version_number: i64,
+
+    pub const json_field_names = .{
+        .layer_name = "LayerName",
+        .version_number = "VersionNumber",
+    };
 };
 
 pub const DeleteLayerVersionOutput = struct {

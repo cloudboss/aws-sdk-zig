@@ -35,6 +35,12 @@ pub const ExecuteTransactionInput = struct {
 
     /// The list of PartiQL statements representing the transaction to run.
     transact_statements: []const ParameterizedStatement,
+
+    pub const json_field_names = .{
+        .client_request_token = "ClientRequestToken",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .transact_statements = "TransactStatements",
+    };
 };
 
 pub const ExecuteTransactionOutput = struct {
@@ -51,6 +57,11 @@ pub const ExecuteTransactionOutput = struct {
     pub fn deinit(self: *const ExecuteTransactionOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .responses = "Responses",
+    };
 };
 
 pub const Options = struct {

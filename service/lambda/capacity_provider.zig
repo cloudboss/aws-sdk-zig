@@ -30,4 +30,15 @@ pub const CapacityProvider = struct {
 
     /// The VPC configuration for the capacity provider.
     vpc_config: CapacityProviderVpcConfig,
+
+    pub const json_field_names = .{
+        .capacity_provider_arn = "CapacityProviderArn",
+        .capacity_provider_scaling_config = "CapacityProviderScalingConfig",
+        .instance_requirements = "InstanceRequirements",
+        .kms_key_arn = "KmsKeyArn",
+        .last_modified = "LastModified",
+        .permissions_config = "PermissionsConfig",
+        .state = "State",
+        .vpc_config = "VpcConfig",
+    };
 };

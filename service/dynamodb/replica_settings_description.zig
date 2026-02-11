@@ -47,4 +47,16 @@ pub const ReplicaSettingsDescription = struct {
     replica_status: ?ReplicaStatus,
 
     replica_table_class_summary: ?TableClassSummary,
+
+    pub const json_field_names = .{
+        .region_name = "RegionName",
+        .replica_billing_mode_summary = "ReplicaBillingModeSummary",
+        .replica_global_secondary_index_settings = "ReplicaGlobalSecondaryIndexSettings",
+        .replica_provisioned_read_capacity_auto_scaling_settings = "ReplicaProvisionedReadCapacityAutoScalingSettings",
+        .replica_provisioned_read_capacity_units = "ReplicaProvisionedReadCapacityUnits",
+        .replica_provisioned_write_capacity_auto_scaling_settings = "ReplicaProvisionedWriteCapacityAutoScalingSettings",
+        .replica_provisioned_write_capacity_units = "ReplicaProvisionedWriteCapacityUnits",
+        .replica_status = "ReplicaStatus",
+        .replica_table_class_summary = "ReplicaTableClassSummary",
+    };
 };

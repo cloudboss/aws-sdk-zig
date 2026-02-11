@@ -190,6 +190,20 @@ pub const DeleteItemInput = struct {
     /// the
     /// Amazon Resource Name (ARN) of the table in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .conditional_operator = "ConditionalOperator",
+        .condition_expression = "ConditionExpression",
+        .expected = "Expected",
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .expression_attribute_values = "ExpressionAttributeValues",
+        .key = "Key",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .return_item_collection_metrics = "ReturnItemCollectionMetrics",
+        .return_values = "ReturnValues",
+        .return_values_on_condition_check_failure = "ReturnValuesOnConditionCheckFailure",
+        .table_name = "TableName",
+    };
 };
 
 pub const DeleteItemOutput = struct {
@@ -242,6 +256,12 @@ pub const DeleteItemOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .attributes = "Attributes",
+        .consumed_capacity = "ConsumedCapacity",
+        .item_collection_metrics = "ItemCollectionMetrics",
+    };
 };
 
 pub const Options = struct {

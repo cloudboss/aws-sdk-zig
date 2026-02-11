@@ -99,6 +99,20 @@ pub const RestoreTableToPointInTimeInput = struct {
     /// Restore the table to the latest possible time. `LatestRestorableDateTime`
     /// is typically 5 minutes before the current time.
     use_latest_restorable_time: ?bool = null,
+
+    pub const json_field_names = .{
+        .billing_mode_override = "BillingModeOverride",
+        .global_secondary_index_override = "GlobalSecondaryIndexOverride",
+        .local_secondary_index_override = "LocalSecondaryIndexOverride",
+        .on_demand_throughput_override = "OnDemandThroughputOverride",
+        .provisioned_throughput_override = "ProvisionedThroughputOverride",
+        .restore_date_time = "RestoreDateTime",
+        .source_table_arn = "SourceTableArn",
+        .source_table_name = "SourceTableName",
+        .sse_specification_override = "SSESpecificationOverride",
+        .target_table_name = "TargetTableName",
+        .use_latest_restorable_time = "UseLatestRestorableTime",
+    };
 };
 
 pub const RestoreTableToPointInTimeOutput = struct {
@@ -110,6 +124,10 @@ pub const RestoreTableToPointInTimeOutput = struct {
     pub fn deinit(self: *const RestoreTableToPointInTimeOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .table_description = "TableDescription",
+    };
 };
 
 pub const Options = struct {

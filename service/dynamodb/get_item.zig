@@ -105,6 +105,16 @@ pub const GetItemInput = struct {
     /// the
     /// Amazon Resource Name (ARN) of the table in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .attributes_to_get = "AttributesToGet",
+        .consistent_read = "ConsistentRead",
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .key = "Key",
+        .projection_expression = "ProjectionExpression",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .table_name = "TableName",
+    };
 };
 
 pub const GetItemOutput = struct {
@@ -129,6 +139,11 @@ pub const GetItemOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .item = "Item",
+    };
 };
 
 pub const Options = struct {

@@ -9,4 +9,9 @@ pub const InvokeWithResponseStreamResponseEvent = union(enum) {
     invoke_complete: ?InvokeWithResponseStreamCompleteEvent,
     /// A chunk of the streamed response payload.
     payload_chunk: ?InvokeResponseStreamUpdate,
+
+    pub const json_field_names = .{
+        .invoke_complete = "InvokeComplete",
+        .payload_chunk = "PayloadChunk",
+    };
 };

@@ -9,4 +9,8 @@ pub const PutRequest = struct {
     /// the table,
     /// their types must match the index key schema.
     item: []const u8,
+
+    pub const json_field_names = .{
+        .item = "Item",
+    };
 };

@@ -243,6 +243,37 @@ pub const CreateEventSourceMappingInput = struct {
     /// window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds
     /// indicates no tumbling window.
     tumbling_window_in_seconds: ?i32 = null,
+
+    pub const json_field_names = .{
+        .amazon_managed_kafka_event_source_config = "AmazonManagedKafkaEventSourceConfig",
+        .batch_size = "BatchSize",
+        .bisect_batch_on_function_error = "BisectBatchOnFunctionError",
+        .destination_config = "DestinationConfig",
+        .document_db_event_source_config = "DocumentDBEventSourceConfig",
+        .enabled = "Enabled",
+        .event_source_arn = "EventSourceArn",
+        .filter_criteria = "FilterCriteria",
+        .function_name = "FunctionName",
+        .function_response_types = "FunctionResponseTypes",
+        .kms_key_arn = "KMSKeyArn",
+        .logging_config = "LoggingConfig",
+        .maximum_batching_window_in_seconds = "MaximumBatchingWindowInSeconds",
+        .maximum_record_age_in_seconds = "MaximumRecordAgeInSeconds",
+        .maximum_retry_attempts = "MaximumRetryAttempts",
+        .metrics_config = "MetricsConfig",
+        .parallelization_factor = "ParallelizationFactor",
+        .provisioned_poller_config = "ProvisionedPollerConfig",
+        .queues = "Queues",
+        .scaling_config = "ScalingConfig",
+        .self_managed_event_source = "SelfManagedEventSource",
+        .self_managed_kafka_event_source_config = "SelfManagedKafkaEventSourceConfig",
+        .source_access_configurations = "SourceAccessConfigurations",
+        .starting_position = "StartingPosition",
+        .starting_position_timestamp = "StartingPositionTimestamp",
+        .tags = "Tags",
+        .topics = "Topics",
+        .tumbling_window_in_seconds = "TumblingWindowInSeconds",
+    };
 };
 
 pub const CreateEventSourceMappingOutput = struct {
@@ -450,6 +481,42 @@ pub const CreateEventSourceMappingOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .amazon_managed_kafka_event_source_config = "AmazonManagedKafkaEventSourceConfig",
+        .batch_size = "BatchSize",
+        .bisect_batch_on_function_error = "BisectBatchOnFunctionError",
+        .destination_config = "DestinationConfig",
+        .document_db_event_source_config = "DocumentDBEventSourceConfig",
+        .event_source_arn = "EventSourceArn",
+        .event_source_mapping_arn = "EventSourceMappingArn",
+        .filter_criteria = "FilterCriteria",
+        .filter_criteria_error = "FilterCriteriaError",
+        .function_arn = "FunctionArn",
+        .function_response_types = "FunctionResponseTypes",
+        .kms_key_arn = "KMSKeyArn",
+        .last_modified = "LastModified",
+        .last_processing_result = "LastProcessingResult",
+        .logging_config = "LoggingConfig",
+        .maximum_batching_window_in_seconds = "MaximumBatchingWindowInSeconds",
+        .maximum_record_age_in_seconds = "MaximumRecordAgeInSeconds",
+        .maximum_retry_attempts = "MaximumRetryAttempts",
+        .metrics_config = "MetricsConfig",
+        .parallelization_factor = "ParallelizationFactor",
+        .provisioned_poller_config = "ProvisionedPollerConfig",
+        .queues = "Queues",
+        .scaling_config = "ScalingConfig",
+        .self_managed_event_source = "SelfManagedEventSource",
+        .self_managed_kafka_event_source_config = "SelfManagedKafkaEventSourceConfig",
+        .source_access_configurations = "SourceAccessConfigurations",
+        .starting_position = "StartingPosition",
+        .starting_position_timestamp = "StartingPositionTimestamp",
+        .state = "State",
+        .state_transition_reason = "StateTransitionReason",
+        .topics = "Topics",
+        .tumbling_window_in_seconds = "TumblingWindowInSeconds",
+        .uuid = "UUID",
+    };
 };
 
 pub const Options = struct {

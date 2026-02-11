@@ -53,6 +53,11 @@ pub const UpdateGlobalTableInput = struct {
 
     /// A list of Regions that should be added or removed from the global table.
     replica_updates: []const ReplicaUpdate,
+
+    pub const json_field_names = .{
+        .global_table_name = "GlobalTableName",
+        .replica_updates = "ReplicaUpdates",
+    };
 };
 
 pub const UpdateGlobalTableOutput = struct {
@@ -64,6 +69,10 @@ pub const UpdateGlobalTableOutput = struct {
     pub fn deinit(self: *const UpdateGlobalTableOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .global_table_description = "GlobalTableDescription",
+    };
 };
 
 pub const Options = struct {

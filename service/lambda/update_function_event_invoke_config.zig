@@ -47,6 +47,14 @@ pub const UpdateFunctionEventInvokeConfigInput = struct {
 
     /// A version number or alias name.
     qualifier: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .destination_config = "DestinationConfig",
+        .function_name = "FunctionName",
+        .maximum_event_age_in_seconds = "MaximumEventAgeInSeconds",
+        .maximum_retry_attempts = "MaximumRetryAttempts",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const UpdateFunctionEventInvokeConfigOutput = struct {
@@ -84,6 +92,14 @@ pub const UpdateFunctionEventInvokeConfigOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .destination_config = "DestinationConfig",
+        .function_arn = "FunctionArn",
+        .last_modified = "LastModified",
+        .maximum_event_age_in_seconds = "MaximumEventAgeInSeconds",
+        .maximum_retry_attempts = "MaximumRetryAttempts",
+    };
 };
 
 pub const Options = struct {

@@ -129,6 +129,13 @@ pub const TransactWriteItemsInput = struct {
     /// no two of them
     /// can operate on the same item.
     transact_items: []const TransactWriteItem,
+
+    pub const json_field_names = .{
+        .client_request_token = "ClientRequestToken",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .return_item_collection_metrics = "ReturnItemCollectionMetrics",
+        .transact_items = "TransactItems",
+    };
 };
 
 pub const TransactWriteItemsOutput = struct {
@@ -151,6 +158,11 @@ pub const TransactWriteItemsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .item_collection_metrics = "ItemCollectionMetrics",
+    };
 };
 
 pub const Options = struct {

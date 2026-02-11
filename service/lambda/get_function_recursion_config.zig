@@ -10,6 +10,10 @@ const RecursiveLoop = @import("recursive_loop.zig").RecursiveLoop;
 pub const GetFunctionRecursionConfigInput = struct {
     /// The name of the function.
     function_name: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+    };
 };
 
 pub const GetFunctionRecursionConfigOutput = struct {
@@ -30,6 +34,10 @@ pub const GetFunctionRecursionConfigOutput = struct {
     pub fn deinit(self: *const GetFunctionRecursionConfigOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .recursive_loop = "RecursiveLoop",
+    };
 };
 
 pub const Options = struct {

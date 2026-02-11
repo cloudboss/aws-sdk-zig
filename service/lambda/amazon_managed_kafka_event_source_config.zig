@@ -12,4 +12,9 @@ pub const AmazonManagedKafkaEventSourceConfig = struct {
 
     /// Specific configuration settings for a Kafka schema registry.
     schema_registry_config: ?KafkaSchemaRegistryConfig,
+
+    pub const json_field_names = .{
+        .consumer_group_id = "ConsumerGroupId",
+        .schema_registry_config = "SchemaRegistryConfig",
+    };
 };

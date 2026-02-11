@@ -344,6 +344,25 @@ pub const ScanInput = struct {
     /// If you specify `TotalSegments`, you must also specify
     /// `Segment`.
     total_segments: ?i32 = null,
+
+    pub const json_field_names = .{
+        .attributes_to_get = "AttributesToGet",
+        .conditional_operator = "ConditionalOperator",
+        .consistent_read = "ConsistentRead",
+        .exclusive_start_key = "ExclusiveStartKey",
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .expression_attribute_values = "ExpressionAttributeValues",
+        .filter_expression = "FilterExpression",
+        .index_name = "IndexName",
+        .limit = "Limit",
+        .projection_expression = "ProjectionExpression",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .scan_filter = "ScanFilter",
+        .segment = "Segment",
+        .select = "Select",
+        .table_name = "TableName",
+        .total_segments = "TotalSegments",
+    };
 };
 
 pub const ScanOutput = struct {
@@ -405,6 +424,14 @@ pub const ScanOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .count = "Count",
+        .items = "Items",
+        .last_evaluated_key = "LastEvaluatedKey",
+        .scanned_count = "ScannedCount",
+    };
 };
 
 pub const Options = struct {

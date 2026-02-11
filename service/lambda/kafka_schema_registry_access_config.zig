@@ -17,4 +17,9 @@ pub const KafkaSchemaRegistryAccessConfig = struct {
     /// The URI of the secret (Secrets Manager secret ARN) to authenticate with your
     /// schema registry.
     uri: ?[]const u8,
+
+    pub const json_field_names = .{
+        .@"type" = "Type",
+        .uri = "URI",
+    };
 };

@@ -45,4 +45,17 @@ pub const BackupSummary = struct {
 
     /// Name of the table.
     table_name: ?[]const u8,
+
+    pub const json_field_names = .{
+        .backup_arn = "BackupArn",
+        .backup_creation_date_time = "BackupCreationDateTime",
+        .backup_expiry_date_time = "BackupExpiryDateTime",
+        .backup_name = "BackupName",
+        .backup_size_bytes = "BackupSizeBytes",
+        .backup_status = "BackupStatus",
+        .backup_type = "BackupType",
+        .table_arn = "TableArn",
+        .table_id = "TableId",
+        .table_name = "TableName",
+    };
 };

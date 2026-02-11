@@ -25,6 +25,13 @@ pub const UpdateTableReplicaAutoScalingInput = struct {
     /// Resource Name (ARN) of the
     /// table in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .global_secondary_index_updates = "GlobalSecondaryIndexUpdates",
+        .provisioned_write_capacity_auto_scaling_update = "ProvisionedWriteCapacityAutoScalingUpdate",
+        .replica_updates = "ReplicaUpdates",
+        .table_name = "TableName",
+    };
 };
 
 pub const UpdateTableReplicaAutoScalingOutput = struct {
@@ -37,6 +44,10 @@ pub const UpdateTableReplicaAutoScalingOutput = struct {
     pub fn deinit(self: *const UpdateTableReplicaAutoScalingOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .table_auto_scaling_description = "TableAutoScalingDescription",
+    };
 };
 
 pub const Options = struct {

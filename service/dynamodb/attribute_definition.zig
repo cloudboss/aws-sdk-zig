@@ -13,4 +13,9 @@ pub const AttributeDefinition = struct {
     ///
     /// * `B` - the attribute is of type Binary
     attribute_type: ScalarAttributeType,
+
+    pub const json_field_names = .{
+        .attribute_name = "AttributeName",
+        .attribute_type = "AttributeType",
+    };
 };

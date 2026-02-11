@@ -92,4 +92,19 @@ pub const ReplicaDescription = struct {
 
     /// Represents the warm throughput value for this replica.
     warm_throughput: ?TableWarmThroughputDescription,
+
+    pub const json_field_names = .{
+        .global_secondary_indexes = "GlobalSecondaryIndexes",
+        .global_table_settings_replication_mode = "GlobalTableSettingsReplicationMode",
+        .kms_master_key_id = "KMSMasterKeyId",
+        .on_demand_throughput_override = "OnDemandThroughputOverride",
+        .provisioned_throughput_override = "ProvisionedThroughputOverride",
+        .region_name = "RegionName",
+        .replica_inaccessible_date_time = "ReplicaInaccessibleDateTime",
+        .replica_status = "ReplicaStatus",
+        .replica_status_description = "ReplicaStatusDescription",
+        .replica_status_percent_progress = "ReplicaStatusPercentProgress",
+        .replica_table_class_summary = "ReplicaTableClassSummary",
+        .warm_throughput = "WarmThroughput",
+    };
 };

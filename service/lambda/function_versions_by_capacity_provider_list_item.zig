@@ -8,4 +8,9 @@ pub const FunctionVersionsByCapacityProviderListItem = struct {
 
     /// The current state of the function version.
     state: State,
+
+    pub const json_field_names = .{
+        .function_arn = "FunctionArn",
+        .state = "State",
+    };
 };

@@ -19,6 +19,12 @@ pub const DisableKinesisStreamingDestinationInput = struct {
     /// Name (ARN) of the
     /// table in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .enable_kinesis_streaming_configuration = "EnableKinesisStreamingConfiguration",
+        .stream_arn = "StreamArn",
+        .table_name = "TableName",
+    };
 };
 
 pub const DisableKinesisStreamingDestinationOutput = struct {
@@ -44,6 +50,13 @@ pub const DisableKinesisStreamingDestinationOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .destination_status = "DestinationStatus",
+        .enable_kinesis_streaming_configuration = "EnableKinesisStreamingConfiguration",
+        .stream_arn = "StreamArn",
+        .table_name = "TableName",
+    };
 };
 
 pub const Options = struct {

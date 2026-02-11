@@ -4,4 +4,8 @@ pub const WaitDetails = struct {
     /// [ISO-8601 format](https://www.w3.org/TR/NOTE-datetime)
     /// (YYYY-MM-DDThh:mm:ss.sTZD).
     scheduled_end_timestamp: ?i64,
+
+    pub const json_field_names = .{
+        .scheduled_end_timestamp = "ScheduledEndTimestamp",
+    };
 };

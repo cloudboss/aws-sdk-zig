@@ -45,6 +45,14 @@ pub const UpdateFunctionUrlConfigInput = struct {
 
     /// The alias name.
     qualifier: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .auth_type = "AuthType",
+        .cors = "Cors",
+        .function_name = "FunctionName",
+        .invoke_mode = "InvokeMode",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const UpdateFunctionUrlConfigOutput = struct {
@@ -93,6 +101,16 @@ pub const UpdateFunctionUrlConfigOutput = struct {
         self.allocator.free(self.function_url);
         self.allocator.free(self.last_modified_time);
     }
+
+    pub const json_field_names = .{
+        .auth_type = "AuthType",
+        .cors = "Cors",
+        .creation_time = "CreationTime",
+        .function_arn = "FunctionArn",
+        .function_url = "FunctionUrl",
+        .invoke_mode = "InvokeMode",
+        .last_modified_time = "LastModifiedTime",
+    };
 };
 
 pub const Options = struct {

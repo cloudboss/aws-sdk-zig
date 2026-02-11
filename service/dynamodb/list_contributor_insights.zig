@@ -19,6 +19,12 @@ pub const ListContributorInsightsInput = struct {
     /// of the table in this
     /// parameter.
     table_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .table_name = "TableName",
+    };
 };
 
 pub const ListContributorInsightsOutput = struct {
@@ -35,6 +41,11 @@ pub const ListContributorInsightsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .contributor_insights_summaries = "ContributorInsightsSummaries",
+        .next_token = "NextToken",
+    };
 };
 
 pub const Options = struct {

@@ -27,6 +27,11 @@ pub const GetRuntimeManagementConfigInput = struct {
     /// version number. If no value is specified, the configuration for the
     /// `$LATEST` version is returned.
     qualifier: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const GetRuntimeManagementConfigOutput = struct {
@@ -51,6 +56,12 @@ pub const GetRuntimeManagementConfigOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .function_arn = "FunctionArn",
+        .runtime_version_arn = "RuntimeVersionArn",
+        .update_runtime_on = "UpdateRuntimeOn",
+    };
 };
 
 pub const Options = struct {

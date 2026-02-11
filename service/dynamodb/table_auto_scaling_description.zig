@@ -19,4 +19,10 @@ pub const TableAutoScalingDescription = struct {
     ///
     /// * `ACTIVE` - The table is ready for use.
     table_status: ?TableStatus,
+
+    pub const json_field_names = .{
+        .replicas = "Replicas",
+        .table_name = "TableName",
+        .table_status = "TableStatus",
+    };
 };

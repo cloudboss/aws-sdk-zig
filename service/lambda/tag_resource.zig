@@ -12,6 +12,11 @@ pub const TagResourceInput = struct {
 
     /// A list of tags to apply to the resource.
     tags: []const u8,
+
+    pub const json_field_names = .{
+        .resource = "Resource",
+        .tags = "Tags",
+    };
 };
 
 pub const TagResourceOutput = struct {

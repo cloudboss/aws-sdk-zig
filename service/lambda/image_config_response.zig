@@ -8,4 +8,9 @@ pub const ImageConfigResponse = struct {
 
     /// Configuration values that override the container image Dockerfile.
     image_config: ?ImageConfig,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+        .image_config = "ImageConfig",
+    };
 };

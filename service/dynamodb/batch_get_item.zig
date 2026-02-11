@@ -172,6 +172,11 @@ pub const BatchGetItemInput = struct {
     request_items: []const u8,
 
     return_consumed_capacity: ?ReturnConsumedCapacity = null,
+
+    pub const json_field_names = .{
+        .request_items = "RequestItems",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+    };
 };
 
 pub const BatchGetItemOutput = struct {
@@ -225,6 +230,12 @@ pub const BatchGetItemOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .responses = "Responses",
+        .unprocessed_keys = "UnprocessedKeys",
+    };
 };
 
 pub const Options = struct {

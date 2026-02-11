@@ -50,4 +50,9 @@ pub const ThrottlingReason = struct {
     /// experienced the
     /// throttling event.
     resource: ?[]const u8,
+
+    pub const json_field_names = .{
+        .reason = "reason",
+        .resource = "resource",
+    };
 };

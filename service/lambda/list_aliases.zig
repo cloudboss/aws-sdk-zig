@@ -28,6 +28,13 @@ pub const ListAliasesInput = struct {
 
     /// Limit the number of aliases returned.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .function_version = "FunctionVersion",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListAliasesOutput = struct {
@@ -44,6 +51,11 @@ pub const ListAliasesOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .aliases = "Aliases",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

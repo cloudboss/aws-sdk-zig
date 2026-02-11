@@ -14,4 +14,9 @@ pub const ReplicaUpdate = struct {
 
     /// The name of the existing replica to be removed.
     delete: ?DeleteReplicaAction,
+
+    pub const json_field_names = .{
+        .create = "Create",
+        .delete = "Delete",
+    };
 };

@@ -105,4 +105,9 @@ pub const AttributeValueUpdate = struct {
     /// For more information, see [Data
     /// Types](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes) in the *Amazon DynamoDB Developer Guide*.
     value: ?AttributeValue,
+
+    pub const json_field_names = .{
+        .action = "Action",
+        .value = "Value",
+    };
 };

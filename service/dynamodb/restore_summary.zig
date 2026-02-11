@@ -12,4 +12,11 @@ pub const RestoreSummary = struct {
 
     /// The ARN of the source table of the backup that is being restored.
     source_table_arn: ?[]const u8,
+
+    pub const json_field_names = .{
+        .restore_date_time = "RestoreDateTime",
+        .restore_in_progress = "RestoreInProgress",
+        .source_backup_arn = "SourceBackupArn",
+        .source_table_arn = "SourceTableArn",
+    };
 };

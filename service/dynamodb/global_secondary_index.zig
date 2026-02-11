@@ -66,4 +66,13 @@ pub const GlobalSecondaryIndex = struct {
     /// must specify
     /// `ReadUnitsPerSecond`, `WriteUnitsPerSecond`, or both.
     warm_throughput: ?WarmThroughput,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .key_schema = "KeySchema",
+        .on_demand_throughput = "OnDemandThroughput",
+        .projection = "Projection",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .warm_throughput = "WarmThroughput",
+    };
 };

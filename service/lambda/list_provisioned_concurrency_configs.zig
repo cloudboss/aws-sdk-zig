@@ -24,6 +24,12 @@ pub const ListProvisionedConcurrencyConfigsInput = struct {
 
     /// Specify a number to limit the number of configurations returned.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListProvisionedConcurrencyConfigsOutput = struct {
@@ -40,6 +46,11 @@ pub const ListProvisionedConcurrencyConfigsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .next_marker = "NextMarker",
+        .provisioned_concurrency_configs = "ProvisionedConcurrencyConfigs",
+    };
 };
 
 pub const Options = struct {

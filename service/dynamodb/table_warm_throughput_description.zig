@@ -15,4 +15,10 @@ pub const TableWarmThroughputDescription = struct {
 
     /// Represents the base table's warm throughput value in write units per second.
     write_units_per_second: ?i64,
+
+    pub const json_field_names = .{
+        .read_units_per_second = "ReadUnitsPerSecond",
+        .status = "Status",
+        .write_units_per_second = "WriteUnitsPerSecond",
+    };
 };

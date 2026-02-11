@@ -10,6 +10,10 @@ const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 pub const GetCapacityProviderInput = struct {
     /// The name of the capacity provider to retrieve.
     capacity_provider_name: []const u8,
+
+    pub const json_field_names = .{
+        .capacity_provider_name = "CapacityProviderName",
+    };
 };
 
 pub const GetCapacityProviderOutput = struct {
@@ -22,6 +26,10 @@ pub const GetCapacityProviderOutput = struct {
     pub fn deinit(self: *const GetCapacityProviderOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .capacity_provider = "CapacityProvider",
+    };
 };
 
 pub const Options = struct {

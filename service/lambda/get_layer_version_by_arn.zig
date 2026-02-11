@@ -12,6 +12,10 @@ const LayerVersionContentOutput = @import("layer_version_content_output.zig").La
 pub const GetLayerVersionByArnInput = struct {
     /// The ARN of the layer version.
     arn: []const u8,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+    };
 };
 
 pub const GetLayerVersionByArnOutput = struct {
@@ -70,6 +74,18 @@ pub const GetLayerVersionByArnOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .compatible_architectures = "CompatibleArchitectures",
+        .compatible_runtimes = "CompatibleRuntimes",
+        .content = "Content",
+        .created_date = "CreatedDate",
+        .description = "Description",
+        .layer_arn = "LayerArn",
+        .layer_version_arn = "LayerVersionArn",
+        .license_info = "LicenseInfo",
+        .version = "Version",
+    };
 };
 
 pub const Options = struct {

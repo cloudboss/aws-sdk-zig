@@ -431,6 +431,26 @@ pub const QueryInput = struct {
     /// the
     /// Amazon Resource Name (ARN) of the table in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .attributes_to_get = "AttributesToGet",
+        .conditional_operator = "ConditionalOperator",
+        .consistent_read = "ConsistentRead",
+        .exclusive_start_key = "ExclusiveStartKey",
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .expression_attribute_values = "ExpressionAttributeValues",
+        .filter_expression = "FilterExpression",
+        .index_name = "IndexName",
+        .key_condition_expression = "KeyConditionExpression",
+        .key_conditions = "KeyConditions",
+        .limit = "Limit",
+        .projection_expression = "ProjectionExpression",
+        .query_filter = "QueryFilter",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .scan_index_forward = "ScanIndexForward",
+        .select = "Select",
+        .table_name = "TableName",
+    };
 };
 
 pub const QueryOutput = struct {
@@ -492,6 +512,14 @@ pub const QueryOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .count = "Count",
+        .items = "Items",
+        .last_evaluated_key = "LastEvaluatedKey",
+        .scanned_count = "ScannedCount",
+    };
 };
 
 pub const Options = struct {

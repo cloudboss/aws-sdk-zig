@@ -40,4 +40,14 @@ pub const FunctionUrlConfig = struct {
     /// When the function URL configuration was last updated, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
     last_modified_time: []const u8,
+
+    pub const json_field_names = .{
+        .auth_type = "AuthType",
+        .cors = "Cors",
+        .creation_time = "CreationTime",
+        .function_arn = "FunctionArn",
+        .function_url = "FunctionUrl",
+        .invoke_mode = "InvokeMode",
+        .last_modified_time = "LastModifiedTime",
+    };
 };

@@ -12,6 +12,10 @@ const BackupDescription = @import("backup_description.zig").BackupDescription;
 pub const DescribeBackupInput = struct {
     /// The Amazon Resource Name (ARN) associated with the backup.
     backup_arn: []const u8,
+
+    pub const json_field_names = .{
+        .backup_arn = "BackupArn",
+    };
 };
 
 pub const DescribeBackupOutput = struct {
@@ -23,6 +27,10 @@ pub const DescribeBackupOutput = struct {
     pub fn deinit(self: *const DescribeBackupOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .backup_description = "BackupDescription",
+    };
 };
 
 pub const Options = struct {

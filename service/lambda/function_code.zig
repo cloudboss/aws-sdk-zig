@@ -26,4 +26,13 @@ pub const FunctionCode = struct {
     /// The base64-encoded contents of the deployment package. Amazon Web Services
     /// SDK and CLI clients handle the encoding for you.
     zip_file: ?[]const u8,
+
+    pub const json_field_names = .{
+        .image_uri = "ImageUri",
+        .s_3_bucket = "S3Bucket",
+        .s_3_key = "S3Key",
+        .s_3_object_version = "S3ObjectVersion",
+        .source_kms_key_arn = "SourceKMSKeyArn",
+        .zip_file = "ZipFile",
+    };
 };

@@ -35,6 +35,12 @@ pub const ListGlobalTablesInput = struct {
 
     /// Lists the global tables in a specific Region.
     region_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .exclusive_start_global_table_name = "ExclusiveStartGlobalTableName",
+        .limit = "Limit",
+        .region_name = "RegionName",
+    };
 };
 
 pub const ListGlobalTablesOutput = struct {
@@ -51,6 +57,11 @@ pub const ListGlobalTablesOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .global_tables = "GlobalTables",
+        .last_evaluated_global_table_name = "LastEvaluatedGlobalTableName",
+    };
 };
 
 pub const Options = struct {

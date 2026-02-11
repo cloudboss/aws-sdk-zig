@@ -31,4 +31,10 @@ pub const ReplicationGroupUpdate = struct {
 
     /// The parameters required for updating a replica for the table.
     update: ?UpdateReplicationGroupMemberAction,
+
+    pub const json_field_names = .{
+        .create = "Create",
+        .delete = "Delete",
+        .update = "Update",
+    };
 };

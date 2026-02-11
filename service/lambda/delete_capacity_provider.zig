@@ -10,6 +10,10 @@ const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 pub const DeleteCapacityProviderInput = struct {
     /// The name of the capacity provider to delete.
     capacity_provider_name: []const u8,
+
+    pub const json_field_names = .{
+        .capacity_provider_name = "CapacityProviderName",
+    };
 };
 
 pub const DeleteCapacityProviderOutput = struct {
@@ -21,6 +25,10 @@ pub const DeleteCapacityProviderOutput = struct {
     pub fn deinit(self: *const DeleteCapacityProviderOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .capacity_provider = "CapacityProvider",
+    };
 };
 
 pub const Options = struct {

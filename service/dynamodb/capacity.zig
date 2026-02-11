@@ -10,4 +10,10 @@ pub const Capacity = struct {
 
     /// The total number of write capacity units consumed on a table or an index.
     write_capacity_units: ?f64,
+
+    pub const json_field_names = .{
+        .capacity_units = "CapacityUnits",
+        .read_capacity_units = "ReadCapacityUnits",
+        .write_capacity_units = "WriteCapacityUnits",
+    };
 };

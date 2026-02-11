@@ -68,6 +68,16 @@ pub const ExecuteStatementInput = struct {
 
     /// The PartiQL statement representing the operation to run.
     statement: []const u8,
+
+    pub const json_field_names = .{
+        .consistent_read = "ConsistentRead",
+        .limit = "Limit",
+        .next_token = "NextToken",
+        .parameters = "Parameters",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .return_values_on_condition_check_failure = "ReturnValuesOnConditionCheckFailure",
+        .statement = "Statement",
+    };
 };
 
 pub const ExecuteStatementOutput = struct {
@@ -109,6 +119,13 @@ pub const ExecuteStatementOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .items = "Items",
+        .last_evaluated_key = "LastEvaluatedKey",
+        .next_token = "NextToken",
+    };
 };
 
 pub const Options = struct {

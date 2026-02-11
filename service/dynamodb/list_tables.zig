@@ -19,6 +19,11 @@ pub const ListTablesInput = struct {
     /// specified, the
     /// limit is 100.
     limit: ?i32 = null,
+
+    pub const json_field_names = .{
+        .exclusive_start_table_name = "ExclusiveStartTableName",
+        .limit = "Limit",
+    };
 };
 
 pub const ListTablesOutput = struct {
@@ -47,6 +52,11 @@ pub const ListTablesOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .last_evaluated_table_name = "LastEvaluatedTableName",
+        .table_names = "TableNames",
+    };
 };
 
 pub const Options = struct {

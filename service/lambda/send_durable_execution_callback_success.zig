@@ -14,6 +14,11 @@ pub const SendDurableExecutionCallbackSuccessInput = struct {
     /// The result data from the successful callback operation. Maximum size is 256
     /// KB.
     result: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .callback_id = "CallbackId",
+        .result = "Result",
+    };
 };
 
 pub const SendDurableExecutionCallbackSuccessOutput = struct {

@@ -32,6 +32,13 @@ pub const RemovePermissionInput = struct {
 
     /// Statement ID of the permission to remove.
     statement_id: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+        .revision_id = "RevisionId",
+        .statement_id = "StatementId",
+    };
 };
 
 pub const RemovePermissionOutput = struct {

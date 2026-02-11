@@ -60,4 +60,17 @@ pub const AttributeValue = union(enum) {
     ///
     /// `"SS": ["Giraffe", "Hippo" ,"Zebra"]`
     ss: ?[]const []const u8,
+
+    pub const json_field_names = .{
+        .b = "B",
+        .bool = "BOOL",
+        .bs = "BS",
+        .l = "L",
+        .m = "M",
+        .n = "N",
+        .ns = "NS",
+        .@"null" = "NULL",
+        .s = "S",
+        .ss = "SS",
+    };
 };

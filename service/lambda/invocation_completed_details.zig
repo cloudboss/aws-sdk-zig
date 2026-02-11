@@ -15,4 +15,11 @@ pub const InvocationCompletedDetails = struct {
     /// The date and time when the invocation started, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
     start_timestamp: i64,
+
+    pub const json_field_names = .{
+        .end_timestamp = "EndTimestamp",
+        .@"error" = "Error",
+        .request_id = "RequestId",
+        .start_timestamp = "StartTimestamp",
+    };
 };

@@ -36,6 +36,13 @@ pub const ListFunctionsInput = struct {
     /// `ListFunctions` returns a maximum of 50 items in each response, even if you
     /// set the number higher.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .function_version = "FunctionVersion",
+        .marker = "Marker",
+        .master_region = "MasterRegion",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListFunctionsOutput = struct {
@@ -52,6 +59,11 @@ pub const ListFunctionsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .functions = "Functions",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

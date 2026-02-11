@@ -4,4 +4,8 @@ pub const SelfManagedEventSource = struct {
     /// format: `"KAFKA_BOOTSTRAP_SERVERS":
     /// ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]`.
     endpoints: ?[]const u8,
+
+    pub const json_field_names = .{
+        .endpoints = "Endpoints",
+    };
 };

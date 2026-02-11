@@ -10,4 +10,10 @@ pub const CallbackStartedDetails = struct {
 
     /// The timeout value, in seconds.
     timeout: ?i32,
+
+    pub const json_field_names = .{
+        .callback_id = "CallbackId",
+        .heartbeat_timeout = "HeartbeatTimeout",
+        .timeout = "Timeout",
+    };
 };

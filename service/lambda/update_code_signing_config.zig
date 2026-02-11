@@ -22,6 +22,13 @@ pub const UpdateCodeSigningConfigInput = struct {
 
     /// Descriptive name for this code signing configuration.
     description: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .allowed_publishers = "AllowedPublishers",
+        .code_signing_config_arn = "CodeSigningConfigArn",
+        .code_signing_policies = "CodeSigningPolicies",
+        .description = "Description",
+    };
 };
 
 pub const UpdateCodeSigningConfigOutput = struct {
@@ -33,6 +40,10 @@ pub const UpdateCodeSigningConfigOutput = struct {
     pub fn deinit(self: *const UpdateCodeSigningConfigOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .code_signing_config = "CodeSigningConfig",
+    };
 };
 
 pub const Options = struct {

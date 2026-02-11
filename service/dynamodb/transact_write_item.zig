@@ -18,4 +18,11 @@ pub const TransactWriteItem = struct {
 
     /// A request to perform an `UpdateItem` operation.
     update: ?Update,
+
+    pub const json_field_names = .{
+        .condition_check = "ConditionCheck",
+        .delete = "Delete",
+        .put = "Put",
+        .update = "Update",
+    };
 };

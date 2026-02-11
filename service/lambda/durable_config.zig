@@ -10,4 +10,9 @@ pub const DurableConfig = struct {
     /// completes. After this period, execution history is no longer available
     /// through the GetDurableExecutionHistory API.
     retention_period_in_days: ?i32,
+
+    pub const json_field_names = .{
+        .execution_timeout = "ExecutionTimeout",
+        .retention_period_in_days = "RetentionPeriodInDays",
+    };
 };

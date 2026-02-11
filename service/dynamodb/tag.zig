@@ -23,4 +23,9 @@ pub const Tag = struct {
 
     /// The value of the tag. Tag values are case-sensitive and can be null.
     value: []const u8,
+
+    pub const json_field_names = .{
+        .key = "Key",
+        .value = "Value",
+    };
 };

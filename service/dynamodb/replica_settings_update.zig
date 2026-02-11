@@ -29,4 +29,12 @@ pub const ReplicaSettingsUpdate = struct {
     /// table
     /// class.
     replica_table_class: ?TableClass,
+
+    pub const json_field_names = .{
+        .region_name = "RegionName",
+        .replica_global_secondary_index_settings_update = "ReplicaGlobalSecondaryIndexSettingsUpdate",
+        .replica_provisioned_read_capacity_auto_scaling_settings_update = "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate",
+        .replica_provisioned_read_capacity_units = "ReplicaProvisionedReadCapacityUnits",
+        .replica_table_class = "ReplicaTableClass",
+    };
 };

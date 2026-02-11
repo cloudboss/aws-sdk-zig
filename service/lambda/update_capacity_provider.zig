@@ -13,6 +13,11 @@ pub const UpdateCapacityProviderInput = struct {
 
     /// The updated scaling configuration for the capacity provider.
     capacity_provider_scaling_config: ?CapacityProviderScalingConfig = null,
+
+    pub const json_field_names = .{
+        .capacity_provider_name = "CapacityProviderName",
+        .capacity_provider_scaling_config = "CapacityProviderScalingConfig",
+    };
 };
 
 pub const UpdateCapacityProviderOutput = struct {
@@ -24,6 +29,10 @@ pub const UpdateCapacityProviderOutput = struct {
     pub fn deinit(self: *const UpdateCapacityProviderOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .capacity_provider = "CapacityProvider",
+    };
 };
 
 pub const Options = struct {

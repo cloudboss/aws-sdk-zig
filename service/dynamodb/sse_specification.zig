@@ -24,4 +24,10 @@ pub const SSESpecification = struct {
     /// * `KMS` - Server-side encryption that uses Key Management Service. The
     /// key is stored in your account and is managed by KMS (KMS charges apply).
     sse_type: ?SSEType,
+
+    pub const json_field_names = .{
+        .enabled = "Enabled",
+        .kms_master_key_id = "KMSMasterKeyId",
+        .sse_type = "SSEType",
+    };
 };

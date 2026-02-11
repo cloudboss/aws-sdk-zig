@@ -31,6 +31,13 @@ pub const ListLayersInput = struct {
 
     /// The maximum number of layers to return.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .compatible_architecture = "CompatibleArchitecture",
+        .compatible_runtime = "CompatibleRuntime",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListLayersOutput = struct {
@@ -47,6 +54,11 @@ pub const ListLayersOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .layers = "Layers",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

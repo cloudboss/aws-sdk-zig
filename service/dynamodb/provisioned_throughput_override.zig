@@ -6,4 +6,8 @@ pub const ProvisionedThroughputOverride = struct {
     /// table's read
     /// capacity settings.
     read_capacity_units: ?i64,
+
+    pub const json_field_names = .{
+        .read_capacity_units = "ReadCapacityUnits",
+    };
 };

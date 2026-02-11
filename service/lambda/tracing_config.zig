@@ -7,4 +7,8 @@ const TracingMode = @import("tracing_mode.zig").TracingMode;
 pub const TracingConfig = struct {
     /// The tracing mode.
     mode: ?TracingMode,
+
+    pub const json_field_names = .{
+        .mode = "Mode",
+    };
 };

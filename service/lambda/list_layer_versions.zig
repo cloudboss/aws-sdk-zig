@@ -32,6 +32,14 @@ pub const ListLayerVersionsInput = struct {
 
     /// The maximum number of versions to return.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .compatible_architecture = "CompatibleArchitecture",
+        .compatible_runtime = "CompatibleRuntime",
+        .layer_name = "LayerName",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListLayerVersionsOutput = struct {
@@ -48,6 +56,11 @@ pub const ListLayerVersionsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .layer_versions = "LayerVersions",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

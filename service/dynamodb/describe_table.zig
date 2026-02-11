@@ -23,6 +23,10 @@ pub const DescribeTableInput = struct {
     /// Name (ARN) of the table in
     /// this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .table_name = "TableName",
+    };
 };
 
 pub const DescribeTableOutput = struct {
@@ -34,6 +38,10 @@ pub const DescribeTableOutput = struct {
     pub fn deinit(self: *const DescribeTableOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .table = "Table",
+    };
 };
 
 pub const Options = struct {

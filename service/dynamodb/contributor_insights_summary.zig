@@ -20,4 +20,11 @@ pub const ContributorInsightsSummary = struct {
 
     /// Name of the table associated with the summary.
     table_name: ?[]const u8,
+
+    pub const json_field_names = .{
+        .contributor_insights_mode = "ContributorInsightsMode",
+        .contributor_insights_status = "ContributorInsightsStatus",
+        .index_name = "IndexName",
+        .table_name = "TableName",
+    };
 };

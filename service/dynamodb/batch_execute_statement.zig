@@ -35,6 +35,11 @@ pub const BatchExecuteStatementInput = struct {
 
     /// The list of PartiQL statements representing the batch to run.
     statements: []const BatchStatementRequest,
+
+    pub const json_field_names = .{
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .statements = "Statements",
+    };
 };
 
 pub const BatchExecuteStatementOutput = struct {
@@ -53,6 +58,11 @@ pub const BatchExecuteStatementOutput = struct {
     pub fn deinit(self: *const BatchExecuteStatementOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .responses = "Responses",
+    };
 };
 
 pub const Options = struct {

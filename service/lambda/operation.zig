@@ -51,4 +51,21 @@ pub const Operation = struct {
 
     /// Details about the wait operation, if this operation represents a wait.
     wait_details: ?WaitDetails,
+
+    pub const json_field_names = .{
+        .callback_details = "CallbackDetails",
+        .chained_invoke_details = "ChainedInvokeDetails",
+        .context_details = "ContextDetails",
+        .end_timestamp = "EndTimestamp",
+        .execution_details = "ExecutionDetails",
+        .id = "Id",
+        .name = "Name",
+        .parent_id = "ParentId",
+        .start_timestamp = "StartTimestamp",
+        .status = "Status",
+        .step_details = "StepDetails",
+        .sub_type = "SubType",
+        .@"type" = "Type",
+        .wait_details = "WaitDetails",
+    };
 };

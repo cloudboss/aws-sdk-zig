@@ -89,6 +89,21 @@ pub const AddPermissionInput = struct {
     /// A statement identifier that differentiates the statement from others in the
     /// same policy.
     statement_id: []const u8,
+
+    pub const json_field_names = .{
+        .action = "Action",
+        .event_source_token = "EventSourceToken",
+        .function_name = "FunctionName",
+        .function_url_auth_type = "FunctionUrlAuthType",
+        .invoked_via_function_url = "InvokedViaFunctionUrl",
+        .principal = "Principal",
+        .principal_org_id = "PrincipalOrgID",
+        .qualifier = "Qualifier",
+        .revision_id = "RevisionId",
+        .source_account = "SourceAccount",
+        .source_arn = "SourceArn",
+        .statement_id = "StatementId",
+    };
 };
 
 pub const AddPermissionOutput = struct {
@@ -102,6 +117,10 @@ pub const AddPermissionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .statement = "Statement",
+    };
 };
 
 pub const Options = struct {

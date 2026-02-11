@@ -18,6 +18,12 @@ pub const UpdateKinesisStreamingDestinationInput = struct {
 
     /// The command to update the Kinesis stream configuration.
     update_kinesis_streaming_configuration: ?UpdateKinesisStreamingConfiguration = null,
+
+    pub const json_field_names = .{
+        .stream_arn = "StreamArn",
+        .table_name = "TableName",
+        .update_kinesis_streaming_configuration = "UpdateKinesisStreamingConfiguration",
+    };
 };
 
 pub const UpdateKinesisStreamingDestinationOutput = struct {
@@ -44,6 +50,13 @@ pub const UpdateKinesisStreamingDestinationOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .destination_status = "DestinationStatus",
+        .stream_arn = "StreamArn",
+        .table_name = "TableName",
+        .update_kinesis_streaming_configuration = "UpdateKinesisStreamingConfiguration",
+    };
 };
 
 pub const Options = struct {

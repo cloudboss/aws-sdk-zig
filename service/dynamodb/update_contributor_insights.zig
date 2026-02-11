@@ -36,6 +36,13 @@ pub const UpdateContributorInsightsInput = struct {
     /// of the table in this
     /// parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .contributor_insights_action = "ContributorInsightsAction",
+        .contributor_insights_mode = "ContributorInsightsMode",
+        .index_name = "IndexName",
+        .table_name = "TableName",
+    };
 };
 
 pub const UpdateContributorInsightsOutput = struct {
@@ -63,6 +70,13 @@ pub const UpdateContributorInsightsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .contributor_insights_mode = "ContributorInsightsMode",
+        .contributor_insights_status = "ContributorInsightsStatus",
+        .index_name = "IndexName",
+        .table_name = "TableName",
+    };
 };
 
 pub const Options = struct {

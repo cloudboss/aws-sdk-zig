@@ -13,4 +13,10 @@ pub const ExportSummary = struct {
     /// The type of export that was performed. Valid values are `FULL_EXPORT` or
     /// `INCREMENTAL_EXPORT`.
     export_type: ?ExportType,
+
+    pub const json_field_names = .{
+        .export_arn = "ExportArn",
+        .export_status = "ExportStatus",
+        .export_type = "ExportType",
+    };
 };

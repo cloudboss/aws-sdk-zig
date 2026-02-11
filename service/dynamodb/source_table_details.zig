@@ -43,4 +43,17 @@ pub const SourceTableDetails = struct {
 
     /// Size of the table in bytes. Note that this is an approximate value.
     table_size_bytes: ?i64,
+
+    pub const json_field_names = .{
+        .billing_mode = "BillingMode",
+        .item_count = "ItemCount",
+        .key_schema = "KeySchema",
+        .on_demand_throughput = "OnDemandThroughput",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .table_arn = "TableArn",
+        .table_creation_date_time = "TableCreationDateTime",
+        .table_id = "TableId",
+        .table_name = "TableName",
+        .table_size_bytes = "TableSizeBytes",
+    };
 };

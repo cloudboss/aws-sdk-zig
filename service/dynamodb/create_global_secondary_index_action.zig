@@ -42,4 +42,13 @@ pub const CreateGlobalSecondaryIndexAction = struct {
     /// units per
     /// second) when creating a secondary index.
     warm_throughput: ?WarmThroughput,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .key_schema = "KeySchema",
+        .on_demand_throughput = "OnDemandThroughput",
+        .projection = "Projection",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .warm_throughput = "WarmThroughput",
+    };
 };

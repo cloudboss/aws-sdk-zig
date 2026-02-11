@@ -6,4 +6,8 @@ pub const DeleteRequest = struct {
     /// their data
     /// types must match those of the table's key schema.
     key: []const u8,
+
+    pub const json_field_names = .{
+        .key = "Key",
+    };
 };

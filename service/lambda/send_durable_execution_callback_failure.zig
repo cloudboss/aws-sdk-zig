@@ -14,6 +14,11 @@ pub const SendDurableExecutionCallbackFailureInput = struct {
 
     /// Error details describing why the callback operation failed.
     @"error": ?ErrorObject = null,
+
+    pub const json_field_names = .{
+        .callback_id = "CallbackId",
+        .@"error" = "Error",
+    };
 };
 
 pub const SendDurableExecutionCallbackFailureOutput = struct {

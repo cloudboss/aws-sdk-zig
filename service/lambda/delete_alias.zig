@@ -20,6 +20,11 @@ pub const DeleteAliasInput = struct {
 
     /// The name of the alias.
     name: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .name = "Name",
+    };
 };
 
 pub const DeleteAliasOutput = struct {

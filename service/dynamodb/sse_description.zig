@@ -27,4 +27,11 @@ pub const SSEDescription = struct {
     ///
     /// * `UPDATING` - Server-side encryption is being updated.
     status: ?SSEStatus,
+
+    pub const json_field_names = .{
+        .inaccessible_encryption_date_time = "InaccessibleEncryptionDateTime",
+        .kms_master_key_arn = "KMSMasterKeyArn",
+        .sse_type = "SSEType",
+        .status = "Status",
+    };
 };

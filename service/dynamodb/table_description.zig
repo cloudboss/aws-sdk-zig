@@ -349,4 +349,35 @@ pub const TableDescription = struct {
 
     /// Describes the warm throughput value of the base table.
     warm_throughput: ?TableWarmThroughputDescription,
+
+    pub const json_field_names = .{
+        .archival_summary = "ArchivalSummary",
+        .attribute_definitions = "AttributeDefinitions",
+        .billing_mode_summary = "BillingModeSummary",
+        .creation_date_time = "CreationDateTime",
+        .deletion_protection_enabled = "DeletionProtectionEnabled",
+        .global_secondary_indexes = "GlobalSecondaryIndexes",
+        .global_table_settings_replication_mode = "GlobalTableSettingsReplicationMode",
+        .global_table_version = "GlobalTableVersion",
+        .global_table_witnesses = "GlobalTableWitnesses",
+        .item_count = "ItemCount",
+        .key_schema = "KeySchema",
+        .latest_stream_arn = "LatestStreamArn",
+        .latest_stream_label = "LatestStreamLabel",
+        .local_secondary_indexes = "LocalSecondaryIndexes",
+        .multi_region_consistency = "MultiRegionConsistency",
+        .on_demand_throughput = "OnDemandThroughput",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .replicas = "Replicas",
+        .restore_summary = "RestoreSummary",
+        .sse_description = "SSEDescription",
+        .stream_specification = "StreamSpecification",
+        .table_arn = "TableArn",
+        .table_class_summary = "TableClassSummary",
+        .table_id = "TableId",
+        .table_name = "TableName",
+        .table_size_bytes = "TableSizeBytes",
+        .table_status = "TableStatus",
+        .warm_throughput = "WarmThroughput",
+    };
 };

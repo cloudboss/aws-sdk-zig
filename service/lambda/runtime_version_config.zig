@@ -8,4 +8,9 @@ pub const RuntimeVersionConfig = struct {
 
     /// The ARN of the runtime version you want the function to use.
     runtime_version_arn: ?[]const u8,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+        .runtime_version_arn = "RuntimeVersionArn",
+    };
 };

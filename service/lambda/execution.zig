@@ -24,4 +24,13 @@ pub const Execution = struct {
 
     /// The current status of the durable execution.
     status: ExecutionStatus,
+
+    pub const json_field_names = .{
+        .durable_execution_arn = "DurableExecutionArn",
+        .durable_execution_name = "DurableExecutionName",
+        .end_timestamp = "EndTimestamp",
+        .function_arn = "FunctionArn",
+        .start_timestamp = "StartTimestamp",
+        .status = "Status",
+    };
 };

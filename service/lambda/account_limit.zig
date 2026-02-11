@@ -19,4 +19,12 @@ pub const AccountLimit = struct {
     /// The maximum number of simultaneous function executions, minus the capacity
     /// that's reserved for individual functions with PutFunctionConcurrency.
     unreserved_concurrent_executions: ?i32,
+
+    pub const json_field_names = .{
+        .code_size_unzipped = "CodeSizeUnzipped",
+        .code_size_zipped = "CodeSizeZipped",
+        .concurrent_executions = "ConcurrentExecutions",
+        .total_code_size = "TotalCodeSize",
+        .unreserved_concurrent_executions = "UnreservedConcurrentExecutions",
+    };
 };

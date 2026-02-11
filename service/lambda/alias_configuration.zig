@@ -21,4 +21,13 @@ pub const AliasConfiguration = struct {
     /// The [routing
     /// configuration](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html) of the alias.
     routing_config: ?AliasRoutingConfiguration,
+
+    pub const json_field_names = .{
+        .alias_arn = "AliasArn",
+        .description = "Description",
+        .function_version = "FunctionVersion",
+        .name = "Name",
+        .revision_id = "RevisionId",
+        .routing_config = "RoutingConfig",
+    };
 };

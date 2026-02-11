@@ -12,4 +12,9 @@ pub const SnapStartResponse = struct {
     /// When you provide a [qualified Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using), this response element indicates whether SnapStart is activated for the specified function version.
     optimization_status: ?SnapStartOptimizationStatus,
+
+    pub const json_field_names = .{
+        .apply_on = "ApplyOn",
+        .optimization_status = "OptimizationStatus",
+    };
 };

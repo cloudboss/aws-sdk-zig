@@ -22,6 +22,13 @@ pub const CreateCodeSigningConfigInput = struct {
 
     /// A list of tags to add to the code signing configuration.
     tags: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .allowed_publishers = "AllowedPublishers",
+        .code_signing_policies = "CodeSigningPolicies",
+        .description = "Description",
+        .tags = "Tags",
+    };
 };
 
 pub const CreateCodeSigningConfigOutput = struct {
@@ -33,6 +40,10 @@ pub const CreateCodeSigningConfigOutput = struct {
     pub fn deinit(self: *const CreateCodeSigningConfigOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .code_signing_config = "CodeSigningConfig",
+    };
 };
 
 pub const Options = struct {

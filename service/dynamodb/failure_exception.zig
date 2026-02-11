@@ -5,4 +5,9 @@ pub const FailureException = struct {
 
     /// Exception name.
     exception_name: ?[]const u8,
+
+    pub const json_field_names = .{
+        .exception_description = "ExceptionDescription",
+        .exception_name = "ExceptionName",
+    };
 };

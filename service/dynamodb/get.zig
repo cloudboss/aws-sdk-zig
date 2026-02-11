@@ -23,4 +23,11 @@ pub const Get = struct {
     /// also provide
     /// the Amazon Resource Name (ARN) of the table in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .key = "Key",
+        .projection_expression = "ProjectionExpression",
+        .table_name = "TableName",
+    };
 };

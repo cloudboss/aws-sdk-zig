@@ -170,6 +170,23 @@ pub const UpdateTableInput = struct {
     /// second)
     /// for updating a table.
     warm_throughput: ?WarmThroughput = null,
+
+    pub const json_field_names = .{
+        .attribute_definitions = "AttributeDefinitions",
+        .billing_mode = "BillingMode",
+        .deletion_protection_enabled = "DeletionProtectionEnabled",
+        .global_secondary_index_updates = "GlobalSecondaryIndexUpdates",
+        .global_table_witness_updates = "GlobalTableWitnessUpdates",
+        .multi_region_consistency = "MultiRegionConsistency",
+        .on_demand_throughput = "OnDemandThroughput",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .replica_updates = "ReplicaUpdates",
+        .sse_specification = "SSESpecification",
+        .stream_specification = "StreamSpecification",
+        .table_class = "TableClass",
+        .table_name = "TableName",
+        .warm_throughput = "WarmThroughput",
+    };
 };
 
 pub const UpdateTableOutput = struct {
@@ -181,6 +198,10 @@ pub const UpdateTableOutput = struct {
     pub fn deinit(self: *const UpdateTableOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .table_description = "TableDescription",
+    };
 };
 
 pub const Options = struct {

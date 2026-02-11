@@ -33,4 +33,15 @@ pub const TableCreationParameters = struct {
 
     /// The name of the table created as part of the import operation.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .attribute_definitions = "AttributeDefinitions",
+        .billing_mode = "BillingMode",
+        .global_secondary_indexes = "GlobalSecondaryIndexes",
+        .key_schema = "KeySchema",
+        .on_demand_throughput = "OnDemandThroughput",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .sse_specification = "SSESpecification",
+        .table_name = "TableName",
+    };
 };

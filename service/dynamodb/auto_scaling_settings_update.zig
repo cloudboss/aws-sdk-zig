@@ -24,4 +24,12 @@ pub const AutoScalingSettingsUpdate = struct {
     /// secondary index
     /// capacity units.
     scaling_policy_update: ?AutoScalingPolicyUpdate,
+
+    pub const json_field_names = .{
+        .auto_scaling_disabled = "AutoScalingDisabled",
+        .auto_scaling_role_arn = "AutoScalingRoleArn",
+        .maximum_units = "MaximumUnits",
+        .minimum_units = "MinimumUnits",
+        .scaling_policy_update = "ScalingPolicyUpdate",
+    };
 };

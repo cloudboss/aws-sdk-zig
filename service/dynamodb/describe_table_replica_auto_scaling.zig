@@ -11,6 +11,10 @@ pub const DescribeTableReplicaAutoScalingInput = struct {
     /// of the table in this
     /// parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .table_name = "TableName",
+    };
 };
 
 pub const DescribeTableReplicaAutoScalingOutput = struct {
@@ -22,6 +26,10 @@ pub const DescribeTableReplicaAutoScalingOutput = struct {
     pub fn deinit(self: *const DescribeTableReplicaAutoScalingOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .table_auto_scaling_description = "TableAutoScalingDescription",
+    };
 };
 
 pub const Options = struct {

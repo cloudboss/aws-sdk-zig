@@ -4,4 +4,8 @@ const EventError = @import("event_error.zig").EventError;
 pub const ChainedInvokeStoppedDetails = struct {
     /// Details about why the chained invocation stopped.
     @"error": EventError,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+    };
 };

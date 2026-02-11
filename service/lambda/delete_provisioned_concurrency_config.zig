@@ -19,6 +19,11 @@ pub const DeleteProvisionedConcurrencyConfigInput = struct {
 
     /// The version number or alias name.
     qualifier: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const DeleteProvisionedConcurrencyConfigOutput = struct {

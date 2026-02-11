@@ -50,6 +50,11 @@ pub const DeleteResourcePolicyInput = struct {
     /// the table's
     /// policy.
     resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .expected_revision_id = "ExpectedRevisionId",
+        .resource_arn = "ResourceArn",
+    };
 };
 
 pub const DeleteResourcePolicyOutput = struct {
@@ -67,6 +72,10 @@ pub const DeleteResourcePolicyOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .revision_id = "RevisionId",
+    };
 };
 
 pub const Options = struct {

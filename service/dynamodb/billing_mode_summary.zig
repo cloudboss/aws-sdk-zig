@@ -26,4 +26,9 @@ pub const BillingModeSummary = struct {
     /// Represents the time when `PAY_PER_REQUEST` was last set as the read/write
     /// capacity mode.
     last_update_to_pay_per_request_date_time: ?i64,
+
+    pub const json_field_names = .{
+        .billing_mode = "BillingMode",
+        .last_update_to_pay_per_request_date_time = "LastUpdateToPayPerRequestDateTime",
+    };
 };

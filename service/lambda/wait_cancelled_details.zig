@@ -4,4 +4,8 @@ const EventError = @import("event_error.zig").EventError;
 pub const WaitCancelledDetails = struct {
     /// Details about why the wait operation was cancelled.
     @"error": ?EventError,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+    };
 };

@@ -15,4 +15,12 @@ pub const LayerVersionContentOutput = struct {
 
     /// The Amazon Resource Name (ARN) for a signing profile version.
     signing_profile_version_arn: ?[]const u8,
+
+    pub const json_field_names = .{
+        .code_sha_256 = "CodeSha256",
+        .code_size = "CodeSize",
+        .location = "Location",
+        .signing_job_arn = "SigningJobArn",
+        .signing_profile_version_arn = "SigningProfileVersionArn",
+    };
 };

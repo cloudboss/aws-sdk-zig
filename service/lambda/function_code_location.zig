@@ -17,4 +17,12 @@ pub const FunctionCodeLocation = struct {
     /// customer managed key, Lambda uses an [Amazon Web Services owned
     /// key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk).
     source_kms_key_arn: ?[]const u8,
+
+    pub const json_field_names = .{
+        .image_uri = "ImageUri",
+        .location = "Location",
+        .repository_type = "RepositoryType",
+        .resolved_image_uri = "ResolvedImageUri",
+        .source_kms_key_arn = "SourceKMSKeyArn",
+    };
 };

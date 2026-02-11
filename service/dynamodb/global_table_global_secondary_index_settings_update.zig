@@ -16,4 +16,10 @@ pub const GlobalTableGlobalSecondaryIndexSettingsUpdate = struct {
     /// The maximum number of writes consumed per second before DynamoDB returns a
     /// `ThrottlingException.`
     provisioned_write_capacity_units: ?i64,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .provisioned_write_capacity_auto_scaling_settings_update = "ProvisionedWriteCapacityAutoScalingSettingsUpdate",
+        .provisioned_write_capacity_units = "ProvisionedWriteCapacityUnits",
+    };
 };

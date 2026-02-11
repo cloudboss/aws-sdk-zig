@@ -11,4 +11,10 @@ pub const LayersListItem = struct {
 
     /// The name of the layer.
     layer_name: ?[]const u8,
+
+    pub const json_field_names = .{
+        .latest_matching_version = "LatestMatchingVersion",
+        .layer_arn = "LayerArn",
+        .layer_name = "LayerName",
+    };
 };

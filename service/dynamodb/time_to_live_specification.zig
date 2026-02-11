@@ -10,4 +10,9 @@ pub const TimeToLiveSpecification = struct {
     /// Indicates whether TTL is to be enabled (true) or disabled (false) on the
     /// table.
     enabled: bool,
+
+    pub const json_field_names = .{
+        .attribute_name = "AttributeName",
+        .enabled = "Enabled",
+    };
 };

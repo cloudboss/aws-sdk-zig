@@ -12,4 +12,10 @@ pub const CallbackDetails = struct {
 
     /// The response payload from the callback operation as a string.
     result: ?[]const u8,
+
+    pub const json_field_names = .{
+        .callback_id = "CallbackId",
+        .@"error" = "Error",
+        .result = "Result",
+    };
 };

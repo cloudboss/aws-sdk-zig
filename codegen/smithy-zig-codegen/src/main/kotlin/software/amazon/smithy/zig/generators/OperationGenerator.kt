@@ -151,6 +151,10 @@ class OperationGenerator(
             firstField = false
         }
 
+        if (isJsonProtocol()) {
+            writeJsonFieldNames(writer, inputShape)
+        }
+
         writer.closeBlock("};")
     }
 
@@ -235,6 +239,11 @@ class OperationGenerator(
         }
 
         writer.closeBlock("}")
+
+        if (isJsonProtocol()) {
+            writeJsonFieldNames(writer, outputShape)
+        }
+
         writer.closeBlock("};")
     }
 
@@ -334,6 +343,25 @@ class OperationGenerator(
         writer.write("return try deserializeStreamingResponse(&stream_resp, client.allocator);")
 
         writer.closeBlock("}")
+    }
+
+    private fun isJsonProtocol(): Boolean {
+        return service.hasTrait("aws.protocols#awsJson1_0") ||
+            service.hasTrait("aws.protocols#awsJson1_1") ||
+            service.hasTrait("aws.protocols#restJson1")
+    }
+
+    private fun writeJsonFieldNames(writer: ZigWriter, shape: StructureShape) {
+        val members = shape.allMembers
+        if (members.isEmpty()) return
+
+        writer.blankLine()
+        writer.openBlock("pub const json_field_names = .{")
+        for ((memberName, _) in members) {
+            val fieldName = NamingUtil.toFieldName(memberName)
+            writer.write(".\$L = \"\$L\",", fieldName, memberName)
+        }
+        writer.closeBlock("};")
     }
 
     /**

@@ -5,4 +5,8 @@ pub const Filter = struct {
     /// see [ Filter rule
     /// syntax](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax).
     pattern: ?[]const u8,
+
+    pub const json_field_names = .{
+        .pattern = "Pattern",
+    };
 };

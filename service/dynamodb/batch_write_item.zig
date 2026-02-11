@@ -162,6 +162,12 @@ pub const BatchWriteItemInput = struct {
     /// during the operation are returned in the response. If set to `NONE` (the
     /// default), no statistics are returned.
     return_item_collection_metrics: ?ReturnItemCollectionMetrics = null,
+
+    pub const json_field_names = .{
+        .request_items = "RequestItems",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .return_item_collection_metrics = "ReturnItemCollectionMetrics",
+    };
 };
 
 pub const BatchWriteItemOutput = struct {
@@ -246,6 +252,12 @@ pub const BatchWriteItemOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .item_collection_metrics = "ItemCollectionMetrics",
+        .unprocessed_items = "UnprocessedItems",
+    };
 };
 
 pub const Options = struct {

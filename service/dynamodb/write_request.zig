@@ -11,4 +11,9 @@ pub const WriteRequest = struct {
 
     /// A request to perform a `PutItem` operation.
     put_request: ?PutRequest,
+
+    pub const json_field_names = .{
+        .delete_request = "DeleteRequest",
+        .put_request = "PutRequest",
+    };
 };

@@ -3,4 +3,8 @@
 pub const ExecutionDetails = struct {
     /// The original input payload provided for the durable execution.
     input_payload: ?[]const u8,
+
+    pub const json_field_names = .{
+        .input_payload = "InputPayload",
+    };
 };

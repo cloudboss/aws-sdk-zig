@@ -7,4 +7,8 @@ pub const Environment = struct {
     /// Lambda environment
     /// variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
     variables: ?[]const u8,
+
+    pub const json_field_names = .{
+        .variables = "Variables",
+    };
 };

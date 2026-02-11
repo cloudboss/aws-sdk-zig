@@ -46,4 +46,20 @@ pub const OperationUpdate = struct {
 
     /// Options for wait operations.
     wait_options: ?WaitOptions,
+
+    pub const json_field_names = .{
+        .action = "Action",
+        .callback_options = "CallbackOptions",
+        .chained_invoke_options = "ChainedInvokeOptions",
+        .context_options = "ContextOptions",
+        .@"error" = "Error",
+        .id = "Id",
+        .name = "Name",
+        .parent_id = "ParentId",
+        .payload = "Payload",
+        .step_options = "StepOptions",
+        .sub_type = "SubType",
+        .@"type" = "Type",
+        .wait_options = "WaitOptions",
+    };
 };

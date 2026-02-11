@@ -118,6 +118,13 @@ pub const DescribeLimitsOutput = struct {
     pub fn deinit(self: *const DescribeLimitsOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .account_max_read_capacity_units = "AccountMaxReadCapacityUnits",
+        .account_max_write_capacity_units = "AccountMaxWriteCapacityUnits",
+        .table_max_read_capacity_units = "TableMaxReadCapacityUnits",
+        .table_max_write_capacity_units = "TableMaxWriteCapacityUnits",
+    };
 };
 
 pub const Options = struct {

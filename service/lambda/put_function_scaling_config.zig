@@ -21,6 +21,12 @@ pub const PutFunctionScalingConfigInput = struct {
     /// Specify a version or alias to set the scaling configuration for a published
     /// version of the function.
     qualifier: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .function_scaling_config = "FunctionScalingConfig",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const PutFunctionScalingConfigOutput = struct {
@@ -32,6 +38,10 @@ pub const PutFunctionScalingConfigOutput = struct {
     pub fn deinit(self: *const PutFunctionScalingConfigOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .function_state = "FunctionState",
+    };
 };
 
 pub const Options = struct {

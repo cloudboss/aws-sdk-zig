@@ -23,4 +23,13 @@ pub const CodeSigningConfig = struct {
     /// The date and time that the Code signing configuration was last modified, in
     /// ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
     last_modified: []const u8,
+
+    pub const json_field_names = .{
+        .allowed_publishers = "AllowedPublishers",
+        .code_signing_config_arn = "CodeSigningConfigArn",
+        .code_signing_config_id = "CodeSigningConfigId",
+        .code_signing_policies = "CodeSigningPolicies",
+        .description = "Description",
+        .last_modified = "LastModified",
+    };
 };

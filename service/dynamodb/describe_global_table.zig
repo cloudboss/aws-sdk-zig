@@ -20,6 +20,10 @@ const GlobalTableDescription = @import("global_table_description.zig").GlobalTab
 pub const DescribeGlobalTableInput = struct {
     /// The name of the global table.
     global_table_name: []const u8,
+
+    pub const json_field_names = .{
+        .global_table_name = "GlobalTableName",
+    };
 };
 
 pub const DescribeGlobalTableOutput = struct {
@@ -31,6 +35,10 @@ pub const DescribeGlobalTableOutput = struct {
     pub fn deinit(self: *const DescribeGlobalTableOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .global_table_description = "GlobalTableDescription",
+    };
 };
 
 pub const Options = struct {

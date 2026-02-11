@@ -30,4 +30,12 @@ pub const ProvisionedThroughputDescription = struct {
     /// The maximum number of writes consumed per second before DynamoDB returns a
     /// `ThrottlingException`.
     write_capacity_units: ?i64,
+
+    pub const json_field_names = .{
+        .last_decrease_date_time = "LastDecreaseDateTime",
+        .last_increase_date_time = "LastIncreaseDateTime",
+        .number_of_decreases_today = "NumberOfDecreasesToday",
+        .read_capacity_units = "ReadCapacityUnits",
+        .write_capacity_units = "WriteCapacityUnits",
+    };
 };

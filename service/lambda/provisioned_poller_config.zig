@@ -20,4 +20,10 @@ pub const ProvisionedPollerConfig = struct {
     /// 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a
     /// group cannot exceed 2000.
     poller_group_name: ?[]const u8,
+
+    pub const json_field_names = .{
+        .maximum_pollers = "MaximumPollers",
+        .minimum_pollers = "MinimumPollers",
+        .poller_group_name = "PollerGroupName",
+    };
 };

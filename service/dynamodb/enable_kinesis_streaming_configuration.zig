@@ -6,4 +6,8 @@ pub const EnableKinesisStreamingConfiguration = struct {
     /// either
     /// `MILLISECOND` or `MICROSECOND`.
     approximate_creation_date_time_precision: ?ApproximateCreationDateTimePrecision,
+
+    pub const json_field_names = .{
+        .approximate_creation_date_time_precision = "ApproximateCreationDateTimePrecision",
+    };
 };

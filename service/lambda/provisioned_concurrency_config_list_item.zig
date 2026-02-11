@@ -27,4 +27,14 @@ pub const ProvisionedConcurrencyConfigListItem = struct {
     /// For failed allocations, the reason that provisioned concurrency could not be
     /// allocated.
     status_reason: ?[]const u8,
+
+    pub const json_field_names = .{
+        .allocated_provisioned_concurrent_executions = "AllocatedProvisionedConcurrentExecutions",
+        .available_provisioned_concurrent_executions = "AvailableProvisionedConcurrentExecutions",
+        .function_arn = "FunctionArn",
+        .last_modified = "LastModified",
+        .requested_provisioned_concurrent_executions = "RequestedProvisionedConcurrentExecutions",
+        .status = "Status",
+        .status_reason = "StatusReason",
+    };
 };

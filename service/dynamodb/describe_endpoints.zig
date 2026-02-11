@@ -21,6 +21,10 @@ pub const DescribeEndpointsOutput = struct {
     pub fn deinit(self: *const DescribeEndpointsOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .endpoints = "Endpoints",
+    };
 };
 
 pub const Options = struct {

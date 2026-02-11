@@ -21,6 +21,11 @@ pub const GetAliasInput = struct {
 
     /// The name of the alias.
     name: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .name = "Name",
+    };
 };
 
 pub const GetAliasOutput = struct {
@@ -62,6 +67,15 @@ pub const GetAliasOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .alias_arn = "AliasArn",
+        .description = "Description",
+        .function_version = "FunctionVersion",
+        .name = "Name",
+        .revision_id = "RevisionId",
+        .routing_config = "RoutingConfig",
+    };
 };
 
 pub const Options = struct {

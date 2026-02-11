@@ -9,4 +9,9 @@ pub const TargetTrackingScalingPolicy = struct {
     /// The target value for the metric that the scaling policy attempts to maintain
     /// through scaling actions.
     target_value: f64,
+
+    pub const json_field_names = .{
+        .predefined_metric_type = "PredefinedMetricType",
+        .target_value = "TargetValue",
+    };
 };

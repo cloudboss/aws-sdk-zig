@@ -76,6 +76,11 @@ pub const CreateGlobalTableInput = struct {
 
     /// The Regions where the global table needs to be created.
     replication_group: []const Replica,
+
+    pub const json_field_names = .{
+        .global_table_name = "GlobalTableName",
+        .replication_group = "ReplicationGroup",
+    };
 };
 
 pub const CreateGlobalTableOutput = struct {
@@ -87,6 +92,10 @@ pub const CreateGlobalTableOutput = struct {
     pub fn deinit(self: *const CreateGlobalTableOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .global_table_description = "GlobalTableDescription",
+    };
 };
 
 pub const Options = struct {

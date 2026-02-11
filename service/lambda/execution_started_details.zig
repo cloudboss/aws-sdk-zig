@@ -8,4 +8,9 @@ pub const ExecutionStartedDetails = struct {
 
     /// The input payload provided for the durable execution.
     input: EventInput,
+
+    pub const json_field_names = .{
+        .execution_timeout = "ExecutionTimeout",
+        .input = "Input",
+    };
 };

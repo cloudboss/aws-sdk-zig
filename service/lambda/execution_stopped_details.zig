@@ -5,4 +5,8 @@ const EventError = @import("event_error.zig").EventError;
 pub const ExecutionStoppedDetails = struct {
     /// Details about why the execution stopped.
     @"error": EventError,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+    };
 };

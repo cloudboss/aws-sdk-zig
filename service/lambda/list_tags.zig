@@ -11,6 +11,10 @@ pub const ListTagsInput = struct {
     /// The resource's Amazon Resource Name (ARN). Note: Lambda does not support
     /// adding tags to function aliases or versions.
     resource: []const u8,
+
+    pub const json_field_names = .{
+        .resource = "Resource",
+    };
 };
 
 pub const ListTagsOutput = struct {
@@ -24,6 +28,10 @@ pub const ListTagsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .tags = "Tags",
+    };
 };
 
 pub const Options = struct {

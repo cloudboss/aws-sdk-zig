@@ -9,4 +9,9 @@ pub const FileSystemConfig = struct {
     /// The path where the function can access the file system, starting with
     /// `/mnt/`.
     local_mount_path: []const u8,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .local_mount_path = "LocalMountPath",
+    };
 };

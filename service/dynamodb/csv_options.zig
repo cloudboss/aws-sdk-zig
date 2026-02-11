@@ -11,4 +11,9 @@ pub const CsvOptions = struct {
     /// line of each
     /// CSV file is treated as the header.
     header_list: ?[]const []const u8,
+
+    pub const json_field_names = .{
+        .delimiter = "Delimiter",
+        .header_list = "HeaderList",
+    };
 };

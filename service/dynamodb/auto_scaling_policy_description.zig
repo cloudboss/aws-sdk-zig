@@ -7,4 +7,9 @@ pub const AutoScalingPolicyDescription = struct {
 
     /// Represents a target tracking scaling policy configuration.
     target_tracking_scaling_policy_configuration: ?AutoScalingTargetTrackingScalingPolicyConfigurationDescription,
+
+    pub const json_field_names = .{
+        .policy_name = "PolicyName",
+        .target_tracking_scaling_policy_configuration = "TargetTrackingScalingPolicyConfiguration",
+    };
 };

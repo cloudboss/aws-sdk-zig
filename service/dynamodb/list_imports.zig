@@ -20,6 +20,12 @@ pub const ListImportsInput = struct {
     /// The Amazon Resource Name (ARN) associated with the table that was imported
     /// to.
     table_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .page_size = "PageSize",
+        .table_arn = "TableArn",
+    };
 };
 
 pub const ListImportsOutput = struct {
@@ -39,6 +45,11 @@ pub const ListImportsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .import_summary_list = "ImportSummaryList",
+        .next_token = "NextToken",
+    };
 };
 
 pub const Options = struct {

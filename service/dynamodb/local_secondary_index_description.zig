@@ -48,4 +48,13 @@ pub const LocalSecondaryIndexDescription = struct {
     /// index key
     /// attributes, which are automatically projected.
     projection: ?Projection,
+
+    pub const json_field_names = .{
+        .index_arn = "IndexArn",
+        .index_name = "IndexName",
+        .index_size_bytes = "IndexSizeBytes",
+        .item_count = "ItemCount",
+        .key_schema = "KeySchema",
+        .projection = "Projection",
+    };
 };

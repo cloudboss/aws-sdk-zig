@@ -8,4 +8,8 @@ pub const InputFormatOptions = struct {
     /// Delimiter and
     /// HeaderList.
     csv: ?CsvOptions,
+
+    pub const json_field_names = .{
+        .csv = "Csv",
+    };
 };

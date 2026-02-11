@@ -19,6 +19,12 @@ pub const ListExportsInput = struct {
 
     /// The Amazon Resource Name (ARN) associated with the exported table.
     table_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .table_arn = "TableArn",
+    };
 };
 
 pub const ListExportsOutput = struct {
@@ -38,6 +44,11 @@ pub const ListExportsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .export_summaries = "ExportSummaries",
+        .next_token = "NextToken",
+    };
 };
 
 pub const Options = struct {

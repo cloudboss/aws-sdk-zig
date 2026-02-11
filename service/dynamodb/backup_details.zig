@@ -39,4 +39,14 @@ pub const BackupDetails = struct {
     ///
     /// * `AWS_BACKUP` - On-demand backup created by you from Backup service.
     backup_type: BackupType,
+
+    pub const json_field_names = .{
+        .backup_arn = "BackupArn",
+        .backup_creation_date_time = "BackupCreationDateTime",
+        .backup_expiry_date_time = "BackupExpiryDateTime",
+        .backup_name = "BackupName",
+        .backup_size_bytes = "BackupSizeBytes",
+        .backup_status = "BackupStatus",
+        .backup_type = "BackupType",
+    };
 };

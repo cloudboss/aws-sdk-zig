@@ -8,4 +8,8 @@ pub const SnapStart = struct {
     /// Set to `PublishedVersions` to create a snapshot of the initialized execution
     /// environment when you publish a function version.
     apply_on: ?SnapStartApplyOn,
+
+    pub const json_field_names = .{
+        .apply_on = "ApplyOn",
+    };
 };

@@ -13,4 +13,11 @@ pub const LayerVersionContentInput = struct {
     /// The base64-encoded contents of the layer archive. Amazon Web Services SDK
     /// and Amazon Web Services CLI clients handle the encoding for you.
     zip_file: ?[]const u8,
+
+    pub const json_field_names = .{
+        .s_3_bucket = "S3Bucket",
+        .s_3_key = "S3Key",
+        .s_3_object_version = "S3ObjectVersion",
+        .zip_file = "ZipFile",
+    };
 };

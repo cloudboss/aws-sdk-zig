@@ -23,4 +23,11 @@ pub const PointInTimeRecoveryDescription = struct {
     /// configured
     /// recovery period. This parameter is optional.
     recovery_period_in_days: ?i32,
+
+    pub const json_field_names = .{
+        .earliest_restorable_date_time = "EarliestRestorableDateTime",
+        .latest_restorable_date_time = "LatestRestorableDateTime",
+        .point_in_time_recovery_status = "PointInTimeRecoveryStatus",
+        .recovery_period_in_days = "RecoveryPeriodInDays",
+    };
 };

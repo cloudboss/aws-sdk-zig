@@ -15,4 +15,11 @@ pub const StepDetails = struct {
 
     /// The JSON response payload from the step operation.
     result: ?[]const u8,
+
+    pub const json_field_names = .{
+        .attempt = "Attempt",
+        .@"error" = "Error",
+        .next_attempt_timestamp = "NextAttemptTimestamp",
+        .result = "Result",
+    };
 };

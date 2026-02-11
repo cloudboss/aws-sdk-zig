@@ -29,6 +29,11 @@ pub const UpdateContinuousBackupsInput = struct {
     /// of the table in this
     /// parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .point_in_time_recovery_specification = "PointInTimeRecoverySpecification",
+        .table_name = "TableName",
+    };
 };
 
 pub const UpdateContinuousBackupsOutput = struct {
@@ -41,6 +46,10 @@ pub const UpdateContinuousBackupsOutput = struct {
     pub fn deinit(self: *const UpdateContinuousBackupsOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .continuous_backups_description = "ContinuousBackupsDescription",
+    };
 };
 
 pub const Options = struct {

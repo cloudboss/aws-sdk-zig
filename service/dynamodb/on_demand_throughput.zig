@@ -18,4 +18,9 @@ pub const OnDemandThroughput = struct {
     /// maximum `OnDemandThroughput` that is currently set on your table, set the
     /// value of `MaxWriteRequestUnits` to -1.
     max_write_request_units: ?i64,
+
+    pub const json_field_names = .{
+        .max_read_request_units = "MaxReadRequestUnits",
+        .max_write_request_units = "MaxWriteRequestUnits",
+    };
 };

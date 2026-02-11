@@ -13,6 +13,11 @@ pub const StopDurableExecutionInput = struct {
 
     /// Optional error details explaining why the execution is being stopped.
     @"error": ?ErrorObject = null,
+
+    pub const json_field_names = .{
+        .durable_execution_arn = "DurableExecutionArn",
+        .@"error" = "Error",
+    };
 };
 
 pub const StopDurableExecutionOutput = struct {
@@ -24,6 +29,10 @@ pub const StopDurableExecutionOutput = struct {
     pub fn deinit(self: *const StopDurableExecutionOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .stop_timestamp = "StopTimestamp",
+    };
 };
 
 pub const Options = struct {

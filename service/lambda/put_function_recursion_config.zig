@@ -53,6 +53,11 @@ pub const PutFunctionRecursionConfigInput = struct {
     /// that cause run-away Lambda
     /// functions](https://serverlessland.com/content/service/lambda/guides/aws-lambda-operator-guide/recursive-runaway) in Serverless Land.
     recursive_loop: RecursiveLoop,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .recursive_loop = "RecursiveLoop",
+    };
 };
 
 pub const PutFunctionRecursionConfigOutput = struct {
@@ -71,6 +76,10 @@ pub const PutFunctionRecursionConfigOutput = struct {
     pub fn deinit(self: *const PutFunctionRecursionConfigOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .recursive_loop = "RecursiveLoop",
+    };
 };
 
 pub const Options = struct {

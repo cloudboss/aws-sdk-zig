@@ -8,4 +8,10 @@ pub const InvokeWithResponseStreamCompleteEvent = struct {
 
     /// The last 4 KB of the execution log, which is base64-encoded.
     log_result: ?[]const u8,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .error_details = "ErrorDetails",
+        .log_result = "LogResult",
+    };
 };

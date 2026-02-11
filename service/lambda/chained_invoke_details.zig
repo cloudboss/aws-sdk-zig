@@ -8,4 +8,9 @@ pub const ChainedInvokeDetails = struct {
 
     /// The response payload from the chained invocation.
     result: ?[]const u8,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+        .result = "Result",
+    };
 };

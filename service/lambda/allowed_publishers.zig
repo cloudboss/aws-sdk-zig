@@ -3,4 +3,8 @@ pub const AllowedPublishers = struct {
     /// The Amazon Resource Name (ARN) for each of the signing profiles. A signing
     /// profile defines a trusted user who can sign a code package.
     signing_profile_version_arns: []const []const u8,
+
+    pub const json_field_names = .{
+        .signing_profile_version_arns = "SigningProfileVersionArns",
+    };
 };

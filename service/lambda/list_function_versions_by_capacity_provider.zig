@@ -17,6 +17,12 @@ pub const ListFunctionVersionsByCapacityProviderInput = struct {
 
     /// The maximum number of function versions to return in the response.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .capacity_provider_name = "CapacityProviderName",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListFunctionVersionsByCapacityProviderOutput = struct {
@@ -37,6 +43,12 @@ pub const ListFunctionVersionsByCapacityProviderOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .capacity_provider_arn = "CapacityProviderArn",
+        .function_versions = "FunctionVersions",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

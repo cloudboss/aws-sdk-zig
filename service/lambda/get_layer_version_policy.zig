@@ -12,6 +12,11 @@ pub const GetLayerVersionPolicyInput = struct {
 
     /// The version number.
     version_number: i64,
+
+    pub const json_field_names = .{
+        .layer_name = "LayerName",
+        .version_number = "VersionNumber",
+    };
 };
 
 pub const GetLayerVersionPolicyOutput = struct {
@@ -31,6 +36,11 @@ pub const GetLayerVersionPolicyOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .policy = "Policy",
+        .revision_id = "RevisionId",
+    };
 };
 
 pub const Options = struct {

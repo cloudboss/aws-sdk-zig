@@ -4,4 +4,8 @@ const Filter = @import("filter.zig").Filter;
 pub const FilterCriteria = struct {
     /// A list of filters.
     filters: ?[]const Filter,
+
+    pub const json_field_names = .{
+        .filters = "Filters",
+    };
 };

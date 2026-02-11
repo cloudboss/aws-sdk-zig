@@ -62,6 +62,17 @@ pub const RestoreTableFromBackupInput = struct {
 
     /// The name of the new table to which the backup must be restored.
     target_table_name: []const u8,
+
+    pub const json_field_names = .{
+        .backup_arn = "BackupArn",
+        .billing_mode_override = "BillingModeOverride",
+        .global_secondary_index_override = "GlobalSecondaryIndexOverride",
+        .local_secondary_index_override = "LocalSecondaryIndexOverride",
+        .on_demand_throughput_override = "OnDemandThroughputOverride",
+        .provisioned_throughput_override = "ProvisionedThroughputOverride",
+        .sse_specification_override = "SSESpecificationOverride",
+        .target_table_name = "TargetTableName",
+    };
 };
 
 pub const RestoreTableFromBackupOutput = struct {
@@ -73,6 +84,10 @@ pub const RestoreTableFromBackupOutput = struct {
     pub fn deinit(self: *const RestoreTableFromBackupOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .table_description = "TableDescription",
+    };
 };
 
 pub const Options = struct {

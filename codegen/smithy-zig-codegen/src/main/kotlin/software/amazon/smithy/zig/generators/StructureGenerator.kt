@@ -63,8 +63,33 @@ class StructureGenerator(
                 firstField = false
             }
 
+            // Emit json_field_names for JSON protocol services
+            if (isJsonProtocol()) {
+                writeJsonFieldNames(writer)
+            }
+
             writer.closeBlock("};")
         }
+    }
+
+    private fun isJsonProtocol(): Boolean {
+        val service = context.service
+        return service.hasTrait("aws.protocols#awsJson1_0") ||
+            service.hasTrait("aws.protocols#awsJson1_1") ||
+            service.hasTrait("aws.protocols#restJson1")
+    }
+
+    private fun writeJsonFieldNames(writer: software.amazon.smithy.zig.ZigWriter) {
+        val members = shape.allMembers
+        if (members.isEmpty()) return
+
+        writer.blankLine()
+        writer.openBlock("pub const json_field_names = .{")
+        for ((memberName, _) in members) {
+            val fieldName = NamingUtil.toFieldName(memberName)
+            writer.write(".\$L = \"\$L\",", fieldName, memberName)
+        }
+        writer.closeBlock("};")
     }
 
     /**

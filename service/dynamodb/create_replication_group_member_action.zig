@@ -35,4 +35,13 @@ pub const CreateReplicationGroupMemberAction = struct {
     /// table
     /// class.
     table_class_override: ?TableClass,
+
+    pub const json_field_names = .{
+        .global_secondary_indexes = "GlobalSecondaryIndexes",
+        .kms_master_key_id = "KMSMasterKeyId",
+        .on_demand_throughput_override = "OnDemandThroughputOverride",
+        .provisioned_throughput_override = "ProvisionedThroughputOverride",
+        .region_name = "RegionName",
+        .table_class_override = "TableClassOverride",
+    };
 };

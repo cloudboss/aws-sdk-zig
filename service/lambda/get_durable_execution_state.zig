@@ -30,6 +30,13 @@ pub const GetDurableExecutionStateInput = struct {
     /// retrieve additional pages of results. The default is 100 and the maximum
     /// allowed is 1000. A value of 0 uses the default.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .checkpoint_token = "CheckpointToken",
+        .durable_execution_arn = "DurableExecutionArn",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const GetDurableExecutionStateOutput = struct {
@@ -50,6 +57,11 @@ pub const GetDurableExecutionStateOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .next_marker = "NextMarker",
+        .operations = "Operations",
+    };
 };
 
 pub const Options = struct {

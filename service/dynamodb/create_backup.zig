@@ -51,6 +51,11 @@ pub const CreateBackupInput = struct {
     /// of the table in this
     /// parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .backup_name = "BackupName",
+        .table_name = "TableName",
+    };
 };
 
 pub const CreateBackupOutput = struct {
@@ -62,6 +67,10 @@ pub const CreateBackupOutput = struct {
     pub fn deinit(self: *const CreateBackupOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .backup_details = "BackupDetails",
+    };
 };
 
 pub const Options = struct {

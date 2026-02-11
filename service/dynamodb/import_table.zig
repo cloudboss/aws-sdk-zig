@@ -46,6 +46,15 @@ pub const ImportTableInput = struct {
 
     /// Parameters for the table to import the data into.
     table_creation_parameters: TableCreationParameters,
+
+    pub const json_field_names = .{
+        .client_token = "ClientToken",
+        .input_compression_type = "InputCompressionType",
+        .input_format = "InputFormat",
+        .input_format_options = "InputFormatOptions",
+        .s_3_bucket_source = "S3BucketSource",
+        .table_creation_parameters = "TableCreationParameters",
+    };
 };
 
 pub const ImportTableOutput = struct {
@@ -61,6 +70,10 @@ pub const ImportTableOutput = struct {
     pub fn deinit(self: *const ImportTableOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .import_table_description = "ImportTableDescription",
+    };
 };
 
 pub const Options = struct {

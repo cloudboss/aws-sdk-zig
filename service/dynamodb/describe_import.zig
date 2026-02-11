@@ -10,6 +10,10 @@ pub const DescribeImportInput = struct {
     /// The Amazon Resource Name (ARN) associated with the table you're importing
     /// to.
     import_arn: []const u8,
+
+    pub const json_field_names = .{
+        .import_arn = "ImportArn",
+    };
 };
 
 pub const DescribeImportOutput = struct {
@@ -25,6 +29,10 @@ pub const DescribeImportOutput = struct {
     pub fn deinit(self: *const DescribeImportOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .import_table_description = "ImportTableDescription",
+    };
 };
 
 pub const Options = struct {

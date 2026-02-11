@@ -14,4 +14,10 @@ pub const BackupDescription = struct {
     /// was created.
     /// For example, LSIs, GSIs, streams, TTL.
     source_table_feature_details: ?SourceTableFeatureDetails,
+
+    pub const json_field_names = .{
+        .backup_details = "BackupDetails",
+        .source_table_details = "SourceTableDetails",
+        .source_table_feature_details = "SourceTableFeatureDetails",
+    };
 };

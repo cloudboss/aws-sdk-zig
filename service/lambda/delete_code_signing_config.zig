@@ -9,6 +9,10 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const DeleteCodeSigningConfigInput = struct {
     /// The The Amazon Resource Name (ARN) of the code signing configuration.
     code_signing_config_arn: []const u8,
+
+    pub const json_field_names = .{
+        .code_signing_config_arn = "CodeSigningConfigArn",
+    };
 };
 
 pub const DeleteCodeSigningConfigOutput = struct {

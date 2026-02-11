@@ -18,4 +18,10 @@ pub const ParameterizedStatement = struct {
 
     /// A PartiQL statement that uses parameters.
     statement: []const u8,
+
+    pub const json_field_names = .{
+        .parameters = "Parameters",
+        .return_values_on_condition_check_failure = "ReturnValuesOnConditionCheckFailure",
+        .statement = "Statement",
+    };
 };

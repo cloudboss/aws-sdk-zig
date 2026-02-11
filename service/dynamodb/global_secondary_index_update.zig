@@ -33,4 +33,10 @@ pub const GlobalSecondaryIndexUpdate = struct {
     /// throughput
     /// settings to be applied to that index.
     update: ?UpdateGlobalSecondaryIndexAction,
+
+    pub const json_field_names = .{
+        .create = "Create",
+        .delete = "Delete",
+        .update = "Update",
+    };
 };

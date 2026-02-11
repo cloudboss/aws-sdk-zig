@@ -12,6 +12,10 @@ const BackupDescription = @import("backup_description.zig").BackupDescription;
 pub const DeleteBackupInput = struct {
     /// The ARN associated with the backup.
     backup_arn: []const u8,
+
+    pub const json_field_names = .{
+        .backup_arn = "BackupArn",
+    };
 };
 
 pub const DeleteBackupOutput = struct {
@@ -23,6 +27,10 @@ pub const DeleteBackupOutput = struct {
     pub fn deinit(self: *const DeleteBackupOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .backup_description = "BackupDescription",
+    };
 };
 
 pub const Options = struct {

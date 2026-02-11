@@ -95,6 +95,17 @@ pub const InvokeInput = struct {
 
     /// The identifier of the tenant in a multi-tenant Lambda function.
     tenant_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .client_context = "ClientContext",
+        .durable_execution_name = "DurableExecutionName",
+        .function_name = "FunctionName",
+        .invocation_type = "InvocationType",
+        .log_type = "LogType",
+        .payload = "Payload",
+        .qualifier = "Qualifier",
+        .tenant_id = "TenantId",
+    };
 };
 
 pub const InvokeOutput = struct {
@@ -142,6 +153,15 @@ pub const InvokeOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .durable_execution_arn = "DurableExecutionArn",
+        .executed_version = "ExecutedVersion",
+        .function_error = "FunctionError",
+        .log_result = "LogResult",
+        .payload = "Payload",
+        .status_code = "StatusCode",
+    };
 };
 
 pub const Options = struct {

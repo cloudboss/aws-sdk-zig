@@ -29,4 +29,11 @@ pub const UpdateGlobalSecondaryIndexAction = struct {
     /// settings to be
     /// applied to a global secondary index.
     warm_throughput: ?WarmThroughput,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .on_demand_throughput = "OnDemandThroughput",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .warm_throughput = "WarmThroughput",
+    };
 };

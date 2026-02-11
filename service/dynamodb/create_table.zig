@@ -297,6 +297,26 @@ pub const CreateTableInput = struct {
     /// second)
     /// for creating a table.
     warm_throughput: ?WarmThroughput = null,
+
+    pub const json_field_names = .{
+        .attribute_definitions = "AttributeDefinitions",
+        .billing_mode = "BillingMode",
+        .deletion_protection_enabled = "DeletionProtectionEnabled",
+        .global_secondary_indexes = "GlobalSecondaryIndexes",
+        .global_table_settings_replication_mode = "GlobalTableSettingsReplicationMode",
+        .global_table_source_arn = "GlobalTableSourceArn",
+        .key_schema = "KeySchema",
+        .local_secondary_indexes = "LocalSecondaryIndexes",
+        .on_demand_throughput = "OnDemandThroughput",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .resource_policy = "ResourcePolicy",
+        .sse_specification = "SSESpecification",
+        .stream_specification = "StreamSpecification",
+        .table_class = "TableClass",
+        .table_name = "TableName",
+        .tags = "Tags",
+        .warm_throughput = "WarmThroughput",
+    };
 };
 
 pub const CreateTableOutput = struct {
@@ -308,6 +328,10 @@ pub const CreateTableOutput = struct {
     pub fn deinit(self: *const CreateTableOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .table_description = "TableDescription",
+    };
 };
 
 pub const Options = struct {

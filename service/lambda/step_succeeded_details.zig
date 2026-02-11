@@ -8,4 +8,9 @@ pub const StepSucceededDetails = struct {
 
     /// Information about retry attempts for this step operation.
     retry_details: RetryDetails,
+
+    pub const json_field_names = .{
+        .result = "Result",
+        .retry_details = "RetryDetails",
+    };
 };

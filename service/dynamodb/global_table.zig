@@ -7,4 +7,9 @@ pub const GlobalTable = struct {
 
     /// The Regions where the global table has replicas.
     replication_group: ?[]const Replica,
+
+    pub const json_field_names = .{
+        .global_table_name = "GlobalTableName",
+        .replication_group = "ReplicationGroup",
+    };
 };

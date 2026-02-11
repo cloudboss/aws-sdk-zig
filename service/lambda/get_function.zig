@@ -29,6 +29,11 @@ pub const GetFunctionInput = struct {
     /// Specify a version or alias to get details about a published version of the
     /// function.
     qualifier: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const GetFunctionOutput = struct {
@@ -58,6 +63,14 @@ pub const GetFunctionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .concurrency = "Concurrency",
+        .configuration = "Configuration",
+        .tags = "Tags",
+        .tags_error = "TagsError",
+    };
 };
 
 pub const Options = struct {

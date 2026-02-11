@@ -45,4 +45,12 @@ pub const GlobalSecondaryIndexInfo = struct {
     /// secondary
     /// index.
     provisioned_throughput: ?ProvisionedThroughput,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .key_schema = "KeySchema",
+        .on_demand_throughput = "OnDemandThroughput",
+        .projection = "Projection",
+        .provisioned_throughput = "ProvisionedThroughput",
+    };
 };

@@ -25,4 +25,12 @@ pub const GlobalTableDescription = struct {
 
     /// The Regions where the global table has replicas.
     replication_group: ?[]const ReplicaDescription,
+
+    pub const json_field_names = .{
+        .creation_date_time = "CreationDateTime",
+        .global_table_arn = "GlobalTableArn",
+        .global_table_name = "GlobalTableName",
+        .global_table_status = "GlobalTableStatus",
+        .replication_group = "ReplicationGroup",
+    };
 };

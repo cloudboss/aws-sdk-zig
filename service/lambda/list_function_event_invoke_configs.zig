@@ -28,6 +28,12 @@ pub const ListFunctionEventInvokeConfigsInput = struct {
 
     /// The maximum number of configurations to return.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListFunctionEventInvokeConfigsOutput = struct {
@@ -44,6 +50,11 @@ pub const ListFunctionEventInvokeConfigsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .function_event_invoke_configs = "FunctionEventInvokeConfigs",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

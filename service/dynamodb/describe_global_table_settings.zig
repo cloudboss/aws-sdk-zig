@@ -20,6 +20,10 @@ const ReplicaSettingsDescription = @import("replica_settings_description.zig").R
 pub const DescribeGlobalTableSettingsInput = struct {
     /// The name of the global table to describe.
     global_table_name: []const u8,
+
+    pub const json_field_names = .{
+        .global_table_name = "GlobalTableName",
+    };
 };
 
 pub const DescribeGlobalTableSettingsOutput = struct {
@@ -36,6 +40,11 @@ pub const DescribeGlobalTableSettingsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .global_table_name = "GlobalTableName",
+        .replica_settings = "ReplicaSettings",
+    };
 };
 
 pub const Options = struct {

@@ -18,4 +18,8 @@ pub const CreateGlobalTableWitnessGroupMemberAction = struct {
     /// * AP Region set: Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific
     /// (Osaka)
     region_name: []const u8,
+
+    pub const json_field_names = .{
+        .region_name = "RegionName",
+    };
 };

@@ -9,4 +9,9 @@ pub const GlobalTableWitnessDescription = struct {
 
     /// The current status of the witness Region in the MRSC global table.
     witness_status: ?WitnessStatus,
+
+    pub const json_field_names = .{
+        .region_name = "RegionName",
+        .witness_status = "WitnessStatus",
+    };
 };

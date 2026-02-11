@@ -15,4 +15,11 @@ pub const KinesisDataStreamDestination = struct {
 
     /// The ARN for a specific Kinesis data stream.
     stream_arn: ?[]const u8,
+
+    pub const json_field_names = .{
+        .approximate_creation_date_time_precision = "ApproximateCreationDateTimePrecision",
+        .destination_status = "DestinationStatus",
+        .destination_status_description = "DestinationStatusDescription",
+        .stream_arn = "StreamArn",
+    };
 };

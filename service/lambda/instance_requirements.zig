@@ -14,4 +14,10 @@ pub const InstanceRequirements = struct {
     /// A list of EC2 instance types that the capacity provider should not use, even
     /// if they meet other requirements.
     excluded_instance_types: ?[]const []const u8,
+
+    pub const json_field_names = .{
+        .allowed_instance_types = "AllowedInstanceTypes",
+        .architectures = "Architectures",
+        .excluded_instance_types = "ExcludedInstanceTypes",
+    };
 };

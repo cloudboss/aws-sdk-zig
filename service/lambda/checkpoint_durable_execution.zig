@@ -32,6 +32,13 @@ pub const CheckpointDurableExecutionInput = struct {
     /// starting a callback, or scheduling a timer. Updates are applied atomically
     /// as part of the checkpoint operation.
     updates: ?[]const OperationUpdate = null,
+
+    pub const json_field_names = .{
+        .checkpoint_token = "CheckpointToken",
+        .client_token = "ClientToken",
+        .durable_execution_arn = "DurableExecutionArn",
+        .updates = "Updates",
+    };
 };
 
 pub const CheckpointDurableExecutionOutput = struct {
@@ -52,6 +59,11 @@ pub const CheckpointDurableExecutionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .checkpoint_token = "CheckpointToken",
+        .new_execution_state = "NewExecutionState",
+    };
 };
 
 pub const Options = struct {

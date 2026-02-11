@@ -40,6 +40,13 @@ pub const ListEventSourceMappingsInput = struct {
     /// ListEventSourceMappings returns a maximum of 100 items in each response,
     /// even if you set the number higher.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .event_source_arn = "EventSourceArn",
+        .function_name = "FunctionName",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListEventSourceMappingsOutput = struct {
@@ -57,6 +64,11 @@ pub const ListEventSourceMappingsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .event_source_mappings = "EventSourceMappings",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

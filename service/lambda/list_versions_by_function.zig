@@ -27,6 +27,12 @@ pub const ListVersionsByFunctionInput = struct {
     /// returns a maximum of 50 items in each response, even if you set the number
     /// higher.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListVersionsByFunctionOutput = struct {
@@ -43,6 +49,11 @@ pub const ListVersionsByFunctionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .next_marker = "NextMarker",
+        .versions = "Versions",
+    };
 };
 
 pub const Options = struct {

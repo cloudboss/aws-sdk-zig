@@ -13,4 +13,9 @@ pub const WarmThroughput = struct {
     /// instantaneously
     /// support.
     write_units_per_second: ?i64,
+
+    pub const json_field_names = .{
+        .read_units_per_second = "ReadUnitsPerSecond",
+        .write_units_per_second = "WriteUnitsPerSecond",
+    };
 };

@@ -23,4 +23,11 @@ pub const ReplicaGlobalSecondaryIndexAutoScalingDescription = struct {
     provisioned_read_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
 
     provisioned_write_capacity_auto_scaling_settings: ?AutoScalingSettingsDescription,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .index_status = "IndexStatus",
+        .provisioned_read_capacity_auto_scaling_settings = "ProvisionedReadCapacityAutoScalingSettings",
+        .provisioned_write_capacity_auto_scaling_settings = "ProvisionedWriteCapacityAutoScalingSettings",
+    };
 };

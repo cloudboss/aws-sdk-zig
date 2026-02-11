@@ -15,4 +15,10 @@ pub const CapacityProviderScalingConfig = struct {
     /// A list of scaling policies that define how the capacity provider scales
     /// compute instances based on metrics and thresholds.
     scaling_policies: ?[]const TargetTrackingScalingPolicy,
+
+    pub const json_field_names = .{
+        .max_v_cpu_count = "MaxVCpuCount",
+        .scaling_mode = "ScalingMode",
+        .scaling_policies = "ScalingPolicies",
+    };
 };

@@ -37,6 +37,16 @@ pub const AddLayerVersionPermissionInput = struct {
 
     /// The version number.
     version_number: i64,
+
+    pub const json_field_names = .{
+        .action = "Action",
+        .layer_name = "LayerName",
+        .organization_id = "OrganizationId",
+        .principal = "Principal",
+        .revision_id = "RevisionId",
+        .statement_id = "StatementId",
+        .version_number = "VersionNumber",
+    };
 };
 
 pub const AddLayerVersionPermissionOutput = struct {
@@ -56,6 +66,11 @@ pub const AddLayerVersionPermissionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .revision_id = "RevisionId",
+        .statement = "Statement",
+    };
 };
 
 pub const Options = struct {

@@ -40,6 +40,18 @@ pub const ListDurableExecutionsByFunctionInput = struct {
     /// Filter executions by status. Valid values: RUNNING, SUCCEEDED, FAILED,
     /// TIMED_OUT, STOPPED.
     statuses: ?[]const ExecutionStatus = null,
+
+    pub const json_field_names = .{
+        .durable_execution_name = "DurableExecutionName",
+        .function_name = "FunctionName",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+        .qualifier = "Qualifier",
+        .reverse_order = "ReverseOrder",
+        .started_after = "StartedAfter",
+        .started_before = "StartedBefore",
+        .statuses = "Statuses",
+    };
 };
 
 pub const ListDurableExecutionsByFunctionOutput = struct {
@@ -57,6 +69,11 @@ pub const ListDurableExecutionsByFunctionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .durable_executions = "DurableExecutions",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

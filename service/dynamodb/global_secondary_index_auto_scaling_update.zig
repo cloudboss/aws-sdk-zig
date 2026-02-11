@@ -8,4 +8,9 @@ pub const GlobalSecondaryIndexAutoScalingUpdate = struct {
     index_name: ?[]const u8,
 
     provisioned_write_capacity_auto_scaling_update: ?AutoScalingSettingsUpdate,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .provisioned_write_capacity_auto_scaling_update = "ProvisionedWriteCapacityAutoScalingUpdate",
+    };
 };

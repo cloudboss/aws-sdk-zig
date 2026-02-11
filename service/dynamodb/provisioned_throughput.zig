@@ -28,4 +28,9 @@ pub const ProvisionedThroughput = struct {
     /// If read/write capacity mode is `PAY_PER_REQUEST` the value is set to
     /// 0.
     write_capacity_units: i64,
+
+    pub const json_field_names = .{
+        .read_capacity_units = "ReadCapacityUnits",
+        .write_capacity_units = "WriteCapacityUnits",
+    };
 };

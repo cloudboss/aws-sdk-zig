@@ -51,6 +51,13 @@ pub const PutRuntimeManagementConfigInput = struct {
     ///   For more information, see [Roll back a runtime
     ///   version](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-rollback).
     update_runtime_on: UpdateRuntimeOn,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+        .runtime_version_arn = "RuntimeVersionArn",
+        .update_runtime_on = "UpdateRuntimeOn",
+    };
 };
 
 pub const PutRuntimeManagementConfigOutput = struct {
@@ -73,6 +80,12 @@ pub const PutRuntimeManagementConfigOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .function_arn = "FunctionArn",
+        .runtime_version_arn = "RuntimeVersionArn",
+        .update_runtime_on = "UpdateRuntimeOn",
+    };
 };
 
 pub const Options = struct {

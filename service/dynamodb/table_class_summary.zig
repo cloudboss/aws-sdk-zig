@@ -8,4 +8,9 @@ pub const TableClassSummary = struct {
     /// The table class of the specified table. Valid values are `STANDARD` and
     /// `STANDARD_INFREQUENT_ACCESS`.
     table_class: ?TableClass,
+
+    pub const json_field_names = .{
+        .last_update_date_time = "LastUpdateDateTime",
+        .table_class = "TableClass",
+    };
 };

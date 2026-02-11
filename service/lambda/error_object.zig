@@ -11,4 +11,11 @@ pub const ErrorObject = struct {
 
     /// Stack trace information for the error.
     stack_trace: ?[]const []const u8,
+
+    pub const json_field_names = .{
+        .error_data = "ErrorData",
+        .error_message = "ErrorMessage",
+        .error_type = "ErrorType",
+        .stack_trace = "StackTrace",
+    };
 };

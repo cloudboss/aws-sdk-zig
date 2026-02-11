@@ -43,6 +43,15 @@ pub const PublishLayerVersionInput = struct {
     ///   `https://opensource.org/licenses/MIT`.
     /// * The full text of the license.
     license_info: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .compatible_architectures = "CompatibleArchitectures",
+        .compatible_runtimes = "CompatibleRuntimes",
+        .content = "Content",
+        .description = "Description",
+        .layer_name = "LayerName",
+        .license_info = "LicenseInfo",
+    };
 };
 
 pub const PublishLayerVersionOutput = struct {
@@ -101,6 +110,18 @@ pub const PublishLayerVersionOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .compatible_architectures = "CompatibleArchitectures",
+        .compatible_runtimes = "CompatibleRuntimes",
+        .content = "Content",
+        .created_date = "CreatedDate",
+        .description = "Description",
+        .layer_arn = "LayerArn",
+        .layer_version_arn = "LayerVersionArn",
+        .license_info = "LicenseInfo",
+        .version = "Version",
+    };
 };
 
 pub const Options = struct {

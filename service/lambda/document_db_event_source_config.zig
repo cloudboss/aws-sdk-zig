@@ -14,4 +14,10 @@ pub const DocumentDBEventSourceConfig = struct {
     /// changes, along with a copy of the entire document. Otherwise, DocumentDB
     /// sends only a partial document that contains the changes.
     full_document: ?FullDocument,
+
+    pub const json_field_names = .{
+        .collection_name = "CollectionName",
+        .database_name = "DatabaseName",
+        .full_document = "FullDocument",
+    };
 };

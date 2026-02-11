@@ -33,6 +33,11 @@ pub const InvokeAsyncInput = struct {
 
     /// The JSON that you want to provide to your Lambda function as input.
     invoke_args: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .invoke_args = "InvokeArgs",
+    };
 };
 
 pub const InvokeAsyncOutput = struct {
@@ -44,6 +49,10 @@ pub const InvokeAsyncOutput = struct {
     pub fn deinit(self: *const InvokeAsyncOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .status = "Status",
+    };
 };
 
 pub const Options = struct {

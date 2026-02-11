@@ -21,4 +21,12 @@ pub const AutoScalingSettingsDescription = struct {
 
     /// Information about the scaling policies.
     scaling_policies: ?[]const AutoScalingPolicyDescription,
+
+    pub const json_field_names = .{
+        .auto_scaling_disabled = "AutoScalingDisabled",
+        .auto_scaling_role_arn = "AutoScalingRoleArn",
+        .maximum_units = "MaximumUnits",
+        .minimum_units = "MinimumUnits",
+        .scaling_policies = "ScalingPolicies",
+    };
 };

@@ -109,6 +109,21 @@ pub const UpdateFunctionCodeInput = struct {
     /// SDK and CLI clients handle the encoding for you. Use only with a function
     /// defined with a .zip file archive deployment package.
     zip_file: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .architectures = "Architectures",
+        .dry_run = "DryRun",
+        .function_name = "FunctionName",
+        .image_uri = "ImageUri",
+        .publish = "Publish",
+        .publish_to = "PublishTo",
+        .revision_id = "RevisionId",
+        .s_3_bucket = "S3Bucket",
+        .s_3_key = "S3Key",
+        .s_3_object_version = "S3ObjectVersion",
+        .source_kms_key_arn = "SourceKMSKeyArn",
+        .zip_file = "ZipFile",
+    };
 };
 
 pub const UpdateFunctionCodeOutput = struct {
@@ -336,6 +351,49 @@ pub const UpdateFunctionCodeOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .architectures = "Architectures",
+        .capacity_provider_config = "CapacityProviderConfig",
+        .code_sha_256 = "CodeSha256",
+        .code_size = "CodeSize",
+        .config_sha_256 = "ConfigSha256",
+        .dead_letter_config = "DeadLetterConfig",
+        .description = "Description",
+        .durable_config = "DurableConfig",
+        .environment = "Environment",
+        .ephemeral_storage = "EphemeralStorage",
+        .file_system_configs = "FileSystemConfigs",
+        .function_arn = "FunctionArn",
+        .function_name = "FunctionName",
+        .handler = "Handler",
+        .image_config_response = "ImageConfigResponse",
+        .kms_key_arn = "KMSKeyArn",
+        .last_modified = "LastModified",
+        .last_update_status = "LastUpdateStatus",
+        .last_update_status_reason = "LastUpdateStatusReason",
+        .last_update_status_reason_code = "LastUpdateStatusReasonCode",
+        .layers = "Layers",
+        .logging_config = "LoggingConfig",
+        .master_arn = "MasterArn",
+        .memory_size = "MemorySize",
+        .package_type = "PackageType",
+        .revision_id = "RevisionId",
+        .role = "Role",
+        .runtime = "Runtime",
+        .runtime_version_config = "RuntimeVersionConfig",
+        .signing_job_arn = "SigningJobArn",
+        .signing_profile_version_arn = "SigningProfileVersionArn",
+        .snap_start = "SnapStart",
+        .state = "State",
+        .state_reason = "StateReason",
+        .state_reason_code = "StateReasonCode",
+        .tenancy_config = "TenancyConfig",
+        .timeout = "Timeout",
+        .tracing_config = "TracingConfig",
+        .version = "Version",
+        .vpc_config = "VpcConfig",
+    };
 };
 
 pub const Options = struct {

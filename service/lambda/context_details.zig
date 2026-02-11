@@ -11,4 +11,10 @@ pub const ContextDetails = struct {
 
     /// The response payload from the context.
     result: ?[]const u8,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+        .replay_children = "ReplayChildren",
+        .result = "Result",
+    };
 };

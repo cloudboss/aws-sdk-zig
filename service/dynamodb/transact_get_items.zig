@@ -42,6 +42,11 @@ pub const TransactGetItemsInput = struct {
     /// An ordered array of up to 100 `TransactGetItem` objects, each of which
     /// contains a `Get` structure.
     transact_items: []const TransactGetItem,
+
+    pub const json_field_names = .{
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .transact_items = "TransactItems",
+    };
 };
 
 pub const TransactGetItemsOutput = struct {
@@ -69,6 +74,11 @@ pub const TransactGetItemsOutput = struct {
     pub fn deinit(self: *const TransactGetItemsOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .consumed_capacity = "ConsumedCapacity",
+        .responses = "Responses",
+    };
 };
 
 pub const Options = struct {

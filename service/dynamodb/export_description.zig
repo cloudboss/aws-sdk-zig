@@ -86,4 +86,28 @@ pub const ExportDescription = struct {
 
     /// Unique ID of the table that was exported.
     table_id: ?[]const u8,
+
+    pub const json_field_names = .{
+        .billed_size_bytes = "BilledSizeBytes",
+        .client_token = "ClientToken",
+        .end_time = "EndTime",
+        .export_arn = "ExportArn",
+        .export_format = "ExportFormat",
+        .export_manifest = "ExportManifest",
+        .export_status = "ExportStatus",
+        .export_time = "ExportTime",
+        .export_type = "ExportType",
+        .failure_code = "FailureCode",
+        .failure_message = "FailureMessage",
+        .incremental_export_specification = "IncrementalExportSpecification",
+        .item_count = "ItemCount",
+        .s_3_bucket = "S3Bucket",
+        .s_3_bucket_owner = "S3BucketOwner",
+        .s_3_prefix = "S3Prefix",
+        .s_3_sse_algorithm = "S3SseAlgorithm",
+        .s_3_sse_kms_key_id = "S3SseKmsKeyId",
+        .start_time = "StartTime",
+        .table_arn = "TableArn",
+        .table_id = "TableId",
+    };
 };

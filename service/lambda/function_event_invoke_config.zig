@@ -27,4 +27,12 @@ pub const FunctionEventInvokeConfig = struct {
 
     /// The maximum number of times to retry when the function returns an error.
     maximum_retry_attempts: ?i32,
+
+    pub const json_field_names = .{
+        .destination_config = "DestinationConfig",
+        .function_arn = "FunctionArn",
+        .last_modified = "LastModified",
+        .maximum_event_age_in_seconds = "MaximumEventAgeInSeconds",
+        .maximum_retry_attempts = "MaximumRetryAttempts",
+    };
 };

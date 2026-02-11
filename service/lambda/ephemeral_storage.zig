@@ -5,4 +5,8 @@
 pub const EphemeralStorage = struct {
     /// The size of the function's `/tmp` directory.
     size: i32,
+
+    pub const json_field_names = .{
+        .size = "Size",
+    };
 };

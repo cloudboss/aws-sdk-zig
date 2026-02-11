@@ -90,6 +90,20 @@ pub const ExportTableToPointInTimeInput = struct {
 
     /// The Amazon Resource Name (ARN) associated with the table to export.
     table_arn: []const u8,
+
+    pub const json_field_names = .{
+        .client_token = "ClientToken",
+        .export_format = "ExportFormat",
+        .export_time = "ExportTime",
+        .export_type = "ExportType",
+        .incremental_export_specification = "IncrementalExportSpecification",
+        .s_3_bucket = "S3Bucket",
+        .s_3_bucket_owner = "S3BucketOwner",
+        .s_3_prefix = "S3Prefix",
+        .s_3_sse_algorithm = "S3SseAlgorithm",
+        .s_3_sse_kms_key_id = "S3SseKmsKeyId",
+        .table_arn = "TableArn",
+    };
 };
 
 pub const ExportTableToPointInTimeOutput = struct {
@@ -101,6 +115,10 @@ pub const ExportTableToPointInTimeOutput = struct {
     pub fn deinit(self: *const ExportTableToPointInTimeOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .export_description = "ExportDescription",
+    };
 };
 
 pub const Options = struct {

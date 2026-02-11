@@ -13,4 +13,10 @@ pub const CancellationReason = struct {
 
     /// Cancellation reason message description.
     message: ?[]const u8,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .item = "Item",
+        .message = "Message",
+    };
 };

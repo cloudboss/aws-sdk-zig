@@ -13,4 +13,9 @@ pub const PointInTimeRecoverySpecification = struct {
     /// value will
     /// default to 35.
     recovery_period_in_days: ?i32,
+
+    pub const json_field_names = .{
+        .point_in_time_recovery_enabled = "PointInTimeRecoveryEnabled",
+        .recovery_period_in_days = "RecoveryPeriodInDays",
+    };
 };

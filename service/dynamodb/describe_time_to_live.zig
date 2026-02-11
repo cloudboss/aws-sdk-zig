@@ -11,6 +11,10 @@ pub const DescribeTimeToLiveInput = struct {
     /// Resource Name (ARN) of the table
     /// in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .table_name = "TableName",
+    };
 };
 
 pub const DescribeTimeToLiveOutput = struct {
@@ -21,6 +25,10 @@ pub const DescribeTimeToLiveOutput = struct {
     pub fn deinit(self: *const DescribeTimeToLiveOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .time_to_live_description = "TimeToLiveDescription",
+    };
 };
 
 pub const Options = struct {

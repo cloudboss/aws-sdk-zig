@@ -18,6 +18,11 @@ pub const DescribeContributorInsightsInput = struct {
     /// Name (ARN) of the table in
     /// this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .table_name = "TableName",
+    };
 };
 
 pub const DescribeContributorInsightsOutput = struct {
@@ -75,6 +80,16 @@ pub const DescribeContributorInsightsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .contributor_insights_mode = "ContributorInsightsMode",
+        .contributor_insights_rule_list = "ContributorInsightsRuleList",
+        .contributor_insights_status = "ContributorInsightsStatus",
+        .failure_exception = "FailureException",
+        .index_name = "IndexName",
+        .last_update_date_time = "LastUpdateDateTime",
+        .table_name = "TableName",
+    };
 };
 
 pub const Options = struct {

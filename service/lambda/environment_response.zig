@@ -9,4 +9,9 @@ pub const EnvironmentResponse = struct {
 
     /// Environment variable key-value pairs. Omitted from CloudTrail logs.
     variables: ?[]const u8,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+        .variables = "Variables",
+    };
 };

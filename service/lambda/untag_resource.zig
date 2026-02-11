@@ -12,6 +12,11 @@ pub const UntagResourceInput = struct {
 
     /// A list of tag keys to remove from the resource.
     tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource = "Resource",
+        .tag_keys = "TagKeys",
+    };
 };
 
 pub const UntagResourceOutput = struct {

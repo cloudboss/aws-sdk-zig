@@ -12,4 +12,11 @@ pub const VpcConfigResponse = struct {
 
     /// The ID of the VPC.
     vpc_id: ?[]const u8,
+
+    pub const json_field_names = .{
+        .ipv_6_allowed_for_dual_stack = "Ipv6AllowedForDualStack",
+        .security_group_ids = "SecurityGroupIds",
+        .subnet_ids = "SubnetIds",
+        .vpc_id = "VpcId",
+    };
 };

@@ -26,6 +26,12 @@ pub const ListFunctionUrlConfigsInput = struct {
     /// `ListFunctionUrlConfigs` returns a maximum of 50 items in each response,
     /// even if you set the number higher.
     max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
 };
 
 pub const ListFunctionUrlConfigsOutput = struct {
@@ -42,6 +48,11 @@ pub const ListFunctionUrlConfigsOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .function_url_configs = "FunctionUrlConfigs",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

@@ -20,6 +20,11 @@ pub const DeleteFunctionUrlConfigInput = struct {
 
     /// The alias name.
     qualifier: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const DeleteFunctionUrlConfigOutput = struct {

@@ -6,4 +6,9 @@ pub const ChainedInvokeOptions = struct {
 
     /// The tenant identifier for the chained invocation.
     tenant_id: ?[]const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .tenant_id = "TenantId",
+    };
 };

@@ -11,4 +11,9 @@ pub const DestinationConfig = struct {
     /// The destination configuration for successful invocations. Not supported in
     /// `CreateEventSourceMapping` or `UpdateEventSourceMapping`.
     on_success: ?OnSuccess,
+
+    pub const json_field_names = .{
+        .on_failure = "OnFailure",
+        .on_success = "OnSuccess",
+    };
 };

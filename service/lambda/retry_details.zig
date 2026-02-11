@@ -5,4 +5,9 @@ pub const RetryDetails = struct {
 
     /// The delay before the next retry attempt, in seconds.
     next_attempt_delay_seconds: ?i32,
+
+    pub const json_field_names = .{
+        .current_attempt = "CurrentAttempt",
+        .next_attempt_delay_seconds = "NextAttemptDelaySeconds",
+    };
 };

@@ -35,4 +35,9 @@ pub const Projection = struct {
     ///
     /// When using the DynamoDB console, `ALL` is selected by default.
     projection_type: ?ProjectionType,
+
+    pub const json_field_names = .{
+        .non_key_attributes = "NonKeyAttributes",
+        .projection_type = "ProjectionType",
+    };
 };

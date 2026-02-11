@@ -8,4 +8,9 @@ pub const FunctionScalingConfig = struct {
 
     /// The minimum number of execution environments to maintain for the function.
     min_execution_environments: ?i32,
+
+    pub const json_field_names = .{
+        .max_execution_environments = "MaxExecutionEnvironments",
+        .min_execution_environments = "MinExecutionEnvironments",
+    };
 };

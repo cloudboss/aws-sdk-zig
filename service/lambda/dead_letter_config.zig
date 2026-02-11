@@ -3,4 +3,8 @@
 pub const DeadLetterConfig = struct {
     /// The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
     target_arn: ?[]const u8,
+
+    pub const json_field_names = .{
+        .target_arn = "TargetArn",
+    };
 };

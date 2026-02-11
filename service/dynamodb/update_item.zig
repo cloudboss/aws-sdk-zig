@@ -293,6 +293,22 @@ pub const UpdateItemInput = struct {
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html) in the *Amazon DynamoDB Developer
     /// Guide*.
     update_expression: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .attribute_updates = "AttributeUpdates",
+        .conditional_operator = "ConditionalOperator",
+        .condition_expression = "ConditionExpression",
+        .expected = "Expected",
+        .expression_attribute_names = "ExpressionAttributeNames",
+        .expression_attribute_values = "ExpressionAttributeValues",
+        .key = "Key",
+        .return_consumed_capacity = "ReturnConsumedCapacity",
+        .return_item_collection_metrics = "ReturnItemCollectionMetrics",
+        .return_values = "ReturnValues",
+        .return_values_on_condition_check_failure = "ReturnValuesOnConditionCheckFailure",
+        .table_name = "TableName",
+        .update_expression = "UpdateExpression",
+    };
 };
 
 pub const UpdateItemOutput = struct {
@@ -347,6 +363,12 @@ pub const UpdateItemOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .attributes = "Attributes",
+        .consumed_capacity = "ConsumedCapacity",
+        .item_collection_metrics = "ItemCollectionMetrics",
+    };
 };
 
 pub const Options = struct {

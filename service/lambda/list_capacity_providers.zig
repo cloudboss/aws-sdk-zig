@@ -17,6 +17,12 @@ pub const ListCapacityProvidersInput = struct {
 
     /// Filter capacity providers by their current state.
     state: ?CapacityProviderState = null,
+
+    pub const json_field_names = .{
+        .marker = "Marker",
+        .max_items = "MaxItems",
+        .state = "State",
+    };
 };
 
 pub const ListCapacityProvidersOutput = struct {
@@ -33,6 +39,11 @@ pub const ListCapacityProvidersOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .capacity_providers = "CapacityProviders",
+        .next_marker = "NextMarker",
+    };
 };
 
 pub const Options = struct {

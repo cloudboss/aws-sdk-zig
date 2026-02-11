@@ -33,6 +33,11 @@ pub const PutFunctionConcurrencyInput = struct {
 
     /// The number of simultaneous executions to reserve for the function.
     reserved_concurrent_executions: i32,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .reserved_concurrent_executions = "ReservedConcurrentExecutions",
+    };
 };
 
 pub const PutFunctionConcurrencyOutput = struct {
@@ -46,6 +51,10 @@ pub const PutFunctionConcurrencyOutput = struct {
     pub fn deinit(self: *const PutFunctionConcurrencyOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .reserved_concurrent_executions = "ReservedConcurrentExecutions",
+    };
 };
 
 pub const Options = struct {

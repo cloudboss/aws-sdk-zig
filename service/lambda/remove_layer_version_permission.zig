@@ -19,6 +19,13 @@ pub const RemoveLayerVersionPermissionInput = struct {
 
     /// The version number.
     version_number: i64,
+
+    pub const json_field_names = .{
+        .layer_name = "LayerName",
+        .revision_id = "RevisionId",
+        .statement_id = "StatementId",
+        .version_number = "VersionNumber",
+    };
 };
 
 pub const RemoveLayerVersionPermissionOutput = struct {

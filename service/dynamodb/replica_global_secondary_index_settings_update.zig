@@ -18,4 +18,10 @@ pub const ReplicaGlobalSecondaryIndexSettingsUpdate = struct {
     /// DynamoDB
     /// returns a `ThrottlingException`.
     provisioned_read_capacity_units: ?i64,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .provisioned_read_capacity_auto_scaling_settings_update = "ProvisionedReadCapacityAutoScalingSettingsUpdate",
+        .provisioned_read_capacity_units = "ProvisionedReadCapacityUnits",
+    };
 };

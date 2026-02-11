@@ -206,4 +206,9 @@ pub const Condition = struct {
     /// Parameters](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html) in the *Amazon DynamoDB Developer
     /// Guide*.
     comparison_operator: ComparisonOperator,
+
+    pub const json_field_names = .{
+        .attribute_value_list = "AttributeValueList",
+        .comparison_operator = "ComparisonOperator",
+    };
 };

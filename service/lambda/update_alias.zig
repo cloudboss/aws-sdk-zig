@@ -36,6 +36,15 @@ pub const UpdateAliasInput = struct {
     /// The [routing
     /// configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing) of the alias.
     routing_config: ?AliasRoutingConfiguration = null,
+
+    pub const json_field_names = .{
+        .description = "Description",
+        .function_name = "FunctionName",
+        .function_version = "FunctionVersion",
+        .name = "Name",
+        .revision_id = "RevisionId",
+        .routing_config = "RoutingConfig",
+    };
 };
 
 pub const UpdateAliasOutput = struct {
@@ -77,6 +86,15 @@ pub const UpdateAliasOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .alias_arn = "AliasArn",
+        .description = "Description",
+        .function_version = "FunctionVersion",
+        .name = "Name",
+        .revision_id = "RevisionId",
+        .routing_config = "RoutingConfig",
+    };
 };
 
 pub const Options = struct {

@@ -12,4 +12,10 @@ pub const ReplicaAutoScalingUpdate = struct {
     replica_global_secondary_index_updates: ?[]const ReplicaGlobalSecondaryIndexAutoScalingUpdate,
 
     replica_provisioned_read_capacity_auto_scaling_update: ?AutoScalingSettingsUpdate,
+
+    pub const json_field_names = .{
+        .region_name = "RegionName",
+        .replica_global_secondary_index_updates = "ReplicaGlobalSecondaryIndexUpdates",
+        .replica_provisioned_read_capacity_auto_scaling_update = "ReplicaProvisionedReadCapacityAutoScalingUpdate",
+    };
 };

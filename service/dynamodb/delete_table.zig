@@ -35,6 +35,10 @@ pub const DeleteTableInput = struct {
     /// Name (ARN) of the table in
     /// this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .table_name = "TableName",
+    };
 };
 
 pub const DeleteTableOutput = struct {
@@ -46,6 +50,10 @@ pub const DeleteTableOutput = struct {
     pub fn deinit(self: *const DeleteTableOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .table_description = "TableDescription",
+    };
 };
 
 pub const Options = struct {

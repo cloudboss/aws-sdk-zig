@@ -24,4 +24,12 @@ pub const ReplicaAutoScalingDescription = struct {
     ///
     /// * `ACTIVE` - The replica is ready for use.
     replica_status: ?ReplicaStatus,
+
+    pub const json_field_names = .{
+        .global_secondary_indexes = "GlobalSecondaryIndexes",
+        .region_name = "RegionName",
+        .replica_provisioned_read_capacity_auto_scaling_settings = "ReplicaProvisionedReadCapacityAutoScalingSettings",
+        .replica_provisioned_write_capacity_auto_scaling_settings = "ReplicaProvisionedWriteCapacityAutoScalingSettings",
+        .replica_status = "ReplicaStatus",
+    };
 };

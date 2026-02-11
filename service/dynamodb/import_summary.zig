@@ -36,4 +36,15 @@ pub const ImportSummary = struct {
 
     /// The Amazon Resource Number (ARN) of the table being imported into.
     table_arn: ?[]const u8,
+
+    pub const json_field_names = .{
+        .cloud_watch_log_group_arn = "CloudWatchLogGroupArn",
+        .end_time = "EndTime",
+        .import_arn = "ImportArn",
+        .import_status = "ImportStatus",
+        .input_format = "InputFormat",
+        .s_3_bucket_source = "S3BucketSource",
+        .start_time = "StartTime",
+        .table_arn = "TableArn",
+    };
 };

@@ -8,4 +8,8 @@ pub const TenancyConfig = struct {
     /// Tenant isolation mode allows for invocation to be sent to a corresponding
     /// execution environment dedicated to a specific tenant ID.
     tenant_isolation_mode: TenantIsolationMode,
+
+    pub const json_field_names = .{
+        .tenant_isolation_mode = "TenantIsolationMode",
+    };
 };

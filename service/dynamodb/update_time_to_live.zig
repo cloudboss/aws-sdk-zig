@@ -57,6 +57,11 @@ pub const UpdateTimeToLiveInput = struct {
     /// specified
     /// table.
     time_to_live_specification: TimeToLiveSpecification,
+
+    pub const json_field_names = .{
+        .table_name = "TableName",
+        .time_to_live_specification = "TimeToLiveSpecification",
+    };
 };
 
 pub const UpdateTimeToLiveOutput = struct {
@@ -68,6 +73,10 @@ pub const UpdateTimeToLiveOutput = struct {
     pub fn deinit(self: *const UpdateTimeToLiveOutput) void {
         _ = self;
     }
+
+    pub const json_field_names = .{
+        .time_to_live_specification = "TimeToLiveSpecification",
+    };
 };
 
 pub const Options = struct {

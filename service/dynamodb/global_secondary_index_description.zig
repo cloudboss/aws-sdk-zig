@@ -105,4 +105,18 @@ pub const GlobalSecondaryIndexDescription = struct {
     /// units per
     /// second) for the specified secondary index.
     warm_throughput: ?GlobalSecondaryIndexWarmThroughputDescription,
+
+    pub const json_field_names = .{
+        .backfilling = "Backfilling",
+        .index_arn = "IndexArn",
+        .index_name = "IndexName",
+        .index_size_bytes = "IndexSizeBytes",
+        .index_status = "IndexStatus",
+        .item_count = "ItemCount",
+        .key_schema = "KeySchema",
+        .on_demand_throughput = "OnDemandThroughput",
+        .projection = "Projection",
+        .provisioned_throughput = "ProvisionedThroughput",
+        .warm_throughput = "WarmThroughput",
+    };
 };

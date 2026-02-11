@@ -182,6 +182,30 @@ pub const UpdateFunctionConfigurationInput = struct {
     /// resources in a
     /// VPC](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).
     vpc_config: ?VpcConfig = null,
+
+    pub const json_field_names = .{
+        .capacity_provider_config = "CapacityProviderConfig",
+        .dead_letter_config = "DeadLetterConfig",
+        .description = "Description",
+        .durable_config = "DurableConfig",
+        .environment = "Environment",
+        .ephemeral_storage = "EphemeralStorage",
+        .file_system_configs = "FileSystemConfigs",
+        .function_name = "FunctionName",
+        .handler = "Handler",
+        .image_config = "ImageConfig",
+        .kms_key_arn = "KMSKeyArn",
+        .layers = "Layers",
+        .logging_config = "LoggingConfig",
+        .memory_size = "MemorySize",
+        .revision_id = "RevisionId",
+        .role = "Role",
+        .runtime = "Runtime",
+        .snap_start = "SnapStart",
+        .timeout = "Timeout",
+        .tracing_config = "TracingConfig",
+        .vpc_config = "VpcConfig",
+    };
 };
 
 pub const UpdateFunctionConfigurationOutput = struct {
@@ -409,6 +433,49 @@ pub const UpdateFunctionConfigurationOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .architectures = "Architectures",
+        .capacity_provider_config = "CapacityProviderConfig",
+        .code_sha_256 = "CodeSha256",
+        .code_size = "CodeSize",
+        .config_sha_256 = "ConfigSha256",
+        .dead_letter_config = "DeadLetterConfig",
+        .description = "Description",
+        .durable_config = "DurableConfig",
+        .environment = "Environment",
+        .ephemeral_storage = "EphemeralStorage",
+        .file_system_configs = "FileSystemConfigs",
+        .function_arn = "FunctionArn",
+        .function_name = "FunctionName",
+        .handler = "Handler",
+        .image_config_response = "ImageConfigResponse",
+        .kms_key_arn = "KMSKeyArn",
+        .last_modified = "LastModified",
+        .last_update_status = "LastUpdateStatus",
+        .last_update_status_reason = "LastUpdateStatusReason",
+        .last_update_status_reason_code = "LastUpdateStatusReasonCode",
+        .layers = "Layers",
+        .logging_config = "LoggingConfig",
+        .master_arn = "MasterArn",
+        .memory_size = "MemorySize",
+        .package_type = "PackageType",
+        .revision_id = "RevisionId",
+        .role = "Role",
+        .runtime = "Runtime",
+        .runtime_version_config = "RuntimeVersionConfig",
+        .signing_job_arn = "SigningJobArn",
+        .signing_profile_version_arn = "SigningProfileVersionArn",
+        .snap_start = "SnapStart",
+        .state = "State",
+        .state_reason = "StateReason",
+        .state_reason_code = "StateReasonCode",
+        .tenancy_config = "TenancyConfig",
+        .timeout = "Timeout",
+        .tracing_config = "TracingConfig",
+        .version = "Version",
+        .vpc_config = "VpcConfig",
+    };
 };
 
 pub const Options = struct {

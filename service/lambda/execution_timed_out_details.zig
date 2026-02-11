@@ -5,4 +5,8 @@ const EventError = @import("event_error.zig").EventError;
 pub const ExecutionTimedOutDetails = struct {
     /// Details about the execution timeout.
     @"error": ?EventError,
+
+    pub const json_field_names = .{
+        .@"error" = "Error",
+    };
 };

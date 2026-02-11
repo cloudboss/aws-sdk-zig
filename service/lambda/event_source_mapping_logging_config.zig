@@ -10,4 +10,8 @@ pub const EventSourceMappingLoggingConfig = struct {
     /// about these metrics, see [ Event source mapping
     /// logging](https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html).
     system_log_level: ?EventSourceMappingSystemLogLevel,
+
+    pub const json_field_names = .{
+        .system_log_level = "SystemLogLevel",
+    };
 };

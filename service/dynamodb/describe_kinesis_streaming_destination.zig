@@ -11,6 +11,10 @@ pub const DescribeKinesisStreamingDestinationInput = struct {
     /// Resource Name (ARN) of the table
     /// in this parameter.
     table_name: []const u8,
+
+    pub const json_field_names = .{
+        .table_name = "TableName",
+    };
 };
 
 pub const DescribeKinesisStreamingDestinationOutput = struct {
@@ -27,6 +31,11 @@ pub const DescribeKinesisStreamingDestinationOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .kinesis_data_stream_destinations = "KinesisDataStreamDestinations",
+        .table_name = "TableName",
+    };
 };
 
 pub const Options = struct {

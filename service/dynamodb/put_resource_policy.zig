@@ -82,6 +82,13 @@ pub const PutResourcePolicyInput = struct {
     /// different permissions for your table, indexes, or both, you can define
     /// multiple `Statement` fields in your policy document.
     resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .confirm_remove_self_resource_access = "ConfirmRemoveSelfResourceAccess",
+        .expected_revision_id = "ExpectedRevisionId",
+        .policy = "Policy",
+        .resource_arn = "ResourceArn",
+    };
 };
 
 pub const PutResourcePolicyOutput = struct {
@@ -96,6 +103,10 @@ pub const PutResourcePolicyOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .revision_id = "RevisionId",
+    };
 };
 
 pub const Options = struct {

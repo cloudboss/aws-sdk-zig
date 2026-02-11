@@ -13,6 +13,11 @@ pub const GetFunctionScalingConfigInput = struct {
     /// Specify a version or alias to get the scaling configuration for a published
     /// version of the function.
     qualifier: []const u8,
+
+    pub const json_field_names = .{
+        .function_name = "FunctionName",
+        .qualifier = "Qualifier",
+    };
 };
 
 pub const GetFunctionScalingConfigOutput = struct {
@@ -33,6 +38,12 @@ pub const GetFunctionScalingConfigOutput = struct {
             self.allocator.free(v);
         }
     }
+
+    pub const json_field_names = .{
+        .applied_function_scaling_config = "AppliedFunctionScalingConfig",
+        .function_arn = "FunctionArn",
+        .requested_function_scaling_config = "RequestedFunctionScalingConfig",
+    };
 };
 
 pub const Options = struct {

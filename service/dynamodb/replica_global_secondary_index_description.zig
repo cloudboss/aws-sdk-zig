@@ -18,4 +18,11 @@ pub const ReplicaGlobalSecondaryIndexDescription = struct {
     /// Represents the warm throughput of the global secondary index for this
     /// replica.
     warm_throughput: ?GlobalSecondaryIndexWarmThroughputDescription,
+
+    pub const json_field_names = .{
+        .index_name = "IndexName",
+        .on_demand_throughput_override = "OnDemandThroughputOverride",
+        .provisioned_throughput_override = "ProvisionedThroughputOverride",
+        .warm_throughput = "WarmThroughput",
+    };
 };

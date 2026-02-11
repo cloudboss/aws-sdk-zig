@@ -31,4 +31,12 @@ pub const SourceTableFeatureDetails = struct {
 
     /// Time to Live settings on the table when the backup was created.
     time_to_live_description: ?TimeToLiveDescription,
+
+    pub const json_field_names = .{
+        .global_secondary_indexes = "GlobalSecondaryIndexes",
+        .local_secondary_indexes = "LocalSecondaryIndexes",
+        .sse_description = "SSEDescription",
+        .stream_description = "StreamDescription",
+        .time_to_live_description = "TimeToLiveDescription",
+    };
 };
