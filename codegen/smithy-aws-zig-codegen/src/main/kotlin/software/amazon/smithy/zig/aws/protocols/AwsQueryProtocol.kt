@@ -14,6 +14,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
     override fun contentType(): String = "application/x-www-form-urlencoded"
 
+    override fun needsXmlSerde(): Boolean = true
+
     override fun writeSerializeRequest(writer: ZigWriter, ctx: OperationContext) {
         val inputName = "${ctx.operationName}Input"
 

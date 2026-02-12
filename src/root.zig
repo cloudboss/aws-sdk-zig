@@ -12,6 +12,7 @@ pub const errors = @import("errors.zig");
 pub const imds = @import("imds.zig");
 pub const ecs = @import("ecs.zig");
 pub const json = @import("json.zig");
+pub const xml = @import("xml.zig");
 
 // Re-exports
 pub const Credentials = credentials.Credentials;

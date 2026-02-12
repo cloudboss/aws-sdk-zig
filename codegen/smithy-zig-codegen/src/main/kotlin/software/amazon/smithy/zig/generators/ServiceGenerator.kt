@@ -35,5 +35,10 @@ class ServiceGenerator(
 
         // 5. Generate root.zig
         RootGenerator(context, service, model).run()
+
+        // 6. Generate serde.zig for XML protocols
+        if (protocol.needsXmlSerde()) {
+            SerdeGenerator(context, service, model).run()
+        }
     }
 }

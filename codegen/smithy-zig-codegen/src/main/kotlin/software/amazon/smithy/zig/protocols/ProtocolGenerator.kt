@@ -10,4 +10,5 @@ interface ProtocolGenerator {
     }
     fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext)
     fun contentType(): String
+    fun needsXmlSerde(): Boolean = false
 }

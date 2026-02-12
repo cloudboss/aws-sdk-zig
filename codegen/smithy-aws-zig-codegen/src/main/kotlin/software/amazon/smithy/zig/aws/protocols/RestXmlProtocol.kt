@@ -22,6 +22,8 @@ class RestXmlProtocol : ProtocolGenerator {
 
     override fun contentType(): String = "application/xml"
 
+    override fun needsXmlSerde(): Boolean = true
+
     private data class InputBindings(
         val labels: Map<String, MemberShape>,
         val queryParams: Map<String, MemberShape>,
