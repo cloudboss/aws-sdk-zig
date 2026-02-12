@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// Returns information about the specified OpenID Connect (OIDC) provider
 /// resource object
@@ -52,12 +53,10 @@ pub const GetOpenIDConnectProviderOutput = struct {
     /// [CreateOpenIDConnectProvider](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html).
     url: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetOpenIDConnectProviderOutput) void {
-        if (self.url) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetOpenIDConnectProviderOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -86,7 +85,11 @@ pub fn execute(client: *Client, input: GetOpenIDConnectProviderInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetOpenIDConnectProviderInput, config: *aws.Config) !aws.http.Request {
@@ -118,12 +121,38 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetOpenIDConnectProviderInp
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetOpenIDConnectProviderOutput {
     _ = status;
     _ = headers;
-    var result: GetOpenIDConnectProviderOutput = .{ .allocator = alloc };
-    if (findElement(body, "CreateDate")) |content| {
-        result.create_date = std.fmt.parseInt(i64, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetOpenIDConnectProviderResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "Url")) |content| {
-        result.url = try alloc.dupe(u8, content);
+
+    var result: GetOpenIDConnectProviderOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ClientIDList")) {
+                    result.client_id_list = try serde.deserializeclientIDListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "CreateDate")) {
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "Tags")) {
+                    result.tags = try serde.deserializetagListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "ThumbprintList")) {
+                    result.thumbprint_list = try serde.deserializethumbprintListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "Url")) {
+                    result.url = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

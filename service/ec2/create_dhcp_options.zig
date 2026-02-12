@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const NewDhcpConfiguration = @import("new_dhcp_configuration.zig").NewDhcpConfiguration;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const DhcpOptions = @import("dhcp_options.zig").DhcpOptions;
+const serde = @import("serde.zig");
 
 /// Creates a custom set of DHCP options. After you create a DHCP option set,
 /// you associate
@@ -83,10 +84,10 @@ pub const CreateDhcpOptionsOutput = struct {
     /// A set of DHCP options.
     dhcp_options: ?DhcpOptions = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateDhcpOptionsOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateDhcpOptionsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -115,7 +116,11 @@ pub fn execute(client: *Client, input: CreateDhcpOptionsInput, options: Options)
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateDhcpOptionsInput, config: *aws.Config) !aws.http.Request {
@@ -173,8 +178,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDhcpOptionsInput, con
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateDhcpOptionsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateDhcpOptionsOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateDhcpOptionsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "dhcpOptions")) {
+                    result.dhcp_options = try serde.deserializeDhcpOptions(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

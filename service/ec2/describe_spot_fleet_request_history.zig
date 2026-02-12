@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const EventType = @import("event_type.zig").EventType;
 const HistoryRecord = @import("history_record.zig").HistoryRecord;
+const serde = @import("serde.zig");
 
 /// Describes the events for the specified Spot Fleet request during the
 /// specified
@@ -73,15 +74,10 @@ pub const DescribeSpotFleetRequestHistoryOutput = struct {
     /// *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     start_time: ?i64 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeSpotFleetRequestHistoryOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
-        if (self.spot_fleet_request_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeSpotFleetRequestHistoryOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -110,7 +106,11 @@ pub fn execute(client: *Client, input: DescribeSpotFleetRequestHistoryInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeSpotFleetRequestHistoryInput, config: *aws.Config) !aws.http.Request {
@@ -160,18 +160,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeSpotFleetRequestHis
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeSpotFleetRequestHistoryOutput {
     _ = status;
     _ = headers;
-    var result: DescribeSpotFleetRequestHistoryOutput = .{ .allocator = alloc };
-    if (findElement(body, "lastEvaluatedTime")) |content| {
-        result.last_evaluated_time = std.fmt.parseInt(i64, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "spotFleetRequestId")) |content| {
-        result.spot_fleet_request_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "startTime")) |content| {
-        result.start_time = std.fmt.parseInt(i64, content, 10) catch null;
+
+    var result: DescribeSpotFleetRequestHistoryOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "historyRecordSet")) {
+                    result.history_records = try serde.deserializeHistoryRecords(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "lastEvaluatedTime")) {
+                    result.last_evaluated_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "spotFleetRequestId")) {
+                    result.spot_fleet_request_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "startTime")) {
+                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

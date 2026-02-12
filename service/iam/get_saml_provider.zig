@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const assertionEncryptionModeType = @import("assertion_encryption_mode_type.zig").assertionEncryptionModeType;
 const SAMLPrivateKey = @import("saml_private_key.zig").SAMLPrivateKey;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// Returns the SAML provider metadocument that was uploaded when the IAM SAML
 /// provider
@@ -53,15 +54,10 @@ pub const GetSAMLProviderOutput = struct {
     /// The expiration date and time for the SAML provider.
     valid_until: ?i64 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetSAMLProviderOutput) void {
-        if (self.saml_metadata_document) |v| {
-            self.allocator.free(v);
-        }
-        if (self.saml_provider_uuid) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetSAMLProviderOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -90,7 +86,11 @@ pub fn execute(client: *Client, input: GetSAMLProviderInput, options: Options) !
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetSAMLProviderInput, config: *aws.Config) !aws.http.Request {
@@ -122,18 +122,42 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSAMLProviderInput, confi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetSAMLProviderOutput {
     _ = status;
     _ = headers;
-    var result: GetSAMLProviderOutput = .{ .allocator = alloc };
-    if (findElement(body, "CreateDate")) |content| {
-        result.create_date = std.fmt.parseInt(i64, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetSAMLProviderResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "SAMLMetadataDocument")) |content| {
-        result.saml_metadata_document = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "SAMLProviderUUID")) |content| {
-        result.saml_provider_uuid = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ValidUntil")) |content| {
-        result.valid_until = std.fmt.parseInt(i64, content, 10) catch null;
+
+    var result: GetSAMLProviderOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AssertionEncryptionMode")) {
+                    result.assertion_encryption_mode = std.meta.stringToEnum(assertionEncryptionModeType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "CreateDate")) {
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "PrivateKeyList")) {
+                    result.private_key_list = try serde.deserializeprivateKeyList(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "SAMLMetadataDocument")) {
+                    result.saml_metadata_document = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SAMLProviderUUID")) {
+                    result.saml_provider_uuid = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Tags")) {
+                    result.tags = try serde.deserializetagListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "ValidUntil")) {
+                    result.valid_until = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

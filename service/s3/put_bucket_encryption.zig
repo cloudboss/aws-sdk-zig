@@ -211,10 +211,10 @@ pub const PutBucketEncryptionInput = struct {
 
 pub const PutBucketEncryptionOutput = struct {
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const PutBucketEncryptionOutput) void {
-        _ = self;
+    pub fn deinit(self: *PutBucketEncryptionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -243,7 +243,11 @@ pub fn execute(client: *Client, input: PutBucketEncryptionInput, options: Option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PutBucketEncryptionInput, config: *aws.Config) !aws.http.Request {
@@ -288,10 +292,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutBucketEncryptionInput, c
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutBucketEncryptionOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: PutBucketEncryptionOutput = .{ .allocator = alloc };
+    const result: PutBucketEncryptionOutput = .{};
 
     return result;
 }

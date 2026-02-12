@@ -54,15 +54,10 @@ pub const GetHumanReadableSummaryOutput = struct {
     /// state of the generation process.
     summary_state: ?summaryStateType = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetHumanReadableSummaryOutput) void {
-        if (self.locale) |v| {
-            self.allocator.free(v);
-        }
-        if (self.summary_content) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetHumanReadableSummaryOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -91,7 +86,11 @@ pub fn execute(client: *Client, input: GetHumanReadableSummaryInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetHumanReadableSummaryInput, config: *aws.Config) !aws.http.Request {
@@ -127,12 +126,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetHumanReadableSummaryInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetHumanReadableSummaryOutput {
     _ = status;
     _ = headers;
-    var result: GetHumanReadableSummaryOutput = .{ .allocator = alloc };
-    if (findElement(body, "Locale")) |content| {
-        result.locale = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetHumanReadableSummaryResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "SummaryContent")) |content| {
-        result.summary_content = try alloc.dupe(u8, content);
+
+    var result: GetHumanReadableSummaryOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Locale")) {
+                    result.locale = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SummaryContent")) {
+                    result.summary_content = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SummaryState")) {
+                    result.summary_state = std.meta.stringToEnum(summaryStateType, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

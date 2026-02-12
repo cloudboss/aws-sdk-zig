@@ -30,18 +30,10 @@ pub const CancelImportTaskOutput = struct {
     /// The current state of the task being canceled.
     state: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CancelImportTaskOutput) void {
-        if (self.import_task_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.previous_state) |v| {
-            self.allocator.free(v);
-        }
-        if (self.state) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CancelImportTaskOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -70,7 +62,11 @@ pub fn execute(client: *Client, input: CancelImportTaskInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CancelImportTaskInput, config: *aws.Config) !aws.http.Request {
@@ -112,15 +108,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CancelImportTaskInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CancelImportTaskOutput {
     _ = status;
     _ = headers;
-    var result: CancelImportTaskOutput = .{ .allocator = alloc };
-    if (findElement(body, "importTaskId")) |content| {
-        result.import_task_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "previousState")) |content| {
-        result.previous_state = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "state")) |content| {
-        result.state = try alloc.dupe(u8, content);
+
+    var result: CancelImportTaskOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "importTaskId")) {
+                    result.import_task_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "previousState")) {
+                    result.previous_state = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

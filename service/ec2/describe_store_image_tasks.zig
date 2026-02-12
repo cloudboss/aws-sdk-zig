@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const StoreImageTaskResult = @import("store_image_task_result.zig").StoreImageTaskResult;
+const serde = @import("serde.zig");
 
 /// Describes the progress of the AMI store tasks. You can describe the store
 /// tasks for
@@ -78,12 +79,10 @@ pub const DescribeStoreImageTasksOutput = struct {
     /// The information about the AMI store tasks.
     store_image_task_results: ?[]const StoreImageTaskResult = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeStoreImageTasksOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeStoreImageTasksOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -112,7 +111,11 @@ pub fn execute(client: *Client, input: DescribeStoreImageTasksInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeStoreImageTasksInput, config: *aws.Config) !aws.http.Request {
@@ -176,9 +179,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeStoreImageTasksInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeStoreImageTasksOutput {
     _ = status;
     _ = headers;
-    var result: DescribeStoreImageTasksOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeStoreImageTasksOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "storeImageTaskResultSet")) {
+                    result.store_image_task_results = try serde.deserializeStoreImageTaskResultSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

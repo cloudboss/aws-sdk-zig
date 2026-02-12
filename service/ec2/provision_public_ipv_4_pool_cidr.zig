@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const PublicIpv4PoolRange = @import("public_ipv_4_pool_range.zig").PublicIpv4PoolRange;
+const serde = @import("serde.zig");
 
 /// Provision a CIDR to a public IPv4 pool.
 ///
@@ -42,12 +43,10 @@ pub const ProvisionPublicIpv4PoolCidrOutput = struct {
     /// The ID of the pool that you want to provision the CIDR to.
     pool_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ProvisionPublicIpv4PoolCidrOutput) void {
-        if (self.pool_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ProvisionPublicIpv4PoolCidrOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -76,7 +75,11 @@ pub fn execute(client: *Client, input: ProvisionPublicIpv4PoolCidrInput, options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ProvisionPublicIpv4PoolCidrInput, config: *aws.Config) !aws.http.Request {
@@ -120,9 +123,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ProvisionPublicIpv4PoolCidr
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ProvisionPublicIpv4PoolCidrOutput {
     _ = status;
     _ = headers;
-    var result: ProvisionPublicIpv4PoolCidrOutput = .{ .allocator = alloc };
-    if (findElement(body, "poolId")) |content| {
-        result.pool_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ProvisionPublicIpv4PoolCidrOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "poolAddressRange")) {
+                    result.pool_address_range = try serde.deserializePublicIpv4PoolRange(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "poolId")) {
+                    result.pool_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

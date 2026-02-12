@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnalyticsConfiguration = @import("analytics_configuration.zig").AnalyticsConfiguration;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -59,10 +60,10 @@ pub const GetBucketAnalyticsConfigurationOutput = struct {
     /// The configuration and any analyses for the analytics filter.
     analytics_configuration: ?AnalyticsConfiguration = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketAnalyticsConfigurationOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketAnalyticsConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -91,7 +92,11 @@ pub fn execute(client: *Client, input: GetBucketAnalyticsConfigurationInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketAnalyticsConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -134,10 +139,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketAnalyticsConfigura
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketAnalyticsConfigurationOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: GetBucketAnalyticsConfigurationOutput = .{ .allocator = alloc };
+    const result: GetBucketAnalyticsConfigurationOutput = .{};
 
     return result;
 }

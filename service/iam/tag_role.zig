@@ -73,10 +73,10 @@ pub const TagRoleInput = struct {
 
 pub const TagRoleOutput = struct {
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const TagRoleOutput) void {
-        _ = self;
+    pub fn deinit(self: *TagRoleOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -105,7 +105,11 @@ pub fn execute(client: *Client, input: TagRoleInput, options: Options) !TagRoleO
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: TagRoleInput, config: *aws.Config) !aws.http.Request {
@@ -153,7 +157,8 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     _ = status;
     _ = headers;
     _ = body;
-    const result: TagRoleOutput = .{ .allocator = alloc };
+    _ = alloc;
+    const result: TagRoleOutput = .{};
 
     return result;
 }

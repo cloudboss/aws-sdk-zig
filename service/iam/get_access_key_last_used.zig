@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessKeyLastUsed = @import("access_key_last_used.zig").AccessKeyLastUsed;
+const serde = @import("serde.zig");
 
 /// Retrieves information about when the specified access key was last used. The
 /// information includes the date and time of last use, along with the Amazon
@@ -25,12 +26,10 @@ pub const GetAccessKeyLastUsedOutput = struct {
     /// The name of the IAM user that owns this access key.
     user_name: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetAccessKeyLastUsedOutput) void {
-        if (self.user_name) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetAccessKeyLastUsedOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -59,7 +58,11 @@ pub fn execute(client: *Client, input: GetAccessKeyLastUsedInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetAccessKeyLastUsedInput, config: *aws.Config) !aws.http.Request {
@@ -91,9 +94,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAccessKeyLastUsedInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAccessKeyLastUsedOutput {
     _ = status;
     _ = headers;
-    var result: GetAccessKeyLastUsedOutput = .{ .allocator = alloc };
-    if (findElement(body, "UserName")) |content| {
-        result.user_name = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetAccessKeyLastUsedResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: GetAccessKeyLastUsedOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AccessKeyLastUsed")) {
+                    result.access_key_last_used = try serde.deserializeAccessKeyLastUsed(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "UserName")) {
+                    result.user_name = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

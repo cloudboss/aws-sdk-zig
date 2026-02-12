@@ -44,10 +44,10 @@ pub const InvokeAsyncOutput = struct {
     /// The status code.
     status: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const InvokeAsyncOutput) void {
-        _ = self;
+    pub fn deinit(self: *InvokeAsyncOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -80,7 +80,11 @@ pub fn execute(client: *Client, input: InvokeAsyncInput, options: Options) !Invo
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: InvokeAsyncInput, config: *aws.Config) !aws.http.Request {
@@ -110,7 +114,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeAsyncInput, config: *
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InvokeAsyncOutput {
-    var result: InvokeAsyncOutput = .{ .allocator = alloc };
+    _ = alloc;
+    var result: InvokeAsyncOutput = .{};
     _ = body;
     result.status = @intCast(status);
     _ = headers;

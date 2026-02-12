@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const SnapshotTierStatus = @import("snapshot_tier_status.zig").SnapshotTierStatus;
+const serde = @import("serde.zig");
 
 /// Describes the storage tier status of one or more Amazon EBS snapshots.
 pub const DescribeSnapshotTierStatusInput = struct {
@@ -50,12 +51,10 @@ pub const DescribeSnapshotTierStatusOutput = struct {
     /// Information about the snapshot's storage tier.
     snapshot_tier_statuses: ?[]const SnapshotTierStatus = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeSnapshotTierStatusOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeSnapshotTierStatusOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -84,7 +83,11 @@ pub fn execute(client: *Client, input: DescribeSnapshotTierStatusInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeSnapshotTierStatusInput, config: *aws.Config) !aws.http.Request {
@@ -139,9 +142,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeSnapshotTierStatusI
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeSnapshotTierStatusOutput {
     _ = status;
     _ = headers;
-    var result: DescribeSnapshotTierStatusOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeSnapshotTierStatusOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "snapshotTierStatusSet")) {
+                    result.snapshot_tier_statuses = try serde.deserializesnapshotTierStatusSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

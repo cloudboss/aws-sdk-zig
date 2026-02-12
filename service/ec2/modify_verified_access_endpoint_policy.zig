@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessSseSpecificationRequest = @import("verified_access_sse_specification_request.zig").VerifiedAccessSseSpecificationRequest;
 const VerifiedAccessSseSpecificationResponse = @import("verified_access_sse_specification_response.zig").VerifiedAccessSseSpecificationResponse;
+const serde = @import("serde.zig");
 
 /// Modifies the specified Amazon Web Services Verified Access endpoint policy.
 pub const ModifyVerifiedAccessEndpointPolicyInput = struct {
@@ -44,12 +45,10 @@ pub const ModifyVerifiedAccessEndpointPolicyOutput = struct {
     /// The options in use for server side encryption.
     sse_specification: ?VerifiedAccessSseSpecificationResponse = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifyVerifiedAccessEndpointPolicyOutput) void {
-        if (self.policy_document) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ModifyVerifiedAccessEndpointPolicyOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -78,7 +77,11 @@ pub fn execute(client: *Client, input: ModifyVerifiedAccessEndpointPolicyInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpointPolicyInput, config: *aws.Config) !aws.http.Request {
@@ -136,12 +139,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyVerifiedAccessEndpointPolicyOutput {
     _ = status;
     _ = headers;
-    var result: ModifyVerifiedAccessEndpointPolicyOutput = .{ .allocator = alloc };
-    if (findElement(body, "policyDocument")) |content| {
-        result.policy_document = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "policyEnabled")) |content| {
-        result.policy_enabled = std.mem.eql(u8, content, "true");
+
+    var result: ModifyVerifiedAccessEndpointPolicyOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "policyDocument")) {
+                    result.policy_document = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "policyEnabled")) {
+                    result.policy_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "sseSpecification")) {
+                    result.sse_specification = try serde.deserializeVerifiedAccessSseSpecificationResponse(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

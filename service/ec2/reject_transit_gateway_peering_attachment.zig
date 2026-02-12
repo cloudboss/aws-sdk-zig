@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayPeeringAttachment = @import("transit_gateway_peering_attachment.zig").TransitGatewayPeeringAttachment;
+const serde = @import("serde.zig");
 
 /// Rejects a transit gateway peering attachment request.
 pub const RejectTransitGatewayPeeringAttachmentInput = struct {
@@ -22,10 +23,10 @@ pub const RejectTransitGatewayPeeringAttachmentOutput = struct {
     /// The transit gateway peering attachment.
     transit_gateway_peering_attachment: ?TransitGatewayPeeringAttachment = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const RejectTransitGatewayPeeringAttachmentOutput) void {
-        _ = self;
+    pub fn deinit(self: *RejectTransitGatewayPeeringAttachmentOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -54,7 +55,11 @@ pub fn execute(client: *Client, input: RejectTransitGatewayPeeringAttachmentInpu
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: RejectTransitGatewayPeeringAttachmentInput, config: *aws.Config) !aws.http.Request {
@@ -90,8 +95,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RejectTransitGatewayPeering
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RejectTransitGatewayPeeringAttachmentOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: RejectTransitGatewayPeeringAttachmentOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: RejectTransitGatewayPeeringAttachmentOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "transitGatewayPeeringAttachment")) {
+                    result.transit_gateway_peering_attachment = try serde.deserializeTransitGatewayPeeringAttachment(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

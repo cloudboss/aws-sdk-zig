@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegisteredInstance = @import("registered_instance.zig").RegisteredInstance;
+const serde = @import("serde.zig");
 
 /// Enable Amazon EC2 instances running in an SQL Server High Availability
 /// cluster for SQL Server High Availability
@@ -52,10 +53,10 @@ pub const EnableInstanceSqlHaStandbyDetectionsOutput = struct {
     /// detection monitoring.
     instances: ?[]const RegisteredInstance = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const EnableInstanceSqlHaStandbyDetectionsOutput) void {
-        _ = self;
+    pub fn deinit(self: *EnableInstanceSqlHaStandbyDetectionsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -84,7 +85,11 @@ pub fn execute(client: *Client, input: EnableInstanceSqlHaStandbyDetectionsInput
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: EnableInstanceSqlHaStandbyDetectionsInput, config: *aws.Config) !aws.http.Request {
@@ -129,8 +134,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: EnableInstanceSqlHaStandbyD
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !EnableInstanceSqlHaStandbyDetectionsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: EnableInstanceSqlHaStandbyDetectionsOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: EnableInstanceSqlHaStandbyDetectionsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "instanceSet")) {
+                    result.instances = try serde.deserializeRegisteredInstanceList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

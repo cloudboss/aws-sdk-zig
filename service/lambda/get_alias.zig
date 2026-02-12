@@ -48,24 +48,10 @@ pub const GetAliasOutput = struct {
     /// configuration](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html) of the alias.
     routing_config: ?AliasRoutingConfiguration = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetAliasOutput) void {
-        if (self.alias_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.description) |v| {
-            self.allocator.free(v);
-        }
-        if (self.function_version) |v| {
-            self.allocator.free(v);
-        }
-        if (self.name) |v| {
-            self.allocator.free(v);
-        }
-        if (self.revision_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetAliasOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -103,7 +89,11 @@ pub fn execute(client: *Client, input: GetAliasInput, options: Options) !GetAlia
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetAliasInput, config: *aws.Config) !aws.http.Request {
@@ -134,7 +124,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAliasInput, config: *aws
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAliasOutput {
-    var result: GetAliasOutput = .{ .allocator = alloc };
+    var result: GetAliasOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(GetAliasOutput, body, alloc);
     }

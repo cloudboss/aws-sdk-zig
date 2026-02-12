@@ -11,6 +11,7 @@ const Owner = @import("owner.zig").Owner;
 const Part = @import("part.zig").Part;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const StorageClass = @import("storage_class.zig").StorageClass;
+const serde = @import("serde.zig");
 
 /// Lists the parts that have been uploaded for a specific multipart upload.
 ///
@@ -323,27 +324,10 @@ pub const ListPartsOutput = struct {
     /// Upload ID identifying the multipart upload whose parts are being listed.
     upload_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ListPartsOutput) void {
-        if (self.abort_rule_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.bucket) |v| {
-            self.allocator.free(v);
-        }
-        if (self.key) |v| {
-            self.allocator.free(v);
-        }
-        if (self.next_part_number_marker) |v| {
-            self.allocator.free(v);
-        }
-        if (self.part_number_marker) |v| {
-            self.allocator.free(v);
-        }
-        if (self.upload_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ListPartsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -372,7 +356,11 @@ pub fn execute(client: *Client, input: ListPartsInput, options: Options) !ListPa
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListPartsInput, config: *aws.Config) !aws.http.Request {
@@ -444,28 +432,53 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListPartsInput, config: *aw
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListPartsOutput {
-    var result: ListPartsOutput = .{ .allocator = alloc };
+    var result: ListPartsOutput = .{};
     _ = status;
-    if (findElement(body, "Bucket")) |content| {
-        result.bucket = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
-    }
-    if (findElement(body, "Key")) |content| {
-        result.key = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "MaxParts")) |content| {
-        result.max_parts = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "NextPartNumberMarker")) |content| {
-        result.next_part_number_marker = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "PartNumberMarker")) |content| {
-        result.part_number_marker = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "UploadId")) |content| {
-        result.upload_id = try alloc.dupe(u8, content);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Bucket")) {
+                    result.bucket = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumAlgorithm")) {
+                    result.checksum_algorithm = std.meta.stringToEnum(ChecksumAlgorithm, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
+                    result.checksum_type = std.meta.stringToEnum(ChecksumType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Initiator")) {
+                    result.initiator = try serde.deserializeInitiator(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Key")) {
+                    result.key = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "MaxParts")) {
+                    result.max_parts = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "NextPartNumberMarker")) {
+                    result.next_part_number_marker = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Owner")) {
+                    result.owner = try serde.deserializeOwner(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "PartNumberMarker")) {
+                    result.part_number_marker = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Part")) {
+                    result.parts = try serde.deserializeParts(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "StorageClass")) {
+                    result.storage_class = std.meta.stringToEnum(StorageClass, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "UploadId")) {
+                    result.upload_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
     if (headers.get("x-amz-abort-date")) |value| {
         result.abort_date = std.fmt.parseInt(i64, value, 10) catch null;

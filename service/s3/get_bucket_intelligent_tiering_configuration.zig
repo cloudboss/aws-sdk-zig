@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IntelligentTieringConfiguration = @import("intelligent_tiering_configuration.zig").IntelligentTieringConfiguration;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -64,10 +65,10 @@ pub const GetBucketIntelligentTieringConfigurationOutput = struct {
     /// Container for S3 Intelligent-Tiering configuration.
     intelligent_tiering_configuration: ?IntelligentTieringConfiguration = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketIntelligentTieringConfigurationOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketIntelligentTieringConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -96,7 +97,11 @@ pub fn execute(client: *Client, input: GetBucketIntelligentTieringConfigurationI
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketIntelligentTieringConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -139,10 +144,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketIntelligentTiering
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketIntelligentTieringConfigurationOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: GetBucketIntelligentTieringConfigurationOutput = .{ .allocator = alloc };
+    const result: GetBucketIntelligentTieringConfigurationOutput = .{};
 
     return result;
 }

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VpcAttributeName = @import("vpc_attribute_name.zig").VpcAttributeName;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
+const serde = @import("serde.zig");
 
 /// Describes the specified attribute of the specified VPC. You can specify only
 /// one attribute at a time.
@@ -41,12 +42,10 @@ pub const DescribeVpcAttributeOutput = struct {
     /// The ID of the VPC.
     vpc_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeVpcAttributeOutput) void {
-        if (self.vpc_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeVpcAttributeOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -75,7 +74,11 @@ pub fn execute(client: *Client, input: DescribeVpcAttributeInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeVpcAttributeInput, config: *aws.Config) !aws.http.Request {
@@ -113,9 +116,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeVpcAttributeInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeVpcAttributeOutput {
     _ = status;
     _ = headers;
-    var result: DescribeVpcAttributeOutput = .{ .allocator = alloc };
-    if (findElement(body, "vpcId")) |content| {
-        result.vpc_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeVpcAttributeOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "enableDnsHostnames")) {
+                    result.enable_dns_hostnames = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "enableDnsSupport")) {
+                    result.enable_dns_support = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "enableNetworkAddressUsageMetrics")) {
+                    result.enable_network_address_usage_metrics = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "vpcId")) {
+                    result.vpc_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

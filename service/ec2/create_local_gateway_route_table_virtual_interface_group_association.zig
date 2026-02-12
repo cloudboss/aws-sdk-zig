@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const LocalGatewayRouteTableVirtualInterfaceGroupAssociation = @import("local_gateway_route_table_virtual_interface_group_association.zig").LocalGatewayRouteTableVirtualInterfaceGroupAssociation;
+const serde = @import("serde.zig");
 
 /// Creates a local gateway route table virtual interface group association.
 pub const CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput = struct {
@@ -31,10 +32,10 @@ pub const CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput = s
     /// association.
     local_gateway_route_table_virtual_interface_group_association: ?LocalGatewayRouteTableVirtualInterfaceGroupAssociation = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -63,7 +64,11 @@ pub fn execute(client: *Client, input: CreateLocalGatewayRouteTableVirtualInterf
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, config: *aws.Config) !aws.http.Request {
@@ -114,8 +119,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateLocalGatewayRouteTabl
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "localGatewayRouteTableVirtualInterfaceGroupAssociation")) {
+                    result.local_gateway_route_table_virtual_interface_group_association = try serde.deserializeLocalGatewayRouteTableVirtualInterfaceGroupAssociation(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

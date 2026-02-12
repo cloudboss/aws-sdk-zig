@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpamPrefixListResolver = @import("ipam_prefix_list_resolver.zig").IpamPrefixListResolver;
+const serde = @import("serde.zig");
 
 /// Deletes an IPAM prefix list resolver. Before deleting a resolver, you must
 /// first delete all resolver targets associated with it.
@@ -23,10 +24,10 @@ pub const DeleteIpamPrefixListResolverOutput = struct {
     /// Information about the IPAM prefix list resolver that was deleted.
     ipam_prefix_list_resolver: ?IpamPrefixListResolver = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteIpamPrefixListResolverOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteIpamPrefixListResolverOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -55,7 +56,11 @@ pub fn execute(client: *Client, input: DeleteIpamPrefixListResolverInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteIpamPrefixListResolverInput, config: *aws.Config) !aws.http.Request {
@@ -91,8 +96,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteIpamPrefixListResolve
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteIpamPrefixListResolverOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeleteIpamPrefixListResolverOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeleteIpamPrefixListResolverOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamPrefixListResolver")) {
+                    result.ipam_prefix_list_resolver = try serde.deserializeIpamPrefixListResolver(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

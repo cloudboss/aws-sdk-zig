@@ -39,10 +39,10 @@ pub const DisableAllowedImagesSettingsOutput = struct {
     /// error.
     allowed_images_settings_state: ?AllowedImagesSettingsDisabledState = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DisableAllowedImagesSettingsOutput) void {
-        _ = self;
+    pub fn deinit(self: *DisableAllowedImagesSettingsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -71,7 +71,11 @@ pub fn execute(client: *Client, input: DisableAllowedImagesSettingsInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DisableAllowedImagesSettingsInput, config: *aws.Config) !aws.http.Request {
@@ -105,8 +109,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisableAllowedImagesSetting
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DisableAllowedImagesSettingsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DisableAllowedImagesSettingsOutput = .{ .allocator = alloc };
+    _ = alloc;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DisableAllowedImagesSettingsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "allowedImagesSettingsState")) {
+                    result.allowed_images_settings_state = std.meta.stringToEnum(AllowedImagesSettingsDisabledState, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -9,6 +9,7 @@ const FastLaunchLaunchTemplateSpecificationResponse = @import("fast_launch_launc
 const FastLaunchResourceType = @import("fast_launch_resource_type.zig").FastLaunchResourceType;
 const FastLaunchSnapshotConfigurationResponse = @import("fast_launch_snapshot_configuration_response.zig").FastLaunchSnapshotConfigurationResponse;
 const FastLaunchStateCode = @import("fast_launch_state_code.zig").FastLaunchStateCode;
+const serde = @import("serde.zig");
 
 /// When you enable Windows fast launch for a Windows AMI, images are
 /// pre-provisioned, using
@@ -102,18 +103,10 @@ pub const EnableFastLaunchOutput = struct {
     /// The time that the state changed for Windows fast launch for the AMI.
     state_transition_time: ?i64 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const EnableFastLaunchOutput) void {
-        if (self.image_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.owner_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.state_transition_reason) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *EnableFastLaunchOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -142,7 +135,11 @@ pub fn execute(client: *Client, input: EnableFastLaunchInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: EnableFastLaunchInput, config: *aws.Config) !aws.http.Request {
@@ -204,21 +201,44 @@ fn serializeRequest(alloc: std.mem.Allocator, input: EnableFastLaunchInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !EnableFastLaunchOutput {
     _ = status;
     _ = headers;
-    var result: EnableFastLaunchOutput = .{ .allocator = alloc };
-    if (findElement(body, "imageId")) |content| {
-        result.image_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "maxParallelLaunches")) |content| {
-        result.max_parallel_launches = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "ownerId")) |content| {
-        result.owner_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "stateTransitionReason")) |content| {
-        result.state_transition_reason = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "stateTransitionTime")) |content| {
-        result.state_transition_time = std.fmt.parseInt(i64, content, 10) catch null;
+
+    var result: EnableFastLaunchOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "imageId")) {
+                    result.image_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "launchTemplate")) {
+                    result.launch_template = try serde.deserializeFastLaunchLaunchTemplateSpecificationResponse(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "maxParallelLaunches")) {
+                    result.max_parallel_launches = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "ownerId")) {
+                    result.owner_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "resourceType")) {
+                    result.resource_type = std.meta.stringToEnum(FastLaunchResourceType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "snapshotConfiguration")) {
+                    result.snapshot_configuration = try serde.deserializeFastLaunchSnapshotConfigurationResponse(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = std.meta.stringToEnum(FastLaunchStateCode, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
+                    result.state_transition_reason = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "stateTransitionTime")) {
+                    result.state_transition_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

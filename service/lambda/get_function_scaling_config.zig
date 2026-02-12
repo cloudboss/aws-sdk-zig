@@ -31,12 +31,10 @@ pub const GetFunctionScalingConfigOutput = struct {
     /// The scaling configuration that was requested for the function.
     requested_function_scaling_config: ?FunctionScalingConfig = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetFunctionScalingConfigOutput) void {
-        if (self.function_arn) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetFunctionScalingConfigOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -71,7 +69,11 @@ pub fn execute(client: *Client, input: GetFunctionScalingConfigInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetFunctionScalingConfigInput, config: *aws.Config) !aws.http.Request {
@@ -110,7 +112,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFunctionScalingConfigInp
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetFunctionScalingConfigOutput {
-    var result: GetFunctionScalingConfigOutput = .{ .allocator = alloc };
+    var result: GetFunctionScalingConfigOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(GetFunctionScalingConfigOutput, body, alloc);
     }

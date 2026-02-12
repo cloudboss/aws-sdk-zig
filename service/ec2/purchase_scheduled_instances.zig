@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const PurchaseRequest = @import("purchase_request.zig").PurchaseRequest;
 const ScheduledInstance = @import("scheduled_instance.zig").ScheduledInstance;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -44,10 +45,10 @@ pub const PurchaseScheduledInstancesOutput = struct {
     /// Information about the Scheduled Instances.
     scheduled_instance_set: ?[]const ScheduledInstance = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const PurchaseScheduledInstancesOutput) void {
-        _ = self;
+    pub fn deinit(self: *PurchaseScheduledInstancesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -76,7 +77,11 @@ pub fn execute(client: *Client, input: PurchaseScheduledInstancesInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PurchaseScheduledInstancesInput, config: *aws.Config) !aws.http.Request {
@@ -129,8 +134,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PurchaseScheduledInstancesI
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PurchaseScheduledInstancesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: PurchaseScheduledInstancesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: PurchaseScheduledInstancesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "scheduledInstanceSet")) {
+                    result.scheduled_instance_set = try serde.deserializePurchasedScheduledInstanceSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

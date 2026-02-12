@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const GetBucketMetadataTableConfigurationResult = @import("get_bucket_metadata_table_configuration_result.zig").GetBucketMetadataTableConfigurationResult;
+const serde = @import("serde.zig");
 
 /// **Important:**
 ///
@@ -75,10 +76,10 @@ pub const GetBucketMetadataTableConfigurationOutput = struct {
     /// The metadata table configuration for the general purpose bucket.
     get_bucket_metadata_table_configuration_result: ?GetBucketMetadataTableConfigurationResult = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketMetadataTableConfigurationOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketMetadataTableConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -107,7 +108,11 @@ pub fn execute(client: *Client, input: GetBucketMetadataTableConfigurationInput,
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketMetadataTableConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -146,10 +151,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketMetadataTableConfi
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketMetadataTableConfigurationOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: GetBucketMetadataTableConfigurationOutput = .{ .allocator = alloc };
+    const result: GetBucketMetadataTableConfigurationOutput = .{};
 
     return result;
 }

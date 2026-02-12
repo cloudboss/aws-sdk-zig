@@ -36,16 +36,10 @@ pub const GetMFADeviceOutput = struct {
     /// The friendly name identifying the user.
     user_name: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetMFADeviceOutput) void {
-        if (self.certifications) |v| {
-            self.allocator.free(v);
-        }
-        self.allocator.free(self.serial_number);
-        if (self.user_name) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetMFADeviceOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -74,7 +68,11 @@ pub fn execute(client: *Client, input: GetMFADeviceInput, options: Options) !Get
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetMFADeviceInput, config: *aws.Config) !aws.http.Request {
@@ -110,18 +108,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetMFADeviceInput, config: 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetMFADeviceOutput {
     _ = status;
     _ = headers;
-    var result: GetMFADeviceOutput = .{ .allocator = alloc };
-    if (findElement(body, "Certifications")) |content| {
-        result.certifications = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetMFADeviceResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "EnableDate")) |content| {
-        result.enable_date = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "SerialNumber")) |content| {
-        result.serial_number = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "UserName")) |content| {
-        result.user_name = try alloc.dupe(u8, content);
+
+    var result: GetMFADeviceOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Certifications")) {
+                    try reader.skipElement();
+                } else if (std.mem.eql(u8, e.local, "EnableDate")) {
+                    result.enable_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "SerialNumber")) {
+                    result.serial_number = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "UserName")) {
+                    result.user_name = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const VolumeType = @import("volume_type.zig").VolumeType;
 const Volume = @import("volume.zig").Volume;
+const serde = @import("serde.zig");
 
 /// Creates a crash-consistent, point-in-time copy of an existing Amazon EBS
 /// volume within the same
@@ -108,10 +109,10 @@ pub const CopyVolumesOutput = struct {
     /// Information about the volume copy.
     volumes: ?[]const Volume = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CopyVolumesOutput) void {
-        _ = self;
+    pub fn deinit(self: *CopyVolumesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -140,7 +141,11 @@ pub fn execute(client: *Client, input: CopyVolumesInput, options: Options) !Copy
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CopyVolumesInput, config: *aws.Config) !aws.http.Request {
@@ -213,8 +218,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CopyVolumesInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CopyVolumesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CopyVolumesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CopyVolumesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "volumeSet")) {
+                    result.volumes = try serde.deserializeVolumeList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

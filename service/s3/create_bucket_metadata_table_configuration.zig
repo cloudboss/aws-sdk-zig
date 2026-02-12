@@ -93,10 +93,10 @@ pub const CreateBucketMetadataTableConfigurationInput = struct {
 
 pub const CreateBucketMetadataTableConfigurationOutput = struct {
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateBucketMetadataTableConfigurationOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateBucketMetadataTableConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -125,7 +125,11 @@ pub fn execute(client: *Client, input: CreateBucketMetadataTableConfigurationInp
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateBucketMetadataTableConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -170,10 +174,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateBucketMetadataTableCo
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateBucketMetadataTableConfigurationOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: CreateBucketMetadataTableConfigurationOutput = .{ .allocator = alloc };
+    const result: CreateBucketMetadataTableConfigurationOutput = .{};
 
     return result;
 }

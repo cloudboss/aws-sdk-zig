@@ -10,6 +10,7 @@ const EnclaveOptions = @import("enclave_options.zig").EnclaveOptions;
 const GroupIdentifier = @import("group_identifier.zig").GroupIdentifier;
 const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const ProductCode = @import("product_code.zig").ProductCode;
+const serde = @import("serde.zig");
 
 /// Describes the specified attribute of the specified instance. You can specify
 /// only one
@@ -93,12 +94,10 @@ pub const DescribeInstanceAttributeOutput = struct {
     /// The user data.
     user_data: ?AttributeValue = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeInstanceAttributeOutput) void {
-        if (self.instance_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeInstanceAttributeOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -127,7 +126,11 @@ pub fn execute(client: *Client, input: DescribeInstanceAttributeInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstanceAttributeInput, config: *aws.Config) !aws.http.Request {
@@ -165,9 +168,60 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstanceAttributeIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeInstanceAttributeOutput {
     _ = status;
     _ = headers;
-    var result: DescribeInstanceAttributeOutput = .{ .allocator = alloc };
-    if (findElement(body, "instanceId")) |content| {
-        result.instance_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeInstanceAttributeOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "blockDeviceMapping")) {
+                    result.block_device_mappings = try serde.deserializeInstanceBlockDeviceMappingList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "disableApiStop")) {
+                    result.disable_api_stop = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "disableApiTermination")) {
+                    result.disable_api_termination = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "ebsOptimized")) {
+                    result.ebs_optimized = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "enaSupport")) {
+                    result.ena_support = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "enclaveOptions")) {
+                    result.enclave_options = try serde.deserializeEnclaveOptions(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "groupSet")) {
+                    result.groups = try serde.deserializeGroupIdentifierList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "instanceId")) {
+                    result.instance_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "instanceInitiatedShutdownBehavior")) {
+                    result.instance_initiated_shutdown_behavior = try serde.deserializeAttributeValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "instanceType")) {
+                    result.instance_type = try serde.deserializeAttributeValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "kernel")) {
+                    result.kernel_id = try serde.deserializeAttributeValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "productCodes")) {
+                    result.product_codes = try serde.deserializeProductCodeList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "ramdisk")) {
+                    result.ramdisk_id = try serde.deserializeAttributeValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "rootDeviceName")) {
+                    result.root_device_name = try serde.deserializeAttributeValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "sourceDestCheck")) {
+                    result.source_dest_check = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "sriovNetSupport")) {
+                    result.sriov_net_support = try serde.deserializeAttributeValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "userData")) {
+                    result.user_data = try serde.deserializeAttributeValue(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -10,6 +10,7 @@ const OfferingClassType = @import("offering_class_type.zig").OfferingClassType;
 const OfferingTypeValues = @import("offering_type_values.zig").OfferingTypeValues;
 const RIProductDescription = @import("ri_product_description.zig").RIProductDescription;
 const ReservedInstancesOffering = @import("reserved_instances_offering.zig").ReservedInstancesOffering;
+const serde = @import("serde.zig");
 
 /// Describes Reserved Instance offerings that are available for purchase. With
 /// Reserved
@@ -173,12 +174,10 @@ pub const DescribeReservedInstancesOfferingsOutput = struct {
     /// A list of Reserved Instances offerings.
     reserved_instances_offerings: ?[]const ReservedInstancesOffering = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeReservedInstancesOfferingsOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeReservedInstancesOfferingsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -207,7 +206,11 @@ pub fn execute(client: *Client, input: DescribeReservedInstancesOfferingsInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesOfferingsInput, config: *aws.Config) !aws.http.Request {
@@ -315,9 +318,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesOf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeReservedInstancesOfferingsOutput {
     _ = status;
     _ = headers;
-    var result: DescribeReservedInstancesOfferingsOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeReservedInstancesOfferingsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "reservedInstancesOfferingsSet")) {
+                    result.reserved_instances_offerings = try serde.deserializeReservedInstancesOfferingList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

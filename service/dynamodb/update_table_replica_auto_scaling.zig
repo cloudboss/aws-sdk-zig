@@ -39,10 +39,10 @@ pub const UpdateTableReplicaAutoScalingOutput = struct {
     /// replicas.
     table_auto_scaling_description: ?TableAutoScalingDescription = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const UpdateTableReplicaAutoScalingOutput) void {
-        _ = self;
+    pub fn deinit(self: *UpdateTableReplicaAutoScalingOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -75,7 +75,11 @@ pub fn execute(client: *Client, input: UpdateTableReplicaAutoScalingInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateTableReplicaAutoScalingInput, config: *aws.Config) !aws.http.Request {
@@ -102,7 +106,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateTableReplicaAutoScali
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateTableReplicaAutoScalingOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{ .allocator = alloc };
+    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(UpdateTableReplicaAutoScalingOutput, body, alloc);
 }
 

@@ -971,45 +971,10 @@ pub const PutObjectOutput = struct {
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const PutObjectOutput) void {
-        if (self.checksum_crc32) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc32_c) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc64_nvme) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_sha1) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_sha256) |v| {
-            self.allocator.free(v);
-        }
-        if (self.e_tag) |v| {
-            self.allocator.free(v);
-        }
-        if (self.expiration) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_algorithm) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_key_md5) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_encryption_context) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_key_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.version_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *PutObjectOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -1038,7 +1003,11 @@ pub fn execute(client: *Client, input: PutObjectInput, options: Options) !PutObj
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PutObjectInput, config: *aws.Config) !aws.http.Request {
@@ -1196,7 +1165,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutObjectInput, config: *aw
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutObjectOutput {
-    var result: PutObjectOutput = .{ .allocator = alloc };
+    var result: PutObjectOutput = .{};
     _ = status;
     _ = body;
     if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {

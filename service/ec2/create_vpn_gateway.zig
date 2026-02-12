@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const GatewayType = @import("gateway_type.zig").GatewayType;
 const VpnGateway = @import("vpn_gateway.zig").VpnGateway;
+const serde = @import("serde.zig");
 
 /// Creates a virtual private gateway. A virtual private gateway is the endpoint
 /// on the
@@ -48,10 +49,10 @@ pub const CreateVpnGatewayOutput = struct {
     /// Information about the virtual private gateway.
     vpn_gateway: ?VpnGateway = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateVpnGatewayOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateVpnGatewayOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -80,7 +81,11 @@ pub fn execute(client: *Client, input: CreateVpnGatewayInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnGatewayInput, config: *aws.Config) !aws.http.Request {
@@ -137,8 +142,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnGatewayInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateVpnGatewayOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateVpnGatewayOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateVpnGatewayOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "vpnGateway")) {
+                    result.vpn_gateway = try serde.deserializeVpnGateway(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

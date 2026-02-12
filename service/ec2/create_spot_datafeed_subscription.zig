@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SpotDatafeedSubscription = @import("spot_datafeed_subscription.zig").SpotDatafeedSubscription;
+const serde = @import("serde.zig");
 
 /// Creates a data feed for Spot Instances, enabling you to view Spot Instance
 /// usage logs.
@@ -35,10 +36,10 @@ pub const CreateSpotDatafeedSubscriptionOutput = struct {
     /// The Spot Instance data feed subscription.
     spot_datafeed_subscription: ?SpotDatafeedSubscription = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateSpotDatafeedSubscriptionOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateSpotDatafeedSubscriptionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -67,7 +68,11 @@ pub fn execute(client: *Client, input: CreateSpotDatafeedSubscriptionInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateSpotDatafeedSubscriptionInput, config: *aws.Config) !aws.http.Request {
@@ -107,8 +112,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateSpotDatafeedSubscript
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateSpotDatafeedSubscriptionOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateSpotDatafeedSubscriptionOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateSpotDatafeedSubscriptionOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "spotDatafeedSubscription")) {
+                    result.spot_datafeed_subscription = try serde.deserializeSpotDatafeedSubscription(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

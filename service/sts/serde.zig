@@ -6,7 +6,7 @@ const Credentials = @import("credentials.zig").Credentials;
 const FederatedUser = @import("federated_user.zig").FederatedUser;
 
 pub fn deserializeAssumedRoleUser(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AssumedRoleUser {
-    var result: AssumedRoleUser = .{};
+    var result: AssumedRoleUser = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -26,14 +26,14 @@ pub fn deserializeAssumedRoleUser(reader: *aws.xml.Reader, alloc: std.mem.Alloca
 }
 
 pub fn deserializeCredentials(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Credentials {
-    var result: Credentials = .{};
+    var result: Credentials = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AccessKeyId")) {
                     result.access_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Expiration")) {
-                    result.expiration = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.expiration = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SecretAccessKey")) {
                     result.secret_access_key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SessionToken")) {
@@ -50,7 +50,7 @@ pub fn deserializeCredentials(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
 }
 
 pub fn deserializeFederatedUser(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !FederatedUser {
-    var result: FederatedUser = .{};
+    var result: FederatedUser = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {

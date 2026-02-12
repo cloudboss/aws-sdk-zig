@@ -45,10 +45,10 @@ pub const DeleteFunctionOutput = struct {
     /// The HTTP status code returned by the operation.
     status_code: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteFunctionOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteFunctionOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -81,7 +81,11 @@ pub fn execute(client: *Client, input: DeleteFunctionInput, options: Options) !D
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteFunctionInput, config: *aws.Config) !aws.http.Request {
@@ -121,7 +125,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteFunctionInput, config
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteFunctionOutput {
-    var result: DeleteFunctionOutput = .{ .allocator = alloc };
+    _ = alloc;
+    var result: DeleteFunctionOutput = .{};
     _ = body;
     result.status_code = @intCast(status);
     _ = headers;

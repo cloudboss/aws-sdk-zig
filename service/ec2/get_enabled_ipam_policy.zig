@@ -34,12 +34,10 @@ pub const GetEnabledIpamPolicyOutput = struct {
     /// The entity that manages the IPAM policy.
     managed_by: ?IpamPolicyManagedBy = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetEnabledIpamPolicyOutput) void {
-        if (self.ipam_policy_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetEnabledIpamPolicyOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -68,7 +66,11 @@ pub fn execute(client: *Client, input: GetEnabledIpamPolicyInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetEnabledIpamPolicyInput, config: *aws.Config) !aws.http.Request {
@@ -102,12 +104,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetEnabledIpamPolicyInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetEnabledIpamPolicyOutput {
     _ = status;
     _ = headers;
-    var result: GetEnabledIpamPolicyOutput = .{ .allocator = alloc };
-    if (findElement(body, "ipamPolicyEnabled")) |content| {
-        result.ipam_policy_enabled = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "ipamPolicyId")) |content| {
-        result.ipam_policy_id = try alloc.dupe(u8, content);
+
+    var result: GetEnabledIpamPolicyOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamPolicyEnabled")) {
+                    result.ipam_policy_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "ipamPolicyId")) {
+                    result.ipam_policy_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "managedBy")) {
+                    result.managed_by = std.meta.stringToEnum(IpamPolicyManagedBy, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

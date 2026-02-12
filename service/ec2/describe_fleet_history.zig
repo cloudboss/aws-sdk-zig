@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FleetEventType = @import("fleet_event_type.zig").FleetEventType;
 const HistoryRecordEntry = @import("history_record_entry.zig").HistoryRecordEntry;
+const serde = @import("serde.zig");
 
 /// Describes the events for the specified EC2 Fleet during the specified time.
 ///
@@ -71,15 +72,10 @@ pub const DescribeFleetHistoryOutput = struct {
     /// *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     start_time: ?i64 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeFleetHistoryOutput) void {
-        if (self.fleet_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeFleetHistoryOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -108,7 +104,11 @@ pub fn execute(client: *Client, input: DescribeFleetHistoryInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeFleetHistoryInput, config: *aws.Config) !aws.http.Request {
@@ -158,18 +158,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeFleetHistoryInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeFleetHistoryOutput {
     _ = status;
     _ = headers;
-    var result: DescribeFleetHistoryOutput = .{ .allocator = alloc };
-    if (findElement(body, "fleetId")) |content| {
-        result.fleet_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "lastEvaluatedTime")) |content| {
-        result.last_evaluated_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "startTime")) |content| {
-        result.start_time = std.fmt.parseInt(i64, content, 10) catch null;
+
+    var result: DescribeFleetHistoryOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "fleetId")) {
+                    result.fleet_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "historyRecordSet")) {
+                    result.history_records = try serde.deserializeHistoryRecordSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "lastEvaluatedTime")) {
+                    result.last_evaluated_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "startTime")) {
+                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

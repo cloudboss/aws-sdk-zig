@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceCreditSpecificationRequest = @import("instance_credit_specification_request.zig").InstanceCreditSpecificationRequest;
 const SuccessfulInstanceCreditSpecificationItem = @import("successful_instance_credit_specification_item.zig").SuccessfulInstanceCreditSpecificationItem;
 const UnsuccessfulInstanceCreditSpecificationItem = @import("unsuccessful_instance_credit_specification_item.zig").UnsuccessfulInstanceCreditSpecificationItem;
+const serde = @import("serde.zig");
 
 /// Modifies the credit option for CPU usage on a running or stopped burstable
 /// performance
@@ -43,10 +44,10 @@ pub const ModifyInstanceCreditSpecificationOutput = struct {
     /// modified.
     unsuccessful_instance_credit_specifications: ?[]const UnsuccessfulInstanceCreditSpecificationItem = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifyInstanceCreditSpecificationOutput) void {
-        _ = self;
+    pub fn deinit(self: *ModifyInstanceCreditSpecificationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -75,7 +76,11 @@ pub fn execute(client: *Client, input: ModifyInstanceCreditSpecificationInput, o
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCreditSpecificationInput, config: *aws.Config) !aws.http.Request {
@@ -130,8 +135,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCreditSpecifi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyInstanceCreditSpecificationOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ModifyInstanceCreditSpecificationOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ModifyInstanceCreditSpecificationOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "successfulInstanceCreditSpecificationSet")) {
+                    result.successful_instance_credit_specifications = try serde.deserializeSuccessfulInstanceCreditSpecificationSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "unsuccessfulInstanceCreditSpecificationSet")) {
+                    result.unsuccessful_instance_credit_specifications = try serde.deserializeUnsuccessfulInstanceCreditSpecificationSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

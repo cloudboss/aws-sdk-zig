@@ -10,6 +10,7 @@ const CapacityReservationInstancePlatform = @import("capacity_reservation_instan
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const CapacityReservationTenancy = @import("capacity_reservation_tenancy.zig").CapacityReservationTenancy;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
+const serde = @import("serde.zig");
 
 /// Creates a new Capacity Reservation with the specified attributes. Capacity
 /// Reservations enable you to reserve capacity for your Amazon EC2 instances in
@@ -250,10 +251,10 @@ pub const CreateCapacityReservationOutput = struct {
     /// Information about the Capacity Reservation.
     capacity_reservation: ?CapacityReservation = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateCapacityReservationOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateCapacityReservationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -282,7 +283,11 @@ pub fn execute(client: *Client, input: CreateCapacityReservationInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateCapacityReservationInput, config: *aws.Config) !aws.http.Request {
@@ -391,8 +396,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateCapacityReservationIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateCapacityReservationOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateCapacityReservationOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateCapacityReservationOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "capacityReservation")) {
+                    result.capacity_reservation = try serde.deserializeCapacityReservation(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -12,6 +12,7 @@ const TargetCapacitySpecificationRequest = @import("target_capacity_specificatio
 const FleetType = @import("fleet_type.zig").FleetType;
 const CreateFleetError = @import("create_fleet_error.zig").CreateFleetError;
 const CreateFleetInstance = @import("create_fleet_instance.zig").CreateFleetInstance;
+const serde = @import("serde.zig");
 
 /// Creates an EC2 Fleet that contains the configuration information for
 /// On-Demand Instances and Spot Instances.
@@ -138,12 +139,10 @@ pub const CreateFleetOutput = struct {
     /// fleets of type `instant`.
     instances: ?[]const CreateFleetInstance = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateFleetOutput) void {
-        if (self.fleet_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateFleetOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -172,7 +171,11 @@ pub fn execute(client: *Client, input: CreateFleetInput, options: Options) !Crea
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateFleetInput, config: *aws.Config) !aws.http.Request {
@@ -321,9 +324,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateFleetInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateFleetOutput {
     _ = status;
     _ = headers;
-    var result: CreateFleetOutput = .{ .allocator = alloc };
-    if (findElement(body, "fleetId")) |content| {
-        result.fleet_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateFleetOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "errorSet")) {
+                    result.errors = try serde.deserializeCreateFleetErrorsSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "fleetId")) {
+                    result.fleet_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "fleetInstanceSet")) {
+                    result.instances = try serde.deserializeCreateFleetInstancesSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

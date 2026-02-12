@@ -7,6 +7,7 @@ const SpreadLevel = @import("spread_level.zig").SpreadLevel;
 const PlacementStrategy = @import("placement_strategy.zig").PlacementStrategy;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const PlacementGroup = @import("placement_group.zig").PlacementGroup;
+const serde = @import("serde.zig");
 
 /// Creates a placement group in which to launch instances. The strategy of the
 /// placement
@@ -65,10 +66,10 @@ pub const CreatePlacementGroupOutput = struct {
     /// Information about the placement group.
     placement_group: ?PlacementGroup = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreatePlacementGroupOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreatePlacementGroupOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -97,7 +98,11 @@ pub fn execute(client: *Client, input: CreatePlacementGroupInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreatePlacementGroupInput, config: *aws.Config) !aws.http.Request {
@@ -164,8 +169,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePlacementGroupInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreatePlacementGroupOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreatePlacementGroupOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreatePlacementGroupOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "placementGroup")) {
+                    result.placement_group = try serde.deserializePlacementGroup(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

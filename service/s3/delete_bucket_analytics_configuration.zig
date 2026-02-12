@@ -56,10 +56,10 @@ pub const DeleteBucketAnalyticsConfigurationInput = struct {
 
 pub const DeleteBucketAnalyticsConfigurationOutput = struct {
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteBucketAnalyticsConfigurationOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteBucketAnalyticsConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -88,7 +88,11 @@ pub fn execute(client: *Client, input: DeleteBucketAnalyticsConfigurationInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteBucketAnalyticsConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -131,10 +135,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteBucketAnalyticsConfig
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteBucketAnalyticsConfigurationOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: DeleteBucketAnalyticsConfigurationOutput = .{ .allocator = alloc };
+    const result: DeleteBucketAnalyticsConfigurationOutput = .{};
 
     return result;
 }

@@ -8,6 +8,7 @@ const TrafficMirrorRuleAction = @import("traffic_mirror_rule_action.zig").Traffi
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TrafficDirection = @import("traffic_direction.zig").TrafficDirection;
 const TrafficMirrorFilterRule = @import("traffic_mirror_filter_rule.zig").TrafficMirrorFilterRule;
+const serde = @import("serde.zig");
 
 /// Creates a Traffic Mirror filter rule.
 ///
@@ -75,12 +76,10 @@ pub const CreateTrafficMirrorFilterRuleOutput = struct {
     /// The Traffic Mirror rule.
     traffic_mirror_filter_rule: ?TrafficMirrorFilterRule = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateTrafficMirrorFilterRuleOutput) void {
-        if (self.client_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateTrafficMirrorFilterRuleOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -109,7 +108,11 @@ pub fn execute(client: *Client, input: CreateTrafficMirrorFilterRuleInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateTrafficMirrorFilterRuleInput, config: *aws.Config) !aws.http.Request {
@@ -200,9 +203,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateTrafficMirrorFilterRu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateTrafficMirrorFilterRuleOutput {
     _ = status;
     _ = headers;
-    var result: CreateTrafficMirrorFilterRuleOutput = .{ .allocator = alloc };
-    if (findElement(body, "clientToken")) |content| {
-        result.client_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateTrafficMirrorFilterRuleOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "clientToken")) {
+                    result.client_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "trafficMirrorFilterRule")) {
+                    result.traffic_mirror_filter_rule = try serde.deserializeTrafficMirrorFilterRule(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessKey = @import("access_key.zig").AccessKey;
+const serde = @import("serde.zig");
 
 /// Creates a new Amazon Web Services secret access key and corresponding Amazon
 /// Web Services access key ID for the
@@ -46,10 +47,10 @@ pub const CreateAccessKeyOutput = struct {
     /// A structure with details about the access key.
     access_key: ?AccessKey = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateAccessKeyOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateAccessKeyOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -78,7 +79,11 @@ pub fn execute(client: *Client, input: CreateAccessKeyInput, options: Options) !
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateAccessKeyInput, config: *aws.Config) !aws.http.Request {
@@ -112,8 +117,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAccessKeyInput, confi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateAccessKeyOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateAccessKeyOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "CreateAccessKeyResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: CreateAccessKeyOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AccessKey")) {
+                    result.access_key = try serde.deserializeAccessKey(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

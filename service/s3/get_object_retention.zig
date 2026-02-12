@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const ObjectLockRetention = @import("object_lock_retention.zig").ObjectLockRetention;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -61,10 +62,10 @@ pub const GetObjectRetentionOutput = struct {
     /// The container element for an object's retention settings.
     retention: ?ObjectLockRetention = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetObjectRetentionOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetObjectRetentionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -93,7 +94,11 @@ pub fn execute(client: *Client, input: GetObjectRetentionInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectRetentionInput, config: *aws.Config) !aws.http.Request {
@@ -143,10 +148,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectRetentionInput, co
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetObjectRetentionOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: GetObjectRetentionOutput = .{ .allocator = alloc };
+    const result: GetObjectRetentionOutput = .{};
 
     return result;
 }

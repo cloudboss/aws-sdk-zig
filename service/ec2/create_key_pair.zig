@@ -7,6 +7,7 @@ const KeyFormat = @import("key_format.zig").KeyFormat;
 const KeyType = @import("key_type.zig").KeyType;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// Creates an ED25519 or 2048-bit RSA key pair with the specified name and in
 /// the
@@ -76,21 +77,10 @@ pub const CreateKeyPairOutput = struct {
     /// Any tags applied to the key pair.
     tags: ?[]const Tag = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateKeyPairOutput) void {
-        if (self.key_fingerprint) |v| {
-            self.allocator.free(v);
-        }
-        if (self.key_material) |v| {
-            self.allocator.free(v);
-        }
-        if (self.key_name) |v| {
-            self.allocator.free(v);
-        }
-        if (self.key_pair_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateKeyPairOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -119,7 +109,11 @@ pub fn execute(client: *Client, input: CreateKeyPairInput, options: Options) !Cr
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateKeyPairInput, config: *aws.Config) !aws.http.Request {
@@ -176,18 +170,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateKeyPairInput, config:
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateKeyPairOutput {
     _ = status;
     _ = headers;
-    var result: CreateKeyPairOutput = .{ .allocator = alloc };
-    if (findElement(body, "keyFingerprint")) |content| {
-        result.key_fingerprint = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "keyMaterial")) |content| {
-        result.key_material = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "keyName")) |content| {
-        result.key_name = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "keyPairId")) |content| {
-        result.key_pair_id = try alloc.dupe(u8, content);
+
+    var result: CreateKeyPairOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "keyFingerprint")) {
+                    result.key_fingerprint = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "keyMaterial")) {
+                    result.key_material = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "keyName")) {
+                    result.key_name = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "keyPairId")) {
+                    result.key_pair_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try serde.deserializeTagList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

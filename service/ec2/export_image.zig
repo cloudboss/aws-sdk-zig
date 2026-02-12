@@ -8,6 +8,7 @@ const ExportTaskS3LocationRequest = @import("export_task_s_3_location_request.zi
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const ExportTaskS3Location = @import("export_task_s_3_location.zig").ExportTaskS3Location;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// Exports an Amazon Machine Image (AMI) to a VM file. For more information,
 /// see [Exporting a VM
@@ -84,30 +85,10 @@ pub const ExportImageOutput = struct {
     /// Any tags assigned to the export image task.
     tags: ?[]const Tag = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ExportImageOutput) void {
-        if (self.description) |v| {
-            self.allocator.free(v);
-        }
-        if (self.export_image_task_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.image_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.progress) |v| {
-            self.allocator.free(v);
-        }
-        if (self.role_name) |v| {
-            self.allocator.free(v);
-        }
-        if (self.status) |v| {
-            self.allocator.free(v);
-        }
-        if (self.status_message) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ExportImageOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -136,7 +117,11 @@ pub fn execute(client: *Client, input: ExportImageInput, options: Options) !Expo
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ExportImageInput, config: *aws.Config) !aws.http.Request {
@@ -205,27 +190,46 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExportImageInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ExportImageOutput {
     _ = status;
     _ = headers;
-    var result: ExportImageOutput = .{ .allocator = alloc };
-    if (findElement(body, "description")) |content| {
-        result.description = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "exportImageTaskId")) |content| {
-        result.export_image_task_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "imageId")) |content| {
-        result.image_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "progress")) |content| {
-        result.progress = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "roleName")) |content| {
-        result.role_name = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "status")) |content| {
-        result.status = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "statusMessage")) |content| {
-        result.status_message = try alloc.dupe(u8, content);
+
+    var result: ExportImageOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "description")) {
+                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "diskImageFormat")) {
+                    result.disk_image_format = std.meta.stringToEnum(DiskImageFormat, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "exportImageTaskId")) {
+                    result.export_image_task_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "imageId")) {
+                    result.image_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "progress")) {
+                    result.progress = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "roleName")) {
+                    result.role_name = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "s3ExportLocation")) {
+                    result.s_3_export_location = try serde.deserializeExportTaskS3Location(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "statusMessage")) {
+                    result.status_message = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try serde.deserializeTagList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

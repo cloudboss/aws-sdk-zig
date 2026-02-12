@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const EntityDetails = @import("entity_details.zig").EntityDetails;
 const ErrorDetails = @import("error_details.zig").ErrorDetails;
 const jobStatusType = @import("job_status_type.zig").jobStatusType;
+const serde = @import("serde.zig");
 
 /// After you generate a group or policy report using the
 /// `GenerateServiceLastAccessedDetails` operation, you can use the
@@ -124,12 +125,10 @@ pub const GetServiceLastAccessedDetailsWithEntitiesOutput = struct {
     /// pagination request.
     marker: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetServiceLastAccessedDetailsWithEntitiesOutput) void {
-        if (self.marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetServiceLastAccessedDetailsWithEntitiesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -158,7 +157,11 @@ pub fn execute(client: *Client, input: GetServiceLastAccessedDetailsWithEntities
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetServiceLastAccessedDetailsWithEntitiesInput, config: *aws.Config) !aws.http.Request {
@@ -200,18 +203,42 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetServiceLastAccessedDetai
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetServiceLastAccessedDetailsWithEntitiesOutput {
     _ = status;
     _ = headers;
-    var result: GetServiceLastAccessedDetailsWithEntitiesOutput = .{ .allocator = alloc };
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetServiceLastAccessedDetailsWithEntitiesResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "JobCompletionDate")) |content| {
-        result.job_completion_date = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "JobCreationDate")) |content| {
-        result.job_creation_date = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "Marker")) |content| {
-        result.marker = try alloc.dupe(u8, content);
+
+    var result: GetServiceLastAccessedDetailsWithEntitiesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "EntityDetailsList")) {
+                    result.entity_details_list = try serde.deserializeentityDetailsListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "Error")) {
+                    result.@"error" = try serde.deserializeErrorDetails(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "JobCompletionDate")) {
+                    result.job_completion_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "JobCreationDate")) {
+                    result.job_creation_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "JobStatus")) {
+                    result.job_status = std.meta.stringToEnum(jobStatusType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Marker")) {
+                    result.marker = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

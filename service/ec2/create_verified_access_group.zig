@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessSseSpecificationRequest = @import("verified_access_sse_specification_request.zig").VerifiedAccessSseSpecificationRequest;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const VerifiedAccessGroup = @import("verified_access_group.zig").VerifiedAccessGroup;
+const serde = @import("serde.zig");
 
 /// An Amazon Web Services Verified Access group is a collection of Amazon Web
 /// Services Verified Access endpoints who's associated applications have
@@ -48,10 +49,10 @@ pub const CreateVerifiedAccessGroupOutput = struct {
     /// Details about the Verified Access group.
     verified_access_group: ?VerifiedAccessGroup = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateVerifiedAccessGroupOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateVerifiedAccessGroupOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -80,7 +81,11 @@ pub fn execute(client: *Client, input: CreateVerifiedAccessGroupInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessGroupInput, config: *aws.Config) !aws.http.Request {
@@ -151,8 +156,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessGroupIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateVerifiedAccessGroupOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateVerifiedAccessGroupOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateVerifiedAccessGroupOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "verifiedAccessGroup")) {
+                    result.verified_access_group = try serde.deserializeVerifiedAccessGroup(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

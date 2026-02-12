@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TrafficMirrorSession = @import("traffic_mirror_session.zig").TrafficMirrorSession;
+const serde = @import("serde.zig");
 
 /// Creates a Traffic Mirror session.
 ///
@@ -92,12 +93,10 @@ pub const CreateTrafficMirrorSessionOutput = struct {
     /// Information about the Traffic Mirror session.
     traffic_mirror_session: ?TrafficMirrorSession = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateTrafficMirrorSessionOutput) void {
-        if (self.client_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateTrafficMirrorSessionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -126,7 +125,11 @@ pub fn execute(client: *Client, input: CreateTrafficMirrorSessionInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateTrafficMirrorSessionInput, config: *aws.Config) !aws.http.Request {
@@ -197,9 +200,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateTrafficMirrorSessionI
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateTrafficMirrorSessionOutput {
     _ = status;
     _ = headers;
-    var result: CreateTrafficMirrorSessionOutput = .{ .allocator = alloc };
-    if (findElement(body, "clientToken")) |content| {
-        result.client_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateTrafficMirrorSessionOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "clientToken")) {
+                    result.client_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "trafficMirrorSession")) {
+                    result.traffic_mirror_session = try serde.deserializeTrafficMirrorSession(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

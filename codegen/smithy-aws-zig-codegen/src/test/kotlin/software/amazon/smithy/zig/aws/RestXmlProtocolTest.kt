@@ -608,16 +608,20 @@ class RestXmlProtocolTest {
         val op = files["list_objects.zig"]!!
 
         assertTrue(
-            op.contains("findElement(body, \"Name\")"),
-            "Should search for Name element in XML body",
+            op.contains("aws.xml.Reader.init(body)"),
+            "Should create xml.Reader from body",
         )
         assertTrue(
-            op.contains("findElement(body, \"KeyCount\")"),
-            "Should search for KeyCount element in XML body",
+            op.contains("e.local, \"Name\""),
+            "Should match Name element in XML",
         )
         assertTrue(
-            op.contains("findElement(body, \"IsTruncated\")"),
-            "Should search for IsTruncated element in XML body",
+            op.contains("e.local, \"KeyCount\""),
+            "Should match KeyCount element in XML",
+        )
+        assertTrue(
+            op.contains("e.local, \"IsTruncated\""),
+            "Should match IsTruncated element in XML",
         )
     }
 
@@ -638,8 +642,8 @@ class RestXmlProtocolTest {
         val op = files["list_objects.zig"]!!
 
         assertTrue(
-            op.contains("std.mem.eql(u8, content, \"true\")"),
-            "Should compare boolean XML content to 'true'",
+            op.contains("std.mem.eql(u8, try reader.readElementText(), \"true\")"),
+            "Should compare boolean XML element text to 'true'",
         )
     }
 
@@ -649,8 +653,8 @@ class RestXmlProtocolTest {
         val op = files["list_objects.zig"]!!
 
         assertTrue(
-            op.contains("alloc.dupe(u8, content)"),
-            "Should dupe string content for output",
+            op.contains("alloc.dupe(u8, try reader.readElementText())"),
+            "Should dupe string element text for output",
         )
     }
 
@@ -763,8 +767,8 @@ class RestXmlProtocolTest {
         val op = files["create_config.zig"]!!
 
         assertTrue(
-            op.contains("findElement(body, \"ConfigId\")"),
-            "Should search for ConfigId in XML response body",
+            op.contains("e.local, \"ConfigId\""),
+            "Should match ConfigId element in XML response body",
         )
     }
 }

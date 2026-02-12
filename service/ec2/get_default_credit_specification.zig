@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const UnlimitedSupportedInstanceFamily = @import("unlimited_supported_instance_family.zig").UnlimitedSupportedInstanceFamily;
 const InstanceFamilyCreditSpecification = @import("instance_family_credit_specification.zig").InstanceFamilyCreditSpecification;
+const serde = @import("serde.zig");
 
 /// Describes the default credit option for CPU usage of a burstable performance
 /// instance
@@ -29,10 +30,10 @@ pub const GetDefaultCreditSpecificationOutput = struct {
     /// The default credit option for CPU usage of the instance family.
     instance_family_credit_specification: ?InstanceFamilyCreditSpecification = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetDefaultCreditSpecificationOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetDefaultCreditSpecificationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -61,7 +62,11 @@ pub fn execute(client: *Client, input: GetDefaultCreditSpecificationInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetDefaultCreditSpecificationInput, config: *aws.Config) !aws.http.Request {
@@ -97,8 +102,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetDefaultCreditSpecificati
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetDefaultCreditSpecificationOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: GetDefaultCreditSpecificationOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: GetDefaultCreditSpecificationOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "instanceFamilyCreditSpecification")) {
+                    result.instance_family_credit_specification = try serde.deserializeInstanceFamilyCreditSpecification(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

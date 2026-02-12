@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TrafficMirrorTarget = @import("traffic_mirror_target.zig").TrafficMirrorTarget;
+const serde = @import("serde.zig");
 
 /// Creates a target for your Traffic Mirror session.
 ///
@@ -58,12 +59,10 @@ pub const CreateTrafficMirrorTargetOutput = struct {
     /// Information about the Traffic Mirror target.
     traffic_mirror_target: ?TrafficMirrorTarget = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateTrafficMirrorTargetOutput) void {
-        if (self.client_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateTrafficMirrorTargetOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -92,7 +91,11 @@ pub fn execute(client: *Client, input: CreateTrafficMirrorTargetInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateTrafficMirrorTargetInput, config: *aws.Config) !aws.http.Request {
@@ -159,9 +162,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateTrafficMirrorTargetIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateTrafficMirrorTargetOutput {
     _ = status;
     _ = headers;
-    var result: CreateTrafficMirrorTargetOutput = .{ .allocator = alloc };
-    if (findElement(body, "clientToken")) |content| {
-        result.client_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateTrafficMirrorTargetOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "clientToken")) {
+                    result.client_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "trafficMirrorTarget")) {
+                    result.traffic_mirror_target = try serde.deserializeTrafficMirrorTarget(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

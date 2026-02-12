@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessEndpointTarget = @import("verified_access_endpoint_target.zig").VerifiedAccessEndpointTarget;
+const serde = @import("serde.zig");
 
 /// Gets the targets for the specified network CIDR endpoint for Verified
 /// Access.
@@ -35,12 +36,10 @@ pub const GetVerifiedAccessEndpointTargetsOutput = struct {
     /// The Verified Access targets.
     verified_access_endpoint_targets: ?[]const VerifiedAccessEndpointTarget = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetVerifiedAccessEndpointTargetsOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetVerifiedAccessEndpointTargetsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -69,7 +68,11 @@ pub fn execute(client: *Client, input: GetVerifiedAccessEndpointTargetsInput, op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetVerifiedAccessEndpointTargetsInput, config: *aws.Config) !aws.http.Request {
@@ -113,9 +116,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetVerifiedAccessEndpointTa
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetVerifiedAccessEndpointTargetsOutput {
     _ = status;
     _ = headers;
-    var result: GetVerifiedAccessEndpointTargetsOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: GetVerifiedAccessEndpointTargetsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "verifiedAccessEndpointTargetSet")) {
+                    result.verified_access_endpoint_targets = try serde.deserializeVerifiedAccessEndpointTargetList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

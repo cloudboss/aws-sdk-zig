@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CurrencyCodeValues = @import("currency_code_values.zig").CurrencyCodeValues;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const Purchase = @import("purchase.zig").Purchase;
+const serde = @import("serde.zig");
 
 /// Purchase a reservation with configurations that match those of your
 /// Dedicated Host.
@@ -68,18 +69,10 @@ pub const PurchaseHostReservationOutput = struct {
     /// The total amount charged to your account when you purchase the reservation.
     total_upfront_price: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const PurchaseHostReservationOutput) void {
-        if (self.client_token) |v| {
-            self.allocator.free(v);
-        }
-        if (self.total_hourly_price) |v| {
-            self.allocator.free(v);
-        }
-        if (self.total_upfront_price) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *PurchaseHostReservationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -108,7 +101,11 @@ pub fn execute(client: *Client, input: PurchaseHostReservationInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PurchaseHostReservationInput, config: *aws.Config) !aws.http.Request {
@@ -172,15 +169,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PurchaseHostReservationInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PurchaseHostReservationOutput {
     _ = status;
     _ = headers;
-    var result: PurchaseHostReservationOutput = .{ .allocator = alloc };
-    if (findElement(body, "clientToken")) |content| {
-        result.client_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "totalHourlyPrice")) |content| {
-        result.total_hourly_price = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "totalUpfrontPrice")) |content| {
-        result.total_upfront_price = try alloc.dupe(u8, content);
+
+    var result: PurchaseHostReservationOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "clientToken")) {
+                    result.client_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "currencyCode")) {
+                    result.currency_code = std.meta.stringToEnum(CurrencyCodeValues, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "purchase")) {
+                    result.purchase = try serde.deserializePurchaseSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "totalHourlyPrice")) {
+                    result.total_hourly_price = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "totalUpfrontPrice")) {
+                    result.total_upfront_price = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

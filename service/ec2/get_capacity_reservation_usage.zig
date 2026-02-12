@@ -7,6 +7,7 @@ const InstanceUsage = @import("instance_usage.zig").InstanceUsage;
 const InterruptibleCapacityAllocation = @import("interruptible_capacity_allocation.zig").InterruptibleCapacityAllocation;
 const InterruptionInfo = @import("interruption_info.zig").InterruptionInfo;
 const CapacityReservationState = @import("capacity_reservation_state.zig").CapacityReservationState;
+const serde = @import("serde.zig");
 
 /// Gets usage information about a Capacity Reservation. If the Capacity
 /// Reservation is
@@ -125,18 +126,10 @@ pub const GetCapacityReservationUsageOutput = struct {
     /// capacity.
     total_instance_count: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetCapacityReservationUsageOutput) void {
-        if (self.capacity_reservation_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.instance_type) |v| {
-            self.allocator.free(v);
-        }
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetCapacityReservationUsageOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -165,7 +158,11 @@ pub fn execute(client: *Client, input: GetCapacityReservationUsageInput, options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityReservationUsageInput, config: *aws.Config) !aws.http.Request {
@@ -209,24 +206,46 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityReservationUsage
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCapacityReservationUsageOutput {
     _ = status;
     _ = headers;
-    var result: GetCapacityReservationUsageOutput = .{ .allocator = alloc };
-    if (findElement(body, "availableInstanceCount")) |content| {
-        result.available_instance_count = std.fmt.parseInt(i32, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "capacityReservationId")) |content| {
-        result.capacity_reservation_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "instanceType")) |content| {
-        result.instance_type = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "interruptible")) |content| {
-        result.interruptible = std.mem.eql(u8, content, "true");
-    }
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "totalInstanceCount")) |content| {
-        result.total_instance_count = std.fmt.parseInt(i32, content, 10) catch null;
+
+    var result: GetCapacityReservationUsageOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "availableInstanceCount")) {
+                    result.available_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "capacityReservationId")) {
+                    result.capacity_reservation_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "instanceType")) {
+                    result.instance_type = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "instanceUsageSet")) {
+                    result.instance_usages = try serde.deserializeInstanceUsageSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "interruptible")) {
+                    result.interruptible = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "interruptibleCapacityAllocation")) {
+                    result.interruptible_capacity_allocation = try serde.deserializeInterruptibleCapacityAllocation(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "interruptionInfo")) {
+                    result.interruption_info = try serde.deserializeInterruptionInfo(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = std.meta.stringToEnum(CapacityReservationState, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "totalInstanceCount")) {
+                    result.total_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

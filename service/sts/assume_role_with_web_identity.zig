@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PolicyDescriptorType = @import("policy_descriptor_type.zig").PolicyDescriptorType;
 const AssumedRoleUser = @import("assumed_role_user.zig").AssumedRoleUser;
 const Credentials = @import("credentials.zig").Credentials;
+const serde = @import("serde.zig");
 
 /// Returns a set of temporary security credentials for users who have been
 /// authenticated in
@@ -457,21 +458,10 @@ pub const AssumeRoleWithWebIdentityOutput = struct {
     /// identity provider as the token's `sub` (Subject) claim.
     subject_from_web_identity_token: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const AssumeRoleWithWebIdentityOutput) void {
-        if (self.audience) |v| {
-            self.allocator.free(v);
-        }
-        if (self.provider) |v| {
-            self.allocator.free(v);
-        }
-        if (self.source_identity) |v| {
-            self.allocator.free(v);
-        }
-        if (self.subject_from_web_identity_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *AssumeRoleWithWebIdentityOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -500,7 +490,11 @@ pub fn execute(client: *Client, input: AssumeRoleWithWebIdentityInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithWebIdentityInput, config: *aws.Config) !aws.http.Request {
@@ -561,21 +555,42 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithWebIdentityIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssumeRoleWithWebIdentityOutput {
     _ = status;
     _ = headers;
-    var result: AssumeRoleWithWebIdentityOutput = .{ .allocator = alloc };
-    if (findElement(body, "Audience")) |content| {
-        result.audience = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AssumeRoleWithWebIdentityResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "PackedPolicySize")) |content| {
-        result.packed_policy_size = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "Provider")) |content| {
-        result.provider = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "SourceIdentity")) |content| {
-        result.source_identity = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "SubjectFromWebIdentityToken")) |content| {
-        result.subject_from_web_identity_token = try alloc.dupe(u8, content);
+
+    var result: AssumeRoleWithWebIdentityOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AssumedRoleUser")) {
+                    result.assumed_role_user = try serde.deserializeAssumedRoleUser(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "Audience")) {
+                    result.audience = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Credentials")) {
+                    result.credentials = try serde.deserializeCredentials(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
+                    result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "Provider")) {
+                    result.provider = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SourceIdentity")) {
+                    result.source_identity = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SubjectFromWebIdentityToken")) {
+                    result.subject_from_web_identity_token = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

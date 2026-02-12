@@ -57,18 +57,10 @@ pub const AssociateEnclaveCertificateIamRoleOutput = struct {
     /// The ID of the KMS key used to encrypt the private key of the certificate.
     encryption_kms_key_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const AssociateEnclaveCertificateIamRoleOutput) void {
-        if (self.certificate_s_3_bucket_name) |v| {
-            self.allocator.free(v);
-        }
-        if (self.certificate_s_3_object_key) |v| {
-            self.allocator.free(v);
-        }
-        if (self.encryption_kms_key_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *AssociateEnclaveCertificateIamRoleOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -97,7 +89,11 @@ pub fn execute(client: *Client, input: AssociateEnclaveCertificateIamRoleInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssociateEnclaveCertificateIamRoleInput, config: *aws.Config) !aws.http.Request {
@@ -135,15 +131,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssociateEnclaveCertificate
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssociateEnclaveCertificateIamRoleOutput {
     _ = status;
     _ = headers;
-    var result: AssociateEnclaveCertificateIamRoleOutput = .{ .allocator = alloc };
-    if (findElement(body, "certificateS3BucketName")) |content| {
-        result.certificate_s_3_bucket_name = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "certificateS3ObjectKey")) |content| {
-        result.certificate_s_3_object_key = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "encryptionKmsKeyId")) |content| {
-        result.encryption_kms_key_id = try alloc.dupe(u8, content);
+
+    var result: AssociateEnclaveCertificateIamRoleOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "certificateS3BucketName")) {
+                    result.certificate_s_3_bucket_name = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "certificateS3ObjectKey")) {
+                    result.certificate_s_3_object_key = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "encryptionKmsKeyId")) {
+                    result.encryption_kms_key_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

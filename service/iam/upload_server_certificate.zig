@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const ServerCertificateMetadata = @import("server_certificate_metadata.zig").ServerCertificateMetadata;
+const serde = @import("serde.zig");
 
 /// Uploads a server certificate entity for the Amazon Web Services account. The
 /// server certificate
@@ -167,10 +168,10 @@ pub const UploadServerCertificateOutput = struct {
     /// *IAM User Guide*.
     tags: ?[]const Tag = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const UploadServerCertificateOutput) void {
-        _ = self;
+    pub fn deinit(self: *UploadServerCertificateOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -199,7 +200,11 @@ pub fn execute(client: *Client, input: UploadServerCertificateInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UploadServerCertificateInput, config: *aws.Config) !aws.http.Request {
@@ -260,8 +265,33 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UploadServerCertificateInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UploadServerCertificateOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: UploadServerCertificateOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "UploadServerCertificateResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: UploadServerCertificateOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ServerCertificateMetadata")) {
+                    result.server_certificate_metadata = try serde.deserializeServerCertificateMetadata(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "Tags")) {
+                    result.tags = try serde.deserializetagListType(&reader, alloc, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

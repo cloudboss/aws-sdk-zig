@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FeatureType = @import("feature_type.zig").FeatureType;
+const serde = @import("serde.zig");
 
 /// Lists the centralized root access features enabled for your organization.
 /// For more
@@ -19,12 +20,10 @@ pub const ListOrganizationsFeaturesOutput = struct {
     /// The unique identifier (ID) of an organization.
     organization_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ListOrganizationsFeaturesOutput) void {
-        if (self.organization_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ListOrganizationsFeaturesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -53,7 +52,11 @@ pub fn execute(client: *Client, input: ListOrganizationsFeaturesInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListOrganizationsFeaturesInput, config: *aws.Config) !aws.http.Request {
@@ -84,9 +87,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListOrganizationsFeaturesIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListOrganizationsFeaturesOutput {
     _ = status;
     _ = headers;
-    var result: ListOrganizationsFeaturesOutput = .{ .allocator = alloc };
-    if (findElement(body, "OrganizationId")) |content| {
-        result.organization_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ListOrganizationsFeaturesResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: ListOrganizationsFeaturesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "EnabledFeatures")) {
+                    result.enabled_features = try serde.deserializeFeaturesListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "OrganizationId")) {
+                    result.organization_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

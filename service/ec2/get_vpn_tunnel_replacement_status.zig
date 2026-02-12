@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceDetails = @import("maintenance_details.zig").MaintenanceDetails;
+const serde = @import("serde.zig");
 
 /// Get details of available tunnel endpoint maintenance.
 pub const GetVpnTunnelReplacementStatusInput = struct {
@@ -39,24 +40,10 @@ pub const GetVpnTunnelReplacementStatusOutput = struct {
     /// The external IP address of the VPN tunnel.
     vpn_tunnel_outside_ip_address: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetVpnTunnelReplacementStatusOutput) void {
-        if (self.customer_gateway_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.transit_gateway_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.vpn_connection_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.vpn_gateway_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.vpn_tunnel_outside_ip_address) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetVpnTunnelReplacementStatusOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -85,7 +72,11 @@ pub fn execute(client: *Client, input: GetVpnTunnelReplacementStatusInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetVpnTunnelReplacementStatusInput, config: *aws.Config) !aws.http.Request {
@@ -123,21 +114,38 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetVpnTunnelReplacementStat
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetVpnTunnelReplacementStatusOutput {
     _ = status;
     _ = headers;
-    var result: GetVpnTunnelReplacementStatusOutput = .{ .allocator = alloc };
-    if (findElement(body, "customerGatewayId")) |content| {
-        result.customer_gateway_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "transitGatewayId")) |content| {
-        result.transit_gateway_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "vpnConnectionId")) |content| {
-        result.vpn_connection_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "vpnGatewayId")) |content| {
-        result.vpn_gateway_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "vpnTunnelOutsideIpAddress")) |content| {
-        result.vpn_tunnel_outside_ip_address = try alloc.dupe(u8, content);
+
+    var result: GetVpnTunnelReplacementStatusOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "customerGatewayId")) {
+                    result.customer_gateway_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "maintenanceDetails")) {
+                    result.maintenance_details = try serde.deserializeMaintenanceDetails(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
+                    result.transit_gateway_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "vpnConnectionId")) {
+                    result.vpn_connection_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "vpnGatewayId")) {
+                    result.vpn_gateway_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "vpnTunnelOutsideIpAddress")) {
+                    result.vpn_tunnel_outside_ip_address = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

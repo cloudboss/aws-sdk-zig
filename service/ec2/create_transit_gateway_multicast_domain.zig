@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CreateTransitGatewayMulticastDomainRequestOptions = @import("create_transit_gateway_multicast_domain_request_options.zig").CreateTransitGatewayMulticastDomainRequestOptions;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayMulticastDomain = @import("transit_gateway_multicast_domain.zig").TransitGatewayMulticastDomain;
+const serde = @import("serde.zig");
 
 /// Creates a multicast domain using the specified transit gateway.
 ///
@@ -34,10 +35,10 @@ pub const CreateTransitGatewayMulticastDomainOutput = struct {
     /// Information about the transit gateway multicast domain.
     transit_gateway_multicast_domain: ?TransitGatewayMulticastDomain = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateTransitGatewayMulticastDomainOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateTransitGatewayMulticastDomainOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -66,7 +67,11 @@ pub fn execute(client: *Client, input: CreateTransitGatewayMulticastDomainInput,
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateTransitGatewayMulticastDomainInput, config: *aws.Config) !aws.http.Request {
@@ -129,8 +134,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateTransitGatewayMultica
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateTransitGatewayMulticastDomainOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateTransitGatewayMulticastDomainOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateTransitGatewayMulticastDomainOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "transitGatewayMulticastDomain")) {
+                    result.transit_gateway_multicast_domain = try serde.deserializeTransitGatewayMulticastDomain(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DeviceTrustProviderType = @import("device_trust_provider_type.zig").DeviceTrustProviderType;
 const VerifiedAccessInstanceOpenVpnClientConfiguration = @import("verified_access_instance_open_vpn_client_configuration.zig").VerifiedAccessInstanceOpenVpnClientConfiguration;
 const VerifiedAccessInstanceUserTrustProviderClientConfiguration = @import("verified_access_instance_user_trust_provider_client_configuration.zig").VerifiedAccessInstanceUserTrustProviderClientConfiguration;
+const serde = @import("serde.zig");
 
 /// Exports the client configuration for a Verified Access instance.
 pub const ExportVerifiedAccessInstanceClientConfigurationInput = struct {
@@ -39,18 +40,10 @@ pub const ExportVerifiedAccessInstanceClientConfigurationOutput = struct {
     /// The version.
     version: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ExportVerifiedAccessInstanceClientConfigurationOutput) void {
-        if (self.region) |v| {
-            self.allocator.free(v);
-        }
-        if (self.verified_access_instance_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.version) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ExportVerifiedAccessInstanceClientConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -79,7 +72,11 @@ pub fn execute(client: *Client, input: ExportVerifiedAccessInstanceClientConfigu
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ExportVerifiedAccessInstanceClientConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -115,15 +112,38 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExportVerifiedAccessInstanc
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ExportVerifiedAccessInstanceClientConfigurationOutput {
     _ = status;
     _ = headers;
-    var result: ExportVerifiedAccessInstanceClientConfigurationOutput = .{ .allocator = alloc };
-    if (findElement(body, "region")) |content| {
-        result.region = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "verifiedAccessInstanceId")) |content| {
-        result.verified_access_instance_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "version")) |content| {
-        result.version = try alloc.dupe(u8, content);
+
+    var result: ExportVerifiedAccessInstanceClientConfigurationOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "deviceTrustProviderSet")) {
+                    result.device_trust_providers = try serde.deserializeDeviceTrustProviderTypeList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "openVpnConfigurationSet")) {
+                    result.open_vpn_configurations = try serde.deserializeVerifiedAccessInstanceOpenVpnClientConfigurationList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "region")) {
+                    result.region = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "userTrustProvider")) {
+                    result.user_trust_provider = try serde.deserializeVerifiedAccessInstanceUserTrustProviderClientConfiguration(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "verifiedAccessInstanceId")) {
+                    result.verified_access_instance_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "version")) {
+                    result.version = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

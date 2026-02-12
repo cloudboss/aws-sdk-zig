@@ -7,6 +7,7 @@ const EventBridgeConfiguration = @import("event_bridge_configuration.zig").Event
 const LambdaFunctionConfiguration = @import("lambda_function_configuration.zig").LambdaFunctionConfiguration;
 const QueueConfiguration = @import("queue_configuration.zig").QueueConfiguration;
 const TopicConfiguration = @import("topic_configuration.zig").TopicConfiguration;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -89,10 +90,10 @@ pub const GetBucketNotificationConfigurationOutput = struct {
     /// generated.
     topic_configurations: ?[]const TopicConfiguration = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketNotificationConfigurationOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketNotificationConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -121,7 +122,11 @@ pub fn execute(client: *Client, input: GetBucketNotificationConfigurationInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketNotificationConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -160,10 +165,37 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketNotificationConfig
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketNotificationConfigurationOutput {
-    _ = body;
+    var result: GetBucketNotificationConfigurationOutput = .{};
     _ = status;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "EventBridgeConfiguration")) {
+                    result.event_bridge_configuration = try serde.deserializeEventBridgeConfiguration(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "CloudFunctionConfiguration")) {
+                    result.lambda_function_configurations = try serde.deserializeLambdaFunctionConfigurationList(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "QueueConfiguration")) {
+                    result.queue_configurations = try serde.deserializeQueueConfigurationList(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "TopicConfiguration")) {
+                    result.topic_configurations = try serde.deserializeTopicConfigurationList(&reader, alloc, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
     _ = headers;
-    const result: GetBucketNotificationConfigurationOutput = .{ .allocator = alloc };
 
     return result;
 }

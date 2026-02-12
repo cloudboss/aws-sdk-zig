@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceMonitoring = @import("instance_monitoring.zig").InstanceMonitoring;
+const serde = @import("serde.zig");
 
 /// Enables detailed monitoring for a running instance. Otherwise, basic
 /// monitoring is
@@ -28,10 +29,10 @@ pub const MonitorInstancesOutput = struct {
     /// The monitoring information.
     instance_monitorings: ?[]const InstanceMonitoring = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const MonitorInstancesOutput) void {
-        _ = self;
+    pub fn deinit(self: *MonitorInstancesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -60,7 +61,11 @@ pub fn execute(client: *Client, input: MonitorInstancesInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: MonitorInstancesInput, config: *aws.Config) !aws.http.Request {
@@ -101,8 +106,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: MonitorInstancesInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !MonitorInstancesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: MonitorInstancesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: MonitorInstancesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "instancesSet")) {
+                    result.instance_monitorings = try serde.deserializeInstanceMonitoringList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

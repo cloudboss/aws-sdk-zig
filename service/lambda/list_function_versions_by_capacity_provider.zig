@@ -35,13 +35,10 @@ pub const ListFunctionVersionsByCapacityProviderOutput = struct {
     /// The pagination token that's included if more results are available.
     next_marker: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ListFunctionVersionsByCapacityProviderOutput) void {
-        self.allocator.free(self.capacity_provider_arn);
-        if (self.next_marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ListFunctionVersionsByCapacityProviderOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -76,7 +73,11 @@ pub fn execute(client: *Client, input: ListFunctionVersionsByCapacityProviderInp
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListFunctionVersionsByCapacityProviderInput, config: *aws.Config) !aws.http.Request {
@@ -126,7 +127,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListFunctionVersionsByCapac
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListFunctionVersionsByCapacityProviderOutput {
-    var result: ListFunctionVersionsByCapacityProviderOutput = .{ .allocator = alloc };
+    var result: ListFunctionVersionsByCapacityProviderOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(ListFunctionVersionsByCapacityProviderOutput, body, alloc);
     }

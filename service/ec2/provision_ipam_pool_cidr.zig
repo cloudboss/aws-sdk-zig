@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamCidrAuthorizationContext = @import("ipam_cidr_authorization_context.zig").IpamCidrAuthorizationContext;
 const VerificationMethod = @import("verification_method.zig").VerificationMethod;
 const IpamPoolCidr = @import("ipam_pool_cidr.zig").IpamPoolCidr;
+const serde = @import("serde.zig");
 
 /// Provision a CIDR to an IPAM pool. You can use this action to provision new
 /// CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a
@@ -61,10 +62,10 @@ pub const ProvisionIpamPoolCidrOutput = struct {
     /// Information about the provisioned CIDR.
     ipam_pool_cidr: ?IpamPoolCidr = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ProvisionIpamPoolCidrOutput) void {
-        _ = self;
+    pub fn deinit(self: *ProvisionIpamPoolCidrOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -93,7 +94,11 @@ pub fn execute(client: *Client, input: ProvisionIpamPoolCidrInput, options: Opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ProvisionIpamPoolCidrInput, config: *aws.Config) !aws.http.Request {
@@ -159,8 +164,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ProvisionIpamPoolCidrInput,
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ProvisionIpamPoolCidrOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ProvisionIpamPoolCidrOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ProvisionIpamPoolCidrOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamPoolCidr")) {
+                    result.ipam_pool_cidr = try serde.deserializeIpamPoolCidr(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const EgressOnlyInternetGateway = @import("egress_only_internet_gateway.zig").EgressOnlyInternetGateway;
+const serde = @import("serde.zig");
 
 /// [IPv6 only] Creates an egress-only internet gateway for your VPC. An
 /// egress-only
@@ -43,12 +44,10 @@ pub const CreateEgressOnlyInternetGatewayOutput = struct {
     /// Information about the egress-only internet gateway.
     egress_only_internet_gateway: ?EgressOnlyInternetGateway = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateEgressOnlyInternetGatewayOutput) void {
-        if (self.client_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateEgressOnlyInternetGatewayOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -77,7 +76,11 @@ pub fn execute(client: *Client, input: CreateEgressOnlyInternetGatewayInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateEgressOnlyInternetGatewayInput, config: *aws.Config) !aws.http.Request {
@@ -130,9 +133,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateEgressOnlyInternetGat
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateEgressOnlyInternetGatewayOutput {
     _ = status;
     _ = headers;
-    var result: CreateEgressOnlyInternetGatewayOutput = .{ .allocator = alloc };
-    if (findElement(body, "clientToken")) |content| {
-        result.client_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateEgressOnlyInternetGatewayOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "clientToken")) {
+                    result.client_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "egressOnlyInternetGateway")) {
+                    result.egress_only_internet_gateway = try serde.deserializeEgressOnlyInternetGateway(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamPolicyAllocationRuleRequest = @import("ipam_policy_allocation_rule_request.zig").IpamPolicyAllocationRuleRequest;
 const IpamPolicyResourceType = @import("ipam_policy_resource_type.zig").IpamPolicyResourceType;
 const IpamPolicyDocument = @import("ipam_policy_document.zig").IpamPolicyDocument;
+const serde = @import("serde.zig");
 
 /// Modifies the allocation rules in an IPAM policy.
 ///
@@ -55,10 +56,10 @@ pub const ModifyIpamPolicyAllocationRulesOutput = struct {
     /// The modified IPAM policy containing the updated allocation rules.
     ipam_policy_document: ?IpamPolicyDocument = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifyIpamPolicyAllocationRulesOutput) void {
-        _ = self;
+    pub fn deinit(self: *ModifyIpamPolicyAllocationRulesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -87,7 +88,11 @@ pub fn execute(client: *Client, input: ModifyIpamPolicyAllocationRulesInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPolicyAllocationRulesInput, config: *aws.Config) !aws.http.Request {
@@ -140,8 +145,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPolicyAllocationR
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyIpamPolicyAllocationRulesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ModifyIpamPolicyAllocationRulesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ModifyIpamPolicyAllocationRulesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamPolicyDocument")) {
+                    result.ipam_policy_document = try serde.deserializeIpamPolicyDocument(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

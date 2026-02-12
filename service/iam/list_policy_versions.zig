@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const PolicyVersion = @import("policy_version.zig").PolicyVersion;
+const serde = @import("serde.zig");
 
 /// Lists information about the versions of the specified managed policy,
 /// including the
@@ -70,12 +71,10 @@ pub const ListPolicyVersionsOutput = struct {
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html) in the *IAM User Guide*.
     versions: ?[]const PolicyVersion = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ListPolicyVersionsOutput) void {
-        if (self.marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ListPolicyVersionsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -104,7 +103,11 @@ pub fn execute(client: *Client, input: ListPolicyVersionsInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListPolicyVersionsInput, config: *aws.Config) !aws.http.Request {
@@ -144,12 +147,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListPolicyVersionsInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListPolicyVersionsOutput {
     _ = status;
     _ = headers;
-    var result: ListPolicyVersionsOutput = .{ .allocator = alloc };
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ListPolicyVersionsResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "Marker")) |content| {
-        result.marker = try alloc.dupe(u8, content);
+
+    var result: ListPolicyVersionsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Marker")) {
+                    result.marker = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Versions")) {
+                    result.versions = try serde.deserializepolicyDocumentVersionListType(&reader, alloc, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

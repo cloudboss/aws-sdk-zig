@@ -8,6 +8,7 @@ const AddIpamOperatingRegion = @import("add_ipam_operating_region.zig").AddIpamO
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const IpamTier = @import("ipam_tier.zig").IpamTier;
 const Ipam = @import("ipam.zig").Ipam;
+const serde = @import("serde.zig");
 
 /// Create an IPAM. Amazon VPC IP Address Manager (IPAM) is a VPC feature that
 /// you can use
@@ -81,10 +82,10 @@ pub const CreateIpamOutput = struct {
     /// Information about the IPAM created.
     ipam: ?Ipam = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateIpamOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateIpamOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -113,7 +114,11 @@ pub fn execute(client: *Client, input: CreateIpamInput, options: Options) !Creat
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateIpamInput, config: *aws.Config) !aws.http.Request {
@@ -193,8 +198,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateIpamInput, config: *a
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateIpamOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateIpamOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateIpamOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipam")) {
+                    result.ipam = try serde.deserializeIpam(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

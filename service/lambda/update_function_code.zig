@@ -299,57 +299,10 @@ pub const UpdateFunctionCodeOutput = struct {
     /// The function's networking configuration.
     vpc_config: ?VpcConfigResponse = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const UpdateFunctionCodeOutput) void {
-        if (self.code_sha_256) |v| {
-            self.allocator.free(v);
-        }
-        if (self.config_sha_256) |v| {
-            self.allocator.free(v);
-        }
-        if (self.description) |v| {
-            self.allocator.free(v);
-        }
-        if (self.function_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.function_name) |v| {
-            self.allocator.free(v);
-        }
-        if (self.handler) |v| {
-            self.allocator.free(v);
-        }
-        if (self.kms_key_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.last_modified) |v| {
-            self.allocator.free(v);
-        }
-        if (self.last_update_status_reason) |v| {
-            self.allocator.free(v);
-        }
-        if (self.master_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.revision_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.role) |v| {
-            self.allocator.free(v);
-        }
-        if (self.signing_job_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.signing_profile_version_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.state_reason) |v| {
-            self.allocator.free(v);
-        }
-        if (self.version) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *UpdateFunctionCodeOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -421,7 +374,11 @@ pub fn execute(client: *Client, input: UpdateFunctionCodeInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionCodeInput, config: *aws.Config) !aws.http.Request {
@@ -523,7 +480,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionCodeInput, co
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateFunctionCodeOutput {
-    var result: UpdateFunctionCodeOutput = .{ .allocator = alloc };
+    var result: UpdateFunctionCodeOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(UpdateFunctionCodeOutput, body, alloc);
     }

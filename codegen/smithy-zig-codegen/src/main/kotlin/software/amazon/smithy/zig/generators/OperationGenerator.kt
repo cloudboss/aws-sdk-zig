@@ -87,6 +87,11 @@ class OperationGenerator(
                 writer.write("const \$L = @import(\"\$L\").\$L;", typeName, fileName, typeName)
             }
 
+            // Import serde module for XML protocols with complex output members
+            if (protocol.needsXmlSerde() && hasComplexOutputMembers()) {
+                writer.write("const serde = @import(\"serde.zig\");")
+            }
+
             writer.blankLine()
 
             writeInputStruct(writer, ctx)
@@ -197,47 +202,21 @@ class OperationGenerator(
         }
 
         writer.blankLine()
-        writer.write("allocator: std.mem.Allocator,")
+        writer.write("_arena: std.heap.ArenaAllocator = undefined,")
         writer.blankLine()
 
-        if (isStreaming) {
-            // For streaming outputs, deinit must close the HTTP connection
-            writer.openBlock("pub fn deinit(self: *\$L) void {", outputName)
-        } else {
-            writer.openBlock("pub fn deinit(self: *const \$L) void {", outputName)
-        }
+        writer.openBlock("pub fn deinit(self: *\$L) void {", outputName)
 
-        val hasStringFields = outputShape.allMembers.values.any { memberShape ->
+        // For streaming outputs, close the HTTP connection before freeing arena
+        for ((memberName, memberShape) in outputShape.allMembers) {
             val targetShape = model.expectShape(memberShape.target)
-            ctx.resolveBaseZigType(targetShape) == "[]const u8"
-        }
-        val hasStreamingField = outputShape.allMembers.values.any { memberShape ->
-            val targetShape = model.expectShape(memberShape.target)
-            ctx.isStreamingBlob(targetShape)
-        }
-
-        if (!hasStringFields && !hasStreamingField) {
-            writer.write("_ = self;")
-        } else {
-            for ((memberName, memberShape) in outputShape.allMembers) {
+            if (ctx.isStreamingBlob(targetShape)) {
                 val fieldName = NamingUtil.toFieldName(memberName)
-                val targetShape = model.expectShape(memberShape.target)
-                val zigType = ctx.resolveBaseZigType(targetShape)
-
-                if (zigType == "aws.http.StreamingBody") {
-                    writer.write("self.\$L.deinit();", fieldName)
-                } else if (zigType == "[]const u8") {
-                    if (memberShape.isRequired) {
-                        writer.write("self.allocator.free(self.\$L);", fieldName)
-                    } else {
-                        writer.openBlock("if (self.\$L) |v| {", fieldName)
-                        writer.write("self.allocator.free(v);")
-                        writer.closeBlock("}")
-                    }
-                }
+                writer.write("self.\$L.deinit();", fieldName)
             }
         }
 
+        writer.write("self._arena.deinit();")
         writer.closeBlock("}")
 
         if (isJsonProtocol()) {
@@ -291,8 +270,12 @@ class OperationGenerator(
         writer.closeBlock("}")
         writer.blankLine()
 
-        // Deserialize
-        writer.write("return try deserializeResponse(response.body, response.status, response.headers, client.allocator);")
+        // Deserialize with a response arena that the caller owns via result.deinit()
+        writer.write("var resp_arena = std.heap.ArenaAllocator.init(client.allocator);")
+        writer.write("errdefer resp_arena.deinit();")
+        writer.write("var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());")
+        writer.write("result._arena = resp_arena;")
+        writer.write("return result;")
 
         writer.closeBlock("}")
     }
@@ -339,8 +322,12 @@ class OperationGenerator(
         writer.closeBlock("}")
         writer.blankLine()
 
-        // Deserialize
-        writer.write("return try deserializeStreamingResponse(&stream_resp, client.allocator);")
+        // Deserialize with a response arena that the caller owns via result.deinit()
+        writer.write("var resp_arena = std.heap.ArenaAllocator.init(client.allocator);")
+        writer.write("errdefer resp_arena.deinit();")
+        writer.write("var result = try deserializeStreamingResponse(&stream_resp, resp_arena.allocator());")
+        writer.write("result._arena = resp_arena;")
+        writer.write("return result;")
 
         writer.closeBlock("}")
     }
@@ -362,6 +349,14 @@ class OperationGenerator(
             writer.write(".\$L = \"\$L\",", fieldName, memberName)
         }
         writer.closeBlock("};")
+    }
+
+    /** Check if output shape has struct or list members that need serde functions. */
+    private fun hasComplexOutputMembers(): Boolean {
+        return outputShape.allMembers.values.any { memberShape ->
+            val target = model.expectShape(memberShape.target)
+            target is StructureShape || target is ListShape
+        }
     }
 
     /**

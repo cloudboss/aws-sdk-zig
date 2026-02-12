@@ -302,12 +302,10 @@ pub const DeleteObjectOutput = struct {
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteObjectOutput) void {
-        if (self.version_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DeleteObjectOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -336,7 +334,11 @@ pub fn execute(client: *Client, input: DeleteObjectInput, options: Options) !Del
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteObjectInput, config: *aws.Config) !aws.http.Request {
@@ -407,7 +409,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteObjectInput, config: 
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteObjectOutput {
-    var result: DeleteObjectOutput = .{ .allocator = alloc };
+    var result: DeleteObjectOutput = .{};
     _ = status;
     _ = body;
     if (headers.get("x-amz-delete-marker")) |value| {

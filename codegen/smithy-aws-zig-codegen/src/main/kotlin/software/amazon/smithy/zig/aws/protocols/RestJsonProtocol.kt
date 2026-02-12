@@ -381,13 +381,21 @@ class RestJsonProtocol : ProtocolGenerator {
         val resultMutated = hasBodyMembers || bindings.responseCode != null ||
             payloadUsesBody || bindings.headers.isNotEmpty()
 
+        val allocUsed = hasBodyMembers || payloadUsesBody || bindings.headers.values.any { ms ->
+            val ts = ctx.model.expectShape(ms.target)
+            ctx.resolveBaseZigType(ts) == "[]const u8"
+        }
+        if (!allocUsed) {
+            writer.write("_ = alloc;")
+        }
+
         if (!resultMutated) {
             writer.write("_ = body;")
             writer.write("_ = status;")
             writer.write("_ = headers;")
-            writer.write("const result: \$L = .{ .allocator = alloc };", outputName)
+            writer.write("const result: \$L = .{};", outputName)
         } else {
-            writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
+            writer.write("var result: \$L = .{};", outputName)
 
             // Body: @httpPayload, body members from JSON, or unused
             if (bindings.payload != null) {
@@ -481,7 +489,16 @@ class RestJsonProtocol : ProtocolGenerator {
             outputName,
         )
 
-        writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
+        // Check if alloc is actually used (only string headers need it)
+        val allocUsedInStreaming = bindings.headers.values.any { ms ->
+            val ts = ctx.model.expectShape(ms.target)
+            ctx.resolveBaseZigType(ts) == "[]const u8"
+        }
+        if (!allocUsedInStreaming) {
+            writer.write("_ = alloc;")
+        }
+
+        writer.write("var result: \$L = .{};", outputName)
 
         // Transfer StreamingBody ownership to result for @httpPayload streaming blob
         if (bindings.payload != null) {

@@ -24,12 +24,10 @@ pub const GetCredentialReportOutput = struct {
     /// The format (MIME type) of the credential report.
     report_format: ?ReportFormatType = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetCredentialReportOutput) void {
-        if (self.content) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetCredentialReportOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -58,7 +56,11 @@ pub fn execute(client: *Client, input: GetCredentialReportInput, options: Option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCredentialReportInput, config: *aws.Config) !aws.http.Request {
@@ -89,12 +91,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCredentialReportInput, c
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCredentialReportOutput {
     _ = status;
     _ = headers;
-    var result: GetCredentialReportOutput = .{ .allocator = alloc };
-    if (findElement(body, "Content")) |content| {
-        result.content = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetCredentialReportResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "GeneratedTime")) |content| {
-        result.generated_time = std.fmt.parseInt(i64, content, 10) catch null;
+
+    var result: GetCredentialReportOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Content")) {
+                    result.content = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "GeneratedTime")) {
+                    result.generated_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "ReportFormat")) {
+                    result.report_format = std.meta.stringToEnum(ReportFormatType, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

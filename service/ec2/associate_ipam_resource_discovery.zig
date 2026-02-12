@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const IpamResourceDiscoveryAssociation = @import("ipam_resource_discovery_association.zig").IpamResourceDiscoveryAssociation;
+const serde = @import("serde.zig");
 
 /// Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource
 /// discovery is an IPAM component that enables IPAM to manage and monitor
@@ -35,10 +36,10 @@ pub const AssociateIpamResourceDiscoveryOutput = struct {
     /// resource discovery that has been associated with an IPAM.
     ipam_resource_discovery_association: ?IpamResourceDiscoveryAssociation = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const AssociateIpamResourceDiscoveryOutput) void {
-        _ = self;
+    pub fn deinit(self: *AssociateIpamResourceDiscoveryOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -67,7 +68,11 @@ pub fn execute(client: *Client, input: AssociateIpamResourceDiscoveryInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssociateIpamResourceDiscoveryInput, config: *aws.Config) !aws.http.Request {
@@ -122,8 +127,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssociateIpamResourceDiscov
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssociateIpamResourceDiscoveryOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: AssociateIpamResourceDiscoveryOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: AssociateIpamResourceDiscoveryOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamResourceDiscoveryAssociation")) {
+                    result.ipam_resource_discovery_association = try serde.deserializeIpamResourceDiscoveryAssociation(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

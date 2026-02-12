@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const InstanceProfile = @import("instance_profile.zig").InstanceProfile;
+const serde = @import("serde.zig");
 
 /// Creates a new instance profile. For information about instance profiles, see
 /// [Using
@@ -61,10 +62,10 @@ pub const CreateInstanceProfileOutput = struct {
     /// A structure containing details about the new instance profile.
     instance_profile: ?InstanceProfile = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateInstanceProfileOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateInstanceProfileOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -93,7 +94,11 @@ pub fn execute(client: *Client, input: CreateInstanceProfileInput, options: Opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceProfileInput, config: *aws.Config) !aws.http.Request {
@@ -146,8 +151,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceProfileInput,
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateInstanceProfileOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateInstanceProfileOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "CreateInstanceProfileResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: CreateInstanceProfileOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "InstanceProfile")) {
+                    result.instance_profile = try serde.deserializeInstanceProfile(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

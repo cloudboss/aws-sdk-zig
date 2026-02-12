@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConversionTask = @import("conversion_task.zig").ConversionTask;
+const serde = @import("serde.zig");
 
 /// Describes the specified conversion tasks or all your conversion tasks. For
 /// more information, see the
@@ -29,10 +30,10 @@ pub const DescribeConversionTasksOutput = struct {
     /// Information about the conversion tasks.
     conversion_tasks: ?[]const ConversionTask = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeConversionTasksOutput) void {
-        _ = self;
+    pub fn deinit(self: *DescribeConversionTasksOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -61,7 +62,11 @@ pub fn execute(client: *Client, input: DescribeConversionTasksInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeConversionTasksInput, config: *aws.Config) !aws.http.Request {
@@ -104,8 +109,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeConversionTasksInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeConversionTasksOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeConversionTasksOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeConversionTasksOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "conversionTasks")) {
+                    result.conversion_tasks = try serde.deserializeDescribeConversionTaskList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

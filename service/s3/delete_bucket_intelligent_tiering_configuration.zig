@@ -61,10 +61,10 @@ pub const DeleteBucketIntelligentTieringConfigurationInput = struct {
 
 pub const DeleteBucketIntelligentTieringConfigurationOutput = struct {
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteBucketIntelligentTieringConfigurationOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteBucketIntelligentTieringConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -93,7 +93,11 @@ pub fn execute(client: *Client, input: DeleteBucketIntelligentTieringConfigurati
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteBucketIntelligentTieringConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -136,10 +140,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteBucketIntelligentTier
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteBucketIntelligentTieringConfigurationOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: DeleteBucketIntelligentTieringConfigurationOutput = .{ .allocator = alloc };
+    const result: DeleteBucketIntelligentTieringConfigurationOutput = .{};
 
     return result;
 }

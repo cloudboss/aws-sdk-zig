@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const PolicyDescriptorType = @import("policy_descriptor_type.zig").PolicyDescriptorType;
 const Credentials = @import("credentials.zig").Credentials;
+const serde = @import("serde.zig");
 
 /// Returns a set of short term credentials you can use to perform privileged
 /// tasks on a
@@ -110,12 +111,10 @@ pub const AssumeRootOutput = struct {
     /// any of the following characters: =,.@-
     source_identity: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const AssumeRootOutput) void {
-        if (self.source_identity) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *AssumeRootOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -144,7 +143,11 @@ pub fn execute(client: *Client, input: AssumeRootInput, options: Options) !Assum
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRootInput, config: *aws.Config) !aws.http.Request {
@@ -184,9 +187,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRootInput, config: *a
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssumeRootOutput {
     _ = status;
     _ = headers;
-    var result: AssumeRootOutput = .{ .allocator = alloc };
-    if (findElement(body, "SourceIdentity")) |content| {
-        result.source_identity = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AssumeRootResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: AssumeRootOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Credentials")) {
+                    result.credentials = try serde.deserializeCredentials(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "SourceIdentity")) {
+                    result.source_identity = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

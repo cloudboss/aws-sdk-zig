@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceProfile = @import("instance_profile.zig").InstanceProfile;
+const serde = @import("serde.zig");
 
 /// Retrieves information about the specified instance profile, including the
 /// instance
@@ -27,10 +28,10 @@ pub const GetInstanceProfileOutput = struct {
     /// A structure containing details about the instance profile.
     instance_profile: ?InstanceProfile = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetInstanceProfileOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetInstanceProfileOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -59,7 +60,11 @@ pub fn execute(client: *Client, input: GetInstanceProfileInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetInstanceProfileInput, config: *aws.Config) !aws.http.Request {
@@ -91,8 +96,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetInstanceProfileInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetInstanceProfileOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: GetInstanceProfileOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetInstanceProfileResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: GetInstanceProfileOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "InstanceProfile")) {
+                    result.instance_profile = try serde.deserializeInstanceProfile(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

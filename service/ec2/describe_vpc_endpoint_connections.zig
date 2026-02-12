@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const VpcEndpointConnection = @import("vpc_endpoint_connection.zig").VpcEndpointConnection;
+const serde = @import("serde.zig");
 
 /// Describes the VPC endpoint connections to your VPC endpoint services,
 /// including any
@@ -58,12 +59,10 @@ pub const DescribeVpcEndpointConnectionsOutput = struct {
     /// Information about the VPC endpoint connections.
     vpc_endpoint_connections: ?[]const VpcEndpointConnection = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeVpcEndpointConnectionsOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeVpcEndpointConnectionsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -92,7 +91,11 @@ pub fn execute(client: *Client, input: DescribeVpcEndpointConnectionsInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeVpcEndpointConnectionsInput, config: *aws.Config) !aws.http.Request {
@@ -147,9 +150,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeVpcEndpointConnecti
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeVpcEndpointConnectionsOutput {
     _ = status;
     _ = headers;
-    var result: DescribeVpcEndpointConnectionsOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeVpcEndpointConnectionsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "vpcEndpointConnectionSet")) {
+                    result.vpc_endpoint_connections = try serde.deserializeVpcEndpointConnectionSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

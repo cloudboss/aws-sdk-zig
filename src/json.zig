@@ -70,8 +70,8 @@ fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
 
     // Initialize fields to defaults
     inline for (std.meta.fields(T)) |field| {
-        if (comptime std.mem.eql(u8, field.name, "allocator")) {
-            @field(result, "allocator") = alloc;
+        if (comptime std.mem.eql(u8, field.name, "_arena")) {
+            // Skip -- arena is set by caller after parsing
         } else if (comptime field.defaultValue()) |dv| {
             @field(result, field.name) = dv;
         }
@@ -96,7 +96,7 @@ fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
 
         var matched = false;
         inline for (std.meta.fields(T)) |field| {
-            if (comptime std.mem.eql(u8, field.name, "allocator")) continue;
+            if (comptime std.mem.eql(u8, field.name, "_arena")) continue;
             const mapped = comptime jsonKeyForField(T, field.name);
             if (std.mem.eql(u8, json_key, mapped)) {
                 @field(result, field.name) = try parseValue(field.type, scanner, alloc);
@@ -322,7 +322,7 @@ fn writeStruct(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList
     try buf.append(alloc, '{');
     var first = true;
     inline for (std.meta.fields(T)) |field| {
-        if (comptime std.mem.eql(u8, field.name, "allocator")) continue;
+        if (comptime std.mem.eql(u8, field.name, "_arena")) continue;
 
         const field_val = @field(value, field.name);
         const key = comptime jsonKeyForField(T, field.name);

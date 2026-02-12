@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SigningCertificate = @import("signing_certificate.zig").SigningCertificate;
+const serde = @import("serde.zig");
 
 /// Uploads an X.509 signing certificate and associates it with the specified
 /// IAM user.
@@ -71,10 +72,10 @@ pub const UploadSigningCertificateOutput = struct {
     /// Information about the certificate.
     certificate: ?SigningCertificate = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const UploadSigningCertificateOutput) void {
-        _ = self;
+    pub fn deinit(self: *UploadSigningCertificateOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -103,7 +104,11 @@ pub fn execute(client: *Client, input: UploadSigningCertificateInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UploadSigningCertificateInput, config: *aws.Config) !aws.http.Request {
@@ -139,8 +144,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UploadSigningCertificateInp
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UploadSigningCertificateOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: UploadSigningCertificateOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "UploadSigningCertificateResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: UploadSigningCertificateOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Certificate")) {
+                    result.certificate = try serde.deserializeSigningCertificate(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

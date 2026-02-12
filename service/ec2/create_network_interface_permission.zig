@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InterfacePermissionType = @import("interface_permission_type.zig").InterfacePermissionType;
 const NetworkInterfacePermission = @import("network_interface_permission.zig").NetworkInterfacePermission;
+const serde = @import("serde.zig");
 
 /// Grants an Amazon Web Services-authorized account permission to attach the
 /// specified
@@ -38,10 +39,10 @@ pub const CreateNetworkInterfacePermissionOutput = struct {
     /// Information about the permission for the network interface.
     interface_permission: ?NetworkInterfacePermission = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateNetworkInterfacePermissionOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateNetworkInterfacePermissionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -70,7 +71,11 @@ pub fn execute(client: *Client, input: CreateNetworkInterfacePermissionInput, op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfacePermissionInput, config: *aws.Config) !aws.http.Request {
@@ -116,8 +121,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfacePermi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateNetworkInterfacePermissionOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateNetworkInterfacePermissionOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateNetworkInterfacePermissionOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "interfacePermission")) {
+                    result.interface_permission = try serde.deserializeNetworkInterfacePermission(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

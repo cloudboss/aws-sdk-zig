@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VpcEncryptionControl = @import("vpc_encryption_control.zig").VpcEncryptionControl;
+const serde = @import("serde.zig");
 
 /// Deletes a VPC Encryption Control configuration. This removes the encryption
 /// policy enforcement from the specified VPC.
@@ -26,10 +27,10 @@ pub const DeleteVpcEncryptionControlOutput = struct {
     /// Information about the deleted VPC Encryption Control configuration.
     vpc_encryption_control: ?VpcEncryptionControl = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteVpcEncryptionControlOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteVpcEncryptionControlOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -58,7 +59,11 @@ pub fn execute(client: *Client, input: DeleteVpcEncryptionControlInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteVpcEncryptionControlInput, config: *aws.Config) !aws.http.Request {
@@ -94,8 +99,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteVpcEncryptionControlI
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteVpcEncryptionControlOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeleteVpcEncryptionControlOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeleteVpcEncryptionControlOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "vpcEncryptionControl")) {
+                    result.vpc_encryption_control = try serde.deserializeVpcEncryptionControl(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const InstanceEventWindowTimeRangeRequest = @import("instance_event_window_time_range_request.zig").InstanceEventWindowTimeRangeRequest;
 const InstanceEventWindow = @import("instance_event_window.zig").InstanceEventWindow;
+const serde = @import("serde.zig");
 
 /// Creates an event window in which scheduled events for the associated Amazon
 /// EC2 instances can
@@ -90,10 +91,10 @@ pub const CreateInstanceEventWindowOutput = struct {
     /// Information about the event window.
     instance_event_window: ?InstanceEventWindow = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateInstanceEventWindowOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateInstanceEventWindowOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -122,7 +123,11 @@ pub fn execute(client: *Client, input: CreateInstanceEventWindowInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceEventWindowInput, config: *aws.Config) !aws.http.Request {
@@ -214,8 +219,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceEventWindowIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateInstanceEventWindowOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateInstanceEventWindowOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateInstanceEventWindowOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "instanceEventWindow")) {
+                    result.instance_event_window = try serde.deserializeInstanceEventWindow(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

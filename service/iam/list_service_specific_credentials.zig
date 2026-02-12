@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ServiceSpecificCredentialMetadata = @import("service_specific_credential_metadata.zig").ServiceSpecificCredentialMetadata;
+const serde = @import("serde.zig");
 
 /// Returns information about the service-specific credentials associated with
 /// the
@@ -75,12 +76,10 @@ pub const ListServiceSpecificCredentialsOutput = struct {
     /// credential.
     service_specific_credentials: ?[]const ServiceSpecificCredentialMetadata = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ListServiceSpecificCredentialsOutput) void {
-        if (self.marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ListServiceSpecificCredentialsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -109,7 +108,11 @@ pub fn execute(client: *Client, input: ListServiceSpecificCredentialsInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListServiceSpecificCredentialsInput, config: *aws.Config) !aws.http.Request {
@@ -159,12 +162,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListServiceSpecificCredenti
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListServiceSpecificCredentialsOutput {
     _ = status;
     _ = headers;
-    var result: ListServiceSpecificCredentialsOutput = .{ .allocator = alloc };
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ListServiceSpecificCredentialsResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "Marker")) |content| {
-        result.marker = try alloc.dupe(u8, content);
+
+    var result: ListServiceSpecificCredentialsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Marker")) {
+                    result.marker = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ServiceSpecificCredentials")) {
+                    result.service_specific_credentials = try serde.deserializeServiceSpecificCredentialsListType(&reader, alloc, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

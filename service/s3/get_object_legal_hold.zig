@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const ObjectLockLegalHold = @import("object_lock_legal_hold.zig").ObjectLockLegalHold;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -62,10 +63,10 @@ pub const GetObjectLegalHoldOutput = struct {
     /// The current legal hold status for the specified object.
     legal_hold: ?ObjectLockLegalHold = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetObjectLegalHoldOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetObjectLegalHoldOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -94,7 +95,11 @@ pub fn execute(client: *Client, input: GetObjectLegalHoldInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectLegalHoldInput, config: *aws.Config) !aws.http.Request {
@@ -144,10 +149,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectLegalHoldInput, co
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetObjectLegalHoldOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: GetObjectLegalHoldOutput = .{ .allocator = alloc };
+    const result: GetObjectLegalHoldOutput = .{};
 
     return result;
 }

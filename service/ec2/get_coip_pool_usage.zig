@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const CoipAddressUsage = @import("coip_address_usage.zig").CoipAddressUsage;
+const serde = @import("serde.zig");
 
 /// Describes the allocations from the specified customer-owned address pool.
 pub const GetCoipPoolUsageInput = struct {
@@ -54,18 +55,10 @@ pub const GetCoipPoolUsageOutput = struct {
     /// when there are no more results to return.
     next_token: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetCoipPoolUsageOutput) void {
-        if (self.coip_pool_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.local_gateway_route_table_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetCoipPoolUsageOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -94,7 +87,11 @@ pub fn execute(client: *Client, input: GetCoipPoolUsageInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCoipPoolUsageInput, config: *aws.Config) !aws.http.Request {
@@ -151,15 +148,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCoipPoolUsageInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCoipPoolUsageOutput {
     _ = status;
     _ = headers;
-    var result: GetCoipPoolUsageOutput = .{ .allocator = alloc };
-    if (findElement(body, "coipPoolId")) |content| {
-        result.coip_pool_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "localGatewayRouteTableId")) |content| {
-        result.local_gateway_route_table_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+
+    var result: GetCoipPoolUsageOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "coipAddressUsageSet")) {
+                    result.coip_address_usages = try serde.deserializeCoipAddressUsageSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "coipPoolId")) {
+                    result.coip_pool_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "localGatewayRouteTableId")) {
+                    result.local_gateway_route_table_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

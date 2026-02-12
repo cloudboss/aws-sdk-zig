@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VpcCidrBlockAssociation = @import("vpc_cidr_block_association.zig").VpcCidrBlockAssociation;
 const VpcIpv6CidrBlockAssociation = @import("vpc_ipv_6_cidr_block_association.zig").VpcIpv6CidrBlockAssociation;
+const serde = @import("serde.zig");
 
 /// Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you
 /// must
@@ -30,12 +31,10 @@ pub const DisassociateVpcCidrBlockOutput = struct {
     /// The ID of the VPC.
     vpc_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DisassociateVpcCidrBlockOutput) void {
-        if (self.vpc_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DisassociateVpcCidrBlockOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -64,7 +63,11 @@ pub fn execute(client: *Client, input: DisassociateVpcCidrBlockInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateVpcCidrBlockInput, config: *aws.Config) !aws.http.Request {
@@ -96,9 +99,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateVpcCidrBlockInp
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DisassociateVpcCidrBlockOutput {
     _ = status;
     _ = headers;
-    var result: DisassociateVpcCidrBlockOutput = .{ .allocator = alloc };
-    if (findElement(body, "vpcId")) |content| {
-        result.vpc_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DisassociateVpcCidrBlockOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "cidrBlockAssociation")) {
+                    result.cidr_block_association = try serde.deserializeVpcCidrBlockAssociation(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "ipv6CidrBlockAssociation")) {
+                    result.ipv_6_cidr_block_association = try serde.deserializeVpcIpv6CidrBlockAssociation(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "vpcId")) {
+                    result.vpc_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

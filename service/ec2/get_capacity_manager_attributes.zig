@@ -47,12 +47,10 @@ pub const GetCapacityManagerAttributesOutput = struct {
     /// aggregation.
     organizations_access: ?bool = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetCapacityManagerAttributesOutput) void {
-        if (self.ingestion_status_message) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetCapacityManagerAttributesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -81,7 +79,11 @@ pub fn execute(client: *Client, input: GetCapacityManagerAttributesInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityManagerAttributesInput, config: *aws.Config) !aws.http.Request {
@@ -115,21 +117,40 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityManagerAttribute
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCapacityManagerAttributesOutput {
     _ = status;
     _ = headers;
-    var result: GetCapacityManagerAttributesOutput = .{ .allocator = alloc };
-    if (findElement(body, "dataExportCount")) |content| {
-        result.data_export_count = std.fmt.parseInt(i32, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "earliestDatapointTimestamp")) |content| {
-        result.earliest_datapoint_timestamp = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "ingestionStatusMessage")) |content| {
-        result.ingestion_status_message = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "latestDatapointTimestamp")) |content| {
-        result.latest_datapoint_timestamp = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "organizationsAccess")) |content| {
-        result.organizations_access = std.mem.eql(u8, content, "true");
+
+    var result: GetCapacityManagerAttributesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "capacityManagerStatus")) {
+                    result.capacity_manager_status = std.meta.stringToEnum(CapacityManagerStatus, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "dataExportCount")) {
+                    result.data_export_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "earliestDatapointTimestamp")) {
+                    result.earliest_datapoint_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "ingestionStatus")) {
+                    result.ingestion_status = std.meta.stringToEnum(IngestionStatus, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ingestionStatusMessage")) {
+                    result.ingestion_status_message = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "latestDatapointTimestamp")) {
+                    result.latest_datapoint_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "organizationsAccess")) {
+                    result.organizations_access = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

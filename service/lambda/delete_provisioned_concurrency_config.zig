@@ -28,10 +28,10 @@ pub const DeleteProvisionedConcurrencyConfigInput = struct {
 
 pub const DeleteProvisionedConcurrencyConfigOutput = struct {
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteProvisionedConcurrencyConfigOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteProvisionedConcurrencyConfigOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -60,7 +60,11 @@ pub fn execute(client: *Client, input: DeleteProvisionedConcurrencyConfigInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteProvisionedConcurrencyConfigInput, config: *aws.Config) !aws.http.Request {
@@ -99,10 +103,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteProvisionedConcurrenc
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteProvisionedConcurrencyConfigOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: DeleteProvisionedConcurrencyConfigOutput = .{ .allocator = alloc };
+    const result: DeleteProvisionedConcurrencyConfigOutput = .{};
 
     return result;
 }

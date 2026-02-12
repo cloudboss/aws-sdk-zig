@@ -7,6 +7,7 @@ const Filter = @import("filter.zig").Filter;
 const SlotDateTimeRangeRequest = @import("slot_date_time_range_request.zig").SlotDateTimeRangeRequest;
 const ScheduledInstanceRecurrenceRequest = @import("scheduled_instance_recurrence_request.zig").ScheduledInstanceRecurrenceRequest;
 const ScheduledInstanceAvailability = @import("scheduled_instance_availability.zig").ScheduledInstanceAvailability;
+const serde = @import("serde.zig");
 
 /// Finds available schedules that meet the specified criteria.
 ///
@@ -70,12 +71,10 @@ pub const DescribeScheduledInstanceAvailabilityOutput = struct {
     /// Information about the available Scheduled Instances.
     scheduled_instance_availability_set: ?[]const ScheduledInstanceAvailability = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeScheduledInstanceAvailabilityOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeScheduledInstanceAvailabilityOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -104,7 +103,11 @@ pub fn execute(client: *Client, input: DescribeScheduledInstanceAvailabilityInpu
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeScheduledInstanceAvailabilityInput, config: *aws.Config) !aws.http.Request {
@@ -187,9 +190,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeScheduledInstanceAv
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeScheduledInstanceAvailabilityOutput {
     _ = status;
     _ = headers;
-    var result: DescribeScheduledInstanceAvailabilityOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeScheduledInstanceAvailabilityOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "scheduledInstanceAvailabilitySet")) {
+                    result.scheduled_instance_availability_set = try serde.deserializeScheduledInstanceAvailabilitySet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AttachedPolicy = @import("attached_policy.zig").AttachedPolicy;
+const serde = @import("serde.zig");
 
 /// Lists all managed policies that are attached to the specified IAM role.
 ///
@@ -90,12 +91,10 @@ pub const ListAttachedRolePoliciesOutput = struct {
     /// pagination request.
     marker: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ListAttachedRolePoliciesOutput) void {
-        if (self.marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ListAttachedRolePoliciesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -124,7 +123,11 @@ pub fn execute(client: *Client, input: ListAttachedRolePoliciesInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListAttachedRolePoliciesInput, config: *aws.Config) !aws.http.Request {
@@ -168,12 +171,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListAttachedRolePoliciesInp
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListAttachedRolePoliciesOutput {
     _ = status;
     _ = headers;
-    var result: ListAttachedRolePoliciesOutput = .{ .allocator = alloc };
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ListAttachedRolePoliciesResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "Marker")) |content| {
-        result.marker = try alloc.dupe(u8, content);
+
+    var result: ListAttachedRolePoliciesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AttachedPolicies")) {
+                    result.attached_policies = try serde.deserializeattachedPoliciesListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Marker")) {
+                    result.marker = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

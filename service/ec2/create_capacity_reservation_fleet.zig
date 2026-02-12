@@ -10,6 +10,7 @@ const FleetCapacityReservationTenancy = @import("fleet_capacity_reservation_tena
 const FleetCapacityReservation = @import("fleet_capacity_reservation.zig").FleetCapacityReservation;
 const CapacityReservationFleetState = @import("capacity_reservation_fleet_state.zig").CapacityReservationFleetState;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// Creates a Capacity Reservation Fleet. For more information, see [Create a
 /// Capacity Reservation
@@ -136,15 +137,10 @@ pub const CreateCapacityReservationFleetOutput = struct {
     /// capacity.
     total_target_capacity: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateCapacityReservationFleetOutput) void {
-        if (self.allocation_strategy) |v| {
-            self.allocator.free(v);
-        }
-        if (self.capacity_reservation_fleet_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateCapacityReservationFleetOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -173,7 +169,11 @@ pub fn execute(client: *Client, input: CreateCapacityReservationFleetInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateCapacityReservationFleetInput, config: *aws.Config) !aws.http.Request {
@@ -301,21 +301,48 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateCapacityReservationFl
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateCapacityReservationFleetOutput {
     _ = status;
     _ = headers;
-    var result: CreateCapacityReservationFleetOutput = .{ .allocator = alloc };
-    if (findElement(body, "allocationStrategy")) |content| {
-        result.allocation_strategy = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "capacityReservationFleetId")) |content| {
-        result.capacity_reservation_fleet_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "createTime")) |content| {
-        result.create_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "endDate")) |content| {
-        result.end_date = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "totalTargetCapacity")) |content| {
-        result.total_target_capacity = std.fmt.parseInt(i32, content, 10) catch null;
+
+    var result: CreateCapacityReservationFleetOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "allocationStrategy")) {
+                    result.allocation_strategy = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "capacityReservationFleetId")) {
+                    result.capacity_reservation_fleet_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "createTime")) {
+                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "endDate")) {
+                    result.end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "fleetCapacityReservationSet")) {
+                    result.fleet_capacity_reservations = try serde.deserializeFleetCapacityReservationSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "instanceMatchCriteria")) {
+                    result.instance_match_criteria = std.meta.stringToEnum(FleetInstanceMatchCriteria, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = std.meta.stringToEnum(CapacityReservationFleetState, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try serde.deserializeTagList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "tenancy")) {
+                    result.tenancy = std.meta.stringToEnum(FleetCapacityReservationTenancy, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "totalFulfilledCapacity")) {
+                    result.total_fulfilled_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "totalTargetCapacity")) {
+                    result.total_target_capacity = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

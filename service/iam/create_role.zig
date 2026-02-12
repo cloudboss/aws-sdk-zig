@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const Role = @import("role.zig").Role;
+const serde = @import("serde.zig");
 
 /// Creates a new role for your Amazon Web Services account.
 ///
@@ -135,10 +136,10 @@ pub const CreateRoleOutput = struct {
     /// A structure containing details about the new role.
     role: ?Role = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateRoleOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateRoleOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -167,7 +168,11 @@ pub fn execute(client: *Client, input: CreateRoleInput, options: Options) !Creat
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateRoleInput, config: *aws.Config) !aws.http.Request {
@@ -234,8 +239,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateRoleInput, config: *a
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateRoleOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateRoleOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "CreateRoleResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: CreateRoleOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Role")) {
+                    result.role = try serde.deserializeRole(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

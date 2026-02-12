@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FailedCapacityReservationFleetCancellationResult = @import("failed_capacity_reservation_fleet_cancellation_result.zig").FailedCapacityReservationFleetCancellationResult;
 const CapacityReservationFleetCancellationState = @import("capacity_reservation_fleet_cancellation_state.zig").CapacityReservationFleetCancellationState;
+const serde = @import("serde.zig");
 
 /// Cancels one or more Capacity Reservation Fleets. When you cancel a Capacity
 /// Reservation Fleet, the following happens:
@@ -37,10 +38,10 @@ pub const CancelCapacityReservationFleetsOutput = struct {
     /// cancelled.
     successful_fleet_cancellations: ?[]const CapacityReservationFleetCancellationState = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CancelCapacityReservationFleetsOutput) void {
-        _ = self;
+    pub fn deinit(self: *CancelCapacityReservationFleetsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -69,7 +70,11 @@ pub fn execute(client: *Client, input: CancelCapacityReservationFleetsInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CancelCapacityReservationFleetsInput, config: *aws.Config) !aws.http.Request {
@@ -110,8 +115,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CancelCapacityReservationFl
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CancelCapacityReservationFleetsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CancelCapacityReservationFleetsOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CancelCapacityReservationFleetsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "failedFleetCancellationSet")) {
+                    result.failed_fleet_cancellations = try serde.deserializeFailedCapacityReservationFleetCancellationResultSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "successfulFleetCancellationSet")) {
+                    result.successful_fleet_cancellations = try serde.deserializeCapacityReservationFleetCancellationStateSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

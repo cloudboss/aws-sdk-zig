@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RouteServerAssociation = @import("route_server_association.zig").RouteServerAssociation;
+const serde = @import("serde.zig");
 
 /// Associates a route server with a VPC to enable dynamic route updates.
 ///
@@ -31,10 +32,10 @@ pub const AssociateRouteServerOutput = struct {
     /// Information about the association between the route server and the VPC.
     route_server_association: ?RouteServerAssociation = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const AssociateRouteServerOutput) void {
-        _ = self;
+    pub fn deinit(self: *AssociateRouteServerOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -63,7 +64,11 @@ pub fn execute(client: *Client, input: AssociateRouteServerInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssociateRouteServerInput, config: *aws.Config) !aws.http.Request {
@@ -101,8 +106,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssociateRouteServerInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssociateRouteServerOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: AssociateRouteServerOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: AssociateRouteServerOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "routeServerAssociation")) {
+                    result.route_server_association = try serde.deserializeRouteServerAssociation(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -91,12 +91,10 @@ pub const CreateFunctionUrlConfigOutput = struct {
     ///   size is 200 MB.
     invoke_mode: ?InvokeMode = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateFunctionUrlConfigOutput) void {
-        self.allocator.free(self.creation_time);
-        self.allocator.free(self.function_arn);
-        self.allocator.free(self.function_url);
+    pub fn deinit(self: *CreateFunctionUrlConfigOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -134,7 +132,11 @@ pub fn execute(client: *Client, input: CreateFunctionUrlConfigInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateFunctionUrlConfigInput, config: *aws.Config) !aws.http.Request {
@@ -197,7 +199,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateFunctionUrlConfigInpu
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateFunctionUrlConfigOutput {
-    var result: CreateFunctionUrlConfigOutput = .{ .allocator = alloc };
+    var result: CreateFunctionUrlConfigOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(CreateFunctionUrlConfigOutput, body, alloc);
     }

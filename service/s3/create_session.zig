@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEncryption;
 const SessionMode = @import("session_mode.zig").SessionMode;
 const SessionCredentials = @import("session_credentials.zig").SessionCredentials;
+const serde = @import("serde.zig");
 
 /// Creates a session that establishes temporary security credentials to support
 /// fast authentication and
@@ -301,15 +302,10 @@ pub const CreateSessionOutput = struct {
     /// encryption.
     ssekms_key_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateSessionOutput) void {
-        if (self.ssekms_encryption_context) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_key_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateSessionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -338,7 +334,11 @@ pub fn execute(client: *Client, input: CreateSessionInput, options: Options) !Cr
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateSessionInput, config: *aws.Config) !aws.http.Request {
@@ -389,9 +389,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateSessionInput, config:
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateSessionOutput {
-    var result: CreateSessionOutput = .{ .allocator = alloc };
+    var result: CreateSessionOutput = .{};
     _ = status;
-    _ = body;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Credentials")) {
+                    result.credentials = try serde.deserializeSessionCredentials(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
     if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {
         result.bucket_key_enabled = std.mem.eql(u8, value, "true");
     }

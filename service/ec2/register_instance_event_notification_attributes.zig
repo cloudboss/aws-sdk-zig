@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegisterInstanceTagAttributeRequest = @import("register_instance_tag_attribute_request.zig").RegisterInstanceTagAttributeRequest;
 const InstanceTagNotificationAttribute = @import("instance_tag_notification_attribute.zig").InstanceTagNotificationAttribute;
+const serde = @import("serde.zig");
 
 /// Registers a set of tag keys to include in scheduled event notifications for
 /// your
@@ -28,10 +29,10 @@ pub const RegisterInstanceEventNotificationAttributesOutput = struct {
     /// The resulting set of tag keys.
     instance_tag_attribute: ?InstanceTagNotificationAttribute = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const RegisterInstanceEventNotificationAttributesOutput) void {
-        _ = self;
+    pub fn deinit(self: *RegisterInstanceEventNotificationAttributesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -60,7 +61,11 @@ pub fn execute(client: *Client, input: RegisterInstanceEventNotificationAttribut
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: RegisterInstanceEventNotificationAttributesInput, config: *aws.Config) !aws.http.Request {
@@ -98,8 +103,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RegisterInstanceEventNotifi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RegisterInstanceEventNotificationAttributesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: RegisterInstanceEventNotificationAttributesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: RegisterInstanceEventNotificationAttributesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "instanceTagAttribute")) {
+                    result.instance_tag_attribute = try serde.deserializeInstanceTagNotificationAttribute(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

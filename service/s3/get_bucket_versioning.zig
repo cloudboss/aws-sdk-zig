@@ -57,10 +57,10 @@ pub const GetBucketVersioningOutput = struct {
     /// The versioning state of the bucket.
     status: ?BucketVersioningStatus = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketVersioningOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketVersioningOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -89,7 +89,11 @@ pub fn execute(client: *Client, input: GetBucketVersioningInput, options: Option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketVersioningInput, config: *aws.Config) !aws.http.Request {
@@ -128,10 +132,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketVersioningInput, c
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketVersioningOutput {
-    _ = body;
+    _ = alloc;
+    var result: GetBucketVersioningOutput = .{};
     _ = status;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "MfaDelete")) {
+                    result.mfa_delete = std.meta.stringToEnum(MFADeleteStatus, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Status")) {
+                    result.status = std.meta.stringToEnum(BucketVersioningStatus, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
     _ = headers;
-    const result: GetBucketVersioningOutput = .{ .allocator = alloc };
 
     return result;
 }

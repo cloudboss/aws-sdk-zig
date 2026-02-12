@@ -1,9 +1,20 @@
 package software.amazon.smithy.zig.aws.protocols
 
 import software.amazon.smithy.model.shapes.BlobShape
+import software.amazon.smithy.model.shapes.BooleanShape
+import software.amazon.smithy.model.shapes.DoubleShape
 import software.amazon.smithy.model.shapes.EnumShape
+import software.amazon.smithy.model.shapes.FloatShape
+import software.amazon.smithy.model.shapes.IntEnumShape
+import software.amazon.smithy.model.shapes.IntegerShape
+import software.amazon.smithy.model.shapes.ListShape
+import software.amazon.smithy.model.shapes.LongShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.Shape
+import software.amazon.smithy.model.shapes.ShortShape
+import software.amazon.smithy.model.shapes.StringShape
+import software.amazon.smithy.model.shapes.StructureShape
+import software.amazon.smithy.model.shapes.TimestampShape
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.HttpHeaderTrait
 import software.amazon.smithy.model.traits.HttpLabelTrait
@@ -399,12 +410,6 @@ class RestXmlProtocol : ProtocolGenerator {
         val outputName = "${ctx.operationName}Output"
         val bindings = resolveOutputBindings(ctx)
 
-        val hasDeserializableBodyFields = bindings.bodyMembers.values.any { ms ->
-            val ts = ctx.model.expectShape(ms.target)
-            val zigType = ctx.resolveBaseZigType(ts)
-            zigType in listOf("[]const u8", "i32", "i64", "bool")
-        }
-
         writer.openBlock(
             "fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !\$L {",
             outputName,
@@ -416,17 +421,32 @@ class RestXmlProtocol : ProtocolGenerator {
             val ts = ctx.model.expectShape(ms.target)
             ctx.resolveBaseZigType(ts) == "[]const u8"
         }
-        val bodyUsed = payloadUsesBody || hasDeserializableBodyFields
-        val resultMutated = hasDeserializableBodyFields || bindings.responseCode != null ||
+        val hasBodyMembers = bindings.bodyMembers.isNotEmpty()
+        val bodyUsed = payloadUsesBody || hasBodyMembers
+        val resultMutated = hasBodyMembers || bindings.responseCode != null ||
             payloadUsesBody || bindings.headers.isNotEmpty()
+
+        val bodyNeedsAlloc = bindings.bodyMembers.values.any { ms ->
+            val target = ctx.model.expectShape(ms.target)
+            (target is StringShape && !ctx.isEnumType(target)) ||
+                target is BlobShape || target is StructureShape || target is ListShape
+        }
+        val headersNeedAlloc = bindings.headers.values.any { ms ->
+            val ts = ctx.model.expectShape(ms.target)
+            ctx.resolveBaseZigType(ts) == "[]const u8"
+        }
+        val allocUsed = bodyNeedsAlloc || payloadUsesBody || headersNeedAlloc
+        if (!allocUsed) {
+            writer.write("_ = alloc;")
+        }
 
         if (!resultMutated) {
             writer.write("_ = body;")
             writer.write("_ = status;")
             writer.write("_ = headers;")
-            writer.write("const result: \$L = .{ .allocator = alloc };", outputName)
+            writer.write("const result: \$L = .{};", outputName)
         } else {
-            writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
+            writer.write("var result: \$L = .{};", outputName)
 
             // @httpResponseCode
             if (bindings.responseCode != null) {
@@ -457,38 +477,22 @@ class RestXmlProtocol : ProtocolGenerator {
                         writer.closeBlock("}")
                     }
                 }
-            } else {
-                // Deserialize body members from XML using findElement
-                for ((memberName, memberShape) in bindings.bodyMembers) {
-                    val fieldName = NamingUtil.toFieldName(memberName)
-                    val targetShape = ctx.model.expectShape(memberShape.target)
-                    val xmlName = xmlElementName(memberName, memberShape)
-                    val zigType = ctx.resolveBaseZigType(targetShape)
+            } else if (hasBodyMembers) {
+                // Deserialize body members from XML using xml.Reader
+                writer.write("var reader = aws.xml.Reader.init(body);")
+                writer.blankLine()
 
-                    when (zigType) {
-                        "[]const u8" -> {
-                            writer.openBlock("if (findElement(body, \"\$L\")) |content| {", xmlName)
-                            writer.write("result.\$L = try alloc.dupe(u8, content);", fieldName)
-                            writer.closeBlock("}")
-                        }
-                        "i32" -> {
-                            writer.openBlock("if (findElement(body, \"\$L\")) |content| {", xmlName)
-                            writer.write("result.\$L = std.fmt.parseInt(i32, content, 10) catch null;", fieldName)
-                            writer.closeBlock("}")
-                        }
-                        "i64" -> {
-                            writer.openBlock("if (findElement(body, \"\$L\")) |content| {", xmlName)
-                            writer.write("result.\$L = std.fmt.parseInt(i64, content, 10) catch null;", fieldName)
-                            writer.closeBlock("}")
-                        }
-                        "bool" -> {
-                            writer.openBlock("if (findElement(body, \"\$L\")) |content| {", xmlName)
-                            writer.write("result.\$L = std.mem.eql(u8, content, \"true\");", fieldName)
-                            writer.closeBlock("}")
-                        }
-                        else -> {}
-                    }
-                }
+                // Skip root element
+                writer.openBlock("while (try reader.next()) |event| {")
+                writer.openBlock("switch (event) {")
+                writer.write(".element_start => break,")
+                writer.write("else => {},")
+                writer.closeBlock("}")
+                writer.closeBlock("}")
+                writer.blankLine()
+
+                // Parse body members
+                writeXmlMemberParsing(writer, ctx, bindings.bodyMembers)
             }
 
             // @httpHeader - extract from response headers
@@ -502,6 +506,137 @@ class RestXmlProtocol : ProtocolGenerator {
         writer.blankLine()
         writer.write("return result;")
         writer.closeBlock("}")
+    }
+
+    private fun writeXmlMemberParsing(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        members: Map<String, MemberShape>,
+    ) {
+        writer.openBlock("while (try reader.next()) |event| {")
+        writer.openBlock("switch (event) {")
+        writer.openBlock(".element_start => |e| {")
+
+        var first = true
+        for ((memberName, memberShape) in members) {
+            val fieldName = NamingUtil.toFieldName(memberName)
+            val targetShape = ctx.model.expectShape(memberShape.target)
+            val xmlName = xmlElementName(memberName, memberShape)
+
+            val prefix = if (first) "if" else "} else if"
+            first = false
+
+            writer.write("\$L (std.mem.eql(u8, e.local, \"\$L\")) {", prefix, xmlName)
+            writer.indent()
+            writeXmlMemberDeserializer(writer, ctx, fieldName, targetShape)
+            writer.dedent()
+        }
+
+        if (!first) {
+            writer.write("} else {")
+            writer.indent()
+            writer.write("try reader.skipElement();")
+            writer.dedent()
+            writer.write("}")
+        } else {
+            writer.write("try reader.skipElement();")
+        }
+
+        writer.closeBlock("},")
+        writer.write(".element_end => break,")
+        writer.write("else => {},")
+        writer.closeBlock("}")
+        writer.closeBlock("}")
+    }
+
+    private fun writeXmlMemberDeserializer(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        fieldName: String,
+        targetShape: Shape,
+    ) {
+        when (targetShape) {
+            is StructureShape -> {
+                writer.write(
+                    "result.\$L = try serde.deserialize\$L(&reader, alloc);",
+                    fieldName, targetShape.id.name,
+                )
+            }
+            is ListShape -> {
+                val listFnName = "deserialize${targetShape.id.name}"
+                val itemTag = targetShape.member.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }
+                    .orElse("member")
+                writer.write(
+                    "result.\$L = try serde.\$L(&reader, alloc, \"\$L\");",
+                    fieldName, listFnName, itemTag,
+                )
+            }
+            is EnumShape, is IntEnumShape -> {
+                writer.write(
+                    "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                    fieldName, targetShape.id.name,
+                )
+            }
+            is StringShape -> {
+                if (ctx.isEnumType(targetShape)) {
+                    writer.write(
+                        "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                        fieldName, targetShape.id.name,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                        fieldName,
+                    )
+                }
+            }
+            is BooleanShape -> {
+                writer.write(
+                    "result.\$L = std.mem.eql(u8, try reader.readElementText(), \"true\");",
+                    fieldName,
+                )
+            }
+            is IntegerShape, is ShortShape -> {
+                writer.write(
+                    "result.\$L = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;",
+                    fieldName,
+                )
+            }
+            is LongShape -> {
+                writer.write(
+                    "result.\$L = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;",
+                    fieldName,
+                )
+            }
+            is FloatShape -> {
+                writer.write(
+                    "result.\$L = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;",
+                    fieldName,
+                )
+            }
+            is DoubleShape -> {
+                writer.write(
+                    "result.\$L = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;",
+                    fieldName,
+                )
+            }
+            is TimestampShape -> {
+                writer.write(
+                    "result.\$L = aws.imds.parseIso8601(try reader.readElementText()) catch null;",
+                    fieldName,
+                )
+            }
+            is BlobShape -> {
+                writer.write(
+                    "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                    fieldName,
+                )
+            }
+            else -> {
+                writer.write("try reader.skipElement();")
+            }
+        }
     }
 
     private fun writeHeaderDeserialization(
@@ -548,7 +683,16 @@ class RestXmlProtocol : ProtocolGenerator {
             outputName,
         )
 
-        writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
+        // Check if alloc is actually used (only string headers need it)
+        val allocUsedInStreaming = bindings.headers.values.any { ms ->
+            val ts = ctx.model.expectShape(ms.target)
+            ctx.resolveBaseZigType(ts) == "[]const u8"
+        }
+        if (!allocUsedInStreaming) {
+            writer.write("_ = alloc;")
+        }
+
+        writer.write("var result: \$L = .{};", outputName)
 
         // Transfer StreamingBody ownership to result for @httpPayload streaming blob
         if (bindings.payload != null) {

@@ -75,12 +75,10 @@ pub const DeleteObjectTaggingOutput = struct {
     /// The versionId of the object the tag-set was removed from.
     version_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteObjectTaggingOutput) void {
-        if (self.version_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DeleteObjectTaggingOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -109,7 +107,11 @@ pub fn execute(client: *Client, input: DeleteObjectTaggingInput, options: Option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteObjectTaggingInput, config: *aws.Config) !aws.http.Request {
@@ -156,7 +158,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteObjectTaggingInput, c
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteObjectTaggingOutput {
-    var result: DeleteObjectTaggingOutput = .{ .allocator = alloc };
+    var result: DeleteObjectTaggingOutput = .{};
     _ = status;
     _ = body;
     if (headers.get("x-amz-version-id")) |value| {

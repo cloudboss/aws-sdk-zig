@@ -70,9 +70,10 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
         if (!hasMembers) {
             writer.write("_ = body;")
-            writer.write("return .{ .allocator = alloc };")
+            writer.write("_ = alloc;")
+            writer.write("return .{};")
         } else {
-            writer.write("if (body.len == 0) return .{ .allocator = alloc };")
+            writer.write("if (body.len == 0) return .{};")
             writer.write("return aws.json.parseJsonObject(\$L, body, alloc);", outputName)
         }
 

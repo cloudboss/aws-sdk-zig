@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VolumeAttributeName = @import("volume_attribute_name.zig").VolumeAttributeName;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
 const ProductCode = @import("product_code.zig").ProductCode;
+const serde = @import("serde.zig");
 
 /// Describes the specified attribute of the specified volume. You can specify
 /// only one
@@ -39,12 +40,10 @@ pub const DescribeVolumeAttributeOutput = struct {
     /// The ID of the volume.
     volume_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeVolumeAttributeOutput) void {
-        if (self.volume_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeVolumeAttributeOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -73,7 +72,11 @@ pub fn execute(client: *Client, input: DescribeVolumeAttributeInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeVolumeAttributeInput, config: *aws.Config) !aws.http.Request {
@@ -111,9 +114,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeVolumeAttributeInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeVolumeAttributeOutput {
     _ = status;
     _ = headers;
-    var result: DescribeVolumeAttributeOutput = .{ .allocator = alloc };
-    if (findElement(body, "volumeId")) |content| {
-        result.volume_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeVolumeAttributeOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "autoEnableIO")) {
+                    result.auto_enable_io = try serde.deserializeAttributeBooleanValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "productCodes")) {
+                    result.product_codes = try serde.deserializeProductCodeList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "volumeId")) {
+                    result.volume_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

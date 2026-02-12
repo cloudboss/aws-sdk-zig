@@ -106,24 +106,10 @@ pub const DetachVolumeOutput = struct {
     /// The ID of the volume.
     volume_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DetachVolumeOutput) void {
-        if (self.associated_resource) |v| {
-            self.allocator.free(v);
-        }
-        if (self.device) |v| {
-            self.allocator.free(v);
-        }
-        if (self.instance_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.instance_owning_service) |v| {
-            self.allocator.free(v);
-        }
-        if (self.volume_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DetachVolumeOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -152,7 +138,11 @@ pub fn execute(client: *Client, input: DetachVolumeInput, options: Options) !Det
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DetachVolumeInput, config: *aws.Config) !aws.http.Request {
@@ -200,30 +190,44 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DetachVolumeInput, config: 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DetachVolumeOutput {
     _ = status;
     _ = headers;
-    var result: DetachVolumeOutput = .{ .allocator = alloc };
-    if (findElement(body, "associatedResource")) |content| {
-        result.associated_resource = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "attachTime")) |content| {
-        result.attach_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "deleteOnTermination")) |content| {
-        result.delete_on_termination = std.mem.eql(u8, content, "true");
-    }
-    if (findElement(body, "device")) |content| {
-        result.device = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ebsCardIndex")) |content| {
-        result.ebs_card_index = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "instanceId")) |content| {
-        result.instance_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "instanceOwningService")) |content| {
-        result.instance_owning_service = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "volumeId")) |content| {
-        result.volume_id = try alloc.dupe(u8, content);
+
+    var result: DetachVolumeOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "associatedResource")) {
+                    result.associated_resource = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "attachTime")) {
+                    result.attach_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
+                    result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "device")) {
+                    result.device = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ebsCardIndex")) {
+                    result.ebs_card_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "instanceId")) {
+                    result.instance_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "instanceOwningService")) {
+                    result.instance_owning_service = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.state = std.meta.stringToEnum(VolumeAttachmentState, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "volumeId")) {
+                    result.volume_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

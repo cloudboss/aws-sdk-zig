@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const LaunchTemplate = @import("launch_template.zig").LaunchTemplate;
+const serde = @import("serde.zig");
 
 /// Deletes a launch template. Deleting a launch template deletes all of its
 /// versions.
@@ -34,10 +35,10 @@ pub const DeleteLaunchTemplateOutput = struct {
     /// Information about the launch template.
     launch_template: ?LaunchTemplate = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteLaunchTemplateOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteLaunchTemplateOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -66,7 +67,11 @@ pub fn execute(client: *Client, input: DeleteLaunchTemplateInput, options: Optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteLaunchTemplateInput, config: *aws.Config) !aws.http.Request {
@@ -108,8 +113,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteLaunchTemplateInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteLaunchTemplateOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeleteLaunchTemplateOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeleteLaunchTemplateOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "launchTemplate")) {
+                    result.launch_template = try serde.deserializeLaunchTemplate(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

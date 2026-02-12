@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClientVpnAuthorizationRuleStatus = @import("client_vpn_authorization_rule_status.zig").ClientVpnAuthorizationRuleStatus;
+const serde = @import("serde.zig");
 
 /// Removes an ingress authorization rule from a Client VPN endpoint.
 pub const RevokeClientVpnIngressInput = struct {
@@ -36,10 +37,10 @@ pub const RevokeClientVpnIngressOutput = struct {
     /// The current state of the authorization rule.
     status: ?ClientVpnAuthorizationRuleStatus = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const RevokeClientVpnIngressOutput) void {
-        _ = self;
+    pub fn deinit(self: *RevokeClientVpnIngressOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -68,7 +69,11 @@ pub fn execute(client: *Client, input: RevokeClientVpnIngressInput, options: Opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: RevokeClientVpnIngressInput, config: *aws.Config) !aws.http.Request {
@@ -114,8 +119,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RevokeClientVpnIngressInput
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RevokeClientVpnIngressOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: RevokeClientVpnIngressOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: RevokeClientVpnIngressOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = try serde.deserializeClientVpnAuthorizationRuleStatus(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

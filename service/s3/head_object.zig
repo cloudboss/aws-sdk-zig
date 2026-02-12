@@ -755,75 +755,10 @@ pub const HeadObjectOutput = struct {
     /// This functionality is not supported for directory buckets.
     website_redirect_location: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const HeadObjectOutput) void {
-        if (self.accept_ranges) |v| {
-            self.allocator.free(v);
-        }
-        if (self.cache_control) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc32) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc32_c) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc64_nvme) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_sha1) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_sha256) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_disposition) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_encoding) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_language) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_range) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_type) |v| {
-            self.allocator.free(v);
-        }
-        if (self.e_tag) |v| {
-            self.allocator.free(v);
-        }
-        if (self.expiration) |v| {
-            self.allocator.free(v);
-        }
-        if (self.expires) |v| {
-            self.allocator.free(v);
-        }
-        if (self.metadata) |v| {
-            self.allocator.free(v);
-        }
-        if (self.restore) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_algorithm) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_key_md5) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_key_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.version_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.website_redirect_location) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *HeadObjectOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -852,7 +787,11 @@ pub fn execute(client: *Client, input: HeadObjectInput, options: Options) !HeadO
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: HeadObjectInput, config: *aws.Config) !aws.http.Request {
@@ -981,10 +920,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: HeadObjectInput, config: *a
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !HeadObjectOutput {
-    var result: HeadObjectOutput = .{ .allocator = alloc };
+    var result: HeadObjectOutput = .{};
     _ = status;
-    if (findElement(body, "Metadata")) |content| {
-        result.metadata = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Metadata")) {
+                    try reader.skipElement();
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
     if (headers.get("accept-ranges")) |value| {
         result.accept_ranges = try alloc.dupe(u8, value);

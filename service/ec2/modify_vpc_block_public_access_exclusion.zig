@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InternetGatewayExclusionMode = @import("internet_gateway_exclusion_mode.zig").InternetGatewayExclusionMode;
 const VpcBlockPublicAccessExclusion = @import("vpc_block_public_access_exclusion.zig").VpcBlockPublicAccessExclusion;
+const serde = @import("serde.zig");
 
 /// Modify VPC Block Public Access (BPA) exclusions. A VPC BPA exclusion is a
 /// mode that can be applied to a single VPC or subnet that exempts it from the
@@ -38,10 +39,10 @@ pub const ModifyVpcBlockPublicAccessExclusionOutput = struct {
     /// Details related to the exclusion.
     vpc_block_public_access_exclusion: ?VpcBlockPublicAccessExclusion = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifyVpcBlockPublicAccessExclusionOutput) void {
-        _ = self;
+    pub fn deinit(self: *ModifyVpcBlockPublicAccessExclusionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -70,7 +71,11 @@ pub fn execute(client: *Client, input: ModifyVpcBlockPublicAccessExclusionInput,
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcBlockPublicAccessExclusionInput, config: *aws.Config) !aws.http.Request {
@@ -108,8 +113,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcBlockPublicAccessE
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyVpcBlockPublicAccessExclusionOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ModifyVpcBlockPublicAccessExclusionOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ModifyVpcBlockPublicAccessExclusionOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "vpcBlockPublicAccessExclusion")) {
+                    result.vpc_block_public_access_exclusion = try serde.deserializeVpcBlockPublicAccessExclusion(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FailedQueuedPurchaseDeletion = @import("failed_queued_purchase_deletion.zig").FailedQueuedPurchaseDeletion;
 const SuccessfulQueuedPurchaseDeletion = @import("successful_queued_purchase_deletion.zig").SuccessfulQueuedPurchaseDeletion;
+const serde = @import("serde.zig");
 
 /// Deletes the queued purchases for the specified Reserved Instances.
 pub const DeleteQueuedReservedInstancesInput = struct {
@@ -27,10 +28,10 @@ pub const DeleteQueuedReservedInstancesOutput = struct {
     /// Information about the queued purchases that were successfully deleted.
     successful_queued_purchase_deletions: ?[]const SuccessfulQueuedPurchaseDeletion = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteQueuedReservedInstancesOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteQueuedReservedInstancesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -59,7 +60,11 @@ pub fn execute(client: *Client, input: DeleteQueuedReservedInstancesInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteQueuedReservedInstancesInput, config: *aws.Config) !aws.http.Request {
@@ -100,8 +105,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteQueuedReservedInstanc
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteQueuedReservedInstancesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeleteQueuedReservedInstancesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeleteQueuedReservedInstancesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "failedQueuedPurchaseDeletionSet")) {
+                    result.failed_queued_purchase_deletions = try serde.deserializeFailedQueuedPurchaseDeletionSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "successfulQueuedPurchaseDeletionSet")) {
+                    result.successful_queued_purchase_deletions = try serde.deserializeSuccessfulQueuedPurchaseDeletionSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

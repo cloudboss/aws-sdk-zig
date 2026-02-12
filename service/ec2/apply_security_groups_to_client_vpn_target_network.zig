@@ -3,6 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const serde = @import("serde.zig");
 
 /// Applies a security group to the association between the target network and
 /// the Client VPN endpoint. This action replaces the existing
@@ -30,10 +31,10 @@ pub const ApplySecurityGroupsToClientVpnTargetNetworkOutput = struct {
     /// The IDs of the applied security groups.
     security_group_ids: ?[]const []const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ApplySecurityGroupsToClientVpnTargetNetworkOutput) void {
-        _ = self;
+    pub fn deinit(self: *ApplySecurityGroupsToClientVpnTargetNetworkOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -62,7 +63,11 @@ pub fn execute(client: *Client, input: ApplySecurityGroupsToClientVpnTargetNetwo
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ApplySecurityGroupsToClientVpnTargetNetworkInput, config: *aws.Config) !aws.http.Request {
@@ -107,8 +112,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ApplySecurityGroupsToClient
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ApplySecurityGroupsToClientVpnTargetNetworkOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ApplySecurityGroupsToClientVpnTargetNetworkOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ApplySecurityGroupsToClientVpnTargetNetworkOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "securityGroupIds")) {
+                    result.security_group_ids = try serde.deserializeClientVpnSecurityGroupIdSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

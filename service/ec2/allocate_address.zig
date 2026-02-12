@@ -117,30 +117,10 @@ pub const AllocateAddressOutput = struct {
     /// The ID of an address pool that you own.
     public_ipv_4_pool: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const AllocateAddressOutput) void {
-        if (self.allocation_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.carrier_ip) |v| {
-            self.allocator.free(v);
-        }
-        if (self.customer_owned_ip) |v| {
-            self.allocator.free(v);
-        }
-        if (self.customer_owned_ipv_4_pool) |v| {
-            self.allocator.free(v);
-        }
-        if (self.network_border_group) |v| {
-            self.allocator.free(v);
-        }
-        if (self.public_ip) |v| {
-            self.allocator.free(v);
-        }
-        if (self.public_ipv_4_pool) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *AllocateAddressOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -169,7 +149,11 @@ pub fn execute(client: *Client, input: AllocateAddressInput, options: Options) !
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AllocateAddressInput, config: *aws.Config) !aws.http.Request {
@@ -240,27 +224,42 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AllocateAddressInput, confi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AllocateAddressOutput {
     _ = status;
     _ = headers;
-    var result: AllocateAddressOutput = .{ .allocator = alloc };
-    if (findElement(body, "allocationId")) |content| {
-        result.allocation_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "carrierIp")) |content| {
-        result.carrier_ip = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "customerOwnedIp")) |content| {
-        result.customer_owned_ip = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "customerOwnedIpv4Pool")) |content| {
-        result.customer_owned_ipv_4_pool = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "networkBorderGroup")) |content| {
-        result.network_border_group = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "publicIp")) |content| {
-        result.public_ip = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "publicIpv4Pool")) |content| {
-        result.public_ipv_4_pool = try alloc.dupe(u8, content);
+
+    var result: AllocateAddressOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "allocationId")) {
+                    result.allocation_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "carrierIp")) {
+                    result.carrier_ip = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "customerOwnedIp")) {
+                    result.customer_owned_ip = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "customerOwnedIpv4Pool")) {
+                    result.customer_owned_ipv_4_pool = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "domain")) {
+                    result.domain = std.meta.stringToEnum(DomainType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "networkBorderGroup")) {
+                    result.network_border_group = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "publicIp")) {
+                    result.public_ip = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "publicIpv4Pool")) {
+                    result.public_ipv_4_pool = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -93,13 +93,10 @@ pub const UpdateFunctionUrlConfigOutput = struct {
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
     last_modified_time: []const u8,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const UpdateFunctionUrlConfigOutput) void {
-        self.allocator.free(self.creation_time);
-        self.allocator.free(self.function_arn);
-        self.allocator.free(self.function_url);
-        self.allocator.free(self.last_modified_time);
+    pub fn deinit(self: *UpdateFunctionUrlConfigOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -138,7 +135,11 @@ pub fn execute(client: *Client, input: UpdateFunctionUrlConfigInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionUrlConfigInput, config: *aws.Config) !aws.http.Request {
@@ -203,7 +204,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionUrlConfigInpu
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateFunctionUrlConfigOutput {
-    var result: UpdateFunctionUrlConfigOutput = .{ .allocator = alloc };
+    var result: UpdateFunctionUrlConfigOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(UpdateFunctionUrlConfigOutput, body, alloc);
     }

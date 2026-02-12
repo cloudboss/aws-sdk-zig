@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AttributeSummary = @import("attribute_summary.zig").AttributeSummary;
+const serde = @import("serde.zig");
 
 /// Retrieves a summary of the account status report.
 ///
@@ -70,21 +71,10 @@ pub const GetDeclarativePoliciesReportSummaryOutput = struct {
     /// * For account: `123456789012`
     target_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetDeclarativePoliciesReportSummaryOutput) void {
-        if (self.report_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.s_3_bucket) |v| {
-            self.allocator.free(v);
-        }
-        if (self.s_3_prefix) |v| {
-            self.allocator.free(v);
-        }
-        if (self.target_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetDeclarativePoliciesReportSummaryOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -113,7 +103,11 @@ pub fn execute(client: *Client, input: GetDeclarativePoliciesReportSummaryInput,
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetDeclarativePoliciesReportSummaryInput, config: *aws.Config) !aws.http.Request {
@@ -149,30 +143,44 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetDeclarativePoliciesRepor
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetDeclarativePoliciesReportSummaryOutput {
     _ = status;
     _ = headers;
-    var result: GetDeclarativePoliciesReportSummaryOutput = .{ .allocator = alloc };
-    if (findElement(body, "endTime")) |content| {
-        result.end_time = std.fmt.parseInt(i64, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "numberOfAccounts")) |content| {
-        result.number_of_accounts = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "numberOfFailedAccounts")) |content| {
-        result.number_of_failed_accounts = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "reportId")) |content| {
-        result.report_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "s3Bucket")) |content| {
-        result.s_3_bucket = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "s3Prefix")) |content| {
-        result.s_3_prefix = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "startTime")) |content| {
-        result.start_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "targetId")) |content| {
-        result.target_id = try alloc.dupe(u8, content);
+
+    var result: GetDeclarativePoliciesReportSummaryOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "attributeSummarySet")) {
+                    result.attribute_summaries = try serde.deserializeAttributeSummaryList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "endTime")) {
+                    result.end_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "numberOfAccounts")) {
+                    result.number_of_accounts = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "numberOfFailedAccounts")) {
+                    result.number_of_failed_accounts = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "reportId")) {
+                    result.report_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "s3Bucket")) {
+                    result.s_3_bucket = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "s3Prefix")) {
+                    result.s_3_prefix = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "startTime")) {
+                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "targetId")) {
+                    result.target_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

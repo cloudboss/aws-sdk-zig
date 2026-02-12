@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const CustomerGateway = @import("customer_gateway.zig").CustomerGateway;
+const serde = @import("serde.zig");
 
 /// Describes one or more of your VPN customer gateways.
 ///
@@ -58,10 +59,10 @@ pub const DescribeCustomerGatewaysOutput = struct {
     /// Information about one or more customer gateways.
     customer_gateways: ?[]const CustomerGateway = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeCustomerGatewaysOutput) void {
-        _ = self;
+    pub fn deinit(self: *DescribeCustomerGatewaysOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -90,7 +91,11 @@ pub fn execute(client: *Client, input: DescribeCustomerGatewaysInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeCustomerGatewaysInput, config: *aws.Config) !aws.http.Request {
@@ -146,8 +151,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeCustomerGatewaysInp
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeCustomerGatewaysOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeCustomerGatewaysOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeCustomerGatewaysOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "customerGatewaySet")) {
+                    result.customer_gateways = try serde.deserializeCustomerGatewayList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

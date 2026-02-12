@@ -115,12 +115,10 @@ pub const GenerateServiceLastAccessedDetailsOutput = struct {
     /// `GetServiceLastAccessedDetail`.
     job_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GenerateServiceLastAccessedDetailsOutput) void {
-        if (self.job_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GenerateServiceLastAccessedDetailsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -149,7 +147,11 @@ pub fn execute(client: *Client, input: GenerateServiceLastAccessedDetailsInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GenerateServiceLastAccessedDetailsInput, config: *aws.Config) !aws.http.Request {
@@ -185,9 +187,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GenerateServiceLastAccessed
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GenerateServiceLastAccessedDetailsOutput {
     _ = status;
     _ = headers;
-    var result: GenerateServiceLastAccessedDetailsOutput = .{ .allocator = alloc };
-    if (findElement(body, "JobId")) |content| {
-        result.job_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GenerateServiceLastAccessedDetailsResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: GenerateServiceLastAccessedDetailsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "JobId")) {
+                    result.job_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

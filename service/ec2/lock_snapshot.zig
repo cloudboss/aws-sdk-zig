@@ -161,12 +161,10 @@ pub const LockSnapshotOutput = struct {
     /// The ID of the snapshot
     snapshot_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const LockSnapshotOutput) void {
-        if (self.snapshot_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *LockSnapshotOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -195,7 +193,11 @@ pub fn execute(client: *Client, input: LockSnapshotInput, options: Options) !Loc
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: LockSnapshotInput, config: *aws.Config) !aws.http.Request {
@@ -245,27 +247,42 @@ fn serializeRequest(alloc: std.mem.Allocator, input: LockSnapshotInput, config: 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !LockSnapshotOutput {
     _ = status;
     _ = headers;
-    var result: LockSnapshotOutput = .{ .allocator = alloc };
-    if (findElement(body, "coolOffPeriod")) |content| {
-        result.cool_off_period = std.fmt.parseInt(i32, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "coolOffPeriodExpiresOn")) |content| {
-        result.cool_off_period_expires_on = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "lockCreatedOn")) |content| {
-        result.lock_created_on = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "lockDuration")) |content| {
-        result.lock_duration = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "lockDurationStartTime")) |content| {
-        result.lock_duration_start_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "lockExpiresOn")) |content| {
-        result.lock_expires_on = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "snapshotId")) |content| {
-        result.snapshot_id = try alloc.dupe(u8, content);
+
+    var result: LockSnapshotOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "coolOffPeriod")) {
+                    result.cool_off_period = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "coolOffPeriodExpiresOn")) {
+                    result.cool_off_period_expires_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "lockCreatedOn")) {
+                    result.lock_created_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "lockDuration")) {
+                    result.lock_duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "lockDurationStartTime")) {
+                    result.lock_duration_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "lockExpiresOn")) {
+                    result.lock_expires_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "lockState")) {
+                    result.lock_state = std.meta.stringToEnum(LockState, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "snapshotId")) {
+                    result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -8,6 +8,7 @@ const GroupDetail = @import("group_detail.zig").GroupDetail;
 const ManagedPolicyDetail = @import("managed_policy_detail.zig").ManagedPolicyDetail;
 const RoleDetail = @import("role_detail.zig").RoleDetail;
 const UserDetail = @import("user_detail.zig").UserDetail;
+const serde = @import("serde.zig");
 
 /// Retrieves information about all IAM users, groups, roles, and policies in
 /// your Amazon Web Services
@@ -97,12 +98,10 @@ pub const GetAccountAuthorizationDetailsOutput = struct {
     /// A list containing information about IAM users.
     user_detail_list: ?[]const UserDetail = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetAccountAuthorizationDetailsOutput) void {
-        if (self.marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetAccountAuthorizationDetailsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -131,7 +130,11 @@ pub fn execute(client: *Client, input: GetAccountAuthorizationDetailsInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetAccountAuthorizationDetailsInput, config: *aws.Config) !aws.http.Request {
@@ -178,12 +181,40 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAccountAuthorizationDeta
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAccountAuthorizationDetailsOutput {
     _ = status;
     _ = headers;
-    var result: GetAccountAuthorizationDetailsOutput = .{ .allocator = alloc };
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetAccountAuthorizationDetailsResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "Marker")) |content| {
-        result.marker = try alloc.dupe(u8, content);
+
+    var result: GetAccountAuthorizationDetailsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GroupDetailList")) {
+                    result.group_detail_list = try serde.deserializegroupDetailListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Marker")) {
+                    result.marker = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Policies")) {
+                    result.policies = try serde.deserializeManagedPolicyDetailListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "RoleDetailList")) {
+                    result.role_detail_list = try serde.deserializeroleDetailListType(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "UserDetailList")) {
+                    result.user_detail_list = try serde.deserializeuserDetailListType(&reader, alloc, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeleteLaunchTemplateVersionsResponseSuccessItem = @import("delete_launch_template_versions_response_success_item.zig").DeleteLaunchTemplateVersionsResponseSuccessItem;
 const DeleteLaunchTemplateVersionsResponseErrorItem = @import("delete_launch_template_versions_response_error_item.zig").DeleteLaunchTemplateVersionsResponseErrorItem;
+const serde = @import("serde.zig");
 
 /// Deletes one or more versions of a launch template.
 ///
@@ -59,10 +60,10 @@ pub const DeleteLaunchTemplateVersionsOutput = struct {
     /// Information about the launch template versions that could not be deleted.
     unsuccessfully_deleted_launch_template_versions: ?[]const DeleteLaunchTemplateVersionsResponseErrorItem = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteLaunchTemplateVersionsOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteLaunchTemplateVersionsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -91,7 +92,11 @@ pub fn execute(client: *Client, input: DeleteLaunchTemplateVersionsInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteLaunchTemplateVersionsInput, config: *aws.Config) !aws.http.Request {
@@ -140,8 +145,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteLaunchTemplateVersion
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteLaunchTemplateVersionsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeleteLaunchTemplateVersionsOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeleteLaunchTemplateVersionsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "successfullyDeletedLaunchTemplateVersionSet")) {
+                    result.successfully_deleted_launch_template_versions = try serde.deserializeDeleteLaunchTemplateVersionsResponseSuccessSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "unsuccessfullyDeletedLaunchTemplateVersionSet")) {
+                    result.unsuccessfully_deleted_launch_template_versions = try serde.deserializeDeleteLaunchTemplateVersionsResponseErrorSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

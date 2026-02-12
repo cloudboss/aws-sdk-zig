@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const TransitGatewayRoute = @import("transit_gateway_route.zig").TransitGatewayRoute;
+const serde = @import("serde.zig");
 
 /// Searches for routes in the specified transit gateway route table.
 pub const SearchTransitGatewayRoutesInput = struct {
@@ -71,12 +72,10 @@ pub const SearchTransitGatewayRoutesOutput = struct {
     /// Information about the routes.
     routes: ?[]const TransitGatewayRoute = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const SearchTransitGatewayRoutesOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *SearchTransitGatewayRoutesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -105,7 +104,11 @@ pub fn execute(client: *Client, input: SearchTransitGatewayRoutesInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: SearchTransitGatewayRoutesInput, config: *aws.Config) !aws.http.Request {
@@ -160,12 +163,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SearchTransitGatewayRoutesI
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !SearchTransitGatewayRoutesOutput {
     _ = status;
     _ = headers;
-    var result: SearchTransitGatewayRoutesOutput = .{ .allocator = alloc };
-    if (findElement(body, "additionalRoutesAvailable")) |content| {
-        result.additional_routes_available = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+
+    var result: SearchTransitGatewayRoutesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "additionalRoutesAvailable")) {
+                    result.additional_routes_available = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "routeSet")) {
+                    result.routes = try serde.deserializeTransitGatewayRouteList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

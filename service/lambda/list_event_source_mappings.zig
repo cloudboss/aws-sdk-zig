@@ -57,12 +57,10 @@ pub const ListEventSourceMappingsOutput = struct {
     /// event source mappings.
     next_marker: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ListEventSourceMappingsOutput) void {
-        if (self.next_marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ListEventSourceMappingsOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -96,7 +94,11 @@ pub fn execute(client: *Client, input: ListEventSourceMappingsInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListEventSourceMappingsInput, config: *aws.Config) !aws.http.Request {
@@ -154,7 +156,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListEventSourceMappingsInpu
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListEventSourceMappingsOutput {
-    var result: ListEventSourceMappingsOutput = .{ .allocator = alloc };
+    var result: ListEventSourceMappingsOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(ListEventSourceMappingsOutput, body, alloc);
     }

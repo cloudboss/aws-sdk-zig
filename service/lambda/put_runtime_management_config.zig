@@ -72,13 +72,10 @@ pub const PutRuntimeManagementConfigOutput = struct {
     /// The runtime update mode.
     update_runtime_on: UpdateRuntimeOn,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const PutRuntimeManagementConfigOutput) void {
-        self.allocator.free(self.function_arn);
-        if (self.runtime_version_arn) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *PutRuntimeManagementConfigOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -113,7 +110,11 @@ pub fn execute(client: *Client, input: PutRuntimeManagementConfigInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PutRuntimeManagementConfigInput, config: *aws.Config) !aws.http.Request {
@@ -170,7 +171,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutRuntimeManagementConfigI
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutRuntimeManagementConfigOutput {
-    var result: PutRuntimeManagementConfigOutput = .{ .allocator = alloc };
+    var result: PutRuntimeManagementConfigOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(PutRuntimeManagementConfigOutput, body, alloc);
     }

@@ -56,10 +56,11 @@ pub const GetObjectTorrentOutput = struct {
 
     request_charged: ?RequestCharged = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
     pub fn deinit(self: *GetObjectTorrentOutput) void {
         self.body.deinit();
+        self._arena.deinit();
     }
 };
 
@@ -90,7 +91,11 @@ pub fn execute(client: *Client, input: GetObjectTorrentInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeStreamingResponse(&stream_resp, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeStreamingResponse(&stream_resp, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectTorrentInput, config: *aws.Config) !aws.http.Request {
@@ -134,7 +139,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectTorrentInput, conf
 }
 
 fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !GetObjectTorrentOutput {
-    var result: GetObjectTorrentOutput = .{ .allocator = alloc };
+    _ = alloc;
+    var result: GetObjectTorrentOutput = .{};
     result.body = stream_resp.body;
     if (stream_resp.headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);

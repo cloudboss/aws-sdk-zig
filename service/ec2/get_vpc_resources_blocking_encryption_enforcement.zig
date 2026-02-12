@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VpcEncryptionNonCompliantResource = @import("vpc_encryption_non_compliant_resource.zig").VpcEncryptionNonCompliantResource;
+const serde = @import("serde.zig");
 
 /// Gets information about resources in a VPC that are blocking encryption
 /// enforcement.
@@ -41,12 +42,10 @@ pub const GetVpcResourcesBlockingEncryptionEnforcementOutput = struct {
     /// Information about resources that are blocking encryption enforcement.
     non_compliant_resources: ?[]const VpcEncryptionNonCompliantResource = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetVpcResourcesBlockingEncryptionEnforcementOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetVpcResourcesBlockingEncryptionEnforcementOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -75,7 +74,11 @@ pub fn execute(client: *Client, input: GetVpcResourcesBlockingEncryptionEnforcem
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetVpcResourcesBlockingEncryptionEnforcementInput, config: *aws.Config) !aws.http.Request {
@@ -119,9 +122,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetVpcResourcesBlockingEncr
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetVpcResourcesBlockingEncryptionEnforcementOutput {
     _ = status;
     _ = headers;
-    var result: GetVpcResourcesBlockingEncryptionEnforcementOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: GetVpcResourcesBlockingEncryptionEnforcementOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "nonCompliantResourceSet")) {
+                    result.non_compliant_resources = try serde.deserializeVpcEncryptionNonCompliantResourceList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

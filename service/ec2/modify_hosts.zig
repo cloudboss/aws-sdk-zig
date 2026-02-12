@@ -7,6 +7,7 @@ const AutoPlacement = @import("auto_placement.zig").AutoPlacement;
 const HostMaintenance = @import("host_maintenance.zig").HostMaintenance;
 const HostRecovery = @import("host_recovery.zig").HostRecovery;
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
+const serde = @import("serde.zig");
 
 /// Modify the auto-placement setting of a Dedicated Host. When auto-placement
 /// is enabled,
@@ -78,10 +79,10 @@ pub const ModifyHostsOutput = struct {
     /// you requested can be used.
     unsuccessful: ?[]const UnsuccessfulItem = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifyHostsOutput) void {
-        _ = self;
+    pub fn deinit(self: *ModifyHostsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -110,7 +111,11 @@ pub fn execute(client: *Client, input: ModifyHostsInput, options: Options) !Modi
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyHostsInput, config: *aws.Config) !aws.http.Request {
@@ -167,8 +172,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyHostsInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyHostsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ModifyHostsOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ModifyHostsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "successful")) {
+                    result.successful = try serde.deserializeResponseHostIdList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "unsuccessful")) {
+                    result.unsuccessful = try serde.deserializeUnsuccessfulItemList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

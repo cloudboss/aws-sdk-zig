@@ -930,14 +930,18 @@ pub fn deserializevirtualMFADeviceListType(reader: *aws.xml.Reader, alloc: std.m
 }
 
 pub fn deserializeAccessDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AccessDetail {
-    var result: AccessDetail = .{};
+    var result: AccessDetail = undefined;
+    result.entity_path = null;
+    result.last_authenticated_time = null;
+    result.region = null;
+    result.total_authenticated_entities = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EntityPath")) {
                     result.entity_path = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastAuthenticatedTime")) {
-                    result.last_authenticated_time = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.last_authenticated_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Region")) {
                     result.region = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ServiceName")) {
@@ -958,14 +962,15 @@ pub fn deserializeAccessDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator
 }
 
 pub fn deserializeAccessKey(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AccessKey {
-    var result: AccessKey = .{};
+    var result: AccessKey = undefined;
+    result.create_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AccessKeyId")) {
                     result.access_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "SecretAccessKey")) {
                     result.secret_access_key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
@@ -984,12 +989,13 @@ pub fn deserializeAccessKey(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
 }
 
 pub fn deserializeAccessKeyLastUsed(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AccessKeyLastUsed {
-    var result: AccessKeyLastUsed = .{};
+    var result: AccessKeyLastUsed = undefined;
+    result.last_used_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "LastUsedDate")) {
-                    result.last_used_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.last_used_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Region")) {
                     result.region = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ServiceName")) {
@@ -1006,14 +1012,18 @@ pub fn deserializeAccessKeyLastUsed(reader: *aws.xml.Reader, alloc: std.mem.Allo
 }
 
 pub fn deserializeAccessKeyMetadata(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AccessKeyMetadata {
-    var result: AccessKeyMetadata = .{};
+    var result: AccessKeyMetadata = undefined;
+    result.access_key_id = null;
+    result.create_date = null;
+    result.status = null;
+    result.user_name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AccessKeyId")) {
                     result.access_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = std.meta.stringToEnum(statusType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
@@ -1030,7 +1040,9 @@ pub fn deserializeAccessKeyMetadata(reader: *aws.xml.Reader, alloc: std.mem.Allo
 }
 
 pub fn deserializeAttachedPermissionsBoundary(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AttachedPermissionsBoundary {
-    var result: AttachedPermissionsBoundary = .{};
+    var result: AttachedPermissionsBoundary = undefined;
+    result.permissions_boundary_arn = null;
+    result.permissions_boundary_type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1050,7 +1062,9 @@ pub fn deserializeAttachedPermissionsBoundary(reader: *aws.xml.Reader, alloc: st
 }
 
 pub fn deserializeAttachedPolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AttachedPolicy {
-    var result: AttachedPolicy = .{};
+    var result: AttachedPolicy = undefined;
+    result.policy_arn = null;
+    result.policy_name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1070,7 +1084,9 @@ pub fn deserializeAttachedPolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocat
 }
 
 pub fn deserializeDelegationPermission(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !DelegationPermission {
-    var result: DelegationPermission = .{};
+    var result: DelegationPermission = undefined;
+    result.parameters = null;
+    result.policy_template_arn = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1090,20 +1106,40 @@ pub fn deserializeDelegationPermission(reader: *aws.xml.Reader, alloc: std.mem.A
 }
 
 pub fn deserializeDelegationRequest(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !DelegationRequest {
-    var result: DelegationRequest = .{};
+    var result: DelegationRequest = undefined;
+    result.approver_id = null;
+    result.create_date = null;
+    result.delegation_request_id = null;
+    result.description = null;
+    result.expiration_time = null;
+    result.notes = null;
+    result.only_send_by_owner = null;
+    result.owner_account_id = null;
+    result.owner_id = null;
+    result.permission_policy = null;
+    result.permissions = null;
+    result.redirect_url = null;
+    result.rejection_reason = null;
+    result.request_message = null;
+    result.requestor_id = null;
+    result.requestor_name = null;
+    result.role_permission_restriction_arns = null;
+    result.session_duration = null;
+    result.state = null;
+    result.updated_time = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ApproverId")) {
                     result.approver_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DelegationRequestId")) {
                     result.delegation_request_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExpirationTime")) {
-                    result.expiration_time = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.expiration_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Notes")) {
                     result.notes = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OnlySendByOwner")) {
@@ -1133,7 +1169,7 @@ pub fn deserializeDelegationRequest(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "State")) {
                     result.state = std.meta.stringToEnum(stateType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UpdatedTime")) {
-                    result.updated_time = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.updated_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -1146,7 +1182,9 @@ pub fn deserializeDelegationRequest(reader: *aws.xml.Reader, alloc: std.mem.Allo
 }
 
 pub fn deserializeDeletionTaskFailureReasonType(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !DeletionTaskFailureReasonType {
-    var result: DeletionTaskFailureReasonType = .{};
+    var result: DeletionTaskFailureReasonType = undefined;
+    result.reason = null;
+    result.role_usage_list = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1166,14 +1204,15 @@ pub fn deserializeDeletionTaskFailureReasonType(reader: *aws.xml.Reader, alloc: 
 }
 
 pub fn deserializeEntityDetails(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EntityDetails {
-    var result: EntityDetails = .{};
+    var result: EntityDetails = undefined;
+    result.last_authenticated = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EntityInfo")) {
                     result.entity_info = try deserializeEntityInfo(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "LastAuthenticated")) {
-                    result.last_authenticated = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.last_authenticated = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -1186,7 +1225,8 @@ pub fn deserializeEntityDetails(reader: *aws.xml.Reader, alloc: std.mem.Allocato
 }
 
 pub fn deserializeEntityInfo(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EntityInfo {
-    var result: EntityInfo = .{};
+    var result: EntityInfo = undefined;
+    result.path = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1212,7 +1252,7 @@ pub fn deserializeEntityInfo(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
 }
 
 pub fn deserializeErrorDetails(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ErrorDetails {
-    var result: ErrorDetails = .{};
+    var result: ErrorDetails = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1232,7 +1272,14 @@ pub fn deserializeErrorDetails(reader: *aws.xml.Reader, alloc: std.mem.Allocator
 }
 
 pub fn deserializeEvaluationResult(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EvaluationResult {
-    var result: EvaluationResult = .{};
+    var result: EvaluationResult = undefined;
+    result.eval_decision_details = null;
+    result.eval_resource_name = null;
+    result.matched_statements = null;
+    result.missing_context_values = null;
+    result.organizations_decision_detail = null;
+    result.permissions_boundary_decision_detail = null;
+    result.resource_specific_results = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1266,14 +1313,14 @@ pub fn deserializeEvaluationResult(reader: *aws.xml.Reader, alloc: std.mem.Alloc
 }
 
 pub fn deserializeGroup(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Group {
-    var result: Group = .{};
+    var result: Group = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Arn")) {
                     result.arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "GroupId")) {
                     result.group_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "GroupName")) {
@@ -1292,7 +1339,14 @@ pub fn deserializeGroup(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Grou
 }
 
 pub fn deserializeGroupDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !GroupDetail {
-    var result: GroupDetail = .{};
+    var result: GroupDetail = undefined;
+    result.arn = null;
+    result.attached_managed_policies = null;
+    result.create_date = null;
+    result.group_id = null;
+    result.group_name = null;
+    result.group_policy_list = null;
+    result.path = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1301,7 +1355,7 @@ pub fn deserializeGroupDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
                 } else if (std.mem.eql(u8, e.local, "AttachedManagedPolicies")) {
                     result.attached_managed_policies = try deserializeattachedPoliciesListType(reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "GroupId")) {
                     result.group_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "GroupName")) {
@@ -1322,14 +1376,15 @@ pub fn deserializeGroupDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
 }
 
 pub fn deserializeInstanceProfile(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !InstanceProfile {
-    var result: InstanceProfile = .{};
+    var result: InstanceProfile = undefined;
+    result.tags = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Arn")) {
                     result.arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InstanceProfileId")) {
                     result.instance_profile_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InstanceProfileName")) {
@@ -1352,7 +1407,9 @@ pub fn deserializeInstanceProfile(reader: *aws.xml.Reader, alloc: std.mem.Alloca
 }
 
 pub fn deserializeListPoliciesGrantingServiceAccessEntry(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ListPoliciesGrantingServiceAccessEntry {
-    var result: ListPoliciesGrantingServiceAccessEntry = .{};
+    var result: ListPoliciesGrantingServiceAccessEntry = undefined;
+    result.policies = null;
+    result.service_namespace = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1372,12 +1429,13 @@ pub fn deserializeListPoliciesGrantingServiceAccessEntry(reader: *aws.xml.Reader
 }
 
 pub fn deserializeLoginProfile(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LoginProfile {
-    var result: LoginProfile = .{};
+    var result: LoginProfile = undefined;
+    result.password_reset_required = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PasswordResetRequired")) {
                     result.password_reset_required = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
@@ -1394,12 +1452,12 @@ pub fn deserializeLoginProfile(reader: *aws.xml.Reader, alloc: std.mem.Allocator
 }
 
 pub fn deserializeMFADevice(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !MFADevice {
-    var result: MFADevice = .{};
+    var result: MFADevice = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EnableDate")) {
-                    result.enable_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.enable_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SerialNumber")) {
                     result.serial_number = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
@@ -1416,7 +1474,19 @@ pub fn deserializeMFADevice(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
 }
 
 pub fn deserializeManagedPolicyDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ManagedPolicyDetail {
-    var result: ManagedPolicyDetail = .{};
+    var result: ManagedPolicyDetail = undefined;
+    result.arn = null;
+    result.attachment_count = null;
+    result.create_date = null;
+    result.default_version_id = null;
+    result.description = null;
+    result.is_attachable = null;
+    result.path = null;
+    result.permissions_boundary_usage_count = null;
+    result.policy_id = null;
+    result.policy_name = null;
+    result.policy_version_list = null;
+    result.update_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1425,7 +1495,7 @@ pub fn deserializeManagedPolicyDetail(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "AttachmentCount")) {
                     result.attachment_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DefaultVersionId")) {
                     result.default_version_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
@@ -1443,7 +1513,7 @@ pub fn deserializeManagedPolicyDetail(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "PolicyVersionList")) {
                     result.policy_version_list = try deserializepolicyDocumentVersionListType(reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "UpdateDate")) {
-                    result.update_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.update_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -1456,7 +1526,8 @@ pub fn deserializeManagedPolicyDetail(reader: *aws.xml.Reader, alloc: std.mem.Al
 }
 
 pub fn deserializeOpenIDConnectProviderListEntry(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !OpenIDConnectProviderListEntry {
-    var result: OpenIDConnectProviderListEntry = .{};
+    var result: OpenIDConnectProviderListEntry = undefined;
+    result.arn = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1475,7 +1546,8 @@ pub fn deserializeOpenIDConnectProviderListEntry(reader: *aws.xml.Reader, alloc:
 
 pub fn deserializeOrganizationsDecisionDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !OrganizationsDecisionDetail {
     _ = alloc;
-    var result: OrganizationsDecisionDetail = .{};
+    var result: OrganizationsDecisionDetail = undefined;
+    result.allowed_by_organizations = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1494,7 +1566,17 @@ pub fn deserializeOrganizationsDecisionDetail(reader: *aws.xml.Reader, alloc: st
 
 pub fn deserializePasswordPolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PasswordPolicy {
     _ = alloc;
-    var result: PasswordPolicy = .{};
+    var result: PasswordPolicy = undefined;
+    result.allow_users_to_change_password = null;
+    result.expire_passwords = null;
+    result.hard_expiry = null;
+    result.max_password_age = null;
+    result.minimum_password_length = null;
+    result.password_reuse_prevention = null;
+    result.require_lowercase_characters = null;
+    result.require_numbers = null;
+    result.require_symbols = null;
+    result.require_uppercase_characters = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1531,7 +1613,8 @@ pub fn deserializePasswordPolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocat
 
 pub fn deserializePermissionsBoundaryDecisionDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PermissionsBoundaryDecisionDetail {
     _ = alloc;
-    var result: PermissionsBoundaryDecisionDetail = .{};
+    var result: PermissionsBoundaryDecisionDetail = undefined;
+    result.allowed_by_permissions_boundary = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1549,7 +1632,19 @@ pub fn deserializePermissionsBoundaryDecisionDetail(reader: *aws.xml.Reader, all
 }
 
 pub fn deserializePolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Policy {
-    var result: Policy = .{};
+    var result: Policy = undefined;
+    result.arn = null;
+    result.attachment_count = null;
+    result.create_date = null;
+    result.default_version_id = null;
+    result.description = null;
+    result.is_attachable = null;
+    result.path = null;
+    result.permissions_boundary_usage_count = null;
+    result.policy_id = null;
+    result.policy_name = null;
+    result.tags = null;
+    result.update_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1558,7 +1653,7 @@ pub fn deserializePolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Pol
                 } else if (std.mem.eql(u8, e.local, "AttachmentCount")) {
                     result.attachment_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DefaultVersionId")) {
                     result.default_version_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
@@ -1576,7 +1671,7 @@ pub fn deserializePolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Pol
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try deserializetagListType(reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "UpdateDate")) {
-                    result.update_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.update_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -1589,7 +1684,9 @@ pub fn deserializePolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Pol
 }
 
 pub fn deserializePolicyDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyDetail {
-    var result: PolicyDetail = .{};
+    var result: PolicyDetail = undefined;
+    result.policy_document = null;
+    result.policy_name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1609,7 +1706,10 @@ pub fn deserializePolicyDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator
 }
 
 pub fn deserializePolicyGrantingServiceAccess(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyGrantingServiceAccess {
-    var result: PolicyGrantingServiceAccess = .{};
+    var result: PolicyGrantingServiceAccess = undefined;
+    result.entity_name = null;
+    result.entity_type = null;
+    result.policy_arn = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1635,7 +1735,9 @@ pub fn deserializePolicyGrantingServiceAccess(reader: *aws.xml.Reader, alloc: st
 }
 
 pub fn deserializePolicyGroup(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyGroup {
-    var result: PolicyGroup = .{};
+    var result: PolicyGroup = undefined;
+    result.group_id = null;
+    result.group_name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1655,7 +1757,10 @@ pub fn deserializePolicyGroup(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
 }
 
 pub fn deserializePolicyParameter(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyParameter {
-    var result: PolicyParameter = .{};
+    var result: PolicyParameter = undefined;
+    result.name = null;
+    result.@"type" = null;
+    result.values = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1677,7 +1782,9 @@ pub fn deserializePolicyParameter(reader: *aws.xml.Reader, alloc: std.mem.Alloca
 }
 
 pub fn deserializePolicyRole(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyRole {
-    var result: PolicyRole = .{};
+    var result: PolicyRole = undefined;
+    result.role_id = null;
+    result.role_name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1697,7 +1804,9 @@ pub fn deserializePolicyRole(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
 }
 
 pub fn deserializePolicyUser(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyUser {
-    var result: PolicyUser = .{};
+    var result: PolicyUser = undefined;
+    result.user_id = null;
+    result.user_name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1717,12 +1826,16 @@ pub fn deserializePolicyUser(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
 }
 
 pub fn deserializePolicyVersion(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyVersion {
-    var result: PolicyVersion = .{};
+    var result: PolicyVersion = undefined;
+    result.create_date = null;
+    result.document = null;
+    result.is_default_version = null;
+    result.version_id = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Document")) {
                     result.document = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IsDefaultVersion")) {
@@ -1742,7 +1855,9 @@ pub fn deserializePolicyVersion(reader: *aws.xml.Reader, alloc: std.mem.Allocato
 
 pub fn deserializePosition(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Position {
     _ = alloc;
-    var result: Position = .{};
+    var result: Position = undefined;
+    result.column = null;
+    result.line = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1762,7 +1877,11 @@ pub fn deserializePosition(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !P
 }
 
 pub fn deserializeResourceSpecificResult(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ResourceSpecificResult {
-    var result: ResourceSpecificResult = .{};
+    var result: ResourceSpecificResult = undefined;
+    result.eval_decision_details = null;
+    result.matched_statements = null;
+    result.missing_context_values = null;
+    result.permissions_boundary_decision_detail = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1790,7 +1909,13 @@ pub fn deserializeResourceSpecificResult(reader: *aws.xml.Reader, alloc: std.mem
 }
 
 pub fn deserializeRole(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Role {
-    var result: Role = .{};
+    var result: Role = undefined;
+    result.assume_role_policy_document = null;
+    result.description = null;
+    result.max_session_duration = null;
+    result.permissions_boundary = null;
+    result.role_last_used = null;
+    result.tags = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1799,7 +1924,7 @@ pub fn deserializeRole(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Role 
                 } else if (std.mem.eql(u8, e.local, "AssumeRolePolicyDocument")) {
                     result.assume_role_policy_document = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MaxSessionDuration")) {
@@ -1828,7 +1953,19 @@ pub fn deserializeRole(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Role 
 }
 
 pub fn deserializeRoleDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !RoleDetail {
-    var result: RoleDetail = .{};
+    var result: RoleDetail = undefined;
+    result.arn = null;
+    result.assume_role_policy_document = null;
+    result.attached_managed_policies = null;
+    result.create_date = null;
+    result.instance_profile_list = null;
+    result.path = null;
+    result.permissions_boundary = null;
+    result.role_id = null;
+    result.role_last_used = null;
+    result.role_name = null;
+    result.role_policy_list = null;
+    result.tags = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1839,7 +1976,7 @@ pub fn deserializeRoleDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
                 } else if (std.mem.eql(u8, e.local, "AttachedManagedPolicies")) {
                     result.attached_managed_policies = try deserializeattachedPoliciesListType(reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "InstanceProfileList")) {
                     result.instance_profile_list = try deserializeinstanceProfileListType(reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "Path")) {
@@ -1868,12 +2005,14 @@ pub fn deserializeRoleDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
 }
 
 pub fn deserializeRoleLastUsed(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !RoleLastUsed {
-    var result: RoleLastUsed = .{};
+    var result: RoleLastUsed = undefined;
+    result.last_used_date = null;
+    result.region = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "LastUsedDate")) {
-                    result.last_used_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.last_used_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Region")) {
                     result.region = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -1888,7 +2027,9 @@ pub fn deserializeRoleLastUsed(reader: *aws.xml.Reader, alloc: std.mem.Allocator
 }
 
 pub fn deserializeRoleUsageType(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !RoleUsageType {
-    var result: RoleUsageType = .{};
+    var result: RoleUsageType = undefined;
+    result.region = null;
+    result.resources = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1908,14 +2049,16 @@ pub fn deserializeRoleUsageType(reader: *aws.xml.Reader, alloc: std.mem.Allocato
 }
 
 pub fn deserializeSAMLPrivateKey(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SAMLPrivateKey {
-    var result: SAMLPrivateKey = .{};
+    var result: SAMLPrivateKey = undefined;
+    result.key_id = null;
+    result.timestamp = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "KeyId")) {
                     result.key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Timestamp")) {
-                    result.timestamp = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -1928,16 +2071,19 @@ pub fn deserializeSAMLPrivateKey(reader: *aws.xml.Reader, alloc: std.mem.Allocat
 }
 
 pub fn deserializeSAMLProviderListEntry(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SAMLProviderListEntry {
-    var result: SAMLProviderListEntry = .{};
+    var result: SAMLProviderListEntry = undefined;
+    result.arn = null;
+    result.create_date = null;
+    result.valid_until = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Arn")) {
                     result.arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ValidUntil")) {
-                    result.valid_until = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.valid_until = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -1950,7 +2096,8 @@ pub fn deserializeSAMLProviderListEntry(reader: *aws.xml.Reader, alloc: std.mem.
 }
 
 pub fn deserializeSSHPublicKey(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SSHPublicKey {
-    var result: SSHPublicKey = .{};
+    var result: SSHPublicKey = undefined;
+    result.upload_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1963,7 +2110,7 @@ pub fn deserializeSSHPublicKey(reader: *aws.xml.Reader, alloc: std.mem.Allocator
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = std.meta.stringToEnum(statusType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UploadDate")) {
-                    result.upload_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.upload_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
                     result.user_name = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -1978,7 +2125,7 @@ pub fn deserializeSSHPublicKey(reader: *aws.xml.Reader, alloc: std.mem.Allocator
 }
 
 pub fn deserializeSSHPublicKeyMetadata(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SSHPublicKeyMetadata {
-    var result: SSHPublicKeyMetadata = .{};
+    var result: SSHPublicKeyMetadata = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1987,7 +2134,7 @@ pub fn deserializeSSHPublicKeyMetadata(reader: *aws.xml.Reader, alloc: std.mem.A
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = std.meta.stringToEnum(statusType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UploadDate")) {
-                    result.upload_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.upload_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
                     result.user_name = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -2002,7 +2149,9 @@ pub fn deserializeSSHPublicKeyMetadata(reader: *aws.xml.Reader, alloc: std.mem.A
 }
 
 pub fn deserializeServerCertificate(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ServerCertificate {
-    var result: ServerCertificate = .{};
+    var result: ServerCertificate = undefined;
+    result.certificate_chain = null;
+    result.tags = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2026,14 +2175,16 @@ pub fn deserializeServerCertificate(reader: *aws.xml.Reader, alloc: std.mem.Allo
 }
 
 pub fn deserializeServerCertificateMetadata(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ServerCertificateMetadata {
-    var result: ServerCertificateMetadata = .{};
+    var result: ServerCertificateMetadata = undefined;
+    result.expiration = null;
+    result.upload_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Arn")) {
                     result.arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Expiration")) {
-                    result.expiration = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.expiration = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Path")) {
                     result.path = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ServerCertificateId")) {
@@ -2041,7 +2192,7 @@ pub fn deserializeServerCertificateMetadata(reader: *aws.xml.Reader, alloc: std.
                 } else if (std.mem.eql(u8, e.local, "ServerCertificateName")) {
                     result.server_certificate_name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UploadDate")) {
-                    result.upload_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.upload_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -2054,12 +2205,17 @@ pub fn deserializeServerCertificateMetadata(reader: *aws.xml.Reader, alloc: std.
 }
 
 pub fn deserializeServiceLastAccessed(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ServiceLastAccessed {
-    var result: ServiceLastAccessed = .{};
+    var result: ServiceLastAccessed = undefined;
+    result.last_authenticated = null;
+    result.last_authenticated_entity = null;
+    result.last_authenticated_region = null;
+    result.total_authenticated_entities = null;
+    result.tracked_actions_last_accessed = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "LastAuthenticated")) {
-                    result.last_authenticated = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.last_authenticated = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "LastAuthenticatedEntity")) {
                     result.last_authenticated_entity = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastAuthenticatedRegion")) {
@@ -2084,14 +2240,19 @@ pub fn deserializeServiceLastAccessed(reader: *aws.xml.Reader, alloc: std.mem.Al
 }
 
 pub fn deserializeServiceSpecificCredential(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ServiceSpecificCredential {
-    var result: ServiceSpecificCredential = .{};
+    var result: ServiceSpecificCredential = undefined;
+    result.expiration_date = null;
+    result.service_credential_alias = null;
+    result.service_credential_secret = null;
+    result.service_password = null;
+    result.service_user_name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExpirationDate")) {
-                    result.expiration_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.expiration_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ServiceCredentialAlias")) {
                     result.service_credential_alias = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ServiceCredentialSecret")) {
@@ -2120,14 +2281,17 @@ pub fn deserializeServiceSpecificCredential(reader: *aws.xml.Reader, alloc: std.
 }
 
 pub fn deserializeServiceSpecificCredentialMetadata(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ServiceSpecificCredentialMetadata {
-    var result: ServiceSpecificCredentialMetadata = .{};
+    var result: ServiceSpecificCredentialMetadata = undefined;
+    result.expiration_date = null;
+    result.service_credential_alias = null;
+    result.service_user_name = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ExpirationDate")) {
-                    result.expiration_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.expiration_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ServiceCredentialAlias")) {
                     result.service_credential_alias = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ServiceName")) {
@@ -2152,7 +2316,8 @@ pub fn deserializeServiceSpecificCredentialMetadata(reader: *aws.xml.Reader, all
 }
 
 pub fn deserializeSigningCertificate(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SigningCertificate {
-    var result: SigningCertificate = .{};
+    var result: SigningCertificate = undefined;
+    result.upload_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2163,7 +2328,7 @@ pub fn deserializeSigningCertificate(reader: *aws.xml.Reader, alloc: std.mem.All
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = std.meta.stringToEnum(statusType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UploadDate")) {
-                    result.upload_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.upload_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
                     result.user_name = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -2178,7 +2343,11 @@ pub fn deserializeSigningCertificate(reader: *aws.xml.Reader, alloc: std.mem.All
 }
 
 pub fn deserializeStatement(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Statement {
-    var result: Statement = .{};
+    var result: Statement = undefined;
+    result.end_position = null;
+    result.source_policy_id = null;
+    result.source_policy_type = null;
+    result.start_position = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2202,7 +2371,7 @@ pub fn deserializeStatement(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
 }
 
 pub fn deserializeTag(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Tag {
-    var result: Tag = .{};
+    var result: Tag = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2222,7 +2391,11 @@ pub fn deserializeTag(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Tag {
 }
 
 pub fn deserializeTrackedActionLastAccessed(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !TrackedActionLastAccessed {
-    var result: TrackedActionLastAccessed = .{};
+    var result: TrackedActionLastAccessed = undefined;
+    result.action_name = null;
+    result.last_accessed_entity = null;
+    result.last_accessed_region = null;
+    result.last_accessed_time = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2233,7 +2406,7 @@ pub fn deserializeTrackedActionLastAccessed(reader: *aws.xml.Reader, alloc: std.
                 } else if (std.mem.eql(u8, e.local, "LastAccessedRegion")) {
                     result.last_accessed_region = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastAccessedTime")) {
-                    result.last_accessed_time = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.last_accessed_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -2246,16 +2419,19 @@ pub fn deserializeTrackedActionLastAccessed(reader: *aws.xml.Reader, alloc: std.
 }
 
 pub fn deserializeUser(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !User {
-    var result: User = .{};
+    var result: User = undefined;
+    result.password_last_used = null;
+    result.permissions_boundary = null;
+    result.tags = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Arn")) {
                     result.arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = try aws.imds.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PasswordLastUsed")) {
-                    result.password_last_used = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.password_last_used = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Path")) {
                     result.path = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PermissionsBoundary")) {
@@ -2278,7 +2454,17 @@ pub fn deserializeUser(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !User 
 }
 
 pub fn deserializeUserDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !UserDetail {
-    var result: UserDetail = .{};
+    var result: UserDetail = undefined;
+    result.arn = null;
+    result.attached_managed_policies = null;
+    result.create_date = null;
+    result.group_list = null;
+    result.path = null;
+    result.permissions_boundary = null;
+    result.tags = null;
+    result.user_id = null;
+    result.user_name = null;
+    result.user_policy_list = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2287,7 +2473,7 @@ pub fn deserializeUserDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
                 } else if (std.mem.eql(u8, e.local, "AttachedManagedPolicies")) {
                     result.attached_managed_policies = try deserializeattachedPoliciesListType(reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "GroupList")) {
                     result.group_list = try deserializegroupNameListType(reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "Path")) {
@@ -2314,14 +2500,19 @@ pub fn deserializeUserDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
 }
 
 pub fn deserializeVirtualMFADevice(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !VirtualMFADevice {
-    var result: VirtualMFADevice = .{};
+    var result: VirtualMFADevice = undefined;
+    result.base_32_string_seed = null;
+    result.enable_date = null;
+    result.qr_code_png = null;
+    result.tags = null;
+    result.user = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Base32StringSeed")) {
                     result.base_32_string_seed = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EnableDate")) {
-                    result.enable_date = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.enable_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "QRCodePNG")) {
                     result.qr_code_png = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SerialNumber")) {

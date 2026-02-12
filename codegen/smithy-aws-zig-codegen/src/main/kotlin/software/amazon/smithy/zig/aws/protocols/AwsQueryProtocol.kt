@@ -1,9 +1,20 @@
 package software.amazon.smithy.zig.aws.protocols
 
+import software.amazon.smithy.model.shapes.BlobShape
+import software.amazon.smithy.model.shapes.BooleanShape
+import software.amazon.smithy.model.shapes.DoubleShape
+import software.amazon.smithy.model.shapes.EnumShape
+import software.amazon.smithy.model.shapes.FloatShape
+import software.amazon.smithy.model.shapes.IntEnumShape
+import software.amazon.smithy.model.shapes.IntegerShape
 import software.amazon.smithy.model.shapes.ListShape
+import software.amazon.smithy.model.shapes.LongShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.Shape
+import software.amazon.smithy.model.shapes.ShortShape
+import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.shapes.StructureShape
+import software.amazon.smithy.model.shapes.TimestampShape
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigWriter
@@ -231,12 +242,9 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
     override fun writeDeserializeResponse(writer: ZigWriter, ctx: OperationContext) {
         val outputName = "${ctx.operationName}Output"
-
-        // Check if any members are deserializable scalar types
-        val hasDeserializableFields = ctx.outputShape.allMembers.values.any { memberShape ->
-            val targetShape = ctx.model.expectShape(memberShape.target)
-            val zigType = ctx.resolveBaseZigType(targetShape)
-            zigType in listOf("[]const u8", "i32", "i64", "bool")
+        val hasMembers = ctx.outputShape.allMembers.isNotEmpty()
+        val resultMutated = ctx.outputShape.allMembers.values.any { ms ->
+            memberWritesToResult(ctx.model.expectShape(ms.target))
         }
 
         writer.openBlock(
@@ -246,72 +254,189 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.write("_ = status;")
         writer.write("_ = headers;")
 
-        if (!hasDeserializableFields) {
+        if (!hasMembers || !resultMutated) {
             writer.write("_ = body;")
-            writer.write("const result: \$L = .{ .allocator = alloc };", outputName)
+            writer.write("_ = alloc;")
+            writer.write("const result: \$L = .{};", outputName)
         } else {
-            writer.write("var result: \$L = .{ .allocator = alloc };", outputName)
-
-            for ((memberName, memberShape) in ctx.outputShape.allMembers) {
-                val fieldName = NamingUtil.toFieldName(memberName)
-                val targetShape = ctx.model.expectShape(memberShape.target)
-                val xmlName = memberShape.getTrait(XmlNameTrait::class.java)
-                    .map { it.value }
-                    .orElse(memberName)
-                val zigType = ctx.resolveBaseZigType(targetShape)
-
-                when (zigType) {
-                    "[]const u8" -> {
-                        writer.openBlock(
-                            "if (findElement(body, \"\$L\")) |content| {",
-                            xmlName,
-                        )
-                        writer.write("result.\$L = try alloc.dupe(u8, content);", fieldName)
-                        writer.closeBlock("}")
-                    }
-                    "i32" -> {
-                        writer.openBlock(
-                            "if (findElement(body, \"\$L\")) |content| {",
-                            xmlName,
-                        )
-                        writer.write(
-                            "result.\$L = std.fmt.parseInt(i32, content, 10) catch null;",
-                            fieldName,
-                        )
-                        writer.closeBlock("}")
-                    }
-                    "i64" -> {
-                        writer.openBlock(
-                            "if (findElement(body, \"\$L\")) |content| {",
-                            xmlName,
-                        )
-                        writer.write(
-                            "result.\$L = std.fmt.parseInt(i64, content, 10) catch null;",
-                            fieldName,
-                        )
-                        writer.closeBlock("}")
-                    }
-                    "bool" -> {
-                        writer.openBlock(
-                            "if (findElement(body, \"\$L\")) |content| {",
-                            xmlName,
-                        )
-                        writer.write(
-                            "result.\$L = std.mem.eql(u8, content, \"true\");",
-                            fieldName,
-                        )
-                        writer.closeBlock("}")
-                    }
-                    else -> {
-                        // Nested struct types -- skip for now.
-                    }
-                }
+            val allocUsed = ctx.outputShape.allMembers.values.any { ms ->
+                val target = ctx.model.expectShape(ms.target)
+                (target is StringShape && !ctx.isEnumType(target)) ||
+                    target is BlobShape || target is StructureShape || target is ListShape
             }
+            if (!allocUsed) {
+                writer.write("_ = alloc;")
+            }
+            writer.write("var reader = aws.xml.Reader.init(body);")
+            writer.blankLine()
+
+            // Navigate to wrapper element
+            writeSkipToResultWrapper(writer, ctx)
+            writer.blankLine()
+
+            writer.write("var result: \$L = .{};", outputName)
+            writeXmlMemberParsing(writer, ctx, ctx.outputShape.allMembers)
         }
 
         writer.blankLine()
         writer.write("return result;")
         writer.closeBlock("}")
+    }
+
+    /** Check if deserializing this shape type will assign to result (vs skipElement). */
+    protected fun memberWritesToResult(targetShape: Shape): Boolean {
+        return targetShape is StructureShape || targetShape is ListShape ||
+            targetShape is StringShape || targetShape is BooleanShape ||
+            targetShape is IntegerShape || targetShape is ShortShape ||
+            targetShape is LongShape || targetShape is FloatShape ||
+            targetShape is DoubleShape || targetShape is EnumShape ||
+            targetShape is IntEnumShape || targetShape is TimestampShape ||
+            targetShape is BlobShape
+    }
+
+    protected open fun writeSkipToResultWrapper(writer: ZigWriter, ctx: OperationContext) {
+        val resultName = "${ctx.operationName}Result"
+        writer.openBlock("while (try reader.next()) |event| {")
+        writer.openBlock("switch (event) {")
+        writer.openBlock(".element_start => |e| {")
+        writer.write("if (std.mem.eql(u8, e.local, \"\$L\")) break;", resultName)
+        writer.closeBlock("},")
+        writer.write("else => {},")
+        writer.closeBlock("}")
+        writer.closeBlock("}")
+    }
+
+    protected fun writeXmlMemberParsing(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        members: Map<String, MemberShape>,
+    ) {
+        writer.openBlock("while (try reader.next()) |event| {")
+        writer.openBlock("switch (event) {")
+        writer.openBlock(".element_start => |e| {")
+
+        var first = true
+        for ((memberName, memberShape) in members) {
+            val fieldName = NamingUtil.toFieldName(memberName)
+            val targetShape = ctx.model.expectShape(memberShape.target)
+            val xmlName = memberShape.getTrait(XmlNameTrait::class.java)
+                .map { it.value }
+                .orElse(memberName)
+
+            val prefix = if (first) "if" else "} else if"
+            first = false
+
+            writer.write("\$L (std.mem.eql(u8, e.local, \"\$L\")) {", prefix, xmlName)
+            writer.indent()
+            writeXmlMemberDeserializer(writer, ctx, fieldName, targetShape)
+            writer.dedent()
+        }
+
+        if (!first) {
+            writer.write("} else {")
+            writer.indent()
+            writer.write("try reader.skipElement();")
+            writer.dedent()
+            writer.write("}")
+        } else {
+            writer.write("try reader.skipElement();")
+        }
+
+        writer.closeBlock("},")
+        writer.write(".element_end => break,")
+        writer.write("else => {},")
+        writer.closeBlock("}")
+        writer.closeBlock("}")
+    }
+
+    protected fun writeXmlMemberDeserializer(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        fieldName: String,
+        targetShape: Shape,
+    ) {
+        when (targetShape) {
+            is StructureShape -> {
+                writer.write(
+                    "result.\$L = try serde.deserialize\$L(&reader, alloc);",
+                    fieldName, targetShape.id.name,
+                )
+            }
+            is ListShape -> {
+                val listFnName = "deserialize${targetShape.id.name}"
+                val itemTag = targetShape.member.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }
+                    .orElse("member")
+                writer.write(
+                    "result.\$L = try serde.\$L(&reader, alloc, \"\$L\");",
+                    fieldName, listFnName, itemTag,
+                )
+            }
+            is EnumShape, is IntEnumShape -> {
+                writer.write(
+                    "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                    fieldName, targetShape.id.name,
+                )
+            }
+            is StringShape -> {
+                if (ctx.isEnumType(targetShape)) {
+                    writer.write(
+                        "result.\$L = std.meta.stringToEnum(\$L, try reader.readElementText());",
+                        fieldName, targetShape.id.name,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                        fieldName,
+                    )
+                }
+            }
+            is BooleanShape -> {
+                writer.write(
+                    "result.\$L = std.mem.eql(u8, try reader.readElementText(), \"true\");",
+                    fieldName,
+                )
+            }
+            is IntegerShape, is ShortShape -> {
+                writer.write(
+                    "result.\$L = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;",
+                    fieldName,
+                )
+            }
+            is LongShape -> {
+                writer.write(
+                    "result.\$L = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;",
+                    fieldName,
+                )
+            }
+            is FloatShape -> {
+                writer.write(
+                    "result.\$L = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;",
+                    fieldName,
+                )
+            }
+            is DoubleShape -> {
+                writer.write(
+                    "result.\$L = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;",
+                    fieldName,
+                )
+            }
+            is TimestampShape -> {
+                writer.write(
+                    "result.\$L = aws.imds.parseIso8601(try reader.readElementText()) catch null;",
+                    fieldName,
+                )
+            }
+            is BlobShape -> {
+                writer.write(
+                    "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                    fieldName,
+                )
+            }
+            else -> {
+                writer.write("try reader.skipElement();")
+            }
+        }
     }
 
     override open fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {

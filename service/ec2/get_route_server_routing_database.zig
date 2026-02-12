@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const RouteServerRoute = @import("route_server_route.zig").RouteServerRoute;
+const serde = @import("serde.zig");
 
 /// Gets the routing database for the specified route server. The [Routing
 /// Information Base (RIB)](https://en.wikipedia.org/wiki/Routing_table) serves
@@ -68,12 +69,10 @@ pub const GetRouteServerRoutingDatabaseOutput = struct {
     /// The collection of routes in the route server's routing database.
     routes: ?[]const RouteServerRoute = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetRouteServerRoutingDatabaseOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetRouteServerRoutingDatabaseOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -102,7 +101,11 @@ pub fn execute(client: *Client, input: GetRouteServerRoutingDatabaseInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetRouteServerRoutingDatabaseInput, config: *aws.Config) !aws.http.Request {
@@ -159,12 +162,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetRouteServerRoutingDataba
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetRouteServerRoutingDatabaseOutput {
     _ = status;
     _ = headers;
-    var result: GetRouteServerRoutingDatabaseOutput = .{ .allocator = alloc };
-    if (findElement(body, "areRoutesPersisted")) |content| {
-        result.are_routes_persisted = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+
+    var result: GetRouteServerRoutingDatabaseOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "areRoutesPersisted")) {
+                    result.are_routes_persisted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "routeSet")) {
+                    result.routes = try serde.deserializeRouteServerRouteList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

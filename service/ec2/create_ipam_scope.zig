@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ExternalAuthorityConfiguration = @import("external_authority_configuration.zig").ExternalAuthorityConfiguration;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const IpamScope = @import("ipam_scope.zig").IpamScope;
+const serde = @import("serde.zig");
 
 /// Create an IPAM scope. In IPAM, a scope is the highest-level container within
 /// IPAM. An IPAM contains two default scopes. Each scope represents the IP
@@ -59,10 +60,10 @@ pub const CreateIpamScopeOutput = struct {
     /// Information about the created scope.
     ipam_scope: ?IpamScope = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateIpamScopeOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateIpamScopeOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -91,7 +92,11 @@ pub fn execute(client: *Client, input: CreateIpamScopeInput, options: Options) !
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateIpamScopeInput, config: *aws.Config) !aws.http.Request {
@@ -158,8 +163,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateIpamScopeInput, confi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateIpamScopeOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateIpamScopeOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateIpamScopeOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamScope")) {
+                    result.ipam_scope = try serde.deserializeIpamScope(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SecurityGroupReference = @import("security_group_reference.zig").SecurityGroupReference;
+const serde = @import("serde.zig");
 
 /// Describes the VPCs on the other side of a VPC peering or Transit Gateway
 /// connection that are referencing the security groups you've specified in this
@@ -24,10 +25,10 @@ pub const DescribeSecurityGroupReferencesOutput = struct {
     /// Information about the VPCs with the referencing security groups.
     security_group_reference_set: ?[]const SecurityGroupReference = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeSecurityGroupReferencesOutput) void {
-        _ = self;
+    pub fn deinit(self: *DescribeSecurityGroupReferencesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -56,7 +57,11 @@ pub fn execute(client: *Client, input: DescribeSecurityGroupReferencesInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeSecurityGroupReferencesInput, config: *aws.Config) !aws.http.Request {
@@ -97,8 +102,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeSecurityGroupRefere
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeSecurityGroupReferencesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeSecurityGroupReferencesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeSecurityGroupReferencesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "securityGroupReferenceSet")) {
+                    result.security_group_reference_set = try serde.deserializeSecurityGroupReferences(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

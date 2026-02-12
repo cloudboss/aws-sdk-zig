@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpamPoolCidr = @import("ipam_pool_cidr.zig").IpamPoolCidr;
+const serde = @import("serde.zig");
 
 /// Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR
 /// from a pool that has a source pool, the CIDR is recycled back into the
@@ -28,10 +29,10 @@ pub const DeprovisionIpamPoolCidrOutput = struct {
     /// The deprovisioned pool CIDR.
     ipam_pool_cidr: ?IpamPoolCidr = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeprovisionIpamPoolCidrOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeprovisionIpamPoolCidrOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -60,7 +61,11 @@ pub fn execute(client: *Client, input: DeprovisionIpamPoolCidrInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeprovisionIpamPoolCidrInput, config: *aws.Config) !aws.http.Request {
@@ -100,8 +105,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeprovisionIpamPoolCidrInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeprovisionIpamPoolCidrOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeprovisionIpamPoolCidrOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeprovisionIpamPoolCidrOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamPoolCidr")) {
+                    result.ipam_pool_cidr = try serde.deserializeIpamPoolCidr(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

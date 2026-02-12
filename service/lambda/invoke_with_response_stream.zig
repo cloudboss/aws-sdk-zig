@@ -82,15 +82,10 @@ pub const InvokeWithResponseStreamOutput = struct {
     /// invocation type, this status code is 204.
     status_code: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const InvokeWithResponseStreamOutput) void {
-        if (self.executed_version) |v| {
-            self.allocator.free(v);
-        }
-        if (self.response_stream_content_type) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *InvokeWithResponseStreamOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -126,7 +121,11 @@ pub fn execute(client: *Client, input: InvokeWithResponseStreamInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: InvokeWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
@@ -179,7 +178,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InvokeWithResponseStreamInp
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InvokeWithResponseStreamOutput {
-    var result: InvokeWithResponseStreamOutput = .{ .allocator = alloc };
+    var result: InvokeWithResponseStreamOutput = .{};
     _ = body;
     result.status_code = @intCast(status);
     if (headers.get("x-amz-executed-version")) |value| {

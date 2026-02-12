@@ -11,6 +11,7 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const ImportImageLicenseConfigurationResponse = @import("import_image_license_configuration_response.zig").ImportImageLicenseConfigurationResponse;
 const SnapshotDetail = @import("snapshot_detail.zig").SnapshotDetail;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -214,45 +215,10 @@ pub const ImportImageOutput = struct {
     /// The usage operation value.
     usage_operation: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ImportImageOutput) void {
-        if (self.architecture) |v| {
-            self.allocator.free(v);
-        }
-        if (self.description) |v| {
-            self.allocator.free(v);
-        }
-        if (self.hypervisor) |v| {
-            self.allocator.free(v);
-        }
-        if (self.image_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.import_task_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.kms_key_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.license_type) |v| {
-            self.allocator.free(v);
-        }
-        if (self.platform) |v| {
-            self.allocator.free(v);
-        }
-        if (self.progress) |v| {
-            self.allocator.free(v);
-        }
-        if (self.status) |v| {
-            self.allocator.free(v);
-        }
-        if (self.status_message) |v| {
-            self.allocator.free(v);
-        }
-        if (self.usage_operation) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ImportImageOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -281,7 +247,11 @@ pub fn execute(client: *Client, input: ImportImageInput, options: Options) !Impo
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ImportImageInput, config: *aws.Config) !aws.http.Request {
@@ -448,45 +418,58 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportImageInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ImportImageOutput {
     _ = status;
     _ = headers;
-    var result: ImportImageOutput = .{ .allocator = alloc };
-    if (findElement(body, "architecture")) |content| {
-        result.architecture = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "description")) |content| {
-        result.description = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "encrypted")) |content| {
-        result.encrypted = std.mem.eql(u8, content, "true");
-    }
-    if (findElement(body, "hypervisor")) |content| {
-        result.hypervisor = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "imageId")) |content| {
-        result.image_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "importTaskId")) |content| {
-        result.import_task_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "kmsKeyId")) |content| {
-        result.kms_key_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "licenseType")) |content| {
-        result.license_type = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "platform")) |content| {
-        result.platform = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "progress")) |content| {
-        result.progress = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "status")) |content| {
-        result.status = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "statusMessage")) |content| {
-        result.status_message = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "usageOperation")) |content| {
-        result.usage_operation = try alloc.dupe(u8, content);
+
+    var result: ImportImageOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "architecture")) {
+                    result.architecture = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "description")) {
+                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "encrypted")) {
+                    result.encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "hypervisor")) {
+                    result.hypervisor = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "imageId")) {
+                    result.image_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "importTaskId")) {
+                    result.import_task_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "kmsKeyId")) {
+                    result.kms_key_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "licenseSpecifications")) {
+                    result.license_specifications = try serde.deserializeImportImageLicenseSpecificationListResponse(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "licenseType")) {
+                    result.license_type = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "platform")) {
+                    result.platform = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "progress")) {
+                    result.progress = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "snapshotDetailSet")) {
+                    result.snapshot_details = try serde.deserializeSnapshotDetailList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "statusMessage")) {
+                    result.status_message = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try serde.deserializeTagList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "usageOperation")) {
+                    result.usage_operation = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

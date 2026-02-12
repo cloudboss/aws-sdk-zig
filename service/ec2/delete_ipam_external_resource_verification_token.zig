@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpamExternalResourceVerificationToken = @import("ipam_external_resource_verification_token.zig").IpamExternalResourceVerificationToken;
+const serde = @import("serde.zig");
 
 /// Delete a verification token.
 ///
@@ -27,10 +28,10 @@ pub const DeleteIpamExternalResourceVerificationTokenOutput = struct {
     /// The verification token.
     ipam_external_resource_verification_token: ?IpamExternalResourceVerificationToken = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteIpamExternalResourceVerificationTokenOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteIpamExternalResourceVerificationTokenOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -59,7 +60,11 @@ pub fn execute(client: *Client, input: DeleteIpamExternalResourceVerificationTok
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteIpamExternalResourceVerificationTokenInput, config: *aws.Config) !aws.http.Request {
@@ -95,8 +100,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteIpamExternalResourceV
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteIpamExternalResourceVerificationTokenOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeleteIpamExternalResourceVerificationTokenOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeleteIpamExternalResourceVerificationTokenOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamExternalResourceVerificationToken")) {
+                    result.ipam_external_resource_verification_token = try serde.deserializeIpamExternalResourceVerificationToken(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

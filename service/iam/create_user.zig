@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const User = @import("user.zig").User;
+const serde = @import("serde.zig");
 
 /// Creates a new IAM user for your Amazon Web Services account.
 ///
@@ -73,10 +74,10 @@ pub const CreateUserOutput = struct {
     /// A structure with details about the new IAM user.
     user: ?User = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateUserOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateUserOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -105,7 +106,11 @@ pub fn execute(client: *Client, input: CreateUserInput, options: Options) !Creat
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateUserInput, config: *aws.Config) !aws.http.Request {
@@ -162,8 +167,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateUserInput, config: *a
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateUserOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateUserOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "CreateUserResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: CreateUserOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "User")) {
+                    result.user = try serde.deserializeUser(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

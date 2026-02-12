@@ -7,6 +7,7 @@ const CapacityReservationInstancePlatform = @import("capacity_reservation_instan
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const CapacityBlock = @import("capacity_block.zig").CapacityBlock;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
+const serde = @import("serde.zig");
 
 /// Purchase the Capacity Block for use with your account. With Capacity Blocks
 /// you ensure
@@ -37,10 +38,10 @@ pub const PurchaseCapacityBlockOutput = struct {
     /// The Capacity Reservation.
     capacity_reservation: ?CapacityReservation = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const PurchaseCapacityBlockOutput) void {
-        _ = self;
+    pub fn deinit(self: *PurchaseCapacityBlockOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -69,7 +70,11 @@ pub fn execute(client: *Client, input: PurchaseCapacityBlockInput, options: Opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: PurchaseCapacityBlockInput, config: *aws.Config) !aws.http.Request {
@@ -120,8 +125,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PurchaseCapacityBlockInput,
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PurchaseCapacityBlockOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: PurchaseCapacityBlockOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: PurchaseCapacityBlockOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "capacityBlockSet")) {
+                    result.capacity_blocks = try serde.deserializeCapacityBlockSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "capacityReservation")) {
+                    result.capacity_reservation = try serde.deserializeCapacityReservation(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

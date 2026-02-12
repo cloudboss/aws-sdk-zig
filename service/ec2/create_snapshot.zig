@@ -10,6 +10,7 @@ const SnapshotState = @import("snapshot_state.zig").SnapshotState;
 const StorageTier = @import("storage_tier.zig").StorageTier;
 const Tag = @import("tag.zig").Tag;
 const TransferType = @import("transfer_type.zig").TransferType;
+const serde = @import("serde.zig");
 
 /// Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use
 /// snapshots for
@@ -251,42 +252,10 @@ pub const CreateSnapshotOutput = struct {
     /// The size of the volume, in GiB.
     volume_size: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateSnapshotOutput) void {
-        if (self.availability_zone) |v| {
-            self.allocator.free(v);
-        }
-        if (self.data_encryption_key_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.description) |v| {
-            self.allocator.free(v);
-        }
-        if (self.kms_key_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.outpost_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.owner_alias) |v| {
-            self.allocator.free(v);
-        }
-        if (self.owner_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.progress) |v| {
-            self.allocator.free(v);
-        }
-        if (self.snapshot_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.state_message) |v| {
-            self.allocator.free(v);
-        }
-        if (self.volume_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateSnapshotOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -315,7 +284,11 @@ pub fn execute(client: *Client, input: CreateSnapshotInput, options: Options) !C
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateSnapshotInput, config: *aws.Config) !aws.http.Request {
@@ -376,60 +349,72 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateSnapshotInput, config
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateSnapshotOutput {
     _ = status;
     _ = headers;
-    var result: CreateSnapshotOutput = .{ .allocator = alloc };
-    if (findElement(body, "availabilityZone")) |content| {
-        result.availability_zone = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "completionDurationMinutes")) |content| {
-        result.completion_duration_minutes = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "completionTime")) |content| {
-        result.completion_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "dataEncryptionKeyId")) |content| {
-        result.data_encryption_key_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "description")) |content| {
-        result.description = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "encrypted")) |content| {
-        result.encrypted = std.mem.eql(u8, content, "true");
-    }
-    if (findElement(body, "fullSnapshotSizeInBytes")) |content| {
-        result.full_snapshot_size_in_bytes = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "kmsKeyId")) |content| {
-        result.kms_key_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "outpostArn")) |content| {
-        result.outpost_arn = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ownerAlias")) |content| {
-        result.owner_alias = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ownerId")) |content| {
-        result.owner_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "progress")) |content| {
-        result.progress = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "restoreExpiryTime")) |content| {
-        result.restore_expiry_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "snapshotId")) |content| {
-        result.snapshot_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "startTime")) |content| {
-        result.start_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "statusMessage")) |content| {
-        result.state_message = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "volumeId")) |content| {
-        result.volume_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "volumeSize")) |content| {
-        result.volume_size = std.fmt.parseInt(i32, content, 10) catch null;
+
+    var result: CreateSnapshotOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "availabilityZone")) {
+                    result.availability_zone = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "completionDurationMinutes")) {
+                    result.completion_duration_minutes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "completionTime")) {
+                    result.completion_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "dataEncryptionKeyId")) {
+                    result.data_encryption_key_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "description")) {
+                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "encrypted")) {
+                    result.encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "fullSnapshotSizeInBytes")) {
+                    result.full_snapshot_size_in_bytes = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "kmsKeyId")) {
+                    result.kms_key_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "outpostArn")) {
+                    result.outpost_arn = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ownerAlias")) {
+                    result.owner_alias = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ownerId")) {
+                    result.owner_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "progress")) {
+                    result.progress = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "restoreExpiryTime")) {
+                    result.restore_expiry_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "snapshotId")) {
+                    result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "sseType")) {
+                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "startTime")) {
+                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "statusMessage")) {
+                    result.state_message = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "storageTier")) {
+                    result.storage_tier = std.meta.stringToEnum(StorageTier, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try serde.deserializeTagList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "transferType")) {
+                    result.transfer_type = std.meta.stringToEnum(TransferType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "volumeId")) {
+                    result.volume_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "volumeSize")) {
+                    result.volume_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

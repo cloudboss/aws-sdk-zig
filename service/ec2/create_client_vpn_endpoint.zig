@@ -14,6 +14,7 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TrafficIpAddressType = @import("traffic_ip_address_type.zig").TrafficIpAddressType;
 const TransportProtocol = @import("transport_protocol.zig").TransportProtocol;
 const ClientVpnEndpointStatus = @import("client_vpn_endpoint_status.zig").ClientVpnEndpointStatus;
+const serde = @import("serde.zig");
 
 /// Creates a Client VPN endpoint. A Client VPN endpoint is the resource you
 /// create and configure to
@@ -174,15 +175,10 @@ pub const CreateClientVpnEndpointOutput = struct {
     /// The current state of the Client VPN endpoint.
     status: ?ClientVpnEndpointStatus = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateClientVpnEndpointOutput) void {
-        if (self.client_vpn_endpoint_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.dns_name) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateClientVpnEndpointOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -211,7 +207,11 @@ pub fn execute(client: *Client, input: CreateClientVpnEndpointInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateClientVpnEndpointInput, config: *aws.Config) !aws.http.Request {
@@ -375,12 +375,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateClientVpnEndpointInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateClientVpnEndpointOutput {
     _ = status;
     _ = headers;
-    var result: CreateClientVpnEndpointOutput = .{ .allocator = alloc };
-    if (findElement(body, "clientVpnEndpointId")) |content| {
-        result.client_vpn_endpoint_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "dnsName")) |content| {
-        result.dns_name = try alloc.dupe(u8, content);
+
+    var result: CreateClientVpnEndpointOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "clientVpnEndpointId")) {
+                    result.client_vpn_endpoint_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "dnsName")) {
+                    result.dns_name = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = try serde.deserializeClientVpnEndpointStatus(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

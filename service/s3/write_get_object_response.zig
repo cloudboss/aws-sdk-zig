@@ -360,10 +360,10 @@ pub const WriteGetObjectResponseInput = struct {
 
 pub const WriteGetObjectResponseOutput = struct {
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const WriteGetObjectResponseOutput) void {
-        _ = self;
+    pub fn deinit(self: *WriteGetObjectResponseOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -392,7 +392,11 @@ pub fn execute(client: *Client, input: WriteGetObjectResponseInput, options: Opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: WriteGetObjectResponseInput, config: *aws.Config) !aws.http.Request {
@@ -552,10 +556,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: WriteGetObjectResponseInput
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !WriteGetObjectResponseOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: WriteGetObjectResponseOutput = .{ .allocator = alloc };
+    const result: WriteGetObjectResponseOutput = .{};
 
     return result;
 }

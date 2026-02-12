@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RequestLaunchTemplateData = @import("request_launch_template_data.zig").RequestLaunchTemplateData;
 const LaunchTemplateVersion = @import("launch_template_version.zig").LaunchTemplateVersion;
 const ValidationWarning = @import("validation_warning.zig").ValidationWarning;
+const serde = @import("serde.zig");
 
 /// Creates a new version of a launch template. You must specify an existing
 /// launch
@@ -106,10 +107,10 @@ pub const CreateLaunchTemplateVersionOutput = struct {
     /// each issue that's found.
     warning: ?ValidationWarning = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateLaunchTemplateVersionOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateLaunchTemplateVersionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -138,7 +139,11 @@ pub fn execute(client: *Client, input: CreateLaunchTemplateVersionInput, options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateLaunchTemplateVersionInput, config: *aws.Config) !aws.http.Request {
@@ -236,8 +241,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateLaunchTemplateVersion
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateLaunchTemplateVersionOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateLaunchTemplateVersionOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateLaunchTemplateVersionOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "launchTemplateVersion")) {
+                    result.launch_template_version = try serde.deserializeLaunchTemplateVersion(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "warning")) {
+                    result.warning = try serde.deserializeValidationWarning(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

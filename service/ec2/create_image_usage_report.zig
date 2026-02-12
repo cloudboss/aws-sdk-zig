@@ -52,12 +52,10 @@ pub const CreateImageUsageReportOutput = struct {
     /// The ID of the report.
     report_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateImageUsageReportOutput) void {
-        if (self.report_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateImageUsageReportOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -86,7 +84,11 @@ pub fn execute(client: *Client, input: CreateImageUsageReportInput, options: Opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateImageUsageReportInput, config: *aws.Config) !aws.http.Request {
@@ -159,9 +161,28 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateImageUsageReportInput
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateImageUsageReportOutput {
     _ = status;
     _ = headers;
-    var result: CreateImageUsageReportOutput = .{ .allocator = alloc };
-    if (findElement(body, "reportId")) |content| {
-        result.report_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateImageUsageReportOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "reportId")) {
+                    result.report_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

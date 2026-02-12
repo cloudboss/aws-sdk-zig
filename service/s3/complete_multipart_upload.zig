@@ -520,45 +520,10 @@ pub const CompleteMultipartUploadOutput = struct {
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CompleteMultipartUploadOutput) void {
-        if (self.bucket) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc32) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc32_c) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc64_nvme) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_sha1) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_sha256) |v| {
-            self.allocator.free(v);
-        }
-        if (self.e_tag) |v| {
-            self.allocator.free(v);
-        }
-        if (self.expiration) |v| {
-            self.allocator.free(v);
-        }
-        if (self.key) |v| {
-            self.allocator.free(v);
-        }
-        if (self.location) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_key_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.version_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CompleteMultipartUploadOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -587,7 +552,11 @@ pub fn execute(client: *Client, input: CompleteMultipartUploadInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CompleteMultipartUploadInput, config: *aws.Config) !aws.http.Request {
@@ -672,34 +641,47 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CompleteMultipartUploadInpu
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CompleteMultipartUploadOutput {
-    var result: CompleteMultipartUploadOutput = .{ .allocator = alloc };
+    var result: CompleteMultipartUploadOutput = .{};
     _ = status;
-    if (findElement(body, "Bucket")) |content| {
-        result.bucket = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "ChecksumCRC32")) |content| {
-        result.checksum_crc32 = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ChecksumCRC32C")) |content| {
-        result.checksum_crc32_c = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ChecksumCRC64NVME")) |content| {
-        result.checksum_crc64_nvme = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ChecksumSHA1")) |content| {
-        result.checksum_sha1 = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ChecksumSHA256")) |content| {
-        result.checksum_sha256 = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ETag")) |content| {
-        result.e_tag = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "Key")) |content| {
-        result.key = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "Location")) |content| {
-        result.location = try alloc.dupe(u8, content);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Bucket")) {
+                    result.bucket = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumCRC32")) {
+                    result.checksum_crc32 = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumCRC32C")) {
+                    result.checksum_crc32_c = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumCRC64NVME")) {
+                    result.checksum_crc64_nvme = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumSHA1")) {
+                    result.checksum_sha1 = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
+                    result.checksum_sha256 = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
+                    result.checksum_type = std.meta.stringToEnum(ChecksumType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ETag")) {
+                    result.e_tag = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Key")) {
+                    result.key = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Location")) {
+                    result.location = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
     if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {
         result.bucket_key_enabled = std.mem.eql(u8, value, "true");

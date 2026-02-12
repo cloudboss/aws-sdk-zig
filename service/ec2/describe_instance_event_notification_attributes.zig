@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceTagNotificationAttribute = @import("instance_tag_notification_attribute.zig").InstanceTagNotificationAttribute;
+const serde = @import("serde.zig");
 
 /// Describes the tag keys that are registered to appear in scheduled event
 /// notifications
@@ -21,10 +22,10 @@ pub const DescribeInstanceEventNotificationAttributesOutput = struct {
     /// Information about the registered tag keys.
     instance_tag_attribute: ?InstanceTagNotificationAttribute = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeInstanceEventNotificationAttributesOutput) void {
-        _ = self;
+    pub fn deinit(self: *DescribeInstanceEventNotificationAttributesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -53,7 +54,11 @@ pub fn execute(client: *Client, input: DescribeInstanceEventNotificationAttribut
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstanceEventNotificationAttributesInput, config: *aws.Config) !aws.http.Request {
@@ -87,8 +92,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInstanceEventNotifi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeInstanceEventNotificationAttributesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeInstanceEventNotificationAttributesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeInstanceEventNotificationAttributesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "instanceTagAttribute")) {
+                    result.instance_tag_attribute = try serde.deserializeInstanceTagNotificationAttribute(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

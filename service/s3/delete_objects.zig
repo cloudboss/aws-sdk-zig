@@ -9,6 +9,7 @@ const RequestPayer = @import("request_payer.zig").RequestPayer;
 const DeletedObject = @import("deleted_object.zig").DeletedObject;
 const Error = @import("error.zig").Error;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
+const serde = @import("serde.zig");
 
 /// This operation enables you to delete multiple objects from a bucket using a
 /// single HTTP request. If
@@ -285,10 +286,10 @@ pub const DeleteObjectsOutput = struct {
 
     request_charged: ?RequestCharged = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteObjectsOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteObjectsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -317,7 +318,11 @@ pub fn execute(client: *Client, input: DeleteObjectsInput, options: Options) !De
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteObjectsInput, config: *aws.Config) !aws.http.Request {
@@ -368,9 +373,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteObjectsInput, config:
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteObjectsOutput {
-    var result: DeleteObjectsOutput = .{ .allocator = alloc };
+    var result: DeleteObjectsOutput = .{};
     _ = status;
-    _ = body;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Deleted")) {
+                    result.deleted = try serde.deserializeDeletedObjects(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "Error")) {
+                    result.errors = try serde.deserializeErrors(&reader, alloc, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
     if (headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
     }

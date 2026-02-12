@@ -298,7 +298,14 @@ class SerdeGenerator(
             writer.write("_ = alloc;")
         }
         if (hasMembers) {
-            writer.write("var result: \$L = .{};", typeName)
+            writer.write("var result: \$L = undefined;", typeName)
+            // Initialize optional fields to null (required fields stay undefined until parsed)
+            for ((memberName, memberShape) in shape.allMembers) {
+                if (!memberShape.isRequired) {
+                    val fieldName = NamingUtil.toFieldName(memberName)
+                    writer.write("result.\$L = null;", fieldName)
+                }
+            }
         } else {
             writer.write("const result: \$L = .{};", typeName)
         }
@@ -380,28 +387,56 @@ class SerdeGenerator(
                 )
             }
             is IntegerShape, is ShortShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try std.fmt.parseInt(i32, try reader.readElementText(), 10);",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is LongShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try std.fmt.parseInt(i64, try reader.readElementText(), 10);",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is FloatShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try std.fmt.parseFloat(f32, try reader.readElementText());",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is DoubleShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try std.fmt.parseFloat(f64, try reader.readElementText());",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is EnumShape, is IntEnumShape -> {
                 val enumName = targetShape.id.name
@@ -411,10 +446,17 @@ class SerdeGenerator(
                 )
             }
             is TimestampShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try aws.imds.parseIso8601(try reader.readElementText());",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = aws.imds.parseIso8601(try reader.readElementText()) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is BlobShape -> {
                 writer.write(
@@ -495,8 +537,11 @@ class SerdeGenerator(
             is IntegerShape, is ShortShape -> {
                 writer.write("if (std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null) |v| try list.append(alloc, v);")
             }
-            is LongShape, is TimestampShape -> {
+            is LongShape -> {
                 writer.write("if (std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null) |v| try list.append(alloc, v);")
+            }
+            is TimestampShape -> {
+                writer.write("if (aws.imds.parseIso8601(try reader.readElementText()) catch null) |v| try list.append(alloc, v);")
             }
             is FloatShape -> {
                 writer.write("if (std.fmt.parseFloat(f32, try reader.readElementText()) catch null) |v| try list.append(alloc, v);")

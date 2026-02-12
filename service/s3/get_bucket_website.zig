@@ -7,6 +7,7 @@ const ErrorDocument = @import("error_document.zig").ErrorDocument;
 const IndexDocument = @import("index_document.zig").IndexDocument;
 const RedirectAllRequestsTo = @import("redirect_all_requests_to.zig").RedirectAllRequestsTo;
 const RoutingRule = @import("routing_rule.zig").RoutingRule;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -63,10 +64,10 @@ pub const GetBucketWebsiteOutput = struct {
     /// Rules that define when a redirect is applied and the redirect behavior.
     routing_rules: ?[]const RoutingRule = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketWebsiteOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketWebsiteOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -95,7 +96,11 @@ pub fn execute(client: *Client, input: GetBucketWebsiteInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketWebsiteInput, config: *aws.Config) !aws.http.Request {
@@ -134,10 +139,37 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketWebsiteInput, conf
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketWebsiteOutput {
-    _ = body;
+    var result: GetBucketWebsiteOutput = .{};
     _ = status;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ErrorDocument")) {
+                    result.error_document = try serde.deserializeErrorDocument(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "IndexDocument")) {
+                    result.index_document = try serde.deserializeIndexDocument(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "RedirectAllRequestsTo")) {
+                    result.redirect_all_requests_to = try serde.deserializeRedirectAllRequestsTo(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "RoutingRules")) {
+                    result.routing_rules = try serde.deserializeRoutingRules(&reader, alloc, "RoutingRule");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
     _ = headers;
-    const result: GetBucketWebsiteOutput = .{ .allocator = alloc };
 
     return result;
 }

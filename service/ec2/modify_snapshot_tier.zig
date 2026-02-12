@@ -36,12 +36,10 @@ pub const ModifySnapshotTierOutput = struct {
     /// The date and time when the archive process was started.
     tiering_start_time: ?i64 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifySnapshotTierOutput) void {
-        if (self.snapshot_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ModifySnapshotTierOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -70,7 +68,11 @@ pub fn execute(client: *Client, input: ModifySnapshotTierInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifySnapshotTierInput, config: *aws.Config) !aws.http.Request {
@@ -110,12 +112,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifySnapshotTierInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifySnapshotTierOutput {
     _ = status;
     _ = headers;
-    var result: ModifySnapshotTierOutput = .{ .allocator = alloc };
-    if (findElement(body, "snapshotId")) |content| {
-        result.snapshot_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "tieringStartTime")) |content| {
-        result.tiering_start_time = std.fmt.parseInt(i64, content, 10) catch null;
+
+    var result: ModifySnapshotTierOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "snapshotId")) {
+                    result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tieringStartTime")) {
+                    result.tiering_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

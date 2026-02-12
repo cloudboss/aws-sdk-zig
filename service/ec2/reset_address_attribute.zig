@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AddressAttributeName = @import("address_attribute_name.zig").AddressAttributeName;
 const AddressAttribute = @import("address_attribute.zig").AddressAttribute;
+const serde = @import("serde.zig");
 
 /// Resets the attribute of the specified IP address. For requirements, see
 /// [Using reverse DNS for email
@@ -28,10 +29,10 @@ pub const ResetAddressAttributeOutput = struct {
     /// Information about the IP address.
     address: ?AddressAttribute = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ResetAddressAttributeOutput) void {
-        _ = self;
+    pub fn deinit(self: *ResetAddressAttributeOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -60,7 +61,11 @@ pub fn execute(client: *Client, input: ResetAddressAttributeInput, options: Opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ResetAddressAttributeInput, config: *aws.Config) !aws.http.Request {
@@ -98,8 +103,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ResetAddressAttributeInput,
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ResetAddressAttributeOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ResetAddressAttributeOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ResetAddressAttributeOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "address")) {
+                    result.address = try serde.deserializeAddressAttribute(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

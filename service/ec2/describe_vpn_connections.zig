@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const VpnConnection = @import("vpn_connection.zig").VpnConnection;
+const serde = @import("serde.zig");
 
 /// Describes one or more of your VPN connections.
 ///
@@ -75,10 +76,10 @@ pub const DescribeVpnConnectionsOutput = struct {
     /// Information about one or more VPN connections.
     vpn_connections: ?[]const VpnConnection = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeVpnConnectionsOutput) void {
-        _ = self;
+    pub fn deinit(self: *DescribeVpnConnectionsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -107,7 +108,11 @@ pub fn execute(client: *Client, input: DescribeVpnConnectionsInput, options: Opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeVpnConnectionsInput, config: *aws.Config) !aws.http.Request {
@@ -163,8 +168,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeVpnConnectionsInput
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeVpnConnectionsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeVpnConnectionsOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeVpnConnectionsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "vpnConnectionSet")) {
+                    result.vpn_connections = try serde.deserializeVpnConnectionList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

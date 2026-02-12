@@ -7,6 +7,7 @@ const PolicyDescriptorType = @import("policy_descriptor_type.zig").PolicyDescrip
 const Tag = @import("tag.zig").Tag;
 const Credentials = @import("credentials.zig").Credentials;
 const FederatedUser = @import("federated_user.zig").FederatedUser;
+const serde = @import("serde.zig");
 
 /// Returns a set of temporary security credentials (consisting of an access key
 /// ID, a
@@ -350,10 +351,10 @@ pub const GetFederationTokenOutput = struct {
     /// which means the policies and tags exceeded the allowed space.
     packed_policy_size: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetFederationTokenOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetFederationTokenOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -382,7 +383,11 @@ pub fn execute(client: *Client, input: GetFederationTokenInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetFederationTokenInput, config: *aws.Config) !aws.http.Request {
@@ -452,9 +457,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFederationTokenInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetFederationTokenOutput {
     _ = status;
     _ = headers;
-    var result: GetFederationTokenOutput = .{ .allocator = alloc };
-    if (findElement(body, "PackedPolicySize")) |content| {
-        result.packed_policy_size = std.fmt.parseInt(i32, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetFederationTokenResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: GetFederationTokenOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Credentials")) {
+                    result.credentials = try serde.deserializeCredentials(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "FederatedUser")) {
+                    result.federated_user = try serde.deserializeFederatedUser(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
+                    result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

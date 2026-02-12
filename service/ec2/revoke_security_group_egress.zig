@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpPermission = @import("ip_permission.zig").IpPermission;
 const RevokedSecurityGroupRule = @import("revoked_security_group_rule.zig").RevokedSecurityGroupRule;
+const serde = @import("serde.zig");
 
 /// Removes the specified outbound (egress) rules from the specified security
 /// group.
@@ -86,10 +87,10 @@ pub const RevokeSecurityGroupEgressOutput = struct {
     /// parameter.
     unknown_ip_permissions: ?[]const IpPermission = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const RevokeSecurityGroupEgressOutput) void {
-        _ = self;
+    pub fn deinit(self: *RevokeSecurityGroupEgressOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -118,7 +119,11 @@ pub fn execute(client: *Client, input: RevokeSecurityGroupEgressInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: RevokeSecurityGroupEgressInput, config: *aws.Config) !aws.http.Request {
@@ -216,9 +221,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RevokeSecurityGroupEgressIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RevokeSecurityGroupEgressOutput {
     _ = status;
     _ = headers;
-    var result: RevokeSecurityGroupEgressOutput = .{ .allocator = alloc };
-    if (findElement(body, "return")) |content| {
-        result.@"return" = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: RevokeSecurityGroupEgressOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "return")) {
+                    result.@"return" = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "revokedSecurityGroupRuleSet")) {
+                    result.revoked_security_group_rules = try serde.deserializeRevokedSecurityGroupRuleList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "unknownIpPermissionSet")) {
+                    result.unknown_ip_permissions = try serde.deserializeIpPermissionList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

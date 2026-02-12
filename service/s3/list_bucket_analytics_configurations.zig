@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnalyticsConfiguration = @import("analytics_configuration.zig").AnalyticsConfiguration;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -91,15 +92,10 @@ pub const ListBucketAnalyticsConfigurationsOutput = struct {
     /// `NextContinuationToken`. The token is obfuscated and is not a usable value.
     next_continuation_token: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ListBucketAnalyticsConfigurationsOutput) void {
-        if (self.continuation_token) |v| {
-            self.allocator.free(v);
-        }
-        if (self.next_continuation_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ListBucketAnalyticsConfigurationsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -128,7 +124,11 @@ pub fn execute(client: *Client, input: ListBucketAnalyticsConfigurationsInput, o
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListBucketAnalyticsConfigurationsInput, config: *aws.Config) !aws.http.Request {
@@ -173,16 +173,35 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListBucketAnalyticsConfigur
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListBucketAnalyticsConfigurationsOutput {
-    var result: ListBucketAnalyticsConfigurationsOutput = .{ .allocator = alloc };
+    var result: ListBucketAnalyticsConfigurationsOutput = .{};
     _ = status;
-    if (findElement(body, "ContinuationToken")) |content| {
-        result.continuation_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
-    }
-    if (findElement(body, "NextContinuationToken")) |content| {
-        result.next_continuation_token = try alloc.dupe(u8, content);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AnalyticsConfiguration")) {
+                    result.analytics_configuration_list = try serde.deserializeAnalyticsConfigurationList(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "ContinuationToken")) {
+                    result.continuation_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "NextContinuationToken")) {
+                    result.next_continuation_token = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
     _ = headers;
 

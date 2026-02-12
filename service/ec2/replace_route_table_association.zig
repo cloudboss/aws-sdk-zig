@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RouteTableAssociationState = @import("route_table_association_state.zig").RouteTableAssociationState;
+const serde = @import("serde.zig");
 
 /// Changes the route table associated with a given subnet, internet gateway, or
 /// virtual private gateway in a VPC. After the operation
@@ -37,12 +38,10 @@ pub const ReplaceRouteTableAssociationOutput = struct {
     /// The ID of the new association.
     new_association_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ReplaceRouteTableAssociationOutput) void {
-        if (self.new_association_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ReplaceRouteTableAssociationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -71,7 +70,11 @@ pub fn execute(client: *Client, input: ReplaceRouteTableAssociationInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ReplaceRouteTableAssociationInput, config: *aws.Config) !aws.http.Request {
@@ -109,9 +112,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ReplaceRouteTableAssociatio
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ReplaceRouteTableAssociationOutput {
     _ = status;
     _ = headers;
-    var result: ReplaceRouteTableAssociationOutput = .{ .allocator = alloc };
-    if (findElement(body, "newAssociationId")) |content| {
-        result.new_association_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ReplaceRouteTableAssociationOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "associationState")) {
+                    result.association_state = try serde.deserializeRouteTableAssociationState(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "newAssociationId")) {
+                    result.new_association_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

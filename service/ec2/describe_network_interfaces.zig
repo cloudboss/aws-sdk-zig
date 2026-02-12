@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const NetworkInterface = @import("network_interface.zig").NetworkInterface;
+const serde = @import("serde.zig");
 
 /// Describes the specified network interfaces or all your network interfaces.
 ///
@@ -193,12 +194,10 @@ pub const DescribeNetworkInterfacesOutput = struct {
     /// `null` when there are no more items to return.
     next_token: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeNetworkInterfacesOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeNetworkInterfacesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -227,7 +226,11 @@ pub fn execute(client: *Client, input: DescribeNetworkInterfacesInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeNetworkInterfacesInput, config: *aws.Config) !aws.http.Request {
@@ -291,9 +294,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeNetworkInterfacesIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeNetworkInterfacesOutput {
     _ = status;
     _ = headers;
-    var result: DescribeNetworkInterfacesOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeNetworkInterfacesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "networkInterfaceSet")) {
+                    result.network_interfaces = try serde.deserializeNetworkInterfaceList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

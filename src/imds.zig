@@ -379,7 +379,7 @@ fn parseJsonField(allocator: Allocator, json: []const u8, field: []const u8) ![]
 }
 
 /// Parse ISO 8601 timestamp to epoch seconds
-fn parseIso8601(timestamp: []const u8) !i64 {
+pub fn parseIso8601(timestamp: []const u8) !i64 {
     // Format: 2024-01-15T12:00:00Z
     if (timestamp.len < 19) return error.InvalidTimestamp;
 

@@ -65,12 +65,10 @@ pub const GetGroupPolicyOutput = struct {
     /// The name of the policy.
     policy_name: []const u8,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetGroupPolicyOutput) void {
-        self.allocator.free(self.group_name);
-        self.allocator.free(self.policy_document);
-        self.allocator.free(self.policy_name);
+    pub fn deinit(self: *GetGroupPolicyOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -99,7 +97,11 @@ pub fn execute(client: *Client, input: GetGroupPolicyInput, options: Options) !G
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetGroupPolicyInput, config: *aws.Config) !aws.http.Request {
@@ -133,15 +135,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetGroupPolicyInput, config
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetGroupPolicyOutput {
     _ = status;
     _ = headers;
-    var result: GetGroupPolicyOutput = .{ .allocator = alloc };
-    if (findElement(body, "GroupName")) |content| {
-        result.group_name = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetGroupPolicyResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "PolicyDocument")) |content| {
-        result.policy_document = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "PolicyName")) |content| {
-        result.policy_name = try alloc.dupe(u8, content);
+
+    var result: GetGroupPolicyOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GroupName")) {
+                    result.group_name = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "PolicyDocument")) {
+                    result.policy_document = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "PolicyName")) {
+                    result.policy_name = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const TransitGatewayAttachment = @import("transit_gateway_attachment.zig").TransitGatewayAttachment;
+const serde = @import("serde.zig");
 
 /// Describes one or more attachments between resources and transit gateways. By
 /// default, all attachments are described.
@@ -69,12 +70,10 @@ pub const DescribeTransitGatewayAttachmentsOutput = struct {
     /// Information about the attachments.
     transit_gateway_attachments: ?[]const TransitGatewayAttachment = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeTransitGatewayAttachmentsOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeTransitGatewayAttachmentsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -103,7 +102,11 @@ pub fn execute(client: *Client, input: DescribeTransitGatewayAttachmentsInput, o
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeTransitGatewayAttachmentsInput, config: *aws.Config) !aws.http.Request {
@@ -167,9 +170,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeTransitGatewayAttac
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeTransitGatewayAttachmentsOutput {
     _ = status;
     _ = headers;
-    var result: DescribeTransitGatewayAttachmentsOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeTransitGatewayAttachmentsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "transitGatewayAttachments")) {
+                    result.transit_gateway_attachments = try serde.deserializeTransitGatewayAttachmentList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

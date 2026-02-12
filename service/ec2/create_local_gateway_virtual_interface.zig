@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const LocalGatewayVirtualInterface = @import("local_gateway_virtual_interface.zig").LocalGatewayVirtualInterface;
+const serde = @import("serde.zig");
 
 /// Create a virtual interface for a local gateway.
 pub const CreateLocalGatewayVirtualInterfaceInput = struct {
@@ -50,10 +51,10 @@ pub const CreateLocalGatewayVirtualInterfaceOutput = struct {
     /// Information about the local gateway virtual interface.
     local_gateway_virtual_interface: ?LocalGatewayVirtualInterface = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateLocalGatewayVirtualInterfaceOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateLocalGatewayVirtualInterfaceOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -82,7 +83,11 @@ pub fn execute(client: *Client, input: CreateLocalGatewayVirtualInterfaceInput, 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateLocalGatewayVirtualInterfaceInput, config: *aws.Config) !aws.http.Request {
@@ -147,8 +152,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateLocalGatewayVirtualIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateLocalGatewayVirtualInterfaceOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateLocalGatewayVirtualInterfaceOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateLocalGatewayVirtualInterfaceOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "localGatewayVirtualInterface")) {
+                    result.local_gateway_virtual_interface = try serde.deserializeLocalGatewayVirtualInterface(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

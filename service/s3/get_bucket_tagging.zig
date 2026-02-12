@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -53,10 +54,10 @@ pub const GetBucketTaggingOutput = struct {
     /// Contains the tag set.
     tag_set: ?[]const Tag = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketTaggingOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketTaggingOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -85,7 +86,11 @@ pub fn execute(client: *Client, input: GetBucketTaggingInput, options: Options) 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketTaggingInput, config: *aws.Config) !aws.http.Request {
@@ -124,10 +129,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketTaggingInput, conf
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketTaggingOutput {
-    _ = body;
+    var result: GetBucketTaggingOutput = .{};
     _ = status;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "TagSet")) {
+                    result.tag_set = try serde.deserializeTagSet(&reader, alloc, "Tag");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
     _ = headers;
-    const result: GetBucketTaggingOutput = .{ .allocator = alloc };
 
     return result;
 }

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Policy = @import("policy.zig").Policy;
+const serde = @import("serde.zig");
 
 /// Retrieves information about the specified managed policy, including the
 /// policy's
@@ -40,10 +41,10 @@ pub const GetPolicyOutput = struct {
     /// A structure containing details about the policy.
     policy: ?Policy = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetPolicyOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetPolicyOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -72,7 +73,11 @@ pub fn execute(client: *Client, input: GetPolicyInput, options: Options) !GetPol
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetPolicyInput, config: *aws.Config) !aws.http.Request {
@@ -104,8 +109,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetPolicyInput, config: *aw
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetPolicyOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: GetPolicyOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetPolicyResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: GetPolicyOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Policy")) {
+                    result.policy = try serde.deserializePolicy(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayRouteTableMode = @import("local_gateway_route_table_mode.zig").LocalGatewayRouteTableMode;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const LocalGatewayRouteTable = @import("local_gateway_route_table.zig").LocalGatewayRouteTable;
+const serde = @import("serde.zig");
 
 /// Creates a local gateway route table.
 pub const CreateLocalGatewayRouteTableInput = struct {
@@ -30,10 +31,10 @@ pub const CreateLocalGatewayRouteTableOutput = struct {
     /// Information about the local gateway route table.
     local_gateway_route_table: ?LocalGatewayRouteTable = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateLocalGatewayRouteTableOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateLocalGatewayRouteTableOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -62,7 +63,11 @@ pub fn execute(client: *Client, input: CreateLocalGatewayRouteTableInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateLocalGatewayRouteTableInput, config: *aws.Config) !aws.http.Request {
@@ -115,8 +120,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateLocalGatewayRouteTabl
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateLocalGatewayRouteTableOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateLocalGatewayRouteTableOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateLocalGatewayRouteTableOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "localGatewayRouteTable")) {
+                    result.local_gateway_route_table = try serde.deserializeLocalGatewayRouteTable(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

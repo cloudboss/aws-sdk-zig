@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CreateTransitGatewayConnectRequestOptions = @import("create_transit_gateway_connect_request_options.zig").CreateTransitGatewayConnectRequestOptions;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayConnect = @import("transit_gateway_connect.zig").TransitGatewayConnect;
+const serde = @import("serde.zig");
 
 /// Creates a Connect attachment from a specified transit gateway attachment. A
 /// Connect attachment is a GRE-based tunnel attachment that you can use to
@@ -36,10 +37,10 @@ pub const CreateTransitGatewayConnectOutput = struct {
     /// Information about the Connect attachment.
     transit_gateway_connect: ?TransitGatewayConnect = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateTransitGatewayConnectOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateTransitGatewayConnectOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -68,7 +69,11 @@ pub fn execute(client: *Client, input: CreateTransitGatewayConnectInput, options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateTransitGatewayConnectInput, config: *aws.Config) !aws.http.Request {
@@ -119,8 +124,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateTransitGatewayConnect
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateTransitGatewayConnectOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateTransitGatewayConnectOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateTransitGatewayConnectOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "transitGatewayConnect")) {
+                    result.transit_gateway_connect = try serde.deserializeTransitGatewayConnect(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

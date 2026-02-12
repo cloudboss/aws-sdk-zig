@@ -7,6 +7,7 @@ const Filter = @import("filter.zig").Filter;
 const OfferingClassType = @import("offering_class_type.zig").OfferingClassType;
 const OfferingTypeValues = @import("offering_type_values.zig").OfferingTypeValues;
 const ReservedInstances = @import("reserved_instances.zig").ReservedInstances;
+const serde = @import("serde.zig");
 
 /// Describes one or more of the Reserved Instances that you purchased.
 ///
@@ -104,10 +105,10 @@ pub const DescribeReservedInstancesOutput = struct {
     /// A list of Reserved Instances.
     reserved_instances: ?[]const ReservedInstances = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeReservedInstancesOutput) void {
-        _ = self;
+    pub fn deinit(self: *DescribeReservedInstancesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -136,7 +137,11 @@ pub fn execute(client: *Client, input: DescribeReservedInstancesInput, options: 
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesInput, config: *aws.Config) !aws.http.Request {
@@ -200,8 +205,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeReservedInstancesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DescribeReservedInstancesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeReservedInstancesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "reservedInstancesSet")) {
+                    result.reserved_instances = try serde.deserializeReservedInstancesList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

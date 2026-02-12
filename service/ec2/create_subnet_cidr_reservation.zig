@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SubnetCidrReservationType = @import("subnet_cidr_reservation_type.zig").SubnetCidrReservationType;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const SubnetCidrReservation = @import("subnet_cidr_reservation.zig").SubnetCidrReservation;
+const serde = @import("serde.zig");
 
 /// Creates a subnet CIDR reservation. For more information, see [Subnet CIDR
 /// reservations](https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html)
@@ -47,10 +48,10 @@ pub const CreateSubnetCidrReservationOutput = struct {
     /// Information about the created subnet CIDR reservation.
     subnet_cidr_reservation: ?SubnetCidrReservation = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateSubnetCidrReservationOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateSubnetCidrReservationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -79,7 +80,11 @@ pub fn execute(client: *Client, input: CreateSubnetCidrReservationInput, options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateSubnetCidrReservationInput, config: *aws.Config) !aws.http.Request {
@@ -136,8 +141,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateSubnetCidrReservation
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateSubnetCidrReservationOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateSubnetCidrReservationOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateSubnetCidrReservationOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "subnetCidrReservation")) {
+                    result.subnet_cidr_reservation = try serde.deserializeSubnetCidrReservation(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

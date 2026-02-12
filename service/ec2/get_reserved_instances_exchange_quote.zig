@@ -7,6 +7,7 @@ const TargetConfigurationRequest = @import("target_configuration_request.zig").T
 const ReservationValue = @import("reservation_value.zig").ReservationValue;
 const ReservedInstanceReservationValue = @import("reserved_instance_reservation_value.zig").ReservedInstanceReservationValue;
 const TargetReservationValue = @import("target_reservation_value.zig").TargetReservationValue;
+const serde = @import("serde.zig");
 
 /// Returns a quote and exchange information for exchanging one or more
 /// specified Convertible
@@ -61,18 +62,10 @@ pub const GetReservedInstancesExchangeQuoteOutput = struct {
     /// Describes the reason why the exchange cannot be completed.
     validation_failure_reason: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetReservedInstancesExchangeQuoteOutput) void {
-        if (self.currency_code) |v| {
-            self.allocator.free(v);
-        }
-        if (self.payment_due) |v| {
-            self.allocator.free(v);
-        }
-        if (self.validation_failure_reason) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetReservedInstancesExchangeQuoteOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -101,7 +94,11 @@ pub fn execute(client: *Client, input: GetReservedInstancesExchangeQuoteInput, o
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetReservedInstancesExchangeQuoteInput, config: *aws.Config) !aws.http.Request {
@@ -161,21 +158,44 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetReservedInstancesExchang
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetReservedInstancesExchangeQuoteOutput {
     _ = status;
     _ = headers;
-    var result: GetReservedInstancesExchangeQuoteOutput = .{ .allocator = alloc };
-    if (findElement(body, "currencyCode")) |content| {
-        result.currency_code = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "isValidExchange")) |content| {
-        result.is_valid_exchange = std.mem.eql(u8, content, "true");
-    }
-    if (findElement(body, "outputReservedInstancesWillExpireAt")) |content| {
-        result.output_reserved_instances_will_expire_at = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "paymentDue")) |content| {
-        result.payment_due = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "validationFailureReason")) |content| {
-        result.validation_failure_reason = try alloc.dupe(u8, content);
+
+    var result: GetReservedInstancesExchangeQuoteOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "currencyCode")) {
+                    result.currency_code = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "isValidExchange")) {
+                    result.is_valid_exchange = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "outputReservedInstancesWillExpireAt")) {
+                    result.output_reserved_instances_will_expire_at = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "paymentDue")) {
+                    result.payment_due = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "reservedInstanceValueRollup")) {
+                    result.reserved_instance_value_rollup = try serde.deserializeReservationValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "reservedInstanceValueSet")) {
+                    result.reserved_instance_value_set = try serde.deserializeReservedInstanceReservationValueSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "targetConfigurationValueRollup")) {
+                    result.target_configuration_value_rollup = try serde.deserializeReservationValue(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "targetConfigurationValueSet")) {
+                    result.target_configuration_value_set = try serde.deserializeTargetReservationValueSet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "validationFailureReason")) {
+                    result.validation_failure_reason = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

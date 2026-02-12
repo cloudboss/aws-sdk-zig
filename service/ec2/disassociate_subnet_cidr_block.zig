@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SubnetIpv6CidrBlockAssociation = @import("subnet_ipv_6_cidr_block_association.zig").SubnetIpv6CidrBlockAssociation;
+const serde = @import("serde.zig");
 
 /// Disassociates a CIDR block from a subnet. Currently, you can disassociate an
 /// IPv6 CIDR block only. You must detach or delete all gateways and resources
@@ -20,12 +21,10 @@ pub const DisassociateSubnetCidrBlockOutput = struct {
     /// The ID of the subnet.
     subnet_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DisassociateSubnetCidrBlockOutput) void {
-        if (self.subnet_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DisassociateSubnetCidrBlockOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -54,7 +53,11 @@ pub fn execute(client: *Client, input: DisassociateSubnetCidrBlockInput, options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateSubnetCidrBlockInput, config: *aws.Config) !aws.http.Request {
@@ -86,9 +89,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateSubnetCidrBlock
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DisassociateSubnetCidrBlockOutput {
     _ = status;
     _ = headers;
-    var result: DisassociateSubnetCidrBlockOutput = .{ .allocator = alloc };
-    if (findElement(body, "subnetId")) |content| {
-        result.subnet_id = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DisassociateSubnetCidrBlockOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipv6CidrBlockAssociation")) {
+                    result.ipv_6_cidr_block_association = try serde.deserializeSubnetIpv6CidrBlockAssociation(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "subnetId")) {
+                    result.subnet_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

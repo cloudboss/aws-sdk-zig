@@ -7,6 +7,7 @@ const sortKeyType = @import("sort_key_type.zig").sortKeyType;
 const AccessDetail = @import("access_detail.zig").AccessDetail;
 const ErrorDetails = @import("error_details.zig").ErrorDetails;
 const jobStatusType = @import("job_status_type.zig").jobStatusType;
+const serde = @import("serde.zig");
 
 /// Retrieves the service last accessed data report for Organizations that was
 /// previously
@@ -127,12 +128,10 @@ pub const GetOrganizationsAccessReportOutput = struct {
     /// access.
     number_of_services_not_accessed: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetOrganizationsAccessReportOutput) void {
-        if (self.marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetOrganizationsAccessReportOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -161,7 +160,11 @@ pub fn execute(client: *Client, input: GetOrganizationsAccessReportInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetOrganizationsAccessReportInput, config: *aws.Config) !aws.http.Request {
@@ -205,24 +208,46 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetOrganizationsAccessRepor
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetOrganizationsAccessReportOutput {
     _ = status;
     _ = headers;
-    var result: GetOrganizationsAccessReportOutput = .{ .allocator = alloc };
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetOrganizationsAccessReportResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "JobCompletionDate")) |content| {
-        result.job_completion_date = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "JobCreationDate")) |content| {
-        result.job_creation_date = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "Marker")) |content| {
-        result.marker = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "NumberOfServicesAccessible")) |content| {
-        result.number_of_services_accessible = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "NumberOfServicesNotAccessed")) |content| {
-        result.number_of_services_not_accessed = std.fmt.parseInt(i32, content, 10) catch null;
+
+    var result: GetOrganizationsAccessReportOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AccessDetails")) {
+                    result.access_details = try serde.deserializeAccessDetails(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "ErrorDetails")) {
+                    result.error_details = try serde.deserializeErrorDetails(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "JobCompletionDate")) {
+                    result.job_completion_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "JobCreationDate")) {
+                    result.job_creation_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "JobStatus")) {
+                    result.job_status = std.meta.stringToEnum(jobStatusType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Marker")) {
+                    result.marker = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "NumberOfServicesAccessible")) {
+                    result.number_of_services_accessible = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "NumberOfServicesNotAccessed")) {
+                    result.number_of_services_not_accessed = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

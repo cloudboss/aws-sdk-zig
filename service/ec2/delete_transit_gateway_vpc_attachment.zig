@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayVpcAttachment = @import("transit_gateway_vpc_attachment.zig").TransitGatewayVpcAttachment;
+const serde = @import("serde.zig");
 
 /// Deletes the specified VPC attachment.
 pub const DeleteTransitGatewayVpcAttachmentInput = struct {
@@ -22,10 +23,10 @@ pub const DeleteTransitGatewayVpcAttachmentOutput = struct {
     /// Information about the deleted VPC attachment.
     transit_gateway_vpc_attachment: ?TransitGatewayVpcAttachment = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeleteTransitGatewayVpcAttachmentOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeleteTransitGatewayVpcAttachmentOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -54,7 +55,11 @@ pub fn execute(client: *Client, input: DeleteTransitGatewayVpcAttachmentInput, o
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteTransitGatewayVpcAttachmentInput, config: *aws.Config) !aws.http.Request {
@@ -90,8 +95,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteTransitGatewayVpcAtta
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteTransitGatewayVpcAttachmentOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeleteTransitGatewayVpcAttachmentOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeleteTransitGatewayVpcAttachmentOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "transitGatewayVpcAttachment")) {
+                    result.transit_gateway_vpc_attachment = try serde.deserializeTransitGatewayVpcAttachment(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

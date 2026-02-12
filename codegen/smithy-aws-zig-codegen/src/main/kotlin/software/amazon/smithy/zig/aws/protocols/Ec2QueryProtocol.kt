@@ -5,6 +5,16 @@ import software.amazon.smithy.zig.protocols.OperationContext
 
 class Ec2QueryProtocol : AwsQueryProtocol() {
 
+    override fun writeSkipToResultWrapper(writer: ZigWriter, ctx: OperationContext) {
+        // EC2 Query: members are directly under root element, no Result wrapper
+        writer.openBlock("while (try reader.next()) |event| {")
+        writer.openBlock("switch (event) {")
+        writer.write(".element_start => break,")
+        writer.write("else => {},")
+        writer.closeBlock("}")
+        writer.closeBlock("}")
+    }
+
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
         writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16) ServiceError {")
 

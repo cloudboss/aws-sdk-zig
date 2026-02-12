@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AbacStatus = @import("abac_status.zig").AbacStatus;
+const serde = @import("serde.zig");
 
 /// Returns the attribute-based access control (ABAC) property of the general
 /// purpose bucket. If ABAC is enabled on your bucket, you can use tags on the
@@ -22,10 +23,10 @@ pub const GetBucketAbacOutput = struct {
     /// The ABAC status of the general purpose bucket.
     abac_status: ?AbacStatus = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketAbacOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketAbacOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -54,7 +55,11 @@ pub fn execute(client: *Client, input: GetBucketAbacInput, options: Options) !Ge
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketAbacInput, config: *aws.Config) !aws.http.Request {
@@ -93,10 +98,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketAbacInput, config:
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketAbacOutput {
+    _ = alloc;
     _ = body;
     _ = status;
     _ = headers;
-    const result: GetBucketAbacOutput = .{ .allocator = alloc };
+    const result: GetBucketAbacOutput = .{};
 
     return result;
 }

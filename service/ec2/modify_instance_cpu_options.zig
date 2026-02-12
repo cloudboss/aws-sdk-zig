@@ -51,12 +51,10 @@ pub const ModifyInstanceCpuOptionsOutput = struct {
     /// instance after the update.
     threads_per_core: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifyInstanceCpuOptionsOutput) void {
-        if (self.instance_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ModifyInstanceCpuOptionsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -85,7 +83,11 @@ pub fn execute(client: *Client, input: ModifyInstanceCpuOptionsInput, options: O
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCpuOptionsInput, config: *aws.Config) !aws.http.Request {
@@ -125,15 +127,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCpuOptionsInp
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyInstanceCpuOptionsOutput {
     _ = status;
     _ = headers;
-    var result: ModifyInstanceCpuOptionsOutput = .{ .allocator = alloc };
-    if (findElement(body, "coreCount")) |content| {
-        result.core_count = std.fmt.parseInt(i32, content, 10) catch null;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "instanceId")) |content| {
-        result.instance_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "threadsPerCore")) |content| {
-        result.threads_per_core = std.fmt.parseInt(i32, content, 10) catch null;
+
+    var result: ModifyInstanceCpuOptionsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "coreCount")) {
+                    result.core_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "instanceId")) {
+                    result.instance_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "threadsPerCore")) {
+                    result.threads_per_core = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

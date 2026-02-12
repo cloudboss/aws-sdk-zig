@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const LifecycleRule = @import("lifecycle_rule.zig").LifecycleRule;
 const TransitionDefaultMinimumObjectSize = @import("transition_default_minimum_object_size.zig").TransitionDefaultMinimumObjectSize;
+const serde = @import("serde.zig");
 
 /// Returns the lifecycle configuration information set on the bucket. For
 /// information about lifecycle
@@ -157,10 +158,10 @@ pub const GetBucketLifecycleConfigurationOutput = struct {
     /// behavior.
     transition_default_minimum_object_size: ?TransitionDefaultMinimumObjectSize = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketLifecycleConfigurationOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketLifecycleConfigurationOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -189,7 +190,11 @@ pub fn execute(client: *Client, input: GetBucketLifecycleConfigurationInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketLifecycleConfigurationInput, config: *aws.Config) !aws.http.Request {
@@ -228,9 +233,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketLifecycleConfigura
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketLifecycleConfigurationOutput {
-    var result: GetBucketLifecycleConfigurationOutput = .{ .allocator = alloc };
+    var result: GetBucketLifecycleConfigurationOutput = .{};
     _ = status;
-    _ = body;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Rule")) {
+                    result.rules = try serde.deserializeLifecycleRules(&reader, alloc, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
     if (headers.get("x-amz-transition-default-minimum-object-size")) |value| {
         result.transition_default_minimum_object_size = std.meta.stringToEnum(TransitionDefaultMinimumObjectSize, value);
     }

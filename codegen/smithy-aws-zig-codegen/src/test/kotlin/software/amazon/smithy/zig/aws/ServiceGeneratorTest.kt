@@ -268,7 +268,7 @@ class ServiceGeneratorTest {
         assertTrue(op.contains("account:"), "Missing account field")
         assertTrue(op.contains("arn:"), "Missing arn field")
         assertTrue(op.contains("user_id:"), "Missing user_id field")
-        assertTrue(op.contains("allocator: std.mem.Allocator"), "Missing allocator field")
+        assertTrue(op.contains("_arena: std.heap.ArenaAllocator"), "Missing _arena field")
     }
 
     @Test

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpamPrefixListResolverRuleRequest = @import("ipam_prefix_list_resolver_rule_request.zig").IpamPrefixListResolverRuleRequest;
 const IpamPrefixListResolver = @import("ipam_prefix_list_resolver.zig").IpamPrefixListResolver;
+const serde = @import("serde.zig");
 
 /// Modifies an IPAM prefix list resolver. You can update the description and
 /// CIDR selection rules. Changes to rules will trigger re-evaluation and
@@ -32,10 +33,10 @@ pub const ModifyIpamPrefixListResolverOutput = struct {
     /// Information about the modified IPAM prefix list resolver.
     ipam_prefix_list_resolver: ?IpamPrefixListResolver = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifyIpamPrefixListResolverOutput) void {
-        _ = self;
+    pub fn deinit(self: *ModifyIpamPrefixListResolverOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -64,7 +65,11 @@ pub fn execute(client: *Client, input: ModifyIpamPrefixListResolverInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolverInput, config: *aws.Config) !aws.http.Request {
@@ -139,8 +144,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyIpamPrefixListResolverOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ModifyIpamPrefixListResolverOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ModifyIpamPrefixListResolverOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamPrefixListResolver")) {
+                    result.ipam_prefix_list_resolver = try serde.deserializeIpamPrefixListResolver(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

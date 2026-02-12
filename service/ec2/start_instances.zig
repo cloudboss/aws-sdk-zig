@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceStateChange = @import("instance_state_change.zig").InstanceStateChange;
+const serde = @import("serde.zig");
 
 /// Starts an Amazon EBS-backed instance that you've previously stopped.
 ///
@@ -56,10 +57,10 @@ pub const StartInstancesOutput = struct {
     /// Information about the started instances.
     starting_instances: ?[]const InstanceStateChange = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const StartInstancesOutput) void {
-        _ = self;
+    pub fn deinit(self: *StartInstancesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -88,7 +89,11 @@ pub fn execute(client: *Client, input: StartInstancesInput, options: Options) !S
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: StartInstancesInput, config: *aws.Config) !aws.http.Request {
@@ -133,8 +138,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartInstancesInput, config
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StartInstancesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: StartInstancesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: StartInstancesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "instancesSet")) {
+                    result.starting_instances = try serde.deserializeInstanceStateChangeList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

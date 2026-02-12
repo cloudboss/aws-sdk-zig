@@ -737,76 +737,11 @@ pub const GetObjectOutput = struct {
     /// This functionality is not supported for directory buckets.
     website_redirect_location: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
     pub fn deinit(self: *GetObjectOutput) void {
-        if (self.accept_ranges) |v| {
-            self.allocator.free(v);
-        }
         self.body.deinit();
-        if (self.cache_control) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc32) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc32_c) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_crc64_nvme) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_sha1) |v| {
-            self.allocator.free(v);
-        }
-        if (self.checksum_sha256) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_disposition) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_encoding) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_language) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_range) |v| {
-            self.allocator.free(v);
-        }
-        if (self.content_type) |v| {
-            self.allocator.free(v);
-        }
-        if (self.e_tag) |v| {
-            self.allocator.free(v);
-        }
-        if (self.expiration) |v| {
-            self.allocator.free(v);
-        }
-        if (self.expires) |v| {
-            self.allocator.free(v);
-        }
-        if (self.metadata) |v| {
-            self.allocator.free(v);
-        }
-        if (self.restore) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_algorithm) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_key_md5) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_key_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.version_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.website_redirect_location) |v| {
-            self.allocator.free(v);
-        }
+        self._arena.deinit();
     }
 };
 
@@ -837,7 +772,11 @@ pub fn execute(client: *Client, input: GetObjectInput, options: Options) !GetObj
         return error.ServiceError;
     }
 
-    return try deserializeStreamingResponse(&stream_resp, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeStreamingResponse(&stream_resp, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectInput, config: *aws.Config) !aws.http.Request {
@@ -968,7 +907,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectInput, config: *aw
 }
 
 fn deserializeStreamingResponse(stream_resp: *aws.http.StreamingResponse, alloc: std.mem.Allocator) !GetObjectOutput {
-    var result: GetObjectOutput = .{ .allocator = alloc };
+    var result: GetObjectOutput = .{};
     result.body = stream_resp.body;
     if (stream_resp.headers.get("accept-ranges")) |value| {
         result.accept_ranges = try alloc.dupe(u8, value);

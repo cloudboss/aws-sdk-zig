@@ -9,6 +9,7 @@ const Checksum = @import("checksum.zig").Checksum;
 const GetObjectAttributesParts = @import("get_object_attributes_parts.zig").GetObjectAttributesParts;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const StorageClass = @import("storage_class.zig").StorageClass;
+const serde = @import("serde.zig");
 
 /// Retrieves all of the metadata from an object without returning the object
 /// itself. This operation is
@@ -379,15 +380,10 @@ pub const GetObjectAttributesOutput = struct {
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetObjectAttributesOutput) void {
-        if (self.e_tag) |v| {
-            self.allocator.free(v);
-        }
-        if (self.version_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetObjectAttributesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -416,7 +412,11 @@ pub fn execute(client: *Client, input: GetObjectAttributesInput, options: Option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAttributesInput, config: *aws.Config) !aws.http.Request {
@@ -485,13 +485,37 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAttributesInput, c
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetObjectAttributesOutput {
-    var result: GetObjectAttributesOutput = .{ .allocator = alloc };
+    var result: GetObjectAttributesOutput = .{};
     _ = status;
-    if (findElement(body, "ETag")) |content| {
-        result.e_tag = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "ObjectSize")) |content| {
-        result.object_size = std.fmt.parseInt(i64, content, 10) catch null;
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Checksum")) {
+                    result.checksum = try serde.deserializeChecksum(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "ETag")) {
+                    result.e_tag = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ObjectParts")) {
+                    result.object_parts = try serde.deserializeGetObjectAttributesParts(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "ObjectSize")) {
+                    result.object_size = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "StorageClass")) {
+                    result.storage_class = std.meta.stringToEnum(StorageClass, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
     if (headers.get("x-amz-delete-marker")) |value| {
         result.delete_marker = std.mem.eql(u8, value, "true");

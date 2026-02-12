@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const PolicyVersion = @import("policy_version.zig").PolicyVersion;
+const serde = @import("serde.zig");
 
 /// Creates a new version of the specified managed policy. To update a managed
 /// policy, you
@@ -79,10 +80,10 @@ pub const CreatePolicyVersionOutput = struct {
     /// A structure containing details about the new policy version.
     policy_version: ?PolicyVersion = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreatePolicyVersionOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreatePolicyVersionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -111,7 +112,11 @@ pub fn execute(client: *Client, input: CreatePolicyVersionInput, options: Option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreatePolicyVersionInput, config: *aws.Config) !aws.http.Request {
@@ -149,8 +154,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePolicyVersionInput, c
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreatePolicyVersionOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreatePolicyVersionOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "CreatePolicyVersionResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: CreatePolicyVersionOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "PolicyVersion")) {
+                    result.policy_version = try serde.deserializePolicyVersion(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

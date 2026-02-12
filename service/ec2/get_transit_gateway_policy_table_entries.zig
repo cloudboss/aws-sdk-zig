@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const TransitGatewayPolicyTableEntry = @import("transit_gateway_policy_table_entry.zig").TransitGatewayPolicyTableEntry;
+const serde = @import("serde.zig");
 
 /// Returns a list of transit gateway policy table entries.
 pub const GetTransitGatewayPolicyTableEntriesInput = struct {
@@ -34,10 +35,10 @@ pub const GetTransitGatewayPolicyTableEntriesOutput = struct {
     /// The entries for the transit gateway policy table.
     transit_gateway_policy_table_entries: ?[]const TransitGatewayPolicyTableEntry = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetTransitGatewayPolicyTableEntriesOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetTransitGatewayPolicyTableEntriesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -66,7 +67,11 @@ pub fn execute(client: *Client, input: GetTransitGatewayPolicyTableEntriesInput,
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetTransitGatewayPolicyTableEntriesInput, config: *aws.Config) !aws.http.Request {
@@ -123,8 +128,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetTransitGatewayPolicyTabl
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetTransitGatewayPolicyTableEntriesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: GetTransitGatewayPolicyTableEntriesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: GetTransitGatewayPolicyTableEntriesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "transitGatewayPolicyTableEntries")) {
+                    result.transit_gateway_policy_table_entries = try serde.deserializeTransitGatewayPolicyTableEntryList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const CoipPool = @import("coip_pool.zig").CoipPool;
+const serde = @import("serde.zig");
 
 /// Creates a pool of customer-owned IP (CoIP) addresses.
 pub const CreateCoipPoolInput = struct {
@@ -26,10 +27,10 @@ pub const CreateCoipPoolOutput = struct {
     /// Information about the CoIP address pool.
     coip_pool: ?CoipPool = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateCoipPoolOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateCoipPoolOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -58,7 +59,11 @@ pub fn execute(client: *Client, input: CreateCoipPoolInput, options: Options) !C
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateCoipPoolInput, config: *aws.Config) !aws.http.Request {
@@ -107,8 +112,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateCoipPoolInput, config
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateCoipPoolOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateCoipPoolOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateCoipPoolOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "coipPool")) {
+                    result.coip_pool = try serde.deserializeCoipPool(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

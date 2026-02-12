@@ -36,15 +36,10 @@ pub const GetPolicyOutput = struct {
     /// A unique identifier for the current revision of the policy.
     revision_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetPolicyOutput) void {
-        if (self.policy) |v| {
-            self.allocator.free(v);
-        }
-        if (self.revision_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetPolicyOutput) void {
+        self._arena.deinit();
     }
 
     pub const json_field_names = .{
@@ -78,7 +73,11 @@ pub fn execute(client: *Client, input: GetPolicyInput, options: Options) !GetPol
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetPolicyInput, config: *aws.Config) !aws.http.Request {
@@ -119,7 +118,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetPolicyInput, config: *aw
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetPolicyOutput {
-    var result: GetPolicyOutput = .{ .allocator = alloc };
+    var result: GetPolicyOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(GetPolicyOutput, body, alloc);
     }

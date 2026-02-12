@@ -8,6 +8,7 @@ const InstanceSpecification = @import("instance_specification.zig").InstanceSpec
 const SnapshotLocationEnum = @import("snapshot_location_enum.zig").SnapshotLocationEnum;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const SnapshotInfo = @import("snapshot_info.zig").SnapshotInfo;
+const serde = @import("serde.zig");
 
 /// Creates crash-consistent snapshots of multiple EBS volumes attached to an
 /// Amazon EC2 instance.
@@ -94,10 +95,10 @@ pub const CreateSnapshotsOutput = struct {
     /// List of snapshots.
     snapshots: ?[]const SnapshotInfo = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateSnapshotsOutput) void {
-        _ = self;
+    pub fn deinit(self: *CreateSnapshotsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -126,7 +127,11 @@ pub fn execute(client: *Client, input: CreateSnapshotsInput, options: Options) !
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateSnapshotsInput, config: *aws.Config) !aws.http.Request {
@@ -195,8 +200,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateSnapshotsInput, confi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateSnapshotsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: CreateSnapshotsOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: CreateSnapshotsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "snapshotSet")) {
+                    result.snapshots = try serde.deserializeSnapshotSet(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

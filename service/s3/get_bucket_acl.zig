@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Grant = @import("grant.zig").Grant;
 const Owner = @import("owner.zig").Owner;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -79,10 +80,10 @@ pub const GetBucketAclOutput = struct {
     /// Container for the bucket owner's ID.
     owner: ?Owner = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketAclOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetBucketAclOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -111,7 +112,11 @@ pub fn execute(client: *Client, input: GetBucketAclInput, options: Options) !Get
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketAclInput, config: *aws.Config) !aws.http.Request {
@@ -150,10 +155,33 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketAclInput, config: 
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketAclOutput {
-    _ = body;
+    var result: GetBucketAclOutput = .{};
     _ = status;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AccessControlList")) {
+                    result.grants = try serde.deserializeGrants(&reader, alloc, "Grant");
+                } else if (std.mem.eql(u8, e.local, "Owner")) {
+                    result.owner = try serde.deserializeOwner(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
     _ = headers;
-    const result: GetBucketAclOutput = .{ .allocator = alloc };
 
     return result;
 }

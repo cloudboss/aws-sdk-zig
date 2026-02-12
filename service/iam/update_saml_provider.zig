@@ -46,12 +46,10 @@ pub const UpdateSAMLProviderOutput = struct {
     /// The Amazon Resource Name (ARN) of the SAML provider that was updated.
     saml_provider_arn: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const UpdateSAMLProviderOutput) void {
-        if (self.saml_provider_arn) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *UpdateSAMLProviderOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -80,7 +78,11 @@ pub fn execute(client: *Client, input: UpdateSAMLProviderInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateSAMLProviderInput, config: *aws.Config) !aws.http.Request {
@@ -128,9 +130,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateSAMLProviderInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateSAMLProviderOutput {
     _ = status;
     _ = headers;
-    var result: UpdateSAMLProviderOutput = .{ .allocator = alloc };
-    if (findElement(body, "SAMLProviderArn")) |content| {
-        result.saml_provider_arn = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "UpdateSAMLProviderResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: UpdateSAMLProviderOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "SAMLProviderArn")) {
+                    result.saml_provider_arn = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

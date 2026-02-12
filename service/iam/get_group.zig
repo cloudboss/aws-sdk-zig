@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Group = @import("group.zig").Group;
 const User = @import("user.zig").User;
+const serde = @import("serde.zig");
 
 /// Returns a list of IAM users that are in the specified IAM group. You can
 /// paginate
@@ -68,12 +69,10 @@ pub const GetGroupOutput = struct {
     /// A list of users in the group.
     users: ?[]const User = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetGroupOutput) void {
-        if (self.marker) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetGroupOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -102,7 +101,11 @@ pub fn execute(client: *Client, input: GetGroupInput, options: Options) !GetGrou
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetGroupInput, config: *aws.Config) !aws.http.Request {
@@ -142,12 +145,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetGroupInput, config: *aws
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetGroupOutput {
     _ = status;
     _ = headers;
-    var result: GetGroupOutput = .{ .allocator = alloc };
-    if (findElement(body, "IsTruncated")) |content| {
-        result.is_truncated = std.mem.eql(u8, content, "true");
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetGroupResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "Marker")) |content| {
-        result.marker = try alloc.dupe(u8, content);
+
+    var result: GetGroupOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Group")) {
+                    result.group = try serde.deserializeGroup(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
+                    result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Marker")) {
+                    result.marker = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Users")) {
+                    result.users = try serde.deserializeuserListType(&reader, alloc, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

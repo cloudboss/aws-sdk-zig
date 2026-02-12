@@ -100,15 +100,10 @@ pub const CreateDelegationRequestOutput = struct {
     /// The unique identifier for the created delegation request.
     delegation_request_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateDelegationRequestOutput) void {
-        if (self.console_deep_link) |v| {
-            self.allocator.free(v);
-        }
-        if (self.delegation_request_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateDelegationRequestOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -137,7 +132,11 @@ pub fn execute(client: *Client, input: CreateDelegationRequestInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateDelegationRequestInput, config: *aws.Config) !aws.http.Request {
@@ -195,12 +194,32 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDelegationRequestInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateDelegationRequestOutput {
     _ = status;
     _ = headers;
-    var result: CreateDelegationRequestOutput = .{ .allocator = alloc };
-    if (findElement(body, "ConsoleDeepLink")) |content| {
-        result.console_deep_link = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "CreateDelegationRequestResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "DelegationRequestId")) |content| {
-        result.delegation_request_id = try alloc.dupe(u8, content);
+
+    var result: CreateDelegationRequestOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ConsoleDeepLink")) {
+                    result.console_deep_link = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "DelegationRequestId")) {
+                    result.delegation_request_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IamInstanceProfileAssociation = @import("iam_instance_profile_association.zig").IamInstanceProfileAssociation;
+const serde = @import("serde.zig");
 
 /// Disassociates an IAM instance profile from a running or stopped instance.
 ///
@@ -18,10 +19,10 @@ pub const DisassociateIamInstanceProfileOutput = struct {
     /// Information about the IAM instance profile association.
     iam_instance_profile_association: ?IamInstanceProfileAssociation = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DisassociateIamInstanceProfileOutput) void {
-        _ = self;
+    pub fn deinit(self: *DisassociateIamInstanceProfileOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -50,7 +51,11 @@ pub fn execute(client: *Client, input: DisassociateIamInstanceProfileInput, opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateIamInstanceProfileInput, config: *aws.Config) !aws.http.Request {
@@ -82,8 +87,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateIamInstanceProf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DisassociateIamInstanceProfileOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DisassociateIamInstanceProfileOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DisassociateIamInstanceProfileOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "iamInstanceProfileAssociation")) {
+                    result.iam_instance_profile_association = try serde.deserializeIamInstanceProfileAssociation(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

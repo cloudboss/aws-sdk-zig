@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PolicyDescriptorType = @import("policy_descriptor_type.zig").PolicyDescriptorType;
 const AssumedRoleUser = @import("assumed_role_user.zig").AssumedRoleUser;
 const Credentials = @import("credentials.zig").Credentials;
+const serde = @import("serde.zig");
 
 /// Returns a set of temporary security credentials for users who have been
 /// authenticated
@@ -418,27 +419,10 @@ pub const AssumeRoleWithSAMLOutput = struct {
     /// with no modifications.
     subject_type: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const AssumeRoleWithSAMLOutput) void {
-        if (self.audience) |v| {
-            self.allocator.free(v);
-        }
-        if (self.issuer) |v| {
-            self.allocator.free(v);
-        }
-        if (self.name_qualifier) |v| {
-            self.allocator.free(v);
-        }
-        if (self.source_identity) |v| {
-            self.allocator.free(v);
-        }
-        if (self.subject) |v| {
-            self.allocator.free(v);
-        }
-        if (self.subject_type) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *AssumeRoleWithSAMLOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -467,7 +451,11 @@ pub fn execute(client: *Client, input: AssumeRoleWithSAMLInput, options: Options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithSAMLInput, config: *aws.Config) !aws.http.Request {
@@ -524,27 +512,46 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleWithSAMLInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AssumeRoleWithSAMLOutput {
     _ = status;
     _ = headers;
-    var result: AssumeRoleWithSAMLOutput = .{ .allocator = alloc };
-    if (findElement(body, "Audience")) |content| {
-        result.audience = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AssumeRoleWithSAMLResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "Issuer")) |content| {
-        result.issuer = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "NameQualifier")) |content| {
-        result.name_qualifier = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "PackedPolicySize")) |content| {
-        result.packed_policy_size = std.fmt.parseInt(i32, content, 10) catch null;
-    }
-    if (findElement(body, "SourceIdentity")) |content| {
-        result.source_identity = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "Subject")) |content| {
-        result.subject = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "SubjectType")) |content| {
-        result.subject_type = try alloc.dupe(u8, content);
+
+    var result: AssumeRoleWithSAMLOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AssumedRoleUser")) {
+                    result.assumed_role_user = try serde.deserializeAssumedRoleUser(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "Audience")) {
+                    result.audience = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Credentials")) {
+                    result.credentials = try serde.deserializeCredentials(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "Issuer")) {
+                    result.issuer = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "NameQualifier")) {
+                    result.name_qualifier = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
+                    result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SourceIdentity")) {
+                    result.source_identity = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Subject")) {
+                    result.subject = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SubjectType")) {
+                    result.subject_type = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

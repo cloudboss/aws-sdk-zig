@@ -8,6 +8,7 @@ const AddIpamOrganizationalUnitExclusion = @import("add_ipam_organizational_unit
 const RemoveIpamOperatingRegion = @import("remove_ipam_operating_region.zig").RemoveIpamOperatingRegion;
 const RemoveIpamOrganizationalUnitExclusion = @import("remove_ipam_organizational_unit_exclusion.zig").RemoveIpamOrganizationalUnitExclusion;
 const IpamResourceDiscovery = @import("ipam_resource_discovery.zig").IpamResourceDiscovery;
+const serde = @import("serde.zig");
 
 /// Modifies a resource discovery. A resource discovery is an IPAM component
 /// that enables IPAM to manage and monitor resources that belong to the owning
@@ -76,10 +77,10 @@ pub const ModifyIpamResourceDiscoveryOutput = struct {
     /// A resource discovery.
     ipam_resource_discovery: ?IpamResourceDiscovery = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ModifyIpamResourceDiscoveryOutput) void {
-        _ = self;
+    pub fn deinit(self: *ModifyIpamResourceDiscoveryOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -108,7 +109,11 @@ pub fn execute(client: *Client, input: ModifyIpamResourceDiscoveryInput, options
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamResourceDiscoveryInput, config: *aws.Config) !aws.http.Request {
@@ -200,8 +205,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamResourceDiscovery
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyIpamResourceDiscoveryOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ModifyIpamResourceDiscoveryOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ModifyIpamResourceDiscoveryOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamResourceDiscovery")) {
+                    result.ipam_resource_discovery = try serde.deserializeIpamResourceDiscovery(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

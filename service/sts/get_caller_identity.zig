@@ -38,18 +38,10 @@ pub const GetCallerIdentityOutput = struct {
     /// page in the *IAM User Guide*.
     user_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetCallerIdentityOutput) void {
-        if (self.account) |v| {
-            self.allocator.free(v);
-        }
-        if (self.arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.user_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetCallerIdentityOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -78,7 +70,11 @@ pub fn execute(client: *Client, input: GetCallerIdentityInput, options: Options)
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCallerIdentityInput, config: *aws.Config) !aws.http.Request {
@@ -109,15 +105,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCallerIdentityInput, con
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetCallerIdentityOutput {
     _ = status;
     _ = headers;
-    var result: GetCallerIdentityOutput = .{ .allocator = alloc };
-    if (findElement(body, "Account")) |content| {
-        result.account = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetCallerIdentityResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "Arn")) |content| {
-        result.arn = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "UserId")) |content| {
-        result.user_id = try alloc.dupe(u8, content);
+
+    var result: GetCallerIdentityOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Account")) {
+                    result.account = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Arn")) {
+                    result.arn = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "UserId")) {
+                    result.user_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

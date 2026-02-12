@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Credentials = @import("credentials.zig").Credentials;
+const serde = @import("serde.zig");
 
 /// Exchanges a trade-in token for temporary Amazon Web Services credentials
 /// with the permissions
@@ -36,12 +37,10 @@ pub const GetDelegatedAccessTokenOutput = struct {
     /// attached to the session. If the packed size exceeds 100%, the request fails.
     packed_policy_size: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetDelegatedAccessTokenOutput) void {
-        if (self.assumed_principal) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetDelegatedAccessTokenOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -70,7 +69,11 @@ pub fn execute(client: *Client, input: GetDelegatedAccessTokenInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetDelegatedAccessTokenInput, config: *aws.Config) !aws.http.Request {
@@ -102,12 +105,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetDelegatedAccessTokenInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetDelegatedAccessTokenOutput {
     _ = status;
     _ = headers;
-    var result: GetDelegatedAccessTokenOutput = .{ .allocator = alloc };
-    if (findElement(body, "AssumedPrincipal")) |content| {
-        result.assumed_principal = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetDelegatedAccessTokenResult")) break;
+            },
+            else => {},
+        }
     }
-    if (findElement(body, "PackedPolicySize")) |content| {
-        result.packed_policy_size = std.fmt.parseInt(i32, content, 10) catch null;
+
+    var result: GetDelegatedAccessTokenOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AssumedPrincipal")) {
+                    result.assumed_principal = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Credentials")) {
+                    result.credentials = try serde.deserializeCredentials(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
+                    result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

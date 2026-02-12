@@ -238,10 +238,10 @@ pub const UpdateObjectEncryptionInput = struct {
 pub const UpdateObjectEncryptionOutput = struct {
     request_charged: ?RequestCharged = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const UpdateObjectEncryptionOutput) void {
-        _ = self;
+    pub fn deinit(self: *UpdateObjectEncryptionOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -270,7 +270,11 @@ pub fn execute(client: *Client, input: UpdateObjectEncryptionInput, options: Opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateObjectEncryptionInput, config: *aws.Config) !aws.http.Request {
@@ -326,7 +330,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateObjectEncryptionInput
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateObjectEncryptionOutput {
-    var result: UpdateObjectEncryptionOutput = .{ .allocator = alloc };
+    _ = alloc;
+    var result: UpdateObjectEncryptionOutput = .{};
     _ = status;
     _ = body;
     if (headers.get("x-amz-request-charged")) |value| {

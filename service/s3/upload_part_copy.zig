@@ -7,6 +7,7 @@ const RequestPayer = @import("request_payer.zig").RequestPayer;
 const CopyPartResult = @import("copy_part_result.zig").CopyPartResult;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEncryption;
+const serde = @import("serde.zig");
 
 /// Uploads a part by copying data from an existing object as data source. To
 /// specify the data source,
@@ -554,21 +555,10 @@ pub const UploadPartCopyOutput = struct {
     /// encryption.
     ssekms_key_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const UploadPartCopyOutput) void {
-        if (self.copy_source_version_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_algorithm) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_key_md5) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_key_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *UploadPartCopyOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -597,7 +587,11 @@ pub fn execute(client: *Client, input: UploadPartCopyInput, options: Options) !U
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UploadPartCopyInput, config: *aws.Config) !aws.http.Request {
@@ -695,7 +689,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UploadPartCopyInput, config
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UploadPartCopyOutput {
-    var result: UploadPartCopyOutput = .{ .allocator = alloc };
+    var result: UploadPartCopyOutput = .{};
     _ = status;
     _ = body;
     if (headers.get("x-amz-server-side-encryption-bucket-key-enabled")) |value| {

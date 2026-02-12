@@ -8,6 +8,7 @@ const SnapshotDiskContainer = @import("snapshot_disk_container.zig").SnapshotDis
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const SnapshotTaskDetail = @import("snapshot_task_detail.zig").SnapshotTaskDetail;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// Imports a disk into an EBS snapshot.
 ///
@@ -96,15 +97,10 @@ pub const ImportSnapshotOutput = struct {
     /// Any tags assigned to the import snapshot task.
     tags: ?[]const Tag = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ImportSnapshotOutput) void {
-        if (self.description) |v| {
-            self.allocator.free(v);
-        }
-        if (self.import_task_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *ImportSnapshotOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -133,7 +129,11 @@ pub fn execute(client: *Client, input: ImportSnapshotInput, options: Options) !I
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ImportSnapshotInput, config: *aws.Config) !aws.http.Request {
@@ -232,12 +232,34 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportSnapshotInput, config
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ImportSnapshotOutput {
     _ = status;
     _ = headers;
-    var result: ImportSnapshotOutput = .{ .allocator = alloc };
-    if (findElement(body, "description")) |content| {
-        result.description = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "importTaskId")) |content| {
-        result.import_task_id = try alloc.dupe(u8, content);
+
+    var result: ImportSnapshotOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "description")) {
+                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "importTaskId")) {
+                    result.import_task_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "snapshotTaskDetail")) {
+                    result.snapshot_task_detail = try serde.deserializeSnapshotTaskDetail(&reader, alloc);
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try serde.deserializeTagList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

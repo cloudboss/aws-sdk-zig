@@ -987,33 +987,10 @@ pub const CreateMultipartUploadOutput = struct {
     /// ID for the initiated multipart upload.
     upload_id: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const CreateMultipartUploadOutput) void {
-        if (self.abort_rule_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.bucket) |v| {
-            self.allocator.free(v);
-        }
-        if (self.key) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_algorithm) |v| {
-            self.allocator.free(v);
-        }
-        if (self.sse_customer_key_md5) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_encryption_context) |v| {
-            self.allocator.free(v);
-        }
-        if (self.ssekms_key_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.upload_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *CreateMultipartUploadOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -1042,7 +1019,11 @@ pub fn execute(client: *Client, input: CreateMultipartUploadInput, options: Opti
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateMultipartUploadInput, config: *aws.Config) !aws.http.Request {
@@ -1175,16 +1156,33 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateMultipartUploadInput,
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateMultipartUploadOutput {
-    var result: CreateMultipartUploadOutput = .{ .allocator = alloc };
+    var result: CreateMultipartUploadOutput = .{};
     _ = status;
-    if (findElement(body, "Bucket")) |content| {
-        result.bucket = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "Key")) |content| {
-        result.key = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "UploadId")) |content| {
-        result.upload_id = try alloc.dupe(u8, content);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Bucket")) {
+                    result.bucket = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Key")) {
+                    result.key = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "UploadId")) {
+                    result.upload_id = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
     if (headers.get("x-amz-abort-date")) |value| {
         result.abort_date = std.fmt.parseInt(i64, value, 10) catch null;

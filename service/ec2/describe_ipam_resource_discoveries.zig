@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const IpamResourceDiscovery = @import("ipam_resource_discovery.zig").IpamResourceDiscovery;
+const serde = @import("serde.zig");
 
 /// Describes IPAM resource discoveries. A resource discovery is an IPAM
 /// component that enables IPAM to manage and monitor resources that belong to
@@ -38,12 +39,10 @@ pub const DescribeIpamResourceDiscoveriesOutput = struct {
     /// when there are no more results to return.
     next_token: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeIpamResourceDiscoveriesOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeIpamResourceDiscoveriesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -72,7 +71,11 @@ pub fn execute(client: *Client, input: DescribeIpamResourceDiscoveriesInput, opt
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeIpamResourceDiscoveriesInput, config: *aws.Config) !aws.http.Request {
@@ -136,9 +139,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeIpamResourceDiscove
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeIpamResourceDiscoveriesOutput {
     _ = status;
     _ = headers;
-    var result: DescribeIpamResourceDiscoveriesOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeIpamResourceDiscoveriesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipamResourceDiscoverySet")) {
+                    result.ipam_resource_discoveries = try serde.deserializeIpamResourceDiscoverySet(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

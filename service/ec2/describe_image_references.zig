@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceTypeRequest = @import("resource_type_request.zig").ResourceTypeRequest;
 const ImageReference = @import("image_reference.zig").ImageReference;
+const serde = @import("serde.zig");
 
 /// Describes your Amazon Web Services resources that are referencing the
 /// specified images.
@@ -68,12 +69,10 @@ pub const DescribeImageReferencesOutput = struct {
     /// are no more items to return.
     next_token: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DescribeImageReferencesOutput) void {
-        if (self.next_token) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *DescribeImageReferencesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -102,7 +101,11 @@ pub fn execute(client: *Client, input: DescribeImageReferencesInput, options: Op
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeImageReferencesInput, config: *aws.Config) !aws.http.Request {
@@ -168,9 +171,30 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeImageReferencesInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeImageReferencesOutput {
     _ = status;
     _ = headers;
-    var result: DescribeImageReferencesOutput = .{ .allocator = alloc };
-    if (findElement(body, "nextToken")) |content| {
-        result.next_token = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DescribeImageReferencesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "imageReferenceSet")) {
+                    result.image_references = try serde.deserializeImageReferenceList(&reader, alloc, "item");
+                } else if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

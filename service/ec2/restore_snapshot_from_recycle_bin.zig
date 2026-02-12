@@ -58,27 +58,10 @@ pub const RestoreSnapshotFromRecycleBinOutput = struct {
     /// The size of the volume, in GiB.
     volume_size: ?i32 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const RestoreSnapshotFromRecycleBinOutput) void {
-        if (self.description) |v| {
-            self.allocator.free(v);
-        }
-        if (self.outpost_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.owner_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.progress) |v| {
-            self.allocator.free(v);
-        }
-        if (self.snapshot_id) |v| {
-            self.allocator.free(v);
-        }
-        if (self.volume_id) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *RestoreSnapshotFromRecycleBinOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -107,7 +90,11 @@ pub fn execute(client: *Client, input: RestoreSnapshotFromRecycleBinInput, optio
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: RestoreSnapshotFromRecycleBinInput, config: *aws.Config) !aws.http.Request {
@@ -143,33 +130,48 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreSnapshotFromRecycleB
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RestoreSnapshotFromRecycleBinOutput {
     _ = status;
     _ = headers;
-    var result: RestoreSnapshotFromRecycleBinOutput = .{ .allocator = alloc };
-    if (findElement(body, "description")) |content| {
-        result.description = try alloc.dupe(u8, content);
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
     }
-    if (findElement(body, "encrypted")) |content| {
-        result.encrypted = std.mem.eql(u8, content, "true");
-    }
-    if (findElement(body, "outpostArn")) |content| {
-        result.outpost_arn = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "ownerId")) |content| {
-        result.owner_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "progress")) |content| {
-        result.progress = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "snapshotId")) |content| {
-        result.snapshot_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "startTime")) |content| {
-        result.start_time = std.fmt.parseInt(i64, content, 10) catch null;
-    }
-    if (findElement(body, "volumeId")) |content| {
-        result.volume_id = try alloc.dupe(u8, content);
-    }
-    if (findElement(body, "volumeSize")) |content| {
-        result.volume_size = std.fmt.parseInt(i32, content, 10) catch null;
+
+    var result: RestoreSnapshotFromRecycleBinOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "description")) {
+                    result.description = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "encrypted")) {
+                    result.encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "outpostArn")) {
+                    result.outpost_arn = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ownerId")) {
+                    result.owner_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "progress")) {
+                    result.progress = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "snapshotId")) {
+                    result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "sseType")) {
+                    result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "startTime")) {
+                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "volumeId")) {
+                    result.volume_id = try alloc.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "volumeSize")) {
+                    result.volume_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
     }
 
     return result;

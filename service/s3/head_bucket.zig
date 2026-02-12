@@ -197,18 +197,10 @@ pub const HeadBucketOutput = struct {
     /// The Region that the bucket is located.
     bucket_region: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const HeadBucketOutput) void {
-        if (self.bucket_arn) |v| {
-            self.allocator.free(v);
-        }
-        if (self.bucket_location_name) |v| {
-            self.allocator.free(v);
-        }
-        if (self.bucket_region) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *HeadBucketOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -237,7 +229,11 @@ pub fn execute(client: *Client, input: HeadBucketInput, options: Options) !HeadB
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: HeadBucketInput, config: *aws.Config) !aws.http.Request {
@@ -269,7 +265,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: HeadBucketInput, config: *a
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !HeadBucketOutput {
-    var result: HeadBucketOutput = .{ .allocator = alloc };
+    var result: HeadBucketOutput = .{};
     _ = status;
     _ = body;
     if (headers.get("x-amz-access-point-alias")) |value| {

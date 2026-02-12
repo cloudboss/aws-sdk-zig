@@ -7,6 +7,7 @@ const DiskImage = @import("disk_image.zig").DiskImage;
 const ImportInstanceLaunchSpecification = @import("import_instance_launch_specification.zig").ImportInstanceLaunchSpecification;
 const PlatformValues = @import("platform_values.zig").PlatformValues;
 const ConversionTask = @import("conversion_task.zig").ConversionTask;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -53,10 +54,10 @@ pub const ImportInstanceOutput = struct {
     /// Information about the conversion task.
     conversion_task: ?ConversionTask = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const ImportInstanceOutput) void {
-        _ = self;
+    pub fn deinit(self: *ImportInstanceOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -85,7 +86,11 @@ pub fn execute(client: *Client, input: ImportInstanceInput, options: Options) !I
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ImportInstanceInput, config: *aws.Config) !aws.http.Request {
@@ -168,8 +173,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportInstanceInput, config
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ImportInstanceOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: ImportInstanceOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: ImportInstanceOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "conversionTask")) {
+                    result.conversion_task = try serde.deserializeConversionTask(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

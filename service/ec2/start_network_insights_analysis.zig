@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const NetworkInsightsAnalysis = @import("network_insights_analysis.zig").NetworkInsightsAnalysis;
+const serde = @import("serde.zig");
 
 /// Starts analyzing the specified path. If the path is reachable, the
 /// operation returns the shortest feasible path.
@@ -43,10 +44,10 @@ pub const StartNetworkInsightsAnalysisOutput = struct {
     /// Information about the network insights analysis.
     network_insights_analysis: ?NetworkInsightsAnalysis = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const StartNetworkInsightsAnalysisOutput) void {
-        _ = self;
+    pub fn deinit(self: *StartNetworkInsightsAnalysisOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -75,7 +76,11 @@ pub fn execute(client: *Client, input: StartNetworkInsightsAnalysisInput, option
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: StartNetworkInsightsAnalysisInput, config: *aws.Config) !aws.http.Request {
@@ -153,8 +158,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartNetworkInsightsAnalysi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StartNetworkInsightsAnalysisOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: StartNetworkInsightsAnalysisOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: StartNetworkInsightsAnalysisOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "networkInsightsAnalysis")) {
+                    result.network_insights_analysis = try serde.deserializeNetworkInsightsAnalysis(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

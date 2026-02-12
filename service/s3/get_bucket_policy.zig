@@ -140,12 +140,10 @@ pub const GetBucketPolicyOutput = struct {
     /// The bucket policy as a JSON document.
     policy: ?[]const u8 = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetBucketPolicyOutput) void {
-        if (self.policy) |v| {
-            self.allocator.free(v);
-        }
+    pub fn deinit(self: *GetBucketPolicyOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -174,7 +172,11 @@ pub fn execute(client: *Client, input: GetBucketPolicyInput, options: Options) !
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketPolicyInput, config: *aws.Config) !aws.http.Request {
@@ -213,7 +215,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetBucketPolicyInput, confi
 }
 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetBucketPolicyOutput {
-    var result: GetBucketPolicyOutput = .{ .allocator = alloc };
+    var result: GetBucketPolicyOutput = .{};
     _ = status;
     if (body.len > 0) {
         result.policy = try alloc.dupe(u8, body);

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMulticastDeregisteredGroupSources = @import("transit_gateway_multicast_deregistered_group_sources.zig").TransitGatewayMulticastDeregisteredGroupSources;
+const serde = @import("serde.zig");
 
 /// Deregisters the specified sources (network interfaces) from the transit
 /// gateway multicast group.
@@ -29,10 +30,10 @@ pub const DeregisterTransitGatewayMulticastGroupSourcesOutput = struct {
     /// Information about the deregistered group sources.
     deregistered_multicast_group_sources: ?TransitGatewayMulticastDeregisteredGroupSources = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const DeregisterTransitGatewayMulticastGroupSourcesOutput) void {
-        _ = self;
+    pub fn deinit(self: *DeregisterTransitGatewayMulticastGroupSourcesOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -61,7 +62,11 @@ pub fn execute(client: *Client, input: DeregisterTransitGatewayMulticastGroupSou
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeregisterTransitGatewayMulticastGroupSourcesInput, config: *aws.Config) !aws.http.Request {
@@ -112,8 +117,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeregisterTransitGatewayMul
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeregisterTransitGatewayMulticastGroupSourcesOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: DeregisterTransitGatewayMulticastGroupSourcesOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: DeregisterTransitGatewayMulticastGroupSourcesOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "deregisteredMulticastGroupSources")) {
+                    result.deregistered_multicast_group_sources = try serde.deserializeTransitGatewayMulticastDeregisteredGroupSources(&reader, alloc);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

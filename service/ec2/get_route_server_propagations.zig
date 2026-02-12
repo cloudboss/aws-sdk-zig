@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RouteServerPropagation = @import("route_server_propagation.zig").RouteServerPropagation;
+const serde = @import("serde.zig");
 
 /// Gets information about the route propagations for the specified route
 /// server.
@@ -51,10 +52,10 @@ pub const GetRouteServerPropagationsOutput = struct {
     /// Information about the route propagations for the specified route server.
     route_server_propagations: ?[]const RouteServerPropagation = null,
 
-    allocator: std.mem.Allocator,
+    _arena: std.heap.ArenaAllocator = undefined,
 
-    pub fn deinit(self: *const GetRouteServerPropagationsOutput) void {
-        _ = self;
+    pub fn deinit(self: *GetRouteServerPropagationsOutput) void {
+        self._arena.deinit();
     }
 };
 
@@ -83,7 +84,11 @@ pub fn execute(client: *Client, input: GetRouteServerPropagationsInput, options:
         return error.ServiceError;
     }
 
-    return try deserializeResponse(response.body, response.status, response.headers, client.allocator);
+    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
+    errdefer resp_arena.deinit();
+    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
+    result._arena = resp_arena;
+    return result;
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetRouteServerPropagationsInput, config: *aws.Config) !aws.http.Request {
@@ -123,8 +128,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetRouteServerPropagationsI
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetRouteServerPropagationsOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    const result: GetRouteServerPropagationsOutput = .{ .allocator = alloc };
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => break,
+            else => {},
+        }
+    }
+
+    var result: GetRouteServerPropagationsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "routeServerPropagationSet")) {
+                    result.route_server_propagations = try serde.deserializeRouteServerPropagationsList(&reader, alloc, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }
