@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OutputFormat = @import("output_format.zig").OutputFormat;
 const Schedule = @import("schedule.zig").Schedule;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Creates a new data export configuration for EC2 Capacity Manager. This
 /// allows you to automatically export capacity usage data to an S3 bucket on a

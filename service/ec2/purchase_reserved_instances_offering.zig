@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReservedInstanceLimitPrice = @import("reserved_instance_limit_price.zig").ReservedInstanceLimitPrice;
+const serde = @import("serde.zig");
 
 /// Purchases a Reserved Instance for use with your account. With Reserved
 /// Instances, you pay

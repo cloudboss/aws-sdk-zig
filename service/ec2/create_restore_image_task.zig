@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Starts a task that restores an AMI from an Amazon S3 object that was
 /// previously created by

@@ -15,6 +15,7 @@ import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.traits.EnumDefinition
 import software.amazon.smithy.model.traits.ErrorTrait
+import software.amazon.smithy.model.traits.XmlFlattenedTrait
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
@@ -138,6 +139,26 @@ class SerdeGeneratorTest {
                     .output(ShapeId.from("test#ListUsersOutput"))
                     .build()
             )
+            // UpdateUser operation (complex input with nested struct + list)
+            .addShape(
+                StructureShape.builder()
+                    .id("test#UpdateUserInput")
+                    .addMember("User", ShapeId.from("test#User"))
+                    .addMember("Tags", ShapeId.from("test#TagList"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#UpdateUserOutput")
+                    .build()
+            )
+            .addShape(
+                OperationShape.builder()
+                    .id("test#UpdateUser")
+                    .input(ShapeId.from("test#UpdateUserInput"))
+                    .output(ShapeId.from("test#UpdateUserOutput"))
+                    .build()
+            )
             // Service
             .addShape(
                 ServiceShape.builder()
@@ -145,6 +166,7 @@ class SerdeGeneratorTest {
                     .version("2010-05-08")
                     .addOperation(ShapeId.from("test#GetUser"))
                     .addOperation(ShapeId.from("test#ListUsers"))
+                    .addOperation(ShapeId.from("test#UpdateUser"))
                     .build()
             )
             .assemble()
@@ -469,6 +491,232 @@ class SerdeGeneratorTest {
         assertTrue(
             serde.contains("const StatusType = @import(\"status_type.zig\").StatusType;"),
             "Should import StatusType enum",
+        )
+    }
+
+    // ---- @xmlName trait ----
+
+    // ---- Struct serializer ----
+
+    @Test
+    fun serializeTagFunction() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {"),
+            "Should generate serializeTag function",
+        )
+    }
+
+    @Test
+    fun serializeUserFunction() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("pub fn serializeUser(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: User) !void {"),
+            "Should generate serializeUser function",
+        )
+    }
+
+    @Test
+    fun tagSerializerHandlesStringField() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        // Tag.Key is optional, so serializer wraps in if/else with |v|
+        assertTrue(
+            serde.contains("appendXmlEscaped(alloc, buf, v)"),
+            "String fields should use appendXmlEscaped",
+        )
+    }
+
+    @Test
+    fun userSerializerHandlesEnumField() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        // Status is optional, so unwrapped as v
+        assertTrue(
+            serde.contains("@tagName(v)"),
+            "Enum fields should use @tagName",
+        )
+    }
+
+    @Test
+    fun userSerializerHandlesListField() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        // Tags is optional, so unwrapped as v
+        assertTrue(
+            serde.contains("serializeTagList(alloc, buf, v, \"member\")"),
+            "List fields should call list serializer",
+        )
+    }
+
+    @Test
+    fun userSerializerHandlesBoolField() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        // IsTruncated is optional, so unwrapped as v
+        assertTrue(
+            serde.contains("if (v) \"true\" else \"false\""),
+            "Bool fields should use if/else true/false",
+        )
+    }
+
+    @Test
+    fun userSerializerHandlesNestedStruct() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        // Settings is optional, so unwrapped as v
+        assertTrue(
+            serde.contains("serializeSettings(alloc, buf, v)"),
+            "Nested struct fields should call struct serializer",
+        )
+    }
+
+    // ---- List serializer ----
+
+    @Test
+    fun serializeTagListFunction() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("pub fn serializeTagList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {"),
+            "Should generate serializeTagList function",
+        )
+    }
+
+    @Test
+    fun tagListSerializerCallsSerializeTag() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        val fnStart = serde.indexOf("pub fn serializeTagList(")
+        assertTrue(fnStart >= 0)
+        val fnBody = serde.substring(fnStart, serde.indexOf("\n}\n", fnStart) + 1)
+        assertTrue(
+            fnBody.contains("try serializeTag(alloc, buf, item)"),
+            "List serializer should call element serializer for struct elements",
+        )
+    }
+
+    // ---- Empty struct serializer ----
+
+    @Test
+    fun emptyStructSerializerSuppressesParams() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        val fnStart = serde.indexOf("pub fn serializeMarker(")
+        assertTrue(fnStart >= 0, "Should generate serializeMarker")
+        val fnBody = serde.substring(fnStart, serde.indexOf("\n}\n", fnStart) + 1)
+        assertTrue(fnBody.contains("_ = alloc;"), "Empty struct serializer should suppress alloc")
+        assertTrue(fnBody.contains("_ = buf;"), "Empty struct serializer should suppress buf")
+        assertTrue(fnBody.contains("_ = value;"), "Empty struct serializer should suppress value")
+    }
+
+    // ---- appendXmlEscaped helper ----
+
+    @Test
+    fun appendXmlEscapedHelperGenerated() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {"),
+            "Should generate appendXmlEscaped helper",
+        )
+    }
+
+    // ---- @xmlFlattened handling ----
+
+    @Test
+    fun xmlFlattenedListSerializerNoWrapper() {
+        // Build a model with a @xmlFlattened list member
+        val model = Model.assembler()
+            .addShape(
+                StructureShape.builder()
+                    .id("test#Item")
+                    .addMember("Name", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                ListShape.builder()
+                    .id("test#ItemList")
+                    .member(ShapeId.from("test#Item"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#Container")
+                    .addMember(
+                        "Items",
+                        ShapeId.from("test#ItemList"),
+                        { it.addTrait(XmlFlattenedTrait()) },
+                    )
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#PutItemsInput")
+                    .addMember("Container", ShapeId.from("test#Container"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#PutItemsOutput")
+                    .build()
+            )
+            .addShape(
+                OperationShape.builder()
+                    .id("test#PutItems")
+                    .input(ShapeId.from("test#PutItemsInput"))
+                    .output(ShapeId.from("test#PutItemsOutput"))
+                    .build()
+            )
+            .addShape(
+                ServiceShape.builder()
+                    .id("test#TestService")
+                    .version("2024-01-01")
+                    .addOperation(ShapeId.from("test#PutItems"))
+                    .build()
+            )
+            .assemble()
+            .unwrap()
+
+        val settings = ZigSettings(
+            ShapeId.from("test#TestService"),
+            "testservice",
+            ".",
+        )
+        val symbolProvider = ZigSymbolVisitor(model, settings.packageName)
+        val fileManifest = FileManifest.create(tempDir)
+        val delegator = WriterDelegator(fileManifest, symbolProvider, ZigWriter.factory())
+        val service = model.expectShape(settings.service, ServiceShape::class.java)
+        val context = ZigContext(
+            model = model,
+            settings = settings,
+            symbolProvider = symbolProvider,
+            fileManifest = fileManifest,
+            writerDelegator = delegator,
+            integrations = listOf(),
+            service = service,
+        )
+
+        ServiceGenerator(context, service, model, AwsQueryProtocol()).run()
+        context.writerDelegator().flushWriters()
+
+        val files = mutableMapOf<String, String>()
+        for (file in context.fileManifest().files) {
+            files[file.fileName.toString()] = file.toFile().readText()
+        }
+
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("pub fn serializeContainer("),
+            "Should generate serializeContainer",
+        )
+
+        // Flattened list should NOT have wrapper element, and Items is optional -> v
+        assertTrue(
+            serde.contains("serializeItemList(alloc, buf, v, \"Items\")"),
+            "Flattened list should use member name as item tag directly",
         )
     }
 

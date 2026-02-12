@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImageUsageResourceTypeRequest = @import("image_usage_resource_type_request.zig").ImageUsageResourceTypeRequest;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Creates a report that shows how your image is used across other Amazon Web
 /// Services accounts. The report

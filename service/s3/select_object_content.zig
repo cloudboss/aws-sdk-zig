@@ -9,6 +9,7 @@ const OutputSerialization = @import("output_serialization.zig").OutputSerializat
 const RequestProgress = @import("request_progress.zig").RequestProgress;
 const ScanRange = @import("scan_range.zig").ScanRange;
 const SelectObjectContentEventStream = @import("select_object_content_event_stream.zig").SelectObjectContentEventStream;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -277,6 +278,22 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SelectObjectContentInput, c
     try body_buf.appendSlice(alloc, "<Expression>");
     try appendXmlEscaped(alloc, &body_buf, input.expression);
     try body_buf.appendSlice(alloc, "</Expression>");
+    try body_buf.appendSlice(alloc, "<InputSerialization>");
+    try serde.serializeInputSerialization(alloc, &body_buf, input.input_serialization);
+    try body_buf.appendSlice(alloc, "</InputSerialization>");
+    try body_buf.appendSlice(alloc, "<OutputSerialization>");
+    try serde.serializeOutputSerialization(alloc, &body_buf, input.output_serialization);
+    try body_buf.appendSlice(alloc, "</OutputSerialization>");
+    if (input.request_progress) |v| {
+        try body_buf.appendSlice(alloc, "<RequestProgress>");
+        try serde.serializeRequestProgress(alloc, &body_buf, v);
+        try body_buf.appendSlice(alloc, "</RequestProgress>");
+    }
+    if (input.scan_range) |v| {
+        try body_buf.appendSlice(alloc, "<ScanRange>");
+        try serde.serializeScanRange(alloc, &body_buf, v);
+        try body_buf.appendSlice(alloc, "</ScanRange>");
+    }
     try body_buf.appendSlice(alloc, "</SelectObjectContentRequest>");
     const body = try body_buf.toOwnedSlice(alloc);
 

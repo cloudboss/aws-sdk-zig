@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Initiates an AMI copy operation. You must specify the source AMI ID and both
 /// the source

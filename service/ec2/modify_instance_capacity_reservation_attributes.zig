@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityReservationSpecification = @import("capacity_reservation_specification.zig").CapacityReservationSpecification;
+const serde = @import("serde.zig");
 
 /// Modifies the Capacity Reservation settings for a stopped instance. Use this
 /// action to

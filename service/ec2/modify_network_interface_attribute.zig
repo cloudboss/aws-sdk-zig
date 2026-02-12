@@ -8,6 +8,7 @@ const ConnectionTrackingSpecificationRequest = @import("connection_tracking_spec
 const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const EnaSrdSpecification = @import("ena_srd_specification.zig").EnaSrdSpecification;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
+const serde = @import("serde.zig");
 
 /// Modifies the specified network interface attribute. You can specify only one
 /// attribute

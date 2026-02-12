@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const ServerSideEncryptionConfiguration = @import("server_side_encryption_configuration.zig").ServerSideEncryptionConfiguration;
+const serde = @import("serde.zig");
 
 /// This operation configures default encryption and Amazon S3 Bucket Keys for
 /// an existing bucket. You can also [block encryption
@@ -268,7 +269,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutBucketEncryptionInput, c
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    try body_buf.appendSlice(alloc, "<ServerSideEncryptionConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try serde.serializeServerSideEncryptionConfiguration(alloc, &body_buf, input.server_side_encryption_configuration);
+    try body_buf.appendSlice(alloc, "</ServerSideEncryptionConfiguration>");
+    const body = try body_buf.toOwnedSlice(alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

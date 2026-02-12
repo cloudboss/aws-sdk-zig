@@ -3,6 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const serde = @import("serde.zig");
 
 /// Replaces the existing list of server certificate thumbprints associated with
 /// an OpenID

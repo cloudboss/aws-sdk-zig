@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3ObjectTag = @import("s_3_object_tag.zig").S3ObjectTag;
+const serde = @import("serde.zig");
 
 /// Stores an AMI as a single object in an Amazon S3 bucket.
 ///

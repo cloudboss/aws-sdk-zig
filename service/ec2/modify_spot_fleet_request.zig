@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExcessCapacityTerminationPolicy = @import("excess_capacity_termination_policy.zig").ExcessCapacityTerminationPolicy;
 const LaunchTemplateConfig = @import("launch_template_config.zig").LaunchTemplateConfig;
+const serde = @import("serde.zig");
 
 /// Modifies the specified Spot Fleet request.
 ///

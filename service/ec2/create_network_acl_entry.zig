@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IcmpTypeCode = @import("icmp_type_code.zig").IcmpTypeCode;
 const PortRange = @import("port_range.zig").PortRange;
 const RuleAction = @import("rule_action.zig").RuleAction;
+const serde = @import("serde.zig");
 
 /// Creates an entry (a rule) in a network ACL with the specified rule number.
 /// Each network ACL has a set of numbered ingress rules

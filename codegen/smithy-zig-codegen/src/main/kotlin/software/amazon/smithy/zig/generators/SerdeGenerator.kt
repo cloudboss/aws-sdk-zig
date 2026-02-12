@@ -22,6 +22,7 @@ import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.TimestampShape
 import software.amazon.smithy.model.traits.EnumTrait
+import software.amazon.smithy.model.traits.XmlFlattenedTrait
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
@@ -50,11 +51,21 @@ class SerdeGenerator(
     /** I/O shape IDs that are exclusively I/O (not also member types). */
     private val exclusiveIoShapeIds: Set<ShapeId> by lazy { collectExclusiveIoShapeIds() }
 
-    fun run() {
-        val structs = deserializableStructs.sortedBy { it.id.name }
-        val lists = deserializableLists.sortedBy { it.id.name }
+    /** Struct shapes that need serialize functions (from input shapes). */
+    private val serializableStructs: Set<StructureShape> by lazy { collectSerializableShapes() }
 
-        if (structs.isEmpty() && lists.isEmpty()) return
+    /** List shapes that need list serializer helpers (from input shapes). */
+    private val serializableLists: Set<ListShape> by lazy { collectSerializableLists() }
+
+    fun run() {
+        val deserStructs = deserializableStructs.sortedBy { it.id.name }
+        val deserLists = deserializableLists.sortedBy { it.id.name }
+        val serStructs = serializableStructs.sortedBy { it.id.name }
+        val serLists = serializableLists.sortedBy { it.id.name }
+
+        if (deserStructs.isEmpty() && deserLists.isEmpty() &&
+            serStructs.isEmpty() && serLists.isEmpty()
+        ) return
 
         context.writerDelegator().useFileWriter("serde.zig") { writer ->
             // Imports
@@ -62,8 +73,10 @@ class SerdeGenerator(
             writer.write("const std = @import(\"std\");")
             writer.blankLine()
 
-            // Import all referenced types
-            val importedTypes = collectImportedTypes(structs, lists)
+            // Import all referenced types (from both deser and ser)
+            val allStructs = (deserStructs + serStructs).distinctBy { it.id.name }.sortedBy { it.id.name }
+            val allLists = (deserLists + serLists).distinctBy { it.id.name }.sortedBy { it.id.name }
+            val importedTypes = collectImportedTypes(allStructs, allLists)
             for (typeName in importedTypes.sorted()) {
                 val fileName = NamingUtil.toZigFileName(typeName)
                 writer.write("const \$L = @import(\"\$L\").\$L;", typeName, fileName, typeName)
@@ -73,15 +86,32 @@ class SerdeGenerator(
             }
 
             // Generate list deserializers first (structs may reference them)
-            for (listShape in lists) {
+            for (listShape in deserLists) {
                 writeListDeserializer(writer, listShape)
                 writer.blankLine()
             }
 
             // Generate struct deserializers
-            for (structShape in structs) {
+            for (structShape in deserStructs) {
                 writeStructDeserializer(writer, structShape)
                 writer.blankLine()
+            }
+
+            // Generate list serializers
+            for (listShape in serLists) {
+                writeListSerializer(writer, listShape)
+                writer.blankLine()
+            }
+
+            // Generate struct serializers
+            for (structShape in serStructs) {
+                writeStructSerializer(writer, structShape)
+                writer.blankLine()
+            }
+
+            // Generate appendXmlEscaped helper if any serializers exist
+            if (serStructs.isNotEmpty() || serLists.isNotEmpty()) {
+                writeAppendXmlEscapedHelper(writer)
             }
         }
     }
@@ -184,6 +214,36 @@ class SerdeGenerator(
                 }
             }
         }
+    }
+
+    private fun collectSerializableShapes(): Set<StructureShape> {
+        val result = mutableSetOf<StructureShape>()
+        val visited = mutableSetOf<ShapeId>()
+        val excludeIds = exclusiveIoShapeIds
+
+        for (op in topDownIndex.getContainedOperations(service)) {
+            val inputShape = model.expectShape(op.inputShape, StructureShape::class.java)
+            for ((_, member) in inputShape.allMembers) {
+                collectNestedStructs(member, result, visited, excludeIds)
+            }
+        }
+        return result
+    }
+
+    private fun collectSerializableLists(): Set<ListShape> {
+        val result = mutableSetOf<ListShape>()
+        val visited = mutableSetOf<ShapeId>()
+
+        for (op in topDownIndex.getContainedOperations(service)) {
+            val inputShape = model.expectShape(op.inputShape, StructureShape::class.java)
+            collectNestedLists(inputShape, result, visited)
+        }
+
+        // Also collect lists from nested serializable structs
+        for (structShape in serializableStructs) {
+            collectNestedLists(structShape, result, visited)
+        }
+        return result
     }
 
     /**
@@ -588,5 +648,189 @@ class SerdeGenerator(
     private fun isEnumType(shape: Shape): Boolean {
         return shape is EnumShape || shape is IntEnumShape ||
             (shape is StringShape && shape.hasTrait(EnumTrait::class.java))
+    }
+
+    // ---- Serialization code generation ----
+
+    private fun isSerializableType(shape: Shape): Boolean {
+        return shape is StringShape || shape is BooleanShape ||
+            shape is IntegerShape || shape is ShortShape || shape is LongShape ||
+            shape is FloatShape || shape is DoubleShape ||
+            shape is EnumShape || shape is IntEnumShape ||
+            shape is TimestampShape || shape is StructureShape || shape is ListShape
+    }
+
+    private fun writeStructSerializer(writer: ZigWriter, shape: StructureShape) {
+        val typeName = shape.id.name
+        val fnName = "serialize$typeName"
+
+        writer.openBlock(
+            "pub fn \$L(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: \$L) !void {",
+            fnName, typeName,
+        )
+
+        val serializableMembers = shape.allMembers.filter { (_, memberShape) ->
+            isSerializableType(model.expectShape(memberShape.target))
+        }
+
+        if (serializableMembers.isEmpty()) {
+            writer.write("_ = alloc;")
+            writer.write("_ = buf;")
+            writer.write("_ = value;")
+        } else {
+            for ((memberName, memberShape) in serializableMembers) {
+                val fieldName = NamingUtil.toFieldName(memberName)
+                val targetShape = model.expectShape(memberShape.target)
+                val xmlName = memberShape.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }
+                    .orElse(memberName)
+
+                if (memberShape.isRequired) {
+                    writeMemberSerializer(writer, xmlName, "value.$fieldName", memberShape, targetShape)
+                } else {
+                    writer.openBlock("if (value.\$L) |v| {", fieldName)
+                    writeMemberSerializer(writer, xmlName, "v", memberShape, targetShape)
+                    writer.closeBlock("}")
+                }
+            }
+        }
+
+        writer.closeBlock("}") // fn
+    }
+
+    private fun writeMemberSerializer(
+        writer: ZigWriter,
+        xmlName: String,
+        accessor: String,
+        memberShape: MemberShape,
+        targetShape: Shape,
+    ) {
+        when (targetShape) {
+            is StringShape -> {
+                if (isEnumType(targetShape)) {
+                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                    writer.write("try buf.appendSlice(alloc, @tagName(\$L));", accessor)
+                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                } else {
+                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                    writer.write("try appendXmlEscaped(alloc, buf, \$L);", accessor)
+                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                }
+            }
+            is BooleanShape -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", accessor)
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+            }
+            is IntegerShape, is ShortShape, is LongShape, is FloatShape, is DoubleShape -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.openBlock("{")
+                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", accessor)
+                writer.write("try buf.appendSlice(alloc, num_str);")
+                writer.closeBlock("}")
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+            }
+            is EnumShape, is IntEnumShape -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.write("try buf.appendSlice(alloc, @tagName(\$L));", accessor)
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+            }
+            is TimestampShape -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.openBlock("{")
+                writer.write("const ts_str = std.fmt.allocPrint(alloc, \"{d}\", .{\$L}) catch \"\";", accessor)
+                writer.write("try buf.appendSlice(alloc, ts_str);")
+                writer.closeBlock("}")
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+            }
+            is StructureShape -> {
+                val nestedTypeName = targetShape.id.name
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.write("try serialize\$L(alloc, buf, \$L);", nestedTypeName, accessor)
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+            }
+            is ListShape -> {
+                val listFnName = "serialize${targetShape.id.name}"
+                if (memberShape.hasTrait(XmlFlattenedTrait::class.java)) {
+                    // Flattened: no wrapper element, item tag from member's xmlName
+                    writer.write("try \$L(alloc, buf, \$L, \"\$L\");", listFnName, accessor, xmlName)
+                } else {
+                    // Non-flattened: wrapper element + item tag from list member
+                    val itemTag = getListItemTag(targetShape)
+                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                    writer.write("try \$L(alloc, buf, \$L, \"\$L\");", listFnName, accessor, itemTag)
+                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                }
+            }
+            else -> {
+                // Maps, blobs, etc. -- skip for now
+            }
+        }
+    }
+
+    private fun writeListSerializer(writer: ZigWriter, listShape: ListShape) {
+        val elementShape = model.expectShape(listShape.member.target)
+        val fnName = "serialize${listShape.id.name}"
+        val elementTypeName = symbolProvider.toSymbol(elementShape).name
+        val paramType = "[]const $elementTypeName"
+
+        writer.openBlock(
+            "pub fn \$L(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: \$L, comptime item_tag: []const u8) !void {",
+            fnName, paramType,
+        )
+
+        writer.openBlock("for (value) |item| {")
+        writer.write("try buf.appendSlice(alloc, \"<\");")
+        writer.write("try buf.appendSlice(alloc, item_tag);")
+        writer.write("try buf.appendSlice(alloc, \">\");")
+
+        when (elementShape) {
+            is StructureShape -> {
+                val typeName = elementShape.id.name
+                writer.write("try serialize\$L(alloc, buf, item);", typeName)
+            }
+            is StringShape -> {
+                if (isEnumType(elementShape)) {
+                    writer.write("try buf.appendSlice(alloc, @tagName(item));")
+                } else {
+                    writer.write("try appendXmlEscaped(alloc, buf, item);")
+                }
+            }
+            is EnumShape, is IntEnumShape -> {
+                writer.write("try buf.appendSlice(alloc, @tagName(item));")
+            }
+            is BooleanShape -> {
+                writer.write("try buf.appendSlice(alloc, if (item) \"true\" else \"false\");")
+            }
+            is IntegerShape, is ShortShape, is LongShape, is FloatShape, is DoubleShape -> {
+                writer.openBlock("{")
+                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{item}) catch \"\";")
+                writer.write("try buf.appendSlice(alloc, num_str);")
+                writer.closeBlock("}")
+            }
+            else -> {
+                writer.write("try appendXmlEscaped(alloc, buf, item);")
+            }
+        }
+
+        writer.write("try buf.appendSlice(alloc, \"</\");")
+        writer.write("try buf.appendSlice(alloc, item_tag);")
+        writer.write("try buf.appendSlice(alloc, \">\");")
+        writer.closeBlock("}") // for
+
+        writer.closeBlock("}") // fn
+    }
+
+    private fun writeAppendXmlEscapedHelper(writer: ZigWriter) {
+        writer.openBlock("fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {")
+        writer.openBlock("for (value) |c| {")
+        writer.openBlock("switch (c) {")
+        writer.write("'&' => try buf.appendSlice(alloc, \"&amp;\"),")
+        writer.write("'<' => try buf.appendSlice(alloc, \"&lt;\"),")
+        writer.write("'>' => try buf.appendSlice(alloc, \"&gt;\"),")
+        writer.write("else => try buf.append(alloc, c),")
+        writer.closeBlock("}")
+        writer.closeBlock("}")
+        writer.closeBlock("}")
     }
 }

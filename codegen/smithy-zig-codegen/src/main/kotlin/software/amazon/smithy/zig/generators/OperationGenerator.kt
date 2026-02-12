@@ -87,8 +87,8 @@ class OperationGenerator(
                 writer.write("const \$L = @import(\"\$L\").\$L;", typeName, fileName, typeName)
             }
 
-            // Import serde module for XML protocols with complex output members
-            if (protocol.needsXmlSerde() && hasComplexOutputMembers()) {
+            // Import serde module for XML protocols with complex members
+            if (protocol.needsXmlSerde() && (hasComplexOutputMembers() || hasComplexInputMembers())) {
                 writer.write("const serde = @import(\"serde.zig\");")
             }
 
@@ -354,6 +354,14 @@ class OperationGenerator(
     /** Check if output shape has struct or list members that need serde functions. */
     private fun hasComplexOutputMembers(): Boolean {
         return outputShape.allMembers.values.any { memberShape ->
+            val target = model.expectShape(memberShape.target)
+            target is StructureShape || target is ListShape
+        }
+    }
+
+    /** Check if input shape has struct or list members that need serde functions. */
+    private fun hasComplexInputMembers(): Boolean {
+        return inputShape.allMembers.values.any { memberShape ->
             val target = model.expectShape(memberShape.target)
             target is StructureShape || target is ListShape
         }

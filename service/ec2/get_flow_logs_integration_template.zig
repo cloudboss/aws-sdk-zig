@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IntegrateServices = @import("integrate_services.zig").IntegrateServices;
+const serde = @import("serde.zig");
 
 /// Generates a CloudFormation template that streamlines and automates the
 /// integration of VPC flow logs

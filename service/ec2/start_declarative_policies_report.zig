@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Generates an account status report. The report is generated asynchronously,
 /// and can

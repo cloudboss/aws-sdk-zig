@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImageCriterionRequest = @import("image_criterion_request.zig").ImageCriterionRequest;
+const serde = @import("serde.zig");
 
 /// Sets or replaces the criteria for Allowed AMIs.
 ///

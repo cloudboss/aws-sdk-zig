@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DnsOptionsSpecification = @import("dns_options_specification.zig").DnsOptionsSpecification;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const SubnetConfiguration = @import("subnet_configuration.zig").SubnetConfiguration;
+const serde = @import("serde.zig");
 
 /// Modifies attributes of a specified VPC endpoint. The attributes that you can
 /// modify

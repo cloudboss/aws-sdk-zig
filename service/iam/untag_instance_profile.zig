@@ -3,6 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const serde = @import("serde.zig");
 
 /// Removes the specified tags from the IAM instance profile. For more
 /// information about tagging, see [Tagging IAM

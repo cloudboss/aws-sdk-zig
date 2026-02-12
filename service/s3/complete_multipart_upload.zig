@@ -8,6 +8,7 @@ const CompletedMultipartUpload = @import("completed_multipart_upload.zig").Compl
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEncryption;
+const serde = @import("serde.zig");
 
 /// Completes a multipart upload by assembling previously uploaded parts.
 ///
@@ -581,7 +582,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CompleteMultipartUploadInpu
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = blk: {
+        if (input.multipart_upload) |payload| {
+            var body_buf: std.ArrayList(u8) = .{};
+            try body_buf.appendSlice(alloc, "<CompletedMultipartUpload xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try serde.serializeCompletedMultipartUpload(alloc, &body_buf, payload);
+            try body_buf.appendSlice(alloc, "</CompletedMultipartUpload>");
+            break :blk try body_buf.toOwnedSlice(alloc);
+        }
+        break :blk null;
+    };
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

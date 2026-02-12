@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
+const serde = @import("serde.zig");
 
 /// Modifies a volume attribute.
 ///

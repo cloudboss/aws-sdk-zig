@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SpotFleetRequestConfigData = @import("spot_fleet_request_config_data.zig").SpotFleetRequestConfigData;
+const serde = @import("serde.zig");
 
 /// Creates a Spot Fleet request.
 ///

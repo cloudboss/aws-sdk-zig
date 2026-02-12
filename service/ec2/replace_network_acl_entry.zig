@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IcmpTypeCode = @import("icmp_type_code.zig").IcmpTypeCode;
 const PortRange = @import("port_range.zig").PortRange;
 const RuleAction = @import("rule_action.zig").RuleAction;
+const serde = @import("serde.zig");
 
 /// Replaces an entry (rule) in a network ACL. For more information, see
 /// [Network

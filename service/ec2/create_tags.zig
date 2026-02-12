@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// Adds or overwrites only the specified tags for the specified Amazon EC2
 /// resource or

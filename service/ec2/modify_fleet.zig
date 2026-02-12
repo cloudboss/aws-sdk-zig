@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const FleetExcessCapacityTerminationPolicy = @import("fleet_excess_capacity_termination_policy.zig").FleetExcessCapacityTerminationPolicy;
 const FleetLaunchTemplateConfigRequest = @import("fleet_launch_template_config_request.zig").FleetLaunchTemplateConfigRequest;
 const TargetCapacitySpecificationRequest = @import("target_capacity_specification_request.zig").TargetCapacitySpecificationRequest;
+const serde = @import("serde.zig");
 
 /// Modifies the specified EC2 Fleet.
 ///

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
+const serde = @import("serde.zig");
 
 /// Exports routes from the specified transit gateway route table to the
 /// specified S3 bucket.

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const MetadataTableConfiguration = @import("metadata_table_configuration.zig").MetadataTableConfiguration;
+const serde = @import("serde.zig");
 
 /// **Important:**
 ///
@@ -150,7 +151,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateBucketMetadataTableCo
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    try body_buf.appendSlice(alloc, "<MetadataTableConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try serde.serializeMetadataTableConfiguration(alloc, &body_buf, input.metadata_table_configuration);
+    try body_buf.appendSlice(alloc, "</MetadataTableConfiguration>");
+    const body = try body_buf.toOwnedSlice(alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

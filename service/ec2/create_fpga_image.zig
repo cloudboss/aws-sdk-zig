@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const StorageLocation = @import("storage_location.zig").StorageLocation;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Creates an Amazon FPGA Image (AFI) from the specified design checkpoint
 /// (DCP).

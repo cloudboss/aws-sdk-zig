@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReservedInstancesConfiguration = @import("reserved_instances_configuration.zig").ReservedInstancesConfiguration;
+const serde = @import("serde.zig");
 
 /// Modifies the configuration of your Reserved Instances, such as the
 /// Availability Zone,

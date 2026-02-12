@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SnapshotAttributeName = @import("snapshot_attribute_name.zig").SnapshotAttributeName;
 const CreateVolumePermissionModifications = @import("create_volume_permission_modifications.zig").CreateVolumePermissionModifications;
 const OperationType = @import("operation_type.zig").OperationType;
+const serde = @import("serde.zig");
 
 /// Adds or removes permission settings for the specified snapshot. You may add
 /// or remove

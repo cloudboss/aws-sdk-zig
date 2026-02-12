@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const BucketLifecycleConfiguration = @import("bucket_lifecycle_configuration.zig").BucketLifecycleConfiguration;
 const TransitionDefaultMinimumObjectSize = @import("transition_default_minimum_object_size.zig").TransitionDefaultMinimumObjectSize;
+const serde = @import("serde.zig");
 
 /// Creates a new lifecycle configuration for the bucket or replaces an existing
 /// lifecycle
@@ -305,7 +306,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutBucketLifecycleConfigura
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = blk: {
+        if (input.lifecycle_configuration) |payload| {
+            var body_buf: std.ArrayList(u8) = .{};
+            try body_buf.appendSlice(alloc, "<BucketLifecycleConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try serde.serializeBucketLifecycleConfiguration(alloc, &body_buf, payload);
+            try body_buf.appendSlice(alloc, "</BucketLifecycleConfiguration>");
+            break :blk try body_buf.toOwnedSlice(alloc);
+        }
+        break :blk null;
+    };
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

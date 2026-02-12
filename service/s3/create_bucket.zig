@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const BucketCannedACL = @import("bucket_canned_acl.zig").BucketCannedACL;
 const CreateBucketConfiguration = @import("create_bucket_configuration.zig").CreateBucketConfiguration;
 const ObjectOwnership = @import("object_ownership.zig").ObjectOwnership;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -310,7 +311,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateBucketInput, config: 
     try path_buf.appendSlice(alloc, input.bucket);
     const path = try path_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = blk: {
+        if (input.create_bucket_configuration) |payload| {
+            var body_buf: std.ArrayList(u8) = .{};
+            try body_buf.appendSlice(alloc, "<CreateBucketConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try serde.serializeCreateBucketConfiguration(alloc, &body_buf, payload);
+            try body_buf.appendSlice(alloc, "</CreateBucketConfiguration>");
+            break :blk try body_buf.toOwnedSlice(alloc);
+        }
+        break :blk null;
+    };
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

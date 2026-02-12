@@ -2,17 +2,24 @@ const aws = @import("aws");
 const std = @import("std");
 
 const AcceleratorCount = @import("accelerator_count.zig").AcceleratorCount;
+const AcceleratorCountRequest = @import("accelerator_count_request.zig").AcceleratorCountRequest;
 const AcceleratorManufacturer = @import("accelerator_manufacturer.zig").AcceleratorManufacturer;
 const AcceleratorName = @import("accelerator_name.zig").AcceleratorName;
 const AcceleratorTotalMemoryMiB = @import("accelerator_total_memory_mi_b.zig").AcceleratorTotalMemoryMiB;
+const AcceleratorTotalMemoryMiBRequest = @import("accelerator_total_memory_mi_b_request.zig").AcceleratorTotalMemoryMiBRequest;
 const AcceleratorType = @import("accelerator_type.zig").AcceleratorType;
 const AccessScopeAnalysisFinding = @import("access_scope_analysis_finding.zig").AccessScopeAnalysisFinding;
 const AccessScopePath = @import("access_scope_path.zig").AccessScopePath;
+const AccessScopePathRequest = @import("access_scope_path_request.zig").AccessScopePathRequest;
 const AccountAttribute = @import("account_attribute.zig").AccountAttribute;
+const AccountAttributeName = @import("account_attribute_name.zig").AccountAttributeName;
 const AccountAttributeValue = @import("account_attribute_value.zig").AccountAttributeValue;
 const ActiveInstance = @import("active_instance.zig").ActiveInstance;
 const ActiveVpnTunnelStatus = @import("active_vpn_tunnel_status.zig").ActiveVpnTunnelStatus;
 const ActivityStatus = @import("activity_status.zig").ActivityStatus;
+const AddIpamOperatingRegion = @import("add_ipam_operating_region.zig").AddIpamOperatingRegion;
+const AddIpamOrganizationalUnitExclusion = @import("add_ipam_organizational_unit_exclusion.zig").AddIpamOrganizationalUnitExclusion;
+const AddPrefixListEntry = @import("add_prefix_list_entry.zig").AddPrefixListEntry;
 const AddedPrincipal = @import("added_principal.zig").AddedPrincipal;
 const AdditionalDetail = @import("additional_detail.zig").AdditionalDetail;
 const Address = @import("address.zig").Address;
@@ -40,6 +47,7 @@ const ArchitectureType = @import("architecture_type.zig").ArchitectureType;
 const ArchitectureValues = @import("architecture_values.zig").ArchitectureValues;
 const AsnAssociation = @import("asn_association.zig").AsnAssociation;
 const AsnAssociationState = @import("asn_association_state.zig").AsnAssociationState;
+const AsnAuthorizationContext = @import("asn_authorization_context.zig").AsnAuthorizationContext;
 const AsnState = @import("asn_state.zig").AsnState;
 const AssignedPrivateIpAddress = @import("assigned_private_ip_address.zig").AssignedPrivateIpAddress;
 const AssociatedNetworkType = @import("associated_network_type.zig").AssociatedNetworkType;
@@ -47,6 +55,7 @@ const AssociatedRole = @import("associated_role.zig").AssociatedRole;
 const AssociatedTargetNetwork = @import("associated_target_network.zig").AssociatedTargetNetwork;
 const AssociationStatus = @import("association_status.zig").AssociationStatus;
 const AssociationStatusCode = @import("association_status_code.zig").AssociationStatusCode;
+const AthenaIntegration = @import("athena_integration.zig").AthenaIntegration;
 const AttachmentEnaSrdSpecification = @import("attachment_ena_srd_specification.zig").AttachmentEnaSrdSpecification;
 const AttachmentEnaSrdUdpSpecification = @import("attachment_ena_srd_udp_specification.zig").AttachmentEnaSrdUdpSpecification;
 const AttachmentLimitType = @import("attachment_limit_type.zig").AttachmentLimitType;
@@ -62,6 +71,7 @@ const AutoProvisionZonesState = @import("auto_provision_zones_state.zig").AutoPr
 const AutoScalingIpsState = @import("auto_scaling_ips_state.zig").AutoScalingIpsState;
 const AvailabilityMode = @import("availability_mode.zig").AvailabilityMode;
 const AvailabilityZone = @import("availability_zone.zig").AvailabilityZone;
+const AvailabilityZoneAddress = @import("availability_zone_address.zig").AvailabilityZoneAddress;
 const AvailabilityZoneMessage = @import("availability_zone_message.zig").AvailabilityZoneMessage;
 const AvailabilityZoneOptInStatus = @import("availability_zone_opt_in_status.zig").AvailabilityZoneOptInStatus;
 const AvailabilityZoneState = @import("availability_zone_state.zig").AvailabilityZoneState;
@@ -69,9 +79,12 @@ const AvailableCapacity = @import("available_capacity.zig").AvailableCapacity;
 const BandwidthWeightingType = @import("bandwidth_weighting_type.zig").BandwidthWeightingType;
 const BareMetal = @import("bare_metal.zig").BareMetal;
 const BaselineEbsBandwidthMbps = @import("baseline_ebs_bandwidth_mbps.zig").BaselineEbsBandwidthMbps;
+const BaselineEbsBandwidthMbpsRequest = @import("baseline_ebs_bandwidth_mbps_request.zig").BaselineEbsBandwidthMbpsRequest;
 const BaselinePerformanceFactors = @import("baseline_performance_factors.zig").BaselinePerformanceFactors;
+const BaselinePerformanceFactorsRequest = @import("baseline_performance_factors_request.zig").BaselinePerformanceFactorsRequest;
 const BatchState = @import("batch_state.zig").BatchState;
 const BgpStatus = @import("bgp_status.zig").BgpStatus;
+const BlobAttributeValue = @import("blob_attribute_value.zig").BlobAttributeValue;
 const BlockDeviceMapping = @import("block_device_mapping.zig").BlockDeviceMapping;
 const BlockDeviceMappingResponse = @import("block_device_mapping_response.zig").BlockDeviceMappingResponse;
 const BlockPublicAccessMode = @import("block_public_access_mode.zig").BlockPublicAccessMode;
@@ -101,6 +114,7 @@ const CapacityBlockInterconnectStatus = @import("capacity_block_interconnect_sta
 const CapacityBlockOffering = @import("capacity_block_offering.zig").CapacityBlockOffering;
 const CapacityBlockResourceState = @import("capacity_block_resource_state.zig").CapacityBlockResourceState;
 const CapacityBlockStatus = @import("capacity_block_status.zig").CapacityBlockStatus;
+const CapacityManagerCondition = @import("capacity_manager_condition.zig").CapacityManagerCondition;
 const CapacityManagerDataExportResponse = @import("capacity_manager_data_export_response.zig").CapacityManagerDataExportResponse;
 const CapacityManagerDataExportStatus = @import("capacity_manager_data_export_status.zig").CapacityManagerDataExportStatus;
 const CapacityManagerDimension = @import("capacity_manager_dimension.zig").CapacityManagerDimension;
@@ -116,10 +130,13 @@ const CapacityReservationGroup = @import("capacity_reservation_group.zig").Capac
 const CapacityReservationInfo = @import("capacity_reservation_info.zig").CapacityReservationInfo;
 const CapacityReservationInstancePlatform = @import("capacity_reservation_instance_platform.zig").CapacityReservationInstancePlatform;
 const CapacityReservationOptions = @import("capacity_reservation_options.zig").CapacityReservationOptions;
+const CapacityReservationOptionsRequest = @import("capacity_reservation_options_request.zig").CapacityReservationOptionsRequest;
 const CapacityReservationPreference = @import("capacity_reservation_preference.zig").CapacityReservationPreference;
+const CapacityReservationSpecification = @import("capacity_reservation_specification.zig").CapacityReservationSpecification;
 const CapacityReservationSpecificationResponse = @import("capacity_reservation_specification_response.zig").CapacityReservationSpecificationResponse;
 const CapacityReservationState = @import("capacity_reservation_state.zig").CapacityReservationState;
 const CapacityReservationStatus = @import("capacity_reservation_status.zig").CapacityReservationStatus;
+const CapacityReservationTarget = @import("capacity_reservation_target.zig").CapacityReservationTarget;
 const CapacityReservationTargetResponse = @import("capacity_reservation_target_response.zig").CapacityReservationTargetResponse;
 const CapacityReservationTenancy = @import("capacity_reservation_tenancy.zig").CapacityReservationTenancy;
 const CapacityReservationTopology = @import("capacity_reservation_topology.zig").CapacityReservationTopology;
@@ -128,6 +145,8 @@ const CapacityTenancy = @import("capacity_tenancy.zig").CapacityTenancy;
 const CarrierGateway = @import("carrier_gateway.zig").CarrierGateway;
 const CarrierGatewayState = @import("carrier_gateway_state.zig").CarrierGatewayState;
 const CertificateAuthentication = @import("certificate_authentication.zig").CertificateAuthentication;
+const CertificateAuthenticationRequest = @import("certificate_authentication_request.zig").CertificateAuthenticationRequest;
+const CidrAuthorizationContext = @import("cidr_authorization_context.zig").CidrAuthorizationContext;
 const CidrBlock = @import("cidr_block.zig").CidrBlock;
 const ClassicLinkDnsSupport = @import("classic_link_dns_support.zig").ClassicLinkDnsSupport;
 const ClassicLinkInstance = @import("classic_link_instance.zig").ClassicLinkInstance;
@@ -135,10 +154,15 @@ const ClassicLoadBalancer = @import("classic_load_balancer.zig").ClassicLoadBala
 const ClassicLoadBalancersConfig = @import("classic_load_balancers_config.zig").ClassicLoadBalancersConfig;
 const ClientCertificateRevocationListStatus = @import("client_certificate_revocation_list_status.zig").ClientCertificateRevocationListStatus;
 const ClientCertificateRevocationListStatusCode = @import("client_certificate_revocation_list_status_code.zig").ClientCertificateRevocationListStatusCode;
+const ClientConnectOptions = @import("client_connect_options.zig").ClientConnectOptions;
 const ClientConnectResponseOptions = @import("client_connect_response_options.zig").ClientConnectResponseOptions;
+const ClientData = @import("client_data.zig").ClientData;
+const ClientLoginBannerOptions = @import("client_login_banner_options.zig").ClientLoginBannerOptions;
 const ClientLoginBannerResponseOptions = @import("client_login_banner_response_options.zig").ClientLoginBannerResponseOptions;
+const ClientRouteEnforcementOptions = @import("client_route_enforcement_options.zig").ClientRouteEnforcementOptions;
 const ClientRouteEnforcementResponseOptions = @import("client_route_enforcement_response_options.zig").ClientRouteEnforcementResponseOptions;
 const ClientVpnAuthentication = @import("client_vpn_authentication.zig").ClientVpnAuthentication;
+const ClientVpnAuthenticationRequest = @import("client_vpn_authentication_request.zig").ClientVpnAuthenticationRequest;
 const ClientVpnAuthenticationType = @import("client_vpn_authentication_type.zig").ClientVpnAuthenticationType;
 const ClientVpnAuthorizationRuleStatus = @import("client_vpn_authorization_rule_status.zig").ClientVpnAuthorizationRuleStatus;
 const ClientVpnAuthorizationRuleStatusCode = @import("client_vpn_authorization_rule_status_code.zig").ClientVpnAuthorizationRuleStatusCode;
@@ -154,9 +178,12 @@ const ClientVpnRoute = @import("client_vpn_route.zig").ClientVpnRoute;
 const ClientVpnRouteStatus = @import("client_vpn_route_status.zig").ClientVpnRouteStatus;
 const ClientVpnRouteStatusCode = @import("client_vpn_route_status_code.zig").ClientVpnRouteStatusCode;
 const CloudWatchLogOptions = @import("cloud_watch_log_options.zig").CloudWatchLogOptions;
+const CloudWatchLogOptionsSpecification = @import("cloud_watch_log_options_specification.zig").CloudWatchLogOptionsSpecification;
 const CoipAddressUsage = @import("coip_address_usage.zig").CoipAddressUsage;
 const CoipCidr = @import("coip_cidr.zig").CoipCidr;
 const CoipPool = @import("coip_pool.zig").CoipPool;
+const Comparison = @import("comparison.zig").Comparison;
+const ConnectionLogOptions = @import("connection_log_options.zig").ConnectionLogOptions;
 const ConnectionLogResponseOptions = @import("connection_log_response_options.zig").ConnectionLogResponseOptions;
 const ConnectionNotification = @import("connection_notification.zig").ConnectionNotification;
 const ConnectionNotificationState = @import("connection_notification_state.zig").ConnectionNotificationState;
@@ -171,14 +198,32 @@ const ConversionTask = @import("conversion_task.zig").ConversionTask;
 const ConversionTaskState = @import("conversion_task_state.zig").ConversionTaskState;
 const CpuManufacturer = @import("cpu_manufacturer.zig").CpuManufacturer;
 const CpuOptions = @import("cpu_options.zig").CpuOptions;
+const CpuOptionsRequest = @import("cpu_options_request.zig").CpuOptionsRequest;
 const CpuPerformanceFactor = @import("cpu_performance_factor.zig").CpuPerformanceFactor;
+const CpuPerformanceFactorRequest = @import("cpu_performance_factor_request.zig").CpuPerformanceFactorRequest;
 const CreateFleetError = @import("create_fleet_error.zig").CreateFleetError;
 const CreateFleetInstance = @import("create_fleet_instance.zig").CreateFleetInstance;
+const CreateTransitGatewayConnectRequestOptions = @import("create_transit_gateway_connect_request_options.zig").CreateTransitGatewayConnectRequestOptions;
+const CreateTransitGatewayMulticastDomainRequestOptions = @import("create_transit_gateway_multicast_domain_request_options.zig").CreateTransitGatewayMulticastDomainRequestOptions;
+const CreateTransitGatewayPeeringAttachmentRequestOptions = @import("create_transit_gateway_peering_attachment_request_options.zig").CreateTransitGatewayPeeringAttachmentRequestOptions;
+const CreateTransitGatewayVpcAttachmentRequestOptions = @import("create_transit_gateway_vpc_attachment_request_options.zig").CreateTransitGatewayVpcAttachmentRequestOptions;
+const CreateVerifiedAccessEndpointCidrOptions = @import("create_verified_access_endpoint_cidr_options.zig").CreateVerifiedAccessEndpointCidrOptions;
+const CreateVerifiedAccessEndpointEniOptions = @import("create_verified_access_endpoint_eni_options.zig").CreateVerifiedAccessEndpointEniOptions;
+const CreateVerifiedAccessEndpointLoadBalancerOptions = @import("create_verified_access_endpoint_load_balancer_options.zig").CreateVerifiedAccessEndpointLoadBalancerOptions;
+const CreateVerifiedAccessEndpointPortRange = @import("create_verified_access_endpoint_port_range.zig").CreateVerifiedAccessEndpointPortRange;
+const CreateVerifiedAccessEndpointRdsOptions = @import("create_verified_access_endpoint_rds_options.zig").CreateVerifiedAccessEndpointRdsOptions;
+const CreateVerifiedAccessNativeApplicationOidcOptions = @import("create_verified_access_native_application_oidc_options.zig").CreateVerifiedAccessNativeApplicationOidcOptions;
+const CreateVerifiedAccessTrustProviderDeviceOptions = @import("create_verified_access_trust_provider_device_options.zig").CreateVerifiedAccessTrustProviderDeviceOptions;
+const CreateVerifiedAccessTrustProviderOidcOptions = @import("create_verified_access_trust_provider_oidc_options.zig").CreateVerifiedAccessTrustProviderOidcOptions;
 const CreateVolumePermission = @import("create_volume_permission.zig").CreateVolumePermission;
+const CreateVolumePermissionModifications = @import("create_volume_permission_modifications.zig").CreateVolumePermissionModifications;
 const CreationDateCondition = @import("creation_date_condition.zig").CreationDateCondition;
+const CreationDateConditionRequest = @import("creation_date_condition_request.zig").CreationDateConditionRequest;
 const CreditSpecification = @import("credit_specification.zig").CreditSpecification;
+const CreditSpecificationRequest = @import("credit_specification_request.zig").CreditSpecificationRequest;
 const CurrencyCodeValues = @import("currency_code_values.zig").CurrencyCodeValues;
 const CustomerGateway = @import("customer_gateway.zig").CustomerGateway;
+const DataQuery = @import("data_query.zig").DataQuery;
 const DataResponse = @import("data_response.zig").DataResponse;
 const DatafeedSubscriptionState = @import("datafeed_subscription_state.zig").DatafeedSubscriptionState;
 const DeclarativePoliciesReport = @import("declarative_policies_report.zig").DeclarativePoliciesReport;
@@ -195,23 +240,30 @@ const DeleteQueuedReservedInstancesError = @import("delete_queued_reserved_insta
 const DeleteQueuedReservedInstancesErrorCode = @import("delete_queued_reserved_instances_error_code.zig").DeleteQueuedReservedInstancesErrorCode;
 const DeleteSnapshotReturnCode = @import("delete_snapshot_return_code.zig").DeleteSnapshotReturnCode;
 const DeprecationTimeCondition = @import("deprecation_time_condition.zig").DeprecationTimeCondition;
+const DeprecationTimeConditionRequest = @import("deprecation_time_condition_request.zig").DeprecationTimeConditionRequest;
+const DeregisterInstanceTagAttributeRequest = @import("deregister_instance_tag_attribute_request.zig").DeregisterInstanceTagAttributeRequest;
 const DescribeFastLaunchImagesSuccessItem = @import("describe_fast_launch_images_success_item.zig").DescribeFastLaunchImagesSuccessItem;
 const DescribeFastSnapshotRestoreSuccessItem = @import("describe_fast_snapshot_restore_success_item.zig").DescribeFastSnapshotRestoreSuccessItem;
 const DescribeFleetError = @import("describe_fleet_error.zig").DescribeFleetError;
 const DescribeFleetsInstances = @import("describe_fleets_instances.zig").DescribeFleetsInstances;
 const DestinationFileFormat = @import("destination_file_format.zig").DestinationFileFormat;
+const DestinationOptionsRequest = @import("destination_options_request.zig").DestinationOptionsRequest;
 const DestinationOptionsResponse = @import("destination_options_response.zig").DestinationOptionsResponse;
 const DeviceOptions = @import("device_options.zig").DeviceOptions;
 const DeviceTrustProviderType = @import("device_trust_provider_type.zig").DeviceTrustProviderType;
 const DeviceType = @import("device_type.zig").DeviceType;
 const DhcpConfiguration = @import("dhcp_configuration.zig").DhcpConfiguration;
 const DhcpOptions = @import("dhcp_options.zig").DhcpOptions;
+const DimensionCondition = @import("dimension_condition.zig").DimensionCondition;
 const DirectoryServiceAuthentication = @import("directory_service_authentication.zig").DirectoryServiceAuthentication;
+const DirectoryServiceAuthenticationRequest = @import("directory_service_authentication_request.zig").DirectoryServiceAuthenticationRequest;
 const DisableFastSnapshotRestoreErrorItem = @import("disable_fast_snapshot_restore_error_item.zig").DisableFastSnapshotRestoreErrorItem;
 const DisableFastSnapshotRestoreStateError = @import("disable_fast_snapshot_restore_state_error.zig").DisableFastSnapshotRestoreStateError;
 const DisableFastSnapshotRestoreStateErrorItem = @import("disable_fast_snapshot_restore_state_error_item.zig").DisableFastSnapshotRestoreStateErrorItem;
 const DisableFastSnapshotRestoreSuccessItem = @import("disable_fast_snapshot_restore_success_item.zig").DisableFastSnapshotRestoreSuccessItem;
+const DiskImage = @import("disk_image.zig").DiskImage;
 const DiskImageDescription = @import("disk_image_description.zig").DiskImageDescription;
+const DiskImageDetail = @import("disk_image_detail.zig").DiskImageDetail;
 const DiskImageFormat = @import("disk_image_format.zig").DiskImageFormat;
 const DiskImageVolumeDescription = @import("disk_image_volume_description.zig").DiskImageVolumeDescription;
 const DiskInfo = @import("disk_info.zig").DiskInfo;
@@ -219,7 +271,9 @@ const DiskType = @import("disk_type.zig").DiskType;
 const DnsEntry = @import("dns_entry.zig").DnsEntry;
 const DnsNameState = @import("dns_name_state.zig").DnsNameState;
 const DnsOptions = @import("dns_options.zig").DnsOptions;
+const DnsOptionsSpecification = @import("dns_options_specification.zig").DnsOptionsSpecification;
 const DnsRecordIpType = @import("dns_record_ip_type.zig").DnsRecordIpType;
+const DnsServersOptionsModifyStructure = @import("dns_servers_options_modify_structure.zig").DnsServersOptionsModifyStructure;
 const DnsSupportValue = @import("dns_support_value.zig").DnsSupportValue;
 const DomainType = @import("domain_type.zig").DomainType;
 const DynamicRoutingValue = @import("dynamic_routing_value.zig").DynamicRoutingValue;
@@ -229,6 +283,7 @@ const EbsCardInfo = @import("ebs_card_info.zig").EbsCardInfo;
 const EbsEncryptionSupport = @import("ebs_encryption_support.zig").EbsEncryptionSupport;
 const EbsInfo = @import("ebs_info.zig").EbsInfo;
 const EbsInstanceBlockDevice = @import("ebs_instance_block_device.zig").EbsInstanceBlockDevice;
+const EbsInstanceBlockDeviceSpecification = @import("ebs_instance_block_device_specification.zig").EbsInstanceBlockDeviceSpecification;
 const EbsNvmeSupport = @import("ebs_nvme_support.zig").EbsNvmeSupport;
 const EbsOptimizedInfo = @import("ebs_optimized_info.zig").EbsOptimizedInfo;
 const EbsOptimizedSupport = @import("ebs_optimized_support.zig").EbsOptimizedSupport;
@@ -240,12 +295,16 @@ const EfaInfo = @import("efa_info.zig").EfaInfo;
 const EgressOnlyInternetGateway = @import("egress_only_internet_gateway.zig").EgressOnlyInternetGateway;
 const ElasticGpuAssociation = @import("elastic_gpu_association.zig").ElasticGpuAssociation;
 const ElasticGpuHealth = @import("elastic_gpu_health.zig").ElasticGpuHealth;
+const ElasticGpuSpecification = @import("elastic_gpu_specification.zig").ElasticGpuSpecification;
 const ElasticGpuSpecificationResponse = @import("elastic_gpu_specification_response.zig").ElasticGpuSpecificationResponse;
 const ElasticGpuState = @import("elastic_gpu_state.zig").ElasticGpuState;
 const ElasticGpuStatus = @import("elastic_gpu_status.zig").ElasticGpuStatus;
 const ElasticGpus = @import("elastic_gpus.zig").ElasticGpus;
+const ElasticInferenceAccelerator = @import("elastic_inference_accelerator.zig").ElasticInferenceAccelerator;
 const ElasticInferenceAcceleratorAssociation = @import("elastic_inference_accelerator_association.zig").ElasticInferenceAcceleratorAssociation;
+const EnaSrdSpecification = @import("ena_srd_specification.zig").EnaSrdSpecification;
 const EnaSrdSpecificationRequest = @import("ena_srd_specification_request.zig").EnaSrdSpecificationRequest;
+const EnaSrdUdpSpecification = @import("ena_srd_udp_specification.zig").EnaSrdUdpSpecification;
 const EnaSrdUdpSpecificationRequest = @import("ena_srd_udp_specification_request.zig").EnaSrdUdpSpecificationRequest;
 const EnaSupport = @import("ena_support.zig").EnaSupport;
 const EnableFastSnapshotRestoreErrorItem = @import("enable_fast_snapshot_restore_error_item.zig").EnableFastSnapshotRestoreErrorItem;
@@ -253,8 +312,10 @@ const EnableFastSnapshotRestoreStateError = @import("enable_fast_snapshot_restor
 const EnableFastSnapshotRestoreStateErrorItem = @import("enable_fast_snapshot_restore_state_error_item.zig").EnableFastSnapshotRestoreStateErrorItem;
 const EnableFastSnapshotRestoreSuccessItem = @import("enable_fast_snapshot_restore_success_item.zig").EnableFastSnapshotRestoreSuccessItem;
 const EnclaveOptions = @import("enclave_options.zig").EnclaveOptions;
+const EnclaveOptionsRequest = @import("enclave_options_request.zig").EnclaveOptionsRequest;
 const EncryptionStateValue = @import("encryption_state_value.zig").EncryptionStateValue;
 const EncryptionSupport = @import("encryption_support.zig").EncryptionSupport;
+const EncryptionSupportOptionValue = @import("encryption_support_option_value.zig").EncryptionSupportOptionValue;
 const EndDateType = @import("end_date_type.zig").EndDateType;
 const EndpointIpAddressType = @import("endpoint_ip_address_type.zig").EndpointIpAddressType;
 const EphemeralNvmeSupport = @import("ephemeral_nvme_support.zig").EphemeralNvmeSupport;
@@ -267,35 +328,50 @@ const ExportEnvironment = @import("export_environment.zig").ExportEnvironment;
 const ExportImageTask = @import("export_image_task.zig").ExportImageTask;
 const ExportTask = @import("export_task.zig").ExportTask;
 const ExportTaskS3Location = @import("export_task_s_3_location.zig").ExportTaskS3Location;
+const ExportTaskS3LocationRequest = @import("export_task_s_3_location_request.zig").ExportTaskS3LocationRequest;
 const ExportTaskState = @import("export_task_state.zig").ExportTaskState;
 const ExportToS3Task = @import("export_to_s_3_task.zig").ExportToS3Task;
+const ExportToS3TaskSpecification = @import("export_to_s_3_task_specification.zig").ExportToS3TaskSpecification;
+const ExternalAuthorityConfiguration = @import("external_authority_configuration.zig").ExternalAuthorityConfiguration;
 const FailedCapacityReservationFleetCancellationResult = @import("failed_capacity_reservation_fleet_cancellation_result.zig").FailedCapacityReservationFleetCancellationResult;
 const FailedQueuedPurchaseDeletion = @import("failed_queued_purchase_deletion.zig").FailedQueuedPurchaseDeletion;
+const FastLaunchLaunchTemplateSpecificationRequest = @import("fast_launch_launch_template_specification_request.zig").FastLaunchLaunchTemplateSpecificationRequest;
 const FastLaunchLaunchTemplateSpecificationResponse = @import("fast_launch_launch_template_specification_response.zig").FastLaunchLaunchTemplateSpecificationResponse;
 const FastLaunchResourceType = @import("fast_launch_resource_type.zig").FastLaunchResourceType;
+const FastLaunchSnapshotConfigurationRequest = @import("fast_launch_snapshot_configuration_request.zig").FastLaunchSnapshotConfigurationRequest;
 const FastLaunchSnapshotConfigurationResponse = @import("fast_launch_snapshot_configuration_response.zig").FastLaunchSnapshotConfigurationResponse;
 const FastLaunchStateCode = @import("fast_launch_state_code.zig").FastLaunchStateCode;
 const FastSnapshotRestoreStateCode = @import("fast_snapshot_restore_state_code.zig").FastSnapshotRestoreStateCode;
 const FederatedAuthentication = @import("federated_authentication.zig").FederatedAuthentication;
+const FederatedAuthenticationRequest = @import("federated_authentication_request.zig").FederatedAuthenticationRequest;
+const Filter = @import("filter.zig").Filter;
+const FilterByDimension = @import("filter_by_dimension.zig").FilterByDimension;
 const FilterPortRange = @import("filter_port_range.zig").FilterPortRange;
 const FindingsFound = @import("findings_found.zig").FindingsFound;
 const FirewallStatefulRule = @import("firewall_stateful_rule.zig").FirewallStatefulRule;
 const FirewallStatelessRule = @import("firewall_stateless_rule.zig").FirewallStatelessRule;
 const FleetActivityStatus = @import("fleet_activity_status.zig").FleetActivityStatus;
+const FleetBlockDeviceMappingRequest = @import("fleet_block_device_mapping_request.zig").FleetBlockDeviceMappingRequest;
 const FleetCapacityReservation = @import("fleet_capacity_reservation.zig").FleetCapacityReservation;
 const FleetCapacityReservationTenancy = @import("fleet_capacity_reservation_tenancy.zig").FleetCapacityReservationTenancy;
 const FleetCapacityReservationUsageStrategy = @import("fleet_capacity_reservation_usage_strategy.zig").FleetCapacityReservationUsageStrategy;
 const FleetData = @import("fleet_data.zig").FleetData;
+const FleetEbsBlockDeviceRequest = @import("fleet_ebs_block_device_request.zig").FleetEbsBlockDeviceRequest;
 const FleetEventType = @import("fleet_event_type.zig").FleetEventType;
 const FleetExcessCapacityTerminationPolicy = @import("fleet_excess_capacity_termination_policy.zig").FleetExcessCapacityTerminationPolicy;
 const FleetInstanceMatchCriteria = @import("fleet_instance_match_criteria.zig").FleetInstanceMatchCriteria;
 const FleetLaunchTemplateConfig = @import("fleet_launch_template_config.zig").FleetLaunchTemplateConfig;
+const FleetLaunchTemplateConfigRequest = @import("fleet_launch_template_config_request.zig").FleetLaunchTemplateConfigRequest;
 const FleetLaunchTemplateOverrides = @import("fleet_launch_template_overrides.zig").FleetLaunchTemplateOverrides;
+const FleetLaunchTemplateOverridesRequest = @import("fleet_launch_template_overrides_request.zig").FleetLaunchTemplateOverridesRequest;
 const FleetLaunchTemplateSpecification = @import("fleet_launch_template_specification.zig").FleetLaunchTemplateSpecification;
+const FleetLaunchTemplateSpecificationRequest = @import("fleet_launch_template_specification_request.zig").FleetLaunchTemplateSpecificationRequest;
 const FleetOnDemandAllocationStrategy = @import("fleet_on_demand_allocation_strategy.zig").FleetOnDemandAllocationStrategy;
 const FleetReplacementStrategy = @import("fleet_replacement_strategy.zig").FleetReplacementStrategy;
 const FleetSpotCapacityRebalance = @import("fleet_spot_capacity_rebalance.zig").FleetSpotCapacityRebalance;
+const FleetSpotCapacityRebalanceRequest = @import("fleet_spot_capacity_rebalance_request.zig").FleetSpotCapacityRebalanceRequest;
 const FleetSpotMaintenanceStrategies = @import("fleet_spot_maintenance_strategies.zig").FleetSpotMaintenanceStrategies;
+const FleetSpotMaintenanceStrategiesRequest = @import("fleet_spot_maintenance_strategies_request.zig").FleetSpotMaintenanceStrategiesRequest;
 const FleetStateCode = @import("fleet_state_code.zig").FleetStateCode;
 const FleetType = @import("fleet_type.zig").FleetType;
 const FlexibleEnaQueuesSupport = @import("flexible_ena_queues_support.zig").FlexibleEnaQueuesSupport;
@@ -312,9 +388,11 @@ const GatewayType = @import("gateway_type.zig").GatewayType;
 const GpuDeviceInfo = @import("gpu_device_info.zig").GpuDeviceInfo;
 const GpuDeviceMemoryInfo = @import("gpu_device_memory_info.zig").GpuDeviceMemoryInfo;
 const GpuInfo = @import("gpu_info.zig").GpuInfo;
+const GroupBy = @import("group_by.zig").GroupBy;
 const GroupIdentifier = @import("group_identifier.zig").GroupIdentifier;
 const HaStatus = @import("ha_status.zig").HaStatus;
 const HibernationOptions = @import("hibernation_options.zig").HibernationOptions;
+const HibernationOptionsRequest = @import("hibernation_options_request.zig").HibernationOptionsRequest;
 const HistoryRecord = @import("history_record.zig").HistoryRecord;
 const HistoryRecordEntry = @import("history_record_entry.zig").HistoryRecordEntry;
 const Host = @import("host.zig").Host;
@@ -328,6 +406,7 @@ const HostnameType = @import("hostname_type.zig").HostnameType;
 const HttpTokensState = @import("http_tokens_state.zig").HttpTokensState;
 const HypervisorType = @import("hypervisor_type.zig").HypervisorType;
 const IKEVersionsListValue = @import("ike_versions_list_value.zig").IKEVersionsListValue;
+const IKEVersionsRequestListValue = @import("ike_versions_request_list_value.zig").IKEVersionsRequestListValue;
 const IamInstanceProfile = @import("iam_instance_profile.zig").IamInstanceProfile;
 const IamInstanceProfileAssociation = @import("iam_instance_profile_association.zig").IamInstanceProfileAssociation;
 const IamInstanceProfileAssociationState = @import("iam_instance_profile_association_state.zig").IamInstanceProfileAssociationState;
@@ -338,9 +417,12 @@ const Igmpv2SupportValue = @import("igmpv_2_support_value.zig").Igmpv2SupportVal
 const Image = @import("image.zig").Image;
 const ImageAncestryEntry = @import("image_ancestry_entry.zig").ImageAncestryEntry;
 const ImageCriterion = @import("image_criterion.zig").ImageCriterion;
+const ImageCriterionRequest = @import("image_criterion_request.zig").ImageCriterionRequest;
+const ImageDiskContainer = @import("image_disk_container.zig").ImageDiskContainer;
 const ImageMetadata = @import("image_metadata.zig").ImageMetadata;
 const ImageRecycleBinInfo = @import("image_recycle_bin_info.zig").ImageRecycleBinInfo;
 const ImageReference = @import("image_reference.zig").ImageReference;
+const ImageReferenceOptionName = @import("image_reference_option_name.zig").ImageReferenceOptionName;
 const ImageReferenceResourceType = @import("image_reference_resource_type.zig").ImageReferenceResourceType;
 const ImageState = @import("image_state.zig").ImageState;
 const ImageTypeValues = @import("image_type_values.zig").ImageTypeValues;
@@ -348,9 +430,13 @@ const ImageUsageReport = @import("image_usage_report.zig").ImageUsageReport;
 const ImageUsageReportEntry = @import("image_usage_report_entry.zig").ImageUsageReportEntry;
 const ImageUsageResourceType = @import("image_usage_resource_type.zig").ImageUsageResourceType;
 const ImageUsageResourceTypeOption = @import("image_usage_resource_type_option.zig").ImageUsageResourceTypeOption;
+const ImageUsageResourceTypeOptionRequest = @import("image_usage_resource_type_option_request.zig").ImageUsageResourceTypeOptionRequest;
+const ImageUsageResourceTypeRequest = @import("image_usage_resource_type_request.zig").ImageUsageResourceTypeRequest;
 const ImdsSupportValues = @import("imds_support_values.zig").ImdsSupportValues;
+const ImportImageLicenseConfigurationRequest = @import("import_image_license_configuration_request.zig").ImportImageLicenseConfigurationRequest;
 const ImportImageLicenseConfigurationResponse = @import("import_image_license_configuration_response.zig").ImportImageLicenseConfigurationResponse;
 const ImportImageTask = @import("import_image_task.zig").ImportImageTask;
+const ImportInstanceLaunchSpecification = @import("import_instance_launch_specification.zig").ImportInstanceLaunchSpecification;
 const ImportInstanceTaskDetails = @import("import_instance_task_details.zig").ImportInstanceTaskDetails;
 const ImportInstanceVolumeDetailItem = @import("import_instance_volume_detail_item.zig").ImportInstanceVolumeDetailItem;
 const ImportSnapshotTask = @import("import_snapshot_task.zig").ImportSnapshotTask;
@@ -366,17 +452,22 @@ const InstanceAttachmentEnaSrdUdpSpecification = @import("instance_attachment_en
 const InstanceAutoRecoveryState = @import("instance_auto_recovery_state.zig").InstanceAutoRecoveryState;
 const InstanceBandwidthWeighting = @import("instance_bandwidth_weighting.zig").InstanceBandwidthWeighting;
 const InstanceBlockDeviceMapping = @import("instance_block_device_mapping.zig").InstanceBlockDeviceMapping;
+const InstanceBlockDeviceMappingSpecification = @import("instance_block_device_mapping_specification.zig").InstanceBlockDeviceMappingSpecification;
 const InstanceBootModeValues = @import("instance_boot_mode_values.zig").InstanceBootModeValues;
 const InstanceCapacity = @import("instance_capacity.zig").InstanceCapacity;
 const InstanceConnectEndpointDnsNames = @import("instance_connect_endpoint_dns_names.zig").InstanceConnectEndpointDnsNames;
 const InstanceConnectEndpointPublicDnsNames = @import("instance_connect_endpoint_public_dns_names.zig").InstanceConnectEndpointPublicDnsNames;
 const InstanceCount = @import("instance_count.zig").InstanceCount;
 const InstanceCreditSpecification = @import("instance_credit_specification.zig").InstanceCreditSpecification;
+const InstanceCreditSpecificationRequest = @import("instance_credit_specification_request.zig").InstanceCreditSpecificationRequest;
 const InstanceEventWindow = @import("instance_event_window.zig").InstanceEventWindow;
+const InstanceEventWindowAssociationRequest = @import("instance_event_window_association_request.zig").InstanceEventWindowAssociationRequest;
 const InstanceEventWindowAssociationTarget = @import("instance_event_window_association_target.zig").InstanceEventWindowAssociationTarget;
+const InstanceEventWindowDisassociationRequest = @import("instance_event_window_disassociation_request.zig").InstanceEventWindowDisassociationRequest;
 const InstanceEventWindowState = @import("instance_event_window_state.zig").InstanceEventWindowState;
 const InstanceEventWindowStateChange = @import("instance_event_window_state_change.zig").InstanceEventWindowStateChange;
 const InstanceEventWindowTimeRange = @import("instance_event_window_time_range.zig").InstanceEventWindowTimeRange;
+const InstanceEventWindowTimeRangeRequest = @import("instance_event_window_time_range_request.zig").InstanceEventWindowTimeRangeRequest;
 const InstanceExportDetails = @import("instance_export_details.zig").InstanceExportDetails;
 const InstanceFamilyCreditSpecification = @import("instance_family_credit_specification.zig").InstanceFamilyCreditSpecification;
 const InstanceGeneration = @import("instance_generation.zig").InstanceGeneration;
@@ -385,13 +476,17 @@ const InstanceImageMetadata = @import("instance_image_metadata.zig").InstanceIma
 const InstanceInterruptionBehavior = @import("instance_interruption_behavior.zig").InstanceInterruptionBehavior;
 const InstanceIpv4Prefix = @import("instance_ipv_4_prefix.zig").InstanceIpv4Prefix;
 const InstanceIpv6Address = @import("instance_ipv_6_address.zig").InstanceIpv6Address;
+const InstanceIpv6AddressRequest = @import("instance_ipv_6_address_request.zig").InstanceIpv6AddressRequest;
 const InstanceIpv6Prefix = @import("instance_ipv_6_prefix.zig").InstanceIpv6Prefix;
 const InstanceLifecycle = @import("instance_lifecycle.zig").InstanceLifecycle;
 const InstanceLifecycleType = @import("instance_lifecycle_type.zig").InstanceLifecycleType;
 const InstanceMaintenanceOptions = @import("instance_maintenance_options.zig").InstanceMaintenanceOptions;
+const InstanceMaintenanceOptionsRequest = @import("instance_maintenance_options_request.zig").InstanceMaintenanceOptionsRequest;
+const InstanceMarketOptionsRequest = @import("instance_market_options_request.zig").InstanceMarketOptionsRequest;
 const InstanceMatchCriteria = @import("instance_match_criteria.zig").InstanceMatchCriteria;
 const InstanceMetadataDefaultsResponse = @import("instance_metadata_defaults_response.zig").InstanceMetadataDefaultsResponse;
 const InstanceMetadataEndpointState = @import("instance_metadata_endpoint_state.zig").InstanceMetadataEndpointState;
+const InstanceMetadataOptionsRequest = @import("instance_metadata_options_request.zig").InstanceMetadataOptionsRequest;
 const InstanceMetadataOptionsResponse = @import("instance_metadata_options_response.zig").InstanceMetadataOptionsResponse;
 const InstanceMetadataOptionsState = @import("instance_metadata_options_state.zig").InstanceMetadataOptionsState;
 const InstanceMetadataProtocolState = @import("instance_metadata_protocol_state.zig").InstanceMetadataProtocolState;
@@ -402,9 +497,13 @@ const InstanceNetworkInterfaceAssociation = @import("instance_network_interface_
 const InstanceNetworkInterfaceAttachment = @import("instance_network_interface_attachment.zig").InstanceNetworkInterfaceAttachment;
 const InstanceNetworkInterfaceSpecification = @import("instance_network_interface_specification.zig").InstanceNetworkInterfaceSpecification;
 const InstanceNetworkPerformanceOptions = @import("instance_network_performance_options.zig").InstanceNetworkPerformanceOptions;
+const InstanceNetworkPerformanceOptionsRequest = @import("instance_network_performance_options_request.zig").InstanceNetworkPerformanceOptionsRequest;
 const InstancePrivateIpAddress = @import("instance_private_ip_address.zig").InstancePrivateIpAddress;
 const InstanceRebootMigrationState = @import("instance_reboot_migration_state.zig").InstanceRebootMigrationState;
 const InstanceRequirements = @import("instance_requirements.zig").InstanceRequirements;
+const InstanceRequirementsRequest = @import("instance_requirements_request.zig").InstanceRequirementsRequest;
+const InstanceRequirementsWithMetadataRequest = @import("instance_requirements_with_metadata_request.zig").InstanceRequirementsWithMetadataRequest;
+const InstanceSpecification = @import("instance_specification.zig").InstanceSpecification;
 const InstanceState = @import("instance_state.zig").InstanceState;
 const InstanceStateChange = @import("instance_state_change.zig").InstanceStateChange;
 const InstanceStateName = @import("instance_state_name.zig").InstanceStateName;
@@ -422,6 +521,7 @@ const InstanceTypeInfo = @import("instance_type_info.zig").InstanceTypeInfo;
 const InstanceTypeInfoFromInstanceRequirements = @import("instance_type_info_from_instance_requirements.zig").InstanceTypeInfoFromInstanceRequirements;
 const InstanceTypeOffering = @import("instance_type_offering.zig").InstanceTypeOffering;
 const InstanceUsage = @import("instance_usage.zig").InstanceUsage;
+const IntegrateServices = @import("integrate_services.zig").IntegrateServices;
 const InterfacePermissionType = @import("interface_permission_type.zig").InterfacePermissionType;
 const InterfaceProtocolType = @import("interface_protocol_type.zig").InterfaceProtocolType;
 const InternetGateway = @import("internet_gateway.zig").InternetGateway;
@@ -440,6 +540,7 @@ const Ipam = @import("ipam.zig").Ipam;
 const IpamAddressHistoryRecord = @import("ipam_address_history_record.zig").IpamAddressHistoryRecord;
 const IpamAddressHistoryResourceType = @import("ipam_address_history_resource_type.zig").IpamAddressHistoryResourceType;
 const IpamAssociatedResourceDiscoveryStatus = @import("ipam_associated_resource_discovery_status.zig").IpamAssociatedResourceDiscoveryStatus;
+const IpamCidrAuthorizationContext = @import("ipam_cidr_authorization_context.zig").IpamCidrAuthorizationContext;
 const IpamComplianceStatus = @import("ipam_compliance_status.zig").IpamComplianceStatus;
 const IpamDiscoveredAccount = @import("ipam_discovered_account.zig").IpamDiscoveredAccount;
 const IpamDiscoveredPublicAddress = @import("ipam_discovered_public_address.zig").IpamDiscoveredPublicAddress;
@@ -456,6 +557,7 @@ const IpamOrganizationalUnitExclusion = @import("ipam_organizational_unit_exclus
 const IpamOverlapStatus = @import("ipam_overlap_status.zig").IpamOverlapStatus;
 const IpamPolicy = @import("ipam_policy.zig").IpamPolicy;
 const IpamPolicyAllocationRule = @import("ipam_policy_allocation_rule.zig").IpamPolicyAllocationRule;
+const IpamPolicyAllocationRuleRequest = @import("ipam_policy_allocation_rule_request.zig").IpamPolicyAllocationRuleRequest;
 const IpamPolicyDocument = @import("ipam_policy_document.zig").IpamPolicyDocument;
 const IpamPolicyOrganizationTarget = @import("ipam_policy_organization_target.zig").IpamPolicyOrganizationTarget;
 const IpamPolicyResourceType = @import("ipam_policy_resource_type.zig").IpamPolicyResourceType;
@@ -470,12 +572,15 @@ const IpamPoolCidrFailureReason = @import("ipam_pool_cidr_failure_reason.zig").I
 const IpamPoolCidrState = @import("ipam_pool_cidr_state.zig").IpamPoolCidrState;
 const IpamPoolPublicIpSource = @import("ipam_pool_public_ip_source.zig").IpamPoolPublicIpSource;
 const IpamPoolSourceResource = @import("ipam_pool_source_resource.zig").IpamPoolSourceResource;
+const IpamPoolSourceResourceRequest = @import("ipam_pool_source_resource_request.zig").IpamPoolSourceResourceRequest;
 const IpamPoolSourceResourceType = @import("ipam_pool_source_resource_type.zig").IpamPoolSourceResourceType;
 const IpamPoolState = @import("ipam_pool_state.zig").IpamPoolState;
 const IpamPrefixListResolver = @import("ipam_prefix_list_resolver.zig").IpamPrefixListResolver;
 const IpamPrefixListResolverRule = @import("ipam_prefix_list_resolver_rule.zig").IpamPrefixListResolverRule;
 const IpamPrefixListResolverRuleCondition = @import("ipam_prefix_list_resolver_rule_condition.zig").IpamPrefixListResolverRuleCondition;
 const IpamPrefixListResolverRuleConditionOperation = @import("ipam_prefix_list_resolver_rule_condition_operation.zig").IpamPrefixListResolverRuleConditionOperation;
+const IpamPrefixListResolverRuleConditionRequest = @import("ipam_prefix_list_resolver_rule_condition_request.zig").IpamPrefixListResolverRuleConditionRequest;
+const IpamPrefixListResolverRuleRequest = @import("ipam_prefix_list_resolver_rule_request.zig").IpamPrefixListResolverRuleRequest;
 const IpamPrefixListResolverRuleType = @import("ipam_prefix_list_resolver_rule_type.zig").IpamPrefixListResolverRuleType;
 const IpamPrefixListResolverState = @import("ipam_prefix_list_resolver_state.zig").IpamPrefixListResolverState;
 const IpamPrefixListResolverTarget = @import("ipam_prefix_list_resolver_target.zig").IpamPrefixListResolverTarget;
@@ -520,45 +625,69 @@ const KeyPairInfo = @import("key_pair_info.zig").KeyPairInfo;
 const KeyType = @import("key_type.zig").KeyType;
 const LastError = @import("last_error.zig").LastError;
 const LaunchPermission = @import("launch_permission.zig").LaunchPermission;
+const LaunchPermissionModifications = @import("launch_permission_modifications.zig").LaunchPermissionModifications;
 const LaunchSpecification = @import("launch_specification.zig").LaunchSpecification;
 const LaunchTemplate = @import("launch_template.zig").LaunchTemplate;
 const LaunchTemplateAndOverridesResponse = @import("launch_template_and_overrides_response.zig").LaunchTemplateAndOverridesResponse;
 const LaunchTemplateAutoRecoveryState = @import("launch_template_auto_recovery_state.zig").LaunchTemplateAutoRecoveryState;
 const LaunchTemplateBlockDeviceMapping = @import("launch_template_block_device_mapping.zig").LaunchTemplateBlockDeviceMapping;
+const LaunchTemplateBlockDeviceMappingRequest = @import("launch_template_block_device_mapping_request.zig").LaunchTemplateBlockDeviceMappingRequest;
+const LaunchTemplateCapacityReservationSpecificationRequest = @import("launch_template_capacity_reservation_specification_request.zig").LaunchTemplateCapacityReservationSpecificationRequest;
 const LaunchTemplateCapacityReservationSpecificationResponse = @import("launch_template_capacity_reservation_specification_response.zig").LaunchTemplateCapacityReservationSpecificationResponse;
 const LaunchTemplateConfig = @import("launch_template_config.zig").LaunchTemplateConfig;
 const LaunchTemplateCpuOptions = @import("launch_template_cpu_options.zig").LaunchTemplateCpuOptions;
+const LaunchTemplateCpuOptionsRequest = @import("launch_template_cpu_options_request.zig").LaunchTemplateCpuOptionsRequest;
 const LaunchTemplateEbsBlockDevice = @import("launch_template_ebs_block_device.zig").LaunchTemplateEbsBlockDevice;
+const LaunchTemplateEbsBlockDeviceRequest = @import("launch_template_ebs_block_device_request.zig").LaunchTemplateEbsBlockDeviceRequest;
+const LaunchTemplateElasticInferenceAccelerator = @import("launch_template_elastic_inference_accelerator.zig").LaunchTemplateElasticInferenceAccelerator;
 const LaunchTemplateElasticInferenceAcceleratorResponse = @import("launch_template_elastic_inference_accelerator_response.zig").LaunchTemplateElasticInferenceAcceleratorResponse;
 const LaunchTemplateEnaSrdSpecification = @import("launch_template_ena_srd_specification.zig").LaunchTemplateEnaSrdSpecification;
 const LaunchTemplateEnaSrdUdpSpecification = @import("launch_template_ena_srd_udp_specification.zig").LaunchTemplateEnaSrdUdpSpecification;
 const LaunchTemplateEnclaveOptions = @import("launch_template_enclave_options.zig").LaunchTemplateEnclaveOptions;
+const LaunchTemplateEnclaveOptionsRequest = @import("launch_template_enclave_options_request.zig").LaunchTemplateEnclaveOptionsRequest;
 const LaunchTemplateErrorCode = @import("launch_template_error_code.zig").LaunchTemplateErrorCode;
 const LaunchTemplateHibernationOptions = @import("launch_template_hibernation_options.zig").LaunchTemplateHibernationOptions;
+const LaunchTemplateHibernationOptionsRequest = @import("launch_template_hibernation_options_request.zig").LaunchTemplateHibernationOptionsRequest;
 const LaunchTemplateHttpTokensState = @import("launch_template_http_tokens_state.zig").LaunchTemplateHttpTokensState;
 const LaunchTemplateIamInstanceProfileSpecification = @import("launch_template_iam_instance_profile_specification.zig").LaunchTemplateIamInstanceProfileSpecification;
+const LaunchTemplateIamInstanceProfileSpecificationRequest = @import("launch_template_iam_instance_profile_specification_request.zig").LaunchTemplateIamInstanceProfileSpecificationRequest;
 const LaunchTemplateInstanceMaintenanceOptions = @import("launch_template_instance_maintenance_options.zig").LaunchTemplateInstanceMaintenanceOptions;
+const LaunchTemplateInstanceMaintenanceOptionsRequest = @import("launch_template_instance_maintenance_options_request.zig").LaunchTemplateInstanceMaintenanceOptionsRequest;
 const LaunchTemplateInstanceMarketOptions = @import("launch_template_instance_market_options.zig").LaunchTemplateInstanceMarketOptions;
+const LaunchTemplateInstanceMarketOptionsRequest = @import("launch_template_instance_market_options_request.zig").LaunchTemplateInstanceMarketOptionsRequest;
 const LaunchTemplateInstanceMetadataEndpointState = @import("launch_template_instance_metadata_endpoint_state.zig").LaunchTemplateInstanceMetadataEndpointState;
 const LaunchTemplateInstanceMetadataOptions = @import("launch_template_instance_metadata_options.zig").LaunchTemplateInstanceMetadataOptions;
+const LaunchTemplateInstanceMetadataOptionsRequest = @import("launch_template_instance_metadata_options_request.zig").LaunchTemplateInstanceMetadataOptionsRequest;
 const LaunchTemplateInstanceMetadataOptionsState = @import("launch_template_instance_metadata_options_state.zig").LaunchTemplateInstanceMetadataOptionsState;
 const LaunchTemplateInstanceMetadataProtocolIpv6 = @import("launch_template_instance_metadata_protocol_ipv_6.zig").LaunchTemplateInstanceMetadataProtocolIpv6;
 const LaunchTemplateInstanceMetadataTagsState = @import("launch_template_instance_metadata_tags_state.zig").LaunchTemplateInstanceMetadataTagsState;
 const LaunchTemplateInstanceNetworkInterfaceSpecification = @import("launch_template_instance_network_interface_specification.zig").LaunchTemplateInstanceNetworkInterfaceSpecification;
+const LaunchTemplateInstanceNetworkInterfaceSpecificationRequest = @import("launch_template_instance_network_interface_specification_request.zig").LaunchTemplateInstanceNetworkInterfaceSpecificationRequest;
 const LaunchTemplateLicenseConfiguration = @import("launch_template_license_configuration.zig").LaunchTemplateLicenseConfiguration;
+const LaunchTemplateLicenseConfigurationRequest = @import("launch_template_license_configuration_request.zig").LaunchTemplateLicenseConfigurationRequest;
 const LaunchTemplateNetworkPerformanceOptions = @import("launch_template_network_performance_options.zig").LaunchTemplateNetworkPerformanceOptions;
+const LaunchTemplateNetworkPerformanceOptionsRequest = @import("launch_template_network_performance_options_request.zig").LaunchTemplateNetworkPerformanceOptionsRequest;
 const LaunchTemplateOverrides = @import("launch_template_overrides.zig").LaunchTemplateOverrides;
 const LaunchTemplatePlacement = @import("launch_template_placement.zig").LaunchTemplatePlacement;
+const LaunchTemplatePlacementRequest = @import("launch_template_placement_request.zig").LaunchTemplatePlacementRequest;
 const LaunchTemplatePrivateDnsNameOptions = @import("launch_template_private_dns_name_options.zig").LaunchTemplatePrivateDnsNameOptions;
+const LaunchTemplatePrivateDnsNameOptionsRequest = @import("launch_template_private_dns_name_options_request.zig").LaunchTemplatePrivateDnsNameOptionsRequest;
+const LaunchTemplateSpecification = @import("launch_template_specification.zig").LaunchTemplateSpecification;
 const LaunchTemplateSpotMarketOptions = @import("launch_template_spot_market_options.zig").LaunchTemplateSpotMarketOptions;
+const LaunchTemplateSpotMarketOptionsRequest = @import("launch_template_spot_market_options_request.zig").LaunchTemplateSpotMarketOptionsRequest;
 const LaunchTemplateTagSpecification = @import("launch_template_tag_specification.zig").LaunchTemplateTagSpecification;
+const LaunchTemplateTagSpecificationRequest = @import("launch_template_tag_specification_request.zig").LaunchTemplateTagSpecificationRequest;
 const LaunchTemplateVersion = @import("launch_template_version.zig").LaunchTemplateVersion;
 const LaunchTemplatesMonitoring = @import("launch_templates_monitoring.zig").LaunchTemplatesMonitoring;
+const LaunchTemplatesMonitoringRequest = @import("launch_templates_monitoring_request.zig").LaunchTemplatesMonitoringRequest;
 const LicenseConfiguration = @import("license_configuration.zig").LicenseConfiguration;
+const LicenseConfigurationRequest = @import("license_configuration_request.zig").LicenseConfigurationRequest;
 const ListingState = @import("listing_state.zig").ListingState;
 const ListingStatus = @import("listing_status.zig").ListingStatus;
 const LoadBalancersConfig = @import("load_balancers_config.zig").LoadBalancersConfig;
 const LoadPermission = @import("load_permission.zig").LoadPermission;
+const LoadPermissionModifications = @import("load_permission_modifications.zig").LoadPermissionModifications;
+const LoadPermissionRequest = @import("load_permission_request.zig").LoadPermissionRequest;
 const LocalGateway = @import("local_gateway.zig").LocalGateway;
 const LocalGatewayRoute = @import("local_gateway_route.zig").LocalGatewayRoute;
 const LocalGatewayRouteState = @import("local_gateway_route_state.zig").LocalGatewayRouteState;
@@ -582,6 +711,7 @@ const MacModificationTask = @import("mac_modification_task.zig").MacModification
 const MacModificationTaskState = @import("mac_modification_task_state.zig").MacModificationTaskState;
 const MacModificationTaskType = @import("mac_modification_task_type.zig").MacModificationTaskType;
 const MacSystemIntegrityProtectionConfiguration = @import("mac_system_integrity_protection_configuration.zig").MacSystemIntegrityProtectionConfiguration;
+const MacSystemIntegrityProtectionConfigurationRequest = @import("mac_system_integrity_protection_configuration_request.zig").MacSystemIntegrityProtectionConfigurationRequest;
 const MacSystemIntegrityProtectionSettingStatus = @import("mac_system_integrity_protection_setting_status.zig").MacSystemIntegrityProtectionSettingStatus;
 const MaintenanceDetails = @import("maintenance_details.zig").MaintenanceDetails;
 const ManagedBy = @import("managed_by.zig").ManagedBy;
@@ -592,13 +722,26 @@ const MediaDeviceInfo = @import("media_device_info.zig").MediaDeviceInfo;
 const MediaDeviceMemoryInfo = @import("media_device_memory_info.zig").MediaDeviceMemoryInfo;
 const MembershipType = @import("membership_type.zig").MembershipType;
 const MemoryGiBPerVCpu = @import("memory_gi_b_per_v_cpu.zig").MemoryGiBPerVCpu;
+const MemoryGiBPerVCpuRequest = @import("memory_gi_b_per_v_cpu_request.zig").MemoryGiBPerVCpuRequest;
 const MemoryInfo = @import("memory_info.zig").MemoryInfo;
 const MemoryMiB = @import("memory_mi_b.zig").MemoryMiB;
+const MemoryMiBRequest = @import("memory_mi_b_request.zig").MemoryMiBRequest;
 const Metric = @import("metric.zig").Metric;
 const MetricDataResult = @import("metric_data_result.zig").MetricDataResult;
 const MetricPoint = @import("metric_point.zig").MetricPoint;
 const MetricType = @import("metric_type.zig").MetricType;
 const MetricValue = @import("metric_value.zig").MetricValue;
+const ModifyTransitGatewayOptions = @import("modify_transit_gateway_options.zig").ModifyTransitGatewayOptions;
+const ModifyTransitGatewayVpcAttachmentRequestOptions = @import("modify_transit_gateway_vpc_attachment_request_options.zig").ModifyTransitGatewayVpcAttachmentRequestOptions;
+const ModifyVerifiedAccessEndpointCidrOptions = @import("modify_verified_access_endpoint_cidr_options.zig").ModifyVerifiedAccessEndpointCidrOptions;
+const ModifyVerifiedAccessEndpointEniOptions = @import("modify_verified_access_endpoint_eni_options.zig").ModifyVerifiedAccessEndpointEniOptions;
+const ModifyVerifiedAccessEndpointLoadBalancerOptions = @import("modify_verified_access_endpoint_load_balancer_options.zig").ModifyVerifiedAccessEndpointLoadBalancerOptions;
+const ModifyVerifiedAccessEndpointPortRange = @import("modify_verified_access_endpoint_port_range.zig").ModifyVerifiedAccessEndpointPortRange;
+const ModifyVerifiedAccessEndpointRdsOptions = @import("modify_verified_access_endpoint_rds_options.zig").ModifyVerifiedAccessEndpointRdsOptions;
+const ModifyVerifiedAccessNativeApplicationOidcOptions = @import("modify_verified_access_native_application_oidc_options.zig").ModifyVerifiedAccessNativeApplicationOidcOptions;
+const ModifyVerifiedAccessTrustProviderDeviceOptions = @import("modify_verified_access_trust_provider_device_options.zig").ModifyVerifiedAccessTrustProviderDeviceOptions;
+const ModifyVerifiedAccessTrustProviderOidcOptions = @import("modify_verified_access_trust_provider_oidc_options.zig").ModifyVerifiedAccessTrustProviderOidcOptions;
+const ModifyVpnTunnelOptionsSpecification = @import("modify_vpn_tunnel_options_specification.zig").ModifyVpnTunnelOptionsSpecification;
 const Monitoring = @import("monitoring.zig").Monitoring;
 const MonitoringState = @import("monitoring_state.zig").MonitoringState;
 const MoveStatus = @import("move_status.zig").MoveStatus;
@@ -617,6 +760,7 @@ const NetworkAcl = @import("network_acl.zig").NetworkAcl;
 const NetworkAclAssociation = @import("network_acl_association.zig").NetworkAclAssociation;
 const NetworkAclEntry = @import("network_acl_entry.zig").NetworkAclEntry;
 const NetworkBandwidthGbps = @import("network_bandwidth_gbps.zig").NetworkBandwidthGbps;
+const NetworkBandwidthGbpsRequest = @import("network_bandwidth_gbps_request.zig").NetworkBandwidthGbpsRequest;
 const NetworkCardInfo = @import("network_card_info.zig").NetworkCardInfo;
 const NetworkInfo = @import("network_info.zig").NetworkInfo;
 const NetworkInsightsAccessScope = @import("network_insights_access_scope.zig").NetworkInsightsAccessScope;
@@ -627,7 +771,9 @@ const NetworkInsightsPath = @import("network_insights_path.zig").NetworkInsights
 const NetworkInterface = @import("network_interface.zig").NetworkInterface;
 const NetworkInterfaceAssociation = @import("network_interface_association.zig").NetworkInterfaceAssociation;
 const NetworkInterfaceAttachment = @import("network_interface_attachment.zig").NetworkInterfaceAttachment;
+const NetworkInterfaceAttachmentChanges = @import("network_interface_attachment_changes.zig").NetworkInterfaceAttachmentChanges;
 const NetworkInterfaceCount = @import("network_interface_count.zig").NetworkInterfaceCount;
+const NetworkInterfaceCountRequest = @import("network_interface_count_request.zig").NetworkInterfaceCountRequest;
 const NetworkInterfaceIpv6Address = @import("network_interface_ipv_6_address.zig").NetworkInterfaceIpv6Address;
 const NetworkInterfacePermission = @import("network_interface_permission.zig").NetworkInterfacePermission;
 const NetworkInterfacePermissionState = @import("network_interface_permission_state.zig").NetworkInterfacePermissionState;
@@ -639,6 +785,7 @@ const NeuronDeviceCoreInfo = @import("neuron_device_core_info.zig").NeuronDevice
 const NeuronDeviceInfo = @import("neuron_device_info.zig").NeuronDeviceInfo;
 const NeuronDeviceMemoryInfo = @import("neuron_device_memory_info.zig").NeuronDeviceMemoryInfo;
 const NeuronInfo = @import("neuron_info.zig").NeuronInfo;
+const NewDhcpConfiguration = @import("new_dhcp_configuration.zig").NewDhcpConfiguration;
 const NitroEnclavesSupport = @import("nitro_enclaves_support.zig").NitroEnclavesSupport;
 const NitroTpmInfo = @import("nitro_tpm_info.zig").NitroTpmInfo;
 const NitroTpmSupport = @import("nitro_tpm_support.zig").NitroTpmSupport;
@@ -647,28 +794,42 @@ const OfferingTypeValues = @import("offering_type_values.zig").OfferingTypeValue
 const OidcOptions = @import("oidc_options.zig").OidcOptions;
 const OnDemandAllocationStrategy = @import("on_demand_allocation_strategy.zig").OnDemandAllocationStrategy;
 const OnDemandOptions = @import("on_demand_options.zig").OnDemandOptions;
+const OnDemandOptionsRequest = @import("on_demand_options_request.zig").OnDemandOptionsRequest;
+const OperatorRequest = @import("operator_request.zig").OperatorRequest;
 const OperatorResponse = @import("operator_response.zig").OperatorResponse;
 const OutpostLag = @import("outpost_lag.zig").OutpostLag;
 const OutputFormat = @import("output_format.zig").OutputFormat;
 const PacketHeaderStatement = @import("packet_header_statement.zig").PacketHeaderStatement;
+const PacketHeaderStatementRequest = @import("packet_header_statement_request.zig").PacketHeaderStatementRequest;
+const PartitionLoadFrequency = @import("partition_load_frequency.zig").PartitionLoadFrequency;
 const PathComponent = @import("path_component.zig").PathComponent;
 const PathFilter = @import("path_filter.zig").PathFilter;
+const PathRequestFilter = @import("path_request_filter.zig").PathRequestFilter;
 const PathStatement = @import("path_statement.zig").PathStatement;
+const PathStatementRequest = @import("path_statement_request.zig").PathStatementRequest;
 const PayerResponsibility = @import("payer_responsibility.zig").PayerResponsibility;
 const PaymentOption = @import("payment_option.zig").PaymentOption;
 const PciId = @import("pci_id.zig").PciId;
 const PeeringAttachmentStatus = @import("peering_attachment_status.zig").PeeringAttachmentStatus;
 const PeeringConnectionOptions = @import("peering_connection_options.zig").PeeringConnectionOptions;
+const PeeringConnectionOptionsRequest = @import("peering_connection_options_request.zig").PeeringConnectionOptionsRequest;
 const PeeringTgwInfo = @import("peering_tgw_info.zig").PeeringTgwInfo;
 const PerformanceFactorReference = @import("performance_factor_reference.zig").PerformanceFactorReference;
+const PerformanceFactorReferenceRequest = @import("performance_factor_reference_request.zig").PerformanceFactorReferenceRequest;
 const PeriodType = @import("period_type.zig").PeriodType;
 const PermissionGroup = @import("permission_group.zig").PermissionGroup;
 const Phase1DHGroupNumbersListValue = @import("phase_1_dh_group_numbers_list_value.zig").Phase1DHGroupNumbersListValue;
+const Phase1DHGroupNumbersRequestListValue = @import("phase_1_dh_group_numbers_request_list_value.zig").Phase1DHGroupNumbersRequestListValue;
 const Phase1EncryptionAlgorithmsListValue = @import("phase_1_encryption_algorithms_list_value.zig").Phase1EncryptionAlgorithmsListValue;
+const Phase1EncryptionAlgorithmsRequestListValue = @import("phase_1_encryption_algorithms_request_list_value.zig").Phase1EncryptionAlgorithmsRequestListValue;
 const Phase1IntegrityAlgorithmsListValue = @import("phase_1_integrity_algorithms_list_value.zig").Phase1IntegrityAlgorithmsListValue;
+const Phase1IntegrityAlgorithmsRequestListValue = @import("phase_1_integrity_algorithms_request_list_value.zig").Phase1IntegrityAlgorithmsRequestListValue;
 const Phase2DHGroupNumbersListValue = @import("phase_2_dh_group_numbers_list_value.zig").Phase2DHGroupNumbersListValue;
+const Phase2DHGroupNumbersRequestListValue = @import("phase_2_dh_group_numbers_request_list_value.zig").Phase2DHGroupNumbersRequestListValue;
 const Phase2EncryptionAlgorithmsListValue = @import("phase_2_encryption_algorithms_list_value.zig").Phase2EncryptionAlgorithmsListValue;
+const Phase2EncryptionAlgorithmsRequestListValue = @import("phase_2_encryption_algorithms_request_list_value.zig").Phase2EncryptionAlgorithmsRequestListValue;
 const Phase2IntegrityAlgorithmsListValue = @import("phase_2_integrity_algorithms_list_value.zig").Phase2IntegrityAlgorithmsListValue;
+const Phase2IntegrityAlgorithmsRequestListValue = @import("phase_2_integrity_algorithms_request_list_value.zig").Phase2IntegrityAlgorithmsRequestListValue;
 const PhcSupport = @import("phc_support.zig").PhcSupport;
 const Placement = @import("placement.zig").Placement;
 const PlacementGroup = @import("placement_group.zig").PlacementGroup;
@@ -686,12 +847,14 @@ const PrefixListEntry = @import("prefix_list_entry.zig").PrefixListEntry;
 const PrefixListId = @import("prefix_list_id.zig").PrefixListId;
 const PrefixListState = @import("prefix_list_state.zig").PrefixListState;
 const PriceSchedule = @import("price_schedule.zig").PriceSchedule;
+const PriceScheduleSpecification = @import("price_schedule_specification.zig").PriceScheduleSpecification;
 const PricingDetail = @import("pricing_detail.zig").PricingDetail;
 const PrincipalIdFormat = @import("principal_id_format.zig").PrincipalIdFormat;
 const PrincipalType = @import("principal_type.zig").PrincipalType;
 const PrivateDnsDetails = @import("private_dns_details.zig").PrivateDnsDetails;
 const PrivateDnsNameConfiguration = @import("private_dns_name_configuration.zig").PrivateDnsNameConfiguration;
 const PrivateDnsNameOptionsOnLaunch = @import("private_dns_name_options_on_launch.zig").PrivateDnsNameOptionsOnLaunch;
+const PrivateDnsNameOptionsRequest = @import("private_dns_name_options_request.zig").PrivateDnsNameOptionsRequest;
 const PrivateDnsNameOptionsResponse = @import("private_dns_name_options_response.zig").PrivateDnsNameOptionsResponse;
 const PrivateIpAddressSpecification = @import("private_ip_address_specification.zig").PrivateIpAddressSpecification;
 const ProcessorInfo = @import("processor_info.zig").ProcessorInfo;
@@ -706,6 +869,7 @@ const PublicIpDnsNameOptions = @import("public_ip_dns_name_options.zig").PublicI
 const PublicIpv4Pool = @import("public_ipv_4_pool.zig").PublicIpv4Pool;
 const PublicIpv4PoolRange = @import("public_ipv_4_pool_range.zig").PublicIpv4PoolRange;
 const Purchase = @import("purchase.zig").Purchase;
+const PurchaseRequest = @import("purchase_request.zig").PurchaseRequest;
 const RIProductDescription = @import("ri_product_description.zig").RIProductDescription;
 const RebootMigrationSupport = @import("reboot_migration_support.zig").RebootMigrationSupport;
 const RecurringCharge = @import("recurring_charge.zig").RecurringCharge;
@@ -713,16 +877,27 @@ const RecurringChargeFrequency = @import("recurring_charge_frequency.zig").Recur
 const ReferencedSecurityGroup = @import("referenced_security_group.zig").ReferencedSecurityGroup;
 const Region = @import("region.zig").Region;
 const RegionalSummary = @import("regional_summary.zig").RegionalSummary;
+const RegisterInstanceTagAttributeRequest = @import("register_instance_tag_attribute_request.zig").RegisterInstanceTagAttributeRequest;
 const RegisteredInstance = @import("registered_instance.zig").RegisteredInstance;
+const RemoveIpamOperatingRegion = @import("remove_ipam_operating_region.zig").RemoveIpamOperatingRegion;
+const RemoveIpamOrganizationalUnitExclusion = @import("remove_ipam_organizational_unit_exclusion.zig").RemoveIpamOrganizationalUnitExclusion;
+const RemovePrefixListEntry = @import("remove_prefix_list_entry.zig").RemovePrefixListEntry;
 const ReplaceRootVolumeTask = @import("replace_root_volume_task.zig").ReplaceRootVolumeTask;
 const ReplaceRootVolumeTaskState = @import("replace_root_volume_task_state.zig").ReplaceRootVolumeTaskState;
 const ReplacementStrategy = @import("replacement_strategy.zig").ReplacementStrategy;
+const ReportInstanceReasonCodes = @import("report_instance_reason_codes.zig").ReportInstanceReasonCodes;
 const ReportState = @import("report_state.zig").ReportState;
+const RequestFilterPortRange = @import("request_filter_port_range.zig").RequestFilterPortRange;
+const RequestIpamResourceTag = @import("request_ipam_resource_tag.zig").RequestIpamResourceTag;
+const RequestLaunchTemplateData = @import("request_launch_template_data.zig").RequestLaunchTemplateData;
+const RequestSpotLaunchSpecification = @import("request_spot_launch_specification.zig").RequestSpotLaunchSpecification;
 const Reservation = @import("reservation.zig").Reservation;
 const ReservationEndDateType = @import("reservation_end_date_type.zig").ReservationEndDateType;
+const ReservationFleetInstanceSpecification = @import("reservation_fleet_instance_specification.zig").ReservationFleetInstanceSpecification;
 const ReservationState = @import("reservation_state.zig").ReservationState;
 const ReservationType = @import("reservation_type.zig").ReservationType;
 const ReservationValue = @import("reservation_value.zig").ReservationValue;
+const ReservedInstanceLimitPrice = @import("reserved_instance_limit_price.zig").ReservedInstanceLimitPrice;
 const ReservedInstanceReservationValue = @import("reserved_instance_reservation_value.zig").ReservedInstanceReservationValue;
 const ReservedInstanceState = @import("reserved_instance_state.zig").ReservedInstanceState;
 const ReservedInstances = @import("reserved_instances.zig").ReservedInstances;
@@ -733,7 +908,10 @@ const ReservedInstancesModification = @import("reserved_instances_modification.z
 const ReservedInstancesModificationResult = @import("reserved_instances_modification_result.zig").ReservedInstancesModificationResult;
 const ReservedInstancesOffering = @import("reserved_instances_offering.zig").ReservedInstancesOffering;
 const ResourceStatement = @import("resource_statement.zig").ResourceStatement;
+const ResourceStatementRequest = @import("resource_statement_request.zig").ResourceStatementRequest;
 const ResourceType = @import("resource_type.zig").ResourceType;
+const ResourceTypeOption = @import("resource_type_option.zig").ResourceTypeOption;
+const ResourceTypeRequest = @import("resource_type_request.zig").ResourceTypeRequest;
 const ResponseError = @import("response_error.zig").ResponseError;
 const ResponseLaunchTemplateData = @import("response_launch_template_data.zig").ResponseLaunchTemplateData;
 const RevokedSecurityGroupRule = @import("revoked_security_group_rule.zig").RevokedSecurityGroupRule;
@@ -746,6 +924,7 @@ const RouteServerAssociationState = @import("route_server_association_state.zig"
 const RouteServerBfdState = @import("route_server_bfd_state.zig").RouteServerBfdState;
 const RouteServerBfdStatus = @import("route_server_bfd_status.zig").RouteServerBfdStatus;
 const RouteServerBgpOptions = @import("route_server_bgp_options.zig").RouteServerBgpOptions;
+const RouteServerBgpOptionsRequest = @import("route_server_bgp_options_request.zig").RouteServerBgpOptionsRequest;
 const RouteServerBgpState = @import("route_server_bgp_state.zig").RouteServerBgpState;
 const RouteServerBgpStatus = @import("route_server_bgp_status.zig").RouteServerBgpStatus;
 const RouteServerEndpoint = @import("route_server_endpoint.zig").RouteServerEndpoint;
@@ -771,18 +950,32 @@ const RuleGroupRuleOptionsPair = @import("rule_group_rule_options_pair.zig").Rul
 const RuleGroupTypePair = @import("rule_group_type_pair.zig").RuleGroupTypePair;
 const RuleOption = @import("rule_option.zig").RuleOption;
 const RunInstancesMonitoringEnabled = @import("run_instances_monitoring_enabled.zig").RunInstancesMonitoringEnabled;
+const S3ObjectTag = @import("s_3_object_tag.zig").S3ObjectTag;
 const S3Storage = @import("s_3_storage.zig").S3Storage;
 const SSEType = @import("sse_type.zig").SSEType;
 const Schedule = @import("schedule.zig").Schedule;
 const ScheduledInstance = @import("scheduled_instance.zig").ScheduledInstance;
 const ScheduledInstanceAvailability = @import("scheduled_instance_availability.zig").ScheduledInstanceAvailability;
 const ScheduledInstanceRecurrence = @import("scheduled_instance_recurrence.zig").ScheduledInstanceRecurrence;
+const ScheduledInstanceRecurrenceRequest = @import("scheduled_instance_recurrence_request.zig").ScheduledInstanceRecurrenceRequest;
+const ScheduledInstancesBlockDeviceMapping = @import("scheduled_instances_block_device_mapping.zig").ScheduledInstancesBlockDeviceMapping;
+const ScheduledInstancesEbs = @import("scheduled_instances_ebs.zig").ScheduledInstancesEbs;
+const ScheduledInstancesIamInstanceProfile = @import("scheduled_instances_iam_instance_profile.zig").ScheduledInstancesIamInstanceProfile;
+const ScheduledInstancesIpv6Address = @import("scheduled_instances_ipv_6_address.zig").ScheduledInstancesIpv6Address;
+const ScheduledInstancesLaunchSpecification = @import("scheduled_instances_launch_specification.zig").ScheduledInstancesLaunchSpecification;
+const ScheduledInstancesMonitoring = @import("scheduled_instances_monitoring.zig").ScheduledInstancesMonitoring;
+const ScheduledInstancesNetworkInterface = @import("scheduled_instances_network_interface.zig").ScheduledInstancesNetworkInterface;
+const ScheduledInstancesPlacement = @import("scheduled_instances_placement.zig").ScheduledInstancesPlacement;
+const ScheduledInstancesPrivateIpAddressConfig = @import("scheduled_instances_private_ip_address_config.zig").ScheduledInstancesPrivateIpAddressConfig;
 const SecurityGroup = @import("security_group.zig").SecurityGroup;
 const SecurityGroupForVpc = @import("security_group_for_vpc.zig").SecurityGroupForVpc;
 const SecurityGroupIdentifier = @import("security_group_identifier.zig").SecurityGroupIdentifier;
 const SecurityGroupReference = @import("security_group_reference.zig").SecurityGroupReference;
 const SecurityGroupReferencingSupportValue = @import("security_group_referencing_support_value.zig").SecurityGroupReferencingSupportValue;
 const SecurityGroupRule = @import("security_group_rule.zig").SecurityGroupRule;
+const SecurityGroupRuleDescription = @import("security_group_rule_description.zig").SecurityGroupRuleDescription;
+const SecurityGroupRuleRequest = @import("security_group_rule_request.zig").SecurityGroupRuleRequest;
+const SecurityGroupRuleUpdate = @import("security_group_rule_update.zig").SecurityGroupRuleUpdate;
 const SecurityGroupVpcAssociation = @import("security_group_vpc_association.zig").SecurityGroupVpcAssociation;
 const SecurityGroupVpcAssociationState = @import("security_group_vpc_association_state.zig").SecurityGroupVpcAssociationState;
 const ServiceConfiguration = @import("service_configuration.zig").ServiceConfiguration;
@@ -795,8 +988,11 @@ const ServiceState = @import("service_state.zig").ServiceState;
 const ServiceType = @import("service_type.zig").ServiceType;
 const ServiceTypeDetail = @import("service_type_detail.zig").ServiceTypeDetail;
 const ShutdownBehavior = @import("shutdown_behavior.zig").ShutdownBehavior;
+const SlotDateTimeRangeRequest = @import("slot_date_time_range_request.zig").SlotDateTimeRangeRequest;
+const SlotStartTimeRangeRequest = @import("slot_start_time_range_request.zig").SlotStartTimeRangeRequest;
 const Snapshot = @import("snapshot.zig").Snapshot;
 const SnapshotDetail = @import("snapshot_detail.zig").SnapshotDetail;
+const SnapshotDiskContainer = @import("snapshot_disk_container.zig").SnapshotDiskContainer;
 const SnapshotInfo = @import("snapshot_info.zig").SnapshotInfo;
 const SnapshotRecycleBinInfo = @import("snapshot_recycle_bin_info.zig").SnapshotRecycleBinInfo;
 const SnapshotReturnCodes = @import("snapshot_return_codes.zig").SnapshotReturnCodes;
@@ -818,7 +1014,9 @@ const SpotInstanceStateFault = @import("spot_instance_state_fault.zig").SpotInst
 const SpotInstanceStatus = @import("spot_instance_status.zig").SpotInstanceStatus;
 const SpotInstanceType = @import("spot_instance_type.zig").SpotInstanceType;
 const SpotMaintenanceStrategies = @import("spot_maintenance_strategies.zig").SpotMaintenanceStrategies;
+const SpotMarketOptions = @import("spot_market_options.zig").SpotMarketOptions;
 const SpotOptions = @import("spot_options.zig").SpotOptions;
+const SpotOptionsRequest = @import("spot_options_request.zig").SpotOptionsRequest;
 const SpotPlacement = @import("spot_placement.zig").SpotPlacement;
 const SpotPlacementScore = @import("spot_placement_score.zig").SpotPlacementScore;
 const SpotPrice = @import("spot_price.zig").SpotPrice;
@@ -833,6 +1031,7 @@ const StatisticType = @import("statistic_type.zig").StatisticType;
 const StatusName = @import("status_name.zig").StatusName;
 const StatusType = @import("status_type.zig").StatusType;
 const Storage = @import("storage.zig").Storage;
+const StorageLocation = @import("storage_location.zig").StorageLocation;
 const StorageTier = @import("storage_tier.zig").StorageTier;
 const StoreImageTaskResult = @import("store_image_task_result.zig").StoreImageTaskResult;
 const Subnet = @import("subnet.zig").Subnet;
@@ -841,6 +1040,7 @@ const SubnetCidrBlockState = @import("subnet_cidr_block_state.zig").SubnetCidrBl
 const SubnetCidrBlockStateCode = @import("subnet_cidr_block_state_code.zig").SubnetCidrBlockStateCode;
 const SubnetCidrReservation = @import("subnet_cidr_reservation.zig").SubnetCidrReservation;
 const SubnetCidrReservationType = @import("subnet_cidr_reservation_type.zig").SubnetCidrReservationType;
+const SubnetConfiguration = @import("subnet_configuration.zig").SubnetConfiguration;
 const SubnetIpPrefixes = @import("subnet_ip_prefixes.zig").SubnetIpPrefixes;
 const SubnetIpv6CidrBlockAssociation = @import("subnet_ipv_6_cidr_block_association.zig").SubnetIpv6CidrBlockAssociation;
 const SubnetState = @import("subnet_state.zig").SubnetState;
@@ -854,8 +1054,10 @@ const Tag = @import("tag.zig").Tag;
 const TagDescription = @import("tag_description.zig").TagDescription;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TargetCapacitySpecification = @import("target_capacity_specification.zig").TargetCapacitySpecification;
+const TargetCapacitySpecificationRequest = @import("target_capacity_specification_request.zig").TargetCapacitySpecificationRequest;
 const TargetCapacityUnitType = @import("target_capacity_unit_type.zig").TargetCapacityUnitType;
 const TargetConfiguration = @import("target_configuration.zig").TargetConfiguration;
+const TargetConfigurationRequest = @import("target_configuration_request.zig").TargetConfigurationRequest;
 const TargetGroup = @import("target_group.zig").TargetGroup;
 const TargetGroupsConfig = @import("target_groups_config.zig").TargetGroupsConfig;
 const TargetNetwork = @import("target_network.zig").TargetNetwork;
@@ -864,18 +1066,23 @@ const TelemetryStatus = @import("telemetry_status.zig").TelemetryStatus;
 const Tenancy = @import("tenancy.zig").Tenancy;
 const TerminateConnectionStatus = @import("terminate_connection_status.zig").TerminateConnectionStatus;
 const ThroughResourcesStatement = @import("through_resources_statement.zig").ThroughResourcesStatement;
+const ThroughResourcesStatementRequest = @import("through_resources_statement_request.zig").ThroughResourcesStatementRequest;
 const TieringOperationStatus = @import("tiering_operation_status.zig").TieringOperationStatus;
 const TokenState = @import("token_state.zig").TokenState;
 const TotalLocalStorageGB = @import("total_local_storage_gb.zig").TotalLocalStorageGB;
+const TotalLocalStorageGBRequest = @import("total_local_storage_gb_request.zig").TotalLocalStorageGBRequest;
 const TpmSupportValues = @import("tpm_support_values.zig").TpmSupportValues;
 const TrafficDirection = @import("traffic_direction.zig").TrafficDirection;
 const TrafficIpAddressType = @import("traffic_ip_address_type.zig").TrafficIpAddressType;
 const TrafficMirrorFilter = @import("traffic_mirror_filter.zig").TrafficMirrorFilter;
 const TrafficMirrorFilterRule = @import("traffic_mirror_filter_rule.zig").TrafficMirrorFilterRule;
+const TrafficMirrorFilterRuleField = @import("traffic_mirror_filter_rule_field.zig").TrafficMirrorFilterRuleField;
 const TrafficMirrorNetworkService = @import("traffic_mirror_network_service.zig").TrafficMirrorNetworkService;
 const TrafficMirrorPortRange = @import("traffic_mirror_port_range.zig").TrafficMirrorPortRange;
+const TrafficMirrorPortRangeRequest = @import("traffic_mirror_port_range_request.zig").TrafficMirrorPortRangeRequest;
 const TrafficMirrorRuleAction = @import("traffic_mirror_rule_action.zig").TrafficMirrorRuleAction;
 const TrafficMirrorSession = @import("traffic_mirror_session.zig").TrafficMirrorSession;
+const TrafficMirrorSessionField = @import("traffic_mirror_session_field.zig").TrafficMirrorSessionField;
 const TrafficMirrorTarget = @import("traffic_mirror_target.zig").TrafficMirrorTarget;
 const TrafficMirrorTargetType = @import("traffic_mirror_target_type.zig").TrafficMirrorTargetType;
 const TrafficType = @import("traffic_type.zig").TrafficType;
@@ -894,6 +1101,7 @@ const TransitGatewayConnectOptions = @import("transit_gateway_connect_options.zi
 const TransitGatewayConnectPeer = @import("transit_gateway_connect_peer.zig").TransitGatewayConnectPeer;
 const TransitGatewayConnectPeerConfiguration = @import("transit_gateway_connect_peer_configuration.zig").TransitGatewayConnectPeerConfiguration;
 const TransitGatewayConnectPeerState = @import("transit_gateway_connect_peer_state.zig").TransitGatewayConnectPeerState;
+const TransitGatewayConnectRequestBgpOptions = @import("transit_gateway_connect_request_bgp_options.zig").TransitGatewayConnectRequestBgpOptions;
 const TransitGatewayMeteringPayerType = @import("transit_gateway_metering_payer_type.zig").TransitGatewayMeteringPayerType;
 const TransitGatewayMeteringPolicy = @import("transit_gateway_metering_policy.zig").TransitGatewayMeteringPolicy;
 const TransitGatewayMeteringPolicyEntry = @import("transit_gateway_metering_policy_entry.zig").TransitGatewayMeteringPolicyEntry;
@@ -925,6 +1133,7 @@ const TransitGatewayPrefixListReference = @import("transit_gateway_prefix_list_r
 const TransitGatewayPrefixListReferenceState = @import("transit_gateway_prefix_list_reference_state.zig").TransitGatewayPrefixListReferenceState;
 const TransitGatewayPropagation = @import("transit_gateway_propagation.zig").TransitGatewayPropagation;
 const TransitGatewayPropagationState = @import("transit_gateway_propagation_state.zig").TransitGatewayPropagationState;
+const TransitGatewayRequestOptions = @import("transit_gateway_request_options.zig").TransitGatewayRequestOptions;
 const TransitGatewayRoute = @import("transit_gateway_route.zig").TransitGatewayRoute;
 const TransitGatewayRouteAttachment = @import("transit_gateway_route_attachment.zig").TransitGatewayRouteAttachment;
 const TransitGatewayRouteState = @import("transit_gateway_route_state.zig").TransitGatewayRouteState;
@@ -952,10 +1161,13 @@ const UnsuccessfulInstanceCreditSpecificationItemError = @import("unsuccessful_i
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
 const UnsuccessfulItemError = @import("unsuccessful_item_error.zig").UnsuccessfulItemError;
 const UsageClassType = @import("usage_class_type.zig").UsageClassType;
+const UserBucket = @import("user_bucket.zig").UserBucket;
 const UserBucketDetails = @import("user_bucket_details.zig").UserBucketDetails;
+const UserData = @import("user_data.zig").UserData;
 const UserIdGroupPair = @import("user_id_group_pair.zig").UserIdGroupPair;
 const UserTrustProviderType = @import("user_trust_provider_type.zig").UserTrustProviderType;
 const VCpuCountRange = @import("v_cpu_count_range.zig").VCpuCountRange;
+const VCpuCountRangeRequest = @import("v_cpu_count_range_request.zig").VCpuCountRangeRequest;
 const VCpuInfo = @import("v_cpu_info.zig").VCpuInfo;
 const ValidationError = @import("validation_error.zig").ValidationError;
 const ValidationWarning = @import("validation_warning.zig").ValidationWarning;
@@ -979,11 +1191,16 @@ const VerifiedAccessInstanceOpenVpnClientConfiguration = @import("verified_acces
 const VerifiedAccessInstanceOpenVpnClientConfigurationRoute = @import("verified_access_instance_open_vpn_client_configuration_route.zig").VerifiedAccessInstanceOpenVpnClientConfigurationRoute;
 const VerifiedAccessInstanceUserTrustProviderClientConfiguration = @import("verified_access_instance_user_trust_provider_client_configuration.zig").VerifiedAccessInstanceUserTrustProviderClientConfiguration;
 const VerifiedAccessLogCloudWatchLogsDestination = @import("verified_access_log_cloud_watch_logs_destination.zig").VerifiedAccessLogCloudWatchLogsDestination;
+const VerifiedAccessLogCloudWatchLogsDestinationOptions = @import("verified_access_log_cloud_watch_logs_destination_options.zig").VerifiedAccessLogCloudWatchLogsDestinationOptions;
 const VerifiedAccessLogDeliveryStatus = @import("verified_access_log_delivery_status.zig").VerifiedAccessLogDeliveryStatus;
 const VerifiedAccessLogDeliveryStatusCode = @import("verified_access_log_delivery_status_code.zig").VerifiedAccessLogDeliveryStatusCode;
 const VerifiedAccessLogKinesisDataFirehoseDestination = @import("verified_access_log_kinesis_data_firehose_destination.zig").VerifiedAccessLogKinesisDataFirehoseDestination;
+const VerifiedAccessLogKinesisDataFirehoseDestinationOptions = @import("verified_access_log_kinesis_data_firehose_destination_options.zig").VerifiedAccessLogKinesisDataFirehoseDestinationOptions;
+const VerifiedAccessLogOptions = @import("verified_access_log_options.zig").VerifiedAccessLogOptions;
 const VerifiedAccessLogS3Destination = @import("verified_access_log_s_3_destination.zig").VerifiedAccessLogS3Destination;
+const VerifiedAccessLogS3DestinationOptions = @import("verified_access_log_s_3_destination_options.zig").VerifiedAccessLogS3DestinationOptions;
 const VerifiedAccessLogs = @import("verified_access_logs.zig").VerifiedAccessLogs;
+const VerifiedAccessSseSpecificationRequest = @import("verified_access_sse_specification_request.zig").VerifiedAccessSseSpecificationRequest;
 const VerifiedAccessSseSpecificationResponse = @import("verified_access_sse_specification_response.zig").VerifiedAccessSseSpecificationResponse;
 const VerifiedAccessTrustProvider = @import("verified_access_trust_provider.zig").VerifiedAccessTrustProvider;
 const VerifiedAccessTrustProviderCondensed = @import("verified_access_trust_provider_condensed.zig").VerifiedAccessTrustProviderCondensed;
@@ -992,6 +1209,7 @@ const VirtualizationType = @import("virtualization_type.zig").VirtualizationType
 const Volume = @import("volume.zig").Volume;
 const VolumeAttachment = @import("volume_attachment.zig").VolumeAttachment;
 const VolumeAttachmentState = @import("volume_attachment_state.zig").VolumeAttachmentState;
+const VolumeDetail = @import("volume_detail.zig").VolumeDetail;
 const VolumeModification = @import("volume_modification.zig").VolumeModification;
 const VolumeModificationState = @import("volume_modification_state.zig").VolumeModificationState;
 const VolumeRecycleBinInfo = @import("volume_recycle_bin_info.zig").VolumeRecycleBinInfo;
@@ -1017,8 +1235,10 @@ const VpcCidrBlockState = @import("vpc_cidr_block_state.zig").VpcCidrBlockState;
 const VpcCidrBlockStateCode = @import("vpc_cidr_block_state_code.zig").VpcCidrBlockStateCode;
 const VpcClassicLink = @import("vpc_classic_link.zig").VpcClassicLink;
 const VpcEncryptionControl = @import("vpc_encryption_control.zig").VpcEncryptionControl;
+const VpcEncryptionControlConfiguration = @import("vpc_encryption_control_configuration.zig").VpcEncryptionControlConfiguration;
 const VpcEncryptionControlExclusion = @import("vpc_encryption_control_exclusion.zig").VpcEncryptionControlExclusion;
 const VpcEncryptionControlExclusionState = @import("vpc_encryption_control_exclusion_state.zig").VpcEncryptionControlExclusionState;
+const VpcEncryptionControlExclusionStateInput = @import("vpc_encryption_control_exclusion_state_input.zig").VpcEncryptionControlExclusionStateInput;
 const VpcEncryptionControlExclusions = @import("vpc_encryption_control_exclusions.zig").VpcEncryptionControlExclusions;
 const VpcEncryptionControlMode = @import("vpc_encryption_control_mode.zig").VpcEncryptionControlMode;
 const VpcEncryptionControlState = @import("vpc_encryption_control_state.zig").VpcEncryptionControlState;
@@ -1038,6 +1258,7 @@ const VpnConcentrator = @import("vpn_concentrator.zig").VpnConcentrator;
 const VpnConnection = @import("vpn_connection.zig").VpnConnection;
 const VpnConnectionDeviceType = @import("vpn_connection_device_type.zig").VpnConnectionDeviceType;
 const VpnConnectionOptions = @import("vpn_connection_options.zig").VpnConnectionOptions;
+const VpnConnectionOptionsSpecification = @import("vpn_connection_options_specification.zig").VpnConnectionOptionsSpecification;
 const VpnEcmpSupportValue = @import("vpn_ecmp_support_value.zig").VpnEcmpSupportValue;
 const VpnGateway = @import("vpn_gateway.zig").VpnGateway;
 const VpnProtocol = @import("vpn_protocol.zig").VpnProtocol;
@@ -1046,6 +1267,8 @@ const VpnStaticRoute = @import("vpn_static_route.zig").VpnStaticRoute;
 const VpnStaticRouteSource = @import("vpn_static_route_source.zig").VpnStaticRouteSource;
 const VpnTunnelBandwidth = @import("vpn_tunnel_bandwidth.zig").VpnTunnelBandwidth;
 const VpnTunnelLogOptions = @import("vpn_tunnel_log_options.zig").VpnTunnelLogOptions;
+const VpnTunnelLogOptionsSpecification = @import("vpn_tunnel_log_options_specification.zig").VpnTunnelLogOptionsSpecification;
+const VpnTunnelOptionsSpecification = @import("vpn_tunnel_options_specification.zig").VpnTunnelOptionsSpecification;
 const VpnTunnelProvisioningStatus = @import("vpn_tunnel_provisioning_status.zig").VpnTunnelProvisioningStatus;
 const WeekDay = @import("week_day.zig").WeekDay;
 const scope = @import("scope.zig").scope;
@@ -31648,3 +31871,9706 @@ pub fn deserializeVpnTunnelLogOptions(reader: *aws.xml.Reader, alloc: std.mem.Al
     return result;
 }
 
+pub fn serializeAcceleratorManufacturerSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AcceleratorManufacturer, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAcceleratorNameSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AcceleratorName, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAcceleratorTypeSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AcceleratorType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAccessScopePathListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AccessScopePathRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeAccessScopePathRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAccountAttributeNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AccountAttributeName, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAddIpamOperatingRegionSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AddIpamOperatingRegion, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeAddIpamOperatingRegion(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAddIpamOrganizationalUnitExclusionSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AddIpamOrganizationalUnitExclusion, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeAddIpamOrganizationalUnitExclusion(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAddPrefixListEntries(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AddPrefixListEntry, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeAddPrefixListEntry(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAllocationIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAllocationIds(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAllowedInstanceTypeSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeArchitectureTypeSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ArchitectureType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeArnList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAssetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAssociationIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAthenaIntegrationsSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AthenaIntegration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeAthenaIntegration(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAvailabilityZoneAddresses(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AvailabilityZoneAddress, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeAvailabilityZoneAddress(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAvailabilityZoneIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAvailabilityZoneStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeBillingProductList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeBlockDeviceMappingList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const BlockDeviceMapping, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeBlockDeviceMapping(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeBlockDeviceMappingRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const BlockDeviceMapping, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeBlockDeviceMapping(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeBundleIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCapacityBlockIds(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCapacityManagerConditionSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const CapacityManagerCondition, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeCapacityManagerCondition(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCapacityManagerDataExportIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCapacityReservationFleetIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCapacityReservationIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCarrierGatewayIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeClassicLoadBalancers(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ClassicLoadBalancer, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeClassicLoadBalancer(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeClientVpnAuthenticationRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ClientVpnAuthenticationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeClientVpnAuthenticationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeClientVpnEndpointIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeClientVpnSecurityGroupIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCoipPoolIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeConditionValueList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeConnectionNotificationIdsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeConversionIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCpuManufacturerSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const CpuManufacturer, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessEndpointPortRangeList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const CreateVerifiedAccessEndpointPortRange, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeCreateVerifiedAccessEndpointPortRange(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessEndpointSubnetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCreateVolumePermissionList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const CreateVolumePermission, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeCreateVolumePermission(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCustomerGatewayIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDataQueries(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const DataQuery, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeDataQuery(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDedicatedHostIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDeleteQueuedReservedInstancesIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDescribeImageReferencesImageIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDescribeImageUsageReportsImageIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDescribeInstanceTopologyGroupNameSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDescribeInstanceTopologyInstanceIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDhcpOptionsIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeDiskImageList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const DiskImage, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeDiskImage(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeEgressOnlyInternetGatewayIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeEipAssociationIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeElasticGpuIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeElasticGpuSpecificationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ElasticGpuSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeElasticGpuSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeElasticGpuSpecifications(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ElasticGpuSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeElasticGpuSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeElasticInferenceAccelerators(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ElasticInferenceAccelerator, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeElasticInferenceAccelerator(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeExcludedInstanceTypeSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeExecutableByStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeExportImageTaskIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeExportTaskIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFastLaunchImageIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFilterList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Filter, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeFilter(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFleetBlockDeviceMappingRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const FleetBlockDeviceMappingRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeFleetBlockDeviceMappingRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFleetIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFleetLaunchTemplateConfigListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const FleetLaunchTemplateConfigRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeFleetLaunchTemplateConfigRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFleetLaunchTemplateOverridesListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const FleetLaunchTemplateOverridesRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeFleetLaunchTemplateOverridesRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFlowLogIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFlowLogResourceIds(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFpgaImageIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeGroupBySet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const GroupBy, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeGroupIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeGroupIdentifierList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const GroupIdentifier, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeGroupIdentifier(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeGroupIds(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeGroupNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeHostReservationIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIKEVersionsRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const IKEVersionsRequestListValue, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIKEVersionsRequestListValue(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageCriterionRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ImageCriterionRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeImageCriterionRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageDiskContainerList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ImageDiskContainer, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeImageDiskContainer(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageNameRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageProviderRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageUsageReportIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageUsageReportUserIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageUsageResourceTypeOptionRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ImageUsageResourceTypeOptionRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeImageUsageResourceTypeOptionRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageUsageResourceTypeOptionValuesList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImageUsageResourceTypeRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ImageUsageResourceTypeRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeImageUsageResourceTypeRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImportImageLicenseSpecificationListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ImportImageLicenseConfigurationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeImportImageLicenseConfigurationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImportSnapshotTaskIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeImportTaskIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInsideCidrBlocksStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceBlockDeviceMappingSpecificationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceBlockDeviceMappingSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeInstanceBlockDeviceMappingSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceCreditSpecificationListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceCreditSpecificationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeInstanceCreditSpecificationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceEventWindowIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceEventWindowTimeRangeRequestSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceEventWindowTimeRangeRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeInstanceEventWindowTimeRangeRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceGenerationSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceGeneration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceIdUpdateStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceIpv6AddressList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceIpv6Address, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeInstanceIpv6Address(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceIpv6AddressListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceIpv6AddressRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeInstanceIpv6AddressRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceNetworkInterfaceSpecificationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceNetworkInterfaceSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeInstanceNetworkInterfaceSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceTagKeySet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceTypeList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInstanceTypes(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInternetGatewayIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpPermissionList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const IpPermission, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIpPermission(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpPrefixList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpRangeList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const IpRange, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIpRange(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpamPolicyAllocationRuleListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const IpamPolicyAllocationRuleRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIpamPolicyAllocationRuleRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpamPoolAllocationAllowedCidrs(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpamPoolAllocationDisallowedCidrs(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpamPrefixListResolverRuleConditionRequestSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const IpamPrefixListResolverRuleConditionRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIpamPrefixListResolverRuleConditionRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpamPrefixListResolverRuleRequestSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const IpamPrefixListResolverRuleRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIpamPrefixListResolverRuleRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpamPrefixListResolverVersionNumberSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const i64, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{item}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpv4PrefixList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Ipv4PrefixSpecificationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIpv4PrefixSpecificationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpv6AddressList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpv6PoolIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpv6PrefixList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Ipv6PrefixSpecificationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIpv6PrefixSpecificationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeIpv6RangeList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Ipv6Range, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeIpv6Range(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeKeyNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeKeyPairIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchPermissionList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchPermission, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLaunchPermission(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchSpecsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const SpotFleetLaunchSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeSpotFleetLaunchSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateBlockDeviceMappingRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchTemplateBlockDeviceMappingRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLaunchTemplateBlockDeviceMappingRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateConfigList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchTemplateConfig, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLaunchTemplateConfig(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateElasticInferenceAcceleratorList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchTemplateElasticInferenceAccelerator, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLaunchTemplateElasticInferenceAccelerator(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchTemplateInstanceNetworkInterfaceSpecificationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateLicenseSpecificationListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchTemplateLicenseConfigurationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLaunchTemplateLicenseConfigurationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateOverridesList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchTemplateOverrides, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLaunchTemplateOverrides(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateTagSpecificationRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchTemplateTagSpecificationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLaunchTemplateTagSpecificationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLicenseSpecificationListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LicenseConfigurationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLicenseConfigurationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLoadPermissionListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LoadPermissionRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLoadPermissionRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLocalGatewayIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLocalGatewayRouteTableIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLocalGatewayRouteTableVpcAssociationIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLocalGatewayVirtualInterfaceGroupIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLocalGatewayVirtualInterfaceIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLocalStorageTypeSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LocalStorageType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeMacModificationTaskIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeMarketplaceProductCodeRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeMetricSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Metric, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessEndpointPortRangeList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ModifyVerifiedAccessEndpointPortRange, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeModifyVerifiedAccessEndpointPortRange(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessEndpointSubnetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNatGatewayIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNetworkAclIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNetworkInsightsAccessScopeAnalysisIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNetworkInsightsAccessScopeIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNetworkInsightsAnalysisIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNetworkInsightsPathIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNetworkInterfaceIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNetworkInterfacePermissionIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNewDhcpConfigurationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const NewDhcpConfiguration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeNewDhcpConfiguration(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeOccurrenceDayRequestSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const i32, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{item}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeOrganizationArnStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeOrganizationalUnitArnStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeOutpostLagIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeOwnerStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePerformanceFactorReferenceSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PerformanceFactorReference, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePerformanceFactorReference(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePerformanceFactorReferenceSetRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PerformanceFactorReferenceRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePerformanceFactorReferenceRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePhase1DHGroupNumbersRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Phase1DHGroupNumbersRequestListValue, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePhase1DHGroupNumbersRequestListValue(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePhase1EncryptionAlgorithmsRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Phase1EncryptionAlgorithmsRequestListValue, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePhase1EncryptionAlgorithmsRequestListValue(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePhase1IntegrityAlgorithmsRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Phase1IntegrityAlgorithmsRequestListValue, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePhase1IntegrityAlgorithmsRequestListValue(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePhase2DHGroupNumbersRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Phase2DHGroupNumbersRequestListValue, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePhase2DHGroupNumbersRequestListValue(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePhase2EncryptionAlgorithmsRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Phase2EncryptionAlgorithmsRequestListValue, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePhase2EncryptionAlgorithmsRequestListValue(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePhase2IntegrityAlgorithmsRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Phase2IntegrityAlgorithmsRequestListValue, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePhase2IntegrityAlgorithmsRequestListValue(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePlacementGroupIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePlacementGroupStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePrefixListIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PrefixListId, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePrefixListId(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePrefixListResourceIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePriceScheduleSpecificationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PriceScheduleSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePriceScheduleSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePrivateDnsSpecifiedDomainSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePrivateIpAddressConfigSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ScheduledInstancesPrivateIpAddressConfig, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeScheduledInstancesPrivateIpAddressConfig(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePrivateIpAddressSpecificationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PrivateIpAddressSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePrivateIpAddressSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePrivateIpAddressStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeProductCodeStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeProductDescriptionList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeProtocolList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Protocol, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePublicIpStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePublicIpv4PoolIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePurchaseRequestSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PurchaseRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePurchaseRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReasonCodesList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ReportInstanceReasonCodes, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRegionNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRegionNames(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRemoveIpamOperatingRegionSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const RemoveIpamOperatingRegion, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeRemoveIpamOperatingRegion(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRemoveIpamOrganizationalUnitExclusionSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const RemoveIpamOrganizationalUnitExclusion, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeRemoveIpamOrganizationalUnitExclusion(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRemovePrefixListEntries(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const RemovePrefixListEntry, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeRemovePrefixListEntry(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReplaceRootVolumeTaskIds(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRequestHostIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRequestHostIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRequestInstanceTypeList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRequestIpamResourceTagList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const RequestIpamResourceTag, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeRequestIpamResourceTag(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRequestSpotLaunchSpecificationSecurityGroupIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRequestSpotLaunchSpecificationSecurityGroupList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReservationFleetInstanceSpecificationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ReservationFleetInstanceSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeReservationFleetInstanceSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReservedInstanceIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReservedInstancesConfigurationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ReservedInstancesConfiguration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeReservedInstancesConfiguration(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReservedInstancesIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReservedInstancesModificationIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReservedInstancesOfferingIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeResourceIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeResourceList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeResourceTypeOptionList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ResourceTypeOption, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeResourceTypeOption(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeResourceTypeOptionValuesList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeResourceTypeRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ResourceTypeRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeResourceTypeRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRestorableByStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRouteServerEndpointIdsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRouteServerIdsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRouteServerPeerIdsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRouteTableIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeS3ObjectTagList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const S3ObjectTag, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeS3ObjectTag(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeScheduledInstanceIdRequestSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeScheduledInstancesBlockDeviceMappingSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ScheduledInstancesBlockDeviceMapping, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeScheduledInstancesBlockDeviceMapping(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeScheduledInstancesIpv6AddressList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ScheduledInstancesIpv6Address, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeScheduledInstancesIpv6Address(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeScheduledInstancesNetworkInterfaceSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ScheduledInstancesNetworkInterface, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeScheduledInstancesNetworkInterface(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeScheduledInstancesSecurityGroupIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSecurityGroupIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSecurityGroupIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSecurityGroupIdStringListRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSecurityGroupRuleDescriptionList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const SecurityGroupRuleDescription, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeSecurityGroupRuleDescription(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSecurityGroupRuleIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSecurityGroupRuleUpdateList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const SecurityGroupRuleUpdate, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeSecurityGroupRuleUpdate(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSecurityGroupStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeServiceLinkVirtualInterfaceIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSnapshotIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSpotFleetRequestIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSpotFleetTagSpecificationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const SpotFleetTagSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeSpotFleetTagSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSpotInstanceRequestIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSubnetConfigurationsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const SubnetConfiguration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeSubnetConfiguration(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSubnetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSubnetIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTagList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTag(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTagSpecificationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TagSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTagSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTargetConfigurationRequestSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TargetConfigurationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTargetConfigurationRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTargetGroups(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TargetGroup, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTargetGroup(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeThroughResourcesStatementRequestList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ThroughResourcesStatementRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeThroughResourcesStatementRequest(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTrafficMirrorFilterIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTrafficMirrorFilterRuleFieldList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TrafficMirrorFilterRuleField, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTrafficMirrorFilterRuleIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTrafficMirrorNetworkServiceList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TrafficMirrorNetworkService, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTrafficMirrorSessionFieldList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TrafficMirrorSessionField, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTrafficMirrorSessionIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTrafficMirrorTargetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayAttachmentIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayCidrBlockStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayConnectPeerIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayMeteringPolicyIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayMulticastDomainIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayNetworkInterfaceIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayPolicyTableIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayRouteTableAnnouncementIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewayRouteTableIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitGatewaySubnetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTrunkInterfaceAssociationIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeUserGroupStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeUserIdGroupPairList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const UserIdGroupPair, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeUserIdGroupPair(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeUserIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeValueStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVerifiedAccessEndpointIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVerifiedAccessGroupIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVerifiedAccessInstanceIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVerifiedAccessTrustProviderIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVersionStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVirtualizationTypeSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const VirtualizationType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVolumeIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcBlockPublicAccessExclusionIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcClassicLinkIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcEncryptionControlIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcEndpointIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcEndpointRouteTableIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcEndpointSecurityGroupIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcEndpointServiceIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcEndpointSubnetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpcPeeringConnectionIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpnConcentratorIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpnConnectionIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpnGatewayIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeVpnTunnelOptionsSpecificationsList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const VpnTunnelOptionsSpecification, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeVpnTunnelOptionsSpecification(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeZoneIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeZoneNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAcceleratorCount(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AcceleratorCount) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeAcceleratorCountRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AcceleratorCountRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<Min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Min>");
+    }
+}
+
+pub fn serializeAcceleratorTotalMemoryMiB(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AcceleratorTotalMemoryMiB) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeAcceleratorTotalMemoryMiBRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AcceleratorTotalMemoryMiBRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<Min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Min>");
+    }
+}
+
+pub fn serializeAccessScopePathRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AccessScopePathRequest) !void {
+    if (value.destination) |v| {
+        try buf.appendSlice(alloc, "<Destination>");
+        try serializePathStatementRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Destination>");
+    }
+    if (value.source) |v| {
+        try buf.appendSlice(alloc, "<Source>");
+        try serializePathStatementRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Source>");
+    }
+    if (value.through_resources) |v| {
+        try buf.appendSlice(alloc, "<ThroughResource>");
+        try serializeThroughResourcesStatementRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ThroughResource>");
+    }
+}
+
+pub fn serializeAddIpamOperatingRegion(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AddIpamOperatingRegion) !void {
+    if (value.region_name) |v| {
+        try buf.appendSlice(alloc, "<RegionName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RegionName>");
+    }
+}
+
+pub fn serializeAddIpamOrganizationalUnitExclusion(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AddIpamOrganizationalUnitExclusion) !void {
+    if (value.organizations_entity_path) |v| {
+        try buf.appendSlice(alloc, "<OrganizationsEntityPath>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</OrganizationsEntityPath>");
+    }
+}
+
+pub fn serializeAddPrefixListEntry(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AddPrefixListEntry) !void {
+    try buf.appendSlice(alloc, "<Cidr>");
+    try appendXmlEscaped(alloc, buf, value.cidr);
+    try buf.appendSlice(alloc, "</Cidr>");
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+}
+
+pub fn serializeAsnAuthorizationContext(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AsnAuthorizationContext) !void {
+    try buf.appendSlice(alloc, "<Message>");
+    try appendXmlEscaped(alloc, buf, value.message);
+    try buf.appendSlice(alloc, "</Message>");
+    try buf.appendSlice(alloc, "<Signature>");
+    try appendXmlEscaped(alloc, buf, value.signature);
+    try buf.appendSlice(alloc, "</Signature>");
+}
+
+pub fn serializeAthenaIntegration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AthenaIntegration) !void {
+    try buf.appendSlice(alloc, "<IntegrationResultS3DestinationArn>");
+    try appendXmlEscaped(alloc, buf, value.integration_result_s_3_destination_arn);
+    try buf.appendSlice(alloc, "</IntegrationResultS3DestinationArn>");
+    if (value.partition_end_date) |v| {
+        try buf.appendSlice(alloc, "<PartitionEndDate>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</PartitionEndDate>");
+    }
+    try buf.appendSlice(alloc, "<PartitionLoadFrequency>");
+    try buf.appendSlice(alloc, @tagName(value.partition_load_frequency));
+    try buf.appendSlice(alloc, "</PartitionLoadFrequency>");
+    if (value.partition_start_date) |v| {
+        try buf.appendSlice(alloc, "<PartitionStartDate>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</PartitionStartDate>");
+    }
+}
+
+pub fn serializeAttributeBooleanValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AttributeBooleanValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<value>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</value>");
+    }
+}
+
+pub fn serializeAttributeValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AttributeValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</value>");
+    }
+}
+
+pub fn serializeAvailabilityZoneAddress(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AvailabilityZoneAddress) !void {
+    if (value.allocation_ids) |v| {
+        try buf.appendSlice(alloc, "<AllocationId>");
+        try serializeAllocationIdList(alloc, buf, v, "AllocationId");
+        try buf.appendSlice(alloc, "</AllocationId>");
+    }
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZoneId>");
+    }
+}
+
+pub fn serializeBaselineEbsBandwidthMbps(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BaselineEbsBandwidthMbps) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeBaselineEbsBandwidthMbpsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BaselineEbsBandwidthMbpsRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<Min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Min>");
+    }
+}
+
+pub fn serializeBaselinePerformanceFactors(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BaselinePerformanceFactors) !void {
+    if (value.cpu) |v| {
+        try buf.appendSlice(alloc, "<cpu>");
+        try serializeCpuPerformanceFactor(alloc, buf, v);
+        try buf.appendSlice(alloc, "</cpu>");
+    }
+}
+
+pub fn serializeBaselinePerformanceFactorsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BaselinePerformanceFactorsRequest) !void {
+    if (value.cpu) |v| {
+        try buf.appendSlice(alloc, "<Cpu>");
+        try serializeCpuPerformanceFactorRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Cpu>");
+    }
+}
+
+pub fn serializeBlobAttributeValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BlobAttributeValue) !void {
+    _ = alloc;
+    _ = buf;
+    _ = value;
+}
+
+pub fn serializeBlockDeviceMapping(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BlockDeviceMapping) !void {
+    if (value.device_name) |v| {
+        try buf.appendSlice(alloc, "<deviceName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</deviceName>");
+    }
+    if (value.ebs) |v| {
+        try buf.appendSlice(alloc, "<ebs>");
+        try serializeEbsBlockDevice(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ebs>");
+    }
+    if (value.no_device) |v| {
+        try buf.appendSlice(alloc, "<noDevice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</noDevice>");
+    }
+    if (value.virtual_name) |v| {
+        try buf.appendSlice(alloc, "<virtualName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</virtualName>");
+    }
+}
+
+pub fn serializeCapacityManagerCondition(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CapacityManagerCondition) !void {
+    if (value.dimension_condition) |v| {
+        try buf.appendSlice(alloc, "<DimensionCondition>");
+        try serializeDimensionCondition(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DimensionCondition>");
+    }
+}
+
+pub fn serializeCapacityReservationOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CapacityReservationOptionsRequest) !void {
+    if (value.usage_strategy) |v| {
+        try buf.appendSlice(alloc, "<UsageStrategy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</UsageStrategy>");
+    }
+}
+
+pub fn serializeCapacityReservationSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CapacityReservationSpecification) !void {
+    if (value.capacity_reservation_preference) |v| {
+        try buf.appendSlice(alloc, "<CapacityReservationPreference>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</CapacityReservationPreference>");
+    }
+    if (value.capacity_reservation_target) |v| {
+        try buf.appendSlice(alloc, "<CapacityReservationTarget>");
+        try serializeCapacityReservationTarget(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CapacityReservationTarget>");
+    }
+}
+
+pub fn serializeCapacityReservationTarget(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CapacityReservationTarget) !void {
+    if (value.capacity_reservation_id) |v| {
+        try buf.appendSlice(alloc, "<CapacityReservationId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CapacityReservationId>");
+    }
+    if (value.capacity_reservation_resource_group_arn) |v| {
+        try buf.appendSlice(alloc, "<CapacityReservationResourceGroupArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CapacityReservationResourceGroupArn>");
+    }
+}
+
+pub fn serializeCertificateAuthenticationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CertificateAuthenticationRequest) !void {
+    if (value.client_root_certificate_chain_arn) |v| {
+        try buf.appendSlice(alloc, "<ClientRootCertificateChainArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientRootCertificateChainArn>");
+    }
+}
+
+pub fn serializeCidrAuthorizationContext(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CidrAuthorizationContext) !void {
+    try buf.appendSlice(alloc, "<Message>");
+    try appendXmlEscaped(alloc, buf, value.message);
+    try buf.appendSlice(alloc, "</Message>");
+    try buf.appendSlice(alloc, "<Signature>");
+    try appendXmlEscaped(alloc, buf, value.signature);
+    try buf.appendSlice(alloc, "</Signature>");
+}
+
+pub fn serializeClassicLoadBalancer(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClassicLoadBalancer) !void {
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<name>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</name>");
+    }
+}
+
+pub fn serializeClassicLoadBalancersConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClassicLoadBalancersConfig) !void {
+    if (value.classic_load_balancers) |v| {
+        try buf.appendSlice(alloc, "<classicLoadBalancers>");
+        try serializeClassicLoadBalancers(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</classicLoadBalancers>");
+    }
+}
+
+pub fn serializeClientConnectOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClientConnectOptions) !void {
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+    if (value.lambda_function_arn) |v| {
+        try buf.appendSlice(alloc, "<LambdaFunctionArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LambdaFunctionArn>");
+    }
+}
+
+pub fn serializeClientData(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClientData) !void {
+    if (value.comment) |v| {
+        try buf.appendSlice(alloc, "<Comment>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Comment>");
+    }
+    if (value.upload_end) |v| {
+        try buf.appendSlice(alloc, "<UploadEnd>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</UploadEnd>");
+    }
+    if (value.upload_size) |v| {
+        try buf.appendSlice(alloc, "<UploadSize>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</UploadSize>");
+    }
+    if (value.upload_start) |v| {
+        try buf.appendSlice(alloc, "<UploadStart>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</UploadStart>");
+    }
+}
+
+pub fn serializeClientLoginBannerOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClientLoginBannerOptions) !void {
+    if (value.banner_text) |v| {
+        try buf.appendSlice(alloc, "<BannerText>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BannerText>");
+    }
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+}
+
+pub fn serializeClientRouteEnforcementOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClientRouteEnforcementOptions) !void {
+    if (value.enforced) |v| {
+        try buf.appendSlice(alloc, "<Enforced>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enforced>");
+    }
+}
+
+pub fn serializeClientVpnAuthenticationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClientVpnAuthenticationRequest) !void {
+    if (value.active_directory) |v| {
+        try buf.appendSlice(alloc, "<ActiveDirectory>");
+        try serializeDirectoryServiceAuthenticationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ActiveDirectory>");
+    }
+    if (value.federated_authentication) |v| {
+        try buf.appendSlice(alloc, "<FederatedAuthentication>");
+        try serializeFederatedAuthenticationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</FederatedAuthentication>");
+    }
+    if (value.mutual_authentication) |v| {
+        try buf.appendSlice(alloc, "<MutualAuthentication>");
+        try serializeCertificateAuthenticationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MutualAuthentication>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<Type>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Type>");
+    }
+}
+
+pub fn serializeCloudWatchLogOptionsSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CloudWatchLogOptionsSpecification) !void {
+    if (value.bgp_log_enabled) |v| {
+        try buf.appendSlice(alloc, "<BgpLogEnabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</BgpLogEnabled>");
+    }
+    if (value.bgp_log_group_arn) |v| {
+        try buf.appendSlice(alloc, "<BgpLogGroupArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BgpLogGroupArn>");
+    }
+    if (value.bgp_log_output_format) |v| {
+        try buf.appendSlice(alloc, "<BgpLogOutputFormat>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BgpLogOutputFormat>");
+    }
+    if (value.log_enabled) |v| {
+        try buf.appendSlice(alloc, "<LogEnabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</LogEnabled>");
+    }
+    if (value.log_group_arn) |v| {
+        try buf.appendSlice(alloc, "<LogGroupArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LogGroupArn>");
+    }
+    if (value.log_output_format) |v| {
+        try buf.appendSlice(alloc, "<LogOutputFormat>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LogOutputFormat>");
+    }
+}
+
+pub fn serializeConnectionLogOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ConnectionLogOptions) !void {
+    if (value.cloudwatch_log_group) |v| {
+        try buf.appendSlice(alloc, "<CloudwatchLogGroup>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CloudwatchLogGroup>");
+    }
+    if (value.cloudwatch_log_stream) |v| {
+        try buf.appendSlice(alloc, "<CloudwatchLogStream>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CloudwatchLogStream>");
+    }
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+}
+
+pub fn serializeConnectionTrackingSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ConnectionTrackingSpecificationRequest) !void {
+    if (value.tcp_established_timeout) |v| {
+        try buf.appendSlice(alloc, "<TcpEstablishedTimeout>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</TcpEstablishedTimeout>");
+    }
+    if (value.udp_stream_timeout) |v| {
+        try buf.appendSlice(alloc, "<UdpStreamTimeout>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</UdpStreamTimeout>");
+    }
+    if (value.udp_timeout) |v| {
+        try buf.appendSlice(alloc, "<UdpTimeout>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</UdpTimeout>");
+    }
+}
+
+pub fn serializeCpuOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CpuOptionsRequest) !void {
+    if (value.amd_sev_snp) |v| {
+        try buf.appendSlice(alloc, "<AmdSevSnp>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AmdSevSnp>");
+    }
+    if (value.core_count) |v| {
+        try buf.appendSlice(alloc, "<CoreCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</CoreCount>");
+    }
+    if (value.threads_per_core) |v| {
+        try buf.appendSlice(alloc, "<ThreadsPerCore>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ThreadsPerCore>");
+    }
+}
+
+pub fn serializeCpuPerformanceFactor(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CpuPerformanceFactor) !void {
+    if (value.references) |v| {
+        try buf.appendSlice(alloc, "<referenceSet>");
+        try serializePerformanceFactorReferenceSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</referenceSet>");
+    }
+}
+
+pub fn serializeCpuPerformanceFactorRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CpuPerformanceFactorRequest) !void {
+    if (value.references) |v| {
+        try buf.appendSlice(alloc, "<Reference>");
+        try serializePerformanceFactorReferenceSetRequest(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Reference>");
+    }
+}
+
+pub fn serializeCreateTransitGatewayConnectRequestOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateTransitGatewayConnectRequestOptions) !void {
+    try buf.appendSlice(alloc, "<Protocol>");
+    try buf.appendSlice(alloc, @tagName(value.protocol));
+    try buf.appendSlice(alloc, "</Protocol>");
+}
+
+pub fn serializeCreateTransitGatewayMulticastDomainRequestOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateTransitGatewayMulticastDomainRequestOptions) !void {
+    if (value.auto_accept_shared_associations) |v| {
+        try buf.appendSlice(alloc, "<AutoAcceptSharedAssociations>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AutoAcceptSharedAssociations>");
+    }
+    if (value.igmpv_2_support) |v| {
+        try buf.appendSlice(alloc, "<Igmpv2Support>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Igmpv2Support>");
+    }
+    if (value.static_sources_support) |v| {
+        try buf.appendSlice(alloc, "<StaticSourcesSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</StaticSourcesSupport>");
+    }
+}
+
+pub fn serializeCreateTransitGatewayPeeringAttachmentRequestOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateTransitGatewayPeeringAttachmentRequestOptions) !void {
+    if (value.dynamic_routing) |v| {
+        try buf.appendSlice(alloc, "<DynamicRouting>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DynamicRouting>");
+    }
+}
+
+pub fn serializeCreateTransitGatewayVpcAttachmentRequestOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateTransitGatewayVpcAttachmentRequestOptions) !void {
+    if (value.appliance_mode_support) |v| {
+        try buf.appendSlice(alloc, "<ApplianceModeSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ApplianceModeSupport>");
+    }
+    if (value.dns_support) |v| {
+        try buf.appendSlice(alloc, "<DnsSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DnsSupport>");
+    }
+    if (value.ipv_6_support) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Support>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Ipv6Support>");
+    }
+    if (value.security_group_referencing_support) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupReferencingSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</SecurityGroupReferencingSupport>");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessEndpointCidrOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessEndpointCidrOptions) !void {
+    if (value.cidr) |v| {
+        try buf.appendSlice(alloc, "<Cidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Cidr>");
+    }
+    if (value.port_ranges) |v| {
+        try buf.appendSlice(alloc, "<PortRange>");
+        try serializeCreateVerifiedAccessEndpointPortRangeList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</PortRange>");
+    }
+    if (value.protocol) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+    if (value.subnet_ids) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try serializeCreateVerifiedAccessEndpointSubnetIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessEndpointEniOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessEndpointEniOptions) !void {
+    if (value.network_interface_id) |v| {
+        try buf.appendSlice(alloc, "<NetworkInterfaceId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NetworkInterfaceId>");
+    }
+    if (value.port) |v| {
+        try buf.appendSlice(alloc, "<Port>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Port>");
+    }
+    if (value.port_ranges) |v| {
+        try buf.appendSlice(alloc, "<PortRange>");
+        try serializeCreateVerifiedAccessEndpointPortRangeList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</PortRange>");
+    }
+    if (value.protocol) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessEndpointLoadBalancerOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessEndpointLoadBalancerOptions) !void {
+    if (value.load_balancer_arn) |v| {
+        try buf.appendSlice(alloc, "<LoadBalancerArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LoadBalancerArn>");
+    }
+    if (value.port) |v| {
+        try buf.appendSlice(alloc, "<Port>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Port>");
+    }
+    if (value.port_ranges) |v| {
+        try buf.appendSlice(alloc, "<PortRange>");
+        try serializeCreateVerifiedAccessEndpointPortRangeList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</PortRange>");
+    }
+    if (value.protocol) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+    if (value.subnet_ids) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try serializeCreateVerifiedAccessEndpointSubnetIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessEndpointPortRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessEndpointPortRange) !void {
+    if (value.from_port) |v| {
+        try buf.appendSlice(alloc, "<FromPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</FromPort>");
+    }
+    if (value.to_port) |v| {
+        try buf.appendSlice(alloc, "<ToPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ToPort>");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessEndpointRdsOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessEndpointRdsOptions) !void {
+    if (value.port) |v| {
+        try buf.appendSlice(alloc, "<Port>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Port>");
+    }
+    if (value.protocol) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+    if (value.rds_db_cluster_arn) |v| {
+        try buf.appendSlice(alloc, "<RdsDbClusterArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RdsDbClusterArn>");
+    }
+    if (value.rds_db_instance_arn) |v| {
+        try buf.appendSlice(alloc, "<RdsDbInstanceArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RdsDbInstanceArn>");
+    }
+    if (value.rds_db_proxy_arn) |v| {
+        try buf.appendSlice(alloc, "<RdsDbProxyArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RdsDbProxyArn>");
+    }
+    if (value.rds_endpoint) |v| {
+        try buf.appendSlice(alloc, "<RdsEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RdsEndpoint>");
+    }
+    if (value.subnet_ids) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try serializeCreateVerifiedAccessEndpointSubnetIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessNativeApplicationOidcOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessNativeApplicationOidcOptions) !void {
+    if (value.authorization_endpoint) |v| {
+        try buf.appendSlice(alloc, "<AuthorizationEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AuthorizationEndpoint>");
+    }
+    if (value.client_id) |v| {
+        try buf.appendSlice(alloc, "<ClientId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientId>");
+    }
+    if (value.client_secret) |v| {
+        try buf.appendSlice(alloc, "<ClientSecret>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientSecret>");
+    }
+    if (value.issuer) |v| {
+        try buf.appendSlice(alloc, "<Issuer>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Issuer>");
+    }
+    if (value.public_signing_key_endpoint) |v| {
+        try buf.appendSlice(alloc, "<PublicSigningKeyEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PublicSigningKeyEndpoint>");
+    }
+    if (value.scope) |v| {
+        try buf.appendSlice(alloc, "<Scope>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Scope>");
+    }
+    if (value.token_endpoint) |v| {
+        try buf.appendSlice(alloc, "<TokenEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TokenEndpoint>");
+    }
+    if (value.user_info_endpoint) |v| {
+        try buf.appendSlice(alloc, "<UserInfoEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserInfoEndpoint>");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessTrustProviderDeviceOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessTrustProviderDeviceOptions) !void {
+    if (value.public_signing_key_url) |v| {
+        try buf.appendSlice(alloc, "<PublicSigningKeyUrl>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PublicSigningKeyUrl>");
+    }
+    if (value.tenant_id) |v| {
+        try buf.appendSlice(alloc, "<TenantId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TenantId>");
+    }
+}
+
+pub fn serializeCreateVerifiedAccessTrustProviderOidcOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessTrustProviderOidcOptions) !void {
+    if (value.authorization_endpoint) |v| {
+        try buf.appendSlice(alloc, "<AuthorizationEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AuthorizationEndpoint>");
+    }
+    if (value.client_id) |v| {
+        try buf.appendSlice(alloc, "<ClientId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientId>");
+    }
+    if (value.client_secret) |v| {
+        try buf.appendSlice(alloc, "<ClientSecret>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientSecret>");
+    }
+    if (value.issuer) |v| {
+        try buf.appendSlice(alloc, "<Issuer>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Issuer>");
+    }
+    if (value.scope) |v| {
+        try buf.appendSlice(alloc, "<Scope>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Scope>");
+    }
+    if (value.token_endpoint) |v| {
+        try buf.appendSlice(alloc, "<TokenEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TokenEndpoint>");
+    }
+    if (value.user_info_endpoint) |v| {
+        try buf.appendSlice(alloc, "<UserInfoEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserInfoEndpoint>");
+    }
+}
+
+pub fn serializeCreateVolumePermission(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVolumePermission) !void {
+    if (value.group) |v| {
+        try buf.appendSlice(alloc, "<group>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</group>");
+    }
+    if (value.user_id) |v| {
+        try buf.appendSlice(alloc, "<userId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</userId>");
+    }
+}
+
+pub fn serializeCreateVolumePermissionModifications(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVolumePermissionModifications) !void {
+    if (value.add) |v| {
+        try buf.appendSlice(alloc, "<Add>");
+        try serializeCreateVolumePermissionList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Add>");
+    }
+    if (value.remove) |v| {
+        try buf.appendSlice(alloc, "<Remove>");
+        try serializeCreateVolumePermissionList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Remove>");
+    }
+}
+
+pub fn serializeCreationDateConditionRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreationDateConditionRequest) !void {
+    if (value.maximum_days_since_created) |v| {
+        try buf.appendSlice(alloc, "<MaximumDaysSinceCreated>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</MaximumDaysSinceCreated>");
+    }
+}
+
+pub fn serializeCreditSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreditSpecificationRequest) !void {
+    try buf.appendSlice(alloc, "<CpuCredits>");
+    try appendXmlEscaped(alloc, buf, value.cpu_credits);
+    try buf.appendSlice(alloc, "</CpuCredits>");
+}
+
+pub fn serializeDataQuery(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DataQuery) !void {
+    if (value.destination) |v| {
+        try buf.appendSlice(alloc, "<Destination>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Destination>");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<Id>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Id>");
+    }
+    if (value.metric) |v| {
+        try buf.appendSlice(alloc, "<Metric>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Metric>");
+    }
+    if (value.period) |v| {
+        try buf.appendSlice(alloc, "<Period>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Period>");
+    }
+    if (value.source) |v| {
+        try buf.appendSlice(alloc, "<Source>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Source>");
+    }
+    if (value.statistic) |v| {
+        try buf.appendSlice(alloc, "<Statistic>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Statistic>");
+    }
+}
+
+pub fn serializeDeprecationTimeConditionRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DeprecationTimeConditionRequest) !void {
+    if (value.maximum_days_since_deprecated) |v| {
+        try buf.appendSlice(alloc, "<MaximumDaysSinceDeprecated>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</MaximumDaysSinceDeprecated>");
+    }
+}
+
+pub fn serializeDeregisterInstanceTagAttributeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DeregisterInstanceTagAttributeRequest) !void {
+    if (value.include_all_tags_of_instance) |v| {
+        try buf.appendSlice(alloc, "<IncludeAllTagsOfInstance>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</IncludeAllTagsOfInstance>");
+    }
+    if (value.instance_tag_keys) |v| {
+        try buf.appendSlice(alloc, "<InstanceTagKey>");
+        try serializeInstanceTagKeySet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</InstanceTagKey>");
+    }
+}
+
+pub fn serializeDestinationOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DestinationOptionsRequest) !void {
+    if (value.file_format) |v| {
+        try buf.appendSlice(alloc, "<FileFormat>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</FileFormat>");
+    }
+    if (value.hive_compatible_partitions) |v| {
+        try buf.appendSlice(alloc, "<HiveCompatiblePartitions>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</HiveCompatiblePartitions>");
+    }
+    if (value.per_hour_partition) |v| {
+        try buf.appendSlice(alloc, "<PerHourPartition>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</PerHourPartition>");
+    }
+}
+
+pub fn serializeDimensionCondition(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DimensionCondition) !void {
+    if (value.comparison) |v| {
+        try buf.appendSlice(alloc, "<Comparison>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Comparison>");
+    }
+    if (value.dimension) |v| {
+        try buf.appendSlice(alloc, "<Dimension>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Dimension>");
+    }
+    if (value.values) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try serializeConditionValueList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializeDirectoryServiceAuthenticationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DirectoryServiceAuthenticationRequest) !void {
+    if (value.directory_id) |v| {
+        try buf.appendSlice(alloc, "<DirectoryId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DirectoryId>");
+    }
+}
+
+pub fn serializeDiskImage(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DiskImage) !void {
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+    if (value.image) |v| {
+        try buf.appendSlice(alloc, "<Image>");
+        try serializeDiskImageDetail(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Image>");
+    }
+    if (value.volume) |v| {
+        try buf.appendSlice(alloc, "<Volume>");
+        try serializeVolumeDetail(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Volume>");
+    }
+}
+
+pub fn serializeDiskImageDetail(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DiskImageDetail) !void {
+    try buf.appendSlice(alloc, "<bytes>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.bytes}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</bytes>");
+    try buf.appendSlice(alloc, "<format>");
+    try buf.appendSlice(alloc, @tagName(value.format));
+    try buf.appendSlice(alloc, "</format>");
+    try buf.appendSlice(alloc, "<importManifestUrl>");
+    try appendXmlEscaped(alloc, buf, value.import_manifest_url);
+    try buf.appendSlice(alloc, "</importManifestUrl>");
+}
+
+pub fn serializeDnsOptionsSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DnsOptionsSpecification) !void {
+    if (value.dns_record_ip_type) |v| {
+        try buf.appendSlice(alloc, "<DnsRecordIpType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DnsRecordIpType>");
+    }
+    if (value.private_dns_only_for_inbound_resolver_endpoint) |v| {
+        try buf.appendSlice(alloc, "<PrivateDnsOnlyForInboundResolverEndpoint>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</PrivateDnsOnlyForInboundResolverEndpoint>");
+    }
+    if (value.private_dns_preference) |v| {
+        try buf.appendSlice(alloc, "<PrivateDnsPreference>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PrivateDnsPreference>");
+    }
+    if (value.private_dns_specified_domains) |v| {
+        try buf.appendSlice(alloc, "<PrivateDnsSpecifiedDomain>");
+        try serializePrivateDnsSpecifiedDomainSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</PrivateDnsSpecifiedDomain>");
+    }
+}
+
+pub fn serializeDnsServersOptionsModifyStructure(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DnsServersOptionsModifyStructure) !void {
+    if (value.custom_dns_servers) |v| {
+        try buf.appendSlice(alloc, "<CustomDnsServers>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</CustomDnsServers>");
+    }
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+}
+
+pub fn serializeEbsBlockDevice(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EbsBlockDevice) !void {
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<availabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZoneId>");
+    }
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<deleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</deleteOnTermination>");
+    }
+    if (value.ebs_card_index) |v| {
+        try buf.appendSlice(alloc, "<EbsCardIndex>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</EbsCardIndex>");
+    }
+    if (value.encrypted) |v| {
+        try buf.appendSlice(alloc, "<encrypted>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</encrypted>");
+    }
+    if (value.iops) |v| {
+        try buf.appendSlice(alloc, "<iops>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</iops>");
+    }
+    if (value.kms_key_id) |v| {
+        try buf.appendSlice(alloc, "<kmsKeyId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</kmsKeyId>");
+    }
+    if (value.outpost_arn) |v| {
+        try buf.appendSlice(alloc, "<outpostArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</outpostArn>");
+    }
+    if (value.snapshot_id) |v| {
+        try buf.appendSlice(alloc, "<snapshotId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</snapshotId>");
+    }
+    if (value.throughput) |v| {
+        try buf.appendSlice(alloc, "<throughput>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</throughput>");
+    }
+    if (value.volume_initialization_rate) |v| {
+        try buf.appendSlice(alloc, "<VolumeInitializationRate>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</VolumeInitializationRate>");
+    }
+    if (value.volume_size) |v| {
+        try buf.appendSlice(alloc, "<volumeSize>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</volumeSize>");
+    }
+    if (value.volume_type) |v| {
+        try buf.appendSlice(alloc, "<volumeType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</volumeType>");
+    }
+}
+
+pub fn serializeEbsInstanceBlockDeviceSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EbsInstanceBlockDeviceSpecification) !void {
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<deleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</deleteOnTermination>");
+    }
+    if (value.volume_id) |v| {
+        try buf.appendSlice(alloc, "<volumeId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</volumeId>");
+    }
+}
+
+pub fn serializeElasticGpuSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ElasticGpuSpecification) !void {
+    try buf.appendSlice(alloc, "<Type>");
+    try appendXmlEscaped(alloc, buf, value.@"type");
+    try buf.appendSlice(alloc, "</Type>");
+}
+
+pub fn serializeElasticInferenceAccelerator(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ElasticInferenceAccelerator) !void {
+    if (value.count) |v| {
+        try buf.appendSlice(alloc, "<Count>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Count>");
+    }
+    try buf.appendSlice(alloc, "<Type>");
+    try appendXmlEscaped(alloc, buf, value.@"type");
+    try buf.appendSlice(alloc, "</Type>");
+}
+
+pub fn serializeEnaSrdSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EnaSrdSpecification) !void {
+    if (value.ena_srd_enabled) |v| {
+        try buf.appendSlice(alloc, "<EnaSrdEnabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnaSrdEnabled>");
+    }
+    if (value.ena_srd_udp_specification) |v| {
+        try buf.appendSlice(alloc, "<EnaSrdUdpSpecification>");
+        try serializeEnaSrdUdpSpecification(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EnaSrdUdpSpecification>");
+    }
+}
+
+pub fn serializeEnaSrdSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EnaSrdSpecificationRequest) !void {
+    if (value.ena_srd_enabled) |v| {
+        try buf.appendSlice(alloc, "<EnaSrdEnabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnaSrdEnabled>");
+    }
+    if (value.ena_srd_udp_specification) |v| {
+        try buf.appendSlice(alloc, "<EnaSrdUdpSpecification>");
+        try serializeEnaSrdUdpSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EnaSrdUdpSpecification>");
+    }
+}
+
+pub fn serializeEnaSrdUdpSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EnaSrdUdpSpecification) !void {
+    if (value.ena_srd_udp_enabled) |v| {
+        try buf.appendSlice(alloc, "<EnaSrdUdpEnabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnaSrdUdpEnabled>");
+    }
+}
+
+pub fn serializeEnaSrdUdpSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EnaSrdUdpSpecificationRequest) !void {
+    if (value.ena_srd_udp_enabled) |v| {
+        try buf.appendSlice(alloc, "<EnaSrdUdpEnabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnaSrdUdpEnabled>");
+    }
+}
+
+pub fn serializeEnclaveOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EnclaveOptionsRequest) !void {
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+}
+
+pub fn serializeExportTaskS3LocationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExportTaskS3LocationRequest) !void {
+    try buf.appendSlice(alloc, "<S3Bucket>");
+    try appendXmlEscaped(alloc, buf, value.s_3_bucket);
+    try buf.appendSlice(alloc, "</S3Bucket>");
+    if (value.s_3_prefix) |v| {
+        try buf.appendSlice(alloc, "<S3Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</S3Prefix>");
+    }
+}
+
+pub fn serializeExportToS3TaskSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExportToS3TaskSpecification) !void {
+    if (value.container_format) |v| {
+        try buf.appendSlice(alloc, "<containerFormat>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</containerFormat>");
+    }
+    if (value.disk_image_format) |v| {
+        try buf.appendSlice(alloc, "<diskImageFormat>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</diskImageFormat>");
+    }
+    if (value.s_3_bucket) |v| {
+        try buf.appendSlice(alloc, "<s3Bucket>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</s3Bucket>");
+    }
+    if (value.s_3_prefix) |v| {
+        try buf.appendSlice(alloc, "<s3Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</s3Prefix>");
+    }
+}
+
+pub fn serializeExternalAuthorityConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExternalAuthorityConfiguration) !void {
+    if (value.external_resource_identifier) |v| {
+        try buf.appendSlice(alloc, "<ExternalResourceIdentifier>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ExternalResourceIdentifier>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<Type>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Type>");
+    }
+}
+
+pub fn serializeFastLaunchLaunchTemplateSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FastLaunchLaunchTemplateSpecificationRequest) !void {
+    if (value.launch_template_id) |v| {
+        try buf.appendSlice(alloc, "<LaunchTemplateId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LaunchTemplateId>");
+    }
+    if (value.launch_template_name) |v| {
+        try buf.appendSlice(alloc, "<LaunchTemplateName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LaunchTemplateName>");
+    }
+    try buf.appendSlice(alloc, "<Version>");
+    try appendXmlEscaped(alloc, buf, value.version);
+    try buf.appendSlice(alloc, "</Version>");
+}
+
+pub fn serializeFastLaunchSnapshotConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FastLaunchSnapshotConfigurationRequest) !void {
+    if (value.target_resource_count) |v| {
+        try buf.appendSlice(alloc, "<TargetResourceCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</TargetResourceCount>");
+    }
+}
+
+pub fn serializeFederatedAuthenticationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FederatedAuthenticationRequest) !void {
+    if (value.saml_provider_arn) |v| {
+        try buf.appendSlice(alloc, "<SAMLProviderArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SAMLProviderArn>");
+    }
+    if (value.self_service_saml_provider_arn) |v| {
+        try buf.appendSlice(alloc, "<SelfServiceSAMLProviderArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SelfServiceSAMLProviderArn>");
+    }
+}
+
+pub fn serializeFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Filter) !void {
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<Name>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Name>");
+    }
+    if (value.values) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializeFleetBlockDeviceMappingRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetBlockDeviceMappingRequest) !void {
+    if (value.device_name) |v| {
+        try buf.appendSlice(alloc, "<DeviceName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DeviceName>");
+    }
+    if (value.ebs) |v| {
+        try buf.appendSlice(alloc, "<Ebs>");
+        try serializeFleetEbsBlockDeviceRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ebs>");
+    }
+    if (value.no_device) |v| {
+        try buf.appendSlice(alloc, "<NoDevice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NoDevice>");
+    }
+    if (value.virtual_name) |v| {
+        try buf.appendSlice(alloc, "<VirtualName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</VirtualName>");
+    }
+}
+
+pub fn serializeFleetEbsBlockDeviceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetEbsBlockDeviceRequest) !void {
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<DeleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</DeleteOnTermination>");
+    }
+    if (value.encrypted) |v| {
+        try buf.appendSlice(alloc, "<Encrypted>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Encrypted>");
+    }
+    if (value.iops) |v| {
+        try buf.appendSlice(alloc, "<Iops>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Iops>");
+    }
+    if (value.kms_key_id) |v| {
+        try buf.appendSlice(alloc, "<KmsKeyId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KmsKeyId>");
+    }
+    if (value.snapshot_id) |v| {
+        try buf.appendSlice(alloc, "<SnapshotId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SnapshotId>");
+    }
+    if (value.throughput) |v| {
+        try buf.appendSlice(alloc, "<Throughput>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Throughput>");
+    }
+    if (value.volume_size) |v| {
+        try buf.appendSlice(alloc, "<VolumeSize>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</VolumeSize>");
+    }
+    if (value.volume_type) |v| {
+        try buf.appendSlice(alloc, "<VolumeType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</VolumeType>");
+    }
+}
+
+pub fn serializeFleetLaunchTemplateConfigRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetLaunchTemplateConfigRequest) !void {
+    if (value.launch_template_specification) |v| {
+        try buf.appendSlice(alloc, "<LaunchTemplateSpecification>");
+        try serializeFleetLaunchTemplateSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LaunchTemplateSpecification>");
+    }
+    if (value.overrides) |v| {
+        try buf.appendSlice(alloc, "<Overrides>");
+        try serializeFleetLaunchTemplateOverridesListRequest(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Overrides>");
+    }
+}
+
+pub fn serializeFleetLaunchTemplateOverridesRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetLaunchTemplateOverridesRequest) !void {
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZoneId>");
+    }
+    if (value.block_device_mappings) |v| {
+        try buf.appendSlice(alloc, "<BlockDeviceMapping>");
+        try serializeFleetBlockDeviceMappingRequestList(alloc, buf, v, "BlockDeviceMapping");
+        try buf.appendSlice(alloc, "</BlockDeviceMapping>");
+    }
+    if (value.image_id) |v| {
+        try buf.appendSlice(alloc, "<ImageId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ImageId>");
+    }
+    if (value.instance_requirements) |v| {
+        try buf.appendSlice(alloc, "<InstanceRequirements>");
+        try serializeInstanceRequirementsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InstanceRequirements>");
+    }
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<InstanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceType>");
+    }
+    if (value.max_price) |v| {
+        try buf.appendSlice(alloc, "<MaxPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MaxPrice>");
+    }
+    if (value.placement) |v| {
+        try buf.appendSlice(alloc, "<Placement>");
+        try serializePlacement(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Placement>");
+    }
+    if (value.priority) |v| {
+        try buf.appendSlice(alloc, "<Priority>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Priority>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+    if (value.weighted_capacity) |v| {
+        try buf.appendSlice(alloc, "<WeightedCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</WeightedCapacity>");
+    }
+}
+
+pub fn serializeFleetLaunchTemplateSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetLaunchTemplateSpecification) !void {
+    if (value.launch_template_id) |v| {
+        try buf.appendSlice(alloc, "<launchTemplateId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</launchTemplateId>");
+    }
+    if (value.launch_template_name) |v| {
+        try buf.appendSlice(alloc, "<launchTemplateName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</launchTemplateName>");
+    }
+    if (value.version) |v| {
+        try buf.appendSlice(alloc, "<version>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</version>");
+    }
+}
+
+pub fn serializeFleetLaunchTemplateSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetLaunchTemplateSpecificationRequest) !void {
+    if (value.launch_template_id) |v| {
+        try buf.appendSlice(alloc, "<LaunchTemplateId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LaunchTemplateId>");
+    }
+    if (value.launch_template_name) |v| {
+        try buf.appendSlice(alloc, "<LaunchTemplateName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LaunchTemplateName>");
+    }
+    if (value.version) |v| {
+        try buf.appendSlice(alloc, "<Version>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Version>");
+    }
+}
+
+pub fn serializeFleetSpotCapacityRebalanceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetSpotCapacityRebalanceRequest) !void {
+    if (value.replacement_strategy) |v| {
+        try buf.appendSlice(alloc, "<ReplacementStrategy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ReplacementStrategy>");
+    }
+    if (value.termination_delay) |v| {
+        try buf.appendSlice(alloc, "<TerminationDelay>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</TerminationDelay>");
+    }
+}
+
+pub fn serializeFleetSpotMaintenanceStrategiesRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetSpotMaintenanceStrategiesRequest) !void {
+    if (value.capacity_rebalance) |v| {
+        try buf.appendSlice(alloc, "<CapacityRebalance>");
+        try serializeFleetSpotCapacityRebalanceRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CapacityRebalance>");
+    }
+}
+
+pub fn serializeGroupIdentifier(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: GroupIdentifier) !void {
+    if (value.group_id) |v| {
+        try buf.appendSlice(alloc, "<groupId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</groupId>");
+    }
+    if (value.group_name) |v| {
+        try buf.appendSlice(alloc, "<groupName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</groupName>");
+    }
+}
+
+pub fn serializeHibernationOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: HibernationOptionsRequest) !void {
+    if (value.configured) |v| {
+        try buf.appendSlice(alloc, "<Configured>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Configured>");
+    }
+}
+
+pub fn serializeIKEVersionsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IKEVersionsRequestListValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializeIamInstanceProfileSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IamInstanceProfileSpecification) !void {
+    if (value.arn) |v| {
+        try buf.appendSlice(alloc, "<arn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</arn>");
+    }
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<name>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</name>");
+    }
+}
+
+pub fn serializeIcmpTypeCode(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IcmpTypeCode) !void {
+    if (value.code) |v| {
+        try buf.appendSlice(alloc, "<code>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</code>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<type>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</type>");
+    }
+}
+
+pub fn serializeImageCriterionRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageCriterionRequest) !void {
+    if (value.creation_date_condition) |v| {
+        try buf.appendSlice(alloc, "<CreationDateCondition>");
+        try serializeCreationDateConditionRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CreationDateCondition>");
+    }
+    if (value.deprecation_time_condition) |v| {
+        try buf.appendSlice(alloc, "<DeprecationTimeCondition>");
+        try serializeDeprecationTimeConditionRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DeprecationTimeCondition>");
+    }
+    if (value.image_names) |v| {
+        try buf.appendSlice(alloc, "<ImageName>");
+        try serializeImageNameRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ImageName>");
+    }
+    if (value.image_providers) |v| {
+        try buf.appendSlice(alloc, "<ImageProvider>");
+        try serializeImageProviderRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ImageProvider>");
+    }
+    if (value.marketplace_product_codes) |v| {
+        try buf.appendSlice(alloc, "<MarketplaceProductCode>");
+        try serializeMarketplaceProductCodeRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</MarketplaceProductCode>");
+    }
+}
+
+pub fn serializeImageDiskContainer(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageDiskContainer) !void {
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+    if (value.device_name) |v| {
+        try buf.appendSlice(alloc, "<DeviceName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DeviceName>");
+    }
+    if (value.format) |v| {
+        try buf.appendSlice(alloc, "<Format>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Format>");
+    }
+    if (value.snapshot_id) |v| {
+        try buf.appendSlice(alloc, "<SnapshotId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SnapshotId>");
+    }
+    if (value.url) |v| {
+        try buf.appendSlice(alloc, "<Url>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Url>");
+    }
+    if (value.user_bucket) |v| {
+        try buf.appendSlice(alloc, "<UserBucket>");
+        try serializeUserBucket(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserBucket>");
+    }
+}
+
+pub fn serializeImageUsageResourceTypeOptionRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageUsageResourceTypeOptionRequest) !void {
+    if (value.option_name) |v| {
+        try buf.appendSlice(alloc, "<OptionName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</OptionName>");
+    }
+    if (value.option_values) |v| {
+        try buf.appendSlice(alloc, "<OptionValue>");
+        try serializeImageUsageResourceTypeOptionValuesList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</OptionValue>");
+    }
+}
+
+pub fn serializeImageUsageResourceTypeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageUsageResourceTypeRequest) !void {
+    if (value.resource_type) |v| {
+        try buf.appendSlice(alloc, "<ResourceType>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceType>");
+    }
+    if (value.resource_type_options) |v| {
+        try buf.appendSlice(alloc, "<ResourceTypeOption>");
+        try serializeImageUsageResourceTypeOptionRequestList(alloc, buf, v, "member");
+        try buf.appendSlice(alloc, "</ResourceTypeOption>");
+    }
+}
+
+pub fn serializeImportImageLicenseConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImportImageLicenseConfigurationRequest) !void {
+    if (value.license_configuration_arn) |v| {
+        try buf.appendSlice(alloc, "<LicenseConfigurationArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LicenseConfigurationArn>");
+    }
+}
+
+pub fn serializeImportInstanceLaunchSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImportInstanceLaunchSpecification) !void {
+    if (value.additional_info) |v| {
+        try buf.appendSlice(alloc, "<additionalInfo>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</additionalInfo>");
+    }
+    if (value.architecture) |v| {
+        try buf.appendSlice(alloc, "<architecture>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</architecture>");
+    }
+    if (value.group_ids) |v| {
+        try buf.appendSlice(alloc, "<GroupId>");
+        try serializeSecurityGroupIdStringList(alloc, buf, v, "SecurityGroupId");
+        try buf.appendSlice(alloc, "</GroupId>");
+    }
+    if (value.group_names) |v| {
+        try buf.appendSlice(alloc, "<GroupName>");
+        try serializeSecurityGroupStringList(alloc, buf, v, "SecurityGroup");
+        try buf.appendSlice(alloc, "</GroupName>");
+    }
+    if (value.instance_initiated_shutdown_behavior) |v| {
+        try buf.appendSlice(alloc, "<instanceInitiatedShutdownBehavior>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</instanceInitiatedShutdownBehavior>");
+    }
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<instanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</instanceType>");
+    }
+    if (value.monitoring) |v| {
+        try buf.appendSlice(alloc, "<monitoring>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</monitoring>");
+    }
+    if (value.placement) |v| {
+        try buf.appendSlice(alloc, "<placement>");
+        try serializePlacement(alloc, buf, v);
+        try buf.appendSlice(alloc, "</placement>");
+    }
+    if (value.private_ip_address) |v| {
+        try buf.appendSlice(alloc, "<privateIpAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</privateIpAddress>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<subnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</subnetId>");
+    }
+    if (value.user_data) |v| {
+        try buf.appendSlice(alloc, "<userData>");
+        try serializeUserData(alloc, buf, v);
+        try buf.appendSlice(alloc, "</userData>");
+    }
+}
+
+pub fn serializeInstanceBlockDeviceMappingSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceBlockDeviceMappingSpecification) !void {
+    if (value.device_name) |v| {
+        try buf.appendSlice(alloc, "<deviceName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</deviceName>");
+    }
+    if (value.ebs) |v| {
+        try buf.appendSlice(alloc, "<ebs>");
+        try serializeEbsInstanceBlockDeviceSpecification(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ebs>");
+    }
+    if (value.no_device) |v| {
+        try buf.appendSlice(alloc, "<noDevice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</noDevice>");
+    }
+    if (value.virtual_name) |v| {
+        try buf.appendSlice(alloc, "<virtualName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</virtualName>");
+    }
+}
+
+pub fn serializeInstanceCreditSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceCreditSpecificationRequest) !void {
+    if (value.cpu_credits) |v| {
+        try buf.appendSlice(alloc, "<CpuCredits>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CpuCredits>");
+    }
+    try buf.appendSlice(alloc, "<InstanceId>");
+    try appendXmlEscaped(alloc, buf, value.instance_id);
+    try buf.appendSlice(alloc, "</InstanceId>");
+}
+
+pub fn serializeInstanceEventWindowAssociationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceEventWindowAssociationRequest) !void {
+    if (value.dedicated_host_ids) |v| {
+        try buf.appendSlice(alloc, "<DedicatedHostId>");
+        try serializeDedicatedHostIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</DedicatedHostId>");
+    }
+    if (value.instance_ids) |v| {
+        try buf.appendSlice(alloc, "<InstanceId>");
+        try serializeInstanceIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</InstanceId>");
+    }
+    if (value.instance_tags) |v| {
+        try buf.appendSlice(alloc, "<InstanceTag>");
+        try serializeTagList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</InstanceTag>");
+    }
+}
+
+pub fn serializeInstanceEventWindowDisassociationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceEventWindowDisassociationRequest) !void {
+    if (value.dedicated_host_ids) |v| {
+        try buf.appendSlice(alloc, "<DedicatedHostId>");
+        try serializeDedicatedHostIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</DedicatedHostId>");
+    }
+    if (value.instance_ids) |v| {
+        try buf.appendSlice(alloc, "<InstanceId>");
+        try serializeInstanceIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</InstanceId>");
+    }
+    if (value.instance_tags) |v| {
+        try buf.appendSlice(alloc, "<InstanceTag>");
+        try serializeTagList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</InstanceTag>");
+    }
+}
+
+pub fn serializeInstanceEventWindowTimeRangeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceEventWindowTimeRangeRequest) !void {
+    if (value.end_hour) |v| {
+        try buf.appendSlice(alloc, "<EndHour>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</EndHour>");
+    }
+    if (value.end_week_day) |v| {
+        try buf.appendSlice(alloc, "<EndWeekDay>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</EndWeekDay>");
+    }
+    if (value.start_hour) |v| {
+        try buf.appendSlice(alloc, "<StartHour>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</StartHour>");
+    }
+    if (value.start_week_day) |v| {
+        try buf.appendSlice(alloc, "<StartWeekDay>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</StartWeekDay>");
+    }
+}
+
+pub fn serializeInstanceIpv6Address(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceIpv6Address) !void {
+    if (value.ipv_6_address) |v| {
+        try buf.appendSlice(alloc, "<ipv6Address>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ipv6Address>");
+    }
+    if (value.is_primary_ipv_6) |v| {
+        try buf.appendSlice(alloc, "<isPrimaryIpv6>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</isPrimaryIpv6>");
+    }
+}
+
+pub fn serializeInstanceIpv6AddressRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceIpv6AddressRequest) !void {
+    if (value.ipv_6_address) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Address>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ipv6Address>");
+    }
+}
+
+pub fn serializeInstanceMaintenanceOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceMaintenanceOptionsRequest) !void {
+    if (value.auto_recovery) |v| {
+        try buf.appendSlice(alloc, "<AutoRecovery>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AutoRecovery>");
+    }
+}
+
+pub fn serializeInstanceMarketOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceMarketOptionsRequest) !void {
+    if (value.market_type) |v| {
+        try buf.appendSlice(alloc, "<MarketType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</MarketType>");
+    }
+    if (value.spot_options) |v| {
+        try buf.appendSlice(alloc, "<SpotOptions>");
+        try serializeSpotMarketOptions(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SpotOptions>");
+    }
+}
+
+pub fn serializeInstanceMetadataOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceMetadataOptionsRequest) !void {
+    if (value.http_endpoint) |v| {
+        try buf.appendSlice(alloc, "<HttpEndpoint>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</HttpEndpoint>");
+    }
+    if (value.http_protocol_ipv_6) |v| {
+        try buf.appendSlice(alloc, "<HttpProtocolIpv6>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</HttpProtocolIpv6>");
+    }
+    if (value.http_put_response_hop_limit) |v| {
+        try buf.appendSlice(alloc, "<HttpPutResponseHopLimit>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</HttpPutResponseHopLimit>");
+    }
+    if (value.http_tokens) |v| {
+        try buf.appendSlice(alloc, "<HttpTokens>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</HttpTokens>");
+    }
+    if (value.instance_metadata_tags) |v| {
+        try buf.appendSlice(alloc, "<InstanceMetadataTags>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceMetadataTags>");
+    }
+}
+
+pub fn serializeInstanceNetworkInterfaceSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceNetworkInterfaceSpecification) !void {
+    if (value.associate_carrier_ip_address) |v| {
+        try buf.appendSlice(alloc, "<AssociateCarrierIpAddress>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</AssociateCarrierIpAddress>");
+    }
+    if (value.associate_public_ip_address) |v| {
+        try buf.appendSlice(alloc, "<associatePublicIpAddress>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</associatePublicIpAddress>");
+    }
+    if (value.connection_tracking_specification) |v| {
+        try buf.appendSlice(alloc, "<ConnectionTrackingSpecification>");
+        try serializeConnectionTrackingSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ConnectionTrackingSpecification>");
+    }
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<deleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</deleteOnTermination>");
+    }
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</description>");
+    }
+    if (value.device_index) |v| {
+        try buf.appendSlice(alloc, "<deviceIndex>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</deviceIndex>");
+    }
+    if (value.ena_queue_count) |v| {
+        try buf.appendSlice(alloc, "<EnaQueueCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</EnaQueueCount>");
+    }
+    if (value.ena_srd_specification) |v| {
+        try buf.appendSlice(alloc, "<EnaSrdSpecification>");
+        try serializeEnaSrdSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EnaSrdSpecification>");
+    }
+    if (value.groups) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupId>");
+        try serializeSecurityGroupIdStringList(alloc, buf, v, "SecurityGroupId");
+        try buf.appendSlice(alloc, "</SecurityGroupId>");
+    }
+    if (value.interface_type) |v| {
+        try buf.appendSlice(alloc, "<InterfaceType>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InterfaceType>");
+    }
+    if (value.ipv_4_prefix_count) |v| {
+        try buf.appendSlice(alloc, "<Ipv4PrefixCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Ipv4PrefixCount>");
+    }
+    if (value.ipv_4_prefixes) |v| {
+        try buf.appendSlice(alloc, "<Ipv4Prefix>");
+        try serializeIpv4PrefixList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Ipv4Prefix>");
+    }
+    if (value.ipv_6_address_count) |v| {
+        try buf.appendSlice(alloc, "<ipv6AddressCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ipv6AddressCount>");
+    }
+    if (value.ipv_6_addresses) |v| {
+        try buf.appendSlice(alloc, "<ipv6AddressesSet>");
+        try serializeInstanceIpv6AddressList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ipv6AddressesSet>");
+    }
+    if (value.ipv_6_prefix_count) |v| {
+        try buf.appendSlice(alloc, "<Ipv6PrefixCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Ipv6PrefixCount>");
+    }
+    if (value.ipv_6_prefixes) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Prefix>");
+        try serializeIpv6PrefixList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Ipv6Prefix>");
+    }
+    if (value.network_card_index) |v| {
+        try buf.appendSlice(alloc, "<NetworkCardIndex>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</NetworkCardIndex>");
+    }
+    if (value.network_interface_id) |v| {
+        try buf.appendSlice(alloc, "<networkInterfaceId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</networkInterfaceId>");
+    }
+    if (value.primary_ipv_6) |v| {
+        try buf.appendSlice(alloc, "<PrimaryIpv6>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</PrimaryIpv6>");
+    }
+    if (value.private_ip_address) |v| {
+        try buf.appendSlice(alloc, "<privateIpAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</privateIpAddress>");
+    }
+    if (value.private_ip_addresses) |v| {
+        try buf.appendSlice(alloc, "<privateIpAddressesSet>");
+        try serializePrivateIpAddressSpecificationList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</privateIpAddressesSet>");
+    }
+    if (value.secondary_private_ip_address_count) |v| {
+        try buf.appendSlice(alloc, "<secondaryPrivateIpAddressCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</secondaryPrivateIpAddressCount>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<subnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</subnetId>");
+    }
+}
+
+pub fn serializeInstanceNetworkPerformanceOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceNetworkPerformanceOptionsRequest) !void {
+    if (value.bandwidth_weighting) |v| {
+        try buf.appendSlice(alloc, "<BandwidthWeighting>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</BandwidthWeighting>");
+    }
+}
+
+pub fn serializeInstanceRequirements(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceRequirements) !void {
+    if (value.accelerator_count) |v| {
+        try buf.appendSlice(alloc, "<acceleratorCount>");
+        try serializeAcceleratorCount(alloc, buf, v);
+        try buf.appendSlice(alloc, "</acceleratorCount>");
+    }
+    if (value.accelerator_manufacturers) |v| {
+        try buf.appendSlice(alloc, "<acceleratorManufacturerSet>");
+        try serializeAcceleratorManufacturerSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</acceleratorManufacturerSet>");
+    }
+    if (value.accelerator_names) |v| {
+        try buf.appendSlice(alloc, "<acceleratorNameSet>");
+        try serializeAcceleratorNameSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</acceleratorNameSet>");
+    }
+    if (value.accelerator_total_memory_mi_b) |v| {
+        try buf.appendSlice(alloc, "<acceleratorTotalMemoryMiB>");
+        try serializeAcceleratorTotalMemoryMiB(alloc, buf, v);
+        try buf.appendSlice(alloc, "</acceleratorTotalMemoryMiB>");
+    }
+    if (value.accelerator_types) |v| {
+        try buf.appendSlice(alloc, "<acceleratorTypeSet>");
+        try serializeAcceleratorTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</acceleratorTypeSet>");
+    }
+    if (value.allowed_instance_types) |v| {
+        try buf.appendSlice(alloc, "<allowedInstanceTypeSet>");
+        try serializeAllowedInstanceTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</allowedInstanceTypeSet>");
+    }
+    if (value.bare_metal) |v| {
+        try buf.appendSlice(alloc, "<bareMetal>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</bareMetal>");
+    }
+    if (value.baseline_ebs_bandwidth_mbps) |v| {
+        try buf.appendSlice(alloc, "<baselineEbsBandwidthMbps>");
+        try serializeBaselineEbsBandwidthMbps(alloc, buf, v);
+        try buf.appendSlice(alloc, "</baselineEbsBandwidthMbps>");
+    }
+    if (value.baseline_performance_factors) |v| {
+        try buf.appendSlice(alloc, "<baselinePerformanceFactors>");
+        try serializeBaselinePerformanceFactors(alloc, buf, v);
+        try buf.appendSlice(alloc, "</baselinePerformanceFactors>");
+    }
+    if (value.burstable_performance) |v| {
+        try buf.appendSlice(alloc, "<burstablePerformance>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</burstablePerformance>");
+    }
+    if (value.cpu_manufacturers) |v| {
+        try buf.appendSlice(alloc, "<cpuManufacturerSet>");
+        try serializeCpuManufacturerSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</cpuManufacturerSet>");
+    }
+    if (value.excluded_instance_types) |v| {
+        try buf.appendSlice(alloc, "<excludedInstanceTypeSet>");
+        try serializeExcludedInstanceTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</excludedInstanceTypeSet>");
+    }
+    if (value.instance_generations) |v| {
+        try buf.appendSlice(alloc, "<instanceGenerationSet>");
+        try serializeInstanceGenerationSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</instanceGenerationSet>");
+    }
+    if (value.local_storage) |v| {
+        try buf.appendSlice(alloc, "<localStorage>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</localStorage>");
+    }
+    if (value.local_storage_types) |v| {
+        try buf.appendSlice(alloc, "<localStorageTypeSet>");
+        try serializeLocalStorageTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</localStorageTypeSet>");
+    }
+    if (value.max_spot_price_as_percentage_of_optimal_on_demand_price) |v| {
+        try buf.appendSlice(alloc, "<maxSpotPriceAsPercentageOfOptimalOnDemandPrice>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</maxSpotPriceAsPercentageOfOptimalOnDemandPrice>");
+    }
+    if (value.memory_gi_b_per_v_cpu) |v| {
+        try buf.appendSlice(alloc, "<memoryGiBPerVCpu>");
+        try serializeMemoryGiBPerVCpu(alloc, buf, v);
+        try buf.appendSlice(alloc, "</memoryGiBPerVCpu>");
+    }
+    if (value.memory_mi_b) |v| {
+        try buf.appendSlice(alloc, "<memoryMiB>");
+        try serializeMemoryMiB(alloc, buf, v);
+        try buf.appendSlice(alloc, "</memoryMiB>");
+    }
+    if (value.network_bandwidth_gbps) |v| {
+        try buf.appendSlice(alloc, "<networkBandwidthGbps>");
+        try serializeNetworkBandwidthGbps(alloc, buf, v);
+        try buf.appendSlice(alloc, "</networkBandwidthGbps>");
+    }
+    if (value.network_interface_count) |v| {
+        try buf.appendSlice(alloc, "<networkInterfaceCount>");
+        try serializeNetworkInterfaceCount(alloc, buf, v);
+        try buf.appendSlice(alloc, "</networkInterfaceCount>");
+    }
+    if (value.on_demand_max_price_percentage_over_lowest_price) |v| {
+        try buf.appendSlice(alloc, "<onDemandMaxPricePercentageOverLowestPrice>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</onDemandMaxPricePercentageOverLowestPrice>");
+    }
+    if (value.require_encryption_in_transit) |v| {
+        try buf.appendSlice(alloc, "<requireEncryptionInTransit>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</requireEncryptionInTransit>");
+    }
+    if (value.require_hibernate_support) |v| {
+        try buf.appendSlice(alloc, "<requireHibernateSupport>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</requireHibernateSupport>");
+    }
+    if (value.spot_max_price_percentage_over_lowest_price) |v| {
+        try buf.appendSlice(alloc, "<spotMaxPricePercentageOverLowestPrice>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</spotMaxPricePercentageOverLowestPrice>");
+    }
+    if (value.total_local_storage_gb) |v| {
+        try buf.appendSlice(alloc, "<totalLocalStorageGB>");
+        try serializeTotalLocalStorageGB(alloc, buf, v);
+        try buf.appendSlice(alloc, "</totalLocalStorageGB>");
+    }
+    if (value.v_cpu_count) |v| {
+        try buf.appendSlice(alloc, "<vCpuCount>");
+        try serializeVCpuCountRange(alloc, buf, v);
+        try buf.appendSlice(alloc, "</vCpuCount>");
+    }
+}
+
+pub fn serializeInstanceRequirementsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceRequirementsRequest) !void {
+    if (value.accelerator_count) |v| {
+        try buf.appendSlice(alloc, "<AcceleratorCount>");
+        try serializeAcceleratorCountRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AcceleratorCount>");
+    }
+    if (value.accelerator_manufacturers) |v| {
+        try buf.appendSlice(alloc, "<AcceleratorManufacturer>");
+        try serializeAcceleratorManufacturerSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</AcceleratorManufacturer>");
+    }
+    if (value.accelerator_names) |v| {
+        try buf.appendSlice(alloc, "<AcceleratorName>");
+        try serializeAcceleratorNameSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</AcceleratorName>");
+    }
+    if (value.accelerator_total_memory_mi_b) |v| {
+        try buf.appendSlice(alloc, "<AcceleratorTotalMemoryMiB>");
+        try serializeAcceleratorTotalMemoryMiBRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AcceleratorTotalMemoryMiB>");
+    }
+    if (value.accelerator_types) |v| {
+        try buf.appendSlice(alloc, "<AcceleratorType>");
+        try serializeAcceleratorTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</AcceleratorType>");
+    }
+    if (value.allowed_instance_types) |v| {
+        try buf.appendSlice(alloc, "<AllowedInstanceType>");
+        try serializeAllowedInstanceTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</AllowedInstanceType>");
+    }
+    if (value.bare_metal) |v| {
+        try buf.appendSlice(alloc, "<BareMetal>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</BareMetal>");
+    }
+    if (value.baseline_ebs_bandwidth_mbps) |v| {
+        try buf.appendSlice(alloc, "<BaselineEbsBandwidthMbps>");
+        try serializeBaselineEbsBandwidthMbpsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BaselineEbsBandwidthMbps>");
+    }
+    if (value.baseline_performance_factors) |v| {
+        try buf.appendSlice(alloc, "<BaselinePerformanceFactors>");
+        try serializeBaselinePerformanceFactorsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BaselinePerformanceFactors>");
+    }
+    if (value.burstable_performance) |v| {
+        try buf.appendSlice(alloc, "<BurstablePerformance>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</BurstablePerformance>");
+    }
+    if (value.cpu_manufacturers) |v| {
+        try buf.appendSlice(alloc, "<CpuManufacturer>");
+        try serializeCpuManufacturerSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</CpuManufacturer>");
+    }
+    if (value.excluded_instance_types) |v| {
+        try buf.appendSlice(alloc, "<ExcludedInstanceType>");
+        try serializeExcludedInstanceTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ExcludedInstanceType>");
+    }
+    if (value.instance_generations) |v| {
+        try buf.appendSlice(alloc, "<InstanceGeneration>");
+        try serializeInstanceGenerationSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</InstanceGeneration>");
+    }
+    if (value.local_storage) |v| {
+        try buf.appendSlice(alloc, "<LocalStorage>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</LocalStorage>");
+    }
+    if (value.local_storage_types) |v| {
+        try buf.appendSlice(alloc, "<LocalStorageType>");
+        try serializeLocalStorageTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</LocalStorageType>");
+    }
+    if (value.max_spot_price_as_percentage_of_optimal_on_demand_price) |v| {
+        try buf.appendSlice(alloc, "<MaxSpotPriceAsPercentageOfOptimalOnDemandPrice>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</MaxSpotPriceAsPercentageOfOptimalOnDemandPrice>");
+    }
+    if (value.memory_gi_b_per_v_cpu) |v| {
+        try buf.appendSlice(alloc, "<MemoryGiBPerVCpu>");
+        try serializeMemoryGiBPerVCpuRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MemoryGiBPerVCpu>");
+    }
+    try buf.appendSlice(alloc, "<MemoryMiB>");
+    try serializeMemoryMiBRequest(alloc, buf, value.memory_mi_b);
+    try buf.appendSlice(alloc, "</MemoryMiB>");
+    if (value.network_bandwidth_gbps) |v| {
+        try buf.appendSlice(alloc, "<NetworkBandwidthGbps>");
+        try serializeNetworkBandwidthGbpsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NetworkBandwidthGbps>");
+    }
+    if (value.network_interface_count) |v| {
+        try buf.appendSlice(alloc, "<NetworkInterfaceCount>");
+        try serializeNetworkInterfaceCountRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NetworkInterfaceCount>");
+    }
+    if (value.on_demand_max_price_percentage_over_lowest_price) |v| {
+        try buf.appendSlice(alloc, "<OnDemandMaxPricePercentageOverLowestPrice>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</OnDemandMaxPricePercentageOverLowestPrice>");
+    }
+    if (value.require_encryption_in_transit) |v| {
+        try buf.appendSlice(alloc, "<RequireEncryptionInTransit>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</RequireEncryptionInTransit>");
+    }
+    if (value.require_hibernate_support) |v| {
+        try buf.appendSlice(alloc, "<RequireHibernateSupport>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</RequireHibernateSupport>");
+    }
+    if (value.spot_max_price_percentage_over_lowest_price) |v| {
+        try buf.appendSlice(alloc, "<SpotMaxPricePercentageOverLowestPrice>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</SpotMaxPricePercentageOverLowestPrice>");
+    }
+    if (value.total_local_storage_gb) |v| {
+        try buf.appendSlice(alloc, "<TotalLocalStorageGB>");
+        try serializeTotalLocalStorageGBRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TotalLocalStorageGB>");
+    }
+    try buf.appendSlice(alloc, "<VCpuCount>");
+    try serializeVCpuCountRangeRequest(alloc, buf, value.v_cpu_count);
+    try buf.appendSlice(alloc, "</VCpuCount>");
+}
+
+pub fn serializeInstanceRequirementsWithMetadataRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceRequirementsWithMetadataRequest) !void {
+    if (value.architecture_types) |v| {
+        try buf.appendSlice(alloc, "<ArchitectureType>");
+        try serializeArchitectureTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ArchitectureType>");
+    }
+    if (value.instance_requirements) |v| {
+        try buf.appendSlice(alloc, "<InstanceRequirements>");
+        try serializeInstanceRequirementsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InstanceRequirements>");
+    }
+    if (value.virtualization_types) |v| {
+        try buf.appendSlice(alloc, "<VirtualizationType>");
+        try serializeVirtualizationTypeSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</VirtualizationType>");
+    }
+}
+
+pub fn serializeInstanceSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceSpecification) !void {
+    if (value.exclude_boot_volume) |v| {
+        try buf.appendSlice(alloc, "<ExcludeBootVolume>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</ExcludeBootVolume>");
+    }
+    if (value.exclude_data_volume_ids) |v| {
+        try buf.appendSlice(alloc, "<ExcludeDataVolumeId>");
+        try serializeVolumeIdStringList(alloc, buf, v, "VolumeId");
+        try buf.appendSlice(alloc, "</ExcludeDataVolumeId>");
+    }
+    try buf.appendSlice(alloc, "<InstanceId>");
+    try appendXmlEscaped(alloc, buf, value.instance_id);
+    try buf.appendSlice(alloc, "</InstanceId>");
+}
+
+pub fn serializeIntegrateServices(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IntegrateServices) !void {
+    if (value.athena_integrations) |v| {
+        try buf.appendSlice(alloc, "<AthenaIntegration>");
+        try serializeAthenaIntegrationsSet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</AthenaIntegration>");
+    }
+}
+
+pub fn serializeIpPermission(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpPermission) !void {
+    if (value.from_port) |v| {
+        try buf.appendSlice(alloc, "<fromPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</fromPort>");
+    }
+    if (value.ip_protocol) |v| {
+        try buf.appendSlice(alloc, "<ipProtocol>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ipProtocol>");
+    }
+    if (value.ip_ranges) |v| {
+        try buf.appendSlice(alloc, "<ipRanges>");
+        try serializeIpRangeList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ipRanges>");
+    }
+    if (value.ipv_6_ranges) |v| {
+        try buf.appendSlice(alloc, "<ipv6Ranges>");
+        try serializeIpv6RangeList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ipv6Ranges>");
+    }
+    if (value.prefix_list_ids) |v| {
+        try buf.appendSlice(alloc, "<prefixListIds>");
+        try serializePrefixListIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</prefixListIds>");
+    }
+    if (value.to_port) |v| {
+        try buf.appendSlice(alloc, "<toPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</toPort>");
+    }
+    if (value.user_id_group_pairs) |v| {
+        try buf.appendSlice(alloc, "<groups>");
+        try serializeUserIdGroupPairList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</groups>");
+    }
+}
+
+pub fn serializeIpRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpRange) !void {
+    if (value.cidr_ip) |v| {
+        try buf.appendSlice(alloc, "<cidrIp>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</cidrIp>");
+    }
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</description>");
+    }
+}
+
+pub fn serializeIpamCidrAuthorizationContext(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamCidrAuthorizationContext) !void {
+    if (value.message) |v| {
+        try buf.appendSlice(alloc, "<Message>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Message>");
+    }
+    if (value.signature) |v| {
+        try buf.appendSlice(alloc, "<Signature>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Signature>");
+    }
+}
+
+pub fn serializeIpamPolicyAllocationRuleRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamPolicyAllocationRuleRequest) !void {
+    if (value.source_ipam_pool_id) |v| {
+        try buf.appendSlice(alloc, "<SourceIpamPoolId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SourceIpamPoolId>");
+    }
+}
+
+pub fn serializeIpamPoolSourceResourceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamPoolSourceResourceRequest) !void {
+    if (value.resource_id) |v| {
+        try buf.appendSlice(alloc, "<ResourceId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceId>");
+    }
+    if (value.resource_owner) |v| {
+        try buf.appendSlice(alloc, "<ResourceOwner>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceOwner>");
+    }
+    if (value.resource_region) |v| {
+        try buf.appendSlice(alloc, "<ResourceRegion>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceRegion>");
+    }
+    if (value.resource_type) |v| {
+        try buf.appendSlice(alloc, "<ResourceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ResourceType>");
+    }
+}
+
+pub fn serializeIpamPrefixListResolverRuleConditionRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamPrefixListResolverRuleConditionRequest) !void {
+    if (value.cidr) |v| {
+        try buf.appendSlice(alloc, "<Cidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Cidr>");
+    }
+    if (value.ipam_pool_id) |v| {
+        try buf.appendSlice(alloc, "<IpamPoolId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</IpamPoolId>");
+    }
+    try buf.appendSlice(alloc, "<Operation>");
+    try buf.appendSlice(alloc, @tagName(value.operation));
+    try buf.appendSlice(alloc, "</Operation>");
+    if (value.resource_id) |v| {
+        try buf.appendSlice(alloc, "<ResourceId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceId>");
+    }
+    if (value.resource_owner) |v| {
+        try buf.appendSlice(alloc, "<ResourceOwner>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceOwner>");
+    }
+    if (value.resource_region) |v| {
+        try buf.appendSlice(alloc, "<ResourceRegion>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceRegion>");
+    }
+    if (value.resource_tag) |v| {
+        try buf.appendSlice(alloc, "<ResourceTag>");
+        try serializeRequestIpamResourceTag(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceTag>");
+    }
+}
+
+pub fn serializeIpamPrefixListResolverRuleRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamPrefixListResolverRuleRequest) !void {
+    if (value.conditions) |v| {
+        try buf.appendSlice(alloc, "<Condition>");
+        try serializeIpamPrefixListResolverRuleConditionRequestSet(alloc, buf, v, "Condition");
+        try buf.appendSlice(alloc, "</Condition>");
+    }
+    if (value.ipam_scope_id) |v| {
+        try buf.appendSlice(alloc, "<IpamScopeId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</IpamScopeId>");
+    }
+    if (value.resource_type) |v| {
+        try buf.appendSlice(alloc, "<ResourceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ResourceType>");
+    }
+    try buf.appendSlice(alloc, "<RuleType>");
+    try buf.appendSlice(alloc, @tagName(value.rule_type));
+    try buf.appendSlice(alloc, "</RuleType>");
+    if (value.static_cidr) |v| {
+        try buf.appendSlice(alloc, "<StaticCidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</StaticCidr>");
+    }
+}
+
+pub fn serializeIpv4PrefixSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ipv4PrefixSpecificationRequest) !void {
+    if (value.ipv_4_prefix) |v| {
+        try buf.appendSlice(alloc, "<Ipv4Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ipv4Prefix>");
+    }
+}
+
+pub fn serializeIpv6PrefixSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ipv6PrefixSpecificationRequest) !void {
+    if (value.ipv_6_prefix) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ipv6Prefix>");
+    }
+}
+
+pub fn serializeIpv6Range(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ipv6Range) !void {
+    if (value.cidr_ipv_6) |v| {
+        try buf.appendSlice(alloc, "<cidrIpv6>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</cidrIpv6>");
+    }
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</description>");
+    }
+}
+
+pub fn serializeLaunchPermission(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchPermission) !void {
+    if (value.group) |v| {
+        try buf.appendSlice(alloc, "<group>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</group>");
+    }
+    if (value.organizational_unit_arn) |v| {
+        try buf.appendSlice(alloc, "<organizationalUnitArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</organizationalUnitArn>");
+    }
+    if (value.organization_arn) |v| {
+        try buf.appendSlice(alloc, "<organizationArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</organizationArn>");
+    }
+    if (value.user_id) |v| {
+        try buf.appendSlice(alloc, "<userId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</userId>");
+    }
+}
+
+pub fn serializeLaunchPermissionModifications(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchPermissionModifications) !void {
+    if (value.add) |v| {
+        try buf.appendSlice(alloc, "<Add>");
+        try serializeLaunchPermissionList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Add>");
+    }
+    if (value.remove) |v| {
+        try buf.appendSlice(alloc, "<Remove>");
+        try serializeLaunchPermissionList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Remove>");
+    }
+}
+
+pub fn serializeLaunchTemplateBlockDeviceMappingRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateBlockDeviceMappingRequest) !void {
+    if (value.device_name) |v| {
+        try buf.appendSlice(alloc, "<DeviceName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DeviceName>");
+    }
+    if (value.ebs) |v| {
+        try buf.appendSlice(alloc, "<Ebs>");
+        try serializeLaunchTemplateEbsBlockDeviceRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ebs>");
+    }
+    if (value.no_device) |v| {
+        try buf.appendSlice(alloc, "<NoDevice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NoDevice>");
+    }
+    if (value.virtual_name) |v| {
+        try buf.appendSlice(alloc, "<VirtualName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</VirtualName>");
+    }
+}
+
+pub fn serializeLaunchTemplateCapacityReservationSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateCapacityReservationSpecificationRequest) !void {
+    if (value.capacity_reservation_preference) |v| {
+        try buf.appendSlice(alloc, "<CapacityReservationPreference>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</CapacityReservationPreference>");
+    }
+    if (value.capacity_reservation_target) |v| {
+        try buf.appendSlice(alloc, "<CapacityReservationTarget>");
+        try serializeCapacityReservationTarget(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CapacityReservationTarget>");
+    }
+}
+
+pub fn serializeLaunchTemplateConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateConfig) !void {
+    if (value.launch_template_specification) |v| {
+        try buf.appendSlice(alloc, "<launchTemplateSpecification>");
+        try serializeFleetLaunchTemplateSpecification(alloc, buf, v);
+        try buf.appendSlice(alloc, "</launchTemplateSpecification>");
+    }
+    if (value.overrides) |v| {
+        try buf.appendSlice(alloc, "<overrides>");
+        try serializeLaunchTemplateOverridesList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</overrides>");
+    }
+}
+
+pub fn serializeLaunchTemplateCpuOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateCpuOptionsRequest) !void {
+    if (value.amd_sev_snp) |v| {
+        try buf.appendSlice(alloc, "<AmdSevSnp>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AmdSevSnp>");
+    }
+    if (value.core_count) |v| {
+        try buf.appendSlice(alloc, "<CoreCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</CoreCount>");
+    }
+    if (value.threads_per_core) |v| {
+        try buf.appendSlice(alloc, "<ThreadsPerCore>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ThreadsPerCore>");
+    }
+}
+
+pub fn serializeLaunchTemplateEbsBlockDeviceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateEbsBlockDeviceRequest) !void {
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<DeleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</DeleteOnTermination>");
+    }
+    if (value.ebs_card_index) |v| {
+        try buf.appendSlice(alloc, "<EbsCardIndex>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</EbsCardIndex>");
+    }
+    if (value.encrypted) |v| {
+        try buf.appendSlice(alloc, "<Encrypted>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Encrypted>");
+    }
+    if (value.iops) |v| {
+        try buf.appendSlice(alloc, "<Iops>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Iops>");
+    }
+    if (value.kms_key_id) |v| {
+        try buf.appendSlice(alloc, "<KmsKeyId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KmsKeyId>");
+    }
+    if (value.snapshot_id) |v| {
+        try buf.appendSlice(alloc, "<SnapshotId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SnapshotId>");
+    }
+    if (value.throughput) |v| {
+        try buf.appendSlice(alloc, "<Throughput>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Throughput>");
+    }
+    if (value.volume_initialization_rate) |v| {
+        try buf.appendSlice(alloc, "<VolumeInitializationRate>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</VolumeInitializationRate>");
+    }
+    if (value.volume_size) |v| {
+        try buf.appendSlice(alloc, "<VolumeSize>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</VolumeSize>");
+    }
+    if (value.volume_type) |v| {
+        try buf.appendSlice(alloc, "<VolumeType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</VolumeType>");
+    }
+}
+
+pub fn serializeLaunchTemplateElasticInferenceAccelerator(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateElasticInferenceAccelerator) !void {
+    if (value.count) |v| {
+        try buf.appendSlice(alloc, "<Count>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Count>");
+    }
+    try buf.appendSlice(alloc, "<Type>");
+    try appendXmlEscaped(alloc, buf, value.@"type");
+    try buf.appendSlice(alloc, "</Type>");
+}
+
+pub fn serializeLaunchTemplateEnclaveOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateEnclaveOptionsRequest) !void {
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+}
+
+pub fn serializeLaunchTemplateHibernationOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateHibernationOptionsRequest) !void {
+    if (value.configured) |v| {
+        try buf.appendSlice(alloc, "<Configured>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Configured>");
+    }
+}
+
+pub fn serializeLaunchTemplateIamInstanceProfileSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateIamInstanceProfileSpecificationRequest) !void {
+    if (value.arn) |v| {
+        try buf.appendSlice(alloc, "<Arn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Arn>");
+    }
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<Name>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Name>");
+    }
+}
+
+pub fn serializeLaunchTemplateInstanceMaintenanceOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateInstanceMaintenanceOptionsRequest) !void {
+    if (value.auto_recovery) |v| {
+        try buf.appendSlice(alloc, "<AutoRecovery>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AutoRecovery>");
+    }
+}
+
+pub fn serializeLaunchTemplateInstanceMarketOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateInstanceMarketOptionsRequest) !void {
+    if (value.market_type) |v| {
+        try buf.appendSlice(alloc, "<MarketType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</MarketType>");
+    }
+    if (value.spot_options) |v| {
+        try buf.appendSlice(alloc, "<SpotOptions>");
+        try serializeLaunchTemplateSpotMarketOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SpotOptions>");
+    }
+}
+
+pub fn serializeLaunchTemplateInstanceMetadataOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateInstanceMetadataOptionsRequest) !void {
+    if (value.http_endpoint) |v| {
+        try buf.appendSlice(alloc, "<HttpEndpoint>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</HttpEndpoint>");
+    }
+    if (value.http_protocol_ipv_6) |v| {
+        try buf.appendSlice(alloc, "<HttpProtocolIpv6>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</HttpProtocolIpv6>");
+    }
+    if (value.http_put_response_hop_limit) |v| {
+        try buf.appendSlice(alloc, "<HttpPutResponseHopLimit>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</HttpPutResponseHopLimit>");
+    }
+    if (value.http_tokens) |v| {
+        try buf.appendSlice(alloc, "<HttpTokens>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</HttpTokens>");
+    }
+    if (value.instance_metadata_tags) |v| {
+        try buf.appendSlice(alloc, "<InstanceMetadataTags>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceMetadataTags>");
+    }
+}
+
+pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) !void {
+    if (value.associate_carrier_ip_address) |v| {
+        try buf.appendSlice(alloc, "<AssociateCarrierIpAddress>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</AssociateCarrierIpAddress>");
+    }
+    if (value.associate_public_ip_address) |v| {
+        try buf.appendSlice(alloc, "<AssociatePublicIpAddress>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</AssociatePublicIpAddress>");
+    }
+    if (value.connection_tracking_specification) |v| {
+        try buf.appendSlice(alloc, "<ConnectionTrackingSpecification>");
+        try serializeConnectionTrackingSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ConnectionTrackingSpecification>");
+    }
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<DeleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</DeleteOnTermination>");
+    }
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+    if (value.device_index) |v| {
+        try buf.appendSlice(alloc, "<DeviceIndex>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</DeviceIndex>");
+    }
+    if (value.ena_queue_count) |v| {
+        try buf.appendSlice(alloc, "<EnaQueueCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</EnaQueueCount>");
+    }
+    if (value.ena_srd_specification) |v| {
+        try buf.appendSlice(alloc, "<EnaSrdSpecification>");
+        try serializeEnaSrdSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EnaSrdSpecification>");
+    }
+    if (value.groups) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupId>");
+        try serializeSecurityGroupIdStringList(alloc, buf, v, "SecurityGroupId");
+        try buf.appendSlice(alloc, "</SecurityGroupId>");
+    }
+    if (value.interface_type) |v| {
+        try buf.appendSlice(alloc, "<InterfaceType>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InterfaceType>");
+    }
+    if (value.ipv_4_prefix_count) |v| {
+        try buf.appendSlice(alloc, "<Ipv4PrefixCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Ipv4PrefixCount>");
+    }
+    if (value.ipv_4_prefixes) |v| {
+        try buf.appendSlice(alloc, "<Ipv4Prefix>");
+        try serializeIpv4PrefixList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Ipv4Prefix>");
+    }
+    if (value.ipv_6_address_count) |v| {
+        try buf.appendSlice(alloc, "<Ipv6AddressCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Ipv6AddressCount>");
+    }
+    if (value.ipv_6_addresses) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Addresses>");
+        try serializeInstanceIpv6AddressListRequest(alloc, buf, v, "InstanceIpv6Address");
+        try buf.appendSlice(alloc, "</Ipv6Addresses>");
+    }
+    if (value.ipv_6_prefix_count) |v| {
+        try buf.appendSlice(alloc, "<Ipv6PrefixCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Ipv6PrefixCount>");
+    }
+    if (value.ipv_6_prefixes) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Prefix>");
+        try serializeIpv6PrefixList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Ipv6Prefix>");
+    }
+    if (value.network_card_index) |v| {
+        try buf.appendSlice(alloc, "<NetworkCardIndex>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</NetworkCardIndex>");
+    }
+    if (value.network_interface_id) |v| {
+        try buf.appendSlice(alloc, "<NetworkInterfaceId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NetworkInterfaceId>");
+    }
+    if (value.primary_ipv_6) |v| {
+        try buf.appendSlice(alloc, "<PrimaryIpv6>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</PrimaryIpv6>");
+    }
+    if (value.private_ip_address) |v| {
+        try buf.appendSlice(alloc, "<PrivateIpAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PrivateIpAddress>");
+    }
+    if (value.private_ip_addresses) |v| {
+        try buf.appendSlice(alloc, "<PrivateIpAddresses>");
+        try serializePrivateIpAddressSpecificationList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</PrivateIpAddresses>");
+    }
+    if (value.secondary_private_ip_address_count) |v| {
+        try buf.appendSlice(alloc, "<SecondaryPrivateIpAddressCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</SecondaryPrivateIpAddressCount>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+}
+
+pub fn serializeLaunchTemplateLicenseConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateLicenseConfigurationRequest) !void {
+    if (value.license_configuration_arn) |v| {
+        try buf.appendSlice(alloc, "<LicenseConfigurationArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LicenseConfigurationArn>");
+    }
+}
+
+pub fn serializeLaunchTemplateNetworkPerformanceOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateNetworkPerformanceOptionsRequest) !void {
+    if (value.bandwidth_weighting) |v| {
+        try buf.appendSlice(alloc, "<BandwidthWeighting>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</BandwidthWeighting>");
+    }
+}
+
+pub fn serializeLaunchTemplateOverrides(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateOverrides) !void {
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<availabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<availabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZoneId>");
+    }
+    if (value.instance_requirements) |v| {
+        try buf.appendSlice(alloc, "<instanceRequirements>");
+        try serializeInstanceRequirements(alloc, buf, v);
+        try buf.appendSlice(alloc, "</instanceRequirements>");
+    }
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<instanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</instanceType>");
+    }
+    if (value.priority) |v| {
+        try buf.appendSlice(alloc, "<priority>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</priority>");
+    }
+    if (value.spot_price) |v| {
+        try buf.appendSlice(alloc, "<spotPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</spotPrice>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<subnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</subnetId>");
+    }
+    if (value.weighted_capacity) |v| {
+        try buf.appendSlice(alloc, "<weightedCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</weightedCapacity>");
+    }
+}
+
+pub fn serializeLaunchTemplatePlacementRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplatePlacementRequest) !void {
+    if (value.affinity) |v| {
+        try buf.appendSlice(alloc, "<Affinity>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Affinity>");
+    }
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZoneId>");
+    }
+    if (value.group_id) |v| {
+        try buf.appendSlice(alloc, "<GroupId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</GroupId>");
+    }
+    if (value.group_name) |v| {
+        try buf.appendSlice(alloc, "<GroupName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</GroupName>");
+    }
+    if (value.host_id) |v| {
+        try buf.appendSlice(alloc, "<HostId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</HostId>");
+    }
+    if (value.host_resource_group_arn) |v| {
+        try buf.appendSlice(alloc, "<HostResourceGroupArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</HostResourceGroupArn>");
+    }
+    if (value.partition_number) |v| {
+        try buf.appendSlice(alloc, "<PartitionNumber>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</PartitionNumber>");
+    }
+    if (value.spread_domain) |v| {
+        try buf.appendSlice(alloc, "<SpreadDomain>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SpreadDomain>");
+    }
+    if (value.tenancy) |v| {
+        try buf.appendSlice(alloc, "<Tenancy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Tenancy>");
+    }
+}
+
+pub fn serializeLaunchTemplatePrivateDnsNameOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplatePrivateDnsNameOptionsRequest) !void {
+    if (value.enable_resource_name_dns_aaaa_record) |v| {
+        try buf.appendSlice(alloc, "<EnableResourceNameDnsAAAARecord>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnableResourceNameDnsAAAARecord>");
+    }
+    if (value.enable_resource_name_dns_a_record) |v| {
+        try buf.appendSlice(alloc, "<EnableResourceNameDnsARecord>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnableResourceNameDnsARecord>");
+    }
+    if (value.hostname_type) |v| {
+        try buf.appendSlice(alloc, "<HostnameType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</HostnameType>");
+    }
+}
+
+pub fn serializeLaunchTemplateSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateSpecification) !void {
+    if (value.launch_template_id) |v| {
+        try buf.appendSlice(alloc, "<LaunchTemplateId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LaunchTemplateId>");
+    }
+    if (value.launch_template_name) |v| {
+        try buf.appendSlice(alloc, "<LaunchTemplateName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LaunchTemplateName>");
+    }
+    if (value.version) |v| {
+        try buf.appendSlice(alloc, "<Version>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Version>");
+    }
+}
+
+pub fn serializeLaunchTemplateSpotMarketOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateSpotMarketOptionsRequest) !void {
+    if (value.block_duration_minutes) |v| {
+        try buf.appendSlice(alloc, "<BlockDurationMinutes>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</BlockDurationMinutes>");
+    }
+    if (value.instance_interruption_behavior) |v| {
+        try buf.appendSlice(alloc, "<InstanceInterruptionBehavior>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceInterruptionBehavior>");
+    }
+    if (value.max_price) |v| {
+        try buf.appendSlice(alloc, "<MaxPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MaxPrice>");
+    }
+    if (value.spot_instance_type) |v| {
+        try buf.appendSlice(alloc, "<SpotInstanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</SpotInstanceType>");
+    }
+    if (value.valid_until) |v| {
+        try buf.appendSlice(alloc, "<ValidUntil>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</ValidUntil>");
+    }
+}
+
+pub fn serializeLaunchTemplateTagSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateTagSpecificationRequest) !void {
+    if (value.resource_type) |v| {
+        try buf.appendSlice(alloc, "<ResourceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ResourceType>");
+    }
+    if (value.tags) |v| {
+        try buf.appendSlice(alloc, "<Tag>");
+        try serializeTagList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Tag>");
+    }
+}
+
+pub fn serializeLaunchTemplatesMonitoringRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplatesMonitoringRequest) !void {
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+}
+
+pub fn serializeLicenseConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LicenseConfigurationRequest) !void {
+    if (value.license_configuration_arn) |v| {
+        try buf.appendSlice(alloc, "<LicenseConfigurationArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LicenseConfigurationArn>");
+    }
+}
+
+pub fn serializeLoadBalancersConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LoadBalancersConfig) !void {
+    if (value.classic_load_balancers_config) |v| {
+        try buf.appendSlice(alloc, "<classicLoadBalancersConfig>");
+        try serializeClassicLoadBalancersConfig(alloc, buf, v);
+        try buf.appendSlice(alloc, "</classicLoadBalancersConfig>");
+    }
+    if (value.target_groups_config) |v| {
+        try buf.appendSlice(alloc, "<targetGroupsConfig>");
+        try serializeTargetGroupsConfig(alloc, buf, v);
+        try buf.appendSlice(alloc, "</targetGroupsConfig>");
+    }
+}
+
+pub fn serializeLoadPermissionModifications(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LoadPermissionModifications) !void {
+    if (value.add) |v| {
+        try buf.appendSlice(alloc, "<Add>");
+        try serializeLoadPermissionListRequest(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Add>");
+    }
+    if (value.remove) |v| {
+        try buf.appendSlice(alloc, "<Remove>");
+        try serializeLoadPermissionListRequest(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Remove>");
+    }
+}
+
+pub fn serializeLoadPermissionRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LoadPermissionRequest) !void {
+    if (value.group) |v| {
+        try buf.appendSlice(alloc, "<Group>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Group>");
+    }
+    if (value.user_id) |v| {
+        try buf.appendSlice(alloc, "<UserId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserId>");
+    }
+}
+
+pub fn serializeMacSystemIntegrityProtectionConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MacSystemIntegrityProtectionConfigurationRequest) !void {
+    if (value.apple_internal) |v| {
+        try buf.appendSlice(alloc, "<AppleInternal>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AppleInternal>");
+    }
+    if (value.base_system) |v| {
+        try buf.appendSlice(alloc, "<BaseSystem>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</BaseSystem>");
+    }
+    if (value.debugging_restrictions) |v| {
+        try buf.appendSlice(alloc, "<DebuggingRestrictions>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DebuggingRestrictions>");
+    }
+    if (value.d_trace_restrictions) |v| {
+        try buf.appendSlice(alloc, "<DTraceRestrictions>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DTraceRestrictions>");
+    }
+    if (value.filesystem_protections) |v| {
+        try buf.appendSlice(alloc, "<FilesystemProtections>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</FilesystemProtections>");
+    }
+    if (value.kext_signing) |v| {
+        try buf.appendSlice(alloc, "<KextSigning>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</KextSigning>");
+    }
+    if (value.nvram_protections) |v| {
+        try buf.appendSlice(alloc, "<NvramProtections>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</NvramProtections>");
+    }
+}
+
+pub fn serializeMemoryGiBPerVCpu(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MemoryGiBPerVCpu) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeMemoryGiBPerVCpuRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MemoryGiBPerVCpuRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<Min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Min>");
+    }
+}
+
+pub fn serializeMemoryMiB(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MemoryMiB) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeMemoryMiBRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MemoryMiBRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    try buf.appendSlice(alloc, "<Min>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.min}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</Min>");
+}
+
+pub fn serializeModifyTransitGatewayOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyTransitGatewayOptions) !void {
+    if (value.add_transit_gateway_cidr_blocks) |v| {
+        try buf.appendSlice(alloc, "<AddTransitGatewayCidrBlocks>");
+        try serializeTransitGatewayCidrBlockStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</AddTransitGatewayCidrBlocks>");
+    }
+    if (value.amazon_side_asn) |v| {
+        try buf.appendSlice(alloc, "<AmazonSideAsn>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</AmazonSideAsn>");
+    }
+    if (value.association_default_route_table_id) |v| {
+        try buf.appendSlice(alloc, "<AssociationDefaultRouteTableId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AssociationDefaultRouteTableId>");
+    }
+    if (value.auto_accept_shared_attachments) |v| {
+        try buf.appendSlice(alloc, "<AutoAcceptSharedAttachments>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AutoAcceptSharedAttachments>");
+    }
+    if (value.default_route_table_association) |v| {
+        try buf.appendSlice(alloc, "<DefaultRouteTableAssociation>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DefaultRouteTableAssociation>");
+    }
+    if (value.default_route_table_propagation) |v| {
+        try buf.appendSlice(alloc, "<DefaultRouteTablePropagation>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DefaultRouteTablePropagation>");
+    }
+    if (value.dns_support) |v| {
+        try buf.appendSlice(alloc, "<DnsSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DnsSupport>");
+    }
+    if (value.encryption_support) |v| {
+        try buf.appendSlice(alloc, "<EncryptionSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</EncryptionSupport>");
+    }
+    if (value.propagation_default_route_table_id) |v| {
+        try buf.appendSlice(alloc, "<PropagationDefaultRouteTableId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PropagationDefaultRouteTableId>");
+    }
+    if (value.remove_transit_gateway_cidr_blocks) |v| {
+        try buf.appendSlice(alloc, "<RemoveTransitGatewayCidrBlocks>");
+        try serializeTransitGatewayCidrBlockStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</RemoveTransitGatewayCidrBlocks>");
+    }
+    if (value.security_group_referencing_support) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupReferencingSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</SecurityGroupReferencingSupport>");
+    }
+    if (value.vpn_ecmp_support) |v| {
+        try buf.appendSlice(alloc, "<VpnEcmpSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</VpnEcmpSupport>");
+    }
+}
+
+pub fn serializeModifyTransitGatewayVpcAttachmentRequestOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyTransitGatewayVpcAttachmentRequestOptions) !void {
+    if (value.appliance_mode_support) |v| {
+        try buf.appendSlice(alloc, "<ApplianceModeSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ApplianceModeSupport>");
+    }
+    if (value.dns_support) |v| {
+        try buf.appendSlice(alloc, "<DnsSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DnsSupport>");
+    }
+    if (value.ipv_6_support) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Support>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Ipv6Support>");
+    }
+    if (value.security_group_referencing_support) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupReferencingSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</SecurityGroupReferencingSupport>");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessEndpointCidrOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessEndpointCidrOptions) !void {
+    if (value.port_ranges) |v| {
+        try buf.appendSlice(alloc, "<PortRange>");
+        try serializeModifyVerifiedAccessEndpointPortRangeList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</PortRange>");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessEndpointEniOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessEndpointEniOptions) !void {
+    if (value.port) |v| {
+        try buf.appendSlice(alloc, "<Port>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Port>");
+    }
+    if (value.port_ranges) |v| {
+        try buf.appendSlice(alloc, "<PortRange>");
+        try serializeModifyVerifiedAccessEndpointPortRangeList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</PortRange>");
+    }
+    if (value.protocol) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessEndpointLoadBalancerOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessEndpointLoadBalancerOptions) !void {
+    if (value.port) |v| {
+        try buf.appendSlice(alloc, "<Port>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Port>");
+    }
+    if (value.port_ranges) |v| {
+        try buf.appendSlice(alloc, "<PortRange>");
+        try serializeModifyVerifiedAccessEndpointPortRangeList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</PortRange>");
+    }
+    if (value.protocol) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+    if (value.subnet_ids) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try serializeModifyVerifiedAccessEndpointSubnetIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessEndpointPortRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessEndpointPortRange) !void {
+    if (value.from_port) |v| {
+        try buf.appendSlice(alloc, "<FromPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</FromPort>");
+    }
+    if (value.to_port) |v| {
+        try buf.appendSlice(alloc, "<ToPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ToPort>");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessEndpointRdsOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessEndpointRdsOptions) !void {
+    if (value.port) |v| {
+        try buf.appendSlice(alloc, "<Port>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Port>");
+    }
+    if (value.rds_endpoint) |v| {
+        try buf.appendSlice(alloc, "<RdsEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RdsEndpoint>");
+    }
+    if (value.subnet_ids) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try serializeModifyVerifiedAccessEndpointSubnetIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessNativeApplicationOidcOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessNativeApplicationOidcOptions) !void {
+    if (value.authorization_endpoint) |v| {
+        try buf.appendSlice(alloc, "<AuthorizationEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AuthorizationEndpoint>");
+    }
+    if (value.client_id) |v| {
+        try buf.appendSlice(alloc, "<ClientId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientId>");
+    }
+    if (value.client_secret) |v| {
+        try buf.appendSlice(alloc, "<ClientSecret>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientSecret>");
+    }
+    if (value.issuer) |v| {
+        try buf.appendSlice(alloc, "<Issuer>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Issuer>");
+    }
+    if (value.public_signing_key_endpoint) |v| {
+        try buf.appendSlice(alloc, "<PublicSigningKeyEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PublicSigningKeyEndpoint>");
+    }
+    if (value.scope) |v| {
+        try buf.appendSlice(alloc, "<Scope>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Scope>");
+    }
+    if (value.token_endpoint) |v| {
+        try buf.appendSlice(alloc, "<TokenEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TokenEndpoint>");
+    }
+    if (value.user_info_endpoint) |v| {
+        try buf.appendSlice(alloc, "<UserInfoEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserInfoEndpoint>");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessTrustProviderDeviceOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessTrustProviderDeviceOptions) !void {
+    if (value.public_signing_key_url) |v| {
+        try buf.appendSlice(alloc, "<PublicSigningKeyUrl>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PublicSigningKeyUrl>");
+    }
+}
+
+pub fn serializeModifyVerifiedAccessTrustProviderOidcOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessTrustProviderOidcOptions) !void {
+    if (value.authorization_endpoint) |v| {
+        try buf.appendSlice(alloc, "<AuthorizationEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AuthorizationEndpoint>");
+    }
+    if (value.client_id) |v| {
+        try buf.appendSlice(alloc, "<ClientId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientId>");
+    }
+    if (value.client_secret) |v| {
+        try buf.appendSlice(alloc, "<ClientSecret>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ClientSecret>");
+    }
+    if (value.issuer) |v| {
+        try buf.appendSlice(alloc, "<Issuer>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Issuer>");
+    }
+    if (value.scope) |v| {
+        try buf.appendSlice(alloc, "<Scope>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Scope>");
+    }
+    if (value.token_endpoint) |v| {
+        try buf.appendSlice(alloc, "<TokenEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TokenEndpoint>");
+    }
+    if (value.user_info_endpoint) |v| {
+        try buf.appendSlice(alloc, "<UserInfoEndpoint>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserInfoEndpoint>");
+    }
+}
+
+pub fn serializeModifyVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVpnTunnelOptionsSpecification) !void {
+    if (value.dpd_timeout_action) |v| {
+        try buf.appendSlice(alloc, "<DPDTimeoutAction>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DPDTimeoutAction>");
+    }
+    if (value.dpd_timeout_seconds) |v| {
+        try buf.appendSlice(alloc, "<DPDTimeoutSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</DPDTimeoutSeconds>");
+    }
+    if (value.enable_tunnel_lifecycle_control) |v| {
+        try buf.appendSlice(alloc, "<EnableTunnelLifecycleControl>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnableTunnelLifecycleControl>");
+    }
+    if (value.ike_versions) |v| {
+        try buf.appendSlice(alloc, "<IKEVersion>");
+        try serializeIKEVersionsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</IKEVersion>");
+    }
+    if (value.log_options) |v| {
+        try buf.appendSlice(alloc, "<LogOptions>");
+        try serializeVpnTunnelLogOptionsSpecification(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LogOptions>");
+    }
+    if (value.phase_1_dh_group_numbers) |v| {
+        try buf.appendSlice(alloc, "<Phase1DHGroupNumber>");
+        try serializePhase1DHGroupNumbersRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase1DHGroupNumber>");
+    }
+    if (value.phase_1_encryption_algorithms) |v| {
+        try buf.appendSlice(alloc, "<Phase1EncryptionAlgorithm>");
+        try serializePhase1EncryptionAlgorithmsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase1EncryptionAlgorithm>");
+    }
+    if (value.phase_1_integrity_algorithms) |v| {
+        try buf.appendSlice(alloc, "<Phase1IntegrityAlgorithm>");
+        try serializePhase1IntegrityAlgorithmsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase1IntegrityAlgorithm>");
+    }
+    if (value.phase_1_lifetime_seconds) |v| {
+        try buf.appendSlice(alloc, "<Phase1LifetimeSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Phase1LifetimeSeconds>");
+    }
+    if (value.phase_2_dh_group_numbers) |v| {
+        try buf.appendSlice(alloc, "<Phase2DHGroupNumber>");
+        try serializePhase2DHGroupNumbersRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase2DHGroupNumber>");
+    }
+    if (value.phase_2_encryption_algorithms) |v| {
+        try buf.appendSlice(alloc, "<Phase2EncryptionAlgorithm>");
+        try serializePhase2EncryptionAlgorithmsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase2EncryptionAlgorithm>");
+    }
+    if (value.phase_2_integrity_algorithms) |v| {
+        try buf.appendSlice(alloc, "<Phase2IntegrityAlgorithm>");
+        try serializePhase2IntegrityAlgorithmsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase2IntegrityAlgorithm>");
+    }
+    if (value.phase_2_lifetime_seconds) |v| {
+        try buf.appendSlice(alloc, "<Phase2LifetimeSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Phase2LifetimeSeconds>");
+    }
+    if (value.pre_shared_key) |v| {
+        try buf.appendSlice(alloc, "<PreSharedKey>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PreSharedKey>");
+    }
+    if (value.rekey_fuzz_percentage) |v| {
+        try buf.appendSlice(alloc, "<RekeyFuzzPercentage>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</RekeyFuzzPercentage>");
+    }
+    if (value.rekey_margin_time_seconds) |v| {
+        try buf.appendSlice(alloc, "<RekeyMarginTimeSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</RekeyMarginTimeSeconds>");
+    }
+    if (value.replay_window_size) |v| {
+        try buf.appendSlice(alloc, "<ReplayWindowSize>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ReplayWindowSize>");
+    }
+    if (value.startup_action) |v| {
+        try buf.appendSlice(alloc, "<StartupAction>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</StartupAction>");
+    }
+    if (value.tunnel_inside_cidr) |v| {
+        try buf.appendSlice(alloc, "<TunnelInsideCidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TunnelInsideCidr>");
+    }
+    if (value.tunnel_inside_ipv_6_cidr) |v| {
+        try buf.appendSlice(alloc, "<TunnelInsideIpv6Cidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TunnelInsideIpv6Cidr>");
+    }
+}
+
+pub fn serializeNetworkBandwidthGbps(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NetworkBandwidthGbps) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeNetworkBandwidthGbpsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NetworkBandwidthGbpsRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<Min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Min>");
+    }
+}
+
+pub fn serializeNetworkInterfaceAttachmentChanges(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NetworkInterfaceAttachmentChanges) !void {
+    if (value.attachment_id) |v| {
+        try buf.appendSlice(alloc, "<attachmentId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</attachmentId>");
+    }
+    if (value.default_ena_queue_count) |v| {
+        try buf.appendSlice(alloc, "<DefaultEnaQueueCount>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</DefaultEnaQueueCount>");
+    }
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<deleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</deleteOnTermination>");
+    }
+    if (value.ena_queue_count) |v| {
+        try buf.appendSlice(alloc, "<EnaQueueCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</EnaQueueCount>");
+    }
+}
+
+pub fn serializeNetworkInterfaceCount(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NetworkInterfaceCount) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeNetworkInterfaceCountRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NetworkInterfaceCountRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<Min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Min>");
+    }
+}
+
+pub fn serializeNewDhcpConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NewDhcpConfiguration) !void {
+    if (value.key) |v| {
+        try buf.appendSlice(alloc, "<key>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</key>");
+    }
+    if (value.values) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializeOnDemandOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OnDemandOptionsRequest) !void {
+    if (value.allocation_strategy) |v| {
+        try buf.appendSlice(alloc, "<AllocationStrategy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AllocationStrategy>");
+    }
+    if (value.capacity_reservation_options) |v| {
+        try buf.appendSlice(alloc, "<CapacityReservationOptions>");
+        try serializeCapacityReservationOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CapacityReservationOptions>");
+    }
+    if (value.max_total_price) |v| {
+        try buf.appendSlice(alloc, "<MaxTotalPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MaxTotalPrice>");
+    }
+    if (value.min_target_capacity) |v| {
+        try buf.appendSlice(alloc, "<MinTargetCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</MinTargetCapacity>");
+    }
+    if (value.single_availability_zone) |v| {
+        try buf.appendSlice(alloc, "<SingleAvailabilityZone>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</SingleAvailabilityZone>");
+    }
+    if (value.single_instance_type) |v| {
+        try buf.appendSlice(alloc, "<SingleInstanceType>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</SingleInstanceType>");
+    }
+}
+
+pub fn serializeOperatorRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OperatorRequest) !void {
+    if (value.principal) |v| {
+        try buf.appendSlice(alloc, "<Principal>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Principal>");
+    }
+}
+
+pub fn serializePacketHeaderStatementRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PacketHeaderStatementRequest) !void {
+    if (value.destination_addresses) |v| {
+        try buf.appendSlice(alloc, "<DestinationAddress>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</DestinationAddress>");
+    }
+    if (value.destination_ports) |v| {
+        try buf.appendSlice(alloc, "<DestinationPort>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</DestinationPort>");
+    }
+    if (value.destination_prefix_lists) |v| {
+        try buf.appendSlice(alloc, "<DestinationPrefixList>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</DestinationPrefixList>");
+    }
+    if (value.protocols) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try serializeProtocolList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+    if (value.source_addresses) |v| {
+        try buf.appendSlice(alloc, "<SourceAddress>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SourceAddress>");
+    }
+    if (value.source_ports) |v| {
+        try buf.appendSlice(alloc, "<SourcePort>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SourcePort>");
+    }
+    if (value.source_prefix_lists) |v| {
+        try buf.appendSlice(alloc, "<SourcePrefixList>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SourcePrefixList>");
+    }
+}
+
+pub fn serializePathRequestFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PathRequestFilter) !void {
+    if (value.destination_address) |v| {
+        try buf.appendSlice(alloc, "<DestinationAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DestinationAddress>");
+    }
+    if (value.destination_port_range) |v| {
+        try buf.appendSlice(alloc, "<DestinationPortRange>");
+        try serializeRequestFilterPortRange(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DestinationPortRange>");
+    }
+    if (value.source_address) |v| {
+        try buf.appendSlice(alloc, "<SourceAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SourceAddress>");
+    }
+    if (value.source_port_range) |v| {
+        try buf.appendSlice(alloc, "<SourcePortRange>");
+        try serializeRequestFilterPortRange(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SourcePortRange>");
+    }
+}
+
+pub fn serializePathStatementRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PathStatementRequest) !void {
+    if (value.packet_header_statement) |v| {
+        try buf.appendSlice(alloc, "<PacketHeaderStatement>");
+        try serializePacketHeaderStatementRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PacketHeaderStatement>");
+    }
+    if (value.resource_statement) |v| {
+        try buf.appendSlice(alloc, "<ResourceStatement>");
+        try serializeResourceStatementRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceStatement>");
+    }
+}
+
+pub fn serializePeeringConnectionOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PeeringConnectionOptionsRequest) !void {
+    if (value.allow_dns_resolution_from_remote_vpc) |v| {
+        try buf.appendSlice(alloc, "<AllowDnsResolutionFromRemoteVpc>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</AllowDnsResolutionFromRemoteVpc>");
+    }
+    if (value.allow_egress_from_local_classic_link_to_remote_vpc) |v| {
+        try buf.appendSlice(alloc, "<AllowEgressFromLocalClassicLinkToRemoteVpc>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</AllowEgressFromLocalClassicLinkToRemoteVpc>");
+    }
+    if (value.allow_egress_from_local_vpc_to_remote_classic_link) |v| {
+        try buf.appendSlice(alloc, "<AllowEgressFromLocalVpcToRemoteClassicLink>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</AllowEgressFromLocalVpcToRemoteClassicLink>");
+    }
+}
+
+pub fn serializePerformanceFactorReference(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PerformanceFactorReference) !void {
+    if (value.instance_family) |v| {
+        try buf.appendSlice(alloc, "<instanceFamily>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</instanceFamily>");
+    }
+}
+
+pub fn serializePerformanceFactorReferenceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PerformanceFactorReferenceRequest) !void {
+    if (value.instance_family) |v| {
+        try buf.appendSlice(alloc, "<InstanceFamily>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InstanceFamily>");
+    }
+}
+
+pub fn serializePhase1DHGroupNumbersRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase1DHGroupNumbersRequestListValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializePhase1EncryptionAlgorithmsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase1EncryptionAlgorithmsRequestListValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializePhase1IntegrityAlgorithmsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase1IntegrityAlgorithmsRequestListValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializePhase2DHGroupNumbersRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase2DHGroupNumbersRequestListValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializePhase2EncryptionAlgorithmsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase2EncryptionAlgorithmsRequestListValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializePhase2IntegrityAlgorithmsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase2IntegrityAlgorithmsRequestListValue) !void {
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializePlacement(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Placement) !void {
+    if (value.affinity) |v| {
+        try buf.appendSlice(alloc, "<affinity>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</affinity>");
+    }
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<availabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<availabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZoneId>");
+    }
+    if (value.group_id) |v| {
+        try buf.appendSlice(alloc, "<groupId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</groupId>");
+    }
+    if (value.group_name) |v| {
+        try buf.appendSlice(alloc, "<groupName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</groupName>");
+    }
+    if (value.host_id) |v| {
+        try buf.appendSlice(alloc, "<hostId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</hostId>");
+    }
+    if (value.host_resource_group_arn) |v| {
+        try buf.appendSlice(alloc, "<hostResourceGroupArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</hostResourceGroupArn>");
+    }
+    if (value.partition_number) |v| {
+        try buf.appendSlice(alloc, "<partitionNumber>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</partitionNumber>");
+    }
+    if (value.spread_domain) |v| {
+        try buf.appendSlice(alloc, "<spreadDomain>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</spreadDomain>");
+    }
+    if (value.tenancy) |v| {
+        try buf.appendSlice(alloc, "<tenancy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</tenancy>");
+    }
+}
+
+pub fn serializePortRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PortRange) !void {
+    if (value.from) |v| {
+        try buf.appendSlice(alloc, "<from>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</from>");
+    }
+    if (value.to) |v| {
+        try buf.appendSlice(alloc, "<to>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</to>");
+    }
+}
+
+pub fn serializePrefixListId(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PrefixListId) !void {
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</description>");
+    }
+    if (value.prefix_list_id) |v| {
+        try buf.appendSlice(alloc, "<prefixListId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</prefixListId>");
+    }
+}
+
+pub fn serializePriceScheduleSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PriceScheduleSpecification) !void {
+    if (value.currency_code) |v| {
+        try buf.appendSlice(alloc, "<currencyCode>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</currencyCode>");
+    }
+    if (value.price) |v| {
+        try buf.appendSlice(alloc, "<price>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</price>");
+    }
+    if (value.term) |v| {
+        try buf.appendSlice(alloc, "<term>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</term>");
+    }
+}
+
+pub fn serializePrivateDnsNameOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PrivateDnsNameOptionsRequest) !void {
+    if (value.enable_resource_name_dns_aaaa_record) |v| {
+        try buf.appendSlice(alloc, "<EnableResourceNameDnsAAAARecord>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnableResourceNameDnsAAAARecord>");
+    }
+    if (value.enable_resource_name_dns_a_record) |v| {
+        try buf.appendSlice(alloc, "<EnableResourceNameDnsARecord>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnableResourceNameDnsARecord>");
+    }
+    if (value.hostname_type) |v| {
+        try buf.appendSlice(alloc, "<HostnameType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</HostnameType>");
+    }
+}
+
+pub fn serializePrivateIpAddressSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PrivateIpAddressSpecification) !void {
+    if (value.primary) |v| {
+        try buf.appendSlice(alloc, "<primary>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</primary>");
+    }
+    if (value.private_ip_address) |v| {
+        try buf.appendSlice(alloc, "<privateIpAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</privateIpAddress>");
+    }
+}
+
+pub fn serializePurchaseRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PurchaseRequest) !void {
+    try buf.appendSlice(alloc, "<InstanceCount>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.instance_count}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</InstanceCount>");
+    try buf.appendSlice(alloc, "<PurchaseToken>");
+    try appendXmlEscaped(alloc, buf, value.purchase_token);
+    try buf.appendSlice(alloc, "</PurchaseToken>");
+}
+
+pub fn serializeRegisterInstanceTagAttributeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RegisterInstanceTagAttributeRequest) !void {
+    if (value.include_all_tags_of_instance) |v| {
+        try buf.appendSlice(alloc, "<IncludeAllTagsOfInstance>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</IncludeAllTagsOfInstance>");
+    }
+    if (value.instance_tag_keys) |v| {
+        try buf.appendSlice(alloc, "<InstanceTagKey>");
+        try serializeInstanceTagKeySet(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</InstanceTagKey>");
+    }
+}
+
+pub fn serializeRemoveIpamOperatingRegion(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RemoveIpamOperatingRegion) !void {
+    if (value.region_name) |v| {
+        try buf.appendSlice(alloc, "<RegionName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RegionName>");
+    }
+}
+
+pub fn serializeRemoveIpamOrganizationalUnitExclusion(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RemoveIpamOrganizationalUnitExclusion) !void {
+    if (value.organizations_entity_path) |v| {
+        try buf.appendSlice(alloc, "<OrganizationsEntityPath>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</OrganizationsEntityPath>");
+    }
+}
+
+pub fn serializeRemovePrefixListEntry(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RemovePrefixListEntry) !void {
+    try buf.appendSlice(alloc, "<Cidr>");
+    try appendXmlEscaped(alloc, buf, value.cidr);
+    try buf.appendSlice(alloc, "</Cidr>");
+}
+
+pub fn serializeRequestFilterPortRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RequestFilterPortRange) !void {
+    if (value.from_port) |v| {
+        try buf.appendSlice(alloc, "<FromPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</FromPort>");
+    }
+    if (value.to_port) |v| {
+        try buf.appendSlice(alloc, "<ToPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ToPort>");
+    }
+}
+
+pub fn serializeRequestIpamResourceTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RequestIpamResourceTag) !void {
+    if (value.key) |v| {
+        try buf.appendSlice(alloc, "<Key>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Key>");
+    }
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializeRequestLaunchTemplateData(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RequestLaunchTemplateData) !void {
+    if (value.block_device_mappings) |v| {
+        try buf.appendSlice(alloc, "<BlockDeviceMapping>");
+        try serializeLaunchTemplateBlockDeviceMappingRequestList(alloc, buf, v, "BlockDeviceMapping");
+        try buf.appendSlice(alloc, "</BlockDeviceMapping>");
+    }
+    if (value.capacity_reservation_specification) |v| {
+        try buf.appendSlice(alloc, "<CapacityReservationSpecification>");
+        try serializeLaunchTemplateCapacityReservationSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CapacityReservationSpecification>");
+    }
+    if (value.cpu_options) |v| {
+        try buf.appendSlice(alloc, "<CpuOptions>");
+        try serializeLaunchTemplateCpuOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CpuOptions>");
+    }
+    if (value.credit_specification) |v| {
+        try buf.appendSlice(alloc, "<CreditSpecification>");
+        try serializeCreditSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CreditSpecification>");
+    }
+    if (value.disable_api_stop) |v| {
+        try buf.appendSlice(alloc, "<DisableApiStop>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</DisableApiStop>");
+    }
+    if (value.disable_api_termination) |v| {
+        try buf.appendSlice(alloc, "<DisableApiTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</DisableApiTermination>");
+    }
+    if (value.ebs_optimized) |v| {
+        try buf.appendSlice(alloc, "<EbsOptimized>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EbsOptimized>");
+    }
+    if (value.elastic_gpu_specifications) |v| {
+        try buf.appendSlice(alloc, "<ElasticGpuSpecification>");
+        try serializeElasticGpuSpecificationList(alloc, buf, v, "ElasticGpuSpecification");
+        try buf.appendSlice(alloc, "</ElasticGpuSpecification>");
+    }
+    if (value.elastic_inference_accelerators) |v| {
+        try buf.appendSlice(alloc, "<ElasticInferenceAccelerator>");
+        try serializeLaunchTemplateElasticInferenceAcceleratorList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ElasticInferenceAccelerator>");
+    }
+    if (value.enclave_options) |v| {
+        try buf.appendSlice(alloc, "<EnclaveOptions>");
+        try serializeLaunchTemplateEnclaveOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EnclaveOptions>");
+    }
+    if (value.hibernation_options) |v| {
+        try buf.appendSlice(alloc, "<HibernationOptions>");
+        try serializeLaunchTemplateHibernationOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</HibernationOptions>");
+    }
+    if (value.iam_instance_profile) |v| {
+        try buf.appendSlice(alloc, "<IamInstanceProfile>");
+        try serializeLaunchTemplateIamInstanceProfileSpecificationRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</IamInstanceProfile>");
+    }
+    if (value.image_id) |v| {
+        try buf.appendSlice(alloc, "<ImageId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ImageId>");
+    }
+    if (value.instance_initiated_shutdown_behavior) |v| {
+        try buf.appendSlice(alloc, "<InstanceInitiatedShutdownBehavior>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceInitiatedShutdownBehavior>");
+    }
+    if (value.instance_market_options) |v| {
+        try buf.appendSlice(alloc, "<InstanceMarketOptions>");
+        try serializeLaunchTemplateInstanceMarketOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InstanceMarketOptions>");
+    }
+    if (value.instance_requirements) |v| {
+        try buf.appendSlice(alloc, "<InstanceRequirements>");
+        try serializeInstanceRequirementsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InstanceRequirements>");
+    }
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<InstanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceType>");
+    }
+    if (value.kernel_id) |v| {
+        try buf.appendSlice(alloc, "<KernelId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KernelId>");
+    }
+    if (value.key_name) |v| {
+        try buf.appendSlice(alloc, "<KeyName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KeyName>");
+    }
+    if (value.license_specifications) |v| {
+        try buf.appendSlice(alloc, "<LicenseSpecification>");
+        try serializeLaunchTemplateLicenseSpecificationListRequest(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</LicenseSpecification>");
+    }
+    if (value.maintenance_options) |v| {
+        try buf.appendSlice(alloc, "<MaintenanceOptions>");
+        try serializeLaunchTemplateInstanceMaintenanceOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MaintenanceOptions>");
+    }
+    if (value.metadata_options) |v| {
+        try buf.appendSlice(alloc, "<MetadataOptions>");
+        try serializeLaunchTemplateInstanceMetadataOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MetadataOptions>");
+    }
+    if (value.monitoring) |v| {
+        try buf.appendSlice(alloc, "<Monitoring>");
+        try serializeLaunchTemplatesMonitoringRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Monitoring>");
+    }
+    if (value.network_interfaces) |v| {
+        try buf.appendSlice(alloc, "<NetworkInterface>");
+        try serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequestList(alloc, buf, v, "InstanceNetworkInterfaceSpecification");
+        try buf.appendSlice(alloc, "</NetworkInterface>");
+    }
+    if (value.network_performance_options) |v| {
+        try buf.appendSlice(alloc, "<NetworkPerformanceOptions>");
+        try serializeLaunchTemplateNetworkPerformanceOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NetworkPerformanceOptions>");
+    }
+    if (value.operator) |v| {
+        try buf.appendSlice(alloc, "<Operator>");
+        try serializeOperatorRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Operator>");
+    }
+    if (value.placement) |v| {
+        try buf.appendSlice(alloc, "<Placement>");
+        try serializeLaunchTemplatePlacementRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Placement>");
+    }
+    if (value.private_dns_name_options) |v| {
+        try buf.appendSlice(alloc, "<PrivateDnsNameOptions>");
+        try serializeLaunchTemplatePrivateDnsNameOptionsRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PrivateDnsNameOptions>");
+    }
+    if (value.ram_disk_id) |v| {
+        try buf.appendSlice(alloc, "<RamDiskId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RamDiskId>");
+    }
+    if (value.security_group_ids) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupId>");
+        try serializeSecurityGroupIdStringList(alloc, buf, v, "SecurityGroupId");
+        try buf.appendSlice(alloc, "</SecurityGroupId>");
+    }
+    if (value.security_groups) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroup>");
+        try serializeSecurityGroupStringList(alloc, buf, v, "SecurityGroup");
+        try buf.appendSlice(alloc, "</SecurityGroup>");
+    }
+    if (value.tag_specifications) |v| {
+        try buf.appendSlice(alloc, "<TagSpecification>");
+        try serializeLaunchTemplateTagSpecificationRequestList(alloc, buf, v, "LaunchTemplateTagSpecificationRequest");
+        try buf.appendSlice(alloc, "</TagSpecification>");
+    }
+    if (value.user_data) |v| {
+        try buf.appendSlice(alloc, "<UserData>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserData>");
+    }
+}
+
+pub fn serializeRequestSpotLaunchSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RequestSpotLaunchSpecification) !void {
+    if (value.addressing_type) |v| {
+        try buf.appendSlice(alloc, "<addressingType>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</addressingType>");
+    }
+    if (value.block_device_mappings) |v| {
+        try buf.appendSlice(alloc, "<blockDeviceMapping>");
+        try serializeBlockDeviceMappingList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</blockDeviceMapping>");
+    }
+    if (value.ebs_optimized) |v| {
+        try buf.appendSlice(alloc, "<ebsOptimized>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</ebsOptimized>");
+    }
+    if (value.iam_instance_profile) |v| {
+        try buf.appendSlice(alloc, "<iamInstanceProfile>");
+        try serializeIamInstanceProfileSpecification(alloc, buf, v);
+        try buf.appendSlice(alloc, "</iamInstanceProfile>");
+    }
+    if (value.image_id) |v| {
+        try buf.appendSlice(alloc, "<imageId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</imageId>");
+    }
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<instanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</instanceType>");
+    }
+    if (value.kernel_id) |v| {
+        try buf.appendSlice(alloc, "<kernelId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</kernelId>");
+    }
+    if (value.key_name) |v| {
+        try buf.appendSlice(alloc, "<keyName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</keyName>");
+    }
+    if (value.monitoring) |v| {
+        try buf.appendSlice(alloc, "<monitoring>");
+        try serializeRunInstancesMonitoringEnabled(alloc, buf, v);
+        try buf.appendSlice(alloc, "</monitoring>");
+    }
+    if (value.network_interfaces) |v| {
+        try buf.appendSlice(alloc, "<NetworkInterface>");
+        try serializeInstanceNetworkInterfaceSpecificationList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</NetworkInterface>");
+    }
+    if (value.placement) |v| {
+        try buf.appendSlice(alloc, "<placement>");
+        try serializeSpotPlacement(alloc, buf, v);
+        try buf.appendSlice(alloc, "</placement>");
+    }
+    if (value.ramdisk_id) |v| {
+        try buf.appendSlice(alloc, "<ramdiskId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ramdiskId>");
+    }
+    if (value.security_group_ids) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupId>");
+        try serializeRequestSpotLaunchSpecificationSecurityGroupIdList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SecurityGroupId>");
+    }
+    if (value.security_groups) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroup>");
+        try serializeRequestSpotLaunchSpecificationSecurityGroupList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</SecurityGroup>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<subnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</subnetId>");
+    }
+    if (value.user_data) |v| {
+        try buf.appendSlice(alloc, "<userData>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</userData>");
+    }
+}
+
+pub fn serializeReservationFleetInstanceSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReservationFleetInstanceSpecification) !void {
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZoneId>");
+    }
+    if (value.ebs_optimized) |v| {
+        try buf.appendSlice(alloc, "<EbsOptimized>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EbsOptimized>");
+    }
+    if (value.instance_platform) |v| {
+        try buf.appendSlice(alloc, "<InstancePlatform>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstancePlatform>");
+    }
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<InstanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceType>");
+    }
+    if (value.priority) |v| {
+        try buf.appendSlice(alloc, "<Priority>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Priority>");
+    }
+    if (value.weight) |v| {
+        try buf.appendSlice(alloc, "<Weight>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Weight>");
+    }
+}
+
+pub fn serializeReservedInstanceLimitPrice(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReservedInstanceLimitPrice) !void {
+    if (value.amount) |v| {
+        try buf.appendSlice(alloc, "<amount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</amount>");
+    }
+    if (value.currency_code) |v| {
+        try buf.appendSlice(alloc, "<currencyCode>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</currencyCode>");
+    }
+}
+
+pub fn serializeReservedInstancesConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReservedInstancesConfiguration) !void {
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<availabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<availabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZoneId>");
+    }
+    if (value.instance_count) |v| {
+        try buf.appendSlice(alloc, "<instanceCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</instanceCount>");
+    }
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<instanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</instanceType>");
+    }
+    if (value.platform) |v| {
+        try buf.appendSlice(alloc, "<platform>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</platform>");
+    }
+    if (value.scope) |v| {
+        try buf.appendSlice(alloc, "<scope>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</scope>");
+    }
+}
+
+pub fn serializeResourceStatementRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResourceStatementRequest) !void {
+    if (value.resources) |v| {
+        try buf.appendSlice(alloc, "<Resource>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Resource>");
+    }
+    if (value.resource_types) |v| {
+        try buf.appendSlice(alloc, "<ResourceType>");
+        try serializeValueStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</ResourceType>");
+    }
+}
+
+pub fn serializeResourceTypeOption(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResourceTypeOption) !void {
+    if (value.option_name) |v| {
+        try buf.appendSlice(alloc, "<OptionName>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</OptionName>");
+    }
+    if (value.option_values) |v| {
+        try buf.appendSlice(alloc, "<OptionValue>");
+        try serializeResourceTypeOptionValuesList(alloc, buf, v, "member");
+        try buf.appendSlice(alloc, "</OptionValue>");
+    }
+}
+
+pub fn serializeResourceTypeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResourceTypeRequest) !void {
+    if (value.resource_type) |v| {
+        try buf.appendSlice(alloc, "<ResourceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ResourceType>");
+    }
+    if (value.resource_type_options) |v| {
+        try buf.appendSlice(alloc, "<ResourceTypeOption>");
+        try serializeResourceTypeOptionList(alloc, buf, v, "member");
+        try buf.appendSlice(alloc, "</ResourceTypeOption>");
+    }
+}
+
+pub fn serializeRouteServerBgpOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RouteServerBgpOptionsRequest) !void {
+    try buf.appendSlice(alloc, "<PeerAsn>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.peer_asn}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</PeerAsn>");
+    if (value.peer_liveness_detection) |v| {
+        try buf.appendSlice(alloc, "<PeerLivenessDetection>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</PeerLivenessDetection>");
+    }
+}
+
+pub fn serializeRunInstancesMonitoringEnabled(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RunInstancesMonitoringEnabled) !void {
+    try buf.appendSlice(alloc, "<enabled>");
+    try buf.appendSlice(alloc, if (value.enabled) "true" else "false");
+    try buf.appendSlice(alloc, "</enabled>");
+}
+
+pub fn serializeS3ObjectTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3ObjectTag) !void {
+    if (value.key) |v| {
+        try buf.appendSlice(alloc, "<Key>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Key>");
+    }
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializeS3Storage(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3Storage) !void {
+    if (value.aws_access_key_id) |v| {
+        try buf.appendSlice(alloc, "<AWSAccessKeyId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AWSAccessKeyId>");
+    }
+    if (value.bucket) |v| {
+        try buf.appendSlice(alloc, "<bucket>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</bucket>");
+    }
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</prefix>");
+    }
+    if (value.upload_policy_signature) |v| {
+        try buf.appendSlice(alloc, "<uploadPolicySignature>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</uploadPolicySignature>");
+    }
+}
+
+pub fn serializeScheduledInstanceRecurrenceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstanceRecurrenceRequest) !void {
+    if (value.frequency) |v| {
+        try buf.appendSlice(alloc, "<Frequency>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Frequency>");
+    }
+    if (value.interval) |v| {
+        try buf.appendSlice(alloc, "<Interval>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Interval>");
+    }
+    if (value.occurrence_days) |v| {
+        try buf.appendSlice(alloc, "<OccurrenceDay>");
+        try serializeOccurrenceDayRequestSet(alloc, buf, v, "OccurenceDay");
+        try buf.appendSlice(alloc, "</OccurrenceDay>");
+    }
+    if (value.occurrence_relative_to_end) |v| {
+        try buf.appendSlice(alloc, "<OccurrenceRelativeToEnd>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</OccurrenceRelativeToEnd>");
+    }
+    if (value.occurrence_unit) |v| {
+        try buf.appendSlice(alloc, "<OccurrenceUnit>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</OccurrenceUnit>");
+    }
+}
+
+pub fn serializeScheduledInstancesBlockDeviceMapping(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesBlockDeviceMapping) !void {
+    if (value.device_name) |v| {
+        try buf.appendSlice(alloc, "<DeviceName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DeviceName>");
+    }
+    if (value.ebs) |v| {
+        try buf.appendSlice(alloc, "<Ebs>");
+        try serializeScheduledInstancesEbs(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ebs>");
+    }
+    if (value.no_device) |v| {
+        try buf.appendSlice(alloc, "<NoDevice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NoDevice>");
+    }
+    if (value.virtual_name) |v| {
+        try buf.appendSlice(alloc, "<VirtualName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</VirtualName>");
+    }
+}
+
+pub fn serializeScheduledInstancesEbs(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesEbs) !void {
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<DeleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</DeleteOnTermination>");
+    }
+    if (value.encrypted) |v| {
+        try buf.appendSlice(alloc, "<Encrypted>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Encrypted>");
+    }
+    if (value.iops) |v| {
+        try buf.appendSlice(alloc, "<Iops>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Iops>");
+    }
+    if (value.snapshot_id) |v| {
+        try buf.appendSlice(alloc, "<SnapshotId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SnapshotId>");
+    }
+    if (value.volume_size) |v| {
+        try buf.appendSlice(alloc, "<VolumeSize>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</VolumeSize>");
+    }
+    if (value.volume_type) |v| {
+        try buf.appendSlice(alloc, "<VolumeType>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</VolumeType>");
+    }
+}
+
+pub fn serializeScheduledInstancesIamInstanceProfile(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesIamInstanceProfile) !void {
+    if (value.arn) |v| {
+        try buf.appendSlice(alloc, "<Arn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Arn>");
+    }
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<Name>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Name>");
+    }
+}
+
+pub fn serializeScheduledInstancesIpv6Address(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesIpv6Address) !void {
+    if (value.ipv_6_address) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Address>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ipv6Address>");
+    }
+}
+
+pub fn serializeScheduledInstancesLaunchSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesLaunchSpecification) !void {
+    if (value.block_device_mappings) |v| {
+        try buf.appendSlice(alloc, "<BlockDeviceMapping>");
+        try serializeScheduledInstancesBlockDeviceMappingSet(alloc, buf, v, "BlockDeviceMapping");
+        try buf.appendSlice(alloc, "</BlockDeviceMapping>");
+    }
+    if (value.ebs_optimized) |v| {
+        try buf.appendSlice(alloc, "<EbsOptimized>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EbsOptimized>");
+    }
+    if (value.iam_instance_profile) |v| {
+        try buf.appendSlice(alloc, "<IamInstanceProfile>");
+        try serializeScheduledInstancesIamInstanceProfile(alloc, buf, v);
+        try buf.appendSlice(alloc, "</IamInstanceProfile>");
+    }
+    try buf.appendSlice(alloc, "<ImageId>");
+    try appendXmlEscaped(alloc, buf, value.image_id);
+    try buf.appendSlice(alloc, "</ImageId>");
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<InstanceType>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InstanceType>");
+    }
+    if (value.kernel_id) |v| {
+        try buf.appendSlice(alloc, "<KernelId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KernelId>");
+    }
+    if (value.key_name) |v| {
+        try buf.appendSlice(alloc, "<KeyName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KeyName>");
+    }
+    if (value.monitoring) |v| {
+        try buf.appendSlice(alloc, "<Monitoring>");
+        try serializeScheduledInstancesMonitoring(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Monitoring>");
+    }
+    if (value.network_interfaces) |v| {
+        try buf.appendSlice(alloc, "<NetworkInterface>");
+        try serializeScheduledInstancesNetworkInterfaceSet(alloc, buf, v, "NetworkInterface");
+        try buf.appendSlice(alloc, "</NetworkInterface>");
+    }
+    if (value.placement) |v| {
+        try buf.appendSlice(alloc, "<Placement>");
+        try serializeScheduledInstancesPlacement(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Placement>");
+    }
+    if (value.ramdisk_id) |v| {
+        try buf.appendSlice(alloc, "<RamdiskId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RamdiskId>");
+    }
+    if (value.security_group_ids) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupId>");
+        try serializeScheduledInstancesSecurityGroupIdSet(alloc, buf, v, "SecurityGroupId");
+        try buf.appendSlice(alloc, "</SecurityGroupId>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+    if (value.user_data) |v| {
+        try buf.appendSlice(alloc, "<UserData>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserData>");
+    }
+}
+
+pub fn serializeScheduledInstancesMonitoring(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesMonitoring) !void {
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+}
+
+pub fn serializeScheduledInstancesNetworkInterface(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesNetworkInterface) !void {
+    if (value.associate_public_ip_address) |v| {
+        try buf.appendSlice(alloc, "<AssociatePublicIpAddress>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</AssociatePublicIpAddress>");
+    }
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(alloc, "<DeleteOnTermination>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</DeleteOnTermination>");
+    }
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+    if (value.device_index) |v| {
+        try buf.appendSlice(alloc, "<DeviceIndex>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</DeviceIndex>");
+    }
+    if (value.groups) |v| {
+        try buf.appendSlice(alloc, "<Group>");
+        try serializeScheduledInstancesSecurityGroupIdSet(alloc, buf, v, "SecurityGroupId");
+        try buf.appendSlice(alloc, "</Group>");
+    }
+    if (value.ipv_6_address_count) |v| {
+        try buf.appendSlice(alloc, "<Ipv6AddressCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Ipv6AddressCount>");
+    }
+    if (value.ipv_6_addresses) |v| {
+        try buf.appendSlice(alloc, "<Ipv6Address>");
+        try serializeScheduledInstancesIpv6AddressList(alloc, buf, v, "Ipv6Address");
+        try buf.appendSlice(alloc, "</Ipv6Address>");
+    }
+    if (value.network_interface_id) |v| {
+        try buf.appendSlice(alloc, "<NetworkInterfaceId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NetworkInterfaceId>");
+    }
+    if (value.private_ip_address) |v| {
+        try buf.appendSlice(alloc, "<PrivateIpAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PrivateIpAddress>");
+    }
+    if (value.private_ip_address_configs) |v| {
+        try buf.appendSlice(alloc, "<PrivateIpAddressConfig>");
+        try serializePrivateIpAddressConfigSet(alloc, buf, v, "PrivateIpAddressConfigSet");
+        try buf.appendSlice(alloc, "</PrivateIpAddressConfig>");
+    }
+    if (value.secondary_private_ip_address_count) |v| {
+        try buf.appendSlice(alloc, "<SecondaryPrivateIpAddressCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</SecondaryPrivateIpAddressCount>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+}
+
+pub fn serializeScheduledInstancesPlacement(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesPlacement) !void {
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<AvailabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AvailabilityZone>");
+    }
+    if (value.group_name) |v| {
+        try buf.appendSlice(alloc, "<GroupName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</GroupName>");
+    }
+}
+
+pub fn serializeScheduledInstancesPrivateIpAddressConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesPrivateIpAddressConfig) !void {
+    if (value.primary) |v| {
+        try buf.appendSlice(alloc, "<Primary>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Primary>");
+    }
+    if (value.private_ip_address) |v| {
+        try buf.appendSlice(alloc, "<PrivateIpAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PrivateIpAddress>");
+    }
+}
+
+pub fn serializeSecurityGroupRuleDescription(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SecurityGroupRuleDescription) !void {
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+    if (value.security_group_rule_id) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupRuleId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SecurityGroupRuleId>");
+    }
+}
+
+pub fn serializeSecurityGroupRuleRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SecurityGroupRuleRequest) !void {
+    if (value.cidr_ipv_4) |v| {
+        try buf.appendSlice(alloc, "<CidrIpv4>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CidrIpv4>");
+    }
+    if (value.cidr_ipv_6) |v| {
+        try buf.appendSlice(alloc, "<CidrIpv6>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CidrIpv6>");
+    }
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+    if (value.from_port) |v| {
+        try buf.appendSlice(alloc, "<FromPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</FromPort>");
+    }
+    if (value.ip_protocol) |v| {
+        try buf.appendSlice(alloc, "<IpProtocol>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</IpProtocol>");
+    }
+    if (value.prefix_list_id) |v| {
+        try buf.appendSlice(alloc, "<PrefixListId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PrefixListId>");
+    }
+    if (value.referenced_group_id) |v| {
+        try buf.appendSlice(alloc, "<ReferencedGroupId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ReferencedGroupId>");
+    }
+    if (value.to_port) |v| {
+        try buf.appendSlice(alloc, "<ToPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ToPort>");
+    }
+}
+
+pub fn serializeSecurityGroupRuleUpdate(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SecurityGroupRuleUpdate) !void {
+    if (value.security_group_rule) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupRule>");
+        try serializeSecurityGroupRuleRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SecurityGroupRule>");
+    }
+    try buf.appendSlice(alloc, "<SecurityGroupRuleId>");
+    try appendXmlEscaped(alloc, buf, value.security_group_rule_id);
+    try buf.appendSlice(alloc, "</SecurityGroupRuleId>");
+}
+
+pub fn serializeSlotDateTimeRangeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SlotDateTimeRangeRequest) !void {
+    try buf.appendSlice(alloc, "<EarliestTime>");
+    {
+        const ts_str = std.fmt.allocPrint(alloc, "{d}", .{value.earliest_time}) catch "";
+        try buf.appendSlice(alloc, ts_str);
+    }
+    try buf.appendSlice(alloc, "</EarliestTime>");
+    try buf.appendSlice(alloc, "<LatestTime>");
+    {
+        const ts_str = std.fmt.allocPrint(alloc, "{d}", .{value.latest_time}) catch "";
+        try buf.appendSlice(alloc, ts_str);
+    }
+    try buf.appendSlice(alloc, "</LatestTime>");
+}
+
+pub fn serializeSlotStartTimeRangeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SlotStartTimeRangeRequest) !void {
+    if (value.earliest_time) |v| {
+        try buf.appendSlice(alloc, "<EarliestTime>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</EarliestTime>");
+    }
+    if (value.latest_time) |v| {
+        try buf.appendSlice(alloc, "<LatestTime>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</LatestTime>");
+    }
+}
+
+pub fn serializeSnapshotDiskContainer(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SnapshotDiskContainer) !void {
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+    if (value.format) |v| {
+        try buf.appendSlice(alloc, "<Format>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Format>");
+    }
+    if (value.url) |v| {
+        try buf.appendSlice(alloc, "<Url>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Url>");
+    }
+    if (value.user_bucket) |v| {
+        try buf.appendSlice(alloc, "<UserBucket>");
+        try serializeUserBucket(alloc, buf, v);
+        try buf.appendSlice(alloc, "</UserBucket>");
+    }
+}
+
+pub fn serializeSpotCapacityRebalance(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotCapacityRebalance) !void {
+    if (value.replacement_strategy) |v| {
+        try buf.appendSlice(alloc, "<replacementStrategy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</replacementStrategy>");
+    }
+    if (value.termination_delay) |v| {
+        try buf.appendSlice(alloc, "<terminationDelay>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</terminationDelay>");
+    }
+}
+
+pub fn serializeSpotFleetLaunchSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotFleetLaunchSpecification) !void {
+    if (value.addressing_type) |v| {
+        try buf.appendSlice(alloc, "<addressingType>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</addressingType>");
+    }
+    if (value.block_device_mappings) |v| {
+        try buf.appendSlice(alloc, "<blockDeviceMapping>");
+        try serializeBlockDeviceMappingList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</blockDeviceMapping>");
+    }
+    if (value.ebs_optimized) |v| {
+        try buf.appendSlice(alloc, "<ebsOptimized>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</ebsOptimized>");
+    }
+    if (value.iam_instance_profile) |v| {
+        try buf.appendSlice(alloc, "<iamInstanceProfile>");
+        try serializeIamInstanceProfileSpecification(alloc, buf, v);
+        try buf.appendSlice(alloc, "</iamInstanceProfile>");
+    }
+    if (value.image_id) |v| {
+        try buf.appendSlice(alloc, "<imageId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</imageId>");
+    }
+    if (value.instance_requirements) |v| {
+        try buf.appendSlice(alloc, "<instanceRequirements>");
+        try serializeInstanceRequirements(alloc, buf, v);
+        try buf.appendSlice(alloc, "</instanceRequirements>");
+    }
+    if (value.instance_type) |v| {
+        try buf.appendSlice(alloc, "<instanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</instanceType>");
+    }
+    if (value.kernel_id) |v| {
+        try buf.appendSlice(alloc, "<kernelId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</kernelId>");
+    }
+    if (value.key_name) |v| {
+        try buf.appendSlice(alloc, "<keyName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</keyName>");
+    }
+    if (value.monitoring) |v| {
+        try buf.appendSlice(alloc, "<monitoring>");
+        try serializeSpotFleetMonitoring(alloc, buf, v);
+        try buf.appendSlice(alloc, "</monitoring>");
+    }
+    if (value.network_interfaces) |v| {
+        try buf.appendSlice(alloc, "<networkInterfaceSet>");
+        try serializeInstanceNetworkInterfaceSpecificationList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</networkInterfaceSet>");
+    }
+    if (value.placement) |v| {
+        try buf.appendSlice(alloc, "<placement>");
+        try serializeSpotPlacement(alloc, buf, v);
+        try buf.appendSlice(alloc, "</placement>");
+    }
+    if (value.ramdisk_id) |v| {
+        try buf.appendSlice(alloc, "<ramdiskId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ramdiskId>");
+    }
+    if (value.security_groups) |v| {
+        try buf.appendSlice(alloc, "<groupSet>");
+        try serializeGroupIdentifierList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</groupSet>");
+    }
+    if (value.spot_price) |v| {
+        try buf.appendSlice(alloc, "<spotPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</spotPrice>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<subnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</subnetId>");
+    }
+    if (value.tag_specifications) |v| {
+        try buf.appendSlice(alloc, "<tagSpecificationSet>");
+        try serializeSpotFleetTagSpecificationList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</tagSpecificationSet>");
+    }
+    if (value.user_data) |v| {
+        try buf.appendSlice(alloc, "<userData>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</userData>");
+    }
+    if (value.weighted_capacity) |v| {
+        try buf.appendSlice(alloc, "<weightedCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</weightedCapacity>");
+    }
+}
+
+pub fn serializeSpotFleetMonitoring(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotFleetMonitoring) !void {
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</enabled>");
+    }
+}
+
+pub fn serializeSpotFleetRequestConfigData(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotFleetRequestConfigData) !void {
+    if (value.allocation_strategy) |v| {
+        try buf.appendSlice(alloc, "<allocationStrategy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</allocationStrategy>");
+    }
+    if (value.client_token) |v| {
+        try buf.appendSlice(alloc, "<clientToken>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</clientToken>");
+    }
+    if (value.context) |v| {
+        try buf.appendSlice(alloc, "<context>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</context>");
+    }
+    if (value.excess_capacity_termination_policy) |v| {
+        try buf.appendSlice(alloc, "<excessCapacityTerminationPolicy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</excessCapacityTerminationPolicy>");
+    }
+    if (value.fulfilled_capacity) |v| {
+        try buf.appendSlice(alloc, "<fulfilledCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</fulfilledCapacity>");
+    }
+    try buf.appendSlice(alloc, "<iamFleetRole>");
+    try appendXmlEscaped(alloc, buf, value.iam_fleet_role);
+    try buf.appendSlice(alloc, "</iamFleetRole>");
+    if (value.instance_interruption_behavior) |v| {
+        try buf.appendSlice(alloc, "<instanceInterruptionBehavior>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</instanceInterruptionBehavior>");
+    }
+    if (value.instance_pools_to_use_count) |v| {
+        try buf.appendSlice(alloc, "<instancePoolsToUseCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</instancePoolsToUseCount>");
+    }
+    if (value.launch_specifications) |v| {
+        try buf.appendSlice(alloc, "<launchSpecifications>");
+        try serializeLaunchSpecsList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</launchSpecifications>");
+    }
+    if (value.launch_template_configs) |v| {
+        try buf.appendSlice(alloc, "<launchTemplateConfigs>");
+        try serializeLaunchTemplateConfigList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</launchTemplateConfigs>");
+    }
+    if (value.load_balancers_config) |v| {
+        try buf.appendSlice(alloc, "<loadBalancersConfig>");
+        try serializeLoadBalancersConfig(alloc, buf, v);
+        try buf.appendSlice(alloc, "</loadBalancersConfig>");
+    }
+    if (value.on_demand_allocation_strategy) |v| {
+        try buf.appendSlice(alloc, "<onDemandAllocationStrategy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</onDemandAllocationStrategy>");
+    }
+    if (value.on_demand_fulfilled_capacity) |v| {
+        try buf.appendSlice(alloc, "<onDemandFulfilledCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</onDemandFulfilledCapacity>");
+    }
+    if (value.on_demand_max_total_price) |v| {
+        try buf.appendSlice(alloc, "<onDemandMaxTotalPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</onDemandMaxTotalPrice>");
+    }
+    if (value.on_demand_target_capacity) |v| {
+        try buf.appendSlice(alloc, "<onDemandTargetCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</onDemandTargetCapacity>");
+    }
+    if (value.replace_unhealthy_instances) |v| {
+        try buf.appendSlice(alloc, "<replaceUnhealthyInstances>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</replaceUnhealthyInstances>");
+    }
+    if (value.spot_maintenance_strategies) |v| {
+        try buf.appendSlice(alloc, "<spotMaintenanceStrategies>");
+        try serializeSpotMaintenanceStrategies(alloc, buf, v);
+        try buf.appendSlice(alloc, "</spotMaintenanceStrategies>");
+    }
+    if (value.spot_max_total_price) |v| {
+        try buf.appendSlice(alloc, "<spotMaxTotalPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</spotMaxTotalPrice>");
+    }
+    if (value.spot_price) |v| {
+        try buf.appendSlice(alloc, "<spotPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</spotPrice>");
+    }
+    if (value.tag_specifications) |v| {
+        try buf.appendSlice(alloc, "<TagSpecification>");
+        try serializeTagSpecificationList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</TagSpecification>");
+    }
+    try buf.appendSlice(alloc, "<targetCapacity>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.target_capacity}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</targetCapacity>");
+    if (value.target_capacity_unit_type) |v| {
+        try buf.appendSlice(alloc, "<targetCapacityUnitType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</targetCapacityUnitType>");
+    }
+    if (value.terminate_instances_with_expiration) |v| {
+        try buf.appendSlice(alloc, "<terminateInstancesWithExpiration>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</terminateInstancesWithExpiration>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<type>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</type>");
+    }
+    if (value.valid_from) |v| {
+        try buf.appendSlice(alloc, "<validFrom>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</validFrom>");
+    }
+    if (value.valid_until) |v| {
+        try buf.appendSlice(alloc, "<validUntil>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</validUntil>");
+    }
+}
+
+pub fn serializeSpotFleetTagSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotFleetTagSpecification) !void {
+    if (value.resource_type) |v| {
+        try buf.appendSlice(alloc, "<resourceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</resourceType>");
+    }
+    if (value.tags) |v| {
+        try buf.appendSlice(alloc, "<tag>");
+        try serializeTagList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</tag>");
+    }
+}
+
+pub fn serializeSpotMaintenanceStrategies(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotMaintenanceStrategies) !void {
+    if (value.capacity_rebalance) |v| {
+        try buf.appendSlice(alloc, "<capacityRebalance>");
+        try serializeSpotCapacityRebalance(alloc, buf, v);
+        try buf.appendSlice(alloc, "</capacityRebalance>");
+    }
+}
+
+pub fn serializeSpotMarketOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotMarketOptions) !void {
+    if (value.block_duration_minutes) |v| {
+        try buf.appendSlice(alloc, "<BlockDurationMinutes>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</BlockDurationMinutes>");
+    }
+    if (value.instance_interruption_behavior) |v| {
+        try buf.appendSlice(alloc, "<InstanceInterruptionBehavior>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceInterruptionBehavior>");
+    }
+    if (value.max_price) |v| {
+        try buf.appendSlice(alloc, "<MaxPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MaxPrice>");
+    }
+    if (value.spot_instance_type) |v| {
+        try buf.appendSlice(alloc, "<SpotInstanceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</SpotInstanceType>");
+    }
+    if (value.valid_until) |v| {
+        try buf.appendSlice(alloc, "<ValidUntil>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</ValidUntil>");
+    }
+}
+
+pub fn serializeSpotOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotOptionsRequest) !void {
+    if (value.allocation_strategy) |v| {
+        try buf.appendSlice(alloc, "<AllocationStrategy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AllocationStrategy>");
+    }
+    if (value.instance_interruption_behavior) |v| {
+        try buf.appendSlice(alloc, "<InstanceInterruptionBehavior>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InstanceInterruptionBehavior>");
+    }
+    if (value.instance_pools_to_use_count) |v| {
+        try buf.appendSlice(alloc, "<InstancePoolsToUseCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</InstancePoolsToUseCount>");
+    }
+    if (value.maintenance_strategies) |v| {
+        try buf.appendSlice(alloc, "<MaintenanceStrategies>");
+        try serializeFleetSpotMaintenanceStrategiesRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MaintenanceStrategies>");
+    }
+    if (value.max_total_price) |v| {
+        try buf.appendSlice(alloc, "<MaxTotalPrice>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</MaxTotalPrice>");
+    }
+    if (value.min_target_capacity) |v| {
+        try buf.appendSlice(alloc, "<MinTargetCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</MinTargetCapacity>");
+    }
+    if (value.single_availability_zone) |v| {
+        try buf.appendSlice(alloc, "<SingleAvailabilityZone>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</SingleAvailabilityZone>");
+    }
+    if (value.single_instance_type) |v| {
+        try buf.appendSlice(alloc, "<SingleInstanceType>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</SingleInstanceType>");
+    }
+}
+
+pub fn serializeSpotPlacement(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotPlacement) !void {
+    if (value.availability_zone) |v| {
+        try buf.appendSlice(alloc, "<availabilityZone>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZone>");
+    }
+    if (value.availability_zone_id) |v| {
+        try buf.appendSlice(alloc, "<availabilityZoneId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</availabilityZoneId>");
+    }
+    if (value.group_name) |v| {
+        try buf.appendSlice(alloc, "<groupName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</groupName>");
+    }
+    if (value.tenancy) |v| {
+        try buf.appendSlice(alloc, "<tenancy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</tenancy>");
+    }
+}
+
+pub fn serializeStorage(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Storage) !void {
+    if (value.s_3) |v| {
+        try buf.appendSlice(alloc, "<S3>");
+        try serializeS3Storage(alloc, buf, v);
+        try buf.appendSlice(alloc, "</S3>");
+    }
+}
+
+pub fn serializeStorageLocation(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: StorageLocation) !void {
+    if (value.bucket) |v| {
+        try buf.appendSlice(alloc, "<Bucket>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Bucket>");
+    }
+    if (value.key) |v| {
+        try buf.appendSlice(alloc, "<Key>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Key>");
+    }
+}
+
+pub fn serializeSubnetConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SubnetConfiguration) !void {
+    if (value.ipv_4) |v| {
+        try buf.appendSlice(alloc, "<Ipv4>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ipv4>");
+    }
+    if (value.ipv_6) |v| {
+        try buf.appendSlice(alloc, "<Ipv6>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Ipv6>");
+    }
+    if (value.subnet_id) |v| {
+        try buf.appendSlice(alloc, "<SubnetId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SubnetId>");
+    }
+}
+
+pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {
+    if (value.key) |v| {
+        try buf.appendSlice(alloc, "<key>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</key>");
+    }
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</value>");
+    }
+}
+
+pub fn serializeTagSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TagSpecification) !void {
+    if (value.resource_type) |v| {
+        try buf.appendSlice(alloc, "<resourceType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</resourceType>");
+    }
+    if (value.tags) |v| {
+        try buf.appendSlice(alloc, "<Tag>");
+        try serializeTagList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Tag>");
+    }
+}
+
+pub fn serializeTargetCapacitySpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetCapacitySpecificationRequest) !void {
+    if (value.default_target_capacity_type) |v| {
+        try buf.appendSlice(alloc, "<DefaultTargetCapacityType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DefaultTargetCapacityType>");
+    }
+    if (value.on_demand_target_capacity) |v| {
+        try buf.appendSlice(alloc, "<OnDemandTargetCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</OnDemandTargetCapacity>");
+    }
+    if (value.spot_target_capacity) |v| {
+        try buf.appendSlice(alloc, "<SpotTargetCapacity>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</SpotTargetCapacity>");
+    }
+    if (value.target_capacity_unit_type) |v| {
+        try buf.appendSlice(alloc, "<TargetCapacityUnitType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</TargetCapacityUnitType>");
+    }
+    try buf.appendSlice(alloc, "<TotalTargetCapacity>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.total_target_capacity}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</TotalTargetCapacity>");
+}
+
+pub fn serializeTargetConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetConfigurationRequest) !void {
+    if (value.instance_count) |v| {
+        try buf.appendSlice(alloc, "<InstanceCount>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</InstanceCount>");
+    }
+    try buf.appendSlice(alloc, "<OfferingId>");
+    try appendXmlEscaped(alloc, buf, value.offering_id);
+    try buf.appendSlice(alloc, "</OfferingId>");
+}
+
+pub fn serializeTargetGroup(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetGroup) !void {
+    if (value.arn) |v| {
+        try buf.appendSlice(alloc, "<arn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</arn>");
+    }
+}
+
+pub fn serializeTargetGroupsConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetGroupsConfig) !void {
+    if (value.target_groups) |v| {
+        try buf.appendSlice(alloc, "<targetGroups>");
+        try serializeTargetGroups(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</targetGroups>");
+    }
+}
+
+pub fn serializeThroughResourcesStatementRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ThroughResourcesStatementRequest) !void {
+    if (value.resource_statement) |v| {
+        try buf.appendSlice(alloc, "<ResourceStatement>");
+        try serializeResourceStatementRequest(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ResourceStatement>");
+    }
+}
+
+pub fn serializeTotalLocalStorageGB(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TotalLocalStorageGB) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeTotalLocalStorageGBRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TotalLocalStorageGBRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<Min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Min>");
+    }
+}
+
+pub fn serializeTrafficMirrorPortRangeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TrafficMirrorPortRangeRequest) !void {
+    if (value.from_port) |v| {
+        try buf.appendSlice(alloc, "<FromPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</FromPort>");
+    }
+    if (value.to_port) |v| {
+        try buf.appendSlice(alloc, "<ToPort>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ToPort>");
+    }
+}
+
+pub fn serializeTransitGatewayConnectRequestBgpOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TransitGatewayConnectRequestBgpOptions) !void {
+    if (value.peer_asn) |v| {
+        try buf.appendSlice(alloc, "<PeerAsn>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</PeerAsn>");
+    }
+}
+
+pub fn serializeTransitGatewayRequestOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TransitGatewayRequestOptions) !void {
+    if (value.amazon_side_asn) |v| {
+        try buf.appendSlice(alloc, "<AmazonSideAsn>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</AmazonSideAsn>");
+    }
+    if (value.auto_accept_shared_attachments) |v| {
+        try buf.appendSlice(alloc, "<AutoAcceptSharedAttachments>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</AutoAcceptSharedAttachments>");
+    }
+    if (value.default_route_table_association) |v| {
+        try buf.appendSlice(alloc, "<DefaultRouteTableAssociation>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DefaultRouteTableAssociation>");
+    }
+    if (value.default_route_table_propagation) |v| {
+        try buf.appendSlice(alloc, "<DefaultRouteTablePropagation>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DefaultRouteTablePropagation>");
+    }
+    if (value.dns_support) |v| {
+        try buf.appendSlice(alloc, "<DnsSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DnsSupport>");
+    }
+    if (value.multicast_support) |v| {
+        try buf.appendSlice(alloc, "<MulticastSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</MulticastSupport>");
+    }
+    if (value.security_group_referencing_support) |v| {
+        try buf.appendSlice(alloc, "<SecurityGroupReferencingSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</SecurityGroupReferencingSupport>");
+    }
+    if (value.transit_gateway_cidr_blocks) |v| {
+        try buf.appendSlice(alloc, "<TransitGatewayCidrBlocks>");
+        try serializeTransitGatewayCidrBlockStringList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</TransitGatewayCidrBlocks>");
+    }
+    if (value.vpn_ecmp_support) |v| {
+        try buf.appendSlice(alloc, "<VpnEcmpSupport>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</VpnEcmpSupport>");
+    }
+}
+
+pub fn serializeUserBucket(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: UserBucket) !void {
+    if (value.s_3_bucket) |v| {
+        try buf.appendSlice(alloc, "<S3Bucket>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</S3Bucket>");
+    }
+    if (value.s_3_key) |v| {
+        try buf.appendSlice(alloc, "<S3Key>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</S3Key>");
+    }
+}
+
+pub fn serializeUserData(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: UserData) !void {
+    if (value.data) |v| {
+        try buf.appendSlice(alloc, "<data>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</data>");
+    }
+}
+
+pub fn serializeUserIdGroupPair(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: UserIdGroupPair) !void {
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</description>");
+    }
+    if (value.group_id) |v| {
+        try buf.appendSlice(alloc, "<groupId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</groupId>");
+    }
+    if (value.group_name) |v| {
+        try buf.appendSlice(alloc, "<groupName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</groupName>");
+    }
+    if (value.peering_status) |v| {
+        try buf.appendSlice(alloc, "<peeringStatus>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</peeringStatus>");
+    }
+    if (value.user_id) |v| {
+        try buf.appendSlice(alloc, "<userId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</userId>");
+    }
+    if (value.vpc_id) |v| {
+        try buf.appendSlice(alloc, "<vpcId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</vpcId>");
+    }
+    if (value.vpc_peering_connection_id) |v| {
+        try buf.appendSlice(alloc, "<vpcPeeringConnectionId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</vpcPeeringConnectionId>");
+    }
+}
+
+pub fn serializeVCpuCountRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VCpuCountRange) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</max>");
+    }
+    if (value.min) |v| {
+        try buf.appendSlice(alloc, "<min>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</min>");
+    }
+}
+
+pub fn serializeVCpuCountRangeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VCpuCountRangeRequest) !void {
+    if (value.max) |v| {
+        try buf.appendSlice(alloc, "<Max>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Max>");
+    }
+    try buf.appendSlice(alloc, "<Min>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.min}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</Min>");
+}
+
+pub fn serializeVerifiedAccessLogCloudWatchLogsDestinationOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VerifiedAccessLogCloudWatchLogsDestinationOptions) !void {
+    try buf.appendSlice(alloc, "<Enabled>");
+    try buf.appendSlice(alloc, if (value.enabled) "true" else "false");
+    try buf.appendSlice(alloc, "</Enabled>");
+    if (value.log_group) |v| {
+        try buf.appendSlice(alloc, "<LogGroup>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LogGroup>");
+    }
+}
+
+pub fn serializeVerifiedAccessLogKinesisDataFirehoseDestinationOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VerifiedAccessLogKinesisDataFirehoseDestinationOptions) !void {
+    if (value.delivery_stream) |v| {
+        try buf.appendSlice(alloc, "<DeliveryStream>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DeliveryStream>");
+    }
+    try buf.appendSlice(alloc, "<Enabled>");
+    try buf.appendSlice(alloc, if (value.enabled) "true" else "false");
+    try buf.appendSlice(alloc, "</Enabled>");
+}
+
+pub fn serializeVerifiedAccessLogOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VerifiedAccessLogOptions) !void {
+    if (value.cloud_watch_logs) |v| {
+        try buf.appendSlice(alloc, "<CloudWatchLogs>");
+        try serializeVerifiedAccessLogCloudWatchLogsDestinationOptions(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CloudWatchLogs>");
+    }
+    if (value.include_trust_context) |v| {
+        try buf.appendSlice(alloc, "<IncludeTrustContext>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</IncludeTrustContext>");
+    }
+    if (value.kinesis_data_firehose) |v| {
+        try buf.appendSlice(alloc, "<KinesisDataFirehose>");
+        try serializeVerifiedAccessLogKinesisDataFirehoseDestinationOptions(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KinesisDataFirehose>");
+    }
+    if (value.log_version) |v| {
+        try buf.appendSlice(alloc, "<LogVersion>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LogVersion>");
+    }
+    if (value.s_3) |v| {
+        try buf.appendSlice(alloc, "<S3>");
+        try serializeVerifiedAccessLogS3DestinationOptions(alloc, buf, v);
+        try buf.appendSlice(alloc, "</S3>");
+    }
+}
+
+pub fn serializeVerifiedAccessLogS3DestinationOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VerifiedAccessLogS3DestinationOptions) !void {
+    if (value.bucket_name) |v| {
+        try buf.appendSlice(alloc, "<BucketName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BucketName>");
+    }
+    if (value.bucket_owner) |v| {
+        try buf.appendSlice(alloc, "<BucketOwner>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BucketOwner>");
+    }
+    try buf.appendSlice(alloc, "<Enabled>");
+    try buf.appendSlice(alloc, if (value.enabled) "true" else "false");
+    try buf.appendSlice(alloc, "</Enabled>");
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+}
+
+pub fn serializeVerifiedAccessSseSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VerifiedAccessSseSpecificationRequest) !void {
+    if (value.customer_managed_key_enabled) |v| {
+        try buf.appendSlice(alloc, "<CustomerManagedKeyEnabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</CustomerManagedKeyEnabled>");
+    }
+    if (value.kms_key_arn) |v| {
+        try buf.appendSlice(alloc, "<KmsKeyArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KmsKeyArn>");
+    }
+}
+
+pub fn serializeVolumeDetail(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VolumeDetail) !void {
+    try buf.appendSlice(alloc, "<size>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.size}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</size>");
+}
+
+pub fn serializeVpcEncryptionControlConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VpcEncryptionControlConfiguration) !void {
+    if (value.egress_only_internet_gateway_exclusion) |v| {
+        try buf.appendSlice(alloc, "<EgressOnlyInternetGatewayExclusion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</EgressOnlyInternetGatewayExclusion>");
+    }
+    if (value.elastic_file_system_exclusion) |v| {
+        try buf.appendSlice(alloc, "<ElasticFileSystemExclusion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ElasticFileSystemExclusion>");
+    }
+    if (value.internet_gateway_exclusion) |v| {
+        try buf.appendSlice(alloc, "<InternetGatewayExclusion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</InternetGatewayExclusion>");
+    }
+    if (value.lambda_exclusion) |v| {
+        try buf.appendSlice(alloc, "<LambdaExclusion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</LambdaExclusion>");
+    }
+    try buf.appendSlice(alloc, "<Mode>");
+    try buf.appendSlice(alloc, @tagName(value.mode));
+    try buf.appendSlice(alloc, "</Mode>");
+    if (value.nat_gateway_exclusion) |v| {
+        try buf.appendSlice(alloc, "<NatGatewayExclusion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</NatGatewayExclusion>");
+    }
+    if (value.virtual_private_gateway_exclusion) |v| {
+        try buf.appendSlice(alloc, "<VirtualPrivateGatewayExclusion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</VirtualPrivateGatewayExclusion>");
+    }
+    if (value.vpc_lattice_exclusion) |v| {
+        try buf.appendSlice(alloc, "<VpcLatticeExclusion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</VpcLatticeExclusion>");
+    }
+    if (value.vpc_peering_exclusion) |v| {
+        try buf.appendSlice(alloc, "<VpcPeeringExclusion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</VpcPeeringExclusion>");
+    }
+}
+
+pub fn serializeVpnConnectionOptionsSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VpnConnectionOptionsSpecification) !void {
+    if (value.enable_acceleration) |v| {
+        try buf.appendSlice(alloc, "<EnableAcceleration>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnableAcceleration>");
+    }
+    if (value.local_ipv_4_network_cidr) |v| {
+        try buf.appendSlice(alloc, "<LocalIpv4NetworkCidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LocalIpv4NetworkCidr>");
+    }
+    if (value.local_ipv_6_network_cidr) |v| {
+        try buf.appendSlice(alloc, "<LocalIpv6NetworkCidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LocalIpv6NetworkCidr>");
+    }
+    if (value.outside_ip_address_type) |v| {
+        try buf.appendSlice(alloc, "<OutsideIpAddressType>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</OutsideIpAddressType>");
+    }
+    if (value.remote_ipv_4_network_cidr) |v| {
+        try buf.appendSlice(alloc, "<RemoteIpv4NetworkCidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RemoteIpv4NetworkCidr>");
+    }
+    if (value.remote_ipv_6_network_cidr) |v| {
+        try buf.appendSlice(alloc, "<RemoteIpv6NetworkCidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RemoteIpv6NetworkCidr>");
+    }
+    if (value.static_routes_only) |v| {
+        try buf.appendSlice(alloc, "<staticRoutesOnly>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</staticRoutesOnly>");
+    }
+    if (value.transport_transit_gateway_attachment_id) |v| {
+        try buf.appendSlice(alloc, "<TransportTransitGatewayAttachmentId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TransportTransitGatewayAttachmentId>");
+    }
+    if (value.tunnel_bandwidth) |v| {
+        try buf.appendSlice(alloc, "<TunnelBandwidth>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</TunnelBandwidth>");
+    }
+    if (value.tunnel_inside_ip_version) |v| {
+        try buf.appendSlice(alloc, "<TunnelInsideIpVersion>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</TunnelInsideIpVersion>");
+    }
+    if (value.tunnel_options) |v| {
+        try buf.appendSlice(alloc, "<TunnelOptions>");
+        try serializeVpnTunnelOptionsSpecificationsList(alloc, buf, v, "member");
+        try buf.appendSlice(alloc, "</TunnelOptions>");
+    }
+}
+
+pub fn serializeVpnTunnelLogOptionsSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VpnTunnelLogOptionsSpecification) !void {
+    if (value.cloud_watch_log_options) |v| {
+        try buf.appendSlice(alloc, "<CloudWatchLogOptions>");
+        try serializeCloudWatchLogOptionsSpecification(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CloudWatchLogOptions>");
+    }
+}
+
+pub fn serializeVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VpnTunnelOptionsSpecification) !void {
+    if (value.dpd_timeout_action) |v| {
+        try buf.appendSlice(alloc, "<DPDTimeoutAction>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DPDTimeoutAction>");
+    }
+    if (value.dpd_timeout_seconds) |v| {
+        try buf.appendSlice(alloc, "<DPDTimeoutSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</DPDTimeoutSeconds>");
+    }
+    if (value.enable_tunnel_lifecycle_control) |v| {
+        try buf.appendSlice(alloc, "<EnableTunnelLifecycleControl>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</EnableTunnelLifecycleControl>");
+    }
+    if (value.ike_versions) |v| {
+        try buf.appendSlice(alloc, "<IKEVersion>");
+        try serializeIKEVersionsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</IKEVersion>");
+    }
+    if (value.log_options) |v| {
+        try buf.appendSlice(alloc, "<LogOptions>");
+        try serializeVpnTunnelLogOptionsSpecification(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LogOptions>");
+    }
+    if (value.phase_1_dh_group_numbers) |v| {
+        try buf.appendSlice(alloc, "<Phase1DHGroupNumber>");
+        try serializePhase1DHGroupNumbersRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase1DHGroupNumber>");
+    }
+    if (value.phase_1_encryption_algorithms) |v| {
+        try buf.appendSlice(alloc, "<Phase1EncryptionAlgorithm>");
+        try serializePhase1EncryptionAlgorithmsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase1EncryptionAlgorithm>");
+    }
+    if (value.phase_1_integrity_algorithms) |v| {
+        try buf.appendSlice(alloc, "<Phase1IntegrityAlgorithm>");
+        try serializePhase1IntegrityAlgorithmsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase1IntegrityAlgorithm>");
+    }
+    if (value.phase_1_lifetime_seconds) |v| {
+        try buf.appendSlice(alloc, "<Phase1LifetimeSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Phase1LifetimeSeconds>");
+    }
+    if (value.phase_2_dh_group_numbers) |v| {
+        try buf.appendSlice(alloc, "<Phase2DHGroupNumber>");
+        try serializePhase2DHGroupNumbersRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase2DHGroupNumber>");
+    }
+    if (value.phase_2_encryption_algorithms) |v| {
+        try buf.appendSlice(alloc, "<Phase2EncryptionAlgorithm>");
+        try serializePhase2EncryptionAlgorithmsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase2EncryptionAlgorithm>");
+    }
+    if (value.phase_2_integrity_algorithms) |v| {
+        try buf.appendSlice(alloc, "<Phase2IntegrityAlgorithm>");
+        try serializePhase2IntegrityAlgorithmsRequestList(alloc, buf, v, "item");
+        try buf.appendSlice(alloc, "</Phase2IntegrityAlgorithm>");
+    }
+    if (value.phase_2_lifetime_seconds) |v| {
+        try buf.appendSlice(alloc, "<Phase2LifetimeSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Phase2LifetimeSeconds>");
+    }
+    if (value.pre_shared_key) |v| {
+        try buf.appendSlice(alloc, "<PreSharedKey>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PreSharedKey>");
+    }
+    if (value.rekey_fuzz_percentage) |v| {
+        try buf.appendSlice(alloc, "<RekeyFuzzPercentage>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</RekeyFuzzPercentage>");
+    }
+    if (value.rekey_margin_time_seconds) |v| {
+        try buf.appendSlice(alloc, "<RekeyMarginTimeSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</RekeyMarginTimeSeconds>");
+    }
+    if (value.replay_window_size) |v| {
+        try buf.appendSlice(alloc, "<ReplayWindowSize>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ReplayWindowSize>");
+    }
+    if (value.startup_action) |v| {
+        try buf.appendSlice(alloc, "<StartupAction>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</StartupAction>");
+    }
+    if (value.tunnel_inside_cidr) |v| {
+        try buf.appendSlice(alloc, "<TunnelInsideCidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TunnelInsideCidr>");
+    }
+    if (value.tunnel_inside_ipv_6_cidr) |v| {
+        try buf.appendSlice(alloc, "<TunnelInsideIpv6Cidr>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TunnelInsideIpv6Cidr>");
+    }
+}
+
+fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            '&' => try buf.appendSlice(alloc, "&amp;"),
+            '<' => try buf.appendSlice(alloc, "&lt;"),
+            '>' => try buf.appendSlice(alloc, "&gt;"),
+            else => try buf.append(alloc, c),
+        }
+    }
+}

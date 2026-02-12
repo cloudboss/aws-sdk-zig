@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
+const serde = @import("serde.zig");
 
 /// Deletes the specified set of tags from the specified set of resources.
 ///

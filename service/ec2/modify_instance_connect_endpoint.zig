@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
+const serde = @import("serde.zig");
 
 /// Modifies the specified EC2 Instance Connect Endpoint.
 ///

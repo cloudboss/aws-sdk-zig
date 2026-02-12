@@ -9,6 +9,7 @@ const ClientRouteEnforcementOptions = @import("client_route_enforcement_options.
 const ConnectionLogOptions = @import("connection_log_options.zig").ConnectionLogOptions;
 const DnsServersOptionsModifyStructure = @import("dns_servers_options_modify_structure.zig").DnsServersOptionsModifyStructure;
 const SelfServicePortal = @import("self_service_portal.zig").SelfServicePortal;
+const serde = @import("serde.zig");
 
 /// Modifies the specified Client VPN endpoint. Modifying the DNS server resets
 /// existing client connections.

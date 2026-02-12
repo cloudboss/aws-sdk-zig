@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const InterruptionType = @import("interruption_type.zig").InterruptionType;
 const InterruptibleCapacityReservationAllocationStatus = @import("interruptible_capacity_reservation_allocation_status.zig").InterruptibleCapacityReservationAllocationStatus;
+const serde = @import("serde.zig");
 
 /// Creates an interruptible Capacity Reservation by specifying the number of
 /// unused instances you want to allocate from your source reservation. This

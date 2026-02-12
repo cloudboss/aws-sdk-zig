@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SecurityGroupRuleUpdate = @import("security_group_rule_update.zig").SecurityGroupRuleUpdate;
+const serde = @import("serde.zig");
 
 /// Modifies the rules of a security group.
 pub const ModifySecurityGroupRulesInput = struct {

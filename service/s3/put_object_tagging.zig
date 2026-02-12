@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const Tagging = @import("tagging.zig").Tagging;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -199,7 +200,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutObjectTaggingInput, conf
     }
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    try body_buf.appendSlice(alloc, "<Tagging xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try serde.serializeTagging(alloc, &body_buf, input.tagging);
+    try body_buf.appendSlice(alloc, "</Tagging>");
+    const body = try body_buf.toOwnedSlice(alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

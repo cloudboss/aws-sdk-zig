@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TargetConfigurationRequest = @import("target_configuration_request.zig").TargetConfigurationRequest;
+const serde = @import("serde.zig");
 
 /// Accepts the Convertible Reserved Instance exchange quote described in the
 /// GetReservedInstancesExchangeQuote call.

@@ -7,6 +7,7 @@ const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const RestoreRequest = @import("restore_request.zig").RestoreRequest;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -336,7 +337,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RestoreObjectInput, config:
     }
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = blk: {
+        if (input.restore_request) |payload| {
+            var body_buf: std.ArrayList(u8) = .{};
+            try body_buf.appendSlice(alloc, "<RestoreRequest xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try serde.serializeRestoreRequest(alloc, &body_buf, payload);
+            try body_buf.appendSlice(alloc, "</RestoreRequest>");
+            break :blk try body_buf.toOwnedSlice(alloc);
+        }
+        break :blk null;
+    };
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

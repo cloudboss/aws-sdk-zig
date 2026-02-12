@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const LaunchPermissionModifications = @import("launch_permission_modifications.zig").LaunchPermissionModifications;
 const OperationType = @import("operation_type.zig").OperationType;
+const serde = @import("serde.zig");
 
 /// Modifies the specified attribute of the specified AMI. You can specify only
 /// one attribute

@@ -4,6 +4,9 @@ const std = @import("std");
 const AssumedRoleUser = @import("assumed_role_user.zig").AssumedRoleUser;
 const Credentials = @import("credentials.zig").Credentials;
 const FederatedUser = @import("federated_user.zig").FederatedUser;
+const PolicyDescriptorType = @import("policy_descriptor_type.zig").PolicyDescriptorType;
+const ProvidedContext = @import("provided_context.zig").ProvidedContext;
+const Tag = @import("tag.zig").Tag;
 
 pub fn deserializeAssumedRoleUser(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AssumedRoleUser {
     var result: AssumedRoleUser = undefined;
@@ -69,3 +72,103 @@ pub fn deserializeFederatedUser(reader: *aws.xml.Reader, alloc: std.mem.Allocato
     return result;
 }
 
+pub fn serializeProvidedContextsListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ProvidedContext, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeProvidedContext(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializepolicyDescriptorListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PolicyDescriptorType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePolicyDescriptorType(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializetagKeyListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializetagListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTag(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializewebIdentityTokenAudienceListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializePolicyDescriptorType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PolicyDescriptorType) !void {
+    if (value.arn) |v| {
+        try buf.appendSlice(alloc, "<arn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</arn>");
+    }
+}
+
+pub fn serializeProvidedContext(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ProvidedContext) !void {
+    if (value.context_assertion) |v| {
+        try buf.appendSlice(alloc, "<ContextAssertion>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ContextAssertion>");
+    }
+    if (value.provider_arn) |v| {
+        try buf.appendSlice(alloc, "<ProviderArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ProviderArn>");
+    }
+}
+
+pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {
+    try buf.appendSlice(alloc, "<Key>");
+    try appendXmlEscaped(alloc, buf, value.key);
+    try buf.appendSlice(alloc, "</Key>");
+    try buf.appendSlice(alloc, "<Value>");
+    try appendXmlEscaped(alloc, buf, value.value);
+    try buf.appendSlice(alloc, "</Value>");
+}
+
+fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            '&' => try buf.appendSlice(alloc, "&amp;"),
+            '<' => try buf.appendSlice(alloc, "&lt;"),
+            '>' => try buf.appendSlice(alloc, "&gt;"),
+            else => try buf.append(alloc, c),
+        }
+    }
+}

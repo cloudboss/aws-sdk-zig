@@ -3,6 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const serde = @import("serde.zig");
 
 /// Removes the specified tags from the specified OpenID Connect
 /// (OIDC)-compatible identity

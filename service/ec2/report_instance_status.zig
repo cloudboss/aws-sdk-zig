@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReportInstanceReasonCodes = @import("report_instance_reason_codes.zig").ReportInstanceReasonCodes;
 const ReportStatusType = @import("report_status_type.zig").ReportStatusType;
+const serde = @import("serde.zig");
 
 /// Submits feedback about the status of an instance. The instance must be in
 /// the

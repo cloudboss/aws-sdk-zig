@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const NotificationConfiguration = @import("notification_configuration.zig").NotificationConfiguration;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -164,7 +165,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutBucketNotificationConfig
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    try body_buf.appendSlice(alloc, "<NotificationConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try serde.serializeNotificationConfiguration(alloc, &body_buf, input.notification_configuration);
+    try body_buf.appendSlice(alloc, "</NotificationConfiguration>");
+    const body = try body_buf.toOwnedSlice(alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

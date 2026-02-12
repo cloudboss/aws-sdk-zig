@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const CORSConfiguration = @import("cors_configuration.zig").CORSConfiguration;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -173,7 +174,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutBucketCorsInput, config:
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    try body_buf.appendSlice(alloc, "<CORSConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try serde.serializeCORSConfiguration(alloc, &body_buf, input.cors_configuration);
+    try body_buf.appendSlice(alloc, "</CORSConfiguration>");
+    const body = try body_buf.toOwnedSlice(alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

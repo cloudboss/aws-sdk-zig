@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
 const HostnameType = @import("hostname_type.zig").HostnameType;
+const serde = @import("serde.zig");
 
 /// Modifies a subnet attribute. You can only modify one attribute at a time.
 ///

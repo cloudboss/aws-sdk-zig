@@ -9,6 +9,7 @@ const BootModeValues = @import("boot_mode_values.zig").BootModeValues;
 const ImdsSupportValues = @import("imds_support_values.zig").ImdsSupportValues;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TpmSupportValues = @import("tpm_support_values.zig").TpmSupportValues;
+const serde = @import("serde.zig");
 
 /// Registers an AMI. When you're creating an instance-store backed AMI,
 /// registering the AMI

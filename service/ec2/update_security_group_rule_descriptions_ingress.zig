@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpPermission = @import("ip_permission.zig").IpPermission;
 const SecurityGroupRuleDescription = @import("security_group_rule_description.zig").SecurityGroupRuleDescription;
+const serde = @import("serde.zig");
 
 /// Updates the description of an ingress (inbound) security group rule. You can
 /// replace an

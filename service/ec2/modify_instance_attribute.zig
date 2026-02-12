@@ -8,6 +8,7 @@ const InstanceBlockDeviceMappingSpecification = @import("instance_block_device_m
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
 const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const BlobAttributeValue = @import("blob_attribute_value.zig").BlobAttributeValue;
+const serde = @import("serde.zig");
 
 /// Modifies the specified attribute of the specified instance. You can specify
 /// only one

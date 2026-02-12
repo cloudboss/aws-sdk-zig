@@ -6,6 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const BlockDeviceMapping = @import("block_device_mapping.zig").BlockDeviceMapping;
 const SnapshotLocationEnum = @import("snapshot_location_enum.zig").SnapshotLocationEnum;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is
 /// either running or

@@ -7,11 +7,14 @@ const AccessKeyLastUsed = @import("access_key_last_used.zig").AccessKeyLastUsed;
 const AccessKeyMetadata = @import("access_key_metadata.zig").AccessKeyMetadata;
 const AttachedPermissionsBoundary = @import("attached_permissions_boundary.zig").AttachedPermissionsBoundary;
 const AttachedPolicy = @import("attached_policy.zig").AttachedPolicy;
+const ContextEntry = @import("context_entry.zig").ContextEntry;
+const ContextKeyTypeEnum = @import("context_key_type_enum.zig").ContextKeyTypeEnum;
 const DelegationPermission = @import("delegation_permission.zig").DelegationPermission;
 const DelegationRequest = @import("delegation_request.zig").DelegationRequest;
 const DeletionTaskFailureReasonType = @import("deletion_task_failure_reason_type.zig").DeletionTaskFailureReasonType;
 const EntityDetails = @import("entity_details.zig").EntityDetails;
 const EntityInfo = @import("entity_info.zig").EntityInfo;
+const EntityType = @import("entity_type.zig").EntityType;
 const ErrorDetails = @import("error_details.zig").ErrorDetails;
 const EvaluationResult = @import("evaluation_result.zig").EvaluationResult;
 const FeatureType = @import("feature_type.zig").FeatureType;
@@ -2532,3 +2535,227 @@ pub fn deserializeVirtualMFADevice(reader: *aws.xml.Reader, alloc: std.mem.Alloc
     return result;
 }
 
+pub fn serializeActionNameListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeContextEntryListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ContextEntry, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeContextEntry(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeContextKeyValueListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeResourceNameListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeSimulationPolicyListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeclientIDListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeentityListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const EntityType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializepolicyParameterListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PolicyParameter, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializePolicyParameter(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializepolicyParameterValuesListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeserviceNamespaceListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializetagKeyListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializetagListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTag(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializethumbprintListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeContextEntry(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ContextEntry) !void {
+    if (value.context_key_name) |v| {
+        try buf.appendSlice(alloc, "<ContextKeyName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ContextKeyName>");
+    }
+    if (value.context_key_type) |v| {
+        try buf.appendSlice(alloc, "<ContextKeyType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ContextKeyType>");
+    }
+    if (value.context_key_values) |v| {
+        try buf.appendSlice(alloc, "<ContextKeyValues>");
+        try serializeContextKeyValueListType(alloc, buf, v, "member");
+        try buf.appendSlice(alloc, "</ContextKeyValues>");
+    }
+}
+
+pub fn serializeDelegationPermission(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DelegationPermission) !void {
+    if (value.parameters) |v| {
+        try buf.appendSlice(alloc, "<Parameters>");
+        try serializepolicyParameterListType(alloc, buf, v, "member");
+        try buf.appendSlice(alloc, "</Parameters>");
+    }
+    if (value.policy_template_arn) |v| {
+        try buf.appendSlice(alloc, "<PolicyTemplateArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PolicyTemplateArn>");
+    }
+}
+
+pub fn serializePolicyParameter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PolicyParameter) !void {
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<Name>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Name>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<Type>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Type>");
+    }
+    if (value.values) |v| {
+        try buf.appendSlice(alloc, "<Values>");
+        try serializepolicyParameterValuesListType(alloc, buf, v, "member");
+        try buf.appendSlice(alloc, "</Values>");
+    }
+}
+
+pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {
+    try buf.appendSlice(alloc, "<Key>");
+    try appendXmlEscaped(alloc, buf, value.key);
+    try buf.appendSlice(alloc, "</Key>");
+    try buf.appendSlice(alloc, "<Value>");
+    try appendXmlEscaped(alloc, buf, value.value);
+    try buf.appendSlice(alloc, "</Value>");
+}
+
+fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            '&' => try buf.appendSlice(alloc, "&amp;"),
+            '<' => try buf.appendSlice(alloc, "&lt;"),
+            '>' => try buf.appendSlice(alloc, "&gt;"),
+            else => try buf.append(alloc, c),
+        }
+    }
+}

@@ -3,6 +3,8 @@ const std = @import("std");
 
 const AbacStatus = @import("abac_status.zig").AbacStatus;
 const AbortIncompleteMultipartUpload = @import("abort_incomplete_multipart_upload.zig").AbortIncompleteMultipartUpload;
+const AccelerateConfiguration = @import("accelerate_configuration.zig").AccelerateConfiguration;
+const AccessControlPolicy = @import("access_control_policy.zig").AccessControlPolicy;
 const AccessControlTranslation = @import("access_control_translation.zig").AccessControlTranslation;
 const AnalyticsConfiguration = @import("analytics_configuration.zig").AnalyticsConfiguration;
 const AnalyticsExportDestination = @import("analytics_export_destination.zig").AnalyticsExportDestination;
@@ -11,22 +13,39 @@ const AnalyticsS3ExportFileFormat = @import("analytics_s_3_export_file_format.zi
 const BlockedEncryptionTypes = @import("blocked_encryption_types.zig").BlockedEncryptionTypes;
 const Bucket = @import("bucket.zig").Bucket;
 const BucketAbacStatus = @import("bucket_abac_status.zig").BucketAbacStatus;
+const BucketAccelerateStatus = @import("bucket_accelerate_status.zig").BucketAccelerateStatus;
+const BucketInfo = @import("bucket_info.zig").BucketInfo;
+const BucketLifecycleConfiguration = @import("bucket_lifecycle_configuration.zig").BucketLifecycleConfiguration;
+const BucketLocationConstraint = @import("bucket_location_constraint.zig").BucketLocationConstraint;
+const BucketLoggingStatus = @import("bucket_logging_status.zig").BucketLoggingStatus;
 const BucketLogsPermission = @import("bucket_logs_permission.zig").BucketLogsPermission;
+const BucketType = @import("bucket_type.zig").BucketType;
+const BucketVersioningStatus = @import("bucket_versioning_status.zig").BucketVersioningStatus;
+const CORSConfiguration = @import("cors_configuration.zig").CORSConfiguration;
 const CORSRule = @import("cors_rule.zig").CORSRule;
+const CSVInput = @import("csv_input.zig").CSVInput;
+const CSVOutput = @import("csv_output.zig").CSVOutput;
 const Checksum = @import("checksum.zig").Checksum;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const ChecksumType = @import("checksum_type.zig").ChecksumType;
 const CommonPrefix = @import("common_prefix.zig").CommonPrefix;
+const CompletedMultipartUpload = @import("completed_multipart_upload.zig").CompletedMultipartUpload;
+const CompletedPart = @import("completed_part.zig").CompletedPart;
+const CompressionType = @import("compression_type.zig").CompressionType;
 const Condition = @import("condition.zig").Condition;
 const CopyObjectResult = @import("copy_object_result.zig").CopyObjectResult;
 const CopyPartResult = @import("copy_part_result.zig").CopyPartResult;
+const CreateBucketConfiguration = @import("create_bucket_configuration.zig").CreateBucketConfiguration;
+const DataRedundancy = @import("data_redundancy.zig").DataRedundancy;
 const DefaultRetention = @import("default_retention.zig").DefaultRetention;
+const Delete = @import("delete.zig").Delete;
 const DeleteMarkerEntry = @import("delete_marker_entry.zig").DeleteMarkerEntry;
 const DeleteMarkerReplication = @import("delete_marker_replication.zig").DeleteMarkerReplication;
 const DeleteMarkerReplicationStatus = @import("delete_marker_replication_status.zig").DeleteMarkerReplicationStatus;
 const DeletedObject = @import("deleted_object.zig").DeletedObject;
 const Destination = @import("destination.zig").Destination;
 const DestinationResult = @import("destination_result.zig").DestinationResult;
+const Encryption = @import("encryption.zig").Encryption;
 const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 const EncryptionType = @import("encryption_type.zig").EncryptionType;
 const Error = @import("error.zig").Error;
@@ -38,15 +57,19 @@ const ExistingObjectReplication = @import("existing_object_replication.zig").Exi
 const ExistingObjectReplicationStatus = @import("existing_object_replication_status.zig").ExistingObjectReplicationStatus;
 const ExpirationState = @import("expiration_state.zig").ExpirationState;
 const ExpirationStatus = @import("expiration_status.zig").ExpirationStatus;
+const ExpressionType = @import("expression_type.zig").ExpressionType;
+const FileHeaderInfo = @import("file_header_info.zig").FileHeaderInfo;
 const FilterRule = @import("filter_rule.zig").FilterRule;
 const FilterRuleName = @import("filter_rule_name.zig").FilterRuleName;
 const GetBucketMetadataConfigurationResult = @import("get_bucket_metadata_configuration_result.zig").GetBucketMetadataConfigurationResult;
 const GetBucketMetadataTableConfigurationResult = @import("get_bucket_metadata_table_configuration_result.zig").GetBucketMetadataTableConfigurationResult;
 const GetObjectAttributesParts = @import("get_object_attributes_parts.zig").GetObjectAttributesParts;
+const GlacierJobParameters = @import("glacier_job_parameters.zig").GlacierJobParameters;
 const Grant = @import("grant.zig").Grant;
 const Grantee = @import("grantee.zig").Grantee;
 const IndexDocument = @import("index_document.zig").IndexDocument;
 const Initiator = @import("initiator.zig").Initiator;
+const InputSerialization = @import("input_serialization.zig").InputSerialization;
 const IntelligentTieringAccessTier = @import("intelligent_tiering_access_tier.zig").IntelligentTieringAccessTier;
 const IntelligentTieringAndOperator = @import("intelligent_tiering_and_operator.zig").IntelligentTieringAndOperator;
 const IntelligentTieringConfiguration = @import("intelligent_tiering_configuration.zig").IntelligentTieringConfiguration;
@@ -63,24 +86,42 @@ const InventoryIncludedObjectVersions = @import("inventory_included_object_versi
 const InventoryOptionalField = @import("inventory_optional_field.zig").InventoryOptionalField;
 const InventoryS3BucketDestination = @import("inventory_s_3_bucket_destination.zig").InventoryS3BucketDestination;
 const InventorySchedule = @import("inventory_schedule.zig").InventorySchedule;
+const InventoryTableConfiguration = @import("inventory_table_configuration.zig").InventoryTableConfiguration;
 const InventoryTableConfigurationResult = @import("inventory_table_configuration_result.zig").InventoryTableConfigurationResult;
+const InventoryTableConfigurationUpdates = @import("inventory_table_configuration_updates.zig").InventoryTableConfigurationUpdates;
+const JSONInput = @import("json_input.zig").JSONInput;
+const JSONOutput = @import("json_output.zig").JSONOutput;
+const JSONType = @import("json_type.zig").JSONType;
+const JournalTableConfiguration = @import("journal_table_configuration.zig").JournalTableConfiguration;
 const JournalTableConfigurationResult = @import("journal_table_configuration_result.zig").JournalTableConfigurationResult;
+const JournalTableConfigurationUpdates = @import("journal_table_configuration_updates.zig").JournalTableConfigurationUpdates;
 const LambdaFunctionConfiguration = @import("lambda_function_configuration.zig").LambdaFunctionConfiguration;
 const LifecycleExpiration = @import("lifecycle_expiration.zig").LifecycleExpiration;
 const LifecycleRule = @import("lifecycle_rule.zig").LifecycleRule;
 const LifecycleRuleAndOperator = @import("lifecycle_rule_and_operator.zig").LifecycleRuleAndOperator;
 const LifecycleRuleFilter = @import("lifecycle_rule_filter.zig").LifecycleRuleFilter;
+const LocationInfo = @import("location_info.zig").LocationInfo;
+const LocationType = @import("location_type.zig").LocationType;
 const LoggingEnabled = @import("logging_enabled.zig").LoggingEnabled;
+const MFADelete = @import("mfa_delete.zig").MFADelete;
+const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
 const MetadataConfigurationResult = @import("metadata_configuration_result.zig").MetadataConfigurationResult;
+const MetadataEntry = @import("metadata_entry.zig").MetadataEntry;
+const MetadataTableConfiguration = @import("metadata_table_configuration.zig").MetadataTableConfiguration;
 const MetadataTableConfigurationResult = @import("metadata_table_configuration_result.zig").MetadataTableConfigurationResult;
+const MetadataTableEncryptionConfiguration = @import("metadata_table_encryption_configuration.zig").MetadataTableEncryptionConfiguration;
 const Metrics = @import("metrics.zig").Metrics;
 const MetricsConfiguration = @import("metrics_configuration.zig").MetricsConfiguration;
 const MetricsStatus = @import("metrics_status.zig").MetricsStatus;
 const MultipartUpload = @import("multipart_upload.zig").MultipartUpload;
 const NoncurrentVersionExpiration = @import("noncurrent_version_expiration.zig").NoncurrentVersionExpiration;
 const NoncurrentVersionTransition = @import("noncurrent_version_transition.zig").NoncurrentVersionTransition;
+const NotificationConfiguration = @import("notification_configuration.zig").NotificationConfiguration;
 const NotificationConfigurationFilter = @import("notification_configuration_filter.zig").NotificationConfigurationFilter;
 const Object = @import("object.zig").Object;
+const ObjectAttributes = @import("object_attributes.zig").ObjectAttributes;
+const ObjectCannedACL = @import("object_canned_acl.zig").ObjectCannedACL;
+const ObjectIdentifier = @import("object_identifier.zig").ObjectIdentifier;
 const ObjectLockConfiguration = @import("object_lock_configuration.zig").ObjectLockConfiguration;
 const ObjectLockEnabled = @import("object_lock_enabled.zig").ObjectLockEnabled;
 const ObjectLockLegalHold = @import("object_lock_legal_hold.zig").ObjectLockLegalHold;
@@ -93,18 +134,24 @@ const ObjectPart = @import("object_part.zig").ObjectPart;
 const ObjectStorageClass = @import("object_storage_class.zig").ObjectStorageClass;
 const ObjectVersion = @import("object_version.zig").ObjectVersion;
 const ObjectVersionStorageClass = @import("object_version_storage_class.zig").ObjectVersionStorageClass;
+const OptionalObjectAttributes = @import("optional_object_attributes.zig").OptionalObjectAttributes;
+const OutputLocation = @import("output_location.zig").OutputLocation;
+const OutputSerialization = @import("output_serialization.zig").OutputSerialization;
 const Owner = @import("owner.zig").Owner;
 const OwnerOverride = @import("owner_override.zig").OwnerOverride;
 const OwnershipControls = @import("ownership_controls.zig").OwnershipControls;
 const OwnershipControlsRule = @import("ownership_controls_rule.zig").OwnershipControlsRule;
+const ParquetInput = @import("parquet_input.zig").ParquetInput;
 const Part = @import("part.zig").Part;
 const PartitionDateSource = @import("partition_date_source.zig").PartitionDateSource;
 const PartitionedPrefix = @import("partitioned_prefix.zig").PartitionedPrefix;
+const Payer = @import("payer.zig").Payer;
 const Permission = @import("permission.zig").Permission;
 const PolicyStatus = @import("policy_status.zig").PolicyStatus;
 const Protocol = @import("protocol.zig").Protocol;
 const PublicAccessBlockConfiguration = @import("public_access_block_configuration.zig").PublicAccessBlockConfiguration;
 const QueueConfiguration = @import("queue_configuration.zig").QueueConfiguration;
+const QuoteFields = @import("quote_fields.zig").QuoteFields;
 const RecordExpiration = @import("record_expiration.zig").RecordExpiration;
 const Redirect = @import("redirect.zig").Redirect;
 const RedirectAllRequestsTo = @import("redirect_all_requests_to.zig").RedirectAllRequestsTo;
@@ -118,13 +165,21 @@ const ReplicationRuleStatus = @import("replication_rule_status.zig").Replication
 const ReplicationTime = @import("replication_time.zig").ReplicationTime;
 const ReplicationTimeStatus = @import("replication_time_status.zig").ReplicationTimeStatus;
 const ReplicationTimeValue = @import("replication_time_value.zig").ReplicationTimeValue;
+const RequestPaymentConfiguration = @import("request_payment_configuration.zig").RequestPaymentConfiguration;
+const RequestProgress = @import("request_progress.zig").RequestProgress;
+const RestoreRequest = @import("restore_request.zig").RestoreRequest;
+const RestoreRequestType = @import("restore_request_type.zig").RestoreRequestType;
 const RestoreStatus = @import("restore_status.zig").RestoreStatus;
 const RoutingRule = @import("routing_rule.zig").RoutingRule;
 const S3KeyFilter = @import("s_3_key_filter.zig").S3KeyFilter;
+const S3Location = @import("s_3_location.zig").S3Location;
 const S3TablesBucketType = @import("s_3_tables_bucket_type.zig").S3TablesBucketType;
+const S3TablesDestination = @import("s_3_tables_destination.zig").S3TablesDestination;
 const S3TablesDestinationResult = @import("s_3_tables_destination_result.zig").S3TablesDestinationResult;
 const SSEKMS = @import("ssekms.zig").SSEKMS;
 const SSES3 = @import("sses3.zig").SSES3;
+const ScanRange = @import("scan_range.zig").ScanRange;
+const SelectParameters = @import("select_parameters.zig").SelectParameters;
 const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEncryption;
 const ServerSideEncryptionByDefault = @import("server_side_encryption_by_default.zig").ServerSideEncryptionByDefault;
 const ServerSideEncryptionConfiguration = @import("server_side_encryption_configuration.zig").ServerSideEncryptionConfiguration;
@@ -138,14 +193,19 @@ const StorageClass = @import("storage_class.zig").StorageClass;
 const StorageClassAnalysis = @import("storage_class_analysis.zig").StorageClassAnalysis;
 const StorageClassAnalysisDataExport = @import("storage_class_analysis_data_export.zig").StorageClassAnalysisDataExport;
 const StorageClassAnalysisSchemaVersion = @import("storage_class_analysis_schema_version.zig").StorageClassAnalysisSchemaVersion;
+const TableSseAlgorithm = @import("table_sse_algorithm.zig").TableSseAlgorithm;
 const Tag = @import("tag.zig").Tag;
+const Tagging = @import("tagging.zig").Tagging;
 const TargetGrant = @import("target_grant.zig").TargetGrant;
 const TargetObjectKeyFormat = @import("target_object_key_format.zig").TargetObjectKeyFormat;
+const Tier = @import("tier.zig").Tier;
 const Tiering = @import("tiering.zig").Tiering;
 const TopicConfiguration = @import("topic_configuration.zig").TopicConfiguration;
 const Transition = @import("transition.zig").Transition;
 const TransitionStorageClass = @import("transition_storage_class.zig").TransitionStorageClass;
 const Type = @import("type.zig").Type;
+const VersioningConfiguration = @import("versioning_configuration.zig").VersioningConfiguration;
+const WebsiteConfiguration = @import("website_configuration.zig").WebsiteConfiguration;
 
 pub fn deserializeAllowedHeaders(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
@@ -3394,3 +3454,2035 @@ pub fn deserializeTransition(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
     return result;
 }
 
+pub fn serializeAllowedHeaders(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAllowedMethods(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAllowedOrigins(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCORSRules(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const CORSRule, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeCORSRule(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeCompletedPartList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const CompletedPart, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeCompletedPart(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeEncryptionTypeList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const EncryptionType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeEventList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Event, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeExposeHeaders(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try appendXmlEscaped(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeFilterRuleList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const FilterRule, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeFilterRule(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeGrants(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Grant, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeGrant(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeInventoryOptionalFields(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InventoryOptionalField, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLambdaFunctionConfigurationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LambdaFunctionConfiguration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLambdaFunctionConfiguration(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeLifecycleRules(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LifecycleRule, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeLifecycleRule(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeNoncurrentVersionTransitionList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const NoncurrentVersionTransition, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeNoncurrentVersionTransition(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeObjectAttributesList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ObjectAttributes, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeObjectIdentifierList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ObjectIdentifier, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeObjectIdentifier(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeOptionalObjectAttributesList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const OptionalObjectAttributes, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, @tagName(item));
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeOwnershipControlsRules(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const OwnershipControlsRule, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeOwnershipControlsRule(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeQueueConfigurationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const QueueConfiguration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeQueueConfiguration(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeReplicationRules(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ReplicationRule, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeReplicationRule(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeRoutingRules(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const RoutingRule, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeRoutingRule(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeServerSideEncryptionRules(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ServerSideEncryptionRule, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeServerSideEncryptionRule(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTagSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tag, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTag(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTargetGrants(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TargetGrant, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTargetGrant(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTieringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Tiering, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTiering(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTopicConfigurationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TopicConfiguration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTopicConfiguration(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeTransitionList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const Transition, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeTransition(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeUserMetadata(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const MetadataEntry, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try serializeMetadataEntry(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeAbacStatus(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AbacStatus) !void {
+    if (value.status) |v| {
+        try buf.appendSlice(alloc, "<Status>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Status>");
+    }
+}
+
+pub fn serializeAbortIncompleteMultipartUpload(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AbortIncompleteMultipartUpload) !void {
+    if (value.days_after_initiation) |v| {
+        try buf.appendSlice(alloc, "<DaysAfterInitiation>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</DaysAfterInitiation>");
+    }
+}
+
+pub fn serializeAccelerateConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AccelerateConfiguration) !void {
+    if (value.status) |v| {
+        try buf.appendSlice(alloc, "<Status>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Status>");
+    }
+}
+
+pub fn serializeAccessControlPolicy(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AccessControlPolicy) !void {
+    if (value.grants) |v| {
+        try buf.appendSlice(alloc, "<AccessControlList>");
+        try serializeGrants(alloc, buf, v, "Grant");
+        try buf.appendSlice(alloc, "</AccessControlList>");
+    }
+    if (value.owner) |v| {
+        try buf.appendSlice(alloc, "<Owner>");
+        try serializeOwner(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Owner>");
+    }
+}
+
+pub fn serializeAccessControlTranslation(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AccessControlTranslation) !void {
+    try buf.appendSlice(alloc, "<Owner>");
+    try buf.appendSlice(alloc, @tagName(value.owner));
+    try buf.appendSlice(alloc, "</Owner>");
+}
+
+pub fn serializeAnalyticsConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AnalyticsConfiguration) !void {
+    try buf.appendSlice(alloc, "<Id>");
+    try appendXmlEscaped(alloc, buf, value.id);
+    try buf.appendSlice(alloc, "</Id>");
+    try buf.appendSlice(alloc, "<StorageClassAnalysis>");
+    try serializeStorageClassAnalysis(alloc, buf, value.storage_class_analysis);
+    try buf.appendSlice(alloc, "</StorageClassAnalysis>");
+}
+
+pub fn serializeAnalyticsExportDestination(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AnalyticsExportDestination) !void {
+    try buf.appendSlice(alloc, "<S3BucketDestination>");
+    try serializeAnalyticsS3BucketDestination(alloc, buf, value.s_3_bucket_destination);
+    try buf.appendSlice(alloc, "</S3BucketDestination>");
+}
+
+pub fn serializeAnalyticsS3BucketDestination(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AnalyticsS3BucketDestination) !void {
+    try buf.appendSlice(alloc, "<Bucket>");
+    try appendXmlEscaped(alloc, buf, value.bucket);
+    try buf.appendSlice(alloc, "</Bucket>");
+    if (value.bucket_account_id) |v| {
+        try buf.appendSlice(alloc, "<BucketAccountId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BucketAccountId>");
+    }
+    try buf.appendSlice(alloc, "<Format>");
+    try buf.appendSlice(alloc, @tagName(value.format));
+    try buf.appendSlice(alloc, "</Format>");
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+}
+
+pub fn serializeBlockedEncryptionTypes(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BlockedEncryptionTypes) !void {
+    if (value.encryption_type) |v| {
+        try serializeEncryptionTypeList(alloc, buf, v, "EncryptionType");
+    }
+}
+
+pub fn serializeBucketInfo(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BucketInfo) !void {
+    if (value.data_redundancy) |v| {
+        try buf.appendSlice(alloc, "<DataRedundancy>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</DataRedundancy>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<Type>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Type>");
+    }
+}
+
+pub fn serializeBucketLifecycleConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BucketLifecycleConfiguration) !void {
+    try serializeLifecycleRules(alloc, buf, value.rules, "Rule");
+}
+
+pub fn serializeBucketLoggingStatus(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BucketLoggingStatus) !void {
+    if (value.logging_enabled) |v| {
+        try buf.appendSlice(alloc, "<LoggingEnabled>");
+        try serializeLoggingEnabled(alloc, buf, v);
+        try buf.appendSlice(alloc, "</LoggingEnabled>");
+    }
+}
+
+pub fn serializeCORSConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CORSConfiguration) !void {
+    try serializeCORSRules(alloc, buf, value.cors_rules, "CORSRule");
+}
+
+pub fn serializeCORSRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CORSRule) !void {
+    if (value.allowed_headers) |v| {
+        try serializeAllowedHeaders(alloc, buf, v, "AllowedHeader");
+    }
+    try serializeAllowedMethods(alloc, buf, value.allowed_methods, "AllowedMethod");
+    try serializeAllowedOrigins(alloc, buf, value.allowed_origins, "AllowedOrigin");
+    if (value.expose_headers) |v| {
+        try serializeExposeHeaders(alloc, buf, v, "ExposeHeader");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<ID>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ID>");
+    }
+    if (value.max_age_seconds) |v| {
+        try buf.appendSlice(alloc, "<MaxAgeSeconds>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</MaxAgeSeconds>");
+    }
+}
+
+pub fn serializeCSVInput(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CSVInput) !void {
+    if (value.allow_quoted_record_delimiter) |v| {
+        try buf.appendSlice(alloc, "<AllowQuotedRecordDelimiter>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</AllowQuotedRecordDelimiter>");
+    }
+    if (value.comments) |v| {
+        try buf.appendSlice(alloc, "<Comments>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Comments>");
+    }
+    if (value.field_delimiter) |v| {
+        try buf.appendSlice(alloc, "<FieldDelimiter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</FieldDelimiter>");
+    }
+    if (value.file_header_info) |v| {
+        try buf.appendSlice(alloc, "<FileHeaderInfo>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</FileHeaderInfo>");
+    }
+    if (value.quote_character) |v| {
+        try buf.appendSlice(alloc, "<QuoteCharacter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</QuoteCharacter>");
+    }
+    if (value.quote_escape_character) |v| {
+        try buf.appendSlice(alloc, "<QuoteEscapeCharacter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</QuoteEscapeCharacter>");
+    }
+    if (value.record_delimiter) |v| {
+        try buf.appendSlice(alloc, "<RecordDelimiter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RecordDelimiter>");
+    }
+}
+
+pub fn serializeCSVOutput(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CSVOutput) !void {
+    if (value.field_delimiter) |v| {
+        try buf.appendSlice(alloc, "<FieldDelimiter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</FieldDelimiter>");
+    }
+    if (value.quote_character) |v| {
+        try buf.appendSlice(alloc, "<QuoteCharacter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</QuoteCharacter>");
+    }
+    if (value.quote_escape_character) |v| {
+        try buf.appendSlice(alloc, "<QuoteEscapeCharacter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</QuoteEscapeCharacter>");
+    }
+    if (value.quote_fields) |v| {
+        try buf.appendSlice(alloc, "<QuoteFields>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</QuoteFields>");
+    }
+    if (value.record_delimiter) |v| {
+        try buf.appendSlice(alloc, "<RecordDelimiter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RecordDelimiter>");
+    }
+}
+
+pub fn serializeCompletedMultipartUpload(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CompletedMultipartUpload) !void {
+    if (value.parts) |v| {
+        try serializeCompletedPartList(alloc, buf, v, "Part");
+    }
+}
+
+pub fn serializeCompletedPart(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CompletedPart) !void {
+    if (value.checksum_crc32) |v| {
+        try buf.appendSlice(alloc, "<ChecksumCRC32>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ChecksumCRC32>");
+    }
+    if (value.checksum_crc32_c) |v| {
+        try buf.appendSlice(alloc, "<ChecksumCRC32C>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ChecksumCRC32C>");
+    }
+    if (value.checksum_crc64_nvme) |v| {
+        try buf.appendSlice(alloc, "<ChecksumCRC64NVME>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ChecksumCRC64NVME>");
+    }
+    if (value.checksum_sha1) |v| {
+        try buf.appendSlice(alloc, "<ChecksumSHA1>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ChecksumSHA1>");
+    }
+    if (value.checksum_sha256) |v| {
+        try buf.appendSlice(alloc, "<ChecksumSHA256>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ChecksumSHA256>");
+    }
+    if (value.e_tag) |v| {
+        try buf.appendSlice(alloc, "<ETag>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ETag>");
+    }
+    if (value.part_number) |v| {
+        try buf.appendSlice(alloc, "<PartNumber>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</PartNumber>");
+    }
+}
+
+pub fn serializeCondition(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Condition) !void {
+    if (value.http_error_code_returned_equals) |v| {
+        try buf.appendSlice(alloc, "<HttpErrorCodeReturnedEquals>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</HttpErrorCodeReturnedEquals>");
+    }
+    if (value.key_prefix_equals) |v| {
+        try buf.appendSlice(alloc, "<KeyPrefixEquals>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KeyPrefixEquals>");
+    }
+}
+
+pub fn serializeCreateBucketConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateBucketConfiguration) !void {
+    if (value.bucket) |v| {
+        try buf.appendSlice(alloc, "<Bucket>");
+        try serializeBucketInfo(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Bucket>");
+    }
+    if (value.location) |v| {
+        try buf.appendSlice(alloc, "<Location>");
+        try serializeLocationInfo(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Location>");
+    }
+    if (value.location_constraint) |v| {
+        try buf.appendSlice(alloc, "<LocationConstraint>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</LocationConstraint>");
+    }
+    if (value.tags) |v| {
+        try buf.appendSlice(alloc, "<Tags>");
+        try serializeTagSet(alloc, buf, v, "Tag");
+        try buf.appendSlice(alloc, "</Tags>");
+    }
+}
+
+pub fn serializeDefaultRetention(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DefaultRetention) !void {
+    if (value.days) |v| {
+        try buf.appendSlice(alloc, "<Days>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Days>");
+    }
+    if (value.mode) |v| {
+        try buf.appendSlice(alloc, "<Mode>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Mode>");
+    }
+    if (value.years) |v| {
+        try buf.appendSlice(alloc, "<Years>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Years>");
+    }
+}
+
+pub fn serializeDelete(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Delete) !void {
+    try serializeObjectIdentifierList(alloc, buf, value.objects, "Object");
+    if (value.quiet) |v| {
+        try buf.appendSlice(alloc, "<Quiet>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Quiet>");
+    }
+}
+
+pub fn serializeDeleteMarkerReplication(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DeleteMarkerReplication) !void {
+    if (value.status) |v| {
+        try buf.appendSlice(alloc, "<Status>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Status>");
+    }
+}
+
+pub fn serializeDestination(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Destination) !void {
+    if (value.access_control_translation) |v| {
+        try buf.appendSlice(alloc, "<AccessControlTranslation>");
+        try serializeAccessControlTranslation(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AccessControlTranslation>");
+    }
+    if (value.account) |v| {
+        try buf.appendSlice(alloc, "<Account>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Account>");
+    }
+    try buf.appendSlice(alloc, "<Bucket>");
+    try appendXmlEscaped(alloc, buf, value.bucket);
+    try buf.appendSlice(alloc, "</Bucket>");
+    if (value.encryption_configuration) |v| {
+        try buf.appendSlice(alloc, "<EncryptionConfiguration>");
+        try serializeEncryptionConfiguration(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EncryptionConfiguration>");
+    }
+    if (value.metrics) |v| {
+        try buf.appendSlice(alloc, "<Metrics>");
+        try serializeMetrics(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Metrics>");
+    }
+    if (value.replication_time) |v| {
+        try buf.appendSlice(alloc, "<ReplicationTime>");
+        try serializeReplicationTime(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ReplicationTime>");
+    }
+    if (value.storage_class) |v| {
+        try buf.appendSlice(alloc, "<StorageClass>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</StorageClass>");
+    }
+}
+
+pub fn serializeEncryption(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Encryption) !void {
+    try buf.appendSlice(alloc, "<EncryptionType>");
+    try buf.appendSlice(alloc, @tagName(value.encryption_type));
+    try buf.appendSlice(alloc, "</EncryptionType>");
+    if (value.kms_context) |v| {
+        try buf.appendSlice(alloc, "<KMSContext>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KMSContext>");
+    }
+    if (value.kms_key_id) |v| {
+        try buf.appendSlice(alloc, "<KMSKeyId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KMSKeyId>");
+    }
+}
+
+pub fn serializeEncryptionConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EncryptionConfiguration) !void {
+    if (value.replica_kms_key_id) |v| {
+        try buf.appendSlice(alloc, "<ReplicaKmsKeyID>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ReplicaKmsKeyID>");
+    }
+}
+
+pub fn serializeErrorDocument(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ErrorDocument) !void {
+    try buf.appendSlice(alloc, "<Key>");
+    try appendXmlEscaped(alloc, buf, value.key);
+    try buf.appendSlice(alloc, "</Key>");
+}
+
+pub fn serializeEventBridgeConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EventBridgeConfiguration) !void {
+    _ = alloc;
+    _ = buf;
+    _ = value;
+}
+
+pub fn serializeExistingObjectReplication(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExistingObjectReplication) !void {
+    try buf.appendSlice(alloc, "<Status>");
+    try buf.appendSlice(alloc, @tagName(value.status));
+    try buf.appendSlice(alloc, "</Status>");
+}
+
+pub fn serializeFilterRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FilterRule) !void {
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<Name>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Name>");
+    }
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializeGlacierJobParameters(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: GlacierJobParameters) !void {
+    try buf.appendSlice(alloc, "<Tier>");
+    try buf.appendSlice(alloc, @tagName(value.tier));
+    try buf.appendSlice(alloc, "</Tier>");
+}
+
+pub fn serializeGrant(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Grant) !void {
+    if (value.grantee) |v| {
+        try buf.appendSlice(alloc, "<Grantee>");
+        try serializeGrantee(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Grantee>");
+    }
+    if (value.permission) |v| {
+        try buf.appendSlice(alloc, "<Permission>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Permission>");
+    }
+}
+
+pub fn serializeGrantee(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Grantee) !void {
+    if (value.display_name) |v| {
+        try buf.appendSlice(alloc, "<DisplayName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DisplayName>");
+    }
+    if (value.email_address) |v| {
+        try buf.appendSlice(alloc, "<EmailAddress>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EmailAddress>");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<ID>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ID>");
+    }
+    try buf.appendSlice(alloc, "<xsi:type>");
+    try buf.appendSlice(alloc, @tagName(value.@"type"));
+    try buf.appendSlice(alloc, "</xsi:type>");
+    if (value.uri) |v| {
+        try buf.appendSlice(alloc, "<URI>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</URI>");
+    }
+}
+
+pub fn serializeIndexDocument(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IndexDocument) !void {
+    try buf.appendSlice(alloc, "<Suffix>");
+    try appendXmlEscaped(alloc, buf, value.suffix);
+    try buf.appendSlice(alloc, "</Suffix>");
+}
+
+pub fn serializeInputSerialization(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InputSerialization) !void {
+    if (value.compression_type) |v| {
+        try buf.appendSlice(alloc, "<CompressionType>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</CompressionType>");
+    }
+    if (value.csv) |v| {
+        try buf.appendSlice(alloc, "<CSV>");
+        try serializeCSVInput(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CSV>");
+    }
+    if (value.json) |v| {
+        try buf.appendSlice(alloc, "<JSON>");
+        try serializeJSONInput(alloc, buf, v);
+        try buf.appendSlice(alloc, "</JSON>");
+    }
+    if (value.parquet) |v| {
+        try buf.appendSlice(alloc, "<Parquet>");
+        try serializeParquetInput(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Parquet>");
+    }
+}
+
+pub fn serializeIntelligentTieringAndOperator(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IntelligentTieringAndOperator) !void {
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+    if (value.tags) |v| {
+        try serializeTagSet(alloc, buf, v, "Tag");
+    }
+}
+
+pub fn serializeIntelligentTieringConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IntelligentTieringConfiguration) !void {
+    if (value.filter) |v| {
+        try buf.appendSlice(alloc, "<Filter>");
+        try serializeIntelligentTieringFilter(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Filter>");
+    }
+    try buf.appendSlice(alloc, "<Id>");
+    try appendXmlEscaped(alloc, buf, value.id);
+    try buf.appendSlice(alloc, "</Id>");
+    try buf.appendSlice(alloc, "<Status>");
+    try buf.appendSlice(alloc, @tagName(value.status));
+    try buf.appendSlice(alloc, "</Status>");
+    try serializeTieringList(alloc, buf, value.tierings, "Tiering");
+}
+
+pub fn serializeIntelligentTieringFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IntelligentTieringFilter) !void {
+    if (value.@"and") |v| {
+        try buf.appendSlice(alloc, "<And>");
+        try serializeIntelligentTieringAndOperator(alloc, buf, v);
+        try buf.appendSlice(alloc, "</And>");
+    }
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+    if (value.tag) |v| {
+        try buf.appendSlice(alloc, "<Tag>");
+        try serializeTag(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Tag>");
+    }
+}
+
+pub fn serializeInventoryConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventoryConfiguration) !void {
+    try buf.appendSlice(alloc, "<Destination>");
+    try serializeInventoryDestination(alloc, buf, value.destination);
+    try buf.appendSlice(alloc, "</Destination>");
+    if (value.filter) |v| {
+        try buf.appendSlice(alloc, "<Filter>");
+        try serializeInventoryFilter(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Filter>");
+    }
+    try buf.appendSlice(alloc, "<Id>");
+    try appendXmlEscaped(alloc, buf, value.id);
+    try buf.appendSlice(alloc, "</Id>");
+    try buf.appendSlice(alloc, "<IncludedObjectVersions>");
+    try buf.appendSlice(alloc, @tagName(value.included_object_versions));
+    try buf.appendSlice(alloc, "</IncludedObjectVersions>");
+    try buf.appendSlice(alloc, "<IsEnabled>");
+    try buf.appendSlice(alloc, if (value.is_enabled) "true" else "false");
+    try buf.appendSlice(alloc, "</IsEnabled>");
+    if (value.optional_fields) |v| {
+        try buf.appendSlice(alloc, "<OptionalFields>");
+        try serializeInventoryOptionalFields(alloc, buf, v, "Field");
+        try buf.appendSlice(alloc, "</OptionalFields>");
+    }
+    try buf.appendSlice(alloc, "<Schedule>");
+    try serializeInventorySchedule(alloc, buf, value.schedule);
+    try buf.appendSlice(alloc, "</Schedule>");
+}
+
+pub fn serializeInventoryDestination(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventoryDestination) !void {
+    try buf.appendSlice(alloc, "<S3BucketDestination>");
+    try serializeInventoryS3BucketDestination(alloc, buf, value.s_3_bucket_destination);
+    try buf.appendSlice(alloc, "</S3BucketDestination>");
+}
+
+pub fn serializeInventoryEncryption(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventoryEncryption) !void {
+    if (value.ssekms) |v| {
+        try buf.appendSlice(alloc, "<SSE-KMS>");
+        try serializeSSEKMS(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SSE-KMS>");
+    }
+    if (value.sses3) |v| {
+        try buf.appendSlice(alloc, "<SSE-S3>");
+        try serializeSSES3(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SSE-S3>");
+    }
+}
+
+pub fn serializeInventoryFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventoryFilter) !void {
+    try buf.appendSlice(alloc, "<Prefix>");
+    try appendXmlEscaped(alloc, buf, value.prefix);
+    try buf.appendSlice(alloc, "</Prefix>");
+}
+
+pub fn serializeInventoryS3BucketDestination(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventoryS3BucketDestination) !void {
+    if (value.account_id) |v| {
+        try buf.appendSlice(alloc, "<AccountId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AccountId>");
+    }
+    try buf.appendSlice(alloc, "<Bucket>");
+    try appendXmlEscaped(alloc, buf, value.bucket);
+    try buf.appendSlice(alloc, "</Bucket>");
+    if (value.encryption) |v| {
+        try buf.appendSlice(alloc, "<Encryption>");
+        try serializeInventoryEncryption(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Encryption>");
+    }
+    try buf.appendSlice(alloc, "<Format>");
+    try buf.appendSlice(alloc, @tagName(value.format));
+    try buf.appendSlice(alloc, "</Format>");
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+}
+
+pub fn serializeInventorySchedule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventorySchedule) !void {
+    try buf.appendSlice(alloc, "<Frequency>");
+    try buf.appendSlice(alloc, @tagName(value.frequency));
+    try buf.appendSlice(alloc, "</Frequency>");
+}
+
+pub fn serializeInventoryTableConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventoryTableConfiguration) !void {
+    try buf.appendSlice(alloc, "<ConfigurationState>");
+    try buf.appendSlice(alloc, @tagName(value.configuration_state));
+    try buf.appendSlice(alloc, "</ConfigurationState>");
+    if (value.encryption_configuration) |v| {
+        try buf.appendSlice(alloc, "<EncryptionConfiguration>");
+        try serializeMetadataTableEncryptionConfiguration(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EncryptionConfiguration>");
+    }
+}
+
+pub fn serializeInventoryTableConfigurationUpdates(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventoryTableConfigurationUpdates) !void {
+    try buf.appendSlice(alloc, "<ConfigurationState>");
+    try buf.appendSlice(alloc, @tagName(value.configuration_state));
+    try buf.appendSlice(alloc, "</ConfigurationState>");
+    if (value.encryption_configuration) |v| {
+        try buf.appendSlice(alloc, "<EncryptionConfiguration>");
+        try serializeMetadataTableEncryptionConfiguration(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EncryptionConfiguration>");
+    }
+}
+
+pub fn serializeJSONInput(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: JSONInput) !void {
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<Type>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Type>");
+    }
+}
+
+pub fn serializeJSONOutput(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: JSONOutput) !void {
+    if (value.record_delimiter) |v| {
+        try buf.appendSlice(alloc, "<RecordDelimiter>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RecordDelimiter>");
+    }
+}
+
+pub fn serializeJournalTableConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: JournalTableConfiguration) !void {
+    if (value.encryption_configuration) |v| {
+        try buf.appendSlice(alloc, "<EncryptionConfiguration>");
+        try serializeMetadataTableEncryptionConfiguration(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EncryptionConfiguration>");
+    }
+    try buf.appendSlice(alloc, "<RecordExpiration>");
+    try serializeRecordExpiration(alloc, buf, value.record_expiration);
+    try buf.appendSlice(alloc, "</RecordExpiration>");
+}
+
+pub fn serializeJournalTableConfigurationUpdates(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: JournalTableConfigurationUpdates) !void {
+    try buf.appendSlice(alloc, "<RecordExpiration>");
+    try serializeRecordExpiration(alloc, buf, value.record_expiration);
+    try buf.appendSlice(alloc, "</RecordExpiration>");
+}
+
+pub fn serializeLambdaFunctionConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LambdaFunctionConfiguration) !void {
+    try serializeEventList(alloc, buf, value.events, "Event");
+    if (value.filter) |v| {
+        try buf.appendSlice(alloc, "<Filter>");
+        try serializeNotificationConfigurationFilter(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Filter>");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<Id>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Id>");
+    }
+    try buf.appendSlice(alloc, "<CloudFunction>");
+    try appendXmlEscaped(alloc, buf, value.lambda_function_arn);
+    try buf.appendSlice(alloc, "</CloudFunction>");
+}
+
+pub fn serializeLifecycleExpiration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LifecycleExpiration) !void {
+    if (value.date) |v| {
+        try buf.appendSlice(alloc, "<Date>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</Date>");
+    }
+    if (value.days) |v| {
+        try buf.appendSlice(alloc, "<Days>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Days>");
+    }
+    if (value.expired_object_delete_marker) |v| {
+        try buf.appendSlice(alloc, "<ExpiredObjectDeleteMarker>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</ExpiredObjectDeleteMarker>");
+    }
+}
+
+pub fn serializeLifecycleRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LifecycleRule) !void {
+    if (value.abort_incomplete_multipart_upload) |v| {
+        try buf.appendSlice(alloc, "<AbortIncompleteMultipartUpload>");
+        try serializeAbortIncompleteMultipartUpload(alloc, buf, v);
+        try buf.appendSlice(alloc, "</AbortIncompleteMultipartUpload>");
+    }
+    if (value.expiration) |v| {
+        try buf.appendSlice(alloc, "<Expiration>");
+        try serializeLifecycleExpiration(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Expiration>");
+    }
+    if (value.filter) |v| {
+        try buf.appendSlice(alloc, "<Filter>");
+        try serializeLifecycleRuleFilter(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Filter>");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<ID>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ID>");
+    }
+    if (value.noncurrent_version_expiration) |v| {
+        try buf.appendSlice(alloc, "<NoncurrentVersionExpiration>");
+        try serializeNoncurrentVersionExpiration(alloc, buf, v);
+        try buf.appendSlice(alloc, "</NoncurrentVersionExpiration>");
+    }
+    if (value.noncurrent_version_transitions) |v| {
+        try serializeNoncurrentVersionTransitionList(alloc, buf, v, "NoncurrentVersionTransition");
+    }
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+    try buf.appendSlice(alloc, "<Status>");
+    try buf.appendSlice(alloc, @tagName(value.status));
+    try buf.appendSlice(alloc, "</Status>");
+    if (value.transitions) |v| {
+        try serializeTransitionList(alloc, buf, v, "Transition");
+    }
+}
+
+pub fn serializeLifecycleRuleAndOperator(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LifecycleRuleAndOperator) !void {
+    if (value.object_size_greater_than) |v| {
+        try buf.appendSlice(alloc, "<ObjectSizeGreaterThan>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ObjectSizeGreaterThan>");
+    }
+    if (value.object_size_less_than) |v| {
+        try buf.appendSlice(alloc, "<ObjectSizeLessThan>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ObjectSizeLessThan>");
+    }
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+    if (value.tags) |v| {
+        try serializeTagSet(alloc, buf, v, "Tag");
+    }
+}
+
+pub fn serializeLifecycleRuleFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LifecycleRuleFilter) !void {
+    if (value.@"and") |v| {
+        try buf.appendSlice(alloc, "<And>");
+        try serializeLifecycleRuleAndOperator(alloc, buf, v);
+        try buf.appendSlice(alloc, "</And>");
+    }
+    if (value.object_size_greater_than) |v| {
+        try buf.appendSlice(alloc, "<ObjectSizeGreaterThan>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ObjectSizeGreaterThan>");
+    }
+    if (value.object_size_less_than) |v| {
+        try buf.appendSlice(alloc, "<ObjectSizeLessThan>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</ObjectSizeLessThan>");
+    }
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+    if (value.tag) |v| {
+        try buf.appendSlice(alloc, "<Tag>");
+        try serializeTag(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Tag>");
+    }
+}
+
+pub fn serializeLocationInfo(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LocationInfo) !void {
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<Name>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Name>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<Type>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Type>");
+    }
+}
+
+pub fn serializeLoggingEnabled(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LoggingEnabled) !void {
+    try buf.appendSlice(alloc, "<TargetBucket>");
+    try appendXmlEscaped(alloc, buf, value.target_bucket);
+    try buf.appendSlice(alloc, "</TargetBucket>");
+    if (value.target_grants) |v| {
+        try buf.appendSlice(alloc, "<TargetGrants>");
+        try serializeTargetGrants(alloc, buf, v, "Grant");
+        try buf.appendSlice(alloc, "</TargetGrants>");
+    }
+    if (value.target_object_key_format) |v| {
+        try buf.appendSlice(alloc, "<TargetObjectKeyFormat>");
+        try serializeTargetObjectKeyFormat(alloc, buf, v);
+        try buf.appendSlice(alloc, "</TargetObjectKeyFormat>");
+    }
+    try buf.appendSlice(alloc, "<TargetPrefix>");
+    try appendXmlEscaped(alloc, buf, value.target_prefix);
+    try buf.appendSlice(alloc, "</TargetPrefix>");
+}
+
+pub fn serializeMetadataConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MetadataConfiguration) !void {
+    if (value.inventory_table_configuration) |v| {
+        try buf.appendSlice(alloc, "<InventoryTableConfiguration>");
+        try serializeInventoryTableConfiguration(alloc, buf, v);
+        try buf.appendSlice(alloc, "</InventoryTableConfiguration>");
+    }
+    try buf.appendSlice(alloc, "<JournalTableConfiguration>");
+    try serializeJournalTableConfiguration(alloc, buf, value.journal_table_configuration);
+    try buf.appendSlice(alloc, "</JournalTableConfiguration>");
+}
+
+pub fn serializeMetadataEntry(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MetadataEntry) !void {
+    if (value.name) |v| {
+        try buf.appendSlice(alloc, "<Name>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Name>");
+    }
+    if (value.value) |v| {
+        try buf.appendSlice(alloc, "<Value>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Value>");
+    }
+}
+
+pub fn serializeMetadataTableConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MetadataTableConfiguration) !void {
+    try buf.appendSlice(alloc, "<S3TablesDestination>");
+    try serializeS3TablesDestination(alloc, buf, value.s_3_tables_destination);
+    try buf.appendSlice(alloc, "</S3TablesDestination>");
+}
+
+pub fn serializeMetadataTableEncryptionConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MetadataTableEncryptionConfiguration) !void {
+    if (value.kms_key_arn) |v| {
+        try buf.appendSlice(alloc, "<KmsKeyArn>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KmsKeyArn>");
+    }
+    try buf.appendSlice(alloc, "<SseAlgorithm>");
+    try buf.appendSlice(alloc, @tagName(value.sse_algorithm));
+    try buf.appendSlice(alloc, "</SseAlgorithm>");
+}
+
+pub fn serializeMetrics(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Metrics) !void {
+    if (value.event_threshold) |v| {
+        try buf.appendSlice(alloc, "<EventThreshold>");
+        try serializeReplicationTimeValue(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EventThreshold>");
+    }
+    try buf.appendSlice(alloc, "<Status>");
+    try buf.appendSlice(alloc, @tagName(value.status));
+    try buf.appendSlice(alloc, "</Status>");
+}
+
+pub fn serializeMetricsConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MetricsConfiguration) !void {
+    try buf.appendSlice(alloc, "<Id>");
+    try appendXmlEscaped(alloc, buf, value.id);
+    try buf.appendSlice(alloc, "</Id>");
+}
+
+pub fn serializeNoncurrentVersionExpiration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NoncurrentVersionExpiration) !void {
+    if (value.newer_noncurrent_versions) |v| {
+        try buf.appendSlice(alloc, "<NewerNoncurrentVersions>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</NewerNoncurrentVersions>");
+    }
+    if (value.noncurrent_days) |v| {
+        try buf.appendSlice(alloc, "<NoncurrentDays>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</NoncurrentDays>");
+    }
+}
+
+pub fn serializeNoncurrentVersionTransition(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NoncurrentVersionTransition) !void {
+    if (value.newer_noncurrent_versions) |v| {
+        try buf.appendSlice(alloc, "<NewerNoncurrentVersions>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</NewerNoncurrentVersions>");
+    }
+    if (value.noncurrent_days) |v| {
+        try buf.appendSlice(alloc, "<NoncurrentDays>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</NoncurrentDays>");
+    }
+    if (value.storage_class) |v| {
+        try buf.appendSlice(alloc, "<StorageClass>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</StorageClass>");
+    }
+}
+
+pub fn serializeNotificationConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NotificationConfiguration) !void {
+    if (value.event_bridge_configuration) |v| {
+        try buf.appendSlice(alloc, "<EventBridgeConfiguration>");
+        try serializeEventBridgeConfiguration(alloc, buf, v);
+        try buf.appendSlice(alloc, "</EventBridgeConfiguration>");
+    }
+    if (value.lambda_function_configurations) |v| {
+        try serializeLambdaFunctionConfigurationList(alloc, buf, v, "CloudFunctionConfiguration");
+    }
+    if (value.queue_configurations) |v| {
+        try serializeQueueConfigurationList(alloc, buf, v, "QueueConfiguration");
+    }
+    if (value.topic_configurations) |v| {
+        try serializeTopicConfigurationList(alloc, buf, v, "TopicConfiguration");
+    }
+}
+
+pub fn serializeNotificationConfigurationFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NotificationConfigurationFilter) !void {
+    if (value.key) |v| {
+        try buf.appendSlice(alloc, "<S3Key>");
+        try serializeS3KeyFilter(alloc, buf, v);
+        try buf.appendSlice(alloc, "</S3Key>");
+    }
+}
+
+pub fn serializeObjectIdentifier(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ObjectIdentifier) !void {
+    if (value.e_tag) |v| {
+        try buf.appendSlice(alloc, "<ETag>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ETag>");
+    }
+    try buf.appendSlice(alloc, "<Key>");
+    try appendXmlEscaped(alloc, buf, value.key);
+    try buf.appendSlice(alloc, "</Key>");
+    if (value.last_modified_time) |v| {
+        try buf.appendSlice(alloc, "<LastModifiedTime>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</LastModifiedTime>");
+    }
+    if (value.size) |v| {
+        try buf.appendSlice(alloc, "<Size>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Size>");
+    }
+    if (value.version_id) |v| {
+        try buf.appendSlice(alloc, "<VersionId>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</VersionId>");
+    }
+}
+
+pub fn serializeObjectLockConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ObjectLockConfiguration) !void {
+    if (value.object_lock_enabled) |v| {
+        try buf.appendSlice(alloc, "<ObjectLockEnabled>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</ObjectLockEnabled>");
+    }
+    if (value.rule) |v| {
+        try buf.appendSlice(alloc, "<Rule>");
+        try serializeObjectLockRule(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Rule>");
+    }
+}
+
+pub fn serializeObjectLockLegalHold(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ObjectLockLegalHold) !void {
+    if (value.status) |v| {
+        try buf.appendSlice(alloc, "<Status>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Status>");
+    }
+}
+
+pub fn serializeObjectLockRetention(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ObjectLockRetention) !void {
+    if (value.mode) |v| {
+        try buf.appendSlice(alloc, "<Mode>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Mode>");
+    }
+    if (value.retain_until_date) |v| {
+        try buf.appendSlice(alloc, "<RetainUntilDate>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</RetainUntilDate>");
+    }
+}
+
+pub fn serializeObjectLockRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ObjectLockRule) !void {
+    if (value.default_retention) |v| {
+        try buf.appendSlice(alloc, "<DefaultRetention>");
+        try serializeDefaultRetention(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DefaultRetention>");
+    }
+}
+
+pub fn serializeOutputLocation(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OutputLocation) !void {
+    if (value.s_3) |v| {
+        try buf.appendSlice(alloc, "<S3>");
+        try serializeS3Location(alloc, buf, v);
+        try buf.appendSlice(alloc, "</S3>");
+    }
+}
+
+pub fn serializeOutputSerialization(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OutputSerialization) !void {
+    if (value.csv) |v| {
+        try buf.appendSlice(alloc, "<CSV>");
+        try serializeCSVOutput(alloc, buf, v);
+        try buf.appendSlice(alloc, "</CSV>");
+    }
+    if (value.json) |v| {
+        try buf.appendSlice(alloc, "<JSON>");
+        try serializeJSONOutput(alloc, buf, v);
+        try buf.appendSlice(alloc, "</JSON>");
+    }
+}
+
+pub fn serializeOwner(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Owner) !void {
+    if (value.display_name) |v| {
+        try buf.appendSlice(alloc, "<DisplayName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DisplayName>");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<ID>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ID>");
+    }
+}
+
+pub fn serializeOwnershipControls(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OwnershipControls) !void {
+    try serializeOwnershipControlsRules(alloc, buf, value.rules, "Rule");
+}
+
+pub fn serializeOwnershipControlsRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OwnershipControlsRule) !void {
+    try buf.appendSlice(alloc, "<ObjectOwnership>");
+    try buf.appendSlice(alloc, @tagName(value.object_ownership));
+    try buf.appendSlice(alloc, "</ObjectOwnership>");
+}
+
+pub fn serializeParquetInput(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ParquetInput) !void {
+    _ = alloc;
+    _ = buf;
+    _ = value;
+}
+
+pub fn serializePartitionedPrefix(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PartitionedPrefix) !void {
+    if (value.partition_date_source) |v| {
+        try buf.appendSlice(alloc, "<PartitionDateSource>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</PartitionDateSource>");
+    }
+}
+
+pub fn serializePublicAccessBlockConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PublicAccessBlockConfiguration) !void {
+    if (value.block_public_acls) |v| {
+        try buf.appendSlice(alloc, "<BlockPublicAcls>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</BlockPublicAcls>");
+    }
+    if (value.block_public_policy) |v| {
+        try buf.appendSlice(alloc, "<BlockPublicPolicy>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</BlockPublicPolicy>");
+    }
+    if (value.ignore_public_acls) |v| {
+        try buf.appendSlice(alloc, "<IgnorePublicAcls>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</IgnorePublicAcls>");
+    }
+    if (value.restrict_public_buckets) |v| {
+        try buf.appendSlice(alloc, "<RestrictPublicBuckets>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</RestrictPublicBuckets>");
+    }
+}
+
+pub fn serializeQueueConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: QueueConfiguration) !void {
+    try serializeEventList(alloc, buf, value.events, "Event");
+    if (value.filter) |v| {
+        try buf.appendSlice(alloc, "<Filter>");
+        try serializeNotificationConfigurationFilter(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Filter>");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<Id>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Id>");
+    }
+    try buf.appendSlice(alloc, "<Queue>");
+    try appendXmlEscaped(alloc, buf, value.queue_arn);
+    try buf.appendSlice(alloc, "</Queue>");
+}
+
+pub fn serializeRecordExpiration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RecordExpiration) !void {
+    if (value.days) |v| {
+        try buf.appendSlice(alloc, "<Days>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Days>");
+    }
+    try buf.appendSlice(alloc, "<Expiration>");
+    try buf.appendSlice(alloc, @tagName(value.expiration));
+    try buf.appendSlice(alloc, "</Expiration>");
+}
+
+pub fn serializeRedirect(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Redirect) !void {
+    if (value.host_name) |v| {
+        try buf.appendSlice(alloc, "<HostName>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</HostName>");
+    }
+    if (value.http_redirect_code) |v| {
+        try buf.appendSlice(alloc, "<HttpRedirectCode>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</HttpRedirectCode>");
+    }
+    if (value.protocol) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+    if (value.replace_key_prefix_with) |v| {
+        try buf.appendSlice(alloc, "<ReplaceKeyPrefixWith>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ReplaceKeyPrefixWith>");
+    }
+    if (value.replace_key_with) |v| {
+        try buf.appendSlice(alloc, "<ReplaceKeyWith>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ReplaceKeyWith>");
+    }
+}
+
+pub fn serializeRedirectAllRequestsTo(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RedirectAllRequestsTo) !void {
+    try buf.appendSlice(alloc, "<HostName>");
+    try appendXmlEscaped(alloc, buf, value.host_name);
+    try buf.appendSlice(alloc, "</HostName>");
+    if (value.protocol) |v| {
+        try buf.appendSlice(alloc, "<Protocol>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Protocol>");
+    }
+}
+
+pub fn serializeReplicaModifications(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicaModifications) !void {
+    try buf.appendSlice(alloc, "<Status>");
+    try buf.appendSlice(alloc, @tagName(value.status));
+    try buf.appendSlice(alloc, "</Status>");
+}
+
+pub fn serializeReplicationConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicationConfiguration) !void {
+    try buf.appendSlice(alloc, "<Role>");
+    try appendXmlEscaped(alloc, buf, value.role);
+    try buf.appendSlice(alloc, "</Role>");
+    try serializeReplicationRules(alloc, buf, value.rules, "Rule");
+}
+
+pub fn serializeReplicationRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicationRule) !void {
+    if (value.delete_marker_replication) |v| {
+        try buf.appendSlice(alloc, "<DeleteMarkerReplication>");
+        try serializeDeleteMarkerReplication(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DeleteMarkerReplication>");
+    }
+    try buf.appendSlice(alloc, "<Destination>");
+    try serializeDestination(alloc, buf, value.destination);
+    try buf.appendSlice(alloc, "</Destination>");
+    if (value.existing_object_replication) |v| {
+        try buf.appendSlice(alloc, "<ExistingObjectReplication>");
+        try serializeExistingObjectReplication(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ExistingObjectReplication>");
+    }
+    if (value.filter) |v| {
+        try buf.appendSlice(alloc, "<Filter>");
+        try serializeReplicationRuleFilter(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Filter>");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<ID>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ID>");
+    }
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+    if (value.priority) |v| {
+        try buf.appendSlice(alloc, "<Priority>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Priority>");
+    }
+    if (value.source_selection_criteria) |v| {
+        try buf.appendSlice(alloc, "<SourceSelectionCriteria>");
+        try serializeSourceSelectionCriteria(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SourceSelectionCriteria>");
+    }
+    try buf.appendSlice(alloc, "<Status>");
+    try buf.appendSlice(alloc, @tagName(value.status));
+    try buf.appendSlice(alloc, "</Status>");
+}
+
+pub fn serializeReplicationRuleAndOperator(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicationRuleAndOperator) !void {
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+    if (value.tags) |v| {
+        try serializeTagSet(alloc, buf, v, "Tag");
+    }
+}
+
+pub fn serializeReplicationRuleFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicationRuleFilter) !void {
+    if (value.@"and") |v| {
+        try buf.appendSlice(alloc, "<And>");
+        try serializeReplicationRuleAndOperator(alloc, buf, v);
+        try buf.appendSlice(alloc, "</And>");
+    }
+    if (value.prefix) |v| {
+        try buf.appendSlice(alloc, "<Prefix>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Prefix>");
+    }
+    if (value.tag) |v| {
+        try buf.appendSlice(alloc, "<Tag>");
+        try serializeTag(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Tag>");
+    }
+}
+
+pub fn serializeReplicationTime(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicationTime) !void {
+    try buf.appendSlice(alloc, "<Status>");
+    try buf.appendSlice(alloc, @tagName(value.status));
+    try buf.appendSlice(alloc, "</Status>");
+    try buf.appendSlice(alloc, "<Time>");
+    try serializeReplicationTimeValue(alloc, buf, value.time);
+    try buf.appendSlice(alloc, "</Time>");
+}
+
+pub fn serializeReplicationTimeValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplicationTimeValue) !void {
+    if (value.minutes) |v| {
+        try buf.appendSlice(alloc, "<Minutes>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Minutes>");
+    }
+}
+
+pub fn serializeRequestPaymentConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RequestPaymentConfiguration) !void {
+    try buf.appendSlice(alloc, "<Payer>");
+    try buf.appendSlice(alloc, @tagName(value.payer));
+    try buf.appendSlice(alloc, "</Payer>");
+}
+
+pub fn serializeRequestProgress(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RequestProgress) !void {
+    if (value.enabled) |v| {
+        try buf.appendSlice(alloc, "<Enabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</Enabled>");
+    }
+}
+
+pub fn serializeRestoreRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RestoreRequest) !void {
+    if (value.days) |v| {
+        try buf.appendSlice(alloc, "<Days>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Days>");
+    }
+    if (value.description) |v| {
+        try buf.appendSlice(alloc, "<Description>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Description>");
+    }
+    if (value.glacier_job_parameters) |v| {
+        try buf.appendSlice(alloc, "<GlacierJobParameters>");
+        try serializeGlacierJobParameters(alloc, buf, v);
+        try buf.appendSlice(alloc, "</GlacierJobParameters>");
+    }
+    if (value.output_location) |v| {
+        try buf.appendSlice(alloc, "<OutputLocation>");
+        try serializeOutputLocation(alloc, buf, v);
+        try buf.appendSlice(alloc, "</OutputLocation>");
+    }
+    if (value.select_parameters) |v| {
+        try buf.appendSlice(alloc, "<SelectParameters>");
+        try serializeSelectParameters(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SelectParameters>");
+    }
+    if (value.tier) |v| {
+        try buf.appendSlice(alloc, "<Tier>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Tier>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(alloc, "<Type>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Type>");
+    }
+}
+
+pub fn serializeRoutingRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RoutingRule) !void {
+    if (value.condition) |v| {
+        try buf.appendSlice(alloc, "<Condition>");
+        try serializeCondition(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Condition>");
+    }
+    try buf.appendSlice(alloc, "<Redirect>");
+    try serializeRedirect(alloc, buf, value.redirect);
+    try buf.appendSlice(alloc, "</Redirect>");
+}
+
+pub fn serializeS3KeyFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3KeyFilter) !void {
+    if (value.filter_rules) |v| {
+        try serializeFilterRuleList(alloc, buf, v, "FilterRule");
+    }
+}
+
+pub fn serializeS3Location(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3Location) !void {
+    if (value.access_control_list) |v| {
+        try buf.appendSlice(alloc, "<AccessControlList>");
+        try serializeGrants(alloc, buf, v, "Grant");
+        try buf.appendSlice(alloc, "</AccessControlList>");
+    }
+    try buf.appendSlice(alloc, "<BucketName>");
+    try appendXmlEscaped(alloc, buf, value.bucket_name);
+    try buf.appendSlice(alloc, "</BucketName>");
+    if (value.canned_acl) |v| {
+        try buf.appendSlice(alloc, "<CannedACL>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</CannedACL>");
+    }
+    if (value.encryption) |v| {
+        try buf.appendSlice(alloc, "<Encryption>");
+        try serializeEncryption(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Encryption>");
+    }
+    try buf.appendSlice(alloc, "<Prefix>");
+    try appendXmlEscaped(alloc, buf, value.prefix);
+    try buf.appendSlice(alloc, "</Prefix>");
+    if (value.storage_class) |v| {
+        try buf.appendSlice(alloc, "<StorageClass>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</StorageClass>");
+    }
+    if (value.tagging) |v| {
+        try buf.appendSlice(alloc, "<Tagging>");
+        try serializeTagging(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Tagging>");
+    }
+    if (value.user_metadata) |v| {
+        try buf.appendSlice(alloc, "<UserMetadata>");
+        try serializeUserMetadata(alloc, buf, v, "MetadataEntry");
+        try buf.appendSlice(alloc, "</UserMetadata>");
+    }
+}
+
+pub fn serializeS3TablesDestination(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3TablesDestination) !void {
+    try buf.appendSlice(alloc, "<TableBucketArn>");
+    try appendXmlEscaped(alloc, buf, value.table_bucket_arn);
+    try buf.appendSlice(alloc, "</TableBucketArn>");
+    try buf.appendSlice(alloc, "<TableName>");
+    try appendXmlEscaped(alloc, buf, value.table_name);
+    try buf.appendSlice(alloc, "</TableName>");
+}
+
+pub fn serializeSSEKMS(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SSEKMS) !void {
+    try buf.appendSlice(alloc, "<KeyId>");
+    try appendXmlEscaped(alloc, buf, value.key_id);
+    try buf.appendSlice(alloc, "</KeyId>");
+}
+
+pub fn serializeSSES3(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SSES3) !void {
+    _ = alloc;
+    _ = buf;
+    _ = value;
+}
+
+pub fn serializeScanRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScanRange) !void {
+    if (value.end) |v| {
+        try buf.appendSlice(alloc, "<End>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</End>");
+    }
+    if (value.start) |v| {
+        try buf.appendSlice(alloc, "<Start>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Start>");
+    }
+}
+
+pub fn serializeSelectParameters(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SelectParameters) !void {
+    try buf.appendSlice(alloc, "<Expression>");
+    try appendXmlEscaped(alloc, buf, value.expression);
+    try buf.appendSlice(alloc, "</Expression>");
+    try buf.appendSlice(alloc, "<ExpressionType>");
+    try buf.appendSlice(alloc, @tagName(value.expression_type));
+    try buf.appendSlice(alloc, "</ExpressionType>");
+    try buf.appendSlice(alloc, "<InputSerialization>");
+    try serializeInputSerialization(alloc, buf, value.input_serialization);
+    try buf.appendSlice(alloc, "</InputSerialization>");
+    try buf.appendSlice(alloc, "<OutputSerialization>");
+    try serializeOutputSerialization(alloc, buf, value.output_serialization);
+    try buf.appendSlice(alloc, "</OutputSerialization>");
+}
+
+pub fn serializeServerSideEncryptionByDefault(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ServerSideEncryptionByDefault) !void {
+    if (value.kms_master_key_id) |v| {
+        try buf.appendSlice(alloc, "<KMSMasterKeyID>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</KMSMasterKeyID>");
+    }
+    try buf.appendSlice(alloc, "<SSEAlgorithm>");
+    try buf.appendSlice(alloc, @tagName(value.sse_algorithm));
+    try buf.appendSlice(alloc, "</SSEAlgorithm>");
+}
+
+pub fn serializeServerSideEncryptionConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ServerSideEncryptionConfiguration) !void {
+    try serializeServerSideEncryptionRules(alloc, buf, value.rules, "Rule");
+}
+
+pub fn serializeServerSideEncryptionRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ServerSideEncryptionRule) !void {
+    if (value.apply_server_side_encryption_by_default) |v| {
+        try buf.appendSlice(alloc, "<ApplyServerSideEncryptionByDefault>");
+        try serializeServerSideEncryptionByDefault(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ApplyServerSideEncryptionByDefault>");
+    }
+    if (value.blocked_encryption_types) |v| {
+        try buf.appendSlice(alloc, "<BlockedEncryptionTypes>");
+        try serializeBlockedEncryptionTypes(alloc, buf, v);
+        try buf.appendSlice(alloc, "</BlockedEncryptionTypes>");
+    }
+    if (value.bucket_key_enabled) |v| {
+        try buf.appendSlice(alloc, "<BucketKeyEnabled>");
+        try buf.appendSlice(alloc, if (v) "true" else "false");
+        try buf.appendSlice(alloc, "</BucketKeyEnabled>");
+    }
+}
+
+pub fn serializeSimplePrefix(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SimplePrefix) !void {
+    _ = alloc;
+    _ = buf;
+    _ = value;
+}
+
+pub fn serializeSourceSelectionCriteria(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SourceSelectionCriteria) !void {
+    if (value.replica_modifications) |v| {
+        try buf.appendSlice(alloc, "<ReplicaModifications>");
+        try serializeReplicaModifications(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ReplicaModifications>");
+    }
+    if (value.sse_kms_encrypted_objects) |v| {
+        try buf.appendSlice(alloc, "<SseKmsEncryptedObjects>");
+        try serializeSseKmsEncryptedObjects(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SseKmsEncryptedObjects>");
+    }
+}
+
+pub fn serializeSseKmsEncryptedObjects(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SseKmsEncryptedObjects) !void {
+    try buf.appendSlice(alloc, "<Status>");
+    try buf.appendSlice(alloc, @tagName(value.status));
+    try buf.appendSlice(alloc, "</Status>");
+}
+
+pub fn serializeStorageClassAnalysis(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: StorageClassAnalysis) !void {
+    if (value.data_export) |v| {
+        try buf.appendSlice(alloc, "<DataExport>");
+        try serializeStorageClassAnalysisDataExport(alloc, buf, v);
+        try buf.appendSlice(alloc, "</DataExport>");
+    }
+}
+
+pub fn serializeStorageClassAnalysisDataExport(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: StorageClassAnalysisDataExport) !void {
+    try buf.appendSlice(alloc, "<Destination>");
+    try serializeAnalyticsExportDestination(alloc, buf, value.destination);
+    try buf.appendSlice(alloc, "</Destination>");
+    try buf.appendSlice(alloc, "<OutputSchemaVersion>");
+    try buf.appendSlice(alloc, @tagName(value.output_schema_version));
+    try buf.appendSlice(alloc, "</OutputSchemaVersion>");
+}
+
+pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {
+    try buf.appendSlice(alloc, "<Key>");
+    try appendXmlEscaped(alloc, buf, value.key);
+    try buf.appendSlice(alloc, "</Key>");
+    try buf.appendSlice(alloc, "<Value>");
+    try appendXmlEscaped(alloc, buf, value.value);
+    try buf.appendSlice(alloc, "</Value>");
+}
+
+pub fn serializeTagging(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tagging) !void {
+    try buf.appendSlice(alloc, "<TagSet>");
+    try serializeTagSet(alloc, buf, value.tag_set, "Tag");
+    try buf.appendSlice(alloc, "</TagSet>");
+}
+
+pub fn serializeTargetGrant(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetGrant) !void {
+    if (value.grantee) |v| {
+        try buf.appendSlice(alloc, "<Grantee>");
+        try serializeGrantee(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Grantee>");
+    }
+    if (value.permission) |v| {
+        try buf.appendSlice(alloc, "<Permission>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Permission>");
+    }
+}
+
+pub fn serializeTargetObjectKeyFormat(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetObjectKeyFormat) !void {
+    if (value.partitioned_prefix) |v| {
+        try buf.appendSlice(alloc, "<PartitionedPrefix>");
+        try serializePartitionedPrefix(alloc, buf, v);
+        try buf.appendSlice(alloc, "</PartitionedPrefix>");
+    }
+    if (value.simple_prefix) |v| {
+        try buf.appendSlice(alloc, "<SimplePrefix>");
+        try serializeSimplePrefix(alloc, buf, v);
+        try buf.appendSlice(alloc, "</SimplePrefix>");
+    }
+}
+
+pub fn serializeTiering(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tiering) !void {
+    try buf.appendSlice(alloc, "<AccessTier>");
+    try buf.appendSlice(alloc, @tagName(value.access_tier));
+    try buf.appendSlice(alloc, "</AccessTier>");
+    try buf.appendSlice(alloc, "<Days>");
+    {
+        const num_str = std.fmt.allocPrint(alloc, "{d}", .{value.days}) catch "";
+        try buf.appendSlice(alloc, num_str);
+    }
+    try buf.appendSlice(alloc, "</Days>");
+}
+
+pub fn serializeTopicConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TopicConfiguration) !void {
+    try serializeEventList(alloc, buf, value.events, "Event");
+    if (value.filter) |v| {
+        try buf.appendSlice(alloc, "<Filter>");
+        try serializeNotificationConfigurationFilter(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Filter>");
+    }
+    if (value.id) |v| {
+        try buf.appendSlice(alloc, "<Id>");
+        try appendXmlEscaped(alloc, buf, v);
+        try buf.appendSlice(alloc, "</Id>");
+    }
+    try buf.appendSlice(alloc, "<Topic>");
+    try appendXmlEscaped(alloc, buf, value.topic_arn);
+    try buf.appendSlice(alloc, "</Topic>");
+}
+
+pub fn serializeTransition(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Transition) !void {
+    if (value.date) |v| {
+        try buf.appendSlice(alloc, "<Date>");
+        {
+            const ts_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, ts_str);
+        }
+        try buf.appendSlice(alloc, "</Date>");
+    }
+    if (value.days) |v| {
+        try buf.appendSlice(alloc, "<Days>");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try buf.appendSlice(alloc, num_str);
+        }
+        try buf.appendSlice(alloc, "</Days>");
+    }
+    if (value.storage_class) |v| {
+        try buf.appendSlice(alloc, "<StorageClass>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</StorageClass>");
+    }
+}
+
+pub fn serializeVersioningConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VersioningConfiguration) !void {
+    if (value.mfa_delete) |v| {
+        try buf.appendSlice(alloc, "<MfaDelete>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</MfaDelete>");
+    }
+    if (value.status) |v| {
+        try buf.appendSlice(alloc, "<Status>");
+        try buf.appendSlice(alloc, @tagName(v));
+        try buf.appendSlice(alloc, "</Status>");
+    }
+}
+
+pub fn serializeWebsiteConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: WebsiteConfiguration) !void {
+    if (value.error_document) |v| {
+        try buf.appendSlice(alloc, "<ErrorDocument>");
+        try serializeErrorDocument(alloc, buf, v);
+        try buf.appendSlice(alloc, "</ErrorDocument>");
+    }
+    if (value.index_document) |v| {
+        try buf.appendSlice(alloc, "<IndexDocument>");
+        try serializeIndexDocument(alloc, buf, v);
+        try buf.appendSlice(alloc, "</IndexDocument>");
+    }
+    if (value.redirect_all_requests_to) |v| {
+        try buf.appendSlice(alloc, "<RedirectAllRequestsTo>");
+        try serializeRedirectAllRequestsTo(alloc, buf, v);
+        try buf.appendSlice(alloc, "</RedirectAllRequestsTo>");
+    }
+    if (value.routing_rules) |v| {
+        try buf.appendSlice(alloc, "<RoutingRules>");
+        try serializeRoutingRules(alloc, buf, v, "RoutingRule");
+        try buf.appendSlice(alloc, "</RoutingRules>");
+    }
+}
+
+fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            '&' => try buf.appendSlice(alloc, "&amp;"),
+            '<' => try buf.appendSlice(alloc, "&lt;"),
+            '>' => try buf.appendSlice(alloc, "&gt;"),
+            else => try buf.append(alloc, c),
+        }
+    }
+}

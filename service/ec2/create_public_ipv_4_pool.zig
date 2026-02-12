@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Creates a public IPv4 address pool. A public IPv4 pool is an EC2 IP address
 /// pool required for the public IPv4 CIDRs that you own and bring to Amazon Web

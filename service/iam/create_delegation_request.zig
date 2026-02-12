@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DelegationPermission = @import("delegation_permission.zig").DelegationPermission;
+const serde = @import("serde.zig");
 
 /// Creates an IAM delegation request for temporary access delegation.
 ///

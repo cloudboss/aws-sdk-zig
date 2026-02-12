@@ -23,7 +23,9 @@ import software.amazon.smithy.model.traits.HttpQueryTrait
 import software.amazon.smithy.model.traits.HttpResponseCodeTrait
 import software.amazon.smithy.model.traits.HttpTrait
 import software.amazon.smithy.model.traits.StreamingTrait
+import software.amazon.smithy.model.traits.XmlFlattenedTrait
 import software.amazon.smithy.model.traits.XmlNameTrait
+import software.amazon.smithy.model.traits.XmlNamespaceTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigWriter
 import software.amazon.smithy.zig.protocols.OperationContext
@@ -112,7 +114,7 @@ class RestXmlProtocol : ProtocolGenerator {
             bindings.headers.isNotEmpty() || bindings.payload != null ||
             bindings.bodyMembers.any { (_, ms) ->
                 val ts = ctx.model.expectShape(ms.target)
-                ctx.isScalarType(ts)
+                ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape
             }
 
         if (!inputUsed) {
@@ -328,6 +330,33 @@ class RestXmlProtocol : ProtocolGenerator {
                 } else {
                     writer.write("const body = input.\$L orelse \"\";", fieldName)
                 }
+            } else if (targetShape is StructureShape) {
+                // Struct payload -- serialize via serde
+                val rootName = targetShape.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }
+                    .orElse(targetShape.id.name)
+                val ns = targetShape.getTrait(XmlNamespaceTrait::class.java)
+                    .or { ctx.service.getTrait(XmlNamespaceTrait::class.java) }
+                    .orElse(null)
+
+                if (memberShape.isRequired) {
+                    writer.write("var body_buf: std.ArrayList(u8) = .{};")
+                    writeXmlRootOpen(writer, rootName, ns)
+                    writer.write("try serde.serialize\$L(alloc, &body_buf, input.\$L);", targetShape.id.name, fieldName)
+                    writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", rootName)
+                    writer.write("const body = try body_buf.toOwnedSlice(alloc);")
+                } else {
+                    writer.openBlock("const body: ?[]const u8 = blk: {")
+                    writer.openBlock("if (input.\$L) |payload| {", fieldName)
+                    writer.write("var body_buf: std.ArrayList(u8) = .{};")
+                    writeXmlRootOpen(writer, rootName, ns)
+                    writer.write("try serde.serialize\$L(alloc, &body_buf, payload);", targetShape.id.name)
+                    writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", rootName)
+                    writer.write("break :blk try body_buf.toOwnedSlice(alloc);")
+                    writer.closeBlock("}")
+                    writer.write("break :blk null;")
+                    writer.closeBlock("};")
+                }
             } else {
                 writer.write("const body: ?[]const u8 = null;")
             }
@@ -335,12 +364,12 @@ class RestXmlProtocol : ProtocolGenerator {
             return
         }
 
-        val hasScalarBodyMembers = bindings.bodyMembers.values.any { ms ->
+        val hasSerializableBodyMembers = bindings.bodyMembers.values.any { ms ->
             val ts = ctx.model.expectShape(ms.target)
-            ctx.isScalarType(ts)
+            ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape
         }
 
-        if (bindings.bodyMembers.isEmpty() || !hasScalarBodyMembers) {
+        if (bindings.bodyMembers.isEmpty() || !hasSerializableBodyMembers) {
             writer.write("const body: ?[]const u8 = null;")
             writer.blankLine()
             return
@@ -356,24 +385,78 @@ class RestXmlProtocol : ProtocolGenerator {
 
         for ((memberName, memberShape) in bindings.bodyMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
-            if (!ctx.isScalarType(targetShape)) continue
-
             val xmlName = xmlElementName(memberName, memberShape)
             val fieldName = NamingUtil.toFieldName(memberName)
-            val zigType = ctx.resolveBaseZigType(targetShape)
 
-            if (memberShape.isRequired) {
-                writeXmlElement(writer, xmlName, zigType, "input.$fieldName")
-            } else {
-                writer.openBlock("if (input.\$L) |v| {", fieldName)
-                writeXmlElement(writer, xmlName, zigType, "v")
-                writer.closeBlock("}")
+            when {
+                ctx.isScalarType(targetShape) -> {
+                    val zigType = ctx.resolveBaseZigType(targetShape)
+                    if (memberShape.isRequired) {
+                        writeXmlElement(writer, xmlName, zigType, "input.$fieldName")
+                    } else {
+                        writer.openBlock("if (input.\$L) |v| {", fieldName)
+                        writeXmlElement(writer, xmlName, zigType, "v")
+                        writer.closeBlock("}")
+                    }
+                }
+                targetShape is StructureShape -> {
+                    if (memberShape.isRequired) {
+                        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                        writer.write("try serde.serialize\$L(alloc, &body_buf, input.\$L);", targetShape.id.name, fieldName)
+                        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                    } else {
+                        writer.openBlock("if (input.\$L) |v| {", fieldName)
+                        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                        writer.write("try serde.serialize\$L(alloc, &body_buf, v);", targetShape.id.name)
+                        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                        writer.closeBlock("}")
+                    }
+                }
+                targetShape is ListShape -> {
+                    val listFnName = "serialize${targetShape.id.name}"
+                    val isFlattened = memberShape.hasTrait(XmlFlattenedTrait::class.java)
+
+                    if (memberShape.isRequired) {
+                        if (isFlattened) {
+                            writer.write("try serde.\$L(alloc, &body_buf, input.\$L, \"\$L\");", listFnName, fieldName, xmlName)
+                        } else {
+                            val itemTag = targetShape.member.getTrait(XmlNameTrait::class.java)
+                                .map { it.value }.orElse("member")
+                            writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                            writer.write("try serde.\$L(alloc, &body_buf, input.\$L, \"\$L\");", listFnName, fieldName, itemTag)
+                            writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                        }
+                    } else {
+                        writer.openBlock("if (input.\$L) |v| {", fieldName)
+                        if (isFlattened) {
+                            writer.write("try serde.\$L(alloc, &body_buf, v, \"\$L\");", listFnName, xmlName)
+                        } else {
+                            val itemTag = targetShape.member.getTrait(XmlNameTrait::class.java)
+                                .map { it.value }.orElse("member")
+                            writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                            writer.write("try serde.\$L(alloc, &body_buf, v, \"\$L\");", listFnName, itemTag)
+                            writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                        }
+                        writer.closeBlock("}")
+                    }
+                }
             }
         }
 
         writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", rootElementName)
         writer.write("const body = try body_buf.toOwnedSlice(alloc);")
         writer.blankLine()
+    }
+
+    private fun writeXmlRootOpen(writer: ZigWriter, rootName: String, ns: XmlNamespaceTrait?) {
+        if (ns != null) {
+            writer.write(
+                "try body_buf.appendSlice(alloc, \"<\$L xmlns=\" ++ &[_]u8{0x22} ++ \"\$L\" ++ &[_]u8{0x22} ++ \">\");",
+                rootName, ns.uri,
+            )
+        } else {
+            writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", rootName)
+        }
     }
 
     private fun xmlElementName(memberName: String, memberShape: MemberShape): String {

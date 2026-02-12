@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DomainType = @import("domain_type.zig").DomainType;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const serde = @import("serde.zig");
 
 /// Allocates an Elastic IP address to your Amazon Web Services account. After
 /// you allocate the Elastic IP address you can associate

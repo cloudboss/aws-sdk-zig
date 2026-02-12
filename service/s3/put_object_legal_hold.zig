@@ -7,6 +7,7 @@ const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const ObjectLockLegalHold = @import("object_lock_legal_hold.zig").ObjectLockLegalHold;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -148,7 +149,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutObjectLegalHoldInput, co
     }
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = blk: {
+        if (input.legal_hold) |payload| {
+            var body_buf: std.ArrayList(u8) = .{};
+            try body_buf.appendSlice(alloc, "<ObjectLockLegalHold xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try serde.serializeObjectLockLegalHold(alloc, &body_buf, payload);
+            try body_buf.appendSlice(alloc, "</ObjectLockLegalHold>");
+            break :blk try body_buf.toOwnedSlice(alloc);
+        }
+        break :blk null;
+    };
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

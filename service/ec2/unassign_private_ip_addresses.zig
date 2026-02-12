@@ -3,6 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const serde = @import("serde.zig");
 
 /// Unassigns the specified secondary private IP addresses or IPv4 Prefix
 /// Delegation

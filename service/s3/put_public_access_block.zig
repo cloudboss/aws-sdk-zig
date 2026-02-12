@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const PublicAccessBlockConfiguration = @import("public_access_block_configuration.zig").PublicAccessBlockConfiguration;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -155,7 +156,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutPublicAccessBlockInput, 
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    try body_buf.appendSlice(alloc, "<PublicAccessBlockConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try serde.serializePublicAccessBlockConfiguration(alloc, &body_buf, input.public_access_block_configuration);
+    try body_buf.appendSlice(alloc, "</PublicAccessBlockConfiguration>");
+    const body = try body_buf.toOwnedSlice(alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;
