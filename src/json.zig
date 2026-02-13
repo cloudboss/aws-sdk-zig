@@ -32,7 +32,9 @@ pub fn jsonStringify(value: anytype, alloc: Allocator) ![]const u8 {
 // Deserialization
 // ---------------------------------------------------------------------------
 
-fn parseValue(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
+const ParseError = Allocator.Error || error{ SyntaxError, UnexpectedEndOfInput, BufferUnderrun, ValueTooLong };
+
+fn parseValue(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
     const info = @typeInfo(T);
     switch (info) {
         .optional => |opt| return parseOptional(opt.child, scanner, alloc),
@@ -43,6 +45,8 @@ fn parseValue(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
             .slice => {
                 if (ptr.child == u8) {
                     return parseDupedString(scanner, alloc);
+                } else if (comptime isMapEntrySlice(ptr.child)) {
+                    return parseMapEntries(ptr.child, scanner, alloc);
                 } else {
                     return parseArray(ptr.child, scanner, alloc);
                 }
@@ -56,7 +60,7 @@ fn parseValue(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
     }
 }
 
-fn parseOptional(comptime Child: type, scanner: *Scanner, alloc: Allocator) !?Child {
+fn parseOptional(comptime Child: type, scanner: *Scanner, alloc: Allocator) ParseError!?Child {
     const peeked = try scanner.peekNextTokenType();
     if (peeked == .null) {
         _ = try scanner.nextAlloc(alloc, .alloc_if_needed);
@@ -65,7 +69,7 @@ fn parseOptional(comptime Child: type, scanner: *Scanner, alloc: Allocator) !?Ch
     return try parseValue(Child, scanner, alloc);
 }
 
-fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
+fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
     var result: T = undefined;
 
     // Initialize fields to defaults
@@ -114,7 +118,7 @@ fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
     return result;
 }
 
-fn parseUnion(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
+fn parseUnion(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
     // AWS tagged union: single-key object {"VariantName": value}
     const open = try scanner.nextAlloc(alloc, .alloc_if_needed);
     switch (open) {
@@ -162,7 +166,7 @@ fn parseUnion(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
     return error.SyntaxError;
 }
 
-fn parseEnum(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
+fn parseEnum(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
     const token = try scanner.nextAlloc(alloc, .alloc_if_needed);
     const str = switch (token) {
         .string => |s| s,
@@ -191,7 +195,7 @@ fn parseEnum(comptime T: type, scanner: *Scanner, alloc: Allocator) !T {
     };
 }
 
-fn parseDupedString(scanner: *Scanner, alloc: Allocator) ![]const u8 {
+fn parseDupedString(scanner: *Scanner, alloc: Allocator) ParseError![]const u8 {
     const token = try scanner.nextAlloc(alloc, .alloc_if_needed);
     switch (token) {
         .string => |s| return try alloc.dupe(u8, s),
@@ -201,7 +205,7 @@ fn parseDupedString(scanner: *Scanner, alloc: Allocator) ![]const u8 {
     }
 }
 
-fn parseArray(comptime Child: type, scanner: *Scanner, alloc: Allocator) ![]const Child {
+fn parseArray(comptime Child: type, scanner: *Scanner, alloc: Allocator) ParseError![]const Child {
     const open = try scanner.nextAlloc(alloc, .alloc_if_needed);
     switch (open) {
         .array_begin => {},
@@ -222,7 +226,33 @@ fn parseArray(comptime Child: type, scanner: *Scanner, alloc: Allocator) ![]cons
     return list.toOwnedSlice(alloc);
 }
 
-fn parseInt(comptime T: type, scanner: *Scanner) !T {
+fn parseMapEntries(comptime Entry: type, scanner: *Scanner, alloc: Allocator) ParseError![]const Entry {
+    const open = try scanner.nextAlloc(alloc, .alloc_if_needed);
+    switch (open) {
+        .object_begin => {},
+        else => return error.SyntaxError,
+    }
+
+    var list: std.ArrayList(Entry) = .{};
+    errdefer list.deinit(alloc);
+
+    while (true) {
+        const key_token = try scanner.nextAlloc(alloc, .alloc_if_needed);
+        const json_key = switch (key_token) {
+            .object_end => break,
+            .string => |s| try alloc.dupe(u8, s),
+            .allocated_string => |s| s,
+            else => return error.SyntaxError,
+        };
+
+        const value = try parseValue(Entry.ValueType, scanner, alloc);
+        try list.append(alloc, .{ .key = json_key, .value = value });
+    }
+
+    return list.toOwnedSlice(alloc);
+}
+
+fn parseInt(comptime T: type, scanner: *Scanner) ParseError!T {
     const alloc_unused = std.heap.page_allocator; // numbers don't allocate
     const token = try scanner.nextAlloc(alloc_unused, .alloc_if_needed);
     const str = switch (token) {
@@ -237,7 +267,7 @@ fn parseInt(comptime T: type, scanner: *Scanner) !T {
     };
 }
 
-fn parseFloat(comptime T: type, scanner: *Scanner) !T {
+fn parseFloat(comptime T: type, scanner: *Scanner) ParseError!T {
     const alloc_unused = std.heap.page_allocator;
     const token = try scanner.nextAlloc(alloc_unused, .alloc_if_needed);
     const str = switch (token) {
@@ -248,7 +278,7 @@ fn parseFloat(comptime T: type, scanner: *Scanner) !T {
     return std.fmt.parseFloat(T, str) catch return error.SyntaxError;
 }
 
-fn parseBool(scanner: *Scanner) !bool {
+fn parseBool(scanner: *Scanner) ParseError!bool {
     const alloc_unused = std.heap.page_allocator;
     const token = try scanner.nextAlloc(alloc_unused, .alloc_if_needed);
     return switch (token) {
@@ -299,6 +329,12 @@ pub fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
 // Field name mapping
 // ---------------------------------------------------------------------------
 
+/// Check if a type is a MapEntry struct (has is_map_entry marker).
+/// Must be a struct type first to avoid @hasDecl errors on scalars/pointers.
+fn isMapEntrySlice(comptime T: type) bool {
+    return @typeInfo(T) == .@"struct" and @hasDecl(T, "is_map_entry");
+}
+
 /// Look up the JSON key for a Zig field name.
 /// Uses `T.json_field_names` if declared, otherwise uses the field name as-is.
 fn jsonKeyForField(comptime T: type, comptime field_name: []const u8) []const u8 {
@@ -315,7 +351,7 @@ fn jsonKeyForField(comptime T: type, comptime field_name: []const u8) []const u8
 // Serialization
 // ---------------------------------------------------------------------------
 
-pub fn writeValue(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) !void {
+pub fn writeValue(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) Allocator.Error!void {
     const info = @typeInfo(T);
     switch (info) {
         .optional => {
@@ -332,6 +368,8 @@ pub fn writeValue(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayL
             .slice => {
                 if (ptr.child == u8) {
                     try writeString(value, alloc, buf);
+                } else if (comptime isMapEntrySlice(ptr.child)) {
+                    try writeMapEntries(ptr.child, value, alloc, buf);
                 } else {
                     try writeArray(ptr.child, value, alloc, buf);
                 }
@@ -355,7 +393,7 @@ pub fn writeValue(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayL
     }
 }
 
-fn writeStruct(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) !void {
+fn writeStruct(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) Allocator.Error!void {
     try buf.append(alloc, '{');
     var first = true;
     inline for (std.meta.fields(T)) |field| {
@@ -386,7 +424,7 @@ fn writeStruct(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList
     try buf.append(alloc, '}');
 }
 
-fn writeUnion(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) !void {
+fn writeUnion(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) Allocator.Error!void {
     // AWS tagged union: {"VariantName": value}
     const tag_name = @tagName(value);
 
@@ -423,7 +461,7 @@ fn writeUnion(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(
     try buf.append(alloc, '}');
 }
 
-fn writeEnum(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) !void {
+fn writeEnum(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) Allocator.Error!void {
     const tag_name = @tagName(value);
 
     // Check json_field_names for mapped name
@@ -444,7 +482,7 @@ fn writeEnum(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u
     try buf.append(alloc, '"');
 }
 
-fn writeString(value: []const u8, alloc: Allocator, buf: *std.ArrayList(u8)) !void {
+fn writeString(value: []const u8, alloc: Allocator, buf: *std.ArrayList(u8)) Allocator.Error!void {
     try buf.append(alloc, '"');
     for (value) |c| {
         switch (c) {
@@ -486,13 +524,24 @@ fn writeString(value: []const u8, alloc: Allocator, buf: *std.ArrayList(u8)) !vo
     try buf.append(alloc, '"');
 }
 
-fn writeArray(comptime Child: type, items: []const Child, alloc: Allocator, buf: *std.ArrayList(u8)) !void {
+fn writeArray(comptime Child: type, items: []const Child, alloc: Allocator, buf: *std.ArrayList(u8)) Allocator.Error!void {
     try buf.append(alloc, '[');
     for (items, 0..) |item, i| {
         if (i > 0) try buf.append(alloc, ',');
         try writeValue(Child, item, alloc, buf);
     }
     try buf.append(alloc, ']');
+}
+
+fn writeMapEntries(comptime Entry: type, entries: []const Entry, alloc: Allocator, buf: *std.ArrayList(u8)) Allocator.Error!void {
+    try buf.append(alloc, '{');
+    for (entries, 0..) |entry, i| {
+        if (i > 0) try buf.append(alloc, ',');
+        try writeString(entry.key, alloc, buf);
+        try buf.append(alloc, ':');
+        try writeValue(Entry.ValueType, entry.value, alloc, buf);
+    }
+    try buf.append(alloc, '}');
 }
 
 // ---------------------------------------------------------------------------
@@ -832,4 +881,126 @@ test "findJsonValue both message variants" {
     const json = "{\"Message\":\"uppercase\"}";
     try std.testing.expect(findJsonValue(json, "message") == null);
     try std.testing.expectEqualStrings("uppercase", findJsonValue(json, "Message").?);
+}
+
+test "parse string map entries" {
+    const map = @import("map.zig");
+    const TestStruct = struct {
+        tags: ?[]const map.StringMapEntry = null,
+
+        pub const json_field_names = .{
+            .tags = "Tags",
+        };
+    };
+
+    const json = "{\"Tags\":{\"Name\":\"test\",\"Env\":\"prod\"}}";
+    const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
+    defer {
+        if (result.tags) |entries| {
+            for (entries) |entry| {
+                std.testing.allocator.free(entry.key);
+                std.testing.allocator.free(entry.value);
+            }
+            std.testing.allocator.free(entries);
+        }
+    }
+
+    try std.testing.expectEqual(@as(usize, 2), result.tags.?.len);
+    try std.testing.expectEqualStrings("Name", result.tags.?[0].key);
+    try std.testing.expectEqualStrings("test", result.tags.?[0].value);
+    try std.testing.expectEqualStrings("Env", result.tags.?[1].key);
+    try std.testing.expectEqualStrings("prod", result.tags.?[1].value);
+}
+
+test "serialize string map entries" {
+    const map = @import("map.zig");
+    const TestStruct = struct {
+        tags: ?[]const map.StringMapEntry = null,
+
+        pub const json_field_names = .{
+            .tags = "Tags",
+        };
+    };
+
+    const entries = [_]map.StringMapEntry{
+        .{ .key = "Name", .value = "test" },
+        .{ .key = "Env", .value = "prod" },
+    };
+    const value = TestStruct{ .tags = &entries };
+    const json = try jsonStringify(value, std.testing.allocator);
+    defer std.testing.allocator.free(json);
+    try std.testing.expectEqualStrings("{\"Tags\":{\"Name\":\"test\",\"Env\":\"prod\"}}", json);
+}
+
+test "parse map with integer values" {
+    const map = @import("map.zig");
+    const IntEntry = map.MapEntry(i32);
+    const TestStruct = struct {
+        counts: ?[]const IntEntry = null,
+
+        pub const json_field_names = .{
+            .counts = "Counts",
+        };
+    };
+
+    const json = "{\"Counts\":{\"a\":1,\"b\":2}}";
+    const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
+    defer {
+        if (result.counts) |entries| {
+            for (entries) |entry| std.testing.allocator.free(entry.key);
+            std.testing.allocator.free(entries);
+        }
+    }
+
+    try std.testing.expectEqual(@as(usize, 2), result.counts.?.len);
+    try std.testing.expectEqualStrings("a", result.counts.?[0].key);
+    try std.testing.expectEqual(@as(i32, 1), result.counts.?[0].value);
+}
+
+test "roundtrip map entries" {
+    const map = @import("map.zig");
+    const TestStruct = struct {
+        tags: ?[]const map.StringMapEntry = null,
+
+        pub const json_field_names = .{
+            .tags = "Tags",
+        };
+    };
+
+    const input = "{\"Tags\":{\"Key\":\"Value\"}}";
+    const parsed = try parseJsonObject(TestStruct, input, std.testing.allocator);
+    defer {
+        if (parsed.tags) |entries| {
+            for (entries) |entry| {
+                std.testing.allocator.free(entry.key);
+                std.testing.allocator.free(entry.value);
+            }
+            std.testing.allocator.free(entries);
+        }
+    }
+
+    const output = try jsonStringify(parsed, std.testing.allocator);
+    defer std.testing.allocator.free(output);
+    try std.testing.expectEqualStrings(input, output);
+}
+
+test "parse empty map" {
+    const map = @import("map.zig");
+    const TestStruct = struct {
+        tags: ?[]const map.StringMapEntry = null,
+
+        pub const json_field_names = .{
+            .tags = "Tags",
+        };
+    };
+
+    const json = "{\"Tags\":{}}";
+    const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
+    defer {
+        if (result.tags) |entries| {
+            std.testing.allocator.free(entries);
+        }
+    }
+
+    try std.testing.expectEqual(@as(usize, 0), result.tags.?.len);
 }
