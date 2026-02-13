@@ -1,0 +1,27 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+
+pub const add_permission = @import("add_permission.zig");
+pub const cancel_message_move_task = @import("cancel_message_move_task.zig");
+pub const change_message_visibility = @import("change_message_visibility.zig");
+pub const change_message_visibility_batch = @import("change_message_visibility_batch.zig");
+pub const create_queue = @import("create_queue.zig");
+pub const delete_message = @import("delete_message.zig");
+pub const delete_message_batch = @import("delete_message_batch.zig");
+pub const delete_queue = @import("delete_queue.zig");
+pub const get_queue_attributes = @import("get_queue_attributes.zig");
+pub const get_queue_url = @import("get_queue_url.zig");
+pub const list_dead_letter_source_queues = @import("list_dead_letter_source_queues.zig");
+pub const list_message_move_tasks = @import("list_message_move_tasks.zig");
+pub const list_queue_tags = @import("list_queue_tags.zig");
+pub const list_queues = @import("list_queues.zig");
+pub const purge_queue = @import("purge_queue.zig");
+pub const receive_message = @import("receive_message.zig");
+pub const remove_permission = @import("remove_permission.zig");
+pub const send_message = @import("send_message.zig");
+pub const send_message_batch = @import("send_message_batch.zig");
+pub const set_queue_attributes = @import("set_queue_attributes.zig");
+pub const start_message_move_task = @import("start_message_move_task.zig");
+pub const tag_queue = @import("tag_queue.zig");
+pub const untag_queue = @import("untag_queue.zig");

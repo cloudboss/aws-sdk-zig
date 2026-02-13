@@ -1,0 +1,27 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+
+pub const batch_get_secret_value = @import("batch_get_secret_value.zig");
+pub const cancel_rotate_secret = @import("cancel_rotate_secret.zig");
+pub const create_secret = @import("create_secret.zig");
+pub const delete_resource_policy = @import("delete_resource_policy.zig");
+pub const delete_secret = @import("delete_secret.zig");
+pub const describe_secret = @import("describe_secret.zig");
+pub const get_random_password = @import("get_random_password.zig");
+pub const get_resource_policy = @import("get_resource_policy.zig");
+pub const get_secret_value = @import("get_secret_value.zig");
+pub const list_secret_version_ids = @import("list_secret_version_ids.zig");
+pub const list_secrets = @import("list_secrets.zig");
+pub const put_resource_policy = @import("put_resource_policy.zig");
+pub const put_secret_value = @import("put_secret_value.zig");
+pub const remove_regions_from_replication = @import("remove_regions_from_replication.zig");
+pub const replicate_secret_to_regions = @import("replicate_secret_to_regions.zig");
+pub const restore_secret = @import("restore_secret.zig");
+pub const rotate_secret = @import("rotate_secret.zig");
+pub const stop_replication_to_replica = @import("stop_replication_to_replica.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_secret = @import("update_secret.zig");
+pub const update_secret_version_stage = @import("update_secret_version_stage.zig");
+pub const validate_resource_policy = @import("validate_resource_policy.zig");

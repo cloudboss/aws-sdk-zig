@@ -49,6 +49,38 @@
                     "package": "iam"
                 }
             }
+        },
+        "secretsmanager": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.secretsmanager#secretsmanager",
+                    "package": "secretsmanager"
+                }
+            }
+        },
+        "ssm": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ssm#AmazonSSM",
+                    "package": "ssm"
+                }
+            }
+        },
+        "sqs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sqs#AmazonSQS",
+                    "package": "sqs"
+                }
+            }
+        },
+        "sns": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sns#AmazonSimpleNotificationService",
+                    "package": "sns"
+                }
+            }
         }
     }
 }

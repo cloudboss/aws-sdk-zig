@@ -86,7 +86,7 @@ test-integration-tls: $(HAS_IMAGE_LOCAL) certs
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh --tls"
 
-SERVICES = sts dynamodb lambda s3 ec2 iam
+SERVICES = sts dynamodb lambda s3 ec2 iam secretsmanager ssm sqs sns
 
 fetch-models: | $(DIR_OUT)
 	@curl -sL -o $(DIR_OUT)/api-models-aws.zip \
@@ -105,6 +105,14 @@ fetch-models: | $(DIR_OUT)
 		codegen/sdk-codegen/model/ec2.json
 	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/iam/service/2010-05-08/iam-2010-05-08.json \
 		codegen/sdk-codegen/model/iam.json
+	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/secrets-manager/service/2017-10-17/secrets-manager-2017-10-17.json \
+		codegen/sdk-codegen/model/secretsmanager.json
+	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/ssm/service/2014-11-06/ssm-2014-11-06.json \
+		codegen/sdk-codegen/model/ssm.json
+	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/sqs/service/2012-11-05/sqs-2012-11-05.json \
+		codegen/sdk-codegen/model/sqs.json
+	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/sns/service/2010-03-31/sns-2010-03-31.json \
+		codegen/sdk-codegen/model/sns.json
 
 codegen: $(HAS_IMAGE_LOCAL) fetch-models
 	@docker run --rm \
