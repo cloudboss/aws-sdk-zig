@@ -7,6 +7,8 @@ import org.junit.jupiter.api.io.TempDir
 import software.amazon.smithy.build.FileManifest
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.EnumShape
+import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
@@ -151,6 +153,21 @@ class RestJsonProtocolTest {
                     )
                     .build()
             )
+            // Runtime enum for header list test
+            .addShape(
+                EnumShape.builder()
+                    .id("test#RuntimeType")
+                    .addMember("Nodejs", "nodejs")
+                    .addMember("Python", "python")
+                    .build()
+            )
+            // List of enums for header list test
+            .addShape(
+                ListShape.builder()
+                    .id("test#RuntimeTypeList")
+                    .member(ShapeId.from("test#RuntimeType"))
+                    .build()
+            )
             // ListFunctions input
             .addShape(
                 StructureShape.builder()
@@ -160,6 +177,13 @@ class RestJsonProtocolTest {
                             .id("test#ListFunctionsInput\$MaxItems")
                             .target("smithy.api#String")
                             .addTrait(HttpQueryTrait("MaxItems"))
+                            .build()
+                    )
+                    .addMember(
+                        MemberShape.builder()
+                            .id("test#ListFunctionsInput\$FilterRuntimes")
+                            .target("test#RuntimeTypeList")
+                            .addTrait(HttpHeaderTrait("X-Filter-Runtimes"))
                             .build()
                     )
                     .build()
@@ -564,6 +588,19 @@ class RestJsonProtocolTest {
         assertTrue(
             op.contains("null") || !op.contains("body_buf"),
             "Should not build JSON body when there are no body members",
+        )
+    }
+
+    // ---- List-of-enum header test ----
+
+    @Test
+    fun listHeaderSerializesAsList() {
+        val files = generateFiles()
+        val op = files["list_functions.zig"]!!
+
+        assertTrue(
+            op.contains("header_buf"),
+            "List-of-enum header should use header_buf for serialization",
         )
     }
 }

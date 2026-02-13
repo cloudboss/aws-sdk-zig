@@ -9,6 +9,7 @@ import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
 import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.ListShape
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
@@ -55,6 +56,14 @@ class SerdeGeneratorTest {
                     .member(ShapeId.from("test#Tag"))
                     .build()
             )
+            // String map
+            .addShape(
+                MapShape.builder()
+                    .id("test#StringMap")
+                    .key(ShapeId.from("smithy.api#String"))
+                    .value(ShapeId.from("smithy.api#String"))
+                    .build()
+            )
             // Marker struct (empty -- no members at all)
             .addShape(
                 StructureShape.builder()
@@ -82,6 +91,7 @@ class SerdeGeneratorTest {
                     .addMember("Tags", ShapeId.from("test#TagList"))
                     .addMember("Settings", ShapeId.from("test#Settings"))
                     .addMember("Marker", ShapeId.from("test#Marker"))
+                    .addMember("Metadata", ShapeId.from("test#StringMap"))
                     .build()
             )
             // Error shape
@@ -799,6 +809,96 @@ class SerdeGeneratorTest {
         assertFalse(
             serde.contains("\"DisplayName\""),
             "Should NOT use original member name when @xmlName is present",
+        )
+    }
+
+    // ---- Map deserializer ----
+
+    @Test
+    fun mapDeserializerFunctionGenerated() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("pub fn deserializeStringMap("),
+            "Should generate deserializeStringMap function",
+        )
+    }
+
+    @Test
+    fun mapDeserializerReturnsCorrectType() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("![]const aws.map.StringMapEntry"),
+            "Map deserializer should return []const aws.map.StringMapEntry",
+        )
+    }
+
+    @Test
+    fun mapDeserializerUsesArrayList() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("var list: std.ArrayList(aws.map.StringMapEntry)"),
+            "Map deserializer should use ArrayList of StringMapEntry",
+        )
+    }
+
+    @Test
+    fun mapDeserializerParsesKeyValue() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        val fnStart = serde.indexOf("pub fn deserializeStringMap(")
+        assertTrue(fnStart >= 0)
+        val fnBody = serde.substring(fnStart, serde.indexOf("\n}\n", fnStart) + 1)
+        assertTrue(
+            fnBody.contains("entry_key") && fnBody.contains("entry_value"),
+            "Map deserializer should parse entry_key and entry_value",
+        )
+    }
+
+    @Test
+    fun mapDeserializerCallsToOwnedSlice() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        val fnStart = serde.indexOf("pub fn deserializeStringMap(")
+        assertTrue(fnStart >= 0)
+        val fnBody = serde.substring(fnStart, serde.indexOf("\n}\n", fnStart) + 1)
+        assertTrue(
+            fnBody.contains("return list.toOwnedSlice(alloc);"),
+            "Map deserializer should call toOwnedSlice",
+        )
+    }
+
+    @Test
+    fun userDeserializerHandlesMapField() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("deserializeStringMap("),
+            "User deserializer should call deserializeStringMap for Metadata field",
+        )
+    }
+
+    // ---- Map serializer ----
+
+    @Test
+    fun mapSerializerFunctionGenerated() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("pub fn serializeStringMap("),
+            "Should generate serializeStringMap function",
+        )
+    }
+
+    @Test
+    fun userSerializerHandlesMapField() {
+        val files = generateFiles()
+        val serde = files["serde.zig"]!!
+        assertTrue(
+            serde.contains("serializeStringMap(alloc, buf,"),
+            "User serializer should call serializeStringMap for Metadata field",
         )
     }
 }

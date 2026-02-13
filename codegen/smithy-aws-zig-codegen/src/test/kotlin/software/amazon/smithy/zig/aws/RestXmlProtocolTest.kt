@@ -7,6 +7,7 @@ import org.junit.jupiter.api.io.TempDir
 import software.amazon.smithy.build.FileManifest
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
@@ -260,12 +261,21 @@ class RestXmlProtocolTest {
                     )
                     .build()
             )
+            // String map for tags
+            .addShape(
+                MapShape.builder()
+                    .id("test#StringMap")
+                    .key(ShapeId.from("smithy.api#String"))
+                    .value(ShapeId.from("smithy.api#String"))
+                    .build()
+            )
             // CreateConfig input (XML body members)
             .addShape(
                 StructureShape.builder()
                     .id("test#CreateConfigInput")
                     .addMember("Region", ShapeId.from("smithy.api#String"))
                     .addMember("Enabled", ShapeId.from("smithy.api#Boolean"))
+                    .addMember("Tags", ShapeId.from("test#StringMap"))
                     .build()
             )
             // CreateConfig output
@@ -778,6 +788,30 @@ class RestXmlProtocolTest {
         assertTrue(
             op.contains("e.local, \"ConfigId\""),
             "Should match ConfigId element in XML response body",
+        )
+    }
+
+    // ---- Map field tests ----
+
+    @Test
+    fun mapFieldInXmlBodyCallsSerde() {
+        val files = generateFiles()
+        val op = files["create_config.zig"]!!
+
+        assertTrue(
+            op.contains("serde.serializeStringMap(") || op.contains("serde.deserializeStringMap("),
+            "Map field should call serde map serializer or deserializer",
+        )
+    }
+
+    @Test
+    fun mapFieldImportsSerde() {
+        val files = generateFiles()
+        val op = files["create_config.zig"]!!
+
+        assertTrue(
+            op.contains("const serde = @import(\"serde.zig\");"),
+            "Operation with map body member should import serde",
         )
     }
 }

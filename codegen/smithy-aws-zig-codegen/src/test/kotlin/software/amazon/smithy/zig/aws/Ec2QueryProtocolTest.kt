@@ -8,6 +8,7 @@ import software.amazon.smithy.build.FileManifest
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
 import software.amazon.smithy.model.shapes.ListShape
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
@@ -259,11 +260,19 @@ class Ec2QueryProtocolTest {
                     .build()
             )
             .addShape(
+                MapShape.builder()
+                    .id("test#StringMap")
+                    .key(ShapeId.from("smithy.api#String"))
+                    .value(ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
                 StructureShape.builder()
                     .id("test#CreateInstanceRequest")
                     .addMember("Instance", ShapeId.from("test#Instance"))
                     .addMember("Tags", ShapeId.from("test#TagList"))
                     .addMember("Wrapper", ShapeId.from("test#Wrapper"))
+                    .addMember("Labels", ShapeId.from("test#StringMap"))
                     .build()
             )
             .addShape(
@@ -329,5 +338,45 @@ class Ec2QueryProtocolTest {
         // hasSerializableFields should still return true and serialize the nested fields
         assertTrue(op.contains("Wrapper.Inner.Street"), "Struct with only nested struct members was skipped")
         assertTrue(op.contains("Wrapper.Inner.City"), "Struct with only nested struct members was skipped")
+    }
+
+    // ---- Map serialization tests ----
+
+    @Test
+    fun awsQueryMapFieldSerialized() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(
+            op.contains("entry.{d}.key") || op.contains("entry.{d}.Key"),
+            "Map field should serialize entry keys with index",
+        )
+        assertTrue(
+            op.contains("entry.{d}.value") || op.contains("entry.{d}.Value"),
+            "Map field should serialize entry values with index",
+        )
+    }
+
+    @Test
+    fun awsQueryMapIteratesEntries() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(
+            op.contains("for ("),
+            "Map serializer should iterate over entries with for loop",
+        )
+    }
+
+    @Test
+    fun awsQueryMapUsesAppendUrlEncoded() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(
+            op.contains("appendUrlEncoded(alloc, &body_buf, entry.value)") ||
+                op.contains("appendUrlEncoded(alloc, &body_buf, entry.key)"),
+            "Map serializer should URL-encode map entry values",
+        )
     }
 }

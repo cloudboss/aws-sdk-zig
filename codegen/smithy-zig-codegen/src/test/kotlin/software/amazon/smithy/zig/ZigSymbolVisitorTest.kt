@@ -10,6 +10,7 @@ import software.amazon.smithy.model.shapes.FloatShape
 import software.amazon.smithy.model.shapes.IntegerShape
 import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.LongShape
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.ShortShape
@@ -43,6 +44,27 @@ class ZigSymbolVisitorTest {
                         .target("test#MyString")
                         .build()
                 )
+                .build()
+        )
+        .addShape(
+            MapShape.builder()
+                .id("test#StringStringMap")
+                .key(ShapeId.from("smithy.api#String"))
+                .value(ShapeId.from("smithy.api#String"))
+                .build()
+        )
+        .addShape(
+            MapShape.builder()
+                .id("test#StringStructMap")
+                .key(ShapeId.from("smithy.api#String"))
+                .value(ShapeId.from("test#MyStruct"))
+                .build()
+        )
+        .addShape(
+            MapShape.builder()
+                .id("test#StringIntegerMap")
+                .key(ShapeId.from("smithy.api#String"))
+                .value(ShapeId.from("test#MyInt"))
                 .build()
         )
         .assemble()
@@ -122,5 +144,23 @@ class ZigSymbolVisitorTest {
     fun memberName() {
         val shape = model.expectShape(ShapeId.from("test#MyStruct\$name")) as MemberShape
         assertEquals("name", visitor.toMemberName(shape))
+    }
+
+    @Test
+    fun mapStringStringType() {
+        val shape = model.expectShape(ShapeId.from("test#StringStringMap"))
+        assertEquals("[]const aws.map.StringMapEntry", visitor.toSymbol(shape).name)
+    }
+
+    @Test
+    fun mapStringStructType() {
+        val shape = model.expectShape(ShapeId.from("test#StringStructMap"))
+        assertEquals("[]const aws.map.MapEntry(MyStruct)", visitor.toSymbol(shape).name)
+    }
+
+    @Test
+    fun mapStringIntegerType() {
+        val shape = model.expectShape(ShapeId.from("test#StringIntegerMap"))
+        assertEquals("[]const aws.map.MapEntry(i32)", visitor.toSymbol(shape).name)
     }
 }

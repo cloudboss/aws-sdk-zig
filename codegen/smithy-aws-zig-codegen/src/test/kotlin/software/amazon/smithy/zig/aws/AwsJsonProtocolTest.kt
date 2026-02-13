@@ -7,6 +7,7 @@ import org.junit.jupiter.api.io.TempDir
 import software.amazon.smithy.build.FileManifest
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
@@ -36,9 +37,24 @@ class AwsJsonProtocolTest {
             )
             .addShape(
                 StructureShape.builder()
+                    .id("test#AttributeValue")
+                    .addMember("S", ShapeId.from("smithy.api#String"))
+                    .addMember("N", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                MapShape.builder()
+                    .id("test#AttributeMap")
+                    .key(ShapeId.from("smithy.api#String"))
+                    .value(ShapeId.from("test#AttributeValue"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
                     .id("test#PutItemInput")
                     .addMember("TableName", ShapeId.from("smithy.api#String"))
                     .addMember("ItemCount", ShapeId.from("smithy.api#Integer"))
+                    .addMember("Item", ShapeId.from("test#AttributeMap"))
                     .build()
             )
             .addShape(
@@ -381,5 +397,30 @@ class AwsJsonProtocolTest {
         for (expected in expectedFiles) {
             assertTrue(files.containsKey(expected), "Missing generated file: $expected")
         }
+    }
+
+    // ---- Map type tests ----
+
+    @Test
+    fun mapMemberImportsSharedType() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("const AttributeValue = @import(\"attribute_value.zig\").AttributeValue;"),
+            "Operation with map member should import the map value type",
+        )
+    }
+
+    @Test
+    fun mapMemberInStructUsesMapEntryType() {
+        val files = generateFiles("1.0")
+        // PutItemInput is an I/O shape, so it's in the operation file
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("aws.map.MapEntry(AttributeValue)"),
+            "Map member in struct should use MapEntry type for non-string values",
+        )
     }
 }
