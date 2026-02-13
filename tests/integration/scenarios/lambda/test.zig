@@ -23,8 +23,9 @@ test "listFunctions returns successfully" {
     );
     defer result.deinit();
 
-    // LocalStack returns an empty list by default -- success means
-    // the full REST-JSON serialize -> sign -> send -> deserialize round-trip works.
+    // LocalStack returns an empty list by default
+    const functions = result.functions orelse return error.MissingFunctions;
+    try std.testing.expectEqual(@as(usize, 0), functions.len);
 }
 
 test "getFunction returns ResourceNotFoundException for missing function" {

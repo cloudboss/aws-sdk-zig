@@ -229,42 +229,42 @@ pub fn execute(client: *Client, input: CreateNetworkInterfaceInput, options: Opt
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpoint("ec2", alloc);
 
-    const host = parseHost(endpoint);
+    const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = parsePort(endpoint);
+    const port = aws.url.parsePort(endpoint);
 
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(alloc, "Action=CreateNetworkInterface&Version=2016-11-15");
     if (input.client_token) |v| {
         try body_buf.appendSlice(alloc, "&ClientToken=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.connection_tracking_specification) |v| {
         if (v.tcp_established_timeout) |sv| {
             try body_buf.appendSlice(alloc, "&ConnectionTrackingSpecification.TcpEstablishedTimeout=");
-            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
         if (v.udp_stream_timeout) |sv| {
             try body_buf.appendSlice(alloc, "&ConnectionTrackingSpecification.UdpStreamTimeout=");
-            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
         if (v.udp_timeout) |sv| {
             try body_buf.appendSlice(alloc, "&ConnectionTrackingSpecification.UdpTimeout=");
-            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
     }
     if (input.description) |v| {
         try body_buf.appendSlice(alloc, "&Description=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.enable_primary_ipv_6) |v| {
         try body_buf.appendSlice(alloc, "&EnablePrimaryIpv6=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.groups) |list| {
         for (list, 0..) |item, idx| {
@@ -272,16 +272,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Groups.SecurityGroupId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            try appendUrlEncoded(alloc, &body_buf, item);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
     }
     if (input.interface_type) |v| {
         try body_buf.appendSlice(alloc, "&InterfaceType=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
     if (input.ipv_4_prefix_count) |v| {
         try body_buf.appendSlice(alloc, "&Ipv4PrefixCount=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.ipv_4_prefixes) |list| {
         for (list, 0..) |item, idx| {
@@ -291,14 +291,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Ipv4Prefixes.item.{d}.Ipv4Prefix=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.ipv_4_prefix) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }
     }
     if (input.ipv_6_address_count) |v| {
         try body_buf.appendSlice(alloc, "&Ipv6AddressCount=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.ipv_6_addresses) |list| {
         for (list, 0..) |item, idx| {
@@ -308,7 +308,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Ipv6Addresses.item.{d}.Ipv6Address=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.ipv_6_address) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
@@ -316,14 +316,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Ipv6Addresses.item.{d}.IsPrimaryIpv6=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.is_primary_ipv_6) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, if (fv_1) "true" else "false");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, if (fv_1) "true" else "false");
                 }
             }
         }
     }
     if (input.ipv_6_prefix_count) |v| {
         try body_buf.appendSlice(alloc, "&Ipv6PrefixCount=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.ipv_6_prefixes) |list| {
         for (list, 0..) |item, idx| {
@@ -333,7 +333,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Ipv6Prefixes.item.{d}.Ipv6Prefix=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.ipv_6_prefix) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }
@@ -341,12 +341,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
     if (input.operator) |v| {
         if (v.principal) |sv| {
             try body_buf.appendSlice(alloc, "&Operator.Principal=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
     }
     if (input.private_ip_address) |v| {
         try body_buf.appendSlice(alloc, "&PrivateIpAddress=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.private_ip_addresses) |list| {
         for (list, 0..) |item, idx| {
@@ -356,7 +356,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PrivateIpAddresses.item.{d}.Primary=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.primary) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, if (fv_1) "true" else "false");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, if (fv_1) "true" else "false");
                 }
             }
             {
@@ -364,17 +364,17 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PrivateIpAddresses.item.{d}.PrivateIpAddress=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.private_ip_address) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }
     }
     if (input.secondary_private_ip_address_count) |v| {
         try body_buf.appendSlice(alloc, "&SecondaryPrivateIpAddressCount=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     try body_buf.appendSlice(alloc, "&SubnetId=");
-    try appendUrlEncoded(alloc, &body_buf, input.subnet_id);
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.subnet_id);
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
@@ -383,7 +383,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
                 }
             }
             if (item.tags) |lst_1| {
@@ -394,7 +394,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.key) |fv_2| {
-                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
                         }
                     }
                     {
@@ -402,7 +402,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInterfaceInput
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
-                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
                         }
                     }
                 }
@@ -456,9 +456,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
-    const error_code = findElement(body, "Code") orelse "Unknown";
-    const error_message = findElement(body, "Message") orelse "";
-    const request_id = findElement(body, "RequestID") orelse "";
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestID") orelse "";
 
 
     return .{ .unknown = .{
@@ -467,48 +467,4 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         .request_id = request_id,
         .http_status = status,
     } };
-}
-
-fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
-    var buf: [256]u8 = undefined;
-
-    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
-    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
-    const content_start = start + open_tag.len;
-
-    var close_buf: [256]u8 = undefined;
-    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
-    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
-
-    return xml[content_start..end];
-}
-
-fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
-            ' ' => try buf.append(alloc, '+'),
-            else => {
-                const hex = "0123456789ABCDEF";
-                try buf.append(alloc, '%');
-                try buf.append(alloc, hex[c >> 4]);
-                try buf.append(alloc, hex[c & 0x0F]);
-            }
-        }
-    }
-}
-
-fn parseHost(endpoint: []const u8) []const u8 {
-    // Strip scheme
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    // Strip port and path
-    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
-    return after_scheme[0..end];
-}
-
-fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
-    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
 }

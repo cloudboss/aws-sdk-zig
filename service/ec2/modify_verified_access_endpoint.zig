@@ -95,9 +95,9 @@ pub fn execute(client: *Client, input: ModifyVerifiedAccessEndpointInput, option
 fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpointInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpoint("ec2", alloc);
 
-    const host = parseHost(endpoint);
+    const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = parsePort(endpoint);
+    const port = aws.url.parsePort(endpoint);
 
     var body_buf: std.ArrayList(u8) = .{};
 
@@ -111,7 +111,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
                     if (item.from_port) |fv_1| {
-                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
@@ -119,7 +119,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
                     if (item.to_port) |fv_1| {
-                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
                     }
                 }
             }
@@ -127,20 +127,20 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
     }
     if (input.client_token) |v| {
         try body_buf.appendSlice(alloc, "&ClientToken=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.description) |v| {
         try body_buf.appendSlice(alloc, "&Description=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.load_balancer_options) |v| {
         if (v.port) |sv| {
             try body_buf.appendSlice(alloc, "&LoadBalancerOptions.Port=");
-            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
         if (v.port_ranges) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -150,7 +150,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
                     if (item.from_port) |fv_1| {
-                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
@@ -158,14 +158,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
                     if (item.to_port) |fv_1| {
-                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
                     }
                 }
             }
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(alloc, "&LoadBalancerOptions.Protocol=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
         if (v.subnet_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -173,14 +173,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.SubnetIds.item.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                try appendUrlEncoded(alloc, &body_buf, item);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
             }
         }
     }
     if (input.network_interface_options) |v| {
         if (v.port) |sv| {
             try body_buf.appendSlice(alloc, "&NetworkInterfaceOptions.Port=");
-            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
         if (v.port_ranges) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -190,7 +190,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
                     if (item.from_port) |fv_1| {
-                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
@@ -198,24 +198,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
                     if (item.to_port) |fv_1| {
-                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
                     }
                 }
             }
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(alloc, "&NetworkInterfaceOptions.Protocol=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
     }
     if (input.rds_options) |v| {
         if (v.port) |sv| {
             try body_buf.appendSlice(alloc, "&RdsOptions.Port=");
-            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
         if (v.rds_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&RdsOptions.RdsEndpoint=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.subnet_ids) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -223,15 +223,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RdsOptions.SubnetIds.item.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                try appendUrlEncoded(alloc, &body_buf, item);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
             }
         }
     }
     try body_buf.appendSlice(alloc, "&VerifiedAccessEndpointId=");
-    try appendUrlEncoded(alloc, &body_buf, input.verified_access_endpoint_id);
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.verified_access_endpoint_id);
     if (input.verified_access_group_id) |v| {
         try body_buf.appendSlice(alloc, "&VerifiedAccessGroupId=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
 
     const body = try body_buf.toOwnedSlice(alloc);
@@ -278,9 +278,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
-    const error_code = findElement(body, "Code") orelse "Unknown";
-    const error_message = findElement(body, "Message") orelse "";
-    const request_id = findElement(body, "RequestID") orelse "";
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestID") orelse "";
 
 
     return .{ .unknown = .{
@@ -289,48 +289,4 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         .request_id = request_id,
         .http_status = status,
     } };
-}
-
-fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
-    var buf: [256]u8 = undefined;
-
-    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
-    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
-    const content_start = start + open_tag.len;
-
-    var close_buf: [256]u8 = undefined;
-    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
-    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
-
-    return xml[content_start..end];
-}
-
-fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
-            ' ' => try buf.append(alloc, '+'),
-            else => {
-                const hex = "0123456789ABCDEF";
-                try buf.append(alloc, '%');
-                try buf.append(alloc, hex[c >> 4]);
-                try buf.append(alloc, hex[c & 0x0F]);
-            }
-        }
-    }
-}
-
-fn parseHost(endpoint: []const u8) []const u8 {
-    // Strip scheme
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    // Strip port and path
-    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
-    return after_scheme[0..end];
-}
-
-fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
-    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
 }

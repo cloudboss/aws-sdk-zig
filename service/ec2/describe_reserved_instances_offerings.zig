@@ -216,24 +216,24 @@ pub fn execute(client: *Client, input: DescribeReservedInstancesOfferingsInput, 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesOfferingsInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpoint("ec2", alloc);
 
-    const host = parseHost(endpoint);
+    const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = parsePort(endpoint);
+    const port = aws.url.parsePort(endpoint);
 
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(alloc, "Action=DescribeReservedInstancesOfferings&Version=2016-11-15");
     if (input.availability_zone) |v| {
         try body_buf.appendSlice(alloc, "&AvailabilityZone=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.availability_zone_id) |v| {
         try body_buf.appendSlice(alloc, "&AvailabilityZoneId=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.filters) |list| {
         for (list, 0..) |item, idx| {
@@ -243,7 +243,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesOf
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.Filter.{d}.Name=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.name) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             if (item.values) |lst_1| {
@@ -253,7 +253,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesOf
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.Filter.{d}.Values.item.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
-                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                        try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
                 }
             }
@@ -261,47 +261,47 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesOf
     }
     if (input.include_marketplace) |v| {
         try body_buf.appendSlice(alloc, "&IncludeMarketplace=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.instance_tenancy) |v| {
         try body_buf.appendSlice(alloc, "&InstanceTenancy=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
     if (input.instance_type) |v| {
         try body_buf.appendSlice(alloc, "&InstanceType=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
     if (input.max_duration) |v| {
         try body_buf.appendSlice(alloc, "&MaxDuration=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.max_instance_count) |v| {
         try body_buf.appendSlice(alloc, "&MaxInstanceCount=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.max_results) |v| {
         try body_buf.appendSlice(alloc, "&MaxResults=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.min_duration) |v| {
         try body_buf.appendSlice(alloc, "&MinDuration=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.next_token) |v| {
         try body_buf.appendSlice(alloc, "&NextToken=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.offering_class) |v| {
         try body_buf.appendSlice(alloc, "&OfferingClass=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
     if (input.offering_type) |v| {
         try body_buf.appendSlice(alloc, "&OfferingType=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
     if (input.product_description) |v| {
         try body_buf.appendSlice(alloc, "&ProductDescription=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
     if (input.reserved_instances_offering_ids) |list| {
         for (list, 0..) |item, idx| {
@@ -309,7 +309,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeReservedInstancesOf
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesOfferingIds.member.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            try appendUrlEncoded(alloc, &body_buf, item);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
     }
 
@@ -359,9 +359,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
-    const error_code = findElement(body, "Code") orelse "Unknown";
-    const error_message = findElement(body, "Message") orelse "";
-    const request_id = findElement(body, "RequestID") orelse "";
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestID") orelse "";
 
 
     return .{ .unknown = .{
@@ -370,48 +370,4 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         .request_id = request_id,
         .http_status = status,
     } };
-}
-
-fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
-    var buf: [256]u8 = undefined;
-
-    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
-    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
-    const content_start = start + open_tag.len;
-
-    var close_buf: [256]u8 = undefined;
-    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
-    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
-
-    return xml[content_start..end];
-}
-
-fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
-            ' ' => try buf.append(alloc, '+'),
-            else => {
-                const hex = "0123456789ABCDEF";
-                try buf.append(alloc, '%');
-                try buf.append(alloc, hex[c >> 4]);
-                try buf.append(alloc, hex[c & 0x0F]);
-            }
-        }
-    }
-}
-
-fn parseHost(endpoint: []const u8) []const u8 {
-    // Strip scheme
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    // Strip port and path
-    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
-    return after_scheme[0..end];
-}
-
-fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
-    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
 }

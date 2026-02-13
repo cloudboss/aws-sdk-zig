@@ -109,10 +109,7 @@ class SerdeGenerator(
                 writer.blankLine()
             }
 
-            // Generate appendXmlEscaped helper if any serializers exist
-            if (serStructs.isNotEmpty() || serLists.isNotEmpty()) {
-                writeAppendXmlEscapedHelper(writer)
-            }
+            // appendXmlEscaped is now provided by the aws.xml runtime module
         }
     }
 
@@ -713,7 +710,7 @@ class SerdeGenerator(
                     writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
                 } else {
                     writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
-                    writer.write("try appendXmlEscaped(alloc, buf, \$L);", accessor)
+                    writer.write("try aws.xml.appendXmlEscaped(alloc, buf, \$L);", accessor)
                     writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
                 }
             }
@@ -793,7 +790,7 @@ class SerdeGenerator(
                 if (isEnumType(elementShape)) {
                     writer.write("try buf.appendSlice(alloc, @tagName(item));")
                 } else {
-                    writer.write("try appendXmlEscaped(alloc, buf, item);")
+                    writer.write("try aws.xml.appendXmlEscaped(alloc, buf, item);")
                 }
             }
             is EnumShape, is IntEnumShape -> {
@@ -809,7 +806,7 @@ class SerdeGenerator(
                 writer.closeBlock("}")
             }
             else -> {
-                writer.write("try appendXmlEscaped(alloc, buf, item);")
+                writer.write("try aws.xml.appendXmlEscaped(alloc, buf, item);")
             }
         }
 
@@ -821,16 +818,4 @@ class SerdeGenerator(
         writer.closeBlock("}") // fn
     }
 
-    private fun writeAppendXmlEscapedHelper(writer: ZigWriter) {
-        writer.openBlock("fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {")
-        writer.openBlock("for (value) |c| {")
-        writer.openBlock("switch (c) {")
-        writer.write("'&' => try buf.appendSlice(alloc, \"&amp;\"),")
-        writer.write("'<' => try buf.appendSlice(alloc, \"&lt;\"),")
-        writer.write("'>' => try buf.appendSlice(alloc, \"&gt;\"),")
-        writer.write("else => try buf.append(alloc, c),")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
-    }
 }

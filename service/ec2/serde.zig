@@ -31972,7 +31972,7 @@ pub fn serializeAllocationIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -31984,7 +31984,7 @@ pub fn serializeAllocationIds(alloc: std.mem.Allocator, buf: *std.ArrayList(u8),
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -31996,7 +31996,7 @@ pub fn serializeAllowedInstanceTypeSet(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32020,7 +32020,7 @@ pub fn serializeArnList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32032,7 +32032,7 @@ pub fn serializeAssetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), v
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32044,7 +32044,7 @@ pub fn serializeAssociationIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32080,7 +32080,7 @@ pub fn serializeAvailabilityZoneIdStringList(alloc: std.mem.Allocator, buf: *std
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32092,7 +32092,7 @@ pub fn serializeAvailabilityZoneStringList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32104,7 +32104,7 @@ pub fn serializeBillingProductList(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32140,7 +32140,7 @@ pub fn serializeBundleIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32152,7 +32152,7 @@ pub fn serializeCapacityBlockIds(alloc: std.mem.Allocator, buf: *std.ArrayList(u
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32176,7 +32176,7 @@ pub fn serializeCapacityManagerDataExportIdSet(alloc: std.mem.Allocator, buf: *s
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32188,7 +32188,7 @@ pub fn serializeCapacityReservationFleetIdSet(alloc: std.mem.Allocator, buf: *st
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32200,7 +32200,7 @@ pub fn serializeCapacityReservationIdSet(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32212,7 +32212,7 @@ pub fn serializeCarrierGatewayIdSet(alloc: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32248,7 +32248,7 @@ pub fn serializeClientVpnEndpointIdList(alloc: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32260,7 +32260,7 @@ pub fn serializeClientVpnSecurityGroupIdSet(alloc: std.mem.Allocator, buf: *std.
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32272,7 +32272,7 @@ pub fn serializeCoipPoolIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8),
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32284,7 +32284,7 @@ pub fn serializeConditionValueList(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32296,7 +32296,7 @@ pub fn serializeConnectionNotificationIdsList(alloc: std.mem.Allocator, buf: *st
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32308,7 +32308,7 @@ pub fn serializeConversionIdStringList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32344,7 +32344,7 @@ pub fn serializeCreateVerifiedAccessEndpointSubnetIdList(alloc: std.mem.Allocato
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32368,7 +32368,7 @@ pub fn serializeCustomerGatewayIdStringList(alloc: std.mem.Allocator, buf: *std.
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32392,7 +32392,7 @@ pub fn serializeDedicatedHostIdList(alloc: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32404,7 +32404,7 @@ pub fn serializeDeleteQueuedReservedInstancesIdList(alloc: std.mem.Allocator, bu
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32416,7 +32416,7 @@ pub fn serializeDescribeImageReferencesImageIdStringList(alloc: std.mem.Allocato
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32428,7 +32428,7 @@ pub fn serializeDescribeImageUsageReportsImageIdStringList(alloc: std.mem.Alloca
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32440,7 +32440,7 @@ pub fn serializeDescribeInstanceTopologyGroupNameSet(alloc: std.mem.Allocator, b
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32452,7 +32452,7 @@ pub fn serializeDescribeInstanceTopologyInstanceIdSet(alloc: std.mem.Allocator, 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32464,7 +32464,7 @@ pub fn serializeDhcpOptionsIdStringList(alloc: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32488,7 +32488,7 @@ pub fn serializeEgressOnlyInternetGatewayIdList(alloc: std.mem.Allocator, buf: *
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32500,7 +32500,7 @@ pub fn serializeEipAssociationIdList(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32512,7 +32512,7 @@ pub fn serializeElasticGpuIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32560,7 +32560,7 @@ pub fn serializeExcludedInstanceTypeSet(alloc: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32572,7 +32572,7 @@ pub fn serializeExecutableByStringList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32584,7 +32584,7 @@ pub fn serializeExportImageTaskIdList(alloc: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32596,7 +32596,7 @@ pub fn serializeExportTaskIdStringList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32608,7 +32608,7 @@ pub fn serializeFastLaunchImageIdList(alloc: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32644,7 +32644,7 @@ pub fn serializeFleetIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), va
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32680,7 +32680,7 @@ pub fn serializeFlowLogIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8),
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32692,7 +32692,7 @@ pub fn serializeFlowLogResourceIds(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32704,7 +32704,7 @@ pub fn serializeFpgaImageIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32728,7 +32728,7 @@ pub fn serializeGroupIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32752,7 +32752,7 @@ pub fn serializeGroupIds(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), valu
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32764,7 +32764,7 @@ pub fn serializeGroupNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32776,7 +32776,7 @@ pub fn serializeHostReservationIdSet(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32824,7 +32824,7 @@ pub fn serializeImageIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), v
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32836,7 +32836,7 @@ pub fn serializeImageIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32848,7 +32848,7 @@ pub fn serializeImageNameRequestList(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32860,7 +32860,7 @@ pub fn serializeImageProviderRequestList(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32872,7 +32872,7 @@ pub fn serializeImageUsageReportIdStringList(alloc: std.mem.Allocator, buf: *std
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32884,7 +32884,7 @@ pub fn serializeImageUsageReportUserIdStringList(alloc: std.mem.Allocator, buf: 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32908,7 +32908,7 @@ pub fn serializeImageUsageResourceTypeOptionValuesList(alloc: std.mem.Allocator,
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32944,7 +32944,7 @@ pub fn serializeImportSnapshotTaskIdList(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32956,7 +32956,7 @@ pub fn serializeImportTaskIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -32968,7 +32968,7 @@ pub fn serializeInsideCidrBlocksStringList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33004,7 +33004,7 @@ pub fn serializeInstanceEventWindowIdSet(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33040,7 +33040,7 @@ pub fn serializeInstanceIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33052,7 +33052,7 @@ pub fn serializeInstanceIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33064,7 +33064,7 @@ pub fn serializeInstanceIdUpdateStringList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33112,7 +33112,7 @@ pub fn serializeInstanceTagKeySet(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33136,7 +33136,7 @@ pub fn serializeInstanceTypes(alloc: std.mem.Allocator, buf: *std.ArrayList(u8),
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33148,7 +33148,7 @@ pub fn serializeInternetGatewayIdList(alloc: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33160,7 +33160,7 @@ pub fn serializeIpList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value:
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33184,7 +33184,7 @@ pub fn serializeIpPrefixList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33220,7 +33220,7 @@ pub fn serializeIpamPoolAllocationAllowedCidrs(alloc: std.mem.Allocator, buf: *s
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33232,7 +33232,7 @@ pub fn serializeIpamPoolAllocationDisallowedCidrs(alloc: std.mem.Allocator, buf:
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33295,7 +33295,7 @@ pub fn serializeIpv6AddressList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33307,7 +33307,7 @@ pub fn serializeIpv6PoolIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33343,7 +33343,7 @@ pub fn serializeKeyNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33355,7 +33355,7 @@ pub fn serializeKeyPairIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33427,7 +33427,7 @@ pub fn serializeLaunchTemplateIdStringList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33463,7 +33463,7 @@ pub fn serializeLaunchTemplateNameStringList(alloc: std.mem.Allocator, buf: *std
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33523,7 +33523,7 @@ pub fn serializeLocalGatewayIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33535,7 +33535,7 @@ pub fn serializeLocalGatewayRouteTableIdSet(alloc: std.mem.Allocator, buf: *std.
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33547,7 +33547,7 @@ pub fn serializeLocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet(allo
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33559,7 +33559,7 @@ pub fn serializeLocalGatewayRouteTableVpcAssociationIdSet(alloc: std.mem.Allocat
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33571,7 +33571,7 @@ pub fn serializeLocalGatewayVirtualInterfaceGroupIdSet(alloc: std.mem.Allocator,
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33583,7 +33583,7 @@ pub fn serializeLocalGatewayVirtualInterfaceIdSet(alloc: std.mem.Allocator, buf:
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33607,7 +33607,7 @@ pub fn serializeMacModificationTaskIdList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33619,7 +33619,7 @@ pub fn serializeMarketplaceProductCodeRequestList(alloc: std.mem.Allocator, buf:
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33655,7 +33655,7 @@ pub fn serializeModifyVerifiedAccessEndpointSubnetIdList(alloc: std.mem.Allocato
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33667,7 +33667,7 @@ pub fn serializeNatGatewayIdStringList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33679,7 +33679,7 @@ pub fn serializeNetworkAclIdStringList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33691,7 +33691,7 @@ pub fn serializeNetworkInsightsAccessScopeAnalysisIdList(alloc: std.mem.Allocato
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33703,7 +33703,7 @@ pub fn serializeNetworkInsightsAccessScopeIdList(alloc: std.mem.Allocator, buf: 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33715,7 +33715,7 @@ pub fn serializeNetworkInsightsAnalysisIdList(alloc: std.mem.Allocator, buf: *st
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33727,7 +33727,7 @@ pub fn serializeNetworkInsightsPathIdList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33739,7 +33739,7 @@ pub fn serializeNetworkInterfaceIdList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33751,7 +33751,7 @@ pub fn serializeNetworkInterfacePermissionIdList(alloc: std.mem.Allocator, buf: 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33790,7 +33790,7 @@ pub fn serializeOrganizationArnStringList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33802,7 +33802,7 @@ pub fn serializeOrganizationalUnitArnStringList(alloc: std.mem.Allocator, buf: *
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33814,7 +33814,7 @@ pub fn serializeOutpostLagIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33826,7 +33826,7 @@ pub fn serializeOwnerStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33934,7 +33934,7 @@ pub fn serializePlacementGroupIdStringList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33946,7 +33946,7 @@ pub fn serializePlacementGroupStringList(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33970,7 +33970,7 @@ pub fn serializePrefixListResourceIdStringList(alloc: std.mem.Allocator, buf: *s
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -33994,7 +33994,7 @@ pub fn serializePrivateDnsSpecifiedDomainSet(alloc: std.mem.Allocator, buf: *std
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34030,7 +34030,7 @@ pub fn serializePrivateIpAddressStringList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34042,7 +34042,7 @@ pub fn serializeProductCodeStringList(alloc: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34054,7 +34054,7 @@ pub fn serializeProductDescriptionList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34078,7 +34078,7 @@ pub fn serializePublicIpStringList(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34090,7 +34090,7 @@ pub fn serializePublicIpv4PoolIdStringList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34126,7 +34126,7 @@ pub fn serializeRegionNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34138,7 +34138,7 @@ pub fn serializeRegionNames(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), v
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34186,7 +34186,7 @@ pub fn serializeReplaceRootVolumeTaskIds(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34198,7 +34198,7 @@ pub fn serializeRequestHostIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34210,7 +34210,7 @@ pub fn serializeRequestHostIdSet(alloc: std.mem.Allocator, buf: *std.ArrayList(u
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34246,7 +34246,7 @@ pub fn serializeRequestSpotLaunchSpecificationSecurityGroupIdList(alloc: std.mem
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34258,7 +34258,7 @@ pub fn serializeRequestSpotLaunchSpecificationSecurityGroupList(alloc: std.mem.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34282,7 +34282,7 @@ pub fn serializeReservedInstanceIdSet(alloc: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34306,7 +34306,7 @@ pub fn serializeReservedInstancesIdStringList(alloc: std.mem.Allocator, buf: *st
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34318,7 +34318,7 @@ pub fn serializeReservedInstancesModificationIdStringList(alloc: std.mem.Allocat
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34330,7 +34330,7 @@ pub fn serializeReservedInstancesOfferingIdStringList(alloc: std.mem.Allocator, 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34342,7 +34342,7 @@ pub fn serializeResourceIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34354,7 +34354,7 @@ pub fn serializeResourceList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34378,7 +34378,7 @@ pub fn serializeResourceTypeOptionValuesList(alloc: std.mem.Allocator, buf: *std
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34402,7 +34402,7 @@ pub fn serializeRestorableByStringList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34414,7 +34414,7 @@ pub fn serializeRouteServerEndpointIdsList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34426,7 +34426,7 @@ pub fn serializeRouteServerIdsList(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34438,7 +34438,7 @@ pub fn serializeRouteServerPeerIdsList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34450,7 +34450,7 @@ pub fn serializeRouteTableIdStringList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34474,7 +34474,7 @@ pub fn serializeScheduledInstanceIdRequestSet(alloc: std.mem.Allocator, buf: *st
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34522,7 +34522,7 @@ pub fn serializeScheduledInstancesSecurityGroupIdSet(alloc: std.mem.Allocator, b
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34534,7 +34534,7 @@ pub fn serializeSecurityGroupIdList(alloc: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34546,7 +34546,7 @@ pub fn serializeSecurityGroupIdStringList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34558,7 +34558,7 @@ pub fn serializeSecurityGroupIdStringListRequest(alloc: std.mem.Allocator, buf: 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34582,7 +34582,7 @@ pub fn serializeSecurityGroupRuleIdList(alloc: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34606,7 +34606,7 @@ pub fn serializeSecurityGroupStringList(alloc: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34618,7 +34618,7 @@ pub fn serializeServiceLinkVirtualInterfaceIdSet(alloc: std.mem.Allocator, buf: 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34630,7 +34630,7 @@ pub fn serializeSnapshotIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34642,7 +34642,7 @@ pub fn serializeSpotFleetRequestIdList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34666,7 +34666,7 @@ pub fn serializeSpotInstanceRequestIdList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34690,7 +34690,7 @@ pub fn serializeSubnetIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34702,7 +34702,7 @@ pub fn serializeSubnetIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34774,7 +34774,7 @@ pub fn serializeTrafficMirrorFilterIdList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34798,7 +34798,7 @@ pub fn serializeTrafficMirrorFilterRuleIdList(alloc: std.mem.Allocator, buf: *st
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34834,7 +34834,7 @@ pub fn serializeTrafficMirrorSessionIdList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34846,7 +34846,7 @@ pub fn serializeTrafficMirrorTargetIdList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34858,7 +34858,7 @@ pub fn serializeTransitGatewayAttachmentIdStringList(alloc: std.mem.Allocator, b
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34870,7 +34870,7 @@ pub fn serializeTransitGatewayCidrBlockStringList(alloc: std.mem.Allocator, buf:
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34882,7 +34882,7 @@ pub fn serializeTransitGatewayConnectPeerIdStringList(alloc: std.mem.Allocator, 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34894,7 +34894,7 @@ pub fn serializeTransitGatewayIdStringList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34906,7 +34906,7 @@ pub fn serializeTransitGatewayMeteringPolicyIdStringList(alloc: std.mem.Allocato
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34918,7 +34918,7 @@ pub fn serializeTransitGatewayMulticastDomainIdStringList(alloc: std.mem.Allocat
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34930,7 +34930,7 @@ pub fn serializeTransitGatewayNetworkInterfaceIdList(alloc: std.mem.Allocator, b
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34942,7 +34942,7 @@ pub fn serializeTransitGatewayPolicyTableIdStringList(alloc: std.mem.Allocator, 
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34954,7 +34954,7 @@ pub fn serializeTransitGatewayRouteTableAnnouncementIdStringList(alloc: std.mem.
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34966,7 +34966,7 @@ pub fn serializeTransitGatewayRouteTableIdStringList(alloc: std.mem.Allocator, b
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34978,7 +34978,7 @@ pub fn serializeTransitGatewaySubnetIdList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -34990,7 +34990,7 @@ pub fn serializeTrunkInterfaceAssociationIdList(alloc: std.mem.Allocator, buf: *
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35002,7 +35002,7 @@ pub fn serializeUserGroupStringList(alloc: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35026,7 +35026,7 @@ pub fn serializeUserIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35038,7 +35038,7 @@ pub fn serializeValueStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35050,7 +35050,7 @@ pub fn serializeVerifiedAccessEndpointIdList(alloc: std.mem.Allocator, buf: *std
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35062,7 +35062,7 @@ pub fn serializeVerifiedAccessGroupIdList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35074,7 +35074,7 @@ pub fn serializeVerifiedAccessInstanceIdList(alloc: std.mem.Allocator, buf: *std
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35086,7 +35086,7 @@ pub fn serializeVerifiedAccessTrustProviderIdList(alloc: std.mem.Allocator, buf:
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35098,7 +35098,7 @@ pub fn serializeVersionStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35122,7 +35122,7 @@ pub fn serializeVolumeIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35134,7 +35134,7 @@ pub fn serializeVpcBlockPublicAccessExclusionIdList(alloc: std.mem.Allocator, bu
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35146,7 +35146,7 @@ pub fn serializeVpcClassicLinkIdList(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35158,7 +35158,7 @@ pub fn serializeVpcEncryptionControlIdList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35170,7 +35170,7 @@ pub fn serializeVpcEndpointIdList(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35182,7 +35182,7 @@ pub fn serializeVpcEndpointRouteTableIdList(alloc: std.mem.Allocator, buf: *std.
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35194,7 +35194,7 @@ pub fn serializeVpcEndpointSecurityGroupIdList(alloc: std.mem.Allocator, buf: *s
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35206,7 +35206,7 @@ pub fn serializeVpcEndpointServiceIdList(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35218,7 +35218,7 @@ pub fn serializeVpcEndpointSubnetIdList(alloc: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35230,7 +35230,7 @@ pub fn serializeVpcIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35242,7 +35242,7 @@ pub fn serializeVpcPeeringConnectionIdList(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35254,7 +35254,7 @@ pub fn serializeVpnConcentratorIdStringList(alloc: std.mem.Allocator, buf: *std.
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35266,7 +35266,7 @@ pub fn serializeVpnConnectionIdStringList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35278,7 +35278,7 @@ pub fn serializeVpnGatewayIdStringList(alloc: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35302,7 +35302,7 @@ pub fn serializeZoneIdStringList(alloc: std.mem.Allocator, buf: *std.ArrayList(u
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35314,7 +35314,7 @@ pub fn serializeZoneNameStringList(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -35418,7 +35418,7 @@ pub fn serializeAccessScopePathRequest(alloc: std.mem.Allocator, buf: *std.Array
 pub fn serializeAddIpamOperatingRegion(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AddIpamOperatingRegion) !void {
     if (value.region_name) |v| {
         try buf.appendSlice(alloc, "<RegionName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RegionName>");
     }
 }
@@ -35426,34 +35426,34 @@ pub fn serializeAddIpamOperatingRegion(alloc: std.mem.Allocator, buf: *std.Array
 pub fn serializeAddIpamOrganizationalUnitExclusion(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AddIpamOrganizationalUnitExclusion) !void {
     if (value.organizations_entity_path) |v| {
         try buf.appendSlice(alloc, "<OrganizationsEntityPath>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</OrganizationsEntityPath>");
     }
 }
 
 pub fn serializeAddPrefixListEntry(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AddPrefixListEntry) !void {
     try buf.appendSlice(alloc, "<Cidr>");
-    try appendXmlEscaped(alloc, buf, value.cidr);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.cidr);
     try buf.appendSlice(alloc, "</Cidr>");
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<Description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Description>");
     }
 }
 
 pub fn serializeAsnAuthorizationContext(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AsnAuthorizationContext) !void {
     try buf.appendSlice(alloc, "<Message>");
-    try appendXmlEscaped(alloc, buf, value.message);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.message);
     try buf.appendSlice(alloc, "</Message>");
     try buf.appendSlice(alloc, "<Signature>");
-    try appendXmlEscaped(alloc, buf, value.signature);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.signature);
     try buf.appendSlice(alloc, "</Signature>");
 }
 
 pub fn serializeAthenaIntegration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AthenaIntegration) !void {
     try buf.appendSlice(alloc, "<IntegrationResultS3DestinationArn>");
-    try appendXmlEscaped(alloc, buf, value.integration_result_s_3_destination_arn);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.integration_result_s_3_destination_arn);
     try buf.appendSlice(alloc, "</IntegrationResultS3DestinationArn>");
     if (value.partition_end_date) |v| {
         try buf.appendSlice(alloc, "<PartitionEndDate>");
@@ -35487,7 +35487,7 @@ pub fn serializeAttributeBooleanValue(alloc: std.mem.Allocator, buf: *std.ArrayL
 pub fn serializeAttributeValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AttributeValue) !void {
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</value>");
     }
 }
@@ -35500,12 +35500,12 @@ pub fn serializeAvailabilityZoneAddress(alloc: std.mem.Allocator, buf: *std.Arra
     }
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZoneId>");
     }
 }
@@ -35573,7 +35573,7 @@ pub fn serializeBlobAttributeValue(alloc: std.mem.Allocator, buf: *std.ArrayList
 pub fn serializeBlockDeviceMapping(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: BlockDeviceMapping) !void {
     if (value.device_name) |v| {
         try buf.appendSlice(alloc, "<deviceName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</deviceName>");
     }
     if (value.ebs) |v| {
@@ -35583,12 +35583,12 @@ pub fn serializeBlockDeviceMapping(alloc: std.mem.Allocator, buf: *std.ArrayList
     }
     if (value.no_device) |v| {
         try buf.appendSlice(alloc, "<noDevice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</noDevice>");
     }
     if (value.virtual_name) |v| {
         try buf.appendSlice(alloc, "<virtualName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</virtualName>");
     }
 }
@@ -35625,12 +35625,12 @@ pub fn serializeCapacityReservationSpecification(alloc: std.mem.Allocator, buf: 
 pub fn serializeCapacityReservationTarget(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CapacityReservationTarget) !void {
     if (value.capacity_reservation_id) |v| {
         try buf.appendSlice(alloc, "<CapacityReservationId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</CapacityReservationId>");
     }
     if (value.capacity_reservation_resource_group_arn) |v| {
         try buf.appendSlice(alloc, "<CapacityReservationResourceGroupArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</CapacityReservationResourceGroupArn>");
     }
 }
@@ -35638,24 +35638,24 @@ pub fn serializeCapacityReservationTarget(alloc: std.mem.Allocator, buf: *std.Ar
 pub fn serializeCertificateAuthenticationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CertificateAuthenticationRequest) !void {
     if (value.client_root_certificate_chain_arn) |v| {
         try buf.appendSlice(alloc, "<ClientRootCertificateChainArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientRootCertificateChainArn>");
     }
 }
 
 pub fn serializeCidrAuthorizationContext(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CidrAuthorizationContext) !void {
     try buf.appendSlice(alloc, "<Message>");
-    try appendXmlEscaped(alloc, buf, value.message);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.message);
     try buf.appendSlice(alloc, "</Message>");
     try buf.appendSlice(alloc, "<Signature>");
-    try appendXmlEscaped(alloc, buf, value.signature);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.signature);
     try buf.appendSlice(alloc, "</Signature>");
 }
 
 pub fn serializeClassicLoadBalancer(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClassicLoadBalancer) !void {
     if (value.name) |v| {
         try buf.appendSlice(alloc, "<name>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</name>");
     }
 }
@@ -35676,7 +35676,7 @@ pub fn serializeClientConnectOptions(alloc: std.mem.Allocator, buf: *std.ArrayLi
     }
     if (value.lambda_function_arn) |v| {
         try buf.appendSlice(alloc, "<LambdaFunctionArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LambdaFunctionArn>");
     }
 }
@@ -35684,7 +35684,7 @@ pub fn serializeClientConnectOptions(alloc: std.mem.Allocator, buf: *std.ArrayLi
 pub fn serializeClientData(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClientData) !void {
     if (value.comment) |v| {
         try buf.appendSlice(alloc, "<Comment>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Comment>");
     }
     if (value.upload_end) |v| {
@@ -35716,7 +35716,7 @@ pub fn serializeClientData(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), va
 pub fn serializeClientLoginBannerOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ClientLoginBannerOptions) !void {
     if (value.banner_text) |v| {
         try buf.appendSlice(alloc, "<BannerText>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</BannerText>");
     }
     if (value.enabled) |v| {
@@ -35765,12 +35765,12 @@ pub fn serializeCloudWatchLogOptionsSpecification(alloc: std.mem.Allocator, buf:
     }
     if (value.bgp_log_group_arn) |v| {
         try buf.appendSlice(alloc, "<BgpLogGroupArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</BgpLogGroupArn>");
     }
     if (value.bgp_log_output_format) |v| {
         try buf.appendSlice(alloc, "<BgpLogOutputFormat>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</BgpLogOutputFormat>");
     }
     if (value.log_enabled) |v| {
@@ -35780,12 +35780,12 @@ pub fn serializeCloudWatchLogOptionsSpecification(alloc: std.mem.Allocator, buf:
     }
     if (value.log_group_arn) |v| {
         try buf.appendSlice(alloc, "<LogGroupArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LogGroupArn>");
     }
     if (value.log_output_format) |v| {
         try buf.appendSlice(alloc, "<LogOutputFormat>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LogOutputFormat>");
     }
 }
@@ -35793,12 +35793,12 @@ pub fn serializeCloudWatchLogOptionsSpecification(alloc: std.mem.Allocator, buf:
 pub fn serializeConnectionLogOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ConnectionLogOptions) !void {
     if (value.cloudwatch_log_group) |v| {
         try buf.appendSlice(alloc, "<CloudwatchLogGroup>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</CloudwatchLogGroup>");
     }
     if (value.cloudwatch_log_stream) |v| {
         try buf.appendSlice(alloc, "<CloudwatchLogStream>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</CloudwatchLogStream>");
     }
     if (value.enabled) |v| {
@@ -35933,7 +35933,7 @@ pub fn serializeCreateTransitGatewayVpcAttachmentRequestOptions(alloc: std.mem.A
 pub fn serializeCreateVerifiedAccessEndpointCidrOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessEndpointCidrOptions) !void {
     if (value.cidr) |v| {
         try buf.appendSlice(alloc, "<Cidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Cidr>");
     }
     if (value.port_ranges) |v| {
@@ -35956,7 +35956,7 @@ pub fn serializeCreateVerifiedAccessEndpointCidrOptions(alloc: std.mem.Allocator
 pub fn serializeCreateVerifiedAccessEndpointEniOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessEndpointEniOptions) !void {
     if (value.network_interface_id) |v| {
         try buf.appendSlice(alloc, "<NetworkInterfaceId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</NetworkInterfaceId>");
     }
     if (value.port) |v| {
@@ -35982,7 +35982,7 @@ pub fn serializeCreateVerifiedAccessEndpointEniOptions(alloc: std.mem.Allocator,
 pub fn serializeCreateVerifiedAccessEndpointLoadBalancerOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessEndpointLoadBalancerOptions) !void {
     if (value.load_balancer_arn) |v| {
         try buf.appendSlice(alloc, "<LoadBalancerArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LoadBalancerArn>");
     }
     if (value.port) |v| {
@@ -36045,22 +36045,22 @@ pub fn serializeCreateVerifiedAccessEndpointRdsOptions(alloc: std.mem.Allocator,
     }
     if (value.rds_db_cluster_arn) |v| {
         try buf.appendSlice(alloc, "<RdsDbClusterArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RdsDbClusterArn>");
     }
     if (value.rds_db_instance_arn) |v| {
         try buf.appendSlice(alloc, "<RdsDbInstanceArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RdsDbInstanceArn>");
     }
     if (value.rds_db_proxy_arn) |v| {
         try buf.appendSlice(alloc, "<RdsDbProxyArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RdsDbProxyArn>");
     }
     if (value.rds_endpoint) |v| {
         try buf.appendSlice(alloc, "<RdsEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RdsEndpoint>");
     }
     if (value.subnet_ids) |v| {
@@ -36073,42 +36073,42 @@ pub fn serializeCreateVerifiedAccessEndpointRdsOptions(alloc: std.mem.Allocator,
 pub fn serializeCreateVerifiedAccessNativeApplicationOidcOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessNativeApplicationOidcOptions) !void {
     if (value.authorization_endpoint) |v| {
         try buf.appendSlice(alloc, "<AuthorizationEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AuthorizationEndpoint>");
     }
     if (value.client_id) |v| {
         try buf.appendSlice(alloc, "<ClientId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientId>");
     }
     if (value.client_secret) |v| {
         try buf.appendSlice(alloc, "<ClientSecret>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientSecret>");
     }
     if (value.issuer) |v| {
         try buf.appendSlice(alloc, "<Issuer>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Issuer>");
     }
     if (value.public_signing_key_endpoint) |v| {
         try buf.appendSlice(alloc, "<PublicSigningKeyEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PublicSigningKeyEndpoint>");
     }
     if (value.scope) |v| {
         try buf.appendSlice(alloc, "<Scope>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Scope>");
     }
     if (value.token_endpoint) |v| {
         try buf.appendSlice(alloc, "<TokenEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TokenEndpoint>");
     }
     if (value.user_info_endpoint) |v| {
         try buf.appendSlice(alloc, "<UserInfoEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</UserInfoEndpoint>");
     }
 }
@@ -36116,12 +36116,12 @@ pub fn serializeCreateVerifiedAccessNativeApplicationOidcOptions(alloc: std.mem.
 pub fn serializeCreateVerifiedAccessTrustProviderDeviceOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessTrustProviderDeviceOptions) !void {
     if (value.public_signing_key_url) |v| {
         try buf.appendSlice(alloc, "<PublicSigningKeyUrl>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PublicSigningKeyUrl>");
     }
     if (value.tenant_id) |v| {
         try buf.appendSlice(alloc, "<TenantId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TenantId>");
     }
 }
@@ -36129,37 +36129,37 @@ pub fn serializeCreateVerifiedAccessTrustProviderDeviceOptions(alloc: std.mem.Al
 pub fn serializeCreateVerifiedAccessTrustProviderOidcOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreateVerifiedAccessTrustProviderOidcOptions) !void {
     if (value.authorization_endpoint) |v| {
         try buf.appendSlice(alloc, "<AuthorizationEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AuthorizationEndpoint>");
     }
     if (value.client_id) |v| {
         try buf.appendSlice(alloc, "<ClientId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientId>");
     }
     if (value.client_secret) |v| {
         try buf.appendSlice(alloc, "<ClientSecret>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientSecret>");
     }
     if (value.issuer) |v| {
         try buf.appendSlice(alloc, "<Issuer>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Issuer>");
     }
     if (value.scope) |v| {
         try buf.appendSlice(alloc, "<Scope>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Scope>");
     }
     if (value.token_endpoint) |v| {
         try buf.appendSlice(alloc, "<TokenEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TokenEndpoint>");
     }
     if (value.user_info_endpoint) |v| {
         try buf.appendSlice(alloc, "<UserInfoEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</UserInfoEndpoint>");
     }
 }
@@ -36172,7 +36172,7 @@ pub fn serializeCreateVolumePermission(alloc: std.mem.Allocator, buf: *std.Array
     }
     if (value.user_id) |v| {
         try buf.appendSlice(alloc, "<userId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</userId>");
     }
 }
@@ -36203,19 +36203,19 @@ pub fn serializeCreationDateConditionRequest(alloc: std.mem.Allocator, buf: *std
 
 pub fn serializeCreditSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: CreditSpecificationRequest) !void {
     try buf.appendSlice(alloc, "<CpuCredits>");
-    try appendXmlEscaped(alloc, buf, value.cpu_credits);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.cpu_credits);
     try buf.appendSlice(alloc, "</CpuCredits>");
 }
 
 pub fn serializeDataQuery(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DataQuery) !void {
     if (value.destination) |v| {
         try buf.appendSlice(alloc, "<Destination>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Destination>");
     }
     if (value.id) |v| {
         try buf.appendSlice(alloc, "<Id>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Id>");
     }
     if (value.metric) |v| {
@@ -36230,7 +36230,7 @@ pub fn serializeDataQuery(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), val
     }
     if (value.source) |v| {
         try buf.appendSlice(alloc, "<Source>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Source>");
     }
     if (value.statistic) |v| {
@@ -36303,7 +36303,7 @@ pub fn serializeDimensionCondition(alloc: std.mem.Allocator, buf: *std.ArrayList
 pub fn serializeDirectoryServiceAuthenticationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DirectoryServiceAuthenticationRequest) !void {
     if (value.directory_id) |v| {
         try buf.appendSlice(alloc, "<DirectoryId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DirectoryId>");
     }
 }
@@ -36311,7 +36311,7 @@ pub fn serializeDirectoryServiceAuthenticationRequest(alloc: std.mem.Allocator, 
 pub fn serializeDiskImage(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: DiskImage) !void {
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<Description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Description>");
     }
     if (value.image) |v| {
@@ -36337,7 +36337,7 @@ pub fn serializeDiskImageDetail(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
     try buf.appendSlice(alloc, @tagName(value.format));
     try buf.appendSlice(alloc, "</format>");
     try buf.appendSlice(alloc, "<importManifestUrl>");
-    try appendXmlEscaped(alloc, buf, value.import_manifest_url);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.import_manifest_url);
     try buf.appendSlice(alloc, "</importManifestUrl>");
 }
 
@@ -36354,7 +36354,7 @@ pub fn serializeDnsOptionsSpecification(alloc: std.mem.Allocator, buf: *std.Arra
     }
     if (value.private_dns_preference) |v| {
         try buf.appendSlice(alloc, "<PrivateDnsPreference>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PrivateDnsPreference>");
     }
     if (value.private_dns_specified_domains) |v| {
@@ -36380,12 +36380,12 @@ pub fn serializeDnsServersOptionsModifyStructure(alloc: std.mem.Allocator, buf: 
 pub fn serializeEbsBlockDevice(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: EbsBlockDevice) !void {
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<availabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZoneId>");
     }
     if (value.delete_on_termination) |v| {
@@ -36416,17 +36416,17 @@ pub fn serializeEbsBlockDevice(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
     }
     if (value.kms_key_id) |v| {
         try buf.appendSlice(alloc, "<kmsKeyId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</kmsKeyId>");
     }
     if (value.outpost_arn) |v| {
         try buf.appendSlice(alloc, "<outpostArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</outpostArn>");
     }
     if (value.snapshot_id) |v| {
         try buf.appendSlice(alloc, "<snapshotId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</snapshotId>");
     }
     if (value.throughput) |v| {
@@ -36468,14 +36468,14 @@ pub fn serializeEbsInstanceBlockDeviceSpecification(alloc: std.mem.Allocator, bu
     }
     if (value.volume_id) |v| {
         try buf.appendSlice(alloc, "<volumeId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</volumeId>");
     }
 }
 
 pub fn serializeElasticGpuSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ElasticGpuSpecification) !void {
     try buf.appendSlice(alloc, "<Type>");
-    try appendXmlEscaped(alloc, buf, value.@"type");
+    try aws.xml.appendXmlEscaped(alloc, buf, value.@"type");
     try buf.appendSlice(alloc, "</Type>");
 }
 
@@ -36489,7 +36489,7 @@ pub fn serializeElasticInferenceAccelerator(alloc: std.mem.Allocator, buf: *std.
         try buf.appendSlice(alloc, "</Count>");
     }
     try buf.appendSlice(alloc, "<Type>");
-    try appendXmlEscaped(alloc, buf, value.@"type");
+    try aws.xml.appendXmlEscaped(alloc, buf, value.@"type");
     try buf.appendSlice(alloc, "</Type>");
 }
 
@@ -36545,11 +36545,11 @@ pub fn serializeEnclaveOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayL
 
 pub fn serializeExportTaskS3LocationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExportTaskS3LocationRequest) !void {
     try buf.appendSlice(alloc, "<S3Bucket>");
-    try appendXmlEscaped(alloc, buf, value.s_3_bucket);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.s_3_bucket);
     try buf.appendSlice(alloc, "</S3Bucket>");
     if (value.s_3_prefix) |v| {
         try buf.appendSlice(alloc, "<S3Prefix>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3Prefix>");
     }
 }
@@ -36567,12 +36567,12 @@ pub fn serializeExportToS3TaskSpecification(alloc: std.mem.Allocator, buf: *std.
     }
     if (value.s_3_bucket) |v| {
         try buf.appendSlice(alloc, "<s3Bucket>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</s3Bucket>");
     }
     if (value.s_3_prefix) |v| {
         try buf.appendSlice(alloc, "<s3Prefix>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</s3Prefix>");
     }
 }
@@ -36580,7 +36580,7 @@ pub fn serializeExportToS3TaskSpecification(alloc: std.mem.Allocator, buf: *std.
 pub fn serializeExternalAuthorityConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExternalAuthorityConfiguration) !void {
     if (value.external_resource_identifier) |v| {
         try buf.appendSlice(alloc, "<ExternalResourceIdentifier>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ExternalResourceIdentifier>");
     }
     if (value.@"type") |v| {
@@ -36593,16 +36593,16 @@ pub fn serializeExternalAuthorityConfiguration(alloc: std.mem.Allocator, buf: *s
 pub fn serializeFastLaunchLaunchTemplateSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FastLaunchLaunchTemplateSpecificationRequest) !void {
     if (value.launch_template_id) |v| {
         try buf.appendSlice(alloc, "<LaunchTemplateId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LaunchTemplateId>");
     }
     if (value.launch_template_name) |v| {
         try buf.appendSlice(alloc, "<LaunchTemplateName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LaunchTemplateName>");
     }
     try buf.appendSlice(alloc, "<Version>");
-    try appendXmlEscaped(alloc, buf, value.version);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.version);
     try buf.appendSlice(alloc, "</Version>");
 }
 
@@ -36620,12 +36620,12 @@ pub fn serializeFastLaunchSnapshotConfigurationRequest(alloc: std.mem.Allocator,
 pub fn serializeFederatedAuthenticationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FederatedAuthenticationRequest) !void {
     if (value.saml_provider_arn) |v| {
         try buf.appendSlice(alloc, "<SAMLProviderArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SAMLProviderArn>");
     }
     if (value.self_service_saml_provider_arn) |v| {
         try buf.appendSlice(alloc, "<SelfServiceSAMLProviderArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SelfServiceSAMLProviderArn>");
     }
 }
@@ -36633,7 +36633,7 @@ pub fn serializeFederatedAuthenticationRequest(alloc: std.mem.Allocator, buf: *s
 pub fn serializeFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Filter) !void {
     if (value.name) |v| {
         try buf.appendSlice(alloc, "<Name>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Name>");
     }
     if (value.values) |v| {
@@ -36646,7 +36646,7 @@ pub fn serializeFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value:
 pub fn serializeFleetBlockDeviceMappingRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetBlockDeviceMappingRequest) !void {
     if (value.device_name) |v| {
         try buf.appendSlice(alloc, "<DeviceName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DeviceName>");
     }
     if (value.ebs) |v| {
@@ -36656,12 +36656,12 @@ pub fn serializeFleetBlockDeviceMappingRequest(alloc: std.mem.Allocator, buf: *s
     }
     if (value.no_device) |v| {
         try buf.appendSlice(alloc, "<NoDevice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</NoDevice>");
     }
     if (value.virtual_name) |v| {
         try buf.appendSlice(alloc, "<VirtualName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</VirtualName>");
     }
 }
@@ -36687,12 +36687,12 @@ pub fn serializeFleetEbsBlockDeviceRequest(alloc: std.mem.Allocator, buf: *std.A
     }
     if (value.kms_key_id) |v| {
         try buf.appendSlice(alloc, "<KmsKeyId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</KmsKeyId>");
     }
     if (value.snapshot_id) |v| {
         try buf.appendSlice(alloc, "<SnapshotId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SnapshotId>");
     }
     if (value.throughput) |v| {
@@ -36734,12 +36734,12 @@ pub fn serializeFleetLaunchTemplateConfigRequest(alloc: std.mem.Allocator, buf: 
 pub fn serializeFleetLaunchTemplateOverridesRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetLaunchTemplateOverridesRequest) !void {
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZoneId>");
     }
     if (value.block_device_mappings) |v| {
@@ -36749,7 +36749,7 @@ pub fn serializeFleetLaunchTemplateOverridesRequest(alloc: std.mem.Allocator, bu
     }
     if (value.image_id) |v| {
         try buf.appendSlice(alloc, "<ImageId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ImageId>");
     }
     if (value.instance_requirements) |v| {
@@ -36764,7 +36764,7 @@ pub fn serializeFleetLaunchTemplateOverridesRequest(alloc: std.mem.Allocator, bu
     }
     if (value.max_price) |v| {
         try buf.appendSlice(alloc, "<MaxPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</MaxPrice>");
     }
     if (value.placement) |v| {
@@ -36782,7 +36782,7 @@ pub fn serializeFleetLaunchTemplateOverridesRequest(alloc: std.mem.Allocator, bu
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<SubnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SubnetId>");
     }
     if (value.weighted_capacity) |v| {
@@ -36798,17 +36798,17 @@ pub fn serializeFleetLaunchTemplateOverridesRequest(alloc: std.mem.Allocator, bu
 pub fn serializeFleetLaunchTemplateSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetLaunchTemplateSpecification) !void {
     if (value.launch_template_id) |v| {
         try buf.appendSlice(alloc, "<launchTemplateId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</launchTemplateId>");
     }
     if (value.launch_template_name) |v| {
         try buf.appendSlice(alloc, "<launchTemplateName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</launchTemplateName>");
     }
     if (value.version) |v| {
         try buf.appendSlice(alloc, "<version>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</version>");
     }
 }
@@ -36816,17 +36816,17 @@ pub fn serializeFleetLaunchTemplateSpecification(alloc: std.mem.Allocator, buf: 
 pub fn serializeFleetLaunchTemplateSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: FleetLaunchTemplateSpecificationRequest) !void {
     if (value.launch_template_id) |v| {
         try buf.appendSlice(alloc, "<LaunchTemplateId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LaunchTemplateId>");
     }
     if (value.launch_template_name) |v| {
         try buf.appendSlice(alloc, "<LaunchTemplateName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LaunchTemplateName>");
     }
     if (value.version) |v| {
         try buf.appendSlice(alloc, "<Version>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Version>");
     }
 }
@@ -36858,12 +36858,12 @@ pub fn serializeFleetSpotMaintenanceStrategiesRequest(alloc: std.mem.Allocator, 
 pub fn serializeGroupIdentifier(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: GroupIdentifier) !void {
     if (value.group_id) |v| {
         try buf.appendSlice(alloc, "<groupId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</groupId>");
     }
     if (value.group_name) |v| {
         try buf.appendSlice(alloc, "<groupName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</groupName>");
     }
 }
@@ -36879,7 +36879,7 @@ pub fn serializeHibernationOptionsRequest(alloc: std.mem.Allocator, buf: *std.Ar
 pub fn serializeIKEVersionsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IKEVersionsRequestListValue) !void {
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<Value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Value>");
     }
 }
@@ -36887,12 +36887,12 @@ pub fn serializeIKEVersionsRequestListValue(alloc: std.mem.Allocator, buf: *std.
 pub fn serializeIamInstanceProfileSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IamInstanceProfileSpecification) !void {
     if (value.arn) |v| {
         try buf.appendSlice(alloc, "<arn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</arn>");
     }
     if (value.name) |v| {
         try buf.appendSlice(alloc, "<name>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</name>");
     }
 }
@@ -36947,27 +36947,27 @@ pub fn serializeImageCriterionRequest(alloc: std.mem.Allocator, buf: *std.ArrayL
 pub fn serializeImageDiskContainer(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageDiskContainer) !void {
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<Description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Description>");
     }
     if (value.device_name) |v| {
         try buf.appendSlice(alloc, "<DeviceName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DeviceName>");
     }
     if (value.format) |v| {
         try buf.appendSlice(alloc, "<Format>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Format>");
     }
     if (value.snapshot_id) |v| {
         try buf.appendSlice(alloc, "<SnapshotId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SnapshotId>");
     }
     if (value.url) |v| {
         try buf.appendSlice(alloc, "<Url>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Url>");
     }
     if (value.user_bucket) |v| {
@@ -36980,7 +36980,7 @@ pub fn serializeImageDiskContainer(alloc: std.mem.Allocator, buf: *std.ArrayList
 pub fn serializeImageUsageResourceTypeOptionRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageUsageResourceTypeOptionRequest) !void {
     if (value.option_name) |v| {
         try buf.appendSlice(alloc, "<OptionName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</OptionName>");
     }
     if (value.option_values) |v| {
@@ -36993,7 +36993,7 @@ pub fn serializeImageUsageResourceTypeOptionRequest(alloc: std.mem.Allocator, bu
 pub fn serializeImageUsageResourceTypeRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageUsageResourceTypeRequest) !void {
     if (value.resource_type) |v| {
         try buf.appendSlice(alloc, "<ResourceType>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ResourceType>");
     }
     if (value.resource_type_options) |v| {
@@ -37006,7 +37006,7 @@ pub fn serializeImageUsageResourceTypeRequest(alloc: std.mem.Allocator, buf: *st
 pub fn serializeImportImageLicenseConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImportImageLicenseConfigurationRequest) !void {
     if (value.license_configuration_arn) |v| {
         try buf.appendSlice(alloc, "<LicenseConfigurationArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LicenseConfigurationArn>");
     }
 }
@@ -37014,7 +37014,7 @@ pub fn serializeImportImageLicenseConfigurationRequest(alloc: std.mem.Allocator,
 pub fn serializeImportInstanceLaunchSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImportInstanceLaunchSpecification) !void {
     if (value.additional_info) |v| {
         try buf.appendSlice(alloc, "<additionalInfo>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</additionalInfo>");
     }
     if (value.architecture) |v| {
@@ -37054,12 +37054,12 @@ pub fn serializeImportInstanceLaunchSpecification(alloc: std.mem.Allocator, buf:
     }
     if (value.private_ip_address) |v| {
         try buf.appendSlice(alloc, "<privateIpAddress>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</privateIpAddress>");
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<subnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</subnetId>");
     }
     if (value.user_data) |v| {
@@ -37072,7 +37072,7 @@ pub fn serializeImportInstanceLaunchSpecification(alloc: std.mem.Allocator, buf:
 pub fn serializeInstanceBlockDeviceMappingSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceBlockDeviceMappingSpecification) !void {
     if (value.device_name) |v| {
         try buf.appendSlice(alloc, "<deviceName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</deviceName>");
     }
     if (value.ebs) |v| {
@@ -37082,12 +37082,12 @@ pub fn serializeInstanceBlockDeviceMappingSpecification(alloc: std.mem.Allocator
     }
     if (value.no_device) |v| {
         try buf.appendSlice(alloc, "<noDevice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</noDevice>");
     }
     if (value.virtual_name) |v| {
         try buf.appendSlice(alloc, "<virtualName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</virtualName>");
     }
 }
@@ -37095,11 +37095,11 @@ pub fn serializeInstanceBlockDeviceMappingSpecification(alloc: std.mem.Allocator
 pub fn serializeInstanceCreditSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceCreditSpecificationRequest) !void {
     if (value.cpu_credits) |v| {
         try buf.appendSlice(alloc, "<CpuCredits>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</CpuCredits>");
     }
     try buf.appendSlice(alloc, "<InstanceId>");
-    try appendXmlEscaped(alloc, buf, value.instance_id);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.instance_id);
     try buf.appendSlice(alloc, "</InstanceId>");
 }
 
@@ -37171,7 +37171,7 @@ pub fn serializeInstanceEventWindowTimeRangeRequest(alloc: std.mem.Allocator, bu
 pub fn serializeInstanceIpv6Address(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceIpv6Address) !void {
     if (value.ipv_6_address) |v| {
         try buf.appendSlice(alloc, "<ipv6Address>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ipv6Address>");
     }
     if (value.is_primary_ipv_6) |v| {
@@ -37184,7 +37184,7 @@ pub fn serializeInstanceIpv6Address(alloc: std.mem.Allocator, buf: *std.ArrayLis
 pub fn serializeInstanceIpv6AddressRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceIpv6AddressRequest) !void {
     if (value.ipv_6_address) |v| {
         try buf.appendSlice(alloc, "<Ipv6Address>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Ipv6Address>");
     }
 }
@@ -37264,7 +37264,7 @@ pub fn serializeInstanceNetworkInterfaceSpecification(alloc: std.mem.Allocator, 
     }
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</description>");
     }
     if (value.device_index) |v| {
@@ -37295,7 +37295,7 @@ pub fn serializeInstanceNetworkInterfaceSpecification(alloc: std.mem.Allocator, 
     }
     if (value.interface_type) |v| {
         try buf.appendSlice(alloc, "<InterfaceType>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</InterfaceType>");
     }
     if (value.ipv_4_prefix_count) |v| {
@@ -37347,7 +37347,7 @@ pub fn serializeInstanceNetworkInterfaceSpecification(alloc: std.mem.Allocator, 
     }
     if (value.network_interface_id) |v| {
         try buf.appendSlice(alloc, "<networkInterfaceId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</networkInterfaceId>");
     }
     if (value.primary_ipv_6) |v| {
@@ -37357,7 +37357,7 @@ pub fn serializeInstanceNetworkInterfaceSpecification(alloc: std.mem.Allocator, 
     }
     if (value.private_ip_address) |v| {
         try buf.appendSlice(alloc, "<privateIpAddress>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</privateIpAddress>");
     }
     if (value.private_ip_addresses) |v| {
@@ -37375,7 +37375,7 @@ pub fn serializeInstanceNetworkInterfaceSpecification(alloc: std.mem.Allocator, 
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<subnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</subnetId>");
     }
 }
@@ -37698,7 +37698,7 @@ pub fn serializeInstanceSpecification(alloc: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(alloc, "</ExcludeDataVolumeId>");
     }
     try buf.appendSlice(alloc, "<InstanceId>");
-    try appendXmlEscaped(alloc, buf, value.instance_id);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.instance_id);
     try buf.appendSlice(alloc, "</InstanceId>");
 }
 
@@ -37721,7 +37721,7 @@ pub fn serializeIpPermission(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), 
     }
     if (value.ip_protocol) |v| {
         try buf.appendSlice(alloc, "<ipProtocol>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ipProtocol>");
     }
     if (value.ip_ranges) |v| {
@@ -37757,12 +37757,12 @@ pub fn serializeIpPermission(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), 
 pub fn serializeIpRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpRange) !void {
     if (value.cidr_ip) |v| {
         try buf.appendSlice(alloc, "<cidrIp>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</cidrIp>");
     }
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</description>");
     }
 }
@@ -37770,12 +37770,12 @@ pub fn serializeIpRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value
 pub fn serializeIpamCidrAuthorizationContext(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamCidrAuthorizationContext) !void {
     if (value.message) |v| {
         try buf.appendSlice(alloc, "<Message>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Message>");
     }
     if (value.signature) |v| {
         try buf.appendSlice(alloc, "<Signature>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Signature>");
     }
 }
@@ -37783,7 +37783,7 @@ pub fn serializeIpamCidrAuthorizationContext(alloc: std.mem.Allocator, buf: *std
 pub fn serializeIpamPolicyAllocationRuleRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamPolicyAllocationRuleRequest) !void {
     if (value.source_ipam_pool_id) |v| {
         try buf.appendSlice(alloc, "<SourceIpamPoolId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SourceIpamPoolId>");
     }
 }
@@ -37791,17 +37791,17 @@ pub fn serializeIpamPolicyAllocationRuleRequest(alloc: std.mem.Allocator, buf: *
 pub fn serializeIpamPoolSourceResourceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamPoolSourceResourceRequest) !void {
     if (value.resource_id) |v| {
         try buf.appendSlice(alloc, "<ResourceId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ResourceId>");
     }
     if (value.resource_owner) |v| {
         try buf.appendSlice(alloc, "<ResourceOwner>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ResourceOwner>");
     }
     if (value.resource_region) |v| {
         try buf.appendSlice(alloc, "<ResourceRegion>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ResourceRegion>");
     }
     if (value.resource_type) |v| {
@@ -37814,12 +37814,12 @@ pub fn serializeIpamPoolSourceResourceRequest(alloc: std.mem.Allocator, buf: *st
 pub fn serializeIpamPrefixListResolverRuleConditionRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: IpamPrefixListResolverRuleConditionRequest) !void {
     if (value.cidr) |v| {
         try buf.appendSlice(alloc, "<Cidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Cidr>");
     }
     if (value.ipam_pool_id) |v| {
         try buf.appendSlice(alloc, "<IpamPoolId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</IpamPoolId>");
     }
     try buf.appendSlice(alloc, "<Operation>");
@@ -37827,17 +37827,17 @@ pub fn serializeIpamPrefixListResolverRuleConditionRequest(alloc: std.mem.Alloca
     try buf.appendSlice(alloc, "</Operation>");
     if (value.resource_id) |v| {
         try buf.appendSlice(alloc, "<ResourceId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ResourceId>");
     }
     if (value.resource_owner) |v| {
         try buf.appendSlice(alloc, "<ResourceOwner>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ResourceOwner>");
     }
     if (value.resource_region) |v| {
         try buf.appendSlice(alloc, "<ResourceRegion>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ResourceRegion>");
     }
     if (value.resource_tag) |v| {
@@ -37855,7 +37855,7 @@ pub fn serializeIpamPrefixListResolverRuleRequest(alloc: std.mem.Allocator, buf:
     }
     if (value.ipam_scope_id) |v| {
         try buf.appendSlice(alloc, "<IpamScopeId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</IpamScopeId>");
     }
     if (value.resource_type) |v| {
@@ -37868,7 +37868,7 @@ pub fn serializeIpamPrefixListResolverRuleRequest(alloc: std.mem.Allocator, buf:
     try buf.appendSlice(alloc, "</RuleType>");
     if (value.static_cidr) |v| {
         try buf.appendSlice(alloc, "<StaticCidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</StaticCidr>");
     }
 }
@@ -37876,7 +37876,7 @@ pub fn serializeIpamPrefixListResolverRuleRequest(alloc: std.mem.Allocator, buf:
 pub fn serializeIpv4PrefixSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ipv4PrefixSpecificationRequest) !void {
     if (value.ipv_4_prefix) |v| {
         try buf.appendSlice(alloc, "<Ipv4Prefix>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Ipv4Prefix>");
     }
 }
@@ -37884,7 +37884,7 @@ pub fn serializeIpv4PrefixSpecificationRequest(alloc: std.mem.Allocator, buf: *s
 pub fn serializeIpv6PrefixSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ipv6PrefixSpecificationRequest) !void {
     if (value.ipv_6_prefix) |v| {
         try buf.appendSlice(alloc, "<Ipv6Prefix>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Ipv6Prefix>");
     }
 }
@@ -37892,12 +37892,12 @@ pub fn serializeIpv6PrefixSpecificationRequest(alloc: std.mem.Allocator, buf: *s
 pub fn serializeIpv6Range(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ipv6Range) !void {
     if (value.cidr_ipv_6) |v| {
         try buf.appendSlice(alloc, "<cidrIpv6>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</cidrIpv6>");
     }
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</description>");
     }
 }
@@ -37910,17 +37910,17 @@ pub fn serializeLaunchPermission(alloc: std.mem.Allocator, buf: *std.ArrayList(u
     }
     if (value.organizational_unit_arn) |v| {
         try buf.appendSlice(alloc, "<organizationalUnitArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</organizationalUnitArn>");
     }
     if (value.organization_arn) |v| {
         try buf.appendSlice(alloc, "<organizationArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</organizationArn>");
     }
     if (value.user_id) |v| {
         try buf.appendSlice(alloc, "<userId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</userId>");
     }
 }
@@ -37941,7 +37941,7 @@ pub fn serializeLaunchPermissionModifications(alloc: std.mem.Allocator, buf: *st
 pub fn serializeLaunchTemplateBlockDeviceMappingRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateBlockDeviceMappingRequest) !void {
     if (value.device_name) |v| {
         try buf.appendSlice(alloc, "<DeviceName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DeviceName>");
     }
     if (value.ebs) |v| {
@@ -37951,12 +37951,12 @@ pub fn serializeLaunchTemplateBlockDeviceMappingRequest(alloc: std.mem.Allocator
     }
     if (value.no_device) |v| {
         try buf.appendSlice(alloc, "<NoDevice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</NoDevice>");
     }
     if (value.virtual_name) |v| {
         try buf.appendSlice(alloc, "<VirtualName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</VirtualName>");
     }
 }
@@ -38040,12 +38040,12 @@ pub fn serializeLaunchTemplateEbsBlockDeviceRequest(alloc: std.mem.Allocator, bu
     }
     if (value.kms_key_id) |v| {
         try buf.appendSlice(alloc, "<KmsKeyId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</KmsKeyId>");
     }
     if (value.snapshot_id) |v| {
         try buf.appendSlice(alloc, "<SnapshotId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SnapshotId>");
     }
     if (value.throughput) |v| {
@@ -38089,7 +38089,7 @@ pub fn serializeLaunchTemplateElasticInferenceAccelerator(alloc: std.mem.Allocat
         try buf.appendSlice(alloc, "</Count>");
     }
     try buf.appendSlice(alloc, "<Type>");
-    try appendXmlEscaped(alloc, buf, value.@"type");
+    try aws.xml.appendXmlEscaped(alloc, buf, value.@"type");
     try buf.appendSlice(alloc, "</Type>");
 }
 
@@ -38112,12 +38112,12 @@ pub fn serializeLaunchTemplateHibernationOptionsRequest(alloc: std.mem.Allocator
 pub fn serializeLaunchTemplateIamInstanceProfileSpecificationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateIamInstanceProfileSpecificationRequest) !void {
     if (value.arn) |v| {
         try buf.appendSlice(alloc, "<Arn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Arn>");
     }
     if (value.name) |v| {
         try buf.appendSlice(alloc, "<Name>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Name>");
     }
 }
@@ -38197,7 +38197,7 @@ pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc
     }
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<Description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Description>");
     }
     if (value.device_index) |v| {
@@ -38228,7 +38228,7 @@ pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc
     }
     if (value.interface_type) |v| {
         try buf.appendSlice(alloc, "<InterfaceType>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</InterfaceType>");
     }
     if (value.ipv_4_prefix_count) |v| {
@@ -38280,7 +38280,7 @@ pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc
     }
     if (value.network_interface_id) |v| {
         try buf.appendSlice(alloc, "<NetworkInterfaceId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</NetworkInterfaceId>");
     }
     if (value.primary_ipv_6) |v| {
@@ -38290,7 +38290,7 @@ pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc
     }
     if (value.private_ip_address) |v| {
         try buf.appendSlice(alloc, "<PrivateIpAddress>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PrivateIpAddress>");
     }
     if (value.private_ip_addresses) |v| {
@@ -38308,7 +38308,7 @@ pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<SubnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SubnetId>");
     }
 }
@@ -38316,7 +38316,7 @@ pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc
 pub fn serializeLaunchTemplateLicenseConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateLicenseConfigurationRequest) !void {
     if (value.license_configuration_arn) |v| {
         try buf.appendSlice(alloc, "<LicenseConfigurationArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LicenseConfigurationArn>");
     }
 }
@@ -38332,12 +38332,12 @@ pub fn serializeLaunchTemplateNetworkPerformanceOptionsRequest(alloc: std.mem.Al
 pub fn serializeLaunchTemplateOverrides(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateOverrides) !void {
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<availabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<availabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZoneId>");
     }
     if (value.instance_requirements) |v| {
@@ -38360,12 +38360,12 @@ pub fn serializeLaunchTemplateOverrides(alloc: std.mem.Allocator, buf: *std.Arra
     }
     if (value.spot_price) |v| {
         try buf.appendSlice(alloc, "<spotPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</spotPrice>");
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<subnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</subnetId>");
     }
     if (value.weighted_capacity) |v| {
@@ -38381,37 +38381,37 @@ pub fn serializeLaunchTemplateOverrides(alloc: std.mem.Allocator, buf: *std.Arra
 pub fn serializeLaunchTemplatePlacementRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplatePlacementRequest) !void {
     if (value.affinity) |v| {
         try buf.appendSlice(alloc, "<Affinity>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Affinity>");
     }
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZoneId>");
     }
     if (value.group_id) |v| {
         try buf.appendSlice(alloc, "<GroupId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</GroupId>");
     }
     if (value.group_name) |v| {
         try buf.appendSlice(alloc, "<GroupName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</GroupName>");
     }
     if (value.host_id) |v| {
         try buf.appendSlice(alloc, "<HostId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</HostId>");
     }
     if (value.host_resource_group_arn) |v| {
         try buf.appendSlice(alloc, "<HostResourceGroupArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</HostResourceGroupArn>");
     }
     if (value.partition_number) |v| {
@@ -38424,7 +38424,7 @@ pub fn serializeLaunchTemplatePlacementRequest(alloc: std.mem.Allocator, buf: *s
     }
     if (value.spread_domain) |v| {
         try buf.appendSlice(alloc, "<SpreadDomain>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SpreadDomain>");
     }
     if (value.tenancy) |v| {
@@ -38455,17 +38455,17 @@ pub fn serializeLaunchTemplatePrivateDnsNameOptionsRequest(alloc: std.mem.Alloca
 pub fn serializeLaunchTemplateSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateSpecification) !void {
     if (value.launch_template_id) |v| {
         try buf.appendSlice(alloc, "<LaunchTemplateId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LaunchTemplateId>");
     }
     if (value.launch_template_name) |v| {
         try buf.appendSlice(alloc, "<LaunchTemplateName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LaunchTemplateName>");
     }
     if (value.version) |v| {
         try buf.appendSlice(alloc, "<Version>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Version>");
     }
 }
@@ -38486,7 +38486,7 @@ pub fn serializeLaunchTemplateSpotMarketOptionsRequest(alloc: std.mem.Allocator,
     }
     if (value.max_price) |v| {
         try buf.appendSlice(alloc, "<MaxPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</MaxPrice>");
     }
     if (value.spot_instance_type) |v| {
@@ -38528,7 +38528,7 @@ pub fn serializeLaunchTemplatesMonitoringRequest(alloc: std.mem.Allocator, buf: 
 pub fn serializeLicenseConfigurationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: LicenseConfigurationRequest) !void {
     if (value.license_configuration_arn) |v| {
         try buf.appendSlice(alloc, "<LicenseConfigurationArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LicenseConfigurationArn>");
     }
 }
@@ -38567,7 +38567,7 @@ pub fn serializeLoadPermissionRequest(alloc: std.mem.Allocator, buf: *std.ArrayL
     }
     if (value.user_id) |v| {
         try buf.appendSlice(alloc, "<UserId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</UserId>");
     }
 }
@@ -38700,7 +38700,7 @@ pub fn serializeModifyTransitGatewayOptions(alloc: std.mem.Allocator, buf: *std.
     }
     if (value.association_default_route_table_id) |v| {
         try buf.appendSlice(alloc, "<AssociationDefaultRouteTableId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AssociationDefaultRouteTableId>");
     }
     if (value.auto_accept_shared_attachments) |v| {
@@ -38730,7 +38730,7 @@ pub fn serializeModifyTransitGatewayOptions(alloc: std.mem.Allocator, buf: *std.
     }
     if (value.propagation_default_route_table_id) |v| {
         try buf.appendSlice(alloc, "<PropagationDefaultRouteTableId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PropagationDefaultRouteTableId>");
     }
     if (value.remove_transit_gateway_cidr_blocks) |v| {
@@ -38858,7 +38858,7 @@ pub fn serializeModifyVerifiedAccessEndpointRdsOptions(alloc: std.mem.Allocator,
     }
     if (value.rds_endpoint) |v| {
         try buf.appendSlice(alloc, "<RdsEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RdsEndpoint>");
     }
     if (value.subnet_ids) |v| {
@@ -38871,42 +38871,42 @@ pub fn serializeModifyVerifiedAccessEndpointRdsOptions(alloc: std.mem.Allocator,
 pub fn serializeModifyVerifiedAccessNativeApplicationOidcOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessNativeApplicationOidcOptions) !void {
     if (value.authorization_endpoint) |v| {
         try buf.appendSlice(alloc, "<AuthorizationEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AuthorizationEndpoint>");
     }
     if (value.client_id) |v| {
         try buf.appendSlice(alloc, "<ClientId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientId>");
     }
     if (value.client_secret) |v| {
         try buf.appendSlice(alloc, "<ClientSecret>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientSecret>");
     }
     if (value.issuer) |v| {
         try buf.appendSlice(alloc, "<Issuer>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Issuer>");
     }
     if (value.public_signing_key_endpoint) |v| {
         try buf.appendSlice(alloc, "<PublicSigningKeyEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PublicSigningKeyEndpoint>");
     }
     if (value.scope) |v| {
         try buf.appendSlice(alloc, "<Scope>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Scope>");
     }
     if (value.token_endpoint) |v| {
         try buf.appendSlice(alloc, "<TokenEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TokenEndpoint>");
     }
     if (value.user_info_endpoint) |v| {
         try buf.appendSlice(alloc, "<UserInfoEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</UserInfoEndpoint>");
     }
 }
@@ -38914,7 +38914,7 @@ pub fn serializeModifyVerifiedAccessNativeApplicationOidcOptions(alloc: std.mem.
 pub fn serializeModifyVerifiedAccessTrustProviderDeviceOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessTrustProviderDeviceOptions) !void {
     if (value.public_signing_key_url) |v| {
         try buf.appendSlice(alloc, "<PublicSigningKeyUrl>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PublicSigningKeyUrl>");
     }
 }
@@ -38922,37 +38922,37 @@ pub fn serializeModifyVerifiedAccessTrustProviderDeviceOptions(alloc: std.mem.Al
 pub fn serializeModifyVerifiedAccessTrustProviderOidcOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVerifiedAccessTrustProviderOidcOptions) !void {
     if (value.authorization_endpoint) |v| {
         try buf.appendSlice(alloc, "<AuthorizationEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AuthorizationEndpoint>");
     }
     if (value.client_id) |v| {
         try buf.appendSlice(alloc, "<ClientId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientId>");
     }
     if (value.client_secret) |v| {
         try buf.appendSlice(alloc, "<ClientSecret>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ClientSecret>");
     }
     if (value.issuer) |v| {
         try buf.appendSlice(alloc, "<Issuer>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Issuer>");
     }
     if (value.scope) |v| {
         try buf.appendSlice(alloc, "<Scope>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Scope>");
     }
     if (value.token_endpoint) |v| {
         try buf.appendSlice(alloc, "<TokenEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TokenEndpoint>");
     }
     if (value.user_info_endpoint) |v| {
         try buf.appendSlice(alloc, "<UserInfoEndpoint>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</UserInfoEndpoint>");
     }
 }
@@ -38960,7 +38960,7 @@ pub fn serializeModifyVerifiedAccessTrustProviderOidcOptions(alloc: std.mem.Allo
 pub fn serializeModifyVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ModifyVpnTunnelOptionsSpecification) !void {
     if (value.dpd_timeout_action) |v| {
         try buf.appendSlice(alloc, "<DPDTimeoutAction>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DPDTimeoutAction>");
     }
     if (value.dpd_timeout_seconds) |v| {
@@ -39034,7 +39034,7 @@ pub fn serializeModifyVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, bu
     }
     if (value.pre_shared_key) |v| {
         try buf.appendSlice(alloc, "<PreSharedKey>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PreSharedKey>");
     }
     if (value.rekey_fuzz_percentage) |v| {
@@ -39063,17 +39063,17 @@ pub fn serializeModifyVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, bu
     }
     if (value.startup_action) |v| {
         try buf.appendSlice(alloc, "<StartupAction>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</StartupAction>");
     }
     if (value.tunnel_inside_cidr) |v| {
         try buf.appendSlice(alloc, "<TunnelInsideCidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TunnelInsideCidr>");
     }
     if (value.tunnel_inside_ipv_6_cidr) |v| {
         try buf.appendSlice(alloc, "<TunnelInsideIpv6Cidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TunnelInsideIpv6Cidr>");
     }
 }
@@ -39119,7 +39119,7 @@ pub fn serializeNetworkBandwidthGbpsRequest(alloc: std.mem.Allocator, buf: *std.
 pub fn serializeNetworkInterfaceAttachmentChanges(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NetworkInterfaceAttachmentChanges) !void {
     if (value.attachment_id) |v| {
         try buf.appendSlice(alloc, "<attachmentId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</attachmentId>");
     }
     if (value.default_ena_queue_count) |v| {
@@ -39183,7 +39183,7 @@ pub fn serializeNetworkInterfaceCountRequest(alloc: std.mem.Allocator, buf: *std
 pub fn serializeNewDhcpConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: NewDhcpConfiguration) !void {
     if (value.key) |v| {
         try buf.appendSlice(alloc, "<key>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</key>");
     }
     if (value.values) |v| {
@@ -39206,7 +39206,7 @@ pub fn serializeOnDemandOptionsRequest(alloc: std.mem.Allocator, buf: *std.Array
     }
     if (value.max_total_price) |v| {
         try buf.appendSlice(alloc, "<MaxTotalPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</MaxTotalPrice>");
     }
     if (value.min_target_capacity) |v| {
@@ -39232,7 +39232,7 @@ pub fn serializeOnDemandOptionsRequest(alloc: std.mem.Allocator, buf: *std.Array
 pub fn serializeOperatorRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OperatorRequest) !void {
     if (value.principal) |v| {
         try buf.appendSlice(alloc, "<Principal>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Principal>");
     }
 }
@@ -39278,7 +39278,7 @@ pub fn serializePacketHeaderStatementRequest(alloc: std.mem.Allocator, buf: *std
 pub fn serializePathRequestFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PathRequestFilter) !void {
     if (value.destination_address) |v| {
         try buf.appendSlice(alloc, "<DestinationAddress>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DestinationAddress>");
     }
     if (value.destination_port_range) |v| {
@@ -39288,7 +39288,7 @@ pub fn serializePathRequestFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(
     }
     if (value.source_address) |v| {
         try buf.appendSlice(alloc, "<SourceAddress>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SourceAddress>");
     }
     if (value.source_port_range) |v| {
@@ -39332,7 +39332,7 @@ pub fn serializePeeringConnectionOptionsRequest(alloc: std.mem.Allocator, buf: *
 pub fn serializePerformanceFactorReference(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PerformanceFactorReference) !void {
     if (value.instance_family) |v| {
         try buf.appendSlice(alloc, "<instanceFamily>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</instanceFamily>");
     }
 }
@@ -39340,7 +39340,7 @@ pub fn serializePerformanceFactorReference(alloc: std.mem.Allocator, buf: *std.A
 pub fn serializePerformanceFactorReferenceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PerformanceFactorReferenceRequest) !void {
     if (value.instance_family) |v| {
         try buf.appendSlice(alloc, "<InstanceFamily>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</InstanceFamily>");
     }
 }
@@ -39359,7 +39359,7 @@ pub fn serializePhase1DHGroupNumbersRequestListValue(alloc: std.mem.Allocator, b
 pub fn serializePhase1EncryptionAlgorithmsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase1EncryptionAlgorithmsRequestListValue) !void {
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<Value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Value>");
     }
 }
@@ -39367,7 +39367,7 @@ pub fn serializePhase1EncryptionAlgorithmsRequestListValue(alloc: std.mem.Alloca
 pub fn serializePhase1IntegrityAlgorithmsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase1IntegrityAlgorithmsRequestListValue) !void {
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<Value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Value>");
     }
 }
@@ -39386,7 +39386,7 @@ pub fn serializePhase2DHGroupNumbersRequestListValue(alloc: std.mem.Allocator, b
 pub fn serializePhase2EncryptionAlgorithmsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase2EncryptionAlgorithmsRequestListValue) !void {
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<Value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Value>");
     }
 }
@@ -39394,7 +39394,7 @@ pub fn serializePhase2EncryptionAlgorithmsRequestListValue(alloc: std.mem.Alloca
 pub fn serializePhase2IntegrityAlgorithmsRequestListValue(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Phase2IntegrityAlgorithmsRequestListValue) !void {
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<Value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Value>");
     }
 }
@@ -39402,37 +39402,37 @@ pub fn serializePhase2IntegrityAlgorithmsRequestListValue(alloc: std.mem.Allocat
 pub fn serializePlacement(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Placement) !void {
     if (value.affinity) |v| {
         try buf.appendSlice(alloc, "<affinity>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</affinity>");
     }
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<availabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<availabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZoneId>");
     }
     if (value.group_id) |v| {
         try buf.appendSlice(alloc, "<groupId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</groupId>");
     }
     if (value.group_name) |v| {
         try buf.appendSlice(alloc, "<groupName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</groupName>");
     }
     if (value.host_id) |v| {
         try buf.appendSlice(alloc, "<hostId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</hostId>");
     }
     if (value.host_resource_group_arn) |v| {
         try buf.appendSlice(alloc, "<hostResourceGroupArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</hostResourceGroupArn>");
     }
     if (value.partition_number) |v| {
@@ -39445,7 +39445,7 @@ pub fn serializePlacement(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), val
     }
     if (value.spread_domain) |v| {
         try buf.appendSlice(alloc, "<spreadDomain>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</spreadDomain>");
     }
     if (value.tenancy) |v| {
@@ -39477,12 +39477,12 @@ pub fn serializePortRange(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), val
 pub fn serializePrefixListId(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PrefixListId) !void {
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</description>");
     }
     if (value.prefix_list_id) |v| {
         try buf.appendSlice(alloc, "<prefixListId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</prefixListId>");
     }
 }
@@ -39537,7 +39537,7 @@ pub fn serializePrivateIpAddressSpecification(alloc: std.mem.Allocator, buf: *st
     }
     if (value.private_ip_address) |v| {
         try buf.appendSlice(alloc, "<privateIpAddress>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</privateIpAddress>");
     }
 }
@@ -39550,7 +39550,7 @@ pub fn serializePurchaseRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
     }
     try buf.appendSlice(alloc, "</InstanceCount>");
     try buf.appendSlice(alloc, "<PurchaseToken>");
-    try appendXmlEscaped(alloc, buf, value.purchase_token);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.purchase_token);
     try buf.appendSlice(alloc, "</PurchaseToken>");
 }
 
@@ -39570,7 +39570,7 @@ pub fn serializeRegisterInstanceTagAttributeRequest(alloc: std.mem.Allocator, bu
 pub fn serializeRemoveIpamOperatingRegion(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RemoveIpamOperatingRegion) !void {
     if (value.region_name) |v| {
         try buf.appendSlice(alloc, "<RegionName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RegionName>");
     }
 }
@@ -39578,14 +39578,14 @@ pub fn serializeRemoveIpamOperatingRegion(alloc: std.mem.Allocator, buf: *std.Ar
 pub fn serializeRemoveIpamOrganizationalUnitExclusion(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RemoveIpamOrganizationalUnitExclusion) !void {
     if (value.organizations_entity_path) |v| {
         try buf.appendSlice(alloc, "<OrganizationsEntityPath>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</OrganizationsEntityPath>");
     }
 }
 
 pub fn serializeRemovePrefixListEntry(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RemovePrefixListEntry) !void {
     try buf.appendSlice(alloc, "<Cidr>");
-    try appendXmlEscaped(alloc, buf, value.cidr);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.cidr);
     try buf.appendSlice(alloc, "</Cidr>");
 }
 
@@ -39611,12 +39611,12 @@ pub fn serializeRequestFilterPortRange(alloc: std.mem.Allocator, buf: *std.Array
 pub fn serializeRequestIpamResourceTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RequestIpamResourceTag) !void {
     if (value.key) |v| {
         try buf.appendSlice(alloc, "<Key>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Key>");
     }
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<Value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Value>");
     }
 }
@@ -39684,7 +39684,7 @@ pub fn serializeRequestLaunchTemplateData(alloc: std.mem.Allocator, buf: *std.Ar
     }
     if (value.image_id) |v| {
         try buf.appendSlice(alloc, "<ImageId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ImageId>");
     }
     if (value.instance_initiated_shutdown_behavior) |v| {
@@ -39709,12 +39709,12 @@ pub fn serializeRequestLaunchTemplateData(alloc: std.mem.Allocator, buf: *std.Ar
     }
     if (value.kernel_id) |v| {
         try buf.appendSlice(alloc, "<KernelId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</KernelId>");
     }
     if (value.key_name) |v| {
         try buf.appendSlice(alloc, "<KeyName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</KeyName>");
     }
     if (value.license_specifications) |v| {
@@ -39764,7 +39764,7 @@ pub fn serializeRequestLaunchTemplateData(alloc: std.mem.Allocator, buf: *std.Ar
     }
     if (value.ram_disk_id) |v| {
         try buf.appendSlice(alloc, "<RamDiskId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RamDiskId>");
     }
     if (value.security_group_ids) |v| {
@@ -39784,7 +39784,7 @@ pub fn serializeRequestLaunchTemplateData(alloc: std.mem.Allocator, buf: *std.Ar
     }
     if (value.user_data) |v| {
         try buf.appendSlice(alloc, "<UserData>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</UserData>");
     }
 }
@@ -39792,7 +39792,7 @@ pub fn serializeRequestLaunchTemplateData(alloc: std.mem.Allocator, buf: *std.Ar
 pub fn serializeRequestSpotLaunchSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: RequestSpotLaunchSpecification) !void {
     if (value.addressing_type) |v| {
         try buf.appendSlice(alloc, "<addressingType>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</addressingType>");
     }
     if (value.block_device_mappings) |v| {
@@ -39812,7 +39812,7 @@ pub fn serializeRequestSpotLaunchSpecification(alloc: std.mem.Allocator, buf: *s
     }
     if (value.image_id) |v| {
         try buf.appendSlice(alloc, "<imageId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</imageId>");
     }
     if (value.instance_type) |v| {
@@ -39822,12 +39822,12 @@ pub fn serializeRequestSpotLaunchSpecification(alloc: std.mem.Allocator, buf: *s
     }
     if (value.kernel_id) |v| {
         try buf.appendSlice(alloc, "<kernelId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</kernelId>");
     }
     if (value.key_name) |v| {
         try buf.appendSlice(alloc, "<keyName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</keyName>");
     }
     if (value.monitoring) |v| {
@@ -39847,7 +39847,7 @@ pub fn serializeRequestSpotLaunchSpecification(alloc: std.mem.Allocator, buf: *s
     }
     if (value.ramdisk_id) |v| {
         try buf.appendSlice(alloc, "<ramdiskId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ramdiskId>");
     }
     if (value.security_group_ids) |v| {
@@ -39862,12 +39862,12 @@ pub fn serializeRequestSpotLaunchSpecification(alloc: std.mem.Allocator, buf: *s
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<subnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</subnetId>");
     }
     if (value.user_data) |v| {
         try buf.appendSlice(alloc, "<userData>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</userData>");
     }
 }
@@ -39875,12 +39875,12 @@ pub fn serializeRequestSpotLaunchSpecification(alloc: std.mem.Allocator, buf: *s
 pub fn serializeReservationFleetInstanceSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReservationFleetInstanceSpecification) !void {
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZoneId>");
     }
     if (value.ebs_optimized) |v| {
@@ -39935,12 +39935,12 @@ pub fn serializeReservedInstanceLimitPrice(alloc: std.mem.Allocator, buf: *std.A
 pub fn serializeReservedInstancesConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReservedInstancesConfiguration) !void {
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<availabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<availabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZoneId>");
     }
     if (value.instance_count) |v| {
@@ -39958,7 +39958,7 @@ pub fn serializeReservedInstancesConfiguration(alloc: std.mem.Allocator, buf: *s
     }
     if (value.platform) |v| {
         try buf.appendSlice(alloc, "<platform>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</platform>");
     }
     if (value.scope) |v| {
@@ -40030,12 +40030,12 @@ pub fn serializeRunInstancesMonitoringEnabled(alloc: std.mem.Allocator, buf: *st
 pub fn serializeS3ObjectTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3ObjectTag) !void {
     if (value.key) |v| {
         try buf.appendSlice(alloc, "<Key>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Key>");
     }
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<Value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Value>");
     }
 }
@@ -40043,22 +40043,22 @@ pub fn serializeS3ObjectTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), v
 pub fn serializeS3Storage(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3Storage) !void {
     if (value.aws_access_key_id) |v| {
         try buf.appendSlice(alloc, "<AWSAccessKeyId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AWSAccessKeyId>");
     }
     if (value.bucket) |v| {
         try buf.appendSlice(alloc, "<bucket>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</bucket>");
     }
     if (value.prefix) |v| {
         try buf.appendSlice(alloc, "<prefix>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</prefix>");
     }
     if (value.upload_policy_signature) |v| {
         try buf.appendSlice(alloc, "<uploadPolicySignature>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</uploadPolicySignature>");
     }
 }
@@ -40066,7 +40066,7 @@ pub fn serializeS3Storage(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), val
 pub fn serializeScheduledInstanceRecurrenceRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstanceRecurrenceRequest) !void {
     if (value.frequency) |v| {
         try buf.appendSlice(alloc, "<Frequency>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Frequency>");
     }
     if (value.interval) |v| {
@@ -40089,7 +40089,7 @@ pub fn serializeScheduledInstanceRecurrenceRequest(alloc: std.mem.Allocator, buf
     }
     if (value.occurrence_unit) |v| {
         try buf.appendSlice(alloc, "<OccurrenceUnit>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</OccurrenceUnit>");
     }
 }
@@ -40097,7 +40097,7 @@ pub fn serializeScheduledInstanceRecurrenceRequest(alloc: std.mem.Allocator, buf
 pub fn serializeScheduledInstancesBlockDeviceMapping(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesBlockDeviceMapping) !void {
     if (value.device_name) |v| {
         try buf.appendSlice(alloc, "<DeviceName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DeviceName>");
     }
     if (value.ebs) |v| {
@@ -40107,12 +40107,12 @@ pub fn serializeScheduledInstancesBlockDeviceMapping(alloc: std.mem.Allocator, b
     }
     if (value.no_device) |v| {
         try buf.appendSlice(alloc, "<NoDevice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</NoDevice>");
     }
     if (value.virtual_name) |v| {
         try buf.appendSlice(alloc, "<VirtualName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</VirtualName>");
     }
 }
@@ -40138,7 +40138,7 @@ pub fn serializeScheduledInstancesEbs(alloc: std.mem.Allocator, buf: *std.ArrayL
     }
     if (value.snapshot_id) |v| {
         try buf.appendSlice(alloc, "<SnapshotId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SnapshotId>");
     }
     if (value.volume_size) |v| {
@@ -40151,7 +40151,7 @@ pub fn serializeScheduledInstancesEbs(alloc: std.mem.Allocator, buf: *std.ArrayL
     }
     if (value.volume_type) |v| {
         try buf.appendSlice(alloc, "<VolumeType>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</VolumeType>");
     }
 }
@@ -40159,12 +40159,12 @@ pub fn serializeScheduledInstancesEbs(alloc: std.mem.Allocator, buf: *std.ArrayL
 pub fn serializeScheduledInstancesIamInstanceProfile(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesIamInstanceProfile) !void {
     if (value.arn) |v| {
         try buf.appendSlice(alloc, "<Arn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Arn>");
     }
     if (value.name) |v| {
         try buf.appendSlice(alloc, "<Name>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Name>");
     }
 }
@@ -40172,7 +40172,7 @@ pub fn serializeScheduledInstancesIamInstanceProfile(alloc: std.mem.Allocator, b
 pub fn serializeScheduledInstancesIpv6Address(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesIpv6Address) !void {
     if (value.ipv_6_address) |v| {
         try buf.appendSlice(alloc, "<Ipv6Address>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Ipv6Address>");
     }
 }
@@ -40194,21 +40194,21 @@ pub fn serializeScheduledInstancesLaunchSpecification(alloc: std.mem.Allocator, 
         try buf.appendSlice(alloc, "</IamInstanceProfile>");
     }
     try buf.appendSlice(alloc, "<ImageId>");
-    try appendXmlEscaped(alloc, buf, value.image_id);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.image_id);
     try buf.appendSlice(alloc, "</ImageId>");
     if (value.instance_type) |v| {
         try buf.appendSlice(alloc, "<InstanceType>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</InstanceType>");
     }
     if (value.kernel_id) |v| {
         try buf.appendSlice(alloc, "<KernelId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</KernelId>");
     }
     if (value.key_name) |v| {
         try buf.appendSlice(alloc, "<KeyName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</KeyName>");
     }
     if (value.monitoring) |v| {
@@ -40228,7 +40228,7 @@ pub fn serializeScheduledInstancesLaunchSpecification(alloc: std.mem.Allocator, 
     }
     if (value.ramdisk_id) |v| {
         try buf.appendSlice(alloc, "<RamdiskId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RamdiskId>");
     }
     if (value.security_group_ids) |v| {
@@ -40238,12 +40238,12 @@ pub fn serializeScheduledInstancesLaunchSpecification(alloc: std.mem.Allocator, 
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<SubnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SubnetId>");
     }
     if (value.user_data) |v| {
         try buf.appendSlice(alloc, "<UserData>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</UserData>");
     }
 }
@@ -40269,7 +40269,7 @@ pub fn serializeScheduledInstancesNetworkInterface(alloc: std.mem.Allocator, buf
     }
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<Description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Description>");
     }
     if (value.device_index) |v| {
@@ -40300,12 +40300,12 @@ pub fn serializeScheduledInstancesNetworkInterface(alloc: std.mem.Allocator, buf
     }
     if (value.network_interface_id) |v| {
         try buf.appendSlice(alloc, "<NetworkInterfaceId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</NetworkInterfaceId>");
     }
     if (value.private_ip_address) |v| {
         try buf.appendSlice(alloc, "<PrivateIpAddress>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PrivateIpAddress>");
     }
     if (value.private_ip_address_configs) |v| {
@@ -40323,7 +40323,7 @@ pub fn serializeScheduledInstancesNetworkInterface(alloc: std.mem.Allocator, buf
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<SubnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SubnetId>");
     }
 }
@@ -40331,12 +40331,12 @@ pub fn serializeScheduledInstancesNetworkInterface(alloc: std.mem.Allocator, buf
 pub fn serializeScheduledInstancesPlacement(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledInstancesPlacement) !void {
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<AvailabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</AvailabilityZone>");
     }
     if (value.group_name) |v| {
         try buf.appendSlice(alloc, "<GroupName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</GroupName>");
     }
 }
@@ -40349,7 +40349,7 @@ pub fn serializeScheduledInstancesPrivateIpAddressConfig(alloc: std.mem.Allocato
     }
     if (value.private_ip_address) |v| {
         try buf.appendSlice(alloc, "<PrivateIpAddress>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PrivateIpAddress>");
     }
 }
@@ -40357,12 +40357,12 @@ pub fn serializeScheduledInstancesPrivateIpAddressConfig(alloc: std.mem.Allocato
 pub fn serializeSecurityGroupRuleDescription(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SecurityGroupRuleDescription) !void {
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<Description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Description>");
     }
     if (value.security_group_rule_id) |v| {
         try buf.appendSlice(alloc, "<SecurityGroupRuleId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SecurityGroupRuleId>");
     }
 }
@@ -40370,17 +40370,17 @@ pub fn serializeSecurityGroupRuleDescription(alloc: std.mem.Allocator, buf: *std
 pub fn serializeSecurityGroupRuleRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SecurityGroupRuleRequest) !void {
     if (value.cidr_ipv_4) |v| {
         try buf.appendSlice(alloc, "<CidrIpv4>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</CidrIpv4>");
     }
     if (value.cidr_ipv_6) |v| {
         try buf.appendSlice(alloc, "<CidrIpv6>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</CidrIpv6>");
     }
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<Description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Description>");
     }
     if (value.from_port) |v| {
@@ -40393,17 +40393,17 @@ pub fn serializeSecurityGroupRuleRequest(alloc: std.mem.Allocator, buf: *std.Arr
     }
     if (value.ip_protocol) |v| {
         try buf.appendSlice(alloc, "<IpProtocol>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</IpProtocol>");
     }
     if (value.prefix_list_id) |v| {
         try buf.appendSlice(alloc, "<PrefixListId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PrefixListId>");
     }
     if (value.referenced_group_id) |v| {
         try buf.appendSlice(alloc, "<ReferencedGroupId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ReferencedGroupId>");
     }
     if (value.to_port) |v| {
@@ -40423,7 +40423,7 @@ pub fn serializeSecurityGroupRuleUpdate(alloc: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(alloc, "</SecurityGroupRule>");
     }
     try buf.appendSlice(alloc, "<SecurityGroupRuleId>");
-    try appendXmlEscaped(alloc, buf, value.security_group_rule_id);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.security_group_rule_id);
     try buf.appendSlice(alloc, "</SecurityGroupRuleId>");
 }
 
@@ -40464,17 +40464,17 @@ pub fn serializeSlotStartTimeRangeRequest(alloc: std.mem.Allocator, buf: *std.Ar
 pub fn serializeSnapshotDiskContainer(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SnapshotDiskContainer) !void {
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<Description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Description>");
     }
     if (value.format) |v| {
         try buf.appendSlice(alloc, "<Format>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Format>");
     }
     if (value.url) |v| {
         try buf.appendSlice(alloc, "<Url>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Url>");
     }
     if (value.user_bucket) |v| {
@@ -40503,7 +40503,7 @@ pub fn serializeSpotCapacityRebalance(alloc: std.mem.Allocator, buf: *std.ArrayL
 pub fn serializeSpotFleetLaunchSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotFleetLaunchSpecification) !void {
     if (value.addressing_type) |v| {
         try buf.appendSlice(alloc, "<addressingType>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</addressingType>");
     }
     if (value.block_device_mappings) |v| {
@@ -40523,7 +40523,7 @@ pub fn serializeSpotFleetLaunchSpecification(alloc: std.mem.Allocator, buf: *std
     }
     if (value.image_id) |v| {
         try buf.appendSlice(alloc, "<imageId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</imageId>");
     }
     if (value.instance_requirements) |v| {
@@ -40538,12 +40538,12 @@ pub fn serializeSpotFleetLaunchSpecification(alloc: std.mem.Allocator, buf: *std
     }
     if (value.kernel_id) |v| {
         try buf.appendSlice(alloc, "<kernelId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</kernelId>");
     }
     if (value.key_name) |v| {
         try buf.appendSlice(alloc, "<keyName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</keyName>");
     }
     if (value.monitoring) |v| {
@@ -40563,7 +40563,7 @@ pub fn serializeSpotFleetLaunchSpecification(alloc: std.mem.Allocator, buf: *std
     }
     if (value.ramdisk_id) |v| {
         try buf.appendSlice(alloc, "<ramdiskId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ramdiskId>");
     }
     if (value.security_groups) |v| {
@@ -40573,12 +40573,12 @@ pub fn serializeSpotFleetLaunchSpecification(alloc: std.mem.Allocator, buf: *std
     }
     if (value.spot_price) |v| {
         try buf.appendSlice(alloc, "<spotPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</spotPrice>");
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<subnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</subnetId>");
     }
     if (value.tag_specifications) |v| {
@@ -40588,7 +40588,7 @@ pub fn serializeSpotFleetLaunchSpecification(alloc: std.mem.Allocator, buf: *std
     }
     if (value.user_data) |v| {
         try buf.appendSlice(alloc, "<userData>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</userData>");
     }
     if (value.weighted_capacity) |v| {
@@ -40617,12 +40617,12 @@ pub fn serializeSpotFleetRequestConfigData(alloc: std.mem.Allocator, buf: *std.A
     }
     if (value.client_token) |v| {
         try buf.appendSlice(alloc, "<clientToken>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</clientToken>");
     }
     if (value.context) |v| {
         try buf.appendSlice(alloc, "<context>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</context>");
     }
     if (value.excess_capacity_termination_policy) |v| {
@@ -40639,7 +40639,7 @@ pub fn serializeSpotFleetRequestConfigData(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "</fulfilledCapacity>");
     }
     try buf.appendSlice(alloc, "<iamFleetRole>");
-    try appendXmlEscaped(alloc, buf, value.iam_fleet_role);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.iam_fleet_role);
     try buf.appendSlice(alloc, "</iamFleetRole>");
     if (value.instance_interruption_behavior) |v| {
         try buf.appendSlice(alloc, "<instanceInterruptionBehavior>");
@@ -40684,7 +40684,7 @@ pub fn serializeSpotFleetRequestConfigData(alloc: std.mem.Allocator, buf: *std.A
     }
     if (value.on_demand_max_total_price) |v| {
         try buf.appendSlice(alloc, "<onDemandMaxTotalPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</onDemandMaxTotalPrice>");
     }
     if (value.on_demand_target_capacity) |v| {
@@ -40707,12 +40707,12 @@ pub fn serializeSpotFleetRequestConfigData(alloc: std.mem.Allocator, buf: *std.A
     }
     if (value.spot_max_total_price) |v| {
         try buf.appendSlice(alloc, "<spotMaxTotalPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</spotMaxTotalPrice>");
     }
     if (value.spot_price) |v| {
         try buf.appendSlice(alloc, "<spotPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</spotPrice>");
     }
     if (value.tag_specifications) |v| {
@@ -40796,7 +40796,7 @@ pub fn serializeSpotMarketOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(
     }
     if (value.max_price) |v| {
         try buf.appendSlice(alloc, "<MaxPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</MaxPrice>");
     }
     if (value.spot_instance_type) |v| {
@@ -40840,7 +40840,7 @@ pub fn serializeSpotOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList
     }
     if (value.max_total_price) |v| {
         try buf.appendSlice(alloc, "<MaxTotalPrice>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</MaxTotalPrice>");
     }
     if (value.min_target_capacity) |v| {
@@ -40866,17 +40866,17 @@ pub fn serializeSpotOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayList
 pub fn serializeSpotPlacement(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SpotPlacement) !void {
     if (value.availability_zone) |v| {
         try buf.appendSlice(alloc, "<availabilityZone>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZone>");
     }
     if (value.availability_zone_id) |v| {
         try buf.appendSlice(alloc, "<availabilityZoneId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</availabilityZoneId>");
     }
     if (value.group_name) |v| {
         try buf.appendSlice(alloc, "<groupName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</groupName>");
     }
     if (value.tenancy) |v| {
@@ -40897,12 +40897,12 @@ pub fn serializeStorage(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value
 pub fn serializeStorageLocation(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: StorageLocation) !void {
     if (value.bucket) |v| {
         try buf.appendSlice(alloc, "<Bucket>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Bucket>");
     }
     if (value.key) |v| {
         try buf.appendSlice(alloc, "<Key>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Key>");
     }
 }
@@ -40910,17 +40910,17 @@ pub fn serializeStorageLocation(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
 pub fn serializeSubnetConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: SubnetConfiguration) !void {
     if (value.ipv_4) |v| {
         try buf.appendSlice(alloc, "<Ipv4>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Ipv4>");
     }
     if (value.ipv_6) |v| {
         try buf.appendSlice(alloc, "<Ipv6>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Ipv6>");
     }
     if (value.subnet_id) |v| {
         try buf.appendSlice(alloc, "<SubnetId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</SubnetId>");
     }
 }
@@ -40928,12 +40928,12 @@ pub fn serializeSubnetConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayLis
 pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {
     if (value.key) |v| {
         try buf.appendSlice(alloc, "<key>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</key>");
     }
     if (value.value) |v| {
         try buf.appendSlice(alloc, "<value>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</value>");
     }
 }
@@ -40996,14 +40996,14 @@ pub fn serializeTargetConfigurationRequest(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, "</InstanceCount>");
     }
     try buf.appendSlice(alloc, "<OfferingId>");
-    try appendXmlEscaped(alloc, buf, value.offering_id);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.offering_id);
     try buf.appendSlice(alloc, "</OfferingId>");
 }
 
 pub fn serializeTargetGroup(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetGroup) !void {
     if (value.arn) |v| {
         try buf.appendSlice(alloc, "<arn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</arn>");
     }
 }
@@ -41146,12 +41146,12 @@ pub fn serializeTransitGatewayRequestOptions(alloc: std.mem.Allocator, buf: *std
 pub fn serializeUserBucket(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: UserBucket) !void {
     if (value.s_3_bucket) |v| {
         try buf.appendSlice(alloc, "<S3Bucket>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3Bucket>");
     }
     if (value.s_3_key) |v| {
         try buf.appendSlice(alloc, "<S3Key>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3Key>");
     }
 }
@@ -41159,7 +41159,7 @@ pub fn serializeUserBucket(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), va
 pub fn serializeUserData(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: UserData) !void {
     if (value.data) |v| {
         try buf.appendSlice(alloc, "<data>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</data>");
     }
 }
@@ -41167,37 +41167,37 @@ pub fn serializeUserData(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), valu
 pub fn serializeUserIdGroupPair(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: UserIdGroupPair) !void {
     if (value.description) |v| {
         try buf.appendSlice(alloc, "<description>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</description>");
     }
     if (value.group_id) |v| {
         try buf.appendSlice(alloc, "<groupId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</groupId>");
     }
     if (value.group_name) |v| {
         try buf.appendSlice(alloc, "<groupName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</groupName>");
     }
     if (value.peering_status) |v| {
         try buf.appendSlice(alloc, "<peeringStatus>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</peeringStatus>");
     }
     if (value.user_id) |v| {
         try buf.appendSlice(alloc, "<userId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</userId>");
     }
     if (value.vpc_id) |v| {
         try buf.appendSlice(alloc, "<vpcId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</vpcId>");
     }
     if (value.vpc_peering_connection_id) |v| {
         try buf.appendSlice(alloc, "<vpcPeeringConnectionId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</vpcPeeringConnectionId>");
     }
 }
@@ -41244,7 +41244,7 @@ pub fn serializeVerifiedAccessLogCloudWatchLogsDestinationOptions(alloc: std.mem
     try buf.appendSlice(alloc, "</Enabled>");
     if (value.log_group) |v| {
         try buf.appendSlice(alloc, "<LogGroup>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LogGroup>");
     }
 }
@@ -41252,7 +41252,7 @@ pub fn serializeVerifiedAccessLogCloudWatchLogsDestinationOptions(alloc: std.mem
 pub fn serializeVerifiedAccessLogKinesisDataFirehoseDestinationOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VerifiedAccessLogKinesisDataFirehoseDestinationOptions) !void {
     if (value.delivery_stream) |v| {
         try buf.appendSlice(alloc, "<DeliveryStream>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DeliveryStream>");
     }
     try buf.appendSlice(alloc, "<Enabled>");
@@ -41278,7 +41278,7 @@ pub fn serializeVerifiedAccessLogOptions(alloc: std.mem.Allocator, buf: *std.Arr
     }
     if (value.log_version) |v| {
         try buf.appendSlice(alloc, "<LogVersion>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LogVersion>");
     }
     if (value.s_3) |v| {
@@ -41291,12 +41291,12 @@ pub fn serializeVerifiedAccessLogOptions(alloc: std.mem.Allocator, buf: *std.Arr
 pub fn serializeVerifiedAccessLogS3DestinationOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VerifiedAccessLogS3DestinationOptions) !void {
     if (value.bucket_name) |v| {
         try buf.appendSlice(alloc, "<BucketName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</BucketName>");
     }
     if (value.bucket_owner) |v| {
         try buf.appendSlice(alloc, "<BucketOwner>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</BucketOwner>");
     }
     try buf.appendSlice(alloc, "<Enabled>");
@@ -41304,7 +41304,7 @@ pub fn serializeVerifiedAccessLogS3DestinationOptions(alloc: std.mem.Allocator, 
     try buf.appendSlice(alloc, "</Enabled>");
     if (value.prefix) |v| {
         try buf.appendSlice(alloc, "<Prefix>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Prefix>");
     }
 }
@@ -41317,7 +41317,7 @@ pub fn serializeVerifiedAccessSseSpecificationRequest(alloc: std.mem.Allocator, 
     }
     if (value.kms_key_arn) |v| {
         try buf.appendSlice(alloc, "<KmsKeyArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</KmsKeyArn>");
     }
 }
@@ -41385,27 +41385,27 @@ pub fn serializeVpnConnectionOptionsSpecification(alloc: std.mem.Allocator, buf:
     }
     if (value.local_ipv_4_network_cidr) |v| {
         try buf.appendSlice(alloc, "<LocalIpv4NetworkCidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LocalIpv4NetworkCidr>");
     }
     if (value.local_ipv_6_network_cidr) |v| {
         try buf.appendSlice(alloc, "<LocalIpv6NetworkCidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LocalIpv6NetworkCidr>");
     }
     if (value.outside_ip_address_type) |v| {
         try buf.appendSlice(alloc, "<OutsideIpAddressType>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</OutsideIpAddressType>");
     }
     if (value.remote_ipv_4_network_cidr) |v| {
         try buf.appendSlice(alloc, "<RemoteIpv4NetworkCidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RemoteIpv4NetworkCidr>");
     }
     if (value.remote_ipv_6_network_cidr) |v| {
         try buf.appendSlice(alloc, "<RemoteIpv6NetworkCidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</RemoteIpv6NetworkCidr>");
     }
     if (value.static_routes_only) |v| {
@@ -41415,7 +41415,7 @@ pub fn serializeVpnConnectionOptionsSpecification(alloc: std.mem.Allocator, buf:
     }
     if (value.transport_transit_gateway_attachment_id) |v| {
         try buf.appendSlice(alloc, "<TransportTransitGatewayAttachmentId>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TransportTransitGatewayAttachmentId>");
     }
     if (value.tunnel_bandwidth) |v| {
@@ -41446,7 +41446,7 @@ pub fn serializeVpnTunnelLogOptionsSpecification(alloc: std.mem.Allocator, buf: 
 pub fn serializeVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VpnTunnelOptionsSpecification) !void {
     if (value.dpd_timeout_action) |v| {
         try buf.appendSlice(alloc, "<DPDTimeoutAction>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</DPDTimeoutAction>");
     }
     if (value.dpd_timeout_seconds) |v| {
@@ -41520,7 +41520,7 @@ pub fn serializeVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, buf: *st
     }
     if (value.pre_shared_key) |v| {
         try buf.appendSlice(alloc, "<PreSharedKey>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PreSharedKey>");
     }
     if (value.rekey_fuzz_percentage) |v| {
@@ -41549,28 +41549,18 @@ pub fn serializeVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, buf: *st
     }
     if (value.startup_action) |v| {
         try buf.appendSlice(alloc, "<StartupAction>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</StartupAction>");
     }
     if (value.tunnel_inside_cidr) |v| {
         try buf.appendSlice(alloc, "<TunnelInsideCidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TunnelInsideCidr>");
     }
     if (value.tunnel_inside_ipv_6_cidr) |v| {
         try buf.appendSlice(alloc, "<TunnelInsideIpv6Cidr>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</TunnelInsideIpv6Cidr>");
     }
 }
 
-fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            '&' => try buf.appendSlice(alloc, "&amp;"),
-            '<' => try buf.appendSlice(alloc, "&lt;"),
-            '>' => try buf.appendSlice(alloc, "&gt;"),
-            else => try buf.append(alloc, c),
-        }
-    }
-}

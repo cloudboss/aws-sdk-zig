@@ -29,9 +29,9 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.blankLine()
 
         // Parse host from endpoint
-        writer.write("const host = parseHost(endpoint);")
+        writer.write("const host = aws.url.parseHost(endpoint);")
         writer.write("const tls = !std.mem.startsWith(u8, endpoint, \"http://\");")
-        writer.write("const port = parsePort(endpoint);")
+        writer.write("const port = aws.url.parsePort(endpoint);")
         writer.blankLine()
 
         // Build JSON body
@@ -85,7 +85,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
         // Extract error code from __type, stripping namespace prefix
         writer.openBlock("const error_code = blk: {")
-        writer.write("const type_str = findJsonValue(body, \"__type\") orelse break :blk @as([]const u8, \"Unknown\");")
+        writer.write("const type_str = aws.json.findJsonValue(body, \"__type\") orelse break :blk @as([]const u8, \"Unknown\");")
         writer.openBlock("if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {")
         writer.write("break :blk type_str[idx + 1 ..];")
         writer.closeBlock("}")
@@ -93,7 +93,7 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.closeBlock("};")
 
         // Extract error message (try both "message" and "Message")
-        writer.write("const error_message = findJsonValue(body, \"message\") orelse findJsonValue(body, \"Message\") orelse \"\";")
+        writer.write("const error_message = aws.json.findJsonValue(body, \"message\") orelse aws.json.findJsonValue(body, \"Message\") orelse \"\";")
         writer.blankLine()
 
         // Match error codes to ServiceError variants
@@ -114,75 +114,6 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.write("    .http_status = status,")
         writer.write("} };")
 
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        // Helper functions
-        writeJsonHelperFunctions(writer)
-    }
-
-    private fun writeJsonHelperFunctions(writer: ZigWriter) {
-        writeFindJsonValueHelper(writer)
-        writer.blankLine()
-        writeHostParseHelpers(writer)
-    }
-
-    private fun writeFindJsonValueHelper(writer: ZigWriter) {
-        // Generates a simple JSON value finder that searches for "key": value
-        // Uses 0x22 for double-quote char to avoid Kotlin/Zig escaping issues
-        writer.openBlock("fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {")
-        writer.write("// Build search pattern: \"key\"")
-        writer.write("var buf: [258]u8 = undefined;")
-        writer.write("if (key.len + 2 > buf.len) return null;")
-        writer.write("buf[0] = 0x22; // double-quote")
-        writer.write("@memcpy(buf[1..][0..key.len], key);")
-        writer.write("buf[key.len + 1] = 0x22; // double-quote")
-        writer.write("const search = buf[0 .. key.len + 2];")
-        writer.write("const key_start = std.mem.indexOf(u8, json, search) orelse return null;")
-        writer.write("var pos = key_start + search.len;")
-        writer.blankLine()
-
-        // Skip whitespace and colon
-        writer.write("// Skip whitespace and colon")
-        writer.openBlock("while (pos < json.len) : (pos += 1) {")
-        writer.write("if (json[pos] != ' ' and json[pos] != ':') break;")
-        writer.closeBlock("}")
-        writer.write("if (pos >= json.len) return null;")
-        writer.blankLine()
-
-        // String value - check for 0x22 (double-quote)
-        writer.openBlock("if (json[pos] == 0x22) {")
-        writer.write("const start = pos + 1;")
-        writer.write("const end = std.mem.indexOfScalarPos(u8, json, start, 0x22) orelse return null;")
-        writer.write("return json[start..end];")
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        // Boolean or number - read until delimiter
-        writer.write("const start = pos;")
-        writer.openBlock("while (pos < json.len) : (pos += 1) {")
-        writer.write("if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;")
-        writer.closeBlock("}")
-        writer.write("return json[start..pos];")
-
-        writer.closeBlock("}")
-    }
-
-    private fun writeHostParseHelpers(writer: ZigWriter) {
-        writer.openBlock("fn parseHost(endpoint: []const u8) []const u8 {")
-        writer.write("// Strip scheme")
-        writer.write("const after_scheme = if (std.mem.indexOf(u8, endpoint, \"://\")) |idx| endpoint[idx + 3 ..] else endpoint;")
-        writer.write("// Strip port and path")
-        writer.write("const end = std.mem.indexOfAny(u8, after_scheme, \":/\") orelse after_scheme.len;")
-        writer.write("return after_scheme[0..end];")
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        writer.openBlock("fn parsePort(endpoint: []const u8) ?u16 {")
-        writer.write("const after_scheme = if (std.mem.indexOf(u8, endpoint, \"://\")) |idx| endpoint[idx + 3 ..] else endpoint;")
-        writer.write("const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;")
-        writer.write("const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;")
-        writer.write("return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;")
         writer.closeBlock("}")
     }
 }

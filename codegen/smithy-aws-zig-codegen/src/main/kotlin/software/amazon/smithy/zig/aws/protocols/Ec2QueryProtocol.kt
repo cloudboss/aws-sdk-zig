@@ -18,9 +18,9 @@ class Ec2QueryProtocol : AwsQueryProtocol() {
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
         writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16) ServiceError {")
 
-        writer.write("const error_code = findElement(body, \"Code\") orelse \"Unknown\";")
-        writer.write("const error_message = findElement(body, \"Message\") orelse \"\";")
-        writer.write("const request_id = findElement(body, \"RequestID\") orelse \"\";")
+        writer.write("const error_code = aws.xml.findElement(body, \"Code\") orelse \"Unknown\";")
+        writer.write("const error_message = aws.xml.findElement(body, \"Message\") orelse \"\";")
+        writer.write("const request_id = aws.xml.findElement(body, \"RequestID\") orelse \"\";")
         writer.blankLine()
 
         // Match error codes to ServiceError variants
@@ -42,9 +42,5 @@ class Ec2QueryProtocol : AwsQueryProtocol() {
         writer.write("} };")
 
         writer.closeBlock("}")
-        writer.blankLine()
-
-        // Helper functions
-        writeHelperFunctions(writer)
     }
 }

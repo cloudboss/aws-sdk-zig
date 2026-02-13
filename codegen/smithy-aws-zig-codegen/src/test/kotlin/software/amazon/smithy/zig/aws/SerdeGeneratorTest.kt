@@ -524,7 +524,7 @@ class SerdeGeneratorTest {
         val serde = files["serde.zig"]!!
         // Tag.Key is optional, so serializer wraps in if/else with |v|
         assertTrue(
-            serde.contains("appendXmlEscaped(alloc, buf, v)"),
+            serde.contains("aws.xml.appendXmlEscaped(alloc, buf, v)"),
             "String fields should use appendXmlEscaped",
         )
     }
@@ -615,12 +615,12 @@ class SerdeGeneratorTest {
     // ---- appendXmlEscaped helper ----
 
     @Test
-    fun appendXmlEscapedHelperGenerated() {
+    fun appendXmlEscapedHelperNotInlined() {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
-        assertTrue(
-            serde.contains("fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {"),
-            "Should generate appendXmlEscaped helper",
+        assertFalse(
+            serde.contains("fn appendXmlEscaped("),
+            "appendXmlEscaped should NOT be inlined -- it is now in the runtime",
         )
     }
 

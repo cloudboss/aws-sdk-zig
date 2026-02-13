@@ -156,16 +156,16 @@ pub fn execute(client: *Client, input: GetSpotPlacementScoresInput, options: Opt
 fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpoint("ec2", alloc);
 
-    const host = parseHost(endpoint);
+    const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = parsePort(endpoint);
+    const port = aws.url.parsePort(endpoint);
 
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(alloc, "Action=GetSpotPlacementScores&Version=2016-11-15");
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.instance_requirements_with_metadata) |v| {
         if (v.architecture_types) |list_d0| {
@@ -174,18 +174,18 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.ArchitectureTypes.item.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                try appendUrlEncoded(alloc, &body_buf, item);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
             }
         }
         if (v.instance_requirements) |sv| {
             if (sv.accelerator_count) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorCount.Max=");
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorCount.Min=");
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
                 }
             }
             if (sv.accelerator_manufacturers) |list_d1| {
@@ -194,7 +194,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorManufacturers.item.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try appendUrlEncoded(alloc, &body_buf, item);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item);
                 }
             }
             if (sv.accelerator_names) |list_d1| {
@@ -203,17 +203,17 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorNames.item.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try appendUrlEncoded(alloc, &body_buf, item);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item);
                 }
             }
             if (sv.accelerator_total_memory_mi_b) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorTotalMemoryMiB.Max=");
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorTotalMemoryMiB.Min=");
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
                 }
             }
             if (sv.accelerator_types) |list_d1| {
@@ -222,7 +222,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorTypes.item.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try appendUrlEncoded(alloc, &body_buf, item);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item);
                 }
             }
             if (sv.allowed_instance_types) |list_d1| {
@@ -231,21 +231,21 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.AllowedInstanceTypes.item.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try appendUrlEncoded(alloc, &body_buf, item);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item);
                 }
             }
             if (sv.bare_metal) |sv2| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.BareMetal=");
-                try appendUrlEncoded(alloc, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv2));
             }
             if (sv.baseline_ebs_bandwidth_mbps) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.BaselineEbsBandwidthMbps.Max=");
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.BaselineEbsBandwidthMbps.Min=");
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
                 }
             }
             if (sv.baseline_performance_factors) |sv2| {
@@ -258,7 +258,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.BaselinePerformanceFactors.Cpu.References.item.{d}.InstanceFamily=", .{n}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 if (item.instance_family) |fv_4| {
-                                    try appendUrlEncoded(alloc, &body_buf, fv_4);
+                                    try aws.url.appendUrlEncoded(alloc, &body_buf, fv_4);
                                 }
                             }
                         }
@@ -267,7 +267,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
             }
             if (sv.burstable_performance) |sv2| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.BurstablePerformance=");
-                try appendUrlEncoded(alloc, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv2));
             }
             if (sv.cpu_manufacturers) |list_d1| {
                 for (list_d1, 0..) |item, idx| {
@@ -275,7 +275,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.CpuManufacturers.item.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try appendUrlEncoded(alloc, &body_buf, item);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item);
                 }
             }
             if (sv.excluded_instance_types) |list_d1| {
@@ -284,7 +284,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.ExcludedInstanceTypes.item.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try appendUrlEncoded(alloc, &body_buf, item);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item);
                 }
             }
             if (sv.instance_generations) |list_d1| {
@@ -293,12 +293,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.InstanceGenerations.item.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try appendUrlEncoded(alloc, &body_buf, item);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item);
                 }
             }
             if (sv.local_storage) |sv2| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.LocalStorage=");
-                try appendUrlEncoded(alloc, &body_buf, @tagName(sv2));
+                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv2));
             }
             if (sv.local_storage_types) |list_d1| {
                 for (list_d1, 0..) |item, idx| {
@@ -306,81 +306,81 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.LocalStorageTypes.item.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try appendUrlEncoded(alloc, &body_buf, item);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item);
                 }
             }
             if (sv.max_spot_price_as_percentage_of_optimal_on_demand_price) |sv2| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice=");
-                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
             }
             if (sv.memory_gi_b_per_v_cpu) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.MemoryGiBPerVCpu.Max=");
-                    try appendUrlEncoded(alloc, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, sv3);
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.MemoryGiBPerVCpu.Min=");
-                    try appendUrlEncoded(alloc, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, sv3);
                 }
             }
             if (sv.memory_mi_b.max) |sv3| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.MemoryMiB.Max=");
-                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
             }
             try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.MemoryMiB.Min=");
-            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv.memory_mi_b.min}) catch "");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv.memory_mi_b.min}) catch "");
             if (sv.network_bandwidth_gbps) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.NetworkBandwidthGbps.Max=");
-                    try appendUrlEncoded(alloc, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, sv3);
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.NetworkBandwidthGbps.Min=");
-                    try appendUrlEncoded(alloc, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, sv3);
                 }
             }
             if (sv.network_interface_count) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.NetworkInterfaceCount.Max=");
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.NetworkInterfaceCount.Min=");
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
                 }
             }
             if (sv.on_demand_max_price_percentage_over_lowest_price) |sv2| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.OnDemandMaxPricePercentageOverLowestPrice=");
-                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
             }
             if (sv.require_encryption_in_transit) |sv2| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.RequireEncryptionInTransit=");
-                try appendUrlEncoded(alloc, &body_buf, if (sv2) "true" else "false");
+                try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv2) "true" else "false");
             }
             if (sv.require_hibernate_support) |sv2| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.RequireHibernateSupport=");
-                try appendUrlEncoded(alloc, &body_buf, if (sv2) "true" else "false");
+                try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv2) "true" else "false");
             }
             if (sv.spot_max_price_percentage_over_lowest_price) |sv2| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.SpotMaxPricePercentageOverLowestPrice=");
-                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
             }
             if (sv.total_local_storage_gb) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.TotalLocalStorageGB.Max=");
-                    try appendUrlEncoded(alloc, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, sv3);
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.TotalLocalStorageGB.Min=");
-                    try appendUrlEncoded(alloc, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, sv3);
                 }
             }
             if (sv.v_cpu_count.max) |sv3| {
                 try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.VCpuCount.Max=");
-                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
+                try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv3}) catch "");
             }
             try body_buf.appendSlice(alloc, "&InstanceRequirementsWithMetadata.InstanceRequirements.VCpuCount.Min=");
-            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv.v_cpu_count.min}) catch "");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv.v_cpu_count.min}) catch "");
         }
         if (v.virtualization_types) |list_d0| {
             for (list_d0, 0..) |item, idx| {
@@ -388,7 +388,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.VirtualizationTypes.item.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                try appendUrlEncoded(alloc, &body_buf, item);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, item);
             }
         }
     }
@@ -398,16 +398,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypes.member.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            try appendUrlEncoded(alloc, &body_buf, item);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
     }
     if (input.max_results) |v| {
         try body_buf.appendSlice(alloc, "&MaxResults=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.next_token) |v| {
         try body_buf.appendSlice(alloc, "&NextToken=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.region_names) |list| {
         for (list, 0..) |item, idx| {
@@ -415,18 +415,18 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSpotPlacementScoresInput
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RegionNames.member.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            try appendUrlEncoded(alloc, &body_buf, item);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
     }
     if (input.single_availability_zone) |v| {
         try body_buf.appendSlice(alloc, "&SingleAvailabilityZone=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(alloc, "&TargetCapacity=");
-    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{input.target_capacity}) catch "");
+    try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{input.target_capacity}) catch "");
     if (input.target_capacity_unit_type) |v| {
         try body_buf.appendSlice(alloc, "&TargetCapacityUnitType=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
 
     const body = try body_buf.toOwnedSlice(alloc);
@@ -475,9 +475,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
-    const error_code = findElement(body, "Code") orelse "Unknown";
-    const error_message = findElement(body, "Message") orelse "";
-    const request_id = findElement(body, "RequestID") orelse "";
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestID") orelse "";
 
 
     return .{ .unknown = .{
@@ -486,48 +486,4 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         .request_id = request_id,
         .http_status = status,
     } };
-}
-
-fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
-    var buf: [256]u8 = undefined;
-
-    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
-    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
-    const content_start = start + open_tag.len;
-
-    var close_buf: [256]u8 = undefined;
-    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
-    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
-
-    return xml[content_start..end];
-}
-
-fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
-            ' ' => try buf.append(alloc, '+'),
-            else => {
-                const hex = "0123456789ABCDEF";
-                try buf.append(alloc, '%');
-                try buf.append(alloc, hex[c >> 4]);
-                try buf.append(alloc, hex[c & 0x0F]);
-            }
-        }
-    }
-}
-
-fn parseHost(endpoint: []const u8) []const u8 {
-    // Strip scheme
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    // Strip port and path
-    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
-    return after_scheme[0..end];
-}
-
-fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
-    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
 }

@@ -520,10 +520,10 @@ class RestJsonProtocolTest {
         val files = generateFiles()
         val op = files["invoke.zig"]!!
 
-        assertTrue(op.contains("fn findJsonValue("), "Missing findJsonValue helper")
-        assertTrue(op.contains("fn appendUrlEncoded("), "Missing appendUrlEncoded helper")
-        assertTrue(op.contains("fn parseHost("), "Missing parseHost helper")
-        assertTrue(op.contains("fn parsePort("), "Missing parsePort helper")
+        assertTrue(op.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
+        assertTrue(op.contains("aws.url.appendUrlEncoded("), "Missing appendUrlEncoded usage")
+        assertTrue(op.contains("aws.url.parseHost("), "Missing parseHost usage")
+        assertTrue(op.contains("aws.url.parsePort("), "Missing parsePort usage")
     }
 
     // ---- No XML helpers ----
@@ -534,8 +534,8 @@ class RestJsonProtocolTest {
         val op = files["invoke.zig"]!!
 
         assertFalse(
-            op.contains("fn findElement("),
-            "REST-JSON should NOT include XML findElement helper",
+            op.contains("aws.xml.findElement("),
+            "REST-JSON should NOT include XML findElement usage",
         )
     }
 

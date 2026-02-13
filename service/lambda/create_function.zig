@@ -536,9 +536,9 @@ pub fn execute(client: *Client, input: CreateFunctionInput, options: Options) !C
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateFunctionInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpoint("lambda", alloc);
 
-    const host = parseHost(endpoint);
+    const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = parsePort(endpoint);
+    const port = aws.url.parsePort(endpoint);
 
     const path = "/2015-03-31/functions";
 
@@ -736,13 +736,13 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
     const error_code = blk: {
-        const type_str = findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
             break :blk type_str[idx + 1 ..];
         }
         break :blk type_str;
     };
-    const error_message = findJsonValue(body, "message") orelse findJsonValue(body, "Message") orelse "";
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
 
     if (std.mem.eql(u8, error_code, "CallbackTimeoutException")) {
         return .{ .callback_timeout_exception = .{
@@ -1015,60 +1015,4 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         .request_id = "",
         .http_status = status,
     } };
-}
-
-fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
-    var buf: [258]u8 = undefined;
-    if (key.len + 2 > buf.len) return null;
-    buf[0] = 0x22;
-    @memcpy(buf[1..][0..key.len], key);
-    buf[key.len + 1] = 0x22;
-    const search = buf[0 .. key.len + 2];
-    const key_start = std.mem.indexOf(u8, json, search) orelse return null;
-    var pos = key_start + search.len;
-
-    while (pos < json.len) : (pos += 1) {
-        if (json[pos] != ' ' and json[pos] != ':') break;
-    }
-    if (pos >= json.len) return null;
-
-    if (json[pos] == 0x22) {
-        const start = pos + 1;
-        const end = std.mem.indexOfScalarPos(u8, json, start, 0x22) orelse return null;
-        return json[start..end];
-    }
-
-    const start = pos;
-    while (pos < json.len) : (pos += 1) {
-        if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;
-    }
-    return json[start..pos];
-}
-
-fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
-            ' ' => try buf.append(alloc, '+'),
-            else => {
-                const hex = "0123456789ABCDEF";
-                try buf.append(alloc, '%');
-                try buf.append(alloc, hex[c >> 4]);
-                try buf.append(alloc, hex[c & 0x0F]);
-            }
-        }
-    }
-}
-
-fn parseHost(endpoint: []const u8) []const u8 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
-    return after_scheme[0..end];
-}
-
-fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
-    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
 }

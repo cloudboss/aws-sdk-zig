@@ -259,6 +259,43 @@ fn parseBool(scanner: *Scanner) !bool {
 }
 
 // ---------------------------------------------------------------------------
+// Simple JSON value finder (for error response parsing)
+// ---------------------------------------------------------------------------
+
+/// Simple JSON value finder that searches for "key": value patterns.
+/// Returns the value as a string slice (without quotes for string values).
+/// Used for error response parsing where a full JSON parse is not needed.
+pub fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
+    // Build search pattern: "key"
+    var buf: [258]u8 = undefined;
+    if (key.len + 2 > buf.len) return null;
+    buf[0] = 0x22; // double-quote
+    @memcpy(buf[1..][0..key.len], key);
+    buf[key.len + 1] = 0x22; // double-quote
+    const search = buf[0 .. key.len + 2];
+    const key_start = std.mem.indexOf(u8, json, search) orelse return null;
+    var pos = key_start + search.len;
+
+    // Skip whitespace and colon
+    while (pos < json.len) : (pos += 1) {
+        if (json[pos] != ' ' and json[pos] != ':') break;
+    }
+    if (pos >= json.len) return null;
+
+    if (json[pos] == 0x22) {
+        const start = pos + 1;
+        const end = std.mem.indexOfScalarPos(u8, json, start, 0x22) orelse return null;
+        return json[start..end];
+    }
+
+    const start = pos;
+    while (pos < json.len) : (pos += 1) {
+        if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;
+    }
+    return json[start..pos];
+}
+
+// ---------------------------------------------------------------------------
 // Field name mapping
 // ---------------------------------------------------------------------------
 
@@ -767,4 +804,32 @@ test "serialize string escaping" {
     const json = try jsonStringify(value, std.testing.allocator);
     defer std.testing.allocator.free(json);
     try std.testing.expectEqualStrings("{\"Msg\":\"hello \\\"world\\\"\\nnewline\"}", json);
+}
+
+test "findJsonValue string value" {
+    const json = "{\"__type\":\"ResourceNotFoundException\",\"message\":\"Table not found\"}";
+    try std.testing.expectEqualStrings("ResourceNotFoundException", findJsonValue(json, "__type").?);
+    try std.testing.expectEqualStrings("Table not found", findJsonValue(json, "message").?);
+}
+
+test "findJsonValue with namespace prefix" {
+    const json = "{\"__type\":\"com.amazonaws.dynamodb.v20120810#ResourceNotFoundException\"}";
+    const type_str = findJsonValue(json, "__type").?;
+    try std.testing.expectEqualStrings("com.amazonaws.dynamodb.v20120810#ResourceNotFoundException", type_str);
+}
+
+test "findJsonValue number value" {
+    const json = "{\"code\":404,\"message\":\"not found\"}";
+    try std.testing.expectEqualStrings("404", findJsonValue(json, "code").?);
+}
+
+test "findJsonValue missing key" {
+    const json = "{\"name\":\"test\"}";
+    try std.testing.expect(findJsonValue(json, "missing") == null);
+}
+
+test "findJsonValue both message variants" {
+    const json = "{\"Message\":\"uppercase\"}";
+    try std.testing.expect(findJsonValue(json, "message") == null);
+    try std.testing.expectEqualStrings("uppercase", findJsonValue(json, "Message").?);
 }

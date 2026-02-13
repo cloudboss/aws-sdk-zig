@@ -108,9 +108,9 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.blankLine()
 
         // Parse host from endpoint
-        writer.write("const host = parseHost(endpoint);")
+        writer.write("const host = aws.url.parseHost(endpoint);")
         writer.write("const tls = !std.mem.startsWith(u8, endpoint, \"http://\");")
-        writer.write("const port = parsePort(endpoint);")
+        writer.write("const port = aws.url.parsePort(endpoint);")
         writer.blankLine()
 
         // Split URI pattern into path and static query
@@ -285,10 +285,10 @@ class RestJsonProtocol : ProtocolGenerator {
 
         when {
             zigType == "[]const u8" -> {
-                writer.write("try appendUrlEncoded(alloc, &query_buf, \$L);", varName)
+                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, \$L);", varName)
             }
             isEnum -> {
-                writer.write("try appendUrlEncoded(alloc, &query_buf, @tagName(\$L));", varName)
+                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(\$L));", varName)
             }
             zigType in listOf("i32", "i64", "i16", "i8") -> {
                 writer.openBlock("{")
@@ -300,7 +300,7 @@ class RestJsonProtocol : ProtocolGenerator {
                 writer.write("try query_buf.appendSlice(alloc, if (\$L) \"true\" else \"false\");", varName)
             }
             else -> {
-                writer.write("try appendUrlEncoded(alloc, &query_buf, \$L);", varName)
+                writer.write("try aws.url.appendUrlEncoded(alloc, &query_buf, \$L);", varName)
             }
         }
     }
@@ -564,7 +564,7 @@ class RestJsonProtocol : ProtocolGenerator {
 
         // Extract error code from __type, stripping namespace prefix
         writer.openBlock("const error_code = blk: {")
-        writer.write("const type_str = findJsonValue(body, \"__type\") orelse break :blk @as([]const u8, \"Unknown\");")
+        writer.write("const type_str = aws.json.findJsonValue(body, \"__type\") orelse break :blk @as([]const u8, \"Unknown\");")
         writer.openBlock("if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {")
         writer.write("break :blk type_str[idx + 1 ..];")
         writer.closeBlock("}")
@@ -572,7 +572,7 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.closeBlock("};")
 
         // Extract error message
-        writer.write("const error_message = findJsonValue(body, \"message\") orelse findJsonValue(body, \"Message\") orelse \"\";")
+        writer.write("const error_message = aws.json.findJsonValue(body, \"message\") orelse aws.json.findJsonValue(body, \"Message\") orelse \"\";")
         writer.blankLine()
 
         // Match error codes to ServiceError variants
@@ -593,85 +593,6 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.write("    .http_status = status,")
         writer.write("} };")
 
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        // Helper functions
-        writeHelperFunctions(writer)
-    }
-
-    private fun writeHelperFunctions(writer: ZigWriter) {
-        writeFindJsonValueHelper(writer)
-        writer.blankLine()
-        writeAppendUrlEncodedHelper(writer)
-        writer.blankLine()
-        writeHostParseHelpers(writer)
-    }
-
-    private fun writeFindJsonValueHelper(writer: ZigWriter) {
-        writer.openBlock("fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {")
-        writer.write("var buf: [258]u8 = undefined;")
-        writer.write("if (key.len + 2 > buf.len) return null;")
-        writer.write("buf[0] = 0x22;")
-        writer.write("@memcpy(buf[1..][0..key.len], key);")
-        writer.write("buf[key.len + 1] = 0x22;")
-        writer.write("const search = buf[0 .. key.len + 2];")
-        writer.write("const key_start = std.mem.indexOf(u8, json, search) orelse return null;")
-        writer.write("var pos = key_start + search.len;")
-        writer.blankLine()
-
-        writer.openBlock("while (pos < json.len) : (pos += 1) {")
-        writer.write("if (json[pos] != ' ' and json[pos] != ':') break;")
-        writer.closeBlock("}")
-        writer.write("if (pos >= json.len) return null;")
-        writer.blankLine()
-
-        writer.openBlock("if (json[pos] == 0x22) {")
-        writer.write("const start = pos + 1;")
-        writer.write("const end = std.mem.indexOfScalarPos(u8, json, start, 0x22) orelse return null;")
-        writer.write("return json[start..end];")
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        writer.write("const start = pos;")
-        writer.openBlock("while (pos < json.len) : (pos += 1) {")
-        writer.write("if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;")
-        writer.closeBlock("}")
-        writer.write("return json[start..pos];")
-
-        writer.closeBlock("}")
-    }
-
-    private fun writeAppendUrlEncodedHelper(writer: ZigWriter) {
-        writer.openBlock("fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {")
-        writer.openBlock("for (value) |c| {")
-        writer.openBlock("switch (c) {")
-        writer.write("'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),")
-        writer.write("' ' => try buf.append(alloc, '+'),")
-        writer.openBlock("else => {")
-        writer.write("const hex = \"0123456789ABCDEF\";")
-        writer.write("try buf.append(alloc, '%');")
-        writer.write("try buf.append(alloc, hex[c >> 4]);")
-        writer.write("try buf.append(alloc, hex[c & 0x0F]);")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
-    }
-
-    private fun writeHostParseHelpers(writer: ZigWriter) {
-        writer.openBlock("fn parseHost(endpoint: []const u8) []const u8 {")
-        writer.write("const after_scheme = if (std.mem.indexOf(u8, endpoint, \"://\")) |idx| endpoint[idx + 3 ..] else endpoint;")
-        writer.write("const end = std.mem.indexOfAny(u8, after_scheme, \":/\") orelse after_scheme.len;")
-        writer.write("return after_scheme[0..end];")
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        writer.openBlock("fn parsePort(endpoint: []const u8) ?u16 {")
-        writer.write("const after_scheme = if (std.mem.indexOf(u8, endpoint, \"://\")) |idx| endpoint[idx + 3 ..] else endpoint;")
-        writer.write("const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;")
-        writer.write("const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;")
-        writer.write("return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;")
         writer.closeBlock("}")
     }
 }

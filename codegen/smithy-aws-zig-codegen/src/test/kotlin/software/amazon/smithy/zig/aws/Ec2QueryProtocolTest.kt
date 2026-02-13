@@ -208,10 +208,10 @@ class Ec2QueryProtocolTest {
         val files = generateFiles(Ec2QueryProtocol())
         val op = files["describe_instances.zig"]!!
 
-        assertTrue(op.contains("fn findElement("), "Missing findElement helper")
-        assertTrue(op.contains("fn appendUrlEncoded("), "Missing appendUrlEncoded helper")
-        assertTrue(op.contains("fn parseHost("), "Missing parseHost helper")
-        assertTrue(op.contains("fn parsePort("), "Missing parsePort helper")
+        assertTrue(op.contains("aws.xml.findElement("), "Missing findElement usage")
+        assertTrue(op.contains("aws.url.appendUrlEncoded("), "Missing appendUrlEncoded usage")
+        assertTrue(op.contains("aws.url.parseHost("), "Missing parseHost usage")
+        assertTrue(op.contains("aws.url.parsePort("), "Missing parsePort usage")
     }
 
     // ---- Nested struct/list serialization tests ----

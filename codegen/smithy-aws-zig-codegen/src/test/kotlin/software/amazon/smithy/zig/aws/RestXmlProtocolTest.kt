@@ -667,15 +667,15 @@ class RestXmlProtocolTest {
 
         assertTrue(op.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
         assertTrue(
-            op.contains("findElement(body, \"Code\")"),
+            op.contains("aws.xml.findElement(body, \"Code\")"),
             "Should extract error code from XML <Code> element",
         )
         assertTrue(
-            op.contains("findElement(body, \"Message\")"),
+            op.contains("aws.xml.findElement(body, \"Message\")"),
             "Should extract error message from XML <Message> element",
         )
         assertTrue(
-            op.contains("findElement(body, \"RequestId\")"),
+            op.contains("aws.xml.findElement(body, \"RequestId\")"),
             "Should extract request ID from XML <RequestId> element",
         )
     }
@@ -707,13 +707,22 @@ class RestXmlProtocolTest {
     @Test
     fun helperFunctionsPresent() {
         val files = generateFiles()
-        val op = files["put_object.zig"]!!
 
-        assertTrue(op.contains("fn findElement("), "Missing findElement helper")
-        assertTrue(op.contains("fn appendXmlEscaped("), "Missing appendXmlEscaped helper")
-        assertTrue(op.contains("fn appendUrlEncoded("), "Missing appendUrlEncoded helper")
-        assertTrue(op.contains("fn parseHost("), "Missing parseHost helper")
-        assertTrue(op.contains("fn parsePort("), "Missing parsePort helper")
+        // All operations use parseHost/parsePort for endpoint parsing
+        val putObject = files["put_object.zig"]!!
+        assertTrue(putObject.contains("aws.url.parseHost("), "Missing parseHost usage in put_object")
+        assertTrue(putObject.contains("aws.url.parsePort("), "Missing parsePort usage in put_object")
+
+        // Error parsing uses findElement for XML error responses
+        assertTrue(putObject.contains("aws.xml.findElement("), "Missing findElement usage in put_object")
+
+        // ListObjects has @httpQuery param so uses appendUrlEncoded
+        val listObjects = files["list_objects.zig"]!!
+        assertTrue(listObjects.contains("aws.url.appendUrlEncoded("), "Missing appendUrlEncoded usage in list_objects")
+
+        // CreateConfig has XML body string members so uses appendXmlEscaped
+        val createConfig = files["create_config.zig"]!!
+        assertTrue(createConfig.contains("aws.xml.appendXmlEscaped("), "Missing appendXmlEscaped usage in create_config")
     }
 
     // ---- No JSON helpers (this is REST-XML) ----
@@ -724,8 +733,8 @@ class RestXmlProtocolTest {
         val op = files["put_object.zig"]!!
 
         assertFalse(
-            op.contains("fn findJsonValue("),
-            "REST-XML should NOT include JSON findJsonValue helper",
+            op.contains("aws.json.findJsonValue("),
+            "REST-XML should NOT include JSON findJsonValue usage",
         )
         assertFalse(
             op.contains("fn appendJsonEscaped("),

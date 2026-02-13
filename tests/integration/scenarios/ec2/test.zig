@@ -24,7 +24,11 @@ test "DescribeVpcs returns results" {
     defer result.deinit();
 
     // LocalStack returns a default VPC
-    // (response parsing for list fields is limited, so just verify success)
+    const vpcs = result.vpcs orelse return error.MissingVpcs;
+    try std.testing.expect(vpcs.len >= 1);
+    // Default VPC should have a vpc_id and cidr_block
+    try std.testing.expect(vpcs[0].vpc_id != null);
+    try std.testing.expect(vpcs[0].cidr_block != null);
 }
 
 test "CreateVpc and DeleteVpc round-trip" {

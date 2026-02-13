@@ -120,113 +120,113 @@ pub fn execute(client: *Client, input: CreateVerifiedAccessTrustProviderInput, o
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessTrustProviderInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpoint("ec2", alloc);
 
-    const host = parseHost(endpoint);
+    const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = parsePort(endpoint);
+    const port = aws.url.parsePort(endpoint);
 
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(alloc, "Action=CreateVerifiedAccessTrustProvider&Version=2016-11-15");
     if (input.client_token) |v| {
         try body_buf.appendSlice(alloc, "&ClientToken=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.description) |v| {
         try body_buf.appendSlice(alloc, "&Description=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.device_options) |v| {
         if (v.public_signing_key_url) |sv| {
             try body_buf.appendSlice(alloc, "&DeviceOptions.PublicSigningKeyUrl=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.tenant_id) |sv| {
             try body_buf.appendSlice(alloc, "&DeviceOptions.TenantId=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
     }
     if (input.device_trust_provider_type) |v| {
         try body_buf.appendSlice(alloc, "&DeviceTrustProviderType=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.native_application_oidc_options) |v| {
         if (v.authorization_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&NativeApplicationOidcOptions.AuthorizationEndpoint=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.client_id) |sv| {
             try body_buf.appendSlice(alloc, "&NativeApplicationOidcOptions.ClientId=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.client_secret) |sv| {
             try body_buf.appendSlice(alloc, "&NativeApplicationOidcOptions.ClientSecret=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.issuer) |sv| {
             try body_buf.appendSlice(alloc, "&NativeApplicationOidcOptions.Issuer=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.public_signing_key_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&NativeApplicationOidcOptions.PublicSigningKeyEndpoint=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.scope) |sv| {
             try body_buf.appendSlice(alloc, "&NativeApplicationOidcOptions.Scope=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.token_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&NativeApplicationOidcOptions.TokenEndpoint=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.user_info_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&NativeApplicationOidcOptions.UserInfoEndpoint=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
     }
     if (input.oidc_options) |v| {
         if (v.authorization_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&OidcOptions.AuthorizationEndpoint=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.client_id) |sv| {
             try body_buf.appendSlice(alloc, "&OidcOptions.ClientId=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.client_secret) |sv| {
             try body_buf.appendSlice(alloc, "&OidcOptions.ClientSecret=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.issuer) |sv| {
             try body_buf.appendSlice(alloc, "&OidcOptions.Issuer=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.scope) |sv| {
             try body_buf.appendSlice(alloc, "&OidcOptions.Scope=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.token_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&OidcOptions.TokenEndpoint=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.user_info_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&OidcOptions.UserInfoEndpoint=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
     }
     try body_buf.appendSlice(alloc, "&PolicyReferenceName=");
-    try appendUrlEncoded(alloc, &body_buf, input.policy_reference_name);
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.policy_reference_name);
     if (input.sse_specification) |v| {
         if (v.customer_managed_key_enabled) |sv| {
             try body_buf.appendSlice(alloc, "&SseSpecification.CustomerManagedKeyEnabled=");
-            try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+            try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
         }
         if (v.kms_key_arn) |sv| {
             try body_buf.appendSlice(alloc, "&SseSpecification.KmsKeyArn=");
-            try appendUrlEncoded(alloc, &body_buf, sv);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
     }
     if (input.tag_specifications) |list| {
@@ -237,7 +237,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessTrustPr
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
                 }
             }
             if (item.tags) |lst_1| {
@@ -248,7 +248,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessTrustPr
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.key) |fv_2| {
-                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
                         }
                     }
                     {
@@ -256,7 +256,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessTrustPr
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
-                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
                         }
                     }
                 }
@@ -264,10 +264,10 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVerifiedAccessTrustPr
         }
     }
     try body_buf.appendSlice(alloc, "&TrustProviderType=");
-    try appendUrlEncoded(alloc, &body_buf, @tagName(input.trust_provider_type));
+    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(input.trust_provider_type));
     if (input.user_trust_provider_type) |v| {
         try body_buf.appendSlice(alloc, "&UserTrustProviderType=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
 
     const body = try body_buf.toOwnedSlice(alloc);
@@ -314,9 +314,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
-    const error_code = findElement(body, "Code") orelse "Unknown";
-    const error_message = findElement(body, "Message") orelse "";
-    const request_id = findElement(body, "RequestID") orelse "";
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestID") orelse "";
 
 
     return .{ .unknown = .{
@@ -325,48 +325,4 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         .request_id = request_id,
         .http_status = status,
     } };
-}
-
-fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
-    var buf: [256]u8 = undefined;
-
-    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
-    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
-    const content_start = start + open_tag.len;
-
-    var close_buf: [256]u8 = undefined;
-    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
-    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
-
-    return xml[content_start..end];
-}
-
-fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
-            ' ' => try buf.append(alloc, '+'),
-            else => {
-                const hex = "0123456789ABCDEF";
-                try buf.append(alloc, '%');
-                try buf.append(alloc, hex[c >> 4]);
-                try buf.append(alloc, hex[c & 0x0F]);
-            }
-        }
-    }
-}
-
-fn parseHost(endpoint: []const u8) []const u8 {
-    // Strip scheme
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    // Strip port and path
-    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
-    return after_scheme[0..end];
-}
-
-fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
-    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
 }

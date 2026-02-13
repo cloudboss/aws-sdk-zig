@@ -295,6 +295,35 @@ pub const Error = error{
     UnexpectedEndOfInput,
 };
 
+/// Simple string-search XML element finder. Searches for `<tag_name>...</tag_name>`
+/// and returns the content between the tags, or null if not found.
+/// Used for error response parsing where a full XML parse is not needed.
+pub fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
+    var buf: [256]u8 = undefined;
+
+    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
+    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
+    const content_start = start + open_tag.len;
+
+    var close_buf: [256]u8 = undefined;
+    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
+    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+
+    return xml[content_start..end];
+}
+
+/// Append a value to a buffer with XML entity escaping for &, <, and >.
+pub fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
+    for (value) |c| {
+        switch (c) {
+            '&' => try buf.appendSlice(alloc, "&amp;"),
+            '<' => try buf.appendSlice(alloc, "&lt;"),
+            '>' => try buf.appendSlice(alloc, "&gt;"),
+            else => try buf.append(alloc, c),
+        }
+    }
+}
+
 // ---- Tests ----
 
 test "simple element" {
@@ -405,6 +434,37 @@ test "attributes are skipped" {
     try testing.expectEqualStrings("Root", (try reader.next()).?.element_start.local);
     try testing.expectEqualStrings("Name", (try reader.next()).?.element_start.local);
     try testing.expectEqualStrings("test", (try reader.next()).?.text);
+}
+
+test "findElement returns content between tags" {
+    const xml = "<Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message></Error>";
+    try testing.expectEqualStrings("NoSuchKey", findElement(xml, "Code").?);
+    try testing.expectEqualStrings("The specified key does not exist.", findElement(xml, "Message").?);
+    try testing.expect(findElement(xml, "Missing") == null);
+}
+
+test "findElement with nested XML" {
+    const xml = "<Response><Errors><Error><Code>Forbidden</Code></Error></Errors><RequestId>abc</RequestId></Response>";
+    try testing.expectEqualStrings("Forbidden", findElement(xml, "Code").?);
+    try testing.expectEqualStrings("abc", findElement(xml, "RequestId").?);
+}
+
+test "appendXmlEscaped escapes special characters" {
+    const alloc = testing.allocator;
+    var buf: std.ArrayList(u8) = .{};
+    defer buf.deinit(alloc);
+
+    try appendXmlEscaped(alloc, &buf, "a < b & c > d");
+    try testing.expectEqualStrings("a &lt; b &amp; c &gt; d", buf.items);
+}
+
+test "appendXmlEscaped passes through normal text" {
+    const alloc = testing.allocator;
+    var buf: std.ArrayList(u8) = .{};
+    defer buf.deinit(alloc);
+
+    try appendXmlEscaped(alloc, &buf, "hello world");
+    try testing.expectEqualStrings("hello world", buf.items);
 }
 
 test "AWS-style response" {

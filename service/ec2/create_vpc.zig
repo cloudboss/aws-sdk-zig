@@ -172,56 +172,56 @@ pub fn execute(client: *Client, input: CreateVpcInput, options: Options) !Create
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpoint("ec2", alloc);
 
-    const host = parseHost(endpoint);
+    const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = parsePort(endpoint);
+    const port = aws.url.parsePort(endpoint);
 
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(alloc, "Action=CreateVpc&Version=2016-11-15");
     if (input.amazon_provided_ipv_6_cidr_block) |v| {
         try body_buf.appendSlice(alloc, "&AmazonProvidedIpv6CidrBlock=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.cidr_block) |v| {
         try body_buf.appendSlice(alloc, "&CidrBlock=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
-        try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.instance_tenancy) |v| {
         try body_buf.appendSlice(alloc, "&InstanceTenancy=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
     if (input.ipv_4_ipam_pool_id) |v| {
         try body_buf.appendSlice(alloc, "&Ipv4IpamPoolId=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.ipv_4_netmask_length) |v| {
         try body_buf.appendSlice(alloc, "&Ipv4NetmaskLength=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.ipv_6_cidr_block) |v| {
         try body_buf.appendSlice(alloc, "&Ipv6CidrBlock=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.ipv_6_cidr_block_network_border_group) |v| {
         try body_buf.appendSlice(alloc, "&Ipv6CidrBlockNetworkBorderGroup=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.ipv_6_ipam_pool_id) |v| {
         try body_buf.appendSlice(alloc, "&Ipv6IpamPoolId=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.ipv_6_netmask_length) |v| {
         try body_buf.appendSlice(alloc, "&Ipv6NetmaskLength=");
-        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
     if (input.ipv_6_pool) |v| {
         try body_buf.appendSlice(alloc, "&Ipv6Pool=");
-        try appendUrlEncoded(alloc, &body_buf, v);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
@@ -231,7 +231,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.resource_type) |fv_1| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
                 }
             }
             if (item.tags) |lst_1| {
@@ -242,7 +242,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.key) |fv_2| {
-                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
                         }
                     }
                     {
@@ -250,7 +250,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
-                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
                         }
                     }
                 }
@@ -260,37 +260,37 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpcInput, config: *aw
     if (input.vpc_encryption_control) |v| {
         if (v.egress_only_internet_gateway_exclusion) |sv| {
             try body_buf.appendSlice(alloc, "&VpcEncryptionControl.EgressOnlyInternetGatewayExclusion=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
         if (v.elastic_file_system_exclusion) |sv| {
             try body_buf.appendSlice(alloc, "&VpcEncryptionControl.ElasticFileSystemExclusion=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
         if (v.internet_gateway_exclusion) |sv| {
             try body_buf.appendSlice(alloc, "&VpcEncryptionControl.InternetGatewayExclusion=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
         if (v.lambda_exclusion) |sv| {
             try body_buf.appendSlice(alloc, "&VpcEncryptionControl.LambdaExclusion=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
         try body_buf.appendSlice(alloc, "&VpcEncryptionControl.Mode=");
-        try appendUrlEncoded(alloc, &body_buf, @tagName(v.mode));
+        try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v.mode));
         if (v.nat_gateway_exclusion) |sv| {
             try body_buf.appendSlice(alloc, "&VpcEncryptionControl.NatGatewayExclusion=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
         if (v.virtual_private_gateway_exclusion) |sv| {
             try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VirtualPrivateGatewayExclusion=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
         if (v.vpc_lattice_exclusion) |sv| {
             try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VpcLatticeExclusion=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
         if (v.vpc_peering_exclusion) |sv| {
             try body_buf.appendSlice(alloc, "&VpcEncryptionControl.VpcPeeringExclusion=");
-            try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
     }
 
@@ -338,9 +338,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
 }
 
 fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
-    const error_code = findElement(body, "Code") orelse "Unknown";
-    const error_message = findElement(body, "Message") orelse "";
-    const request_id = findElement(body, "RequestID") orelse "";
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestID") orelse "";
 
 
     return .{ .unknown = .{
@@ -349,48 +349,4 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         .request_id = request_id,
         .http_status = status,
     } };
-}
-
-fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
-    var buf: [256]u8 = undefined;
-
-    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
-    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
-    const content_start = start + open_tag.len;
-
-    var close_buf: [256]u8 = undefined;
-    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
-    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
-
-    return xml[content_start..end];
-}
-
-fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),
-            ' ' => try buf.append(alloc, '+'),
-            else => {
-                const hex = "0123456789ABCDEF";
-                try buf.append(alloc, '%');
-                try buf.append(alloc, hex[c >> 4]);
-                try buf.append(alloc, hex[c & 0x0F]);
-            }
-        }
-    }
-}
-
-fn parseHost(endpoint: []const u8) []const u8 {
-    // Strip scheme
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    // Strip port and path
-    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
-    return after_scheme[0..end];
-}
-
-fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
-    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
 }

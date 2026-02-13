@@ -45,9 +45,9 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.blankLine()
 
         // Parse host from endpoint
-        writer.write("const host = parseHost(endpoint);")
+        writer.write("const host = aws.url.parseHost(endpoint);")
         writer.write("const tls = !std.mem.startsWith(u8, endpoint, \"http://\");")
-        writer.write("const port = parsePort(endpoint);")
+        writer.write("const port = aws.url.parsePort(endpoint);")
         writer.blankLine()
 
         // Build form body
@@ -138,12 +138,12 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 // Scalar field
                 if (memberShape.isRequired) {
                     writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", smithyName)
-                    writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                    writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
                         ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                 } else {
                     writer.openBlock("if (\$L.\$L) |v| {", accessor, fieldName)
                     writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", smithyName)
-                    writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                    writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
                         ctx.scalarFormatExprForOptional(targetShape, "v"))
                     writer.closeBlock("}")
                 }
@@ -168,13 +168,13 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 ctx.isScalarType(targetShape) -> {
                     if (memberShape.isRequired) {
                         writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", qualifiedName)
-                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
                             ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                     } else {
                         val captureVar = if (depth == 0) "sv" else "sv${depth + 1}"
                         writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
                         writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", qualifiedName)
-                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
                             ctx.scalarFormatExprForOptional(targetShape, captureVar))
                         writer.closeBlock("}")
                     }
@@ -242,7 +242,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 prefix, xmlName,
             )
             writer.write("try body_buf.appendSlice(alloc, field_prefix);")
-            writer.write("try appendUrlEncoded(alloc, &body_buf, item);")
+            writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, item);")
             writer.closeBlock("}")
         }
     }
@@ -273,11 +273,11 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     )
                     writer.write("try body_buf.appendSlice(alloc, field_prefix);")
                     if (memberShape.isRequired) {
-                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
                             ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                     } else {
                         writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
-                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
                             ctx.scalarFormatExprForOptional(targetShape, captureVar))
                         writer.closeBlock("}")
                     }
@@ -329,7 +329,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                             innerPrefix, formatArgs,
                         )
                         writer.write("try body_buf.appendSlice(alloc, field_prefix);")
-                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);", innerVar)
+                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);", innerVar)
                         writer.closeBlock("}")
                     }
 
@@ -544,9 +544,9 @@ open class AwsQueryProtocol : ProtocolGenerator {
     override open fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
         writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16) ServiceError {")
 
-        writer.write("const error_code = findElement(body, \"Code\") orelse \"Unknown\";")
-        writer.write("const error_message = findElement(body, \"Message\") orelse \"\";")
-        writer.write("const request_id = findElement(body, \"RequestId\") orelse \"\";")
+        writer.write("const error_code = aws.xml.findElement(body, \"Code\") orelse \"Unknown\";")
+        writer.write("const error_message = aws.xml.findElement(body, \"Message\") orelse \"\";")
+        writer.write("const request_id = aws.xml.findElement(body, \"RequestId\") orelse \"\";")
         writer.blankLine()
 
         // Match error codes to ServiceError variants
@@ -567,69 +567,6 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.write("    .http_status = status,")
         writer.write("} };")
 
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        // Helper functions
-        writeHelperFunctions(writer)
-    }
-
-    protected fun writeHelperFunctions(writer: ZigWriter) {
-        writeFindElementHelper(writer)
-        writer.blankLine()
-        writeUrlEncodeHelper(writer)
-        writer.blankLine()
-        writeHostParseHelpers(writer)
-    }
-
-    private fun writeFindElementHelper(writer: ZigWriter) {
-        writer.openBlock("fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {")
-        writer.write("var buf: [256]u8 = undefined;")
-        writer.blankLine()
-        writer.write("const open_tag = std.fmt.bufPrint(&buf, \"<{s}>\", .{tag_name}) catch return null;")
-        writer.write("const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;")
-        writer.write("const content_start = start + open_tag.len;")
-        writer.blankLine()
-        writer.write("var close_buf: [256]u8 = undefined;")
-        writer.write("const close_tag = std.fmt.bufPrint(&close_buf, \"</{s}>\", .{tag_name}) catch return null;")
-        writer.write("const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;")
-        writer.blankLine()
-        writer.write("return xml[content_start..end];")
-        writer.closeBlock("}")
-    }
-
-    private fun writeUrlEncodeHelper(writer: ZigWriter) {
-        writer.openBlock("fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {")
-        writer.openBlock("for (value) |c| {")
-        writer.openBlock("switch (c) {")
-        writer.write("'A'...'Z', 'a'...'z', '0'...'9', '-', '_', '.', '~' => try buf.append(alloc, c),")
-        writer.write("' ' => try buf.append(alloc, '+'),")
-        writer.openBlock("else => {")
-        writer.write("const hex = \"0123456789ABCDEF\";")
-        writer.write("try buf.append(alloc, '%');")
-        writer.write("try buf.append(alloc, hex[c >> 4]);")
-        writer.write("try buf.append(alloc, hex[c & 0x0F]);")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
-    }
-
-    private fun writeHostParseHelpers(writer: ZigWriter) {
-        writer.openBlock("fn parseHost(endpoint: []const u8) []const u8 {")
-        writer.write("// Strip scheme")
-        writer.write("const after_scheme = if (std.mem.indexOf(u8, endpoint, \"://\")) |idx| endpoint[idx + 3 ..] else endpoint;")
-        writer.write("// Strip port and path")
-        writer.write("const end = std.mem.indexOfAny(u8, after_scheme, \":/\") orelse after_scheme.len;")
-        writer.write("return after_scheme[0..end];")
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        writer.openBlock("fn parsePort(endpoint: []const u8) ?u16 {")
-        writer.write("const after_scheme = if (std.mem.indexOf(u8, endpoint, \"://\")) |idx| endpoint[idx + 3 ..] else endpoint;")
-        writer.write("const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;")
-        writer.write("const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;")
-        writer.write("return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;")
         writer.closeBlock("}")
     }
 }

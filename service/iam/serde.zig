@@ -2540,7 +2540,7 @@ pub fn serializeActionNameListType(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2564,7 +2564,7 @@ pub fn serializeContextKeyValueListType(alloc: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2576,7 +2576,7 @@ pub fn serializeResourceNameListType(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2588,7 +2588,7 @@ pub fn serializeSimulationPolicyListType(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2600,7 +2600,7 @@ pub fn serializeclientIDListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2636,7 +2636,7 @@ pub fn serializepolicyParameterValuesListType(alloc: std.mem.Allocator, buf: *st
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2648,7 +2648,7 @@ pub fn serializeserviceNamespaceListType(alloc: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2660,7 +2660,7 @@ pub fn serializetagKeyListType(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2684,7 +2684,7 @@ pub fn serializethumbprintListType(alloc: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(alloc, "<");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
-        try appendXmlEscaped(alloc, buf, item);
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
@@ -2694,7 +2694,7 @@ pub fn serializethumbprintListType(alloc: std.mem.Allocator, buf: *std.ArrayList
 pub fn serializeContextEntry(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ContextEntry) !void {
     if (value.context_key_name) |v| {
         try buf.appendSlice(alloc, "<ContextKeyName>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ContextKeyName>");
     }
     if (value.context_key_type) |v| {
@@ -2717,7 +2717,7 @@ pub fn serializeDelegationPermission(alloc: std.mem.Allocator, buf: *std.ArrayLi
     }
     if (value.policy_template_arn) |v| {
         try buf.appendSlice(alloc, "<PolicyTemplateArn>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</PolicyTemplateArn>");
     }
 }
@@ -2725,7 +2725,7 @@ pub fn serializeDelegationPermission(alloc: std.mem.Allocator, buf: *std.ArrayLi
 pub fn serializePolicyParameter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: PolicyParameter) !void {
     if (value.name) |v| {
         try buf.appendSlice(alloc, "<Name>");
-        try appendXmlEscaped(alloc, buf, v);
+        try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Name>");
     }
     if (value.@"type") |v| {
@@ -2742,20 +2742,10 @@ pub fn serializePolicyParameter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
 
 pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {
     try buf.appendSlice(alloc, "<Key>");
-    try appendXmlEscaped(alloc, buf, value.key);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.key);
     try buf.appendSlice(alloc, "</Key>");
     try buf.appendSlice(alloc, "<Value>");
-    try appendXmlEscaped(alloc, buf, value.value);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.value);
     try buf.appendSlice(alloc, "</Value>");
 }
 
-fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const u8) !void {
-    for (value) |c| {
-        switch (c) {
-            '&' => try buf.appendSlice(alloc, "&amp;"),
-            '<' => try buf.appendSlice(alloc, "&lt;"),
-            '>' => try buf.appendSlice(alloc, "&gt;"),
-            else => try buf.append(alloc, c),
-        }
-    }
-}

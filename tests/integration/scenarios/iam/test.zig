@@ -28,7 +28,7 @@ test "IAM CreateUser, GetUser, ListUsers, DeleteUser round-trip" {
         defer result.deinit();
     }
 
-    // 2. GetUser
+    // 2. GetUser -- verify user_name matches
     {
         var result = try iam.get_user.execute(
             &client,
@@ -36,9 +36,12 @@ test "IAM CreateUser, GetUser, ListUsers, DeleteUser round-trip" {
             .{},
         );
         defer result.deinit();
+
+        const user = result.user orelse return error.MissingUser;
+        try std.testing.expectEqualStrings(user_name, user.user_name);
     }
 
-    // 3. ListUsers
+    // 3. ListUsers -- verify created user appears in list
     {
         var result = try iam.list_users.execute(
             &client,
@@ -46,6 +49,16 @@ test "IAM CreateUser, GetUser, ListUsers, DeleteUser round-trip" {
             .{},
         );
         defer result.deinit();
+
+        const users = result.users orelse return error.MissingUsers;
+        var found = false;
+        for (users) |u| {
+            if (std.mem.eql(u8, u.user_name, user_name)) {
+                found = true;
+                break;
+            }
+        }
+        try std.testing.expect(found);
     }
 
     // 4. DeleteUser

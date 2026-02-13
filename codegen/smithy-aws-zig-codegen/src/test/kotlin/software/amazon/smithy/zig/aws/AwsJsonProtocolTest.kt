@@ -333,45 +333,9 @@ class AwsJsonProtocolTest {
         val files = generateFiles("1.0")
         val op = files["put_item.zig"]!!
 
-        assertTrue(op.contains("fn findJsonValue("), "Missing findJsonValue helper")
-        assertTrue(op.contains("fn parseHost("), "Missing parseHost helper")
-        assertTrue(op.contains("fn parsePort("), "Missing parsePort helper")
-    }
-
-    @Test
-    fun findJsonValueBuildsSearchPattern() {
-        val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
-
-        // findJsonValue should build "key" search pattern using 0x22 (double-quote)
-        assertTrue(
-            op.contains("buf[0] = 0x22;") && op.contains("buf[key.len + 1] = 0x22;"),
-            "findJsonValue should construct quoted key pattern using hex 0x22",
-        )
-    }
-
-    @Test
-    fun findJsonValueHandlesStringValues() {
-        val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
-
-        // Should detect string values by checking for 0x22 (double-quote)
-        assertTrue(
-            op.contains("json[pos] == 0x22"),
-            "findJsonValue should detect string values by quote character (0x22)",
-        )
-    }
-
-    @Test
-    fun findJsonValueHandlesNonStringValues() {
-        val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
-
-        // Should handle booleans/numbers by reading until delimiter
-        assertTrue(
-            op.contains("json[pos] == ','") || op.contains("json[pos] == '}'"),
-            "findJsonValue should read non-string values until delimiter",
-        )
+        assertTrue(op.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
+        assertTrue(op.contains("aws.url.parseHost("), "Missing parseHost usage")
+        assertTrue(op.contains("aws.url.parsePort("), "Missing parsePort usage")
     }
 
     // ---- No XML helpers ----
