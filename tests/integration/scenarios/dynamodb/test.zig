@@ -93,6 +93,105 @@ test "CreateTable, DescribeTable, ListTables, DeleteTable" {
     try std.testing.expect(delete_result.table_description != null);
 }
 
+test "PutItem and GetItem with map fields" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var arena_state = std.heap.ArenaAllocator.init(allocator);
+    defer arena_state.deinit();
+    const arena = arena_state.allocator();
+
+    var client = dynamodb.Client.init(arena, &cfg);
+    defer client.deinit();
+
+    const table_name = "sdk-zig-map-test-table";
+
+    // Create table
+    _ = try dynamodb.create_table.execute(
+        &client,
+        .{
+            .table_name = table_name,
+            .key_schema = &.{
+                .{ .attribute_name = "pk", .key_type = .hash },
+            },
+            .attribute_definitions = &.{
+                .{ .attribute_name = "pk", .attribute_type = .s },
+            },
+            .billing_mode = .pay_per_request,
+        },
+        .{},
+    );
+
+    // --- PutItem with map of AttributeValue ---
+    // Exercises: map serialization (MapEntry), union serialization (AttributeValue)
+    _ = try dynamodb.put_item.execute(
+        &client,
+        .{
+            .table_name = table_name,
+            .item = &.{
+                .{ .key = "pk", .value = .{ .s = "test-key-1" } },
+                .{ .key = "name", .value = .{ .s = "Alice" } },
+                .{ .key = "age", .value = .{ .n = "30" } },
+            },
+        },
+        .{},
+    );
+
+    // --- GetItem with map key ---
+    // Exercises: map deserialization of response
+    const get_result = try dynamodb.get_item.execute(
+        &client,
+        .{
+            .table_name = table_name,
+            .key = &.{
+                .{ .key = "pk", .value = .{ .s = "test-key-1" } },
+            },
+        },
+        .{},
+    );
+
+    const item = get_result.item orelse return error.MissingItem;
+
+    // Verify returned map contains our fields
+    var found_name = false;
+    var found_age = false;
+    for (item) |entry| {
+        if (std.mem.eql(u8, entry.key, "name")) {
+            switch (entry.value) {
+                .s => |v| {
+                    try std.testing.expectEqualStrings("Alice", v orelse return error.MissingValue);
+                    found_name = true;
+                },
+                else => return error.UnexpectedType,
+            }
+        } else if (std.mem.eql(u8, entry.key, "age")) {
+            switch (entry.value) {
+                .n => |v| {
+                    try std.testing.expectEqualStrings("30", v orelse return error.MissingValue);
+                    found_age = true;
+                },
+                else => return error.UnexpectedType,
+            }
+        }
+    }
+    try std.testing.expect(found_name);
+    try std.testing.expect(found_age);
+
+    // Cleanup
+    _ = try dynamodb.delete_table.execute(
+        &client,
+        .{ .table_name = table_name },
+        .{},
+    );
+}
+
 test "DescribeTable returns ResourceNotFoundException for missing table" {
     const allocator = std.testing.allocator;
 
