@@ -125,7 +125,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Certifications")) {
-                    try reader.skipElement();
+                    result.certifications = try serde.deserializeCertificationMapType(&reader, alloc, "entry");
                 } else if (std.mem.eql(u8, e.local, "EnableDate")) {
                     result.enable_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "SerialNumber")) {

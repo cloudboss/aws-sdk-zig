@@ -87,9 +87,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAccountSummaryInput, con
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAccountSummaryOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    _ = alloc;
-    const result: GetAccountSummaryOutput = .{};
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "GetAccountSummaryResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: GetAccountSummaryOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "SummaryMap")) {
+                    result.summary_map = try serde.deserializesummaryMapType(&reader, alloc, "entry");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -936,7 +936,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Metadata")) {
-                    try reader.skipElement();
+                    result.metadata = try serde.deserializeMetadata(&reader, alloc, "entry");
                 } else {
                     try reader.skipElement();
                 }

@@ -9,12 +9,14 @@ import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.IntegerShape
 import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.LongShape
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.Shape
 import software.amazon.smithy.model.shapes.ShortShape
 import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.TimestampShape
+import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigWriter
@@ -86,13 +88,14 @@ open class AwsQueryProtocol : ProtocolGenerator {
         return when (shape) {
             is StructureShape -> shape.allMembers.values.any { ms ->
                 val ts = ctx.model.expectShape(ms.target)
-                ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape
+                ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape || ts is MapShape
             }
             is ListShape -> {
                 val elementShape = ctx.model.expectShape(shape.member.target)
                 if (elementShape is StructureShape) hasSerializableFields(ctx, elementShape)
                 else ctx.isScalarType(elementShape)
             }
+            is MapShape -> true
             else -> ctx.isScalarType(shape)
         }
     }
@@ -131,6 +134,31 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 } else {
                     writer.openBlock("if (\$L.\$L) |list| {", accessor, fieldName)
                     writeListSerializer(writer, ctx, smithyName, xmlName, listTargetShape, "list")
+                    writer.closeBlock("}")
+                }
+            }
+            targetShape is MapShape -> {
+                val mapValueShape = ctx.model.expectShape(targetShape.value.target)
+                // Skip struct/union-valued maps -- flattened query serialization not yet supported
+                if (mapValueShape is StructureShape || mapValueShape is UnionShape) {
+                    if (!memberShape.isRequired) {
+                        // Optional: no code needed, field is null by default
+                    } else {
+                        writer.write("_ = \$L.\$L;", accessor, fieldName)
+                    }
+                    return
+                }
+
+                val keyTag = targetShape.key.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }.orElse("key")
+                val valueTag = targetShape.value.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }.orElse("value")
+
+                if (memberShape.isRequired) {
+                    writeMapQuerySerializer(writer, ctx, smithyName, targetShape, keyTag, valueTag, "$accessor.$fieldName")
+                } else {
+                    writer.openBlock("if (\$L.\$L) |entries| {", accessor, fieldName)
+                    writeMapQuerySerializer(writer, ctx, smithyName, targetShape, keyTag, valueTag, "entries")
                     writer.closeBlock("}")
                 }
             }
@@ -342,6 +370,63 @@ open class AwsQueryProtocol : ProtocolGenerator {
         }
     }
 
+    private fun writeMapQuerySerializer(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        prefix: String,
+        mapShape: MapShape,
+        keyTag: String,
+        valueTag: String,
+        accessor: String,
+    ) {
+        // Maps are serialized as: prefix.entry.1.key=K&prefix.entry.1.value=V
+        val valueShape = ctx.model.expectShape(mapShape.value.target)
+        val valueZigType = ctx.resolveBaseZigType(valueShape)
+        val isValueEnum = ctx.isEnumType(valueShape)
+
+        writer.openBlock("for (\$L, 0..) |entry, idx| {", accessor)
+        writer.write("const n = idx + 1;")
+        writer.openBlock("{")
+        writer.write("var prefix_buf: [256]u8 = undefined;")
+        writer.write(
+            "const key_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.entry.{d}.\$L=\", .{n}) catch continue;",
+            prefix, keyTag,
+        )
+        writer.write("try body_buf.appendSlice(alloc, key_prefix);")
+        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, entry.key);")
+        writer.closeBlock("}")
+
+        writer.openBlock("{")
+        writer.write("var prefix_buf: [256]u8 = undefined;")
+        writer.write(
+            "const val_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.entry.{d}.\$L=\", .{n}) catch continue;",
+            prefix, valueTag,
+        )
+        writer.write("try body_buf.appendSlice(alloc, val_prefix);")
+
+        when {
+            isValueEnum -> {
+                writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(entry.value));")
+            }
+            valueZigType == "[]const u8" -> {
+                writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, entry.value);")
+            }
+            valueZigType in listOf("i32", "i64", "i16", "i8") -> {
+                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{entry.value}) catch \"\";")
+                writer.write("try body_buf.appendSlice(alloc, num_str);")
+            }
+            valueZigType == "bool" -> {
+                writer.write("try body_buf.appendSlice(alloc, if (entry.value) \"true\" else \"false\");")
+            }
+            else -> {
+                writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, entry.value);")
+            }
+        }
+
+        writer.closeBlock("}")
+        writer.closeBlock("}") // for
+    }
+
     override fun writeDeserializeResponse(writer: ZigWriter, ctx: OperationContext) {
         val outputName = "${ctx.operationName}Output"
         val hasMembers = ctx.outputShape.allMembers.isNotEmpty()
@@ -364,7 +449,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
             val allocUsed = ctx.outputShape.allMembers.values.any { ms ->
                 val target = ctx.model.expectShape(ms.target)
                 (target is StringShape && !ctx.isEnumType(target)) ||
-                    target is BlobShape || target is StructureShape || target is ListShape
+                    target is BlobShape || target is StructureShape || target is ListShape ||
+                    target is MapShape
             }
             if (!allocUsed) {
                 writer.write("_ = alloc;")
@@ -388,6 +474,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
     /** Check if deserializing this shape type will assign to result (vs skipElement). */
     protected fun memberWritesToResult(targetShape: Shape): Boolean {
         return targetShape is StructureShape || targetShape is ListShape ||
+            targetShape is MapShape ||
             targetShape is StringShape || targetShape is BooleanShape ||
             targetShape is IntegerShape || targetShape is ShortShape ||
             targetShape is LongShape || targetShape is FloatShape ||
@@ -472,6 +559,13 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 writer.write(
                     "result.\$L = try serde.\$L(&reader, alloc, \"\$L\");",
                     fieldName, listFnName, itemTag,
+                )
+            }
+            is MapShape -> {
+                val mapFnName = "deserialize${targetShape.id.name}"
+                writer.write(
+                    "result.\$L = try serde.\$L(&reader, alloc, \"entry\");",
+                    fieldName, mapFnName,
                 )
             }
             is EnumShape, is IntEnumShape -> {

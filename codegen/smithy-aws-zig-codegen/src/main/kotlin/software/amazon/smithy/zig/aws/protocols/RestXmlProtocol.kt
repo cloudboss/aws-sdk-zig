@@ -9,6 +9,7 @@ import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.IntegerShape
 import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.LongShape
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.Shape
 import software.amazon.smithy.model.shapes.ShortShape
@@ -114,7 +115,7 @@ class RestXmlProtocol : ProtocolGenerator {
             bindings.headers.isNotEmpty() || bindings.payload != null ||
             bindings.bodyMembers.any { (_, ms) ->
                 val ts = ctx.model.expectShape(ms.target)
-                ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape
+                ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape || ts is MapShape
             }
 
         if (!inputUsed) {
@@ -404,7 +405,7 @@ class RestXmlProtocol : ProtocolGenerator {
 
         val hasSerializableBodyMembers = bindings.bodyMembers.values.any { ms ->
             val ts = ctx.model.expectShape(ms.target)
-            ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape
+            ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape || ts is MapShape
         }
 
         if (bindings.bodyMembers.isEmpty() || !hasSerializableBodyMembers) {
@@ -475,6 +476,22 @@ class RestXmlProtocol : ProtocolGenerator {
                             writer.write("try serde.\$L(alloc, &body_buf, v, \"\$L\");", listFnName, itemTag)
                             writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
                         }
+                        writer.closeBlock("}")
+                    }
+                }
+                targetShape is MapShape -> {
+                    val mapFnName = "serialize${targetShape.id.name}"
+                    val entryTag = "entry"
+
+                    if (memberShape.isRequired) {
+                        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                        writer.write("try serde.\$L(alloc, &body_buf, input.\$L, \"\$L\");", mapFnName, fieldName, entryTag)
+                        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                    } else {
+                        writer.openBlock("if (input.\$L) |v| {", fieldName)
+                        writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                        writer.write("try serde.\$L(alloc, &body_buf, v, \"\$L\");", mapFnName, entryTag)
+                        writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
                         writer.closeBlock("}")
                     }
                 }
@@ -550,7 +567,8 @@ class RestXmlProtocol : ProtocolGenerator {
         val bodyNeedsAlloc = bindings.bodyMembers.values.any { ms ->
             val target = ctx.model.expectShape(ms.target)
             (target is StringShape && !ctx.isEnumType(target)) ||
-                target is BlobShape || target is StructureShape || target is ListShape
+                target is BlobShape || target is StructureShape || target is ListShape ||
+                target is MapShape
         }
         val headersNeedAlloc = bindings.headers.values.any { ms ->
             val ts = ctx.model.expectShape(ms.target)
@@ -691,6 +709,13 @@ class RestXmlProtocol : ProtocolGenerator {
                 writer.write(
                     "result.\$L = try serde.\$L(&reader, alloc, \"\$L\");",
                     fieldName, listFnName, itemTag,
+                )
+            }
+            is MapShape -> {
+                val mapFnName = "deserialize${targetShape.id.name}"
+                writer.write(
+                    "result.\$L = try serde.\$L(&reader, alloc, \"entry\");",
+                    fieldName, mapFnName,
                 )
             }
             is EnumShape, is IntEnumShape -> {

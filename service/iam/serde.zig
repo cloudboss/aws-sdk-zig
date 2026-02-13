@@ -932,6 +932,111 @@ pub fn deserializevirtualMFADeviceListType(reader: *aws.xml.Reader, alloc: std.m
     return list.toOwnedSlice(alloc);
 }
 
+pub fn deserializeCertificationMapType(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
+    var list: std.ArrayList(aws.map.StringMapEntry) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, entry_tag)) {
+                    var entry_key: []const u8 = "";
+                    var entry_value: []const u8 = undefined;
+                    while (try reader.next()) |inner| {
+                        switch (inner) {
+                            .element_start => |ie| {
+                                if (std.mem.eql(u8, ie.local, "key")) {
+                                    entry_key = try alloc.dupe(u8, try reader.readElementText());
+                                } else if (std.mem.eql(u8, ie.local, "value")) {
+                                    entry_value = try alloc.dupe(u8, try reader.readElementText());
+                                } else {
+                                    try reader.skipElement();
+                                }
+                            },
+                            .element_end => break,
+                            else => {},
+                        }
+                    }
+                    try list.append(alloc, .{ .key = entry_key, .value = entry_value });
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(alloc);
+}
+
+pub fn deserializeEvalDecisionDetailsType(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime entry_tag: []const u8) ![]const aws.map.MapEntry(PolicyEvaluationDecisionType) {
+    var list: std.ArrayList(aws.map.MapEntry(PolicyEvaluationDecisionType)) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, entry_tag)) {
+                    var entry_key: []const u8 = "";
+                    var entry_value: PolicyEvaluationDecisionType = undefined;
+                    while (try reader.next()) |inner| {
+                        switch (inner) {
+                            .element_start => |ie| {
+                                if (std.mem.eql(u8, ie.local, "key")) {
+                                    entry_key = try alloc.dupe(u8, try reader.readElementText());
+                                } else if (std.mem.eql(u8, ie.local, "value")) {
+                                    if (std.meta.stringToEnum(PolicyEvaluationDecisionType, try reader.readElementText())) |v| { entry_value = v; }
+                                } else {
+                                    try reader.skipElement();
+                                }
+                            },
+                            .element_end => break,
+                            else => {},
+                        }
+                    }
+                    try list.append(alloc, .{ .key = entry_key, .value = entry_value });
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(alloc);
+}
+
+pub fn deserializesummaryMapType(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime entry_tag: []const u8) ![]const aws.map.MapEntry(i32) {
+    var list: std.ArrayList(aws.map.MapEntry(i32)) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, entry_tag)) {
+                    var entry_key: []const u8 = "";
+                    var entry_value: i32 = undefined;
+                    while (try reader.next()) |inner| {
+                        switch (inner) {
+                            .element_start => |ie| {
+                                if (std.mem.eql(u8, ie.local, "key")) {
+                                    entry_key = try alloc.dupe(u8, try reader.readElementText());
+                                } else if (std.mem.eql(u8, ie.local, "value")) {
+                                    entry_value = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch 0;
+                                } else {
+                                    try reader.skipElement();
+                                }
+                            },
+                            .element_end => break,
+                            else => {},
+                        }
+                    }
+                    try list.append(alloc, .{ .key = entry_key, .value = entry_value });
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(alloc);
+}
+
 pub fn deserializeAccessDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AccessDetail {
     var result: AccessDetail = undefined;
     result.entity_path = null;
@@ -1291,7 +1396,7 @@ pub fn deserializeEvaluationResult(reader: *aws.xml.Reader, alloc: std.mem.Alloc
                 } else if (std.mem.eql(u8, e.local, "EvalDecision")) {
                     result.eval_decision = std.meta.stringToEnum(PolicyEvaluationDecisionType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EvalDecisionDetails")) {
-                    result.eval_decision_details = try alloc.dupe(u8, try reader.readElementText());
+                    result.eval_decision_details = try deserializeEvalDecisionDetailsType(reader, alloc, "entry");
                 } else if (std.mem.eql(u8, e.local, "EvalResourceName")) {
                     result.eval_resource_name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MatchedStatements")) {
@@ -1889,7 +1994,7 @@ pub fn deserializeResourceSpecificResult(reader: *aws.xml.Reader, alloc: std.mem
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EvalDecisionDetails")) {
-                    result.eval_decision_details = try alloc.dupe(u8, try reader.readElementText());
+                    result.eval_decision_details = try deserializeEvalDecisionDetailsType(reader, alloc, "entry");
                 } else if (std.mem.eql(u8, e.local, "EvalResourceDecision")) {
                     result.eval_resource_decision = std.meta.stringToEnum(PolicyEvaluationDecisionType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EvalResourceName")) {

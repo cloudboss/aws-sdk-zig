@@ -891,6 +891,41 @@ pub fn deserializeTransitionList(reader: *aws.xml.Reader, alloc: std.mem.Allocat
     return list.toOwnedSlice(alloc);
 }
 
+pub fn deserializeMetadata(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
+    var list: std.ArrayList(aws.map.StringMapEntry) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, entry_tag)) {
+                    var entry_key: []const u8 = "";
+                    var entry_value: []const u8 = undefined;
+                    while (try reader.next()) |inner| {
+                        switch (inner) {
+                            .element_start => |ie| {
+                                if (std.mem.eql(u8, ie.local, "key")) {
+                                    entry_key = try alloc.dupe(u8, try reader.readElementText());
+                                } else if (std.mem.eql(u8, ie.local, "value")) {
+                                    entry_value = try alloc.dupe(u8, try reader.readElementText());
+                                } else {
+                                    try reader.skipElement();
+                                }
+                            },
+                            .element_end => break,
+                            else => {},
+                        }
+                    }
+                    try list.append(alloc, .{ .key = entry_key, .value = entry_value });
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(alloc);
+}
+
 pub fn deserializeAbacStatus(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AbacStatus {
     _ = alloc;
     var result: AbacStatus = undefined;
@@ -3786,6 +3821,23 @@ pub fn serializeUserMetadata(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), 
         try serializeMetadataEntry(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeMetadata(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), entries: []const aws.map.StringMapEntry, comptime entry_tag: []const u8) !void {
+    for (entries) |entry| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, entry_tag);
+        try buf.appendSlice(alloc, ">");
+        try buf.appendSlice(alloc, "<key>");
+        try aws.xml.appendXmlEscaped(alloc, buf, entry.key);
+        try buf.appendSlice(alloc, "</key>");
+        try buf.appendSlice(alloc, "<value>");
+        try aws.xml.appendXmlEscaped(alloc, buf, entry.value);
+        try buf.appendSlice(alloc, "</value>");
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, entry_tag);
         try buf.appendSlice(alloc, ">");
     }
 }

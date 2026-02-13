@@ -51,20 +51,28 @@ class SerdeGenerator(
     /** I/O shape IDs that are exclusively I/O (not also member types). */
     private val exclusiveIoShapeIds: Set<ShapeId> by lazy { collectExclusiveIoShapeIds() }
 
+    /** Map shapes that need map deserializer helpers. */
+    private val deserializableMaps: Set<MapShape> by lazy { collectDeserializableMaps() }
+
     /** Struct shapes that need serialize functions (from input shapes). */
     private val serializableStructs: Set<StructureShape> by lazy { collectSerializableShapes() }
 
     /** List shapes that need list serializer helpers (from input shapes). */
     private val serializableLists: Set<ListShape> by lazy { collectSerializableLists() }
 
+    /** Map shapes that need map serializer helpers (from input shapes). */
+    private val serializableMaps: Set<MapShape> by lazy { collectSerializableMaps() }
+
     fun run() {
         val deserStructs = deserializableStructs.sortedBy { it.id.name }
         val deserLists = deserializableLists.sortedBy { it.id.name }
+        val deserMaps = deserializableMaps.sortedBy { it.id.name }
         val serStructs = serializableStructs.sortedBy { it.id.name }
         val serLists = serializableLists.sortedBy { it.id.name }
+        val serMaps = serializableMaps.sortedBy { it.id.name }
 
-        if (deserStructs.isEmpty() && deserLists.isEmpty() &&
-            serStructs.isEmpty() && serLists.isEmpty()
+        if (deserStructs.isEmpty() && deserLists.isEmpty() && deserMaps.isEmpty() &&
+            serStructs.isEmpty() && serLists.isEmpty() && serMaps.isEmpty()
         ) return
 
         context.writerDelegator().useFileWriter("serde.zig") { writer ->
@@ -76,7 +84,8 @@ class SerdeGenerator(
             // Import all referenced types (from both deser and ser)
             val allStructs = (deserStructs + serStructs).distinctBy { it.id.name }.sortedBy { it.id.name }
             val allLists = (deserLists + serLists).distinctBy { it.id.name }.sortedBy { it.id.name }
-            val importedTypes = collectImportedTypes(allStructs, allLists)
+            val allMaps = (deserMaps + serMaps).distinctBy { it.id.name }.sortedBy { it.id.name }
+            val importedTypes = collectImportedTypes(allStructs, allLists, allMaps)
             for (typeName in importedTypes.sorted()) {
                 val fileName = NamingUtil.toZigFileName(typeName)
                 writer.write("const \$L = @import(\"\$L\").\$L;", typeName, fileName, typeName)
@@ -91,6 +100,12 @@ class SerdeGenerator(
                 writer.blankLine()
             }
 
+            // Generate map deserializers
+            for (mapShape in deserMaps) {
+                writeMapDeserializer(writer, mapShape)
+                writer.blankLine()
+            }
+
             // Generate struct deserializers
             for (structShape in deserStructs) {
                 writeStructDeserializer(writer, structShape)
@@ -100,6 +115,12 @@ class SerdeGenerator(
             // Generate list serializers
             for (listShape in serLists) {
                 writeListSerializer(writer, listShape)
+                writer.blankLine()
+            }
+
+            // Generate map serializers
+            for (mapShape in serMaps) {
+                writeMapSerializer(writer, mapShape)
                 writer.blankLine()
             }
 
@@ -164,7 +185,18 @@ class SerdeGenerator(
                 }
             }
             is MapShape -> {
-                // Maps are []const u8 placeholder -- skip
+                val valueTarget = model.expectShape(target.value.target)
+                if (valueTarget is StructureShape) {
+                    if (valueTarget.id !in excludeIds) {
+                        result.add(valueTarget)
+                    }
+                    if (valueTarget.id !in visited) {
+                        visited.add(valueTarget.id)
+                        for ((_, m) in valueTarget.allMembers) {
+                            collectNestedStructs(m, result, visited, excludeIds)
+                        }
+                    }
+                }
             }
         }
     }
@@ -213,6 +245,41 @@ class SerdeGenerator(
         }
     }
 
+    private fun collectDeserializableMaps(): Set<MapShape> {
+        val result = mutableSetOf<MapShape>()
+        val visited = mutableSetOf<ShapeId>()
+
+        for (op in topDownIndex.getContainedOperations(service)) {
+            val outputShape = model.expectShape(op.outputShape, StructureShape::class.java)
+            collectNestedMaps(outputShape, result, visited)
+        }
+
+        // Also collect maps from nested deserialized structs
+        for (structShape in deserializableStructs) {
+            collectNestedMaps(structShape, result, visited)
+        }
+        return result
+    }
+
+    private fun collectNestedMaps(
+        structShape: StructureShape,
+        result: MutableSet<MapShape>,
+        visited: MutableSet<ShapeId>,
+    ) {
+        for ((_, member) in structShape.allMembers) {
+            val target = model.expectShape(member.target)
+            if (target is MapShape && target.id !in visited) {
+                visited.add(target.id)
+                result.add(target)
+                // Recurse into struct values
+                val valueShape = model.expectShape(target.value.target)
+                if (valueShape is StructureShape) {
+                    collectNestedMaps(valueShape, result, visited)
+                }
+            }
+        }
+    }
+
     private fun collectSerializableShapes(): Set<StructureShape> {
         val result = mutableSetOf<StructureShape>()
         val visited = mutableSetOf<ShapeId>()
@@ -239,6 +306,22 @@ class SerdeGenerator(
         // Also collect lists from nested serializable structs
         for (structShape in serializableStructs) {
             collectNestedLists(structShape, result, visited)
+        }
+        return result
+    }
+
+    private fun collectSerializableMaps(): Set<MapShape> {
+        val result = mutableSetOf<MapShape>()
+        val visited = mutableSetOf<ShapeId>()
+
+        for (op in topDownIndex.getContainedOperations(service)) {
+            val inputShape = model.expectShape(op.inputShape, StructureShape::class.java)
+            collectNestedMaps(inputShape, result, visited)
+        }
+
+        // Also collect maps from nested serializable structs
+        for (structShape in serializableStructs) {
+            collectNestedMaps(structShape, result, visited)
         }
         return result
     }
@@ -284,6 +367,7 @@ class SerdeGenerator(
     private fun collectImportedTypes(
         structs: List<StructureShape>,
         lists: List<ListShape>,
+        maps: List<MapShape> = emptyList(),
     ): Set<String> {
         val types = mutableSetOf<String>()
 
@@ -306,6 +390,15 @@ class SerdeGenerator(
                         types.add(elem.id.name)
                     }
                 }
+                // Also check map value types
+                if (target is MapShape) {
+                    val valueShape = model.expectShape(target.value.target)
+                    if (valueShape is StructureShape) {
+                        types.add(valueShape.id.name)
+                    } else if (isEnumType(valueShape)) {
+                        types.add(valueShape.id.name)
+                    }
+                }
             }
         }
 
@@ -316,6 +409,16 @@ class SerdeGenerator(
                 types.add(elem.id.name)
             } else if (isEnumType(elem)) {
                 types.add(elem.id.name)
+            }
+        }
+
+        // Map value types
+        for (m in maps) {
+            val valueShape = model.expectShape(m.value.target)
+            if (valueShape is StructureShape) {
+                types.add(valueShape.id.name)
+            } else if (isEnumType(valueShape)) {
+                types.add(valueShape.id.name)
             }
         }
 
@@ -537,10 +640,11 @@ class SerdeGenerator(
                 )
             }
             is MapShape -> {
-                // Maps are []const u8 placeholder -- read raw text
+                val mapFnName = "deserialize${targetShape.id.name}"
+                val entryTag = getMapEntryTag(targetShape)
                 writer.write(
-                    "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
-                    fieldName,
+                    "result.\$L = try \$L(reader, alloc, \"\$L\");",
+                    fieldName, mapFnName, entryTag,
                 )
             }
             else -> {
@@ -647,6 +751,215 @@ class SerdeGenerator(
             (shape is StringShape && shape.hasTrait(EnumTrait::class.java))
     }
 
+    private fun getMapEntryTag(mapShape: MapShape): String {
+        // Default entry wrapper tag for AWS maps
+        return "entry"
+    }
+
+    private fun getMapKeyTag(mapShape: MapShape): String {
+        return mapShape.key.getTrait(XmlNameTrait::class.java)
+            .map { it.value }
+            .orElse("key")
+    }
+
+    private fun getMapValueTag(mapShape: MapShape): String {
+        return mapShape.value.getTrait(XmlNameTrait::class.java)
+            .map { it.value }
+            .orElse("value")
+    }
+
+    private fun writeMapDeserializer(writer: ZigWriter, mapShape: MapShape) {
+        val valueShape = model.expectShape(mapShape.value.target)
+        val fnName = "deserialize${mapShape.id.name}"
+        val valueSymbol = symbolProvider.toSymbol(mapShape)
+        val returnType = valueSymbol.name
+        val keyTag = getMapKeyTag(mapShape)
+        val valueTag = getMapValueTag(mapShape)
+
+        writer.openBlock(
+            "pub fn \$L(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime entry_tag: []const u8) !\$L {",
+            fnName, returnType,
+        )
+
+        // Determine value Zig type for the MapEntry
+        val valueZigType = symbolProvider.toSymbol(valueShape).name
+        val entryType = if (valueZigType == "[]const u8") {
+            "aws.map.StringMapEntry"
+        } else {
+            "aws.map.MapEntry($valueZigType)"
+        }
+
+        writer.write("var list: std.ArrayList(\$L) = .{};", entryType)
+        writer.openBlock("while (try reader.next()) |event| {")
+        writer.openBlock("switch (event) {")
+        writer.openBlock(".element_start => |e| {")
+        writer.openBlock("if (std.mem.eql(u8, e.local, entry_tag)) {")
+
+        // Parse key and value from child elements
+        writer.write("var entry_key: []const u8 = \"\";")
+        writer.write("var entry_value: \$L = undefined;", valueZigType)
+        writer.openBlock("while (try reader.next()) |inner| {")
+        writer.openBlock("switch (inner) {")
+        writer.openBlock(".element_start => |ie| {")
+
+        // Key parsing
+        writer.openBlock("if (std.mem.eql(u8, ie.local, \"\$L\")) {", keyTag)
+        writer.write("entry_key = try alloc.dupe(u8, try reader.readElementText());")
+        writer.dedent()
+        writer.openBlock("} else if (std.mem.eql(u8, ie.local, \"\$L\")) {", valueTag)
+
+        // Value parsing depends on value type
+        writeMapValueDeserializer(writer, valueShape)
+
+        writer.dedent()
+        writer.openBlock("} else {")
+        writer.write("try reader.skipElement();")
+        writer.closeBlock("}")
+        writer.closeBlock("},") // .element_start
+        writer.write(".element_end => break,")
+        writer.write("else => {},")
+        writer.closeBlock("}") // switch
+        writer.closeBlock("}") // while
+
+        writer.write("try list.append(alloc, .{ .key = entry_key, .value = entry_value });")
+
+        writer.closeBlock("} else {") // if eql
+        writer.write("    try reader.skipElement();")
+        writer.write("}")
+        writer.closeBlock("},") // .element_start
+        writer.write(".element_end => break,")
+        writer.write("else => {},")
+        writer.closeBlock("}") // switch
+        writer.closeBlock("}") // while
+
+        writer.write("return list.toOwnedSlice(alloc);")
+        writer.closeBlock("}") // fn
+    }
+
+    private fun writeMapValueDeserializer(writer: ZigWriter, valueShape: Shape) {
+        when (valueShape) {
+            is StringShape -> {
+                if (isEnumType(valueShape)) {
+                    writer.write(
+                        "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| { entry_value = v; }",
+                        valueShape.id.name,
+                    )
+                } else {
+                    writer.write("entry_value = try alloc.dupe(u8, try reader.readElementText());")
+                }
+            }
+            is BooleanShape -> {
+                writer.write("entry_value = std.mem.eql(u8, try reader.readElementText(), \"true\");")
+            }
+            is IntegerShape, is ShortShape -> {
+                writer.write("entry_value = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch 0;")
+            }
+            is LongShape -> {
+                writer.write("entry_value = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch 0;")
+            }
+            is FloatShape -> {
+                writer.write("entry_value = std.fmt.parseFloat(f32, try reader.readElementText()) catch 0;")
+            }
+            is DoubleShape -> {
+                writer.write("entry_value = std.fmt.parseFloat(f64, try reader.readElementText()) catch 0;")
+            }
+            is StructureShape -> {
+                writer.write("entry_value = try deserialize\$L(reader, alloc);", valueShape.id.name)
+            }
+            is EnumShape, is IntEnumShape -> {
+                writer.write(
+                    "if (std.meta.stringToEnum(\$L, try reader.readElementText())) |v| { entry_value = v; }",
+                    valueShape.id.name,
+                )
+            }
+            else -> {
+                writer.write("entry_value = try alloc.dupe(u8, try reader.readElementText());")
+            }
+        }
+    }
+
+    private fun writeMapSerializer(writer: ZigWriter, mapShape: MapShape) {
+        val valueShape = model.expectShape(mapShape.value.target)
+        val fnName = "serialize${mapShape.id.name}"
+        val valueZigType = symbolProvider.toSymbol(valueShape).name
+        val entryType = if (valueZigType == "[]const u8") {
+            "aws.map.StringMapEntry"
+        } else {
+            "aws.map.MapEntry($valueZigType)"
+        }
+        val keyTag = getMapKeyTag(mapShape)
+        val valueTag = getMapValueTag(mapShape)
+
+        writer.openBlock(
+            "pub fn \$L(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), entries: []const \$L, comptime entry_tag: []const u8) !void {",
+            fnName, entryType,
+        )
+
+        writer.openBlock("for (entries) |entry| {")
+        writer.write("try buf.appendSlice(alloc, \"<\");")
+        writer.write("try buf.appendSlice(alloc, entry_tag);")
+        writer.write("try buf.appendSlice(alloc, \">\");")
+
+        // Serialize key
+        writer.write("try buf.appendSlice(alloc, \"<\$L>\");", keyTag)
+        writer.write("try aws.xml.appendXmlEscaped(alloc, buf, entry.key);")
+        writer.write("try buf.appendSlice(alloc, \"</\$L>\");", keyTag)
+
+        // Serialize value
+        writeMapValueSerializer(writer, valueShape, valueTag)
+
+        writer.write("try buf.appendSlice(alloc, \"</\");")
+        writer.write("try buf.appendSlice(alloc, entry_tag);")
+        writer.write("try buf.appendSlice(alloc, \">\");")
+        writer.closeBlock("}") // for
+
+        writer.closeBlock("}") // fn
+    }
+
+    private fun writeMapValueSerializer(writer: ZigWriter, valueShape: Shape, valueTag: String) {
+        when (valueShape) {
+            is StringShape -> {
+                if (isEnumType(valueShape)) {
+                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
+                    writer.write("try buf.appendSlice(alloc, @tagName(entry.value));")
+                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                } else {
+                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
+                    writer.write("try aws.xml.appendXmlEscaped(alloc, buf, entry.value);")
+                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+                }
+            }
+            is BooleanShape -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(alloc, if (entry.value) \"true\" else \"false\");")
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+            }
+            is IntegerShape, is ShortShape, is LongShape, is FloatShape, is DoubleShape -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
+                writer.openBlock("{")
+                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{entry.value}) catch \"\";")
+                writer.write("try buf.appendSlice(alloc, num_str);")
+                writer.closeBlock("}")
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+            }
+            is EnumShape, is IntEnumShape -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
+                writer.write("try buf.appendSlice(alloc, @tagName(entry.value));")
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+            }
+            is StructureShape -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
+                writer.write("try serialize\$L(alloc, buf, entry.value);", valueShape.id.name)
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+            }
+            else -> {
+                writer.write("try buf.appendSlice(alloc, \"<\$L>\");", valueTag)
+                writer.write("try aws.xml.appendXmlEscaped(alloc, buf, entry.value);")
+                writer.write("try buf.appendSlice(alloc, \"</\$L>\");", valueTag)
+            }
+        }
+    }
+
     // ---- Serialization code generation ----
 
     private fun isSerializableType(shape: Shape): Boolean {
@@ -654,7 +967,8 @@ class SerdeGenerator(
             shape is IntegerShape || shape is ShortShape || shape is LongShape ||
             shape is FloatShape || shape is DoubleShape ||
             shape is EnumShape || shape is IntEnumShape ||
-            shape is TimestampShape || shape is StructureShape || shape is ListShape
+            shape is TimestampShape || shape is StructureShape || shape is ListShape ||
+            shape is MapShape
     }
 
     private fun writeStructSerializer(writer: ZigWriter, shape: StructureShape) {
@@ -759,9 +1073,18 @@ class SerdeGenerator(
                     writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
                 }
             }
-            else -> {
-                // Maps, blobs, etc. -- skip for now
+            is MapShape -> {
+                val mapFnName = "serialize${targetShape.id.name}"
+                val entryTag = getMapEntryTag(targetShape)
+                if (memberShape.hasTrait(XmlFlattenedTrait::class.java)) {
+                    writer.write("try \$L(alloc, buf, \$L, \"\$L\");", mapFnName, accessor, xmlName)
+                } else {
+                    writer.write("try buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                    writer.write("try \$L(alloc, buf, \$L, \"\$L\");", mapFnName, accessor, entryTag)
+                    writer.write("try buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+                }
             }
+            else -> {}
         }
     }
 

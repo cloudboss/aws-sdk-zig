@@ -1047,7 +1047,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateMultipartUploadInput,
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    try body_buf.appendSlice(alloc, "<CreateMultipartUploadRequest>");
+    if (input.metadata) |v| {
+        try body_buf.appendSlice(alloc, "<Metadata>");
+        try serde.serializeMetadata(alloc, &body_buf, v, "entry");
+        try body_buf.appendSlice(alloc, "</Metadata>");
+    }
+    try body_buf.appendSlice(alloc, "</CreateMultipartUploadRequest>");
+    const body = try body_buf.toOwnedSlice(alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;
