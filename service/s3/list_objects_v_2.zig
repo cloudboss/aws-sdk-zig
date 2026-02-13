@@ -498,7 +498,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListObjectsV2Input, config:
         try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
     }
     if (input.optional_object_attributes) |v| {
-        try request.headers.put(alloc, "x-amz-optional-object-attributes", v);
+        {
+            var header_buf: std.ArrayList(u8) = .{};
+            for (v) |item| {
+                if (header_buf.items.len > 0) try header_buf.appendSlice(alloc, ", ");
+                try header_buf.appendSlice(alloc, @tagName(item));
+            }
+            try request.headers.put(alloc, "x-amz-optional-object-attributes", header_buf.items);
+        }
     }
     if (input.request_payer) |v| {
         try request.headers.put(alloc, "x-amz-request-payer", @tagName(v));

@@ -464,7 +464,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetObjectAttributesInput, c
             try request.headers.put(alloc, "x-amz-max-parts", num_str);
         }
     }
-    try request.headers.put(alloc, "x-amz-object-attributes", input.object_attributes);
+    {
+        var header_buf: std.ArrayList(u8) = .{};
+        for (input.object_attributes) |item| {
+            if (header_buf.items.len > 0) try header_buf.appendSlice(alloc, ", ");
+            try header_buf.appendSlice(alloc, @tagName(item));
+        }
+        try request.headers.put(alloc, "x-amz-object-attributes", header_buf.items);
+    }
     if (input.part_number_marker) |v| {
         try request.headers.put(alloc, "x-amz-part-number-marker", v);
     }

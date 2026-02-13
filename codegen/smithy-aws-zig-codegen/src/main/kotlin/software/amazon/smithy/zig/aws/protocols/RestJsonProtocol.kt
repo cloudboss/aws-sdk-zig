@@ -2,7 +2,9 @@ package software.amazon.smithy.zig.aws.protocols
 
 import software.amazon.smithy.model.shapes.BlobShape
 import software.amazon.smithy.model.shapes.EnumShape
+import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.MemberShape
+import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.HttpHeaderTrait
 import software.amazon.smithy.model.traits.HttpLabelTrait
@@ -185,10 +187,48 @@ class RestJsonProtocol : ProtocolGenerator {
             zigType == "bool" -> {
                 writer.write("try request.headers.put(alloc, \"\$L\", if (\$L) \"true\" else \"false\");", headerName, varName)
             }
+            targetShape is ListShape -> {
+                writeListHeaderPut(writer, ctx, targetShape, headerName, varName)
+            }
             else -> {
                 writer.write("try request.headers.put(alloc, \"\$L\", \$L);", headerName, varName)
             }
         }
+    }
+
+    private fun writeListHeaderPut(writer: ZigWriter, ctx: OperationContext, listShape: ListShape, headerName: String, varName: String) {
+        val elementShape = ctx.model.expectShape(listShape.member.target)
+        val isElementEnum = elementShape is EnumShape ||
+            (elementShape is StringShape && elementShape.hasTrait(EnumTrait::class.java))
+        val elementZigType = ctx.resolveBaseZigType(elementShape)
+
+        writer.openBlock("{")
+        writer.write("var header_buf: std.ArrayList(u8) = .{};")
+        writer.openBlock("for (\$L) |item| {", varName)
+        writer.write("if (header_buf.items.len > 0) try header_buf.appendSlice(alloc, \", \");")
+
+        when {
+            isElementEnum -> {
+                writer.write("try header_buf.appendSlice(alloc, @tagName(item));")
+            }
+            elementZigType == "[]const u8" -> {
+                writer.write("try header_buf.appendSlice(alloc, item);")
+            }
+            elementZigType in listOf("i32", "i64", "i16", "i8") -> {
+                writer.write("const num_str = std.fmt.allocPrint(alloc, \"{d}\", .{item}) catch \"\";")
+                writer.write("try header_buf.appendSlice(alloc, num_str);")
+            }
+            elementZigType == "bool" -> {
+                writer.write("try header_buf.appendSlice(alloc, if (item) \"true\" else \"false\");")
+            }
+            else -> {
+                writer.write("try header_buf.appendSlice(alloc, item);")
+            }
+        }
+
+        writer.closeBlock("}")
+        writer.write("try request.headers.put(alloc, \"\$L\", header_buf.items);", headerName)
+        writer.closeBlock("}")
     }
 
     private fun writeUriBuilder(writer: ZigWriter, pathPattern: String, bindings: InputBindings) {
