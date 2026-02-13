@@ -4,6 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConditionalOperator = @import("conditional_operator.zig").ConditionalOperator;
+const ExpectedAttributeValue = @import("expected_attribute_value.zig").ExpectedAttributeValue;
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const ReturnConsumedCapacity = @import("return_consumed_capacity.zig").ReturnConsumedCapacity;
 const ReturnItemCollectionMetrics = @import("return_item_collection_metrics.zig").ReturnItemCollectionMetrics;
 const ReturnValue = @import("return_value.zig").ReturnValue;
@@ -62,7 +64,7 @@ pub const DeleteItemInput = struct {
     /// information, see
     /// [Expected](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expected: ?[]const u8 = null,
+    expected: ?[]const aws.map.MapEntry(ExpectedAttributeValue) = null,
 
     /// One or more substitution tokens for attribute names in an expression. The
     /// following
@@ -107,7 +109,7 @@ pub const DeleteItemInput = struct {
     /// For more information on expression attribute names, see [Specifying Item
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_names: ?[]const u8 = null,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry = null,
 
     /// One or more values that can be substituted in an expression.
     ///
@@ -131,7 +133,7 @@ pub const DeleteItemInput = struct {
     /// For more information on expression attribute values, see [Condition
     /// Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_values: ?[]const u8 = null,
+    expression_attribute_values: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// A map of attribute names to `AttributeValue` objects, representing the
     /// primary key of the item to delete.
@@ -143,7 +145,7 @@ pub const DeleteItemInput = struct {
     /// composite primary key, you must provide values for both the partition key
     /// and the sort
     /// key.
-    key: []const u8,
+    key: []const aws.map.MapEntry(AttributeValue),
 
     return_consumed_capacity: ?ReturnConsumedCapacity = null,
 
@@ -211,7 +213,7 @@ pub const DeleteItemOutput = struct {
     /// as it appeared before the `DeleteItem` operation. This map appears in the
     /// response only if `ReturnValues` was specified as `ALL_OLD` in the
     /// request.
-    attributes: ?[]const u8 = null,
+    attributes: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// The capacity units consumed by the `DeleteItem` operation. The data
     /// returned includes the total provisioned throughput consumed, along with

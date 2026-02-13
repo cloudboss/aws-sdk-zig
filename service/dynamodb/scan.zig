@@ -4,7 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConditionalOperator = @import("conditional_operator.zig").ConditionalOperator;
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const ReturnConsumedCapacity = @import("return_consumed_capacity.zig").ReturnConsumedCapacity;
+const Condition = @import("condition.zig").Condition;
 const Select = @import("select.zig").Select;
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
 
@@ -106,7 +108,7 @@ pub const ScanInput = struct {
     /// `ExclusiveStartKey` must specify the same segment whose previous
     /// `Scan` returned the corresponding value of
     /// `LastEvaluatedKey`.
-    exclusive_start_key: ?[]const u8 = null,
+    exclusive_start_key: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// One or more substitution tokens for attribute names in an expression. The
     /// following
@@ -151,7 +153,7 @@ pub const ScanInput = struct {
     /// For more information on expression attribute names, see [Specifying Item
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_names: ?[]const u8 = null,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry = null,
 
     /// One or more values that can be substituted in an expression.
     ///
@@ -175,7 +177,7 @@ pub const ScanInput = struct {
     /// For more information on expression attribute values, see [Condition
     /// Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_values: ?[]const u8 = null,
+    expression_attribute_values: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// A string that contains conditions that DynamoDB applies after the `Scan`
     /// operation, but before the data is returned to you. Items that do not satisfy
@@ -238,7 +240,7 @@ pub const ScanInput = struct {
     /// information, see
     /// [ScanFilter](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    scan_filter: ?[]const u8 = null,
+    scan_filter: ?[]const aws.map.MapEntry(Condition) = null,
 
     /// For a parallel `Scan` request, `Segment` identifies an
     /// individual segment to be scanned by an application worker.
@@ -389,7 +391,7 @@ pub const ScanOutput = struct {
     /// An array of item attributes that match the scan criteria. Each element in
     /// this array
     /// consists of an attribute name and the value for that attribute.
-    items: ?[]const []const u8 = null,
+    items: ?[]const []const aws.map.MapEntry(AttributeValue) = null,
 
     /// The primary key of the item where the operation stopped, inclusive of the
     /// previous
@@ -404,7 +406,7 @@ pub const ScanOutput = struct {
     /// is more data in the result set. The only way to know when you have reached
     /// the end of
     /// the result set is when `LastEvaluatedKey` is empty.
-    last_evaluated_key: ?[]const u8 = null,
+    last_evaluated_key: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// The number of items evaluated, before any `ScanFilter` is applied. A high
     /// `ScannedCount` value with few, or no, `Count` results

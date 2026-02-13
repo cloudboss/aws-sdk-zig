@@ -6,6 +6,7 @@ import software.amazon.smithy.model.Model
 import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.ListShape
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
@@ -32,6 +33,22 @@ class StructureGenerator(
 
     fun run() {
         context.writerDelegator().useShapeWriter(shape) { writer ->
+            // Import aws runtime if any member transitively uses map types
+            fun containsMap(target: software.amazon.smithy.model.shapes.Shape): Boolean {
+                return when (target) {
+                    is MapShape -> true
+                    is ListShape -> containsMap(model.expectShape(target.member.target))
+                    else -> false
+                }
+            }
+            val hasMapMembers = shape.allMembers.values.any { member ->
+                containsMap(model.expectShape(member.target))
+            }
+            if (hasMapMembers) {
+                writer.write("const aws = @import(\"aws\");")
+                writer.blankLine()
+            }
+
             // Import referenced named types (enums, structs, unions)
             val referencedTypes = collectReferencedNamedTypes()
             for (typeName in referencedTypes) {
@@ -94,33 +111,30 @@ class StructureGenerator(
 
     /**
      * Collect type names of named shapes (enums, structs, unions) referenced by members,
-     * excluding the current shape itself. Handles list member targets too.
+     * excluding the current shape itself. Recurses through list elements and map values
+     * to find nested named types.
      */
     private fun collectReferencedNamedTypes(): Set<String> {
         val result = mutableSetOf<String>()
 
-        for ((_, memberShape) in shape.allMembers) {
-            val targetShape = model.expectShape(memberShape.target)
+        fun collectFromShape(targetShape: software.amazon.smithy.model.shapes.Shape) {
             when (targetShape) {
                 is StructureShape -> result.add(targetShape.id.name)
                 is EnumShape -> result.add(targetShape.id.name)
                 is IntEnumShape -> result.add(targetShape.id.name)
                 is UnionShape -> result.add(targetShape.id.name)
-                is ListShape -> {
-                    val listTarget = model.expectShape(targetShape.member.target)
-                    when (listTarget) {
-                        is StructureShape -> result.add(listTarget.id.name)
-                        is EnumShape -> result.add(listTarget.id.name)
-                        is IntEnumShape -> result.add(listTarget.id.name)
-                        is UnionShape -> result.add(listTarget.id.name)
+                is ListShape -> collectFromShape(model.expectShape(targetShape.member.target))
+                is MapShape -> collectFromShape(model.expectShape(targetShape.value.target))
+                is software.amazon.smithy.model.shapes.StringShape -> {
+                    if (targetShape.hasTrait(EnumTrait::class.java)) {
+                        result.add(targetShape.id.name)
                     }
                 }
             }
-            // Also check for legacy string enums with @enum trait
-            if (targetShape is software.amazon.smithy.model.shapes.StringShape &&
-                targetShape.hasTrait(EnumTrait::class.java)) {
-                result.add(targetShape.id.name)
-            }
+        }
+
+        for ((_, memberShape) in shape.allMembers) {
+            collectFromShape(model.expectShape(memberShape.target))
         }
 
         // Don't import ourselves

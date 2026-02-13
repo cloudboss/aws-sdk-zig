@@ -1,3 +1,6 @@
+const aws = @import("aws");
+
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const ReturnValuesOnConditionCheckFailure = @import("return_values_on_condition_check_failure.zig").ReturnValuesOnConditionCheckFailure;
 
 /// Represents a request to perform a check that an item exists or to check the
@@ -16,19 +19,19 @@ pub const ConditionCheck = struct {
     /// information, see [Expression attribute
     /// names](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_names: ?[]const u8,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry,
 
     /// One or more values that can be substituted in an expression. For more
     /// information, see
     /// [Condition
     /// expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_values: ?[]const u8,
+    expression_attribute_values: ?[]const aws.map.MapEntry(AttributeValue),
 
     /// The primary key of the item to be checked. Each element consists of an
     /// attribute name
     /// and a value for that attribute.
-    key: []const u8,
+    key: []const aws.map.MapEntry(AttributeValue),
 
     /// Use `ReturnValuesOnConditionCheckFailure` to get the item attributes if the
     /// `ConditionCheck` condition fails. For

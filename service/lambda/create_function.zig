@@ -220,7 +220,7 @@ pub const CreateFunctionInput = struct {
 
     /// A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
     /// to apply to the function.
-    tags: ?[]const u8 = null,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Configuration for multi-tenant applications that use Lambda functions.
     /// Defines tenant isolation settings and resource allocations. Required for

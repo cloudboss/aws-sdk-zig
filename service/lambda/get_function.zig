@@ -51,7 +51,7 @@ pub const GetFunctionOutput = struct {
     /// [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html). Lambda
     /// returns tag data only if you have explicit allow permissions for
     /// [lambda:ListTags](https://docs.aws.amazon.com/lambda/latest/api/API_ListTags.html).
-    tags: ?[]const u8 = null,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// An object that contains details about an error related to retrieving tags.
     tags_error: ?TagsError = null,

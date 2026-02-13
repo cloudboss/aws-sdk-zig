@@ -3,6 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const serde = @import("serde.zig");
 
 /// Retrieves information about an MFA device for a specified user.
 pub const GetMFADeviceInput = struct {
@@ -22,7 +23,7 @@ pub const GetMFADeviceOutput = struct {
     /// FIPS-140-3, and FIDO certification levels obtained from [ FIDO Alliance
     /// Metadata Service
     /// (MDS)](https://fidoalliance.org/metadata/).
-    certifications: ?[]const u8 = null,
+    certifications: ?[]const aws.map.StringMapEntry = null,
 
     /// The date that a specified user's MFA device was first enabled.
     enable_date: ?i64 = null,

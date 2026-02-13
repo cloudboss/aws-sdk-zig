@@ -9,6 +9,7 @@ const ReplicationStatus = @import("replication_status.zig").ReplicationStatus;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEncryption;
 const StorageClass = @import("storage_class.zig").StorageClass;
+const serde = @import("serde.zig");
 
 /// **Note:**
 ///
@@ -236,7 +237,7 @@ pub const WriteGetObjectResponseInput = struct {
     last_modified: ?i64 = null,
 
     /// A map of metadata to store with the object in S3.
-    metadata: ?[]const u8 = null,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// Set to the number of metadata entries not returned in `x-amz-meta` headers.
     /// This can

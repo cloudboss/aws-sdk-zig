@@ -7,6 +7,7 @@ const ReturnConsumedCapacity = @import("return_consumed_capacity.zig").ReturnCon
 const ReturnItemCollectionMetrics = @import("return_item_collection_metrics.zig").ReturnItemCollectionMetrics;
 const TransactWriteItem = @import("transact_write_item.zig").TransactWriteItem;
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
+const ItemCollectionMetrics = @import("item_collection_metrics.zig").ItemCollectionMetrics;
 
 /// `TransactWriteItems` is a synchronous write operation that groups up to 100
 /// action requests. These actions can target items in different tables, but not
@@ -149,7 +150,7 @@ pub const TransactWriteItemsOutput = struct {
     /// individual
     /// `UpdateItem`, `PutItem`, or `DeleteItem`
     /// operations.
-    item_collection_metrics: ?[]const u8 = null,
+    item_collection_metrics: ?[]const aws.map.MapEntry([]const ItemCollectionMetrics) = null,
 
     _arena: std.heap.ArenaAllocator = undefined,
 

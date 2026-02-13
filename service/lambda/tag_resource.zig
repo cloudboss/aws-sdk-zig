@@ -11,7 +11,7 @@ pub const TagResourceInput = struct {
     resource: []const u8,
 
     /// A list of tags to apply to the resource.
-    tags: []const u8,
+    tags: []const aws.map.StringMapEntry,
 
     pub const json_field_names = .{
         .resource = "Resource",

@@ -12,6 +12,7 @@ const RequestPayer = @import("request_payer.zig").RequestPayer;
 const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEncryption;
 const StorageClass = @import("storage_class.zig").StorageClass;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
+const serde = @import("serde.zig");
 
 /// **Important:**
 ///
@@ -693,7 +694,7 @@ pub const CreateMultipartUploadInput = struct {
     key: []const u8,
 
     /// A map of metadata to store with the object in S3.
-    metadata: ?[]const u8 = null,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether you want to apply a legal hold to the uploaded object.
     ///
@@ -1046,15 +1047,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateMultipartUploadInput,
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(alloc, "<CreateMultipartUploadRequest>");
-    if (input.metadata) |v| {
-        try body_buf.appendSlice(alloc, "<Metadata>");
-        try aws.xml.appendXmlEscaped(alloc, &body_buf, v);
-        try body_buf.appendSlice(alloc, "</Metadata>");
-    }
-    try body_buf.appendSlice(alloc, "</CreateMultipartUploadRequest>");
-    const body = try body_buf.toOwnedSlice(alloc);
+    const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

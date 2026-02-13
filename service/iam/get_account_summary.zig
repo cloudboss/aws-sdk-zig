@@ -3,6 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const serde = @import("serde.zig");
 
 /// Retrieves information about IAM entity usage and IAM quotas in the Amazon
 /// Web Services
@@ -17,7 +18,7 @@ pub const GetAccountSummaryInput = struct {
 pub const GetAccountSummaryOutput = struct {
     /// A set of key–value pairs containing information about IAM entity usage and
     /// IAM quotas.
-    summary_map: ?[]const u8 = null,
+    summary_map: ?[]const aws.map.MapEntry(i32) = null,
 
     _arena: std.heap.ArenaAllocator = undefined,
 

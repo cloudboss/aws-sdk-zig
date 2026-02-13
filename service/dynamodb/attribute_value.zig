@@ -1,3 +1,5 @@
+const aws = @import("aws");
+
 /// Represents the data for an attribute.
 ///
 /// Each attribute value is described as a name-value pair. The name is the data
@@ -27,7 +29,7 @@ pub const AttributeValue = union(enum) {
     /// An attribute of type Map. For example:
     ///
     /// `"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}`
-    m: ?[]const u8,
+    m: ?[]const aws.map.MapEntry(AttributeValue),
     /// An attribute of type Number. For example:
     ///
     /// `"N": "123.45"`

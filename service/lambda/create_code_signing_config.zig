@@ -21,7 +21,7 @@ pub const CreateCodeSigningConfigInput = struct {
     description: ?[]const u8 = null,
 
     /// A list of tags to add to the code signing configuration.
-    tags: ?[]const u8 = null,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .allowed_publishers = "AllowedPublishers",

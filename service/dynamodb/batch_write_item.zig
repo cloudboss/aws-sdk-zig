@@ -3,9 +3,11 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const WriteRequest = @import("write_request.zig").WriteRequest;
 const ReturnConsumedCapacity = @import("return_consumed_capacity.zig").ReturnConsumedCapacity;
 const ReturnItemCollectionMetrics = @import("return_item_collection_metrics.zig").ReturnItemCollectionMetrics;
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
+const ItemCollectionMetrics = @import("item_collection_metrics.zig").ItemCollectionMetrics;
 
 /// The `BatchWriteItem` operation puts or deletes multiple items in one or
 /// more tables. A single call to `BatchWriteItem` can transmit up to 16MB of
@@ -152,7 +154,7 @@ pub const BatchWriteItemInput = struct {
     /// If you specify any attributes that are part of an index key, then the
     /// data types for those attributes must match those of the schema in the
     /// table's attribute definition.
-    request_items: []const u8,
+    request_items: []const aws.map.MapEntry([]const WriteRequest),
 
     return_consumed_capacity: ?ReturnConsumedCapacity = null,
 
@@ -202,7 +204,7 @@ pub const BatchWriteItemOutput = struct {
     ///
     /// The estimate is subject to change over time; therefore, do not rely on the
     /// precision or accuracy of the estimate.
-    item_collection_metrics: ?[]const u8 = null,
+    item_collection_metrics: ?[]const aws.map.MapEntry([]const ItemCollectionMetrics) = null,
 
     /// A map of tables and requests against those tables that were not processed.
     /// The
@@ -240,7 +242,7 @@ pub const BatchWriteItemOutput = struct {
     ///
     /// If there are no unprocessed items remaining, the response contains an empty
     /// `UnprocessedItems` map.
-    unprocessed_items: ?[]const u8 = null,
+    unprocessed_items: ?[]const aws.map.MapEntry([]const WriteRequest) = null,
 
     _arena: std.heap.ArenaAllocator = undefined,
 

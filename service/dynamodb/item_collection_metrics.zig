@@ -1,3 +1,7 @@
+const aws = @import("aws");
+
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
+
 /// Information about item collections, if any, that were affected by the
 /// operation.
 /// `ItemCollectionMetrics` is only returned if the request asked for it. If
@@ -8,7 +12,7 @@ pub const ItemCollectionMetrics = struct {
     /// The partition key value of the item collection. This value is the same as
     /// the
     /// partition key value of the item.
-    item_collection_key: ?[]const u8,
+    item_collection_key: ?[]const aws.map.MapEntry(AttributeValue),
 
     /// An estimate of item collection size, in gigabytes. This value is a
     /// two-element array

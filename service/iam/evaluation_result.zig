@@ -1,3 +1,5 @@
+const aws = @import("aws");
+
 const PolicyEvaluationDecisionType = @import("policy_evaluation_decision_type.zig").PolicyEvaluationDecisionType;
 const Statement = @import("statement.zig").Statement;
 const OrganizationsDecisionDetail = @import("organizations_decision_detail.zig").OrganizationsDecisionDetail;
@@ -44,7 +46,7 @@ pub const EvaluationResult = struct {
     /// this case, policy evaluation does not proceed any further and this parameter
     /// is not
     /// returned.
-    eval_decision_details: ?[]const u8,
+    eval_decision_details: ?[]const aws.map.MapEntry(PolicyEvaluationDecisionType),
 
     /// The ARN of the resource that the indicated API operation was tested on.
     eval_resource_name: ?[]const u8,

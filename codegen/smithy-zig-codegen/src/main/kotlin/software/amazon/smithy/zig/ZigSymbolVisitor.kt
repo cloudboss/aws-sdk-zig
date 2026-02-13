@@ -89,8 +89,15 @@ class ZigSymbolVisitor(private val model: Model, private val packageName: String
     }
 
     override fun mapShape(shape: MapShape): Symbol {
-        // Maps are represented as raw JSON for now (map serialization not yet supported)
-        return simpleSymbol("[]const u8")
+        val valueTarget = model.expectShape(shape.value.target)
+        val valueSymbol = toSymbol(valueTarget)
+        val valueTypeName = valueSymbol.name
+
+        return if (valueTypeName == "[]const u8") {
+            simpleSymbol("[]const aws.map.StringMapEntry")
+        } else {
+            simpleSymbol("[]const aws.map.MapEntry($valueTypeName)")
+        }
     }
 
     override fun structureShape(shape: StructureShape): Symbol = namedShape(shape)

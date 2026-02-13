@@ -4,6 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConditionalOperator = @import("conditional_operator.zig").ConditionalOperator;
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
+const Condition = @import("condition.zig").Condition;
 const ReturnConsumedCapacity = @import("return_consumed_capacity.zig").ReturnConsumedCapacity;
 const Select = @import("select.zig").Select;
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
@@ -107,7 +109,7 @@ pub const QueryInput = struct {
     ///
     /// The data type for `ExclusiveStartKey` must be String, Number, or Binary. No
     /// set data types are allowed.
-    exclusive_start_key: ?[]const u8 = null,
+    exclusive_start_key: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// One or more substitution tokens for attribute names in an expression. The
     /// following
@@ -152,7 +154,7 @@ pub const QueryInput = struct {
     /// For more information on expression attribute names, see [Specifying Item
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_names: ?[]const u8 = null,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry = null,
 
     /// One or more values that can be substituted in an expression.
     ///
@@ -176,7 +178,7 @@ pub const QueryInput = struct {
     /// For more information on expression attribute values, see [Specifying
     /// Conditions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_values: ?[]const u8 = null,
+    expression_attribute_values: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// A string that contains conditions that DynamoDB applies after the `Query`
     /// operation, but before the data is returned to you. Items that do not satisfy
@@ -304,7 +306,7 @@ pub const QueryInput = struct {
     /// information, see
     /// [KeyConditions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    key_conditions: ?[]const u8 = null,
+    key_conditions: ?[]const aws.map.MapEntry(Condition) = null,
 
     /// The maximum number of items to evaluate (not necessarily the number of
     /// matching
@@ -343,7 +345,7 @@ pub const QueryInput = struct {
     /// information, see
     /// [QueryFilter](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    query_filter: ?[]const u8 = null,
+    query_filter: ?[]const aws.map.MapEntry(Condition) = null,
 
     return_consumed_capacity: ?ReturnConsumedCapacity = null,
 
@@ -477,7 +479,7 @@ pub const QueryOutput = struct {
     /// An array of item attributes that match the query criteria. Each element in
     /// this array
     /// consists of an attribute name and the value for that attribute.
-    items: ?[]const []const u8 = null,
+    items: ?[]const []const aws.map.MapEntry(AttributeValue) = null,
 
     /// The primary key of the item where the operation stopped, inclusive of the
     /// previous
@@ -492,7 +494,7 @@ pub const QueryOutput = struct {
     /// is more data in the result set. The only way to know when you have reached
     /// the end of
     /// the result set is when `LastEvaluatedKey` is empty.
-    last_evaluated_key: ?[]const u8 = null,
+    last_evaluated_key: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// The number of items evaluated, before any `QueryFilter` is applied. A high
     /// `ScannedCount` value with few, or no, `Count` results

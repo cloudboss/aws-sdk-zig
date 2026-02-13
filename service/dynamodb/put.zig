@@ -1,3 +1,6 @@
+const aws = @import("aws");
+
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const ReturnValuesOnConditionCheckFailure = @import("return_values_on_condition_check_failure.zig").ReturnValuesOnConditionCheckFailure;
 
 /// Represents a request to perform a `PutItem` operation.
@@ -7,10 +10,10 @@ pub const Put = struct {
     condition_expression: ?[]const u8,
 
     /// One or more substitution tokens for attribute names in an expression.
-    expression_attribute_names: ?[]const u8,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry,
 
     /// One or more values that can be substituted in an expression.
-    expression_attribute_values: ?[]const u8,
+    expression_attribute_values: ?[]const aws.map.MapEntry(AttributeValue),
 
     /// A map of attribute name to attribute values, representing the primary key of
     /// the item
@@ -21,7 +24,7 @@ pub const Put = struct {
     /// attributes are present in the item that are part of an index key schema for
     /// the table,
     /// their types must match the index key schema.
-    item: []const u8,
+    item: []const aws.map.MapEntry(AttributeValue),
 
     /// Use `ReturnValuesOnConditionCheckFailure` to get the item attributes if the
     /// `Put` condition fails. For

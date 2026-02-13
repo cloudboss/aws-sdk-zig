@@ -5,6 +5,7 @@ import software.amazon.smithy.model.shapes.BlobShape
 import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.ListShape
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.StringShape
@@ -351,31 +352,32 @@ class OperationGenerator(
         writer.closeBlock("};")
     }
 
-    /** Check if output shape has struct or list members that need serde functions. */
+    /** Check if output shape has struct, list, or map members that need serde functions. */
     private fun hasComplexOutputMembers(): Boolean {
         return outputShape.allMembers.values.any { memberShape ->
             val target = model.expectShape(memberShape.target)
-            target is StructureShape || target is ListShape
+            target is StructureShape || target is ListShape || target is MapShape
         }
     }
 
-    /** Check if input shape has struct or list members that need serde functions. */
+    /** Check if input shape has struct, list, or map members that need serde functions. */
     private fun hasComplexInputMembers(): Boolean {
         return inputShape.allMembers.values.any { memberShape ->
             val target = model.expectShape(memberShape.target)
-            target is StructureShape || target is ListShape
+            target is StructureShape || target is ListShape || target is MapShape
         }
     }
 
     /**
      * Collect unique named type names referenced by input/output members
-     * (enums, structs, unions -- directly or through ListShape targets).
+     * (enums, structs, unions -- directly or through ListShape/MapShape targets).
+     * Recurses through list elements and map values to find nested named types.
      * Excludes the input/output shapes themselves.
      */
     private fun collectSharedTypes(): Set<String> {
         val result = mutableSetOf<String>()
 
-        fun addIfNamed(shape: software.amazon.smithy.model.shapes.Shape) {
+        fun collectFromShape(shape: software.amazon.smithy.model.shapes.Shape) {
             when (shape) {
                 is StructureShape -> result.add(shape.id.name)
                 is EnumShape -> result.add(shape.id.name)
@@ -386,16 +388,14 @@ class OperationGenerator(
                         result.add(shape.id.name)
                     }
                 }
+                is ListShape -> collectFromShape(model.expectShape(shape.member.target))
+                is MapShape -> collectFromShape(model.expectShape(shape.value.target))
             }
         }
 
         fun collectFromMembers(struct: StructureShape) {
             for ((_, memberShape) in struct.allMembers) {
-                val targetShape = model.expectShape(memberShape.target)
-                addIfNamed(targetShape)
-                if (targetShape is ListShape) {
-                    addIfNamed(model.expectShape(targetShape.member.target))
-                }
+                collectFromShape(model.expectShape(memberShape.target))
             }
         }
 

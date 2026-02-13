@@ -1,3 +1,7 @@
+const aws = @import("aws");
+
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
+
 /// An ordered list of errors for each item in the request which caused the
 /// transaction to
 /// get cancelled. The values of the list are ordered according to the ordering
@@ -9,7 +13,7 @@ pub const CancellationReason = struct {
     code: ?[]const u8,
 
     /// Item in the request which caused the transaction to get cancelled.
-    item: ?[]const u8,
+    item: ?[]const aws.map.MapEntry(AttributeValue),
 
     /// Cancellation reason message description.
     message: ?[]const u8,

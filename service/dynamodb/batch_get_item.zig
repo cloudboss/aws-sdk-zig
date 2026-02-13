@@ -3,8 +3,10 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const KeysAndAttributes = @import("keys_and_attributes.zig").KeysAndAttributes;
 const ReturnConsumedCapacity = @import("return_consumed_capacity.zig").ReturnConsumedCapacity;
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
 
 /// The `BatchGetItem` operation returns the attributes of one or more items
 /// from one or more tables. You identify requested items by primary key.
@@ -169,7 +171,7 @@ pub const BatchGetItemInput = struct {
     /// `ProjectionExpression` instead. For more information, see
     /// [AttributesToGet](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    request_items: []const u8,
+    request_items: []const aws.map.MapEntry(KeysAndAttributes),
 
     return_consumed_capacity: ?ReturnConsumedCapacity = null,
 
@@ -194,7 +196,7 @@ pub const BatchGetItemOutput = struct {
     /// A map of table name or table ARN to a list of items. Each object in
     /// `Responses` consists of a table name or ARN, along with a map of
     /// attribute data consisting of the data type and attribute value.
-    responses: ?[]const u8 = null,
+    responses: ?[]const aws.map.MapEntry([]const []const aws.map.MapEntry(AttributeValue)) = null,
 
     /// A map of tables and their respective keys that were not processed with the
     /// current
@@ -218,7 +220,7 @@ pub const BatchGetItemOutput = struct {
     ///
     /// If there are no unprocessed keys remaining, the response contains an empty
     /// `UnprocessedKeys` map.
-    unprocessed_keys: ?[]const u8 = null,
+    unprocessed_keys: ?[]const aws.map.MapEntry(KeysAndAttributes) = null,
 
     _arena: std.heap.ArenaAllocator = undefined,
 

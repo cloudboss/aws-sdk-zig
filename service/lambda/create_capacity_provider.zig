@@ -32,7 +32,7 @@ pub const CreateCapacityProviderInput = struct {
     permissions_config: CapacityProviderPermissionsConfig,
 
     /// A list of tags to associate with the capacity provider.
-    tags: ?[]const u8 = null,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The VPC configuration for the capacity provider, including subnet IDs and
     /// security group IDs where compute instances will be launched.

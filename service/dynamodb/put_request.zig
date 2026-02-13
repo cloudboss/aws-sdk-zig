@@ -1,3 +1,7 @@
+const aws = @import("aws");
+
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
+
 /// Represents a request to perform a `PutItem` operation on an item.
 pub const PutRequest = struct {
     /// A map of attribute name to attribute values, representing the primary key of
@@ -8,7 +12,7 @@ pub const PutRequest = struct {
     /// attributes are present in the item that are part of an index key schema for
     /// the table,
     /// their types must match the index key schema.
-    item: []const u8,
+    item: []const aws.map.MapEntry(AttributeValue),
 
     pub const json_field_names = .{
         .item = "Item",

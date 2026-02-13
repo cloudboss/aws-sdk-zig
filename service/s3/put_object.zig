@@ -12,6 +12,7 @@ const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEnc
 const StorageClass = @import("storage_class.zig").StorageClass;
 const ChecksumType = @import("checksum_type.zig").ChecksumType;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
+const serde = @import("serde.zig");
 
 /// **Important:**
 ///
@@ -539,7 +540,7 @@ pub const PutObjectInput = struct {
     key: []const u8,
 
     /// A map of metadata to store with the object in S3.
-    metadata: ?[]const u8 = null,
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether a legal hold will be applied to this object. For more
     /// information about S3 Object

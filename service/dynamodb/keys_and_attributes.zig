@@ -1,3 +1,7 @@
+const aws = @import("aws");
+
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
+
 /// Represents a set of primary keys and, for each key, the attributes to
 /// retrieve from
 /// the table.
@@ -62,12 +66,12 @@ pub const KeysAndAttributes = struct {
     /// For more information on expression attribute names, see [Accessing Item
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_names: ?[]const u8,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry,
 
     /// The primary key attribute values that define the items and the attributes
     /// associated
     /// with the items.
-    keys: []const []const u8,
+    keys: []const []const aws.map.MapEntry(AttributeValue),
 
     /// A string that identifies one or more attributes to retrieve from the table.
     /// These

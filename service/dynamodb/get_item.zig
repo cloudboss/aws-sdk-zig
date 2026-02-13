@@ -3,6 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const ReturnConsumedCapacity = @import("return_consumed_capacity.zig").ReturnConsumedCapacity;
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
 
@@ -70,7 +71,7 @@ pub const GetItemInput = struct {
     /// For more information on expression attribute names, see [Specifying Item
     /// Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html) in the *Amazon DynamoDB Developer
     /// Guide*.
-    expression_attribute_names: ?[]const u8 = null,
+    expression_attribute_names: ?[]const aws.map.StringMapEntry = null,
 
     /// A map of attribute names to `AttributeValue` objects, representing the
     /// primary key of the item to retrieve.
@@ -82,7 +83,7 @@ pub const GetItemInput = struct {
     /// composite primary key, you must provide values for both the partition key
     /// and the sort
     /// key.
-    key: []const u8,
+    key: []const aws.map.MapEntry(AttributeValue),
 
     /// A string that identifies one or more attributes to retrieve from the table.
     /// These
@@ -130,7 +131,7 @@ pub const GetItemOutput = struct {
 
     /// A map of attribute names to `AttributeValue` objects, as specified by
     /// `ProjectionExpression`.
-    item: ?[]const u8 = null,
+    item: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     _arena: std.heap.ArenaAllocator = undefined,
 

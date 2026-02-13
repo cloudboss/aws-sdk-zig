@@ -234,7 +234,7 @@ pub const CreateEventSourceMappingInput = struct {
     starting_position_timestamp: ?i64 = null,
 
     /// A list of tags to apply to the event source mapping.
-    tags: ?[]const u8 = null,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the Kafka topic.
     topics: ?[]const []const u8 = null,

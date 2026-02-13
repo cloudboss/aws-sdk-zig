@@ -88,7 +88,7 @@ pub const ExecuteStatementOutput = struct {
     /// operation; a map of attribute names and their values. For the write
     /// operations this
     /// value will be empty.
-    items: ?[]const []const u8 = null,
+    items: ?[]const []const aws.map.MapEntry(AttributeValue) = null,
 
     /// The primary key of the item where the operation stopped, inclusive of the
     /// previous
@@ -100,7 +100,7 @@ pub const ExecuteStatementOutput = struct {
     /// is more data in the result set. The only way to know when you have reached
     /// the end of
     /// the result set is when `LastEvaluatedKey` is empty.
-    last_evaluated_key: ?[]const u8 = null,
+    last_evaluated_key: ?[]const aws.map.MapEntry(AttributeValue) = null,
 
     /// If the response of a read request exceeds the response payload limit
     /// DynamoDB will set

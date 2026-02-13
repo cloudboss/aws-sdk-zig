@@ -1,3 +1,5 @@
+const aws = @import("aws");
+
 const Capacity = @import("capacity.zig").Capacity;
 
 /// The capacity units consumed by an operation. The data returned includes the
@@ -15,11 +17,11 @@ pub const ConsumedCapacity = struct {
 
     /// The amount of throughput consumed on each global index affected by the
     /// operation.
-    global_secondary_indexes: ?[]const u8,
+    global_secondary_indexes: ?[]const aws.map.MapEntry(Capacity),
 
     /// The amount of throughput consumed on each local index affected by the
     /// operation.
-    local_secondary_indexes: ?[]const u8,
+    local_secondary_indexes: ?[]const aws.map.MapEntry(Capacity),
 
     /// The total number of read capacity units consumed by the operation.
     read_capacity_units: ?f64,

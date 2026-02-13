@@ -19,7 +19,7 @@ pub const ListTagsInput = struct {
 
 pub const ListTagsOutput = struct {
     /// The function's tags.
-    tags: ?[]const u8 = null,
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     _arena: std.heap.ArenaAllocator = undefined,
 

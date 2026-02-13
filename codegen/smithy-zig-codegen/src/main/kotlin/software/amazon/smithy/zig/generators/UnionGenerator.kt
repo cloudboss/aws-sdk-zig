@@ -4,6 +4,7 @@ import software.amazon.smithy.codegen.core.directed.GenerateUnionDirective
 import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.ListShape
+import software.amazon.smithy.model.shapes.MapShape
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
@@ -23,29 +24,42 @@ class UnionGenerator(
         val model = directive.model()
 
         context.writerDelegator().useShapeWriter(shape) { writer ->
+            // Import aws runtime if any member transitively uses map types
+            fun containsMap(target: software.amazon.smithy.model.shapes.Shape): Boolean {
+                return when (target) {
+                    is MapShape -> true
+                    is ListShape -> containsMap(model.expectShape(target.member.target))
+                    else -> false
+                }
+            }
+            val hasMapMembers = shape.members().any { member ->
+                containsMap(model.expectShape(member.target))
+            }
+            if (hasMapMembers) {
+                writer.write("const aws = @import(\"aws\");")
+                writer.blankLine()
+            }
+
             // Import referenced named types (enums, structs, unions)
+            // Recurses through list elements and map values to find nested named types.
             val referencedTypes = mutableSetOf<String>()
-            for (member in shape.members()) {
-                val targetShape = model.expectShape(member.target)
+            fun collectFromShape(targetShape: software.amazon.smithy.model.shapes.Shape) {
                 when (targetShape) {
                     is StructureShape -> referencedTypes.add(targetShape.id.name)
                     is EnumShape -> referencedTypes.add(targetShape.id.name)
                     is IntEnumShape -> referencedTypes.add(targetShape.id.name)
                     is UnionShape -> referencedTypes.add(targetShape.id.name)
-                    is ListShape -> {
-                        val listTarget = model.expectShape(targetShape.member.target)
-                        when (listTarget) {
-                            is StructureShape -> referencedTypes.add(listTarget.id.name)
-                            is EnumShape -> referencedTypes.add(listTarget.id.name)
-                            is IntEnumShape -> referencedTypes.add(listTarget.id.name)
-                            is UnionShape -> referencedTypes.add(listTarget.id.name)
+                    is ListShape -> collectFromShape(model.expectShape(targetShape.member.target))
+                    is MapShape -> collectFromShape(model.expectShape(targetShape.value.target))
+                    is software.amazon.smithy.model.shapes.StringShape -> {
+                        if (targetShape.hasTrait(EnumTrait::class.java)) {
+                            referencedTypes.add(targetShape.id.name)
                         }
                     }
                 }
-                if (targetShape is software.amazon.smithy.model.shapes.StringShape &&
-                    targetShape.hasTrait(EnumTrait::class.java)) {
-                    referencedTypes.add(targetShape.id.name)
-                }
+            }
+            for (member in shape.members()) {
+                collectFromShape(model.expectShape(member.target))
             }
             referencedTypes.remove(shape.id.name)
 

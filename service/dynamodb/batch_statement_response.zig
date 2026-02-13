@@ -1,4 +1,7 @@
+const aws = @import("aws");
+
 const BatchStatementError = @import("batch_statement_error.zig").BatchStatementError;
+const AttributeValue = @import("attribute_value.zig").AttributeValue;
 
 /// A PartiQL batch statement response..
 pub const BatchStatementResponse = struct {
@@ -6,7 +9,7 @@ pub const BatchStatementResponse = struct {
     @"error": ?BatchStatementError,
 
     /// A DynamoDB item associated with a BatchStatementResponse
-    item: ?[]const u8,
+    item: ?[]const aws.map.MapEntry(AttributeValue),
 
     /// The table name associated with a failed PartiQL batch statement.
     table_name: ?[]const u8,

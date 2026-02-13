@@ -1,3 +1,5 @@
+const aws = @import("aws");
+
 const EnvironmentError = @import("environment_error.zig").EnvironmentError;
 
 /// The results of an operation to update or read environment variables. If the
@@ -8,7 +10,7 @@ pub const EnvironmentResponse = struct {
     @"error": ?EnvironmentError,
 
     /// Environment variable key-value pairs. Omitted from CloudTrail logs.
-    variables: ?[]const u8,
+    variables: ?[]const aws.map.StringMapEntry,
 
     pub const json_field_names = .{
         .@"error" = "Error",

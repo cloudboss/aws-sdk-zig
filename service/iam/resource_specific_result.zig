@@ -1,3 +1,5 @@
+const aws = @import("aws");
+
 const PolicyEvaluationDecisionType = @import("policy_evaluation_decision_type.zig").PolicyEvaluationDecisionType;
 const Statement = @import("statement.zig").Statement;
 const PermissionsBoundaryDecisionDetail = @import("permissions_boundary_decision_detail.zig").PermissionsBoundaryDecisionDetail;
@@ -15,7 +17,7 @@ pub const ResourceSpecificResult = struct {
     /// This parameter is returned only for cross-account simulations. This
     /// parameter explains how
     /// each policy type contributes to the resource-specific evaluation decision.
-    eval_decision_details: ?[]const u8,
+    eval_decision_details: ?[]const aws.map.MapEntry(PolicyEvaluationDecisionType),
 
     /// The result of the simulation of the simulated API operation on the resource
     /// specified in
