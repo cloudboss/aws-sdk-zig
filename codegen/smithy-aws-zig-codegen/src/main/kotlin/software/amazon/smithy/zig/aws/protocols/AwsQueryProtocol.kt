@@ -82,15 +82,15 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.closeBlock("}")
     }
 
-    private fun hasSerializableScalarFields(ctx: OperationContext, shape: Shape): Boolean {
+    private fun hasSerializableFields(ctx: OperationContext, shape: Shape): Boolean {
         return when (shape) {
             is StructureShape -> shape.allMembers.values.any { ms ->
                 val ts = ctx.model.expectShape(ms.target)
-                ctx.isScalarType(ts)
+                ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape
             }
             is ListShape -> {
                 val elementShape = ctx.model.expectShape(shape.member.target)
-                if (elementShape is StructureShape) hasSerializableScalarFields(ctx, elementShape)
+                if (elementShape is StructureShape) hasSerializableFields(ctx, elementShape)
                 else ctx.isScalarType(elementShape)
             }
             else -> ctx.isScalarType(shape)
@@ -109,7 +109,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
         when {
             targetShape is StructureShape -> {
-                if (!hasSerializableScalarFields(ctx, targetShape)) return
+                if (!hasSerializableFields(ctx, targetShape)) return
                 if (memberShape.isRequired) {
                     writeStructFieldSerializers(writer, ctx, smithyName, targetShape, "$accessor.$fieldName")
                 } else {
@@ -121,7 +121,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
             targetShape is ListShape -> {
                 val listMemberShape = targetShape.member
                 val listTargetShape = ctx.model.expectShape(listMemberShape.target)
-                if (!hasSerializableScalarFields(ctx, listTargetShape)) return
+                if (!hasSerializableFields(ctx, listTargetShape)) return
                 val xmlName = listMemberShape.getTrait(XmlNameTrait::class.java)
                     .map { it.value }
                     .orElse("member")
@@ -157,6 +157,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         prefix: String,
         structShape: StructureShape,
         accessor: String,
+        depth: Int = 0,
     ) {
         for ((memberName, memberShape) in structShape.allMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
@@ -170,14 +171,45 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
                             ctx.scalarFormatExpr(targetShape, fieldName, accessor))
                     } else {
-                        writer.openBlock("if (\$L.\$L) |sv| {", accessor, fieldName)
+                        val captureVar = if (depth == 0) "sv" else "sv${depth + 1}"
+                        writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
                         writer.write("try body_buf.appendSlice(alloc, \"&\$L=\");", qualifiedName)
                         writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
-                            ctx.scalarFormatExprForOptional(targetShape, "sv"))
+                            ctx.scalarFormatExprForOptional(targetShape, captureVar))
                         writer.closeBlock("}")
                     }
                 }
-                else -> {}
+                targetShape is StructureShape -> {
+                    if (!hasSerializableFields(ctx, targetShape)) continue
+                    val captureVar = if (depth == 0) "sv" else "sv${depth + 1}"
+                    if (memberShape.isRequired) {
+                        writeStructFieldSerializers(writer, ctx, qualifiedName, targetShape,
+                            "$accessor.$fieldName", depth + 1)
+                    } else {
+                        writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
+                        writeStructFieldSerializers(writer, ctx, qualifiedName, targetShape,
+                            captureVar, depth + 1)
+                        writer.closeBlock("}")
+                    }
+                }
+                targetShape is ListShape -> {
+                    val listMemberShape = targetShape.member
+                    val listTargetShape = ctx.model.expectShape(listMemberShape.target)
+                    if (!hasSerializableFields(ctx, listTargetShape)) continue
+                    val xmlName = listMemberShape.getTrait(XmlNameTrait::class.java)
+                        .map { it.value }
+                        .orElse("member")
+                    val listVar = "list_d$depth"
+                    if (memberShape.isRequired) {
+                        writeListSerializer(writer, ctx, qualifiedName, xmlName, listTargetShape,
+                            "$accessor.$fieldName", depth)
+                    } else {
+                        writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, listVar)
+                        writeListSerializer(writer, ctx, qualifiedName, xmlName, listTargetShape,
+                            listVar, depth)
+                        writer.closeBlock("}")
+                    }
+                }
             }
         }
     }
@@ -189,41 +221,16 @@ open class AwsQueryProtocol : ProtocolGenerator {
         xmlName: String,
         elementShape: Shape,
         accessor: String,
+        depth: Int = 0,
     ) {
         if (elementShape is StructureShape) {
-            // Check if any members are serializable scalars
-            val serializableMembers = elementShape.allMembers.filter { (_, ms) ->
-                val ts = ctx.model.expectShape(ms.target)
-                ctx.isScalarType(ts)
-            }
-            if (serializableMembers.isEmpty()) return
+            if (!hasSerializableFields(ctx, elementShape)) return
 
             writer.openBlock("for (\$L, 0..) |item, idx| {", accessor)
             writer.write("const n = idx + 1;")
 
-            for ((memberName, memberShape) in serializableMembers) {
-                val targetShape = ctx.model.expectShape(memberShape.target)
-                val fieldName = NamingUtil.toFieldName(memberName)
-
-                // Use a block scope to avoid variable name conflicts across struct fields
-                writer.openBlock("{")
-                writer.write("var prefix_buf: [256]u8 = undefined;")
-                writer.write(
-                    "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.\$L.{d}.\$L=\", .{n}) catch continue;",
-                    prefix, xmlName, memberName,
-                )
-                writer.write("try body_buf.appendSlice(alloc, field_prefix);")
-                if (memberShape.isRequired) {
-                    writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
-                        ctx.scalarFormatExpr(targetShape, fieldName, "item"))
-                } else {
-                    writer.openBlock("if (item.\$L) |v| {", fieldName)
-                    writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
-                        ctx.scalarFormatExprForOptional(targetShape, "v"))
-                    writer.closeBlock("}")
-                }
-                writer.closeBlock("}")
-            }
+            val innerPrefix = "$prefix.$xmlName.{d}"
+            writeStructFieldSerializersInList(writer, ctx, innerPrefix, elementShape, "item", listOf("n"), depth + 1)
 
             writer.closeBlock("}")
         } else {
@@ -237,6 +244,101 @@ open class AwsQueryProtocol : ProtocolGenerator {
             writer.write("try body_buf.appendSlice(alloc, field_prefix);")
             writer.write("try appendUrlEncoded(alloc, &body_buf, item);")
             writer.closeBlock("}")
+        }
+    }
+
+    private fun writeStructFieldSerializersInList(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        prefixTemplate: String,
+        structShape: StructureShape,
+        accessor: String,
+        indexVars: List<String>,
+        depth: Int,
+    ) {
+        for ((memberName, memberShape) in structShape.allMembers) {
+            val targetShape = ctx.model.expectShape(memberShape.target)
+            val fieldName = NamingUtil.toFieldName(memberName)
+            val qualifiedPrefix = "$prefixTemplate.$memberName"
+
+            when {
+                ctx.isScalarType(targetShape) -> {
+                    val captureVar = "fv_$depth"
+                    writer.openBlock("{")
+                    writer.write("var prefix_buf: [256]u8 = undefined;")
+                    val formatArgs = indexVars.joinToString(", ")
+                    writer.write(
+                        "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
+                        qualifiedPrefix, formatArgs,
+                    )
+                    writer.write("try body_buf.appendSlice(alloc, field_prefix);")
+                    if (memberShape.isRequired) {
+                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                            ctx.scalarFormatExpr(targetShape, fieldName, accessor))
+                    } else {
+                        writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
+                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);",
+                            ctx.scalarFormatExprForOptional(targetShape, captureVar))
+                        writer.closeBlock("}")
+                    }
+                    writer.closeBlock("}")
+                }
+                targetShape is StructureShape -> {
+                    if (!hasSerializableFields(ctx, targetShape)) continue
+                    val captureVar = "sv_$depth"
+                    if (memberShape.isRequired) {
+                        writeStructFieldSerializersInList(writer, ctx, qualifiedPrefix, targetShape,
+                            "$accessor.$fieldName", indexVars, depth + 1)
+                    } else {
+                        writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
+                        writeStructFieldSerializersInList(writer, ctx, qualifiedPrefix, targetShape,
+                            captureVar, indexVars, depth + 1)
+                        writer.closeBlock("}")
+                    }
+                }
+                targetShape is ListShape -> {
+                    val listMember = targetShape.member
+                    val listElement = ctx.model.expectShape(listMember.target)
+                    if (!hasSerializableFields(ctx, listElement)) continue
+                    val xmlName = listMember.getTrait(XmlNameTrait::class.java)
+                        .map { it.value }
+                        .orElse("member")
+                    val innerPrefix = "$qualifiedPrefix.$xmlName.{d}"
+                    val innerVar = "item_$depth"
+                    val innerIdx = "idx_$depth"
+                    val innerN = "n_$depth"
+                    val listVar = "lst_$depth"
+
+                    if (!memberShape.isRequired) {
+                        writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, listVar)
+                    }
+                    val listAccessor = if (memberShape.isRequired) "$accessor.$fieldName" else listVar
+                    writer.openBlock("for (\$L, 0..) |\$L, \$L| {", listAccessor, innerVar, innerIdx)
+                    writer.write("const \$L = \$L + 1;", innerN, innerIdx)
+
+                    val newIndexVars = indexVars + innerN
+                    if (listElement is StructureShape) {
+                        writeStructFieldSerializersInList(writer, ctx, innerPrefix, listElement,
+                            innerVar, newIndexVars, depth + 1)
+                    } else {
+                        writer.openBlock("{")
+                        writer.write("var prefix_buf: [256]u8 = undefined;")
+                        val formatArgs = newIndexVars.joinToString(", ")
+                        writer.write(
+                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
+                            innerPrefix, formatArgs,
+                        )
+                        writer.write("try body_buf.appendSlice(alloc, field_prefix);")
+                        writer.write("try appendUrlEncoded(alloc, &body_buf, \$L);", innerVar)
+                        writer.closeBlock("}")
+                    }
+
+                    writer.closeBlock("}") // for
+                    if (!memberShape.isRequired) {
+                        writer.closeBlock("}") // if
+                    }
+                }
+            }
         }
     }
 

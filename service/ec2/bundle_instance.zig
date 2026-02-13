@@ -98,6 +98,28 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BundleInstanceInput, config
     }
     try body_buf.appendSlice(alloc, "&InstanceId=");
     try appendUrlEncoded(alloc, &body_buf, input.instance_id);
+    if (input.storage.s_3) |sv| {
+        if (sv.aws_access_key_id) |sv2| {
+            try body_buf.appendSlice(alloc, "&Storage.S3.AWSAccessKeyId=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.bucket) |sv2| {
+            try body_buf.appendSlice(alloc, "&Storage.S3.Bucket=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.prefix) |sv2| {
+            try body_buf.appendSlice(alloc, "&Storage.S3.Prefix=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.upload_policy) |sv2| {
+            try body_buf.appendSlice(alloc, "&Storage.S3.UploadPolicy=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.upload_policy_signature) |sv2| {
+            try body_buf.appendSlice(alloc, "&Storage.S3.UploadPolicySignature=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+    }
 
     const body = try body_buf.toOwnedSlice(alloc);
 

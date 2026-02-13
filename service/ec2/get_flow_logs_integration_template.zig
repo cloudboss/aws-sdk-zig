@@ -108,6 +108,39 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFlowLogsIntegrationTempl
     }
     try body_buf.appendSlice(alloc, "&FlowLogId=");
     try appendUrlEncoded(alloc, &body_buf, input.flow_log_id);
+    if (input.integrate_services.athena_integrations) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateServices.AthenaIntegrations.item.{d}.IntegrationResultS3DestinationArn=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item.integration_result_s_3_destination_arn);
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateServices.AthenaIntegrations.item.{d}.PartitionEndDate=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.partition_end_date) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateServices.AthenaIntegrations.item.{d}.PartitionLoadFrequency=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, @tagName(item.partition_load_frequency));
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateServices.AthenaIntegrations.item.{d}.PartitionStartDate=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.partition_start_date) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                }
+            }
+        }
+    }
 
     const body = try body_buf.toOwnedSlice(alloc);
 

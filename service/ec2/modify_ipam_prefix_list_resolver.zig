@@ -95,20 +95,89 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
     if (input.rules) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
+            if (item.conditions) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.Conditions.Condition.{d}.Cidr=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.cidr) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.Conditions.Condition.{d}.IpamPoolId=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.ipam_pool_id) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.Conditions.Condition.{d}.Operation=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(item_1.operation));
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.Conditions.Condition.{d}.ResourceId=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.resource_id) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.Conditions.Condition.{d}.ResourceOwner=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.resource_owner) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.Conditions.Condition.{d}.ResourceRegion=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.resource_region) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    if (item_1.resource_tag) |sv_2| {
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.Conditions.Condition.{d}.ResourceTag.Key=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.key) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_3);
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.Conditions.Condition.{d}.ResourceTag.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.value) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_3);
+                            }
+                        }
+                    }
+                }
+            }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.IpamScopeId=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.ipam_scope_id) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.ipam_scope_id) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.resource_type) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.resource_type) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
                 }
             }
             {
@@ -121,8 +190,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rules.Rule.{d}.StaticCidr=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.static_cidr) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.static_cidr) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }

@@ -114,8 +114,36 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportInstanceInput, config
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImages.member.{d}.Description=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.description) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.description) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            if (item.image) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImages.member.{d}.Image.Bytes=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv_1.bytes}) catch "");
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImages.member.{d}.Image.Format=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(sv_1.format));
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImages.member.{d}.Image.ImportManifestUrl=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    try appendUrlEncoded(alloc, &body_buf, sv_1.import_manifest_url);
+                }
+            }
+            if (item.volume) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImages.member.{d}.Volume.Size=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv_1.size}) catch "");
                 }
             }
         }
@@ -133,6 +161,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportInstanceInput, config
             try body_buf.appendSlice(alloc, "&LaunchSpecification.Architecture=");
             try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
+        if (v.group_ids) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.GroupIds.SecurityGroupId.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item);
+            }
+        }
+        if (v.group_names) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.GroupNames.SecurityGroup.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item);
+            }
+        }
         if (v.instance_initiated_shutdown_behavior) |sv| {
             try body_buf.appendSlice(alloc, "&LaunchSpecification.InstanceInitiatedShutdownBehavior=");
             try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
@@ -145,6 +191,48 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportInstanceInput, config
             try body_buf.appendSlice(alloc, "&LaunchSpecification.Monitoring=");
             try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
         }
+        if (v.placement) |sv| {
+            if (sv.affinity) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.Affinity=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
+            if (sv.availability_zone) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.AvailabilityZone=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
+            if (sv.availability_zone_id) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.AvailabilityZoneId=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
+            if (sv.group_id) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.GroupId=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
+            if (sv.group_name) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.GroupName=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
+            if (sv.host_id) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.HostId=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
+            if (sv.host_resource_group_arn) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.HostResourceGroupArn=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
+            if (sv.partition_number) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.PartitionNumber=");
+                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+            }
+            if (sv.spread_domain) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.SpreadDomain=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
+            if (sv.tenancy) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.Tenancy=");
+                try appendUrlEncoded(alloc, &body_buf, @tagName(sv2));
+            }
+        }
         if (v.private_ip_address) |sv| {
             try body_buf.appendSlice(alloc, "&LaunchSpecification.PrivateIpAddress=");
             try appendUrlEncoded(alloc, &body_buf, sv);
@@ -152,6 +240,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportInstanceInput, config
         if (v.subnet_id) |sv| {
             try body_buf.appendSlice(alloc, "&LaunchSpecification.SubnetId=");
             try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+        if (v.user_data) |sv| {
+            if (sv.data) |sv2| {
+                try body_buf.appendSlice(alloc, "&LaunchSpecification.UserData.Data=");
+                try appendUrlEncoded(alloc, &body_buf, sv2);
+            }
         }
     }
     try body_buf.appendSlice(alloc, "&Platform=");

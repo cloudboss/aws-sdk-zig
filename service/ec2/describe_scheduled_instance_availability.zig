@@ -131,8 +131,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeScheduledInstanceAv
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.Filter.{d}.Name=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.name) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.name) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            if (item.values) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.Filter.{d}.Values.item.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                    }
                 }
             }
         }
@@ -164,6 +175,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeScheduledInstanceAv
     if (input.recurrence.interval) |sv| {
         try body_buf.appendSlice(alloc, "&Recurrence.Interval=");
         try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+    }
+    if (input.recurrence.occurrence_days) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Recurrence.OccurrenceDays.OccurenceDay.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
     }
     if (input.recurrence.occurrence_relative_to_end) |sv| {
         try body_buf.appendSlice(alloc, "&Recurrence.OccurrenceRelativeToEnd=");

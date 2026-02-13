@@ -112,8 +112,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPolicyAllocationR
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AllocationRules.item.{d}.SourceIpamPoolId=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.source_ipam_pool_id) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.source_ipam_pool_id) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }

@@ -178,6 +178,250 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
             try body_buf.appendSlice(alloc, "&Options.TunnelInsideIpVersion=");
             try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
+        if (v.tunnel_options) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.DPDTimeoutAction=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.dpd_timeout_action) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.DPDTimeoutSeconds=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.dpd_timeout_seconds) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.EnableTunnelLifecycleControl=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.enable_tunnel_lifecycle_control) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, if (fv_1) "true" else "false");
+                    }
+                }
+                if (item.ike_versions) |lst_1| {
+                    for (lst_1, 0..) |item_1, idx_1| {
+                        const n_1 = idx_1 + 1;
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.IKEVersions.item.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (item_1.value) |fv_2| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            }
+                        }
+                    }
+                }
+                if (item.log_options) |sv_1| {
+                    if (sv_1.cloud_watch_log_options) |sv_2| {
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.BgpLogEnabled=", .{n}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.bgp_log_enabled) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, if (fv_3) "true" else "false");
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.BgpLogGroupArn=", .{n}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.bgp_log_group_arn) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_3);
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.BgpLogOutputFormat=", .{n}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.bgp_log_output_format) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_3);
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.LogEnabled=", .{n}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.log_enabled) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, if (fv_3) "true" else "false");
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.LogGroupArn=", .{n}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.log_group_arn) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_3);
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.LogOutputFormat=", .{n}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.log_output_format) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_3);
+                            }
+                        }
+                    }
+                }
+                if (item.phase_1_dh_group_numbers) |lst_1| {
+                    for (lst_1, 0..) |item_1, idx_1| {
+                        const n_1 = idx_1 + 1;
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1DHGroupNumbers.item.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (item_1.value) |fv_2| {
+                                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
+                            }
+                        }
+                    }
+                }
+                if (item.phase_1_encryption_algorithms) |lst_1| {
+                    for (lst_1, 0..) |item_1, idx_1| {
+                        const n_1 = idx_1 + 1;
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1EncryptionAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (item_1.value) |fv_2| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            }
+                        }
+                    }
+                }
+                if (item.phase_1_integrity_algorithms) |lst_1| {
+                    for (lst_1, 0..) |item_1, idx_1| {
+                        const n_1 = idx_1 + 1;
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1IntegrityAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (item_1.value) |fv_2| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            }
+                        }
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1LifetimeSeconds=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.phase_1_lifetime_seconds) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                if (item.phase_2_dh_group_numbers) |lst_1| {
+                    for (lst_1, 0..) |item_1, idx_1| {
+                        const n_1 = idx_1 + 1;
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2DHGroupNumbers.item.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (item_1.value) |fv_2| {
+                                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
+                            }
+                        }
+                    }
+                }
+                if (item.phase_2_encryption_algorithms) |lst_1| {
+                    for (lst_1, 0..) |item_1, idx_1| {
+                        const n_1 = idx_1 + 1;
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2EncryptionAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (item_1.value) |fv_2| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            }
+                        }
+                    }
+                }
+                if (item.phase_2_integrity_algorithms) |lst_1| {
+                    for (lst_1, 0..) |item_1, idx_1| {
+                        const n_1 = idx_1 + 1;
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2IntegrityAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (item_1.value) |fv_2| {
+                                try appendUrlEncoded(alloc, &body_buf, fv_2);
+                            }
+                        }
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2LifetimeSeconds=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.phase_2_lifetime_seconds) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.PreSharedKey=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.pre_shared_key) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.RekeyFuzzPercentage=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.rekey_fuzz_percentage) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.RekeyMarginTimeSeconds=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.rekey_margin_time_seconds) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.ReplayWindowSize=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.replay_window_size) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.StartupAction=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.startup_action) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.TunnelInsideCidr=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.tunnel_inside_cidr) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.TunnelInsideIpv6Cidr=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.tunnel_inside_ipv_6_cidr) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+            }
+        }
     }
     if (input.pre_shared_key_storage) |v| {
         try body_buf.appendSlice(alloc, "&PreSharedKeyStorage=");
@@ -190,8 +434,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.resource_type) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.resource_type) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                }
+            }
+            if (item.tags) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.key) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.value) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
                 }
             }
         }

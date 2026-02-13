@@ -226,12 +226,50 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateClientVpnEndpointInpu
     try body_buf.appendSlice(alloc, "Action=CreateClientVpnEndpoint&Version=2016-11-15");
     for (input.authentication_options, 0..) |item, idx| {
         const n = idx + 1;
+        if (item.active_directory) |sv_1| {
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthenticationOptions.member.{d}.ActiveDirectory.DirectoryId=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (sv_1.directory_id) |fv_2| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_2);
+                }
+            }
+        }
+        if (item.federated_authentication) |sv_1| {
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthenticationOptions.member.{d}.FederatedAuthentication.SAMLProviderArn=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (sv_1.saml_provider_arn) |fv_2| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_2);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthenticationOptions.member.{d}.FederatedAuthentication.SelfServiceSAMLProviderArn=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (sv_1.self_service_saml_provider_arn) |fv_2| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_2);
+                }
+            }
+        }
+        if (item.mutual_authentication) |sv_1| {
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthenticationOptions.member.{d}.MutualAuthentication.ClientRootCertificateChainArn=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (sv_1.client_root_certificate_chain_arn) |fv_2| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_2);
+                }
+            }
+        }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthenticationOptions.member.{d}.Type=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            if (item.@"type") |v| {
-                try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+            if (item.@"type") |fv_1| {
+                try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
             }
         }
     }
@@ -336,8 +374,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateClientVpnEndpointInpu
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.resource_type) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.resource_type) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                }
+            }
+            if (item.tags) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.key) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.value) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
                 }
             }
         }

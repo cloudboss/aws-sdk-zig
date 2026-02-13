@@ -204,20 +204,31 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
     if (input.availability_zone_addresses) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
+            if (item.allocation_ids) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddresses.AvailabilityZoneAddress.{d}.AllocationIds.AllocationId.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                    }
+                }
+            }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddresses.AvailabilityZoneAddress.{d}.AvailabilityZone=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.availability_zone) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.availability_zone) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddresses.AvailabilityZoneAddress.{d}.AvailabilityZoneId=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.availability_zone_id) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.availability_zone_id) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }
@@ -271,8 +282,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.resource_type) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.resource_type) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                }
+            }
+            if (item.tags) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.key) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.value) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
                 }
             }
         }

@@ -133,21 +133,176 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetInstanceTypesFromInstanc
         try body_buf.appendSlice(alloc, "&DryRun=");
         try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
+    if (input.instance_requirements.accelerator_count) |sv| {
+        if (sv.max) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.AcceleratorCount.Max=");
+            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+        }
+        if (sv.min) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.AcceleratorCount.Min=");
+            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+        }
+    }
+    if (input.instance_requirements.accelerator_manufacturers) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorManufacturers.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.instance_requirements.accelerator_names) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorNames.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.instance_requirements.accelerator_total_memory_mi_b) |sv| {
+        if (sv.max) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.AcceleratorTotalMemoryMiB.Max=");
+            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+        }
+        if (sv.min) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.AcceleratorTotalMemoryMiB.Min=");
+            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+        }
+    }
+    if (input.instance_requirements.accelerator_types) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorTypes.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.instance_requirements.allowed_instance_types) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AllowedInstanceTypes.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
     if (input.instance_requirements.bare_metal) |sv| {
         try body_buf.appendSlice(alloc, "&InstanceRequirements.BareMetal=");
         try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+    }
+    if (input.instance_requirements.baseline_ebs_bandwidth_mbps) |sv| {
+        if (sv.max) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.BaselineEbsBandwidthMbps.Max=");
+            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+        }
+        if (sv.min) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.BaselineEbsBandwidthMbps.Min=");
+            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+        }
+    }
+    if (input.instance_requirements.baseline_performance_factors) |sv| {
+        if (sv.cpu) |sv2| {
+            if (sv2.references) |list_d2| {
+                for (list_d2, 0..) |item, idx| {
+                    const n = idx + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.BaselinePerformanceFactors.Cpu.References.item.{d}.InstanceFamily=", .{n}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item.instance_family) |fv_3| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_3);
+                        }
+                    }
+                }
+            }
+        }
     }
     if (input.instance_requirements.burstable_performance) |sv| {
         try body_buf.appendSlice(alloc, "&InstanceRequirements.BurstablePerformance=");
         try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
     }
+    if (input.instance_requirements.cpu_manufacturers) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.CpuManufacturers.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.instance_requirements.excluded_instance_types) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.ExcludedInstanceTypes.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.instance_requirements.instance_generations) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.InstanceGenerations.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
     if (input.instance_requirements.local_storage) |sv| {
         try body_buf.appendSlice(alloc, "&InstanceRequirements.LocalStorage=");
         try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
     }
+    if (input.instance_requirements.local_storage_types) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.LocalStorageTypes.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
     if (input.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price) |sv| {
         try body_buf.appendSlice(alloc, "&InstanceRequirements.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice=");
         try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+    }
+    if (input.instance_requirements.memory_gi_b_per_v_cpu) |sv| {
+        if (sv.max) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.MemoryGiBPerVCpu.Max=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.min) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.MemoryGiBPerVCpu.Min=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+    }
+    if (input.instance_requirements.memory_mi_b.max) |sv2| {
+        try body_buf.appendSlice(alloc, "&InstanceRequirements.MemoryMiB.Max=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+    }
+    try body_buf.appendSlice(alloc, "&InstanceRequirements.MemoryMiB.Min=");
+    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{input.instance_requirements.memory_mi_b.min}) catch "");
+    if (input.instance_requirements.network_bandwidth_gbps) |sv| {
+        if (sv.max) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.NetworkBandwidthGbps.Max=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.min) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.NetworkBandwidthGbps.Min=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+    }
+    if (input.instance_requirements.network_interface_count) |sv| {
+        if (sv.max) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.NetworkInterfaceCount.Max=");
+            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+        }
+        if (sv.min) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.NetworkInterfaceCount.Min=");
+            try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+        }
     }
     if (input.instance_requirements.on_demand_max_price_percentage_over_lowest_price) |sv| {
         try body_buf.appendSlice(alloc, "&InstanceRequirements.OnDemandMaxPricePercentageOverLowestPrice=");
@@ -165,6 +320,22 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetInstanceTypesFromInstanc
         try body_buf.appendSlice(alloc, "&InstanceRequirements.SpotMaxPricePercentageOverLowestPrice=");
         try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
     }
+    if (input.instance_requirements.total_local_storage_gb) |sv| {
+        if (sv.max) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.TotalLocalStorageGB.Max=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.min) |sv2| {
+            try body_buf.appendSlice(alloc, "&InstanceRequirements.TotalLocalStorageGB.Min=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+    }
+    if (input.instance_requirements.v_cpu_count.max) |sv2| {
+        try body_buf.appendSlice(alloc, "&InstanceRequirements.VCpuCount.Max=");
+        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv2}) catch "");
+    }
+    try body_buf.appendSlice(alloc, "&InstanceRequirements.VCpuCount.Min=");
+    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{input.instance_requirements.v_cpu_count.min}) catch "");
     if (input.max_results) |v| {
         try body_buf.appendSlice(alloc, "&MaxResults=");
         try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");

@@ -166,6 +166,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointInput, con
             try body_buf.appendSlice(alloc, "&DnsOptions.PrivateDnsPreference=");
             try appendUrlEncoded(alloc, &body_buf, sv);
         }
+        if (v.private_dns_specified_domains) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DnsOptions.PrivateDnsSpecifiedDomains.item.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item);
+            }
+        }
     }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
@@ -221,24 +230,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointInput, con
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfigurations.item.{d}.Ipv4=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.ipv_4) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.ipv_4) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfigurations.item.{d}.Ipv6=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.ipv_6) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.ipv_6) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfigurations.item.{d}.SubnetId=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.subnet_id) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.subnet_id) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }

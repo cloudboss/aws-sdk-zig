@@ -99,8 +99,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AcceptReservedInstancesExch
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetConfigurations.TargetConfigurationRequest.{d}.InstanceCount=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.instance_count) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+                if (item.instance_count) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
                 }
             }
             {

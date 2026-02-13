@@ -102,6 +102,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(alloc, "Action=ModifyVerifiedAccessEndpoint&Version=2016-11-15");
+    if (input.cidr_options) |v| {
+        if (v.port_ranges) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.from_port) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.to_port) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+            }
+        }
+    }
     if (input.client_token) |v| {
         try body_buf.appendSlice(alloc, "&ClientToken=");
         try appendUrlEncoded(alloc, &body_buf, v);
@@ -119,15 +142,66 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
             try body_buf.appendSlice(alloc, "&LoadBalancerOptions.Port=");
             try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
+        if (v.port_ranges) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.from_port) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.to_port) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+            }
+        }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(alloc, "&LoadBalancerOptions.Protocol=");
             try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
+        }
+        if (v.subnet_ids) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.SubnetIds.item.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item);
+            }
         }
     }
     if (input.network_interface_options) |v| {
         if (v.port) |sv| {
             try body_buf.appendSlice(alloc, "&NetworkInterfaceOptions.Port=");
             try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+        }
+        if (v.port_ranges) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.from_port) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.to_port) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                    }
+                }
+            }
         }
         if (v.protocol) |sv| {
             try body_buf.appendSlice(alloc, "&NetworkInterfaceOptions.Protocol=");
@@ -142,6 +216,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessEndpoin
         if (v.rds_endpoint) |sv| {
             try body_buf.appendSlice(alloc, "&RdsOptions.RdsEndpoint=");
             try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+        if (v.subnet_ids) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RdsOptions.SubnetIds.item.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item);
+            }
         }
     }
     try body_buf.appendSlice(alloc, "&VerifiedAccessEndpointId=");

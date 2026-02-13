@@ -101,48 +101,48 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAwsNetworkPerformanceDat
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Destination=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.destination) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.destination) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Id=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.id) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.id) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Metric=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.metric) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.metric) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Period=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.period) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.period) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Source=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.source) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.source) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Statistic=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.statistic) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.statistic) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
                 }
             }
         }

@@ -216,6 +216,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyClientVpnEndpointInpu
         try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.dns_servers) |v| {
+        if (v.custom_dns_servers) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DnsServers.CustomDnsServers.item.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item);
+            }
+        }
         if (v.enabled) |sv| {
             try body_buf.appendSlice(alloc, "&DnsServers.Enabled=");
             try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");

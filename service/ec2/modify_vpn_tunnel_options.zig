@@ -121,9 +121,128 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpnTunnelOptionsInput
         try body_buf.appendSlice(alloc, "&TunnelOptions.EnableTunnelLifecycleControl=");
         try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
     }
+    if (input.tunnel_options.ike_versions) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TunnelOptions.IKEVersions.item.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.value) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+        }
+    }
+    if (input.tunnel_options.log_options) |sv| {
+        if (sv.cloud_watch_log_options) |sv2| {
+            if (sv2.bgp_log_enabled) |sv3| {
+                try body_buf.appendSlice(alloc, "&TunnelOptions.LogOptions.CloudWatchLogOptions.BgpLogEnabled=");
+                try appendUrlEncoded(alloc, &body_buf, if (sv3) "true" else "false");
+            }
+            if (sv2.bgp_log_group_arn) |sv3| {
+                try body_buf.appendSlice(alloc, "&TunnelOptions.LogOptions.CloudWatchLogOptions.BgpLogGroupArn=");
+                try appendUrlEncoded(alloc, &body_buf, sv3);
+            }
+            if (sv2.bgp_log_output_format) |sv3| {
+                try body_buf.appendSlice(alloc, "&TunnelOptions.LogOptions.CloudWatchLogOptions.BgpLogOutputFormat=");
+                try appendUrlEncoded(alloc, &body_buf, sv3);
+            }
+            if (sv2.log_enabled) |sv3| {
+                try body_buf.appendSlice(alloc, "&TunnelOptions.LogOptions.CloudWatchLogOptions.LogEnabled=");
+                try appendUrlEncoded(alloc, &body_buf, if (sv3) "true" else "false");
+            }
+            if (sv2.log_group_arn) |sv3| {
+                try body_buf.appendSlice(alloc, "&TunnelOptions.LogOptions.CloudWatchLogOptions.LogGroupArn=");
+                try appendUrlEncoded(alloc, &body_buf, sv3);
+            }
+            if (sv2.log_output_format) |sv3| {
+                try body_buf.appendSlice(alloc, "&TunnelOptions.LogOptions.CloudWatchLogOptions.LogOutputFormat=");
+                try appendUrlEncoded(alloc, &body_buf, sv3);
+            }
+        }
+    }
+    if (input.tunnel_options.phase_1_dh_group_numbers) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TunnelOptions.Phase1DHGroupNumbers.item.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.value) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                }
+            }
+        }
+    }
+    if (input.tunnel_options.phase_1_encryption_algorithms) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TunnelOptions.Phase1EncryptionAlgorithms.item.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.value) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+        }
+    }
+    if (input.tunnel_options.phase_1_integrity_algorithms) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TunnelOptions.Phase1IntegrityAlgorithms.item.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.value) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+        }
+    }
     if (input.tunnel_options.phase_1_lifetime_seconds) |sv| {
         try body_buf.appendSlice(alloc, "&TunnelOptions.Phase1LifetimeSeconds=");
         try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
+    }
+    if (input.tunnel_options.phase_2_dh_group_numbers) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TunnelOptions.Phase2DHGroupNumbers.item.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.value) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                }
+            }
+        }
+    }
+    if (input.tunnel_options.phase_2_encryption_algorithms) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TunnelOptions.Phase2EncryptionAlgorithms.item.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.value) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+        }
+    }
+    if (input.tunnel_options.phase_2_integrity_algorithms) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TunnelOptions.Phase2IntegrityAlgorithms.item.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.value) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+        }
     }
     if (input.tunnel_options.phase_2_lifetime_seconds) |sv| {
         try body_buf.appendSlice(alloc, "&TunnelOptions.Phase2LifetimeSeconds=");

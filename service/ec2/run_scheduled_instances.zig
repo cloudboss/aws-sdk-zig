@@ -111,9 +111,98 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RunScheduledInstancesInput,
         try body_buf.appendSlice(alloc, "&InstanceCount=");
         try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
     }
+    if (input.launch_specification.block_device_mappings) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.DeviceName=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.device_name) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            if (item.ebs) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.delete_on_termination) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, if (fv_2) "true" else "false");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.Ebs.Encrypted=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.encrypted) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, if (fv_2) "true" else "false");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.Ebs.Iops=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.iops) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.Ebs.SnapshotId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.snapshot_id) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_2);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.Ebs.VolumeSize=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.volume_size) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.Ebs.VolumeType=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.volume_type) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_2);
+                    }
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.NoDevice=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.no_device) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMappings.BlockDeviceMapping.{d}.VirtualName=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.virtual_name) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+        }
+    }
     if (input.launch_specification.ebs_optimized) |sv| {
         try body_buf.appendSlice(alloc, "&LaunchSpecification.EbsOptimized=");
         try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+    }
+    if (input.launch_specification.iam_instance_profile) |sv| {
+        if (sv.arn) |sv2| {
+            try body_buf.appendSlice(alloc, "&LaunchSpecification.IamInstanceProfile.Arn=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.name) |sv2| {
+            try body_buf.appendSlice(alloc, "&LaunchSpecification.IamInstanceProfile.Name=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
     }
     try body_buf.appendSlice(alloc, "&LaunchSpecification.ImageId=");
     try appendUrlEncoded(alloc, &body_buf, input.launch_specification.image_id);
@@ -129,9 +218,156 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RunScheduledInstancesInput,
         try body_buf.appendSlice(alloc, "&LaunchSpecification.KeyName=");
         try appendUrlEncoded(alloc, &body_buf, sv);
     }
+    if (input.launch_specification.monitoring) |sv| {
+        if (sv.enabled) |sv2| {
+            try body_buf.appendSlice(alloc, "&LaunchSpecification.Monitoring.Enabled=");
+            try appendUrlEncoded(alloc, &body_buf, if (sv2) "true" else "false");
+        }
+    }
+    if (input.launch_specification.network_interfaces) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.AssociatePublicIpAddress=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.associate_public_ip_address) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, if (fv_1) "true" else "false");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.DeleteOnTermination=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.delete_on_termination) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, if (fv_1) "true" else "false");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.Description=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.description) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.DeviceIndex=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.device_index) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                }
+            }
+            if (item.groups) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.Groups.SecurityGroupId.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                    }
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.Ipv6AddressCount=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.ipv_6_address_count) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                }
+            }
+            if (item.ipv_6_addresses) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.Ipv6Addresses.Ipv6Address.{d}.Ipv6Address=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.ipv_6_address) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.NetworkInterfaceId=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.network_interface_id) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.PrivateIpAddress=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.private_ip_address) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            if (item.private_ip_address_configs) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.PrivateIpAddressConfigs.PrivateIpAddressConfigSet.{d}.Primary=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.primary) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, if (fv_2) "true" else "false");
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.PrivateIpAddressConfigs.PrivateIpAddressConfigSet.{d}.PrivateIpAddress=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.private_ip_address) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.SecondaryPrivateIpAddressCount=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.secondary_private_ip_address_count) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.SubnetId=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.subnet_id) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+        }
+    }
+    if (input.launch_specification.placement) |sv| {
+        if (sv.availability_zone) |sv2| {
+            try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.AvailabilityZone=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.group_name) |sv2| {
+            try body_buf.appendSlice(alloc, "&LaunchSpecification.Placement.GroupName=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+    }
     if (input.launch_specification.ramdisk_id) |sv| {
         try body_buf.appendSlice(alloc, "&LaunchSpecification.RamdiskId=");
         try appendUrlEncoded(alloc, &body_buf, sv);
+    }
+    if (input.launch_specification.security_group_ids) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.SecurityGroupIds.SecurityGroupId.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
     }
     if (input.launch_specification.subnet_id) |sv| {
         try body_buf.appendSlice(alloc, "&LaunchSpecification.SubnetId=");

@@ -79,6 +79,45 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DisassociateInstanceEventWi
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(alloc, "Action=DisassociateInstanceEventWindow&Version=2016-11-15");
+    if (input.association_target.dedicated_host_ids) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.DedicatedHostIds.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.association_target.instance_ids) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceIds.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.association_target.instance_tags) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceTags.item.{d}.Key=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.key) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceTags.item.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.value) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+        }
+    }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
         try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");

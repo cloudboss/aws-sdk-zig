@@ -83,13 +83,45 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessInstanc
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(alloc, "Action=ModifyVerifiedAccessInstanceLoggingConfiguration&Version=2016-11-15");
+    if (input.access_logs.cloud_watch_logs) |sv| {
+        try body_buf.appendSlice(alloc, "&AccessLogs.CloudWatchLogs.Enabled=");
+        try appendUrlEncoded(alloc, &body_buf, if (sv.enabled) "true" else "false");
+        if (sv.log_group) |sv2| {
+            try body_buf.appendSlice(alloc, "&AccessLogs.CloudWatchLogs.LogGroup=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+    }
     if (input.access_logs.include_trust_context) |sv| {
         try body_buf.appendSlice(alloc, "&AccessLogs.IncludeTrustContext=");
         try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
     }
+    if (input.access_logs.kinesis_data_firehose) |sv| {
+        if (sv.delivery_stream) |sv2| {
+            try body_buf.appendSlice(alloc, "&AccessLogs.KinesisDataFirehose.DeliveryStream=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        try body_buf.appendSlice(alloc, "&AccessLogs.KinesisDataFirehose.Enabled=");
+        try appendUrlEncoded(alloc, &body_buf, if (sv.enabled) "true" else "false");
+    }
     if (input.access_logs.log_version) |sv| {
         try body_buf.appendSlice(alloc, "&AccessLogs.LogVersion=");
         try appendUrlEncoded(alloc, &body_buf, sv);
+    }
+    if (input.access_logs.s_3) |sv| {
+        if (sv.bucket_name) |sv2| {
+            try body_buf.appendSlice(alloc, "&AccessLogs.S3.BucketName=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.bucket_owner) |sv2| {
+            try body_buf.appendSlice(alloc, "&AccessLogs.S3.BucketOwner=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        try body_buf.appendSlice(alloc, "&AccessLogs.S3.Enabled=");
+        try appendUrlEncoded(alloc, &body_buf, if (sv.enabled) "true" else "false");
+        if (sv.prefix) |sv2| {
+            try body_buf.appendSlice(alloc, "&AccessLogs.S3.Prefix=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
     }
     if (input.client_token) |v| {
         try body_buf.appendSlice(alloc, "&ClientToken=");

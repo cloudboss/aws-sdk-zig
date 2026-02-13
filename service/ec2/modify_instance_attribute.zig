@@ -239,24 +239,42 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceAttributeInpu
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.item.{d}.DeviceName=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.device_name) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.device_name) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            if (item.ebs) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.item.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.delete_on_termination) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, if (fv_2) "true" else "false");
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.item.{d}.Ebs.VolumeId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.volume_id) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_2);
+                    }
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.item.{d}.NoDevice=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.no_device) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.no_device) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.item.{d}.VirtualName=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.virtual_name) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.virtual_name) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }

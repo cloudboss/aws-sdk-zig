@@ -586,8 +586,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleInput, config: *a
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyArns.member.{d}.arn=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.arn) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.arn) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }
@@ -599,16 +599,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: AssumeRoleInput, config: *a
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProvidedContexts.member.{d}.ContextAssertion=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.context_assertion) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.context_assertion) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProvidedContexts.member.{d}.ProviderArn=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.provider_arn) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.provider_arn) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }

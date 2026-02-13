@@ -124,8 +124,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyManagedPrefixListInpu
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddEntries.member.{d}.Description=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.description) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.description) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }

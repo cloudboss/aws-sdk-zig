@@ -162,6 +162,38 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDelegationRequestInpu
         try body_buf.appendSlice(alloc, "&OwnerAccountId=");
         try appendUrlEncoded(alloc, &body_buf, v);
     }
+    if (input.permissions.parameters) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Permissions.Parameters.member.{d}.Name=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.name) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Permissions.Parameters.member.{d}.Type=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                if (item.@"type") |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                }
+            }
+            if (item.values) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Permissions.Parameters.member.{d}.Values.member.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                    }
+                }
+            }
+        }
+    }
     if (input.permissions.policy_template_arn) |sv| {
         try body_buf.appendSlice(alloc, "&Permissions.PolicyTemplateArn=");
         try appendUrlEncoded(alloc, &body_buf, sv);

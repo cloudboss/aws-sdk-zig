@@ -83,6 +83,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeregisterInstanceEventNoti
         try body_buf.appendSlice(alloc, "&InstanceTagAttribute.IncludeAllTagsOfInstance=");
         try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
     }
+    if (input.instance_tag_attribute.instance_tag_keys) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTagAttribute.InstanceTagKeys.item.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
 
     const body = try body_buf.toOwnedSlice(alloc);
 

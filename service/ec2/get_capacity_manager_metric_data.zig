@@ -116,6 +116,40 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetCapacityManagerMetricDat
     }
     try body_buf.appendSlice(alloc, "&EndTime=");
     try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{input.end_time}) catch "");
+    if (input.filter_by) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            if (item.dimension_condition) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.item.{d}.DimensionCondition.Comparison=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.comparison) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(fv_2));
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.item.{d}.DimensionCondition.Dimension=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.dimension) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(fv_2));
+                    }
+                }
+                if (sv_1.values) |lst_2| {
+                    for (lst_2, 0..) |item_2, idx_2| {
+                        const n_2 = idx_2 + 1;
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.item.{d}.DimensionCondition.Values.item.{d}=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            try appendUrlEncoded(alloc, &body_buf, item_2);
+                        }
+                    }
+                }
+            }
+        }
+    }
     if (input.group_by) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;

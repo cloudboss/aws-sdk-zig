@@ -7,6 +7,7 @@ import org.junit.jupiter.api.io.TempDir
 import software.amazon.smithy.build.FileManifest
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
@@ -89,7 +90,13 @@ class Ec2QueryProtocolTest {
     }
 
     private fun generateFiles(protocol: software.amazon.smithy.zig.protocols.ProtocolGenerator): Map<String, String> {
-        val model = buildTestModel()
+        return generateFilesFromModel(buildTestModel(), protocol)
+    }
+
+    private fun generateFilesFromModel(
+        model: Model,
+        protocol: software.amazon.smithy.zig.protocols.ProtocolGenerator,
+    ): Map<String, String> {
         val context = createContext(model)
         val service = model.expectShape(
             ShapeId.from("test#Ec2Service"),
@@ -205,5 +212,122 @@ class Ec2QueryProtocolTest {
         assertTrue(op.contains("fn appendUrlEncoded("), "Missing appendUrlEncoded helper")
         assertTrue(op.contains("fn parseHost("), "Missing parseHost helper")
         assertTrue(op.contains("fn parsePort("), "Missing parsePort helper")
+    }
+
+    // ---- Nested struct/list serialization tests ----
+
+    private fun buildNestedTestModel(): Model {
+        return Model.assembler()
+            .addShape(
+                StructureShape.builder()
+                    .id("test#InvalidParameterException")
+                    .addTrait(ErrorTrait("client"))
+                    .addMember("message", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#Address")
+                    .addMember("Street", ShapeId.from("smithy.api#String"))
+                    .addMember("City", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#Instance")
+                    .addMember("Name", ShapeId.from("smithy.api#String"))
+                    .addMember("Address", ShapeId.from("test#Address"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#Tag")
+                    .addMember("Key", ShapeId.from("smithy.api#String"))
+                    .addMember("Value", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                ListShape.builder()
+                    .id("test#TagList")
+                    .member(ShapeId.from("test#Tag"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#Wrapper")
+                    .addMember("Inner", ShapeId.from("test#Address"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#CreateInstanceRequest")
+                    .addMember("Instance", ShapeId.from("test#Instance"))
+                    .addMember("Tags", ShapeId.from("test#TagList"))
+                    .addMember("Wrapper", ShapeId.from("test#Wrapper"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#CreateInstanceResponse")
+                    .addMember("InstanceId", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                OperationShape.builder()
+                    .id("test#CreateInstance")
+                    .input(ShapeId.from("test#CreateInstanceRequest"))
+                    .output(ShapeId.from("test#CreateInstanceResponse"))
+                    .addError(ShapeId.from("test#InvalidParameterException"))
+                    .build()
+            )
+            .addShape(
+                ServiceShape.builder()
+                    .id("test#Ec2Service")
+                    .version("2016-11-15")
+                    .addOperation(ShapeId.from("test#CreateInstance"))
+                    .build()
+            )
+            .assemble()
+            .unwrap()
+    }
+
+    @Test
+    fun nestedStructFieldsSerialized() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(op.contains("Instance.Name"), "Missing Instance.Name in serializer")
+        assertTrue(op.contains("Instance.Address.Street"), "Missing nested Instance.Address.Street")
+        assertTrue(op.contains("Instance.Address.City"), "Missing nested Instance.Address.City")
+    }
+
+    @Test
+    fun listOfStructsSerialized() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(op.contains("Tags.member.{d}.Key"), "Missing Tags.member.{d}.Key")
+        assertTrue(op.contains("Tags.member.{d}.Value"), "Missing Tags.member.{d}.Value")
+    }
+
+    @Test
+    fun nestedStructInListSerialized() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        // Instance.Address nested struct fields should not be skipped
+        assertTrue(op.contains("Instance.Address.Street"), "Nested struct within struct was skipped")
+        assertTrue(op.contains("Instance.Address.City"), "Nested struct within struct was skipped")
+    }
+
+    @Test
+    fun hasSerializableFieldsRecursive() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        // Wrapper has no scalar fields of its own, only a nested struct Inner (Address)
+        // hasSerializableFields should still return true and serialize the nested fields
+        assertTrue(op.contains("Wrapper.Inner.Street"), "Struct with only nested struct members was skipped")
+        assertTrue(op.contains("Wrapper.Inner.City"), "Struct with only nested struct members was skipped")
     }
 }

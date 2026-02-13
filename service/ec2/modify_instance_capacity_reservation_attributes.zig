@@ -82,6 +82,16 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCapacityReser
         try body_buf.appendSlice(alloc, "&CapacityReservationSpecification.CapacityReservationPreference=");
         try appendUrlEncoded(alloc, &body_buf, @tagName(sv));
     }
+    if (input.capacity_reservation_specification.capacity_reservation_target) |sv| {
+        if (sv.capacity_reservation_id) |sv2| {
+            try body_buf.appendSlice(alloc, "&CapacityReservationSpecification.CapacityReservationTarget.CapacityReservationId=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+        if (sv.capacity_reservation_resource_group_arn) |sv2| {
+            try body_buf.appendSlice(alloc, "&CapacityReservationSpecification.CapacityReservationTarget.CapacityReservationResourceGroupArn=");
+            try appendUrlEncoded(alloc, &body_buf, sv2);
+        }
+    }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
         try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");

@@ -91,6 +91,64 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ReplaceImageCriteriaInAllow
         try body_buf.appendSlice(alloc, "&DryRun=");
         try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
+    if (input.image_criteria) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            if (item.creation_date_condition) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriteria.ImageCriterion.{d}.CreationDateCondition.MaximumDaysSinceCreated=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.maximum_days_since_created) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
+                    }
+                }
+            }
+            if (item.deprecation_time_condition) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriteria.ImageCriterion.{d}.DeprecationTimeCondition.MaximumDaysSinceDeprecated=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.maximum_days_since_deprecated) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
+                    }
+                }
+            }
+            if (item.image_names) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriteria.ImageCriterion.{d}.ImageNames.item.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                    }
+                }
+            }
+            if (item.image_providers) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriteria.ImageCriterion.{d}.ImageProviders.item.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                    }
+                }
+            }
+            if (item.marketplace_product_codes) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriteria.ImageCriterion.{d}.MarketplaceProductCodes.item.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                    }
+                }
+            }
+        }
+    }
 
     const body = try body_buf.toOwnedSlice(alloc);
 

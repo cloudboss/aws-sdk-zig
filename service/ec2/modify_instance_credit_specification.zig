@@ -107,8 +107,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCreditSpecifi
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceCreditSpecifications.item.{d}.CpuCredits=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            if (item.cpu_credits) |v| {
-                try appendUrlEncoded(alloc, &body_buf, v);
+            if (item.cpu_credits) |fv_1| {
+                try appendUrlEncoded(alloc, &body_buf, fv_1);
             }
         }
         {

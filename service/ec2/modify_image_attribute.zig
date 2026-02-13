@@ -171,6 +171,82 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyImageAttributeInput, 
             try appendUrlEncoded(alloc, &body_buf, sv);
         }
     }
+    if (input.launch_permission) |v| {
+        if (v.add) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.Group=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.group) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.OrganizationalUnitArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.organizational_unit_arn) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.OrganizationArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.organization_arn) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Add.item.{d}.UserId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.user_id) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+            }
+        }
+        if (v.remove) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.Group=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.group) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.OrganizationalUnitArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.organizational_unit_arn) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.OrganizationArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.organization_arn) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchPermission.Remove.item.{d}.UserId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.user_id) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+            }
+        }
+    }
     if (input.operation_type) |v| {
         try body_buf.appendSlice(alloc, "&OperationType=");
         try appendUrlEncoded(alloc, &body_buf, @tagName(v));

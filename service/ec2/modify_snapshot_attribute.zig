@@ -108,6 +108,50 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifySnapshotAttributeInpu
         try body_buf.appendSlice(alloc, "&Attribute=");
         try appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
+    if (input.create_volume_permission) |v| {
+        if (v.add) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CreateVolumePermission.Add.item.{d}.Group=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.group) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CreateVolumePermission.Add.item.{d}.UserId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.user_id) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+            }
+        }
+        if (v.remove) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CreateVolumePermission.Remove.item.{d}.Group=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.group) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CreateVolumePermission.Remove.item.{d}.UserId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.user_id) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+            }
+        }
+    }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
         try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");

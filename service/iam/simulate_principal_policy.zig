@@ -413,16 +413,27 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SimulatePrincipalPolicyInpu
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ContextEntries.member.{d}.ContextKeyName=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.context_key_name) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.context_key_name) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ContextEntries.member.{d}.ContextKeyType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.context_key_type) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.context_key_type) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                }
+            }
+            if (item.context_key_values) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ContextEntries.member.{d}.ContextKeyValues.member.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        try appendUrlEncoded(alloc, &body_buf, item_1);
+                    }
                 }
             }
         }

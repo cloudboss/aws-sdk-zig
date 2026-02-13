@@ -142,6 +142,431 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifySpotFleetRequestInput
         try body_buf.appendSlice(alloc, "&ExcessCapacityTerminationPolicy=");
         try appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
+    if (input.launch_template_configs) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            if (item.launch_template_specification) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.LaunchTemplateSpecification.LaunchTemplateId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.launch_template_id) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_2);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.LaunchTemplateSpecification.LaunchTemplateName=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.launch_template_name) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_2);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.LaunchTemplateSpecification.Version=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.version) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_2);
+                    }
+                }
+            }
+            if (item.overrides) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.AvailabilityZone=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.availability_zone) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.AvailabilityZoneId=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.availability_zone_id) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    if (item_1.instance_requirements) |sv_2| {
+                        if (sv_2.accelerator_count) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.AcceleratorCount.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.AcceleratorCount.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                        }
+                        if (sv_2.accelerator_manufacturers) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.AcceleratorManufacturers.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        if (sv_2.accelerator_names) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.AcceleratorNames.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        if (sv_2.accelerator_total_memory_mi_b) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.AcceleratorTotalMemoryMiB.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.AcceleratorTotalMemoryMiB.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                        }
+                        if (sv_2.accelerator_types) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.AcceleratorTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        if (sv_2.allowed_instance_types) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.AllowedInstanceTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.BareMetal=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.bare_metal) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, @tagName(fv_3));
+                            }
+                        }
+                        if (sv_2.baseline_ebs_bandwidth_mbps) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.BaselineEbsBandwidthMbps.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.BaselineEbsBandwidthMbps.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                        }
+                        if (sv_2.baseline_performance_factors) |sv_3| {
+                            if (sv_3.cpu) |sv_4| {
+                                if (sv_4.references) |lst_5| {
+                                    for (lst_5, 0..) |item_5, idx_5| {
+                                        const n_5 = idx_5 + 1;
+                                        {
+                                            var prefix_buf: [256]u8 = undefined;
+                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.References.item.{d}.InstanceFamily=", .{n, n_1, n_5}) catch continue;
+                                            try body_buf.appendSlice(alloc, field_prefix);
+                                            if (item_5.instance_family) |fv_6| {
+                                                try appendUrlEncoded(alloc, &body_buf, fv_6);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.BurstablePerformance=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.burstable_performance) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, @tagName(fv_3));
+                            }
+                        }
+                        if (sv_2.cpu_manufacturers) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.CpuManufacturers.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        if (sv_2.excluded_instance_types) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.ExcludedInstanceTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        if (sv_2.instance_generations) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.InstanceGenerations.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.LocalStorage=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.local_storage) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, @tagName(fv_3));
+                            }
+                        }
+                        if (sv_2.local_storage_types) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.LocalStorageTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.max_spot_price_as_percentage_of_optimal_on_demand_price) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_3}) catch "");
+                            }
+                        }
+                        if (sv_2.memory_gi_b_per_v_cpu) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.MemoryGiBPerVCpu.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, fv_4);
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.MemoryGiBPerVCpu.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, fv_4);
+                                }
+                            }
+                        }
+                        if (sv_2.memory_mi_b) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.MemoryMiB.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.MemoryMiB.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                        }
+                        if (sv_2.network_bandwidth_gbps) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.NetworkBandwidthGbps.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, fv_4);
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.NetworkBandwidthGbps.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, fv_4);
+                                }
+                            }
+                        }
+                        if (sv_2.network_interface_count) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.NetworkInterfaceCount.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.NetworkInterfaceCount.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.OnDemandMaxPricePercentageOverLowestPrice=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.on_demand_max_price_percentage_over_lowest_price) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_3}) catch "");
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.RequireEncryptionInTransit=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.require_encryption_in_transit) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, if (fv_3) "true" else "false");
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.RequireHibernateSupport=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.require_hibernate_support) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, if (fv_3) "true" else "false");
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.SpotMaxPricePercentageOverLowestPrice=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(alloc, field_prefix);
+                            if (sv_2.spot_max_price_percentage_over_lowest_price) |fv_3| {
+                                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_3}) catch "");
+                            }
+                        }
+                        if (sv_2.total_local_storage_gb) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.TotalLocalStorageGB.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, fv_4);
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.TotalLocalStorageGB.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, fv_4);
+                                }
+                            }
+                        }
+                        if (sv_2.v_cpu_count) |sv_3| {
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.VCpuCount.Max=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.max) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceRequirements.VCpuCount.Min=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                if (sv_3.min) |fv_4| {
+                                    try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_4}) catch "");
+                                }
+                            }
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.InstanceType=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.instance_type) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, @tagName(fv_2));
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.Priority=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.priority) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.SpotPrice=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.spot_price) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.SubnetId=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.subnet_id) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfigs.item.{d}.Overrides.item.{d}.WeightedCapacity=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.weighted_capacity) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                }
+            }
+        }
+    }
     if (input.on_demand_target_capacity) |v| {
         try body_buf.appendSlice(alloc, "&OnDemandTargetCapacity=");
         try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");

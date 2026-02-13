@@ -104,6 +104,494 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
         try body_buf.appendSlice(alloc, "&DryRun=");
         try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
+    if (input.exclude_paths) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            if (item.destination) |sv_1| {
+                if (sv_1.packet_header_statement) |sv_2| {
+                    if (sv_2.destination_addresses) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.destination_ports) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.destination_prefix_lists) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.protocols) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_addresses) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_ports) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_prefix_lists) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                }
+                if (sv_1.resource_statement) |sv_2| {
+                    if (sv_2.resources) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.resource_types) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                }
+            }
+            if (item.source) |sv_1| {
+                if (sv_1.packet_header_statement) |sv_2| {
+                    if (sv_2.destination_addresses) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.destination_ports) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.destination_prefix_lists) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.protocols) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_addresses) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_ports) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_prefix_lists) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                }
+                if (sv_1.resource_statement) |sv_2| {
+                    if (sv_2.resources) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.resource_types) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                }
+            }
+            if (item.through_resources) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    if (item_1.resource_statement) |sv_2| {
+                        if (sv_2.resources) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.ThroughResources.item.{d}.ResourceStatement.Resources.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        if (sv_2.resource_types) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.ThroughResources.item.{d}.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (input.match_paths) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            if (item.destination) |sv_1| {
+                if (sv_1.packet_header_statement) |sv_2| {
+                    if (sv_2.destination_addresses) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.destination_ports) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.destination_prefix_lists) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.protocols) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_addresses) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_ports) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_prefix_lists) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                }
+                if (sv_1.resource_statement) |sv_2| {
+                    if (sv_2.resources) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.resource_types) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                }
+            }
+            if (item.source) |sv_1| {
+                if (sv_1.packet_header_statement) |sv_2| {
+                    if (sv_2.destination_addresses) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.destination_ports) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.destination_prefix_lists) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.protocols) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_addresses) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_ports) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.source_prefix_lists) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                }
+                if (sv_1.resource_statement) |sv_2| {
+                    if (sv_2.resources) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                    if (sv_2.resource_types) |lst_3| {
+                        for (lst_3, 0..) |item_3, idx_3| {
+                            const n_3 = idx_3 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
+                                try body_buf.appendSlice(alloc, field_prefix);
+                                try appendUrlEncoded(alloc, &body_buf, item_3);
+                            }
+                        }
+                    }
+                }
+            }
+            if (item.through_resources) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    if (item_1.resource_statement) |sv_2| {
+                        if (sv_2.resources) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.ThroughResources.item.{d}.ResourceStatement.Resources.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                        if (sv_2.resource_types) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.ThroughResources.item.{d}.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    try body_buf.appendSlice(alloc, field_prefix);
+                                    try appendUrlEncoded(alloc, &body_buf, item_3);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
@@ -111,8 +599,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.resource_type) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.resource_type) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                }
+            }
+            if (item.tags) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.key) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.value) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
                 }
             }
         }

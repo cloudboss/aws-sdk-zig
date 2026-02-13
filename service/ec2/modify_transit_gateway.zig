@@ -90,6 +90,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyTransitGatewayInput, 
         try appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
     }
     if (input.options) |v| {
+        if (v.add_transit_gateway_cidr_blocks) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.AddTransitGatewayCidrBlocks.item.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item);
+            }
+        }
         if (v.amazon_side_asn) |sv| {
             try body_buf.appendSlice(alloc, "&Options.AmazonSideAsn=");
             try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
@@ -121,6 +130,15 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyTransitGatewayInput, 
         if (v.propagation_default_route_table_id) |sv| {
             try body_buf.appendSlice(alloc, "&Options.PropagationDefaultRouteTableId=");
             try appendUrlEncoded(alloc, &body_buf, sv);
+        }
+        if (v.remove_transit_gateway_cidr_blocks) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.RemoveTransitGatewayCidrBlocks.item.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try appendUrlEncoded(alloc, &body_buf, item);
+            }
         }
         if (v.security_group_referencing_support) |sv| {
             try body_buf.appendSlice(alloc, "&Options.SecurityGroupReferencingSupport=");

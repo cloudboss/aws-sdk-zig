@@ -117,6 +117,50 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyFpgaImageAttributeInp
     }
     try body_buf.appendSlice(alloc, "&FpgaImageId=");
     try appendUrlEncoded(alloc, &body_buf, input.fpga_image_id);
+    if (input.load_permission) |v| {
+        if (v.add) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.item.{d}.Group=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.group) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.item.{d}.UserId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.user_id) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+            }
+        }
+        if (v.remove) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.item.{d}.Group=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.group) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.item.{d}.UserId=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (item.user_id) |fv_1| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_1);
+                    }
+                }
+            }
+        }
+    }
     if (input.name) |v| {
         try body_buf.appendSlice(alloc, "&Name=");
         try appendUrlEncoded(alloc, &body_buf, v);

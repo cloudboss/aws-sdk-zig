@@ -305,40 +305,58 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportImageInput, config: *
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.Description=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.description) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.description) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.DeviceName=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.device_name) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.device_name) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.Format=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.format) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.format) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.SnapshotId=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.snapshot_id) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.snapshot_id) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.Url=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.url) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.url) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
+                }
+            }
+            if (item.user_bucket) |sv_1| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.UserBucket.S3Bucket=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.s_3_bucket) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_2);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.UserBucket.S3Key=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    if (sv_1.s_3_key) |fv_2| {
+                        try appendUrlEncoded(alloc, &body_buf, fv_2);
+                    }
                 }
             }
         }
@@ -366,8 +384,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportImageInput, config: *
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LicenseSpecifications.item.{d}.LicenseConfigurationArn=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.license_configuration_arn) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, v);
+                if (item.license_configuration_arn) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, fv_1);
                 }
             }
         }
@@ -391,8 +409,29 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportImageInput, config: *
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                if (item.resource_type) |v| {
-                    try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+                if (item.resource_type) |fv_1| {
+                    try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
+                }
+            }
+            if (item.tags) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.key) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(alloc, field_prefix);
+                        if (item_1.value) |fv_2| {
+                            try appendUrlEncoded(alloc, &body_buf, fv_2);
+                        }
+                    }
                 }
             }
         }

@@ -128,24 +128,24 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateReservedInstancesList
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.item.{d}.CurrencyCode=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            if (item.currency_code) |v| {
-                try appendUrlEncoded(alloc, &body_buf, @tagName(v));
+            if (item.currency_code) |fv_1| {
+                try appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.item.{d}.Price=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            if (item.price) |v| {
-                try appendUrlEncoded(alloc, &body_buf, v);
+            if (item.price) |fv_1| {
+                try appendUrlEncoded(alloc, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.item.{d}.Term=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            if (item.term) |v| {
-                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+            if (item.term) |fv_1| {
+                try appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
             }
         }
     }

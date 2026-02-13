@@ -213,6 +213,12 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyNetworkInterfaceAttri
             try body_buf.appendSlice(alloc, "&EnaSrdSpecification.EnaSrdEnabled=");
             try appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
         }
+        if (v.ena_srd_udp_specification) |sv| {
+            if (sv.ena_srd_udp_enabled) |sv2| {
+                try body_buf.appendSlice(alloc, "&EnaSrdSpecification.EnaSrdUdpSpecification.EnaSrdUdpEnabled=");
+                try appendUrlEncoded(alloc, &body_buf, if (sv2) "true" else "false");
+            }
+        }
     }
     if (input.groups) |list| {
         for (list, 0..) |item, idx| {
