@@ -12,6 +12,216 @@ const http = @import("http.zig");
 
 pub const algorithm = "AWS4-HMAC-SHA256";
 
+/// Options for presigning a request.
+pub const PresignOptions = struct {
+    /// How long the presigned URL is valid, in seconds (default: 1 hour, max: 7 days).
+    expires_seconds: u64 = 3600,
+};
+
+/// Presign a request -- puts the SigV4 signature in query parameters instead
+/// of the `Authorization` header.  Returns the full presigned URL as an
+/// owned string that the caller must free.
+pub fn presignRequest(
+    allocator: Allocator,
+    request: *const http.Request,
+    credentials: Credentials,
+    region: []const u8,
+    service: []const u8,
+    options: PresignOptions,
+) ![]const u8 {
+    const timestamp = std.time.timestamp();
+    const datetime = formatAmzDate(timestamp);
+    const datestamp = datetime[0..8];
+
+    const credential_scope = try std.fmt.allocPrint(allocator, "{s}/{s}/{s}/aws4_request", .{
+        datestamp, region, service,
+    });
+    defer allocator.free(credential_scope);
+
+    const credential = try std.fmt.allocPrint(allocator, "{s}/{s}", .{
+        credentials.access_key_id, credential_scope,
+    });
+    defer allocator.free(credential);
+
+    // Ensure host header is present for signed-headers computation.
+    // We work on a mutable copy of the headers so the caller's request
+    // is not modified.
+    var headers = try request.headers.clone(allocator);
+    var allocated_host: ?[]const u8 = null;
+    defer {
+        if (allocated_host) |h| allocator.free(h);
+        headers.deinit(allocator);
+    }
+
+    if (headers.get("host") == null) {
+        const is_default_port = if (request.port) |port|
+            (request.tls and port == 443) or (!request.tls and port == 80)
+        else
+            true;
+        if (!is_default_port) {
+            const host_with_port = try std.fmt.allocPrint(allocator, "{s}:{d}", .{ request.host, request.port.? });
+            allocated_host = host_with_port;
+            try headers.put(allocator, "host", host_with_port);
+        } else {
+            try headers.put(allocator, "host", request.host);
+        }
+    }
+
+    // Build signed-headers list from the (possibly augmented) header set.
+    const headers_result = try canonicalizeHeaders(allocator, &headers);
+    defer allocator.free(headers_result.canonical);
+    defer allocator.free(headers_result.signed);
+
+    // Canonical URI
+    const canonical_uri = try encodeUri(allocator, if (request.path.len == 0) "/" else request.path);
+    defer allocator.free(canonical_uri);
+
+    // Build the canonical query string: existing params + X-Amz-* presign params, sorted.
+    const canonical_query = try buildPresignCanonicalQuery(
+        allocator,
+        request.query,
+        &datetime,
+        credential,
+        headers_result.signed,
+        options.expires_seconds,
+        credentials.session_token,
+    );
+    defer allocator.free(canonical_query);
+
+    // Canonical request (payload is always UNSIGNED-PAYLOAD for presigning)
+    const method = @tagName(request.method);
+    const canonical_request = try std.fmt.allocPrint(allocator, "{s}\n{s}\n{s}\n{s}\n{s}\n{s}", .{
+        method,
+        canonical_uri,
+        canonical_query,
+        headers_result.canonical,
+        headers_result.signed,
+        "UNSIGNED-PAYLOAD",
+    });
+    defer allocator.free(canonical_request);
+
+    // String to sign
+    var canonical_request_hash: [Sha256.digest_length]u8 = undefined;
+    Sha256.hash(canonical_request, &canonical_request_hash, .{});
+    const canonical_request_hash_hex = std.fmt.bytesToHex(&canonical_request_hash, .lower);
+
+    const string_to_sign = try std.fmt.allocPrint(allocator, "{s}\n{s}\n{s}\n{s}", .{
+        algorithm,
+        datetime,
+        credential_scope,
+        canonical_request_hash_hex,
+    });
+    defer allocator.free(string_to_sign);
+
+    // Signature
+    const signing_key = deriveSigningKey(credentials.secret_access_key, datestamp, region, service);
+    var signature: [Hmac.mac_length]u8 = undefined;
+    Hmac.create(&signature, string_to_sign, &signing_key);
+    const signature_hex = std.fmt.bytesToHex(&signature, .lower);
+
+    // Assemble final URL
+    const scheme: []const u8 = if (request.tls) "https" else "http";
+
+    const port_str = if (request.port) |p| blk: {
+        const is_default = (request.tls and p == 443) or (!request.tls and p == 80);
+        if (is_default) break :blk try allocator.dupe(u8, "");
+        break :blk try std.fmt.allocPrint(allocator, ":{d}", .{p});
+    } else try allocator.dupe(u8, "");
+    defer allocator.free(port_str);
+
+    const path_str = if (request.path.len == 0) "/" else request.path;
+
+    return std.fmt.allocPrint(allocator, "{s}://{s}{s}{s}?{s}&X-Amz-Signature={s}", .{
+        scheme,
+        request.host,
+        port_str,
+        path_str,
+        canonical_query,
+        signature_hex,
+    });
+}
+
+/// Build the canonical query string for presigning.  Merges any existing
+/// query parameters with the required `X-Amz-*` presigning parameters and
+/// returns the sorted, percent-encoded result.
+fn buildPresignCanonicalQuery(
+    allocator: Allocator,
+    existing_query: ?[]const u8,
+    datetime: []const u8,
+    credential: []const u8,
+    signed_headers: []const u8,
+    expires_seconds: u64,
+    session_token: ?[]const u8,
+) ![]const u8 {
+    var pairs: std.ArrayList(QueryPair) = .{};
+    defer pairs.deinit(allocator);
+
+    // Parse existing query params
+    if (existing_query) |q| {
+        var param_iter = std.mem.splitScalar(u8, q, '&');
+        while (param_iter.next()) |param| {
+            if (param.len == 0) continue;
+            if (std.mem.indexOfScalar(u8, param, '=')) |eq_idx| {
+                try pairs.append(allocator, .{
+                    .key = param[0..eq_idx],
+                    .value = param[eq_idx + 1 ..],
+                });
+            } else {
+                try pairs.append(allocator, .{ .key = param, .value = "" });
+            }
+        }
+    }
+
+    // Add X-Amz-* presigning parameters (keys already percent-safe)
+    try pairs.append(allocator, .{ .key = "X-Amz-Algorithm", .value = algorithm });
+    try pairs.append(allocator, .{ .key = "X-Amz-Credential", .value = credential });
+    try pairs.append(allocator, .{ .key = "X-Amz-Date", .value = datetime });
+
+    const expires_str = try std.fmt.allocPrint(allocator, "{d}", .{expires_seconds});
+    defer allocator.free(expires_str);
+    try pairs.append(allocator, .{ .key = "X-Amz-Expires", .value = expires_str });
+
+    try pairs.append(allocator, .{ .key = "X-Amz-SignedHeaders", .value = signed_headers });
+
+    if (session_token) |token| {
+        try pairs.append(allocator, .{ .key = "X-Amz-Security-Token", .value = token });
+    }
+
+    // Sort
+    std.mem.sort(QueryPair, pairs.items, {}, struct {
+        fn lessThan(_: void, a: QueryPair, b: QueryPair) bool {
+            const key_cmp = std.mem.order(u8, a.key, b.key);
+            if (key_cmp != .eq) return key_cmp == .lt;
+            return std.mem.order(u8, a.value, b.value) == .lt;
+        }
+    }.lessThan);
+
+    // Encode
+    var result: std.ArrayList(u8) = .{};
+    errdefer result.deinit(allocator);
+
+    for (pairs.items, 0..) |pair, i| {
+        if (i > 0) try result.append(allocator, '&');
+        for (pair.key) |c| {
+            if (shouldEncodeQueryChar(c)) {
+                try result.appendSlice(allocator, &percentEncode(c));
+            } else {
+                try result.append(allocator, c);
+            }
+        }
+        try result.append(allocator, '=');
+        for (pair.value) |c| {
+            if (shouldEncodeQueryChar(c)) {
+                try result.appendSlice(allocator, &percentEncode(c));
+            } else {
+                try result.append(allocator, c);
+            }
+        }
+    }
+
+    return result.toOwnedSlice(allocator);
+}
+
 /// Sign an HTTP request with AWS Signature Version 4
 pub fn signRequest(
     allocator: Allocator,
@@ -463,4 +673,117 @@ test "trimAndNormalizeHeaderValue" {
     try std.testing.expectEqualStrings("value", trimAndNormalizeHeaderValue("  value  "));
     try std.testing.expectEqualStrings("value", trimAndNormalizeHeaderValue("\tvalue\t"));
     try std.testing.expectEqualStrings("hello world", trimAndNormalizeHeaderValue("  hello world  "));
+}
+
+test "presignRequest produces valid URL" {
+    const allocator = std.testing.allocator;
+
+    var request = http.Request.init("my-bucket.s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .GET;
+    request.path = "/my-key.txt";
+
+    const creds = Credentials{
+        .access_key_id = "AKIAIOSFODNN7EXAMPLE",
+        .secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+    };
+
+    const url = try presignRequest(allocator, &request, creds, "us-east-1", "s3", .{});
+    defer allocator.free(url);
+
+    // URL should start with https and contain all required SigV4 query params
+    try std.testing.expect(std.mem.startsWith(u8, url, "https://my-bucket.s3.us-east-1.amazonaws.com/my-key.txt?"));
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Algorithm=AWS4-HMAC-SHA256") != null);
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Credential=") != null);
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Date=") != null);
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Expires=3600") != null);
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-SignedHeaders=host") != null);
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Signature=") != null);
+}
+
+test "presignRequest with session token" {
+    const allocator = std.testing.allocator;
+
+    var request = http.Request.init("s3.us-west-2.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .GET;
+    request.path = "/bucket/key";
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+        .session_token = "TOKEN123",
+    };
+
+    const url = try presignRequest(allocator, &request, creds, "us-west-2", "s3", .{ .expires_seconds = 900 });
+    defer allocator.free(url);
+
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Security-Token=TOKEN123") != null);
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Expires=900") != null);
+}
+
+test "presignRequest with custom port" {
+    const allocator = std.testing.allocator;
+
+    var request = http.Request.init("localhost");
+    defer request.deinit(allocator);
+    request.method = .GET;
+    request.path = "/bucket/key";
+    request.port = 4566;
+    request.tls = false;
+
+    const creds = Credentials{
+        .access_key_id = "test",
+        .secret_access_key = "test",
+    };
+
+    const url = try presignRequest(allocator, &request, creds, "us-east-1", "s3", .{});
+    defer allocator.free(url);
+
+    try std.testing.expect(std.mem.startsWith(u8, url, "http://localhost:4566/bucket/key?"));
+}
+
+test "presignRequest with existing query params" {
+    const allocator = std.testing.allocator;
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .GET;
+    request.path = "/bucket/key";
+    request.query = "response-content-disposition=attachment";
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    const url = try presignRequest(allocator, &request, creds, "us-east-1", "s3", .{});
+    defer allocator.free(url);
+
+    // Existing param should be present alongside the signing params
+    try std.testing.expect(std.mem.indexOf(u8, url, "response-content-disposition=attachment") != null);
+    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Algorithm=") != null);
+}
+
+test "buildPresignCanonicalQuery sorts params" {
+    const allocator = std.testing.allocator;
+
+    const result = try buildPresignCanonicalQuery(
+        allocator,
+        "Zebra=1&Alpha=2",
+        "20240101T000000Z",
+        "AKID/20240101/us-east-1/s3/aws4_request",
+        "host",
+        3600,
+        null,
+    );
+    defer allocator.free(result);
+
+    // All params should be sorted: Alpha, X-Amz-Algorithm, X-Amz-Credential, ...
+    const alpha_pos = std.mem.indexOf(u8, result, "Alpha=2") orelse unreachable;
+    const algo_pos = std.mem.indexOf(u8, result, "X-Amz-Algorithm=") orelse unreachable;
+    const zebra_pos = std.mem.indexOf(u8, result, "Zebra=1") orelse unreachable;
+
+    try std.testing.expect(alpha_pos < algo_pos);
+    try std.testing.expect(algo_pos < zebra_pos);
 }
