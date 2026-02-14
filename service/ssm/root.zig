@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
 
 pub const add_tags_to_resource = @import("add_tags_to_resource.zig");
 pub const associate_ops_item_related_item = @import("associate_ops_item_related_item.zig");

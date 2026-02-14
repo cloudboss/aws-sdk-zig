@@ -25,6 +25,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_secret = @import("update_secret.zig");
 const update_secret_version_stage = @import("update_secret_version_stage.zig");
 const validate_resource_policy = @import("validate_resource_policy.zig");
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -868,5 +869,29 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
     pub fn validateResourcePolicy(self: *Self, input: validate_resource_policy.ValidateResourcePolicyInput, options: validate_resource_policy.Options) !validate_resource_policy.ValidateResourcePolicyOutput {
         return validate_resource_policy.execute(self, input, options);
+    }
+
+    pub fn batchGetSecretValuePaginator(self: *Self, params: batch_get_secret_value.BatchGetSecretValueInput) paginator.BatchGetSecretValuePaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSecretVersionIdsPaginator(self: *Self, params: list_secret_version_ids.ListSecretVersionIdsInput) paginator.ListSecretVersionIdsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSecretsPaginator(self: *Self, params: list_secrets.ListSecretsInput) paginator.ListSecretsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
     }
 };

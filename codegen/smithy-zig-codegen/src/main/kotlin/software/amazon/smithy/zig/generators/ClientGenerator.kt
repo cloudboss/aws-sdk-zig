@@ -12,6 +12,7 @@ class ClientGenerator(
     private val context: ZigContext,
     private val service: ServiceShape,
     private val model: Model,
+    private val paginatorGen: PaginatorGenerator? = null,
 ) {
     data class OperationInfo(
         val operationName: String,
@@ -26,6 +27,7 @@ class ClientGenerator(
 
     fun run() {
         val operations = collectOperations()
+        val paginatedOps = paginatorGen?.collectPaginatedOperations() ?: emptyList()
 
         context.writerDelegator().useFileWriter("client.zig") { writer ->
             writer.importContainer.addImport("std", "std")
@@ -39,9 +41,15 @@ class ClientGenerator(
                     op.constName, op.moduleFileName,
                 )
             }
+
+            // Import paginator module if paginated ops exist
+            if (paginatedOps.isNotEmpty()) {
+                writer.write("const paginator = @import(\"paginator.zig\");")
+            }
+
             writer.blankLine()
 
-            writeClientStruct(writer, operations)
+            writeClientStruct(writer, operations, paginatedOps)
         }
     }
 
@@ -76,7 +84,11 @@ class ClientGenerator(
             .sortedBy { it.moduleName }
     }
 
-    private fun writeClientStruct(writer: ZigWriter, operations: List<OperationInfo>) {
+    private fun writeClientStruct(
+        writer: ZigWriter,
+        operations: List<OperationInfo>,
+        paginatedOps: List<PaginatorGenerator.PaginationInfo>,
+    ) {
         writer.openBlock("pub const Client = struct {")
         writer.write("allocator: std.mem.Allocator,")
         writer.write("config: *aws.Config,")
@@ -115,6 +127,24 @@ class ClientGenerator(
                 op.constName, op.outputType,
             )
             writer.write("return \$L.execute(self, input, options);", op.constName)
+            writer.closeBlock("}")
+        }
+
+        // Paginator convenience methods
+        for (pagOp in paginatedOps) {
+            writer.blankLine()
+            val paginatorMethodName = "${toCamelCase(pagOp.moduleName)}Paginator"
+            writer.openBlock(
+                "pub fn \$L(self: *Self, params: \$L.\$L) paginator.\$LPaginator {",
+                paginatorMethodName,
+                pagOp.constName, pagOp.inputType,
+                pagOp.operationName,
+            )
+            writer.openBlock("return .{")
+            writer.write(".client = self,")
+            writer.write(".params = params,")
+            writer.write(".allocator = self.allocator,")
+            writer.closeBlock("};")
             writer.closeBlock("}")
         }
 

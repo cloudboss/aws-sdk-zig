@@ -751,6 +751,7 @@ const update_interruptible_capacity_reservation_allocation = @import("update_int
 const update_security_group_rule_descriptions_egress = @import("update_security_group_rule_descriptions_egress.zig");
 const update_security_group_rule_descriptions_ingress = @import("update_security_group_rule_descriptions_ingress.zig");
 const withdraw_byoip_cidr = @import("withdraw_byoip_cidr.zig");
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -10771,5 +10772,1317 @@ pub const Client = struct {
     /// because of BGP propagation delays.
     pub fn withdrawByoipCidr(self: *Self, input: withdraw_byoip_cidr.WithdrawByoipCidrInput, options: withdraw_byoip_cidr.Options) !withdraw_byoip_cidr.WithdrawByoipCidrOutput {
         return withdraw_byoip_cidr.execute(self, input, options);
+    }
+
+    pub fn describeAddressTransfersPaginator(self: *Self, params: describe_address_transfers.DescribeAddressTransfersInput) paginator.DescribeAddressTransfersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeAddressesAttributePaginator(self: *Self, params: describe_addresses_attribute.DescribeAddressesAttributeInput) paginator.DescribeAddressesAttributePaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeAwsNetworkPerformanceMetricSubscriptionsPaginator(self: *Self, params: describe_aws_network_performance_metric_subscriptions.DescribeAwsNetworkPerformanceMetricSubscriptionsInput) paginator.DescribeAwsNetworkPerformanceMetricSubscriptionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeByoipCidrsPaginator(self: *Self, params: describe_byoip_cidrs.DescribeByoipCidrsInput) paginator.DescribeByoipCidrsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityBlockExtensionHistoryPaginator(self: *Self, params: describe_capacity_block_extension_history.DescribeCapacityBlockExtensionHistoryInput) paginator.DescribeCapacityBlockExtensionHistoryPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityBlockExtensionOfferingsPaginator(self: *Self, params: describe_capacity_block_extension_offerings.DescribeCapacityBlockExtensionOfferingsInput) paginator.DescribeCapacityBlockExtensionOfferingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityBlockOfferingsPaginator(self: *Self, params: describe_capacity_block_offerings.DescribeCapacityBlockOfferingsInput) paginator.DescribeCapacityBlockOfferingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityBlockStatusPaginator(self: *Self, params: describe_capacity_block_status.DescribeCapacityBlockStatusInput) paginator.DescribeCapacityBlockStatusPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityBlocksPaginator(self: *Self, params: describe_capacity_blocks.DescribeCapacityBlocksInput) paginator.DescribeCapacityBlocksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityManagerDataExportsPaginator(self: *Self, params: describe_capacity_manager_data_exports.DescribeCapacityManagerDataExportsInput) paginator.DescribeCapacityManagerDataExportsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityReservationBillingRequestsPaginator(self: *Self, params: describe_capacity_reservation_billing_requests.DescribeCapacityReservationBillingRequestsInput) paginator.DescribeCapacityReservationBillingRequestsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityReservationFleetsPaginator(self: *Self, params: describe_capacity_reservation_fleets.DescribeCapacityReservationFleetsInput) paginator.DescribeCapacityReservationFleetsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCapacityReservationsPaginator(self: *Self, params: describe_capacity_reservations.DescribeCapacityReservationsInput) paginator.DescribeCapacityReservationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCarrierGatewaysPaginator(self: *Self, params: describe_carrier_gateways.DescribeCarrierGatewaysInput) paginator.DescribeCarrierGatewaysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeClassicLinkInstancesPaginator(self: *Self, params: describe_classic_link_instances.DescribeClassicLinkInstancesInput) paginator.DescribeClassicLinkInstancesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeClientVpnAuthorizationRulesPaginator(self: *Self, params: describe_client_vpn_authorization_rules.DescribeClientVpnAuthorizationRulesInput) paginator.DescribeClientVpnAuthorizationRulesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeClientVpnConnectionsPaginator(self: *Self, params: describe_client_vpn_connections.DescribeClientVpnConnectionsInput) paginator.DescribeClientVpnConnectionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeClientVpnEndpointsPaginator(self: *Self, params: describe_client_vpn_endpoints.DescribeClientVpnEndpointsInput) paginator.DescribeClientVpnEndpointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeClientVpnRoutesPaginator(self: *Self, params: describe_client_vpn_routes.DescribeClientVpnRoutesInput) paginator.DescribeClientVpnRoutesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeClientVpnTargetNetworksPaginator(self: *Self, params: describe_client_vpn_target_networks.DescribeClientVpnTargetNetworksInput) paginator.DescribeClientVpnTargetNetworksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeCoipPoolsPaginator(self: *Self, params: describe_coip_pools.DescribeCoipPoolsInput) paginator.DescribeCoipPoolsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeDhcpOptionsPaginator(self: *Self, params: describe_dhcp_options.DescribeDhcpOptionsInput) paginator.DescribeDhcpOptionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeEgressOnlyInternetGatewaysPaginator(self: *Self, params: describe_egress_only_internet_gateways.DescribeEgressOnlyInternetGatewaysInput) paginator.DescribeEgressOnlyInternetGatewaysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeExportImageTasksPaginator(self: *Self, params: describe_export_image_tasks.DescribeExportImageTasksInput) paginator.DescribeExportImageTasksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeFastLaunchImagesPaginator(self: *Self, params: describe_fast_launch_images.DescribeFastLaunchImagesInput) paginator.DescribeFastLaunchImagesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeFastSnapshotRestoresPaginator(self: *Self, params: describe_fast_snapshot_restores.DescribeFastSnapshotRestoresInput) paginator.DescribeFastSnapshotRestoresPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeFleetsPaginator(self: *Self, params: describe_fleets.DescribeFleetsInput) paginator.DescribeFleetsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeFlowLogsPaginator(self: *Self, params: describe_flow_logs.DescribeFlowLogsInput) paginator.DescribeFlowLogsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeFpgaImagesPaginator(self: *Self, params: describe_fpga_images.DescribeFpgaImagesInput) paginator.DescribeFpgaImagesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeHostReservationOfferingsPaginator(self: *Self, params: describe_host_reservation_offerings.DescribeHostReservationOfferingsInput) paginator.DescribeHostReservationOfferingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeHostReservationsPaginator(self: *Self, params: describe_host_reservations.DescribeHostReservationsInput) paginator.DescribeHostReservationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeHostsPaginator(self: *Self, params: describe_hosts.DescribeHostsInput) paginator.DescribeHostsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIamInstanceProfileAssociationsPaginator(self: *Self, params: describe_iam_instance_profile_associations.DescribeIamInstanceProfileAssociationsInput) paginator.DescribeIamInstanceProfileAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeImageReferencesPaginator(self: *Self, params: describe_image_references.DescribeImageReferencesInput) paginator.DescribeImageReferencesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeImageUsageReportEntriesPaginator(self: *Self, params: describe_image_usage_report_entries.DescribeImageUsageReportEntriesInput) paginator.DescribeImageUsageReportEntriesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeImageUsageReportsPaginator(self: *Self, params: describe_image_usage_reports.DescribeImageUsageReportsInput) paginator.DescribeImageUsageReportsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeImagesPaginator(self: *Self, params: describe_images.DescribeImagesInput) paginator.DescribeImagesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeImportImageTasksPaginator(self: *Self, params: describe_import_image_tasks.DescribeImportImageTasksInput) paginator.DescribeImportImageTasksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeImportSnapshotTasksPaginator(self: *Self, params: describe_import_snapshot_tasks.DescribeImportSnapshotTasksInput) paginator.DescribeImportSnapshotTasksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstanceConnectEndpointsPaginator(self: *Self, params: describe_instance_connect_endpoints.DescribeInstanceConnectEndpointsInput) paginator.DescribeInstanceConnectEndpointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstanceCreditSpecificationsPaginator(self: *Self, params: describe_instance_credit_specifications.DescribeInstanceCreditSpecificationsInput) paginator.DescribeInstanceCreditSpecificationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstanceEventWindowsPaginator(self: *Self, params: describe_instance_event_windows.DescribeInstanceEventWindowsInput) paginator.DescribeInstanceEventWindowsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstanceImageMetadataPaginator(self: *Self, params: describe_instance_image_metadata.DescribeInstanceImageMetadataInput) paginator.DescribeInstanceImageMetadataPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstanceStatusPaginator(self: *Self, params: describe_instance_status.DescribeInstanceStatusInput) paginator.DescribeInstanceStatusPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstanceTopologyPaginator(self: *Self, params: describe_instance_topology.DescribeInstanceTopologyInput) paginator.DescribeInstanceTopologyPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstanceTypeOfferingsPaginator(self: *Self, params: describe_instance_type_offerings.DescribeInstanceTypeOfferingsInput) paginator.DescribeInstanceTypeOfferingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstanceTypesPaginator(self: *Self, params: describe_instance_types.DescribeInstanceTypesInput) paginator.DescribeInstanceTypesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInstancesPaginator(self: *Self, params: describe_instances.DescribeInstancesInput) paginator.DescribeInstancesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeInternetGatewaysPaginator(self: *Self, params: describe_internet_gateways.DescribeInternetGatewaysInput) paginator.DescribeInternetGatewaysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIpamPoolsPaginator(self: *Self, params: describe_ipam_pools.DescribeIpamPoolsInput) paginator.DescribeIpamPoolsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIpamPrefixListResolverTargetsPaginator(self: *Self, params: describe_ipam_prefix_list_resolver_targets.DescribeIpamPrefixListResolverTargetsInput) paginator.DescribeIpamPrefixListResolverTargetsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIpamPrefixListResolversPaginator(self: *Self, params: describe_ipam_prefix_list_resolvers.DescribeIpamPrefixListResolversInput) paginator.DescribeIpamPrefixListResolversPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIpamResourceDiscoveriesPaginator(self: *Self, params: describe_ipam_resource_discoveries.DescribeIpamResourceDiscoveriesInput) paginator.DescribeIpamResourceDiscoveriesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIpamResourceDiscoveryAssociationsPaginator(self: *Self, params: describe_ipam_resource_discovery_associations.DescribeIpamResourceDiscoveryAssociationsInput) paginator.DescribeIpamResourceDiscoveryAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIpamScopesPaginator(self: *Self, params: describe_ipam_scopes.DescribeIpamScopesInput) paginator.DescribeIpamScopesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIpamsPaginator(self: *Self, params: describe_ipams.DescribeIpamsInput) paginator.DescribeIpamsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeIpv6PoolsPaginator(self: *Self, params: describe_ipv_6_pools.DescribeIpv6PoolsInput) paginator.DescribeIpv6PoolsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeLaunchTemplateVersionsPaginator(self: *Self, params: describe_launch_template_versions.DescribeLaunchTemplateVersionsInput) paginator.DescribeLaunchTemplateVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeLaunchTemplatesPaginator(self: *Self, params: describe_launch_templates.DescribeLaunchTemplatesInput) paginator.DescribeLaunchTemplatesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsPaginator(self: *Self, params: describe_local_gateway_route_table_virtual_interface_group_associations.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput) paginator.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeLocalGatewayRouteTableVpcAssociationsPaginator(self: *Self, params: describe_local_gateway_route_table_vpc_associations.DescribeLocalGatewayRouteTableVpcAssociationsInput) paginator.DescribeLocalGatewayRouteTableVpcAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeLocalGatewayRouteTablesPaginator(self: *Self, params: describe_local_gateway_route_tables.DescribeLocalGatewayRouteTablesInput) paginator.DescribeLocalGatewayRouteTablesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeLocalGatewayVirtualInterfaceGroupsPaginator(self: *Self, params: describe_local_gateway_virtual_interface_groups.DescribeLocalGatewayVirtualInterfaceGroupsInput) paginator.DescribeLocalGatewayVirtualInterfaceGroupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeLocalGatewayVirtualInterfacesPaginator(self: *Self, params: describe_local_gateway_virtual_interfaces.DescribeLocalGatewayVirtualInterfacesInput) paginator.DescribeLocalGatewayVirtualInterfacesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeLocalGatewaysPaginator(self: *Self, params: describe_local_gateways.DescribeLocalGatewaysInput) paginator.DescribeLocalGatewaysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeMacHostsPaginator(self: *Self, params: describe_mac_hosts.DescribeMacHostsInput) paginator.DescribeMacHostsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeMacModificationTasksPaginator(self: *Self, params: describe_mac_modification_tasks.DescribeMacModificationTasksInput) paginator.DescribeMacModificationTasksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeManagedPrefixListsPaginator(self: *Self, params: describe_managed_prefix_lists.DescribeManagedPrefixListsInput) paginator.DescribeManagedPrefixListsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeMovingAddressesPaginator(self: *Self, params: describe_moving_addresses.DescribeMovingAddressesInput) paginator.DescribeMovingAddressesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeNatGatewaysPaginator(self: *Self, params: describe_nat_gateways.DescribeNatGatewaysInput) paginator.DescribeNatGatewaysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeNetworkAclsPaginator(self: *Self, params: describe_network_acls.DescribeNetworkAclsInput) paginator.DescribeNetworkAclsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeNetworkInsightsAccessScopeAnalysesPaginator(self: *Self, params: describe_network_insights_access_scope_analyses.DescribeNetworkInsightsAccessScopeAnalysesInput) paginator.DescribeNetworkInsightsAccessScopeAnalysesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeNetworkInsightsAccessScopesPaginator(self: *Self, params: describe_network_insights_access_scopes.DescribeNetworkInsightsAccessScopesInput) paginator.DescribeNetworkInsightsAccessScopesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeNetworkInsightsAnalysesPaginator(self: *Self, params: describe_network_insights_analyses.DescribeNetworkInsightsAnalysesInput) paginator.DescribeNetworkInsightsAnalysesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeNetworkInsightsPathsPaginator(self: *Self, params: describe_network_insights_paths.DescribeNetworkInsightsPathsInput) paginator.DescribeNetworkInsightsPathsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeNetworkInterfacePermissionsPaginator(self: *Self, params: describe_network_interface_permissions.DescribeNetworkInterfacePermissionsInput) paginator.DescribeNetworkInterfacePermissionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeNetworkInterfacesPaginator(self: *Self, params: describe_network_interfaces.DescribeNetworkInterfacesInput) paginator.DescribeNetworkInterfacesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describePrefixListsPaginator(self: *Self, params: describe_prefix_lists.DescribePrefixListsInput) paginator.DescribePrefixListsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describePrincipalIdFormatPaginator(self: *Self, params: describe_principal_id_format.DescribePrincipalIdFormatInput) paginator.DescribePrincipalIdFormatPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describePublicIpv4PoolsPaginator(self: *Self, params: describe_public_ipv_4_pools.DescribePublicIpv4PoolsInput) paginator.DescribePublicIpv4PoolsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeReplaceRootVolumeTasksPaginator(self: *Self, params: describe_replace_root_volume_tasks.DescribeReplaceRootVolumeTasksInput) paginator.DescribeReplaceRootVolumeTasksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeReservedInstancesModificationsPaginator(self: *Self, params: describe_reserved_instances_modifications.DescribeReservedInstancesModificationsInput) paginator.DescribeReservedInstancesModificationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeReservedInstancesOfferingsPaginator(self: *Self, params: describe_reserved_instances_offerings.DescribeReservedInstancesOfferingsInput) paginator.DescribeReservedInstancesOfferingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeRouteServerEndpointsPaginator(self: *Self, params: describe_route_server_endpoints.DescribeRouteServerEndpointsInput) paginator.DescribeRouteServerEndpointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeRouteServerPeersPaginator(self: *Self, params: describe_route_server_peers.DescribeRouteServerPeersInput) paginator.DescribeRouteServerPeersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeRouteServersPaginator(self: *Self, params: describe_route_servers.DescribeRouteServersInput) paginator.DescribeRouteServersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeRouteTablesPaginator(self: *Self, params: describe_route_tables.DescribeRouteTablesInput) paginator.DescribeRouteTablesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeScheduledInstanceAvailabilityPaginator(self: *Self, params: describe_scheduled_instance_availability.DescribeScheduledInstanceAvailabilityInput) paginator.DescribeScheduledInstanceAvailabilityPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeScheduledInstancesPaginator(self: *Self, params: describe_scheduled_instances.DescribeScheduledInstancesInput) paginator.DescribeScheduledInstancesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSecurityGroupRulesPaginator(self: *Self, params: describe_security_group_rules.DescribeSecurityGroupRulesInput) paginator.DescribeSecurityGroupRulesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSecurityGroupVpcAssociationsPaginator(self: *Self, params: describe_security_group_vpc_associations.DescribeSecurityGroupVpcAssociationsInput) paginator.DescribeSecurityGroupVpcAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSecurityGroupsPaginator(self: *Self, params: describe_security_groups.DescribeSecurityGroupsInput) paginator.DescribeSecurityGroupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSnapshotTierStatusPaginator(self: *Self, params: describe_snapshot_tier_status.DescribeSnapshotTierStatusInput) paginator.DescribeSnapshotTierStatusPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSnapshotsPaginator(self: *Self, params: describe_snapshots.DescribeSnapshotsInput) paginator.DescribeSnapshotsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSpotFleetRequestsPaginator(self: *Self, params: describe_spot_fleet_requests.DescribeSpotFleetRequestsInput) paginator.DescribeSpotFleetRequestsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSpotInstanceRequestsPaginator(self: *Self, params: describe_spot_instance_requests.DescribeSpotInstanceRequestsInput) paginator.DescribeSpotInstanceRequestsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSpotPriceHistoryPaginator(self: *Self, params: describe_spot_price_history.DescribeSpotPriceHistoryInput) paginator.DescribeSpotPriceHistoryPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeStaleSecurityGroupsPaginator(self: *Self, params: describe_stale_security_groups.DescribeStaleSecurityGroupsInput) paginator.DescribeStaleSecurityGroupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeStoreImageTasksPaginator(self: *Self, params: describe_store_image_tasks.DescribeStoreImageTasksInput) paginator.DescribeStoreImageTasksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeSubnetsPaginator(self: *Self, params: describe_subnets.DescribeSubnetsInput) paginator.DescribeSubnetsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTagsPaginator(self: *Self, params: describe_tags.DescribeTagsInput) paginator.DescribeTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTrafficMirrorFiltersPaginator(self: *Self, params: describe_traffic_mirror_filters.DescribeTrafficMirrorFiltersInput) paginator.DescribeTrafficMirrorFiltersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTrafficMirrorSessionsPaginator(self: *Self, params: describe_traffic_mirror_sessions.DescribeTrafficMirrorSessionsInput) paginator.DescribeTrafficMirrorSessionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTrafficMirrorTargetsPaginator(self: *Self, params: describe_traffic_mirror_targets.DescribeTrafficMirrorTargetsInput) paginator.DescribeTrafficMirrorTargetsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayAttachmentsPaginator(self: *Self, params: describe_transit_gateway_attachments.DescribeTransitGatewayAttachmentsInput) paginator.DescribeTransitGatewayAttachmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayConnectPeersPaginator(self: *Self, params: describe_transit_gateway_connect_peers.DescribeTransitGatewayConnectPeersInput) paginator.DescribeTransitGatewayConnectPeersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayConnectsPaginator(self: *Self, params: describe_transit_gateway_connects.DescribeTransitGatewayConnectsInput) paginator.DescribeTransitGatewayConnectsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayMulticastDomainsPaginator(self: *Self, params: describe_transit_gateway_multicast_domains.DescribeTransitGatewayMulticastDomainsInput) paginator.DescribeTransitGatewayMulticastDomainsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayPeeringAttachmentsPaginator(self: *Self, params: describe_transit_gateway_peering_attachments.DescribeTransitGatewayPeeringAttachmentsInput) paginator.DescribeTransitGatewayPeeringAttachmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayPolicyTablesPaginator(self: *Self, params: describe_transit_gateway_policy_tables.DescribeTransitGatewayPolicyTablesInput) paginator.DescribeTransitGatewayPolicyTablesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayRouteTableAnnouncementsPaginator(self: *Self, params: describe_transit_gateway_route_table_announcements.DescribeTransitGatewayRouteTableAnnouncementsInput) paginator.DescribeTransitGatewayRouteTableAnnouncementsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayRouteTablesPaginator(self: *Self, params: describe_transit_gateway_route_tables.DescribeTransitGatewayRouteTablesInput) paginator.DescribeTransitGatewayRouteTablesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewayVpcAttachmentsPaginator(self: *Self, params: describe_transit_gateway_vpc_attachments.DescribeTransitGatewayVpcAttachmentsInput) paginator.DescribeTransitGatewayVpcAttachmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTransitGatewaysPaginator(self: *Self, params: describe_transit_gateways.DescribeTransitGatewaysInput) paginator.DescribeTransitGatewaysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeTrunkInterfaceAssociationsPaginator(self: *Self, params: describe_trunk_interface_associations.DescribeTrunkInterfaceAssociationsInput) paginator.DescribeTrunkInterfaceAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVerifiedAccessEndpointsPaginator(self: *Self, params: describe_verified_access_endpoints.DescribeVerifiedAccessEndpointsInput) paginator.DescribeVerifiedAccessEndpointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVerifiedAccessGroupsPaginator(self: *Self, params: describe_verified_access_groups.DescribeVerifiedAccessGroupsInput) paginator.DescribeVerifiedAccessGroupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVerifiedAccessInstanceLoggingConfigurationsPaginator(self: *Self, params: describe_verified_access_instance_logging_configurations.DescribeVerifiedAccessInstanceLoggingConfigurationsInput) paginator.DescribeVerifiedAccessInstanceLoggingConfigurationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVerifiedAccessInstancesPaginator(self: *Self, params: describe_verified_access_instances.DescribeVerifiedAccessInstancesInput) paginator.DescribeVerifiedAccessInstancesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVerifiedAccessTrustProvidersPaginator(self: *Self, params: describe_verified_access_trust_providers.DescribeVerifiedAccessTrustProvidersInput) paginator.DescribeVerifiedAccessTrustProvidersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVolumeStatusPaginator(self: *Self, params: describe_volume_status.DescribeVolumeStatusInput) paginator.DescribeVolumeStatusPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVolumesPaginator(self: *Self, params: describe_volumes.DescribeVolumesInput) paginator.DescribeVolumesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVolumesModificationsPaginator(self: *Self, params: describe_volumes_modifications.DescribeVolumesModificationsInput) paginator.DescribeVolumesModificationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpcClassicLinkDnsSupportPaginator(self: *Self, params: describe_vpc_classic_link_dns_support.DescribeVpcClassicLinkDnsSupportInput) paginator.DescribeVpcClassicLinkDnsSupportPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpcEndpointConnectionNotificationsPaginator(self: *Self, params: describe_vpc_endpoint_connection_notifications.DescribeVpcEndpointConnectionNotificationsInput) paginator.DescribeVpcEndpointConnectionNotificationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpcEndpointConnectionsPaginator(self: *Self, params: describe_vpc_endpoint_connections.DescribeVpcEndpointConnectionsInput) paginator.DescribeVpcEndpointConnectionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpcEndpointServiceConfigurationsPaginator(self: *Self, params: describe_vpc_endpoint_service_configurations.DescribeVpcEndpointServiceConfigurationsInput) paginator.DescribeVpcEndpointServiceConfigurationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpcEndpointServicePermissionsPaginator(self: *Self, params: describe_vpc_endpoint_service_permissions.DescribeVpcEndpointServicePermissionsInput) paginator.DescribeVpcEndpointServicePermissionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpcEndpointsPaginator(self: *Self, params: describe_vpc_endpoints.DescribeVpcEndpointsInput) paginator.DescribeVpcEndpointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpcPeeringConnectionsPaginator(self: *Self, params: describe_vpc_peering_connections.DescribeVpcPeeringConnectionsInput) paginator.DescribeVpcPeeringConnectionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpcsPaginator(self: *Self, params: describe_vpcs.DescribeVpcsInput) paginator.DescribeVpcsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn describeVpnConcentratorsPaginator(self: *Self, params: describe_vpn_concentrators.DescribeVpnConcentratorsInput) paginator.DescribeVpnConcentratorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getAssociatedIpv6PoolCidrsPaginator(self: *Self, params: get_associated_ipv_6_pool_cidrs.GetAssociatedIpv6PoolCidrsInput) paginator.GetAssociatedIpv6PoolCidrsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getAwsNetworkPerformanceDataPaginator(self: *Self, params: get_aws_network_performance_data.GetAwsNetworkPerformanceDataInput) paginator.GetAwsNetworkPerformanceDataPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getCapacityManagerMetricDataPaginator(self: *Self, params: get_capacity_manager_metric_data.GetCapacityManagerMetricDataInput) paginator.GetCapacityManagerMetricDataPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getCapacityManagerMetricDimensionsPaginator(self: *Self, params: get_capacity_manager_metric_dimensions.GetCapacityManagerMetricDimensionsInput) paginator.GetCapacityManagerMetricDimensionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getGroupsForCapacityReservationPaginator(self: *Self, params: get_groups_for_capacity_reservation.GetGroupsForCapacityReservationInput) paginator.GetGroupsForCapacityReservationPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getInstanceTypesFromInstanceRequirementsPaginator(self: *Self, params: get_instance_types_from_instance_requirements.GetInstanceTypesFromInstanceRequirementsInput) paginator.GetInstanceTypesFromInstanceRequirementsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamAddressHistoryPaginator(self: *Self, params: get_ipam_address_history.GetIpamAddressHistoryInput) paginator.GetIpamAddressHistoryPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamDiscoveredAccountsPaginator(self: *Self, params: get_ipam_discovered_accounts.GetIpamDiscoveredAccountsInput) paginator.GetIpamDiscoveredAccountsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamDiscoveredResourceCidrsPaginator(self: *Self, params: get_ipam_discovered_resource_cidrs.GetIpamDiscoveredResourceCidrsInput) paginator.GetIpamDiscoveredResourceCidrsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamPoolAllocationsPaginator(self: *Self, params: get_ipam_pool_allocations.GetIpamPoolAllocationsInput) paginator.GetIpamPoolAllocationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamPoolCidrsPaginator(self: *Self, params: get_ipam_pool_cidrs.GetIpamPoolCidrsInput) paginator.GetIpamPoolCidrsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamPrefixListResolverRulesPaginator(self: *Self, params: get_ipam_prefix_list_resolver_rules.GetIpamPrefixListResolverRulesInput) paginator.GetIpamPrefixListResolverRulesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamPrefixListResolverVersionEntriesPaginator(self: *Self, params: get_ipam_prefix_list_resolver_version_entries.GetIpamPrefixListResolverVersionEntriesInput) paginator.GetIpamPrefixListResolverVersionEntriesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamPrefixListResolverVersionsPaginator(self: *Self, params: get_ipam_prefix_list_resolver_versions.GetIpamPrefixListResolverVersionsInput) paginator.GetIpamPrefixListResolverVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getIpamResourceCidrsPaginator(self: *Self, params: get_ipam_resource_cidrs.GetIpamResourceCidrsInput) paginator.GetIpamResourceCidrsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getManagedPrefixListAssociationsPaginator(self: *Self, params: get_managed_prefix_list_associations.GetManagedPrefixListAssociationsInput) paginator.GetManagedPrefixListAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getManagedPrefixListEntriesPaginator(self: *Self, params: get_managed_prefix_list_entries.GetManagedPrefixListEntriesInput) paginator.GetManagedPrefixListEntriesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getNetworkInsightsAccessScopeAnalysisFindingsPaginator(self: *Self, params: get_network_insights_access_scope_analysis_findings.GetNetworkInsightsAccessScopeAnalysisFindingsInput) paginator.GetNetworkInsightsAccessScopeAnalysisFindingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getSecurityGroupsForVpcPaginator(self: *Self, params: get_security_groups_for_vpc.GetSecurityGroupsForVpcInput) paginator.GetSecurityGroupsForVpcPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getSpotPlacementScoresPaginator(self: *Self, params: get_spot_placement_scores.GetSpotPlacementScoresInput) paginator.GetSpotPlacementScoresPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getTransitGatewayAttachmentPropagationsPaginator(self: *Self, params: get_transit_gateway_attachment_propagations.GetTransitGatewayAttachmentPropagationsInput) paginator.GetTransitGatewayAttachmentPropagationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getTransitGatewayMulticastDomainAssociationsPaginator(self: *Self, params: get_transit_gateway_multicast_domain_associations.GetTransitGatewayMulticastDomainAssociationsInput) paginator.GetTransitGatewayMulticastDomainAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getTransitGatewayPolicyTableAssociationsPaginator(self: *Self, params: get_transit_gateway_policy_table_associations.GetTransitGatewayPolicyTableAssociationsInput) paginator.GetTransitGatewayPolicyTableAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getTransitGatewayPrefixListReferencesPaginator(self: *Self, params: get_transit_gateway_prefix_list_references.GetTransitGatewayPrefixListReferencesInput) paginator.GetTransitGatewayPrefixListReferencesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getTransitGatewayRouteTableAssociationsPaginator(self: *Self, params: get_transit_gateway_route_table_associations.GetTransitGatewayRouteTableAssociationsInput) paginator.GetTransitGatewayRouteTableAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getTransitGatewayRouteTablePropagationsPaginator(self: *Self, params: get_transit_gateway_route_table_propagations.GetTransitGatewayRouteTablePropagationsInput) paginator.GetTransitGatewayRouteTablePropagationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getVpnConnectionDeviceTypesPaginator(self: *Self, params: get_vpn_connection_device_types.GetVpnConnectionDeviceTypesInput) paginator.GetVpnConnectionDeviceTypesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listImagesInRecycleBinPaginator(self: *Self, params: list_images_in_recycle_bin.ListImagesInRecycleBinInput) paginator.ListImagesInRecycleBinPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSnapshotsInRecycleBinPaginator(self: *Self, params: list_snapshots_in_recycle_bin.ListSnapshotsInRecycleBinInput) paginator.ListSnapshotsInRecycleBinPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn searchLocalGatewayRoutesPaginator(self: *Self, params: search_local_gateway_routes.SearchLocalGatewayRoutesInput) paginator.SearchLocalGatewayRoutesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn searchTransitGatewayMulticastGroupsPaginator(self: *Self, params: search_transit_gateway_multicast_groups.SearchTransitGatewayMulticastGroupsInput) paginator.SearchTransitGatewayMulticastGroupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn searchTransitGatewayRoutesPaginator(self: *Self, params: search_transit_gateway_routes.SearchTransitGatewayRoutesInput) paginator.SearchTransitGatewayRoutesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
     }
 };

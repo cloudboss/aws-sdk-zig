@@ -87,6 +87,7 @@ const update_function_code = @import("update_function_code.zig");
 const update_function_configuration = @import("update_function_configuration.zig");
 const update_function_event_invoke_config = @import("update_function_event_invoke_config.zig");
 const update_function_url_config = @import("update_function_url_config.zig");
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -1005,5 +1006,133 @@ pub const Client = struct {
     /// Updates the configuration for a Lambda function URL.
     pub fn updateFunctionUrlConfig(self: *Self, input: update_function_url_config.UpdateFunctionUrlConfigInput, options: update_function_url_config.Options) !update_function_url_config.UpdateFunctionUrlConfigOutput {
         return update_function_url_config.execute(self, input, options);
+    }
+
+    pub fn getDurableExecutionHistoryPaginator(self: *Self, params: get_durable_execution_history.GetDurableExecutionHistoryInput) paginator.GetDurableExecutionHistoryPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getDurableExecutionStatePaginator(self: *Self, params: get_durable_execution_state.GetDurableExecutionStateInput) paginator.GetDurableExecutionStatePaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listAliasesPaginator(self: *Self, params: list_aliases.ListAliasesInput) paginator.ListAliasesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listCapacityProvidersPaginator(self: *Self, params: list_capacity_providers.ListCapacityProvidersInput) paginator.ListCapacityProvidersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listCodeSigningConfigsPaginator(self: *Self, params: list_code_signing_configs.ListCodeSigningConfigsInput) paginator.ListCodeSigningConfigsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listDurableExecutionsByFunctionPaginator(self: *Self, params: list_durable_executions_by_function.ListDurableExecutionsByFunctionInput) paginator.ListDurableExecutionsByFunctionPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listEventSourceMappingsPaginator(self: *Self, params: list_event_source_mappings.ListEventSourceMappingsInput) paginator.ListEventSourceMappingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listFunctionEventInvokeConfigsPaginator(self: *Self, params: list_function_event_invoke_configs.ListFunctionEventInvokeConfigsInput) paginator.ListFunctionEventInvokeConfigsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listFunctionUrlConfigsPaginator(self: *Self, params: list_function_url_configs.ListFunctionUrlConfigsInput) paginator.ListFunctionUrlConfigsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listFunctionVersionsByCapacityProviderPaginator(self: *Self, params: list_function_versions_by_capacity_provider.ListFunctionVersionsByCapacityProviderInput) paginator.ListFunctionVersionsByCapacityProviderPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listFunctionsPaginator(self: *Self, params: list_functions.ListFunctionsInput) paginator.ListFunctionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listFunctionsByCodeSigningConfigPaginator(self: *Self, params: list_functions_by_code_signing_config.ListFunctionsByCodeSigningConfigInput) paginator.ListFunctionsByCodeSigningConfigPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listLayerVersionsPaginator(self: *Self, params: list_layer_versions.ListLayerVersionsInput) paginator.ListLayerVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listLayersPaginator(self: *Self, params: list_layers.ListLayersInput) paginator.ListLayersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listProvisionedConcurrencyConfigsPaginator(self: *Self, params: list_provisioned_concurrency_configs.ListProvisionedConcurrencyConfigsInput) paginator.ListProvisionedConcurrencyConfigsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listVersionsByFunctionPaginator(self: *Self, params: list_versions_by_function.ListVersionsByFunctionInput) paginator.ListVersionsByFunctionPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
     }
 };

@@ -10,6 +10,7 @@ class RootGenerator(
     private val context: ZigContext,
     private val service: ServiceShape,
     private val model: Model,
+    private val paginatorGen: PaginatorGenerator? = null,
 ) {
     fun run() {
         val topDownIndex = TopDownIndex.of(model)
@@ -20,10 +21,17 @@ class RootGenerator(
             }
             .sorted()
 
+        val hasPaginatedOps = paginatorGen?.collectPaginatedOperations()?.isNotEmpty() ?: false
+
         context.writerDelegator().useFileWriter("root.zig") { writer ->
             writer.write("pub const Client = @import(\"client.zig\").Client;")
             writer.write("pub const errors = @import(\"errors.zig\");")
             writer.write("pub const ServiceError = errors.ServiceError;")
+
+            if (hasPaginatedOps) {
+                writer.write("pub const paginator = @import(\"paginator.zig\");")
+            }
+
             writer.blankLine()
 
             for (opName in operations) {

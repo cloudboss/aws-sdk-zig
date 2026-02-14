@@ -178,6 +178,7 @@ const update_user = @import("update_user.zig");
 const upload_server_certificate = @import("upload_server_certificate.zig");
 const upload_signing_certificate = @import("upload_signing_certificate.zig");
 const upload_ssh_public_key = @import("upload_ssh_public_key.zig");
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -4053,5 +4054,277 @@ pub const Client = struct {
     /// connections](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html) in the *CodeCommit User Guide*.
     pub fn uploadSshPublicKey(self: *Self, input: upload_ssh_public_key.UploadSSHPublicKeyInput, options: upload_ssh_public_key.Options) !upload_ssh_public_key.UploadSSHPublicKeyOutput {
         return upload_ssh_public_key.execute(self, input, options);
+    }
+
+    pub fn getAccountAuthorizationDetailsPaginator(self: *Self, params: get_account_authorization_details.GetAccountAuthorizationDetailsInput) paginator.GetAccountAuthorizationDetailsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn getGroupPaginator(self: *Self, params: get_group.GetGroupInput) paginator.GetGroupPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listAccessKeysPaginator(self: *Self, params: list_access_keys.ListAccessKeysInput) paginator.ListAccessKeysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listAccountAliasesPaginator(self: *Self, params: list_account_aliases.ListAccountAliasesInput) paginator.ListAccountAliasesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listAttachedGroupPoliciesPaginator(self: *Self, params: list_attached_group_policies.ListAttachedGroupPoliciesInput) paginator.ListAttachedGroupPoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listAttachedRolePoliciesPaginator(self: *Self, params: list_attached_role_policies.ListAttachedRolePoliciesInput) paginator.ListAttachedRolePoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listAttachedUserPoliciesPaginator(self: *Self, params: list_attached_user_policies.ListAttachedUserPoliciesInput) paginator.ListAttachedUserPoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listEntitiesForPolicyPaginator(self: *Self, params: list_entities_for_policy.ListEntitiesForPolicyInput) paginator.ListEntitiesForPolicyPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listGroupPoliciesPaginator(self: *Self, params: list_group_policies.ListGroupPoliciesInput) paginator.ListGroupPoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listGroupsPaginator(self: *Self, params: list_groups.ListGroupsInput) paginator.ListGroupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listGroupsForUserPaginator(self: *Self, params: list_groups_for_user.ListGroupsForUserInput) paginator.ListGroupsForUserPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listInstanceProfileTagsPaginator(self: *Self, params: list_instance_profile_tags.ListInstanceProfileTagsInput) paginator.ListInstanceProfileTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listInstanceProfilesPaginator(self: *Self, params: list_instance_profiles.ListInstanceProfilesInput) paginator.ListInstanceProfilesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listInstanceProfilesForRolePaginator(self: *Self, params: list_instance_profiles_for_role.ListInstanceProfilesForRoleInput) paginator.ListInstanceProfilesForRolePaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listMfaDeviceTagsPaginator(self: *Self, params: list_mfa_device_tags.ListMFADeviceTagsInput) paginator.ListMFADeviceTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listMfaDevicesPaginator(self: *Self, params: list_mfa_devices.ListMFADevicesInput) paginator.ListMFADevicesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listOpenIdConnectProviderTagsPaginator(self: *Self, params: list_open_id_connect_provider_tags.ListOpenIDConnectProviderTagsInput) paginator.ListOpenIDConnectProviderTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listPoliciesPaginator(self: *Self, params: list_policies.ListPoliciesInput) paginator.ListPoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listPolicyTagsPaginator(self: *Self, params: list_policy_tags.ListPolicyTagsInput) paginator.ListPolicyTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listPolicyVersionsPaginator(self: *Self, params: list_policy_versions.ListPolicyVersionsInput) paginator.ListPolicyVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listRolePoliciesPaginator(self: *Self, params: list_role_policies.ListRolePoliciesInput) paginator.ListRolePoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listRoleTagsPaginator(self: *Self, params: list_role_tags.ListRoleTagsInput) paginator.ListRoleTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listRolesPaginator(self: *Self, params: list_roles.ListRolesInput) paginator.ListRolesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSamlProviderTagsPaginator(self: *Self, params: list_saml_provider_tags.ListSAMLProviderTagsInput) paginator.ListSAMLProviderTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listServerCertificateTagsPaginator(self: *Self, params: list_server_certificate_tags.ListServerCertificateTagsInput) paginator.ListServerCertificateTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listServerCertificatesPaginator(self: *Self, params: list_server_certificates.ListServerCertificatesInput) paginator.ListServerCertificatesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSigningCertificatesPaginator(self: *Self, params: list_signing_certificates.ListSigningCertificatesInput) paginator.ListSigningCertificatesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSshPublicKeysPaginator(self: *Self, params: list_ssh_public_keys.ListSSHPublicKeysInput) paginator.ListSSHPublicKeysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listUserPoliciesPaginator(self: *Self, params: list_user_policies.ListUserPoliciesInput) paginator.ListUserPoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listUserTagsPaginator(self: *Self, params: list_user_tags.ListUserTagsInput) paginator.ListUserTagsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listUsersPaginator(self: *Self, params: list_users.ListUsersInput) paginator.ListUsersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listVirtualMfaDevicesPaginator(self: *Self, params: list_virtual_mfa_devices.ListVirtualMFADevicesInput) paginator.ListVirtualMFADevicesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn simulateCustomPolicyPaginator(self: *Self, params: simulate_custom_policy.SimulateCustomPolicyInput) paginator.SimulateCustomPolicyPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn simulatePrincipalPolicyPaginator(self: *Self, params: simulate_principal_policy.SimulatePrincipalPolicyInput) paginator.SimulatePrincipalPolicyPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
     }
 };

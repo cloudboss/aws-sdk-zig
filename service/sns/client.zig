@@ -44,6 +44,7 @@ const tag_resource = @import("tag_resource.zig");
 const unsubscribe_ = @import("unsubscribe.zig");
 const untag_resource = @import("untag_resource.zig");
 const verify_sms_sandbox_phone_number = @import("verify_sms_sandbox_phone_number.zig");
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -712,5 +713,69 @@ pub const Client = struct {
     /// the *Amazon SNS Developer Guide*.
     pub fn verifySmsSandboxPhoneNumber(self: *Self, input: verify_sms_sandbox_phone_number.VerifySMSSandboxPhoneNumberInput, options: verify_sms_sandbox_phone_number.Options) !verify_sms_sandbox_phone_number.VerifySMSSandboxPhoneNumberOutput {
         return verify_sms_sandbox_phone_number.execute(self, input, options);
+    }
+
+    pub fn listEndpointsByPlatformApplicationPaginator(self: *Self, params: list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationInput) paginator.ListEndpointsByPlatformApplicationPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listOriginationNumbersPaginator(self: *Self, params: list_origination_numbers.ListOriginationNumbersInput) paginator.ListOriginationNumbersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listPhoneNumbersOptedOutPaginator(self: *Self, params: list_phone_numbers_opted_out.ListPhoneNumbersOptedOutInput) paginator.ListPhoneNumbersOptedOutPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listPlatformApplicationsPaginator(self: *Self, params: list_platform_applications.ListPlatformApplicationsInput) paginator.ListPlatformApplicationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSmsSandboxPhoneNumbersPaginator(self: *Self, params: list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersInput) paginator.ListSMSSandboxPhoneNumbersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSubscriptionsPaginator(self: *Self, params: list_subscriptions.ListSubscriptionsInput) paginator.ListSubscriptionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listSubscriptionsByTopicPaginator(self: *Self, params: list_subscriptions_by_topic.ListSubscriptionsByTopicInput) paginator.ListSubscriptionsByTopicPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listTopicsPaginator(self: *Self, params: list_topics.ListTopicsInput) paginator.ListTopicsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
     }
 };

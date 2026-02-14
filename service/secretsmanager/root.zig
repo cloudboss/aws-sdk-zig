@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
 
 pub const batch_get_secret_value = @import("batch_get_secret_value.zig");
 pub const cancel_rotate_secret = @import("cancel_rotate_secret.zig");

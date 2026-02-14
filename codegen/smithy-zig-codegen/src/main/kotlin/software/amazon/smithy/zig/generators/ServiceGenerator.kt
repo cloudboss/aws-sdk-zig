@@ -30,13 +30,17 @@ class ServiceGenerator(
             ).run()
         }
 
-        // 4. Generate client.zig
-        ClientGenerator(context, service, model).run()
+        // 4. Generate paginator.zig (if any paginated operations)
+        val paginatorGen = PaginatorGenerator(context, service, model)
+        paginatorGen.run()
 
-        // 5. Generate root.zig
-        RootGenerator(context, service, model).run()
+        // 5. Generate client.zig
+        ClientGenerator(context, service, model, paginatorGen).run()
 
-        // 6. Generate serde.zig for XML protocols
+        // 6. Generate root.zig
+        RootGenerator(context, service, model, paginatorGen).run()
+
+        // 7. Generate serde.zig for XML protocols
         if (protocol.needsXmlSerde()) {
             SerdeGenerator(context, service, model).run()
         }

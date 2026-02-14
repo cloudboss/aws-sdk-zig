@@ -59,6 +59,7 @@ const update_kinesis_streaming_destination = @import("update_kinesis_streaming_d
 const update_table = @import("update_table.zig");
 const update_table_replica_auto_scaling = @import("update_table_replica_auto_scaling.zig");
 const update_time_to_live = @import("update_time_to_live.zig");
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -1561,5 +1562,53 @@ pub const Client = struct {
     /// Amazon DynamoDB Developer Guide.
     pub fn updateTimeToLive(self: *Self, input: update_time_to_live.UpdateTimeToLiveInput, options: update_time_to_live.Options) !update_time_to_live.UpdateTimeToLiveOutput {
         return update_time_to_live.execute(self, input, options);
+    }
+
+    pub fn listContributorInsightsPaginator(self: *Self, params: list_contributor_insights.ListContributorInsightsInput) paginator.ListContributorInsightsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listExportsPaginator(self: *Self, params: list_exports.ListExportsInput) paginator.ListExportsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listImportsPaginator(self: *Self, params: list_imports.ListImportsInput) paginator.ListImportsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listTablesPaginator(self: *Self, params: list_tables.ListTablesInput) paginator.ListTablesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn queryPaginator(self: *Self, params: query_.QueryInput) paginator.QueryPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn scanPaginator(self: *Self, params: scan_.ScanInput) paginator.ScanPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
     }
 };

@@ -109,6 +109,7 @@ const update_object_encryption = @import("update_object_encryption.zig");
 const upload_part = @import("upload_part.zig");
 const upload_part_copy = @import("upload_part_copy.zig");
 const write_get_object_response = @import("write_get_object_response.zig");
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -8768,5 +8769,37 @@ pub const Client = struct {
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
     pub fn writeGetObjectResponse(self: *Self, input: write_get_object_response.WriteGetObjectResponseInput, options: write_get_object_response.Options) !write_get_object_response.WriteGetObjectResponseOutput {
         return write_get_object_response.execute(self, input, options);
+    }
+
+    pub fn listBucketsPaginator(self: *Self, params: list_buckets.ListBucketsInput) paginator.ListBucketsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listDirectoryBucketsPaginator(self: *Self, params: list_directory_buckets.ListDirectoryBucketsInput) paginator.ListDirectoryBucketsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listObjectsV2Paginator(self: *Self, params: list_objects_v_2.ListObjectsV2Input) paginator.ListObjectsV2Paginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listPartsPaginator(self: *Self, params: list_parts.ListPartsInput) paginator.ListPartsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
     }
 };

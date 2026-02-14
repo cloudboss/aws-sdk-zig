@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
 
 pub const add_layer_version_permission = @import("add_layer_version_permission.zig");
 pub const add_permission = @import("add_permission.zig");

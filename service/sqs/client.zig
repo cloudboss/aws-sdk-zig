@@ -25,6 +25,7 @@ const set_queue_attributes = @import("set_queue_attributes.zig");
 const start_message_move_task = @import("start_message_move_task.zig");
 const tag_queue = @import("tag_queue.zig");
 const untag_queue = @import("untag_queue.zig");
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -714,5 +715,21 @@ pub const Client = struct {
     /// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
     pub fn untagQueue(self: *Self, input: untag_queue.UntagQueueInput, options: untag_queue.Options) !untag_queue.UntagQueueOutput {
         return untag_queue.execute(self, input, options);
+    }
+
+    pub fn listDeadLetterSourceQueuesPaginator(self: *Self, params: list_dead_letter_source_queues.ListDeadLetterSourceQueuesInput) paginator.ListDeadLetterSourceQueuesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+
+    pub fn listQueuesPaginator(self: *Self, params: list_queues.ListQueuesInput) paginator.ListQueuesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
     }
 };
