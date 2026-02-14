@@ -15,6 +15,7 @@ pub const json = @import("json.zig");
 pub const xml = @import("xml.zig");
 pub const url = @import("url.zig");
 pub const map = @import("map.zig");
+pub const waiter = @import("waiter.zig");
 
 // Re-exports
 pub const Credentials = credentials.Credentials;
