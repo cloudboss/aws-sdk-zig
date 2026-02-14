@@ -35,6 +35,36 @@ pub fn build(b: *std.Build) void {
         }
     } else |_| {}
 
+    // Documentation generation
+    const docs_step = b.step("docs", "Generate documentation");
+
+    // Runtime library docs
+    const lib = b.addLibrary(.{
+        .name = "aws",
+        .root_module = aws_module,
+    });
+    const install_runtime_docs = b.addInstallDirectory(.{
+        .source_dir = lib.getEmittedDocs(),
+        .install_dir = .prefix,
+        .install_subdir = "docs/aws",
+    });
+    docs_step.dependOn(&install_runtime_docs.step);
+
+    // Service docs
+    var docs_iter = service_modules.iterator();
+    while (docs_iter.next()) |svc_entry| {
+        const svc_lib = b.addLibrary(.{
+            .name = svc_entry.key_ptr.*,
+            .root_module = svc_entry.value_ptr.*,
+        });
+        const install_svc_docs = b.addInstallDirectory(.{
+            .source_dir = svc_lib.getEmittedDocs(),
+            .install_dir = .prefix,
+            .install_subdir = b.fmt("docs/{s}", .{svc_entry.key_ptr.*}),
+        });
+        docs_step.dependOn(&install_svc_docs.step);
+    }
+
     // Unit tests
     const test_module = b.createModule(.{
         .root_source_file = b.path("src/root.zig"),
