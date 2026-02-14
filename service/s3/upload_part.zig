@@ -543,6 +543,30 @@ pub fn execute(client: *Client, input: UploadPartInput, options: Options) !Uploa
     return result;
 }
 
+pub const PresignOptions = struct {
+    expires_seconds: u64 = 3600,
+};
+
+pub fn presign(client: *Client, input: UploadPartInput, options: PresignOptions) ![]const u8 {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+
+    return aws.signing.presignRequest(
+        client.allocator,
+        &request,
+        creds,
+        client.config.region,
+        "s3",
+        .{ .expires_seconds = options.expires_seconds },
+    );
+}
+
 fn serializeRequest(alloc: std.mem.Allocator, input: UploadPartInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpoint("s3", alloc);
 

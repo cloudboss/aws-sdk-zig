@@ -77,6 +77,30 @@ pub fn execute(client: *Client, input: GetCallerIdentityInput, options: Options)
     return result;
 }
 
+pub const PresignOptions = struct {
+    expires_seconds: u64 = 3600,
+};
+
+pub fn presign(client: *Client, input: GetCallerIdentityInput, options: PresignOptions) ![]const u8 {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+
+    return aws.signing.presignRequest(
+        client.allocator,
+        &request,
+        creds,
+        client.config.region,
+        "sts",
+        .{ .expires_seconds = options.expires_seconds },
+    );
+}
+
 fn serializeRequest(alloc: std.mem.Allocator, input: GetCallerIdentityInput, config: *aws.Config) !aws.http.Request {
     _ = input;
     const endpoint = try config.getEndpoint("sts", alloc);

@@ -32,6 +32,17 @@ class OperationGenerator(
     private val errorInfos: List<ErrorGenerator.ErrorInfo>,
     private val protocol: ProtocolGenerator,
 ) {
+    companion object {
+        val PRESIGNABLE_OPERATIONS = setOf(
+            "com.amazonaws.s3#GetObject",
+            "com.amazonaws.s3#PutObject",
+            "com.amazonaws.s3#DeleteObject",
+            "com.amazonaws.s3#HeadObject",
+            "com.amazonaws.s3#HeadBucket",
+            "com.amazonaws.s3#UploadPart",
+            "com.amazonaws.sts#GetCallerIdentity",
+        )
+    }
     private val operationName = operation.id.name
     private val fileName = NamingUtil.toZigFileName(operationName)
     private val inputShape: StructureShape =
@@ -106,6 +117,12 @@ class OperationGenerator(
             } else {
                 writeExecuteFunction(writer)
             }
+            // Presign function for allowlisted operations
+            if (operation.id.toString() in PRESIGNABLE_OPERATIONS) {
+                writer.blankLine()
+                writePresignFunction(writer)
+            }
+
             writer.blankLine()
             protocol.writeSerializeRequest(writer, ctx)
             writer.blankLine()
@@ -329,6 +346,47 @@ class OperationGenerator(
         writer.write("var result = try deserializeStreamingResponse(&stream_resp, resp_arena.allocator());")
         writer.write("result._arena = resp_arena;")
         writer.write("return result;")
+
+        writer.closeBlock("}")
+    }
+
+    private fun writePresignOptions(writer: ZigWriter) {
+        writer.openBlock("pub const PresignOptions = struct {")
+        writer.write("expires_seconds: u64 = 3600,")
+        writer.closeBlock("};")
+    }
+
+    private fun writePresignFunction(writer: ZigWriter) {
+        val inputName = "${operationName}Input"
+
+        writePresignOptions(writer)
+        writer.blankLine()
+
+        writer.openBlock(
+            "pub fn presign(client: *Client, input: \$L, options: PresignOptions) ![]const u8 {",
+            inputName,
+        )
+
+        writer.write("var arena = std.heap.ArenaAllocator.init(client.allocator);")
+        writer.write("defer arena.deinit();")
+        writer.write("const alloc = arena.allocator();")
+        writer.blankLine()
+
+        writer.write("var request = try serializeRequest(alloc, input, client.config);")
+        writer.write("defer request.deinit(alloc);")
+        writer.blankLine()
+
+        writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
+        writer.blankLine()
+
+        writer.openBlock("return aws.signing.presignRequest(")
+        writer.write("client.allocator,")
+        writer.write("&request,")
+        writer.write("creds,")
+        writer.write("client.config.region,")
+        writer.write("\"\$L\",", settings.packageName)
+        writer.write(".{ .expires_seconds = options.expires_seconds },")
+        writer.closeBlock(");")
 
         writer.closeBlock("}")
     }

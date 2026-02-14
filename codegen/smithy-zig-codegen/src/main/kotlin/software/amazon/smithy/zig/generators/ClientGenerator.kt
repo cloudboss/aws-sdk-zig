@@ -23,6 +23,7 @@ class ClientGenerator(
         val inputType: String,
         val outputType: String,
         val docs: String?,
+        val shapeId: String,
     )
 
     fun run() {
@@ -79,6 +80,7 @@ class ClientGenerator(
                     inputType = "${operationName}Input",
                     outputType = "${operationName}Output",
                     docs = docs,
+                    shapeId = opShape.id.toString(),
                 )
             }
             .sortedBy { it.moduleName }
@@ -145,6 +147,23 @@ class ClientGenerator(
             writer.write(".params = params,")
             writer.write(".allocator = self.allocator,")
             writer.closeBlock("};")
+            writer.closeBlock("}")
+        }
+
+        // Presign convenience methods
+        val presignableOps = operations.filter {
+            it.shapeId in OperationGenerator.PRESIGNABLE_OPERATIONS
+        }
+        for (op in presignableOps) {
+            writer.blankLine()
+            val presignMethodName = "presign${op.operationName}"
+            writer.openBlock(
+                "pub fn \$L(self: *Self, input: \$L.\$L, options: \$L.PresignOptions) ![]const u8 {",
+                presignMethodName,
+                op.constName, op.inputType,
+                op.constName,
+            )
+            writer.write("return \$L.presign(self, input, options);", op.constName)
             writer.closeBlock("}")
         }
 

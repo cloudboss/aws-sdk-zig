@@ -940,4 +940,8 @@ pub const Client = struct {
     pub fn getWebIdentityToken(self: *Self, input: get_web_identity_token.GetWebIdentityTokenInput, options: get_web_identity_token.Options) !get_web_identity_token.GetWebIdentityTokenOutput {
         return get_web_identity_token.execute(self, input, options);
     }
+
+    pub fn presignGetCallerIdentity(self: *Self, input: get_caller_identity.GetCallerIdentityInput, options: get_caller_identity.PresignOptions) ![]const u8 {
+        return get_caller_identity.presign(self, input, options);
+    }
 };

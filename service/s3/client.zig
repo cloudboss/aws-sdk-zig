@@ -8802,4 +8802,28 @@ pub const Client = struct {
             .allocator = self.allocator,
         };
     }
+
+    pub fn presignDeleteObject(self: *Self, input: delete_object.DeleteObjectInput, options: delete_object.PresignOptions) ![]const u8 {
+        return delete_object.presign(self, input, options);
+    }
+
+    pub fn presignGetObject(self: *Self, input: get_object.GetObjectInput, options: get_object.PresignOptions) ![]const u8 {
+        return get_object.presign(self, input, options);
+    }
+
+    pub fn presignHeadBucket(self: *Self, input: head_bucket.HeadBucketInput, options: head_bucket.PresignOptions) ![]const u8 {
+        return head_bucket.presign(self, input, options);
+    }
+
+    pub fn presignHeadObject(self: *Self, input: head_object.HeadObjectInput, options: head_object.PresignOptions) ![]const u8 {
+        return head_object.presign(self, input, options);
+    }
+
+    pub fn presignPutObject(self: *Self, input: put_object.PutObjectInput, options: put_object.PresignOptions) ![]const u8 {
+        return put_object.presign(self, input, options);
+    }
+
+    pub fn presignUploadPart(self: *Self, input: upload_part.UploadPartInput, options: upload_part.PresignOptions) ![]const u8 {
+        return upload_part.presign(self, input, options);
+    }
 };
