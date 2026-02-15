@@ -34,11 +34,15 @@ class ServiceGenerator(
         val paginatorGen = PaginatorGenerator(context, service, model)
         paginatorGen.run()
 
-        // 5. Generate client.zig
-        ClientGenerator(context, service, model, paginatorGen).run()
+        // 5. Generate waiters.zig (if any waitable operations)
+        val waiterGen = WaiterGenerator(context, service, model)
+        waiterGen.run()
 
-        // 6. Generate root.zig
-        RootGenerator(context, service, model, paginatorGen).run()
+        // 6. Generate client.zig
+        ClientGenerator(context, service, model, paginatorGen, waiterGen).run()
+
+        // 7. Generate root.zig
+        RootGenerator(context, service, model, paginatorGen, waiterGen).run()
 
         // 7. Generate serde.zig for XML protocols
         if (protocol.needsXmlSerde()) {

@@ -13,6 +13,7 @@ class ClientGenerator(
     private val service: ServiceShape,
     private val model: Model,
     private val paginatorGen: PaginatorGenerator? = null,
+    private val waiterGen: WaiterGenerator? = null,
 ) {
     data class OperationInfo(
         val operationName: String,
@@ -29,6 +30,7 @@ class ClientGenerator(
     fun run() {
         val operations = collectOperations()
         val paginatedOps = paginatorGen?.collectPaginatedOperations() ?: emptyList()
+        val waiterInfos = waiterGen?.collectWaiters() ?: emptyList()
 
         context.writerDelegator().useFileWriter("client.zig") { writer ->
             writer.importContainer.addImport("std", "std")
@@ -48,9 +50,14 @@ class ClientGenerator(
                 writer.write("const paginator = @import(\"paginator.zig\");")
             }
 
+            // Import waiters module if waitable ops exist
+            if (waiterInfos.isNotEmpty()) {
+                writer.write("const waiters = @import(\"waiters.zig\");")
+            }
+
             writer.blankLine()
 
-            writeClientStruct(writer, operations, paginatedOps)
+            writeClientStruct(writer, operations, paginatedOps, waiterInfos)
         }
     }
 
@@ -90,6 +97,7 @@ class ClientGenerator(
         writer: ZigWriter,
         operations: List<OperationInfo>,
         paginatedOps: List<PaginatorGenerator.PaginationInfo>,
+        waiterInfos: List<WaiterGenerator.WaiterInfo>,
     ) {
         writer.openBlock("pub const Client = struct {")
         writer.write("allocator: std.mem.Allocator,")
@@ -164,6 +172,23 @@ class ClientGenerator(
                 op.constName,
             )
             writer.write("return \$L.presign(self, input, options);", op.constName)
+            writer.closeBlock("}")
+        }
+
+        // Waiter convenience methods
+        for (waiter in waiterInfos) {
+            writer.blankLine()
+            val waitMethodName = "waitUntil${waiter.waiterName}"
+            writer.openBlock(
+                "pub fn \$L(self: *Self, params: \$L.\$L) aws.waiter.WaiterError!void {",
+                waitMethodName,
+                waiter.constName, waiter.inputType,
+            )
+            writer.write(
+                "var w = waiters.\$LWaiter{ .client = self, .params = params };",
+                waiter.waiterName,
+            )
+            writer.write("return w.wait();")
             writer.closeBlock("}")
         }
 

@@ -179,6 +179,7 @@ const upload_server_certificate = @import("upload_server_certificate.zig");
 const upload_signing_certificate = @import("upload_signing_certificate.zig");
 const upload_ssh_public_key = @import("upload_ssh_public_key.zig");
 const paginator = @import("paginator.zig");
+const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -4326,5 +4327,25 @@ pub const Client = struct {
             .params = params,
             .allocator = self.allocator,
         };
+    }
+
+    pub fn waitUntilInstanceProfileExists(self: *Self, params: get_instance_profile.GetInstanceProfileInput) aws.waiter.WaiterError!void {
+        var w = waiters.InstanceProfileExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilPolicyExists(self: *Self, params: get_policy.GetPolicyInput) aws.waiter.WaiterError!void {
+        var w = waiters.PolicyExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilRoleExists(self: *Self, params: get_role.GetRoleInput) aws.waiter.WaiterError!void {
+        var w = waiters.RoleExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilUserExists(self: *Self, params: get_user.GetUserInput) aws.waiter.WaiterError!void {
+        var w = waiters.UserExistsWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 };

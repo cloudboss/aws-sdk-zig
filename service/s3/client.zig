@@ -110,6 +110,7 @@ const upload_part = @import("upload_part.zig");
 const upload_part_copy = @import("upload_part_copy.zig");
 const write_get_object_response = @import("write_get_object_response.zig");
 const paginator = @import("paginator.zig");
+const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -8825,5 +8826,25 @@ pub const Client = struct {
 
     pub fn presignUploadPart(self: *Self, input: upload_part.UploadPartInput, options: upload_part.PresignOptions) ![]const u8 {
         return upload_part.presign(self, input, options);
+    }
+
+    pub fn waitUntilBucketExists(self: *Self, params: head_bucket.HeadBucketInput) aws.waiter.WaiterError!void {
+        var w = waiters.BucketExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilBucketNotExists(self: *Self, params: head_bucket.HeadBucketInput) aws.waiter.WaiterError!void {
+        var w = waiters.BucketNotExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilObjectExists(self: *Self, params: head_object.HeadObjectInput) aws.waiter.WaiterError!void {
+        var w = waiters.ObjectExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilObjectNotExists(self: *Self, params: head_object.HeadObjectInput) aws.waiter.WaiterError!void {
+        var w = waiters.ObjectNotExistsWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 };

@@ -88,6 +88,7 @@ const update_function_configuration = @import("update_function_configuration.zig
 const update_function_event_invoke_config = @import("update_function_event_invoke_config.zig");
 const update_function_url_config = @import("update_function_url_config.zig");
 const paginator = @import("paginator.zig");
+const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -1134,5 +1135,35 @@ pub const Client = struct {
             .params = params,
             .allocator = self.allocator,
         };
+    }
+
+    pub fn waitUntilFunctionActive(self: *Self, params: get_function_configuration.GetFunctionConfigurationInput) aws.waiter.WaiterError!void {
+        var w = waiters.FunctionActiveWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilFunctionActiveV2(self: *Self, params: get_function.GetFunctionInput) aws.waiter.WaiterError!void {
+        var w = waiters.FunctionActiveV2Waiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilFunctionExists(self: *Self, params: get_function.GetFunctionInput) aws.waiter.WaiterError!void {
+        var w = waiters.FunctionExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilFunctionUpdated(self: *Self, params: get_function_configuration.GetFunctionConfigurationInput) aws.waiter.WaiterError!void {
+        var w = waiters.FunctionUpdatedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilFunctionUpdatedV2(self: *Self, params: get_function.GetFunctionInput) aws.waiter.WaiterError!void {
+        var w = waiters.FunctionUpdatedV2Waiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilPublishedVersionActive(self: *Self, params: get_function_configuration.GetFunctionConfigurationInput) aws.waiter.WaiterError!void {
+        var w = waiters.PublishedVersionActiveWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 };

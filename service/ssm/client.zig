@@ -149,6 +149,7 @@ const update_patch_baseline = @import("update_patch_baseline.zig");
 const update_resource_data_sync = @import("update_resource_data_sync.zig");
 const update_service_setting = @import("update_service_setting.zig");
 const paginator = @import("paginator.zig");
+const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -2422,5 +2423,10 @@ pub const Client = struct {
             .params = params,
             .allocator = self.allocator,
         };
+    }
+
+    pub fn waitUntilCommandExecuted(self: *Self, params: get_command_invocation.GetCommandInvocationInput) aws.waiter.WaiterError!void {
+        var w = waiters.CommandExecutedWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 };

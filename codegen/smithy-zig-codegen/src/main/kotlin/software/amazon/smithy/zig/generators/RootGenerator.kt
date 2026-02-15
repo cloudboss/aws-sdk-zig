@@ -11,6 +11,7 @@ class RootGenerator(
     private val service: ServiceShape,
     private val model: Model,
     private val paginatorGen: PaginatorGenerator? = null,
+    private val waiterGen: WaiterGenerator? = null,
 ) {
     fun run() {
         val topDownIndex = TopDownIndex.of(model)
@@ -22,6 +23,7 @@ class RootGenerator(
             .sorted()
 
         val hasPaginatedOps = paginatorGen?.collectPaginatedOperations()?.isNotEmpty() ?: false
+        val hasWaiters = waiterGen?.collectWaiters()?.isNotEmpty() ?: false
 
         context.writerDelegator().useFileWriter("root.zig") { writer ->
             writer.write("pub const Client = @import(\"client.zig\").Client;")
@@ -30,6 +32,10 @@ class RootGenerator(
 
             if (hasPaginatedOps) {
                 writer.write("pub const paginator = @import(\"paginator.zig\");")
+            }
+
+            if (hasWaiters) {
+                writer.write("pub const waiters = @import(\"waiters.zig\");")
             }
 
             writer.blankLine()

@@ -752,6 +752,7 @@ const update_security_group_rule_descriptions_egress = @import("update_security_
 const update_security_group_rule_descriptions_ingress = @import("update_security_group_rule_descriptions_ingress.zig");
 const withdraw_byoip_cidr = @import("withdraw_byoip_cidr.zig");
 const paginator = @import("paginator.zig");
+const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -12084,5 +12085,80 @@ pub const Client = struct {
             .params = params,
             .allocator = self.allocator,
         };
+    }
+
+    pub fn waitUntilImageExists(self: *Self, params: describe_images.DescribeImagesInput) aws.waiter.WaiterError!void {
+        var w = waiters.ImageExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilInstanceExists(self: *Self, params: describe_instances.DescribeInstancesInput) aws.waiter.WaiterError!void {
+        var w = waiters.InstanceExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilInstanceRunning(self: *Self, params: describe_instances.DescribeInstancesInput) aws.waiter.WaiterError!void {
+        var w = waiters.InstanceRunningWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilInstanceStatusOk(self: *Self, params: describe_instance_status.DescribeInstanceStatusInput) aws.waiter.WaiterError!void {
+        var w = waiters.InstanceStatusOkWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilInternetGatewayExists(self: *Self, params: describe_internet_gateways.DescribeInternetGatewaysInput) aws.waiter.WaiterError!void {
+        var w = waiters.InternetGatewayExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilKeyPairExists(self: *Self, params: describe_key_pairs.DescribeKeyPairsInput) aws.waiter.WaiterError!void {
+        var w = waiters.KeyPairExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilNatGatewayAvailable(self: *Self, params: describe_nat_gateways.DescribeNatGatewaysInput) aws.waiter.WaiterError!void {
+        var w = waiters.NatGatewayAvailableWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilNatGatewayDeleted(self: *Self, params: describe_nat_gateways.DescribeNatGatewaysInput) aws.waiter.WaiterError!void {
+        var w = waiters.NatGatewayDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilNetworkInterfaceAvailable(self: *Self, params: describe_network_interfaces.DescribeNetworkInterfacesInput) aws.waiter.WaiterError!void {
+        var w = waiters.NetworkInterfaceAvailableWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilSecurityGroupExists(self: *Self, params: describe_security_groups.DescribeSecurityGroupsInput) aws.waiter.WaiterError!void {
+        var w = waiters.SecurityGroupExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilSpotInstanceRequestFulfilled(self: *Self, params: describe_spot_instance_requests.DescribeSpotInstanceRequestsInput) aws.waiter.WaiterError!void {
+        var w = waiters.SpotInstanceRequestFulfilledWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilVolumeDeleted(self: *Self, params: describe_volumes.DescribeVolumesInput) aws.waiter.WaiterError!void {
+        var w = waiters.VolumeDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilVpcExists(self: *Self, params: describe_vpcs.DescribeVpcsInput) aws.waiter.WaiterError!void {
+        var w = waiters.VpcExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilVpcPeeringConnectionDeleted(self: *Self, params: describe_vpc_peering_connections.DescribeVpcPeeringConnectionsInput) aws.waiter.WaiterError!void {
+        var w = waiters.VpcPeeringConnectionDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilVpcPeeringConnectionExists(self: *Self, params: describe_vpc_peering_connections.DescribeVpcPeeringConnectionsInput) aws.waiter.WaiterError!void {
+        var w = waiters.VpcPeeringConnectionExistsWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 };

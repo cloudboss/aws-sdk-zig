@@ -60,6 +60,7 @@ const update_table = @import("update_table.zig");
 const update_table_replica_auto_scaling = @import("update_table_replica_auto_scaling.zig");
 const update_time_to_live = @import("update_time_to_live.zig");
 const paginator = @import("paginator.zig");
+const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -1610,5 +1611,30 @@ pub const Client = struct {
             .params = params,
             .allocator = self.allocator,
         };
+    }
+
+    pub fn waitUntilContributorInsightsEnabled(self: *Self, params: describe_contributor_insights.DescribeContributorInsightsInput) aws.waiter.WaiterError!void {
+        var w = waiters.ContributorInsightsEnabledWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilExportCompleted(self: *Self, params: describe_export.DescribeExportInput) aws.waiter.WaiterError!void {
+        var w = waiters.ExportCompletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilImportCompleted(self: *Self, params: describe_import.DescribeImportInput) aws.waiter.WaiterError!void {
+        var w = waiters.ImportCompletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilTableExists(self: *Self, params: describe_table.DescribeTableInput) aws.waiter.WaiterError!void {
+        var w = waiters.TableExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilTableNotExists(self: *Self, params: describe_table.DescribeTableInput) aws.waiter.WaiterError!void {
+        var w = waiters.TableNotExistsWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 };
