@@ -44,9 +44,10 @@ pub const ContributorInsightsEnabledWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        const output = self.client.describeContributorInsights(self.params, .{}) catch  {
+        var output = self.client.describeContributorInsights(self.params, .{}) catch  {
             return .retry;
         };
+        defer output.deinit();
 
         if (output.contributor_insights_status) |val_0| {
             if (std.mem.eql(u8, @tagName(val_0), "ENABLED")) {
@@ -98,9 +99,10 @@ pub const ExportCompletedWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        const output = self.client.describeExport(self.params, .{}) catch  {
+        var output = self.client.describeExport(self.params, .{}) catch  {
             return .retry;
         };
+        defer output.deinit();
 
         if (output.export_description) |val_0| {
             if (val_0.export_status) |val_1| {
@@ -156,9 +158,10 @@ pub const ImportCompletedWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        const output = self.client.describeImport(self.params, .{}) catch  {
+        var output = self.client.describeImport(self.params, .{}) catch  {
             return .retry;
         };
+        defer output.deinit();
 
         if (output.import_table_description) |val_0| {
             if (val_0.import_status) |val_1| {
@@ -222,7 +225,7 @@ pub const TableExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        const output = self.client.describeTable(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output = self.client.describeTable(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
                     return .retry;
@@ -230,6 +233,7 @@ pub const TableExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output.deinit();
 
         if (output.table) |val_0| {
             if (val_0.table_status) |val_1| {
@@ -279,7 +283,7 @@ pub const TableNotExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeTable(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeTable(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
                     return .success;
@@ -287,6 +291,7 @@ pub const TableNotExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }

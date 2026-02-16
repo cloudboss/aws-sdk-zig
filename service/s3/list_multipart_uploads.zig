@@ -507,13 +507,15 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var common_prefixes_list: std.ArrayList(CommonPrefix) = .{};
+    var uploads_list: std.ArrayList(MultipartUpload) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Bucket")) {
                     result.bucket = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CommonPrefixes")) {
-                    result.common_prefixes = try serde.deserializeCommonPrefixList(&reader, alloc, "member");
+                    try common_prefixes_list.append(alloc, try serde.deserializeCommonPrefix(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "Delimiter")) {
                     result.delimiter = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EncodingType")) {
@@ -533,7 +535,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "UploadIdMarker")) {
                     result.upload_id_marker = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Upload")) {
-                    result.uploads = try serde.deserializeMultipartUploadList(&reader, alloc, "member");
+                    try uploads_list.append(alloc, try serde.deserializeMultipartUpload(&reader, alloc));
                 } else {
                     try reader.skipElement();
                 }
@@ -542,6 +544,8 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.common_prefixes = if (common_prefixes_list.items.len > 0) try common_prefixes_list.toOwnedSlice(alloc) else null;
+    result.uploads = if (uploads_list.items.len > 0) try uploads_list.toOwnedSlice(alloc) else null;
     if (headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
     }

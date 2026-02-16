@@ -328,13 +328,16 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var common_prefixes_list: std.ArrayList(CommonPrefix) = .{};
+    var delete_markers_list: std.ArrayList(DeleteMarkerEntry) = .{};
+    var versions_list: std.ArrayList(ObjectVersion) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CommonPrefixes")) {
-                    result.common_prefixes = try serde.deserializeCommonPrefixList(&reader, alloc, "member");
+                    try common_prefixes_list.append(alloc, try serde.deserializeCommonPrefix(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "DeleteMarker")) {
-                    result.delete_markers = try serde.deserializeDeleteMarkers(&reader, alloc, "member");
+                    try delete_markers_list.append(alloc, try serde.deserializeDeleteMarkerEntry(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "Delimiter")) {
                     result.delimiter = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EncodingType")) {
@@ -356,7 +359,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "VersionIdMarker")) {
                     result.version_id_marker = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
-                    result.versions = try serde.deserializeObjectVersionList(&reader, alloc, "member");
+                    try versions_list.append(alloc, try serde.deserializeObjectVersion(&reader, alloc));
                 } else {
                     try reader.skipElement();
                 }
@@ -365,6 +368,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.common_prefixes = if (common_prefixes_list.items.len > 0) try common_prefixes_list.toOwnedSlice(alloc) else null;
+    result.delete_markers = if (delete_markers_list.items.len > 0) try delete_markers_list.toOwnedSlice(alloc) else null;
+    result.versions = if (versions_list.items.len > 0) try versions_list.toOwnedSlice(alloc) else null;
     if (headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
     }

@@ -183,13 +183,14 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var inventory_configuration_list_list: std.ArrayList(InventoryConfiguration) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ContinuationToken")) {
                     result.continuation_token = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InventoryConfiguration")) {
-                    result.inventory_configuration_list = try serde.deserializeInventoryConfigurationList(&reader, alloc, "member");
+                    try inventory_configuration_list_list.append(alloc, try serde.deserializeInventoryConfiguration(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
                     result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "NextContinuationToken")) {
@@ -202,6 +203,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.inventory_configuration_list = if (inventory_configuration_list_list.items.len > 0) try inventory_configuration_list_list.toOwnedSlice(alloc) else null;
     _ = headers;
 
     return result;

@@ -184,11 +184,12 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var analytics_configuration_list_list: std.ArrayList(AnalyticsConfiguration) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AnalyticsConfiguration")) {
-                    result.analytics_configuration_list = try serde.deserializeAnalyticsConfigurationList(&reader, alloc, "member");
+                    try analytics_configuration_list_list.append(alloc, try serde.deserializeAnalyticsConfiguration(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "ContinuationToken")) {
                     result.continuation_token = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
@@ -203,6 +204,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.analytics_configuration_list = if (analytics_configuration_list_list.items.len > 0) try analytics_configuration_list_list.toOwnedSlice(alloc) else null;
     _ = headers;
 
     return result;

@@ -42,9 +42,10 @@ pub const FunctionActiveWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        const output = self.client.getFunctionConfiguration(self.params, .{}) catch  {
+        var output = self.client.getFunctionConfiguration(self.params, .{}) catch  {
             return .retry;
         };
+        defer output.deinit();
 
         if (output.state) |val_0| {
             if (std.mem.eql(u8, @tagName(val_0), "Active")) {
@@ -101,9 +102,10 @@ pub const FunctionActiveV2Waiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        const output = self.client.getFunction(self.params, .{}) catch  {
+        var output = self.client.getFunction(self.params, .{}) catch  {
             return .retry;
         };
+        defer output.deinit();
 
         if (output.configuration) |val_0| {
             if (val_0.state) |val_1| {
@@ -167,7 +169,7 @@ pub const FunctionExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.getFunction(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.getFunction(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
                     return .retry;
@@ -175,6 +177,7 @@ pub const FunctionExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .success;
     }
@@ -216,9 +219,10 @@ pub const FunctionUpdatedWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        const output = self.client.getFunctionConfiguration(self.params, .{}) catch  {
+        var output = self.client.getFunctionConfiguration(self.params, .{}) catch  {
             return .retry;
         };
+        defer output.deinit();
 
         if (output.last_update_status) |val_0| {
             if (std.mem.eql(u8, @tagName(val_0), "Successful")) {
@@ -275,9 +279,10 @@ pub const FunctionUpdatedV2Waiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        const output = self.client.getFunction(self.params, .{}) catch  {
+        var output = self.client.getFunction(self.params, .{}) catch  {
             return .retry;
         };
+        defer output.deinit();
 
         if (output.configuration) |val_0| {
             if (val_0.last_update_status) |val_1| {
@@ -340,9 +345,10 @@ pub const PublishedVersionActiveWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        const output = self.client.getFunctionConfiguration(self.params, .{}) catch  {
+        var output = self.client.getFunctionConfiguration(self.params, .{}) catch  {
             return .retry;
         };
+        defer output.deinit();
 
         if (output.state) |val_0| {
             if (std.mem.eql(u8, @tagName(val_0), "Active")) {

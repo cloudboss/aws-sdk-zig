@@ -195,11 +195,10 @@ class WaiterGenerator(
         writer.openBlock("fn poll(self: *Self) aws.waiter.AcceptorState {")
 
         val hasOutputAcceptors = waiter.acceptors.any { it.type == AcceptorType.OUTPUT_PATH }
-        val hasSuccessAcceptors = waiter.acceptors.any { it.type == AcceptorType.SUCCESS }
         val errorAcceptors = waiter.acceptors.filter { it.type == AcceptorType.ERROR_TYPE }
-        val needsOutput = hasOutputAcceptors
         val needsDiagnostic = errorAcceptors.isNotEmpty()
-        val resultPrefix = if (needsOutput) "const output = " else "_ = "
+        // Always capture the result to deinit it (avoid leaking the response arena)
+        val resultPrefix = if (hasOutputAcceptors) "var output = " else "var output_ = "
         val errCapture = if (needsDiagnostic) "|err|" else ""
 
         if (needsDiagnostic) {
@@ -228,6 +227,11 @@ class WaiterGenerator(
 
         writer.write("return .retry;")
         writer.closeBlock("};")
+        if (hasOutputAcceptors) {
+            writer.write("defer output.deinit();")
+        } else {
+            writer.write("defer output_.deinit();")
+        }
         writer.blankLine()
 
         // Success-path acceptors (operation succeeded)

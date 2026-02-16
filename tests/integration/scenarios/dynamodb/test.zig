@@ -192,6 +192,82 @@ test "PutItem and GetItem with map fields" {
     );
 }
 
+test "Scan paginator collects all items across pages" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var arena_state = std.heap.ArenaAllocator.init(allocator);
+    defer arena_state.deinit();
+    const arena = arena_state.allocator();
+
+    var client = dynamodb.Client.init(arena, &cfg);
+    defer client.deinit();
+
+    const table_name = "sdk-zig-paginator-test-table";
+
+    // Create table
+    _ = try dynamodb.create_table.execute(
+        &client,
+        .{
+            .table_name = table_name,
+            .key_schema = &.{
+                .{ .attribute_name = "pk", .key_type = .hash },
+            },
+            .attribute_definitions = &.{
+                .{ .attribute_name = "pk", .attribute_type = .s },
+            },
+            .billing_mode = .pay_per_request,
+        },
+        .{},
+    );
+
+    // Put 5 items
+    for (0..5) |i| {
+        var key_buf: [16]u8 = undefined;
+        const key = std.fmt.bufPrint(&key_buf, "item-{d}", .{i + 1}) catch unreachable;
+        _ = try dynamodb.put_item.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .item = &.{
+                    .{ .key = "pk", .value = .{ .s = key } },
+                },
+            },
+            .{},
+        );
+    }
+
+    // Scan with limit=2 via paginator
+    var pag = client.scanPaginator(.{ .table_name = table_name, .limit = 2 });
+
+    var total_items: usize = 0;
+    var pages: usize = 0;
+    while (!pag.done) {
+        const output = try pag.next(.{});
+        if (output.items) |items| {
+            total_items += items.len;
+        }
+        pages += 1;
+    }
+
+    try std.testing.expect(total_items == 5);
+    try std.testing.expect(pages >= 3);
+
+    // Cleanup
+    _ = try dynamodb.delete_table.execute(
+        &client,
+        .{ .table_name = table_name },
+        .{},
+    );
+}
+
 test "DescribeTable returns ResourceNotFoundException for missing table" {
     const allocator = std.testing.allocator;
 

@@ -42,7 +42,7 @@ pub const CommandExecutedWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        const output = self.client.getCommandInvocation(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output = self.client.getCommandInvocation(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvocationDoesNotExist")) {
                     return .retry;
@@ -50,6 +50,7 @@ pub const CommandExecutedWaiter = struct {
             }
             return .retry;
         };
+        defer output.deinit();
 
         if (output.status) |val_0| {
             if (std.mem.eql(u8, @tagName(val_0), "Pending")) {

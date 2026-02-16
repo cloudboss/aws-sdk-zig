@@ -189,6 +189,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var metrics_configuration_list_list: std.ArrayList(MetricsConfiguration) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -197,7 +198,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "IsTruncated")) {
                     result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "MetricsConfiguration")) {
-                    result.metrics_configuration_list = try serde.deserializeMetricsConfigurationList(&reader, alloc, "member");
+                    try metrics_configuration_list_list.append(alloc, try serde.deserializeMetricsConfiguration(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "NextContinuationToken")) {
                     result.next_continuation_token = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -208,6 +209,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.metrics_configuration_list = if (metrics_configuration_list_list.items.len > 0) try metrics_configuration_list_list.toOwnedSlice(alloc) else null;
     _ = headers;
 
     return result;

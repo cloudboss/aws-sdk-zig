@@ -443,6 +443,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var parts_list: std.ArrayList(Part) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -467,7 +468,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "PartNumberMarker")) {
                     result.part_number_marker = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Part")) {
-                    result.parts = try serde.deserializeParts(&reader, alloc, "member");
+                    try parts_list.append(alloc, try serde.deserializePart(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
                     result.storage_class = std.meta.stringToEnum(StorageClass, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UploadId")) {
@@ -480,6 +481,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.parts = if (parts_list.items.len > 0) try parts_list.toOwnedSlice(alloc) else null;
     if (headers.get("x-amz-abort-date")) |value| {
         result.abort_date = std.fmt.parseInt(i64, value, 10) catch null;
     }

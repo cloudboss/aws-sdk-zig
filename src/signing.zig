@@ -172,19 +172,30 @@ fn buildPresignCanonicalQuery(
         }
     }
 
-    // Add X-Amz-* presigning parameters (keys already percent-safe)
+    // Add X-Amz-* presigning parameters -- pre-encode values that contain
+    // characters outside the unreserved set (credential has '/', signed-headers
+    // has ';', session tokens may have special chars).
     try pairs.append(allocator, .{ .key = "X-Amz-Algorithm", .value = algorithm });
-    try pairs.append(allocator, .{ .key = "X-Amz-Credential", .value = credential });
+
+    const encoded_credential = try encodeQueryValue(allocator, credential);
+    defer allocator.free(encoded_credential);
+    try pairs.append(allocator, .{ .key = "X-Amz-Credential", .value = encoded_credential });
+
     try pairs.append(allocator, .{ .key = "X-Amz-Date", .value = datetime });
 
     const expires_str = try std.fmt.allocPrint(allocator, "{d}", .{expires_seconds});
     defer allocator.free(expires_str);
     try pairs.append(allocator, .{ .key = "X-Amz-Expires", .value = expires_str });
 
-    try pairs.append(allocator, .{ .key = "X-Amz-SignedHeaders", .value = signed_headers });
+    const encoded_signed_headers = try encodeQueryValue(allocator, signed_headers);
+    defer allocator.free(encoded_signed_headers);
+    try pairs.append(allocator, .{ .key = "X-Amz-SignedHeaders", .value = encoded_signed_headers });
 
+    var encoded_token: ?[]const u8 = null;
+    defer if (encoded_token) |t| allocator.free(t);
     if (session_token) |token| {
-        try pairs.append(allocator, .{ .key = "X-Amz-Security-Token", .value = token });
+        encoded_token = try encodeQueryValue(allocator, token);
+        try pairs.append(allocator, .{ .key = "X-Amz-Security-Token", .value = encoded_token.? });
     }
 
     // Sort
@@ -196,27 +207,16 @@ fn buildPresignCanonicalQuery(
         }
     }.lessThan);
 
-    // Encode
+    // All values are already URI-encoded (existing query params by the
+    // serializer, X-Amz-* params above), so just sort and rejoin.
     var result: std.ArrayList(u8) = .{};
     errdefer result.deinit(allocator);
 
     for (pairs.items, 0..) |pair, i| {
         if (i > 0) try result.append(allocator, '&');
-        for (pair.key) |c| {
-            if (shouldEncodeQueryChar(c)) {
-                try result.appendSlice(allocator, &percentEncode(c));
-            } else {
-                try result.append(allocator, c);
-            }
-        }
+        try result.appendSlice(allocator, pair.key);
         try result.append(allocator, '=');
-        for (pair.value) |c| {
-            if (shouldEncodeQueryChar(c)) {
-                try result.appendSlice(allocator, &percentEncode(c));
-            } else {
-                try result.append(allocator, c);
-            }
-        }
+        try result.appendSlice(allocator, pair.value);
     }
 
     return result.toOwnedSlice(allocator);
@@ -481,6 +481,20 @@ pub fn encodeUri(allocator: Allocator, path: []const u8) ![]const u8 {
     return result.toOwnedSlice(allocator);
 }
 
+/// Percent-encode a raw query value.
+fn encodeQueryValue(allocator: Allocator, value: []const u8) ![]const u8 {
+    var buf: std.ArrayList(u8) = .{};
+    errdefer buf.deinit(allocator);
+    for (value) |c| {
+        if (shouldEncodeQueryChar(c)) {
+            try buf.appendSlice(allocator, &percentEncode(c));
+        } else {
+            try buf.append(allocator, c);
+        }
+    }
+    return buf.toOwnedSlice(allocator);
+}
+
 fn shouldEncodeUriChar(c: u8) bool {
     // Don't encode: A-Z, a-z, 0-9, '-', '_', '.', '~', '/'
     return switch (c) {
@@ -540,7 +554,8 @@ pub fn canonicalizeQueryString(allocator: Allocator, query: ?[]const u8) ![]cons
         }
     }.lessThan);
 
-    // Build canonical query string
+    // Build canonical query string -- keys and values are already URI-encoded
+    // by the request serializer, so we just sort and rejoin without re-encoding.
     var result: std.ArrayList(u8) = .{};
     errdefer result.deinit(allocator);
 
@@ -549,25 +564,9 @@ pub fn canonicalizeQueryString(allocator: Allocator, query: ?[]const u8) ![]cons
             try result.append(allocator, '&');
         }
 
-        // Encode key
-        for (pair.key) |c| {
-            if (shouldEncodeQueryChar(c)) {
-                try result.appendSlice(allocator, &percentEncode(c));
-            } else {
-                try result.append(allocator, c);
-            }
-        }
-
+        try result.appendSlice(allocator, pair.key);
         try result.append(allocator, '=');
-
-        // Encode value
-        for (pair.value) |c| {
-            if (shouldEncodeQueryChar(c)) {
-                try result.appendSlice(allocator, &percentEncode(c));
-            } else {
-                try result.append(allocator, c);
-            }
-        }
+        try result.appendSlice(allocator, pair.value);
     }
 
     return result.toOwnedSlice(allocator);

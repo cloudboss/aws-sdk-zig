@@ -53,7 +53,7 @@ pub const ImageExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeImages(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeImages(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidAMIID.NotFound")) {
                     return .retry;
@@ -61,6 +61,7 @@ pub const ImageExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -103,7 +104,7 @@ pub const InstanceExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeInstances(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeInstances(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
                     return .retry;
@@ -111,6 +112,7 @@ pub const InstanceExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -153,7 +155,7 @@ pub const InstanceRunningWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeInstances(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeInstances(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
                     return .retry;
@@ -161,6 +163,7 @@ pub const InstanceRunningWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -203,7 +206,7 @@ pub const InstanceStatusOkWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeInstanceStatus(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeInstanceStatus(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
                     return .retry;
@@ -211,6 +214,7 @@ pub const InstanceStatusOkWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -253,7 +257,7 @@ pub const InternetGatewayExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeInternetGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeInternetGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInternetGateway.NotFound")) {
                     return .retry;
@@ -261,6 +265,7 @@ pub const InternetGatewayExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -303,7 +308,7 @@ pub const KeyPairExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeKeyPairs(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeKeyPairs(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidKeyPair.NotFound")) {
                     return .retry;
@@ -311,6 +316,7 @@ pub const KeyPairExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -353,7 +359,7 @@ pub const NatGatewayAvailableWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeNatGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeNatGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "NatGatewayNotFound")) {
                     return .retry;
@@ -361,6 +367,7 @@ pub const NatGatewayAvailableWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -403,7 +410,7 @@ pub const NatGatewayDeletedWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeNatGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeNatGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "NatGatewayNotFound")) {
                     return .success;
@@ -411,6 +418,7 @@ pub const NatGatewayDeletedWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -453,7 +461,7 @@ pub const NetworkInterfaceAvailableWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeNetworkInterfaces(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeNetworkInterfaces(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidNetworkInterfaceID.NotFound")) {
                     return .failure;
@@ -461,6 +469,7 @@ pub const NetworkInterfaceAvailableWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -503,7 +512,7 @@ pub const SecurityGroupExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeSecurityGroups(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeSecurityGroups(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidGroup.NotFound")) {
                     return .retry;
@@ -511,6 +520,7 @@ pub const SecurityGroupExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -553,7 +563,7 @@ pub const SpotInstanceRequestFulfilledWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeSpotInstanceRequests(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeSpotInstanceRequests(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidSpotInstanceRequestID.NotFound")) {
                     return .retry;
@@ -561,6 +571,7 @@ pub const SpotInstanceRequestFulfilledWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -603,7 +614,7 @@ pub const VolumeDeletedWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeVolumes(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeVolumes(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVolume.NotFound")) {
                     return .success;
@@ -611,6 +622,7 @@ pub const VolumeDeletedWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -653,7 +665,7 @@ pub const VpcExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeVpcs(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeVpcs(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcID.NotFound")) {
                     return .retry;
@@ -661,6 +673,7 @@ pub const VpcExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .success;
     }
@@ -703,7 +716,7 @@ pub const VpcPeeringConnectionDeletedWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeVpcPeeringConnections(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeVpcPeeringConnections(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcPeeringConnectionID.NotFound")) {
                     return .success;
@@ -711,6 +724,7 @@ pub const VpcPeeringConnectionDeletedWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .retry;
     }
@@ -753,7 +767,7 @@ pub const VpcPeeringConnectionExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.describeVpcPeeringConnections(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.describeVpcPeeringConnections(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcPeeringConnectionID.NotFound")) {
                     return .retry;
@@ -761,6 +775,7 @@ pub const VpcPeeringConnectionExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .success;
     }

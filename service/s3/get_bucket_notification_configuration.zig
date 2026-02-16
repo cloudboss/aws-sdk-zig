@@ -176,17 +176,20 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var lambda_function_configurations_list: std.ArrayList(LambdaFunctionConfiguration) = .{};
+    var queue_configurations_list: std.ArrayList(QueueConfiguration) = .{};
+    var topic_configurations_list: std.ArrayList(TopicConfiguration) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EventBridgeConfiguration")) {
                     result.event_bridge_configuration = try serde.deserializeEventBridgeConfiguration(&reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "CloudFunctionConfiguration")) {
-                    result.lambda_function_configurations = try serde.deserializeLambdaFunctionConfigurationList(&reader, alloc, "member");
+                    try lambda_function_configurations_list.append(alloc, try serde.deserializeLambdaFunctionConfiguration(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "QueueConfiguration")) {
-                    result.queue_configurations = try serde.deserializeQueueConfigurationList(&reader, alloc, "member");
+                    try queue_configurations_list.append(alloc, try serde.deserializeQueueConfiguration(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "TopicConfiguration")) {
-                    result.topic_configurations = try serde.deserializeTopicConfigurationList(&reader, alloc, "member");
+                    try topic_configurations_list.append(alloc, try serde.deserializeTopicConfiguration(&reader, alloc));
                 } else {
                     try reader.skipElement();
                 }
@@ -195,6 +198,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.lambda_function_configurations = if (lambda_function_configurations_list.items.len > 0) try lambda_function_configurations_list.toOwnedSlice(alloc) else null;
+    result.queue_configurations = if (queue_configurations_list.items.len > 0) try queue_configurations_list.toOwnedSlice(alloc) else null;
+    result.topic_configurations = if (topic_configurations_list.items.len > 0) try topic_configurations_list.toOwnedSlice(alloc) else null;
     _ = headers;
 
     return result;

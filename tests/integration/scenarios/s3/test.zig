@@ -145,3 +145,186 @@ test "GetObject returns NoSuchKey for missing object" {
         defer del_result.deinit();
     }
 }
+
+test "ListObjectsV2 paginator collects all objects across pages" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = s3.Client.init(allocator, &cfg);
+    defer client.deinit();
+
+    const bucket_name = "sdk-zig-paginator-test";
+    const obj_count = 5;
+
+    // Create bucket
+    {
+        var result = try s3.create_bucket.execute(&client, .{ .bucket = bucket_name }, .{});
+        defer result.deinit();
+    }
+
+    // Put 5 objects with distinct keys
+    var key_bufs: [obj_count][16]u8 = undefined;
+    var keys: [obj_count][]const u8 = undefined;
+    for (0..obj_count) |i| {
+        keys[i] = std.fmt.bufPrint(&key_bufs[i], "obj-{d}", .{i + 1}) catch unreachable;
+        var result = try s3.put_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = keys[i], .body = "data" },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // Paginate with max_keys=2
+    var pag = client.listObjectsV2Paginator(.{ .bucket = bucket_name, .max_keys = 2 });
+    defer pag.deinit();
+
+    var total_keys: usize = 0;
+    var pages: usize = 0;
+    while (!pag.done) {
+        var output = try pag.next(.{});
+        defer output.deinit();
+
+        if (output.contents) |contents| {
+            total_keys += contents.len;
+        }
+        pages += 1;
+    }
+
+    try std.testing.expectEqual(@as(usize, obj_count), total_keys);
+    try std.testing.expect(pages >= 3); // 5 objects / 2 per page = at least 3 pages
+
+    // Clean up objects
+    for (0..obj_count) |i| {
+        var result = try s3.delete_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = keys[i] },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // Delete bucket
+    {
+        var result = try s3.delete_bucket.execute(&client, .{ .bucket = bucket_name }, .{});
+        defer result.deinit();
+    }
+}
+
+test "presigned GetObject URL retrieves object without signing" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = s3.Client.init(allocator, &cfg);
+    defer client.deinit();
+
+    const bucket_name = "sdk-zig-presign-test";
+    const object_key = "presign-test.txt";
+    const object_body = "presigned content here";
+
+    // Create bucket
+    {
+        var result = try s3.create_bucket.execute(&client, .{ .bucket = bucket_name }, .{});
+        defer result.deinit();
+    }
+
+    // PutObject
+    {
+        var result = try s3.put_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = object_key, .body = object_body },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // Generate presigned URL
+    const presigned_url = try client.presignGetObject(
+        .{ .bucket = bucket_name, .key = object_key },
+        .{ .expires_seconds = 60 },
+    );
+    defer allocator.free(presigned_url);
+
+    // Fetch via plain HTTP (no AWS signing)
+    var http_client = std.http.Client{ .allocator = allocator };
+    defer http_client.deinit();
+
+    const uri = std.Uri.parse(presigned_url) catch return error.InvalidPresignedUrl;
+
+    var req = http_client.request(.GET, uri, .{}) catch return error.ConnectionFailed;
+    defer req.deinit();
+
+    req.sendBodiless() catch return error.RequestFailed;
+
+    var redirect_buf: [4096]u8 = undefined;
+    var response = req.receiveHead(&redirect_buf) catch return error.RequestFailed;
+
+    try std.testing.expect(response.head.status == .ok);
+
+    var transfer_buf: [4096]u8 = undefined;
+    const body_reader = response.reader(&transfer_buf);
+    const body = body_reader.allocRemaining(allocator, std.Io.Limit.limited(1024 * 1024)) catch return error.ReadFailed;
+    defer allocator.free(body);
+
+    try std.testing.expectEqualStrings(object_body, body);
+
+    // Clean up
+    {
+        var result = try s3.delete_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = object_key },
+            .{},
+        );
+        defer result.deinit();
+    }
+    {
+        var result = try s3.delete_bucket.execute(&client, .{ .bucket = bucket_name }, .{});
+        defer result.deinit();
+    }
+}
+
+test "waitUntilBucketExists succeeds after CreateBucket" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = s3.Client.init(allocator, &cfg);
+    defer client.deinit();
+
+    const bucket_name = "sdk-zig-waiter-test";
+
+    // Create bucket
+    {
+        var result = try s3.create_bucket.execute(&client, .{ .bucket = bucket_name }, .{});
+        defer result.deinit();
+    }
+
+    // Wait should succeed immediately
+    try client.waitUntilBucketExists(.{ .bucket = bucket_name });
+
+    // Clean up
+    {
+        var result = try s3.delete_bucket.execute(&client, .{ .bucket = bucket_name }, .{});
+        defer result.deinit();
+    }
+}

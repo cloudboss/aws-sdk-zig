@@ -388,13 +388,15 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var deleted_list: std.ArrayList(DeletedObject) = .{};
+    var errors_list: std.ArrayList(Error) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Deleted")) {
-                    result.deleted = try serde.deserializeDeletedObjects(&reader, alloc, "member");
+                    try deleted_list.append(alloc, try serde.deserializeDeletedObject(&reader, alloc));
                 } else if (std.mem.eql(u8, e.local, "Error")) {
-                    result.errors = try serde.deserializeErrors(&reader, alloc, "member");
+                    try errors_list.append(alloc, try serde.deserializeError(&reader, alloc));
                 } else {
                     try reader.skipElement();
                 }
@@ -403,6 +405,8 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.deleted = if (deleted_list.items.len > 0) try deleted_list.toOwnedSlice(alloc) else null;
+    result.errors = if (errors_list.items.len > 0) try errors_list.toOwnedSlice(alloc) else null;
     if (headers.get("x-amz-request-charged")) |value| {
         result.request_charged = std.meta.stringToEnum(RequestCharged, value);
     }

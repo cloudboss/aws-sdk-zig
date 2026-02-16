@@ -244,11 +244,12 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var rules_list: std.ArrayList(LifecycleRule) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Rule")) {
-                    result.rules = try serde.deserializeLifecycleRules(&reader, alloc, "member");
+                    try rules_list.append(alloc, try serde.deserializeLifecycleRule(&reader, alloc));
                 } else {
                     try reader.skipElement();
                 }
@@ -257,6 +258,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.rules = if (rules_list.items.len > 0) try rules_list.toOwnedSlice(alloc) else null;
     if (headers.get("x-amz-transition-default-minimum-object-size")) |value| {
         result.transition_default_minimum_object_size = std.meta.stringToEnum(TransitionDefaultMinimumObjectSize, value);
     }

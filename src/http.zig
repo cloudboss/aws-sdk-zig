@@ -69,7 +69,8 @@ pub const Request = struct {
             .host = .{ .raw = self.host },
             .port = self.port,
             .path = .{ .raw = if (self.path.len > 0) self.path else "/" },
-            .query = if (self.query) |q| .{ .raw = q } else null,
+            // Query values are already percent-encoded by the request serializer
+            .query = if (self.query) |q| .{ .percent_encoded = q } else null,
         };
     }
 };

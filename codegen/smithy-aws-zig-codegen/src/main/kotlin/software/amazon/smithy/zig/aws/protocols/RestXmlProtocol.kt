@@ -652,6 +652,24 @@ class RestXmlProtocol : ProtocolGenerator {
         ctx: OperationContext,
         members: Map<String, MemberShape>,
     ) {
+        // Collect flattened list members that need ArrayList accumulation
+        val flattenedLists = mutableListOf<Triple<String, String, ListShape>>() // (fieldName, xmlName, listShape)
+        for ((memberName, memberShape) in members) {
+            val targetShape = ctx.model.expectShape(memberShape.target)
+            if (targetShape is ListShape && memberShape.hasTrait(XmlFlattenedTrait::class.java)) {
+                val fieldName = NamingUtil.toFieldName(memberName)
+                val xmlName = xmlElementName(memberName, memberShape)
+                flattenedLists.add(Triple(fieldName, xmlName, targetShape))
+            }
+        }
+
+        // Declare ArrayLists for flattened list members before the loop
+        for ((fieldName, _, listShape) in flattenedLists) {
+            val elementShape = ctx.model.expectShape(listShape.member.target)
+            val elementType = resolveZigElementType(ctx, elementShape)
+            writer.write("var \${L}_list: std.ArrayList(\$L) = .{};", fieldName, elementType)
+        }
+
         writer.openBlock("while (try reader.next()) |event| {")
         writer.openBlock("switch (event) {")
         writer.openBlock(".element_start => |e| {")
@@ -667,7 +685,7 @@ class RestXmlProtocol : ProtocolGenerator {
 
             writer.write("\$L (std.mem.eql(u8, e.local, \"\$L\")) {", prefix, xmlName)
             writer.indent()
-            writeXmlMemberDeserializer(writer, ctx, fieldName, targetShape)
+            writeXmlMemberDeserializer(writer, ctx, fieldName, targetShape, memberShape)
             writer.dedent()
         }
 
@@ -686,6 +704,31 @@ class RestXmlProtocol : ProtocolGenerator {
         writer.write("else => {},")
         writer.closeBlock("}")
         writer.closeBlock("}")
+
+        // Assign accumulated flattened lists to result fields
+        for ((fieldName, _, _) in flattenedLists) {
+            writer.write(
+                "result.\$L = if (\${L}_list.items.len > 0) try \${L}_list.toOwnedSlice(alloc) else null;",
+                fieldName, fieldName, fieldName,
+            )
+        }
+    }
+
+    private fun resolveZigElementType(ctx: OperationContext, elementShape: Shape): String {
+        return when (elementShape) {
+            is StructureShape -> elementShape.id.name
+            is EnumShape, is IntEnumShape -> elementShape.id.name
+            is StringShape -> {
+                if (ctx.isEnumType(elementShape)) elementShape.id.name
+                else "[]const u8"
+            }
+            is BooleanShape -> "bool"
+            is IntegerShape, is ShortShape -> "i32"
+            is LongShape -> "i64"
+            is FloatShape -> "f32"
+            is DoubleShape -> "f64"
+            else -> "[]const u8"
+        }
     }
 
     private fun writeXmlMemberDeserializer(
@@ -693,6 +736,7 @@ class RestXmlProtocol : ProtocolGenerator {
         ctx: OperationContext,
         fieldName: String,
         targetShape: Shape,
+        memberShape: MemberShape,
     ) {
         when (targetShape) {
             is StructureShape -> {
@@ -702,14 +746,21 @@ class RestXmlProtocol : ProtocolGenerator {
                 )
             }
             is ListShape -> {
-                val listFnName = "deserialize${targetShape.id.name}"
-                val itemTag = targetShape.member.getTrait(XmlNameTrait::class.java)
-                    .map { it.value }
-                    .orElse("member")
-                writer.write(
-                    "result.\$L = try serde.\$L(&reader, alloc, \"\$L\");",
-                    fieldName, listFnName, itemTag,
-                )
+                val isFlattened = memberShape.hasTrait(XmlFlattenedTrait::class.java)
+                if (isFlattened) {
+                    // Each XML element is a single item -- append to the ArrayList
+                    val elementShape = ctx.model.expectShape(targetShape.member.target)
+                    writeFlattenedItemDeserializer(writer, ctx, fieldName, elementShape)
+                } else {
+                    val listFnName = "deserialize${targetShape.id.name}"
+                    val itemTag = targetShape.member.getTrait(XmlNameTrait::class.java)
+                        .map { it.value }
+                        .orElse("member")
+                    writer.write(
+                        "result.\$L = try serde.\$L(&reader, alloc, \"\$L\");",
+                        fieldName, listFnName, itemTag,
+                    )
+                }
             }
             is MapShape -> {
                 val mapFnName = "deserialize${targetShape.id.name}"
@@ -776,6 +827,62 @@ class RestXmlProtocol : ProtocolGenerator {
             is BlobShape -> {
                 writer.write(
                     "result.\$L = try alloc.dupe(u8, try reader.readElementText());",
+                    fieldName,
+                )
+            }
+            else -> {
+                writer.write("try reader.skipElement();")
+            }
+        }
+    }
+
+    private fun writeFlattenedItemDeserializer(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        fieldName: String,
+        elementShape: Shape,
+    ) {
+        when (elementShape) {
+            is StructureShape -> {
+                writer.write(
+                    "try \${L}_list.append(alloc, try serde.deserialize\$L(&reader, alloc));",
+                    fieldName, elementShape.id.name,
+                )
+            }
+            is EnumShape, is IntEnumShape -> {
+                writer.write(
+                    "try \${L}_list.append(alloc, std.meta.stringToEnum(\$L, try reader.readElementText()) orelse continue);",
+                    fieldName, elementShape.id.name,
+                )
+            }
+            is StringShape -> {
+                if (ctx.isEnumType(elementShape)) {
+                    writer.write(
+                        "try \${L}_list.append(alloc, std.meta.stringToEnum(\$L, try reader.readElementText()) orelse continue);",
+                        fieldName, elementShape.id.name,
+                    )
+                } else {
+                    writer.write(
+                        "try \${L}_list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));",
+                        fieldName,
+                    )
+                }
+            }
+            is BooleanShape -> {
+                writer.write(
+                    "try \${L}_list.append(alloc, std.mem.eql(u8, try reader.readElementText(), \"true\"));",
+                    fieldName,
+                )
+            }
+            is IntegerShape, is ShortShape -> {
+                writer.write(
+                    "try \${L}_list.append(alloc, std.fmt.parseInt(i32, try reader.readElementText(), 10) catch continue);",
+                    fieldName,
+                )
+            }
+            is LongShape -> {
+                writer.write(
+                    "try \${L}_list.append(alloc, std.fmt.parseInt(i64, try reader.readElementText(), 10) catch continue);",
                     fieldName,
                 )
             }

@@ -45,7 +45,7 @@ pub const InstanceProfileExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.getInstanceProfile(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.getInstanceProfile(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntityException")) {
                     return .retry;
@@ -53,6 +53,7 @@ pub const InstanceProfileExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .success;
     }
@@ -95,7 +96,7 @@ pub const PolicyExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.getPolicy(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.getPolicy(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
                     return .retry;
@@ -103,6 +104,7 @@ pub const PolicyExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .success;
     }
@@ -145,7 +147,7 @@ pub const RoleExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.getRole(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.getRole(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
                     return .retry;
@@ -153,6 +155,7 @@ pub const RoleExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .success;
     }
@@ -195,7 +198,7 @@ pub const UserExistsWaiter = struct {
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        _ = self.client.getUser(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        var output_ = self.client.getUser(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
                     return .retry;
@@ -203,6 +206,7 @@ pub const UserExistsWaiter = struct {
             }
             return .retry;
         };
+        defer output_.deinit();
 
         return .success;
     }

@@ -159,11 +159,12 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         }
     }
 
+    var cors_rules_list: std.ArrayList(CORSRule) = .{};
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CORSRule")) {
-                    result.cors_rules = try serde.deserializeCORSRules(&reader, alloc, "member");
+                    try cors_rules_list.append(alloc, try serde.deserializeCORSRule(&reader, alloc));
                 } else {
                     try reader.skipElement();
                 }
@@ -172,6 +173,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
             else => {},
         }
     }
+    result.cors_rules = if (cors_rules_list.items.len > 0) try cors_rules_list.toOwnedSlice(alloc) else null;
     _ = headers;
 
     return result;
