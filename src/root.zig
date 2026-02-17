@@ -19,6 +19,7 @@ pub const waiter = @import("waiter.zig");
 pub const sts_common = @import("sts_common.zig");
 pub const web_identity = @import("web_identity.zig");
 pub const process_creds = @import("process.zig");
+pub const sso = @import("sso.zig");
 
 // Re-exports
 pub const Credentials = credentials.Credentials;
