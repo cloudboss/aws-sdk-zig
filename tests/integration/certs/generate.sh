@@ -40,9 +40,12 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key \
     -CAcreateserial -out server.crt -days 365 \
     -extfile server.ext 2>/dev/null
 
+# Create combined PEM file (cert + key) for LocalStack 4.x
+cat server.crt server.key > server.pem
+
 # Clean up intermediate files
 rm -f server.csr server.ext ca.srl
 
 echo "Certificates generated in ${CERT_DIR}/"
 echo "  CA:     ca.crt, ca.key"
-echo "  Server: server.crt, server.key"
+echo "  Server: server.crt, server.key, server.pem"

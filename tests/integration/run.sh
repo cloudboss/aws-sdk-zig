@@ -73,8 +73,9 @@ start_localstack() {
 
     if [[ "${TLS_MODE}" == "true" ]]; then
         docker_args+=(
-            -v "${CERT_DIR}/server.crt:/etc/localstack/server.crt:ro"
-            -v "${CERT_DIR}/server.key:/etc/localstack/server.key:ro"
+            -v "${CERT_DIR}/server.pem:/etc/localstack/server.pem:ro"
+            -e "CUSTOM_SSL_CERT_PATH=/etc/localstack/server.pem"
+            -e "SKIP_SSL_CERT_DOWNLOAD=1"
         )
     fi
 
@@ -103,12 +104,6 @@ setup_environment() {
     export AWS_DEFAULT_REGION=us-east-1
 
     if [[ "${TLS_MODE}" == "true" ]]; then
-        echo "127.0.0.1 sts.us-east-1.amazonaws.com" >> /etc/hosts
-        echo "127.0.0.1 s3.us-east-1.amazonaws.com" >> /etc/hosts
-        echo "127.0.0.1 dynamodb.us-east-1.amazonaws.com" >> /etc/hosts
-        echo "127.0.0.1 iam.us-east-1.amazonaws.com" >> /etc/hosts
-        echo "127.0.0.1 lambda.us-east-1.amazonaws.com" >> /etc/hosts
-
         export SSL_CERT_FILE="${CERT_DIR}/ca.crt"
         export AWS_ENDPOINT_URL="https://localhost:4566"
     else

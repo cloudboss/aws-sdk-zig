@@ -72,10 +72,20 @@ test-integration: $(HAS_IMAGE_LOCAL)
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh"
 
-test-integration-tls: $(HAS_IMAGE_LOCAL) certs
+test-integration-tls: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
+	@printf '%s\n' \
+		'127.0.0.1 localhost' \
+		'::1 localhost' \
+		'127.0.0.1 sts.us-east-1.amazonaws.com' \
+		'127.0.0.1 s3.us-east-1.amazonaws.com' \
+		'127.0.0.1 dynamodb.us-east-1.amazonaws.com' \
+		'127.0.0.1 iam.us-east-1.amazonaws.com' \
+		'127.0.0.1 lambda.us-east-1.amazonaws.com' \
+		> $(DIR_OUT)/tls-hosts
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v $(DIR_ROOT)/$(DIR_OUT)/tls-hosts:/etc/hosts \
 		--group-add $(DOCKER_GID) \
 		--security-opt label=type:container_runtime_t \
 		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
