@@ -7,7 +7,7 @@ const std = @import("std");
 const Allocator = std.mem.Allocator;
 
 const Credentials = @import("credentials.zig").Credentials;
-const imds = @import("imds.zig");
+const date = @import("date.zig");
 const signing = @import("signing.zig");
 const http = @import("http.zig");
 const url_mod = @import("url.zig");
@@ -145,7 +145,7 @@ pub fn parseStsCredentials(allocator: Allocator, body: []const u8) !Credentials 
                         session_token = try allocator.dupe(u8, text);
                     } else if (std.mem.eql(u8, name, "Expiration")) {
                         const text = try reader.readElementText();
-                        expiration = imds.parseIso8601(text) catch null;
+                        expiration = date.parseIso8601(text) catch null;
                     }
                 }
             },

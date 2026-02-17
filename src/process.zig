@@ -7,7 +7,7 @@ const std = @import("std");
 const Allocator = std.mem.Allocator;
 
 const Credentials = @import("credentials.zig").Credentials;
-const imds = @import("imds.zig");
+const date = @import("date.zig");
 
 pub const ProcessProvider = struct {
     command: []const u8,
@@ -68,7 +68,7 @@ fn parseProcessOutput(allocator: Allocator, output: []const u8) !Credentials {
     errdefer if (session_token) |t| allocator.free(t);
 
     const expiration: ?i64 = if (parseJsonField(output, "Expiration")) |exp_str|
-        imds.parseIso8601(exp_str) catch null
+        date.parseIso8601(exp_str) catch null
     else
         null;
 

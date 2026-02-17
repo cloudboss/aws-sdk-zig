@@ -8,6 +8,8 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
+const date = @import("date.zig");
+
 /// Default ECS metadata endpoint (link-local address)
 pub const default_endpoint = "http://169.254.170.2";
 
@@ -148,7 +150,7 @@ fn parseCredentials(allocator: Allocator, json: []const u8) !Credentials {
     const expiration_str = try parseJsonField(allocator, json, "Expiration");
     defer allocator.free(expiration_str);
 
-    const expiration = parseIso8601(expiration_str) catch 0;
+    const expiration = date.parseIso8601(expiration_str) catch 0;
 
     return Credentials{
         .access_key_id = access_key,
@@ -182,57 +184,6 @@ fn parseJsonField(allocator: Allocator, json: []const u8, field: []const u8) ![]
     return try allocator.dupe(u8, value_start[0..quote_end]);
 }
 
-/// Parse ISO 8601 timestamp to epoch seconds
-fn parseIso8601(timestamp: []const u8) !i64 {
-    if (timestamp.len < 19) return error.InvalidTimestamp;
-
-    const year = std.fmt.parseInt(u16, timestamp[0..4], 10) catch return error.InvalidTimestamp;
-    const month = std.fmt.parseInt(u4, timestamp[5..7], 10) catch return error.InvalidTimestamp;
-    const day = std.fmt.parseInt(u5, timestamp[8..10], 10) catch return error.InvalidTimestamp;
-    const hour = std.fmt.parseInt(u5, timestamp[11..13], 10) catch return error.InvalidTimestamp;
-    const minute = std.fmt.parseInt(u6, timestamp[14..16], 10) catch return error.InvalidTimestamp;
-    const second = std.fmt.parseInt(u6, timestamp[17..19], 10) catch return error.InvalidTimestamp;
-
-    const epoch_day = yearDayToEpochDay(year, dayOfYear(year, month, day));
-    const day_seconds = @as(i64, hour) * 3600 + @as(i64, minute) * 60 + @as(i64, second);
-    return epoch_day * 86400 + day_seconds;
-}
-
-fn yearDayToEpochDay(year: u16, day_of_year: u9) i64 {
-    var days: i64 = day_of_year;
-
-    if (year >= 1970) {
-        var y: u16 = 1970;
-        while (y < year) : (y += 1) {
-            days += if (isLeapYear(y)) 366 else 365;
-        }
-    } else {
-        var y: u16 = year;
-        while (y < 1970) : (y += 1) {
-            days -= if (isLeapYear(y)) 366 else 365;
-        }
-    }
-
-    return days;
-}
-
-fn dayOfYear(year: u16, month: u4, day: u5) u9 {
-    const days_before_month = [_]u16{ 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
-    var result: u16 = days_before_month[month - 1] + day - 1;
-
-    if (month > 2 and isLeapYear(year)) {
-        result += 1;
-    }
-
-    return @intCast(result);
-}
-
-fn isLeapYear(year: u16) bool {
-    if (@mod(year, 4) != 0) return false;
-    if (@mod(year, 100) != 0) return true;
-    return @mod(year, 400) == 0;
-}
-
 // Tests
 
 test "parseJsonField" {
@@ -254,12 +205,6 @@ test "parseJsonField" {
     const token = try parseJsonField(allocator, json, "Token");
     defer allocator.free(token);
     try std.testing.expectEqualStrings("tokenXXX", token);
-}
-
-test "parseIso8601" {
-    const ts = try parseIso8601("2024-01-15T12:00:00Z");
-    try std.testing.expect(ts > 1705300000);
-    try std.testing.expect(ts < 1705400000);
 }
 
 test "resolveCredentialsUri with relative URI" {
