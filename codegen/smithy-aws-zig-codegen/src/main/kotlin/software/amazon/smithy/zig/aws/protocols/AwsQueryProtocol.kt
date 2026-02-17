@@ -619,7 +619,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
             }
             is TimestampShape -> {
                 writer.write(
-                    "result.\$L = aws.imds.parseIso8601(try reader.readElementText()) catch null;",
+                    "result.\$L = aws.date.parseIso8601(try reader.readElementText()) catch null;",
                     fieldName,
                 )
             }

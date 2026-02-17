@@ -608,12 +608,12 @@ class SerdeGenerator(
             is TimestampShape -> {
                 if (memberShape.isRequired) {
                     writer.write(
-                        "result.\$L = try aws.imds.parseIso8601(try reader.readElementText());",
+                        "result.\$L = try aws.date.parseIso8601(try reader.readElementText());",
                         fieldName,
                     )
                 } else {
                     writer.write(
-                        "result.\$L = aws.imds.parseIso8601(try reader.readElementText()) catch null;",
+                        "result.\$L = aws.date.parseIso8601(try reader.readElementText()) catch null;",
                         fieldName,
                     )
                 }
@@ -702,7 +702,7 @@ class SerdeGenerator(
                 writer.write("if (std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null) |v| try list.append(alloc, v);")
             }
             is TimestampShape -> {
-                writer.write("if (aws.imds.parseIso8601(try reader.readElementText()) catch null) |v| try list.append(alloc, v);")
+                writer.write("if (aws.date.parseIso8601(try reader.readElementText()) catch null) |v| try list.append(alloc, v);")
             }
             is FloatShape -> {
                 writer.write("if (std.fmt.parseFloat(f32, try reader.readElementText()) catch null) |v| try list.append(alloc, v);")
