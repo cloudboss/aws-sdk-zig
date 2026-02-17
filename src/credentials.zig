@@ -6,6 +6,10 @@ const std = @import("std");
 const Allocator = std.mem.Allocator;
 const imds = @import("imds.zig");
 const ecs = @import("ecs.zig");
+const web_identity = @import("web_identity.zig");
+const process = @import("process.zig");
+const sso = @import("sso.zig");
+const assume_role = @import("assume_role.zig");
 
 /// AWS credentials for request signing
 pub const Credentials = struct {
@@ -30,21 +34,38 @@ pub const CredentialsProvider = union(enum) {
     environment: void,
     /// Load from shared credentials file (~/.aws/credentials)
     file: FileProvider,
+    /// Load from web identity token file (OIDC)
+    web_identity: web_identity.WebIdentityProvider,
     /// Load from EC2 instance metadata service
     imds: ImdsProvider,
     /// Load from ECS container metadata service
     ecs: EcsProvider,
-    /// Automatic credential chain (environment -> file -> imds -> ecs)
+    /// Load via external process (credential_process)
+    process: process.ProcessProvider,
+    /// Load via STS AssumeRole with source credentials
+    assume_role: assume_role.AssumeRoleProvider,
+    /// Load via SSO (cached access token)
+    sso: sso.SsoProvider,
+    /// Automatic credential chain (environment -> file -> web_identity -> ecs -> imds)
     chain: ChainProvider,
 
+    pub const GetCredentialsError = error{
+        CredentialsNotFound,
+        OutOfMemory,
+    };
+
     /// Retrieve credentials from this provider
-    pub fn getCredentials(self: *CredentialsProvider, allocator: Allocator) !Credentials {
+    pub fn getCredentials(self: *CredentialsProvider, allocator: Allocator) GetCredentialsError!Credentials {
         return switch (self.*) {
             .static => |creds| creds,
             .environment => getFromEnvironment(),
-            .file => |*f| f.load(allocator),
-            .imds => |*i| i.load(allocator),
-            .ecs => |*e| e.load(allocator),
+            .file => |*f| f.load(allocator) catch return error.CredentialsNotFound,
+            .web_identity => |*w| w.getCredentials(allocator) catch return error.CredentialsNotFound,
+            .imds => |*i| i.load(allocator) catch return error.CredentialsNotFound,
+            .ecs => |*e| e.load(allocator) catch return error.CredentialsNotFound,
+            .process => |*p| p.getCredentials(allocator) catch return error.CredentialsNotFound,
+            .assume_role => |*a| a.getCredentials(allocator) catch return error.CredentialsNotFound,
+            .sso => |*s| s.getCredentials(allocator) catch return error.CredentialsNotFound,
             .chain => |*c| c.getCredentials(allocator),
         };
     }
@@ -203,7 +224,7 @@ pub const FileProvider = struct {
 };
 
 /// Automatic credential chain provider
-/// Tries providers in order: environment -> file -> imds -> ecs
+/// Tries providers in order: environment -> file -> web_identity -> ecs -> imds
 pub const ChainProvider = struct {
     /// Cached credentials from last successful retrieval
     cached: ?Credentials = null,
@@ -211,16 +232,23 @@ pub const ChainProvider = struct {
     successful_provider: ?ProviderType = null,
     /// Profile for file provider
     profile: ?[]const u8 = null,
+    /// Region for web identity provider in chain
+    region: ?[]const u8 = null,
+    /// Endpoint URL override (for LocalStack, etc.)
+    endpoint_url: ?[]const u8 = null,
     /// IMDS provider (reused across calls)
     imds_provider: ?ImdsProvider = null,
     /// ECS provider (reused across calls)
     ecs_provider: ?EcsProvider = null,
+    /// Web identity provider (reused across calls)
+    web_identity_provider: ?web_identity.WebIdentityProvider = null,
 
     const Self = @This();
 
     const ProviderType = enum {
         environment,
         file,
+        web_identity,
         ecs,
         imds,
     };
@@ -246,7 +274,7 @@ pub const ChainProvider = struct {
         }
 
         // Try each provider in order
-        const providers = [_]ProviderType{ .environment, .file, .ecs, .imds };
+        const providers = [_]ProviderType{ .environment, .file, .web_identity, .ecs, .imds };
         for (providers) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
                 self.cached = creds;
@@ -267,6 +295,26 @@ pub const ChainProvider = struct {
             .file => blk: {
                 var fp = FileProvider{ .profile = self.profile };
                 break :blk fp.load(allocator);
+            },
+            .web_identity => blk: {
+                // Only attempt if env vars are set
+                const token_file = std.posix.getenv("AWS_WEB_IDENTITY_TOKEN_FILE") orelse
+                    break :blk error.CredentialsNotFound;
+                const role_arn = std.posix.getenv("AWS_ROLE_ARN") orelse
+                    break :blk error.CredentialsNotFound;
+                const region = self.region orelse
+                    break :blk error.CredentialsNotFound;
+
+                if (self.web_identity_provider == null) {
+                    self.web_identity_provider = web_identity.WebIdentityProvider{
+                        .role_arn = role_arn,
+                        .token_file = token_file,
+                        .session_name = std.posix.getenv("AWS_ROLE_SESSION_NAME") orelse "aws-sdk-zig",
+                        .region = region,
+                        .endpoint_url = self.endpoint_url,
+                    };
+                }
+                break :blk self.web_identity_provider.?.getCredentials(allocator);
             },
             .ecs => blk: {
                 if (self.ecs_provider == null) {
