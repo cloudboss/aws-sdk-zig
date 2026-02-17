@@ -7,6 +7,7 @@ CERT_DIR="${SCRIPT_DIR}/certs"
 LOCALSTACK_CONTAINER=""
 LOCALSTACK_IMG="${LOCALSTACK_IMG:-localstack/localstack:4.3.0}"
 ZIG_BUILD_FLAGS="${ZIG_BUILD_FLAGS:-}"
+TLS_CERT_HOST_PATH="${TLS_CERT_HOST_PATH:-}"
 # Filter to single scenario if SCENARIO is set
 if [[ -n "${SCENARIO:-}" ]]; then
     SCENARIO_DIRS=("${SCENARIOS_DIR}/${SCENARIO}/")
@@ -73,7 +74,7 @@ start_localstack() {
 
     if [[ "${TLS_MODE}" == "true" ]]; then
         docker_args+=(
-            -v "${CERT_DIR}/server.pem:/etc/localstack/server.pem:ro"
+            -v "${TLS_CERT_HOST_PATH}:/etc/localstack/server.pem:ro"
             -e "CUSTOM_SSL_CERT_PATH=/etc/localstack/server.pem"
             -e "SKIP_SSL_CERT_DOWNLOAD=1"
         )
@@ -104,7 +105,6 @@ setup_environment() {
     export AWS_DEFAULT_REGION=us-east-1
 
     if [[ "${TLS_MODE}" == "true" ]]; then
-        export SSL_CERT_FILE="${CERT_DIR}/ca.crt"
         export AWS_ENDPOINT_URL="https://localhost:4566"
     else
         export AWS_ENDPOINT_URL="http://localhost:4566"
