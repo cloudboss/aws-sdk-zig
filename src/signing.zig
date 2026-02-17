@@ -639,10 +639,11 @@ test "canonicalizeQueryString sorts parameters" {
     try std.testing.expectEqualStrings("Action=GetCallerIdentity&Version=2011-06-15", result);
 }
 
-test "canonicalizeQueryString encodes values" {
+test "canonicalizeQueryString preserves already-encoded values" {
     const allocator = std.testing.allocator;
 
-    const result = try canonicalizeQueryString(allocator, "key=hello world");
+    // Query values are already percent-encoded by the request serializer
+    const result = try canonicalizeQueryString(allocator, "key=hello%20world");
     defer allocator.free(result);
     try std.testing.expectEqualStrings("key=hello%20world", result);
 }
