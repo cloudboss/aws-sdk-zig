@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Returns information about the specified OpenID Connect (OIDC) provider
-/// resource object
-/// in IAM.
 pub const GetOpenIDConnectProviderInput = struct {
     /// The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM
     /// to get
@@ -139,7 +136,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "ClientIDList")) {
                     result.client_id_list = try serde.deserializeclientIDListType(&reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try serde.deserializetagListType(&reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "ThumbprintList")) {

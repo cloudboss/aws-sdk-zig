@@ -8,7 +8,6 @@ const AutoScalingSettingsUpdate = @import("auto_scaling_settings_update.zig").Au
 const ReplicaAutoScalingUpdate = @import("replica_auto_scaling_update.zig").ReplicaAutoScalingUpdate;
 const TableAutoScalingDescription = @import("table_auto_scaling_description.zig").TableAutoScalingDescription;
 
-/// Updates auto scaling settings on your global tables at once.
 pub const UpdateTableReplicaAutoScalingInput = struct {
     /// Represents the auto scaling settings of the global secondary indexes of the
     /// replica to

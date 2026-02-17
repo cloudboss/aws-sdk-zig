@@ -9,10 +9,6 @@ const Metric = @import("metric.zig").Metric;
 const MetricDataResult = @import("metric_data_result.zig").MetricDataResult;
 const serde = @import("serde.zig");
 
-/// Retrieves capacity usage metrics for your EC2 resources. Returns time-series
-/// data for metrics like unused capacity, utilization rates, and costs
-/// across On-Demand, Spot, and Capacity Reservations. Data can be grouped and
-/// filtered by various dimensions such as region, account, and instance family.
 pub const GetCapacityManagerMetricDataInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request, and provides an error response. If you have

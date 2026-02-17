@@ -4,26 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Disassociates the specified Amazon Web Services Systems Manager document
-/// (SSM document) from the specified managed
-/// node. If you created the association by using the `Targets` parameter, then
-/// you must
-/// delete the association by using the association ID.
-///
-/// When you disassociate a document from a managed node, it doesn't change the
-/// configuration of
-/// the node. To change the configuration state of a managed node after you
-/// disassociate a document,
-/// you must create a new document with the desired configuration and associate
-/// it with the
-/// node.
 pub const DeleteAssociationInput = struct {
     /// The association ID that you want to delete.
     association_id: ?[]const u8 = null,
 
     /// The managed node ID.
-    ///
-    /// **Note:**
     ///
     /// `InstanceId` has been deprecated. To specify a managed node ID for an
     /// association, use the `Targets` parameter. Requests that include the

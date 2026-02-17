@@ -4,25 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Generates a random password. We recommend that you specify the maximum
-/// length and
-/// include every character type that the system you are generating a password
-/// for can
-/// support. By default, Secrets Manager uses uppercase and lowercase letters,
-/// numbers, and the
-/// following characters in passwords:
-/// `!\"#$%&'()*+,-./:;?@[\\]^_`{|}~`
-///
-/// Secrets Manager generates a CloudTrail log entry when you call this
-/// action.
-///
-/// **Required permissions:
-/// **
-/// `secretsmanager:GetRandomPassword`. For more information, see [
-/// IAM policy actions for Secrets
-/// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
-/// and access control in Secrets
-/// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 pub const GetRandomPasswordInput = struct {
     /// A string of the characters that you don't want in the password.
     exclude_characters: ?[]const u8 = null,

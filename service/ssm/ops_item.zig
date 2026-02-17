@@ -75,8 +75,6 @@ pub const OpsItem = struct {
     /// has a maximum length
     /// of 128 characters. The value has a maximum size of 20 KB.
     ///
-    /// **Important:**
-    ///
     /// Operational data keys *can't* begin with the following:
     /// `amazon`, `aws`, `amzn`, `ssm`,
     /// `/amazon`, `/aws`, `/amzn`, `/ssm`.

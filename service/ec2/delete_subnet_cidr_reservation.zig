@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SubnetCidrReservation = @import("subnet_cidr_reservation.zig").SubnetCidrReservation;
 const serde = @import("serde.zig");
 
-/// Deletes a subnet CIDR reservation.
 pub const DeleteSubnetCidrReservationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

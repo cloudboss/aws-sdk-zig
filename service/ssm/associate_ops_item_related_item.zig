@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Associates a related item to a Systems Manager OpsCenter OpsItem. For
-/// example, you can associate an
-/// Incident Manager incident or analysis with an OpsItem. Incident Manager and
-/// OpsCenter are tools in
-/// Amazon Web Services Systems Manager.
 pub const AssociateOpsItemRelatedItemInput = struct {
     /// The type of association that you want to create between an OpsItem and a
     /// resource. OpsCenter

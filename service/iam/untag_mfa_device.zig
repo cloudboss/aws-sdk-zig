@@ -5,12 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Removes the specified tags from the IAM virtual multi-factor authentication
-/// (MFA)
-/// device. For more information about tagging, see [Tagging IAM
-/// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
-/// the
-/// *IAM User Guide*.
 pub const UntagMFADeviceInput = struct {
     /// The unique identifier for the IAM virtual MFA device from which you want to
     /// remove

@@ -21,8 +21,6 @@ pub const PatchRule = struct {
     ///
     /// Not supported for Debian Server or Ubuntu Server.
     ///
-    /// **Important:**
-    ///
     /// Use caution when setting this value for Windows Server patch baselines.
     /// Because patch
     /// updates that are replaced by later updates are removed, setting too broad a
@@ -52,8 +50,6 @@ pub const PatchRule = struct {
     /// for either `ApproveUntilDate` or `ApproveAfterDays`.
     ///
     /// Not supported for Debian Server or Ubuntu Server.
-    ///
-    /// **Important:**
     ///
     /// Use caution when setting this value for Windows Server patch baselines.
     /// Because patch

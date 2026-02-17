@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const NodeFilter = @import("node_filter.zig").NodeFilter;
 const Node = @import("node.zig").Node;
 
-/// Takes in filters and returns a list of managed nodes matching the filter
-/// criteria.
 pub const ListNodesInput = struct {
     /// One or more filters. Use a filter to return a more specific list of managed
     /// nodes.

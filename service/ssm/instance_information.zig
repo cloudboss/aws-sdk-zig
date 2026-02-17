@@ -85,8 +85,6 @@ pub const InstanceInformation = struct {
 
     /// Connection status of SSM Agent.
     ///
-    /// **Note:**
-    ///
     /// The status `Inactive` has been deprecated and is no longer in use.
     ping_status: ?PingStatus,
 

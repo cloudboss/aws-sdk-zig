@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CapacityReservationFleet = @import("capacity_reservation_fleet.zig").CapacityReservationFleet;
 const serde = @import("serde.zig");
 
-/// Describes one or more Capacity Reservation Fleets.
 pub const DescribeCapacityReservationFleetsInput = struct {
     /// The IDs of the Capacity Reservation Fleets to describe.
     capacity_reservation_fleet_ids: ?[]const []const u8 = null,

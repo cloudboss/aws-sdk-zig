@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceStatusEvent = @import("instance_status_event.zig").InstanceStatusEvent;
 const serde = @import("serde.zig");
 
-/// Modifies the start time for a scheduled Amazon EC2 instance event.
 pub const ModifyInstanceEventStartTimeInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

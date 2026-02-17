@@ -7,8 +7,6 @@ const ErrorObject = @import("error_object.zig").ErrorObject;
 const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
 const TraceHeader = @import("trace_header.zig").TraceHeader;
 
-/// Retrieves detailed information about a specific [durable
-/// execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), including its current status, input payload, result or error information, and execution metadata such as start time and usage statistics.
 pub const GetDurableExecutionInput = struct {
     /// The Amazon Resource Name (ARN) of the durable execution.
     durable_execution_arn: []const u8,

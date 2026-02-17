@@ -17,8 +17,8 @@ pub const ExportToS3Task = struct {
     /// canonical account ID for
     /// the `Grantee`. For more information about the ACL to your S3 bucket, see
     /// [Prerequisites](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites) in the VM Import/Export User Guide.
-    s_3_bucket: ?[]const u8,
+    s3_bucket: ?[]const u8,
 
     /// The encryption key for your S3 bucket.
-    s_3_key: ?[]const u8,
+    s3_key: ?[]const u8,
 };

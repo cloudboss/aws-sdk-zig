@@ -7,13 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
 const serde = @import("serde.zig");
 
-/// Create a new Capacity Reservation by splitting the capacity of the source
-/// Capacity
-/// Reservation. The new Capacity Reservation will have the same attributes as
-/// the source
-/// Capacity Reservation except for tags. The source Capacity Reservation must
-/// be
-/// `active` and owned by your Amazon Web Services account.
 pub const CreateCapacityReservationBySplittingInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see [Ensure

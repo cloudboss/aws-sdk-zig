@@ -17,8 +17,6 @@ pub const ReplicationRule = struct {
 
     /// Optional configuration to replicate existing source bucket objects.
     ///
-    /// **Note:**
-    ///
     /// This parameter is no longer supported. To replicate existing objects, see
     /// [Replicating
     /// existing objects with S3 Batch
@@ -35,8 +33,6 @@ pub const ReplicationRule = struct {
     /// rule applies. The
     /// maximum prefix length is 1,024 characters. To include all objects in a
     /// bucket, specify an empty string.
-    ///
-    /// **Important:**
     ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using

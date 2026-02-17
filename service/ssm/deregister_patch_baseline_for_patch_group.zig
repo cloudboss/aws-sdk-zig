@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes a patch group from a patch baseline.
 pub const DeregisterPatchBaselineForPatchGroupInput = struct {
     /// The ID of the patch baseline to deregister the patch group from.
     baseline_id: []const u8,

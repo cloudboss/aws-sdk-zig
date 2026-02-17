@@ -5,32 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VolumeAttachmentState = @import("volume_attachment_state.zig").VolumeAttachmentState;
 
-/// Detaches an EBS volume from an instance. Make sure to unmount any file
-/// systems on the
-/// device within your operating system before detaching the volume. Failure to
-/// do so can result
-/// in the volume becoming stuck in the `busy` state while detaching. If this
-/// happens,
-/// detachment can be delayed indefinitely until you unmount the volume, force
-/// detachment, reboot
-/// the instance, or all three. If an EBS volume is the root device of an
-/// instance, it can't be
-/// detached while the instance is running. To detach the root volume, stop the
-/// instance
-/// first.
-///
-/// When a volume with an Amazon Web Services Marketplace product code is
-/// detached from an instance, the
-/// product code is no longer associated with the instance.
-///
-/// You can't detach or force detach volumes that are attached to Amazon Web
-/// Services-managed resources.
-/// Attempting to do this results in the `UnsupportedOperationException`
-/// exception.
-///
-/// For more information, see [Detach an Amazon EBS
-/// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-detaching-volume.html) in the
-/// *Amazon EBS User Guide*.
 pub const DetachVolumeInput = struct {
     /// The device name.
     device: ?[]const u8 = null,
@@ -206,7 +180,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "associatedResource")) {
                     result.associated_resource = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachTime")) {
-                    result.attach_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.attach_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
                     result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "device")) {

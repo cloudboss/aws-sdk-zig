@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowFilter = @import("maintenance_window_filter.zig").MaintenanceWindowFilter;
 const MaintenanceWindowExecution = @import("maintenance_window_execution.zig").MaintenanceWindowExecution;
 
-/// Lists the executions of a maintenance window. This includes information
-/// about when the
-/// maintenance window was scheduled to be active, and information about tasks
-/// registered and run
-/// with the maintenance window.
 pub const DescribeMaintenanceWindowExecutionsInput = struct {
     /// Each entry in the array is a structure containing:
     ///

@@ -6,25 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
 const serde = @import("serde.zig");
 
-/// Move available capacity from a source Capacity Reservation to a destination
-/// Capacity
-/// Reservation. The source Capacity Reservation and the destination Capacity
-/// Reservation
-/// must be `active`, owned by your Amazon Web Services account, and share the
-/// following:
-///
-/// * Instance type
-///
-/// * Platform
-///
-/// * Availability Zone
-///
-/// * Tenancy
-///
-/// * Placement group
-///
-/// * Capacity Reservation end time - `At specific time` or
-/// `Manually`.
 pub const MoveCapacityReservationInstancesInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see [Ensure

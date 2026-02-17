@@ -4,14 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes the specified client ID (also known as audience) from the list of
-/// client IDs
-/// registered for the specified IAM OpenID Connect (OIDC) provider resource
-/// object.
-///
-/// This operation is idempotent; it does not fail or return an error if you try
-/// to remove
-/// a client ID that does not exist.
 pub const RemoveClientIDFromOpenIDConnectProviderInput = struct {
     /// The client ID (also known as audience) to remove from the IAM OIDC provider
     /// resource. For more information about client IDs, see

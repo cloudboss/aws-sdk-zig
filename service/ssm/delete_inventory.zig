@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InventorySchemaDeleteOption = @import("inventory_schema_delete_option.zig").InventorySchemaDeleteOption;
 const InventoryDeletionSummary = @import("inventory_deletion_summary.zig").InventoryDeletionSummary;
 
-/// Delete a custom inventory type or the data associated with a custom
-/// Inventory type. Deleting
-/// a custom inventory type is also referred to as deleting a custom inventory
-/// schema.
 pub const DeleteInventoryInput = struct {
     /// User-provided idempotency token.
     client_token: ?[]const u8 = null,

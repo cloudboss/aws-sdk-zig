@@ -126,8 +126,6 @@ pub const ExpectedAttributeValue = struct {
     /// * `NOT_NULL` : The attribute exists. `NOT_NULL` is supported
     /// for all data types, including lists and maps.
     ///
-    /// **Note:**
-    ///
     /// This operator tests for the existence of an attribute, not its data type.
     /// If the data type of attribute "`a`" is null, and you evaluate it
     /// using `NOT_NULL`, the result is a Boolean `true`. This
@@ -136,8 +134,6 @@ pub const ExpectedAttributeValue = struct {
     ///
     /// * `NULL` : The attribute does not exist. `NULL` is supported
     /// for all data types, including lists and maps.
-    ///
-    /// **Note:**
     ///
     /// This operator tests for the nonexistence of an attribute, not its data
     /// type. If the data type of attribute "`a`" is null, and you

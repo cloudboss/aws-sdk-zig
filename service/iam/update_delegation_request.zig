@@ -4,16 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Updates an existing delegation request with additional information. When the
-/// delegation
-/// request is updated, it reaches the `PENDING_APPROVAL` state.
-///
-/// Once a delegation request has an owner, that owner gets a default permission
-/// to update the
-/// delegation request. For more details, see
-/// [
-/// Managing Permissions for Delegation
-/// Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
 pub const UpdateDelegationRequestInput = struct {
     /// The unique identifier of the delegation request to update.
     delegation_request_id: []const u8,

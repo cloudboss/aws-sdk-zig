@@ -6,23 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DeclarativePoliciesReport = @import("declarative_policies_report.zig").DeclarativePoliciesReport;
 const serde = @import("serde.zig");
 
-/// Describes the metadata of an account status report, including the status of
-/// the
-/// report.
-///
-/// To view the full report, download it from the Amazon S3 bucket where it was
-/// saved.
-/// Reports are accessible only when they have the `complete` status. Reports
-/// with other statuses (`running`, `cancelled`, or
-/// `error`) are not available in the S3 bucket. For more information about
-/// downloading objects from an S3 bucket, see [Downloading
-/// objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/download-objects.html) in
-/// the *Amazon Simple Storage Service User Guide*.
-///
-/// For more information, see [Generating the account status report for
-/// declarative
-/// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html) in the
-/// *Amazon Web Services Organizations User Guide*.
 pub const DescribeDeclarativePoliciesReportsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

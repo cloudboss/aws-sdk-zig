@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VpnConnection = @import("vpn_connection.zig").VpnConnection;
 const serde = @import("serde.zig");
 
-/// Modifies the VPN tunnel endpoint certificate.
 pub const ModifyVpnTunnelCertificateInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

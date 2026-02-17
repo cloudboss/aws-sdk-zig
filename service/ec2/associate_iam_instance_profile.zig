@@ -7,9 +7,6 @@ const IamInstanceProfileSpecification = @import("iam_instance_profile_specificat
 const IamInstanceProfileAssociation = @import("iam_instance_profile_association.zig").IamInstanceProfileAssociation;
 const serde = @import("serde.zig");
 
-/// Associates an IAM instance profile with a running or stopped instance. You
-/// cannot
-/// associate more than one IAM instance profile with an instance.
 pub const AssociateIamInstanceProfileInput = struct {
     /// The IAM instance profile.
     iam_instance_profile: IamInstanceProfileSpecification,

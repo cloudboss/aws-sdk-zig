@@ -7,17 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TrafficMirrorFilter = @import("traffic_mirror_filter.zig").TrafficMirrorFilter;
 const serde = @import("serde.zig");
 
-/// Creates a Traffic Mirror filter.
-///
-/// A Traffic Mirror filter is a set of rules that defines the traffic to
-/// mirror.
-///
-/// By default, no traffic is mirrored. To mirror traffic, use
-/// [CreateTrafficMirrorFilterRule](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilterRule.htm)
-/// to add Traffic Mirror rules to the filter. The rules you add define what
-/// traffic gets mirrored.
-/// You can also use
-/// [ModifyTrafficMirrorFilterNetworkServices](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyTrafficMirrorFilterNetworkServices.html) to mirror supported network services.
 pub const CreateTrafficMirrorFilterInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see [How to ensure

@@ -3,8 +3,6 @@ const MetadataTableConfigurationResult = @import("metadata_table_configuration_r
 
 /// The V1 S3 Metadata configuration for a general purpose bucket.
 ///
-/// **Note:**
-///
 /// If you created your S3 Metadata configuration before July 15, 2025, we
 /// recommend that you delete
 /// and re-create your configuration by using

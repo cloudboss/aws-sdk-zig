@@ -12,15 +12,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const IpamPool = @import("ipam_pool.zig").IpamPool;
 const serde = @import("serde.zig");
 
-/// Create an IP address pool for Amazon VPC IP Address Manager (IPAM). In IPAM,
-/// a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to
-/// organize your IP addresses according to your routing and security needs. For
-/// example, if you have separate routing and security needs for development and
-/// production applications, you can create a pool for each.
-///
-/// For more information, see [Create a top-level
-/// pool](https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html) in
-/// the *Amazon VPC IPAM User Guide*.
 pub const CreateIpamPoolInput = struct {
     /// The IP protocol assigned to this IPAM pool. You must choose either IPv4 or
     /// IPv6 protocol for a pool.

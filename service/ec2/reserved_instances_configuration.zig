@@ -11,8 +11,6 @@ pub const ReservedInstancesConfiguration = struct {
 
     /// The number of modified Reserved Instances.
     ///
-    /// **Note:**
-    ///
     /// This is a required field for a request.
     instance_count: ?i32,
 

@@ -6,46 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ResourceTypeForTagging = @import("resource_type_for_tagging.zig").ResourceTypeForTagging;
 const Tag = @import("tag.zig").Tag;
 
-/// Adds or overwrites one or more tags for the specified resource. *Tags*
-/// are metadata that you can assign to your automations, documents, managed
-/// nodes, maintenance
-/// windows, Parameter Store parameters, and patch baselines. Tags enable you to
-/// categorize your
-/// resources in different ways, for example, by purpose, owner, or environment.
-/// Each tag consists of
-/// a key and an optional value, both of which you define. For example, you
-/// could define a set of
-/// tags for your account's managed nodes that helps you track each node's owner
-/// and stack level. For
-/// example:
-///
-/// * `Key=Owner,Value=DbAdmin`
-///
-/// * `Key=Owner,Value=SysAdmin`
-///
-/// * `Key=Owner,Value=Dev`
-///
-/// * `Key=Stack,Value=Production`
-///
-/// * `Key=Stack,Value=Pre-Production`
-///
-/// * `Key=Stack,Value=Test`
-///
-/// Most resources can have a maximum of 50 tags. Automations can have a maximum
-/// of 5
-/// tags.
-///
-/// We recommend that you devise a set of tag keys that meets your needs for
-/// each resource type.
-/// Using a consistent set of tag keys makes it easier for you to manage your
-/// resources. You can
-/// search and filter the resources based on the tags you add. Tags don't have
-/// any semantic meaning
-/// to and are interpreted strictly as a string of characters.
-///
-/// For more information about using tags with Amazon Elastic Compute Cloud
-/// (Amazon EC2) instances, see [Tag your Amazon EC2
-/// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the *Amazon EC2 User Guide*.
 pub const AddTagsToResourceInput = struct {
     /// The resource ID you want to tag.
     ///
@@ -74,8 +34,6 @@ pub const AddTagsToResourceInput = struct {
     ///
     /// `ManagedInstance`: `mi-012345abcde`
     ///
-    /// **Note:**
-    ///
     /// The `ManagedInstance` type for this API operation is only for on-premises
     /// managed nodes. You must specify the name of the managed node in the
     /// following format:
@@ -86,8 +44,6 @@ pub const AddTagsToResourceInput = struct {
 
     /// Specifies the type of resource you are tagging.
     ///
-    /// **Note:**
-    ///
     /// The `ManagedInstance` type for this API operation is for on-premises managed
     /// nodes. You must specify the name of the managed node in the following
     /// format:
@@ -97,8 +53,6 @@ pub const AddTagsToResourceInput = struct {
     resource_type: ResourceTypeForTagging,
 
     /// One or more tags. The value parameter is required.
-    ///
-    /// **Important:**
     ///
     /// Don't enter personally identifiable information in this field.
     tags: []const Tag,

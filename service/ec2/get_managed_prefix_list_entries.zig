@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PrefixListEntry = @import("prefix_list_entry.zig").PrefixListEntry;
 const serde = @import("serde.zig");
 
-/// Gets information about the entries for a specified managed prefix list.
 pub const GetManagedPrefixListEntriesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

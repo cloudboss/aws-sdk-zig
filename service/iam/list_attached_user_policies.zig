@@ -6,22 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AttachedPolicy = @import("attached_policy.zig").AttachedPolicy;
 const serde = @import("serde.zig");
 
-/// Lists all managed policies that are attached to the specified IAM user.
-///
-/// An IAM user can also have inline policies embedded with it. To list the
-/// inline
-/// policies for a user, use
-/// [ListUserPolicies](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUserPolicies.html).
-/// For information about policies, see [Managed policies and inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters. You can use the `PathPrefix` parameter to limit the list of
-/// policies to only those matching the specified path prefix. If there are no
-/// policies
-/// attached to the specified group (or none that match the specified path
-/// prefix), the
-/// operation returns an empty list.
 pub const ListAttachedUserPoliciesInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

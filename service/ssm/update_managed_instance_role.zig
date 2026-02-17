@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Changes the Identity and Access Management (IAM) role that is assigned to
-/// the
-/// on-premises server, edge device, or virtual machines (VM). IAM roles are
-/// first
-/// assigned to these hybrid nodes during the activation process. For more
-/// information, see CreateActivation.
 pub const UpdateManagedInstanceRoleInput = struct {
     /// The name of the Identity and Access Management (IAM) role that you want to
     /// assign to
@@ -18,8 +12,6 @@ pub const UpdateManagedInstanceRoleInput = struct {
     /// For more information, see [Create the IAM service role required for Systems
     /// Manager in hybrid and multicloud
     /// environments](https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-service-role.html) in the *Amazon Web Services Systems Manager User Guide*.
-    ///
-    /// **Note:**
     ///
     /// You can't specify an IAM service-linked role for this parameter. You must
     /// create a unique role.

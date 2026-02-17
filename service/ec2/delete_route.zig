@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified route from the specified route table.
 pub const DeleteRouteInput = struct {
     /// The IPv4 CIDR range for the route. The value you specify must match the CIDR
     /// for the route exactly.

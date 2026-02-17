@@ -8,13 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const VerifiedAccessGroup = @import("verified_access_group.zig").VerifiedAccessGroup;
 const serde = @import("serde.zig");
 
-/// An Amazon Web Services Verified Access group is a collection of Amazon Web
-/// Services Verified Access endpoints who's associated applications have
-/// similar security requirements. Each instance within a Verified Access group
-/// shares an Verified Access policy. For
-/// example, you can group all Verified Access instances associated with "sales"
-/// applications together and
-/// use one common Verified Access policy.
 pub const CreateVerifiedAccessGroupInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

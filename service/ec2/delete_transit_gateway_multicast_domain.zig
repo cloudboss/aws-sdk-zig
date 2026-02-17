@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMulticastDomain = @import("transit_gateway_multicast_domain.zig").TransitGatewayMulticastDomain;
 const serde = @import("serde.zig");
 
-/// Deletes the specified transit gateway multicast domain.
 pub const DeleteTransitGatewayMulticastDomainInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

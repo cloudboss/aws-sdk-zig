@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityBlockExtensionOffering = @import("capacity_block_extension_offering.zig").CapacityBlockExtensionOffering;
 const serde = @import("serde.zig");
 
-/// Describes Capacity Block extension offerings available for purchase in the
-/// Amazon Web Services
-/// Region that you're currently using.
 pub const DescribeCapacityBlockExtensionOfferingsInput = struct {
     /// The duration of the Capacity Block extension offering in hours.
     capacity_block_extension_duration_hours: i32,

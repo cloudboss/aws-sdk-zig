@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayRoute = @import("local_gateway_route.zig").LocalGatewayRoute;
 const serde = @import("serde.zig");
 
-/// Deletes the specified route from the specified local gateway route table.
 pub const DeleteLocalGatewayRouteInput = struct {
     /// The CIDR range for the route. This must match the CIDR for the route
     /// exactly.

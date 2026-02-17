@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessTrustProvider = @import("verified_access_trust_provider.zig").VerifiedAccessTrustProvider;
 const serde = @import("serde.zig");
 
-/// Delete an Amazon Web Services Verified Access trust provider.
 pub const DeleteVerifiedAccessTrustProviderInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

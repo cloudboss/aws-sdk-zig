@@ -6,51 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Adds one or more tags to a Security Assertion Markup Language (SAML)
-/// identity provider.
-/// For more information about these providers, see [About SAML 2.0-based
-/// federation
-/// ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html).
-/// If a tag with the same key name already exists, then that tag is overwritten
-/// with the new
-/// value.
-///
-/// A tag consists of a key name and an associated value. By assigning tags to
-/// your
-/// resources, you can do the following:
-///
-/// * **Administrative grouping and discovery** - Attach
-/// tags to resources to aid in organization and search. For example, you could
-/// search for all
-/// resources with the key name *Project* and the value
-/// *MyImportantProject*. Or search for all resources with the key name
-/// *Cost Center* and the value *41200*.
-///
-/// * **Access control** - Include tags in IAM user-based
-/// and resource-based policies. You can use tags to restrict access to only a
-/// SAML identity
-/// provider that has a specified tag attached. For examples of policies that
-/// show how to use
-/// tags to control access, see [Control access using IAM
-/// tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in
-/// the
-/// *IAM User Guide*.
-///
-/// **Note:**
-///
-/// * If any one of the tags is invalid or if you exceed the allowed maximum
-///   number of tags, then the entire request
-/// fails and the resource is not created. For more information about tagging,
-/// see [Tagging IAM
-/// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
-/// the
-/// *IAM User Guide*.
-///
-/// * Amazon Web Services always interprets the tag `Value` as a single string.
-///   If you
-/// need to store an array, you can store comma-separated values in the string.
-/// However, you
-/// must interpret the value in your code.
 pub const TagSAMLProviderInput = struct {
     /// The ARN of the SAML identity provider in IAM to which you want to add tags.
     ///

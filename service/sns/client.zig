@@ -77,8 +77,6 @@ pub const Client = struct {
     /// specified
     /// Amazon Web Services accounts to the specified actions.
     ///
-    /// **Note:**
-    ///
     /// To remove the ability to change topic permissions, you must deny permissions
     /// to
     /// the `AddPermission`, `RemovePermission`, and
@@ -496,8 +494,6 @@ pub const Client = struct {
     /// Platform-Specific Payloads in Messages to Mobile
     /// Devices](https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html).
     ///
-    /// **Important:**
-    ///
     /// You can publish messages only to topics and endpoints in the same
     /// Amazon Web Services Region.
     pub fn publish(self: *Self, input: publish_.PublishInput, options: publish_.Options) !publish_.PublishOutput {
@@ -529,8 +525,6 @@ pub const Client = struct {
     /// of the individual lengths of all of the batched messages) are both 256 KB
     /// (262,144
     /// bytes).
-    ///
-    /// **Important:**
     ///
     /// The `PublishBatch` API can send up to 10 messages at a time. If you
     /// attempt to send more than 10 messages in one request, you will encounter a
@@ -566,8 +560,6 @@ pub const Client = struct {
     }
 
     /// Removes a statement from a topic's access control policy.
-    ///
-    /// **Note:**
     ///
     /// To remove the ability to change topic permissions, you must deny permissions
     /// to
@@ -612,8 +604,6 @@ pub const Client = struct {
     /// phone](https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
     /// in the *Amazon SNS Developer Guide*.
     ///
-    /// **Note:**
-    ///
     /// To use this operation, you must grant the Amazon SNS service principal
     /// (`sns.amazonaws.com`) permission to perform the
     /// `s3:ListBucket` action.
@@ -628,8 +618,6 @@ pub const Client = struct {
     }
 
     /// Allows a topic owner to set an attribute of the topic to a new value.
-    ///
-    /// **Note:**
     ///
     /// To remove the ability to change topic permissions, you must deny permissions
     /// to

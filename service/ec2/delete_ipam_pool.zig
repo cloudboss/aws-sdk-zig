@@ -6,26 +6,10 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamPool = @import("ipam_pool.zig").IpamPool;
 const serde = @import("serde.zig");
 
-/// Delete an IPAM pool.
-///
-/// **Note:**
-///
-/// You cannot delete an IPAM pool if there are allocations in it or CIDRs
-/// provisioned to it. To release
-/// allocations, see
-/// [ReleaseIpamPoolAllocation](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html). To deprovision pool
-/// CIDRs, see
-/// [DeprovisionIpamPoolCidr](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeprovisionIpamPoolCidr.html).
-///
-/// For more information, see [Delete a
-/// pool](https://docs.aws.amazon.com/vpc/latest/ipam/delete-pool-ipam.html) in
-/// the *Amazon VPC IPAM User Guide*.
 pub const DeleteIpamPoolInput = struct {
     /// Enables you to quickly delete an IPAM pool and all resources within that
     /// pool, including
     /// provisioned CIDRs, allocations, and other pools.
-    ///
-    /// **Important:**
     ///
     /// You can only use this option to delete pools in the private scope or pools
     /// in the public scope with a source resource. A source resource is a resource

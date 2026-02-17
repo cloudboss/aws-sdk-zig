@@ -4,49 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Adds or updates an inline policy document that is embedded in the specified
-/// IAM
-/// role.
-///
-/// When you embed an inline policy in a role, the inline policy is used as part
-/// of the
-/// role's access (permissions) policy. The role's trust policy is created at
-/// the same time
-/// as the role, using [
-/// `CreateRole`
-/// ](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html).
-/// You can update a role's trust policy using [
-/// `UpdateAssumeRolePolicy`
-/// ](https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAssumeRolePolicy.html). For more information about roles,
-/// see [IAM
-/// roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html)
-/// in the *IAM User Guide*.
-///
-/// A role can also have a managed policy attached to it. To attach a managed
-/// policy to a
-/// role, use [
-/// `AttachRolePolicy`
-/// ](https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachRolePolicy.html). To create a new managed policy, use
-/// [
-/// `CreatePolicy`
-/// ](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html). For information about policies, see [Managed
-/// policies and inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
-/// *IAM User Guide*.
-///
-/// For information about the maximum number of inline policies that you can
-/// embed with a
-/// role, see [IAM and STS
-/// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
-///
-/// **Note:**
-///
-/// Because policy documents can be large, you should use POST rather than GET
-/// when
-/// calling `PutRolePolicy`. For general information about using the Query
-/// API with IAM, see [Making query
-/// requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html) in the
-/// *IAM User Guide*.
 pub const PutRolePolicyInput = struct {
     /// The policy document.
     ///

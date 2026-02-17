@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConnectionStatus = @import("connection_status.zig").ConnectionStatus;
 
-/// Retrieves the Session Manager connection status for a managed node to
-/// determine whether it is running
-/// and ready to receive Session Manager connections.
 pub const GetConnectionStatusInput = struct {
     /// The managed node ID.
     target: []const u8,

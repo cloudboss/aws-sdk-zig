@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
 const Execution = @import("execution.zig").Execution;
 
-/// Returns a list of [durable
-/// executions](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) for a specified Lambda function. You can filter the results by execution name, status, and start time range. This API supports pagination for large result sets.
 pub const ListDurableExecutionsByFunctionInput = struct {
     /// Filter executions by name. Only executions with names that contain this
     /// string are returned.

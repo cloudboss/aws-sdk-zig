@@ -251,12 +251,8 @@ pub const Client = struct {
     /// instance
     /// profile](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html), or you can stop your instance and then restart it.
     ///
-    /// **Note:**
-    ///
     /// The caller of this operation must be granted the `PassRole` permission
     /// on the IAM role by a permissions policy.
-    ///
-    /// **Important:**
     ///
     /// When using the
     /// [iam:AssociatedResourceArn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#available-keys-for-iam) condition in a policy to restrict the [PassRole](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) IAM action, special considerations apply if the policy is
@@ -339,8 +335,6 @@ pub const Client = struct {
     /// permission
     /// (access) policy.
     ///
-    /// **Note:**
-    ///
     /// You cannot use a managed policy as the role's trust policy. The role's trust
     /// policy is created at the same time as the role, using [
     /// `CreateRole`
@@ -419,8 +413,6 @@ pub const Client = struct {
     /// For information about quotas on the number of keys you can create, see [IAM
     /// and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
-    ///
-    /// **Important:**
     ///
     /// To ensure the security of your Amazon Web Services account, the secret
     /// access key is accessible
@@ -529,8 +521,6 @@ pub const Client = struct {
     /// You get all of this information from the OIDC IdP you want to use to access
     /// Amazon Web Services.
     ///
-    /// **Note:**
-    ///
     /// Amazon Web Services secures communication with OIDC identity providers
     /// (IdPs) using our library of
     /// trusted root certificate authorities (CAs) to verify the JSON Web Key Set
@@ -540,8 +530,6 @@ pub const Client = struct {
     /// by one of these trusted CAs, only then we secure communication using the
     /// thumbprints set
     /// in the IdP's configuration.
-    ///
-    /// **Note:**
     ///
     /// The trust for the OIDC provider is derived from the IAM provider that this
     /// operation creates. Therefore, it is best to limit access to the
@@ -630,8 +618,6 @@ pub const Client = struct {
     /// management
     /// software that is used as your organization's IdP.
     ///
-    /// **Note:**
-    ///
     /// This operation requires [Signature Version
     /// 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
     ///
@@ -709,8 +695,6 @@ pub const Client = struct {
     /// For information about the maximum number of MFA devices you can create, see
     /// [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
-    ///
-    /// **Important:**
     ///
     /// The seed information contained in the QR code and the Base32 string should
     /// be
@@ -792,8 +776,6 @@ pub const Client = struct {
     /// an
     /// associated role.
     ///
-    /// **Important:**
-    ///
     /// Make sure that you do not have any Amazon EC2 instances running with the
     /// instance
     /// profile you are about to delete. Deleting a role or instance profile that is
@@ -819,8 +801,6 @@ pub const Client = struct {
     /// [ChangePassword](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html) to update, but not delete, your own password in the
     /// **My Security Credentials** page in the
     /// Amazon Web Services Management Console.
-    ///
-    /// **Important:**
     ///
     /// Deleting a user's password does not prevent a user from accessing Amazon Web
     /// Services through
@@ -920,8 +900,6 @@ pub const Client = struct {
     /// resource clean up
     /// ([DeleteInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteInstanceProfile.html))
     ///
-    /// **Important:**
-    ///
     /// Make sure that you do not have any Amazon EC2 instances running with the
     /// role you are
     /// about to delete. Deleting a role or instance profile that is associated with
@@ -934,8 +912,6 @@ pub const Client = struct {
     /// Deletes the permissions boundary for the specified IAM role.
     ///
     /// You cannot set the boundary for a service-linked role.
-    ///
-    /// **Important:**
     ///
     /// Deleting the permissions boundary for a role might increase its permissions.
     /// For
@@ -967,8 +943,6 @@ pub const Client = struct {
     /// attempt to
     /// assume a role that references a non-existent provider resource ARN fails.
     ///
-    /// **Note:**
-    ///
     /// This operation requires [Signature Version
     /// 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
     pub fn deleteSamlProvider(self: *Self, input: delete_saml_provider.DeleteSAMLProviderInput, options: delete_saml_provider.Options) !delete_saml_provider.DeleteSAMLProviderOutput {
@@ -983,8 +957,6 @@ pub const Client = struct {
     /// topic also includes a list of Amazon Web Services services that can use the
     /// server certificates that
     /// you manage with IAM.
-    ///
-    /// **Important:**
     ///
     /// If you are using a server certificate with Elastic Load Balancing, deleting
     /// the
@@ -1109,8 +1081,6 @@ pub const Client = struct {
 
     /// Deletes the permissions boundary for the specified IAM user.
     ///
-    /// **Important:**
-    ///
     /// Deleting the permissions boundary for a user might increase its permissions
     /// by
     /// allowing the user to perform all the actions granted in its permissions
@@ -1133,8 +1103,6 @@ pub const Client = struct {
     }
 
     /// Deletes a virtual MFA device.
-    ///
-    /// **Note:**
     ///
     /// You must deactivate a user's virtual MFA device before you can delete it.
     /// For
@@ -1330,8 +1298,6 @@ pub const Client = struct {
     /// data](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html) in the
     /// *IAM User Guide*.
     ///
-    /// **Important:**
-    ///
     /// The data includes all attempts to access Amazon Web Services, not just the
     /// successful ones. This
     /// includes all attempts that were made using the Amazon Web Services
@@ -1446,8 +1412,6 @@ pub const Client = struct {
     /// the SCP is not attached to the account, the report will return a list of
     /// services with no data.
     ///
-    /// **Note:**
-    ///
     /// Service last accessed data does not use other policy types when determining
     /// whether a principal could access a service. These other policy types include
     /// identity-based policies, resource-based policies, access control lists, IAM
@@ -1478,8 +1442,6 @@ pub const Client = struct {
     /// actions for which action last accessed information is displayed, see [IAM
     /// action last accessed information services and
     /// actions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-action-last-accessed.html).
-    ///
-    /// **Important:**
     ///
     /// The service last accessed data includes all attempts to access an Amazon Web
     /// Services API, not
@@ -1531,8 +1493,6 @@ pub const Client = struct {
     /// (user, group, or role) to access specific services, use the
     /// [ListPoliciesGrantingServiceAccess](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPoliciesGrantingServiceAccess.html) operation.
     ///
-    /// **Note:**
-    ///
     /// Service last accessed data does not use other policy types when determining
     /// whether a resource could access a service. These other policy types include
     /// resource-based policies, access control lists, Organizations policies, IAM
@@ -1565,8 +1525,6 @@ pub const Client = struct {
     /// snapshot of the configuration of IAM permissions (users, groups, roles, and
     /// policies)
     /// in your account.
-    ///
-    /// **Note:**
     ///
     /// Policies returned by this operation are URL-encoded compliant
     /// with [RFC 3986](https://tools.ietf.org/html/rfc3986). You can use a URL
@@ -1697,8 +1655,6 @@ pub const Client = struct {
     /// Retrieves the specified inline policy document that is embedded in the
     /// specified IAM
     /// group.
-    ///
-    /// **Note:**
     ///
     /// Policies returned by this operation are URL-encoded compliant
     /// with [RFC 3986](https://tools.ietf.org/html/rfc3986). You can use a URL
@@ -1870,8 +1826,6 @@ pub const Client = struct {
     /// policy,
     /// including the policy document.
     ///
-    /// **Note:**
-    ///
     /// Policies returned by this operation are URL-encoded compliant
     /// with [RFC 3986](https://tools.ietf.org/html/rfc3986). You can use a URL
     /// decoding method to convert the policy back to plain JSON text. For example,
@@ -1910,8 +1864,6 @@ pub const Client = struct {
     /// the
     /// *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// Policies returned by this operation are URL-encoded compliant
     /// with [RFC 3986](https://tools.ietf.org/html/rfc3986). You can use a URL
     /// decoding method to convert the policy back to plain JSON text. For example,
@@ -1927,8 +1879,6 @@ pub const Client = struct {
     /// Retrieves the specified inline policy document that is embedded with the
     /// specified
     /// IAM role.
-    ///
-    /// **Note:**
     ///
     /// Policies returned by this operation are URL-encoded compliant
     /// with [RFC 3986](https://tools.ietf.org/html/rfc3986). You can use a URL
@@ -1962,8 +1912,6 @@ pub const Client = struct {
     /// provider
     /// resource object was created or updated.
     ///
-    /// **Note:**
-    ///
     /// This operation requires [Signature Version
     /// 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
     pub fn getSamlProvider(self: *Self, input: get_saml_provider.GetSAMLProviderInput, options: get_saml_provider.Options) !get_saml_provider.GetSAMLProviderOutput {
@@ -1990,8 +1938,6 @@ pub const Client = struct {
     /// the generated report. The report includes a list of Amazon Web Services
     /// services that the resource
     /// (user, group, role, or managed policy) can access.
-    ///
-    /// **Note:**
     ///
     /// Service last accessed data does not use other policy types when determining
     /// whether a resource could access a service. These other policy types include
@@ -2118,8 +2064,6 @@ pub const Client = struct {
     /// specified IAM
     /// user.
     ///
-    /// **Note:**
-    ///
     /// Policies returned by this operation are URL-encoded compliant
     /// with [RFC 3986](https://tools.ietf.org/html/rfc3986). You can use a URL
     /// decoding method to convert the policy back to plain JSON text. For example,
@@ -2162,8 +2106,6 @@ pub const Client = struct {
     /// no associated users, the root user returns it's own access key IDs by
     /// running this
     /// command.
-    ///
-    /// **Note:**
     ///
     /// To ensure the security of your Amazon Web Services account, the secret
     /// access key is accessible
@@ -2327,8 +2269,6 @@ pub const Client = struct {
     /// instance
     /// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// IAM resource-listing operations return a subset of the available
     /// attributes for the resource. For example, this operation does not return
     /// tags, even though they are an attribute of the returned object. To view all
@@ -2397,8 +2337,6 @@ pub const Client = struct {
     /// objects
     /// defined in the Amazon Web Services account.
     ///
-    /// **Note:**
-    ///
     /// IAM resource-listing operations return a subset of the available
     /// attributes for the resource. For example, this operation does not return
     /// tags, even though they are an attribute of the returned object. To view all
@@ -2435,8 +2373,6 @@ pub const Client = struct {
     /// inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// IAM resource-listing operations return a subset of the available
     /// attributes for the resource. For example, this operation does not return
     /// tags, even though they are an attribute of the returned object. To view all
@@ -2449,8 +2385,6 @@ pub const Client = struct {
     /// Retrieves a list of policies that the IAM identity (user, group, or role)
     /// can use to
     /// access each specified service.
-    ///
-    /// **Note:**
     ///
     /// This operation does not use other policy types when determining whether a
     /// resource
@@ -2562,8 +2496,6 @@ pub const Client = struct {
     /// the
     /// *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// IAM resource-listing operations return a subset of the available
     /// attributes for the resource. This operation does not return the following
     /// attributes, even though they are an attribute of the returned object:
@@ -2604,8 +2536,6 @@ pub const Client = struct {
     /// of the information for a SAML provider, see
     /// [GetSAMLProvider](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html).
     ///
-    /// **Important:**
-    ///
     /// This operation requires [Signature Version
     /// 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
     pub fn listSamlProviders(self: *Self, input: list_saml_providers.ListSAMLProvidersInput, options: list_saml_providers.Options) !list_saml_providers.ListSAMLProvidersOutput {
@@ -2619,8 +2549,6 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// For certificates in a Region supported by Certificate Manager (ACM), we
     /// recommend that you don't use IAM server certificates. Instead, use ACM to
@@ -2646,8 +2574,6 @@ pub const Client = struct {
     /// topic also includes a list of Amazon Web Services services that can use the
     /// server certificates that
     /// you manage with IAM.
-    ///
-    /// **Note:**
     ///
     /// IAM resource-listing operations return a subset of the available
     /// attributes for the resource. For example, this operation does not return
@@ -2747,8 +2673,6 @@ pub const Client = struct {
     /// account. If there are none, the
     /// operation returns an empty list.
     ///
-    /// **Note:**
-    ///
     /// IAM resource-listing operations return a subset of the available
     /// attributes for the resource. This operation does not return the following
     /// attributes, even though they are an attribute of the returned object:
@@ -2772,8 +2696,6 @@ pub const Client = struct {
     /// virtual MFA
     /// devices. Assignment status can be `Assigned`, `Unassigned`, or
     /// `Any`.
-    ///
-    /// **Note:**
     ///
     /// IAM resource-listing operations return a subset of the available
     /// attributes for the resource. For example, this operation does not return
@@ -2808,8 +2730,6 @@ pub const Client = struct {
     /// group, see [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// Because policy documents can be large, you should use POST rather than GET
     /// when
     /// calling `PutGroupPolicy`. For general information about using the Query
@@ -2831,8 +2751,6 @@ pub const Client = struct {
     /// for the role.
     ///
     /// You cannot set the boundary for a service-linked role.
-    ///
-    /// **Important:**
     ///
     /// Policies used as permissions boundaries do not provide permissions. You must
     /// also
@@ -2880,8 +2798,6 @@ pub const Client = struct {
     /// role, see [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// Because policy documents can be large, you should use POST rather than GET
     /// when
     /// calling `PutRolePolicy`. For general information about using the Query
@@ -2900,8 +2816,6 @@ pub const Client = struct {
     /// can have. Setting a permissions boundary is an advanced feature that can
     /// affect the
     /// permissions for the user.
-    ///
-    /// **Important:**
     ///
     /// Policies that are used as permissions boundaries do not provide permissions.
     /// You
@@ -2934,8 +2848,6 @@ pub const Client = struct {
     /// embed in a
     /// user, see [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// Because policy documents can be large, you should use POST rather than GET
     /// when
@@ -2977,8 +2889,6 @@ pub const Client = struct {
 
     /// Removes the specified IAM role from the specified Amazon EC2 instance
     /// profile.
-    ///
-    /// **Important:**
     ///
     /// Make sure that you do not have any Amazon EC2 instances running with the
     /// role you are
@@ -3130,8 +3040,6 @@ pub const Client = struct {
     /// If the output is long, you can use `MaxItems` and `Marker`
     /// parameters to paginate the results.
     ///
-    /// **Note:**
-    ///
     /// The IAM policy simulator evaluates statements in the identity-based policy
     /// and
     /// the inputs that you provide during simulation. The policy simulator results
@@ -3192,8 +3100,6 @@ pub const Client = struct {
     /// If the output is long, you can use the `MaxItems` and `Marker`
     /// parameters to paginate the results.
     ///
-    /// **Note:**
-    ///
     /// The IAM policy simulator evaluates statements in the identity-based policy
     /// and
     /// the inputs that you provide during simulation. The policy simulator results
@@ -3236,8 +3142,6 @@ pub const Client = struct {
     /// tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in
     /// the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// * If any one of the tags is invalid or if you exceed the allowed maximum
     ///   number of tags, then the entire request
@@ -3282,8 +3186,6 @@ pub const Client = struct {
     /// tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in
     /// the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// * If any one of the tags is invalid or if you exceed the allowed maximum
     ///   number of tags, then the entire request
@@ -3331,8 +3233,6 @@ pub const Client = struct {
     /// the
     /// *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// * If any one of the tags is invalid or if you exceed the allowed maximum
     ///   number of tags, then the entire request
     /// fails and the resource is not created. For more information about tagging,
@@ -3374,8 +3274,6 @@ pub const Client = struct {
     /// tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in
     /// the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// * If any one of the tags is invalid or if you exceed the allowed maximum
     ///   number of tags, then the entire request
@@ -3424,8 +3322,6 @@ pub const Client = struct {
     ///
     /// * **Cost allocation** - Use tags to help track which
     /// individuals and teams are using which Amazon Web Services resources.
-    ///
-    /// **Note:**
     ///
     /// * If any one of the tags is invalid or if you exceed the allowed maximum
     ///   number of tags, then the entire request
@@ -3479,8 +3375,6 @@ pub const Client = struct {
     /// the
     /// *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// * If any one of the tags is invalid or if you exceed the allowed maximum
     ///   number of tags, then the entire request
     /// fails and the resource is not created. For more information about tagging,
@@ -3501,8 +3395,6 @@ pub const Client = struct {
     /// Adds one or more tags to an IAM server certificate. If a tag with the same
     /// key name
     /// already exists, then that tag is overwritten with the new value.
-    ///
-    /// **Note:**
     ///
     /// For certificates in a Region supported by Certificate Manager (ACM), we
     /// recommend that you don't use IAM server certificates. Instead, use ACM to
@@ -3535,8 +3427,6 @@ pub const Client = struct {
     ///
     /// * **Cost allocation** - Use tags to help track which
     /// individuals and teams are using which Amazon Web Services resources.
-    ///
-    /// **Note:**
     ///
     /// * If any one of the tags is invalid or if you exceed the allowed maximum
     ///   number of tags, then the entire request
@@ -3584,8 +3474,6 @@ pub const Client = struct {
     ///
     /// * **Cost allocation** - Use tags to help track which
     /// individuals and teams are using which Amazon Web Services resources.
-    ///
-    /// **Note:**
     ///
     /// * If any one of the tags is invalid or if you exceed the allowed maximum
     ///   number of tags, then the entire request
@@ -3675,8 +3563,6 @@ pub const Client = struct {
     /// the
     /// *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// For certificates in a Region supported by Certificate Manager (ACM), we
     /// recommend that you don't use IAM server certificates. Instead, use ACM to
     /// provision,
@@ -3719,8 +3605,6 @@ pub const Client = struct {
     }
 
     /// Updates the password policy settings for the Amazon Web Services account.
-    ///
-    /// **Note:**
     ///
     /// This operation does not support partial updates. No parameters are required,
     /// but
@@ -3767,14 +3651,10 @@ pub const Client = struct {
 
     /// Updates the name and/or the path of the specified IAM group.
     ///
-    /// **Important:**
-    ///
     /// You should understand the implications of changing a group's path or name.
     /// For
     /// more information, see [Renaming users and
     /// groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html) in the *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The person making the request (the principal), must have permission to
     /// change the
@@ -3820,8 +3700,6 @@ pub const Client = struct {
     /// the OIDC provider as a principal fails until the certificate thumbprint is
     /// updated.
     ///
-    /// **Note:**
-    ///
     /// Amazon Web Services secures communication with OIDC identity providers
     /// (IdPs) using our library of
     /// trusted root certificate authorities (CAs) to verify the JSON Web Key Set
@@ -3831,8 +3709,6 @@ pub const Client = struct {
     /// by one of these trusted CAs, only then we secure communication using the
     /// thumbprints set
     /// in the IdP's configuration.
-    ///
-    /// **Note:**
     ///
     /// Trust for the OIDC provider is derived from the provider certificate and is
     /// validated by the thumbprint. Therefore, it is best to limit access to the
@@ -3877,15 +3753,11 @@ pub const Client = struct {
     /// server certificates that
     /// you manage with IAM.
     ///
-    /// **Important:**
-    ///
     /// You should understand the implications of changing a server certificate's
     /// path or
     /// name. For more information, see [Renaming a server
     /// certificate](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts) in the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The person making the request (the principal), must have permission to
     /// change the
@@ -3948,14 +3820,10 @@ pub const Client = struct {
 
     /// Updates the name and/or the path of the specified IAM user.
     ///
-    /// **Important:**
-    ///
     /// You should understand the implications of changing an IAM user's path or
     /// name. For more information, see [Renaming an IAM
     /// user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_renaming) and [Renaming an IAM
     /// group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_rename.html) in the *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// To change a user name, the requester must have appropriate permissions on
     /// both
@@ -3998,8 +3866,6 @@ pub const Client = struct {
     /// [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// Because the body of the public key certificate, private key, and the
     /// certificate
     /// chain can be large, you should use POST rather than GET when calling
@@ -4037,8 +3903,6 @@ pub const Client = struct {
     /// to manage Amazon Web Services account root user credentials even if the
     /// Amazon Web Services account has no associated
     /// users.
-    ///
-    /// **Note:**
     ///
     /// Because the body of an X.509 certificate can be large, you should use POST
     /// rather

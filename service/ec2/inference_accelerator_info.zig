@@ -1,7 +1,5 @@
 const InferenceDeviceInfo = @import("inference_device_info.zig").InferenceDeviceInfo;
 
-/// **Note:**
-///
 /// Amazon Elastic Inference is no longer available.
 ///
 /// Describes the Inference accelerators for the instance type.

@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified customer gateway. You must delete the VPN connection
-/// before you
-/// can delete the customer gateway.
 pub const DeleteCustomerGatewayInput = struct {
     /// The ID of the customer gateway.
     customer_gateway_id: []const u8,

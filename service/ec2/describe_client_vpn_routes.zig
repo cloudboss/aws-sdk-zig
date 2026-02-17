@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ClientVpnRoute = @import("client_vpn_route.zig").ClientVpnRoute;
 const serde = @import("serde.zig");
 
-/// Describes the routes for the specified Client VPN endpoint.
 pub const DescribeClientVpnRoutesInput = struct {
     /// The ID of the Client VPN endpoint.
     client_vpn_endpoint_id: []const u8,

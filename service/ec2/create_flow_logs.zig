@@ -11,29 +11,6 @@ const TrafficType = @import("traffic_type.zig").TrafficType;
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
 const serde = @import("serde.zig");
 
-/// Creates one or more flow logs to capture information about IP traffic for a
-/// specific network interface,
-/// subnet, or VPC.
-///
-/// Flow log data for a monitored network interface is recorded as flow log
-/// records, which are log events
-/// consisting of fields that describe the traffic flow. For more information,
-/// see
-/// [Flow log
-/// records](https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html)
-/// in the *Amazon VPC User Guide*.
-///
-/// When publishing to CloudWatch Logs, flow log records are published to a log
-/// group, and each network
-/// interface has a unique log stream in the log group. When publishing to
-/// Amazon S3, flow log records for all
-/// of the monitored network interfaces are published to a single log file
-/// object that is stored in the specified
-/// bucket.
-///
-/// For more information, see [VPC Flow
-/// Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html)
-/// in the *Amazon VPC User Guide*.
 pub const CreateFlowLogsInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the

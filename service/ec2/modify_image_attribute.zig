@@ -8,21 +8,6 @@ const LaunchPermissionModifications = @import("launch_permission_modifications.z
 const OperationType = @import("operation_type.zig").OperationType;
 const serde = @import("serde.zig");
 
-/// Modifies the specified attribute of the specified AMI. You can specify only
-/// one attribute
-/// at a time.
-///
-/// To specify the attribute, you can use the `Attribute` parameter, or one of
-/// the
-/// following parameters: `Description`, `ImdsSupport`, or
-/// `LaunchPermission`.
-///
-/// Images with an Amazon Web Services Marketplace product code cannot be made
-/// public.
-///
-/// To enable the SriovNetSupport enhanced networking attribute of an image,
-/// enable
-/// SriovNetSupport on an instance and create an AMI from the instance.
 pub const ModifyImageAttributeInput = struct {
     /// The name of the attribute to modify.
     ///
@@ -51,8 +36,6 @@ pub const ModifyImageAttributeInput = struct {
     /// to
     /// `2`. For more information, see [Configure the
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration) in the *Amazon EC2 User Guide*.
-    ///
-    /// **Important:**
     ///
     /// Do not use this parameter unless your AMI software supports IMDSv2. After
     /// you set the

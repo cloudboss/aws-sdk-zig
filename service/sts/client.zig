@@ -198,8 +198,6 @@ pub const Client = struct {
     /// temporary
     /// security credentials to sign calls to Amazon Web Services services.
     ///
-    /// **Note:**
-    ///
     /// AssumeRoleWithSAML will not work on IAM Identity Center managed roles. These
     /// roles' names start
     /// with `AWSReservedSSO_`.
@@ -228,8 +226,6 @@ pub const Client = struct {
     /// Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html)
     /// in the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// [Role
     /// chaining](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-role-chaining) limits your CLI or Amazon Web Services API role
@@ -280,8 +276,6 @@ pub const Client = struct {
     /// metadata document
     /// that is uploaded for the SAML provider entity for your identity provider.
     ///
-    /// **Important:**
-    ///
     /// Calling `AssumeRoleWithSAML` can result in an entry in your CloudTrail logs.
     /// The entry includes the value in the `NameID` element of the SAML assertion.
     /// We recommend that you use a `NameIDType` that is not associated with any
@@ -308,8 +302,6 @@ pub const Client = struct {
     /// [IAM
     /// and STS Character
     /// Limits](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length) in the *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// An Amazon Web Services conversion compresses the passed inline session
     /// policy, managed policy ARNs,
@@ -378,8 +370,6 @@ pub const Client = struct {
     /// Connect-compatible
     /// identity provider such as Google or [Amazon Cognito federated
     /// identities](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html).
-    ///
-    /// **Note:**
     ///
     /// For mobile applications, we recommend that you use Amazon Cognito. You can
     /// use Amazon Cognito with the
@@ -489,8 +479,6 @@ pub const Client = struct {
     /// and STS Character
     /// Limits](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length) in the *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// An Amazon Web Services conversion compresses the passed inline session
     /// policy, managed policy ARNs,
     /// and session tags into a packed binary format that has a separate limit. Your
@@ -528,8 +516,6 @@ pub const Client = struct {
     /// associated with the identity token. In other words, the identity provider
     /// must be specified
     /// in the role's trust policy.
-    ///
-    /// **Important:**
     ///
     /// Calling `AssumeRoleWithWebIdentity` can result in an entry in your
     /// CloudTrail logs. The entry includes the
@@ -576,8 +562,6 @@ pub const Client = struct {
     /// member
     /// accounts](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-enable-root-access.html) in the *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// The STS global endpoint is not supported for AssumeRoot. You must send this
     /// request
     /// to a Regional STS endpoint. For more information, see
@@ -611,8 +595,6 @@ pub const Client = struct {
     /// HTTP 403 response). Some Amazon Web Services operations additionally return
     /// an encoded message that can
     /// provide details about this authorization failure.
-    ///
-    /// **Note:**
     ///
     /// Only certain Amazon Web Services operations return an encoded authorization
     /// message. The
@@ -685,8 +667,6 @@ pub const Client = struct {
     /// Returns details about the IAM user or role whose credentials are used to
     /// call the operation.
     ///
-    /// **Note:**
-    ///
     /// No permissions are required to perform this operation. If an administrator
     /// attaches a
     /// policy to your identity that explicitly denies access to the
@@ -738,8 +718,6 @@ pub const Client = struct {
     /// for everyday
     /// tasks](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#lock-away-credentials) in the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// You can create a mobile-based or browser-based app that can authenticate
     /// users using
@@ -820,8 +798,6 @@ pub const Client = struct {
     /// in the
     /// *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// You can create a mobile-based or browser-based app that can authenticate
     /// users using
     /// a web identity provider like Login with Amazon, Facebook, Google, or an
@@ -877,8 +853,6 @@ pub const Client = struct {
     /// Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html) and [Compare STS
     /// credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_sts-comparison.html) in the *IAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// No permissions are required for users to perform this operation. The purpose
     /// of the
     /// `sts:GetSessionToken` operation is to authenticate the user using MFA. You
@@ -917,8 +891,6 @@ pub const Client = struct {
     /// associated with the IAM user whose credentials were used to call the
     /// operation. The temporary credentials have the same permissions as the IAM
     /// user.
-    ///
-    /// **Note:**
     ///
     /// Although it is possible to call `GetSessionToken` using the security
     /// credentials of an Amazon Web Services account root user rather than an IAM

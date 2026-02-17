@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReportStateType = @import("report_state_type.zig").ReportStateType;
 
-/// Generates a credential report for the Amazon Web Services account. For more
-/// information about the
-/// credential report, see [Getting credential
-/// reports](https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
-/// the *IAM User Guide*.
 pub const GenerateCredentialReportInput = struct {
 };
 

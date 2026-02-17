@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CapacityBlock = @import("capacity_block.zig").CapacityBlock;
 const serde = @import("serde.zig");
 
-/// Describes details about Capacity Blocks in the Amazon Web Services Region
-/// that you're currently using.
 pub const DescribeCapacityBlocksInput = struct {
     /// The IDs of the Capacity Blocks.
     capacity_block_ids: ?[]const []const u8 = null,

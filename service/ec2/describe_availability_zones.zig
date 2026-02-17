@@ -7,22 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const AvailabilityZone = @import("availability_zone.zig").AvailabilityZone;
 const serde = @import("serde.zig");
 
-/// Describes the Availability Zones, Local Zones, and Wavelength Zones that are
-/// available to
-/// you.
-///
-/// For more information about Availability Zones, Local Zones, and Wavelength
-/// Zones, see
-/// [Regions and
-/// zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
-/// in the *Amazon EC2 User Guide*.
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures, might vary. Applications should not assume the elements appear
-/// in a
-/// particular order.
 pub const DescribeAvailabilityZonesInput = struct {
     /// Include all Availability Zones, Local Zones, and Wavelength Zones regardless
     /// of your

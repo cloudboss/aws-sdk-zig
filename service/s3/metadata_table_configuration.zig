@@ -1,8 +1,6 @@
-const S3TablesDestination = @import("s_3_tables_destination.zig").S3TablesDestination;
+const S3TablesDestination = @import("s3_tables_destination.zig").S3TablesDestination;
 
 /// The V1 S3 Metadata configuration for a general purpose bucket.
-///
-/// **Note:**
 ///
 /// If you created your S3 Metadata configuration before July 15, 2025, we
 /// recommend that you delete
@@ -16,5 +14,5 @@ pub const MetadataTableConfiguration = struct {
     /// bucket. The specified metadata table name
     /// must be unique within the `aws_s3_metadata` namespace in the destination
     /// table bucket.
-    s_3_tables_destination: S3TablesDestination,
+    s3_tables_destination: S3TablesDestination,
 };

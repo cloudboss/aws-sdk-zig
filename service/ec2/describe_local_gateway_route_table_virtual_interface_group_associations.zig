@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LocalGatewayRouteTableVirtualInterfaceGroupAssociation = @import("local_gateway_route_table_virtual_interface_group_association.zig").LocalGatewayRouteTableVirtualInterfaceGroupAssociation;
 const serde = @import("serde.zig");
 
-/// Describes the associations between virtual interface groups and local
-/// gateway route tables.
 pub const DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

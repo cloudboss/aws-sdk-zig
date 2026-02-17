@@ -4,21 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Changes the password of the IAM user who is calling this operation. This
-/// operation
-/// can be performed using the CLI, the Amazon Web Services API, or the **My
-/// Security Credentials** page in the Amazon Web Services Management Console.
-/// The Amazon Web Services account root user password is
-/// not affected by this operation.
-///
-/// Use
-/// [UpdateLoginProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateLoginProfile.html)
-/// to use the CLI, the Amazon Web Services API, or the **Users** page in
-/// the IAM console to change the password for any IAM user. For more
-/// information about
-/// modifying passwords, see [Managing
-/// passwords](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in the
-/// *IAM User Guide*.
 pub const ChangePasswordInput = struct {
     /// The new password. The new password must conform to the Amazon Web Services
     /// account's password

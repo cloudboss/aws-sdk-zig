@@ -8,11 +8,6 @@ const Schedule = @import("schedule.zig").Schedule;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const serde = @import("serde.zig");
 
-/// Creates a new data export configuration for EC2 Capacity Manager. This
-/// allows you to automatically export capacity usage data to an S3 bucket on a
-/// scheduled basis.
-/// The exported data includes metrics for On-Demand, Spot, and Capacity
-/// Reservations usage across your organization.
 pub const CreateCapacityManagerDataExportInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see Ensure Idempotency.
@@ -30,12 +25,12 @@ pub const CreateCapacityManagerDataExportInput = struct {
 
     /// The name of the S3 bucket where the capacity data export files will be
     /// delivered. The bucket must exist and you must have write permissions to it.
-    s_3_bucket_name: []const u8,
+    s3_bucket_name: []const u8,
 
     /// The S3 key prefix for the exported data files. This allows you to organize
     /// exports in a specific folder structure within your bucket. If not specified,
     /// files are placed at the bucket root.
-    s_3_bucket_prefix: ?[]const u8 = null,
+    s3_bucket_prefix: ?[]const u8 = null,
 
     /// The frequency at which data exports are generated.
     schedule: Schedule,
@@ -110,8 +105,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateCapacityManagerDataEx
     try body_buf.appendSlice(alloc, "&OutputFormat=");
     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(input.output_format));
     try body_buf.appendSlice(alloc, "&S3BucketName=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.s_3_bucket_name);
-    if (input.s_3_bucket_prefix) |v| {
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.s3_bucket_name);
+    if (input.s3_bucket_prefix) |v| {
         try body_buf.appendSlice(alloc, "&S3BucketPrefix=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }

@@ -8,12 +8,6 @@ const CreateVolumePermission = @import("create_volume_permission.zig").CreateVol
 const ProductCode = @import("product_code.zig").ProductCode;
 const serde = @import("serde.zig");
 
-/// Describes the specified attribute of the specified snapshot. You can specify
-/// only one
-/// attribute at a time.
-///
-/// For more information about EBS snapshots, see [Amazon EBS
-/// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html) in the *Amazon EBS User Guide*.
 pub const DescribeSnapshotAttributeInput = struct {
     /// The snapshot attribute you would like to view.
     attribute: SnapshotAttributeName,

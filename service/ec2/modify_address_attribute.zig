@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AddressAttribute = @import("address_attribute.zig").AddressAttribute;
 const serde = @import("serde.zig");
 
-/// Modifies an attribute of the specified Elastic IP address. For requirements,
-/// see [Using reverse DNS for email
-/// applications](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS).
 pub const ModifyAddressAttributeInput = struct {
     /// [EC2-VPC] The allocation ID.
     allocation_id: []const u8,

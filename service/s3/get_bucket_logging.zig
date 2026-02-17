@@ -6,27 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LoggingEnabled = @import("logging_enabled.zig").LoggingEnabled;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Returns the logging status of a bucket and the permissions users have to
-/// view and modify that
-/// status.
-///
-/// The following operations are related to `GetBucketLogging`:
-///
-/// *
-///   [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-///
-/// *
-///   [PutBucketLogging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLogging.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const GetBucketLoggingInput = struct {
     /// The bucket name for which to get the logging information.
     bucket: []const u8,

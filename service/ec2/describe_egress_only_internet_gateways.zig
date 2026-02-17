@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const EgressOnlyInternetGateway = @import("egress_only_internet_gateway.zig").EgressOnlyInternetGateway;
 const serde = @import("serde.zig");
 
-/// Describes your egress-only internet gateways. The default is to describe all
-/// your egress-only internet gateways.
-/// Alternatively, you can specify specific egress-only internet gateway IDs or
-/// filter the results to
-/// include only the egress-only internet gateways that match specific criteria.
 pub const DescribeEgressOnlyInternetGatewaysInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

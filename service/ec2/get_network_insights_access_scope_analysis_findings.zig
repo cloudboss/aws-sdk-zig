@@ -7,7 +7,6 @@ const AccessScopeAnalysisFinding = @import("access_scope_analysis_finding.zig").
 const AnalysisStatus = @import("analysis_status.zig").AnalysisStatus;
 const serde = @import("serde.zig");
 
-/// Gets the findings for the specified Network Access Scope analysis.
 pub const GetNetworkInsightsAccessScopeAnalysisFindingsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

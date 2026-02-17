@@ -6,18 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const FunctionVersion = @import("function_version.zig").FunctionVersion;
 const FunctionConfiguration = @import("function_configuration.zig").FunctionConfiguration;
 
-/// Returns a list of Lambda functions, with the version-specific configuration
-/// of each. Lambda returns up to 50 functions per call.
-///
-/// Set `FunctionVersion` to `ALL` to include all published versions of each
-/// function in addition to the unpublished version.
-///
-/// **Note:**
-///
-/// The `ListFunctions` operation returns a subset of the FunctionConfiguration
-/// fields. To get the additional fields (State, StateReasonCode, StateReason,
-/// LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode,
-/// RuntimeVersionConfig) for a function or version, use GetFunction.
 pub const ListFunctionsInput = struct {
     /// Set to `ALL` to include entries for all published versions of each function.
     function_version: ?FunctionVersion = null,

@@ -2,8 +2,6 @@ const ElasticGpuHealth = @import("elastic_gpu_health.zig").ElasticGpuHealth;
 const ElasticGpuState = @import("elastic_gpu_state.zig").ElasticGpuState;
 const Tag = @import("tag.zig").Tag;
 
-/// **Note:**
-///
 /// Amazon Elastic Graphics reached end of life on January 8, 2024.
 ///
 /// Describes an Elastic Graphics accelerator.

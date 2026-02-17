@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OpsItemRelatedItemsFilter = @import("ops_item_related_items_filter.zig").OpsItemRelatedItemsFilter;
 const OpsItemRelatedItemSummary = @import("ops_item_related_item_summary.zig").OpsItemRelatedItemSummary;
 
-/// Lists all related-item resources associated with a Systems Manager OpsCenter
-/// OpsItem. OpsCenter is a
-/// tool in Amazon Web Services Systems Manager.
 pub const ListOpsItemRelatedItemsInput = struct {
     /// One or more OpsItem filters. Use a filter to return a more specific list of
     /// results.

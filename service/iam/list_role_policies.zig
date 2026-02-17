@@ -5,22 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Lists the names of the inline policies that are embedded in the specified
-/// IAM
-/// role.
-///
-/// An IAM role can also have managed policies attached to it. To list the
-/// managed
-/// policies that are attached to a role, use
-/// [ListAttachedRolePolicies](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedRolePolicies.html). For more information about policies, see [Managed
-/// policies and inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
-/// *IAM User Guide*.
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters. If there are no inline policies embedded with the specified
-/// role, the
-/// operation returns an empty list.
 pub const ListRolePoliciesInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

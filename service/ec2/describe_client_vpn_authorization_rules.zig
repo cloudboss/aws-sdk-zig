@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const AuthorizationRule = @import("authorization_rule.zig").AuthorizationRule;
 const serde = @import("serde.zig");
 
-/// Describes the authorization rules for a specified Client VPN endpoint.
 pub const DescribeClientVpnAuthorizationRulesInput = struct {
     /// The ID of the Client VPN endpoint.
     client_vpn_endpoint_id: []const u8,

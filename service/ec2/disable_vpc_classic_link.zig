@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// **Note:**
-///
-/// This action is deprecated.
-///
-/// Disables ClassicLink for a VPC. You cannot disable ClassicLink for a VPC
-/// that has EC2-Classic instances
-/// linked to it.
 pub const DisableVpcClassicLinkInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

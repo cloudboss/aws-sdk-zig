@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamPrefixListResolver = @import("ipam_prefix_list_resolver.zig").IpamPrefixListResolver;
 const serde = @import("serde.zig");
 
-/// Deletes an IPAM prefix list resolver. Before deleting a resolver, you must
-/// first delete all resolver targets associated with it.
 pub const DeleteIpamPrefixListResolverInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

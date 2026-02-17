@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified internet gateway. You must detach the internet gateway
-/// from the
-/// VPC before you can delete it.
 pub const DeleteInternetGatewayInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

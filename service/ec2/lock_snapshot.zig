@@ -6,26 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LockMode = @import("lock_mode.zig").LockMode;
 const LockState = @import("lock_state.zig").LockState;
 
-/// Locks an Amazon EBS snapshot in either *governance* or *compliance*
-/// mode to protect it against accidental or malicious deletions for a specific
-/// duration. A locked snapshot
-/// can't be deleted.
-///
-/// You can also use this action to modify the lock settings for a snapshot that
-/// is already locked. The
-/// allowed modifications depend on the lock mode and lock state:
-///
-/// * If the snapshot is locked in governance mode, you can modify the lock mode
-///   and the lock duration
-/// or lock expiration date.
-///
-/// * If the snapshot is locked in compliance mode and it is in the cooling-off
-///   period, you can modify
-/// the lock mode and the lock duration or lock expiration date.
-///
-/// * If the snapshot is locked in compliance mode and the cooling-off period
-///   has lapsed, you can
-/// only increase the lock duration or extend the lock expiration date.
 pub const LockSnapshotInput = struct {
     /// The cooling-off period during which you can unlock the snapshot or modify
     /// the lock settings after
@@ -263,15 +243,15 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "coolOffPeriod")) {
                     result.cool_off_period = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "coolOffPeriodExpiresOn")) {
-                    result.cool_off_period_expires_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.cool_off_period_expires_on = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockCreatedOn")) {
-                    result.lock_created_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.lock_created_on = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockDuration")) {
                     result.lock_duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockDurationStartTime")) {
-                    result.lock_duration_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.lock_duration_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockExpiresOn")) {
-                    result.lock_expires_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.lock_expires_on = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockState")) {
                     result.lock_state = std.meta.stringToEnum(LockState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {

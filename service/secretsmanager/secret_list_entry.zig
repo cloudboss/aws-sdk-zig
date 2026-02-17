@@ -95,8 +95,6 @@ pub const SecretListEntry = struct {
     /// and the `SecretVersionId` attached to each one. Staging labels are used to
     /// keep track of the different versions during the rotation process.
     ///
-    /// **Note:**
-    ///
     /// A version that does not have any `SecretVersionStage` is considered
     /// deprecated and subject to deletion. Such versions are not included in this
     /// list.

@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
 const serde = @import("serde.zig");
 
-/// Describes one or more of your Capacity Reservations. The results describe
-/// only the
-/// Capacity Reservations in the Amazon Web Services Region that you're
-/// currently
-/// using.
 pub const DescribeCapacityReservationsInput = struct {
     /// The ID of the Capacity Reservation.
     capacity_reservation_ids: ?[]const []const u8 = null,

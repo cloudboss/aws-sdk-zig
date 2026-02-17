@@ -8,7 +8,6 @@ const MaintenanceWindowResourceType = @import("maintenance_window_resource_type.
 const Target = @import("target.zig").Target;
 const ScheduledWindowExecution = @import("scheduled_window_execution.zig").ScheduledWindowExecution;
 
-/// Retrieves information about upcoming executions of a maintenance window.
 pub const DescribeMaintenanceWindowScheduleInput = struct {
     /// Filters used to limit the range of results. For example, you can limit
     /// maintenance window

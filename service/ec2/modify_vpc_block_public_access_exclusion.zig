@@ -7,12 +7,6 @@ const InternetGatewayExclusionMode = @import("internet_gateway_exclusion_mode.zi
 const VpcBlockPublicAccessExclusion = @import("vpc_block_public_access_exclusion.zig").VpcBlockPublicAccessExclusion;
 const serde = @import("serde.zig");
 
-/// Modify VPC Block Public Access (BPA) exclusions. A VPC BPA exclusion is a
-/// mode that can be applied to a single VPC or subnet that exempts it from the
-/// account’s BPA mode and will allow bidirectional or egress-only access. You
-/// can create BPA exclusions for VPCs and subnets even when BPA is not enabled
-/// on the account to ensure that there is no traffic disruption to the
-/// exclusions when VPC BPA is turned on.
 pub const ModifyVpcBlockPublicAccessExclusionInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

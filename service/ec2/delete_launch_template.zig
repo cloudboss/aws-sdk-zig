@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LaunchTemplate = @import("launch_template.zig").LaunchTemplate;
 const serde = @import("serde.zig");
 
-/// Deletes a launch template. Deleting a launch template deletes all of its
-/// versions.
 pub const DeleteLaunchTemplateInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

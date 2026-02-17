@@ -7,15 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const RouteServerEndpoint = @import("route_server_endpoint.zig").RouteServerEndpoint;
 const serde = @import("serde.zig");
 
-/// Describes one or more route server endpoints.
-///
-/// A route server endpoint is an Amazon Web Services-managed component inside a
-/// subnet that facilitates [BGP (Border Gateway
-/// Protocol)](https://en.wikipedia.org/wiki/Border_Gateway_Protocol)
-/// connections between your route server and your BGP peers.
-///
-/// For more information see [Dynamic routing in your VPC with VPC Route
-/// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
 pub const DescribeRouteServerEndpointsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

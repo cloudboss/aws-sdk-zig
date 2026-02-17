@@ -7,7 +7,6 @@ const TrafficMirrorSessionField = @import("traffic_mirror_session_field.zig").Tr
 const TrafficMirrorSession = @import("traffic_mirror_session.zig").TrafficMirrorSession;
 const serde = @import("serde.zig");
 
-/// Modifies a Traffic Mirror session.
 pub const ModifyTrafficMirrorSessionInput = struct {
     /// The description to assign to the Traffic Mirror session.
     description: ?[]const u8 = null,

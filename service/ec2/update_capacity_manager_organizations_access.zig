@@ -5,10 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityManagerStatus = @import("capacity_manager_status.zig").CapacityManagerStatus;
 
-/// Updates the Organizations access setting for EC2 Capacity Manager. This
-/// controls whether Capacity Manager can aggregate
-/// data from all accounts in your Amazon Web Services Organization or only from
-/// the current account.
 pub const UpdateCapacityManagerOrganizationsAccessInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request.

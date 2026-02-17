@@ -7,8 +7,6 @@ const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEnc
 /// information, see
 /// [PutBucketEncryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html).
 ///
-/// **Note:**
-///
 /// * **General purpose buckets** - If you don't specify a customer managed key
 /// at configuration, Amazon S3 automatically creates an Amazon Web Services KMS
 /// key (`aws/s3`) in your Amazon Web Services
@@ -28,8 +26,6 @@ const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEnc
 pub const ServerSideEncryptionByDefault = struct {
     /// Amazon Web Services Key Management Service (KMS) customer managed key ID to
     /// use for the default encryption.
-    ///
-    /// **Note:**
     ///
     /// * **General purpose buckets** - This parameter is allowed if and
     /// only if `SSEAlgorithm` is set to `aws:kms` or
@@ -54,8 +50,6 @@ pub const ServerSideEncryptionByDefault = struct {
     /// encryption for cross-account
     /// operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).
     ///
-    /// **Note:**
-    ///
     /// * **General purpose buckets** - If you're specifying a customer
     /// managed KMS key, we recommend using a fully qualified KMS key ARN. If you
     /// use a KMS key
@@ -71,8 +65,6 @@ pub const ServerSideEncryptionByDefault = struct {
     /// When you specify an [KMS customer managed
     /// key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.
     ///
-    /// **Important:**
-    ///
     /// Amazon S3 only supports symmetric encryption KMS keys. For more information,
     /// see [Asymmetric keys in
     /// Amazon Web Services
@@ -80,8 +72,6 @@ pub const ServerSideEncryptionByDefault = struct {
     kms_master_key_id: ?[]const u8,
 
     /// Server-side encryption algorithm to use for the default encryption.
-    ///
-    /// **Note:**
     ///
     /// For directory buckets, there are only two supported values for server-side
     /// encryption: `AES256` and `aws:kms`.

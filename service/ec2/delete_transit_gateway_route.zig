@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayRoute = @import("transit_gateway_route.zig").TransitGatewayRoute;
 const serde = @import("serde.zig");
 
-/// Deletes the specified route from the specified transit gateway route table.
 pub const DeleteTransitGatewayRouteInput = struct {
     /// The CIDR range for the route. This must match the CIDR for the route
     /// exactly.

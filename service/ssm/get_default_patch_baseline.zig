@@ -5,14 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const OperatingSystem = @import("operating_system.zig").OperatingSystem;
 
-/// Retrieves the default patch baseline. Amazon Web Services Systems Manager
-/// supports creating multiple default patch
-/// baselines. For example, you can create a default patch baseline for each
-/// operating system.
-///
-/// If you don't specify an operating system value, the default patch baseline
-/// for Windows is
-/// returned.
 pub const GetDefaultPatchBaselineInput = struct {
     /// Returns the default patch baseline for the specified operating system.
     operating_system: ?OperatingSystem = null,

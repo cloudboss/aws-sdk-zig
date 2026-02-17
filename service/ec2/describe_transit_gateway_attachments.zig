@@ -7,10 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayAttachment = @import("transit_gateway_attachment.zig").TransitGatewayAttachment;
 const serde = @import("serde.zig");
 
-/// Describes one or more attachments between resources and transit gateways. By
-/// default, all attachments are described.
-/// Alternatively, you can filter the results by attachment ID, attachment
-/// state, resource ID, or resource owner.
 pub const DescribeTransitGatewayAttachmentsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

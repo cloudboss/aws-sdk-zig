@@ -6,27 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Policy = @import("policy.zig").Policy;
 const serde = @import("serde.zig");
 
-/// Retrieves information about the specified managed policy, including the
-/// policy's
-/// default version and the total number of IAM users, groups, and roles to
-/// which the
-/// policy is attached. To retrieve the list of the specific users, groups, and
-/// roles that
-/// the policy is attached to, use
-/// [ListEntitiesForPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListEntitiesForPolicy.html). This operation returns metadata about the policy. To
-/// retrieve the actual policy document for a specific version of the policy,
-/// use
-/// [GetPolicyVersion](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html).
-///
-/// This operation retrieves information about managed policies. To retrieve
-/// information
-/// about an inline policy that is embedded with an IAM user, group, or role,
-/// use
-/// [GetUserPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUserPolicy.html), [GetGroupPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroupPolicy.html), or
-/// [GetRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRolePolicy.html).
-///
-/// For more information about policies, see [Managed policies and inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
 pub const GetPolicyInput = struct {
     /// The Amazon Resource Name (ARN) of the managed policy that you want
     /// information

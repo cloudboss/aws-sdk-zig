@@ -6,32 +6,10 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IntegrateServices = @import("integrate_services.zig").IntegrateServices;
 const serde = @import("serde.zig");
 
-/// Generates a CloudFormation template that streamlines and automates the
-/// integration of VPC flow logs
-/// with Amazon Athena. This make it easier for you to query and gain insights
-/// from VPC flow logs data.
-/// Based on the information that you provide, we configure resources in the
-/// template to do the following:
-///
-/// * Create a table in Athena that maps fields to a custom log format
-///
-/// * Create a Lambda function that updates the table with new partitions on a
-///   daily, weekly, or
-/// monthly basis
-///
-/// * Create a table partitioned between two timestamps in the past
-///
-/// * Create a set of named queries in Athena that you can use to get started
-///   quickly
-///
-/// **Note:**
-///
-/// `GetFlowLogsIntegrationTemplate` does not support integration between
-/// Amazon Web Services Transit Gateway Flow Logs and Amazon Athena.
 pub const GetFlowLogsIntegrationTemplateInput = struct {
     /// To store the CloudFormation template in Amazon S3, specify the location in
     /// Amazon S3.
-    config_delivery_s_3_destination_arn: []const u8,
+    config_delivery_s3_destination_arn: []const u8,
 
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -101,7 +79,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFlowLogsIntegrationTempl
 
     try body_buf.appendSlice(alloc, "Action=GetFlowLogsIntegrationTemplate&Version=2016-11-15");
     try body_buf.appendSlice(alloc, "&ConfigDeliveryS3DestinationArn=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.config_delivery_s_3_destination_arn);
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.config_delivery_s3_destination_arn);
     if (input.dry_run) |v| {
         try body_buf.appendSlice(alloc, "&DryRun=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
@@ -115,7 +93,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetFlowLogsIntegrationTempl
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateServices.AthenaIntegrations.item.{d}.IntegrationResultS3DestinationArn=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, item.integration_result_s_3_destination_arn);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, item.integration_result_s3_destination_arn);
             }
             {
                 var prefix_buf: [256]u8 = undefined;

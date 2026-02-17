@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayRouteTable = @import("transit_gateway_route_table.zig").TransitGatewayRouteTable;
 const serde = @import("serde.zig");
 
-/// Deletes the specified transit gateway route table. If there are any route
-/// tables associated with
-/// the transit gateway route table, you must first run DisassociateRouteTable
-/// before you can delete the transit gateway route table. This removes any
-/// route tables associated with the transit gateway route table.
 pub const DeleteTransitGatewayRouteTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

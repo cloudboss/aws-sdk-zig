@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const SecurityGroupForVpc = @import("security_group_for_vpc.zig").SecurityGroupForVpc;
 const serde = @import("serde.zig");
 
-/// Gets security groups that can be associated by the Amazon Web Services
-/// account making the request with network interfaces in the specified VPC.
 pub const GetSecurityGroupsForVpcInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

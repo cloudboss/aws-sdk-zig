@@ -36,7 +36,7 @@ pub fn deserializeCredentials(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
                 if (std.mem.eql(u8, e.local, "AccessKeyId")) {
                     result.access_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Expiration")) {
-                    result.expiration = try aws.imds.parseIso8601(try reader.readElementText());
+                    result.expiration = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SecretAccessKey")) {
                     result.secret_access_key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SessionToken")) {

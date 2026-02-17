@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const SecurityGroup = @import("security_group.zig").SecurityGroup;
 const serde = @import("serde.zig");
 
-/// Describes the specified security groups or all of your security groups.
 pub const DescribeSecurityGroupsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamResourceDiscovery = @import("ipam_resource_discovery.zig").IpamResourceDiscovery;
 const serde = @import("serde.zig");
 
-/// Describes IPAM resource discoveries. A resource discovery is an IPAM
-/// component that enables IPAM to manage and monitor resources that belong to
-/// the owning account.
 pub const DescribeIpamResourceDiscoveriesInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

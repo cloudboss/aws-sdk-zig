@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ComplianceStringFilter = @import("compliance_string_filter.zig").ComplianceStringFilter;
 const ResourceComplianceSummaryItem = @import("resource_compliance_summary_item.zig").ResourceComplianceSummaryItem;
 
-/// Returns a resource-level summary count. The summary includes information
-/// about compliant and
-/// non-compliant statuses and detailed compliance-item severity counts,
-/// according to the filter
-/// criteria you specify.
 pub const ListResourceComplianceSummariesInput = struct {
     /// One or more filters. Use a filter to return a more specific list of results.
     filters: ?[]const ComplianceStringFilter = null,

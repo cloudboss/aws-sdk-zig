@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SecurityGroupReference = @import("security_group_reference.zig").SecurityGroupReference;
 const serde = @import("serde.zig");
 
-/// Describes the VPCs on the other side of a VPC peering or Transit Gateway
-/// connection that are referencing the security groups you've specified in this
-/// request.
 pub const DescribeSecurityGroupReferencesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

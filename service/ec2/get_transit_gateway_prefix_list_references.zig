@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayPrefixListReference = @import("transit_gateway_prefix_list_reference.zig").TransitGatewayPrefixListReference;
 const serde = @import("serde.zig");
 
-/// Gets information about the prefix list references in a specified transit
-/// gateway route table.
 pub const GetTransitGatewayPrefixListReferencesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

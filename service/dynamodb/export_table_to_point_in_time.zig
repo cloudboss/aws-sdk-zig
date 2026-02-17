@@ -6,14 +6,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ExportFormat = @import("export_format.zig").ExportFormat;
 const ExportType = @import("export_type.zig").ExportType;
 const IncrementalExportSpecification = @import("incremental_export_specification.zig").IncrementalExportSpecification;
-const S3SseAlgorithm = @import("s_3_sse_algorithm.zig").S3SseAlgorithm;
+const S3SseAlgorithm = @import("s3_sse_algorithm.zig").S3SseAlgorithm;
 const ExportDescription = @import("export_description.zig").ExportDescription;
 
-/// Exports table data to an S3 bucket. The table must have point in time
-/// recovery
-/// enabled, and you can export data from any time within the point in time
-/// recovery
-/// window.
 pub const ExportTableToPointInTimeInput = struct {
     /// Providing a `ClientToken` makes the call to
     /// `ExportTableToPointInTimeInput` idempotent, meaning that multiple
@@ -56,22 +51,20 @@ pub const ExportTableToPointInTimeInput = struct {
     incremental_export_specification: ?IncrementalExportSpecification = null,
 
     /// The name of the Amazon S3 bucket to export the snapshot to.
-    s_3_bucket: []const u8,
+    s3_bucket: []const u8,
 
     /// The ID of the Amazon Web Services account that owns the bucket the export
     /// will be
     /// stored in.
     ///
-    /// **Note:**
-    ///
     /// S3BucketOwner is a required parameter when exporting to a S3 bucket in
     /// another
     /// account.
-    s_3_bucket_owner: ?[]const u8 = null,
+    s3_bucket_owner: ?[]const u8 = null,
 
     /// The Amazon S3 bucket prefix to use as the file name and path of the exported
     /// snapshot.
-    s_3_prefix: ?[]const u8 = null,
+    s3_prefix: ?[]const u8 = null,
 
     /// Type of encryption used on the bucket where export data will be stored.
     /// Valid values
@@ -82,11 +75,11 @@ pub const ExportTableToPointInTimeInput = struct {
     ///
     /// * `KMS` - server-side encryption with KMS managed
     /// keys
-    s_3_sse_algorithm: ?S3SseAlgorithm = null,
+    s3_sse_algorithm: ?S3SseAlgorithm = null,
 
     /// The ID of the KMS managed key used to encrypt the S3 bucket where
     /// export data will be stored (if applicable).
-    s_3_sse_kms_key_id: ?[]const u8 = null,
+    s3_sse_kms_key_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) associated with the table to export.
     table_arn: []const u8,
@@ -97,11 +90,11 @@ pub const ExportTableToPointInTimeInput = struct {
         .export_time = "ExportTime",
         .export_type = "ExportType",
         .incremental_export_specification = "IncrementalExportSpecification",
-        .s_3_bucket = "S3Bucket",
-        .s_3_bucket_owner = "S3BucketOwner",
-        .s_3_prefix = "S3Prefix",
-        .s_3_sse_algorithm = "S3SseAlgorithm",
-        .s_3_sse_kms_key_id = "S3SseKmsKeyId",
+        .s3_bucket = "S3Bucket",
+        .s3_bucket_owner = "S3BucketOwner",
+        .s3_prefix = "S3Prefix",
+        .s3_sse_algorithm = "S3SseAlgorithm",
+        .s3_sse_kms_key_id = "S3SseKmsKeyId",
         .table_arn = "TableArn",
     };
 };

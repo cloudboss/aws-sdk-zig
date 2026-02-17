@@ -7,7 +7,6 @@ const FpgaImageAttributeName = @import("fpga_image_attribute_name.zig").FpgaImag
 const FpgaImageAttribute = @import("fpga_image_attribute.zig").FpgaImageAttribute;
 const serde = @import("serde.zig");
 
-/// Describes the specified attribute of the specified Amazon FPGA Image (AFI).
 pub const DescribeFpgaImageAttributeInput = struct {
     /// The AFI attribute.
     attribute: FpgaImageAttributeName,

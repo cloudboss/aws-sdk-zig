@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayRouteTableAnnouncement = @import("transit_gateway_route_table_announcement.zig").TransitGatewayRouteTableAnnouncement;
 const serde = @import("serde.zig");
 
-/// Advertises to the transit gateway that a transit gateway route table is
-/// deleted.
 pub const DeleteTransitGatewayRouteTableAnnouncementInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

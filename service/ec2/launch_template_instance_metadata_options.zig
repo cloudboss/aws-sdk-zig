@@ -13,8 +13,6 @@ pub const LaunchTemplateInstanceMetadataOptions = struct {
     /// parameter is
     /// not specified, the default state is `enabled`.
     ///
-    /// **Note:**
-    ///
     /// If you specify a value of `disabled`, you will not be able to access
     /// your instance metadata.
     http_endpoint: ?LaunchTemplateInstanceMetadataEndpointState,

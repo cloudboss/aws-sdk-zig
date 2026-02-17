@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowFilter = @import("maintenance_window_filter.zig").MaintenanceWindowFilter;
 const MaintenanceWindowIdentity = @import("maintenance_window_identity.zig").MaintenanceWindowIdentity;
 
-/// Retrieves the maintenance windows in an Amazon Web Services account.
 pub const DescribeMaintenanceWindowsInput = struct {
     /// Optional filters used to narrow down the scope of the returned maintenance
     /// windows.

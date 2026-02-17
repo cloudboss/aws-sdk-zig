@@ -51,8 +51,6 @@ pub const InstancePatchState = struct {
     /// `RejectedPatches` list. Patches with a status of `InstalledRejected` were
     /// typically installed before they were added to a `RejectedPatches` list.
     ///
-    /// **Note:**
-    ///
     /// If `ALLOW_AS_DEPENDENCY` is the specified option for
     /// `RejectedPatchesAction`, the value of `InstalledRejectedCount` will
     /// always be `0` (zero).
@@ -125,8 +123,6 @@ pub const InstancePatchState = struct {
     patch_group: []const u8,
 
     /// Indicates the reboot option specified in the patch baseline.
-    ///
-    /// **Note:**
     ///
     /// Reboot options apply to `Install` operations only. Reboots aren't attempted
     /// for

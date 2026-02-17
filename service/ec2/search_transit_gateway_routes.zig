@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayRoute = @import("transit_gateway_route.zig").TransitGatewayRoute;
 const serde = @import("serde.zig");
 
-/// Searches for routes in the specified transit gateway route table.
 pub const SearchTransitGatewayRoutesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

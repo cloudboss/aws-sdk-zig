@@ -10,11 +10,6 @@ const EnaSrdSpecification = @import("ena_srd_specification.zig").EnaSrdSpecifica
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
 const serde = @import("serde.zig");
 
-/// Modifies the specified network interface attribute. You can specify only one
-/// attribute
-/// at a time. You can use this action to attach and detach security groups from
-/// an existing
-/// EC2 instance.
 pub const ModifyNetworkInterfaceAttributeInput = struct {
     /// A list of subnet IDs to associate with the network interface.
     associated_subnet_ids: ?[]const []const u8 = null,

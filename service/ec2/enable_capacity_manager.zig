@@ -5,10 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityManagerStatus = @import("capacity_manager_status.zig").CapacityManagerStatus;
 
-/// Enables EC2 Capacity Manager for your account. This starts data ingestion
-/// for your EC2 capacity usage across On-Demand, Spot, and Capacity
-/// Reservations.
-/// Initial data processing may take several hours to complete.
 pub const EnableCapacityManagerInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request.

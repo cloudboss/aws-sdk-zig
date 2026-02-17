@@ -4,17 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// **Note:**
-///
-/// This action is deprecated.
-///
-/// Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames
-/// resolve to
-/// public IP addresses when addressed between a linked EC2-Classic instance and
-/// instances
-/// in the VPC to which it's linked.
-///
-/// You must specify a VPC ID in the request.
 pub const DisableVpcClassicLinkDnsSupportInput = struct {
     /// The ID of the VPC.
     vpc_id: ?[]const u8 = null,

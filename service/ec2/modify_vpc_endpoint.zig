@@ -8,12 +8,6 @@ const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const SubnetConfiguration = @import("subnet_configuration.zig").SubnetConfiguration;
 const serde = @import("serde.zig");
 
-/// Modifies attributes of a specified VPC endpoint. The attributes that you can
-/// modify
-/// depend on the type of VPC endpoint (interface, gateway, or Gateway Load
-/// Balancer). For more information,
-/// see the [Amazon Web Services PrivateLink
-/// Guide](https://docs.aws.amazon.com/vpc/latest/privatelink/).
 pub const ModifyVpcEndpointInput = struct {
     /// (Gateway endpoint) The IDs of the route tables to associate with the
     /// endpoint.

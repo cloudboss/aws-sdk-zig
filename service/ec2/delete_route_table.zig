@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified route table. You must disassociate the route table
-/// from any subnets before you can delete it. You can't delete the main route
-/// table.
 pub const DeleteRouteTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamResourceDiscovery = @import("ipam_resource_discovery.zig").IpamResourceDiscovery;
 const serde = @import("serde.zig");
 
-/// Deletes an IPAM resource discovery. A resource discovery is an IPAM
-/// component that enables IPAM to manage and monitor resources that belong to
-/// the owning account.
 pub const DeleteIpamResourceDiscoveryInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGateway = @import("transit_gateway.zig").TransitGateway;
 const serde = @import("serde.zig");
 
-/// Describes one or more transit gateways. By default, all transit gateways are
-/// described. Alternatively, you can
-/// filter the results.
 pub const DescribeTransitGatewaysInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

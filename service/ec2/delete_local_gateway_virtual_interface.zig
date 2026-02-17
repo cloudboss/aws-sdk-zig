@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayVirtualInterface = @import("local_gateway_virtual_interface.zig").LocalGatewayVirtualInterface;
 const serde = @import("serde.zig");
 
-/// Deletes the specified local gateway virtual interface.
 pub const DeleteLocalGatewayVirtualInterfaceInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

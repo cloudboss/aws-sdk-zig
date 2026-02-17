@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Delete OpsMetadata related to an application.
 pub const DeleteOpsMetadataInput = struct {
     /// The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
     ops_metadata_arn: []const u8,

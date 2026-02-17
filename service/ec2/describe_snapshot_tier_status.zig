@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const SnapshotTierStatus = @import("snapshot_tier_status.zig").SnapshotTierStatus;
 const serde = @import("serde.zig");
 
-/// Describes the storage tier status of one or more Amazon EBS snapshots.
 pub const DescribeSnapshotTierStatusInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

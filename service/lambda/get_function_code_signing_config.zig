@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Returns the code signing configuration for the specified function.
 pub const GetFunctionCodeSigningConfigInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

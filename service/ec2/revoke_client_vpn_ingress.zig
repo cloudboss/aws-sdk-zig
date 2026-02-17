@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ClientVpnAuthorizationRuleStatus = @import("client_vpn_authorization_rule_status.zig").ClientVpnAuthorizationRuleStatus;
 const serde = @import("serde.zig");
 
-/// Removes an ingress authorization rule from a Client VPN endpoint.
 pub const RevokeClientVpnIngressInput = struct {
     /// The ID of the Active Directory group for which to revoke access.
     access_group_id: ?[]const u8 = null,

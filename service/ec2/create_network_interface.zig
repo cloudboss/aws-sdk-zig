@@ -14,15 +14,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const NetworkInterface = @import("network_interface.zig").NetworkInterface;
 const serde = @import("serde.zig");
 
-/// Creates a network interface in the specified subnet.
-///
-/// The number of IP addresses you can assign to a network interface varies by
-/// instance
-/// type.
-///
-/// For more information about network interfaces, see [Elastic network
-/// interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in the
-/// *Amazon EC2 User Guide*.
 pub const CreateNetworkInterfaceInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see [Ensuring

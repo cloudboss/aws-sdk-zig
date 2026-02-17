@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes the code signing configuration from the function.
 pub const DeleteFunctionCodeSigningConfigInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

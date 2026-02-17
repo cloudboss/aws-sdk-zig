@@ -2,8 +2,6 @@ const ExpressionType = @import("expression_type.zig").ExpressionType;
 const InputSerialization = @import("input_serialization.zig").InputSerialization;
 const OutputSerialization = @import("output_serialization.zig").OutputSerialization;
 
-/// **Important:**
-///
 /// Amazon S3 Select is no longer available to new customers. Existing customers
 /// of Amazon S3 Select can
 /// continue to use the feature as usual. [Learn
@@ -16,8 +14,6 @@ const OutputSerialization = @import("output_serialization.zig").OutputSerializat
 /// S3](http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/) using [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html), [S3 Object Lambda](https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html), or client-side
 /// filtering.
 pub const SelectParameters = struct {
-    /// **Important:**
-    ///
     /// Amazon S3 Select is no longer available to new customers. Existing customers
     /// of Amazon S3 Select can
     /// continue to use the feature as usual. [Learn

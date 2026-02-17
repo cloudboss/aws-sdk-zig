@@ -9,8 +9,6 @@ const CapacityProviderPermissionsConfig = @import("capacity_provider_permissions
 const CapacityProviderVpcConfig = @import("capacity_provider_vpc_config.zig").CapacityProviderVpcConfig;
 const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 
-/// Creates a capacity provider that manages compute resources for Lambda
-/// functions
 pub const CreateCapacityProviderInput = struct {
     /// The name of the capacity provider.
     capacity_provider_name: []const u8,

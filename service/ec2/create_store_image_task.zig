@@ -3,18 +3,9 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
-const S3ObjectTag = @import("s_3_object_tag.zig").S3ObjectTag;
+const S3ObjectTag = @import("s3_object_tag.zig").S3ObjectTag;
 const serde = @import("serde.zig");
 
-/// Stores an AMI as a single object in an Amazon S3 bucket.
-///
-/// To use this API, you must have the required permissions. For more
-/// information, see [Permissions for storing and restoring AMIs using
-/// S3](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-ami-store-restore.html#ami-s3-permissions) in the
-/// *Amazon EC2 User Guide*.
-///
-/// For more information, see [Store and restore an AMI using
-/// S3](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html) in the *Amazon EC2 User Guide*.
 pub const CreateStoreImageTaskInput = struct {
     /// The name of the Amazon S3 bucket in which the AMI object will be stored. The
     /// bucket must be in
@@ -35,7 +26,7 @@ pub const CreateStoreImageTaskInput = struct {
 
     /// The tags to apply to the AMI object that will be stored in the Amazon S3
     /// bucket.
-    s_3_object_tags: ?[]const S3ObjectTag = null,
+    s3_object_tags: ?[]const S3ObjectTag = null,
 };
 
 pub const CreateStoreImageTaskOutput = struct {
@@ -99,7 +90,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateStoreImageTaskInput, 
     }
     try body_buf.appendSlice(alloc, "&ImageId=");
     try aws.url.appendUrlEncoded(alloc, &body_buf, input.image_id);
-    if (input.s_3_object_tags) |list| {
+    if (input.s3_object_tags) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             {

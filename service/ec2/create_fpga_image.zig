@@ -7,17 +7,6 @@ const StorageLocation = @import("storage_location.zig").StorageLocation;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const serde = @import("serde.zig");
 
-/// Creates an Amazon FPGA Image (AFI) from the specified design checkpoint
-/// (DCP).
-///
-/// The create operation is asynchronous. To verify that the AFI was
-/// successfully
-/// created and is ready for use, check the output logs.
-///
-/// An AFI contains the FPGA bitstream that is ready to download to an FPGA.
-/// You can securely deploy an AFI on multiple FPGA-accelerated instances.
-/// For more information, see the [Amazon Web Services FPGA Hardware Development
-/// Kit](https://github.com/aws/aws-fpga/).
 pub const CreateFpgaImageInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request.

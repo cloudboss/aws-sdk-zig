@@ -7,8 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const MacModificationTask = @import("mac_modification_task.zig").MacModificationTask;
 const serde = @import("serde.zig");
 
-/// Delegates ownership of the Amazon EBS root volume for an Apple silicon
-/// Mac instance to an administrative user.
 pub const CreateDelegateMacVolumeOwnershipTaskInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see [Ensuring

@@ -7,14 +7,6 @@ const encodingType = @import("encoding_type.zig").encodingType;
 const SSHPublicKey = @import("ssh_public_key.zig").SSHPublicKey;
 const serde = @import("serde.zig");
 
-/// Retrieves the specified SSH public key, including metadata about the key.
-///
-/// The SSH public key retrieved by this operation is used only for
-/// authenticating the
-/// associated IAM user to an CodeCommit repository. For more information about
-/// using SSH keys
-/// to authenticate to an CodeCommit repository, see [Set up CodeCommit for SSH
-/// connections](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html) in the *CodeCommit User Guide*.
 pub const GetSSHPublicKeyInput = struct {
     /// Specifies the public key encoding format to use in the response. To retrieve
     /// the

@@ -5,8 +5,6 @@ const BillingMode = @import("billing_mode.zig").BillingMode;
 /// information about these modes, see [Read/write capacity
 /// mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html).
 ///
-/// **Note:**
-///
 /// You may need to switch to on-demand mode at least once in order to return a
 /// `BillingModeSummary` response.
 pub const BillingModeSummary = struct {

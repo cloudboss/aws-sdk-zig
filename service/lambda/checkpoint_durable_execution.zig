@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OperationUpdate = @import("operation_update.zig").OperationUpdate;
 const CheckpointUpdatedExecutionState = @import("checkpoint_updated_execution_state.zig").CheckpointUpdatedExecutionState;
 
-/// Saves the progress of a [durable
-/// function](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) execution during runtime. This API is used by the Lambda durable functions SDK to checkpoint completed steps and schedule asynchronous operations. You typically don't need to call this API directly as the SDK handles checkpointing automatically.
-///
-/// Each checkpoint operation consumes the current checkpoint token and returns
-/// a new one for the next checkpoint. This ensures that checkpoints are applied
-/// in the correct order and prevents duplicate or out-of-order state updates.
 pub const CheckpointDurableExecutionInput = struct {
     /// A unique token that identifies the current checkpoint state. This token is
     /// provided by the Lambda runtime and must be used to ensure checkpoints are

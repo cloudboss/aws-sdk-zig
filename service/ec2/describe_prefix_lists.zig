@@ -7,10 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const PrefixList = @import("prefix_list.zig").PrefixList;
 const serde = @import("serde.zig");
 
-/// Describes available Amazon Web Services services in a prefix list format,
-/// which includes the prefix list
-/// name and prefix list ID of the service and the IP address range for the
-/// service.
 pub const DescribePrefixListsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

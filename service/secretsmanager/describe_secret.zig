@@ -8,22 +8,6 @@ const ReplicationStatusType = @import("replication_status_type.zig").Replication
 const RotationRulesType = @import("rotation_rules_type.zig").RotationRulesType;
 const Tag = @import("tag.zig").Tag;
 
-/// Retrieves the details of a secret. It does not include the encrypted secret
-/// value.
-/// Secrets Manager only returns fields that have a value in the response.
-///
-/// Secrets Manager generates a CloudTrail log entry when you call this action.
-/// Do not include sensitive information in request parameters because it might
-/// be logged. For more information, see [Logging Secrets Manager events with
-/// CloudTrail](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
-///
-/// **Required permissions:
-/// **
-/// `secretsmanager:DescribeSecret`. For more information, see [
-/// IAM policy actions for Secrets
-/// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
-/// and access control in Secrets
-/// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 pub const DescribeSecretInput = struct {
     /// The ARN or name of the secret.
     ///

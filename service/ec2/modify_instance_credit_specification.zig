@@ -8,14 +8,6 @@ const SuccessfulInstanceCreditSpecificationItem = @import("successful_instance_c
 const UnsuccessfulInstanceCreditSpecificationItem = @import("unsuccessful_instance_credit_specification_item.zig").UnsuccessfulInstanceCreditSpecificationItem;
 const serde = @import("serde.zig");
 
-/// Modifies the credit option for CPU usage on a running or stopped burstable
-/// performance
-/// instance. The credit options are `standard` and
-/// `unlimited`.
-///
-/// For more information, see [Burstable
-/// performance
-/// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
 pub const ModifyInstanceCreditSpecificationInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

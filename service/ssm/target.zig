@@ -2,8 +2,6 @@
 /// pair that you
 /// specify.
 ///
-/// **Note:**
-///
 /// One or more targets must be specified for maintenance window Run
 /// Command-type tasks.
 /// Depending on the task, targets are optional for other maintenance window

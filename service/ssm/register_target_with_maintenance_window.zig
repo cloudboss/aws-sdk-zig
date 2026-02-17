@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowResourceType = @import("maintenance_window_resource_type.zig").MaintenanceWindowResourceType;
 const Target = @import("target.zig").Target;
 
-/// Registers a target with a maintenance window.
 pub const RegisterTargetWithMaintenanceWindowInput = struct {
     /// User-provided idempotency token.
     client_token: ?[]const u8 = null,
@@ -28,8 +27,6 @@ pub const RegisterTargetWithMaintenanceWindowInput = struct {
     /// The targets to register with the maintenance window. In other words, the
     /// managed nodes to
     /// run commands on when the maintenance window runs.
-    ///
-    /// **Note:**
     ///
     /// If a single maintenance window task is registered with multiple targets, its
     /// task
@@ -63,8 +60,6 @@ pub const RegisterTargetWithMaintenanceWindowInput = struct {
     /// **Example 5**: Use filters for resource group types
     ///
     /// `Key=resource-groups:ResourceTypeFilters,Values=,`
-    ///
-    /// **Note:**
     ///
     /// For `Key=resource-groups:ResourceTypeFilters`, specify resource types in the
     /// following format

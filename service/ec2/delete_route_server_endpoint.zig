@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RouteServerEndpoint = @import("route_server_endpoint.zig").RouteServerEndpoint;
 const serde = @import("serde.zig");
 
-/// Deletes the specified route server endpoint.
-///
-/// A route server endpoint is an Amazon Web Services-managed component inside a
-/// subnet that facilitates [BGP (Border Gateway
-/// Protocol)](https://en.wikipedia.org/wiki/Border_Gateway_Protocol)
-/// connections between your route server and your BGP peers.
 pub const DeleteRouteServerEndpointInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

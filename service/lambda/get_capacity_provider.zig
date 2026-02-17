@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 
-/// Retrieves information about a specific capacity provider, including its
-/// configuration, state, and associated resources.
 pub const GetCapacityProviderInput = struct {
     /// The name of the capacity provider to retrieve.
     capacity_provider_name: []const u8,

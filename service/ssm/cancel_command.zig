@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Attempts to cancel the command specified by the Command ID. There is no
-/// guarantee that the
-/// command will be terminated and the underlying process stopped.
 pub const CancelCommandInput = struct {
     /// The ID of the command you want to cancel.
     command_id: []const u8,

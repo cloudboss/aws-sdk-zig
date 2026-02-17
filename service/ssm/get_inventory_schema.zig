@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InventoryItemSchema = @import("inventory_item_schema.zig").InventoryItemSchema;
 
-/// Return a list of inventory type names for the account, or return a list of
-/// attribute names
-/// for a specific Inventory item type.
 pub const GetInventorySchemaInput = struct {
     /// Returns inventory schemas that support aggregation. For example, this call
     /// returns the

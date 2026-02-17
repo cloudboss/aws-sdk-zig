@@ -5,21 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
-/// Creates a new maintenance window.
-///
-/// **Note:**
-///
-/// The value you specify for `Duration` determines the specific end time for
-/// the
-/// maintenance window based on the time it begins. No maintenance window tasks
-/// are permitted to
-/// start after the resulting endtime minus the number of hours you specify for
-/// `Cutoff`.
-/// For example, if the maintenance window starts at 3 PM, the duration is three
-/// hours, and the
-/// value you specify for `Cutoff` is one hour, no maintenance window tasks can
-/// start
-/// after 5 PM.
 pub const CreateMaintenanceWindowInput = struct {
     /// Enables a maintenance window task to run on managed nodes, even if you
     /// haven't registered
@@ -91,8 +76,6 @@ pub const CreateMaintenanceWindowInput = struct {
     /// window
     /// until the specified future date.
     ///
-    /// **Note:**
-    ///
     /// When using a rate schedule, if you provide a start date that occurs in the
     /// past, the
     /// current date and time are used as the start date.
@@ -112,8 +95,6 @@ pub const CreateMaintenanceWindowInput = struct {
     /// * `Key=OS,Value=Windows`
     ///
     /// * `Key=Environment,Value=Production`
-    ///
-    /// **Note:**
     ///
     /// To add tags to an existing maintenance window, use the AddTagsToResource
     /// operation.

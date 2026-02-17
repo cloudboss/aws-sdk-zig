@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const PublicIpv4Pool = @import("public_ipv_4_pool.zig").PublicIpv4Pool;
 const serde = @import("serde.zig");
 
-/// Describes the specified IPv4 address pools.
 pub const DescribePublicIpv4PoolsInput = struct {
     /// One or more filters.
     ///

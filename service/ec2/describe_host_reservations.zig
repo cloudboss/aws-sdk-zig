@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const HostReservation = @import("host_reservation.zig").HostReservation;
 const serde = @import("serde.zig");
 
-/// Describes reservations that are associated with Dedicated Hosts in your
-/// account.
 pub const DescribeHostReservationsInput = struct {
     /// The filters.
     ///

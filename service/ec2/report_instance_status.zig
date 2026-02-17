@@ -7,15 +7,6 @@ const ReportInstanceReasonCodes = @import("report_instance_reason_codes.zig").Re
 const ReportStatusType = @import("report_status_type.zig").ReportStatusType;
 const serde = @import("serde.zig");
 
-/// Submits feedback about the status of an instance. The instance must be in
-/// the
-/// `running` state. If your experience with the instance differs from the
-/// instance status returned by DescribeInstanceStatus, use ReportInstanceStatus
-/// to report your experience with the instance. Amazon
-/// EC2 collects this information to improve the accuracy of status checks.
-///
-/// Use of this action does not change the value returned by
-/// DescribeInstanceStatus.
 pub const ReportInstanceStatusInput = struct {
     /// Descriptive text about the health state of your instance.
     description: ?[]const u8 = null,

@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ImportSnapshotTask = @import("import_snapshot_task.zig").ImportSnapshotTask;
 const serde = @import("serde.zig");
 
-/// Describes your import snapshot tasks.
 pub const DescribeImportSnapshotTasksInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

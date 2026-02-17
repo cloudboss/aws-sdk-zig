@@ -8,19 +8,6 @@ const TargetCapacityUnitType = @import("target_capacity_unit_type.zig").TargetCa
 const SpotPlacementScore = @import("spot_placement_score.zig").SpotPlacementScore;
 const serde = @import("serde.zig");
 
-/// Calculates the Spot placement score for a Region or Availability Zone based
-/// on the
-/// specified target capacity and compute requirements.
-///
-/// You can specify your compute requirements either by using
-/// `InstanceRequirementsWithMetadata` and letting Amazon EC2 choose the optimal
-/// instance types to fulfill your Spot request, or you can specify the instance
-/// types by using
-/// `InstanceTypes`.
-///
-/// For more information, see [Spot placement
-/// score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in
-/// the *Amazon EC2 User Guide*.
 pub const GetSpotPlacementScoresInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -106,8 +93,6 @@ pub const GetSpotPlacementScoresOutput = struct {
     /// allocation strategy.
     ///
     /// Different  Regions or Availability Zones might return the same score.
-    ///
-    /// **Note:**
     ///
     /// The Spot placement score serves as a recommendation only. No score
     /// guarantees that your

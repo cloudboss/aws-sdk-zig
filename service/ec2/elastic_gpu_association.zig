@@ -1,5 +1,3 @@
-/// **Note:**
-///
 /// Amazon Elastic Graphics reached end of life on January 8, 2024.
 ///
 /// Describes the association between an instance and an Elastic Graphics

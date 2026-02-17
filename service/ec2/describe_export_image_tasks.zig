@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ExportImageTask = @import("export_image_task.zig").ExportImageTask;
 const serde = @import("serde.zig");
 
-/// Describes the specified export image tasks or all of your export image
-/// tasks.
 pub const DescribeExportImageTasksInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

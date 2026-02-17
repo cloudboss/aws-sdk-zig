@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const DescribeFastSnapshotRestoreSuccessItem = @import("describe_fast_snapshot_restore_success_item.zig").DescribeFastSnapshotRestoreSuccessItem;
 const serde = @import("serde.zig");
 
-/// Describes the state of fast snapshot restores for your snapshots.
 pub const DescribeFastSnapshotRestoresInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

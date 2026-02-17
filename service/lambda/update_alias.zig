@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AliasRoutingConfiguration = @import("alias_routing_configuration.zig").AliasRoutingConfiguration;
 
-/// Updates the configuration of a Lambda function
-/// [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 pub const UpdateAliasInput = struct {
     /// A description of the alias.
     description: ?[]const u8 = null,

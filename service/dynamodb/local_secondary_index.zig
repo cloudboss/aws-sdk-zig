@@ -16,8 +16,6 @@ pub const LocalSecondaryIndex = struct {
     ///
     /// * `RANGE` - sort key
     ///
-    /// **Note:**
-    ///
     /// The partition key of an item is also known as its *hash
     /// attribute*. The term "hash attribute" derives from DynamoDB's usage of
     /// an internal hash function to evenly distribute data items across partitions,

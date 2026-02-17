@@ -6,27 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ServerCertificateMetadata = @import("server_certificate_metadata.zig").ServerCertificateMetadata;
 const serde = @import("serde.zig");
 
-/// Lists the server certificates stored in IAM that have the specified path
-/// prefix. If
-/// none exist, the operation returns an empty list.
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters.
-///
-/// For more information about working with server certificates, see [Working
-/// with server
-/// certificates](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html) in the *IAM User Guide*. This
-/// topic also includes a list of Amazon Web Services services that can use the
-/// server certificates that
-/// you manage with IAM.
-///
-/// **Note:**
-///
-/// IAM resource-listing operations return a subset of the available
-/// attributes for the resource. For example, this operation does not return
-/// tags, even though they are an attribute of the returned object. To view all
-/// of the information for a servercertificate, see
-/// [GetServerCertificate](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServerCertificate.html).
 pub const ListServerCertificatesInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

@@ -7,7 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayRouteTableAnnouncement = @import("transit_gateway_route_table_announcement.zig").TransitGatewayRouteTableAnnouncement;
 const serde = @import("serde.zig");
 
-/// Advertises a new transit gateway route table.
 pub const CreateTransitGatewayRouteTableAnnouncementInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

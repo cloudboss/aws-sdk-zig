@@ -7,14 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const MovingAddressStatus = @import("moving_address_status.zig").MovingAddressStatus;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This action is deprecated.
-///
-/// Describes your Elastic IP addresses that are being moved from or being
-/// restored to the EC2-Classic platform.
-/// This request does not return information about any other Elastic IP
-/// addresses in your account.
 pub const DescribeMovingAddressesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

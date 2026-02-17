@@ -22,8 +22,6 @@ pub const SSEKMSEncryption = struct {
     /// for the updated server-side encryption
     /// type. Required if `ObjectEncryption` specifies `SSEKMS`.
     ///
-    /// **Note:**
-    ///
     /// You must specify the full Amazon Web Services KMS key ARN. The KMS key ID
     /// and KMS key alias aren't
     /// supported.

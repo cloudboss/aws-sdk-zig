@@ -4,17 +4,12 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DiskImageFormat = @import("disk_image_format.zig").DiskImageFormat;
-const ExportTaskS3LocationRequest = @import("export_task_s_3_location_request.zig").ExportTaskS3LocationRequest;
+const ExportTaskS3LocationRequest = @import("export_task_s3_location_request.zig").ExportTaskS3LocationRequest;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
-const ExportTaskS3Location = @import("export_task_s_3_location.zig").ExportTaskS3Location;
+const ExportTaskS3Location = @import("export_task_s3_location.zig").ExportTaskS3Location;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Exports an Amazon Machine Image (AMI) to a VM file. For more information,
-/// see [Exporting a VM
-/// directly from an Amazon Machine Image
-/// (AMI)](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport_image.html) in the
-/// *VM Import/Export User Guide*.
 pub const ExportImageInput = struct {
     /// Token to enable idempotency for export image requests.
     client_token: ?[]const u8 = null,
@@ -44,7 +39,7 @@ pub const ExportImageInput = struct {
 
     /// The Amazon S3 bucket for the destination image. The destination bucket must
     /// exist.
-    s_3_export_location: ExportTaskS3LocationRequest,
+    s3_export_location: ExportTaskS3LocationRequest,
 
     /// The tags to apply to the export image task during creation.
     tag_specifications: ?[]const TagSpecification = null,
@@ -72,7 +67,7 @@ pub const ExportImageOutput = struct {
     role_name: ?[]const u8 = null,
 
     /// Information about the destination Amazon S3 bucket.
-    s_3_export_location: ?ExportTaskS3Location = null,
+    s3_export_location: ?ExportTaskS3Location = null,
 
     /// The status of the export image task. The possible values are `active`,
     /// `completed`,
@@ -155,8 +150,8 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExportImageInput, config: *
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     try body_buf.appendSlice(alloc, "&S3ExportLocation.S3Bucket=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.s_3_export_location.s_3_bucket);
-    if (input.s_3_export_location.s_3_prefix) |sv| {
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.s3_export_location.s3_bucket);
+    if (input.s3_export_location.s3_prefix) |sv| {
         try body_buf.appendSlice(alloc, "&S3ExportLocation.S3Prefix=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
     }
@@ -237,7 +232,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "roleName")) {
                     result.role_name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3ExportLocation")) {
-                    result.s_3_export_location = try serde.deserializeExportTaskS3Location(&reader, alloc);
+                    result.s3_export_location = try serde.deserializeExportTaskS3Location(&reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {

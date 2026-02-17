@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const NetworkInsightsAccessScopeContent = @import("network_insights_access_scope_content.zig").NetworkInsightsAccessScopeContent;
 const serde = @import("serde.zig");
 
-/// Gets the content for the specified Network Access Scope.
 pub const GetNetworkInsightsAccessScopeContentInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

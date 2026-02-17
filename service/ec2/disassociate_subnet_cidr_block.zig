@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SubnetIpv6CidrBlockAssociation = @import("subnet_ipv_6_cidr_block_association.zig").SubnetIpv6CidrBlockAssociation;
 const serde = @import("serde.zig");
 
-/// Disassociates a CIDR block from a subnet. Currently, you can disassociate an
-/// IPv6 CIDR block only. You must detach or delete all gateways and resources
-/// that are associated with the CIDR block before you can disassociate it.
 pub const DisassociateSubnetCidrBlockInput = struct {
     /// The association ID for the CIDR block.
     association_id: []const u8,

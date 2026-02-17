@@ -5,12 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentPermissionType = @import("document_permission_type.zig").DocumentPermissionType;
 
-/// Shares a Amazon Web Services Systems Manager document (SSM document)publicly
-/// or privately. If you share a document
-/// privately, you must specify the Amazon Web Services user IDs for those
-/// people who can use the document. If
-/// you share a document publicly, you must specify *All* as the account
-/// ID.
 pub const ModifyDocumentPermissionInput = struct {
     /// The Amazon Web Services users that should have access to the document. The
     /// account IDs can either be a

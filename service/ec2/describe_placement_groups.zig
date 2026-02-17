@@ -7,19 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const PlacementGroup = @import("placement_group.zig").PlacementGroup;
 const serde = @import("serde.zig");
 
-/// Describes the specified placement groups or all of your placement groups.
-///
-/// **Note:**
-///
-/// To describe a specific placement group that is *shared* with
-/// your account, you must specify the ID of the placement group using the
-/// `GroupId` parameter. Specifying the name of a
-/// *shared* placement group using the `GroupNames`
-/// parameter will result in an error.
-///
-/// For more information, see [Placement
-/// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the
-/// *Amazon EC2 User Guide*.
 pub const DescribePlacementGroupsInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

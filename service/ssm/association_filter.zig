@@ -4,8 +4,6 @@ const AssociationFilterKey = @import("association_filter_key.zig").AssociationFi
 pub const AssociationFilter = struct {
     /// The name of the filter.
     ///
-    /// **Note:**
-    ///
     /// `InstanceId` has been deprecated.
     key: AssociationFilterKey,
 

@@ -6,16 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AssociationFilter = @import("association_filter.zig").AssociationFilter;
 const Association = @import("association.zig").Association;
 
-/// Returns all State Manager associations in the current Amazon Web Services
-/// account and Amazon Web Services Region. You
-/// can limit the results to a specific State Manager association document or
-/// managed node by
-/// specifying a filter. State Manager is a tool in Amazon Web Services Systems
-/// Manager.
 pub const ListAssociationsInput = struct {
     /// One or more filters. Use a filter to return a more specific list of results.
-    ///
-    /// **Note:**
     ///
     /// Filtering associations using the `InstanceID` attribute only returns legacy
     /// associations created using the `InstanceID` attribute. Associations

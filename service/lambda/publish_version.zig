@@ -26,16 +26,6 @@ const TenancyConfig = @import("tenancy_config.zig").TenancyConfig;
 const TracingConfigResponse = @import("tracing_config_response.zig").TracingConfigResponse;
 const VpcConfigResponse = @import("vpc_config_response.zig").VpcConfigResponse;
 
-/// Creates a
-/// [version](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn't change.
-///
-/// Lambda doesn't publish a version if the function's configuration and code
-/// haven't changed since the last version. Use UpdateFunctionCode or
-/// UpdateFunctionConfiguration to update the function before publishing a
-/// version.
-///
-/// Clients can invoke versions directly or with an alias. To create an alias,
-/// use CreateAlias.
 pub const PublishVersionInput = struct {
     /// Only publish a version if the hash value matches the value that's specified.
     /// Use this option to avoid publishing a version if the function code has

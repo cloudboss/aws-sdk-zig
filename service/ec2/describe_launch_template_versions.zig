@@ -7,13 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LaunchTemplateVersion = @import("launch_template_version.zig").LaunchTemplateVersion;
 const serde = @import("serde.zig");
 
-/// Describes one or more versions of a specified launch template. You can
-/// describe all
-/// versions, individual versions, or a range of versions. You can also describe
-/// all the
-/// latest versions or all the default versions of all the launch templates in
-/// your
-/// account.
 pub const DescribeLaunchTemplateVersionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

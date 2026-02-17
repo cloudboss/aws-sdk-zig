@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ClientVpnEndpoint = @import("client_vpn_endpoint.zig").ClientVpnEndpoint;
 const serde = @import("serde.zig");
 
-/// Describes one or more Client VPN endpoints in the account.
 pub const DescribeClientVpnEndpointsInput = struct {
     /// The ID of the Client VPN endpoint.
     client_vpn_endpoint_ids: ?[]const []const u8 = null,

@@ -10,9 +10,6 @@ const RemoveIpamOrganizationalUnitExclusion = @import("remove_ipam_organizationa
 const IpamResourceDiscovery = @import("ipam_resource_discovery.zig").IpamResourceDiscovery;
 const serde = @import("serde.zig");
 
-/// Modifies a resource discovery. A resource discovery is an IPAM component
-/// that enables IPAM to manage and monitor resources that belong to the owning
-/// account.
 pub const ModifyIpamResourceDiscoveryInput = struct {
     /// Add operating Regions to the resource discovery. Operating Regions are
     /// Amazon Web Services Regions where the IPAM is allowed to manage IP address
@@ -27,8 +24,6 @@ pub const ModifyIpamResourceDiscoveryInput = struct {
     /// you can create. For more information, see [Quotas for your
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in the
     /// *Amazon VPC IPAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The resulting set of exclusions must not result in "overlap", meaning two or
     /// more OU
@@ -61,8 +56,6 @@ pub const ModifyIpamResourceDiscoveryInput = struct {
     /// you can create. For more information, see [Quotas for your
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in the
     /// *Amazon VPC IPAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The resulting set of exclusions must not result in "overlap", meaning two or
     /// more OU

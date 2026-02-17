@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FunctionConfiguration = @import("function_configuration.zig").FunctionConfiguration;
 
-/// Returns a list of
-/// [versions](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html), with the version-specific configuration of each. Lambda returns up to 50 versions per call.
 pub const ListVersionsByFunctionInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

@@ -7,8 +7,6 @@ const VerifiedAccessInstance = @import("verified_access_instance.zig").VerifiedA
 const VerifiedAccessTrustProvider = @import("verified_access_trust_provider.zig").VerifiedAccessTrustProvider;
 const serde = @import("serde.zig");
 
-/// Attaches the specified Amazon Web Services Verified Access trust provider to
-/// the specified Amazon Web Services Verified Access instance.
 pub const AttachVerifiedAccessTrustProviderInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

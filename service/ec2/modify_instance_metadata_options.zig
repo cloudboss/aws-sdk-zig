@@ -10,20 +10,6 @@ const InstanceMetadataTagsState = @import("instance_metadata_tags_state.zig").In
 const InstanceMetadataOptionsResponse = @import("instance_metadata_options_response.zig").InstanceMetadataOptionsResponse;
 const serde = @import("serde.zig");
 
-/// Modify the instance metadata parameters on a running or stopped instance.
-/// When you
-/// modify the parameters on a stopped instance, they are applied when the
-/// instance is
-/// started. When you modify the parameters on a running instance, the API
-/// responds with a
-/// state of “pending”. After the parameter modifications are successfully
-/// applied to the
-/// instance, the state of the modifications changes from “pending” to “applied”
-/// in
-/// subsequent describe-instances API calls. For more information, see [Instance
-/// metadata and user
-/// data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the
-/// *Amazon EC2 User Guide*.
 pub const ModifyInstanceMetadataOptionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

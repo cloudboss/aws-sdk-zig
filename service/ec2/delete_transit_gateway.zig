@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGateway = @import("transit_gateway.zig").TransitGateway;
 const serde = @import("serde.zig");
 
-/// Deletes the specified transit gateway.
 pub const DeleteTransitGatewayInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Retrieves information about an MFA device for a specified user.
 pub const GetMFADeviceInput = struct {
     /// Serial number that uniquely identifies the MFA device. For this API, we only
     /// accept
@@ -127,7 +126,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "Certifications")) {
                     result.certifications = try serde.deserializeCertificationMapType(&reader, alloc, "entry");
                 } else if (std.mem.eql(u8, e.local, "EnableDate")) {
-                    result.enable_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.enable_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "SerialNumber")) {
                     result.serial_number = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UserName")) {

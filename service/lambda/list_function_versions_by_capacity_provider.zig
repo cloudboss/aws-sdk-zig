@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FunctionVersionsByCapacityProviderListItem = @import("function_versions_by_capacity_provider_list_item.zig").FunctionVersionsByCapacityProviderListItem;
 
-/// Returns a list of function versions that are configured to use a specific
-/// capacity provider.
 pub const ListFunctionVersionsByCapacityProviderInput = struct {
     /// The name of the capacity provider to list function versions for.
     capacity_provider_name: []const u8,

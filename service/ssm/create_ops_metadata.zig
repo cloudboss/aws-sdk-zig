@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MetadataValue = @import("metadata_value.zig").MetadataValue;
 const Tag = @import("tag.zig").Tag;
 
-/// If you create a new application in Application Manager, Amazon Web Services
-/// Systems Manager calls this API operation to specify
-/// information about the new application, including the application type.
 pub const CreateOpsMetadataInput = struct {
     /// Metadata for a new Application Manager application.
     metadata: ?[]const aws.map.MapEntry(MetadataValue) = null,

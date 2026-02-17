@@ -7,9 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const VerifiedAccessInstance = @import("verified_access_instance.zig").VerifiedAccessInstance;
 const serde = @import("serde.zig");
 
-/// An Amazon Web Services Verified Access instance is a regional entity that
-/// evaluates application requests and grants
-/// access only when your security requirements are met.
 pub const CreateVerifiedAccessInstanceInput = struct {
     /// The custom subdomain.
     cidr_endpoints_custom_sub_domain: ?[]const u8 = null,

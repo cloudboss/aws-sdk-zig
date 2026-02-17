@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const SecurityGroupVpcAssociation = @import("security_group_vpc_association.zig").SecurityGroupVpcAssociation;
 const serde = @import("serde.zig");
 
-/// Describes security group VPC associations made with
-/// [AssociateSecurityGroupVpc](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html).
 pub const DescribeSecurityGroupVpcAssociationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

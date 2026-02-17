@@ -7,9 +7,6 @@ const AllowedPublishers = @import("allowed_publishers.zig").AllowedPublishers;
 const CodeSigningPolicies = @import("code_signing_policies.zig").CodeSigningPolicies;
 const CodeSigningConfig = @import("code_signing_config.zig").CodeSigningConfig;
 
-/// Update the code signing configuration. Changes to the code signing
-/// configuration take effect the next time a user tries to deploy a code
-/// package to the function.
 pub const UpdateCodeSigningConfigInput = struct {
     /// Signing profiles for this code signing configuration.
     allowed_publishers: ?AllowedPublishers = null,

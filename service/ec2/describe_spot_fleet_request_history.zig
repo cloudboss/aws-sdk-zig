@@ -7,18 +7,6 @@ const EventType = @import("event_type.zig").EventType;
 const HistoryRecord = @import("history_record.zig").HistoryRecord;
 const serde = @import("serde.zig");
 
-/// Describes the events for the specified Spot Fleet request during the
-/// specified
-/// time.
-///
-/// Spot Fleet events are delayed by up to 30 seconds before they can be
-/// described. This
-/// ensures that you can query by the last evaluated time and not miss a
-/// recorded event.
-/// Spot Fleet events are available for 48 hours.
-///
-/// For more information, see [Monitor fleet events using Amazon
-/// EventBridge](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html) in the *Amazon EC2 User Guide*.
 pub const DescribeSpotFleetRequestHistoryInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually
@@ -176,13 +164,13 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "historyRecordSet")) {
                     result.history_records = try serde.deserializeHistoryRecords(&reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "lastEvaluatedTime")) {
-                    result.last_evaluated_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_evaluated_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "nextToken")) {
                     result.next_token = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "spotFleetRequestId")) {
                     result.spot_fleet_request_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

@@ -6,27 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ObjectLockConfiguration = @import("object_lock_configuration.zig").ObjectLockConfiguration;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Gets the Object Lock configuration for a bucket. The rule specified in the
-/// Object Lock configuration
-/// will be applied by default to every new object placed in the specified
-/// bucket. For more information, see
-/// [Locking
-/// Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-///
-/// The following action is related to `GetObjectLockConfiguration`:
-///
-/// *
-///   [GetObjectAttributes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const GetObjectLockConfigurationInput = struct {
     /// The bucket whose Object Lock configuration you want to retrieve.
     ///

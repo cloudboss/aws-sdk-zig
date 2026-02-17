@@ -5,20 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Requests a reboot of the specified instances. This operation is
-/// asynchronous; it only
-/// queues a request to reboot the specified instances. The operation succeeds
-/// if the
-/// instances are valid and belong to you. Requests to reboot terminated
-/// instances are
-/// ignored.
-///
-/// If an instance does not cleanly shut down within a few minutes, Amazon EC2
-/// performs a
-/// hard reboot.
-///
-/// For more information about troubleshooting, see [Troubleshoot an unreachable
-/// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html) in the *Amazon EC2 User Guide*.
 pub const RebootInstancesInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

@@ -6,13 +6,9 @@
 /// manufacturer or
 /// architecture.
 ///
-/// **Note:**
-///
 /// Currently, only one instance family can be specified in the list.
 pub const PerformanceFactorReferenceRequest = struct {
     /// The instance family to use as a baseline reference.
-    ///
-    /// **Note:**
     ///
     /// Ensure that you specify the correct value for the instance family. The
     /// instance

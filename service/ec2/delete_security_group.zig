@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a security group.
-///
-/// If you attempt to delete a security group that is associated with an
-/// instance or network interface, is
-/// referenced by another security group in the same VPC, or has a VPC
-/// association, the operation fails with
-/// `DependencyViolation`.
 pub const DeleteSecurityGroupInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

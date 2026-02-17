@@ -84,17 +84,17 @@ pub const Command = struct {
     /// The S3 bucket where the responses to the command executions should be
     /// stored. This was
     /// requested when issuing the command.
-    output_s_3_bucket_name: ?[]const u8,
+    output_s3_bucket_name: ?[]const u8,
 
     /// The S3 directory path inside the bucket where the responses to the command
     /// executions should
     /// be stored. This was requested when issuing the command.
-    output_s_3_key_prefix: ?[]const u8,
+    output_s3_key_prefix: ?[]const u8,
 
     /// (Deprecated) You can no longer specify this parameter. The system ignores
     /// it. Instead, Systems Manager
     /// automatically determines the Amazon Web Services Region of the S3 bucket.
-    output_s_3_region: ?[]const u8,
+    output_s3_region: ?[]const u8,
 
     /// The parameter values to be inserted in the document when running the
     /// command.
@@ -195,9 +195,9 @@ pub const Command = struct {
         .max_concurrency = "MaxConcurrency",
         .max_errors = "MaxErrors",
         .notification_config = "NotificationConfig",
-        .output_s_3_bucket_name = "OutputS3BucketName",
-        .output_s_3_key_prefix = "OutputS3KeyPrefix",
-        .output_s_3_region = "OutputS3Region",
+        .output_s3_bucket_name = "OutputS3BucketName",
+        .output_s3_key_prefix = "OutputS3KeyPrefix",
+        .output_s3_region = "OutputS3Region",
         .parameters = "Parameters",
         .requested_date_time = "RequestedDateTime",
         .service_role = "ServiceRole",

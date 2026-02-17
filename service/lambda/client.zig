@@ -336,8 +336,6 @@ pub const Client = struct {
     /// `Qualifier` parameter. Otherwise, all versions and aliases are deleted. This
     /// doesn't require the user to have explicit permissions for DeleteAlias.
     ///
-    /// **Note:**
-    ///
     /// A deleted Lambda function cannot be recovered. Ensure that you specify the
     /// correct function name and version before deleting.
     ///
@@ -576,17 +574,11 @@ pub const Client = struct {
         return invoke_.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// For asynchronous function invocation, use Invoke.
     ///
     /// Invokes a function asynchronously.
     ///
-    /// **Note:**
-    ///
     /// The payload limit is 256KB. For larger payloads, for up to 1MB, use Invoke.
-    ///
-    /// **Note:**
     ///
     /// If you do use the InvokeAsync action, note that it doesn't support the use
     /// of X-Ray active tracing. Trace ID is not propagated to the function, even if
@@ -659,8 +651,6 @@ pub const Client = struct {
     ///
     /// Set `FunctionVersion` to `ALL` to include all published versions of each
     /// function in addition to the unpublished version.
-    ///
-    /// **Note:**
     ///
     /// The `ListFunctions` operation returns a subset of the FunctionConfiguration
     /// fields. To get the additional fields (State, StateReasonCode, StateReason,
@@ -770,8 +760,6 @@ pub const Client = struct {
     /// To send an invocation record to a queue, topic, S3 bucket, function, or
     /// event bus, specify a
     /// [destination](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations). You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.
-    ///
-    /// **Note:**
     ///
     /// S3 buckets are supported only for on-failure destinations. To retain records
     /// of successful invocations, use another destination type.
@@ -970,8 +958,6 @@ pub const Client = struct {
     ///
     /// The function's code is locked when you publish a version. You can't modify
     /// the code of a published version, only the unpublished version.
-    ///
-    /// **Note:**
     ///
     /// For a function defined as a container image, Lambda resolves the image tag
     /// to an image digest. In Amazon ECR, if you update the image tag to a new

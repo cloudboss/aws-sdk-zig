@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayVpcAttachment = @import("transit_gateway_vpc_attachment.zig").TransitGatewayVpcAttachment;
 const serde = @import("serde.zig");
 
-/// Deletes the specified VPC attachment.
 pub const DeleteTransitGatewayVpcAttachmentInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

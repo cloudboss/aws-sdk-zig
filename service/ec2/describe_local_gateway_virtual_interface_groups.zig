@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LocalGatewayVirtualInterfaceGroup = @import("local_gateway_virtual_interface_group.zig").LocalGatewayVirtualInterfaceGroup;
 const serde = @import("serde.zig");
 
-/// Describes the specified local gateway virtual interface groups.
 pub const DescribeLocalGatewayVirtualInterfaceGroupsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

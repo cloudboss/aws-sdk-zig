@@ -7,9 +7,6 @@ const DeregisterInstanceTagAttributeRequest = @import("deregister_instance_tag_a
 const InstanceTagNotificationAttribute = @import("instance_tag_notification_attribute.zig").InstanceTagNotificationAttribute;
 const serde = @import("serde.zig");
 
-/// Deregisters tag keys to prevent tags that have the specified tag keys from
-/// being
-/// included in scheduled event notifications for resources in the Region.
 pub const DeregisterInstanceEventNotificationAttributesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

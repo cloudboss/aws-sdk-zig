@@ -1,7 +1,5 @@
 /// Request to create a launch template for a Windows fast launch enabled AMI.
 ///
-/// **Note:**
-///
 /// Note - You can specify either the `LaunchTemplateName` or the
 /// `LaunchTemplateId`, but not both.
 pub const FastLaunchLaunchTemplateSpecificationRequest = struct {

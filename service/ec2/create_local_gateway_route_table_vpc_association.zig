@@ -7,7 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const LocalGatewayRouteTableVpcAssociation = @import("local_gateway_route_table_vpc_association.zig").LocalGatewayRouteTableVpcAssociation;
 const serde = @import("serde.zig");
 
-/// Associates the specified VPC with the specified local gateway route table.
 pub const CreateLocalGatewayRouteTableVpcAssociationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

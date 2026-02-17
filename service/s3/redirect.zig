@@ -26,8 +26,6 @@ pub const Redirect = struct {
     /// only if
     /// `ReplaceKeyWith` is not provided.
     ///
-    /// **Important:**
-    ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using
     /// XML requests. For more information, see [
@@ -40,8 +38,6 @@ pub const Redirect = struct {
     /// `error.html`. Not required if one of the siblings is present. Can be present
     /// only if
     /// `ReplaceKeyPrefixWith` is not provided.
-    ///
-    /// **Important:**
     ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using

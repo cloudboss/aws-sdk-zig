@@ -55,13 +55,9 @@ pub const ResponseLaunchTemplateData = struct {
 
     /// Deprecated.
     ///
-    /// **Note:**
-    ///
     /// Amazon Elastic Graphics reached end of life on January 8, 2024.
     elastic_gpu_specifications: ?[]const ElasticGpuSpecificationResponse,
 
-    /// **Note:**
-    ///
     /// Amazon Elastic Inference is no longer available.
     ///
     /// An elastic inference accelerator to associate with the instance. Elastic

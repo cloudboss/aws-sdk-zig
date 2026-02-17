@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a permission for a network interface. By default, you cannot delete
-/// the
-/// permission if the account for which you're removing the permission has
-/// attached the
-/// network interface to an instance. However, you can force delete the
-/// permission,
-/// regardless of any attachment.
 pub const DeleteNetworkInterfacePermissionInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

@@ -4,17 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Replaces an existing route within a route table in a VPC.
-///
-/// You must specify either a destination CIDR block or a prefix list ID. You
-/// must also specify
-/// exactly one of the resources from the parameter list, or reset the local
-/// route to its default
-/// target.
-///
-/// For more information, see [Route
-/// tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
-/// *Amazon VPC User Guide*.
 pub const ReplaceRouteInput = struct {
     /// [IPv4 traffic only] The ID of a carrier gateway.
     carrier_gateway_id: ?[]const u8 = null,

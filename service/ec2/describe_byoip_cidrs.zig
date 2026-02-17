@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ByoipCidr = @import("byoip_cidr.zig").ByoipCidr;
 const serde = @import("serde.zig");
 
-/// Describes the IP address ranges that were provisioned for use with Amazon
-/// Web Services resources
-/// through through bring your own IP addresses (BYOIP).
 pub const DescribeByoipCidrsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

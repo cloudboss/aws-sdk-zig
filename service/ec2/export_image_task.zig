@@ -1,4 +1,4 @@
-const ExportTaskS3Location = @import("export_task_s_3_location.zig").ExportTaskS3Location;
+const ExportTaskS3Location = @import("export_task_s3_location.zig").ExportTaskS3Location;
 const Tag = @import("tag.zig").Tag;
 
 /// Describes an export image task.
@@ -16,7 +16,7 @@ pub const ExportImageTask = struct {
     progress: ?[]const u8,
 
     /// Information about the destination Amazon S3 bucket.
-    s_3_export_location: ?ExportTaskS3Location,
+    s3_export_location: ?ExportTaskS3Location,
 
     /// The status of the export image task. The possible values are `active`,
     /// `completed`,

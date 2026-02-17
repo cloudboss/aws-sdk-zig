@@ -7,23 +7,6 @@ const assignmentStatusType = @import("assignment_status_type.zig").assignmentSta
 const VirtualMFADevice = @import("virtual_mfa_device.zig").VirtualMFADevice;
 const serde = @import("serde.zig");
 
-/// Lists the virtual MFA devices defined in the Amazon Web Services account by
-/// assignment status. If
-/// you do not specify an assignment status, the operation returns a list of all
-/// virtual MFA
-/// devices. Assignment status can be `Assigned`, `Unassigned`, or
-/// `Any`.
-///
-/// **Note:**
-///
-/// IAM resource-listing operations return a subset of the available
-/// attributes for the resource. For example, this operation does not return
-/// tags, even though they are an attribute of the returned object. To view tag
-/// information for a virtual MFA device, see
-/// [ListMFADeviceTags](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADeviceTags.html).
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters.
 pub const ListVirtualMFADevicesInput = struct {
     /// The status (`Unassigned` or `Assigned`) of the devices to list.
     /// If you do not specify an `AssignmentStatus`, the operation defaults to

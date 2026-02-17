@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Role = @import("role.zig").Role;
 const serde = @import("serde.zig");
 
-/// Use
-/// [UpdateRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateRole.html) instead.
-///
-/// Modifies only the description of a role. This operation performs the same
-/// function as
-/// the `Description` parameter in the `UpdateRole` operation.
 pub const UpdateRoleDescriptionInput = struct {
     /// The new description that you want to apply to the specified role.
     description: []const u8,

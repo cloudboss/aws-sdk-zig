@@ -7,18 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ServiceDetail = @import("service_detail.zig").ServiceDetail;
 const serde = @import("serde.zig");
 
-/// Describes available services to which you can create a VPC endpoint.
-///
-/// When the service provider and the consumer have different accounts in
-/// multiple
-/// Availability Zones, and the consumer views the VPC endpoint service
-/// information, the
-/// response only includes the common Availability Zones. For example, when the
-/// service
-/// provider account uses `us-east-1a` and `us-east-1c` and the
-/// consumer uses `us-east-1a` and `us-east-1b`, the response includes
-/// the VPC endpoint services in the common Availability Zone,
-/// `us-east-1a`.
 pub const DescribeVpcEndpointServicesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

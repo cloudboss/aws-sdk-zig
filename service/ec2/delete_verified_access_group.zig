@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessGroup = @import("verified_access_group.zig").VerifiedAccessGroup;
 const serde = @import("serde.zig");
 
-/// Delete an Amazon Web Services Verified Access group.
 pub const DeleteVerifiedAccessGroupInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

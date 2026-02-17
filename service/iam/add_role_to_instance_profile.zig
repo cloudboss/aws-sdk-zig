@@ -4,42 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Adds the specified IAM role to the specified instance profile. An instance
-/// profile
-/// can contain only one role, and this quota cannot be increased. You can
-/// remove the
-/// existing role and then add a different role to an instance profile. You must
-/// then wait
-/// for the change to appear across all of Amazon Web Services because of
-/// [eventual
-/// consistency](https://en.wikipedia.org/wiki/Eventual_consistency). To force
-/// the change, you must [disassociate the instance
-/// profile](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html) and then [associate the
-/// instance
-/// profile](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html), or you can stop your instance and then restart it.
-///
-/// **Note:**
-///
-/// The caller of this operation must be granted the `PassRole` permission
-/// on the IAM role by a permissions policy.
-///
-/// **Important:**
-///
-/// When using the
-/// [iam:AssociatedResourceArn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#available-keys-for-iam) condition in a policy to restrict the [PassRole](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) IAM action, special considerations apply if the policy is
-/// intended to define access for the `AddRoleToInstanceProfile` action. In
-/// this case, you cannot specify a Region or instance ID in the EC2 instance
-/// ARN. The
-/// ARN value must be `arn:aws:ec2:*:CallerAccountId:instance/*`. Using any
-/// other ARN value may lead to unexpected evaluation results.
-///
-/// For more information about roles, see [IAM
-/// roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in
-/// the
-/// *IAM User Guide*. For more information about instance profiles,
-/// see [Using
-/// instance
-/// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
 pub const AddRoleToInstanceProfileInput = struct {
     /// The name of the instance profile to update.
     ///

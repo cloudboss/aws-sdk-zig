@@ -2,7 +2,7 @@ const ImportStatus = @import("import_status.zig").ImportStatus;
 const InputCompressionType = @import("input_compression_type.zig").InputCompressionType;
 const InputFormat = @import("input_format.zig").InputFormat;
 const InputFormatOptions = @import("input_format_options.zig").InputFormatOptions;
-const S3BucketSource = @import("s_3_bucket_source.zig").S3BucketSource;
+const S3BucketSource = @import("s3_bucket_source.zig").S3BucketSource;
 const TableCreationParameters = @import("table_creation_parameters.zig").TableCreationParameters;
 
 /// Represents the properties of the table being imported into.
@@ -66,7 +66,7 @@ pub const ImportTableDescription = struct {
     /// Values for the S3 bucket the source file is imported from. Includes bucket
     /// name
     /// (required), key prefix (optional) and bucket account owner ID (optional).
-    s_3_bucket_source: ?S3BucketSource,
+    s3_bucket_source: ?S3BucketSource,
 
     /// The time when this import task started.
     start_time: ?i64,
@@ -95,7 +95,7 @@ pub const ImportTableDescription = struct {
         .input_format_options = "InputFormatOptions",
         .processed_item_count = "ProcessedItemCount",
         .processed_size_bytes = "ProcessedSizeBytes",
-        .s_3_bucket_source = "S3BucketSource",
+        .s3_bucket_source = "S3BucketSource",
         .start_time = "StartTime",
         .table_arn = "TableArn",
         .table_creation_parameters = "TableCreationParameters",

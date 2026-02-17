@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Unlocks a snapshot that is locked in governance mode or that is locked in
-/// compliance mode
-/// but still in the cooling-off period. You can't unlock a snapshot that is
-/// locked in compliance
-/// mode after the cooling-off period has expired.
 pub const UnlockSnapshotInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

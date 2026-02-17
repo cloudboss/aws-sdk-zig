@@ -7,12 +7,6 @@ const RegisterInstanceTagAttributeRequest = @import("register_instance_tag_attri
 const InstanceTagNotificationAttribute = @import("instance_tag_notification_attribute.zig").InstanceTagNotificationAttribute;
 const serde = @import("serde.zig");
 
-/// Registers a set of tag keys to include in scheduled event notifications for
-/// your
-/// resources.
-///
-/// To remove tags, use
-/// [DeregisterInstanceEventNotificationAttributes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeregisterInstanceEventNotificationAttributes.html).
 pub const RegisterInstanceEventNotificationAttributesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

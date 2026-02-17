@@ -4,8 +4,6 @@ const ObjectLockRetentionMode = @import("object_lock_retention_mode.zig").Object
 /// retention settings for new
 /// objects placed in the specified bucket.
 ///
-/// **Note:**
-///
 /// * The `DefaultRetention` settings require both a mode and a period.
 ///
 /// * The `DefaultRetention` period can be either `Days` or `Years`

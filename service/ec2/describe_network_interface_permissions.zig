@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const NetworkInterfacePermission = @import("network_interface_permission.zig").NetworkInterfacePermission;
 const serde = @import("serde.zig");
 
-/// Describes the permissions for your network interfaces.
 pub const DescribeNetworkInterfacePermissionsInput = struct {
     /// One or more filters.
     ///

@@ -11,15 +11,6 @@ const PatchAction = @import("patch_action.zig").PatchAction;
 const PatchSource = @import("patch_source.zig").PatchSource;
 const OperatingSystem = @import("operating_system.zig").OperatingSystem;
 
-/// Modifies an existing patch baseline. Fields not specified in the request are
-/// left
-/// unchanged.
-///
-/// **Note:**
-///
-/// For information about valid key-value pairs in `PatchFilters` for each
-/// supported
-/// operating system type, see PatchFilter.
 pub const UpdatePatchBaselineInput = struct {
     /// A set of rules used to include patches in the baseline.
     approval_rules: ?PatchRuleGroup = null,
@@ -68,8 +59,6 @@ pub const UpdatePatchBaselineInput = struct {
     description: ?[]const u8 = null,
 
     /// A set of global filters used to include patches in the baseline.
-    ///
-    /// **Important:**
     ///
     /// The `GlobalFilters` parameter can be configured only by using the CLI or an
     /// Amazon Web Services SDK. It can't be configured from the Patch Manager

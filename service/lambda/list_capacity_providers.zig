@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityProviderState = @import("capacity_provider_state.zig").CapacityProviderState;
 const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 
-/// Returns a list of capacity providers in your account.
 pub const ListCapacityProvidersInput = struct {
     /// Specify the pagination token that's returned by a previous request to
     /// retrieve the next page of results.

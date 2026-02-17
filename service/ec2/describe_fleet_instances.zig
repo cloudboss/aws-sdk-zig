@@ -7,17 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ActiveInstance = @import("active_instance.zig").ActiveInstance;
 const serde = @import("serde.zig");
 
-/// Describes the running instances for the specified EC2 Fleet.
-///
-/// **Note:**
-///
-/// Currently, `DescribeFleetInstances` does not support fleets of type
-/// `instant`. Instead, use `DescribeFleets`, specifying the
-/// `instant` fleet ID in the request.
-///
-/// For more information, see [Describe your
-/// EC2
-/// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#monitor-ec2-fleet) in the *Amazon EC2 User Guide*.
 pub const DescribeFleetInstancesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

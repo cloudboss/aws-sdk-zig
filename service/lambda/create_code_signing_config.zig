@@ -7,8 +7,6 @@ const AllowedPublishers = @import("allowed_publishers.zig").AllowedPublishers;
 const CodeSigningPolicies = @import("code_signing_policies.zig").CodeSigningPolicies;
 const CodeSigningConfig = @import("code_signing_config.zig").CodeSigningConfig;
 
-/// Creates a code signing configuration. A [code signing
-/// configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html) defines a list of allowed signing profiles and defines the code-signing validation policy (action to be taken if deployment validation checks fail).
 pub const CreateCodeSigningConfigInput = struct {
     /// Signing profiles for this code signing configuration.
     allowed_publishers: AllowedPublishers,

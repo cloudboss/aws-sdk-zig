@@ -12,13 +12,6 @@ const PatchAction = @import("patch_action.zig").PatchAction;
 const PatchSource = @import("patch_source.zig").PatchSource;
 const Tag = @import("tag.zig").Tag;
 
-/// Creates a patch baseline.
-///
-/// **Note:**
-///
-/// For information about valid key-value pairs in `PatchFilters` for each
-/// supported
-/// operating system type, see PatchFilter.
 pub const CreatePatchBaselineInput = struct {
     /// A set of rules used to include patches in the baseline.
     approval_rules: ?PatchRuleGroup = null,
@@ -72,8 +65,6 @@ pub const CreatePatchBaselineInput = struct {
     description: ?[]const u8 = null,
 
     /// A set of global filters used to include patches in the baseline.
-    ///
-    /// **Important:**
     ///
     /// The `GlobalFilters` parameter can be configured only by using the CLI or an
     /// Amazon Web Services SDK. It can't be configured from the Patch Manager
@@ -158,8 +149,6 @@ pub const CreatePatchBaselineInput = struct {
     /// * `Key=PatchSeverity,Value=Critical`
     ///
     /// * `Key=OS,Value=Windows`
-    ///
-    /// **Note:**
     ///
     /// To add tags to an existing patch baseline, use the AddTagsToResource
     /// operation.

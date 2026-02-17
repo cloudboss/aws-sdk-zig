@@ -12,10 +12,6 @@ const CapacityReservationFleetState = @import("capacity_reservation_fleet_state.
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Creates a Capacity Reservation Fleet. For more information, see [Create a
-/// Capacity Reservation
-/// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-cr-fleets.html#create-crfleet) in the
-/// *Amazon EC2 User Guide*.
 pub const CreateCapacityReservationFleetInput = struct {
     /// The strategy used by the Capacity Reservation Fleet to determine which of
     /// the
@@ -340,9 +336,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "capacityReservationFleetId")) {
                     result.capacity_reservation_fleet_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
-                    result.end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "fleetCapacityReservationSet")) {
                     result.fleet_capacity_reservations = try serde.deserializeFleetCapacityReservationSet(&reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "instanceMatchCriteria")) {

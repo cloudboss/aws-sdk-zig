@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const NodeAggregator = @import("node_aggregator.zig").NodeAggregator;
 const NodeFilter = @import("node_filter.zig").NodeFilter;
 
-/// Generates a summary of managed instance/node metadata based on the filters
-/// and aggregators
-/// you specify. Results are grouped by the input aggregator you specify.
 pub const ListNodesSummaryInput = struct {
     /// Specify one or more aggregators to return a count of managed nodes that
     /// match that

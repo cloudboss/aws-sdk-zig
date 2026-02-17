@@ -378,7 +378,7 @@ pub fn deserializePhoneNumberInformation(reader: *aws.xml.Reader, alloc: std.mem
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CreatedAt")) {
-                    result.created_at = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.created_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Iso2CountryCode")) {
                     result.iso_2_country_code = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NumberCapabilities")) {

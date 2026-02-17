@@ -15,180 +15,6 @@ const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEnc
 const StorageClass = @import("storage_class.zig").StorageClass;
 const serde = @import("serde.zig");
 
-/// The `HEAD` operation retrieves metadata from an object without returning the
-/// object
-/// itself. This operation is useful if you're interested only in an object's
-/// metadata.
-///
-/// **Note:**
-///
-/// A `HEAD` request has the same options as a `GET` operation on an object. The
-/// response is identical to the `GET` response except that there is no response
-/// body. Because
-/// of this, if the `HEAD` request generates an error, it returns a generic
-/// code, such as
-/// `400 Bad Request`, `403 Forbidden`, `404 Not Found`, `405
-/// Method Not Allowed`, `412 Precondition Failed`, or `304 Not Modified`.
-/// It's not possible to retrieve the exact exception of these error codes.
-///
-/// Request headers are limited to 8 KB in size. For more information, see
-/// [Common Request
-/// Headers](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html).
-///
-/// **Permissions**
-///
-/// * **General purpose bucket permissions** - To use
-/// `HEAD`, you must have the `s3:GetObject` permission. You need the
-/// relevant read object (or version) permission for this operation. For more
-/// information, see
-/// [Actions, resources,
-/// and condition keys for Amazon
-/// S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html) in
-/// the *Amazon S3 User Guide*. For more
-/// information about the permissions to S3 API operations by S3 resource types,
-/// see [Required permissions for
-/// Amazon S3 API
-/// operations](/AmazonS3/latest/userguide/using-with-s3-policy-actions.html) in
-/// the *Amazon S3 User Guide*.
-///
-/// If the object you request doesn't exist, the error that Amazon S3 returns
-/// depends on whether
-/// you also have the `s3:ListBucket` permission.
-///
-/// * If you have the `s3:ListBucket` permission on the bucket, Amazon S3
-///   returns an
-/// HTTP status code `404 Not Found` error.
-///
-/// * If you don’t have the `s3:ListBucket` permission, Amazon S3 returns an
-///   HTTP
-/// status code `403 Forbidden` error.
-///
-/// * **Directory bucket permissions** - To grant access to this API operation
-///   on a directory bucket, we recommend that you use the [
-/// `CreateSession`
-/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-/// API operation for session-based authorization. Specifically, you grant the
-/// `s3express:CreateSession` permission to the directory bucket in a bucket
-/// policy or an IAM identity-based policy. Then, you make the `CreateSession`
-/// API call on the bucket to obtain a session token. With the session token in
-/// your request header, you can make API requests to this operation. After the
-/// session token expires, you make another `CreateSession` API call to generate
-/// a new session token for use.
-/// Amazon Web Services CLI or SDKs create session and refresh the session token
-/// automatically to avoid service interruptions when a session expires. For
-/// more information about authorization, see [
-/// `CreateSession`
-/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html).
-///
-/// If you enable `x-amz-checksum-mode` in the request and the object is
-/// encrypted
-/// with Amazon Web Services Key Management Service (Amazon Web Services KMS),
-/// you must also have the
-/// `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-/// identity-based policies and KMS key policies for the KMS key to retrieve the
-/// checksum of
-/// the object.
-///
-/// **Encryption**
-///
-/// **Note:**
-///
-/// Encryption request headers, like `x-amz-server-side-encryption`, should not
-/// be
-/// sent for `HEAD` requests if your object uses server-side encryption with Key
-/// Management Service
-/// (KMS) keys (SSE-KMS), dual-layer server-side encryption with Amazon Web
-/// Services KMS keys (DSSE-KMS), or
-/// server-side encryption with Amazon S3 managed encryption keys (SSE-S3). The
-/// `x-amz-server-side-encryption` header is used when you `PUT` an object
-/// to S3 and want to specify the encryption method. If you include this header
-/// in a
-/// `HEAD` request for an object that uses these types of keys, you’ll get an
-/// HTTP
-/// `400 Bad Request` error. It's because the encryption method can't be changed
-/// when
-/// you retrieve the object.
-///
-/// If you encrypt an object by using server-side encryption with
-/// customer-provided encryption
-/// keys (SSE-C) when you store the object in Amazon S3, then when you retrieve
-/// the metadata from the
-/// object, you must use the following headers to provide the encryption key for
-/// the server to be able
-/// to retrieve the object's metadata. The headers are:
-///
-/// * `x-amz-server-side-encryption-customer-algorithm`
-///
-/// * `x-amz-server-side-encryption-customer-key`
-///
-/// * `x-amz-server-side-encryption-customer-key-MD5`
-///
-/// For more information about SSE-C, see [Server-Side Encryption (Using
-/// Customer-Provided Encryption
-/// Keys)](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html) in the *Amazon S3 User Guide*.
-///
-/// **Note:**
-///
-/// **Directory bucket ** -
-/// For directory buckets, there are only two supported options for server-side
-/// encryption: SSE-S3 and SSE-KMS. SSE-C isn't supported. For more
-/// information, see [Protecting data with server-side
-/// encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html) in the *Amazon S3 User Guide*.
-///
-/// **Versioning**
-///
-/// * If the current version of the object is a delete marker, Amazon S3 behaves
-///   as if the object was
-/// deleted and includes `x-amz-delete-marker: true` in the response.
-///
-/// * If the specified version is a delete marker, the response returns a `405
-///   Method Not
-/// Allowed` error and the `Last-Modified: timestamp` response header.
-///
-/// **Note:**
-///
-/// * **Directory buckets** -
-/// Delete marker is not supported for directory buckets.
-///
-/// * **Directory buckets** -
-/// S3 Versioning isn't enabled and supported for directory buckets. For this
-/// API operation, only the `null` value of the version ID is supported by
-/// directory buckets. You can only specify `null` to the
-/// `versionId` query parameter in the request.
-///
-/// **HTTP Host header syntax**
-///
-/// **Directory buckets ** - The HTTP Host header syntax is `
-/// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
-///
-/// **Note:**
-///
-/// For directory buckets, you must make requests for this API operation to the
-/// Zonal endpoint. These endpoints support virtual-hosted-style requests in the
-/// format
-/// `https://*amzn-s3-demo-bucket*.s3express-*zone-id*.*region-code*.amazonaws.com/*key-name*
-/// `. Path-style requests are not supported. For more information about
-/// endpoints in Availability Zones, see [Regional and Zonal endpoints for
-/// directory buckets in Availability
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
-/// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
-/// see [Concepts for directory buckets in Local
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
-/// *Amazon S3 User Guide*.
-///
-/// The following actions are related to `HeadObject`:
-///
-/// *
-///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-///
-/// *
-///   [GetObjectAttributes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const HeadObjectInput = struct {
     /// The name of the bucket that contains the object.
     ///
@@ -216,8 +42,6 @@ pub const HeadObjectInput = struct {
     /// you provide the access point ARN in place of the bucket name. For more
     /// information about access point ARNs, see [Using access
     /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// Object Lambda access points are not supported by directory buckets.
     ///
@@ -362,8 +186,6 @@ pub const HeadObjectInput = struct {
     /// Specifies the algorithm to use when encrypting the object (for example,
     /// AES256).
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     sse_customer_algorithm: ?[]const u8 = null,
 
@@ -374,8 +196,6 @@ pub const HeadObjectInput = struct {
     /// be appropriate for use with the algorithm specified in the
     /// `x-amz-server-side-encryption-customer-algorithm` header.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     sse_customer_key: ?[]const u8 = null,
 
@@ -384,14 +204,10 @@ pub const HeadObjectInput = struct {
     /// for a message integrity check to ensure that the encryption key was
     /// transmitted without error.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     sse_customer_key_md5: ?[]const u8 = null,
 
     /// Version ID used to reference a specific version of the object.
-    ///
-    /// **Note:**
     ///
     /// For directory buckets in this API operation, only the `null` value of the
     /// version ID is supported.
@@ -403,8 +219,6 @@ pub const HeadObjectOutput = struct {
     accept_ranges: ?[]const u8 = null,
 
     /// The archive state of the head object.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     archive_status: ?ArchiveStatus = null,
@@ -508,8 +322,6 @@ pub const HeadObjectOutput = struct {
     /// Delete Marker. If false, this
     /// response header does not appear in the response.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     delete_marker: ?bool = null,
 
@@ -523,8 +335,6 @@ pub const HeadObjectOutput = struct {
     /// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)), the response includes this header. It
     /// includes the `expiry-date` and `rule-id` key-value pairs providing object
     /// expiration information. The value of the `rule-id` is URL-encoded.
-    ///
-    /// **Note:**
     ///
     /// Object expiration information is not returned in directory buckets and this
     /// header returns the
@@ -548,8 +358,6 @@ pub const HeadObjectOutput = struct {
     /// not legal HTTP
     /// headers.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     missing_meta: ?i32 = null,
 
@@ -562,8 +370,6 @@ pub const HeadObjectOutput = struct {
     /// Object Lock, see [Object
     /// Lock](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     object_lock_legal_hold_status: ?ObjectLockLegalHoldStatus = null,
 
@@ -574,16 +380,12 @@ pub const HeadObjectOutput = struct {
     /// Lock, see [Object
     /// Lock](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     object_lock_mode: ?ObjectLockMode = null,
 
     /// The date and time when the Object Lock retention period expires. This header
     /// is only returned if the
     /// requester has the `s3:GetObjectRetention` permission.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     object_lock_retain_until_date: ?i64 = null,
@@ -641,8 +443,6 @@ pub const HeadObjectOutput = struct {
     /// For more information, see
     /// [Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html).
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     replication_status: ?ReplicationStatus = null,
 
@@ -669,8 +469,6 @@ pub const HeadObjectOutput = struct {
     /// General
     /// Considerations](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations).
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets. Directory buckets
     /// only support `EXPRESS_ONEZONE` (the S3 Express One Zone storage class) in
     /// Availability Zones and `ONEZONE_IA` (the S3 One Zone-Infrequent Access
@@ -679,8 +477,6 @@ pub const HeadObjectOutput = struct {
 
     /// The server-side encryption algorithm used when you store this object in
     /// Amazon S3 or Amazon FSx.
-    ///
-    /// **Note:**
     ///
     /// When accessing data stored in Amazon FSx file systems using S3 access
     /// points, the only valid server side
@@ -691,8 +487,6 @@ pub const HeadObjectOutput = struct {
     /// requested, the response will
     /// include this header to confirm the encryption algorithm that's used.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     sse_customer_algorithm: ?[]const u8 = null,
 
@@ -701,8 +495,6 @@ pub const HeadObjectOutput = struct {
     /// include this header to provide the round-trip message integrity verification
     /// of the customer-provided
     /// encryption key.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     sse_customer_key_md5: ?[]const u8 = null,
@@ -718,8 +510,6 @@ pub const HeadObjectOutput = struct {
     /// For more information, see [Storage
     /// Classes](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html).
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets ** -
     /// Directory buckets only support `EXPRESS_ONEZONE` (the S3 Express One Zone
     /// storage class) in Availability Zones and `ONEZONE_IA` (the S3 One
@@ -733,14 +523,10 @@ pub const HeadObjectOutput = struct {
     /// You can use
     /// [GetObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html) to retrieve the tag set associated with an object.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     tag_count: ?i32 = null,
 
     /// Version ID of the object.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8 = null,
@@ -750,8 +536,6 @@ pub const HeadObjectOutput = struct {
     /// the same bucket or to an external URL. Amazon S3 stores the value of this
     /// header in the object
     /// metadata.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     website_redirect_location: ?[]const u8 = null,

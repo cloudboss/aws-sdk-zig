@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TableAutoScalingDescription = @import("table_auto_scaling_description.zig").TableAutoScalingDescription;
 
-/// Describes auto scaling settings across replicas of the global table at once.
 pub const DescribeTableReplicaAutoScalingInput = struct {
     /// The name of the table. You can also provide the Amazon Resource Name (ARN)
     /// of the table in this

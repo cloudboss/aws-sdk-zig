@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Permanently ends a session and closes the data connection between the
-/// Session Manager client and
-/// SSM Agent on the managed node. A terminated session can't be resumed.
 pub const TerminateSessionInput = struct {
     /// The ID of the session to terminate.
     session_id: []const u8,

@@ -4,18 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a subscription. If the subscription requires authentication for
-/// deletion, only
-/// the owner of the subscription or the topic's owner can unsubscribe, and an
-/// Amazon Web Services
-/// signature is required. If the `Unsubscribe` call does not require
-/// authentication and the requester is not the subscription owner, a final
-/// cancellation
-/// message is delivered to the endpoint, so that the endpoint owner can easily
-/// resubscribe
-/// to the topic if the `Unsubscribe` request was unintended.
-///
-/// This action is throttled at 100 transactions per second (TPS).
 pub const UnsubscribeInput = struct {
     /// The ARN of the subscription to be deleted.
     subscription_arn: []const u8,

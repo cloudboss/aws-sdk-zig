@@ -56,6 +56,7 @@ pub const GetAccountAuthorizationDetailsPaginator = struct {
 
         const output = try get_account_authorization_details.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -96,6 +97,7 @@ pub const GetGroupPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try get_group.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -138,6 +140,7 @@ pub const ListAccessKeysPaginator = struct {
 
         const output = try list_access_keys.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -178,6 +181,7 @@ pub const ListAccountAliasesPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_account_aliases.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -220,6 +224,7 @@ pub const ListAttachedGroupPoliciesPaginator = struct {
 
         const output = try list_attached_group_policies.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -260,6 +265,7 @@ pub const ListAttachedRolePoliciesPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_attached_role_policies.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -302,6 +308,7 @@ pub const ListAttachedUserPoliciesPaginator = struct {
 
         const output = try list_attached_user_policies.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -342,6 +349,7 @@ pub const ListEntitiesForPolicyPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_entities_for_policy.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -384,6 +392,7 @@ pub const ListGroupPoliciesPaginator = struct {
 
         const output = try list_group_policies.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -424,6 +433,7 @@ pub const ListGroupsPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_groups.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -466,6 +476,7 @@ pub const ListGroupsForUserPaginator = struct {
 
         const output = try list_groups_for_user.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -506,6 +517,7 @@ pub const ListInstanceProfileTagsPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_instance_profile_tags.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -548,6 +560,7 @@ pub const ListInstanceProfilesPaginator = struct {
 
         const output = try list_instance_profiles.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -588,6 +601,7 @@ pub const ListInstanceProfilesForRolePaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_instance_profiles_for_role.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -630,6 +644,7 @@ pub const ListMFADeviceTagsPaginator = struct {
 
         const output = try list_mfa_device_tags.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -670,6 +685,7 @@ pub const ListMFADevicesPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_mfa_devices.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -712,6 +728,7 @@ pub const ListOpenIDConnectProviderTagsPaginator = struct {
 
         const output = try list_open_id_connect_provider_tags.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -752,6 +769,7 @@ pub const ListPoliciesPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_policies.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -794,6 +812,7 @@ pub const ListPolicyTagsPaginator = struct {
 
         const output = try list_policy_tags.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -834,6 +853,7 @@ pub const ListPolicyVersionsPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_policy_versions.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -876,6 +896,7 @@ pub const ListRolePoliciesPaginator = struct {
 
         const output = try list_role_policies.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -916,6 +937,7 @@ pub const ListRoleTagsPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_role_tags.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -958,6 +980,7 @@ pub const ListRolesPaginator = struct {
 
         const output = try list_roles.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -998,6 +1021,7 @@ pub const ListSAMLProviderTagsPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_saml_provider_tags.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1040,6 +1064,7 @@ pub const ListServerCertificateTagsPaginator = struct {
 
         const output = try list_server_certificate_tags.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1080,6 +1105,7 @@ pub const ListServerCertificatesPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_server_certificates.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1122,6 +1148,7 @@ pub const ListSigningCertificatesPaginator = struct {
 
         const output = try list_signing_certificates.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1162,6 +1189,7 @@ pub const ListSSHPublicKeysPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_ssh_public_keys.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1204,6 +1232,7 @@ pub const ListUserPoliciesPaginator = struct {
 
         const output = try list_user_policies.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1244,6 +1273,7 @@ pub const ListUserTagsPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_user_tags.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1286,6 +1316,7 @@ pub const ListUsersPaginator = struct {
 
         const output = try list_users.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1326,6 +1357,7 @@ pub const ListVirtualMFADevicesPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_virtual_mfa_devices.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1368,6 +1400,7 @@ pub const SimulateCustomPolicyPaginator = struct {
 
         const output = try simulate_custom_policy.execute(self.client, self.params, options);
 
+
         if (output.marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1408,6 +1441,7 @@ pub const SimulatePrincipalPolicyPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try simulate_principal_policy.execute(self.client, self.params, options);
+
 
         if (output.marker) |token| {
             if (self.next_token) |old| {

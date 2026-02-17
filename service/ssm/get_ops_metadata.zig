@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const MetadataValue = @import("metadata_value.zig").MetadataValue;
 
-/// View operational metadata related to an application in Application Manager.
 pub const GetOpsMetadataInput = struct {
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you

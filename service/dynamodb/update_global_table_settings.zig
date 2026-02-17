@@ -9,18 +9,6 @@ const AutoScalingSettingsUpdate = @import("auto_scaling_settings_update.zig").Au
 const ReplicaSettingsUpdate = @import("replica_settings_update.zig").ReplicaSettingsUpdate;
 const ReplicaSettingsDescription = @import("replica_settings_description.zig").ReplicaSettingsDescription;
 
-/// Updates settings for a global table.
-///
-/// **Important:**
-///
-/// This documentation is for version 2017.11.29 (Legacy) of global tables,
-/// which should be avoided for new global tables. Customers should use [Global
-/// Tables version 2019.11.21
-/// (Current)](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy).
-///
-/// To determine which version you're using, see [Determining the global table
-/// version you are
-/// using](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html). To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Upgrading global tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
 pub const UpdateGlobalTableSettingsInput = struct {
     /// The billing mode of the global table. If `GlobalTableBillingMode` is not
     /// specified, the global table defaults to `PROVISIONED` capacity billing

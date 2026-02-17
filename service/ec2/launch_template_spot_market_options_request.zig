@@ -21,8 +21,6 @@ pub const LaunchTemplateSpotMarketOptionsRequest = struct {
     /// result in an `InvalidParameterValue` error message when the launch template
     /// is used to launch an instance.
     ///
-    /// **Important:**
-    ///
     /// If you specify a maximum price, your Spot Instances will be interrupted more
     /// frequently than if you do not specify this parameter.
     max_price: ?[]const u8,

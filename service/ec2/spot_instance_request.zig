@@ -64,8 +64,6 @@ pub const SpotInstanceRequest = struct {
     /// using this parameter because it can lead to increased interruptions. If you
     /// do not specify this parameter, you will pay the current Spot price.
     ///
-    /// **Important:**
-    ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.
     spot_price: ?[]const u8,

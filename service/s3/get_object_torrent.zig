@@ -6,34 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Returns torrent files from a bucket. BitTorrent can save you bandwidth when
-/// you're distributing
-/// large files.
-///
-/// **Note:**
-///
-/// You can get torrent only for objects that are less than 5 GB in size, and
-/// that are not encrypted
-/// using server-side encryption with a customer-provided encryption key.
-///
-/// To use GET, you must have READ access to the object.
-///
-/// This functionality is not supported for Amazon S3 on Outposts.
-///
-/// The following action is related to `GetObjectTorrent`:
-///
-/// *
-///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const GetObjectTorrentInput = struct {
     /// The name of the bucket containing the object for which to get the torrent
     /// files.

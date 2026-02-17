@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SnapshotAttributeName = @import("snapshot_attribute_name.zig").SnapshotAttributeName;
 
-/// Resets permission settings for the specified snapshot.
-///
-/// For more information about modifying snapshot permissions, see [Share a
-/// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modifying-snapshot-permissions.html) in the
-/// *Amazon EBS User Guide*.
 pub const ResetSnapshotAttributeInput = struct {
     /// The attribute to reset. Currently, only the attribute for permission to
     /// create volumes can

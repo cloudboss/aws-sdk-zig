@@ -4,67 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Creates a new standard or FIFO queue. You can pass one or more attributes in
-/// the request. Keep the following in mind:
-///
-/// * If you don't specify the `FifoQueue` attribute, Amazon SQS creates a
-///   standard queue.
-///
-/// **Note:**
-///
-/// You can't change the queue type after you create it and you can't convert
-/// an existing standard queue into a FIFO queue. You must either create a new
-/// FIFO queue for your application or delete your existing standard queue and
-/// recreate it as a FIFO queue. For more information, see [Moving From a
-/// standard queue to a FIFO
-/// queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-moving) in the
-/// *Amazon SQS Developer Guide*.
-///
-/// * If you don't provide a value for an attribute, the queue is created with
-///   the
-/// default value for the attribute.
-///
-/// * If you delete a queue, you must wait at least 60 seconds before creating a
-/// queue with the same name.
-///
-/// To successfully create a new queue, you must provide a queue name that
-/// adheres to the
-/// [limits
-/// related to
-/// queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html) and is unique within the scope of your queues.
-///
-/// **Note:**
-///
-/// After you create a queue, you must wait at least one second after the queue
-/// is
-/// created to be able to use the queue.
-///
-/// To retrieve the URL of a queue, use the [
-/// `GetQueueUrl`
-/// ](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueUrl.html) action. This action only requires the [
-/// `QueueName`
-/// ](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html#API_CreateQueue_RequestSyntax) parameter.
-///
-/// When creating queues, keep the following points in mind:
-///
-/// * If you specify the name of an existing queue and provide the exact same
-///   names
-/// and values for all its attributes, the [
-/// `CreateQueue`
-/// ](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html) action will return the URL of the
-/// existing queue instead of creating a new one.
-///
-/// * If you attempt to create a queue with a name that already exists but with
-/// different attribute names or values, the `CreateQueue` action will
-/// return an error. This ensures that existing queues are not inadvertently
-/// altered.
-///
-/// **Note:**
-///
-/// Cross-account permissions don't apply to this action. For more information,
-/// see [Grant
-/// cross-account permissions to a role and a
-/// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
 pub const CreateQueueInput = struct {
     /// A map of attributes with their corresponding values.
     ///
@@ -161,8 +100,6 @@ pub const CreateQueueInput = struct {
     /// To allow more than 10 source queues to specify dead-letter queues, set the
     /// `redrivePermission` parameter
     /// to `allowAll`.
-    ///
-    /// **Note:**
     ///
     /// The dead-letter queue of a
     /// FIFO queue must also be a FIFO queue. Similarly, the dead-letter
@@ -317,8 +254,6 @@ pub const CreateQueueInput = struct {
     /// [Quotas related to
     /// queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues)
     /// in the *Amazon SQS Developer Guide*.
-    ///
-    /// **Note:**
     ///
     /// To be able to tag a queue on creation, you must have the
     /// `sqs:CreateQueue` and `sqs:TagQueue` permissions.

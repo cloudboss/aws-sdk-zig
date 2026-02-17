@@ -6,15 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Creates a topic to which notifications can be published. Users can create at
-/// most
-/// 100,000 standard topics (at most 1,000 FIFO topics). For more information,
-/// see [Creating an Amazon SNS
-/// topic](https://docs.aws.amazon.com/sns/latest/dg/sns-create-topic.html) in
-/// the *Amazon SNS Developer Guide*. This action is
-/// idempotent, so if the requester already owns a topic with the specified
-/// name, that
-/// topic's ARN is returned without creating a new topic.
 pub const CreateTopicInput = struct {
     /// A map of attributes with their corresponding values.
     ///
@@ -102,8 +93,6 @@ pub const CreateTopicInput = struct {
     /// failed message delivery status for an Amazon SNS topic that is subscribed to
     /// an platform application endpoint.
     ///
-    /// **Note:**
-    ///
     /// In addition to being able to configure topic attributes for message
     /// delivery status of notification messages sent to Amazon SNS application
     /// endpoints, you can also configure application attributes for the delivery
@@ -127,8 +116,6 @@ pub const CreateTopicInput = struct {
     /// * `SQSFailureFeedbackRoleArn` – Indicates failed
     /// message delivery status for an Amazon SNS topic that is subscribed to an
     /// Amazon SQS endpoint.
-    ///
-    /// **Note:**
     ///
     /// The SuccessFeedbackRoleArn and FailureFeedbackRoleArn
     /// attributes are used to give Amazon SNS write access to use CloudWatch Logs
@@ -211,8 +198,6 @@ pub const CreateTopicInput = struct {
     name: []const u8,
 
     /// The list of tags to add to a new topic.
-    ///
-    /// **Note:**
     ///
     /// To be able to tag a topic on creation, you must have the
     /// `sns:CreateTopic` and `sns:TagResource`

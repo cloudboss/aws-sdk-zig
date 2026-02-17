@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Determines whether a product code is associated with an instance. This
-/// action can only
-/// be used by the owner of the product code. It is useful when a product code
-/// owner must
-/// verify whether another user's instance is eligible for support.
 pub const ConfirmProductInstanceInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

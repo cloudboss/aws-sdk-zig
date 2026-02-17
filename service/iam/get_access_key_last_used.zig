@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AccessKeyLastUsed = @import("access_key_last_used.zig").AccessKeyLastUsed;
 const serde = @import("serde.zig");
 
-/// Retrieves information about when the specified access key was last used. The
-/// information includes the date and time of last use, along with the Amazon
-/// Web Services service and
-/// Region that were specified in the last request made with that key.
 pub const GetAccessKeyLastUsedInput = struct {
     /// The identifier of an access key.
     ///

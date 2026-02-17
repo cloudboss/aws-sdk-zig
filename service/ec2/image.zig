@@ -103,8 +103,6 @@ pub const Image = struct {
     /// to launch an instance, there is a 24-hour delay before that usage is
     /// reported.
     ///
-    /// **Note:**
-    ///
     /// `lastLaunchedTime` data is available starting April 2017.
     last_launched_time: ?[]const u8,
 

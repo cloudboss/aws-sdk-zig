@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceTypeForTagging = @import("resource_type_for_tagging.zig").ResourceTypeForTagging;
 
-/// Removes tag keys from the specified resource.
 pub const RemoveTagsFromResourceInput = struct {
     /// The ID of the resource from which you want to remove tags. For example:
     ///
@@ -30,8 +29,6 @@ pub const RemoveTagsFromResourceInput = struct {
     ///
     /// For the Document and Parameter values, use the name of the resource.
     ///
-    /// **Note:**
-    ///
     /// The `ManagedInstance` type for this API operation is only for on-premises
     /// managed nodes. Specify the name of the managed node in the following format:
     /// mi-ID_number. For
@@ -39,8 +36,6 @@ pub const RemoveTagsFromResourceInput = struct {
     resource_id: []const u8,
 
     /// The type of resource from which you want to remove a tag.
-    ///
-    /// **Note:**
     ///
     /// The `ManagedInstance` type for this API operation is only for on-premises
     /// managed nodes. Specify the name of the managed node in the following format:

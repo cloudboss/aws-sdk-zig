@@ -4,15 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Initiates the verification process to prove that the service provider owns
-/// the private
-/// DNS name domain for the endpoint service.
-///
-/// The service provider must successfully perform the verification before the
-/// consumer can use the name to access the service.
-///
-/// Before the service provider runs this command, they must add a record to the
-/// DNS server.
 pub const StartVpcEndpointServicePrivateDnsVerificationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

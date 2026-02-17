@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Group = @import("group.zig").Group;
 const serde = @import("serde.zig");
 
-/// Lists the IAM groups that have the specified path prefix.
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters.
 pub const ListGroupsInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

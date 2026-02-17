@@ -4,34 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified role. Unlike the Amazon Web Services Management
-/// Console, when you delete a role
-/// programmatically, you must delete the items attached to the role manually,
-/// or the
-/// deletion fails. For more information, see [Deleting an IAM
-/// role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html#roles-managingrole-deleting-cli). Before attempting to delete a role, remove the
-/// following attached items:
-///
-/// * Inline policies
-///   ([DeleteRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRolePolicy.html))
-///
-/// * Attached managed policies
-///   ([DetachRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachRolePolicy.html))
-///
-/// * Instance profile
-///   ([RemoveRoleFromInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_RemoveRoleFromInstanceProfile.html))
-///
-/// * Optional – Delete instance profile after detaching from role for
-/// resource clean up
-/// ([DeleteInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteInstanceProfile.html))
-///
-/// **Important:**
-///
-/// Make sure that you do not have any Amazon EC2 instances running with the
-/// role you are
-/// about to delete. Deleting a role or instance profile that is associated with
-/// a
-/// running instance will break any applications running on the instance.
 pub const DeleteRoleInput = struct {
     /// The name of the role to delete.
     ///

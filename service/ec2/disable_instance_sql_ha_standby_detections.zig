@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RegisteredInstance = @import("registered_instance.zig").RegisteredInstance;
 const serde = @import("serde.zig");
 
-/// Disable Amazon EC2 instances running in an SQL Server High Availability
-/// cluster from SQL Server High Availability
-/// instance standby detection monitoring. Once disabled, Amazon Web Services no
-/// longer monitors the
-/// metadata for the instances to determine whether they are active or standby
-/// nodes in the
-/// SQL Server High Availability cluster.
 pub const DisableInstanceSqlHaStandbyDetectionsInput = struct {
     /// Checks whether you have the required permissions for the action,
     /// without actually making the request, and provides an error response. If you

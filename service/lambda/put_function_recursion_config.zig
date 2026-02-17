@@ -5,20 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RecursiveLoop = @import("recursive_loop.zig").RecursiveLoop;
 
-/// Sets your function's [recursive loop
-/// detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html) configuration.
-///
-/// When you configure a Lambda function to output to the same service or
-/// resource that invokes the function, it's possible to create an infinite
-/// recursive loop. For example, a Lambda function might write a message to an
-/// Amazon Simple Queue Service (Amazon SQS) queue, which then invokes the same
-/// function. This invocation causes the function to write another message to
-/// the queue, which in turn invokes the function again.
-///
-/// Lambda can detect certain types of recursive loops shortly after they occur.
-/// When Lambda detects a recursive loop and your function's recursive loop
-/// detection configuration is set to `Terminate`, it stops your function being
-/// invoked and notifies you.
 pub const PutFunctionRecursionConfigInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///
@@ -42,8 +28,6 @@ pub const PutFunctionRecursionConfigInput = struct {
     /// it detects your function being invoked as part of a recursive loop.
     ///
     /// By default, Lambda sets your function's configuration to `Terminate`.
-    ///
-    /// **Important:**
     ///
     /// If your design intentionally uses a Lambda function to write data back to
     /// the same Amazon Web Services resource that invokes the function, then use

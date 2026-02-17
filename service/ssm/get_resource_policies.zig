@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const GetResourcePoliciesResponseEntry = @import("get_resource_policies_response_entry.zig").GetResourcePoliciesResponseEntry;
 
-/// Returns an array of the `Policy` object.
 pub const GetResourcePoliciesInput = struct {
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you

@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowFilter = @import("maintenance_window_filter.zig").MaintenanceWindowFilter;
 const MaintenanceWindowExecutionTaskIdentity = @import("maintenance_window_execution_task_identity.zig").MaintenanceWindowExecutionTaskIdentity;
 
-/// For a given maintenance window execution, lists the tasks that were run.
 pub const DescribeMaintenanceWindowExecutionTasksInput = struct {
     /// Optional filters used to scope down the returned tasks. The supported filter
     /// key is

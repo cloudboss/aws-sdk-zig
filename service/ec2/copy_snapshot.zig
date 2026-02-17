@@ -7,51 +7,7 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Creates an exact copy of an Amazon EBS snapshot.
-///
-/// The location of the source snapshot determines whether you can copy it or
-/// not,
-/// and the allowed destinations for the snapshot copy.
-///
-/// * If the source snapshot is in a Region, you can copy it within that Region,
-/// to another Region, to an Outpost associated with that Region, or to a Local
-/// Zone in that Region.
-///
-/// * If the source snapshot is in a Local Zone, you can copy it within that
-///   Local Zone,
-/// to another Local Zone in the same zone group, or to the parent Region of the
-/// Local
-/// Zone.
-///
-/// * If the source snapshot is on an Outpost, you can't copy it.
-///
-/// When copying snapshots to a Region, the encryption outcome for the snapshot
-/// copy depends on the
-/// Amazon EBS encryption by default setting for the destination Region, the
-/// encryption status of the source
-/// snapshot, and the encryption parameters you specify in the request. For more
-/// information, see [
-/// Encryption and snapshot
-/// copying](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html#creating-encrypted-snapshots).
-///
-/// Snapshots copied to an Outpost must be encrypted. Unencrypted snapshots are
-/// not supported
-/// on Outposts. For more information, [
-/// Amazon EBS local snapshots on
-/// Outposts](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#considerations).
-///
-/// **Note:**
-///
-/// Snapshots copies have an arbitrary source volume ID. Do not use this volume
-/// ID for
-/// any purpose.
-///
-/// For more information, see [Copy an Amazon EBS
-/// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html) in the
-/// *Amazon EBS User Guide*.
 pub const CopySnapshotInput = struct {
-    /// **Note:**
-    ///
     /// Not supported when copying snapshots to or from Local Zones or Outposts.
     ///
     /// Specify a completion duration, in 15 minute increments, to initiate a
@@ -72,14 +28,10 @@ pub const CopySnapshotInput = struct {
     /// The Local Zone, for example, `cn-north-1-pkx-1a` to which to copy the
     /// snapshot.
     ///
-    /// **Note:**
-    ///
     /// Only supported when copying a snapshot to a Local Zone.
     destination_availability_zone: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the Outpost to which to copy the snapshot.
-    ///
-    /// **Note:**
     ///
     /// Only supported when copying a snapshot to an Outpost.
     ///

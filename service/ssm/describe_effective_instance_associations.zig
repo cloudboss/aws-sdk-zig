@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceAssociation = @import("instance_association.zig").InstanceAssociation;
 
-/// All associations for the managed nodes.
 pub const DescribeEffectiveInstanceAssociationsInput = struct {
     /// The managed node ID for which you want to view all associations.
     instance_id: []const u8,

@@ -4,17 +4,10 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Enables the specified MFA device and associates it with the specified IAM
-/// user. When
-/// enabled, the MFA device is required for every subsequent login by the IAM
-/// user
-/// associated with the device.
 pub const EnableMFADeviceInput = struct {
     /// An authentication code emitted by the device.
     ///
     /// The format for this parameter is a string of six digits.
-    ///
-    /// **Important:**
     ///
     /// Submit your request immediately after generating the authentication codes.
     /// If you
@@ -31,8 +24,6 @@ pub const EnableMFADeviceInput = struct {
     /// A subsequent authentication code emitted by the device.
     ///
     /// The format for this parameter is a string of six digits.
-    ///
-    /// **Important:**
     ///
     /// Submit your request immediately after generating the authentication codes.
     /// If you

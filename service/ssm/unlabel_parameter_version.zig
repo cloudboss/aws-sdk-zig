@@ -4,20 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Remove a label or labels from a parameter.
-///
-/// Parameter names can't contain spaces. The service removes any spaces
-/// specified for the
-/// beginning or end of a parameter name. If the specified name for a parameter
-/// contains spaces
-/// between characters, the request fails with a `ValidationException` error.
 pub const UnlabelParameterVersionInput = struct {
     /// One or more labels to delete from the specified parameter version.
     labels: []const []const u8,
 
     /// The name of the parameter from which you want to delete one or more labels.
-    ///
-    /// **Note:**
     ///
     /// You can't enter the Amazon Resource Name (ARN) for a parameter, only the
     /// parameter name

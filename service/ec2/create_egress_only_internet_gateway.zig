@@ -7,13 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const EgressOnlyInternetGateway = @import("egress_only_internet_gateway.zig").EgressOnlyInternetGateway;
 const serde = @import("serde.zig");
 
-/// [IPv6 only] Creates an egress-only internet gateway for your VPC. An
-/// egress-only
-/// internet gateway is used to enable outbound communication over IPv6 from
-/// instances in
-/// your VPC to the internet, and prevents hosts outside of your VPC from
-/// initiating an IPv6
-/// connection with your instance.
 pub const CreateEgressOnlyInternetGatewayInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the

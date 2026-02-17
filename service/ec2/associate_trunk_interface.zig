@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TrunkInterfaceAssociation = @import("trunk_interface_association.zig").TrunkInterfaceAssociation;
 const serde = @import("serde.zig");
 
-/// Associates a branch network interface with a trunk network interface.
-///
-/// Before you create the association, use
-/// [CreateNetworkInterface](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html) command and set the interface type
-/// to `trunk`. You must also create a network interface for
-/// each branch network interface that you want to associate with the trunk
-/// network interface.
 pub const AssociateTrunkInterfaceInput = struct {
     /// The ID of the branch network interface.
     branch_interface_id: []const u8,

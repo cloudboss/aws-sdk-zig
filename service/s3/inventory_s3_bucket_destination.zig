@@ -9,8 +9,6 @@ pub const InventoryS3BucketDestination = struct {
     /// provided, the owner is not
     /// validated before exporting data.
     ///
-    /// **Note:**
-    ///
     /// Although this value is optional, we strongly recommend that you set it to
     /// help prevent problems
     /// if the destination bucket ownership changes.

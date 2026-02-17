@@ -5,10 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const BackupDescription = @import("backup_description.zig").BackupDescription;
 
-/// Describes an existing backup of a table.
-///
-/// You can call `DescribeBackup` at a maximum rate of 10 times per
-/// second.
 pub const DescribeBackupInput = struct {
     /// The Amazon Resource Name (ARN) associated with the backup.
     backup_arn: []const u8,

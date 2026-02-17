@@ -6,14 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RouteServerPropagation = @import("route_server_propagation.zig").RouteServerPropagation;
 const serde = @import("serde.zig");
 
-/// Defines which route tables the route server can update with routes.
-///
-/// When enabled, route server propagation installs the routes in the FIB on the
-/// route table you've specified. Route server supports IPv4 and IPv6 route
-/// propagation.
-///
-/// For more information see [Dynamic routing in your VPC with VPC Route
-/// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
 pub const EnableRouteServerPropagationInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

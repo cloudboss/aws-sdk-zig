@@ -4,14 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Accepts a phone number and indicates whether the phone holder has opted out
-/// of
-/// receiving SMS messages from your Amazon Web Services account. You cannot
-/// send SMS messages to a number
-/// that is opted out.
-///
-/// To resume sending messages, you can opt in the number by using the
-/// `OptInPhoneNumber` action.
 pub const CheckIfPhoneNumberIsOptedOutInput = struct {
     /// The phone number for which you want to check the opt out status.
     phone_number: []const u8,

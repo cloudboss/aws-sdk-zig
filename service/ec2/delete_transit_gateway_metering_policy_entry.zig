@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMeteringPolicyEntry = @import("transit_gateway_metering_policy_entry.zig").TransitGatewayMeteringPolicyEntry;
 const serde = @import("serde.zig");
 
-/// Deletes an entry from a transit gateway metering policy.
 pub const DeleteTransitGatewayMeteringPolicyEntryInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

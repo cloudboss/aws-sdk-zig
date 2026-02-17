@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a topic and all its subscriptions. Deleting a topic might prevent
-/// some
-/// messages previously sent to the topic from being delivered to subscribers.
-/// This action
-/// is idempotent, so deleting a topic that does not exist does not result in an
-/// error.
 pub const DeleteTopicInput = struct {
     /// The ARN of the topic you want to delete.
     topic_arn: []const u8,

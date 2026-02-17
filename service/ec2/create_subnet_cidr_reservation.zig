@@ -8,11 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const SubnetCidrReservation = @import("subnet_cidr_reservation.zig").SubnetCidrReservation;
 const serde = @import("serde.zig");
 
-/// Creates a subnet CIDR reservation. For more information, see [Subnet CIDR
-/// reservations](https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html)
-/// in the *Amazon VPC User Guide* and [Manage prefixes
-/// for your network
-/// interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-prefixes.html) in the *Amazon EC2 User Guide*.
 pub const CreateSubnetCidrReservationInput = struct {
     /// The IPv4 or IPV6 CIDR range to reserve.
     cidr: []const u8,

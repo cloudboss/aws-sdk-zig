@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const FunctionScalingConfig = @import("function_scaling_config.zig").FunctionScalingConfig;
 const State = @import("state.zig").State;
 
-/// Sets the scaling configuration for a Lambda Managed Instances function. The
-/// scaling configuration defines the minimum and maximum number of execution
-/// environments that can be provisioned for the function, allowing you to
-/// control scaling behavior and resource allocation.
 pub const PutFunctionScalingConfigInput = struct {
     /// The name or ARN of the Lambda function.
     function_name: []const u8,

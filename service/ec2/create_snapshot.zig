@@ -12,59 +12,6 @@ const Tag = @import("tag.zig").Tag;
 const TransferType = @import("transfer_type.zig").TransferType;
 const serde = @import("serde.zig");
 
-/// Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use
-/// snapshots for
-/// backups, to make copies of EBS volumes, and to save data before shutting
-/// down an
-/// instance.
-///
-/// The location of the source EBS volume determines where you can create the
-/// snapshot.
-///
-/// * If the source volume is in a Region, you must create the snapshot in the
-///   same
-/// Region as the volume.
-///
-/// * If the source volume is in a Local Zone, you can create the snapshot in
-///   the same Local
-/// Zone or in its parent Amazon Web Services Region.
-///
-/// * If the source volume is on an Outpost, you can create the snapshot on the
-///   same
-/// Outpost or in its parent Amazon Web Services Region.
-///
-/// When a snapshot is created, any Amazon Web Services Marketplace product
-/// codes that are associated with the
-/// source volume are propagated to the snapshot.
-///
-/// You can take a snapshot of an attached volume that is in use. However,
-/// snapshots only
-/// capture data that has been written to your Amazon EBS volume at the time the
-/// snapshot command is
-/// issued; this might exclude any data that has been cached by any applications
-/// or the operating
-/// system. If you can pause any file systems on the volume long enough to take
-/// a snapshot, your
-/// snapshot should be complete. However, if you cannot pause all file writes to
-/// the volume, you
-/// should unmount the volume from within the instance, issue the snapshot
-/// command, and then
-/// remount the volume to ensure a consistent and complete snapshot. You may
-/// remount and use your
-/// volume while the snapshot status is `pending`.
-///
-/// When you create a snapshot for an EBS volume that serves as a root device,
-/// we recommend
-/// that you stop the instance before taking the snapshot.
-///
-/// Snapshots that are taken from encrypted volumes are automatically encrypted.
-/// Volumes that
-/// are created from encrypted snapshots are also automatically encrypted. Your
-/// encrypted volumes
-/// and any associated snapshots always remain protected. For more information,
-/// see [Amazon EBS
-/// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
-/// in the *Amazon EBS User Guide*.
 pub const CreateSnapshotInput = struct {
     /// A description for the snapshot.
     description: ?[]const u8 = null,
@@ -76,8 +23,6 @@ pub const CreateSnapshotInput = struct {
     /// Otherwise, it is `UnauthorizedOperation`.
     dry_run: ?bool = null,
 
-    /// **Note:**
-    ///
     /// Only supported for volumes in Local Zones. If the source volume is not in a
     /// Local Zone,
     /// omit this parameter.
@@ -93,8 +38,6 @@ pub const CreateSnapshotInput = struct {
     /// Default value: `regional`
     location: ?SnapshotLocationEnum = null,
 
-    /// **Note:**
-    ///
     /// Only supported for volumes on Outposts. If the source volume is not on an
     /// Outpost,
     /// omit this parameter.
@@ -124,8 +67,6 @@ pub const CreateSnapshotOutput = struct {
     /// (Availability Zone) or `us-west-2-lax-1a` (Local Zone).
     availability_zone: ?[]const u8 = null,
 
-    /// **Note:**
-    ///
     /// Only for snapshot copies created with time-based snapshot copy operations.
     ///
     /// The completion duration requested for the time-based snapshot copy
@@ -154,8 +95,6 @@ pub const CreateSnapshotOutput = struct {
     encrypted: ?bool = null,
 
     /// The full size of the snapshot, in bytes.
-    ///
-    /// **Important:**
     ///
     /// This is **not** the incremental size of the snapshot.
     /// This is the full snapshot size and represents the size of all the blocks
@@ -224,8 +163,6 @@ pub const CreateSnapshotOutput = struct {
     /// Any tags assigned to the snapshot.
     tags: ?[]const Tag = null,
 
-    /// **Note:**
-    ///
     /// Only for snapshot copies.
     ///
     /// Indicates whether the snapshot copy was created with a standard or
@@ -388,7 +325,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "completionDurationMinutes")) {
                     result.completion_duration_minutes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "completionTime")) {
-                    result.completion_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.completion_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "dataEncryptionKeyId")) {
                     result.data_encryption_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "description")) {
@@ -408,13 +345,13 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "progress")) {
                     result.progress = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "restoreExpiryTime")) {
-                    result.restore_expiry_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.restore_expiry_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
                     result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {

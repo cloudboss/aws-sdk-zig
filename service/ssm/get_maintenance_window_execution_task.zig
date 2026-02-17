@@ -9,9 +9,6 @@ const MaintenanceWindowTaskParameterValueExpression = @import("maintenance_windo
 const AlarmStateInformation = @import("alarm_state_information.zig").AlarmStateInformation;
 const MaintenanceWindowTaskType = @import("maintenance_window_task_type.zig").MaintenanceWindowTaskType;
 
-/// Retrieves the details about a specific task run as part of a maintenance
-/// window
-/// execution.
 pub const GetMaintenanceWindowExecutionTaskInput = struct {
     /// The ID of the specific task execution in the maintenance window task that
     /// should be
@@ -67,8 +64,6 @@ pub const GetMaintenanceWindowExecutionTaskOutput = struct {
     task_execution_id: ?[]const u8 = null,
 
     /// The parameters passed to the task when it was run.
-    ///
-    /// **Note:**
     ///
     /// `TaskParameters` has been deprecated. To specify parameters to pass to a
     /// task when it runs,

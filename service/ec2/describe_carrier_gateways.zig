@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CarrierGateway = @import("carrier_gateway.zig").CarrierGateway;
 const serde = @import("serde.zig");
 
-/// Describes one or more of your carrier gateways.
 pub const DescribeCarrierGatewaysInput = struct {
     /// One or more carrier gateway IDs.
     carrier_gateway_ids: ?[]const []const u8 = null,

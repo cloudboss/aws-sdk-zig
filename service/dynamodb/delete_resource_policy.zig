@@ -4,32 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the resource-based policy attached to the resource, which can be a
-/// table or
-/// stream.
-///
-/// `DeleteResourcePolicy` is an idempotent operation; running it multiple
-/// times on the same resource *doesn't* result in an error response,
-/// unless you specify an `ExpectedRevisionId`, which will then return a
-/// `PolicyNotFoundException`.
-///
-/// **Important:**
-///
-/// To make sure that you don't inadvertently lock yourself out of your own
-/// resources,
-/// the root principal in your Amazon Web Services account can perform
-/// `DeleteResourcePolicy` requests, even if your resource-based policy
-/// explicitly denies the root principal's access.
-///
-/// **Note:**
-///
-/// `DeleteResourcePolicy` is an asynchronous operation. If you issue a
-/// `GetResourcePolicy` request immediately after running the
-/// `DeleteResourcePolicy` request, DynamoDB might still return
-/// the deleted policy. This is because the policy for your resource might not
-/// have been
-/// deleted yet. Wait for a few seconds, and then try the `GetResourcePolicy`
-/// request again.
 pub const DeleteResourcePolicyInput = struct {
     /// A string value that you can use to conditionally delete your policy. When
     /// you provide

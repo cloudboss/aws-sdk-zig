@@ -14,8 +14,6 @@ pub const ComplianceExecutionSummary = struct {
     /// following format:
     /// `yyyy-MM-dd'T'HH:mm:ss'Z'`
     ///
-    /// **Important:**
-    ///
     /// For State Manager associations, this timestamp represents when the
     /// compliance status was
     /// captured and reported by the Systems Manager service, not when the

@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceTagNotificationAttribute = @import("instance_tag_notification_attribute.zig").InstanceTagNotificationAttribute;
 const serde = @import("serde.zig");
 
-/// Describes the tag keys that are registered to appear in scheduled event
-/// notifications
-/// for resources in the current Region.
 pub const DescribeInstanceEventNotificationAttributesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

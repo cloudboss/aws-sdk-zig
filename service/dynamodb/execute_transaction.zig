@@ -8,20 +8,6 @@ const ParameterizedStatement = @import("parameterized_statement.zig").Parameteri
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
 const ItemResponse = @import("item_response.zig").ItemResponse;
 
-/// This operation allows you to perform transactional reads or writes on data
-/// stored in
-/// DynamoDB, using PartiQL.
-///
-/// **Note:**
-///
-/// The entire transaction must consist of either read statements or write
-/// statements,
-/// you cannot mix both in one transaction. The EXISTS function is an exception
-/// and can
-/// be used to check the condition of specific attributes of the item in a
-/// similar
-/// manner to `ConditionCheck` in the
-/// [TransactWriteItems](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html#transaction-apis-txwriteitems) API.
 pub const ExecuteTransactionInput = struct {
     /// Set this value to get remaining results, if `NextToken` was returned in the
     /// statement response.

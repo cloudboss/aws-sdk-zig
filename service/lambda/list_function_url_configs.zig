@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FunctionUrlConfig = @import("function_url_config.zig").FunctionUrlConfig;
 
-/// Returns a list of Lambda function URLs for the specified function.
 pub const ListFunctionUrlConfigsInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

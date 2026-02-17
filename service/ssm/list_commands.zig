@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CommandFilter = @import("command_filter.zig").CommandFilter;
 const Command = @import("command.zig").Command;
 
-/// Lists the commands requested by users of the Amazon Web Services account.
 pub const ListCommandsInput = struct {
     /// (Optional) If provided, lists only the specified command.
     command_id: ?[]const u8 = null,
@@ -16,8 +15,6 @@ pub const ListCommandsInput = struct {
     filters: ?[]const CommandFilter = null,
 
     /// (Optional) Lists commands issued against this managed node ID.
-    ///
-    /// **Note:**
     ///
     /// You can't specify a managed node ID in the same command that you specify
     /// `Status` = `Pending`. This is because the command hasn't reached the

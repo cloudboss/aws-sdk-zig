@@ -9,35 +9,6 @@ const RequestPayer = @import("request_payer.zig").RequestPayer;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Places an Object Lock configuration on the specified bucket. The rule
-/// specified in the Object Lock
-/// configuration will be applied by default to every new object placed in the
-/// specified bucket. For more
-/// information, see [Locking
-/// Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-///
-/// **Note:**
-///
-/// * The `DefaultRetention` settings require both a mode and a period.
-///
-/// * The `DefaultRetention` period can be either `Days` or `Years`
-/// but you must select one. You cannot specify `Days` and `Years` at the same
-/// time.
-///
-/// * You can enable Object Lock for new or existing buckets. For more
-///   information, see [Configuring
-/// Object
-/// Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const PutObjectLockConfigurationInput = struct {
     /// The bucket whose Object Lock configuration you want to create or replace.
     bucket: []const u8,

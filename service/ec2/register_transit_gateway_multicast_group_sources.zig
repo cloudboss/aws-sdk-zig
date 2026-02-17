@@ -6,19 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMulticastRegisteredGroupSources = @import("transit_gateway_multicast_registered_group_sources.zig").TransitGatewayMulticastRegisteredGroupSources;
 const serde = @import("serde.zig");
 
-/// Registers sources (network interfaces) with the specified transit gateway
-/// multicast group.
-///
-/// A multicast source is a network interface attached to a supported instance
-/// that sends
-/// multicast traffic. For more information about supported instances, see
-/// [Multicast
-/// on transit
-/// gateways](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-multicast-overview.html) in the *Amazon Web Services Transit Gateways Guide*.
-///
-/// After you add the source, use
-/// [SearchTransitGatewayMulticastGroups](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html) to verify that the source was added to the multicast
-/// group.
 pub const RegisterTransitGatewayMulticastGroupSourcesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

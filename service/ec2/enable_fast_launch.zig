@@ -11,23 +11,6 @@ const FastLaunchSnapshotConfigurationResponse = @import("fast_launch_snapshot_co
 const FastLaunchStateCode = @import("fast_launch_state_code.zig").FastLaunchStateCode;
 const serde = @import("serde.zig");
 
-/// When you enable Windows fast launch for a Windows AMI, images are
-/// pre-provisioned, using
-/// snapshots to launch instances up to 65% faster. To create the optimized
-/// Windows image, Amazon EC2
-/// launches an instance and runs through Sysprep steps, rebooting as required.
-/// Then it creates a
-/// set of reserved snapshots that are used for subsequent launches. The
-/// reserved snapshots are
-/// automatically replenished as they are used, depending on your settings for
-/// launch
-/// frequency.
-///
-/// **Note:**
-///
-/// You can only change these settings for Windows AMIs that you own or that
-/// have been
-/// shared with you.
 pub const EnableFastLaunchInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -231,7 +214,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
                     result.state_transition_reason = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionTime")) {
-                    result.state_transition_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.state_transition_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

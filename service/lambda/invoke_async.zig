@@ -4,21 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// **Note:**
-///
-/// For asynchronous function invocation, use Invoke.
-///
-/// Invokes a function asynchronously.
-///
-/// **Note:**
-///
-/// The payload limit is 256KB. For larger payloads, for up to 1MB, use Invoke.
-///
-/// **Note:**
-///
-/// If you do use the InvokeAsync action, note that it doesn't support the use
-/// of X-Ray active tracing. Trace ID is not propagated to the function, even if
-/// X-Ray active tracing is turned on.
 pub const InvokeAsyncInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

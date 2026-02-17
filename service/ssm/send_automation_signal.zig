@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SignalType = @import("signal_type.zig").SignalType;
 
-/// Sends a signal to an Automation execution to change the current behavior or
-/// status of the
-/// execution.
 pub const SendAutomationSignalInput = struct {
     /// The unique identifier for an existing Automation execution that you want to
     /// send the signal

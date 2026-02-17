@@ -7,9 +7,6 @@ const SessionFilter = @import("session_filter.zig").SessionFilter;
 const SessionState = @import("session_state.zig").SessionState;
 const Session = @import("session.zig").Session;
 
-/// Retrieves a list of all active sessions (both connected and disconnected) or
-/// terminated
-/// sessions from the past 30 days.
 pub const DescribeSessionsInput = struct {
     /// One or more filters to limit the type of sessions returned by the request.
     filters: ?[]const SessionFilter = null,

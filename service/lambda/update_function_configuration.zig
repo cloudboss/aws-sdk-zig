@@ -30,25 +30,6 @@ const TenancyConfig = @import("tenancy_config.zig").TenancyConfig;
 const TracingConfigResponse = @import("tracing_config_response.zig").TracingConfigResponse;
 const VpcConfigResponse = @import("vpc_config_response.zig").VpcConfigResponse;
 
-/// Modify the version-specific settings of a Lambda function.
-///
-/// When you update a function, Lambda provisions an instance of the function
-/// and its supporting resources. If your function connects to a VPC, this
-/// process can take a minute. During this time, you can't modify the function,
-/// but you can still invoke it. The `LastUpdateStatus`,
-/// `LastUpdateStatusReason`, and `LastUpdateStatusReasonCode` fields in the
-/// response from GetFunctionConfiguration indicate when the update is complete
-/// and the function is processing events with the new configuration. For more
-/// information, see [Lambda function
-/// states](https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html).
-///
-/// These settings can vary between versions of a function and are locked when
-/// you publish a version. You can't modify the configuration of a published
-/// version, only the unpublished version.
-///
-/// To configure function concurrency, use PutFunctionConcurrency. To grant
-/// invoke permissions to an Amazon Web Services account or Amazon Web Services
-/// service, use AddPermission.
 pub const UpdateFunctionConfigurationInput = struct {
     /// Configuration for the capacity provider that manages compute resources for
     /// Lambda functions.

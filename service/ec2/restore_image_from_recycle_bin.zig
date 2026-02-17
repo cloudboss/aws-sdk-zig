@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Restores an AMI from the Recycle Bin. For more information, see [Recover
-/// deleted Amazon EBS
-/// snapshots and EBS-back AMIs with Recycle
-/// Bin](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html)
-/// in the
-/// *Amazon EC2 User Guide*.
 pub const RestoreImageFromRecycleBinInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

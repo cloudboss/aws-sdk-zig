@@ -6,11 +6,10 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InputCompressionType = @import("input_compression_type.zig").InputCompressionType;
 const InputFormat = @import("input_format.zig").InputFormat;
 const InputFormatOptions = @import("input_format_options.zig").InputFormatOptions;
-const S3BucketSource = @import("s_3_bucket_source.zig").S3BucketSource;
+const S3BucketSource = @import("s3_bucket_source.zig").S3BucketSource;
 const TableCreationParameters = @import("table_creation_parameters.zig").TableCreationParameters;
 const ImportTableDescription = @import("import_table_description.zig").ImportTableDescription;
 
-/// Imports table data from an S3 bucket.
 pub const ImportTableInput = struct {
     /// Providing a `ClientToken` makes the call to `ImportTableInput`
     /// idempotent, meaning that multiple identical calls have the same effect as
@@ -42,7 +41,7 @@ pub const ImportTableInput = struct {
     input_format_options: ?InputFormatOptions = null,
 
     /// The S3 bucket that provides the source for the import.
-    s_3_bucket_source: S3BucketSource,
+    s3_bucket_source: S3BucketSource,
 
     /// Parameters for the table to import the data into.
     table_creation_parameters: TableCreationParameters,
@@ -52,7 +51,7 @@ pub const ImportTableInput = struct {
         .input_compression_type = "InputCompressionType",
         .input_format = "InputFormat",
         .input_format_options = "InputFormatOptions",
-        .s_3_bucket_source = "S3BucketSource",
+        .s3_bucket_source = "S3BucketSource",
         .table_creation_parameters = "TableCreationParameters",
     };
 };

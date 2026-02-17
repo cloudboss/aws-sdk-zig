@@ -8,32 +8,6 @@ const policyScopeType = @import("policy_scope_type.zig").policyScopeType;
 const Policy = @import("policy.zig").Policy;
 const serde = @import("serde.zig");
 
-/// Lists all the managed policies that are available in your Amazon Web
-/// Services account, including
-/// your own customer-defined managed policies and all Amazon Web Services
-/// managed policies.
-///
-/// You can filter the list of policies that is returned using the optional
-/// `OnlyAttached`, `Scope`, and `PathPrefix`
-/// parameters. For example, to list only the customer managed policies in your
-/// Amazon Web Services
-/// account, set `Scope` to `Local`. To list only Amazon Web Services managed
-/// policies, set `Scope` to `AWS`.
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters.
-///
-/// For more information about managed policies, see [Managed policies and
-/// inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-///
-/// **Note:**
-///
-/// IAM resource-listing operations return a subset of the available
-/// attributes for the resource. For example, this operation does not return
-/// tags, even though they are an attribute of the returned object. To view all
-/// of the information for a customer manged policy, see
-/// [GetPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html).
 pub const ListPoliciesInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

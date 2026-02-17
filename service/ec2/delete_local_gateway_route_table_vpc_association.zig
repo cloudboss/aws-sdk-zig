@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayRouteTableVpcAssociation = @import("local_gateway_route_table_vpc_association.zig").LocalGatewayRouteTableVpcAssociation;
 const serde = @import("serde.zig");
 
-/// Deletes the specified association between a VPC and local gateway route
-/// table.
 pub const DeleteLocalGatewayRouteTableVpcAssociationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

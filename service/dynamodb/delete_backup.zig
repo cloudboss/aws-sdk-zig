@@ -5,10 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const BackupDescription = @import("backup_description.zig").BackupDescription;
 
-/// Deletes an existing backup of a table.
-///
-/// You can call `DeleteBackup` at a maximum rate of 10 times per
-/// second.
 pub const DeleteBackupInput = struct {
     /// The ARN associated with the backup.
     backup_arn: []const u8,

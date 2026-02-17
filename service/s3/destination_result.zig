@@ -1,4 +1,4 @@
-const S3TablesBucketType = @import("s_3_tables_bucket_type.zig").S3TablesBucketType;
+const S3TablesBucketType = @import("s3_tables_bucket_type.zig").S3TablesBucketType;
 
 /// The destination information for the S3 Metadata configuration.
 pub const DestinationResult = struct {

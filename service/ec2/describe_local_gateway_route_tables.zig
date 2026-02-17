@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LocalGatewayRouteTable = @import("local_gateway_route_table.zig").LocalGatewayRouteTable;
 const serde = @import("serde.zig");
 
-/// Describes one or more local gateway route tables. By default, all local
-/// gateway route tables are described.
-/// Alternatively, you can filter the results.
 pub const DescribeLocalGatewayRouteTablesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -4,16 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Cancels the generation of an account status report.
-///
-/// You can only cancel a report while it has the `running` status. Reports
-/// with other statuses (`complete`, `cancelled`, or
-/// `error`) can't be canceled.
-///
-/// For more information, see [Generating the account status report for
-/// declarative
-/// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html) in the
-/// *Amazon Web Services Organizations User Guide*.
 pub const CancelDeclarativePoliciesReportInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

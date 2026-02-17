@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamPoolCidr = @import("ipam_pool_cidr.zig").IpamPoolCidr;
 const serde = @import("serde.zig");
 
-/// Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR
-/// from a pool that has a source pool, the CIDR is recycled back into the
-/// source pool. For more information, see [Deprovision pool
-/// CIDRs](https://docs.aws.amazon.com/vpc/latest/ipam/depro-pool-cidr-ipam.html) in the *Amazon VPC IPAM User Guide*.
 pub const DeprovisionIpamPoolCidrInput = struct {
     /// The CIDR which you want to deprovision from the pool.
     cidr: ?[]const u8 = null,

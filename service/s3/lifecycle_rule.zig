@@ -29,8 +29,6 @@ pub const LifecycleRule = struct {
     /// rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-filters.html)
     /// in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// `Tag` filters are not supported for directory buckets.
     filter: ?LifecycleRuleFilter,
 
@@ -48,8 +46,6 @@ pub const LifecycleRule = struct {
     /// noncurrent object versions to a
     /// specific storage class at a set period in the object's lifetime.
     ///
-    /// **Note:**
-    ///
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
@@ -59,8 +55,6 @@ pub const LifecycleRule = struct {
     /// which the rule applies. We recommend using `Filter` instead of `Prefix` for
     /// new PUTs. Previous configurations where a prefix is defined will continue to
     /// operate as before.
-    ///
-    /// **Important:**
     ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using
@@ -75,8 +69,6 @@ pub const LifecycleRule = struct {
     status: ExpirationStatus,
 
     /// Specifies when an Amazon S3 object transitions to a specified storage class.
-    ///
-    /// **Note:**
     ///
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket

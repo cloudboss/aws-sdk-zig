@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Retrieve a JPG-format screenshot of a running instance to help with
-/// troubleshooting.
-///
-/// The returned content is Base64-encoded.
-///
-/// For more information, see [Instance console
-/// output](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshoot-unreachable-instance.html#instance-console-console-output) in the *Amazon EC2 User Guide*.
 pub const GetConsoleScreenshotInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

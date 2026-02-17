@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VpcEndpoint = @import("vpc_endpoint.zig").VpcEndpoint;
 const serde = @import("serde.zig");
 
-/// Describes your VPC endpoints. The default is to describe all your VPC
-/// endpoints.
-/// Alternatively, you can specify specific VPC endpoint IDs or filter the
-/// results to
-/// include only the VPC endpoints that match specific criteria.
 pub const DescribeVpcEndpointsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Ipam = @import("ipam.zig").Ipam;
 const serde = @import("serde.zig");
 
-/// Delete an IPAM. Deleting an IPAM removes all monitored data associated with
-/// the IPAM including the historical data for CIDRs.
-///
-/// For more information, see [Delete an
-/// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/delete-ipam.html) in the
-/// *Amazon VPC IPAM User Guide*.
 pub const DeleteIpamInput = struct {
     /// Enables you to quickly delete an IPAM, private scopes, pools in private
     /// scopes, and
@@ -21,8 +15,6 @@ pub const DeleteIpamInput = struct {
     ///
     /// * Deallocates any CIDRs allocated to VPC resources (such as VPCs) in pools
     ///   in private scopes.
-    ///
-    /// **Note:**
     ///
     /// No VPC resources are deleted as a result of enabling this option. The CIDR
     /// associated with the resource will no longer be allocated from an IPAM pool,

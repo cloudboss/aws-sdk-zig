@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayPolicyTableEntry = @import("transit_gateway_policy_table_entry.zig").TransitGatewayPolicyTableEntry;
 const serde = @import("serde.zig");
 
-/// Returns a list of transit gateway policy table entries.
 pub const GetTransitGatewayPolicyTableEntriesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

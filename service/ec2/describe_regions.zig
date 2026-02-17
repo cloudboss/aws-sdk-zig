@@ -7,22 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const Region = @import("region.zig").Region;
 const serde = @import("serde.zig");
 
-/// Describes the Regions that are enabled for your account, or all Regions.
-///
-/// For a list of the Regions supported by Amazon EC2, see [Amazon EC2 service
-/// endpoints](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-endpoints.html).
-///
-/// For information about enabling and disabling Regions for your account, see
-/// [Specify which Amazon Web Services Regions
-/// your account can
-/// use](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html) in the *Amazon Web Services Account Management Reference Guide*.
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures,
-/// might vary. Applications should not assume the elements appear in a
-/// particular order.
 pub const DescribeRegionsInput = struct {
     /// Indicates whether to display all Regions, including Regions that are
     /// disabled for your account.

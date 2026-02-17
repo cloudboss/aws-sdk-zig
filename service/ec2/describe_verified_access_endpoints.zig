@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VerifiedAccessEndpoint = @import("verified_access_endpoint.zig").VerifiedAccessEndpoint;
 const serde = @import("serde.zig");
 
-/// Describes the specified Amazon Web Services Verified Access endpoints.
 pub const DescribeVerifiedAccessEndpointsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

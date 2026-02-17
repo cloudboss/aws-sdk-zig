@@ -7,13 +7,6 @@ const UnlimitedSupportedInstanceFamily = @import("unlimited_supported_instance_f
 const InstanceFamilyCreditSpecification = @import("instance_family_credit_specification.zig").InstanceFamilyCreditSpecification;
 const serde = @import("serde.zig");
 
-/// Describes the default credit option for CPU usage of a burstable performance
-/// instance
-/// family.
-///
-/// For more information, see [Burstable
-/// performance
-/// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
 pub const GetDefaultCreditSpecificationInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

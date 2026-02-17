@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VerifiedAccessGroup = @import("verified_access_group.zig").VerifiedAccessGroup;
 const serde = @import("serde.zig");
 
-/// Describes the specified Verified Access groups.
 pub const DescribeVerifiedAccessGroupsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

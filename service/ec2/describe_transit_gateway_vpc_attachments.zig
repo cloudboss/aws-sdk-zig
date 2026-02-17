@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayVpcAttachment = @import("transit_gateway_vpc_attachment.zig").TransitGatewayVpcAttachment;
 const serde = @import("serde.zig");
 
-/// Describes one or more VPC attachments. By default, all VPC attachments are
-/// described.
-/// Alternatively, you can filter the results.
 pub const DescribeTransitGatewayVpcAttachmentsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

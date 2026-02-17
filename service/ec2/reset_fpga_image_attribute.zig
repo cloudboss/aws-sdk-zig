@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResetFpgaImageAttributeName = @import("reset_fpga_image_attribute_name.zig").ResetFpgaImageAttributeName;
 
-/// Resets the specified attribute of the specified Amazon FPGA Image (AFI) to
-/// its default value.
-/// You can only reset the load permission attribute.
 pub const ResetFpgaImageAttributeInput = struct {
     /// The attribute.
     attribute: ?ResetFpgaImageAttributeName = null,

@@ -7,16 +7,6 @@ const Tag = @import("tag.zig").Tag;
 const InstanceProfile = @import("instance_profile.zig").InstanceProfile;
 const serde = @import("serde.zig");
 
-/// Creates a new instance profile. For information about instance profiles, see
-/// [Using
-/// roles for applications on Amazon
-/// EC2](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the
-/// *IAM User Guide*, and [Instance
-/// profiles](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile) in the *Amazon EC2 User Guide*.
-///
-/// For information about the number of instance profiles you can create, see
-/// [IAM object
-/// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
 pub const CreateInstanceProfileInput = struct {
     /// The name of the instance profile to create.
     ///
@@ -49,8 +39,6 @@ pub const CreateInstanceProfileInput = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// If any one of the tags is invalid or if you exceed the allowed maximum
     /// number of tags, then the entire request

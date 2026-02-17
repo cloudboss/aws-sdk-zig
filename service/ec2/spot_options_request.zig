@@ -47,8 +47,6 @@ pub const SpotOptionsRequest = struct {
     ///
     /// **lowest-price (not recommended)**
     ///
-    /// **Important:**
-    ///
     /// We don't recommend the `lowest-price` allocation strategy because
     /// it has the highest risk of interruption for your Spot Instances.
     ///
@@ -107,12 +105,8 @@ pub const SpotOptionsRequest = struct {
     /// do not specify
     /// this parameter, you will pay the current Spot price.
     ///
-    /// **Important:**
-    ///
     /// If you specify a maximum price, your Spot Instances will be interrupted more
     /// frequently than if you do not specify this parameter.
-    ///
-    /// **Note:**
     ///
     /// If your fleet includes T instances that are configured as `unlimited`, and
     /// if their average CPU usage exceeds the baseline utilization, you will incur

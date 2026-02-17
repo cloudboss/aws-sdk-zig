@@ -5,19 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VpcTenancy = @import("vpc_tenancy.zig").VpcTenancy;
 
-/// Modifies the instance tenancy attribute of the specified VPC. You can change
-/// the
-/// instance tenancy attribute of a VPC to `default` only. You cannot change the
-/// instance tenancy attribute to `dedicated`.
-///
-/// After you modify the tenancy of the VPC, any new instances that you launch
-/// into the
-/// VPC have a tenancy of `default`, unless you specify otherwise during launch.
-/// The tenancy of any existing instances in the VPC is not affected.
-///
-/// For more information, see [Dedicated
-/// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the
-/// *Amazon EC2 User Guide*.
 pub const ModifyVpcTenancyInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

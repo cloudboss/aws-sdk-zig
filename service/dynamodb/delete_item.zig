@@ -13,25 +13,6 @@ const ReturnValuesOnConditionCheckFailure = @import("return_values_on_condition_
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
 const ItemCollectionMetrics = @import("item_collection_metrics.zig").ItemCollectionMetrics;
 
-/// Deletes a single item in a table by primary key. You can perform a
-/// conditional delete
-/// operation that deletes the item if it exists, or if it has an expected
-/// attribute
-/// value.
-///
-/// In addition to deleting an item, you can also return the item's attribute
-/// values in
-/// the same operation, using the `ReturnValues` parameter.
-///
-/// Unless you specify conditions, the `DeleteItem` is an idempotent operation;
-/// running it multiple times on the same item or attribute does *not*
-/// result in an error response.
-///
-/// Conditional deletes are useful for deleting items only if specific
-/// conditions are met.
-/// If those conditions are met, DynamoDB performs the delete. Otherwise, the
-/// item is not
-/// deleted.
 pub const DeleteItemInput = struct {
     /// This is a legacy parameter. Use `ConditionExpression` instead. For more
     /// information, see
@@ -99,8 +80,6 @@ pub const DeleteItemInput = struct {
     /// You could then use this substitution in an expression, as in this example:
     ///
     /// * `#P = :val`
-    ///
-    /// **Note:**
     ///
     /// Tokens that begin with the **:** character are
     /// *expression attribute values*, which are placeholders for the
@@ -170,8 +149,6 @@ pub const DeleteItemInput = struct {
     /// small network and processing overhead of receiving a larger response. No
     /// read capacity
     /// units are consumed.
-    ///
-    /// **Note:**
     ///
     /// The `ReturnValues` parameter is used by several DynamoDB operations;
     /// however, `DeleteItem` does not recognize any values other than

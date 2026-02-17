@@ -5,25 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContinuousBackupsDescription = @import("continuous_backups_description.zig").ContinuousBackupsDescription;
 
-/// Checks the status of continuous backups and point in time recovery on the
-/// specified
-/// table. Continuous backups are `ENABLED` on all tables at table creation. If
-/// point in time recovery is enabled, `PointInTimeRecoveryStatus` will be set
-/// to
-/// ENABLED.
-///
-/// After continuous backups and point in time recovery are enabled, you can
-/// restore to
-/// any point in time within `EarliestRestorableDateTime` and
-/// `LatestRestorableDateTime`.
-///
-/// `LatestRestorableDateTime` is typically 5 minutes before the current time.
-/// You can restore your table to any point in time in the last 35 days. You can
-/// set the
-/// recovery period to any value between 1 and 35 days.
-///
-/// You can call `DescribeContinuousBackups` at a maximum rate of 10 times per
-/// second.
 pub const DescribeContinuousBackupsInput = struct {
     /// Name of the table for which the customer wants to check the continuous
     /// backups and

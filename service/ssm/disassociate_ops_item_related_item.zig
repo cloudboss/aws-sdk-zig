@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the association between an OpsItem and a related item. For example,
-/// this API
-/// operation can delete an Incident Manager incident from an OpsItem. Incident
-/// Manager is a tool in
-/// Amazon Web Services Systems Manager.
 pub const DisassociateOpsItemRelatedItemInput = struct {
     /// The ID of the association for which you want to delete an association
     /// between the OpsItem

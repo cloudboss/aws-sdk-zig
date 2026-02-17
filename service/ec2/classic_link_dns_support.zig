@@ -1,5 +1,3 @@
-/// **Note:**
-///
 /// Deprecated.
 ///
 /// Describes the ClassicLink DNS support status of a VPC.

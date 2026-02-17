@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstancePatchStateFilter = @import("instance_patch_state_filter.zig").InstancePatchStateFilter;
 const InstancePatchState = @import("instance_patch_state.zig").InstancePatchState;
 
-/// Retrieves the high-level patch state for the managed nodes in the specified
-/// patch
-/// group.
 pub const DescribeInstancePatchStatesForPatchGroupInput = struct {
     /// Each entry in the array is a structure containing:
     ///

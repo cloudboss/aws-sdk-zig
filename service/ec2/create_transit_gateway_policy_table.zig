@@ -7,7 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayPolicyTable = @import("transit_gateway_policy_table.zig").TransitGatewayPolicyTable;
 const serde = @import("serde.zig");
 
-/// Creates a transit gateway policy table.
 pub const CreateTransitGatewayPolicyTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

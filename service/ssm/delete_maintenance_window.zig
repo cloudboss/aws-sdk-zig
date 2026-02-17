@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a maintenance window.
 pub const DeleteMaintenanceWindowInput = struct {
     /// The ID of the maintenance window to delete.
     window_id: []const u8,

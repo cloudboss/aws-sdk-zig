@@ -4,8 +4,6 @@ pub const DeleteMessageBatchRequestEntry = struct {
     /// communicate the
     /// result.
     ///
-    /// **Note:**
-    ///
     /// The `Id`s of a batch request need to be unique within a request.
     ///
     /// This identifier can have up to 80 characters. The following characters are

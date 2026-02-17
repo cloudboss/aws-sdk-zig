@@ -24,7 +24,7 @@ pub const CommandPlugin = struct {
     /// `i-02573cafcfEXAMPLE` is the managed node ID;
     ///
     /// `awsrunShellScript` is the name of the plugin.
-    output_s_3_bucket_name: ?[]const u8,
+    output_s3_bucket_name: ?[]const u8,
 
     /// The S3 directory path inside the bucket where the responses to the command
     /// executions should
@@ -41,13 +41,13 @@ pub const CommandPlugin = struct {
     /// `i-02573cafcfEXAMPLE` is the managed node ID;
     ///
     /// `awsrunShellScript` is the name of the plugin.
-    output_s_3_key_prefix: ?[]const u8,
+    output_s3_key_prefix: ?[]const u8,
 
     /// (Deprecated) You can no longer specify this parameter. The system ignores
     /// it. Instead,
     /// Amazon Web Services Systems Manager automatically determines the S3 bucket
     /// region.
-    output_s_3_region: ?[]const u8,
+    output_s3_region: ?[]const u8,
 
     /// A numeric response code generated after running the plugin.
     response_code: ?i32,
@@ -133,9 +133,9 @@ pub const CommandPlugin = struct {
     pub const json_field_names = .{
         .name = "Name",
         .output = "Output",
-        .output_s_3_bucket_name = "OutputS3BucketName",
-        .output_s_3_key_prefix = "OutputS3KeyPrefix",
-        .output_s_3_region = "OutputS3Region",
+        .output_s3_bucket_name = "OutputS3BucketName",
+        .output_s3_key_prefix = "OutputS3KeyPrefix",
+        .output_s3_region = "OutputS3Region",
         .response_code = "ResponseCode",
         .response_finish_date_time = "ResponseFinishDateTime",
         .response_start_date_time = "ResponseStartDateTime",

@@ -4,47 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Deletes a metrics configuration for the Amazon CloudWatch request metrics
-/// (specified by the metrics
-/// configuration ID) from the bucket. Note that this doesn't include the daily
-/// storage metrics.
-///
-/// To use this operation, you must have permissions to perform the
-/// `s3:PutMetricsConfiguration` action. The bucket owner has this permission by
-/// default. The
-/// bucket owner can grant this permission to others. For more information about
-/// permissions, see [Permissions Related to Bucket Subresource
-/// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
-/// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
-///
-/// For information about CloudWatch request metrics for Amazon S3, see
-/// [Monitoring Metrics with Amazon
-/// CloudWatch](https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
-///
-/// The following operations are related to `DeleteBucketMetricsConfiguration`:
-///
-/// *
-///   [GetBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html)
-///
-/// *
-///   [PutBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html)
-///
-/// *
-///   [ListBucketMetricsConfigurations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html)
-///
-/// * [Monitoring
-/// Metrics with Amazon
-/// CloudWatch](https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const DeleteBucketMetricsConfigurationInput = struct {
     /// The name of the bucket containing the metrics configuration to delete.
     bucket: []const u8,

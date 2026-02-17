@@ -7,9 +7,6 @@ const DocumentFilter = @import("document_filter.zig").DocumentFilter;
 const DocumentKeyValuesFilter = @import("document_key_values_filter.zig").DocumentKeyValuesFilter;
 const DocumentIdentifier = @import("document_identifier.zig").DocumentIdentifier;
 
-/// Returns all Systems Manager (SSM) documents in the current Amazon Web
-/// Services account and Amazon Web Services Region. You can
-/// limit the results of this request by using a filter.
 pub const ListDocumentsInput = struct {
     /// This data type is deprecated. Instead, use `Filters`.
     document_filter_list: ?[]const DocumentFilter = null,
@@ -22,8 +19,6 @@ pub const ListDocumentsInput = struct {
     /// to return documents you own use `Key=Owner,Values=Self`. To specify a custom
     /// key-value
     /// pair, use the format `Key=tag:tagName,Values=valueName`.
-    ///
-    /// **Note:**
     ///
     /// This API operation only supports filtering documents by using a single tag
     /// key and one or

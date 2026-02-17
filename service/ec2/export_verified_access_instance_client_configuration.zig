@@ -8,7 +8,6 @@ const VerifiedAccessInstanceOpenVpnClientConfiguration = @import("verified_acces
 const VerifiedAccessInstanceUserTrustProviderClientConfiguration = @import("verified_access_instance_user_trust_provider_client_configuration.zig").VerifiedAccessInstanceUserTrustProviderClientConfiguration;
 const serde = @import("serde.zig");
 
-/// Exports the client configuration for a Verified Access instance.
 pub const ExportVerifiedAccessInstanceClientConfigurationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -8,13 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const Purchase = @import("purchase.zig").Purchase;
 const serde = @import("serde.zig");
 
-/// Purchase a reservation with configurations that match those of your
-/// Dedicated Host.
-/// You must have active Dedicated Hosts in your account before you purchase a
-/// reservation.
-/// This action results in the specified reservation being purchased and charged
-/// to your
-/// account.
 pub const PurchaseHostReservationInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see [Ensuring

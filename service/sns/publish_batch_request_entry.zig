@@ -7,8 +7,6 @@ const MessageAttributeValue = @import("message_attribute_value.zig").MessageAttr
 pub const PublishBatchRequestEntry = struct {
     /// An identifier for the message in this batch.
     ///
-    /// **Note:**
-    ///
     /// The `Ids` of a batch request must be unique within a request.
     ///
     /// This identifier can have up to 80 characters. The following characters are
@@ -74,8 +72,6 @@ pub const PublishBatchRequestEntry = struct {
     /// same as the one generated for the first `MessageDeduplicationId`, the
     /// two messages are treated as duplicates, within the deduplication scope and
     /// interval, and only one copy of the message is delivered.
-    ///
-    /// **Note:**
     ///
     /// The `MessageDeduplicationId` is available to the consumer of the
     /// message (this can be useful for troubleshooting delivery issues).

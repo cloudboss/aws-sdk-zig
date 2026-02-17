@@ -6,23 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Lists the tags that are attached to the specified IAM server certificate.
-/// The
-/// returned list of tags is sorted by tag key. For more information about
-/// tagging, see [Tagging IAM
-/// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
-/// the
-/// *IAM User Guide*.
-///
-/// **Note:**
-///
-/// For certificates in a Region supported by Certificate Manager (ACM), we
-/// recommend that you don't use IAM server certificates. Instead, use ACM to
-/// provision,
-/// manage, and deploy your server certificates. For more information about IAM
-/// server
-/// certificates, [Working with server
-/// certificates](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html) in the *IAM User Guide*.
 pub const ListServerCertificateTagsInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

@@ -7,9 +7,6 @@ const InstancePropertyStringFilter = @import("instance_property_string_filter.zi
 const InstancePropertyFilter = @import("instance_property_filter.zig").InstancePropertyFilter;
 const InstanceProperty = @import("instance_property.zig").InstanceProperty;
 
-/// An API operation used by the Systems Manager console to display information
-/// about Systems Manager managed
-/// nodes.
 pub const DescribeInstancePropertiesInput = struct {
     /// The request filters to use with the operator.
     filters_with_operator: ?[]const InstancePropertyStringFilter = null,

@@ -25,8 +25,6 @@ pub const Condition = struct {
     /// specified. If both conditions are specified, both must be true for the
     /// redirect to be applied.
     ///
-    /// **Important:**
-    ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using
     /// XML requests. For more information, see [

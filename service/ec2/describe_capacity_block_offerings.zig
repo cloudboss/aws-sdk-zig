@@ -6,14 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityBlockOffering = @import("capacity_block_offering.zig").CapacityBlockOffering;
 const serde = @import("serde.zig");
 
-/// Describes Capacity Block offerings available for purchase in the Amazon Web
-/// Services Region that you're currently using. With Capacity Blocks, you can
-/// purchase a specific GPU instance type or EC2 UltraServer for a period of
-/// time.
-///
-/// To search for an available Capacity Block offering, you specify a
-/// reservation duration
-/// and instance count.
 pub const DescribeCapacityBlockOfferingsInput = struct {
     /// The reservation duration for the Capacity Block, in hours. You must specify
     /// the

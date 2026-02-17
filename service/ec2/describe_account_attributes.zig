@@ -7,36 +7,6 @@ const AccountAttributeName = @import("account_attribute_name.zig").AccountAttrib
 const AccountAttribute = @import("account_attribute.zig").AccountAttribute;
 const serde = @import("serde.zig");
 
-/// Describes attributes of your Amazon Web Services account. The following are
-/// the supported account attributes:
-///
-/// * `default-vpc`: The ID of the default VPC for your account, or `none`.
-///
-/// * `max-instances`: This attribute is no longer supported. The returned
-/// value does not reflect your actual vCPU limit for running On-Demand
-/// Instances.
-/// For more information, see [On-Demand Instance
-/// Limits](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits) in the
-/// *Amazon Elastic Compute Cloud User Guide*.
-///
-/// * `max-elastic-ips`: The maximum number of Elastic IP addresses that you can
-///   allocate.
-///
-/// * `supported-platforms`: This attribute is deprecated.
-///
-/// * `vpc-max-elastic-ips`: The maximum number of Elastic IP addresses that you
-///   can allocate.
-///
-/// * `vpc-max-security-groups-per-interface`: The maximum number of security
-///   groups
-/// that you can assign to a network interface.
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures, might vary. Applications should not assume the elements appear
-/// in a
-/// particular order.
 pub const DescribeAccountAttributesInput = struct {
     /// The account attribute names.
     attribute_names: ?[]const AccountAttributeName = null,

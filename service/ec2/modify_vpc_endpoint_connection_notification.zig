@@ -5,10 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Modifies a connection notification for VPC endpoint or VPC endpoint service.
-/// You
-/// can change the SNS topic for the notification, or the events for which to be
-/// notified.
 pub const ModifyVpcEndpointConnectionNotificationInput = struct {
     /// The events for the endpoint. Valid values are `Accept`,
     /// `Connect`, `Delete`, and `Reject`.

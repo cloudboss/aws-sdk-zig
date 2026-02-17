@@ -8,13 +8,6 @@ const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBo
 const ProductCode = @import("product_code.zig").ProductCode;
 const serde = @import("serde.zig");
 
-/// Describes the specified attribute of the specified volume. You can specify
-/// only one
-/// attribute at a time.
-///
-/// For more information about EBS volumes, see [Amazon EBS
-/// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html)
-/// in the *Amazon EBS User Guide*.
 pub const DescribeVolumeAttributeInput = struct {
     /// The attribute of the volume. This parameter is required.
     attribute: VolumeAttributeName,

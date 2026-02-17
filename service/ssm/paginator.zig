@@ -72,6 +72,7 @@ pub const DescribeActivationsPaginator = struct {
 
         const output = try describe_activations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -112,6 +113,7 @@ pub const DescribeAssociationExecutionTargetsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_association_execution_targets.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -154,6 +156,7 @@ pub const DescribeAssociationExecutionsPaginator = struct {
 
         const output = try describe_association_executions.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -194,6 +197,7 @@ pub const DescribeAutomationExecutionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_automation_executions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -236,6 +240,7 @@ pub const DescribeAutomationStepExecutionsPaginator = struct {
 
         const output = try describe_automation_step_executions.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -276,6 +281,7 @@ pub const DescribeAvailablePatchesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_available_patches.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -318,6 +324,7 @@ pub const DescribeEffectiveInstanceAssociationsPaginator = struct {
 
         const output = try describe_effective_instance_associations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -358,6 +365,7 @@ pub const DescribeEffectivePatchesForPatchBaselinePaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_effective_patches_for_patch_baseline.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -400,6 +408,7 @@ pub const DescribeInstanceAssociationsStatusPaginator = struct {
 
         const output = try describe_instance_associations_status.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -440,6 +449,7 @@ pub const DescribeInstanceInformationPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_instance_information.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -482,6 +492,7 @@ pub const DescribeInstancePatchStatesPaginator = struct {
 
         const output = try describe_instance_patch_states.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -522,6 +533,7 @@ pub const DescribeInstancePatchStatesForPatchGroupPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_instance_patch_states_for_patch_group.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -564,6 +576,7 @@ pub const DescribeInstancePatchesPaginator = struct {
 
         const output = try describe_instance_patches.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -604,6 +617,7 @@ pub const DescribeInstancePropertiesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_instance_properties.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -646,6 +660,7 @@ pub const DescribeInventoryDeletionsPaginator = struct {
 
         const output = try describe_inventory_deletions.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -686,6 +701,7 @@ pub const DescribeMaintenanceWindowExecutionTaskInvocationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_maintenance_window_execution_task_invocations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -728,6 +744,7 @@ pub const DescribeMaintenanceWindowExecutionTasksPaginator = struct {
 
         const output = try describe_maintenance_window_execution_tasks.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -768,6 +785,7 @@ pub const DescribeMaintenanceWindowExecutionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_maintenance_window_executions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -810,6 +828,7 @@ pub const DescribeMaintenanceWindowSchedulePaginator = struct {
 
         const output = try describe_maintenance_window_schedule.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -850,6 +869,7 @@ pub const DescribeMaintenanceWindowTargetsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_maintenance_window_targets.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -892,6 +912,7 @@ pub const DescribeMaintenanceWindowTasksPaginator = struct {
 
         const output = try describe_maintenance_window_tasks.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -932,6 +953,7 @@ pub const DescribeMaintenanceWindowsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_maintenance_windows.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -974,6 +996,7 @@ pub const DescribeMaintenanceWindowsForTargetPaginator = struct {
 
         const output = try describe_maintenance_windows_for_target.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1014,6 +1037,7 @@ pub const DescribeOpsItemsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_ops_items.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1056,6 +1080,7 @@ pub const DescribeParametersPaginator = struct {
 
         const output = try describe_parameters.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1096,6 +1121,7 @@ pub const DescribePatchBaselinesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_patch_baselines.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1138,6 +1164,7 @@ pub const DescribePatchGroupsPaginator = struct {
 
         const output = try describe_patch_groups.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1178,6 +1205,7 @@ pub const DescribePatchPropertiesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_patch_properties.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1220,6 +1248,7 @@ pub const DescribeSessionsPaginator = struct {
 
         const output = try describe_sessions.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1260,6 +1289,7 @@ pub const GetInventoryPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_inventory.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1302,6 +1332,7 @@ pub const GetInventorySchemaPaginator = struct {
 
         const output = try get_inventory_schema.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1342,6 +1373,7 @@ pub const GetOpsSummaryPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_ops_summary.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1384,6 +1416,7 @@ pub const GetParameterHistoryPaginator = struct {
 
         const output = try get_parameter_history.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1424,6 +1457,7 @@ pub const GetParametersByPathPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_parameters_by_path.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1466,6 +1500,7 @@ pub const GetResourcePoliciesPaginator = struct {
 
         const output = try get_resource_policies.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1506,6 +1541,7 @@ pub const ListAssociationVersionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_association_versions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1548,6 +1584,7 @@ pub const ListAssociationsPaginator = struct {
 
         const output = try list_associations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1588,6 +1625,7 @@ pub const ListCommandInvocationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_command_invocations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1630,6 +1668,7 @@ pub const ListCommandsPaginator = struct {
 
         const output = try list_commands.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1670,6 +1709,7 @@ pub const ListComplianceItemsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_compliance_items.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1712,6 +1752,7 @@ pub const ListComplianceSummariesPaginator = struct {
 
         const output = try list_compliance_summaries.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1752,6 +1793,7 @@ pub const ListDocumentVersionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_document_versions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1794,6 +1836,7 @@ pub const ListDocumentsPaginator = struct {
 
         const output = try list_documents.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1834,6 +1877,7 @@ pub const ListNodesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_nodes.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1876,6 +1920,7 @@ pub const ListNodesSummaryPaginator = struct {
 
         const output = try list_nodes_summary.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1916,6 +1961,7 @@ pub const ListOpsItemEventsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_ops_item_events.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1958,6 +2004,7 @@ pub const ListOpsItemRelatedItemsPaginator = struct {
 
         const output = try list_ops_item_related_items.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1998,6 +2045,7 @@ pub const ListOpsMetadataPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_ops_metadata.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2040,6 +2088,7 @@ pub const ListResourceComplianceSummariesPaginator = struct {
 
         const output = try list_resource_compliance_summaries.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2080,6 +2129,7 @@ pub const ListResourceDataSyncPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_resource_data_sync.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

@@ -8,16 +8,6 @@ const GatewayType = @import("gateway_type.zig").GatewayType;
 const VpnGateway = @import("vpn_gateway.zig").VpnGateway;
 const serde = @import("serde.zig");
 
-/// Creates a virtual private gateway. A virtual private gateway is the endpoint
-/// on the
-/// VPC side of your VPN connection. You can create a virtual private gateway
-/// before
-/// creating the VPC itself.
-///
-/// For more information, see [Amazon Web Services Site-to-Site
-/// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
-/// *Amazon Web Services Site-to-Site VPN
-/// User Guide*.
 pub const CreateVpnGatewayInput = struct {
     /// A private Autonomous System Number (ASN) for the Amazon side of a BGP
     /// session. If

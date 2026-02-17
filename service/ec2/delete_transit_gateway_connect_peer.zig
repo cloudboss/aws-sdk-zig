@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayConnectPeer = @import("transit_gateway_connect_peer.zig").TransitGatewayConnectPeer;
 const serde = @import("serde.zig");
 
-/// Deletes the specified Connect peer.
 pub const DeleteTransitGatewayConnectPeerInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

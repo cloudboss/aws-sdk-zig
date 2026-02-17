@@ -7,8 +7,6 @@ const VolumeType = @import("volume_type.zig").VolumeType;
 
 /// Describes a volume.
 pub const Volume = struct {
-    /// **Note:**
-    ///
     /// This parameter is not returned by CreateVolume.
     ///
     /// Information about the volume attachments.
@@ -26,8 +24,6 @@ pub const Volume = struct {
     /// Indicates whether the volume is encrypted.
     encrypted: ?bool,
 
-    /// **Note:**
-    ///
     /// This parameter is not returned by CreateVolume.
     ///
     /// Indicates whether the volume was created using fast snapshot restore.
@@ -64,8 +60,6 @@ pub const Volume = struct {
     /// volume copies.
     source_volume_id: ?[]const u8,
 
-    /// **Note:**
-    ///
     /// This parameter is not returned by CreateVolume.
     ///
     /// Reserved for future use.

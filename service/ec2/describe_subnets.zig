@@ -7,13 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const Subnet = @import("subnet.zig").Subnet;
 const serde = @import("serde.zig");
 
-/// Describes your subnets. The default is to describe all your subnets.
-/// Alternatively, you can specify specific subnet IDs or filter the results to
-/// include only the subnets that match specific criteria.
-///
-/// For more information, see
-/// [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) in the
-/// *Amazon VPC User Guide*.
 pub const DescribeSubnetsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

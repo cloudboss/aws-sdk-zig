@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayPolicyTableAssociation = @import("transit_gateway_policy_table_association.zig").TransitGatewayPolicyTableAssociation;
 const serde = @import("serde.zig");
 
-/// Associates the specified transit gateway attachment with a transit gateway
-/// policy table.
 pub const AssociateTransitGatewayPolicyTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

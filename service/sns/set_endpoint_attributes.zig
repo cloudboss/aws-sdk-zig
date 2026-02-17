@@ -5,12 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Sets the attributes for an endpoint for a device on one of the supported
-/// push
-/// notification services, such as GCM (Firebase Cloud Messaging) and APNS. For
-/// more
-/// information, see [Using Amazon SNS Mobile Push
-/// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 pub const SetEndpointAttributesInput = struct {
     /// A map of the endpoint attributes. Attributes in this map include the
     /// following:

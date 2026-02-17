@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayAssociation = @import("transit_gateway_association.zig").TransitGatewayAssociation;
 const serde = @import("serde.zig");
 
-/// Disassociates a resource attachment from a transit gateway route table.
 pub const DisassociateTransitGatewayRouteTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

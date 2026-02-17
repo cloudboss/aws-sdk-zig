@@ -69,8 +69,6 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// ID](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#use-an-ssm-parameter-instead-of-an-ami-id) in the
     /// *Amazon EC2 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// This parameter is only available for fleets of type `instant`. For fleets
     /// of type `maintain` and `request`, you must specify the AMI ID in
     /// the launch template.
@@ -80,8 +78,6 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// Amazon EC2 will
     /// identify instance types with those attributes.
     ///
-    /// **Note:**
-    ///
     /// If you specify `InstanceRequirements`, you can't specify
     /// `InstanceType`.
     instance_requirements: ?InstanceRequirementsRequest,
@@ -89,8 +85,6 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// The instance type.
     ///
     /// `mac1.metal` is not supported as a launch template override.
-    ///
-    /// **Note:**
     ///
     /// If you specify `InstanceType`, you can't specify
     /// `InstanceRequirements`.
@@ -101,8 +95,6 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// recommend using this parameter because it can lead to increased
     /// interruptions. If you
     /// do not specify this parameter, you will pay the current Spot price.
-    ///
-    /// **Important:**
     ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.
@@ -156,8 +148,6 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// number of instances to the next whole number. If this value is not
     /// specified, the default
     /// is 1.
-    ///
-    /// **Note:**
     ///
     /// When specifying weights, the price used in the `lowest-price` and
     /// `price-capacity-optimized` allocation strategies is per

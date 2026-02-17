@@ -5,19 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TableDescription = @import("table_description.zig").TableDescription;
 
-/// Returns information about the table, including the current status of the
-/// table, when
-/// it was created, the primary key schema, and any indexes on the table.
-///
-/// **Note:**
-///
-/// If you issue a `DescribeTable` request immediately after a
-/// `CreateTable` request, DynamoDB might return a
-/// `ResourceNotFoundException`. This is because
-/// `DescribeTable` uses an eventually consistent query, and the metadata
-/// for your table might not be available at that moment. Wait for a few
-/// seconds, and
-/// then try the `DescribeTable` request again.
 pub const DescribeTableInput = struct {
     /// The name of the table to describe. You can also provide the Amazon Resource
     /// Name (ARN) of the table in

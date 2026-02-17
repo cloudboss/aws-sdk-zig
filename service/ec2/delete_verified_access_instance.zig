@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessInstance = @import("verified_access_instance.zig").VerifiedAccessInstance;
 const serde = @import("serde.zig");
 
-/// Delete an Amazon Web Services Verified Access instance.
 pub const DeleteVerifiedAccessInstanceInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

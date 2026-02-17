@@ -5,10 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Returns the settings for sending SMS messages from your Amazon Web Services
-/// account.
-///
-/// These settings are set with the `SetSMSAttributes` action.
 pub const GetSMSAttributesInput = struct {
     /// A list of the individual attribute names, such as `MonthlySpendLimit`, for
     /// which you want values.

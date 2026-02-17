@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InventoryItem = @import("inventory_item.zig").InventoryItem;
 
-/// Bulk update custom inventory items on one or more managed nodes. The request
-/// adds an
-/// inventory item, if it doesn't already exist, or updates an inventory item,
-/// if it does
-/// exist.
 pub const PutInventoryInput = struct {
     /// An managed node ID where you want to add or update inventory items.
     instance_id: []const u8,

@@ -11,8 +11,6 @@
 /// naming
 /// guidelines](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines).
 ///
-/// **Note:**
-///
 /// When using the URL encoding type, non-ASCII characters that are used in an
 /// object's key name will
 /// be percent-encoded according to UTF-8 code values. For example, the object

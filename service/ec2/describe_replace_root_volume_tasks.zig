@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ReplaceRootVolumeTask = @import("replace_root_volume_task.zig").ReplaceRootVolumeTask;
 const serde = @import("serde.zig");
 
-/// Describes a root volume replacement task. For more information, see
-/// [Replace a root
-/// volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html) in the *Amazon EC2 User Guide*.
 pub const DescribeReplaceRootVolumeTasksInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

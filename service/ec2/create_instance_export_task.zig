@@ -3,26 +3,19 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
-const ExportToS3TaskSpecification = @import("export_to_s_3_task_specification.zig").ExportToS3TaskSpecification;
+const ExportToS3TaskSpecification = @import("export_to_s3_task_specification.zig").ExportToS3TaskSpecification;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const ExportEnvironment = @import("export_environment.zig").ExportEnvironment;
 const ExportTask = @import("export_task.zig").ExportTask;
 const serde = @import("serde.zig");
 
-/// Exports a running or stopped instance to an Amazon S3 bucket.
-///
-/// For information about the prerequisites for your Amazon S3 bucket, supported
-/// operating systems,
-/// image formats, and known limitations for the types of instances you can
-/// export, see [Exporting an instance as a VM Using VM
-/// Import/Export](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html) in the *VM Import/Export User Guide*.
 pub const CreateInstanceExportTaskInput = struct {
     /// A description for the conversion task or the resource being exported. The
     /// maximum length is 255 characters.
     description: ?[]const u8 = null,
 
     /// The format and location for an export instance task.
-    export_to_s_3_task: ExportToS3TaskSpecification,
+    export_to_s3_task: ExportToS3TaskSpecification,
 
     /// The ID of the instance.
     instance_id: []const u8,
@@ -91,19 +84,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceExportTaskInp
         try body_buf.appendSlice(alloc, "&Description=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
-    if (input.export_to_s_3_task.container_format) |sv| {
+    if (input.export_to_s3_task.container_format) |sv| {
         try body_buf.appendSlice(alloc, "&ExportToS3Task.ContainerFormat=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
     }
-    if (input.export_to_s_3_task.disk_image_format) |sv| {
+    if (input.export_to_s3_task.disk_image_format) |sv| {
         try body_buf.appendSlice(alloc, "&ExportToS3Task.DiskImageFormat=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
     }
-    if (input.export_to_s_3_task.s_3_bucket) |sv| {
+    if (input.export_to_s3_task.s3_bucket) |sv| {
         try body_buf.appendSlice(alloc, "&ExportToS3Task.S3Bucket=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
     }
-    if (input.export_to_s_3_task.s_3_prefix) |sv| {
+    if (input.export_to_s3_task.s3_prefix) |sv| {
         try body_buf.appendSlice(alloc, "&ExportToS3Task.S3Prefix=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
     }

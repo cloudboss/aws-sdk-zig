@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamPrefixListResolverTarget = @import("ipam_prefix_list_resolver_target.zig").IpamPrefixListResolverTarget;
 const serde = @import("serde.zig");
 
-/// Modifies an IPAM prefix list resolver target. You can update version
-/// tracking settings and the desired version of the target prefix list.
 pub const ModifyIpamPrefixListResolverTargetInput = struct {
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the request. For more information, see [Ensuring

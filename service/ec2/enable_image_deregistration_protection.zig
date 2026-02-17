@@ -4,16 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Enables deregistration protection for an AMI. When deregistration protection
-/// is enabled,
-/// the AMI can't be deregistered.
-///
-/// To allow the AMI to be deregistered, you must first disable deregistration
-/// protection.
-///
-/// For more information, see [Protect an
-/// Amazon EC2 AMI from
-/// deregistration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deregistration-protection.html) in the *Amazon EC2 User Guide*.
 pub const EnableImageDeregistrationProtectionInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

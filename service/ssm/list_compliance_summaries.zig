@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ComplianceStringFilter = @import("compliance_string_filter.zig").ComplianceStringFilter;
 const ComplianceSummaryItem = @import("compliance_summary_item.zig").ComplianceSummaryItem;
 
-/// Returns a summary count of compliant and non-compliant resources for a
-/// compliance type. For
-/// example, this call can return State Manager associations, patches, or custom
-/// compliance types
-/// according to the filter criteria that you specify.
 pub const ListComplianceSummariesInput = struct {
     /// One or more compliance or inventory filters. Use a filter to return a more
     /// specific list of

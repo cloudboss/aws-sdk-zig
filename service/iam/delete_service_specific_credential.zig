@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified service-specific credential.
 pub const DeleteServiceSpecificCredentialInput = struct {
     /// The unique identifier of the service-specific credential. You can get this
     /// value by

@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityReservationSpecification = @import("capacity_reservation_specification.zig").CapacityReservationSpecification;
 const serde = @import("serde.zig");
 
-/// Modifies the Capacity Reservation settings for a stopped instance. Use this
-/// action to
-/// configure an instance to target a specific Capacity Reservation, run in any
-/// `open` Capacity Reservation with matching attributes, run in On-Demand
-/// Instance capacity, or only run in a Capacity Reservation.
 pub const ModifyInstanceCapacityReservationAttributesInput = struct {
     /// Information about the Capacity Reservation targeting option.
     capacity_reservation_specification: CapacityReservationSpecification,

@@ -54,15 +54,11 @@ pub const DocumentDescription = struct {
 
     /// The Sha256 or Sha1 hash created by the system when the document was created.
     ///
-    /// **Note:**
-    ///
     /// Sha1 hashes have been deprecated.
     hash: ?[]const u8,
 
     /// The hash type of the document. Valid values include `Sha256` or
     /// `Sha1`.
-    ///
-    /// **Note:**
     ///
     /// Sha1 hashes have been deprecated.
     hash_type: ?DocumentHashType,

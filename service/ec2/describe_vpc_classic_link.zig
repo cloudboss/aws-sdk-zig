@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VpcClassicLink = @import("vpc_classic_link.zig").VpcClassicLink;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This action is deprecated.
-///
-/// Describes the ClassicLink status of the specified VPCs.
 pub const DescribeVpcClassicLinkInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

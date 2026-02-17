@@ -10,11 +10,6 @@ const SnapshotTaskDetail = @import("snapshot_task_detail.zig").SnapshotTaskDetai
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Imports a disk into an EBS snapshot.
-///
-/// For more information, see [Importing a disk as a snapshot using VM
-/// Import/Export](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-import-snapshot.html) in the
-/// *VM Import/Export User Guide*.
 pub const ImportSnapshotInput = struct {
     /// The client-specific data.
     client_data: ?ClientData = null,
@@ -186,11 +181,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportSnapshotInput, config
             try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
         if (v.user_bucket) |sv| {
-            if (sv.s_3_bucket) |sv2| {
+            if (sv.s3_bucket) |sv2| {
                 try body_buf.appendSlice(alloc, "&DiskContainer.UserBucket.S3Bucket=");
                 try aws.url.appendUrlEncoded(alloc, &body_buf, sv2);
             }
-            if (sv.s_3_key) |sv2| {
+            if (sv.s3_key) |sv2| {
                 try body_buf.appendSlice(alloc, "&DiskContainer.UserBucket.S3Key=");
                 try aws.url.appendUrlEncoded(alloc, &body_buf, sv2);
             }

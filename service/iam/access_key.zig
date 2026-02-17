@@ -6,8 +6,6 @@ const statusType = @import("status_type.zig").statusType;
 /// [CreateAccessKey](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccessKey.html) and
 /// [ListAccessKeys](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccessKeys.html) operations.
 ///
-/// **Note:**
-///
 /// The `SecretAccessKey` value is returned only in response to
 /// [CreateAccessKey](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccessKey.html). You can get a secret access key only when you first create
 /// an access key; you cannot recover the secret access key later. If you lose a

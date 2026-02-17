@@ -7,14 +7,6 @@ const IamInstanceProfileSpecification = @import("iam_instance_profile_specificat
 const IamInstanceProfileAssociation = @import("iam_instance_profile_association.zig").IamInstanceProfileAssociation;
 const serde = @import("serde.zig");
 
-/// Replaces an IAM instance profile for the specified running instance. You can
-/// use
-/// this action to change the IAM instance profile that's associated with an
-/// instance
-/// without having to disassociate the existing IAM instance profile first.
-///
-/// Use DescribeIamInstanceProfileAssociations to get the association
-/// ID.
 pub const ReplaceIamInstanceProfileAssociationInput = struct {
     /// The ID of the existing IAM instance profile association.
     association_id: []const u8,

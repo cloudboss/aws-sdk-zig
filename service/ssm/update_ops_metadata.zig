@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const MetadataValue = @import("metadata_value.zig").MetadataValue;
 
-/// Amazon Web Services Systems Manager calls this API operation when you edit
-/// OpsMetadata in Application Manager.
 pub const UpdateOpsMetadataInput = struct {
     /// The metadata keys to delete from the OpsMetadata object.
     keys_to_delete: ?[]const []const u8 = null,

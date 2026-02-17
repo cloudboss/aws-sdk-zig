@@ -5,13 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Lists the account alias associated with the Amazon Web Services account
-/// (Note: you can have only
-/// one). For information about using an Amazon Web Services account alias, see
-/// [Creating,
-/// deleting, and listing an Amazon Web Services account
-/// alias](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#CreateAccountAlias) in the
-/// *IAM User Guide*.
 pub const ListAccountAliasesInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

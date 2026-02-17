@@ -4,10 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Enable an Organizations member account as the IPAM admin account. You cannot
-/// select the Organizations management account as the IPAM admin account. For
-/// more information, see [Enable integration with
-/// Organizations](https://docs.aws.amazon.com/vpc/latest/ipam/enable-integ-ipam.html) in the *Amazon VPC IPAM User Guide*.
 pub const EnableIpamOrganizationAdminAccountInput = struct {
     /// The Organizations member account ID that you want to enable as the IPAM
     /// account.

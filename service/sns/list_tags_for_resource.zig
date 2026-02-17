@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// List all tags added to the specified Amazon SNS topic. For an overview, see
-/// [Amazon SNS Tags](https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html)
-/// in the
-/// *Amazon Simple Notification Service Developer Guide*.
 pub const ListTagsForResourceInput = struct {
     /// The ARN of the topic for which to list tags.
     resource_arn: []const u8,

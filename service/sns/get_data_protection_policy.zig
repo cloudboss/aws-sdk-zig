@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Retrieves the specified inline `DataProtectionPolicy` document that is
-/// stored in the specified Amazon SNS topic.
 pub const GetDataProtectionPolicyInput = struct {
     /// The ARN of the topic whose `DataProtectionPolicy` you want to get.
     ///

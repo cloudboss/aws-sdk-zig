@@ -6,39 +6,17 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RegistrationMetadataItem = @import("registration_metadata_item.zig").RegistrationMetadataItem;
 const Tag = @import("tag.zig").Tag;
 
-/// Generates an activation code and activation ID you can use to register your
-/// on-premises
-/// servers, edge devices, or virtual machine (VM) with Amazon Web Services
-/// Systems Manager. Registering these machines with
-/// Systems Manager makes it possible to manage them using Systems Manager
-/// tools. You use the activation code and ID when
-/// installing SSM Agent on machines in your hybrid environment. For more
-/// information about
-/// requirements for managing on-premises machines using Systems Manager, see
-/// [Using Amazon Web Services Systems Manager in
-/// hybrid and multicloud
-/// environments](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-hybrid-multicloud.html) in the *Amazon Web Services Systems Manager User Guide*.
-///
-/// **Note:**
-///
-/// Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and
-/// on-premises servers and VMs that are
-/// configured for Systems Manager are all called *managed nodes*.
 pub const CreateActivationInput = struct {
     /// The name of the registered, managed node as it will appear in the Amazon Web
     /// Services Systems Manager console or when
     /// you use the Amazon Web Services command line tools to list Systems Manager
     /// resources.
     ///
-    /// **Important:**
-    ///
     /// Don't enter personally identifiable information in this field.
     default_instance_name: ?[]const u8 = null,
 
     /// A user-defined description of the resource that you want to register with
     /// Systems Manager.
-    ///
-    /// **Important:**
     ///
     /// Don't enter personally identifiable information in this field.
     description: ?[]const u8 = null,
@@ -57,8 +35,6 @@ pub const CreateActivationInput = struct {
     /// For more information, see [Create the IAM service role required for Systems
     /// Manager in a hybrid and multicloud
     /// environments](https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-service-role.html) in the *Amazon Web Services Systems Manager User Guide*.
-    ///
-    /// **Note:**
     ///
     /// You can't specify an IAM service-linked role for this parameter. You must
     /// create a unique role.
@@ -84,8 +60,6 @@ pub const CreateActivationInput = struct {
     /// * `Key=OS,Value=Windows`
     ///
     /// * `Key=Environment,Value=Production`
-    ///
-    /// **Important:**
     ///
     /// When you install SSM Agent on your on-premises servers and VMs, you specify
     /// an activation ID

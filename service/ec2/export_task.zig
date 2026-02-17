@@ -1,4 +1,4 @@
-const ExportToS3Task = @import("export_to_s_3_task.zig").ExportToS3Task;
+const ExportToS3Task = @import("export_to_s3_task.zig").ExportToS3Task;
 const InstanceExportDetails = @import("instance_export_details.zig").InstanceExportDetails;
 const ExportTaskState = @import("export_task_state.zig").ExportTaskState;
 const Tag = @import("tag.zig").Tag;
@@ -12,7 +12,7 @@ pub const ExportTask = struct {
     export_task_id: ?[]const u8,
 
     /// Information about the export task.
-    export_to_s_3_task: ?ExportToS3Task,
+    export_to_s3_task: ?ExportToS3Task,
 
     /// Information about the instance to export.
     instance_export_details: ?InstanceExportDetails,

@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FunctionEventInvokeConfig = @import("function_event_invoke_config.zig").FunctionEventInvokeConfig;
 
-/// Retrieves a list of configurations for asynchronous invocation for a
-/// function.
-///
-/// To configure options for asynchronous invocation, use
-/// PutFunctionEventInvokeConfig.
 pub const ListFunctionEventInvokeConfigsInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

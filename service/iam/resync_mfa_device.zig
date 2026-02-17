@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Synchronizes the specified MFA device with its IAM resource object on the
-/// Amazon Web Services
-/// servers.
-///
-/// For more information about creating and working with virtual MFA devices,
-/// see [Using a virtual MFA
-/// device](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the *IAM User Guide*.
 pub const ResyncMFADeviceInput = struct {
     /// An authentication code emitted by the device.
     ///

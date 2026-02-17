@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceDetails = @import("maintenance_details.zig").MaintenanceDetails;
 const serde = @import("serde.zig");
 
-/// Get details of available tunnel endpoint maintenance.
 pub const GetVpnTunnelReplacementStatusInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request, and provides an error response. If you have the

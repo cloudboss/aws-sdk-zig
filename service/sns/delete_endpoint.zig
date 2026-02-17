@@ -4,14 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the endpoint for a device and mobile app from Amazon SNS. This
-/// action is
-/// idempotent. For more information, see [Using Amazon SNS Mobile Push
-/// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-///
-/// When you delete an endpoint that is also subscribed to a topic, then you
-/// must also
-/// unsubscribe the endpoint from the topic.
 pub const DeleteEndpointInput = struct {
     /// `EndpointArn` of endpoint to delete.
     endpoint_arn: []const u8,

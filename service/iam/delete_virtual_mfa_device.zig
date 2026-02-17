@@ -4,14 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a virtual MFA device.
-///
-/// **Note:**
-///
-/// You must deactivate a user's virtual MFA device before you can delete it.
-/// For
-/// information about deactivating MFA devices, see
-/// [DeactivateMFADevice](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeactivateMFADevice.html).
 pub const DeleteVirtualMFADeviceInput = struct {
     /// The serial number that uniquely identifies the MFA device. For virtual MFA
     /// devices,

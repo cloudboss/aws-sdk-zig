@@ -9,7 +9,6 @@ const Tag = @import("tag.zig").Tag;
 const TargetLocation = @import("target_location.zig").TargetLocation;
 const Target = @import("target.zig").Target;
 
-/// Initiates execution of an Automation runbook.
 pub const StartAutomationExecutionInput = struct {
     /// The CloudWatch alarm you want to apply to your automation.
     alarm_configuration: ?AlarmConfiguration = null,
@@ -89,8 +88,6 @@ pub const StartAutomationExecutionInput = struct {
     /// * `Key=environment,Value=test`
     ///
     /// * `Key=OS,Value=Windows`
-    ///
-    /// **Note:**
     ///
     /// The `Array Members` maximum value is reported as 1000. This number includes
     /// capacity reserved for internal operations. When calling the

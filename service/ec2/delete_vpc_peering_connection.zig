@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a VPC peering connection. Either the owner of the requester VPC or
-/// the owner
-/// of the accepter VPC can delete the VPC peering connection if it's in the
-/// `active` state. The owner of the requester VPC can delete a VPC peering
-/// connection in the `pending-acceptance` state. You cannot delete a VPC
-/// peering
-/// connection that's in the `failed` or `rejected` state.
 pub const DeleteVpcPeeringConnectionInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

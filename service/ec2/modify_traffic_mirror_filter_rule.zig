@@ -10,10 +10,6 @@ const TrafficDirection = @import("traffic_direction.zig").TrafficDirection;
 const TrafficMirrorFilterRule = @import("traffic_mirror_filter_rule.zig").TrafficMirrorFilterRule;
 const serde = @import("serde.zig");
 
-/// Modifies the specified Traffic Mirror rule.
-///
-/// `DestinationCidrBlock` and `SourceCidrBlock` must both be an IPv4
-/// range or an IPv6 range.
 pub const ModifyTrafficMirrorFilterRuleInput = struct {
     /// The description to assign to the Traffic Mirror rule.
     description: ?[]const u8 = null,
@@ -62,8 +58,6 @@ pub const ModifyTrafficMirrorFilterRuleInput = struct {
 };
 
 pub const ModifyTrafficMirrorFilterRuleOutput = struct {
-    /// **Note:**
-    ///
     /// Tags are not returned for ModifyTrafficMirrorFilterRule.
     ///
     /// A Traffic Mirror rule.

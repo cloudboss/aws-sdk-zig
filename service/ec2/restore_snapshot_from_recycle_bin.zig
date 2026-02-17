@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SSEType = @import("sse_type.zig").SSEType;
 const SnapshotState = @import("snapshot_state.zig").SnapshotState;
 
-/// Restores a snapshot from the Recycle Bin. For more information, see [Restore
-/// snapshots from the Recycle
-/// Bin](https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-snaps.html#recycle-bin-restore-snaps) in the *Amazon EBS User Guide*.
 pub const RestoreSnapshotFromRecycleBinInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -158,7 +155,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
                     result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {

@@ -7,24 +7,6 @@ const Tag = @import("tag.zig").Tag;
 const Policy = @import("policy.zig").Policy;
 const serde = @import("serde.zig");
 
-/// Creates a new managed policy for your Amazon Web Services account.
-///
-/// This operation creates a policy version with a version identifier of `v1`
-/// and sets v1 as the policy's default version. For more information about
-/// policy versions,
-/// see [Versioning for managed
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html) in the
-/// *IAM User Guide*.
-///
-/// As a best practice, you can validate your IAM policies.
-/// To learn more, see [Validating IAM
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html)
-/// in the *IAM User Guide*.
-///
-/// For more information about managed policies in general, see [Managed
-/// policies and inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
-/// *IAM User Guide*.
 pub const CreatePolicyInput = struct {
     /// A friendly description of the policy.
     ///
@@ -52,8 +34,6 @@ pub const CreatePolicyInput = struct {
     /// In addition, it can contain any ASCII character from the ! (`\u0021`)
     /// through the DEL character (`\u007F`), including
     /// most punctuation characters, digits, and upper and lowercased letters.
-    ///
-    /// **Note:**
     ///
     /// You cannot use an asterisk (*) in the path name.
     path: ?[]const u8 = null,
@@ -109,8 +89,6 @@ pub const CreatePolicyInput = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// If any one of the tags is invalid or if you exceed the allowed maximum
     /// number of tags, then the entire request

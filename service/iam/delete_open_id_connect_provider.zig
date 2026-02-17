@@ -4,17 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes an OpenID Connect identity provider (IdP) resource object in IAM.
-///
-/// Deleting an IAM OIDC provider resource does not update any roles that
-/// reference the
-/// provider as a principal in their trust policies. Any attempt to assume a
-/// role that
-/// references a deleted provider fails.
-///
-/// This operation is idempotent; it does not fail or return an error if you
-/// call the
-/// operation for a provider that does not exist.
 pub const DeleteOpenIDConnectProviderInput = struct {
     /// The Amazon Resource Name (ARN) of the IAM OpenID Connect provider resource
     /// object to

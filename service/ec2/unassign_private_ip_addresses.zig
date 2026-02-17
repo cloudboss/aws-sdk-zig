@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Unassigns the specified secondary private IP addresses or IPv4 Prefix
-/// Delegation
-/// prefixes from a network interface.
 pub const UnassignPrivateIpAddressesInput = struct {
     /// The IPv4 prefixes to unassign from the network interface.
     ipv_4_prefixes: ?[]const []const u8 = null,

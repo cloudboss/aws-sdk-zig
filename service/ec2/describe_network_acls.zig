@@ -7,15 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const NetworkAcl = @import("network_acl.zig").NetworkAcl;
 const serde = @import("serde.zig");
 
-/// Describes your network ACLs. The default is to describe all your network
-/// ACLs.
-/// Alternatively, you can specify specific network ACL IDs or filter the
-/// results to
-/// include only the network ACLs that match specific criteria.
-///
-/// For more information, see [Network
-/// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the
-/// *Amazon VPC User Guide*.
 pub const DescribeNetworkAclsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -25,8 +25,6 @@ pub const RestoreRequest = struct {
     /// Describes the location where the restore job's output is stored.
     output_location: ?OutputLocation,
 
-    /// **Important:**
-    ///
     /// Amazon S3 Select is no longer available to new customers. Existing customers
     /// of Amazon S3 Select can
     /// continue to use the feature as usual. [Learn
@@ -38,8 +36,6 @@ pub const RestoreRequest = struct {
     /// Retrieval tier at which the restore will be processed.
     tier: ?Tier,
 
-    /// **Important:**
-    ///
     /// Amazon S3 Select is no longer available to new customers. Existing customers
     /// of Amazon S3 Select can
     /// continue to use the feature as usual. [Learn

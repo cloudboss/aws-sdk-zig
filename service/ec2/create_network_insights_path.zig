@@ -9,14 +9,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const NetworkInsightsPath = @import("network_insights_path.zig").NetworkInsightsPath;
 const serde = @import("serde.zig");
 
-/// Creates a path to analyze for reachability.
-///
-/// Reachability Analyzer enables you to analyze and debug network reachability
-/// between
-/// two resources in your virtual private cloud (VPC). For more information, see
-/// the
-/// [Reachability Analyzer
-/// Guide](https://docs.aws.amazon.com/vpc/latest/reachability/).
 pub const CreateNetworkInsightsPathInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information,

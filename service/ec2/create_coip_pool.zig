@@ -7,7 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const CoipPool = @import("coip_pool.zig").CoipPool;
 const serde = @import("serde.zig");
 
-/// Creates a pool of customer-owned IP (CoIP) addresses.
 pub const CreateCoipPoolInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

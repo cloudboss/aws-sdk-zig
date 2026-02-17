@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the Amazon Web Services Systems Manager document (SSM document) and
-/// all managed node associations to the
-/// document.
-///
-/// Before you delete the document, we recommend that you use DeleteAssociation
-/// to disassociate all managed nodes that are associated with the document.
 pub const DeleteDocumentInput = struct {
     /// The version of the document that you want to delete. If not provided, all
     /// versions of the

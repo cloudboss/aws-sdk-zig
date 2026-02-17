@@ -51,8 +51,6 @@ pub const CompletedPart = struct {
     /// Part number that identifies the part. This is a positive integer between 1
     /// and 10,000.
     ///
-    /// **Note:**
-    ///
     /// * **General purpose buckets** - In
     /// `CompleteMultipartUpload`, when a additional checksum (including
     /// `x-amz-checksum-crc32`, `x-amz-checksum-crc32c`,

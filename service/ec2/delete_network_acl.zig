@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified network ACL. You can't delete the ACL if it's
-/// associated with any subnets. You can't delete the default network ACL.
 pub const DeleteNetworkAclInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

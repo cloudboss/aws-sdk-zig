@@ -14,8 +14,6 @@ pub const OnFailure = struct {
     /// you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket,
     /// or Kafka topic as the destination.
     ///
-    /// **Note:**
-    ///
     /// Amazon SNS destinations have a message size limit of 256 KB. If the combined
     /// size of the function request and response payload exceeds the limit, Lambda
     /// will drop the payload when sending `OnFailure` event to the destination. For

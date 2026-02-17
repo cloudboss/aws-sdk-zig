@@ -24,8 +24,6 @@ pub const GetObjectAttributesParts = struct {
     /// contain zero or more
     /// `Parts` elements.
     ///
-    /// **Note:**
-    ///
     /// * **General purpose buckets** - For
     /// `GetObjectAttributes`, if an additional checksum (including
     /// `x-amz-checksum-crc32`, `x-amz-checksum-crc32c`,

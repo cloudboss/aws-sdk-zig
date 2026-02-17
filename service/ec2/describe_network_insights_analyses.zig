@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const NetworkInsightsAnalysis = @import("network_insights_analysis.zig").NetworkInsightsAnalysis;
 const serde = @import("serde.zig");
 
-/// Describes one or more of your network insights analyses.
 pub const DescribeNetworkInsightsAnalysesInput = struct {
     /// The time when the network insights analyses ended.
     analysis_end_time: ?i64 = null,

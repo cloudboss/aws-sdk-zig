@@ -1,7 +1,5 @@
 /// The established temporary security credentials of the session.
 ///
-/// **Note:**
-///
 /// **Directory buckets** - These session credentials are only
 /// supported for the authentication and authorization of Zonal endpoint API
 /// operations on directory buckets.

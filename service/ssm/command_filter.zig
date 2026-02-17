@@ -2,15 +2,11 @@ const CommandFilterKey = @import("command_filter_key.zig").CommandFilterKey;
 
 /// Describes a command filter.
 ///
-/// **Note:**
-///
 /// A managed node ID can't be specified when a command status is `Pending`
 /// because
 /// the command hasn't run on the node yet.
 pub const CommandFilter = struct {
     /// The name of the filter.
-    ///
-    /// **Note:**
     ///
     /// The `ExecutionStage` filter can't be used with the
     /// `ListCommandInvocations` operation, only with `ListCommands`.

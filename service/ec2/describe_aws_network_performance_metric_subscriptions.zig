@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const Subscription = @import("subscription.zig").Subscription;
 const serde = @import("serde.zig");
 
-/// Describes the current Infrastructure Performance metric subscriptions.
 pub const DescribeAwsNetworkPerformanceMetricSubscriptionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

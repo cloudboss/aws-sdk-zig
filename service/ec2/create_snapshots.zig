@@ -10,30 +10,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const SnapshotInfo = @import("snapshot_info.zig").SnapshotInfo;
 const serde = @import("serde.zig");
 
-/// Creates crash-consistent snapshots of multiple EBS volumes attached to an
-/// Amazon EC2 instance.
-/// Volumes are chosen by specifying an instance. Each volume attached to the
-/// specified instance
-/// will produce one snapshot that is crash-consistent across the instance. You
-/// can include all of
-/// the volumes currently attached to the instance, or you can exclude the root
-/// volume or specific
-/// data (non-root) volumes from the multi-volume snapshot set.
-///
-/// The location of the source instance determines where you can create the
-/// snapshots.
-///
-/// * If the source instance is in a Region, you must create the snapshots in
-///   the same
-/// Region as the instance.
-///
-/// * If the source instance is in a Local Zone, you can create the snapshots in
-///   the same
-/// Local Zone or in its parent Amazon Web Services Region.
-///
-/// * If the source instance is on an Outpost, you can create the snapshots on
-///   the same
-/// Outpost or in its parent Amazon Web Services Region.
 pub const CreateSnapshotsInput = struct {
     /// Copies the tags from the specified volume to corresponding snapshot.
     copy_tags_from_source: ?CopyTagsFromSource = null,
@@ -51,8 +27,6 @@ pub const CreateSnapshotsInput = struct {
     /// The instance to specify which volumes should be included in the snapshots.
     instance_specification: InstanceSpecification,
 
-    /// **Note:**
-    ///
     /// Only supported for instances in Local Zones. If the source instance is not
     /// in a Local Zone,
     /// omit this parameter.
@@ -68,8 +42,6 @@ pub const CreateSnapshotsInput = struct {
     /// Default value: `regional`
     location: ?SnapshotLocationEnum = null,
 
-    /// **Note:**
-    ///
     /// Only supported for instances on Outposts. If the source instance is not on
     /// an Outpost,
     /// omit this parameter.

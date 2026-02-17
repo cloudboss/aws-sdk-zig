@@ -46,8 +46,6 @@ pub const SpotFleetLaunchSpecification = struct {
     /// Amazon EC2 will
     /// identify instance types with those attributes.
     ///
-    /// **Note:**
-    ///
     /// If you specify `InstanceRequirements`, you can't specify
     /// `InstanceType`.
     instance_requirements: ?InstanceRequirements,
@@ -65,8 +63,6 @@ pub const SpotFleetLaunchSpecification = struct {
     monitoring: ?SpotFleetMonitoring,
 
     /// The network interfaces.
-    ///
-    /// **Note:**
     ///
     /// `SpotFleetLaunchSpecification` does not support Elastic Fabric Adapter
     /// (EFA).
@@ -96,8 +92,6 @@ pub const SpotFleetLaunchSpecification = struct {
     /// Instance. We do not recommend using this parameter because it can lead to
     /// increased interruptions. If you do not specify this parameter, you will pay
     /// the current Spot price.
-    ///
-    /// **Important:**
     ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.
@@ -131,8 +125,6 @@ pub const SpotFleetLaunchSpecification = struct {
     /// number of instances to the next whole number. If this value is not
     /// specified, the default
     /// is 1.
-    ///
-    /// **Note:**
     ///
     /// When specifying weights, the price used in the `lowestPrice` and
     /// `priceCapacityOptimized` allocation strategies is per

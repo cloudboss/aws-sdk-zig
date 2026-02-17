@@ -10,8 +10,6 @@ const VerifiedAccessSseSpecificationRequest = @import("verified_access_sse_speci
 const VerifiedAccessTrustProvider = @import("verified_access_trust_provider.zig").VerifiedAccessTrustProvider;
 const serde = @import("serde.zig");
 
-/// Modifies the configuration of the specified Amazon Web Services Verified
-/// Access trust provider.
 pub const ModifyVerifiedAccessTrustProviderInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

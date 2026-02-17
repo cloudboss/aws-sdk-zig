@@ -186,6 +186,7 @@ pub const DescribeAddressTransfersPaginator = struct {
 
         const output = try describe_address_transfers.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -226,6 +227,7 @@ pub const DescribeAddressesAttributePaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_addresses_attribute.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -268,6 +270,7 @@ pub const DescribeAwsNetworkPerformanceMetricSubscriptionsPaginator = struct {
 
         const output = try describe_aws_network_performance_metric_subscriptions.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -308,6 +311,7 @@ pub const DescribeByoipCidrsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_byoip_cidrs.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -350,6 +354,7 @@ pub const DescribeCapacityBlockExtensionHistoryPaginator = struct {
 
         const output = try describe_capacity_block_extension_history.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -390,6 +395,7 @@ pub const DescribeCapacityBlockExtensionOfferingsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_capacity_block_extension_offerings.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -432,6 +438,7 @@ pub const DescribeCapacityBlockOfferingsPaginator = struct {
 
         const output = try describe_capacity_block_offerings.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -472,6 +479,7 @@ pub const DescribeCapacityBlockStatusPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_capacity_block_status.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -514,6 +522,7 @@ pub const DescribeCapacityBlocksPaginator = struct {
 
         const output = try describe_capacity_blocks.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -554,6 +563,7 @@ pub const DescribeCapacityManagerDataExportsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_capacity_manager_data_exports.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -596,6 +606,7 @@ pub const DescribeCapacityReservationBillingRequestsPaginator = struct {
 
         const output = try describe_capacity_reservation_billing_requests.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -636,6 +647,7 @@ pub const DescribeCapacityReservationFleetsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_capacity_reservation_fleets.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -678,6 +690,7 @@ pub const DescribeCapacityReservationsPaginator = struct {
 
         const output = try describe_capacity_reservations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -718,6 +731,7 @@ pub const DescribeCarrierGatewaysPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_carrier_gateways.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -760,6 +774,7 @@ pub const DescribeClassicLinkInstancesPaginator = struct {
 
         const output = try describe_classic_link_instances.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -800,6 +815,7 @@ pub const DescribeClientVpnAuthorizationRulesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_client_vpn_authorization_rules.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -842,6 +858,7 @@ pub const DescribeClientVpnConnectionsPaginator = struct {
 
         const output = try describe_client_vpn_connections.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -882,6 +899,7 @@ pub const DescribeClientVpnEndpointsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_client_vpn_endpoints.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -924,6 +942,7 @@ pub const DescribeClientVpnRoutesPaginator = struct {
 
         const output = try describe_client_vpn_routes.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -964,6 +983,7 @@ pub const DescribeClientVpnTargetNetworksPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_client_vpn_target_networks.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1006,6 +1026,7 @@ pub const DescribeCoipPoolsPaginator = struct {
 
         const output = try describe_coip_pools.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1046,6 +1067,7 @@ pub const DescribeDhcpOptionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_dhcp_options.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1088,6 +1110,7 @@ pub const DescribeEgressOnlyInternetGatewaysPaginator = struct {
 
         const output = try describe_egress_only_internet_gateways.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1128,6 +1151,7 @@ pub const DescribeExportImageTasksPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_export_image_tasks.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1170,6 +1194,7 @@ pub const DescribeFastLaunchImagesPaginator = struct {
 
         const output = try describe_fast_launch_images.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1210,6 +1235,7 @@ pub const DescribeFastSnapshotRestoresPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_fast_snapshot_restores.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1252,6 +1278,7 @@ pub const DescribeFleetsPaginator = struct {
 
         const output = try describe_fleets.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1292,6 +1319,7 @@ pub const DescribeFlowLogsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_flow_logs.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1334,6 +1362,7 @@ pub const DescribeFpgaImagesPaginator = struct {
 
         const output = try describe_fpga_images.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1374,6 +1403,7 @@ pub const DescribeHostReservationOfferingsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_host_reservation_offerings.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1416,6 +1446,7 @@ pub const DescribeHostReservationsPaginator = struct {
 
         const output = try describe_host_reservations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1456,6 +1487,7 @@ pub const DescribeHostsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_hosts.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1498,6 +1530,7 @@ pub const DescribeIamInstanceProfileAssociationsPaginator = struct {
 
         const output = try describe_iam_instance_profile_associations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1538,6 +1571,7 @@ pub const DescribeImageReferencesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_image_references.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1580,6 +1614,7 @@ pub const DescribeImageUsageReportEntriesPaginator = struct {
 
         const output = try describe_image_usage_report_entries.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1620,6 +1655,7 @@ pub const DescribeImageUsageReportsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_image_usage_reports.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1662,6 +1698,7 @@ pub const DescribeImagesPaginator = struct {
 
         const output = try describe_images.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1702,6 +1739,7 @@ pub const DescribeImportImageTasksPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_import_image_tasks.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1744,6 +1782,7 @@ pub const DescribeImportSnapshotTasksPaginator = struct {
 
         const output = try describe_import_snapshot_tasks.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1784,6 +1823,7 @@ pub const DescribeInstanceConnectEndpointsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_instance_connect_endpoints.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1826,6 +1866,7 @@ pub const DescribeInstanceCreditSpecificationsPaginator = struct {
 
         const output = try describe_instance_credit_specifications.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1866,6 +1907,7 @@ pub const DescribeInstanceEventWindowsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_instance_event_windows.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1908,6 +1950,7 @@ pub const DescribeInstanceImageMetadataPaginator = struct {
 
         const output = try describe_instance_image_metadata.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -1948,6 +1991,7 @@ pub const DescribeInstanceStatusPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_instance_status.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1990,6 +2034,7 @@ pub const DescribeInstanceTopologyPaginator = struct {
 
         const output = try describe_instance_topology.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2030,6 +2075,7 @@ pub const DescribeInstanceTypeOfferingsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_instance_type_offerings.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2072,6 +2118,7 @@ pub const DescribeInstanceTypesPaginator = struct {
 
         const output = try describe_instance_types.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2112,6 +2159,7 @@ pub const DescribeInstancesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_instances.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2154,6 +2202,7 @@ pub const DescribeInternetGatewaysPaginator = struct {
 
         const output = try describe_internet_gateways.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2194,6 +2243,7 @@ pub const DescribeIpamPoolsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_ipam_pools.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2236,6 +2286,7 @@ pub const DescribeIpamPrefixListResolverTargetsPaginator = struct {
 
         const output = try describe_ipam_prefix_list_resolver_targets.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2276,6 +2327,7 @@ pub const DescribeIpamPrefixListResolversPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_ipam_prefix_list_resolvers.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2318,6 +2370,7 @@ pub const DescribeIpamResourceDiscoveriesPaginator = struct {
 
         const output = try describe_ipam_resource_discoveries.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2358,6 +2411,7 @@ pub const DescribeIpamResourceDiscoveryAssociationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_ipam_resource_discovery_associations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2400,6 +2454,7 @@ pub const DescribeIpamScopesPaginator = struct {
 
         const output = try describe_ipam_scopes.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2440,6 +2495,7 @@ pub const DescribeIpamsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_ipams.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2482,6 +2538,7 @@ pub const DescribeIpv6PoolsPaginator = struct {
 
         const output = try describe_ipv_6_pools.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2522,6 +2579,7 @@ pub const DescribeLaunchTemplateVersionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_launch_template_versions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2564,6 +2622,7 @@ pub const DescribeLaunchTemplatesPaginator = struct {
 
         const output = try describe_launch_templates.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2604,6 +2663,7 @@ pub const DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsPaginat
         self.params.next_token = self.next_token;
 
         const output = try describe_local_gateway_route_table_virtual_interface_group_associations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2646,6 +2706,7 @@ pub const DescribeLocalGatewayRouteTableVpcAssociationsPaginator = struct {
 
         const output = try describe_local_gateway_route_table_vpc_associations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2686,6 +2747,7 @@ pub const DescribeLocalGatewayRouteTablesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_local_gateway_route_tables.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2728,6 +2790,7 @@ pub const DescribeLocalGatewayVirtualInterfaceGroupsPaginator = struct {
 
         const output = try describe_local_gateway_virtual_interface_groups.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2768,6 +2831,7 @@ pub const DescribeLocalGatewayVirtualInterfacesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_local_gateway_virtual_interfaces.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2810,6 +2874,7 @@ pub const DescribeLocalGatewaysPaginator = struct {
 
         const output = try describe_local_gateways.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2850,6 +2915,7 @@ pub const DescribeMacHostsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_mac_hosts.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2892,6 +2958,7 @@ pub const DescribeMacModificationTasksPaginator = struct {
 
         const output = try describe_mac_modification_tasks.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -2932,6 +2999,7 @@ pub const DescribeManagedPrefixListsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_managed_prefix_lists.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2974,6 +3042,7 @@ pub const DescribeMovingAddressesPaginator = struct {
 
         const output = try describe_moving_addresses.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3014,6 +3083,7 @@ pub const DescribeNatGatewaysPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_nat_gateways.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3056,6 +3126,7 @@ pub const DescribeNetworkAclsPaginator = struct {
 
         const output = try describe_network_acls.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3096,6 +3167,7 @@ pub const DescribeNetworkInsightsAccessScopeAnalysesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_network_insights_access_scope_analyses.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3138,6 +3210,7 @@ pub const DescribeNetworkInsightsAccessScopesPaginator = struct {
 
         const output = try describe_network_insights_access_scopes.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3178,6 +3251,7 @@ pub const DescribeNetworkInsightsAnalysesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_network_insights_analyses.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3220,6 +3294,7 @@ pub const DescribeNetworkInsightsPathsPaginator = struct {
 
         const output = try describe_network_insights_paths.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3260,6 +3335,7 @@ pub const DescribeNetworkInterfacePermissionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_network_interface_permissions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3302,6 +3378,7 @@ pub const DescribeNetworkInterfacesPaginator = struct {
 
         const output = try describe_network_interfaces.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3342,6 +3419,7 @@ pub const DescribePrefixListsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_prefix_lists.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3384,6 +3462,7 @@ pub const DescribePrincipalIdFormatPaginator = struct {
 
         const output = try describe_principal_id_format.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3424,6 +3503,7 @@ pub const DescribePublicIpv4PoolsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_public_ipv_4_pools.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3466,6 +3546,7 @@ pub const DescribeReplaceRootVolumeTasksPaginator = struct {
 
         const output = try describe_replace_root_volume_tasks.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3506,6 +3587,7 @@ pub const DescribeReservedInstancesModificationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_reserved_instances_modifications.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3548,6 +3630,7 @@ pub const DescribeReservedInstancesOfferingsPaginator = struct {
 
         const output = try describe_reserved_instances_offerings.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3588,6 +3671,7 @@ pub const DescribeRouteServerEndpointsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_route_server_endpoints.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3630,6 +3714,7 @@ pub const DescribeRouteServerPeersPaginator = struct {
 
         const output = try describe_route_server_peers.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3670,6 +3755,7 @@ pub const DescribeRouteServersPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_route_servers.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3712,6 +3798,7 @@ pub const DescribeRouteTablesPaginator = struct {
 
         const output = try describe_route_tables.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3752,6 +3839,7 @@ pub const DescribeScheduledInstanceAvailabilityPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_scheduled_instance_availability.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3794,6 +3882,7 @@ pub const DescribeScheduledInstancesPaginator = struct {
 
         const output = try describe_scheduled_instances.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3834,6 +3923,7 @@ pub const DescribeSecurityGroupRulesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_security_group_rules.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3876,6 +3966,7 @@ pub const DescribeSecurityGroupVpcAssociationsPaginator = struct {
 
         const output = try describe_security_group_vpc_associations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3916,6 +4007,7 @@ pub const DescribeSecurityGroupsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_security_groups.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -3958,6 +4050,7 @@ pub const DescribeSnapshotTierStatusPaginator = struct {
 
         const output = try describe_snapshot_tier_status.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -3998,6 +4091,7 @@ pub const DescribeSnapshotsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_snapshots.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4040,6 +4134,7 @@ pub const DescribeSpotFleetRequestsPaginator = struct {
 
         const output = try describe_spot_fleet_requests.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4080,6 +4175,7 @@ pub const DescribeSpotInstanceRequestsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_spot_instance_requests.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4122,6 +4218,7 @@ pub const DescribeSpotPriceHistoryPaginator = struct {
 
         const output = try describe_spot_price_history.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4162,6 +4259,7 @@ pub const DescribeStaleSecurityGroupsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_stale_security_groups.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4204,6 +4302,7 @@ pub const DescribeStoreImageTasksPaginator = struct {
 
         const output = try describe_store_image_tasks.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4244,6 +4343,7 @@ pub const DescribeSubnetsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_subnets.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4286,6 +4386,7 @@ pub const DescribeTagsPaginator = struct {
 
         const output = try describe_tags.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4326,6 +4427,7 @@ pub const DescribeTrafficMirrorFiltersPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_traffic_mirror_filters.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4368,6 +4470,7 @@ pub const DescribeTrafficMirrorSessionsPaginator = struct {
 
         const output = try describe_traffic_mirror_sessions.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4408,6 +4511,7 @@ pub const DescribeTrafficMirrorTargetsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_traffic_mirror_targets.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4450,6 +4554,7 @@ pub const DescribeTransitGatewayAttachmentsPaginator = struct {
 
         const output = try describe_transit_gateway_attachments.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4490,6 +4595,7 @@ pub const DescribeTransitGatewayConnectPeersPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_transit_gateway_connect_peers.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4532,6 +4638,7 @@ pub const DescribeTransitGatewayConnectsPaginator = struct {
 
         const output = try describe_transit_gateway_connects.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4572,6 +4679,7 @@ pub const DescribeTransitGatewayMulticastDomainsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_transit_gateway_multicast_domains.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4614,6 +4722,7 @@ pub const DescribeTransitGatewayPeeringAttachmentsPaginator = struct {
 
         const output = try describe_transit_gateway_peering_attachments.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4654,6 +4763,7 @@ pub const DescribeTransitGatewayPolicyTablesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_transit_gateway_policy_tables.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4696,6 +4806,7 @@ pub const DescribeTransitGatewayRouteTableAnnouncementsPaginator = struct {
 
         const output = try describe_transit_gateway_route_table_announcements.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4736,6 +4847,7 @@ pub const DescribeTransitGatewayRouteTablesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_transit_gateway_route_tables.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4778,6 +4890,7 @@ pub const DescribeTransitGatewayVpcAttachmentsPaginator = struct {
 
         const output = try describe_transit_gateway_vpc_attachments.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4818,6 +4931,7 @@ pub const DescribeTransitGatewaysPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_transit_gateways.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4860,6 +4974,7 @@ pub const DescribeTrunkInterfaceAssociationsPaginator = struct {
 
         const output = try describe_trunk_interface_associations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4900,6 +5015,7 @@ pub const DescribeVerifiedAccessEndpointsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_verified_access_endpoints.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -4942,6 +5058,7 @@ pub const DescribeVerifiedAccessGroupsPaginator = struct {
 
         const output = try describe_verified_access_groups.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -4982,6 +5099,7 @@ pub const DescribeVerifiedAccessInstanceLoggingConfigurationsPaginator = struct 
         self.params.next_token = self.next_token;
 
         const output = try describe_verified_access_instance_logging_configurations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5024,6 +5142,7 @@ pub const DescribeVerifiedAccessInstancesPaginator = struct {
 
         const output = try describe_verified_access_instances.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5064,6 +5183,7 @@ pub const DescribeVerifiedAccessTrustProvidersPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_verified_access_trust_providers.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5106,6 +5226,7 @@ pub const DescribeVolumeStatusPaginator = struct {
 
         const output = try describe_volume_status.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5146,6 +5267,7 @@ pub const DescribeVolumesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_volumes.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5188,6 +5310,7 @@ pub const DescribeVolumesModificationsPaginator = struct {
 
         const output = try describe_volumes_modifications.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5228,6 +5351,7 @@ pub const DescribeVpcClassicLinkDnsSupportPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_vpc_classic_link_dns_support.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5270,6 +5394,7 @@ pub const DescribeVpcEndpointConnectionNotificationsPaginator = struct {
 
         const output = try describe_vpc_endpoint_connection_notifications.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5310,6 +5435,7 @@ pub const DescribeVpcEndpointConnectionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_vpc_endpoint_connections.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5352,6 +5478,7 @@ pub const DescribeVpcEndpointServiceConfigurationsPaginator = struct {
 
         const output = try describe_vpc_endpoint_service_configurations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5392,6 +5519,7 @@ pub const DescribeVpcEndpointServicePermissionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_vpc_endpoint_service_permissions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5434,6 +5562,7 @@ pub const DescribeVpcEndpointsPaginator = struct {
 
         const output = try describe_vpc_endpoints.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5474,6 +5603,7 @@ pub const DescribeVpcPeeringConnectionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_vpc_peering_connections.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5516,6 +5646,7 @@ pub const DescribeVpcsPaginator = struct {
 
         const output = try describe_vpcs.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5556,6 +5687,7 @@ pub const DescribeVpnConcentratorsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_vpn_concentrators.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5598,6 +5730,7 @@ pub const GetAssociatedIpv6PoolCidrsPaginator = struct {
 
         const output = try get_associated_ipv_6_pool_cidrs.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5638,6 +5771,7 @@ pub const GetAwsNetworkPerformanceDataPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_aws_network_performance_data.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5680,6 +5814,7 @@ pub const GetCapacityManagerMetricDataPaginator = struct {
 
         const output = try get_capacity_manager_metric_data.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5720,6 +5855,7 @@ pub const GetCapacityManagerMetricDimensionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_capacity_manager_metric_dimensions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5762,6 +5898,7 @@ pub const GetGroupsForCapacityReservationPaginator = struct {
 
         const output = try get_groups_for_capacity_reservation.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5802,6 +5939,7 @@ pub const GetInstanceTypesFromInstanceRequirementsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_instance_types_from_instance_requirements.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5844,6 +5982,7 @@ pub const GetIpamAddressHistoryPaginator = struct {
 
         const output = try get_ipam_address_history.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5884,6 +6023,7 @@ pub const GetIpamDiscoveredAccountsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_ipam_discovered_accounts.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -5926,6 +6066,7 @@ pub const GetIpamDiscoveredResourceCidrsPaginator = struct {
 
         const output = try get_ipam_discovered_resource_cidrs.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -5966,6 +6107,7 @@ pub const GetIpamPoolAllocationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_ipam_pool_allocations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6008,6 +6150,7 @@ pub const GetIpamPoolCidrsPaginator = struct {
 
         const output = try get_ipam_pool_cidrs.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6048,6 +6191,7 @@ pub const GetIpamPrefixListResolverRulesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_ipam_prefix_list_resolver_rules.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6090,6 +6234,7 @@ pub const GetIpamPrefixListResolverVersionEntriesPaginator = struct {
 
         const output = try get_ipam_prefix_list_resolver_version_entries.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6130,6 +6275,7 @@ pub const GetIpamPrefixListResolverVersionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_ipam_prefix_list_resolver_versions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6172,6 +6318,7 @@ pub const GetIpamResourceCidrsPaginator = struct {
 
         const output = try get_ipam_resource_cidrs.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6212,6 +6359,7 @@ pub const GetManagedPrefixListAssociationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_managed_prefix_list_associations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6254,6 +6402,7 @@ pub const GetManagedPrefixListEntriesPaginator = struct {
 
         const output = try get_managed_prefix_list_entries.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6294,6 +6443,7 @@ pub const GetNetworkInsightsAccessScopeAnalysisFindingsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_network_insights_access_scope_analysis_findings.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6336,6 +6486,7 @@ pub const GetSecurityGroupsForVpcPaginator = struct {
 
         const output = try get_security_groups_for_vpc.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6376,6 +6527,7 @@ pub const GetSpotPlacementScoresPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_spot_placement_scores.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6418,6 +6570,7 @@ pub const GetTransitGatewayAttachmentPropagationsPaginator = struct {
 
         const output = try get_transit_gateway_attachment_propagations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6458,6 +6611,7 @@ pub const GetTransitGatewayMulticastDomainAssociationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_transit_gateway_multicast_domain_associations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6500,6 +6654,7 @@ pub const GetTransitGatewayPolicyTableAssociationsPaginator = struct {
 
         const output = try get_transit_gateway_policy_table_associations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6540,6 +6695,7 @@ pub const GetTransitGatewayPrefixListReferencesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_transit_gateway_prefix_list_references.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6582,6 +6738,7 @@ pub const GetTransitGatewayRouteTableAssociationsPaginator = struct {
 
         const output = try get_transit_gateway_route_table_associations.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6622,6 +6779,7 @@ pub const GetTransitGatewayRouteTablePropagationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_transit_gateway_route_table_propagations.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6664,6 +6822,7 @@ pub const GetVpnConnectionDeviceTypesPaginator = struct {
 
         const output = try get_vpn_connection_device_types.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6704,6 +6863,7 @@ pub const ListImagesInRecycleBinPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_images_in_recycle_bin.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6746,6 +6906,7 @@ pub const ListSnapshotsInRecycleBinPaginator = struct {
 
         const output = try list_snapshots_in_recycle_bin.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6786,6 +6947,7 @@ pub const SearchLocalGatewayRoutesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try search_local_gateway_routes.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -6828,6 +6990,7 @@ pub const SearchTransitGatewayMulticastGroupsPaginator = struct {
 
         const output = try search_transit_gateway_multicast_groups.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -6868,6 +7031,7 @@ pub const SearchTransitGatewayRoutesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try search_transit_gateway_routes.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

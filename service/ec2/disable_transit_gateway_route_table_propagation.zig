@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayPropagation = @import("transit_gateway_propagation.zig").TransitGatewayPropagation;
 const serde = @import("serde.zig");
 
-/// Disables the specified resource attachment from propagating routes to the
-/// specified
-/// propagation route table.
 pub const DisableTransitGatewayRouteTablePropagationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

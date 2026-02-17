@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the password policy for the Amazon Web Services account. There are
-/// no parameters.
 pub const DeleteAccountPasswordPolicyInput = struct {
 };
 

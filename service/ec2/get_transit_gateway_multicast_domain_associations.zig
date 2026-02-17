@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayMulticastDomainAssociation = @import("transit_gateway_multicast_domain_association.zig").TransitGatewayMulticastDomainAssociation;
 const serde = @import("serde.zig");
 
-/// Gets information about the associations for the transit gateway multicast
-/// domain.
 pub const GetTransitGatewayMulticastDomainAssociationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

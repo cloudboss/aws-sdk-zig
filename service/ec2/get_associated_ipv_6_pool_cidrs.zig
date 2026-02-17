@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Ipv6CidrAssociation = @import("ipv_6_cidr_association.zig").Ipv6CidrAssociation;
 const serde = @import("serde.zig");
 
-/// Gets information about the IPv6 CIDR block associations for a specified IPv6
-/// address pool.
 pub const GetAssociatedIpv6PoolCidrsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

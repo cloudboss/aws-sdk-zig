@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const NetworkInsightsAccessScope = @import("network_insights_access_scope.zig").NetworkInsightsAccessScope;
 const serde = @import("serde.zig");
 
-/// Describes the specified Network Access Scopes.
 pub const DescribeNetworkInsightsAccessScopesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

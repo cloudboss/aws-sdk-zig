@@ -1,7 +1,5 @@
 const MoveStatus = @import("move_status.zig").MoveStatus;
 
-/// **Note:**
-///
 /// This action is deprecated.
 ///
 /// Describes the status of a moving Elastic IP address.

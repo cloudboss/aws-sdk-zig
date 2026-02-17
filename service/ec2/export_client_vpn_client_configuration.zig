@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Downloads the contents of the Client VPN endpoint configuration file for the
-/// specified Client VPN endpoint. The Client VPN endpoint configuration
-/// file includes the Client VPN endpoint and certificate information clients
-/// need to establish a connection
-/// with the Client VPN endpoint.
 pub const ExportClientVpnClientConfigurationInput = struct {
     /// The ID of the Client VPN endpoint.
     client_vpn_endpoint_id: []const u8,

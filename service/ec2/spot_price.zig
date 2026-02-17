@@ -6,8 +6,6 @@ const RIProductDescription = @import("ri_product_description.zig").RIProductDesc
 /// using this parameter because it can lead to increased interruptions. If you
 /// do not specify this parameter, you will pay the current Spot price.
 ///
-/// **Important:**
-///
 /// If you specify a maximum price, your instances will be interrupted more
 /// frequently than if you do not specify this parameter.
 pub const SpotPrice = struct {
@@ -27,8 +25,6 @@ pub const SpotPrice = struct {
     /// Instance. We do not recommend
     /// using this parameter because it can lead to increased interruptions. If you
     /// do not specify this parameter, you will pay the current Spot price.
-    ///
-    /// **Important:**
     ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.

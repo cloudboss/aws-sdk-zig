@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CodeSigningConfig = @import("code_signing_config.zig").CodeSigningConfig;
 
-/// Returns information about the specified code signing configuration.
 pub const GetCodeSigningConfigInput = struct {
     /// The The Amazon Resource Name (ARN) of the code signing configuration.
     code_signing_config_arn: []const u8,

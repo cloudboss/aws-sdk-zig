@@ -38,8 +38,6 @@ pub const ByoipCidr = struct {
     ///
     /// * us-west-2-phx-2
     ///
-    /// **Note:**
-    ///
     /// You cannot provision or advertise BYOIPv6 address ranges in Local Zones at
     /// this time.
     network_border_group: ?[]const u8,

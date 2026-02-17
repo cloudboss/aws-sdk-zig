@@ -5,45 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VolumeAttachmentState = @import("volume_attachment_state.zig").VolumeAttachmentState;
 
-/// Attaches an Amazon EBS volume to a `running` or `stopped`
-/// instance, and exposes it to the instance with the specified device name.
-///
-/// **Note:**
-///
-/// The maximum number of Amazon EBS volumes that you can attach to an instance
-/// depends on the
-/// instance type. If you exceed the volume attachment limit for an instance
-/// type, the attachment
-/// request fails with the `AttachmentLimitExceeded` error. For more
-/// information,
-/// see [Instance
-/// volume
-/// limits](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html).
-///
-/// After you attach an EBS volume, you must make it available for use. For more
-/// information,
-/// see [Make an
-/// EBS volume available for
-/// use](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html).
-///
-/// If a volume has an Amazon Web Services Marketplace product code:
-///
-/// * The volume can be attached only to a stopped instance.
-///
-/// * Amazon Web Services Marketplace product codes are copied from the volume
-///   to the instance.
-///
-/// * You must be subscribed to the product.
-///
-/// * The instance type and operating system of the instance must support the
-///   product. For
-/// example, you can't detach a volume from a Windows instance and attach it to
-/// a Linux
-/// instance.
-///
-/// For more information, see [Attach an Amazon EBS volume to an
-/// instance](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-attaching-volume.html) in the
-/// *Amazon EBS User Guide*.
 pub const AttachVolumeInput = struct {
     /// The device name (for example, `/dev/sdh` or `xvdh`).
     device: []const u8,
@@ -207,7 +168,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "associatedResource")) {
                     result.associated_resource = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachTime")) {
-                    result.attach_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.attach_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
                     result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "device")) {

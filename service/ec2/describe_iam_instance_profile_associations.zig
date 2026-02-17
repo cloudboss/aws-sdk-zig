@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IamInstanceProfileAssociation = @import("iam_instance_profile_association.zig").IamInstanceProfileAssociation;
 const serde = @import("serde.zig");
 
-/// Describes your IAM instance profile associations.
 pub const DescribeIamInstanceProfileAssociationsInput = struct {
     /// The IAM instance profile associations.
     association_ids: ?[]const []const u8 = null,

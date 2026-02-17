@@ -8,8 +8,6 @@
 /// Requester Pays
 /// Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html) in the *Amazon S3 User Guide*.
 ///
-/// **Note:**
-///
 /// This functionality is not supported for directory buckets.
 pub const RequestPayer = enum {
     requester,

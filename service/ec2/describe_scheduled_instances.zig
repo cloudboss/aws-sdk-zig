@@ -8,7 +8,6 @@ const SlotStartTimeRangeRequest = @import("slot_start_time_range_request.zig").S
 const ScheduledInstance = @import("scheduled_instance.zig").ScheduledInstance;
 const serde = @import("serde.zig");
 
-/// Describes the specified Scheduled Instances or all your Scheduled Instances.
 pub const DescribeScheduledInstancesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

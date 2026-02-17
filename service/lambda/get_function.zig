@@ -8,10 +8,6 @@ const Concurrency = @import("concurrency.zig").Concurrency;
 const FunctionConfiguration = @import("function_configuration.zig").FunctionConfiguration;
 const TagsError = @import("tags_error.zig").TagsError;
 
-/// Returns information about the function or function version, with a link to
-/// download the deployment package that's valid for 10 minutes. If you specify
-/// a function version, only details that are specific to that version are
-/// returned.
 pub const GetFunctionInput = struct {
     /// The name or ARN of the Lambda function, version, or alias. **Name formats**
     ///

@@ -6,19 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OpsItemFilter = @import("ops_item_filter.zig").OpsItemFilter;
 const OpsItemSummary = @import("ops_item_summary.zig").OpsItemSummary;
 
-/// Query a set of OpsItems. You must have permission in Identity and Access
-/// Management (IAM) to query a list of OpsItems. For more information, see [Set
-/// up
-/// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html) in the
-/// *Amazon Web Services Systems Manager User Guide*.
-///
-/// Operations engineers and IT professionals use Amazon Web Services Systems
-/// Manager OpsCenter to view, investigate, and
-/// remediate operational issues impacting the performance and health of their
-/// Amazon Web Services resources. For
-/// more information, see [Amazon Web Services Systems Manager
-/// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in the
-/// *Amazon Web Services Systems Manager User Guide*.
 pub const DescribeOpsItemsInput = struct {
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you

@@ -1,8 +1,6 @@
 /// The minimum and maximum amount of network bandwidth, in gigabits per second
 /// (Gbps).
 ///
-/// **Note:**
-///
 /// Setting the minimum bandwidth does not guarantee that your instance will
 /// achieve the
 /// minimum bandwidth. Amazon EC2 will identify instance types that support the

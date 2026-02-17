@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Creates an alias for your Amazon Web Services account. For information about
-/// using an Amazon Web Services account
-/// alias, see [Creating, deleting, and
-/// listing an Amazon Web Services account
-/// alias](https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html) in the *Amazon Web Services Sign-In User
-/// Guide*.
 pub const CreateAccountAliasInput = struct {
     /// The account alias to create.
     ///

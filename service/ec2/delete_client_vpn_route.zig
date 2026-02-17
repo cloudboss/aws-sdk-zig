@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ClientVpnRouteStatus = @import("client_vpn_route_status.zig").ClientVpnRouteStatus;
 const serde = @import("serde.zig");
 
-/// Deletes a route from a Client VPN endpoint. You can only delete routes that
-/// you manually added using
-/// the **CreateClientVpnRoute** action. You cannot delete routes that were
-/// automatically added when associating a subnet. To remove routes that have
-/// been automatically added,
-/// disassociate the target subnet from the Client VPN endpoint.
 pub const DeleteClientVpnRouteInput = struct {
     /// The ID of the Client VPN endpoint from which the route is to be deleted.
     client_vpn_endpoint_id: []const u8,

@@ -5,13 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ManagedBy = @import("managed_by.zig").ManagedBy;
 
-/// Retrieves the access status of your account to the EC2 serial console of all
-/// instances. By
-/// default, access to the EC2 serial console is disabled for your account. For
-/// more
-/// information, see [Manage account access to the EC2 serial
-/// console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access) in the *Amazon EC2
-/// User Guide*.
 pub const GetSerialConsoleAccessStatusInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request, and provides an error response. If you have the

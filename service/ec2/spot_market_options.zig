@@ -32,8 +32,6 @@ pub const SpotMarketOptions = struct {
     /// interruptions. If you do
     /// not specify this parameter, you will pay the current Spot price.
     ///
-    /// **Important:**
-    ///
     /// If you specify a maximum price, your Spot Instances will be interrupted more
     /// frequently than if you do not specify this parameter.
     ///

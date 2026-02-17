@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ClientVpnRouteStatus = @import("client_vpn_route_status.zig").ClientVpnRouteStatus;
 const serde = @import("serde.zig");
 
-/// Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint
-/// has a route table that describes the
-/// available destination network routes. Each route in the route table
-/// specifies the path for traﬃc to speciﬁc resources or networks.
 pub const CreateClientVpnRouteInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request.

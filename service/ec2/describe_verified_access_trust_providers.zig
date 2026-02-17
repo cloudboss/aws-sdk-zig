@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VerifiedAccessTrustProvider = @import("verified_access_trust_provider.zig").VerifiedAccessTrustProvider;
 const serde = @import("serde.zig");
 
-/// Describes the specified Amazon Web Services Verified Access trust providers.
 pub const DescribeVerifiedAccessTrustProvidersInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

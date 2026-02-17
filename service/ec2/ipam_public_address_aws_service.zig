@@ -4,7 +4,7 @@ pub const IpamPublicAddressAwsService = enum {
     redshift,
     ecs,
     rds,
-    s_2_s_vpn,
+    s2_s_vpn,
     ec2_lb,
     aga,
     cloudfront,

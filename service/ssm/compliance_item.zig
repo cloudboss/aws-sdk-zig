@@ -22,8 +22,6 @@ pub const ComplianceItem = struct {
     /// execution type
     /// (for example, command), and the execution time.
     ///
-    /// **Important:**
-    ///
     /// For State Manager associations, the `ExecutionTime` value represents when
     /// the
     /// compliance status was captured and aggregated by the Systems Manager

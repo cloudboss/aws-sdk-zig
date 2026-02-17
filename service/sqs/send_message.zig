@@ -6,20 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MessageAttributeValue = @import("message_attribute_value.zig").MessageAttributeValue;
 const MessageSystemAttributeValue = @import("message_system_attribute_value.zig").MessageSystemAttributeValue;
 
-/// Delivers a message to the specified queue.
-///
-/// **Important:**
-///
-/// A message can include only XML, JSON, and unformatted text. The following
-/// Unicode characters are allowed. For more information, see the [W3C
-/// specification for characters](http://www.w3.org/TR/REC-xml/#charsets).
-///
-/// `#x9` | `#xA` | `#xD` | `#x20` to `#xD7FF` | `#xE000` to `#xFFFD` |
-/// `#x10000` to `#x10FFFF`
-///
-/// If a message contains characters outside the allowed set, Amazon SQS rejects
-/// the message and returns an InvalidMessageContents error. Ensure that your
-/// message body includes only valid characters to avoid this exception.
 pub const SendMessageInput = struct {
     /// The length of time, in seconds, for which to delay a specific message. Valid
     /// values:
@@ -27,8 +13,6 @@ pub const SendMessageInput = struct {
     /// become available for processing after the delay period is finished. If you
     /// don't specify
     /// a value, the default value for the queue applies.
-    ///
-    /// **Note:**
     ///
     /// When you set `FifoQueue`, you can't set `DelaySeconds` per message. You can
     /// set this parameter only on a queue level.
@@ -43,8 +27,6 @@ pub const SendMessageInput = struct {
 
     /// The message to send. The minimum size is one character. The maximum size is
     /// 1 MiB or 1,048,576 bytes
-    ///
-    /// **Important:**
     ///
     /// A message can include only XML, JSON, and unformatted text. The following
     /// Unicode characters are allowed. For more information, see the [W3C
@@ -97,8 +79,6 @@ pub const SendMessageInput = struct {
     /// same as the one generated for the first `MessageDeduplicationId`, the
     /// two messages are treated as duplicates and only one copy of the message is
     /// delivered.
-    ///
-    /// **Note:**
     ///
     /// The `MessageDeduplicationId` is available to the consumer of the
     /// message (this can be useful for troubleshooting delivery issues).
@@ -183,8 +163,6 @@ pub const SendMessageInput = struct {
 
     /// The message system attribute to send. Each message system attribute consists
     /// of a `Name`, `Type`, and `Value`.
-    ///
-    /// **Important:**
     ///
     /// * Currently, the only supported message system attribute is
     ///   `AWSTraceHeader`.

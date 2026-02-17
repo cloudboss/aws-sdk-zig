@@ -7,8 +7,6 @@ const VpcAttributeName = @import("vpc_attribute_name.zig").VpcAttributeName;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
 const serde = @import("serde.zig");
 
-/// Describes the specified attribute of the specified VPC. You can specify only
-/// one attribute at a time.
 pub const DescribeVpcAttributeInput = struct {
     /// The VPC attribute.
     attribute: VpcAttributeName,

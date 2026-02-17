@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
 const serde = @import("serde.zig");
 
-/// Deletes one or more flow logs.
 pub const DeleteFlowLogsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

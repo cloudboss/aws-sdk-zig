@@ -10,22 +10,6 @@ const SpotInstanceType = @import("spot_instance_type.zig").SpotInstanceType;
 const SpotInstanceRequest = @import("spot_instance_request.zig").SpotInstanceRequest;
 const serde = @import("serde.zig");
 
-/// Creates a Spot Instance request.
-///
-/// For more information, see [Work with Spot
-/// Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html) in
-/// the *Amazon EC2 User Guide*.
-///
-/// **Important:**
-///
-/// We strongly discourage using the RequestSpotInstances API because it is a
-/// legacy
-/// API with no planned investment. For options for requesting Spot Instances,
-/// see
-/// [Which
-/// is the best Spot request method to
-/// use?](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use) in the
-/// *Amazon EC2 User Guide*.
 pub const RequestSpotInstancesInput = struct {
     /// The user-specified name for a logical grouping of requests.
     ///
@@ -98,8 +82,6 @@ pub const RequestSpotInstancesInput = struct {
     /// Instance. We do not recommend
     /// using this parameter because it can lead to increased interruptions. If you
     /// do not specify this parameter, you will pay the current Spot price.
-    ///
-    /// **Important:**
     ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.

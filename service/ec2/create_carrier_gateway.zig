@@ -7,9 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const CarrierGateway = @import("carrier_gateway.zig").CarrierGateway;
 const serde = @import("serde.zig");
 
-/// Creates a carrier gateway. For more information about carrier gateways, see
-/// [Carrier
-/// gateways](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#wavelength-carrier-gateway) in the *Amazon Web Services Wavelength Developer Guide*.
 pub const CreateCarrierGatewayInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the

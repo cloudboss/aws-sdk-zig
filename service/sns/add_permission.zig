@@ -5,16 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Adds a statement to a topic's access control policy, granting access for the
-/// specified
-/// Amazon Web Services accounts to the specified actions.
-///
-/// **Note:**
-///
-/// To remove the ability to change topic permissions, you must deny permissions
-/// to
-/// the `AddPermission`, `RemovePermission`, and
-/// `SetTopicAttributes` actions in your IAM policy.
 pub const AddPermissionInput = struct {
     /// The action you want to allow for the specified principal(s).
     ///

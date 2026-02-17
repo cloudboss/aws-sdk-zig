@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceMonitoring = @import("instance_monitoring.zig").InstanceMonitoring;
 const serde = @import("serde.zig");
 
-/// Disables detailed monitoring for a running instance. For more information,
-/// see [Monitoring
-/// your instances and
-/// volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html) in the
-/// *Amazon EC2 User Guide*.
 pub const UnmonitorInstancesInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

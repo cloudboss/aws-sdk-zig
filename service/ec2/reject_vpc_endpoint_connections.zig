@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
 const serde = @import("serde.zig");
 
-/// Rejects VPC endpoint connection requests to your VPC endpoint service.
 pub const RejectVpcEndpointConnectionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -6,16 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowFilter = @import("maintenance_window_filter.zig").MaintenanceWindowFilter;
 const MaintenanceWindowTask = @import("maintenance_window_task.zig").MaintenanceWindowTask;
 
-/// Lists the tasks in a maintenance window.
-///
-/// **Note:**
-///
-/// For maintenance window tasks without a specified target, you can't supply
-/// values for
-/// `--max-errors` and `--max-concurrency`. Instead, the system inserts a
-/// placeholder value of `1`, which may be reported in the response to this
-/// command.
-/// These values don't affect the running of your task and can be ignored.
 pub const DescribeMaintenanceWindowTasksInput = struct {
     /// Optional filters used to narrow down the scope of the returned tasks. The
     /// supported filter

@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamAddressHistoryRecord = @import("ipam_address_history_record.zig").IpamAddressHistoryRecord;
 const serde = @import("serde.zig");
 
-/// Retrieve historical information about a CIDR within an IPAM scope. For more
-/// information, see [View the history of IP
-/// addresses](https://docs.aws.amazon.com/vpc/latest/ipam/view-history-cidr-ipam.html) in the *Amazon VPC IPAM User Guide*.
 pub const GetIpamAddressHistoryInput = struct {
     /// The CIDR you want the history of. The CIDR can be an IPv4 or IPv6 IP address
     /// range.

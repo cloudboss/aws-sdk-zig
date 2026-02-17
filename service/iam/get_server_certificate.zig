@@ -6,14 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ServerCertificate = @import("server_certificate.zig").ServerCertificate;
 const serde = @import("serde.zig");
 
-/// Retrieves information about the specified server certificate stored in IAM.
-///
-/// For more information about working with server certificates, see [Working
-/// with server
-/// certificates](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html) in the *IAM User Guide*. This
-/// topic includes a list of Amazon Web Services services that can use the
-/// server certificates that you
-/// manage with IAM.
 pub const GetServerCertificateInput = struct {
     /// The name of the server certificate you want to retrieve information about.
     ///

@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Stops a maintenance window execution that is already in progress and cancels
-/// any tasks in
-/// the window that haven't already starting running. Tasks already in progress
-/// will continue to
-/// completion.
 pub const CancelMaintenanceWindowExecutionInput = struct {
     /// The ID of the maintenance window execution to stop.
     window_execution_id: []const u8,

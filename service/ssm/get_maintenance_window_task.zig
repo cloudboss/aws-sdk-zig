@@ -11,19 +11,6 @@ const MaintenanceWindowTaskInvocationParameters = @import("maintenance_window_ta
 const MaintenanceWindowTaskParameterValueExpression = @import("maintenance_window_task_parameter_value_expression.zig").MaintenanceWindowTaskParameterValueExpression;
 const MaintenanceWindowTaskType = @import("maintenance_window_task_type.zig").MaintenanceWindowTaskType;
 
-/// Retrieves the details of a maintenance window task.
-///
-/// **Note:**
-///
-/// For maintenance window tasks without a specified target, you can't supply
-/// values for
-/// `--max-errors` and `--max-concurrency`. Instead, the system inserts a
-/// placeholder value of `1`, which may be reported in the response to this
-/// command.
-/// These values don't affect the running of your task and can be ignored.
-///
-/// To retrieve a list of tasks in a maintenance window, instead use the
-/// DescribeMaintenanceWindowTasks command.
 pub const GetMaintenanceWindowTaskInput = struct {
     /// The maintenance window ID that includes the task to retrieve.
     window_id: []const u8,
@@ -59,8 +46,6 @@ pub const GetMaintenanceWindowTaskOutput = struct {
     /// results are
     /// logged.
     ///
-    /// **Note:**
-    ///
     /// `LoggingInfo` has been deprecated. To specify an Amazon Simple Storage
     /// Service (Amazon S3) bucket to contain logs, instead use the
     /// `OutputS3BucketName` and `OutputS3KeyPrefix` options in the
@@ -72,8 +57,6 @@ pub const GetMaintenanceWindowTaskOutput = struct {
 
     /// The maximum number of targets allowed to run this task in parallel.
     ///
-    /// **Note:**
-    ///
     /// For maintenance window tasks without a target specified, you can't supply a
     /// value for this
     /// option. Instead, the system inserts a placeholder value of `1`, which may be
@@ -84,8 +67,6 @@ pub const GetMaintenanceWindowTaskOutput = struct {
     max_concurrency: ?[]const u8 = null,
 
     /// The maximum number of errors allowed before the task stops being scheduled.
-    ///
-    /// **Note:**
     ///
     /// For maintenance window tasks without a target specified, you can't supply a
     /// value for this
@@ -136,8 +117,6 @@ pub const GetMaintenanceWindowTaskOutput = struct {
     task_invocation_parameters: ?MaintenanceWindowTaskInvocationParameters = null,
 
     /// The parameters to pass to the task when it runs.
-    ///
-    /// **Note:**
     ///
     /// `TaskParameters` has been deprecated. To specify parameters to pass to a
     /// task when it runs,

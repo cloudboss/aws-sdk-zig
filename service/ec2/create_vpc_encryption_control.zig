@@ -7,13 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const VpcEncryptionControl = @import("vpc_encryption_control.zig").VpcEncryptionControl;
 const serde = @import("serde.zig");
 
-/// Creates a VPC Encryption Control configuration for a specified VPC. VPC
-/// Encryption Control enables you to enforce encryption for all data in transit
-/// within and between VPCs to meet compliance requirements for standards like
-/// HIPAA, FedRAMP, and PCI DSS.
-///
-/// For more information, see [Enforce VPC encryption in
-/// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
 pub const CreateVpcEncryptionControlInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

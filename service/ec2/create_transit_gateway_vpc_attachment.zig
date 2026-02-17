@@ -8,15 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayVpcAttachment = @import("transit_gateway_vpc_attachment.zig").TransitGatewayVpcAttachment;
 const serde = @import("serde.zig");
 
-/// Attaches the specified VPC to the specified transit gateway.
-///
-/// If you attach a VPC with a CIDR range that overlaps the CIDR range of a VPC
-/// that is already attached,
-/// the new VPC CIDR range is not propagated to the default propagation route
-/// table.
-///
-/// To send VPC traffic to an attached transit gateway, add a route to the VPC
-/// route table using CreateRoute.
 pub const CreateTransitGatewayVpcAttachmentInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

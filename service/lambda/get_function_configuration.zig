@@ -25,12 +25,6 @@ const TenancyConfig = @import("tenancy_config.zig").TenancyConfig;
 const TracingConfigResponse = @import("tracing_config_response.zig").TracingConfigResponse;
 const VpcConfigResponse = @import("vpc_config_response.zig").VpcConfigResponse;
 
-/// Returns the version-specific settings of a Lambda function or version. The
-/// output includes only options that can vary between versions of a function.
-/// To modify these settings, use UpdateFunctionConfiguration.
-///
-/// To get all of a function's details, including function-level settings, use
-/// GetFunction.
 pub const GetFunctionConfigurationInput = struct {
     /// The name or ARN of the Lambda function, version, or alias. **Name formats**
     ///

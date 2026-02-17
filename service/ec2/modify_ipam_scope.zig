@@ -7,7 +7,6 @@ const ExternalAuthorityConfiguration = @import("external_authority_configuration
 const IpamScope = @import("ipam_scope.zig").IpamScope;
 const serde = @import("serde.zig");
 
-/// Modify an IPAM scope.
 pub const ModifyIpamScopeInput = struct {
     /// The description of the scope you want to modify.
     description: ?[]const u8 = null,

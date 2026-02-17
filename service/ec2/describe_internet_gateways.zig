@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const InternetGateway = @import("internet_gateway.zig").InternetGateway;
 const serde = @import("serde.zig");
 
-/// Describes your internet gateways. The default is to describe all your
-/// internet gateways.
-/// Alternatively, you can specify specific internet gateway IDs or filter the
-/// results to
-/// include only the internet gateways that match specific criteria.
 pub const DescribeInternetGatewaysInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

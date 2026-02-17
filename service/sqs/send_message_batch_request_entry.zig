@@ -12,15 +12,11 @@ pub const SendMessageBatchRequestEntry = struct {
     /// don't specify
     /// a value, the default value for the queue is applied.
     ///
-    /// **Note:**
-    ///
     /// When you set `FifoQueue`, you can't set `DelaySeconds` per message. You can
     /// set this parameter only on a queue level.
     delay_seconds: ?i32,
 
     /// An identifier for a message in this batch used to communicate the result.
-    ///
-    /// **Note:**
     ///
     /// The `Id`s of a batch request need to be unique within a request.
     ///
@@ -77,8 +73,6 @@ pub const SendMessageBatchRequestEntry = struct {
     /// same as the one generated for the first `MessageDeduplicationId`, the
     /// two messages are treated as duplicates and only one copy of the message is
     /// delivered.
-    ///
-    /// **Note:**
     ///
     /// The `MessageDeduplicationId` is available to the consumer of the
     /// message (this can be useful for troubleshooting delivery issues).
@@ -163,8 +157,6 @@ pub const SendMessageBatchRequestEntry = struct {
 
     /// The message system attribute to send Each message system attribute consists
     /// of a `Name`, `Type`, and `Value`.
-    ///
-    /// **Important:**
     ///
     /// * Currently, the only supported message system attribute is
     ///   `AWSTraceHeader`.

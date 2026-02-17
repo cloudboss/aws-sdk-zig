@@ -5,15 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentDefaultVersionDescription = @import("document_default_version_description.zig").DocumentDefaultVersionDescription;
 
-/// Set the default version of a document.
-///
-/// **Note:**
-///
-/// If you change a document version for a State Manager association, Systems
-/// Manager immediately runs
-/// the association unless you previously specifed the
-/// `apply-only-at-cron-interval`
-/// parameter.
 pub const UpdateDocumentDefaultVersionInput = struct {
     /// The version of a custom document that you want to set as the default
     /// version.

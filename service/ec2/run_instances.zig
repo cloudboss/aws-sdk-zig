@@ -31,69 +31,6 @@ const GroupIdentifier = @import("group_identifier.zig").GroupIdentifier;
 const Instance = @import("instance.zig").Instance;
 const serde = @import("serde.zig");
 
-/// Launches the specified number of instances using an AMI for which you have
-/// permissions.
-///
-/// You can specify a number of options, or leave the default options. The
-/// following rules
-/// apply:
-///
-/// * If you don't specify a subnet ID, we choose a default subnet from
-/// your default VPC for you. If you don't have a default VPC, you must specify
-/// a
-/// subnet ID in the request.
-///
-/// * All instances have a network interface with a primary private IPv4
-/// address. If you don't specify this address, we choose one from the IPv4
-/// range of
-/// your subnet.
-///
-/// * Not all instance types support IPv6 addresses. For more information, see
-/// [Instance
-/// types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
-///
-/// * If you don't specify a security group ID, we use the default security
-///   group
-/// for the VPC. For more information, see [Security
-/// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html).
-///
-/// * If any of the AMIs have a product code attached for which the user has not
-/// subscribed, the request fails.
-///
-/// You can create a [launch
-/// template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html),
-/// which is a resource that contains the parameters to launch an instance. When
-/// you launch
-/// an instance using RunInstances, you can specify the launch template
-/// instead of specifying the launch parameters.
-///
-/// To ensure faster instance launches, break up large requests into smaller
-/// batches. For
-/// example, create five separate launch requests for 100 instances each instead
-/// of one
-/// launch request for 500 instances.
-///
-/// `RunInstances` is subject to both request rate limiting and resource rate
-/// limiting. For more information, see [Request
-/// throttling](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-throttling.html).
-///
-/// An instance is ready for you to use when it's in the `running` state. You
-/// can check the state of your instance using DescribeInstances. You can
-/// tag instances and EBS volumes during launch, after launch, or both. For more
-/// information, see CreateTags and [Tagging your Amazon EC2
-/// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
-///
-/// Linux instances have access to the public key of the key pair at boot. You
-/// can use
-/// this key to provide secure access to the instance. Amazon EC2 public images
-/// use this
-/// feature to provide secure access without passwords. For more information,
-/// see [Key
-/// pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
-///
-/// For troubleshooting, see [What to do if
-/// an instance immediately
-/// terminates](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html), and [Troubleshooting connecting to your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html).
 pub const RunInstancesInput = struct {
     /// Reserved.
     additional_info: ?[]const u8 = null,
@@ -180,14 +117,10 @@ pub const RunInstancesInput = struct {
 
     /// An elastic GPU to associate with the instance.
     ///
-    /// **Note:**
-    ///
     /// Amazon Elastic Graphics reached end of life on January 8, 2024.
     elastic_gpu_specification: ?[]const ElasticGpuSpecification = null,
 
     /// An elastic inference accelerator to associate with the instance.
-    ///
-    /// **Note:**
     ///
     /// Amazon Elastic Inference is no longer available.
     elastic_inference_accelerators: ?[]const ElasticInferenceAccelerator = null,
@@ -292,8 +225,6 @@ pub const RunInstancesInput = struct {
 
     /// The ID of the kernel.
     ///
-    /// **Important:**
-    ///
     /// We recommend that you use PV-GRUB instead of kernels and RAM disks. For more
     /// information, see
     /// [PV-GRUB](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the
@@ -303,8 +234,6 @@ pub const RunInstancesInput = struct {
     /// The name of the key pair. For more information, see [Create a key pair for
     /// your EC2
     /// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html).
-    ///
-    /// **Important:**
     ///
     /// If you do not specify a key pair, you can't connect to the instance unless
     /// you
@@ -395,8 +324,6 @@ pub const RunInstancesInput = struct {
     /// disk. To find kernel requirements, go to the Amazon Web Services Resource
     /// Center and
     /// search for the kernel ID.
-    ///
-    /// **Important:**
     ///
     /// We recommend that you use PV-GRUB instead of kernels and RAM disks. For more
     /// information, see

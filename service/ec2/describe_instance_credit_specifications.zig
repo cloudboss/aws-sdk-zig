@@ -7,40 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const InstanceCreditSpecification = @import("instance_credit_specification.zig").InstanceCreditSpecification;
 const serde = @import("serde.zig");
 
-/// Describes the credit option for CPU usage of the specified burstable
-/// performance
-/// instances. The credit options are `standard` and
-/// `unlimited`.
-///
-/// If you do not specify an instance ID, Amazon EC2 returns burstable
-/// performance
-/// instances with the `unlimited` credit option, as well as instances that were
-/// previously configured as T2, T3, and T3a with the `unlimited` credit option.
-/// For example, if you resize a T2 instance, while it is configured as
-/// `unlimited`, to an M4 instance, Amazon EC2 returns the M4
-/// instance.
-///
-/// If you specify one or more instance IDs, Amazon EC2 returns the credit
-/// option
-/// (`standard` or `unlimited`) of those instances. If you specify
-/// an instance ID that is not valid, such as an instance that is not a
-/// burstable
-/// performance instance, an error is returned.
-///
-/// Recently terminated instances might appear in the returned results. This
-/// interval is
-/// usually less than one hour.
-///
-/// If an Availability Zone is experiencing a service disruption and you specify
-/// instance
-/// IDs in the affected zone, or do not specify any instance IDs at all, the
-/// call fails. If
-/// you specify only instance IDs in an unaffected zone, the call works
-/// normally.
-///
-/// For more information, see [Burstable
-/// performance
-/// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
 pub const DescribeInstanceCreditSpecificationsInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

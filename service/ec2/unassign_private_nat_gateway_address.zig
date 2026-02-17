@@ -6,25 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const NatGatewayAddress = @import("nat_gateway_address.zig").NatGatewayAddress;
 const serde = @import("serde.zig");
 
-/// Unassigns secondary private IPv4 addresses from a private NAT gateway. You
-/// cannot unassign your primary private IP. For more information,
-/// see [Edit secondary IP address
-/// associations](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary)
-/// in the *Amazon VPC User Guide*.
-///
-/// While unassigning is in progress, you cannot assign/unassign additional IP
-/// addresses while the connections are being drained. You are, however, allowed
-/// to delete the NAT gateway.
-///
-/// A private IP address will only be released at the end of
-/// MaxDrainDurationSeconds. The
-/// private IP addresses stay associated and support the existing connections,
-/// but do not
-/// support any new connections (new connections are distributed across the
-/// remaining
-/// assigned private IP address). After the existing connections drain out, the
-/// private IP
-/// addresses are released.
 pub const UnassignPrivateNatGatewayAddressInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -8,12 +8,6 @@ const VolumeType = @import("volume_type.zig").VolumeType;
 const Volume = @import("volume.zig").Volume;
 const serde = @import("serde.zig");
 
-/// Creates a crash-consistent, point-in-time copy of an existing Amazon EBS
-/// volume within the same
-/// Availability Zone. The volume copy can be attached to an Amazon EC2 instance
-/// once it reaches the
-/// `available` state. For more information, see [Copy an Amazon EBS
-/// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copying-volume.html).
 pub const CopyVolumesInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the
@@ -43,8 +37,6 @@ pub const CopyVolumesInput = struct {
     /// * io1: `100 - 64,000` IOPS
     ///
     /// * io2: `100 - 256,000` IOPS
-    ///
-    /// **Note:**
     ///
     /// [
     /// Instances built on the Nitro

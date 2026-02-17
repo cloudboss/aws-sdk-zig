@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RecursiveLoop = @import("recursive_loop.zig").RecursiveLoop;
 
-/// Returns your function's [recursive loop
-/// detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html) configuration.
 pub const GetFunctionRecursionConfigInput = struct {
     /// The name of the function.
     function_name: []const u8,

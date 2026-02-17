@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Uploads a client certificate revocation list to the specified Client VPN
-/// endpoint. Uploading a client certificate revocation list overwrites the
-/// existing client certificate revocation list.
-///
-/// Uploading a client certificate revocation list resets existing client
-/// connections.
 pub const ImportClientVpnClientCertificateRevocationListInput = struct {
     /// The client certificate revocation list file. For more information, see
     /// [Generate a Client Certificate Revocation

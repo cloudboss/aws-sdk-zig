@@ -9,146 +9,6 @@ const Credentials = @import("credentials.zig").Credentials;
 const FederatedUser = @import("federated_user.zig").FederatedUser;
 const serde = @import("serde.zig");
 
-/// Returns a set of temporary security credentials (consisting of an access key
-/// ID, a
-/// secret access key, and a security token) for a user. A typical use is in a
-/// proxy
-/// application that gets temporary security credentials on behalf of
-/// distributed applications
-/// inside a corporate network.
-///
-/// You must call the `GetFederationToken` operation using the long-term
-/// security
-/// credentials of an IAM user. As a result, this call is appropriate in
-/// contexts where those credentials can be safeguarded, usually in a
-/// server-based application.
-/// For a comparison of `GetFederationToken` with the other API operations that
-/// produce temporary credentials, see [Requesting Temporary Security
-/// Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html) and [Compare STS
-/// credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_sts-comparison.html) in the *IAM User Guide*.
-///
-/// Although it is possible to call `GetFederationToken` using the security
-/// credentials of an Amazon Web Services account root user rather than an IAM
-/// user that you
-/// create for the purpose of a proxy application, we do not recommend it. For
-/// more
-/// information, see [Safeguard your root user credentials and don't use them
-/// for everyday
-/// tasks](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#lock-away-credentials) in the
-/// *IAM User Guide*.
-///
-/// **Note:**
-///
-/// You can create a mobile-based or browser-based app that can authenticate
-/// users using
-/// a web identity provider like Login with Amazon, Facebook, Google, or an
-/// OpenID
-/// Connect-compatible identity provider. In this case, we recommend that you
-/// use [Amazon Cognito](http://aws.amazon.com/cognito/) or
-/// `AssumeRoleWithWebIdentity`. For more information, see [Federation Through a
-/// Web-based Identity
-/// Provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity) in the
-/// *IAM User Guide*.
-///
-/// **Session duration**
-///
-/// The temporary credentials are valid for the specified duration, from 900
-/// seconds (15
-/// minutes) up to a maximum of 129,600 seconds (36 hours). The default session
-/// duration is
-/// 43,200 seconds (12 hours). Temporary credentials obtained by using the root
-/// user
-/// credentials have a maximum duration of 3,600 seconds (1 hour).
-///
-/// **Permissions**
-///
-/// You can use the temporary credentials created by `GetFederationToken` in any
-/// Amazon Web Services service with the following exceptions:
-///
-/// * You cannot call any IAM operations using the CLI or the Amazon Web
-///   Services API. This
-/// limitation does not apply to console sessions.
-///
-/// * You cannot call any STS operations except `GetCallerIdentity`.
-///
-/// You can use temporary credentials for single sign-on (SSO) to the console.
-///
-/// You must pass an inline or managed [session
-/// policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session) to
-/// this operation. You can pass a single JSON policy document to use as an
-/// inline session
-/// policy. You can also specify up to 10 managed policy Amazon Resource Names
-/// (ARNs) to use as
-/// managed session policies. The plaintext that you use for both inline and
-/// managed session
-/// policies can't exceed 2,048 characters.
-///
-/// Though the session policy parameters are optional, if you do not pass a
-/// policy, then the
-/// resulting federated user session has no permissions. When you pass session
-/// policies, the
-/// session permissions are the intersection of the IAM user policies and the
-/// session policies that you pass. This gives you a way to further restrict the
-/// permissions
-/// for a federated user. You cannot use session policies to grant more
-/// permissions than those
-/// that are defined in the permissions policy of the IAM user. For more
-/// information, see [Session
-/// Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session) in
-/// the *IAM User Guide*. For information about using
-/// `GetFederationToken` to create temporary security credentials, see
-/// [GetFederationToken—Federation Through a Custom Identity
-/// Broker](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken).
-///
-/// You can use the credentials to access a resource that has a resource-based
-/// policy. If
-/// that policy specifically references the federated user session in the
-/// `Principal` element of the policy, the session has the permissions allowed
-/// by
-/// the policy. These permissions are granted in addition to the permissions
-/// granted by the
-/// session policies.
-///
-/// **Tags**
-///
-/// (Optional) You can pass tag key-value pairs to your session. These are
-/// called session
-/// tags. For more information about session tags, see [Passing Session Tags in
-/// STS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html)
-/// in the
-/// *IAM User Guide*.
-///
-/// **Note:**
-///
-/// You can create a mobile-based or browser-based app that can authenticate
-/// users using
-/// a web identity provider like Login with Amazon, Facebook, Google, or an
-/// OpenID
-/// Connect-compatible identity provider. In this case, we recommend that you
-/// use [Amazon Cognito](http://aws.amazon.com/cognito/) or
-/// `AssumeRoleWithWebIdentity`. For more information, see [Federation Through a
-/// Web-based Identity
-/// Provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity) in the
-/// *IAM User Guide*.
-///
-/// An administrator must grant you the permissions necessary to pass session
-/// tags. The
-/// administrator can also create granular permissions to allow you to pass only
-/// specific
-/// session tags. For more information, see [Tutorial: Using Tags
-/// for Attribute-Based Access
-/// Control](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html) in the
-/// *IAM User Guide*.
-///
-/// Tag key–value pairs are not case sensitive, but case is preserved. This
-/// means that you
-/// cannot have separate `Department` and `department` tag keys. Assume
-/// that the user that you are federating has the
-/// `Department`=`Marketing` tag and you pass the
-/// `department`=`engineering` session tag. `Department`
-/// and `department` are not saved as separate tags, and the session tag passed
-/// in
-/// the request takes precedence over the user tag.
 pub const GetFederationTokenInput = struct {
     /// The duration, in seconds, that the session should last. Acceptable durations
     /// for
@@ -218,8 +78,6 @@ pub const GetFederationTokenInput = struct {
     /// include the tab (\u0009), linefeed (\u000A), and carriage return (\u000D)
     /// characters.
     ///
-    /// **Note:**
-    ///
     /// An Amazon Web Services conversion compresses the passed inline session
     /// policy, managed policy ARNs,
     /// and session tags into a packed binary format that has a separate limit. Your
@@ -274,8 +132,6 @@ pub const GetFederationTokenInput = struct {
     /// that are granted
     /// by the session policies.
     ///
-    /// **Note:**
-    ///
     /// An Amazon Web Services conversion compresses the passed inline session
     /// policy, managed policy ARNs,
     /// and session tags into a packed binary format that has a separate limit. Your
@@ -299,8 +155,6 @@ pub const GetFederationTokenInput = struct {
     /// and additional limits, see [IAM
     /// and STS Character
     /// Limits](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length) in the *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// An Amazon Web Services conversion compresses the passed inline session
     /// policy, managed policy ARNs,
@@ -330,8 +184,6 @@ pub const GetFederationTokenOutput = struct {
     /// The temporary security credentials, which include an access key ID, a secret
     /// access key,
     /// and a security (or session) token.
-    ///
-    /// **Note:**
     ///
     /// The size of the security token that STS API operations return is not fixed.
     /// We

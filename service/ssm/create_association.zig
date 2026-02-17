@@ -12,26 +12,6 @@ const TargetLocation = @import("target_location.zig").TargetLocation;
 const Target = @import("target.zig").Target;
 const AssociationDescription = @import("association_description.zig").AssociationDescription;
 
-/// A State Manager association defines the state that you want to maintain on
-/// your managed
-/// nodes. For example, an association can specify that anti-virus software must
-/// be installed and
-/// running on your managed nodes, or that certain ports must be closed. For
-/// static targets, the
-/// association specifies a schedule for when the configuration is reapplied.
-/// For dynamic targets,
-/// such as an Amazon Web Services resource group or an Amazon Web Services
-/// autoscaling group, State Manager, a tool in Amazon Web Services Systems
-/// Manager
-/// applies the configuration when new managed nodes are added to the group. The
-/// association also
-/// specifies actions to take when applying the configuration. For example, an
-/// association for
-/// anti-virus software might run once a day. If the software isn't installed,
-/// then State Manager
-/// installs it. If the software is installed, but the service isn't running,
-/// then the association
-/// might instruct State Manager to start the service.
 pub const CreateAssociationInput = struct {
     alarm_configuration: ?AlarmConfiguration = null,
 
@@ -76,8 +56,6 @@ pub const CreateAssociationInput = struct {
     /// specific version or
     /// the default version.
     ///
-    /// **Important:**
-    ///
     /// State Manager doesn't support running associations that use a new version of
     /// a document if
     /// that document is shared from another account. State Manager always runs the
@@ -112,8 +90,6 @@ pub const CreateAssociationInput = struct {
     duration: ?i32 = null,
 
     /// The managed node ID.
-    ///
-    /// **Note:**
     ///
     /// `InstanceId` has been deprecated. To specify a managed node ID for an
     /// association, use the `Targets` parameter. Requests that
@@ -210,8 +186,6 @@ pub const CreateAssociationInput = struct {
     /// and rate expressions for Systems
     /// Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html) in the *Amazon Web Services Systems Manager User Guide*.
     ///
-    /// **Note:**
-    ///
     /// To use offsets, you must specify the `ApplyOnlyAtCronInterval` parameter.
     /// This
     /// option tells the system not to run an association immediately after you
@@ -249,8 +223,6 @@ pub const CreateAssociationInput = struct {
     /// association. Use this action to create an association in multiple Regions
     /// and multiple
     /// accounts.
-    ///
-    /// **Note:**
     ///
     /// The `IncludeChildOrganizationUnits` parameter is not supported by State
     /// Manager.

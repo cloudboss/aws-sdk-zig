@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OpsItemEventFilter = @import("ops_item_event_filter.zig").OpsItemEventFilter;
 const OpsItemEventSummary = @import("ops_item_event_summary.zig").OpsItemEventSummary;
 
-/// Returns a list of all OpsItem events in the current Amazon Web Services
-/// Region and Amazon Web Services account. You can
-/// limit the results to events associated with specific OpsItems by specifying
-/// a filter.
 pub const ListOpsItemEventsInput = struct {
     /// One or more OpsItem filters. Use a filter to return a more specific list of
     /// results.

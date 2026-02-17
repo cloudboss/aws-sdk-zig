@@ -49,8 +49,6 @@ pub const Address = struct {
 
     /// The service that manages the elastic IP address.
     ///
-    /// **Note:**
-    ///
     /// The only option supported today is `alb`.
     service_managed: ?ServiceManaged,
 

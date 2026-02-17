@@ -6,18 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const serde = @import("serde.zig");
 
-/// Starts a task that restores an AMI from an Amazon S3 object that was
-/// previously created by
-/// using
-/// [CreateStoreImageTask](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html).
-///
-/// To use this API, you must have the required permissions. For more
-/// information, see [Permissions for storing and restoring AMIs using
-/// S3](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-ami-store-restore.html#ami-s3-permissions) in the
-/// *Amazon EC2 User Guide*.
-///
-/// For more information, see [Store and restore an AMI using
-/// S3](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html) in the *Amazon EC2 User Guide*.
 pub const CreateRestoreImageTaskInput = struct {
     /// The name of the Amazon S3 bucket that contains the stored AMI object.
     bucket: []const u8,

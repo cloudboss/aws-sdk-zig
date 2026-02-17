@@ -7,7 +7,6 @@ const Tag = @import("tag.zig").Tag;
 const ParameterTier = @import("parameter_tier.zig").ParameterTier;
 const ParameterType = @import("parameter_type.zig").ParameterType;
 
-/// Create or update a parameter in Parameter Store.
 pub const PutParameterInput = struct {
     /// A regular expression used to validate the parameter value. For example, for
     /// String types
@@ -32,8 +31,6 @@ pub const PutParameterInput = struct {
     /// required format, such as
     /// `ami-12345abcdeEXAMPLE`, and that the specified AMI is available in your
     /// Amazon Web Services account.
-    ///
-    /// **Note:**
     ///
     /// If the action is successful, the service sends back an HTTP 200 response
     /// which indicates a
@@ -62,8 +59,6 @@ pub const PutParameterInput = struct {
     /// but
     /// recommended.
     ///
-    /// **Important:**
-    ///
     /// Don't enter personally identifiable information in this field.
     description: ?[]const u8 = null,
 
@@ -80,8 +75,6 @@ pub const PutParameterInput = struct {
     key_id: ?[]const u8 = null,
 
     /// The fully qualified name of the parameter that you want to create or update.
-    ///
-    /// **Note:**
     ///
     /// You can't enter the Amazon Resource Name (ARN) for a parameter, only the
     /// parameter name
@@ -120,8 +113,6 @@ pub const PutParameterInput = struct {
     /// For additional information about valid values for parameter names, see
     /// [Creating Systems Manager
     /// parameters](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html) in the *Amazon Web Services Systems Manager User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The reported maximum length of 2048 characters for a parameter name includes
     /// 1037
@@ -188,8 +179,6 @@ pub const PutParameterInput = struct {
     /// * `Key=OS,Value=Windows`
     ///
     /// * `Key=ParameterType,Value=LicenseKey`
-    ///
-    /// **Note:**
     ///
     /// To add tags to an existing Systems Manager parameter, use the
     /// AddTagsToResource
@@ -284,16 +273,12 @@ pub const PutParameterInput = struct {
 
     /// The type of parameter that you want to create.
     ///
-    /// **Note:**
-    ///
     /// `SecureString` isn't currently supported for CloudFormation templates.
     ///
     /// Items in a `StringList` must be separated by a comma (,). You can't
     /// use other punctuation or special character to escape items in the list. If
     /// you have a parameter
     /// value that requires a comma, then use the `String` data type.
-    ///
-    /// **Important:**
     ///
     /// Specifying a parameter type isn't required when updating a parameter. You
     /// must specify a
@@ -303,8 +288,6 @@ pub const PutParameterInput = struct {
     /// The parameter value that you want to add to the system. Standard parameters
     /// have a value
     /// limit of 4 KB. Advanced parameters have a value limit of 8 KB.
-    ///
-    /// **Note:**
     ///
     /// Parameters can't be referenced or nested in the values of other parameters.
     /// You can't

@@ -4,8 +4,6 @@
 /// usage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html) in the *Amazon Simple
 /// Storage Service user guide*.
 ///
-/// **Note:**
-///
 /// This functionality is not supported for directory buckets.
 pub const RequestCharged = enum {
     requester,

@@ -1,8 +1,8 @@
 /// Describes the destination for an export image task.
-pub const ExportTaskS3Location = struct {
+pub const ExportTaskS3LocationRequest = struct {
     /// The destination Amazon S3 bucket.
-    s_3_bucket: ?[]const u8,
+    s3_bucket: []const u8,
 
     /// The prefix (logical hierarchy) in the bucket.
-    s_3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8,
 };

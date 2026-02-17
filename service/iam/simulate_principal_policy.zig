@@ -7,64 +7,6 @@ const ContextEntry = @import("context_entry.zig").ContextEntry;
 const EvaluationResult = @import("evaluation_result.zig").EvaluationResult;
 const serde = @import("serde.zig");
 
-/// Simulate how a set of IAM policies attached to an IAM entity works with a
-/// list of
-/// API operations and Amazon Web Services resources to determine the policies'
-/// effective permissions. The
-/// entity can be an IAM user, group, or role. If you specify a user, then the
-/// simulation
-/// also includes all of the policies that are attached to groups that the user
-/// belongs to.
-/// You can simulate resources that don't exist in your account.
-///
-/// You can optionally include a list of one or more additional policies
-/// specified as
-/// strings to include in the simulation. If you want to simulate only policies
-/// specified as
-/// strings, use
-/// [SimulateCustomPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html) instead.
-///
-/// You can also optionally include one resource-based policy to be evaluated
-/// with each of
-/// the resources included in the simulation for IAM users only.
-///
-/// The simulation does not perform the API operations; it only checks the
-/// authorization
-/// to determine if the simulated policies allow or deny the operations.
-///
-/// **Note:** This operation discloses information about the
-/// permissions granted to other users. If you do not want users to see other
-/// user's
-/// permissions, then consider allowing them to use
-/// [SimulateCustomPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html) instead.
-///
-/// Context keys are variables maintained by Amazon Web Services and its
-/// services that provide details
-/// about the context of an API query request. You can use the `Condition`
-/// element of an IAM policy to evaluate context keys. To get the list of
-/// context keys
-/// that the policies require for correct simulation, use
-/// [GetContextKeysForPrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html).
-///
-/// If the output is long, you can use the `MaxItems` and `Marker`
-/// parameters to paginate the results.
-///
-/// **Note:**
-///
-/// The IAM policy simulator evaluates statements in the identity-based policy
-/// and
-/// the inputs that you provide during simulation. The policy simulator results
-/// can
-/// differ from your live Amazon Web Services environment. We recommend that you
-/// check your policies
-/// against your live Amazon Web Services environment after testing using the
-/// policy simulator to
-/// confirm that you have the desired results. For more information about using
-/// the
-/// policy simulator, see [Testing IAM
-/// policies with the IAM policy simulator
-/// ](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in the
-/// *IAM User Guide*.
 pub const SimulatePrincipalPolicyInput = struct {
     /// A list of names of API operations to evaluate in the simulation. Each
     /// operation is
@@ -228,8 +170,6 @@ pub const SimulatePrincipalPolicyInput = struct {
     /// For more information about ARNs, see [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*.
     ///
-    /// **Note:**
-    ///
     /// Simulation of resource-based policies isn't supported for IAM roles.
     resource_arns: ?[]const []const u8 = null,
 
@@ -317,8 +257,6 @@ pub const SimulatePrincipalPolicyInput = struct {
     ///
     /// * The special characters tab (`\u0009`), line feed (`\u000A`), and
     /// carriage return (`\u000D`)
-    ///
-    /// **Note:**
     ///
     /// Simulation of resource-based policies isn't supported for IAM roles.
     resource_policy: ?[]const u8 = null,

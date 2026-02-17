@@ -6,8 +6,6 @@
 /// versions at a specific period in
 /// the object's lifetime.
 ///
-/// **Note:**
-///
 /// This parameter applies to general purpose buckets only. It is not supported
 /// for directory bucket
 /// lifecycle configurations.
@@ -21,8 +19,6 @@ pub const NoncurrentVersionExpiration = struct {
     /// elements](https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html) in
     /// the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
@@ -35,8 +31,6 @@ pub const NoncurrentVersionExpiration = struct {
     /// see [How Amazon S3 Calculates
     /// When an Object Became
     /// Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket

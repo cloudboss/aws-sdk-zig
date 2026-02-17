@@ -6,16 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceProfile = @import("instance_profile.zig").InstanceProfile;
 const serde = @import("serde.zig");
 
-/// Lists the instance profiles that have the specified associated IAM role. If
-/// there
-/// are none, the operation returns an empty list. For more information about
-/// instance
-/// profiles, go to [Using
-/// instance
-/// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters.
 pub const ListInstanceProfilesForRoleInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

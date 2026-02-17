@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const SubnetCidrReservation = @import("subnet_cidr_reservation.zig").SubnetCidrReservation;
 const serde = @import("serde.zig");
 
-/// Gets information about the subnet CIDR reservations.
 pub const GetSubnetCidrReservationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

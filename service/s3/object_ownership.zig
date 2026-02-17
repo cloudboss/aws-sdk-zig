@@ -29,8 +29,6 @@
 /// bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html) in the
 /// *Amazon S3 User Guide*.
 ///
-/// **Note:**
-///
 /// This functionality is not supported for directory buckets. Directory buckets
 /// use the bucket owner enforced setting for S3 Object Ownership.
 pub const ObjectOwnership = enum {

@@ -18,11 +18,6 @@ const SelfManagedKafkaEventSourceConfig = @import("self_managed_kafka_event_sour
 const SourceAccessConfiguration = @import("source_access_configuration.zig").SourceAccessConfiguration;
 const EventSourcePosition = @import("event_source_position.zig").EventSourcePosition;
 
-/// Deletes an [event source
-/// mapping](https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html). You can get the identifier of a mapping from the output of ListEventSourceMappings.
-///
-/// When you delete an event source mapping, it enters a `Deleting` state and
-/// might not be completely deleted for several seconds.
 pub const DeleteEventSourceMappingInput = struct {
     /// The identifier of the event source mapping.
     uuid: []const u8,
@@ -130,8 +125,6 @@ pub const DeleteEventSourceMappingOutput = struct {
     /// Discard records older than the specified age. The default value is -1, which
     /// sets the maximum age to infinite. When the value is set to infinite, Lambda
     /// never discards old records.
-    ///
-    /// **Note:**
     ///
     /// The minimum valid value for maximum record age is 60s. Although values less
     /// than 60 and greater than -1 fall within the parameter's absolute range, they

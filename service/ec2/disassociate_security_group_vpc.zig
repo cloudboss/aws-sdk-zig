@@ -5,13 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SecurityGroupVpcAssociationState = @import("security_group_vpc_association_state.zig").SecurityGroupVpcAssociationState;
 
-/// Disassociates a security group from a VPC. You cannot disassociate the
-/// security group if any Elastic network interfaces in the associated VPC are
-/// still associated with the security group.
-///
-/// Note that the disassociation is asynchronous and you can check the status of
-/// the request with
-/// [DescribeSecurityGroupVpcAssociations](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroupVpcAssociations.html).
 pub const DisassociateSecurityGroupVpcInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

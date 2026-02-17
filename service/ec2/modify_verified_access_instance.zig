@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessInstance = @import("verified_access_instance.zig").VerifiedAccessInstance;
 const serde = @import("serde.zig");
 
-/// Modifies the configuration of the specified Amazon Web Services Verified
-/// Access instance.
 pub const ModifyVerifiedAccessInstanceInput = struct {
     /// The custom subdomain.
     cidr_endpoints_custom_sub_domain: ?[]const u8 = null,

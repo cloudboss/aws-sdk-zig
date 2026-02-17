@@ -6,37 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PolicyVersion = @import("policy_version.zig").PolicyVersion;
 const serde = @import("serde.zig");
 
-/// Retrieves information about the specified version of the specified managed
-/// policy,
-/// including the policy document.
-///
-/// **Note:**
-///
-/// Policies returned by this operation are URL-encoded compliant
-/// with [RFC 3986](https://tools.ietf.org/html/rfc3986). You can use a URL
-/// decoding method to convert the policy back to plain JSON text. For example,
-/// if you use Java, you
-/// can use the `decode` method of the `java.net.URLDecoder` utility class in
-/// the Java SDK. Other languages and SDKs provide similar functionality, and
-/// some SDKs do this decoding
-/// automatically.
-///
-/// To list the available versions for a policy, use
-/// [ListPolicyVersions](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html).
-///
-/// This operation retrieves information about managed policies. To retrieve
-/// information
-/// about an inline policy that is embedded in a user, group, or role, use
-/// [GetUserPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUserPolicy.html), [GetGroupPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroupPolicy.html), or
-/// [GetRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRolePolicy.html).
-///
-/// For more information about the types of policies, see [Managed policies and
-/// inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-///
-/// For more information about managed policy versions, see [Versioning for
-/// managed
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html) in the *IAM User Guide*.
 pub const GetPolicyVersionInput = struct {
     /// The Amazon Resource Name (ARN) of the managed policy that you want
     /// information

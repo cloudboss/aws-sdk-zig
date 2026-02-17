@@ -26,31 +26,6 @@ const TenancyConfig = @import("tenancy_config.zig").TenancyConfig;
 const TracingConfigResponse = @import("tracing_config_response.zig").TracingConfigResponse;
 const VpcConfigResponse = @import("vpc_config_response.zig").VpcConfigResponse;
 
-/// Updates a Lambda function's code. If code signing is enabled for the
-/// function, the code package must be signed by a trusted publisher. For more
-/// information, see [Configuring code signing for
-/// Lambda](https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html).
-///
-/// If the function's package type is `Image`, then you must specify the code
-/// package in `ImageUri` as the URI of a [container
-/// image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in
-/// the Amazon ECR registry.
-///
-/// If the function's package type is `Zip`, then you must specify the
-/// deployment package as a [.zip file
-/// archive](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip). Enter the Amazon S3 bucket and key of the code .zip file location. You can also provide the function code inline using the `ZipFile` field.
-///
-/// The code in the deployment package must be compatible with the target
-/// instruction set architecture of the function (`x86-64` or `arm64`).
-///
-/// The function's code is locked when you publish a version. You can't modify
-/// the code of a published version, only the unpublished version.
-///
-/// **Note:**
-///
-/// For a function defined as a container image, Lambda resolves the image tag
-/// to an image digest. In Amazon ECR, if you update the image tag to a new
-/// image, Lambda does not automatically update the function.
 pub const UpdateFunctionCodeInput = struct {
     /// The instruction set architecture that the function supports. Enter a string
     /// array with one of the valid values (arm64 or x86_64). The default value is
@@ -91,14 +66,14 @@ pub const UpdateFunctionCodeInput = struct {
     /// An Amazon S3 bucket in the same Amazon Web Services Region as your function.
     /// The bucket can be in a different Amazon Web Services account. Use only with
     /// a function defined with a .zip file archive deployment package.
-    s_3_bucket: ?[]const u8 = null,
+    s3_bucket: ?[]const u8 = null,
 
     /// The Amazon S3 key of the deployment package. Use only with a function
     /// defined with a .zip file archive deployment package.
-    s_3_key: ?[]const u8 = null,
+    s3_key: ?[]const u8 = null,
 
     /// For versioned objects, the version of the deployment package object to use.
-    s_3_object_version: ?[]const u8 = null,
+    s3_object_version: ?[]const u8 = null,
 
     /// The ARN of the Key Management Service (KMS) customer managed key that's used
     /// to encrypt your function's .zip deployment package. If you don't provide a
@@ -118,9 +93,9 @@ pub const UpdateFunctionCodeInput = struct {
         .publish = "Publish",
         .publish_to = "PublishTo",
         .revision_id = "RevisionId",
-        .s_3_bucket = "S3Bucket",
-        .s_3_key = "S3Key",
-        .s_3_object_version = "S3ObjectVersion",
+        .s3_bucket = "S3Bucket",
+        .s3_key = "S3Key",
+        .s3_object_version = "S3ObjectVersion",
         .source_kms_key_arn = "SourceKMSKeyArn",
         .zip_file = "ZipFile",
     };
@@ -434,19 +409,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateFunctionCodeInput, co
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.s_3_bucket) |v| {
+    if (input.s3_bucket) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"S3Bucket\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.s_3_key) |v| {
+    if (input.s3_key) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"S3Key\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.s_3_object_version) |v| {
+    if (input.s3_object_version) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"S3ObjectVersion\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

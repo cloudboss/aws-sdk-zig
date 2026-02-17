@@ -327,11 +327,11 @@ const Explanation = @import("explanation.zig").Explanation;
 const ExportEnvironment = @import("export_environment.zig").ExportEnvironment;
 const ExportImageTask = @import("export_image_task.zig").ExportImageTask;
 const ExportTask = @import("export_task.zig").ExportTask;
-const ExportTaskS3Location = @import("export_task_s_3_location.zig").ExportTaskS3Location;
-const ExportTaskS3LocationRequest = @import("export_task_s_3_location_request.zig").ExportTaskS3LocationRequest;
+const ExportTaskS3Location = @import("export_task_s3_location.zig").ExportTaskS3Location;
+const ExportTaskS3LocationRequest = @import("export_task_s3_location_request.zig").ExportTaskS3LocationRequest;
 const ExportTaskState = @import("export_task_state.zig").ExportTaskState;
-const ExportToS3Task = @import("export_to_s_3_task.zig").ExportToS3Task;
-const ExportToS3TaskSpecification = @import("export_to_s_3_task_specification.zig").ExportToS3TaskSpecification;
+const ExportToS3Task = @import("export_to_s3_task.zig").ExportToS3Task;
+const ExportToS3TaskSpecification = @import("export_to_s3_task_specification.zig").ExportToS3TaskSpecification;
 const ExternalAuthorityConfiguration = @import("external_authority_configuration.zig").ExternalAuthorityConfiguration;
 const FailedCapacityReservationFleetCancellationResult = @import("failed_capacity_reservation_fleet_cancellation_result.zig").FailedCapacityReservationFleetCancellationResult;
 const FailedQueuedPurchaseDeletion = @import("failed_queued_purchase_deletion.zig").FailedQueuedPurchaseDeletion;
@@ -950,8 +950,8 @@ const RuleGroupRuleOptionsPair = @import("rule_group_rule_options_pair.zig").Rul
 const RuleGroupTypePair = @import("rule_group_type_pair.zig").RuleGroupTypePair;
 const RuleOption = @import("rule_option.zig").RuleOption;
 const RunInstancesMonitoringEnabled = @import("run_instances_monitoring_enabled.zig").RunInstancesMonitoringEnabled;
-const S3ObjectTag = @import("s_3_object_tag.zig").S3ObjectTag;
-const S3Storage = @import("s_3_storage.zig").S3Storage;
+const S3ObjectTag = @import("s3_object_tag.zig").S3ObjectTag;
+const S3Storage = @import("s3_storage.zig").S3Storage;
 const SSEType = @import("sse_type.zig").SSEType;
 const Schedule = @import("schedule.zig").Schedule;
 const ScheduledInstance = @import("scheduled_instance.zig").ScheduledInstance;
@@ -1197,8 +1197,8 @@ const VerifiedAccessLogDeliveryStatusCode = @import("verified_access_log_deliver
 const VerifiedAccessLogKinesisDataFirehoseDestination = @import("verified_access_log_kinesis_data_firehose_destination.zig").VerifiedAccessLogKinesisDataFirehoseDestination;
 const VerifiedAccessLogKinesisDataFirehoseDestinationOptions = @import("verified_access_log_kinesis_data_firehose_destination_options.zig").VerifiedAccessLogKinesisDataFirehoseDestinationOptions;
 const VerifiedAccessLogOptions = @import("verified_access_log_options.zig").VerifiedAccessLogOptions;
-const VerifiedAccessLogS3Destination = @import("verified_access_log_s_3_destination.zig").VerifiedAccessLogS3Destination;
-const VerifiedAccessLogS3DestinationOptions = @import("verified_access_log_s_3_destination_options.zig").VerifiedAccessLogS3DestinationOptions;
+const VerifiedAccessLogS3Destination = @import("verified_access_log_s3_destination.zig").VerifiedAccessLogS3Destination;
+const VerifiedAccessLogS3DestinationOptions = @import("verified_access_log_s3_destination_options.zig").VerifiedAccessLogS3DestinationOptions;
 const VerifiedAccessLogs = @import("verified_access_logs.zig").VerifiedAccessLogs;
 const VerifiedAccessSseSpecificationRequest = @import("verified_access_sse_specification_request.zig").VerifiedAccessSseSpecificationRequest;
 const VerifiedAccessSseSpecificationResponse = @import("verified_access_sse_specification_response.zig").VerifiedAccessSseSpecificationResponse;
@@ -10196,9 +10196,9 @@ pub fn deserializeAddressTransfer(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "transferAccountId")) {
                     result.transfer_account_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transferOfferAcceptedTimestamp")) {
-                    result.transfer_offer_accepted_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.transfer_offer_accepted_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "transferOfferExpirationTimestamp")) {
-                    result.transfer_offer_expiration_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.transfer_offer_expiration_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -10549,8 +10549,8 @@ pub fn deserializeAssignedPrivateIpAddress(reader: *aws.xml.Reader, alloc: std.m
 pub fn deserializeAssociatedRole(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AssociatedRole {
     var result: AssociatedRole = undefined;
     result.associated_role_arn = null;
-    result.certificate_s_3_bucket_name = null;
-    result.certificate_s_3_object_key = null;
+    result.certificate_s3_bucket_name = null;
+    result.certificate_s3_object_key = null;
     result.encryption_kms_key_id = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -10558,9 +10558,9 @@ pub fn deserializeAssociatedRole(reader: *aws.xml.Reader, alloc: std.mem.Allocat
                 if (std.mem.eql(u8, e.local, "associatedRoleArn")) {
                     result.associated_role_arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "certificateS3BucketName")) {
-                    result.certificate_s_3_bucket_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.certificate_s3_bucket_name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "certificateS3ObjectKey")) {
-                    result.certificate_s_3_object_key = try alloc.dupe(u8, try reader.readElementText());
+                    result.certificate_s3_object_key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "encryptionKmsKeyId")) {
                     result.encryption_kms_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -10997,13 +10997,13 @@ pub fn deserializeBundleTask(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
                 } else if (std.mem.eql(u8, e.local, "progress")) {
                     result.progress = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(BundleTaskState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "storage")) {
                     result.storage = try deserializeStorage(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "updateTime")) {
-                    result.update_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.update_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -11262,11 +11262,11 @@ pub fn deserializeCapacityBlock(reader: *aws.xml.Reader, alloc: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "capacityReservationIdSet")) {
                     result.capacity_reservation_ids = try deserializeCapacityReservationIdSet(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "createDate")) {
-                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
-                    result.end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
-                    result.start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(CapacityBlockResourceState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -11309,13 +11309,13 @@ pub fn deserializeCapacityBlockExtension(reader: *aws.xml.Reader, alloc: std.mem
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionDurationHours")) {
                     result.capacity_block_extension_duration_hours = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionEndDate")) {
-                    result.capacity_block_extension_end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.capacity_block_extension_end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionOfferingId")) {
                     result.capacity_block_extension_offering_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionPurchaseDate")) {
-                    result.capacity_block_extension_purchase_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.capacity_block_extension_purchase_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionStartDate")) {
-                    result.capacity_block_extension_start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.capacity_block_extension_start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionStatus")) {
                     result.capacity_block_extension_status = std.meta.stringToEnum(CapacityBlockExtensionStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityReservationId")) {
@@ -11363,11 +11363,11 @@ pub fn deserializeCapacityBlockExtensionOffering(reader: *aws.xml.Reader, alloc:
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionDurationHours")) {
                     result.capacity_block_extension_duration_hours = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionEndDate")) {
-                    result.capacity_block_extension_end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.capacity_block_extension_end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionOfferingId")) {
                     result.capacity_block_extension_offering_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "capacityBlockExtensionStartDate")) {
-                    result.capacity_block_extension_start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.capacity_block_extension_start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "currencyCode")) {
                     result.currency_code = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceCount")) {
@@ -11375,7 +11375,7 @@ pub fn deserializeCapacityBlockExtensionOffering(reader: *aws.xml.Reader, alloc:
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
                     result.instance_type = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
-                    result.start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
                     result.tenancy = std.meta.stringToEnum(CapacityReservationTenancy, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "upfrontFee")) {
@@ -11420,13 +11420,13 @@ pub fn deserializeCapacityBlockOffering(reader: *aws.xml.Reader, alloc: std.mem.
                 } else if (std.mem.eql(u8, e.local, "currencyCode")) {
                     result.currency_code = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
-                    result.end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceCount")) {
                     result.instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
                     result.instance_type = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
-                    result.start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
                     result.tenancy = std.meta.stringToEnum(CapacityReservationTenancy, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ultraserverCount")) {
@@ -11484,13 +11484,13 @@ pub fn deserializeCapacityManagerDataExportResponse(reader: *aws.xml.Reader, all
     var result: CapacityManagerDataExportResponse = undefined;
     result.capacity_manager_data_export_id = null;
     result.create_time = null;
-    result.latest_delivery_s_3_location_uri = null;
+    result.latest_delivery_s3_location_uri = null;
     result.latest_delivery_status = null;
     result.latest_delivery_status_message = null;
     result.latest_delivery_time = null;
     result.output_format = null;
-    result.s_3_bucket_name = null;
-    result.s_3_bucket_prefix = null;
+    result.s3_bucket_name = null;
+    result.s3_bucket_prefix = null;
     result.schedule = null;
     result.tags = null;
     while (try reader.next()) |event| {
@@ -11499,21 +11499,21 @@ pub fn deserializeCapacityManagerDataExportResponse(reader: *aws.xml.Reader, all
                 if (std.mem.eql(u8, e.local, "capacityManagerDataExportId")) {
                     result.capacity_manager_data_export_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "latestDeliveryS3LocationUri")) {
-                    result.latest_delivery_s_3_location_uri = try alloc.dupe(u8, try reader.readElementText());
+                    result.latest_delivery_s3_location_uri = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "latestDeliveryStatus")) {
                     result.latest_delivery_status = std.meta.stringToEnum(CapacityManagerDataExportStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "latestDeliveryStatusMessage")) {
                     result.latest_delivery_status_message = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "latestDeliveryTime")) {
-                    result.latest_delivery_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.latest_delivery_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "outputFormat")) {
                     result.output_format = std.meta.stringToEnum(OutputFormat, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3BucketName")) {
-                    result.s_3_bucket_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_bucket_name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3BucketPrefix")) {
-                    result.s_3_bucket_prefix = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_bucket_prefix = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "schedule")) {
                     result.schedule = std.meta.stringToEnum(Schedule, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -11564,17 +11564,17 @@ pub fn deserializeCapacityManagerDimension(reader: *aws.xml.Reader, alloc: std.m
                 } else if (std.mem.eql(u8, e.local, "reservationArn")) {
                     result.reservation_arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationCreateTimestamp")) {
-                    result.reservation_create_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.reservation_create_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reservationEndDateType")) {
                     result.reservation_end_date_type = std.meta.stringToEnum(ReservationEndDateType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationEndTimestamp")) {
-                    result.reservation_end_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.reservation_end_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reservationId")) {
                     result.reservation_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationInstanceMatchCriteria")) {
                     result.reservation_instance_match_criteria = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationStartTimestamp")) {
-                    result.reservation_start_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.reservation_start_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reservationState")) {
                     result.reservation_state = std.meta.stringToEnum(ReservationState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservationType")) {
@@ -11651,13 +11651,13 @@ pub fn deserializeCapacityReservation(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "commitmentInfo")) {
                     result.commitment_info = try deserializeCapacityReservationCommitmentInfo(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "createDate")) {
-                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deliveryPreference")) {
                     result.delivery_preference = std.meta.stringToEnum(CapacityReservationDeliveryPreference, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ebsOptimized")) {
                     result.ebs_optimized = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
-                    result.end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "endDateType")) {
                     result.end_date_type = std.meta.stringToEnum(EndDateType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ephemeralStorage")) {
@@ -11683,7 +11683,7 @@ pub fn deserializeCapacityReservation(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "reservationType")) {
                     result.reservation_type = std.meta.stringToEnum(CapacityReservationType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
-                    result.start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(CapacityReservationState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -11722,7 +11722,7 @@ pub fn deserializeCapacityReservationBillingRequest(reader: *aws.xml.Reader, all
                 } else if (std.mem.eql(u8, e.local, "capacityReservationInfo")) {
                     result.capacity_reservation_info = try deserializeCapacityReservationInfo(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "lastUpdateTime")) {
-                    result.last_update_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_update_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "requestedBy")) {
                     result.requested_by = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
@@ -11751,7 +11751,7 @@ pub fn deserializeCapacityReservationCommitmentInfo(reader: *aws.xml.Reader, all
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "commitmentEndDate")) {
-                    result.commitment_end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.commitment_end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "committedInstanceCount")) {
                     result.committed_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -11789,9 +11789,9 @@ pub fn deserializeCapacityReservationFleet(reader: *aws.xml.Reader, alloc: std.m
                 } else if (std.mem.eql(u8, e.local, "capacityReservationFleetId")) {
                     result.capacity_reservation_fleet_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
-                    result.end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceMatchCriteria")) {
                     result.instance_match_criteria = std.meta.stringToEnum(FleetInstanceMatchCriteria, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceTypeSpecificationSet")) {
@@ -13176,8 +13176,8 @@ pub fn deserializeDeclarativePoliciesReport(reader: *aws.xml.Reader, alloc: std.
     var result: DeclarativePoliciesReport = undefined;
     result.end_time = null;
     result.report_id = null;
-    result.s_3_bucket = null;
-    result.s_3_prefix = null;
+    result.s3_bucket = null;
+    result.s3_prefix = null;
     result.start_time = null;
     result.status = null;
     result.tags = null;
@@ -13186,15 +13186,15 @@ pub fn deserializeDeclarativePoliciesReport(reader: *aws.xml.Reader, alloc: std.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "endTime")) {
-                    result.end_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reportId")) {
                     result.report_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Bucket")) {
-                    result.s_3_bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_bucket = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Prefix")) {
-                    result.s_3_prefix = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_prefix = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = std.meta.stringToEnum(ReportState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -13429,7 +13429,7 @@ pub fn deserializeDescribeFastLaunchImagesSuccessItem(reader: *aws.xml.Reader, a
                 } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
                     result.state_transition_reason = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionTime")) {
-                    result.state_transition_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.state_transition_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -13463,15 +13463,15 @@ pub fn deserializeDescribeFastSnapshotRestoreSuccessItem(reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "disabledTime")) {
-                    result.disabled_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.disabled_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "disablingTime")) {
-                    result.disabling_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.disabling_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "enabledTime")) {
-                    result.enabled_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.enabled_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "enablingTime")) {
-                    result.enabling_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.enabling_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "optimizingTime")) {
-                    result.optimizing_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.optimizing_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ownerAlias")) {
                     result.owner_alias = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -13760,15 +13760,15 @@ pub fn deserializeDisableFastSnapshotRestoreSuccessItem(reader: *aws.xml.Reader,
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "disabledTime")) {
-                    result.disabled_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.disabled_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "disablingTime")) {
-                    result.disabling_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.disabling_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "enabledTime")) {
-                    result.enabled_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.enabled_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "enablingTime")) {
-                    result.enabling_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.enabling_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "optimizingTime")) {
-                    result.optimizing_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.optimizing_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ownerAlias")) {
                     result.owner_alias = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -14105,7 +14105,7 @@ pub fn deserializeEbsInstanceBlockDevice(reader: *aws.xml.Reader, alloc: std.mem
                 if (std.mem.eql(u8, e.local, "associatedResource")) {
                     result.associated_resource = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachTime")) {
-                    result.attach_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.attach_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
                     result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "ebsCardIndex")) {
@@ -14174,7 +14174,7 @@ pub fn deserializeEbsStatusDetails(reader: *aws.xml.Reader, alloc: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "impairedSince")) {
-                    result.impaired_since = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.impaired_since = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "name")) {
                     result.name = std.meta.stringToEnum(StatusName, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
@@ -14240,7 +14240,7 @@ pub fn deserializeEc2InstanceConnectEndpoint(reader: *aws.xml.Reader, alloc: std
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createdAt")) {
-                    result.created_at = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.created_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "dnsName")) {
                     result.dns_name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "fipsDnsName")) {
@@ -14447,7 +14447,7 @@ pub fn deserializeElasticInferenceAcceleratorAssociation(reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "elasticInferenceAcceleratorAssociationState")) {
                     result.elastic_inference_accelerator_association_state = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "elasticInferenceAcceleratorAssociationTime")) {
-                    result.elastic_inference_accelerator_association_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.elastic_inference_accelerator_association_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -14592,15 +14592,15 @@ pub fn deserializeEnableFastSnapshotRestoreSuccessItem(reader: *aws.xml.Reader, 
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "disabledTime")) {
-                    result.disabled_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.disabled_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "disablingTime")) {
-                    result.disabling_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.disabling_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "enabledTime")) {
-                    result.enabled_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.enabled_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "enablingTime")) {
-                    result.enabling_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.enabling_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "optimizingTime")) {
-                    result.optimizing_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.optimizing_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ownerAlias")) {
                     result.owner_alias = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -14873,7 +14873,7 @@ pub fn deserializeExportImageTask(reader: *aws.xml.Reader, alloc: std.mem.Alloca
     result.export_image_task_id = null;
     result.image_id = null;
     result.progress = null;
-    result.s_3_export_location = null;
+    result.s3_export_location = null;
     result.status = null;
     result.status_message = null;
     result.tags = null;
@@ -14889,7 +14889,7 @@ pub fn deserializeExportImageTask(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "progress")) {
                     result.progress = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3ExportLocation")) {
-                    result.s_3_export_location = try deserializeExportTaskS3Location(reader, alloc);
+                    result.s3_export_location = try deserializeExportTaskS3Location(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
@@ -14911,7 +14911,7 @@ pub fn deserializeExportTask(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
     var result: ExportTask = undefined;
     result.description = null;
     result.export_task_id = null;
-    result.export_to_s_3_task = null;
+    result.export_to_s3_task = null;
     result.instance_export_details = null;
     result.state = null;
     result.status_message = null;
@@ -14924,7 +14924,7 @@ pub fn deserializeExportTask(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
                 } else if (std.mem.eql(u8, e.local, "exportTaskId")) {
                     result.export_task_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "exportToS3")) {
-                    result.export_to_s_3_task = try deserializeExportToS3Task(reader, alloc);
+                    result.export_to_s3_task = try deserializeExportToS3Task(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "instanceExport")) {
                     result.instance_export_details = try deserializeInstanceExportDetails(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "state")) {
@@ -14946,15 +14946,15 @@ pub fn deserializeExportTask(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
 
 pub fn deserializeExportTaskS3Location(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ExportTaskS3Location {
     var result: ExportTaskS3Location = undefined;
-    result.s_3_bucket = null;
-    result.s_3_prefix = null;
+    result.s3_bucket = null;
+    result.s3_prefix = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "s3Bucket")) {
-                    result.s_3_bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_bucket = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Prefix")) {
-                    result.s_3_prefix = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_prefix = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -14970,8 +14970,8 @@ pub fn deserializeExportToS3Task(reader: *aws.xml.Reader, alloc: std.mem.Allocat
     var result: ExportToS3Task = undefined;
     result.container_format = null;
     result.disk_image_format = null;
-    result.s_3_bucket = null;
-    result.s_3_key = null;
+    result.s3_bucket = null;
+    result.s3_key = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -14980,9 +14980,9 @@ pub fn deserializeExportToS3Task(reader: *aws.xml.Reader, alloc: std.mem.Allocat
                 } else if (std.mem.eql(u8, e.local, "diskImageFormat")) {
                     result.disk_image_format = std.meta.stringToEnum(DiskImageFormat, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Bucket")) {
-                    result.s_3_bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_bucket = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Key")) {
-                    result.s_3_key = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_key = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -15231,7 +15231,7 @@ pub fn deserializeFleetCapacityReservation(reader: *aws.xml.Reader, alloc: std.m
                 } else if (std.mem.eql(u8, e.local, "capacityReservationId")) {
                     result.capacity_reservation_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createDate")) {
-                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ebsOptimized")) {
                     result.ebs_optimized = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "fulfilledCapacity")) {
@@ -15290,7 +15290,7 @@ pub fn deserializeFleetData(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
                 } else if (std.mem.eql(u8, e.local, "context")) {
                     result.context = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "errorSet")) {
                     result.errors = try deserializeDescribeFleetsErrorSet(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "excessCapacityTerminationPolicy")) {
@@ -15322,9 +15322,9 @@ pub fn deserializeFleetData(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
                 } else if (std.mem.eql(u8, e.local, "type")) {
                     result.@"type" = std.meta.stringToEnum(FleetType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
-                    result.valid_from = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
-                    result.valid_until = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.valid_until = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -15496,7 +15496,7 @@ pub fn deserializeFlowLog(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Fl
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deliverCrossAccountRole")) {
                     result.deliver_cross_account_role = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "deliverLogsErrorMessage")) {
@@ -15608,7 +15608,7 @@ pub fn deserializeFpgaImage(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "dataRetentionSupport")) {
                     result.data_retention_support = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "description")) {
@@ -15638,7 +15638,7 @@ pub fn deserializeFpgaImage(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
                 } else if (std.mem.eql(u8, e.local, "tags")) {
                     result.tags = try deserializeTagList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "updateTime")) {
-                    result.update_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.update_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -15859,7 +15859,7 @@ pub fn deserializeHistoryRecord(reader: *aws.xml.Reader, alloc: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "eventType")) {
                     result.event_type = std.meta.stringToEnum(EventType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
-                    result.timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -15884,7 +15884,7 @@ pub fn deserializeHistoryRecordEntry(reader: *aws.xml.Reader, alloc: std.mem.All
                 } else if (std.mem.eql(u8, e.local, "eventType")) {
                     result.event_type = std.meta.stringToEnum(FleetEventType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
-                    result.timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -15922,7 +15922,7 @@ pub fn deserializeHost(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Host 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "allocationTime")) {
-                    result.allocation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.allocation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "allowsMultipleInstanceTypes")) {
                     result.allows_multiple_instance_types = std.meta.stringToEnum(AllowsMultipleInstanceTypes, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "assetId")) {
@@ -15956,7 +15956,7 @@ pub fn deserializeHost(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Host 
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "releaseTime")) {
-                    result.release_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.release_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(AllocationState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -16091,7 +16091,7 @@ pub fn deserializeHostReservation(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "duration")) {
                     result.duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "end")) {
-                    result.end = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "hostIdSet")) {
                     result.host_id_set = try deserializeResponseHostIdSet(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "hostReservationId")) {
@@ -16105,7 +16105,7 @@ pub fn deserializeHostReservation(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "paymentOption")) {
                     result.payment_option = std.meta.stringToEnum(PaymentOption, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "start")) {
-                    result.start = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(ReservationState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -16183,7 +16183,7 @@ pub fn deserializeIamInstanceProfileAssociation(reader: *aws.xml.Reader, alloc: 
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(IamInstanceProfileAssociationState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
-                    result.timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -16249,7 +16249,7 @@ pub fn deserializeIdFormat(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !I
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "deadline")) {
-                    result.deadline = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.deadline = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "resource")) {
                     result.resource = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "useLongIds")) {
@@ -16403,7 +16403,7 @@ pub fn deserializeImageAncestryEntry(reader: *aws.xml.Reader, alloc: std.mem.All
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationDate")) {
-                    result.creation_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "imageId")) {
                     result.image_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "imageOwnerAlias")) {
@@ -16514,9 +16514,9 @@ pub fn deserializeImageRecycleBinInfo(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "name")) {
                     result.name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "recycleBinEnterTime")) {
-                    result.recycle_bin_enter_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.recycle_bin_enter_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "recycleBinExitTime")) {
-                    result.recycle_bin_exit_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.recycle_bin_exit_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -16570,9 +16570,9 @@ pub fn deserializeImageUsageReport(reader: *aws.xml.Reader, alloc: std.mem.Alloc
                 if (std.mem.eql(u8, e.local, "accountIdSet")) {
                     result.account_ids = try deserializeUserIdList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "expirationTime")) {
-                    result.expiration_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.expiration_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "imageId")) {
                     result.image_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reportId")) {
@@ -16612,7 +16612,7 @@ pub fn deserializeImageUsageReportEntry(reader: *aws.xml.Reader, alloc: std.mem.
                 } else if (std.mem.eql(u8, e.local, "imageId")) {
                     result.image_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reportCreationTime")) {
-                    result.report_creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.report_creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reportId")) {
                     result.report_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
@@ -17102,7 +17102,7 @@ pub fn deserializeInstance(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !I
                 } else if (std.mem.eql(u8, e.local, "keyName")) {
                     result.key_name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "launchTime")) {
-                    result.launch_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.launch_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "licenseSet")) {
                     result.licenses = try deserializeLicenseList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "maintenanceOptions")) {
@@ -17166,7 +17166,7 @@ pub fn deserializeInstance(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !I
                 } else if (std.mem.eql(u8, e.local, "usageOperation")) {
                     result.usage_operation = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "usageOperationUpdateTime")) {
-                    result.usage_operation_update_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.usage_operation_update_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "virtualizationType")) {
                     result.virtualization_type = std.meta.stringToEnum(VirtualizationType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
@@ -17541,7 +17541,7 @@ pub fn deserializeInstanceImageMetadata(reader: *aws.xml.Reader, alloc: std.mem.
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
                     result.instance_type = std.meta.stringToEnum(InstanceType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "launchTime")) {
-                    result.launch_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.launch_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "operator")) {
                     result.operator = try deserializeOperatorResponse(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "instanceOwnerId")) {
@@ -17860,7 +17860,7 @@ pub fn deserializeInstanceNetworkInterfaceAttachment(reader: *aws.xml.Reader, al
                 if (std.mem.eql(u8, e.local, "attachmentId")) {
                     result.attachment_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachTime")) {
-                    result.attach_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.attach_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
                     result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "deviceIndex")) {
@@ -18215,7 +18215,7 @@ pub fn deserializeInstanceStatusDetails(reader: *aws.xml.Reader, alloc: std.mem.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "impairedSince")) {
-                    result.impaired_since = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.impaired_since = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "name")) {
                     result.name = std.meta.stringToEnum(StatusName, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
@@ -18249,11 +18249,11 @@ pub fn deserializeInstanceStatusEvent(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "instanceEventId")) {
                     result.instance_event_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "notAfter")) {
-                    result.not_after = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.not_after = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "notBefore")) {
-                    result.not_before = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.not_before = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "notBeforeDeadline")) {
-                    result.not_before_deadline = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.not_before_deadline = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -18814,9 +18814,9 @@ pub fn deserializeIpamAddressHistoryRecord(reader: *aws.xml.Reader, alloc: std.m
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
                     result.resource_type = std.meta.stringToEnum(IpamAddressHistoryResourceType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sampledEndTime")) {
-                    result.sampled_end_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.sampled_end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "sampledStartTime")) {
-                    result.sampled_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.sampled_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -18848,9 +18848,9 @@ pub fn deserializeIpamDiscoveredAccount(reader: *aws.xml.Reader, alloc: std.mem.
                 } else if (std.mem.eql(u8, e.local, "failureReason")) {
                     result.failure_reason = try deserializeIpamDiscoveryFailureReason(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "lastAttemptedDiscoveryTime")) {
-                    result.last_attempted_discovery_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_attempted_discovery_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lastSuccessfulDiscoveryTime")) {
-                    result.last_successful_discovery_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_successful_discovery_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "organizationalUnitId")) {
                     result.organizational_unit_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -18913,7 +18913,7 @@ pub fn deserializeIpamDiscoveredPublicAddress(reader: *aws.xml.Reader, alloc: st
                 } else if (std.mem.eql(u8, e.local, "publicIpv4PoolId")) {
                     result.public_ipv_4_pool_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sampleTime")) {
-                    result.sample_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.sample_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "securityGroupSet")) {
                     result.security_groups = try deserializeIpamPublicAddressSecurityGroupList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "service")) {
@@ -18979,7 +18979,7 @@ pub fn deserializeIpamDiscoveredResourceCidr(reader: *aws.xml.Reader, alloc: std
                 } else if (std.mem.eql(u8, e.local, "resourceType")) {
                     result.resource_type = std.meta.stringToEnum(IpamResourceType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sampleTime")) {
-                    result.sample_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.sample_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
@@ -19044,7 +19044,7 @@ pub fn deserializeIpamExternalResourceVerificationToken(reader: *aws.xml.Reader,
                 } else if (std.mem.eql(u8, e.local, "ipamRegion")) {
                     result.ipam_region = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "notAfter")) {
-                    result.not_after = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.not_after = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(IpamExternalResourceVerificationTokenState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
@@ -20160,7 +20160,7 @@ pub fn deserializeKeyPairInfo(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "keyFingerprint")) {
                     result.key_fingerprint = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "keyName")) {
@@ -20311,7 +20311,7 @@ pub fn deserializeLaunchTemplate(reader: *aws.xml.Reader, alloc: std.mem.Allocat
                 if (std.mem.eql(u8, e.local, "createdBy")) {
                     result.created_by = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "defaultVersionNumber")) {
                     result.default_version_number = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "latestVersionNumber")) {
@@ -20959,7 +20959,7 @@ pub fn deserializeLaunchTemplateSpotMarketOptions(reader: *aws.xml.Reader, alloc
                 } else if (std.mem.eql(u8, e.local, "spotInstanceType")) {
                     result.spot_instance_type = std.meta.stringToEnum(SpotInstanceType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
-                    result.valid_until = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.valid_until = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -21010,7 +21010,7 @@ pub fn deserializeLaunchTemplateVersion(reader: *aws.xml.Reader, alloc: std.mem.
                 if (std.mem.eql(u8, e.local, "createdBy")) {
                     result.created_by = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "defaultVersion")) {
                     result.default_version = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "launchTemplateData")) {
@@ -21440,15 +21440,15 @@ pub fn deserializeLockedSnapshotsInfo(reader: *aws.xml.Reader, alloc: std.mem.Al
                 if (std.mem.eql(u8, e.local, "coolOffPeriod")) {
                     result.cool_off_period = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "coolOffPeriodExpiresOn")) {
-                    result.cool_off_period_expires_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.cool_off_period_expires_on = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockCreatedOn")) {
-                    result.lock_created_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.lock_created_on = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockDuration")) {
                     result.lock_duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockDurationStartTime")) {
-                    result.lock_duration_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.lock_duration_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockExpiresOn")) {
-                    result.lock_expires_on = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.lock_expires_on = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lockState")) {
                     result.lock_state = std.meta.stringToEnum(LockState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -21507,7 +21507,7 @@ pub fn deserializeMacModificationTask(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "macSystemIntegrityProtectionConfig")) {
                     result.mac_system_integrity_protection_config = try deserializeMacSystemIntegrityProtectionConfiguration(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "taskState")) {
@@ -21575,9 +21575,9 @@ pub fn deserializeMaintenanceDetails(reader: *aws.xml.Reader, alloc: std.mem.All
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "lastMaintenanceApplied")) {
-                    result.last_maintenance_applied = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_maintenance_applied = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "maintenanceAutoAppliedAfter")) {
-                    result.maintenance_auto_applied_after = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.maintenance_auto_applied_after = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "pendingMaintenance")) {
                     result.pending_maintenance = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -21792,7 +21792,7 @@ pub fn deserializeMetricDataResult(reader: *aws.xml.Reader, alloc: std.mem.Alloc
                 } else if (std.mem.eql(u8, e.local, "metricValueSet")) {
                     result.metric_values = try deserializeMetricValueSet(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
-                    result.timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -21814,9 +21814,9 @@ pub fn deserializeMetricPoint(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "endDate")) {
-                    result.end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
-                    result.start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "value")) {
@@ -21930,9 +21930,9 @@ pub fn deserializeNatGateway(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
                 } else if (std.mem.eql(u8, e.local, "connectivityType")) {
                     result.connectivity_type = std.meta.stringToEnum(ConnectivityType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deleteTime")) {
-                    result.delete_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.delete_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "failureCode")) {
                     result.failure_code = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "failureMessage")) {
@@ -22324,7 +22324,7 @@ pub fn deserializeNetworkInsightsAccessScope(reader: *aws.xml.Reader, alloc: std
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "createdDate")) {
-                    result.created_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.created_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "networkInsightsAccessScopeArn")) {
                     result.network_insights_access_scope_arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkInsightsAccessScopeId")) {
@@ -22332,7 +22332,7 @@ pub fn deserializeNetworkInsightsAccessScope(reader: *aws.xml.Reader, alloc: std
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "updatedDate")) {
-                    result.updated_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.updated_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -22363,7 +22363,7 @@ pub fn deserializeNetworkInsightsAccessScopeAnalysis(reader: *aws.xml.Reader, al
                 if (std.mem.eql(u8, e.local, "analyzedEniCount")) {
                     result.analyzed_eni_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "endDate")) {
-                    result.end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "findingsFound")) {
                     result.findings_found = std.meta.stringToEnum(FindingsFound, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "networkInsightsAccessScopeAnalysisArn")) {
@@ -22373,7 +22373,7 @@ pub fn deserializeNetworkInsightsAccessScopeAnalysis(reader: *aws.xml.Reader, al
                 } else if (std.mem.eql(u8, e.local, "networkInsightsAccessScopeId")) {
                     result.network_insights_access_scope_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
-                    result.start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = std.meta.stringToEnum(AnalysisStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
@@ -22463,7 +22463,7 @@ pub fn deserializeNetworkInsightsAnalysis(reader: *aws.xml.Reader, alloc: std.me
                 } else if (std.mem.eql(u8, e.local, "returnPathComponentSet")) {
                     result.return_path_components = try deserializePathComponentList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "startDate")) {
-                    result.start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = std.meta.stringToEnum(AnalysisStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
@@ -22505,7 +22505,7 @@ pub fn deserializeNetworkInsightsPath(reader: *aws.xml.Reader, alloc: std.mem.Al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "createdDate")) {
-                    result.created_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.created_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "destination")) {
                     result.destination = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "destinationArn")) {
@@ -22710,7 +22710,7 @@ pub fn deserializeNetworkInterfaceAttachment(reader: *aws.xml.Reader, alloc: std
                 if (std.mem.eql(u8, e.local, "attachmentId")) {
                     result.attachment_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachTime")) {
-                    result.attach_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.attach_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
                     result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "deviceIndex")) {
@@ -24051,11 +24051,11 @@ pub fn deserializeProvisionedBandwidth(reader: *aws.xml.Reader, alloc: std.mem.A
                 if (std.mem.eql(u8, e.local, "provisioned")) {
                     result.provisioned = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "provisionTime")) {
-                    result.provision_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.provision_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "requested")) {
                     result.requested = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "requestTime")) {
-                    result.request_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.request_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.status = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -24348,7 +24348,7 @@ pub fn deserializeRegisteredInstance(reader: *aws.xml.Reader, alloc: std.mem.All
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastUpdatedTime")) {
-                    result.last_updated_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_updated_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "processingStatus")) {
                     result.processing_status = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sqlServerCredentials")) {
@@ -24522,7 +24522,7 @@ pub fn deserializeReservedInstances(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "duration")) {
                     result.duration = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "end")) {
-                    result.end = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "fixedPrice")) {
                     result.fixed_price = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceCount")) {
@@ -24544,7 +24544,7 @@ pub fn deserializeReservedInstances(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "scope")) {
                     result.scope = std.meta.stringToEnum(scope, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "start")) {
-                    result.start = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(ReservedInstanceState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -24633,7 +24633,7 @@ pub fn deserializeReservedInstancesListing(reader: *aws.xml.Reader, alloc: std.m
                 if (std.mem.eql(u8, e.local, "clientToken")) {
                     result.client_token = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createDate")) {
-                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceCounts")) {
                     result.instance_counts = try deserializeInstanceCountList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "priceSchedules")) {
@@ -24649,7 +24649,7 @@ pub fn deserializeReservedInstancesListing(reader: *aws.xml.Reader, alloc: std.m
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "updateDate")) {
-                    result.update_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.update_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -24678,9 +24678,9 @@ pub fn deserializeReservedInstancesModification(reader: *aws.xml.Reader, alloc: 
                 if (std.mem.eql(u8, e.local, "clientToken")) {
                     result.client_token = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createDate")) {
-                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "effectiveDate")) {
-                    result.effective_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.effective_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "modificationResultSet")) {
                     result.modification_results = try deserializeReservedInstancesModificationResultList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "reservedInstancesSet")) {
@@ -24692,7 +24692,7 @@ pub fn deserializeReservedInstancesModification(reader: *aws.xml.Reader, alloc: 
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "updateDate")) {
-                    result.update_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.update_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -25622,7 +25622,7 @@ pub fn deserializeScheduledInstance(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 if (std.mem.eql(u8, e.local, "availabilityZone")) {
                     result.availability_zone = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createDate")) {
-                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "hourlyPrice")) {
                     result.hourly_price = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceCount")) {
@@ -25632,11 +25632,11 @@ pub fn deserializeScheduledInstance(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "networkPlatform")) {
                     result.network_platform = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "nextSlotStartTime")) {
-                    result.next_slot_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.next_slot_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "platform")) {
                     result.platform = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "previousSlotEndTime")) {
-                    result.previous_slot_end_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.previous_slot_end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "recurrence")) {
                     result.recurrence = try deserializeScheduledInstanceRecurrence(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "scheduledInstanceId")) {
@@ -25644,9 +25644,9 @@ pub fn deserializeScheduledInstance(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "slotDurationInHours")) {
                     result.slot_duration_in_hours = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "termEndDate")) {
-                    result.term_end_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.term_end_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "termStartDate")) {
-                    result.term_start_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.term_start_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "totalScheduledInstanceHours")) {
                     result.total_scheduled_instance_hours = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -25683,7 +25683,7 @@ pub fn deserializeScheduledInstanceAvailability(reader: *aws.xml.Reader, alloc: 
                 } else if (std.mem.eql(u8, e.local, "availableInstanceCount")) {
                     result.available_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "firstSlotStartTime")) {
-                    result.first_slot_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.first_slot_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "hourlyPrice")) {
                     result.hourly_price = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceType")) {
@@ -26207,7 +26207,7 @@ pub fn deserializeSnapshot(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !S
                 } else if (std.mem.eql(u8, e.local, "completionDurationMinutes")) {
                     result.completion_duration_minutes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "completionTime")) {
-                    result.completion_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.completion_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "dataEncryptionKeyId")) {
                     result.data_encryption_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "description")) {
@@ -26227,13 +26227,13 @@ pub fn deserializeSnapshot(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !S
                 } else if (std.mem.eql(u8, e.local, "progress")) {
                     result.progress = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "restoreExpiryTime")) {
-                    result.restore_expiry_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.restore_expiry_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
                     result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "status")) {
                     result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
@@ -26340,7 +26340,7 @@ pub fn deserializeSnapshotInfo(reader: *aws.xml.Reader, alloc: std.mem.Allocator
                 } else if (std.mem.eql(u8, e.local, "sseType")) {
                     result.sse_type = std.meta.stringToEnum(SSEType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(SnapshotState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -26373,9 +26373,9 @@ pub fn deserializeSnapshotRecycleBinInfo(reader: *aws.xml.Reader, alloc: std.mem
                 if (std.mem.eql(u8, e.local, "description")) {
                     result.description = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "recycleBinEnterTime")) {
-                    result.recycle_bin_enter_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.recycle_bin_enter_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "recycleBinExitTime")) {
-                    result.recycle_bin_exit_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.recycle_bin_exit_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
@@ -26458,7 +26458,7 @@ pub fn deserializeSnapshotTierStatus(reader: *aws.xml.Reader, alloc: std.mem.All
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "archivalCompleteTime")) {
-                    result.archival_complete_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.archival_complete_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "lastTieringOperationStatus")) {
                     result.last_tiering_operation_status = std.meta.stringToEnum(TieringOperationStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastTieringOperationStatusDetail")) {
@@ -26466,11 +26466,11 @@ pub fn deserializeSnapshotTierStatus(reader: *aws.xml.Reader, alloc: std.mem.All
                 } else if (std.mem.eql(u8, e.local, "lastTieringProgress")) {
                     result.last_tiering_progress = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "lastTieringStartTime")) {
-                    result.last_tiering_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_tiering_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
                     result.owner_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "restoreExpiryTime")) {
-                    result.restore_expiry_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.restore_expiry_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
@@ -26653,7 +26653,7 @@ pub fn deserializeSpotFleetRequestConfig(reader: *aws.xml.Reader, alloc: std.mem
                 if (std.mem.eql(u8, e.local, "activityStatus")) {
                     result.activity_status = std.meta.stringToEnum(ActivityStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "spotFleetRequestConfig")) {
                     result.spot_fleet_request_config = try deserializeSpotFleetRequestConfigData(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "spotFleetRequestId")) {
@@ -26751,9 +26751,9 @@ pub fn deserializeSpotFleetRequestConfigData(reader: *aws.xml.Reader, alloc: std
                 } else if (std.mem.eql(u8, e.local, "type")) {
                     result.@"type" = std.meta.stringToEnum(FleetType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
-                    result.valid_from = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
-                    result.valid_until = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.valid_until = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -26819,7 +26819,7 @@ pub fn deserializeSpotInstanceRequest(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "blockDurationMinutes")) {
                     result.block_duration_minutes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "fault")) {
                     result.fault = try deserializeSpotInstanceStateFault(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
@@ -26849,9 +26849,9 @@ pub fn deserializeSpotInstanceRequest(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "type")) {
                     result.@"type" = std.meta.stringToEnum(SpotInstanceType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
-                    result.valid_from = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
-                    result.valid_until = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.valid_until = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -26898,7 +26898,7 @@ pub fn deserializeSpotInstanceStatus(reader: *aws.xml.Reader, alloc: std.mem.All
                 } else if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "updateTime")) {
-                    result.update_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.update_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -27044,7 +27044,7 @@ pub fn deserializeSpotPrice(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
                 } else if (std.mem.eql(u8, e.local, "spotPrice")) {
                     result.spot_price = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
-                    result.timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -27148,12 +27148,12 @@ pub fn deserializeStateReason(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
 
 pub fn deserializeStorage(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Storage {
     var result: Storage = undefined;
-    result.s_3 = null;
+    result.s3 = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "S3")) {
-                    result.s_3 = try deserializeS3Storage(reader, alloc);
+                    result.s3 = try deserializeS3Storage(reader, alloc);
                 } else {
                     try reader.skipElement();
                 }
@@ -27170,7 +27170,7 @@ pub fn deserializeStoreImageTaskResult(reader: *aws.xml.Reader, alloc: std.mem.A
     result.ami_id = null;
     result.bucket = null;
     result.progress_percentage = null;
-    result.s_3_object_key = null;
+    result.s3_object_key = null;
     result.store_task_failure_reason = null;
     result.store_task_state = null;
     result.task_start_time = null;
@@ -27184,13 +27184,13 @@ pub fn deserializeStoreImageTaskResult(reader: *aws.xml.Reader, alloc: std.mem.A
                 } else if (std.mem.eql(u8, e.local, "progressPercentage")) {
                     result.progress_percentage = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "s3objectKey")) {
-                    result.s_3_object_key = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_object_key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "storeTaskFailureReason")) {
                     result.store_task_failure_reason = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "storeTaskState")) {
                     result.store_task_state = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "taskStartTime")) {
-                    result.task_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.task_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -28008,7 +28008,7 @@ pub fn deserializeTransitGateway(reader: *aws.xml.Reader, alloc: std.mem.Allocat
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "description")) {
                     result.description = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "options")) {
@@ -28083,7 +28083,7 @@ pub fn deserializeTransitGatewayAttachment(reader: *aws.xml.Reader, alloc: std.m
                 if (std.mem.eql(u8, e.local, "association")) {
                     result.association = try deserializeTransitGatewayAttachmentAssociation(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "resourceId")) {
                     result.resource_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceOwnerId")) {
@@ -28199,7 +28199,7 @@ pub fn deserializeTransitGatewayConnect(reader: *aws.xml.Reader, alloc: std.mem.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "options")) {
                     result.options = try deserializeTransitGatewayConnectOptions(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "state")) {
@@ -28257,7 +28257,7 @@ pub fn deserializeTransitGatewayConnectPeer(reader: *aws.xml.Reader, alloc: std.
                 if (std.mem.eql(u8, e.local, "connectPeerConfiguration")) {
                     result.connect_peer_configuration = try deserializeTransitGatewayConnectPeerConfiguration(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(TransitGatewayConnectPeerState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -28330,7 +28330,7 @@ pub fn deserializeTransitGatewayMeteringPolicy(reader: *aws.xml.Reader, alloc: s
                 } else if (std.mem.eql(u8, e.local, "transitGatewayMeteringPolicyId")) {
                     result.transit_gateway_metering_policy_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "updateEffectiveAt")) {
-                    result.update_effective_at = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.update_effective_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -28362,9 +28362,9 @@ pub fn deserializeTransitGatewayMeteringPolicyEntry(reader: *aws.xml.Reader, all
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(TransitGatewayMeteringPolicyEntryState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "updatedAt")) {
-                    result.updated_at = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.updated_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "updateEffectiveAt")) {
-                    result.update_effective_at = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.update_effective_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -28483,7 +28483,7 @@ pub fn deserializeTransitGatewayMulticastDomain(reader: *aws.xml.Reader, alloc: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "options")) {
                     result.options = try deserializeTransitGatewayMulticastDomainOptions(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "ownerId")) {
@@ -28770,7 +28770,7 @@ pub fn deserializeTransitGatewayPeeringAttachment(reader: *aws.xml.Reader, alloc
                 } else if (std.mem.eql(u8, e.local, "accepterTransitGatewayAttachmentId")) {
                     result.accepter_transit_gateway_attachment_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "options")) {
                     result.options = try deserializeTransitGatewayPeeringAttachmentOptions(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "requesterTgwInfo")) {
@@ -28881,7 +28881,7 @@ pub fn deserializeTransitGatewayPolicyTable(reader: *aws.xml.Reader, alloc: std.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(TransitGatewayPolicyTableState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -29122,7 +29122,7 @@ pub fn deserializeTransitGatewayRouteTable(reader: *aws.xml.Reader, alloc: std.m
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "defaultAssociationRouteTable")) {
                     result.default_association_route_table = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "defaultPropagationRouteTable")) {
@@ -29167,7 +29167,7 @@ pub fn deserializeTransitGatewayRouteTableAnnouncement(reader: *aws.xml.Reader, 
                 } else if (std.mem.eql(u8, e.local, "coreNetworkId")) {
                     result.core_network_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "peerCoreNetworkId")) {
                     result.peer_core_network_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "peeringAttachmentId")) {
@@ -29306,7 +29306,7 @@ pub fn deserializeTransitGatewayVpcAttachment(reader: *aws.xml.Reader, alloc: st
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTime")) {
-                    result.creation_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "options")) {
                     result.options = try deserializeTransitGatewayVpcAttachmentOptions(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "state")) {
@@ -29569,15 +29569,15 @@ pub fn deserializeUnsuccessfulItemError(reader: *aws.xml.Reader, alloc: std.mem.
 
 pub fn deserializeUserBucketDetails(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !UserBucketDetails {
     var result: UserBucketDetails = undefined;
-    result.s_3_bucket = null;
-    result.s_3_key = null;
+    result.s3_bucket = null;
+    result.s3_key = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "s3Bucket")) {
-                    result.s_3_bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_bucket = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Key")) {
-                    result.s_3_key = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_key = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -30320,7 +30320,7 @@ pub fn deserializeVerifiedAccessLogs(reader: *aws.xml.Reader, alloc: std.mem.All
     result.include_trust_context = null;
     result.kinesis_data_firehose = null;
     result.log_version = null;
-    result.s_3 = null;
+    result.s3 = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -30333,7 +30333,7 @@ pub fn deserializeVerifiedAccessLogs(reader: *aws.xml.Reader, alloc: std.mem.All
                 } else if (std.mem.eql(u8, e.local, "logVersion")) {
                     result.log_version = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3")) {
-                    result.s_3 = try deserializeVerifiedAccessLogS3Destination(reader, alloc);
+                    result.s3 = try deserializeVerifiedAccessLogS3Destination(reader, alloc);
                 } else {
                     try reader.skipElement();
                 }
@@ -30469,7 +30469,7 @@ pub fn deserializeVgwTelemetry(reader: *aws.xml.Reader, alloc: std.mem.Allocator
                 } else if (std.mem.eql(u8, e.local, "certificateArn")) {
                     result.certificate_arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastStatusChange")) {
-                    result.last_status_change = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_status_change = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "outsideIpAddress")) {
                     result.outside_ip_address = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "status")) {
@@ -30520,7 +30520,7 @@ pub fn deserializeVolume(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Vol
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "encrypted")) {
                     result.encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "fastRestored")) {
@@ -30583,7 +30583,7 @@ pub fn deserializeVolumeAttachment(reader: *aws.xml.Reader, alloc: std.mem.Alloc
                 if (std.mem.eql(u8, e.local, "associatedResource")) {
                     result.associated_resource = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachTime")) {
-                    result.attach_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.attach_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
                     result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "device")) {
@@ -30631,7 +30631,7 @@ pub fn deserializeVolumeModification(reader: *aws.xml.Reader, alloc: std.mem.All
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "endTime")) {
-                    result.end_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "modificationState")) {
                     result.modification_state = std.meta.stringToEnum(VolumeModificationState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "originalIops")) {
@@ -30647,7 +30647,7 @@ pub fn deserializeVolumeModification(reader: *aws.xml.Reader, alloc: std.mem.All
                 } else if (std.mem.eql(u8, e.local, "progress")) {
                     result.progress = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "statusMessage")) {
                     result.status_message = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "targetIops")) {
@@ -30698,7 +30698,7 @@ pub fn deserializeVolumeRecycleBinInfo(reader: *aws.xml.Reader, alloc: std.mem.A
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "iops")) {
                     result.iops = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "operator")) {
@@ -30706,9 +30706,9 @@ pub fn deserializeVolumeRecycleBinInfo(reader: *aws.xml.Reader, alloc: std.mem.A
                 } else if (std.mem.eql(u8, e.local, "outpostArn")) {
                     result.outpost_arn = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "recycleBinEnterTime")) {
-                    result.recycle_bin_enter_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.recycle_bin_enter_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "recycleBinExitTime")) {
-                    result.recycle_bin_exit_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.recycle_bin_exit_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "size")) {
                     result.size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
@@ -30826,9 +30826,9 @@ pub fn deserializeVolumeStatusEvent(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "notAfter")) {
-                    result.not_after = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.not_after = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "notBefore")) {
-                    result.not_before = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.not_before = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -30994,15 +30994,15 @@ pub fn deserializeVpcBlockPublicAccessExclusion(reader: *aws.xml.Reader, alloc: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTimestamp")) {
-                    result.creation_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "deletionTimestamp")) {
-                    result.deletion_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.deletion_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "exclusionId")) {
                     result.exclusion_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "internetGatewayExclusionMode")) {
                     result.internet_gateway_exclusion_mode = std.meta.stringToEnum(InternetGatewayExclusionMode, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastUpdateTimestamp")) {
-                    result.last_update_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_update_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "reason")) {
                     result.reason = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceArn")) {
@@ -31044,7 +31044,7 @@ pub fn deserializeVpcBlockPublicAccessOptions(reader: *aws.xml.Reader, alloc: st
                 } else if (std.mem.eql(u8, e.local, "internetGatewayBlockMode")) {
                     result.internet_gateway_block_mode = std.meta.stringToEnum(InternetGatewayBlockMode, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "lastUpdateTimestamp")) {
-                    result.last_update_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_update_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "managedBy")) {
                     result.managed_by = std.meta.stringToEnum(ManagedBy, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reason")) {
@@ -31292,7 +31292,7 @@ pub fn deserializeVpcEndpoint(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTimestamp")) {
-                    result.creation_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "dnsEntrySet")) {
                     result.dns_entries = try deserializeDnsEntrySet(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "dnsOptions")) {
@@ -31422,7 +31422,7 @@ pub fn deserializeVpcEndpointConnection(reader: *aws.xml.Reader, alloc: std.mem.
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "creationTimestamp")) {
-                    result.creation_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "dnsEntrySet")) {
                     result.dns_entries = try deserializeDnsEntrySet(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "gatewayLoadBalancerArnSet")) {
@@ -31507,7 +31507,7 @@ pub fn deserializeVpcPeeringConnection(reader: *aws.xml.Reader, alloc: std.mem.A
                 if (std.mem.eql(u8, e.local, "accepterVpcInfo")) {
                     result.accepter_vpc_info = try deserializeVpcPeeringConnectionVpcInfo(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "expirationTime")) {
-                    result.expiration_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.expiration_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "requesterVpcInfo")) {
                     result.requester_vpc_info = try deserializeVpcPeeringConnectionVpcInfo(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "status")) {
@@ -35453,7 +35453,7 @@ pub fn serializeAsnAuthorizationContext(alloc: std.mem.Allocator, buf: *std.Arra
 
 pub fn serializeAthenaIntegration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AthenaIntegration) !void {
     try buf.appendSlice(alloc, "<IntegrationResultS3DestinationArn>");
-    try aws.xml.appendXmlEscaped(alloc, buf, value.integration_result_s_3_destination_arn);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.integration_result_s3_destination_arn);
     try buf.appendSlice(alloc, "</IntegrationResultS3DestinationArn>");
     if (value.partition_end_date) |v| {
         try buf.appendSlice(alloc, "<PartitionEndDate>");
@@ -36545,9 +36545,9 @@ pub fn serializeEnclaveOptionsRequest(alloc: std.mem.Allocator, buf: *std.ArrayL
 
 pub fn serializeExportTaskS3LocationRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExportTaskS3LocationRequest) !void {
     try buf.appendSlice(alloc, "<S3Bucket>");
-    try aws.xml.appendXmlEscaped(alloc, buf, value.s_3_bucket);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.s3_bucket);
     try buf.appendSlice(alloc, "</S3Bucket>");
-    if (value.s_3_prefix) |v| {
+    if (value.s3_prefix) |v| {
         try buf.appendSlice(alloc, "<S3Prefix>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3Prefix>");
@@ -36565,12 +36565,12 @@ pub fn serializeExportToS3TaskSpecification(alloc: std.mem.Allocator, buf: *std.
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</diskImageFormat>");
     }
-    if (value.s_3_bucket) |v| {
+    if (value.s3_bucket) |v| {
         try buf.appendSlice(alloc, "<s3Bucket>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</s3Bucket>");
     }
-    if (value.s_3_prefix) |v| {
+    if (value.s3_prefix) |v| {
         try buf.appendSlice(alloc, "<s3Prefix>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</s3Prefix>");
@@ -40887,7 +40887,7 @@ pub fn serializeSpotPlacement(alloc: std.mem.Allocator, buf: *std.ArrayList(u8),
 }
 
 pub fn serializeStorage(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Storage) !void {
-    if (value.s_3) |v| {
+    if (value.s3) |v| {
         try buf.appendSlice(alloc, "<S3>");
         try serializeS3Storage(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3>");
@@ -41144,12 +41144,12 @@ pub fn serializeTransitGatewayRequestOptions(alloc: std.mem.Allocator, buf: *std
 }
 
 pub fn serializeUserBucket(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: UserBucket) !void {
-    if (value.s_3_bucket) |v| {
+    if (value.s3_bucket) |v| {
         try buf.appendSlice(alloc, "<S3Bucket>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3Bucket>");
     }
-    if (value.s_3_key) |v| {
+    if (value.s3_key) |v| {
         try buf.appendSlice(alloc, "<S3Key>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3Key>");
@@ -41281,7 +41281,7 @@ pub fn serializeVerifiedAccessLogOptions(alloc: std.mem.Allocator, buf: *std.Arr
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</LogVersion>");
     }
-    if (value.s_3) |v| {
+    if (value.s3) |v| {
         try buf.appendSlice(alloc, "<S3>");
         try serializeVerifiedAccessLogS3DestinationOptions(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3>");

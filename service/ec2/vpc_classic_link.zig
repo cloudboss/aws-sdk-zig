@@ -1,7 +1,5 @@
 const Tag = @import("tag.zig").Tag;
 
-/// **Note:**
-///
 /// Deprecated.
 ///
 /// Describes whether a VPC is enabled for ClassicLink.

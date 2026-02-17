@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMeteringPolicy = @import("transit_gateway_metering_policy.zig").TransitGatewayMeteringPolicy;
 const serde = @import("serde.zig");
 
-/// Modifies a transit gateway metering policy.
 pub const ModifyTransitGatewayMeteringPolicyInput = struct {
     /// The IDs of middlebox attachments to add to the metering policy.
     add_middlebox_attachment_ids: ?[]const []const u8 = null,

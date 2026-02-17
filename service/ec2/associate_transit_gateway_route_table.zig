@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayAssociation = @import("transit_gateway_association.zig").TransitGatewayAssociation;
 const serde = @import("serde.zig");
 
-/// Associates the specified attachment with the specified transit gateway route
-/// table. You can
-/// associate only one route table with an attachment.
 pub const AssociateTransitGatewayRouteTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes your Amazon Web Services account from the launch permissions for the
-/// specified AMI.
-/// For more information, see [Cancel having an AMI shared with
-/// your Amazon Web Services
-/// account](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cancel-sharing-an-AMI.html) in the *Amazon EC2 User Guide*.
 pub const CancelImageLaunchPermissionInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

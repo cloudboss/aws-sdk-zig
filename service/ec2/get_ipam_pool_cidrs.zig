@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamPoolCidr = @import("ipam_pool_cidr.zig").IpamPoolCidr;
 const serde = @import("serde.zig");
 
-/// Get the CIDRs provisioned to an IPAM pool.
 pub const GetIpamPoolCidrsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

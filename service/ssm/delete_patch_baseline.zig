@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a patch baseline.
 pub const DeletePatchBaselineInput = struct {
     /// The ID of the patch baseline to delete.
     baseline_id: []const u8,

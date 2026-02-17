@@ -114,8 +114,6 @@ pub const EventSourceMappingConfiguration = struct {
     /// sets the maximum age to infinite. When the value is set to infinite, Lambda
     /// never discards old records.
     ///
-    /// **Note:**
-    ///
     /// The minimum valid value for maximum record age is 60s. Although values less
     /// than 60 and greater than -1 fall within the parameter's absolute range, they
     /// are not allowed

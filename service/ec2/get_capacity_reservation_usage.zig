@@ -9,13 +9,6 @@ const InterruptionInfo = @import("interruption_info.zig").InterruptionInfo;
 const CapacityReservationState = @import("capacity_reservation_state.zig").CapacityReservationState;
 const serde = @import("serde.zig");
 
-/// Gets usage information about a Capacity Reservation. If the Capacity
-/// Reservation is
-/// shared, it shows usage information for the Capacity Reservation owner and
-/// each Amazon Web Services account that is currently using the shared
-/// capacity. If the Capacity
-/// Reservation is not shared, it shows only the Capacity Reservation owner's
-/// usage.
 pub const GetCapacityReservationUsageInput = struct {
     /// The ID of the Capacity Reservation.
     capacity_reservation_id: []const u8,

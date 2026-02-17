@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InterruptionType = @import("interruption_type.zig").InterruptionType;
 const InterruptibleCapacityReservationAllocationStatus = @import("interruptible_capacity_reservation_allocation_status.zig").InterruptibleCapacityReservationAllocationStatus;
 
-/// Modifies the number of instances allocated to an interruptible reservation,
-/// allowing you to add more capacity or reclaim capacity to your source
-/// Capacity Reservation.
 pub const UpdateInterruptibleCapacityReservationAllocationInput = struct {
     /// The ID of the source Capacity Reservation containing the interruptible
     /// allocation to modify.

@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AsnAssociation = @import("asn_association.zig").AsnAssociation;
 const serde = @import("serde.zig");
 
-/// Remove the association between your Autonomous System Number (ASN) and your
-/// BYOIP CIDR. You may want to use this action to disassociate an ASN from a
-/// CIDR or if you want to swap ASNs.
-/// For more information, see [Tutorial: Bring your ASN to
-/// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
-/// the *Amazon VPC IPAM guide*.
 pub const DisassociateIpamByoasnInput = struct {
     /// A public 2-byte or 4-byte ASN.
     asn: []const u8,

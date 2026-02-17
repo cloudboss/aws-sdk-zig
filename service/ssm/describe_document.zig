@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentDescription = @import("document_description.zig").DocumentDescription;
 
-/// Describes the specified Amazon Web Services Systems Manager document (SSM
-/// document).
 pub const DescribeDocumentInput = struct {
     /// The document version for which you want information. Can be a specific
     /// version or the
@@ -14,8 +12,6 @@ pub const DescribeDocumentInput = struct {
     document_version: ?[]const u8 = null,
 
     /// The name of the SSM document.
-    ///
-    /// **Note:**
     ///
     /// If you're calling a shared SSM document from a different Amazon Web Services
     /// account,

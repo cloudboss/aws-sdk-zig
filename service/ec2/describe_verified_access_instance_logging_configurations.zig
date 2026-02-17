@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VerifiedAccessInstanceLoggingConfiguration = @import("verified_access_instance_logging_configuration.zig").VerifiedAccessInstanceLoggingConfiguration;
 const serde = @import("serde.zig");
 
-/// Describes the specified Amazon Web Services Verified Access instances.
 pub const DescribeVerifiedAccessInstanceLoggingConfigurationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Cancels a pending request to assign billing of the unused capacity of a
-/// Capacity
-/// Reservation to a consumer account, or revokes a request that has already
-/// been accepted.
-/// For more information, see [Billing assignment for shared
-/// Amazon EC2 Capacity
-/// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html).
 pub const DisassociateCapacityReservationBillingOwnerInput = struct {
     /// The ID of the Capacity Reservation.
     capacity_reservation_id: []const u8,

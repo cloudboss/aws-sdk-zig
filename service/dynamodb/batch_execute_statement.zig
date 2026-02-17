@@ -8,28 +8,6 @@ const BatchStatementRequest = @import("batch_statement_request.zig").BatchStatem
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
 const BatchStatementResponse = @import("batch_statement_response.zig").BatchStatementResponse;
 
-/// This operation allows you to perform batch reads or writes on data stored in
-/// DynamoDB,
-/// using PartiQL. Each read statement in a `BatchExecuteStatement` must specify
-/// an equality condition on all key attributes. This enforces that each
-/// `SELECT`
-/// statement in a batch returns at most a single item. For more information,
-/// see [Running batch operations with PartiQL for DynamoDB
-/// ](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-reference.multiplestatements.batching.html).
-///
-/// **Note:**
-///
-/// The entire batch must consist of either read statements or write statements,
-/// you
-/// cannot mix both in one batch.
-///
-/// **Important:**
-///
-/// A HTTP 200 response does not mean that all statements in the
-/// BatchExecuteStatement
-/// succeeded. Error details for individual statements can be found under the
-/// [Error](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchStatementResponse.html#DDB-Type-BatchStatementResponse-Error) field of the `BatchStatementResponse` for each
-/// statement.
 pub const BatchExecuteStatementInput = struct {
     return_consumed_capacity: ?ReturnConsumedCapacity = null,
 

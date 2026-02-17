@@ -18,8 +18,6 @@ pub const LifecycleRuleFilter = struct {
 
     /// Prefix identifying one or more objects to which the rule applies.
     ///
-    /// **Important:**
-    ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using
     /// XML requests. For more information, see [
@@ -28,8 +26,6 @@ pub const LifecycleRuleFilter = struct {
     prefix: ?[]const u8,
 
     /// This tag must exist in the object's tag set in order for the rule to apply.
-    ///
-    /// **Note:**
     ///
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket

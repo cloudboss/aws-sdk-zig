@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const DescribeFastLaunchImagesSuccessItem = @import("describe_fast_launch_images_success_item.zig").DescribeFastLaunchImagesSuccessItem;
 const serde = @import("serde.zig");
 
-/// Describe details for Windows AMIs that are configured for Windows fast
-/// launch.
 pub const DescribeFastLaunchImagesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

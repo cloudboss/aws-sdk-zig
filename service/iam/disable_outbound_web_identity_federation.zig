@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Disables the outbound identity federation feature for your Amazon Web
-/// Services account. When disabled, IAM principals in the account cannot
-/// use the `GetWebIdentityToken` API to obtain JSON Web Tokens (JWTs) for
-/// authentication with external services. This operation
-/// does not affect tokens that were issued before the feature was disabled.
 pub const DisableOutboundWebIdentityFederationInput = struct {
 };
 

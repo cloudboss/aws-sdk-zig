@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ClientCertificateRevocationListStatus = @import("client_certificate_revocation_list_status.zig").ClientCertificateRevocationListStatus;
 const serde = @import("serde.zig");
 
-/// Downloads the client certificate revocation list for the specified Client
-/// VPN endpoint.
 pub const ExportClientVpnClientCertificateRevocationListInput = struct {
     /// The ID of the Client VPN endpoint.
     client_vpn_endpoint_id: []const u8,

@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CoipAddressUsage = @import("coip_address_usage.zig").CoipAddressUsage;
 const serde = @import("serde.zig");
 
-/// Describes the allocations from the specified customer-owned address pool.
 pub const GetCoipPoolUsageInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

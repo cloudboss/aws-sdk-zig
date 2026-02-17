@@ -10,16 +10,6 @@ const LaunchPermission = @import("launch_permission.zig").LaunchPermission;
 const ProductCode = @import("product_code.zig").ProductCode;
 const serde = @import("serde.zig");
 
-/// Describes the specified attribute of the specified AMI. You can specify only
-/// one attribute
-/// at a time.
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures,
-/// might vary. Applications should not assume the elements appear in a
-/// particular order.
 pub const DescribeImageAttributeInput = struct {
     /// The AMI attribute.
     ///
@@ -75,8 +65,6 @@ pub const DescribeImageAttributeOutput = struct {
     /// launch an EC2 instance. When the AMI is used
     /// to launch an instance, there is a 24-hour delay before that usage is
     /// reported.
-    ///
-    /// **Note:**
     ///
     /// `lastLaunchedTime` data is available starting April 2017.
     last_launched_time: ?AttributeValue = null,

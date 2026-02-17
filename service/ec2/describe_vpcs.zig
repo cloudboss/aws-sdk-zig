@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const Vpc = @import("vpc.zig").Vpc;
 const serde = @import("serde.zig");
 
-/// Describes your VPCs. The default is to describe all your VPCs.
-/// Alternatively, you can specify specific VPC IDs or filter the results to
-/// include only the VPCs that match specific criteria.
 pub const DescribeVpcsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

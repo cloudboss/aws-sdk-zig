@@ -4,16 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Restores an archived Amazon EBS snapshot for use temporarily or permanently,
-/// or modifies the restore
-/// period or restore type for a snapshot that was previously temporarily
-/// restored.
-///
-/// For more information see [
-/// Restore an archived
-/// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/working-with-snapshot-archiving.html#restore-archived-snapshot) and [
-/// modify the restore period or restore type for a temporarily restored
-/// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/working-with-snapshot-archiving.html#modify-temp-restore-period) in the *Amazon EBS User Guide*.
 pub const RestoreSnapshotTierInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -159,7 +149,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "restoreDuration")) {
                     result.restore_duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "restoreStartTime")) {
-                    result.restore_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.restore_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {

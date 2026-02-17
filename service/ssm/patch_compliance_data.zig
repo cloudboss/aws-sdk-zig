@@ -12,8 +12,6 @@ pub const PatchComplianceData = struct {
     /// are resolved by
     /// the patch.
     ///
-    /// **Note:**
-    ///
     /// Currently, CVE ID values are reported only for patches with a status of
     /// `Missing` or `Failed`.
     cve_ids: ?[]const u8,

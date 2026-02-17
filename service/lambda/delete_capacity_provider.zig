@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 
-/// Deletes a capacity provider. You cannot delete a capacity provider that is
-/// currently being used by Lambda functions.
 pub const DeleteCapacityProviderInput = struct {
     /// The name of the capacity provider to delete.
     capacity_provider_name: []const u8,

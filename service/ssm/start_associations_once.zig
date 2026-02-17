@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Runs an association immediately and only one time. This operation can be
-/// helpful when
-/// troubleshooting associations.
 pub const StartAssociationsOnceInput = struct {
     /// The association IDs that you want to run immediately and only one time.
     association_ids: []const []const u8,

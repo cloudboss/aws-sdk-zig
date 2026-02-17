@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityReservationGroup = @import("capacity_reservation_group.zig").CapacityReservationGroup;
 const serde = @import("serde.zig");
 
-/// Lists the resource groups to which a Capacity Reservation has been added.
 pub const GetGroupsForCapacityReservationInput = struct {
     /// The ID of the Capacity Reservation. If you specify a Capacity Reservation
     /// that is

@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CoipCidr = @import("coip_cidr.zig").CoipCidr;
 const serde = @import("serde.zig");
 
-/// Creates a range of customer-owned IP addresses.
 pub const CreateCoipCidrInput = struct {
     /// A customer-owned IP address range to create.
     cidr: []const u8,

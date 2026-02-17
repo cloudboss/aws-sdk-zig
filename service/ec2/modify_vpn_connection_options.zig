@@ -6,15 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VpnConnection = @import("vpn_connection.zig").VpnConnection;
 const serde = @import("serde.zig");
 
-/// Modifies the connection options for your Site-to-Site VPN connection.
-///
-/// When you modify the VPN connection options, the VPN endpoint IP addresses on
-/// the
-/// Amazon Web Services side do not change, and the tunnel options do not
-/// change. Your
-/// VPN connection will be temporarily unavailable for a brief period while the
-/// VPN
-/// connection is updated.
 pub const ModifyVpnConnectionOptionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request, and provides an error response. If you have the

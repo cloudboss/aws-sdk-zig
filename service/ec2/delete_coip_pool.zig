@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CoipPool = @import("coip_pool.zig").CoipPool;
 const serde = @import("serde.zig");
 
-/// Deletes a pool of customer-owned IP (CoIP) addresses.
 pub const DeleteCoipPoolInput = struct {
     /// The ID of the CoIP pool that you want to delete.
     coip_pool_id: []const u8,

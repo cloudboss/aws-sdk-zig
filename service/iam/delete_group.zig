@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified IAM group. The group must not contain any users or
-/// have any
-/// attached policies.
 pub const DeleteGroupInput = struct {
     /// The name of the IAM group to delete.
     ///

@@ -22,8 +22,6 @@ pub const TargetLocation = struct {
     /// children of the
     /// targeted OUs. The default is `false`.
     ///
-    /// **Note:**
-    ///
     /// This parameter is not supported by State Manager.
     include_child_organization_units: ?bool,
 

@@ -9,27 +9,6 @@ const ObjectLockRetention = @import("object_lock_retention.zig").ObjectLockReten
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Places an Object Retention configuration on an object. For more information,
-/// see [Locking
-/// Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-/// Users or
-/// accounts require the `s3:PutObjectRetention` permission in order to place an
-/// Object Retention
-/// configuration on objects. Bypassing a Governance Retention configuration
-/// requires the
-/// `s3:BypassGovernanceRetention` permission.
-///
-/// This functionality is not supported for Amazon S3 on Outposts.
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const PutObjectRetentionInput = struct {
     /// The bucket name that contains the object you want to apply this Object
     /// Retention configuration to.

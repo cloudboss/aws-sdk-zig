@@ -6,8 +6,6 @@ const Target = @import("target.zig").Target;
 /// Information about an Automation runbook used in a runbook workflow in Change
 /// Manager.
 ///
-/// **Note:**
-///
 /// The Automation runbooks specified for the runbook workflow can't run until
 /// all required
 /// approvals for the change request have been received.

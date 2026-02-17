@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Returns the [resource-based IAM
-/// policy](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) for a function, version, or alias.
 pub const GetPolicyInput = struct {
     /// The name or ARN of the Lambda function, version, or alias. **Name formats**
     ///

@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Deprovision a CIDR from a public IPv4 pool.
 pub const DeprovisionPublicIpv4PoolCidrInput = struct {
     /// The CIDR you want to deprovision from the pool.
     cidr: []const u8,

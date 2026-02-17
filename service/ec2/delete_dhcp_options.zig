@@ -4,10 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified set of DHCP options. You must disassociate the set of
-/// DHCP options before you can delete it. You can disassociate the set of DHCP
-/// options by associating either a new set of options or the default set of
-/// options with the VPC.
 pub const DeleteDhcpOptionsInput = struct {
     /// The ID of the DHCP options set.
     dhcp_options_id: []const u8,

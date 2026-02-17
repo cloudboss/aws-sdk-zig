@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CancelledSpotInstanceRequest = @import("cancelled_spot_instance_request.zig").CancelledSpotInstanceRequest;
 const serde = @import("serde.zig");
 
-/// Cancels one or more Spot Instance requests.
-///
-/// **Important:**
-///
-/// Canceling a Spot Instance request does not terminate running Spot Instances
-/// associated with the request.
 pub const CancelSpotInstanceRequestsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

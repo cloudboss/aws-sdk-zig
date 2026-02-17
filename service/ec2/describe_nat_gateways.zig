@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const NatGateway = @import("nat_gateway.zig").NatGateway;
 const serde = @import("serde.zig");
 
-/// Describes your NAT gateways. The default is to describe all your NAT
-/// gateways.
-/// Alternatively, you can specify specific NAT gateway IDs or filter the
-/// results to
-/// include only the NAT gateways that match specific criteria.
 pub const DescribeNatGatewaysInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

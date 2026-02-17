@@ -7,9 +7,6 @@ const ContributorInsightsMode = @import("contributor_insights_mode.zig").Contrib
 const ContributorInsightsStatus = @import("contributor_insights_status.zig").ContributorInsightsStatus;
 const FailureException = @import("failure_exception.zig").FailureException;
 
-/// Returns information about contributor insights for a given table or global
-/// secondary
-/// index.
 pub const DescribeContributorInsightsInput = struct {
     /// The name of the global secondary index to describe, if applicable.
     index_name: ?[]const u8 = null,

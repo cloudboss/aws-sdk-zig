@@ -7,15 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const ReplaceRootVolumeTask = @import("replace_root_volume_task.zig").ReplaceRootVolumeTask;
 const serde = @import("serde.zig");
 
-/// Replaces the EBS-backed root volume for a `running` instance with a new
-/// volume that is restored to the original root volume's launch state, that is
-/// restored to a
-/// specific snapshot taken from the original root volume, or that is restored
-/// from an AMI
-/// that has the same key characteristics as that of the instance.
-///
-/// For more information, see [Replace a root
-/// volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html) in the *Amazon EC2 User Guide*.
 pub const CreateReplaceRootVolumeTaskInput = struct {
     /// Unique, case-sensitive identifier you provide to ensure the idempotency of
     /// the request.
@@ -86,8 +77,6 @@ pub const CreateReplaceRootVolumeTaskInput = struct {
     /// that is enabled for fast snapshot restore. In this case, the volume is fully
     /// initialized at
     /// creation.
-    ///
-    /// **Note:**
     ///
     /// If you specify a snapshot that is enabled for fast snapshot restore and a
     /// volume initialization rate,

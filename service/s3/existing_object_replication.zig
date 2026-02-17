@@ -2,8 +2,6 @@ const ExistingObjectReplicationStatus = @import("existing_object_replication_sta
 
 /// Optional configuration to replicate existing source bucket objects.
 ///
-/// **Note:**
-///
 /// This parameter is no longer supported. To replicate existing objects, see
 /// [Replicating
 /// existing objects with S3 Batch

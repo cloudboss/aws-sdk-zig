@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Cancels an in-process import virtual machine or import snapshot task.
 pub const CancelImportTaskInput = struct {
     /// The reason for canceling the task.
     cancel_reason: ?[]const u8 = null,

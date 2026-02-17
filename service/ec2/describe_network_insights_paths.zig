@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const NetworkInsightsPath = @import("network_insights_path.zig").NetworkInsightsPath;
 const serde = @import("serde.zig");
 
-/// Describes one or more of your paths.
 pub const DescribeNetworkInsightsPathsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

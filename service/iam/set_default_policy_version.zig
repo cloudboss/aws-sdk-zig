@@ -4,17 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Sets the specified version of the specified policy as the policy's default
-/// (operative)
-/// version.
-///
-/// This operation affects all users, groups, and roles that the policy is
-/// attached to. To
-/// list the users, groups, and roles that the policy is attached to, use
-/// [ListEntitiesForPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListEntitiesForPolicy.html).
-///
-/// For information about managed policies, see [Managed policies and inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
 pub const SetDefaultPolicyVersionInput = struct {
     /// The Amazon Resource Name (ARN) of the IAM policy whose default version you
     /// want to

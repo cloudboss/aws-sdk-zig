@@ -7,42 +7,6 @@ const PolicyDescriptorType = @import("policy_descriptor_type.zig").PolicyDescrip
 const Credentials = @import("credentials.zig").Credentials;
 const serde = @import("serde.zig");
 
-/// Returns a set of short term credentials you can use to perform privileged
-/// tasks on a
-/// member account in your organization. You must use credentials from an
-/// Organizations management
-/// account or a delegated administrator account for IAM to call `AssumeRoot`.
-/// You
-/// cannot use root user credentials to make this call.
-///
-/// Before you can launch a privileged session, you must have centralized root
-/// access in
-/// your organization. For steps to enable this feature, see [Centralize root
-/// access for
-/// member
-/// accounts](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-enable-root-access.html) in the *IAM User Guide*.
-///
-/// **Note:**
-///
-/// The STS global endpoint is not supported for AssumeRoot. You must send this
-/// request
-/// to a Regional STS endpoint. For more information, see
-/// [Endpoints](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html#sts-endpoints).
-///
-/// You can track AssumeRoot in CloudTrail logs to determine what actions were
-/// performed in a
-/// session. For more information, see [Track privileged tasks
-/// in
-/// CloudTrail](https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-track-privileged-tasks.html) in the *IAM User Guide*.
-///
-/// When granting access to privileged tasks you should only grant the necessary
-/// permissions
-/// required to perform that task. For more information, see [Security best
-/// practices in
-/// IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html).
-/// In addition, you can use [service control
-/// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) (SCPs) to manage and limit permissions in your organization. See [General examples](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples_general.html) in the *Organizations User
-/// Guide* for more information on SCPs.
 pub const AssumeRootInput = struct {
     /// The duration, in seconds, of the privileged session. The value can range
     /// from 0 seconds
@@ -85,8 +49,6 @@ pub const AssumeRootOutput = struct {
     /// The temporary security credentials, which include an access key ID, a secret
     /// access key,
     /// and a security token.
-    ///
-    /// **Note:**
     ///
     /// The size of the security token that STS API operations return is not fixed.
     /// We

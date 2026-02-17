@@ -7,8 +7,6 @@ const VerifiedAccessLogOptions = @import("verified_access_log_options.zig").Veri
 const VerifiedAccessInstanceLoggingConfiguration = @import("verified_access_instance_logging_configuration.zig").VerifiedAccessInstanceLoggingConfiguration;
 const serde = @import("serde.zig");
 
-/// Modifies the logging configuration for the specified Amazon Web Services
-/// Verified Access instance.
 pub const ModifyVerifiedAccessInstanceLoggingConfigurationInput = struct {
     /// The configuration options for Verified Access instances.
     access_logs: VerifiedAccessLogOptions,
@@ -107,7 +105,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVerifiedAccessInstanc
         try body_buf.appendSlice(alloc, "&AccessLogs.LogVersion=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
     }
-    if (input.access_logs.s_3) |sv| {
+    if (input.access_logs.s3) |sv| {
         if (sv.bucket_name) |sv2| {
             try body_buf.appendSlice(alloc, "&AccessLogs.S3.BucketName=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, sv2);

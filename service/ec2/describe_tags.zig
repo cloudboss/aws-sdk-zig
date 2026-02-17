@@ -7,24 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TagDescription = @import("tag_description.zig").TagDescription;
 const serde = @import("serde.zig");
 
-/// Describes the specified tags for your EC2 resources.
-///
-/// For more information about tags, see [Tag your Amazon EC2
-/// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
-/// *Amazon Elastic Compute Cloud User Guide*.
-///
-/// **Important:**
-///
-/// We strongly recommend using only paginated requests. Unpaginated requests
-/// are
-/// susceptible to throttling and timeouts.
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures, might vary. Applications should not assume the elements appear
-/// in a
-/// particular order.
 pub const DescribeTagsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

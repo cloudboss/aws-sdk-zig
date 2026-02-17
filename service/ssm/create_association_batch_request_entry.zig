@@ -76,8 +76,6 @@ pub const CreateAssociationBatchRequestEntry = struct {
 
     /// The managed node ID.
     ///
-    /// **Note:**
-    ///
     /// `InstanceId` has been deprecated. To specify a managed node ID for an
     /// association, use the `Targets` parameter. Requests that
     /// include the parameter `InstanceID` with Systems Manager documents (SSM

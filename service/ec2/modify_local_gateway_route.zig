@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayRoute = @import("local_gateway_route.zig").LocalGatewayRoute;
 const serde = @import("serde.zig");
 
-/// Modifies the specified local gateway route.
 pub const ModifyLocalGatewayRouteInput = struct {
     /// The CIDR block used for destination matches. The value that you provide must
     /// match the CIDR of an existing route in the table.

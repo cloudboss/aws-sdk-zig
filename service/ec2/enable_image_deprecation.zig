@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Enables deprecation of the specified AMI at the specified date and time.
-///
-/// For more information, see [Deprecate an
-/// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html)
-/// in the
-/// *Amazon EC2 User Guide*.
 pub const EnableImageDeprecationInput = struct {
     /// The date and time to deprecate the AMI, in UTC, in the following format:
     /// *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z.

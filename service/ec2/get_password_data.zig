@@ -4,29 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Retrieves the encrypted administrator password for a running Windows
-/// instance.
-///
-/// The Windows password is generated at boot by the `EC2Config` service or
-/// `EC2Launch` scripts (Windows Server 2016 and later). This usually only
-/// happens the first time an instance is launched. For more information, see
-/// [EC2Config](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UsingConfig_WinAMI.html) and [EC2Launch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2launch.html) in the
-/// *Amazon EC2 User Guide*.
-///
-/// For the `EC2Config` service, the password is not generated for rebundled
-/// AMIs unless `Ec2SetPassword` is enabled before bundling.
-///
-/// The password is encrypted using the key pair that you specified when you
-/// launched the
-/// instance. You must provide the corresponding key pair file.
-///
-/// When you launch an instance, password generation and encryption may take a
-/// few
-/// minutes. If you try to retrieve the password before it's available, the
-/// output returns
-/// an empty string. We recommend that you wait up to 15 minutes after launching
-/// an instance
-/// before trying to retrieve the generated password.
 pub const GetPasswordDataInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the
@@ -140,7 +117,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "passwordData")) {
                     result.password_data = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
-                    result.timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

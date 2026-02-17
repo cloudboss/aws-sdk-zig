@@ -67,8 +67,6 @@ pub const Client = struct {
     /// Queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue) in the *Amazon SQS
     /// Developer Guide*.
     ///
-    /// **Note:**
-    ///
     /// * `AddPermission` generates a policy for you. You can use
     /// `
     /// SetQueueAttributes
@@ -87,8 +85,6 @@ pub const Client = struct {
     /// * Amazon SQS `AddPermission` does not support adding a non-account
     /// principal.
     ///
-    /// **Note:**
-    ///
     /// Cross-account permissions don't apply to this action. For more information,
     /// see [Grant
     /// cross-account permissions to a role and a
@@ -104,8 +100,6 @@ pub const Client = struct {
     /// the messages that have already been moved. It can only stop the messages
     /// that have not
     /// been moved yet.
-    ///
-    /// **Note:**
     ///
     /// * This action is currently limited to supporting message redrive from
     ///   [dead-letter queues
@@ -172,8 +166,6 @@ pub const Client = struct {
     /// (received from a queue by a consumer, but not yet deleted from the queue).
     /// If you reach this limit, Amazon SQS returns no error messages.
     ///
-    /// **Important:**
-    ///
     /// If you attempt to set the `VisibilityTimeout` to a value greater than
     /// the maximum time left, Amazon SQS returns an error. Amazon SQS doesn't
     /// automatically
@@ -204,8 +196,6 @@ pub const Client = struct {
     /// ` requests with each
     /// `ChangeMessageVisibilityBatch` action.
     ///
-    /// **Important:**
-    ///
     /// Because the batch request can result in a combination of successful and
     /// unsuccessful actions, you should check for batch errors even when the call
     /// returns an HTTP status code of `200`.
@@ -218,8 +208,6 @@ pub const Client = struct {
     ///
     /// * If you don't specify the `FifoQueue` attribute, Amazon SQS creates a
     ///   standard queue.
-    ///
-    /// **Note:**
     ///
     /// You can't change the queue type after you create it and you can't convert
     /// an existing standard queue into a FIFO queue. You must either create a new
@@ -241,8 +229,6 @@ pub const Client = struct {
     /// [limits
     /// related to
     /// queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html) and is unique within the scope of your queues.
-    ///
-    /// **Note:**
     ///
     /// After you create a queue, you must wait at least one second after the queue
     /// is
@@ -268,8 +254,6 @@ pub const Client = struct {
     /// return an error. This ensures that existing queues are not inadvertently
     /// altered.
     ///
-    /// **Note:**
-    ///
     /// Cross-account permissions don't apply to this action. For more information,
     /// see [Grant
     /// cross-account permissions to a role and a
@@ -287,8 +271,6 @@ pub const Client = struct {
     /// be locked by another consumer. Amazon SQS automatically deletes messages
     /// left in a queue
     /// longer than the retention period configured for the queue.
-    ///
-    /// **Note:**
     ///
     /// Each time you receive a message, meaning when a consumer retrieves a message
     /// from
@@ -319,8 +301,6 @@ pub const Client = struct {
     /// DeleteMessage.` The result of the action on each
     /// message is reported individually in the response.
     ///
-    /// **Important:**
-    ///
     /// Because the batch request can result in a combination of successful and
     /// unsuccessful actions, you should check for batch errors even when the call
     /// returns an HTTP status code of `200`.
@@ -330,8 +310,6 @@ pub const Client = struct {
 
     /// Deletes the queue specified by the `QueueUrl`, regardless of the queue's
     /// contents.
-    ///
-    /// **Important:**
     ///
     /// Be careful with the `DeleteQueue` action: When you delete a queue, any
     /// messages in the queue are no longer available.
@@ -349,8 +327,6 @@ pub const Client = struct {
     /// queue
     /// with the same name.
     ///
-    /// **Note:**
-    ///
     /// Cross-account permissions don't apply to this action. For more information,
     /// see [Grant
     /// cross-account permissions to a role and a
@@ -362,8 +338,6 @@ pub const Client = struct {
     }
 
     /// Gets attributes for the specified queue.
-    ///
-    /// **Note:**
     ///
     /// To determine whether a queue is
     /// [FIFO](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html), you can check whether `QueueName` ends with the `.fifo` suffix.
@@ -415,8 +389,6 @@ pub const Client = struct {
     /// source
     /// queue.
     ///
-    /// **Note:**
-    ///
     /// * This action is currently limited to supporting message redrive from
     ///   [dead-letter queues
     ///   (DLQs)](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html) only. In this context, the source
@@ -434,8 +406,6 @@ pub const Client = struct {
     /// For an overview, see [Tagging
     /// Your Amazon SQS
     /// Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html) in the *Amazon SQS Developer Guide*.
-    ///
-    /// **Note:**
     ///
     /// Cross-account permissions don't apply to this action. For more information,
     /// see [Grant
@@ -460,8 +430,6 @@ pub const Client = struct {
     /// Use `NextToken` as a parameter in your next request to
     /// `listQueues` to receive the next page of results.
     ///
-    /// **Note:**
-    ///
     /// Cross-account permissions don't apply to this action. For more information,
     /// see [Grant
     /// cross-account permissions to a role and a
@@ -473,8 +441,6 @@ pub const Client = struct {
     /// Deletes available messages in a queue (including in-flight messages)
     /// specified by the
     /// `QueueURL` parameter.
-    ///
-    /// **Important:**
     ///
     /// When you use the `PurgeQueue` action, you can't retrieve any messages
     /// deleted from a queue.
@@ -539,8 +505,6 @@ pub const Client = struct {
     /// for the
     /// returned messages. The default visibility timeout for a queue is 30 seconds.
     ///
-    /// **Note:**
-    ///
     /// In the future, new attributes might be added. If you write code that calls
     /// this action, we recommend that you structure your code so that it can handle
     /// new attributes gracefully.
@@ -550,8 +514,6 @@ pub const Client = struct {
 
     /// Revokes any permissions in the queue policy that matches the specified
     /// `Label` parameter.
-    ///
-    /// **Note:**
     ///
     /// * Only the owner of a queue can remove permissions from it.
     ///
@@ -569,8 +531,6 @@ pub const Client = struct {
     }
 
     /// Delivers a message to the specified queue.
-    ///
-    /// **Important:**
     ///
     /// A message can include only XML, JSON, and unformatted text. The following
     /// Unicode characters are allowed. For more information, see the [W3C
@@ -604,8 +564,6 @@ pub const Client = struct {
     /// sum of the individual lengths of all of the batched messages) are both 1 MiB
     /// 1,048,576 bytes.
     ///
-    /// **Important:**
-    ///
     /// A message can include only XML, JSON, and unformatted text. The following
     /// Unicode characters are allowed. For more information, see the [W3C
     /// specification for characters](http://www.w3.org/TR/REC-xml/#charsets).
@@ -635,8 +593,6 @@ pub const Client = struct {
     /// if the `MessageRetentionPeriod` is reduced below the age of existing
     /// messages.
     ///
-    /// **Note:**
-    ///
     /// * In the future, new attributes might be added. If you write code that calls
     ///   this action, we recommend that you structure your code so that it can
     ///   handle new attributes gracefully.
@@ -657,8 +613,6 @@ pub const Client = struct {
     /// Starts an asynchronous task to move messages from a specified source queue
     /// to a
     /// specified destination queue.
-    ///
-    /// **Note:**
     ///
     /// * This action is currently limited to supporting message redrive from queues
     /// that are configured as [dead-letter queues
@@ -700,8 +654,6 @@ pub const Client = struct {
     /// queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues)
     /// in the *Amazon SQS Developer Guide*.
     ///
-    /// **Note:**
-    ///
     /// Cross-account permissions don't apply to this action. For more information,
     /// see [Grant
     /// cross-account permissions to a role and a
@@ -714,8 +666,6 @@ pub const Client = struct {
     /// overview, see [Tagging
     /// Your Amazon SQS
     /// Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html) in the *Amazon SQS Developer Guide*.
-    ///
-    /// **Note:**
     ///
     /// Cross-account permissions don't apply to this action. For more information,
     /// see [Grant

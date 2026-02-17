@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImportTableDescription = @import("import_table_description.zig").ImportTableDescription;
 
-/// Represents the properties of the import.
 pub const DescribeImportInput = struct {
     /// The Amazon Resource Name (ARN) associated with the table you're importing
     /// to.

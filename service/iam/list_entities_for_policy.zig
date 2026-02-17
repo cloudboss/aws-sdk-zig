@@ -10,18 +10,6 @@ const PolicyRole = @import("policy_role.zig").PolicyRole;
 const PolicyUser = @import("policy_user.zig").PolicyUser;
 const serde = @import("serde.zig");
 
-/// Lists all IAM users, groups, and roles that the specified managed policy is
-/// attached
-/// to.
-///
-/// You can use the optional `EntityFilter` parameter to limit the results to a
-/// particular type of entity (users, groups, or roles). For example, to list
-/// only the roles
-/// that are attached to the specified policy, set `EntityFilter` to
-/// `Role`.
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters.
 pub const ListEntitiesForPolicyInput = struct {
     /// The entity type to use for filtering the results.
     ///

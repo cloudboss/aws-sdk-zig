@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Registers a patch baseline for a patch group.
 pub const RegisterPatchBaselineForPatchGroupInput = struct {
     /// The ID of the patch baseline to register with the patch group.
     baseline_id: []const u8,

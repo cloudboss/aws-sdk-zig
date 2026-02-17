@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
 const serde = @import("serde.zig");
 
-/// Deletes the specified VPC endpoint service configurations. Before you can
-/// delete
-/// an endpoint service configuration, you must reject any `Available` or
-/// `PendingAcceptance` interface endpoint connections that are attached to
-/// the service.
 pub const DeleteVpcEndpointServiceConfigurationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

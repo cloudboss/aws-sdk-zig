@@ -10,7 +10,6 @@ const IpamTier = @import("ipam_tier.zig").IpamTier;
 const Ipam = @import("ipam.zig").Ipam;
 const serde = @import("serde.zig");
 
-/// Modify the configurations of an IPAM.
 pub const ModifyIpamInput = struct {
     /// Choose the operating Regions for the IPAM. Operating Regions are Amazon Web
     /// Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM

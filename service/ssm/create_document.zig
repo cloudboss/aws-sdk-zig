@@ -10,14 +10,6 @@ const DocumentRequires = @import("document_requires.zig").DocumentRequires;
 const Tag = @import("tag.zig").Tag;
 const DocumentDescription = @import("document_description.zig").DocumentDescription;
 
-/// Creates a Amazon Web Services Systems Manager (SSM document). An SSM
-/// document defines the actions that Systems Manager performs
-/// on your managed nodes. For more information about SSM documents, including
-/// information about
-/// supported schemas, features, and syntax, see [Amazon Web Services Systems
-/// Manager
-/// Documents](https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html) in the
-/// *Amazon Web Services Systems Manager User Guide*.
 pub const CreateDocumentInput = struct {
     /// A list of key-value pairs that describe attachments to a version of a
     /// document.
@@ -61,15 +53,11 @@ pub const CreateDocumentInput = struct {
 
     /// The type of document to create.
     ///
-    /// **Note:**
-    ///
     /// The `DeploymentStrategy` document type is an internal-use-only document type
     /// reserved for AppConfig.
     document_type: ?DocumentType = null,
 
     /// A name for the SSM document.
-    ///
-    /// **Important:**
     ///
     /// You can't use the following strings as document name prefixes. These are
     /// reserved by Amazon Web Services
@@ -111,8 +99,6 @@ pub const CreateDocumentInput = struct {
     /// * `Key=OS,Value=Windows`
     ///
     /// * `Key=Environment,Value=Production`
-    ///
-    /// **Note:**
     ///
     /// To add tags to an existing SSM document, use the AddTagsToResource
     /// operation.

@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const Ipam = @import("ipam.zig").Ipam;
 const serde = @import("serde.zig");
 
-/// Get information about your IPAM pools.
-///
-/// For more information, see [What is
-/// IPAM?](https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
-/// the *Amazon VPC IPAM User Guide*.
 pub const DescribeIpamsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

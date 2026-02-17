@@ -1,5 +1,3 @@
-/// **Note:**
-///
 /// Amazon Elastic Inference is no longer available.
 ///
 /// Describes an elastic inference accelerator.

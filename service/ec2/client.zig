@@ -929,8 +929,6 @@ pub const Client = struct {
     /// CIDRs](https://docs.aws.amazon.com/vpc/latest/ipam/allocate-cidrs-ipam.html)
     /// in the *Amazon VPC IPAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// This action creates an allocation with strong consistency. The returned CIDR
     /// will not overlap with any other allocations from the same pool.
     pub fn allocateIpamPoolCidr(self: *Self, input: allocate_ipam_pool_cidr.AllocateIpamPoolCidrInput, options: allocate_ipam_pool_cidr.Options) !allocate_ipam_pool_cidr.AllocateIpamPoolCidrOutput {
@@ -1033,8 +1031,6 @@ pub const Client = struct {
     ///
     /// You cannot associate an Elastic IP address with an interface in a different
     /// network border group.
-    ///
-    /// **Important:**
     ///
     /// This is an idempotent operation. If you perform the operation more than
     /// once, Amazon EC2
@@ -1167,8 +1163,6 @@ pub const Client = struct {
     /// For more information, see [Elastic IP address
     /// quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips) in the *Amazon VPC User Guide*.
     ///
-    /// **Important:**
-    ///
     /// When you associate an EIP or secondary EIPs with a public NAT gateway, the
     /// network border group of the EIPs
     /// must match the network border group of the Availability Zone (AZ) that the
@@ -1215,8 +1209,6 @@ pub const Client = struct {
     /// Associates a security group with another VPC in the same Region. This
     /// enables you to use the same security group with network interfaces and
     /// instances in the specified VPC.
-    ///
-    /// **Note:**
     ///
     /// * The VPC you want to associate the security group with must be in the same
     ///   Region.
@@ -1295,8 +1287,6 @@ pub const Client = struct {
         return associate_vpc_cidr_block.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Links an EC2-Classic instance to a ClassicLink-enabled VPC through one or
@@ -1340,8 +1330,6 @@ pub const Client = struct {
 
     /// Attaches an Amazon EBS volume to a `running` or `stopped`
     /// instance, and exposes it to the instance with the specified device name.
-    ///
-    /// **Note:**
     ///
     /// The maximum number of Amazon EBS volumes that you can attach to an instance
     /// depends on the
@@ -1475,8 +1463,6 @@ pub const Client = struct {
     /// instance
     /// store volumes is not preserved.
     ///
-    /// **Note:**
-    ///
     /// This action is not applicable for Linux/Unix instances or Windows instances
     /// that are
     /// backed by Amazon EBS.
@@ -1500,8 +1486,6 @@ pub const Client = struct {
     /// * `active` and there is no commitment duration or the commitment
     /// duration has elapsed. You can't cancel a future-dated Capacity Reservation
     /// during the commitment duration.
-    ///
-    /// **Note:**
     ///
     /// You can't modify or cancel a Capacity Block. For more information, see
     /// [Capacity Blocks for
@@ -1608,8 +1592,6 @@ pub const Client = struct {
     /// the `cancelled_running` state and the instances continue to run until they
     /// are interrupted or you terminate them manually.
     ///
-    /// **Important:**
-    ///
     /// **Terminating an instance is permanent and irreversible.**
     ///
     /// After you terminate an instance, you can no longer connect to it, and it
@@ -1636,8 +1618,6 @@ pub const Client = struct {
     }
 
     /// Cancels one or more Spot Instance requests.
-    ///
-    /// **Important:**
     ///
     /// Canceling a Spot Instance request does not terminate running Spot Instances
     /// associated with the request.
@@ -1773,8 +1753,6 @@ pub const Client = struct {
     /// on Outposts. For more information, [
     /// Amazon EBS local snapshots on
     /// Outposts](https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#considerations).
-    ///
-    /// **Note:**
     ///
     /// Snapshots copies have an arbitrary source volume ID. Do not use this volume
     /// ID for
@@ -2158,8 +2136,6 @@ pub const Client = struct {
     /// associate one or more targets with it by using the
     /// AssociateInstanceEventWindow API.
     ///
-    /// **Important:**
-    ///
     /// Event windows are applicable only for scheduled events that stop, reboot, or
     /// terminate instances.
     ///
@@ -2430,8 +2406,6 @@ pub const Client = struct {
     /// that
     /// selectively enables or disables specific SIP settings.
     ///
-    /// **Note:**
-    ///
     /// If you implement a custom configuration, [
     /// connect to the instance and verify the
     /// settings](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-check-settings) to ensure that your
@@ -2495,8 +2469,6 @@ pub const Client = struct {
     ///
     /// For more information, see [NAT
     /// gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*.
-    ///
-    /// **Important:**
     ///
     /// When you create a public NAT gateway and assign it an EIP or secondary EIPs,
     /// the network border group of the EIPs must match the network border group of
@@ -2646,8 +2618,6 @@ pub const Client = struct {
     /// at a time. To get
     /// a list of your Standard Reserved Instances, you can use the
     /// DescribeReservedInstances operation.
-    ///
-    /// **Note:**
     ///
     /// Only Standard Reserved Instances can be sold in the Reserved Instance
     /// Marketplace.
@@ -3369,8 +3339,6 @@ pub const Client = struct {
     /// requester VPC.
     /// The requester VPC and accepter VPC cannot have overlapping CIDR blocks.
     ///
-    /// **Note:**
-    ///
     /// Limitations and rules apply to a VPC peering connection. For more
     /// information, see
     /// the [VPC peering
@@ -3403,8 +3371,6 @@ pub const Client = struct {
     /// The response includes information that you need to give to your network
     /// administrator
     /// to configure your customer gateway.
-    ///
-    /// **Important:**
     ///
     /// We strongly recommend that you use HTTPS when calling this operation because
     /// the
@@ -3466,8 +3432,6 @@ pub const Client = struct {
     }
 
     /// Deletes a carrier gateway.
-    ///
-    /// **Important:**
     ///
     /// If you do not delete the route that contains the carrier gateway as the
     /// Target, the route is a blackhole route. For information about how to delete
@@ -3544,8 +3508,6 @@ pub const Client = struct {
     /// leaving 1000 or
     /// fewer. Then delete the fleet, and the remaining instances will be terminated
     /// automatically.
-    ///
-    /// **Important:**
     ///
     /// **Terminating an instance is permanent and irreversible.**
     ///
@@ -3659,8 +3621,6 @@ pub const Client = struct {
     }
 
     /// Delete an IPAM pool.
-    ///
-    /// **Note:**
     ///
     /// You cannot delete an IPAM pool if there are allocations in it or CIDRs
     /// provisioned to it. To release
@@ -4373,8 +4333,6 @@ pub const Client = struct {
     ///   groups
     /// that you can assign to a network interface.
     ///
-    /// **Note:**
-    ///
     /// The order of the elements in the response, including those within nested
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
@@ -4449,8 +4407,6 @@ pub const Client = struct {
     /// zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
     /// in the *Amazon EC2 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// The order of the elements in the response, including those within nested
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
@@ -4466,16 +4422,12 @@ pub const Client = struct {
 
     /// Describes the specified bundle tasks or all of your bundle tasks.
     ///
-    /// **Note:**
-    ///
     /// Completed bundle tasks are listed for only a limited time. If your bundle
     /// task is no
     /// longer in the list, you can still register an AMI from it. Just use
     /// `RegisterImage` with the Amazon S3 bucket name and image manifest name you
     /// provided
     /// to the bundle task.
-    ///
-    /// **Note:**
     ///
     /// The order of the elements in the response, including those within nested
     /// structures,
@@ -4568,8 +4520,6 @@ pub const Client = struct {
     /// topology](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology-prerequisites.html) in the
     /// *Amazon EC2 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// The Amazon EC2 API follows an eventual consistency model due to the
     /// distributed nature of the system supporting it. As a result, when you call
     /// the
@@ -4603,8 +4553,6 @@ pub const Client = struct {
         return describe_carrier_gateways.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Describes your linked EC2-Classic instances. This request only returns
@@ -4714,8 +4662,6 @@ pub const Client = struct {
         return describe_egress_only_internet_gateways.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// Amazon Elastic Graphics reached end of life on January 8, 2024.
     ///
     /// Describes the Elastic Graphics accelerator associated with your instances.
@@ -4763,8 +4709,6 @@ pub const Client = struct {
 
     /// Describes the running instances for the specified EC2 Fleet.
     ///
-    /// **Note:**
-    ///
     /// Currently, `DescribeFleetInstances` does not support fleets of type
     /// `instant`. Instead, use `DescribeFleets`, specifying the
     /// `instant` fleet ID in the request.
@@ -4777,8 +4721,6 @@ pub const Client = struct {
     }
 
     /// Describes the specified EC2 Fleet or all of your EC2 Fleets.
-    ///
-    /// **Important:**
     ///
     /// If a fleet is of type `instant`, you must specify the fleet ID in the
     /// request, otherwise the fleet does not appear in the response.
@@ -4922,8 +4864,6 @@ pub const Client = struct {
     /// one attribute
     /// at a time.
     ///
-    /// **Note:**
-    ///
     /// The order of the elements in the response, including those within nested
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
@@ -5001,13 +4941,9 @@ pub const Client = struct {
     /// API](https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html) in the *Amazon EC2 Developer
     /// Guide*.
     ///
-    /// **Important:**
-    ///
     /// We strongly recommend using only paginated requests. Unpaginated requests
     /// are
     /// susceptible to throttling and timeouts.
-    ///
-    /// **Note:**
     ///
     /// The order of the elements in the response, including those within nested
     /// structures,
@@ -5139,8 +5075,6 @@ pub const Client = struct {
     /// are in an
     /// unaffected Availability Zone, the call works normally.
     ///
-    /// **Note:**
-    ///
     /// The order of the elements in the response, including those within nested
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
@@ -5205,8 +5139,6 @@ pub const Client = struct {
     /// API](https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html) in the *Amazon EC2 Developer
     /// Guide*.
     ///
-    /// **Note:**
-    ///
     /// The order of the elements in the response, including those within nested
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
@@ -5229,8 +5161,6 @@ pub const Client = struct {
     /// for Amazon EC2 instance
     /// topology](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology-prerequisites.html) in the
     /// *Amazon EC2 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The Amazon EC2 API follows an eventual consistency model due to the
     /// distributed nature of the system supporting it. As a result, when you call
@@ -5315,13 +5245,9 @@ pub const Client = struct {
     /// API](https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html) in the *Amazon EC2 Developer
     /// Guide*.
     ///
-    /// **Important:**
-    ///
     /// We strongly recommend using only paginated requests. Unpaginated requests
     /// are
     /// susceptible to throttling and timeouts.
-    ///
-    /// **Note:**
     ///
     /// The order of the elements in the response, including those within nested
     /// structures, might vary. Applications should not assume the elements appear
@@ -5510,8 +5436,6 @@ pub const Client = struct {
         return describe_managed_prefix_lists.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Describes your Elastic IP addresses that are being moved from or being
@@ -5585,8 +5509,6 @@ pub const Client = struct {
     /// `private-ip-address`, `subnet-id`, or
     /// `vpc-id`.
     ///
-    /// **Important:**
-    ///
     /// We strongly recommend using only paginated requests. Unpaginated requests
     /// are
     /// susceptible to throttling and timeouts.
@@ -5596,16 +5518,12 @@ pub const Client = struct {
 
     /// Describes the Outposts link aggregation groups (LAGs).
     ///
-    /// **Note:**
-    ///
     /// LAGs are only available for second-generation Outposts racks at this time.
     pub fn describeOutpostLags(self: *Self, input: describe_outpost_lags.DescribeOutpostLagsInput, options: describe_outpost_lags.Options) !describe_outpost_lags.DescribeOutpostLagsOutput {
         return describe_outpost_lags.execute(self, input, options);
     }
 
     /// Describes the specified placement groups or all of your placement groups.
-    ///
-    /// **Note:**
     ///
     /// To describe a specific placement group that is *shared* with
     /// your account, you must specify the ID of the placement group using the
@@ -5670,8 +5588,6 @@ pub const Client = struct {
     /// your account can
     /// use](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html) in the *Amazon Web Services Account Management Reference Guide*.
     ///
-    /// **Note:**
-    ///
     /// The order of the elements in the response, including those within nested
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
@@ -5691,8 +5607,6 @@ pub const Client = struct {
     ///
     /// For more information about Reserved Instances, see [Reserved
     /// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html) in the *Amazon EC2 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The order of the elements in the response, including those within nested
     /// structures,
@@ -5732,8 +5646,6 @@ pub const Client = struct {
     /// For more information, see [Sell in the Reserved Instance
     /// Marketplace](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html) in the *Amazon EC2 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// The order of the elements in the response, including those within nested
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
@@ -5753,8 +5665,6 @@ pub const Client = struct {
     /// For more information, see [Modify Reserved
     /// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html) in the
     /// *Amazon EC2 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The order of the elements in the response, including those within nested
     /// structures,
@@ -5780,8 +5690,6 @@ pub const Client = struct {
     ///
     /// For more information, see [Sell in the Reserved Instance
     /// Marketplace](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html) in the *Amazon EC2 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The order of the elements in the response, including those within nested
     /// structures,
@@ -5993,8 +5901,6 @@ pub const Client = struct {
     /// For more information about EBS snapshots, see [Amazon EBS
     /// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html) in the *Amazon EBS User Guide*.
     ///
-    /// **Important:**
-    ///
     /// We strongly recommend using only paginated requests. Unpaginated requests
     /// are
     /// susceptible to throttling and timeouts.
@@ -6142,13 +6048,9 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
     /// *Amazon Elastic Compute Cloud User Guide*.
     ///
-    /// **Important:**
-    ///
     /// We strongly recommend using only paginated requests. Unpaginated requests
     /// are
     /// susceptible to throttling and timeouts.
-    ///
-    /// **Note:**
     ///
     /// The order of the elements in the response, including those within nested
     /// structures, might vary. Applications should not assume the elements appear
@@ -6339,8 +6241,6 @@ pub const Client = struct {
     /// Therefore, volume status does not indicate volumes in the `error` state (for
     /// example, when a volume is incapable of accepting I/O.)
     ///
-    /// **Note:**
-    ///
     /// The order of the elements in the response, including those within nested
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
@@ -6360,13 +6260,9 @@ pub const Client = struct {
     /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html)
     /// in the *Amazon EBS User Guide*.
     ///
-    /// **Important:**
-    ///
     /// We strongly recommend using only paginated requests. Unpaginated requests
     /// are
     /// susceptible to throttling and timeouts.
-    ///
-    /// **Note:**
     ///
     /// The order of the elements in the response, including those within nested
     /// structures, might vary. Applications should not assume the elements appear
@@ -6414,8 +6310,6 @@ pub const Client = struct {
         return describe_vpc_block_public_access_options.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Describes the ClassicLink status of the specified VPCs.
@@ -6423,8 +6317,6 @@ pub const Client = struct {
         return describe_vpc_classic_link.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Describes the ClassicLink DNS support status of one or more VPCs. If
@@ -6550,8 +6442,6 @@ pub const Client = struct {
         return describe_vpn_gateways.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the
@@ -6642,8 +6532,6 @@ pub const Client = struct {
     /// account can launch
     /// instances using any public AMI or AMI shared with your account.
     ///
-    /// **Note:**
-    ///
     /// The Allowed AMIs feature does not restrict the AMIs owned by your account.
     /// Regardless of
     /// the criteria you set, the AMIs created by your account will always be
@@ -6694,8 +6582,6 @@ pub const Client = struct {
     /// each new instance. Amazon EC2 must remove all pre-provisioned snapshots
     /// before you can enable
     /// Windows fast launch again.
-    ///
-    /// **Note:**
     ///
     /// You can only change these settings for Windows AMIs that you own or that
     /// have been
@@ -6856,8 +6742,6 @@ pub const Client = struct {
     /// access for snapshots in a Region, users can publicly share snapshots in that
     /// Region.
     ///
-    /// **Important:**
-    ///
     /// Enabling block public access for snapshots in *block-all-sharing*
     /// mode does not change the permissions for snapshots that are already publicly
     /// shared.
@@ -6892,8 +6776,6 @@ pub const Client = struct {
         return disable_vgw_route_propagation.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Disables ClassicLink for a VPC. You cannot disable ClassicLink for a VPC
@@ -6903,8 +6785,6 @@ pub const Client = struct {
         return disable_vpc_classic_link.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames
@@ -7135,8 +7015,6 @@ pub const Client = struct {
     /// when Allowed
     /// AMIs is enabled.
     ///
-    /// **Note:**
-    ///
     /// The Allowed AMIs feature does not restrict the AMIs owned by your account.
     /// Regardless of
     /// the criteria you set, the AMIs created by your account will always be
@@ -7197,8 +7075,6 @@ pub const Client = struct {
     /// automatically replenished as they are used, depending on your settings for
     /// launch
     /// frequency.
-    ///
-    /// **Note:**
     ///
     /// You can only change these settings for Windows AMIs that you own or that
     /// have been
@@ -7374,8 +7250,6 @@ pub const Client = struct {
     /// treated as private or they remain publicly shared, depending on the
     /// **State** that you specify.
     ///
-    /// **Important:**
-    ///
     /// Enabling block public access for snapshots in *block all sharing*
     /// mode does not change the permissions for snapshots that are already publicly
     /// shared.
@@ -7415,8 +7289,6 @@ pub const Client = struct {
         return enable_volume_io.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Enables a VPC for ClassicLink. You can then link EC2-Classic instances to
@@ -7432,8 +7304,6 @@ pub const Client = struct {
         return enable_vpc_classic_link.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Enables a VPC to support DNS hostname resolution for ClassicLink. If
@@ -7504,8 +7374,6 @@ pub const Client = struct {
     /// Gets the current state of the Allowed AMIs setting and the list of Allowed
     /// AMIs criteria
     /// at the account level in the specified Region.
-    ///
-    /// **Note:**
     ///
     /// The Allowed AMIs feature does not restrict the AMIs owned by your account.
     /// Regardless of
@@ -7691,8 +7559,6 @@ pub const Client = struct {
     /// * Create a set of named queries in Athena that you can use to get started
     ///   quickly
     ///
-    /// **Note:**
-    ///
     /// `GetFlowLogsIntegrationTemplate` does not support integration between
     /// Amazon Web Services Transit Gateway Flow Logs and Amazon Athena.
     pub fn getFlowLogsIntegrationTemplate(self: *Self, input: get_flow_logs_integration_template.GetFlowLogsIntegrationTemplateInput, options: get_flow_logs_integration_template.Options) !get_flow_logs_integration_template.GetFlowLogsIntegrationTemplateOutput {
@@ -7868,8 +7734,6 @@ pub const Client = struct {
     /// Get a list of all the CIDR allocations in an IPAM pool. The Region you use
     /// should be the IPAM pool locale. The locale is the Amazon Web Services Region
     /// where this IPAM pool is available for allocations.
-    ///
-    /// **Note:**
     ///
     /// If you use this action after
     /// [AllocateIpamPoolCidr](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html) or [ReleaseIpamPoolAllocation](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html), note that all EC2 API actions follow an [eventual consistency](https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html) model.
@@ -8239,8 +8103,6 @@ pub const Client = struct {
         return import_client_vpn_client_certificate_revocation_list.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// To import your virtual machines (VMs) with a console-based experience, you
     /// can use the
     /// *Import virtual machine images to Amazon Web Services* template in the
@@ -8252,8 +8114,6 @@ pub const Client = struct {
     ///
     /// Import single or multi-volume disk images or EBS snapshots into an Amazon
     /// Machine Image (AMI).
-    ///
-    /// **Important:**
     ///
     /// Amazon Web Services VM Import/Export strongly recommends specifying a value
     /// for either the
@@ -8269,8 +8129,6 @@ pub const Client = struct {
         return import_image.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// We recommend that you use the [
     /// `ImportImage`
     /// ](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html)
@@ -8314,8 +8172,6 @@ pub const Client = struct {
         return import_snapshot.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This API action supports only single-volume VMs. To import multi-volume VMs,
     /// use
     /// ImportImage instead. To import a disk to a snapshot, use
@@ -8715,8 +8571,6 @@ pub const Client = struct {
     /// multiplied by the number
     /// of cores. The instance must be in a `Stopped` state before you make changes.
     ///
-    /// **Note:**
-    ///
     /// Some instance type options do not support this capability. For more
     /// information, see
     /// [Supported CPU
@@ -8782,8 +8636,6 @@ pub const Client = struct {
     /// Modifies the default instance metadata service (IMDS) settings at the
     /// account level in
     /// the specified Amazon Web Services  Region.
-    ///
-    /// **Note:**
     ///
     /// To remove a parameter's account-level default setting, specify
     /// `no-preference`. If an account-level setting is cleared with
@@ -9485,8 +9337,6 @@ pub const Client = struct {
         return monitor_instances.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC
@@ -9640,8 +9490,6 @@ pub const Client = struct {
         return purchase_reserved_instances_offering.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// You can no longer purchase Scheduled Instances.
     ///
     /// Purchases the Scheduled Instances with the specified schedule.
@@ -9893,8 +9741,6 @@ pub const Client = struct {
     /// deleting the resource, set its monitored state to false using
     /// [ModifyIpamResourceCidr](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyIpamResourceCidr.html). For more information, see [Release an allocation](https://docs.aws.amazon.com/vpc/latest/ipam/release-alloc-ipam.html) in the *Amazon VPC IPAM User Guide*.
     ///
-    /// **Note:**
-    ///
     /// All EC2 API actions follow an [eventual
     /// consistency](https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html) model.
     pub fn releaseIpamPoolAllocation(self: *Self, input: release_ipam_pool_allocation.ReleaseIpamPoolAllocationInput, options: release_ipam_pool_allocation.Options) !release_ipam_pool_allocation.ReleaseIpamPoolAllocationOutput {
@@ -9914,8 +9760,6 @@ pub const Client = struct {
     }
 
     /// Sets or replaces the criteria for Allowed AMIs.
-    ///
-    /// **Note:**
     ///
     /// The Allowed AMIs feature does not restrict the AMIs owned by your account.
     /// Regardless of
@@ -10039,8 +9883,6 @@ pub const Client = struct {
     /// requests](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html)
     /// in the *Amazon EC2 User Guide*.
     ///
-    /// **Important:**
-    ///
     /// We strongly discourage using the RequestSpotFleet API because it is a legacy
     /// API with no planned investment. For options for requesting Spot Instances,
     /// see
@@ -10057,8 +9899,6 @@ pub const Client = struct {
     /// For more information, see [Work with Spot
     /// Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html) in
     /// the *Amazon EC2 User Guide*.
-    ///
-    /// **Important:**
     ///
     /// We strongly discourage using the RequestSpotInstances API because it is a
     /// legacy
@@ -10137,8 +9977,6 @@ pub const Client = struct {
         return reset_snapshot_attribute.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action is deprecated.
     ///
     /// Restores an Elastic IP address that was previously moved to the EC2-VPC
@@ -10580,8 +10418,6 @@ pub const Client = struct {
     /// Terminates (deletes) the specified instances. This operation is
     /// [idempotent](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html); if you
     /// terminate an instance more than once, each call succeeds.
-    ///
-    /// **Important:**
     ///
     /// **Terminating an instance is permanent and irreversible.**
     ///

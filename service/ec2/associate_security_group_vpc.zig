@@ -5,23 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SecurityGroupVpcAssociationState = @import("security_group_vpc_association_state.zig").SecurityGroupVpcAssociationState;
 
-/// Associates a security group with another VPC in the same Region. This
-/// enables you to use the same security group with network interfaces and
-/// instances in the specified VPC.
-///
-/// **Note:**
-///
-/// * The VPC you want to associate the security group with must be in the same
-///   Region.
-///
-/// * You can associate the security group with another VPC if your account owns
-///   the VPC or if the VPC was shared with you.
-///
-/// * You must own the security group.
-///
-/// * You cannot use this feature with default security groups.
-///
-/// * You cannot use this feature with the default VPC.
 pub const AssociateSecurityGroupVpcInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

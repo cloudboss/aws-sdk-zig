@@ -97,8 +97,6 @@ pub const AutomationExecutionMetadata = struct {
     /// workflow in
     /// Change Manager.
     ///
-    /// **Note:**
-    ///
     /// The Automation runbooks specified for the runbook workflow can't run until
     /// all required
     /// approvals for the change request have been received.

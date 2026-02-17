@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const FeatureType = @import("feature_type.zig").FeatureType;
 const serde = @import("serde.zig");
 
-/// Disables the management of privileged root user credentials across member
-/// accounts in
-/// your organization. When you disable this feature, the management account and
-/// the
-/// delegated administrator for IAM can no longer manage root user credentials
-/// for member
-/// accounts in your organization.
 pub const DisableOrganizationsRootCredentialsManagementInput = struct {
 };
 

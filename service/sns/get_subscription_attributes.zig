@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Returns all of the properties of a subscription.
 pub const GetSubscriptionAttributesInput = struct {
     /// The ARN of the subscription whose properties you want to get.
     subscription_arn: []const u8,

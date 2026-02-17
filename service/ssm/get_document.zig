@@ -10,8 +10,6 @@ const DocumentRequires = @import("document_requires.zig").DocumentRequires;
 const ReviewStatus = @import("review_status.zig").ReviewStatus;
 const DocumentStatus = @import("document_status.zig").DocumentStatus;
 
-/// Gets the contents of the specified Amazon Web Services Systems Manager
-/// document (SSM document).
 pub const GetDocumentInput = struct {
     /// Returns the document in the specified format. The document format can be
     /// either JSON or

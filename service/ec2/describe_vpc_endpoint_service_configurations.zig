@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ServiceConfiguration = @import("service_configuration.zig").ServiceConfiguration;
 const serde = @import("serde.zig");
 
-/// Describes the VPC endpoint service configurations in your account (your
-/// services).
 pub const DescribeVpcEndpointServiceConfigurationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

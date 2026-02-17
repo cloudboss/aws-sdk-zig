@@ -6,18 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ScheduledInstancesLaunchSpecification = @import("scheduled_instances_launch_specification.zig").ScheduledInstancesLaunchSpecification;
 const serde = @import("serde.zig");
 
-/// Launches the specified Scheduled Instances.
-///
-/// Before you can launch a Scheduled Instance, you must purchase it and obtain
-/// an identifier using PurchaseScheduledInstances.
-///
-/// You must launch a Scheduled Instance during its scheduled time period. You
-/// can't stop or
-/// reboot a Scheduled Instance, but you can terminate it as needed. If you
-/// terminate a
-/// Scheduled Instance before the current scheduled time period ends, you can
-/// launch it again
-/// after a few minutes.
 pub const RunScheduledInstancesInput = struct {
     /// Unique, case-sensitive identifier that ensures the idempotency of the
     /// request.

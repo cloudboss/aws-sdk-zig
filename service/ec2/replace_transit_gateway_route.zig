@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayRoute = @import("transit_gateway_route.zig").TransitGatewayRoute;
 const serde = @import("serde.zig");
 
-/// Replaces the specified route in the specified transit gateway route table.
 pub const ReplaceTransitGatewayRouteInput = struct {
     /// Indicates whether traffic matching this route is to be dropped.
     blackhole: ?bool = null,

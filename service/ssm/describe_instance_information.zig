@@ -7,26 +7,6 @@ const InstanceInformationStringFilter = @import("instance_information_string_fil
 const InstanceInformationFilter = @import("instance_information_filter.zig").InstanceInformationFilter;
 const InstanceInformation = @import("instance_information.zig").InstanceInformation;
 
-/// Provides information about one or more of your managed nodes, including the
-/// operating system
-/// platform, SSM Agent version, association status, and IP address. This
-/// operation does not return
-/// information for nodes that are either Stopped or Terminated.
-///
-/// If you specify one or more node IDs, the operation returns information for
-/// those managed
-/// nodes. If you don't specify node IDs, it returns information for all your
-/// managed nodes. If you
-/// specify a node ID that isn't valid or a node that you don't own, you receive
-/// an error.
-///
-/// **Note:**
-///
-/// The `IamRole` field returned for this API operation is the role assigned to
-/// an
-/// Amazon EC2 instance configured with a Systems Manager Quick Setup host
-/// management configuration or
-/// the role assigned to an on-premises managed node.
 pub const DescribeInstanceInformationInput = struct {
     /// One or more filters. Use a filter to return a more specific list of managed
     /// nodes. You can
@@ -40,8 +20,6 @@ pub const DescribeInstanceInformationInput = struct {
     /// Instead, use the
     /// `Filters` data type. `Filters` enables you to return node information by
     /// filtering based on tags applied to managed nodes.
-    ///
-    /// **Note:**
     ///
     /// Attempting to use `InstanceInformationFilterList` and `Filters` leads
     /// to an exception error.

@@ -4,22 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Updates an existing maintenance window. Only specified parameters are
-/// modified.
-///
-/// **Note:**
-///
-/// The value you specify for `Duration` determines the specific end time for
-/// the
-/// maintenance window based on the time it begins. No maintenance window tasks
-/// are permitted to
-/// start after the resulting endtime minus the number of hours you specify for
-/// `Cutoff`.
-/// For example, if the maintenance window starts at 3 PM, the duration is three
-/// hours, and the
-/// value you specify for `Cutoff` is one hour, no maintenance window tasks can
-/// start
-/// after 5 PM.
 pub const UpdateMaintenanceWindowInput = struct {
     /// Whether targets must be registered with the maintenance window before tasks
     /// can be defined
@@ -87,8 +71,6 @@ pub const UpdateMaintenanceWindowInput = struct {
     /// become active. `StartDate` allows you to delay activation of the maintenance
     /// window
     /// until the specified future date.
-    ///
-    /// **Note:**
     ///
     /// When using a rate schedule, if you provide a start date that occurs in the
     /// past, the

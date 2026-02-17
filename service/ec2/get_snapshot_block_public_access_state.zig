@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ManagedBy = @import("managed_by.zig").ManagedBy;
 const SnapshotBlockPublicAccessState = @import("snapshot_block_public_access_state.zig").SnapshotBlockPublicAccessState;
 
-/// Gets the current state of *block public access for snapshots* setting
-/// for the account and Region.
-///
-/// For more information, see [
-/// Block public access for
-/// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html) in the *Amazon EBS User Guide*.
 pub const GetSnapshotBlockPublicAccessStateInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -7,9 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const AddressTransfer = @import("address_transfer.zig").AddressTransfer;
 const serde = @import("serde.zig");
 
-/// Accepts an Elastic IP address transfer. For more information, see [Accept a
-/// transferred Elastic IP
-/// address](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#using-instance-addressing-eips-transfer-accept) in the *Amazon VPC User Guide*.
 pub const AcceptAddressTransferInput = struct {
     /// The Elastic IP address you are accepting for transfer.
     address: []const u8,

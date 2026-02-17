@@ -6,17 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AssociationStatus = @import("association_status.zig").AssociationStatus;
 const serde = @import("serde.zig");
 
-/// Disassociates a target network from the specified Client VPN endpoint. When
-/// you disassociate the
-/// last target network from a Client VPN, the following happens:
-///
-/// * The route that was automatically added for the VPC is deleted
-///
-/// * All active client connections are terminated
-///
-/// * New client connections are disallowed
-///
-/// * The Client VPN endpoint's status changes to `pending-associate`
 pub const DisassociateClientVpnTargetNetworkInput = struct {
     /// The ID of the target network association.
     association_id: []const u8,

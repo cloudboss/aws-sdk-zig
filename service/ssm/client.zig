@@ -260,8 +260,6 @@ pub const Client = struct {
     /// hybrid and multicloud
     /// environments](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-hybrid-multicloud.html) in the *Amazon Web Services Systems Manager User Guide*.
     ///
-    /// **Note:**
-    ///
     /// Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and
     /// on-premises servers and VMs that are
     /// configured for Systems Manager are all called *managed nodes*.
@@ -324,8 +322,6 @@ pub const Client = struct {
 
     /// Creates a new maintenance window.
     ///
-    /// **Note:**
-    ///
     /// The value you specify for `Duration` determines the specific end time for
     /// the
     /// maintenance window based on the time it begins. No maintenance window tasks
@@ -366,8 +362,6 @@ pub const Client = struct {
 
     /// Creates a patch baseline.
     ///
-    /// **Note:**
-    ///
     /// For information about valid key-value pairs in `PatchFilters` for each
     /// supported
     /// operating system type, see PatchFilter.
@@ -407,8 +401,6 @@ pub const Client = struct {
     /// successful initial sync is completed, the system continuously syncs data. To
     /// check the status of
     /// a sync, use the ListResourceDataSync.
-    ///
-    /// **Note:**
     ///
     /// By default, data isn't encrypted in Amazon S3. We strongly recommend that
     /// you
@@ -473,8 +465,6 @@ pub const Client = struct {
     /// Delete an OpsItem. You must have permission in Identity and Access
     /// Management (IAM) to
     /// delete an OpsItem.
-    ///
-    /// **Important:**
     ///
     /// Note the following important information about this operation.
     ///
@@ -631,8 +621,6 @@ pub const Client = struct {
 
     /// Lists all patches eligible to be included in a patch baseline.
     ///
-    /// **Note:**
-    ///
     /// Currently, `DescribeAvailablePatches` supports only the Amazon Linux 1,
     /// Amazon
     /// Linux 2, and Windows Server operating systems.
@@ -684,8 +672,6 @@ pub const Client = struct {
     /// managed nodes. If you
     /// specify a node ID that isn't valid or a node that you don't own, you receive
     /// an error.
-    ///
-    /// **Note:**
     ///
     /// The `IamRole` field returned for this API operation is the role assigned to
     /// an
@@ -760,8 +746,6 @@ pub const Client = struct {
 
     /// Lists the tasks in a maintenance window.
     ///
-    /// **Note:**
-    ///
     /// For maintenance window tasks without a specified target, you can't supply
     /// values for
     /// `--max-errors` and `--max-concurrency`. Instead, the system inserts a
@@ -822,8 +806,6 @@ pub const Client = struct {
     /// beginning or end of a parameter name. If the specified name for a parameter
     /// contains spaces
     /// between characters, the request fails with a `ValidationException` error.
-    ///
-    /// **Important:**
     ///
     /// If you change the KMS key alias for the KMS key used to encrypt a parameter,
     /// then you must also update the key alias the parameter uses to reference KMS.
@@ -1012,8 +994,6 @@ pub const Client = struct {
     /// primarily used by the `AWS-RunPatchBaseline` Systems Manager document (SSM
     /// document).
     ///
-    /// **Note:**
-    ///
     /// If you run the command locally, such as with the Command Line Interface
     /// (CLI), the system attempts to use your local Amazon Web Services credentials
     /// and the operation fails. To avoid
@@ -1078,8 +1058,6 @@ pub const Client = struct {
 
     /// Retrieves the details of a maintenance window task.
     ///
-    /// **Note:**
-    ///
     /// For maintenance window tasks without a specified target, you can't supply
     /// values for
     /// `--max-errors` and `--max-concurrency`. Instead, the system inserts a
@@ -1135,8 +1113,6 @@ pub const Client = struct {
     /// contains spaces
     /// between characters, the request fails with a `ValidationException` error.
     ///
-    /// **Note:**
-    ///
     /// To get information about more than one parameter at a time, use the
     /// GetParameters operation.
     pub fn getParameter(self: *Self, input: get_parameter.GetParameterInput, options: get_parameter.Options) !get_parameter.GetParameterOutput {
@@ -1151,8 +1127,6 @@ pub const Client = struct {
     /// contains spaces
     /// between characters, the request fails with a `ValidationException` error.
     ///
-    /// **Important:**
-    ///
     /// If you change the KMS key alias for the KMS key used to encrypt a parameter,
     /// then you must also update the key alias the parameter uses to reference KMS.
     /// Otherwise,
@@ -1164,8 +1138,6 @@ pub const Client = struct {
 
     /// Get information about one or more parameters by specifying multiple
     /// parameter names.
-    ///
-    /// **Note:**
     ///
     /// To get information about a single parameter, you can use the GetParameter
     /// operation instead.
@@ -1343,8 +1315,6 @@ pub const Client = struct {
         return list_compliance_summaries.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// Amazon Web Services Systems Manager Change Manager will no longer be open to
     /// new
     /// customers starting November 7, 2025. If you would like to use Change
@@ -1478,8 +1448,6 @@ pub const Client = struct {
     ///   was applied to
     /// the managed node.
     ///
-    /// **Important:**
-    ///
     /// For State Manager associations, this represents the time when compliance
     /// status was
     /// captured by the Systems Manager service during its internal compliance
@@ -1565,8 +1533,6 @@ pub const Client = struct {
     /// concepts](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) in the
     /// *Key Management Service Developer Guide*.
     ///
-    /// **Important:**
-    ///
     /// While you can share a parameter using the Systems Manager
     /// `PutResourcePolicy` operation,
     /// we recommend using Resource Access Manager (RAM) instead. This is because
@@ -1650,8 +1616,6 @@ pub const Client = struct {
     /// Connections can be
     /// resumed for disconnected sessions, but not terminated sessions.
     ///
-    /// **Note:**
-    ///
     /// This command is primarily for use by client machines to automatically
     /// reconnect during
     /// intermittent network issues. It isn't intended for any other use.
@@ -1688,8 +1652,6 @@ pub const Client = struct {
         return start_automation_execution.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// Amazon Web Services Systems Manager Change Manager will no longer be open to
     /// new
     /// customers starting November 7, 2025. If you would like to use Change
@@ -1719,8 +1681,6 @@ pub const Client = struct {
     /// Returns a URL and token that can be used to open a WebSocket connection for
     /// sending input and
     /// receiving outputs.
-    ///
-    /// **Note:**
     ///
     /// Amazon Web Services CLI usage: `start-session` is an interactive command
     /// that requires the Session Manager
@@ -1783,8 +1743,6 @@ pub const Client = struct {
     /// isn't authorized to perform: ssm:DescribeAssociation on resource:
     /// `
     ///
-    /// **Important:**
-    ///
     /// When you update an association, the association immediately runs against the
     /// specified
     /// targets. You can add the `ApplyOnlyAtCronInterval` parameter to run the
@@ -1814,8 +1772,6 @@ pub const Client = struct {
 
     /// Set the default version of a document.
     ///
-    /// **Note:**
-    ///
     /// If you change a document version for a State Manager association, Systems
     /// Manager immediately runs
     /// the association unless you previously specifed the
@@ -1825,8 +1781,6 @@ pub const Client = struct {
         return update_document_default_version.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// Amazon Web Services Systems Manager Change Manager will no longer be open to
     /// new
     /// customers starting November 7, 2025. If you would like to use Change
@@ -1844,8 +1798,6 @@ pub const Client = struct {
 
     /// Updates an existing maintenance window. Only specified parameters are
     /// modified.
-    ///
-    /// **Note:**
     ///
     /// The value you specify for `Duration` determines the specific end time for
     /// the
@@ -1879,8 +1831,6 @@ pub const Client = struct {
     ///   ID target, Tag
     /// target, and resource group. For more information, see Target.
     ///
-    /// **Note:**
-    ///
     /// If a parameter is null, then the corresponding field isn't modified.
     pub fn updateMaintenanceWindowTarget(self: *Self, input: update_maintenance_window_target.UpdateMaintenanceWindowTargetInput, options: update_maintenance_window_target.Options) !update_maintenance_window_target.UpdateMaintenanceWindowTargetOutput {
         return update_maintenance_window_target.execute(self, input, options);
@@ -1903,8 +1853,6 @@ pub const Client = struct {
     ///
     /// * `MaxErrors`
     ///
-    /// **Note:**
-    ///
     /// One or more targets must be specified for maintenance window Run
     /// Command-type tasks.
     /// Depending on the task, targets are optional for other maintenance window
@@ -1921,8 +1869,6 @@ pub const Client = struct {
     /// fields
     /// required by the RegisterTaskWithMaintenanceWindow operation are required for
     /// this request. Optional fields that aren't specified are set to null.
-    ///
-    /// **Important:**
     ///
     /// When you update a maintenance window task that has options specified in
     /// `TaskInvocationParameters`, you must provide again all the
@@ -1975,8 +1921,6 @@ pub const Client = struct {
     /// left
     /// unchanged.
     ///
-    /// **Note:**
-    ///
     /// For information about valid key-value pairs in `PatchFilters` for each
     /// supported
     /// operating system type, see PatchFilter.
@@ -1995,8 +1939,6 @@ pub const Client = struct {
     /// configuration` option. Instead, you must delete the first resource data
     /// sync, and create a
     /// new one.
-    ///
-    /// **Note:**
     ///
     /// This API operation only supports a resource data sync that was created with
     /// a

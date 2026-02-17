@@ -8,16 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayConnectPeer = @import("transit_gateway_connect_peer.zig").TransitGatewayConnectPeer;
 const serde = @import("serde.zig");
 
-/// Creates a Connect peer for a specified transit gateway Connect attachment
-/// between a
-/// transit gateway and an appliance.
-///
-/// The peer address and transit gateway address must be the same IP address
-/// family (IPv4 or IPv6).
-///
-/// For more information, see [Connect
-/// peers](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer)
-/// in the *Amazon Web Services Transit Gateways Guide*.
 pub const CreateTransitGatewayConnectPeerInput = struct {
     /// The BGP options for the Connect peer.
     bgp_options: ?TransitGatewayConnectRequestBgpOptions = null,

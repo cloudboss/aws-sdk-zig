@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Returns a function, event source mapping, or code signing configuration's
-/// [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html). You can
-/// also view function tags with GetFunction.
 pub const ListTagsInput = struct {
     /// The resource's Amazon Resource Name (ARN). Note: Lambda does not support
     /// adding tags to function aliases or versions.

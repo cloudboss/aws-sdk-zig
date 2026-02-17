@@ -6,25 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RegisteredInstance = @import("registered_instance.zig").RegisteredInstance;
 const serde = @import("serde.zig");
 
-/// Enable Amazon EC2 instances running in an SQL Server High Availability
-/// cluster for SQL Server High Availability
-/// instance standby detection monitoring. Once enabled, Amazon Web Services
-/// monitors the metadata for
-/// the instances to determine whether they are active or standby nodes in the
-/// SQL Server High Availability cluster.
-/// If the instances are determined to be standby failover nodes, Amazon Web
-/// Services
-/// automatically applies SQL Server licensing fee waiver for those instances.
-///
-/// To register an instance, it must be running a Windows SQL Server
-/// license-included
-/// AMI and have the Amazon Web Services Systems Manager agent installed and
-/// running. Only Windows Server 2019 and later
-/// and SQL Server (Standard and Enterprise editions) 2017 and later are
-/// supported. For more
-/// information, see [
-/// Prerequisites for using SQL Server High Availability instance standby
-/// detection](https://docs.aws.amazon.com/sql-server-ec2/latest/userguide/prerequisites-and-requirements.html).
 pub const EnableInstanceSqlHaStandbyDetectionsInput = struct {
     /// Checks whether you have the required permissions for the action,
     /// without actually making the request, and provides an error response. If you

@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModifyAvailabilityZoneOptInStatus = @import("modify_availability_zone_opt_in_status.zig").ModifyAvailabilityZoneOptInStatus;
 
-/// Changes the opt-in status of the specified zone group for your account.
 pub const ModifyAvailabilityZoneGroupInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

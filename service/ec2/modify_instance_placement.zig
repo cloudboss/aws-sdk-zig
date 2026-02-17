@@ -6,31 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Affinity = @import("affinity.zig").Affinity;
 const HostTenancy = @import("host_tenancy.zig").HostTenancy;
 
-/// Modifies the placement attributes for a specified instance. You can do the
-/// following:
-///
-/// * Modify the affinity between an instance and a [Dedicated
-/// Host](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html). When affinity is set to `host` and the instance is
-/// not associated with a specific Dedicated Host, the next time the instance is
-/// started, it is automatically associated with the host on which it lands. If
-/// the
-/// instance is restarted or rebooted, this relationship persists.
-///
-/// * Change the Dedicated Host with which an instance is associated.
-///
-/// * Change the instance tenancy of an instance.
-///
-/// * Move an instance to or from a [placement
-/// group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html).
-///
-/// At least one attribute for affinity, host ID, tenancy, or placement group
-/// name must be
-/// specified in the request. Affinity and tenancy can be modified in the same
-/// request.
-///
-/// To modify the host ID, tenancy, placement group, or partition for an
-/// instance, the
-/// instance must be in the `stopped` state.
 pub const ModifyInstancePlacementInput = struct {
     /// The affinity setting for the instance. For more information, see [Host
     /// affinity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-affinity) in the *Amazon EC2 User Guide*.
@@ -67,8 +42,6 @@ pub const ModifyInstancePlacementInput = struct {
     partition_number: ?i32 = null,
 
     /// The tenancy for the instance.
-    ///
-    /// **Note:**
     ///
     /// For T3 instances, you must launch the instance on a Dedicated Host to use a
     /// tenancy of `host`. You can't change the tenancy from

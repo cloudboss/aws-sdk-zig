@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const PayerResponsibility = @import("payer_responsibility.zig").PayerResponsibility;
 
-/// Modifies the payer responsibility for your VPC endpoint service.
 pub const ModifyVpcEndpointServicePayerResponsibilityInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

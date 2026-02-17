@@ -4,15 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deactivates the specified MFA device and removes it from association with
-/// the user
-/// name for which it was originally enabled.
-///
-/// For more information about creating and working with virtual MFA devices,
-/// see [Enabling a virtual
-/// multi-factor authentication (MFA)
-/// device](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the
-/// *IAM User Guide*.
 pub const DeactivateMFADeviceInput = struct {
     /// The serial number that uniquely identifies the MFA device. For virtual MFA
     /// devices,

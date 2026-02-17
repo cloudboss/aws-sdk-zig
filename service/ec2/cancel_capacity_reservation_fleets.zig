@@ -7,17 +7,6 @@ const FailedCapacityReservationFleetCancellationResult = @import("failed_capacit
 const CapacityReservationFleetCancellationState = @import("capacity_reservation_fleet_cancellation_state.zig").CapacityReservationFleetCancellationState;
 const serde = @import("serde.zig");
 
-/// Cancels one or more Capacity Reservation Fleets. When you cancel a Capacity
-/// Reservation Fleet, the following happens:
-///
-/// * The Capacity Reservation Fleet's status changes to
-/// `cancelled`.
-///
-/// * The individual Capacity Reservations in the Fleet are cancelled. Instances
-/// running in the Capacity Reservations at the time of cancelling the Fleet
-/// continue to run in shared capacity.
-///
-/// * The Fleet stops creating new Capacity Reservations.
 pub const CancelCapacityReservationFleetsInput = struct {
     /// The IDs of the Capacity Reservation Fleets to cancel.
     capacity_reservation_fleet_ids: []const []const u8,

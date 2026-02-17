@@ -4,19 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Disables EBS encryption by default for your account in the current Region.
-///
-/// After you disable encryption by default, you can still create encrypted
-/// volumes by
-/// enabling encryption when you create each volume.
-///
-/// Disabling encryption by default does not change the encryption status of
-/// your
-/// existing volumes.
-///
-/// For more information, see [Amazon EBS
-/// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html) in the
-/// *Amazon EBS User Guide*.
 pub const DisableEbsEncryptionByDefaultInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

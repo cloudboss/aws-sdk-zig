@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes a concurrent execution limit from a function.
 pub const DeleteFunctionConcurrencyInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

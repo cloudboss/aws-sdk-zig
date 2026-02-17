@@ -10,11 +10,6 @@ const TrafficDirection = @import("traffic_direction.zig").TrafficDirection;
 const TrafficMirrorFilterRule = @import("traffic_mirror_filter_rule.zig").TrafficMirrorFilterRule;
 const serde = @import("serde.zig");
 
-/// Creates a Traffic Mirror filter rule.
-///
-/// A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.
-///
-/// You need the Traffic Mirror filter ID when you create the rule.
 pub const CreateTrafficMirrorFilterRuleInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see [How to ensure

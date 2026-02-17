@@ -5,21 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceAttributeName = @import("instance_attribute_name.zig").InstanceAttributeName;
 
-/// Resets an attribute of an instance to its default value. To reset the
-/// `kernel` or `ramdisk`, the instance must be in a stopped
-/// state. To reset the `sourceDestCheck`, the instance can be either running or
-/// stopped.
-///
-/// The `sourceDestCheck` attribute controls whether source/destination
-/// checking is enabled. The default value is `true`, which means checking is
-/// enabled. This value must be `false` for a NAT instance to perform NAT. For
-/// more information, see [NAT
-/// instances](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html) in the
-/// *Amazon VPC User Guide*.
 pub const ResetInstanceAttributeInput = struct {
     /// The attribute to reset.
-    ///
-    /// **Important:**
     ///
     /// You can only reset the following attributes: `kernel` |
     /// `ramdisk` | `sourceDestCheck`.

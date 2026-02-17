@@ -5,22 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const BaselineOverride = @import("baseline_override.zig").BaselineOverride;
 
-/// Retrieves the current snapshot for the patch baseline the managed node uses.
-/// This API is
-/// primarily used by the `AWS-RunPatchBaseline` Systems Manager document (SSM
-/// document).
-///
-/// **Note:**
-///
-/// If you run the command locally, such as with the Command Line Interface
-/// (CLI), the system attempts to use your local Amazon Web Services credentials
-/// and the operation fails. To avoid
-/// this, you can run the command in the Amazon Web Services Systems Manager
-/// console. Use Run Command, a tool in Amazon Web Services Systems Manager,
-/// with an SSM document that enables you to target a managed node with a script
-/// or command. For
-/// example, run the command using the `AWS-RunShellScript` document or the
-/// `AWS-RunPowerShellScript` document.
 pub const GetDeployablePatchSnapshotForInstanceInput = struct {
     /// Defines the basic information about a patch baseline override.
     baseline_override: ?BaselineOverride = null,
@@ -39,13 +23,13 @@ pub const GetDeployablePatchSnapshotForInstanceInput = struct {
     /// connectivity. Set
     /// to `false` to use standard IPv4-only endpoints. Default is `false`. This
     /// parameter is required for managed nodes in IPv6-only environments.
-    use_s_3_dual_stack_endpoint: ?bool = null,
+    use_s3_dual_stack_endpoint: ?bool = null,
 
     pub const json_field_names = .{
         .baseline_override = "BaselineOverride",
         .instance_id = "InstanceId",
         .snapshot_id = "SnapshotId",
-        .use_s_3_dual_stack_endpoint = "UseS3DualStackEndpoint",
+        .use_s3_dual_stack_endpoint = "UseS3DualStackEndpoint",
     };
 };
 

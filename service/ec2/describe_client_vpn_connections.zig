@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ClientVpnConnection = @import("client_vpn_connection.zig").ClientVpnConnection;
 const serde = @import("serde.zig");
 
-/// Describes active client connections and connections that have been
-/// terminated within the last 60
-/// minutes for the specified Client VPN endpoint.
 pub const DescribeClientVpnConnectionsInput = struct {
     /// The ID of the Client VPN endpoint.
     client_vpn_endpoint_id: []const u8,

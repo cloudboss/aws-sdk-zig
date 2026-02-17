@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const Ipv6Pool = @import("ipv_6_pool.zig").Ipv6Pool;
 const serde = @import("serde.zig");
 
-/// Describes your IPv6 address pools.
 pub const DescribeIpv6PoolsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

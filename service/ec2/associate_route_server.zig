@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RouteServerAssociation = @import("route_server_association.zig").RouteServerAssociation;
 const serde = @import("serde.zig");
 
-/// Associates a route server with a VPC to enable dynamic route updates.
-///
-/// A route server association is the connection established between a route
-/// server and a VPC.
-///
-/// For more information see [Dynamic routing in your VPC with VPC Route
-/// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
 pub const AssociateRouteServerInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

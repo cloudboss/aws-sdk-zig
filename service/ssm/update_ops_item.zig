@@ -8,18 +8,6 @@ const OpsItemDataValue = @import("ops_item_data_value.zig").OpsItemDataValue;
 const RelatedOpsItem = @import("related_ops_item.zig").RelatedOpsItem;
 const OpsItemStatus = @import("ops_item_status.zig").OpsItemStatus;
 
-/// Edit or change an OpsItem. You must have permission in Identity and Access
-/// Management (IAM) to update an OpsItem. For more information, see [Set up
-/// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html) in the
-/// *Amazon Web Services Systems Manager User Guide*.
-///
-/// Operations engineers and IT professionals use Amazon Web Services Systems
-/// Manager OpsCenter to view, investigate, and
-/// remediate operational issues impacting the performance and health of their
-/// Amazon Web Services resources. For
-/// more information, see [Amazon Web Services Systems Manager
-/// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in the
-/// *Amazon Web Services Systems Manager User Guide*.
 pub const UpdateOpsItemInput = struct {
     /// The time a runbook workflow ended. Currently reported only for the OpsItem
     /// type
@@ -54,8 +42,6 @@ pub const UpdateOpsItemInput = struct {
     /// other relevant data. You enter operational data as key-value pairs. The key
     /// has a maximum length
     /// of 128 characters. The value has a maximum size of 20 KB.
-    ///
-    /// **Important:**
     ///
     /// Operational data keys *can't* begin with the following:
     /// `amazon`, `aws`, `amzn`, `ssm`,

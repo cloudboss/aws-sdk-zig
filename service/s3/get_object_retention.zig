@@ -7,25 +7,6 @@ const RequestPayer = @import("request_payer.zig").RequestPayer;
 const ObjectLockRetention = @import("object_lock_retention.zig").ObjectLockRetention;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Retrieves an object's retention settings. For more information, see [Locking
-/// Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-///
-/// This functionality is not supported for Amazon S3 on Outposts.
-///
-/// The following action is related to `GetObjectRetention`:
-///
-/// *
-///   [GetObjectAttributes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const GetObjectRetentionInput = struct {
     /// The bucket name containing the object whose retention settings you want to
     /// retrieve.

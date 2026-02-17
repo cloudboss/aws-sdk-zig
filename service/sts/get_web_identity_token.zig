@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Returns a signed JSON Web Token (JWT) that represents the calling Amazon Web
-/// Services identity.
-/// The returned JWT can be used to authenticate with external services that
-/// support OIDC discovery.
-/// The token is signed by Amazon Web Services STS and can be publicly verified
-/// using the verification keys published at the issuer's JWKS endpoint.
 pub const GetWebIdentityTokenInput = struct {
     /// The intended recipient of the web identity token. This value populates the
     /// `aud` claim in the JWT and should identify the service or application that
@@ -172,7 +166,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Expiration")) {
-                    result.expiration = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.expiration = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "WebIdentityToken")) {
                     result.web_identity_token = try alloc.dupe(u8, try reader.readElementText());
                 } else {

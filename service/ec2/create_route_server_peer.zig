@@ -8,21 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const RouteServerPeer = @import("route_server_peer.zig").RouteServerPeer;
 const serde = @import("serde.zig");
 
-/// Creates a new BGP peer for a specified route server endpoint.
-///
-/// A route server peer is a session between a route server endpoint and the
-/// device deployed in Amazon Web Services (such as a firewall appliance or
-/// other network security function running on an EC2 instance). The device must
-/// meet these requirements:
-///
-/// * Have an elastic network interface in the VPC
-///
-/// * Support BGP (Border Gateway Protocol)
-///
-/// * Can initiate BGP sessions
-///
-/// For more information see [Dynamic routing in your VPC with VPC Route
-/// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
 pub const CreateRouteServerPeerInput = struct {
     /// The BGP options for the peer, including ASN (Autonomous System Number) and
     /// BFD (Bidrectional Forwarding Detection) settings.

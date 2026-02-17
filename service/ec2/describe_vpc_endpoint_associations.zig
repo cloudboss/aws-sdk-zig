@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VpcEndpointAssociation = @import("vpc_endpoint_association.zig").VpcEndpointAssociation;
 const serde = @import("serde.zig");
 
-/// Describes the VPC resources, VPC endpoint services, Amazon Lattice services,
-/// or service networks
-/// associated with the VPC endpoint.
 pub const DescribeVpcEndpointAssociationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

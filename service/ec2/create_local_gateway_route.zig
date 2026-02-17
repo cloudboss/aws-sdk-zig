@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayRoute = @import("local_gateway_route.zig").LocalGatewayRoute;
 const serde = @import("serde.zig");
 
-/// Creates a static route for the specified local gateway route table. You must
-/// specify one of the
-/// following targets:
-///
-/// * `LocalGatewayVirtualInterfaceGroupId`
-///
-/// * `NetworkInterfaceId`
 pub const CreateLocalGatewayRouteInput = struct {
     /// The CIDR range used for destination matches. Routing decisions are based on
     /// the most specific match.

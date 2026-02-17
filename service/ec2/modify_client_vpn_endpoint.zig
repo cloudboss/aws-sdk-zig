@@ -11,8 +11,6 @@ const DnsServersOptionsModifyStructure = @import("dns_servers_options_modify_str
 const SelfServicePortal = @import("self_service_portal.zig").SelfServicePortal;
 const serde = @import("serde.zig");
 
-/// Modifies the specified Client VPN endpoint. Modifying the DNS server resets
-/// existing client connections.
 pub const ModifyClientVpnEndpointInput = struct {
     /// The options for managing connection authorization for new client
     /// connections.

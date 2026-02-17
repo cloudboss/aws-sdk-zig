@@ -5,13 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
-/// List all tags on an Amazon DynamoDB resource. You can call
-/// ListTagsOfResource up to 10
-/// times per second, per account.
-///
-/// For an overview on tagging DynamoDB resources, see [Tagging for
-/// DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
-/// in the *Amazon DynamoDB Developer Guide*.
 pub const ListTagsOfResourceInput = struct {
     /// An optional string that, if supplied, must be copied from the output of a
     /// previous

@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CapacityBlockExtension = @import("capacity_block_extension.zig").CapacityBlockExtension;
 const serde = @import("serde.zig");
 
-/// Describes the events for the specified Capacity Block extension during the
-/// specified
-/// time.
 pub const DescribeCapacityBlockExtensionHistoryInput = struct {
     /// The IDs of Capacity Block reservations that you want to display the history
     /// for.

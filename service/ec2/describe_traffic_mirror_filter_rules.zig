@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TrafficMirrorFilterRule = @import("traffic_mirror_filter_rule.zig").TrafficMirrorFilterRule;
 const serde = @import("serde.zig");
 
-/// Describe traffic mirror filters that determine the traffic that is mirrored.
 pub const DescribeTrafficMirrorFilterRulesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

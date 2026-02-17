@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IamInstanceProfileAssociation = @import("iam_instance_profile_association.zig").IamInstanceProfileAssociation;
 const serde = @import("serde.zig");
 
-/// Disassociates an IAM instance profile from a running or stopped instance.
-///
-/// Use DescribeIamInstanceProfileAssociations to get the association
-/// ID.
 pub const DisassociateIamInstanceProfileInput = struct {
     /// The ID of the IAM instance profile association.
     association_id: []const u8,

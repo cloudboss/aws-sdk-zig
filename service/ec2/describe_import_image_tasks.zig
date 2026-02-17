@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ImportImageTask = @import("import_image_task.zig").ImportImageTask;
 const serde = @import("serde.zig");
 
-/// Displays details about an import virtual machine or import snapshot tasks
-/// that are already created.
 pub const DescribeImportImageTasksInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

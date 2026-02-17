@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayPeeringAttachment = @import("transit_gateway_peering_attachment.zig").TransitGatewayPeeringAttachment;
 const serde = @import("serde.zig");
 
-/// Rejects a transit gateway peering attachment request.
 pub const RejectTransitGatewayPeeringAttachmentInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -11,11 +11,8 @@ const OperatingSystem = @import("operating_system.zig").OperatingSystem;
 const PatchAction = @import("patch_action.zig").PatchAction;
 const PatchSource = @import("patch_source.zig").PatchSource;
 
-/// Retrieves information about a patch baseline.
 pub const GetPatchBaselineInput = struct {
     /// The ID of the patch baseline to retrieve.
-    ///
-    /// **Note:**
     ///
     /// To retrieve information about an Amazon Web Services managed patch baseline,
     /// specify the full Amazon

@@ -22,8 +22,6 @@ pub const ReplicationRuleFilter = struct {
     /// An object key name prefix that identifies the subset of objects to which the
     /// rule applies.
     ///
-    /// **Important:**
-    ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using
     /// XML requests. For more information, see [

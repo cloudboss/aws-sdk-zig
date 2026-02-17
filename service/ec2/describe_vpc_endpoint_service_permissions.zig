@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const AllowedPrincipal = @import("allowed_principal.zig").AllowedPrincipal;
 const serde = @import("serde.zig");
 
-/// Describes the principals (service consumers) that are permitted to discover
-/// your VPC
-/// endpoint service. Principal ARNs with path components aren't supported.
 pub const DescribeVpcEndpointServicePermissionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -23,8 +23,6 @@ pub const Association = struct {
     /// unless you previously specifed
     /// the `apply-only-at-cron-interval` parameter.
     ///
-    /// **Important:**
-    ///
     /// State Manager doesn't support running associations that use a new version of
     /// a document if
     /// that document is shared from another account. State Manager always runs the

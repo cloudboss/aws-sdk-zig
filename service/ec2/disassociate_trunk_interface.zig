@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes an association between a branch network interface with a trunk
-/// network interface.
 pub const DisassociateTrunkInterfaceInput = struct {
     /// The ID of the association
     association_id: []const u8,

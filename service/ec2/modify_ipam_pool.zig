@@ -7,11 +7,6 @@ const RequestIpamResourceTag = @import("request_ipam_resource_tag.zig").RequestI
 const IpamPool = @import("ipam_pool.zig").IpamPool;
 const serde = @import("serde.zig");
 
-/// Modify the configurations of an IPAM pool.
-///
-/// For more information, see [Modify a
-/// pool](https://docs.aws.amazon.com/vpc/latest/ipam/mod-pool-ipam.html) in the
-/// *Amazon VPC IPAM User Guide*.
 pub const ModifyIpamPoolInput = struct {
     /// Add tag allocation rules to a pool. For more information about allocation
     /// rules, see [Create a top-level

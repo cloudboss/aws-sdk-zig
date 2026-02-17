@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SpotFleetRequestConfig = @import("spot_fleet_request_config.zig").SpotFleetRequestConfig;
 const serde = @import("serde.zig");
 
-/// Describes your Spot Fleet requests.
-///
-/// Spot Fleet requests are deleted 48 hours after they are canceled and their
-/// instances
-/// are terminated.
 pub const DescribeSpotFleetRequestsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

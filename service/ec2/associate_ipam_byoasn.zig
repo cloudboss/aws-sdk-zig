@@ -6,15 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AsnAssociation = @import("asn_association.zig").AsnAssociation;
 const serde = @import("serde.zig");
 
-/// Associates your Autonomous System Number (ASN) with a BYOIP CIDR that you
-/// own in the same Amazon Web Services Region.
-/// For more information, see [Tutorial: Bring your ASN to
-/// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
-/// the *Amazon VPC IPAM guide*.
-///
-/// After the association succeeds, the ASN is eligible for
-/// advertisement. You can view the association with
-/// [DescribeByoipCidrs](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeByoipCidrs.html). You can advertise the CIDR with [AdvertiseByoipCidr](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AdvertiseByoipCidr.html).
 pub const AssociateIpamByoasnInput = struct {
     /// A public 2-byte or 4-byte ASN.
     asn: []const u8,

@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Subnet = @import("subnet.zig").Subnet;
 const serde = @import("serde.zig");
 
-/// Creates a default subnet with a size `/20` IPv4 CIDR block in the
-/// specified Availability Zone in your default VPC. You can have only one
-/// default subnet
-/// per Availability Zone. For more information, see [Create a default
-/// subnet](https://docs.aws.amazon.com/vpc/latest/userguide/work-with-default-vpc.html#create-default-subnet) in the *Amazon VPC User Guide*.
 pub const CreateDefaultSubnetInput = struct {
     /// The Availability Zone in which to create the default subnet.
     ///

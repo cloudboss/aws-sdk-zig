@@ -7,15 +7,6 @@ const ImageUsageResourceTypeRequest = @import("image_usage_resource_type_request
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const serde = @import("serde.zig");
 
-/// Creates a report that shows how your image is used across other Amazon Web
-/// Services accounts. The report
-/// provides visibility into which accounts are using the specified image, and
-/// how many resources
-/// (EC2 instances or launch templates) are referencing it.
-///
-/// For more information, see [View your AMI
-/// usage](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html) in the
-/// *Amazon EC2 User Guide*.
 pub const CreateImageUsageReportInput = struct {
     /// The Amazon Web Services account IDs to include in the report. To include all
     /// accounts, omit this

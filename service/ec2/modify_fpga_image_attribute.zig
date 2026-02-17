@@ -9,7 +9,6 @@ const OperationType = @import("operation_type.zig").OperationType;
 const FpgaImageAttribute = @import("fpga_image_attribute.zig").FpgaImageAttribute;
 const serde = @import("serde.zig");
 
-/// Modifies the specified attribute of the specified Amazon FPGA Image (AFI).
 pub const ModifyFpgaImageAttributeInput = struct {
     /// The name of the attribute.
     attribute: ?FpgaImageAttributeName = null,

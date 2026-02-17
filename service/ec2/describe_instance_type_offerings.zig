@@ -8,11 +8,6 @@ const LocationType = @import("location_type.zig").LocationType;
 const InstanceTypeOffering = @import("instance_type_offering.zig").InstanceTypeOffering;
 const serde = @import("serde.zig");
 
-/// Lists the instance types that are offered for the specified location. If no
-/// location is
-/// specified, the default is to list the instance types that are offered in the
-/// current
-/// Region.
 pub const DescribeInstanceTypeOfferingsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

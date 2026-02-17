@@ -4,8 +4,6 @@ const FleetCapacityReservationUsageStrategy = @import("fleet_capacity_reservatio
 /// On-Demand
 /// capacity.
 ///
-/// **Note:**
-///
 /// This strategy can only be used if the EC2 Fleet is of type `instant`.
 ///
 /// For more information about Capacity Reservations, see [On-Demand Capacity

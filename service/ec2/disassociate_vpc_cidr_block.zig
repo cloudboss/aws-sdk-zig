@@ -7,15 +7,6 @@ const VpcCidrBlockAssociation = @import("vpc_cidr_block_association.zig").VpcCid
 const VpcIpv6CidrBlockAssociation = @import("vpc_ipv_6_cidr_block_association.zig").VpcIpv6CidrBlockAssociation;
 const serde = @import("serde.zig");
 
-/// Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you
-/// must
-/// specify its association ID. You can get the association ID by using
-/// DescribeVpcs. You must detach or delete all gateways and resources that
-/// are associated with the CIDR block before you can disassociate it.
-///
-/// You cannot disassociate the CIDR block with which you originally created the
-/// VPC (the
-/// primary CIDR block).
 pub const DisassociateVpcCidrBlockInput = struct {
     /// The association ID for the CIDR block.
     association_id: []const u8,

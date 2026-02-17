@@ -17,10 +17,10 @@ pub const ExportToS3TaskSpecification = struct {
     /// canonical account ID for
     /// the `Grantee`. For more information about the ACL to your S3 bucket, see
     /// [Prerequisites](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites) in the VM Import/Export User Guide.
-    s_3_bucket: ?[]const u8,
+    s3_bucket: ?[]const u8,
 
     /// The image is written to a single object in the Amazon S3 bucket at the S3
     /// key s3prefix +
     /// exportTaskId + '.' + diskImageFormat.
-    s_3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8,
 };

@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TimeToLiveDescription = @import("time_to_live_description.zig").TimeToLiveDescription;
 
-/// Gives a description of the Time to Live (TTL) status on the specified table.
 pub const DescribeTimeToLiveInput = struct {
     /// The name of the table to be described. You can also provide the Amazon
     /// Resource Name (ARN) of the table

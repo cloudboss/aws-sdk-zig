@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SnapshotRecycleBinInfo = @import("snapshot_recycle_bin_info.zig").SnapshotRecycleBinInfo;
 const serde = @import("serde.zig");
 
-/// Lists one or more snapshots that are currently in the Recycle Bin.
 pub const ListSnapshotsInRecycleBinInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

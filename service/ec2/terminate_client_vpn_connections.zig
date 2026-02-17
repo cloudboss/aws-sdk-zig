@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TerminateConnectionStatus = @import("terminate_connection_status.zig").TerminateConnectionStatus;
 const serde = @import("serde.zig");
 
-/// Terminates active Client VPN endpoint connections. This action can be used
-/// to terminate a specific client connection, or up to five connections
-/// established by a specific user.
 pub const TerminateClientVpnConnectionsInput = struct {
     /// The ID of the Client VPN endpoint to which the client is connected.
     client_vpn_endpoint_id: []const u8,

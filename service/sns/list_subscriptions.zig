@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Subscription = @import("subscription.zig").Subscription;
 const serde = @import("serde.zig");
 
-/// Returns a list of the requester's subscriptions. Each call returns a limited
-/// list of
-/// subscriptions, up to 100. If there are more subscriptions, a `NextToken` is
-/// also returned. Use the `NextToken` parameter in a new
-/// `ListSubscriptions` call to get further results.
-///
-/// This action is throttled at 30 transactions per second (TPS).
 pub const ListSubscriptionsInput = struct {
     /// Token returned by the previous `ListSubscriptions` request.
     next_token: ?[]const u8 = null,

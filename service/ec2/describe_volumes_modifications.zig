@@ -7,12 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VolumeModification = @import("volume_modification.zig").VolumeModification;
 const serde = @import("serde.zig");
 
-/// Describes the most recent volume modification request for the specified EBS
-/// volumes.
-///
-/// For more information, see [
-/// Monitor the progress of volume
-/// modifications](https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html) in the *Amazon EBS User Guide*.
 pub const DescribeVolumesModificationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

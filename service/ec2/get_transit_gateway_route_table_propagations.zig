@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayRouteTablePropagation = @import("transit_gateway_route_table_propagation.zig").TransitGatewayRouteTablePropagation;
 const serde = @import("serde.zig");
 
-/// Gets information about the route table propagations for the specified
-/// transit gateway route table.
 pub const GetTransitGatewayRouteTablePropagationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CapacityBlockStatus = @import("capacity_block_status.zig").CapacityBlockStatus;
 const serde = @import("serde.zig");
 
-/// Describes the availability of capacity for the specified Capacity blocks, or
-/// all of your Capacity Blocks.
 pub const DescribeCapacityBlockStatusInput = struct {
     /// The ID of the Capacity Block.
     capacity_block_ids: ?[]const []const u8 = null,

@@ -6,20 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceAutoRecoveryState = @import("instance_auto_recovery_state.zig").InstanceAutoRecoveryState;
 const InstanceRebootMigrationState = @import("instance_reboot_migration_state.zig").InstanceRebootMigrationState;
 
-/// Modifies the recovery behavior of your instance to disable simplified
-/// automatic
-/// recovery or set the recovery behavior to default. The default configuration
-/// will not
-/// enable simplified automatic recovery for an unsupported instance type. For
-/// more
-/// information, see [Simplified automatic
-/// recovery](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery).
-///
-/// Modifies the reboot migration behavior during a user-initiated reboot of an
-/// instance
-/// that has a pending `system-reboot` event. For more information, see [Enable
-/// or disable reboot
-/// migration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration).
 pub const ModifyInstanceMaintenanceOptionsInput = struct {
     /// Disables the automatic recovery behavior of your instance or sets it to
     /// default.

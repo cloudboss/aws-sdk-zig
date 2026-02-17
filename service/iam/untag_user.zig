@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Removes the specified tags from the user. For more information about
-/// tagging, see [Tagging IAM
-/// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
-/// the
-/// *IAM User Guide*.
 pub const UntagUserInput = struct {
     /// A list of key names as a simple array of strings. The tags with matching
     /// keys are

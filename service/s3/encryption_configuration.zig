@@ -2,8 +2,6 @@
 /// destination for replicated
 /// objects.
 ///
-/// **Note:**
-///
 /// If you're specifying a customer managed KMS key, we recommend using a fully
 /// qualified KMS key
 /// ARN. If you use a KMS key alias instead, then KMS resolves the key within

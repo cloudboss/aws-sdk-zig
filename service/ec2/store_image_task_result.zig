@@ -11,7 +11,7 @@ pub const StoreImageTaskResult = struct {
     progress_percentage: ?i32,
 
     /// The name of the stored AMI object in the bucket.
-    s_3_object_key: ?[]const u8,
+    s3_object_key: ?[]const u8,
 
     /// If the tasks fails, the reason for the failure is returned. If the task
     /// succeeds,

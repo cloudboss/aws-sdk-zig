@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceMonitoring = @import("instance_monitoring.zig").InstanceMonitoring;
 const serde = @import("serde.zig");
 
-/// Enables detailed monitoring for a running instance. Otherwise, basic
-/// monitoring is
-/// enabled. For more information, see [Monitor your instances using
-/// CloudWatch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html) in the *Amazon EC2 User Guide*.
-///
-/// To disable detailed monitoring, see
-/// [UnmonitorInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UnmonitorInstances.html).
 pub const MonitorInstancesInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

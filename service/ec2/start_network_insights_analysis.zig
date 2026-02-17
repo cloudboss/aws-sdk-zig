@@ -7,8 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const NetworkInsightsAnalysis = @import("network_insights_analysis.zig").NetworkInsightsAnalysis;
 const serde = @import("serde.zig");
 
-/// Starts analyzing the specified path. If the path is reachable, the
-/// operation returns the shortest feasible path.
 pub const StartNetworkInsightsAnalysisInput = struct {
     /// The member accounts that contain resources that the path can traverse.
     additional_accounts: ?[]const []const u8 = null,

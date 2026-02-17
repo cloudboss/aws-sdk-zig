@@ -11,8 +11,6 @@ pub const Snapshot = struct {
     /// (Availability Zone) or `us-west-2-lax-1a` (Local Zone).
     availability_zone: ?[]const u8,
 
-    /// **Note:**
-    ///
     /// Only for snapshot copies created with time-based snapshot copy operations.
     ///
     /// The completion duration requested for the time-based snapshot copy
@@ -41,8 +39,6 @@ pub const Snapshot = struct {
     encrypted: ?bool,
 
     /// The full size of the snapshot, in bytes.
-    ///
-    /// **Important:**
     ///
     /// This is **not** the incremental size of the snapshot.
     /// This is the full snapshot size and represents the size of all the blocks
@@ -111,8 +107,6 @@ pub const Snapshot = struct {
     /// Any tags assigned to the snapshot.
     tags: ?[]const Tag,
 
-    /// **Note:**
-    ///
     /// Only for snapshot copies.
     ///
     /// Indicates whether the snapshot copy was created with a standard or

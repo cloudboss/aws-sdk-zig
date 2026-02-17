@@ -7,16 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const FleetData = @import("fleet_data.zig").FleetData;
 const serde = @import("serde.zig");
 
-/// Describes the specified EC2 Fleet or all of your EC2 Fleets.
-///
-/// **Important:**
-///
-/// If a fleet is of type `instant`, you must specify the fleet ID in the
-/// request, otherwise the fleet does not appear in the response.
-///
-/// For more information, see [Describe your
-/// EC2
-/// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#monitor-ec2-fleet) in the *Amazon EC2 User Guide*.
 pub const DescribeFleetsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -49,8 +39,6 @@ pub const DescribeFleetsInput = struct {
     filters: ?[]const Filter = null,
 
     /// The IDs of the EC2 Fleets.
-    ///
-    /// **Note:**
     ///
     /// If a fleet is of type `instant`, you must specify the fleet ID, otherwise
     /// it does not appear in the response.

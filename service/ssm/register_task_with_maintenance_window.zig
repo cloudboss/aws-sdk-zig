@@ -11,7 +11,6 @@ const MaintenanceWindowTaskInvocationParameters = @import("maintenance_window_ta
 const MaintenanceWindowTaskParameterValueExpression = @import("maintenance_window_task_parameter_value_expression.zig").MaintenanceWindowTaskParameterValueExpression;
 const MaintenanceWindowTaskType = @import("maintenance_window_task_type.zig").MaintenanceWindowTaskType;
 
-/// Adds a new task to a maintenance window.
 pub const RegisterTaskWithMaintenanceWindowInput = struct {
     /// The CloudWatch alarm you want to apply to your maintenance window task.
     alarm_configuration: ?AlarmConfiguration = null,
@@ -51,8 +50,6 @@ pub const RegisterTaskWithMaintenanceWindowInput = struct {
     /// (Amazon S3) bucket
     /// to write managed node-level logs to.
     ///
-    /// **Note:**
-    ///
     /// `LoggingInfo` has been deprecated. To specify an Amazon Simple Storage
     /// Service (Amazon S3) bucket to contain logs, instead use the
     /// `OutputS3BucketName` and `OutputS3KeyPrefix` options in the
@@ -63,8 +60,6 @@ pub const RegisterTaskWithMaintenanceWindowInput = struct {
     logging_info: ?LoggingInfo = null,
 
     /// The maximum number of targets this task can be run for, in parallel.
-    ///
-    /// **Note:**
     ///
     /// Although this element is listed as "Required: No", a value can be omitted
     /// only when you are
@@ -79,8 +74,6 @@ pub const RegisterTaskWithMaintenanceWindowInput = struct {
     max_concurrency: ?[]const u8 = null,
 
     /// The maximum number of errors allowed before this task stops being scheduled.
-    ///
-    /// **Note:**
     ///
     /// Although this element is listed as "Required: No", a value can be omitted
     /// only when you are
@@ -125,8 +118,6 @@ pub const RegisterTaskWithMaintenanceWindowInput = struct {
 
     /// The targets (either managed nodes or maintenance window targets).
     ///
-    /// **Note:**
-    ///
     /// One or more targets must be specified for maintenance window Run
     /// Command-type tasks.
     /// Depending on the task, targets are optional for other maintenance window
@@ -155,8 +146,6 @@ pub const RegisterTaskWithMaintenanceWindowInput = struct {
     task_invocation_parameters: ?MaintenanceWindowTaskInvocationParameters = null,
 
     /// The parameters that should be passed to the task when it is run.
-    ///
-    /// **Note:**
     ///
     /// `TaskParameters` has been deprecated. To specify parameters to pass to a
     /// task when it runs,

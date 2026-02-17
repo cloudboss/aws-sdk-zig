@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const assertionEncryptionModeType = @import("assertion_encryption_mode_type.zig").assertionEncryptionModeType;
 
-/// Updates the metadata document, SAML encryption settings, and private keys
-/// for an
-/// existing SAML provider. To rotate private keys, add your new private key and
-/// then remove
-/// the old key in a separate request.
 pub const UpdateSAMLProviderInput = struct {
     /// Specifies the new private key from your external identity provider. The
     /// private key

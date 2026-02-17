@@ -4,14 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Allows a topic owner to set an attribute of the topic to a new value.
-///
-/// **Note:**
-///
-/// To remove the ability to change topic permissions, you must deny permissions
-/// to
-/// the `AddPermission`, `RemovePermission`, and
-/// `SetTopicAttributes` actions in your IAM policy.
 pub const SetTopicAttributesInput = struct {
     /// A map of attributes with their corresponding values.
     ///
@@ -99,8 +91,6 @@ pub const SetTopicAttributesInput = struct {
     /// failed message delivery status for an Amazon SNS topic that is subscribed to
     /// an platform application endpoint.
     ///
-    /// **Note:**
-    ///
     /// In addition to being able to configure topic attributes for message
     /// delivery status of notification messages sent to Amazon SNS application
     /// endpoints, you can also configure application attributes for the delivery
@@ -124,8 +114,6 @@ pub const SetTopicAttributesInput = struct {
     /// * `SQSFailureFeedbackRoleArn` – Indicates failed
     /// message delivery status for an Amazon SNS topic that is subscribed to an
     /// Amazon SQS endpoint.
-    ///
-    /// **Note:**
     ///
     /// The SuccessFeedbackRoleArn and FailureFeedbackRoleArn
     /// attributes are used to give Amazon SNS write access to use CloudWatch Logs

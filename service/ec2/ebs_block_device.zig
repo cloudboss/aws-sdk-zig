@@ -168,8 +168,6 @@ pub const EbsBlockDevice = struct {
     /// initialized at
     /// creation.
     ///
-    /// **Note:**
-    ///
     /// If you specify a snapshot that is enabled for fast snapshot restore and a
     /// volume initialization rate,
     /// the volume will be initialized at the specified rate instead of fast

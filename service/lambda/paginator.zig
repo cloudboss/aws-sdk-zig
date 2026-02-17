@@ -38,6 +38,7 @@ pub const GetDurableExecutionHistoryPaginator = struct {
 
         const output = try get_durable_execution_history.execute(self.client, self.params, options);
 
+
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -78,6 +79,7 @@ pub const GetDurableExecutionStatePaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try get_durable_execution_state.execute(self.client, self.params, options);
+
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -120,6 +122,7 @@ pub const ListAliasesPaginator = struct {
 
         const output = try list_aliases.execute(self.client, self.params, options);
 
+
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -160,6 +163,7 @@ pub const ListCapacityProvidersPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_capacity_providers.execute(self.client, self.params, options);
+
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -202,6 +206,7 @@ pub const ListCodeSigningConfigsPaginator = struct {
 
         const output = try list_code_signing_configs.execute(self.client, self.params, options);
 
+
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -242,6 +247,7 @@ pub const ListDurableExecutionsByFunctionPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_durable_executions_by_function.execute(self.client, self.params, options);
+
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -284,6 +290,7 @@ pub const ListEventSourceMappingsPaginator = struct {
 
         const output = try list_event_source_mappings.execute(self.client, self.params, options);
 
+
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -324,6 +331,7 @@ pub const ListFunctionEventInvokeConfigsPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_function_event_invoke_configs.execute(self.client, self.params, options);
+
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -366,6 +374,7 @@ pub const ListFunctionUrlConfigsPaginator = struct {
 
         const output = try list_function_url_configs.execute(self.client, self.params, options);
 
+
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -406,6 +415,7 @@ pub const ListFunctionVersionsByCapacityProviderPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_function_versions_by_capacity_provider.execute(self.client, self.params, options);
+
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -448,6 +458,7 @@ pub const ListFunctionsPaginator = struct {
 
         const output = try list_functions.execute(self.client, self.params, options);
 
+
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -488,6 +499,7 @@ pub const ListFunctionsByCodeSigningConfigPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_functions_by_code_signing_config.execute(self.client, self.params, options);
+
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -530,6 +542,7 @@ pub const ListLayerVersionsPaginator = struct {
 
         const output = try list_layer_versions.execute(self.client, self.params, options);
 
+
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -570,6 +583,7 @@ pub const ListLayersPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_layers.execute(self.client, self.params, options);
+
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -612,6 +626,7 @@ pub const ListProvisionedConcurrencyConfigsPaginator = struct {
 
         const output = try list_provisioned_concurrency_configs.execute(self.client, self.params, options);
 
+
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -652,6 +667,7 @@ pub const ListVersionsByFunctionPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try list_versions_by_function.execute(self.client, self.params, options);
+
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {

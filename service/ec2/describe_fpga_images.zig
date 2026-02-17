@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const FpgaImage = @import("fpga_image.zig").FpgaImage;
 const serde = @import("serde.zig");
 
-/// Describes the Amazon FPGA Images (AFIs) available to you. These include
-/// public AFIs,
-/// private AFIs that you own, and AFIs owned by other Amazon Web Services
-/// accounts for which you have load
-/// permissions.
 pub const DescribeFpgaImagesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

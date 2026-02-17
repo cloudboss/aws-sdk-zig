@@ -11,15 +11,6 @@ const VpcEndpointType = @import("vpc_endpoint_type.zig").VpcEndpointType;
 const VpcEndpoint = @import("vpc_endpoint.zig").VpcEndpoint;
 const serde = @import("serde.zig");
 
-/// Creates a VPC endpoint. A VPC endpoint provides a private connection between
-/// the
-/// specified VPC and the specified endpoint service. You can use an endpoint
-/// service
-/// provided by Amazon Web Services, an Amazon Web Services Marketplace Partner,
-/// or another
-/// Amazon Web Services account. For more information, see the [Amazon Web
-/// Services PrivateLink User
-/// Guide](https://docs.aws.amazon.com/vpc/latest/privatelink/).
 pub const CreateVpcEndpointInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the

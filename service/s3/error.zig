@@ -984,8 +984,6 @@ pub const Error = struct {
 
     /// The version ID of the error.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8,
 };

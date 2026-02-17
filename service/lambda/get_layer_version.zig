@@ -7,8 +7,6 @@ const Architecture = @import("architecture.zig").Architecture;
 const Runtime = @import("runtime.zig").Runtime;
 const LayerVersionContentOutput = @import("layer_version_content_output.zig").LayerVersionContentOutput;
 
-/// Returns information about a version of an [Lambda
-/// layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes.
 pub const GetLayerVersionInput = struct {
     /// The name or Amazon Resource Name (ARN) of the layer.
     layer_name: []const u8,

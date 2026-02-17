@@ -10,7 +10,6 @@ const NotificationConfig = @import("notification_config.zig").NotificationConfig
 const Target = @import("target.zig").Target;
 const Command = @import("command.zig").Command;
 
-/// Runs commands on one or more managed nodes.
 pub const SendCommandInput = struct {
     /// The CloudWatch alarm you want to apply to your command.
     alarm_configuration: ?AlarmConfiguration = null,
@@ -27,14 +26,10 @@ pub const SendCommandInput = struct {
 
     /// The Sha256 or Sha1 hash created by the system when the document was created.
     ///
-    /// **Note:**
-    ///
     /// Sha1 hashes have been deprecated.
     document_hash: ?[]const u8 = null,
 
     /// Sha256 or Sha1.
-    ///
-    /// **Note:**
     ///
     /// Sha1 hashes have been deprecated.
     document_hash_type: ?DocumentHashType = null,
@@ -46,8 +41,6 @@ pub const SendCommandInput = struct {
     /// Amazon Resource Name (ARN). For more information about how to use shared
     /// documents, see [Sharing SSM
     /// documents](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html) in the *Amazon Web Services Systems Manager User Guide*.
-    ///
-    /// **Note:**
     ///
     /// If you specify a document name or ARN that hasn't been shared with your
     /// account, you
@@ -112,16 +105,16 @@ pub const SendCommandInput = struct {
 
     /// The name of the S3 bucket where command execution responses should be
     /// stored.
-    output_s_3_bucket_name: ?[]const u8 = null,
+    output_s3_bucket_name: ?[]const u8 = null,
 
     /// The directory structure within the S3 bucket where the responses should be
     /// stored.
-    output_s_3_key_prefix: ?[]const u8 = null,
+    output_s3_key_prefix: ?[]const u8 = null,
 
     /// (Deprecated) You can no longer specify this parameter. The system ignores
     /// it. Instead, Systems Manager
     /// automatically determines the Amazon Web Services Region of the S3 bucket.
-    output_s_3_region: ?[]const u8 = null,
+    output_s3_region: ?[]const u8 = null,
 
     /// The required and optional parameters specified in the document being run.
     parameters: ?[]const aws.map.MapEntry([]const []const u8) = null,
@@ -172,9 +165,9 @@ pub const SendCommandInput = struct {
         .max_concurrency = "MaxConcurrency",
         .max_errors = "MaxErrors",
         .notification_config = "NotificationConfig",
-        .output_s_3_bucket_name = "OutputS3BucketName",
-        .output_s_3_key_prefix = "OutputS3KeyPrefix",
-        .output_s_3_region = "OutputS3Region",
+        .output_s3_bucket_name = "OutputS3BucketName",
+        .output_s3_key_prefix = "OutputS3KeyPrefix",
+        .output_s3_region = "OutputS3Region",
         .parameters = "Parameters",
         .service_role_arn = "ServiceRoleArn",
         .targets = "Targets",

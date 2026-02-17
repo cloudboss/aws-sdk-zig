@@ -9,15 +9,6 @@ const NetworkInsightsAccessScope = @import("network_insights_access_scope.zig").
 const NetworkInsightsAccessScopeContent = @import("network_insights_access_scope_content.zig").NetworkInsightsAccessScopeContent;
 const serde = @import("serde.zig");
 
-/// Creates a Network Access Scope.
-///
-/// Amazon Web Services Network Access Analyzer enables cloud networking and
-/// cloud operations teams
-/// to verify that their networks on Amazon Web Services conform to their
-/// network security and governance
-/// objectives. For more information, see the [Amazon Web Services Network
-/// Access Analyzer
-/// Guide](https://docs.aws.amazon.com/vpc/latest/network-access-analyzer/).
 pub const CreateNetworkInsightsAccessScopeInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information,

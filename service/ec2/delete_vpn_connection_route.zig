@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified static route associated with a VPN connection between
-/// an
-/// existing virtual private gateway and a VPN customer gateway. The static
-/// route allows
-/// traffic to be routed from the virtual private gateway to the VPN customer
-/// gateway.
 pub const DeleteVpnConnectionRouteInput = struct {
     /// The CIDR block associated with the local subnet of the customer network.
     destination_cidr_block: []const u8,

@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Credentials = @import("credentials.zig").Credentials;
 const serde = @import("serde.zig");
 
-/// Exchanges a trade-in token for temporary Amazon Web Services credentials
-/// with the permissions
-/// associated with the assumed principal. This operation allows you to obtain
-/// credentials for
-/// a specific principal based on a trade-in token, enabling delegation of
-/// access to Amazon Web Services
-/// resources.
 pub const GetDelegatedAccessTokenInput = struct {
     /// The token to exchange for temporary Amazon Web Services credentials. This
     /// token must be valid and

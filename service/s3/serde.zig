@@ -8,8 +8,8 @@ const AccessControlPolicy = @import("access_control_policy.zig").AccessControlPo
 const AccessControlTranslation = @import("access_control_translation.zig").AccessControlTranslation;
 const AnalyticsConfiguration = @import("analytics_configuration.zig").AnalyticsConfiguration;
 const AnalyticsExportDestination = @import("analytics_export_destination.zig").AnalyticsExportDestination;
-const AnalyticsS3BucketDestination = @import("analytics_s_3_bucket_destination.zig").AnalyticsS3BucketDestination;
-const AnalyticsS3ExportFileFormat = @import("analytics_s_3_export_file_format.zig").AnalyticsS3ExportFileFormat;
+const AnalyticsS3BucketDestination = @import("analytics_s3_bucket_destination.zig").AnalyticsS3BucketDestination;
+const AnalyticsS3ExportFileFormat = @import("analytics_s3_export_file_format.zig").AnalyticsS3ExportFileFormat;
 const BlockedEncryptionTypes = @import("blocked_encryption_types.zig").BlockedEncryptionTypes;
 const Bucket = @import("bucket.zig").Bucket;
 const BucketAbacStatus = @import("bucket_abac_status.zig").BucketAbacStatus;
@@ -84,7 +84,7 @@ const InventoryFormat = @import("inventory_format.zig").InventoryFormat;
 const InventoryFrequency = @import("inventory_frequency.zig").InventoryFrequency;
 const InventoryIncludedObjectVersions = @import("inventory_included_object_versions.zig").InventoryIncludedObjectVersions;
 const InventoryOptionalField = @import("inventory_optional_field.zig").InventoryOptionalField;
-const InventoryS3BucketDestination = @import("inventory_s_3_bucket_destination.zig").InventoryS3BucketDestination;
+const InventoryS3BucketDestination = @import("inventory_s3_bucket_destination.zig").InventoryS3BucketDestination;
 const InventorySchedule = @import("inventory_schedule.zig").InventorySchedule;
 const InventoryTableConfiguration = @import("inventory_table_configuration.zig").InventoryTableConfiguration;
 const InventoryTableConfigurationResult = @import("inventory_table_configuration_result.zig").InventoryTableConfigurationResult;
@@ -171,11 +171,11 @@ const RestoreRequest = @import("restore_request.zig").RestoreRequest;
 const RestoreRequestType = @import("restore_request_type.zig").RestoreRequestType;
 const RestoreStatus = @import("restore_status.zig").RestoreStatus;
 const RoutingRule = @import("routing_rule.zig").RoutingRule;
-const S3KeyFilter = @import("s_3_key_filter.zig").S3KeyFilter;
-const S3Location = @import("s_3_location.zig").S3Location;
-const S3TablesBucketType = @import("s_3_tables_bucket_type.zig").S3TablesBucketType;
-const S3TablesDestination = @import("s_3_tables_destination.zig").S3TablesDestination;
-const S3TablesDestinationResult = @import("s_3_tables_destination_result.zig").S3TablesDestinationResult;
+const S3KeyFilter = @import("s3_key_filter.zig").S3KeyFilter;
+const S3Location = @import("s3_location.zig").S3Location;
+const S3TablesBucketType = @import("s3_tables_bucket_type.zig").S3TablesBucketType;
+const S3TablesDestination = @import("s3_tables_destination.zig").S3TablesDestination;
+const S3TablesDestinationResult = @import("s3_tables_destination_result.zig").S3TablesDestinationResult;
 const SSEKMS = @import("ssekms.zig").SSEKMS;
 const SSES3 = @import("sses3.zig").SSES3;
 const ScanRange = @import("scan_range.zig").ScanRange;
@@ -1014,7 +1014,7 @@ pub fn deserializeAnalyticsExportDestination(reader: *aws.xml.Reader, alloc: std
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "S3BucketDestination")) {
-                    result.s_3_bucket_destination = try deserializeAnalyticsS3BucketDestination(reader, alloc);
+                    result.s3_bucket_destination = try deserializeAnalyticsS3BucketDestination(reader, alloc);
                 } else {
                     try reader.skipElement();
                 }
@@ -1085,7 +1085,7 @@ pub fn deserializeBucket(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Buc
                 } else if (std.mem.eql(u8, e.local, "BucketRegion")) {
                     result.bucket_region = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreationDate")) {
-                    result.creation_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.creation_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -1234,7 +1234,7 @@ pub fn deserializeCopyObjectResult(reader: *aws.xml.Reader, alloc: std.mem.Alloc
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
-                    result.last_modified = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_modified = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -1271,7 +1271,7 @@ pub fn deserializeCopyPartResult(reader: *aws.xml.Reader, alloc: std.mem.Allocat
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
-                    result.last_modified = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_modified = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -1324,7 +1324,7 @@ pub fn deserializeDeleteMarkerEntry(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "Key")) {
                     result.key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
-                    result.last_modified = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_modified = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Owner")) {
                     result.owner = try deserializeOwner(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "VersionId")) {
@@ -1869,7 +1869,7 @@ pub fn deserializeInventoryDestination(reader: *aws.xml.Reader, alloc: std.mem.A
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "S3BucketDestination")) {
-                    result.s_3_bucket_destination = try deserializeInventoryS3BucketDestination(reader, alloc);
+                    result.s3_bucket_destination = try deserializeInventoryS3BucketDestination(reader, alloc);
                 } else {
                     try reader.skipElement();
                 }
@@ -2063,7 +2063,7 @@ pub fn deserializeLifecycleExpiration(reader: *aws.xml.Reader, alloc: std.mem.Al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Date")) {
-                    result.date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Days")) {
                     result.days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ExpiredObjectDeleteMarker")) {
@@ -2236,7 +2236,7 @@ pub fn deserializeMetadataTableConfigurationResult(reader: *aws.xml.Reader, allo
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "S3TablesDestinationResult")) {
-                    result.s_3_tables_destination_result = try deserializeS3TablesDestinationResult(reader, alloc);
+                    result.s3_tables_destination_result = try deserializeS3TablesDestinationResult(reader, alloc);
                 } else {
                     try reader.skipElement();
                 }
@@ -2308,7 +2308,7 @@ pub fn deserializeMultipartUpload(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
                     result.checksum_type = std.meta.stringToEnum(ChecksumType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Initiated")) {
-                    result.initiated = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.initiated = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Initiator")) {
                     result.initiator = try deserializeInitiator(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "Key")) {
@@ -2421,7 +2421,7 @@ pub fn deserializeObject(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Obj
                 } else if (std.mem.eql(u8, e.local, "Key")) {
                     result.key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
-                    result.last_modified = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_modified = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Owner")) {
                     result.owner = try deserializeOwner(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "RestoreStatus")) {
@@ -2494,7 +2494,7 @@ pub fn deserializeObjectLockRetention(reader: *aws.xml.Reader, alloc: std.mem.Al
                 if (std.mem.eql(u8, e.local, "Mode")) {
                     result.mode = std.meta.stringToEnum(ObjectLockRetentionMode, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RetainUntilDate")) {
-                    result.retain_until_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.retain_until_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -2589,7 +2589,7 @@ pub fn deserializeObjectVersion(reader: *aws.xml.Reader, alloc: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "Key")) {
                     result.key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
-                    result.last_modified = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_modified = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Owner")) {
                     result.owner = try deserializeOwner(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "RestoreStatus")) {
@@ -2697,7 +2697,7 @@ pub fn deserializePart(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Part 
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
-                    result.last_modified = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.last_modified = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "PartNumber")) {
                     result.part_number = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Size")) {
@@ -3060,7 +3060,7 @@ pub fn deserializeRestoreStatus(reader: *aws.xml.Reader, alloc: std.mem.Allocato
                 if (std.mem.eql(u8, e.local, "IsRestoreInProgress")) {
                     result.is_restore_in_progress = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "RestoreExpiryDate")) {
-                    result.restore_expiry_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.restore_expiry_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -3241,7 +3241,7 @@ pub fn deserializeSessionCredentials(reader: *aws.xml.Reader, alloc: std.mem.All
                 if (std.mem.eql(u8, e.local, "AccessKeyId")) {
                     result.access_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Expiration")) {
-                    result.expiration = try aws.imds.parseIso8601(try reader.readElementText());
+                    result.expiration = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SecretAccessKey")) {
                     result.secret_access_key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SessionToken")) {
@@ -3473,7 +3473,7 @@ pub fn deserializeTransition(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Date")) {
-                    result.date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Days")) {
                     result.days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageClass")) {
@@ -3899,7 +3899,7 @@ pub fn serializeAnalyticsConfiguration(alloc: std.mem.Allocator, buf: *std.Array
 
 pub fn serializeAnalyticsExportDestination(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: AnalyticsExportDestination) !void {
     try buf.appendSlice(alloc, "<S3BucketDestination>");
-    try serializeAnalyticsS3BucketDestination(alloc, buf, value.s_3_bucket_destination);
+    try serializeAnalyticsS3BucketDestination(alloc, buf, value.s3_bucket_destination);
     try buf.appendSlice(alloc, "</S3BucketDestination>");
 }
 
@@ -4410,7 +4410,7 @@ pub fn serializeInventoryConfiguration(alloc: std.mem.Allocator, buf: *std.Array
 
 pub fn serializeInventoryDestination(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: InventoryDestination) !void {
     try buf.appendSlice(alloc, "<S3BucketDestination>");
-    try serializeInventoryS3BucketDestination(alloc, buf, value.s_3_bucket_destination);
+    try serializeInventoryS3BucketDestination(alloc, buf, value.s3_bucket_destination);
     try buf.appendSlice(alloc, "</S3BucketDestination>");
 }
 
@@ -4720,7 +4720,7 @@ pub fn serializeMetadataEntry(alloc: std.mem.Allocator, buf: *std.ArrayList(u8),
 
 pub fn serializeMetadataTableConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: MetadataTableConfiguration) !void {
     try buf.appendSlice(alloc, "<S3TablesDestination>");
-    try serializeS3TablesDestination(alloc, buf, value.s_3_tables_destination);
+    try serializeS3TablesDestination(alloc, buf, value.s3_tables_destination);
     try buf.appendSlice(alloc, "</S3TablesDestination>");
 }
 
@@ -4898,7 +4898,7 @@ pub fn serializeObjectLockRule(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
 }
 
 pub fn serializeOutputLocation(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: OutputLocation) !void {
-    if (value.s_3) |v| {
+    if (value.s3) |v| {
         try buf.appendSlice(alloc, "<S3>");
         try serializeS3Location(alloc, buf, v);
         try buf.appendSlice(alloc, "</S3>");

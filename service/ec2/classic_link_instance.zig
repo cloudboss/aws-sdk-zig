@@ -1,8 +1,6 @@
 const GroupIdentifier = @import("group_identifier.zig").GroupIdentifier;
 const Tag = @import("tag.zig").Tag;
 
-/// **Note:**
-///
 /// Deprecated.
 ///
 /// Describes a linked EC2-Classic instance.

@@ -8,8 +8,6 @@ const LocationType = @import("location_type.zig").LocationType;
 /// directory
 /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html) in the *Amazon S3 User Guide*.
 ///
-/// **Note:**
-///
 /// This functionality is only supported by directory buckets.
 pub const LocationInfo = struct {
     /// The name of the location where the bucket will be created.

@@ -7,13 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ImageUsageReportEntry = @import("image_usage_report_entry.zig").ImageUsageReportEntry;
 const serde = @import("serde.zig");
 
-/// Describes the entries in image usage reports, showing how your images are
-/// used across
-/// other Amazon Web Services accounts.
-///
-/// For more information, see [View your AMI
-/// usage](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html) in the
-/// *Amazon EC2 User Guide*.
 pub const DescribeImageUsageReportEntriesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

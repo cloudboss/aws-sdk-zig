@@ -43,8 +43,6 @@ const VCpuCountRangeRequest = @import("v_cpu_count_range_request.zig").VCpuCount
 /// * `ExcludedInstanceTypes` - The instance types to exclude from the list,
 /// even if they match your specified attributes.
 ///
-/// **Note:**
-///
 /// If you specify `InstanceRequirements`, you can't specify
 /// `InstanceType`.
 ///
@@ -170,8 +168,6 @@ pub const InstanceRequirementsRequest = struct {
     /// `m5a.*`, Amazon EC2 will allow all the M5a instance types, but not the M5n
     /// instance types.
     ///
-    /// **Note:**
-    ///
     /// If you specify `AllowedInstanceTypes`, you can't specify
     /// `ExcludedInstanceTypes`.
     ///
@@ -238,8 +234,6 @@ pub const InstanceRequirementsRequest = struct {
     ///
     /// * For instance types with Apple CPUs, specify `apple`.
     ///
-    /// **Note:**
-    ///
     /// Don't confuse the CPU manufacturer with the CPU architecture. Instances will
     /// be launched with a compatible CPU architecture based on the Amazon Machine
     /// Image (AMI) that you
@@ -261,8 +255,6 @@ pub const InstanceRequirementsRequest = struct {
     /// family, which includes all C5a and C5n instance types. If you specify
     /// `m5a.*`, Amazon EC2 will exclude all the M5a instance types, but not the M5n
     /// instance types.
-    ///
-    /// **Note:**
     ///
     /// If you specify `ExcludedInstanceTypes`, you can't specify
     /// `AllowedInstanceTypes`.
@@ -338,8 +330,6 @@ pub const InstanceRequirementsRequest = struct {
     /// `memory-mib`, the price protection threshold is based on the per vCPU or per
     /// memory price instead of the per instance price.
     ///
-    /// **Note:**
-    ///
     /// Only one of `SpotMaxPricePercentageOverLowestPrice` or
     /// `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified. If you
     /// don't specify either, Amazon EC2 will automatically apply optimal price
@@ -393,8 +383,6 @@ pub const InstanceRequirementsRequest = struct {
     /// This parameter is not supported for
     /// [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).
     ///
-    /// **Note:**
-    ///
     /// If you set `TargetCapacityUnitType` to `vcpu` or
     /// `memory-mib`, the price protection threshold is applied based on the
     /// per-vCPU or per-memory price instead of the per-instance price.
@@ -445,8 +433,6 @@ pub const InstanceRequirementsRequest = struct {
     ///
     /// This parameter is not supported for
     /// [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).
-    ///
-    /// **Note:**
     ///
     /// Only one of `SpotMaxPricePercentageOverLowestPrice` or
     /// `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified. If you

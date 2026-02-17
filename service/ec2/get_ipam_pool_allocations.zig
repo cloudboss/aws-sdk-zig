@@ -7,14 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamPoolAllocation = @import("ipam_pool_allocation.zig").IpamPoolAllocation;
 const serde = @import("serde.zig");
 
-/// Get a list of all the CIDR allocations in an IPAM pool. The Region you use
-/// should be the IPAM pool locale. The locale is the Amazon Web Services Region
-/// where this IPAM pool is available for allocations.
-///
-/// **Note:**
-///
-/// If you use this action after
-/// [AllocateIpamPoolCidr](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html) or [ReleaseIpamPoolAllocation](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html), note that all EC2 API actions follow an [eventual consistency](https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html) model.
 pub const GetIpamPoolAllocationsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayPolicyTable = @import("transit_gateway_policy_table.zig").TransitGatewayPolicyTable;
 const serde = @import("serde.zig");
 
-/// Deletes the specified transit gateway policy table.
 pub const DeleteTransitGatewayPolicyTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

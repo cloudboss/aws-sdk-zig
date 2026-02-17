@@ -7,22 +7,6 @@ const ImageCriterion = @import("image_criterion.zig").ImageCriterion;
 const ManagedBy = @import("managed_by.zig").ManagedBy;
 const serde = @import("serde.zig");
 
-/// Gets the current state of the Allowed AMIs setting and the list of Allowed
-/// AMIs criteria
-/// at the account level in the specified Region.
-///
-/// **Note:**
-///
-/// The Allowed AMIs feature does not restrict the AMIs owned by your account.
-/// Regardless of
-/// the criteria you set, the AMIs created by your account will always be
-/// discoverable and
-/// usable by users in your account.
-///
-/// For more information, see [Control the discovery and use of AMIs in
-/// Amazon EC2 with Allowed
-/// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html) in
-/// *Amazon EC2 User Guide*.
 pub const GetAllowedImagesSettingsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

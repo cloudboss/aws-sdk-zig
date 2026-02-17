@@ -7,21 +7,6 @@ const InstanceEventWindowTimeRangeRequest = @import("instance_event_window_time_
 const InstanceEventWindow = @import("instance_event_window.zig").InstanceEventWindow;
 const serde = @import("serde.zig");
 
-/// Modifies the specified event window.
-///
-/// You can define either a set of time ranges or a cron expression when
-/// modifying the event
-/// window, but not both.
-///
-/// To modify the targets associated with the event window, use the
-/// AssociateInstanceEventWindow and DisassociateInstanceEventWindow API.
-///
-/// If Amazon Web Services has already scheduled an event, modifying an event
-/// window won't change the time
-/// of the scheduled event.
-///
-/// For more information, see [Define event windows for scheduled
-/// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
 pub const ModifyInstanceEventWindowInput = struct {
     /// The cron expression of the event window, for example, `* 0-4,20-23 * *
     /// 1,5`.

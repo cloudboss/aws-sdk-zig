@@ -4,15 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// **Note:**
-///
-/// This action is deprecated.
-///
-/// Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the
-/// instance has been unlinked,
-/// the VPC security groups are no longer associated with it. An instance is
-/// automatically unlinked from
-/// a VPC when it's stopped.
 pub const DetachClassicLinkVpcInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

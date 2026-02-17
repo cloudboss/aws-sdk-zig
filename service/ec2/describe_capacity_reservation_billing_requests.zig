@@ -8,11 +8,6 @@ const CallerRole = @import("caller_role.zig").CallerRole;
 const CapacityReservationBillingRequest = @import("capacity_reservation_billing_request.zig").CapacityReservationBillingRequest;
 const serde = @import("serde.zig");
 
-/// Describes a request to assign the billing of the unused capacity of a
-/// Capacity
-/// Reservation. For more information, see [ Billing assignment for shared
-/// Amazon EC2 Capacity
-/// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/transfer-billing.html).
 pub const DescribeCapacityReservationBillingRequestsInput = struct {
     /// The ID of the Capacity Reservation.
     capacity_reservation_ids: ?[]const []const u8 = null,

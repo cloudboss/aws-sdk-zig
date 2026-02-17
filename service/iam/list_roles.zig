@@ -6,30 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Role = @import("role.zig").Role;
 const serde = @import("serde.zig");
 
-/// Lists the IAM roles that have the specified path prefix. If there are none,
-/// the
-/// operation returns an empty list. For more information about roles, see [IAM
-/// roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in
-/// the
-/// *IAM User Guide*.
-///
-/// **Note:**
-///
-/// IAM resource-listing operations return a subset of the available
-/// attributes for the resource. This operation does not return the following
-/// attributes, even though they are an attribute of the returned object:
-///
-/// * PermissionsBoundary
-///
-/// * RoleLastUsed
-///
-/// * Tags
-///
-/// To view all of the information for a role, see
-/// [GetRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRole.html).
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters.
 pub const ListRolesInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

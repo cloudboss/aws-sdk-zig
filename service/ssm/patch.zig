@@ -34,8 +34,6 @@ pub const Patch = struct {
 
     /// The ID of the patch. Applies to Windows patches only.
     ///
-    /// **Note:**
-    ///
     /// This ID isn't the same as the Microsoft Knowledge Base ID.
     id: ?[]const u8,
 

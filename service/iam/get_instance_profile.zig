@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceProfile = @import("instance_profile.zig").InstanceProfile;
 const serde = @import("serde.zig");
 
-/// Retrieves information about the specified instance profile, including the
-/// instance
-/// profile's path, GUID, ARN, and role. For more information about instance
-/// profiles, see
-/// [Using
-/// instance
-/// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
 pub const GetInstanceProfileInput = struct {
     /// The name of the instance profile to get information about.
     ///

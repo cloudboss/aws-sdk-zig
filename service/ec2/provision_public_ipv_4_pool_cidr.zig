@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PublicIpv4PoolRange = @import("public_ipv_4_pool_range.zig").PublicIpv4PoolRange;
 const serde = @import("serde.zig");
 
-/// Provision a CIDR to a public IPv4 pool.
-///
-/// For more information about IPAM, see [What is
-/// IPAM?](https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
-/// the *Amazon VPC IPAM User Guide*.
 pub const ProvisionPublicIpv4PoolCidrInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

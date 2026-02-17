@@ -5,15 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TargetStorageTier = @import("target_storage_tier.zig").TargetStorageTier;
 
-/// Archives an Amazon EBS snapshot. When you archive a snapshot, it is
-/// converted to a full
-/// snapshot that includes all of the blocks of data that were written to the
-/// volume at the
-/// time the snapshot was created, and moved from the standard tier to the
-/// archive
-/// tier. For more information, see [Archive Amazon EBS
-/// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive.html)
-/// in the *Amazon EBS User Guide*.
 pub const ModifySnapshotTierInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -128,7 +119,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "snapshotId")) {
                     result.snapshot_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "tieringStartTime")) {
-                    result.tiering_start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.tiering_start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

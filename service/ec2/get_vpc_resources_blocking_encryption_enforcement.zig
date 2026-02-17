@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VpcEncryptionNonCompliantResource = @import("vpc_encryption_non_compliant_resource.zig").VpcEncryptionNonCompliantResource;
 const serde = @import("serde.zig");
 
-/// Gets information about resources in a VPC that are blocking encryption
-/// enforcement.
-///
-/// For more information, see [Enforce VPC encryption in
-/// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
 pub const GetVpcResourcesBlockingEncryptionEnforcementInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

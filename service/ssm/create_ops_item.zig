@@ -8,18 +8,6 @@ const OpsItemDataValue = @import("ops_item_data_value.zig").OpsItemDataValue;
 const RelatedOpsItem = @import("related_ops_item.zig").RelatedOpsItem;
 const Tag = @import("tag.zig").Tag;
 
-/// Creates a new OpsItem. You must have permission in Identity and Access
-/// Management (IAM) to create a new OpsItem. For more information, see [Set up
-/// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html) in the
-/// *Amazon Web Services Systems Manager User Guide*.
-///
-/// Operations engineers and IT professionals use Amazon Web Services Systems
-/// Manager OpsCenter to view, investigate, and
-/// remediate operational issues impacting the performance and health of their
-/// Amazon Web Services resources. For
-/// more information, see [Amazon Web Services Systems Manager
-/// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in the
-/// *Amazon Web Services Systems Manager User Guide*.
 pub const CreateOpsItemInput = struct {
     /// The target Amazon Web Services account where you want to create an OpsItem.
     /// To make this call, your account
@@ -44,8 +32,6 @@ pub const CreateOpsItemInput = struct {
     /// User-defined text that contains information about the OpsItem, in Markdown
     /// format.
     ///
-    /// **Note:**
-    ///
     /// Provide enough information so that users viewing this OpsItem for the first
     /// time understand
     /// the issue.
@@ -63,8 +49,6 @@ pub const CreateOpsItemInput = struct {
     /// other relevant data. You enter operational data as key-value pairs. The key
     /// has a maximum length
     /// of 128 characters. The value has a maximum size of 20 KB.
-    ///
-    /// **Important:**
     ///
     /// Operational data keys *can't* begin with the following:
     /// `amazon`, `aws`, `amzn`, `ssm`,
@@ -108,8 +92,6 @@ pub const CreateOpsItemInput = struct {
     /// or rejecting change
     /// requests.
     ///
-    /// **Important:**
-    ///
     /// Amazon Web Services Systems Manager Change Manager will no longer be open to
     /// new
     /// customers starting November 7, 2025. If you would like to use Change
@@ -144,8 +126,6 @@ pub const CreateOpsItemInput = struct {
 
     /// The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
     ///
-    /// **Note:**
-    ///
     /// The source name can't contain the following strings: `aws`, `amazon`,
     /// and `amzn`.
     source: []const u8,
@@ -155,8 +135,6 @@ pub const CreateOpsItemInput = struct {
     /// Tags use a key-value pair. For example:
     ///
     /// `Key=Department,Value=Finance`
-    ///
-    /// **Important:**
     ///
     /// To add tags to a new OpsItem, a user must have IAM permissions for both the
     /// `ssm:CreateOpsItems` operation and the `ssm:AddTagsToResource` operation.

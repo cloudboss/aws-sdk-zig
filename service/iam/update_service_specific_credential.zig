@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const statusType = @import("status_type.zig").statusType;
 
-/// Sets the status of a service-specific credential to `Active` or
-/// `Inactive`. Service-specific credentials that are inactive cannot be used
-/// for authentication to the service. This operation can be used to disable a
-/// user's
-/// service-specific credential as part of a credential rotation work flow.
 pub const UpdateServiceSpecificCredentialInput = struct {
     /// The unique identifier of the service-specific credential.
     ///

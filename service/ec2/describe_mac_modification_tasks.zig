@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const MacModificationTask = @import("mac_modification_task.zig").MacModificationTask;
 const serde = @import("serde.zig");
 
-/// Describes a System Integrity Protection (SIP) modification task or volume
-/// ownership delegation
-/// task for an Amazon EC2 Mac instance. For more information, see [Configure
-/// SIP for Amazon EC2
-/// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-configure) in the *Amazon EC2 User Guide*.
 pub const DescribeMacModificationTasksInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request, and provides an error response. If you have the

@@ -8,15 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const Ec2InstanceConnectEndpoint = @import("ec_2_instance_connect_endpoint.zig").Ec2InstanceConnectEndpoint;
 const serde = @import("serde.zig");
 
-/// Creates an EC2 Instance Connect Endpoint.
-///
-/// An EC2 Instance Connect Endpoint allows you to connect to an instance,
-/// without
-/// requiring the instance to have a public IPv4 or public IPv6 address. For
-/// more
-/// information, see [Connect to your instances using EC2 Instance Connect
-/// Endpoint](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect-Endpoint.html) in the
-/// *Amazon EC2 User Guide*.
 pub const CreateInstanceConnectEndpointInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request.
@@ -41,8 +32,6 @@ pub const CreateInstanceConnectEndpointInput = struct {
     ///
     /// * `ipv6` - If the subnet has only IPv6 CIDRs
     ///
-    /// **Note:**
-    ///
     /// `PreserveClientIp` is only supported on IPv4 EC2 Instance Connect
     /// Endpoints. To use `PreserveClientIp`, the value for
     /// `IpAddressType` must be `ipv4`.
@@ -54,8 +43,6 @@ pub const CreateInstanceConnectEndpointInput = struct {
     /// * `true` - Use the client IP address as the source.
     ///
     /// * `false` - Use the network interface IP address as the source.
-    ///
-    /// **Note:**
     ///
     /// `PreserveClientIp` is only supported on IPv4 EC2 Instance Connect
     /// Endpoints. To use `PreserveClientIp`, the value for

@@ -16,8 +16,6 @@ const UpdateReplicationGroupMemberAction = @import("update_replication_group_mem
 /// `DeleteTableReplica` action in the destination Region, deleting
 /// the replica and all if its items in the destination Region.
 ///
-/// **Note:**
-///
 /// When you manually remove a table or global table replica, you do not
 /// automatically
 /// remove any associated scalable targets, scaling policies, or CloudWatch

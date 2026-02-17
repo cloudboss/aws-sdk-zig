@@ -4,15 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Reconnects a session to a managed node after it has been disconnected.
-/// Connections can be
-/// resumed for disconnected sessions, but not terminated sessions.
-///
-/// **Note:**
-///
-/// This command is primarily for use by client machines to automatically
-/// reconnect during
-/// intermittent network issues. It isn't intended for any other use.
 pub const ResumeSessionInput = struct {
     /// The ID of the disconnected session to resume.
     session_id: []const u8,

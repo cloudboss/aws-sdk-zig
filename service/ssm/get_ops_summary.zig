@@ -8,13 +8,6 @@ const OpsFilter = @import("ops_filter.zig").OpsFilter;
 const OpsResultAttribute = @import("ops_result_attribute.zig").OpsResultAttribute;
 const OpsEntity = @import("ops_entity.zig").OpsEntity;
 
-/// View a summary of operations metadata (OpsData) based on specified filters
-/// and aggregators.
-/// OpsData can include information about Amazon Web Services Systems Manager
-/// OpsCenter operational workitems (OpsItems) as
-/// well as information about any Amazon Web Services resource or service
-/// configured to report OpsData to Amazon Web Services Systems Manager
-/// Explorer.
 pub const GetOpsSummaryInput = struct {
     /// Optional aggregators that return counts of OpsData based on one or more
     /// expressions.

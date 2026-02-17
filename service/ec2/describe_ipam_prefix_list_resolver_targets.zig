@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamPrefixListResolverTarget = @import("ipam_prefix_list_resolver_target.zig").IpamPrefixListResolverTarget;
 const serde = @import("serde.zig");
 
-/// Describes one or more IPAM prefix list resolver Targets. Use this operation
-/// to view the configuration and status of resolver targets.
 pub const DescribeIpamPrefixListResolverTargetsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

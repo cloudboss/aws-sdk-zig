@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const Address = @import("address.zig").Address;
 const serde = @import("serde.zig");
 
-/// Describes the specified Elastic IP addresses or all of your Elastic IP
-/// addresses.
 pub const DescribeAddressesInput = struct {
     /// Information about the allocation IDs.
     allocation_ids: ?[]const []const u8 = null,

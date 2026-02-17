@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ErrorObject = @import("error_object.zig").ErrorObject;
 
-/// Sends a failure response for a callback operation in a durable execution.
-/// Use this API when an external system cannot complete a callback operation
-/// successfully.
 pub const SendDurableExecutionCallbackFailureInput = struct {
     /// The unique identifier for the callback operation.
     callback_id: []const u8,

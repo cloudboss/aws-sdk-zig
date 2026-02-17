@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the code signing configuration. You can delete the code signing
-/// configuration only if no function is using it.
 pub const DeleteCodeSigningConfigInput = struct {
     /// The The Amazon Resource Name (ARN) of the code signing configuration.
     code_signing_config_arn: []const u8,

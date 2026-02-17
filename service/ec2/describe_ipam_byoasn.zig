@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Byoasn = @import("byoasn.zig").Byoasn;
 const serde = @import("serde.zig");
 
-/// Describes your Autonomous System Numbers (ASNs), their provisioning
-/// statuses, and the BYOIP CIDRs with which they are associated. For more
-/// information, see [Tutorial: Bring your ASN to
-/// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
-/// the *Amazon VPC IPAM guide*.
 pub const DescribeIpamByoasnInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

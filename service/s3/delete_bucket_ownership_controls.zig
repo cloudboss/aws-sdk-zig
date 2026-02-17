@@ -4,32 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Removes `OwnershipControls` for an Amazon S3 bucket. To use this operation,
-/// you must have the
-/// `s3:PutBucketOwnershipControls` permission. For more information about
-/// Amazon S3 permissions,
-/// see [Specifying
-/// Permissions in a
-/// Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
-///
-/// For information about Amazon S3 Object Ownership, see [Using Object
-/// Ownership](https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html).
-///
-/// The following operations are related to `DeleteBucketOwnershipControls`:
-///
-/// * GetBucketOwnershipControls
-///
-/// * PutBucketOwnershipControls
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const DeleteBucketOwnershipControlsInput = struct {
     /// The Amazon S3 bucket whose `OwnershipControls` you want to delete.
     bucket: []const u8,

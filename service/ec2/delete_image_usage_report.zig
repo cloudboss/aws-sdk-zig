@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified image usage report.
-///
-/// For more information, see [View your AMI
-/// usage](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html) in the
-/// *Amazon EC2 User Guide*.
 pub const DeleteImageUsageReportInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

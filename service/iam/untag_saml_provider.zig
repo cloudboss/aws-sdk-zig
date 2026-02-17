@@ -5,12 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Removes the specified tags from the specified Security Assertion Markup
-/// Language (SAML)
-/// identity provider in IAM. For more information about these providers, see
-/// [About web identity
-/// federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html). For more information about tagging, see [Tagging IAM resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the
-/// *IAM User Guide*.
 pub const UntagSAMLProviderInput = struct {
     /// The ARN of the SAML identity provider in IAM from which you want to remove
     /// tags.

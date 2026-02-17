@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OpsMetadataFilter = @import("ops_metadata_filter.zig").OpsMetadataFilter;
 const OpsMetadata = @import("ops_metadata.zig").OpsMetadata;
 
-/// Amazon Web Services Systems Manager calls this API operation when displaying
-/// all Application Manager OpsMetadata objects or
-/// blobs.
 pub const ListOpsMetadataInput = struct {
     /// One or more filters to limit the number of OpsMetadata objects returned by
     /// the call.

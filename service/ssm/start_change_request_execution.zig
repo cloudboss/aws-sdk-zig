@@ -6,21 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Runbook = @import("runbook.zig").Runbook;
 const Tag = @import("tag.zig").Tag;
 
-/// **Important:**
-///
-/// Amazon Web Services Systems Manager Change Manager will no longer be open to
-/// new
-/// customers starting November 7, 2025. If you would like to use Change
-/// Manager, sign up prior to that date. Existing customers can
-/// continue to use the service as normal. For more information, see
-/// [Amazon Web Services Systems Manager Change Manager availability
-/// change](https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html).
-///
-/// Creates a change request for Change Manager. The Automation runbooks
-/// specified in the
-/// change request run only after all required approvals for the change request
-/// have been
-/// received.
 pub const StartChangeRequestExecutionInput = struct {
     /// Indicates whether the change request can be approved automatically without
     /// the need for
@@ -29,8 +14,6 @@ pub const StartChangeRequestExecutionInput = struct {
     /// If `AutoApprovable` is enabled in a change template, then setting
     /// `AutoApprove` to `true` in `StartChangeRequestExecution`
     /// creates a change request that bypasses approver review.
-    ///
-    /// **Note:**
     ///
     /// Change Calendar restrictions are not bypassed in this scenario. If the state
     /// of an
@@ -71,8 +54,6 @@ pub const StartChangeRequestExecutionInput = struct {
     /// Information about the Automation runbooks that are run during the runbook
     /// workflow.
     ///
-    /// **Note:**
-    ///
     /// The Automation runbooks specified for the runbook workflow can't run until
     /// all required
     /// approvals for the change request have been received.
@@ -86,8 +67,6 @@ pub const StartChangeRequestExecutionInput = struct {
 
     /// The date and time specified in the change request to run the Automation
     /// runbooks.
-    ///
-    /// **Note:**
     ///
     /// The Automation runbooks specified for the runbook workflow can't run until
     /// all required
@@ -107,8 +86,6 @@ pub const StartChangeRequestExecutionInput = struct {
     /// * `Key=Environment,Value=Production`
     ///
     /// * `Key=Region,Value=us-east-2`
-    ///
-    /// **Note:**
     ///
     /// The `Array Members` maximum value is reported as 1000. This number includes
     /// capacity reserved for internal operations. When calling the

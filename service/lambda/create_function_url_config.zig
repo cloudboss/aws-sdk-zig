@@ -7,9 +7,6 @@ const FunctionUrlAuthType = @import("function_url_auth_type.zig").FunctionUrlAut
 const Cors = @import("cors.zig").Cors;
 const InvokeMode = @import("invoke_mode.zig").InvokeMode;
 
-/// Creates a Lambda function URL with the specified configuration parameters. A
-/// function URL is a dedicated HTTP(S) endpoint that you can use to invoke your
-/// function.
 pub const CreateFunctionUrlConfigInput = struct {
     /// The type of authentication that your function URL uses. Set to `AWS_IAM` if
     /// you want to restrict access to authenticated users only. Set to `NONE` if

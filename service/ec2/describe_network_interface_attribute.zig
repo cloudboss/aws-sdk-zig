@@ -10,9 +10,6 @@ const GroupIdentifier = @import("group_identifier.zig").GroupIdentifier;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
 const serde = @import("serde.zig");
 
-/// Describes a network interface attribute. You can specify only one attribute
-/// at a
-/// time.
 pub const DescribeNetworkInterfaceAttributeInput = struct {
     /// The attribute of the network interface. This parameter is required.
     attribute: ?NetworkInterfaceAttribute = null,

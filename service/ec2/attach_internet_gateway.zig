@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Attaches an internet gateway or a virtual private gateway to a VPC, enabling
-/// connectivity
-/// between the internet and the VPC. For more information, see [Internet
-/// gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the
-/// *Amazon VPC User Guide*.
 pub const AttachInternetGatewayInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

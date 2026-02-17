@@ -7,8 +7,6 @@ const Tag = @import("tag.zig").Tag;
 pub const CreateBucketConfiguration = struct {
     /// Specifies the information about the bucket that will be created.
     ///
-    /// **Note:**
-    ///
     /// This functionality is only supported by directory buckets.
     bucket: ?BucketInfo,
 
@@ -23,8 +21,6 @@ pub const CreateBucketConfiguration = struct {
     /// see [Enable
     /// accounts for Local
     /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/opt-in-directory-bucket-lz.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// This functionality is only supported by directory buckets.
     location: ?LocationInfo,
@@ -44,8 +40,6 @@ pub const CreateBucketConfiguration = struct {
     /// For a list of the valid values for all of the Amazon Web Services Regions,
     /// see [Regions and
     /// Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     location_constraint: ?BucketLocationConstraint,

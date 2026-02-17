@@ -7,12 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VpnGateway = @import("vpn_gateway.zig").VpnGateway;
 const serde = @import("serde.zig");
 
-/// Describes one or more of your virtual private gateways.
-///
-/// For more information, see [Amazon Web Services Site-to-Site
-/// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
-/// *Amazon Web Services Site-to-Site VPN
-/// User Guide*.
 pub const DescribeVpnGatewaysInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

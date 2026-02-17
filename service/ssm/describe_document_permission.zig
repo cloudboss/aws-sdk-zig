@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DocumentPermissionType = @import("document_permission_type.zig").DocumentPermissionType;
 const AccountSharingInfo = @import("account_sharing_info.zig").AccountSharingInfo;
 
-/// Describes the permissions for a Amazon Web Services Systems Manager document
-/// (SSM document). If you created the
-/// document, you are the owner. If a document is shared, it can either be
-/// shared privately (by
-/// specifying a user's Amazon Web Services account ID) or publicly (*All*).
 pub const DescribeDocumentPermissionInput = struct {
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you

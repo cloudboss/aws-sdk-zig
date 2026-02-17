@@ -4,14 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the permissions boundary for the specified IAM user.
-///
-/// **Important:**
-///
-/// Deleting the permissions boundary for a user might increase its permissions
-/// by
-/// allowing the user to perform all the actions granted in its permissions
-/// policies.
 pub const DeleteUserPermissionsBoundaryInput = struct {
     /// The name (friendly name, not ARN) of the IAM user from which you want to
     /// remove the

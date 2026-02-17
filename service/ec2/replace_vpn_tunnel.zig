@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Trigger replacement of specified VPN tunnel.
 pub const ReplaceVpnTunnelInput = struct {
     /// Trigger pending tunnel endpoint maintenance.
     apply_pending_maintenance: ?bool = null,

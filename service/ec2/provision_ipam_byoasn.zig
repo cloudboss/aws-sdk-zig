@@ -7,12 +7,6 @@ const AsnAuthorizationContext = @import("asn_authorization_context.zig").AsnAuth
 const Byoasn = @import("byoasn.zig").Byoasn;
 const serde = @import("serde.zig");
 
-/// Provisions your Autonomous System Number (ASN) for use in your Amazon Web
-/// Services account. This action requires authorization context for Amazon to
-/// bring the ASN to an Amazon Web Services account. For more information, see
-/// [Tutorial: Bring your ASN to
-/// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
-/// the *Amazon VPC IPAM guide*.
 pub const ProvisionIpamByoasnInput = struct {
     /// A public 2-byte or 4-byte ASN.
     asn: []const u8,

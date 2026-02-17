@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Download an Amazon Web Services-provided sample configuration file to be
-/// used with the customer
-/// gateway device specified for your Site-to-Site VPN connection.
 pub const GetVpnConnectionDeviceSampleConfigurationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

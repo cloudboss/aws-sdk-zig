@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VpnConnectionDeviceType = @import("vpn_connection_device_type.zig").VpnConnectionDeviceType;
 const serde = @import("serde.zig");
 
-/// Obtain a list of customer gateway devices for which sample configuration
-/// files can be provided. The request has no additional parameters. You can
-/// also see the
-/// list of device types with sample configuration files available under [Your
-/// customer gateway
-/// device](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html) in the
-/// *Amazon Web Services Site-to-Site VPN User Guide*.
 pub const GetVpnConnectionDeviceTypesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

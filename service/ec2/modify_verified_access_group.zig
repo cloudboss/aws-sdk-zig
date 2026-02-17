@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessGroup = @import("verified_access_group.zig").VerifiedAccessGroup;
 const serde = @import("serde.zig");
 
-/// Modifies the specified Amazon Web Services Verified Access group
-/// configuration.
 pub const ModifyVerifiedAccessGroupInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

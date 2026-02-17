@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Detaches a network interface from an instance.
 pub const DetachNetworkInterfaceInput = struct {
     /// The ID of the attachment.
     attachment_id: []const u8,
@@ -17,8 +16,6 @@ pub const DetachNetworkInterfaceInput = struct {
     dry_run: ?bool = null,
 
     /// Specifies whether to force a detachment.
-    ///
-    /// **Note:**
     ///
     /// * Use the `Force` parameter only as a last resort to detach a
     /// network interface from a failed instance.

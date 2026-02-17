@@ -14,13 +14,6 @@ const UserTrustProviderType = @import("user_trust_provider_type.zig").UserTrustP
 const VerifiedAccessTrustProvider = @import("verified_access_trust_provider.zig").VerifiedAccessTrustProvider;
 const serde = @import("serde.zig");
 
-/// A trust provider is a third-party entity that creates, maintains, and
-/// manages identity
-/// information for users and devices. When an application request is made, the
-/// identity
-/// information sent by the trust provider is evaluated by Verified Access
-/// before allowing or
-/// denying the application request.
 pub const CreateVerifiedAccessTrustProviderInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

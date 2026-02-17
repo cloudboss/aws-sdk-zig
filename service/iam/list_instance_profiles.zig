@@ -6,24 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceProfile = @import("instance_profile.zig").InstanceProfile;
 const serde = @import("serde.zig");
 
-/// Lists the instance profiles that have the specified path prefix. If there
-/// are none,
-/// the operation returns an empty list. For more information about instance
-/// profiles, see
-/// [Using
-/// instance
-/// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
-///
-/// **Note:**
-///
-/// IAM resource-listing operations return a subset of the available
-/// attributes for the resource. For example, this operation does not return
-/// tags, even though they are an attribute of the returned object. To view all
-/// of the information for an instance profile, see
-/// [GetInstanceProfile](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetInstanceProfile.html).
-///
-/// You can paginate the results using the `MaxItems` and `Marker`
-/// parameters.
 pub const ListInstanceProfilesInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

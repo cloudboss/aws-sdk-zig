@@ -13,41 +13,6 @@ const ReturnValuesOnConditionCheckFailure = @import("return_values_on_condition_
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
 const ItemCollectionMetrics = @import("item_collection_metrics.zig").ItemCollectionMetrics;
 
-/// Creates a new item, or replaces an old item with a new item. If an item that
-/// has the
-/// same primary key as the new item already exists in the specified table, the
-/// new item
-/// completely replaces the existing item. You can perform a conditional put
-/// operation (add
-/// a new item if one with the specified primary key doesn't exist), or replace
-/// an existing
-/// item if it has certain attribute values. You can return the item's attribute
-/// values in
-/// the same operation, using the `ReturnValues` parameter.
-///
-/// When you add an item, the primary key attributes are the only required
-/// attributes.
-///
-/// Empty String and Binary attribute values are allowed. Attribute values of
-/// type String
-/// and Binary must have a length greater than zero if the attribute is used as
-/// a key
-/// attribute for a table or index. Set type attributes cannot be empty.
-///
-/// Invalid Requests with empty values will be rejected with a
-/// `ValidationException` exception.
-///
-/// **Note:**
-///
-/// To prevent a new item from replacing an existing item, use a conditional
-/// expression that contains the `attribute_not_exists` function with the
-/// name of the attribute being used as the partition key for the table. Since
-/// every
-/// record must contain that attribute, the `attribute_not_exists` function
-/// will only succeed if no matching item exists.
-///
-/// For more information about `PutItem`, see [Working with
-/// Items](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html) in the *Amazon DynamoDB Developer Guide*.
 pub const PutItemInput = struct {
     /// This is a legacy parameter. Use `ConditionExpression` instead. For more
     /// information, see
@@ -115,8 +80,6 @@ pub const PutItemInput = struct {
     /// You could then use this substitution in an expression, as in this example:
     ///
     /// * `#P = :val`
-    ///
-    /// **Note:**
     ///
     /// Tokens that begin with the **:** character are
     /// *expression attribute values*, which are placeholders for the
@@ -211,8 +174,6 @@ pub const PutItemInput = struct {
     /// small network and processing overhead of receiving a larger response. No
     /// read capacity
     /// units are consumed.
-    ///
-    /// **Note:**
     ///
     /// The `ReturnValues` parameter is used by several DynamoDB operations;
     /// however, `PutItem` does not recognize any values other than

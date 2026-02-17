@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Returns high-level aggregated patch compliance state information for a patch
-/// group.
 pub const DescribePatchGroupStateInput = struct {
     /// The name of the patch group whose patch snapshot should be retrieved.
     patch_group: []const u8,
@@ -61,8 +59,6 @@ pub const DescribePatchGroupStateOutput = struct {
     /// The number of managed nodes with patches installed that are specified in a
     /// `RejectedPatches` list. Patches with a status of `INSTALLED_REJECTED` were
     /// typically installed before they were added to a `RejectedPatches` list.
-    ///
-    /// **Note:**
     ///
     /// If `ALLOW_AS_DEPENDENCY` is the specified option for
     /// `RejectedPatchesAction`, the value of

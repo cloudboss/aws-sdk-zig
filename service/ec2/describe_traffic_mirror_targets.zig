@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TrafficMirrorTarget = @import("traffic_mirror_target.zig").TrafficMirrorTarget;
 const serde = @import("serde.zig");
 
-/// Information about one or more Traffic Mirror targets.
 pub const DescribeTrafficMirrorTargetsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

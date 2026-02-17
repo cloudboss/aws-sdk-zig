@@ -5,12 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AliasRoutingConfiguration = @import("alias_routing_configuration.zig").AliasRoutingConfiguration;
 
-/// Creates an
-/// [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function version. Use aliases to provide clients with a function identifier that you can update to invoke a different version.
-///
-/// You can also map an alias to split invocation requests between two versions.
-/// Use the `RoutingConfig` parameter to specify a second version and the
-/// percentage of invocation requests that it receives.
 pub const CreateAliasInput = struct {
     /// A description of the alias.
     description: ?[]const u8 = null,

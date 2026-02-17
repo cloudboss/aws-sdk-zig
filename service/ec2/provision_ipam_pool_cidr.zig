@@ -8,13 +8,6 @@ const VerificationMethod = @import("verification_method.zig").VerificationMethod
 const IpamPoolCidr = @import("ipam_pool_cidr.zig").IpamPoolCidr;
 const serde = @import("serde.zig");
 
-/// Provision a CIDR to an IPAM pool. You can use this action to provision new
-/// CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a
-/// pool within it.
-///
-/// For more information, see [Provision CIDRs to
-/// pools](https://docs.aws.amazon.com/vpc/latest/ipam/prov-cidr-ipam.html) in
-/// the *Amazon VPC IPAM User Guide*.
 pub const ProvisionIpamPoolCidrInput = struct {
     /// The CIDR you want to assign to the IPAM pool. Either "NetmaskLength" or
     /// "Cidr" is required. This value will be null if you specify "NetmaskLength"

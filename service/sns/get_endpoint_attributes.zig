@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Retrieves the endpoint attributes for a device on one of the supported push
-/// notification services, such as GCM (Firebase Cloud Messaging) and APNS. For
-/// more
-/// information, see [Using Amazon SNS Mobile Push
-/// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 pub const GetEndpointAttributesInput = struct {
     /// `EndpointArn` for `GetEndpointAttributes` input.
     endpoint_arn: []const u8,
@@ -34,8 +29,6 @@ pub const GetEndpointAttributesOutput = struct {
     /// for an app and mobile device. This is returned from the notification service
     /// when an app and mobile device are registered with the notification
     /// service.
-    ///
-    /// **Note:**
     ///
     /// The device token for the iOS platform is returned in lowercase.
     attributes: ?[]const aws.map.StringMapEntry = null,

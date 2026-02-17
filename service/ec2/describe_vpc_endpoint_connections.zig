@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VpcEndpointConnection = @import("vpc_endpoint_connection.zig").VpcEndpointConnection;
 const serde = @import("serde.zig");
 
-/// Describes the VPC endpoint connections to your VPC endpoint services,
-/// including any
-/// endpoints that are pending your acceptance.
 pub const DescribeVpcEndpointConnectionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

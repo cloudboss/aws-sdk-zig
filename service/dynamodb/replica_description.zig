@@ -62,8 +62,6 @@ pub const ReplicaDescription = struct {
     /// * `REGION_DISABLED` - The replica is inaccessible because the Amazon Web
     ///   Services Region has been disabled.
     ///
-    /// **Note:**
-    ///
     /// If the Amazon Web Services Region remains inaccessible for more than 20
     /// hours, DynamoDB will remove this replica from the replication
     /// group. The replica will not be deleted and replication will stop from and to
@@ -71,8 +69,6 @@ pub const ReplicaDescription = struct {
     ///
     /// * `INACCESSIBLE_ENCRYPTION_CREDENTIALS ` - The KMS key
     /// used to encrypt the table is inaccessible.
-    ///
-    /// **Note:**
     ///
     /// If the KMS key remains inaccessible for more than 20 hours,
     /// DynamoDB will remove this replica from the replication group.

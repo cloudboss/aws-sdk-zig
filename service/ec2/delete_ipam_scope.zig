@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamScope = @import("ipam_scope.zig").IpamScope;
 const serde = @import("serde.zig");
 
-/// Delete the scope for an IPAM. You cannot delete the default scopes.
-///
-/// For more information, see [Delete a
-/// scope](https://docs.aws.amazon.com/vpc/latest/ipam/delete-scope-ipam.html)
-/// in the *Amazon VPC IPAM User Guide*.
 pub const DeleteIpamScopeInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

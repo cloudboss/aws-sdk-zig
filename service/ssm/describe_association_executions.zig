@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AssociationExecutionFilter = @import("association_execution_filter.zig").AssociationExecutionFilter;
 const AssociationExecution = @import("association_execution.zig").AssociationExecution;
 
-/// Views all executions for a specific association ID.
 pub const DescribeAssociationExecutionsInput = struct {
     /// The association ID for which you want to view execution history details.
     association_id: []const u8,

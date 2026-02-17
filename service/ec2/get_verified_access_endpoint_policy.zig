@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Get the Verified Access policy associated with the endpoint.
 pub const GetVerifiedAccessEndpointPolicyInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

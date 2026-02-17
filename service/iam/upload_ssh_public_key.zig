@@ -6,15 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SSHPublicKey = @import("ssh_public_key.zig").SSHPublicKey;
 const serde = @import("serde.zig");
 
-/// Uploads an SSH public key and associates it with the specified IAM user.
-///
-/// The SSH public key uploaded by this operation can be used only for
-/// authenticating the
-/// associated IAM user to an CodeCommit repository. For more information about
-/// using SSH keys
-/// to authenticate to an CodeCommit repository, see [Set up CodeCommit for
-/// SSH
-/// connections](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html) in the *CodeCommit User Guide*.
 pub const UploadSSHPublicKeyInput = struct {
     /// The SSH public key. The public key must be encoded in ssh-rsa format or PEM
     /// format.

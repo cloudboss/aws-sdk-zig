@@ -7,7 +7,6 @@ const VerifiedAccessSseSpecificationRequest = @import("verified_access_sse_speci
 const VerifiedAccessSseSpecificationResponse = @import("verified_access_sse_specification_response.zig").VerifiedAccessSseSpecificationResponse;
 const serde = @import("serde.zig");
 
-/// Modifies the specified Amazon Web Services Verified Access group policy.
 pub const ModifyVerifiedAccessGroupPolicyInput = struct {
     /// A unique, case-sensitive token that you provide to ensure idempotency of
     /// your

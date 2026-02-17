@@ -4,15 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified SSH public key.
-///
-/// The SSH public key deleted by this operation is used only for authenticating
-/// the
-/// associated IAM user to an CodeCommit repository. For more information about
-/// using SSH keys
-/// to authenticate to an CodeCommit repository, see [Set up CodeCommit for
-/// SSH
-/// connections](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html) in the *CodeCommit User Guide*.
 pub const DeleteSSHPublicKeyInput = struct {
     /// The unique identifier for the SSH public key.
     ///

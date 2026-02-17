@@ -8,11 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayMulticastDomain = @import("transit_gateway_multicast_domain.zig").TransitGatewayMulticastDomain;
 const serde = @import("serde.zig");
 
-/// Creates a multicast domain using the specified transit gateway.
-///
-/// The transit gateway must be in the available state before you create a
-/// domain. Use
-/// [DescribeTransitGateways](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGateways.html) to see the state of transit gateway.
 pub const CreateTransitGatewayMulticastDomainInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -4,15 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified EBS volume. The volume must be in the `available`
-/// state
-/// (not attached to an instance).
-///
-/// The volume can remain in the `deleting` state for several minutes.
-///
-/// For more information, see [Delete an Amazon EBS
-/// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-deleting-volume.html) in the
-/// *Amazon EBS User Guide*.
 pub const DeleteVolumeInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

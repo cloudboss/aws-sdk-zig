@@ -7,8 +7,6 @@ const BucketType = @import("bucket_type.zig").BucketType;
 /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html) in the
 /// *Amazon S3 User Guide*.
 ///
-/// **Note:**
-///
 /// This functionality is only supported by directory buckets.
 pub const BucketInfo = struct {
     /// The number of Zone (Availability Zone or Local Zone) that's used for

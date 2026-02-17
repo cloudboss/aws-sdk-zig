@@ -5,20 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Status = @import("status.zig").Status;
 
-/// **Note:**
-///
-/// This action is deprecated.
-///
-/// Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC
-/// platform. The
-/// Elastic IP address must be allocated to your account for more than 24 hours,
-/// and it must not
-/// be associated with an instance. After the Elastic IP address is moved, it is
-/// no longer
-/// available for use in the EC2-Classic platform. You cannot move an Elastic IP
-/// address that was
-/// originally allocated for use in the EC2-VPC platform to the EC2-Classic
-/// platform.
 pub const MoveAddressToVpcInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

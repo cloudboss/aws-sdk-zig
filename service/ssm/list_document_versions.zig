@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentVersionInfo = @import("document_version_info.zig").DocumentVersionInfo;
 
-/// List all versions for a document.
 pub const ListDocumentVersionsInput = struct {
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you

@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TrafficMirrorFilter = @import("traffic_mirror_filter.zig").TrafficMirrorFilter;
 const serde = @import("serde.zig");
 
-/// Describes one or more Traffic Mirror filters.
 pub const DescribeTrafficMirrorFiltersInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

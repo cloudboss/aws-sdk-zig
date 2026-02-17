@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AccountLimit = @import("account_limit.zig").AccountLimit;
 const AccountUsage = @import("account_usage.zig").AccountUsage;
 
-/// Retrieves details about your account's
-/// [limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) and usage
-/// in an Amazon Web Services Region.
 pub const GetAccountSettingsInput = struct {
 };
 

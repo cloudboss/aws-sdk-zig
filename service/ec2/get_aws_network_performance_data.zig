@@ -7,7 +7,6 @@ const DataQuery = @import("data_query.zig").DataQuery;
 const DataResponse = @import("data_response.zig").DataResponse;
 const serde = @import("serde.zig");
 
-/// Gets network performance data.
 pub const GetAwsNetworkPerformanceDataInput = struct {
     /// A list of network performance data queries.
     data_queries: ?[]const DataQuery = null,

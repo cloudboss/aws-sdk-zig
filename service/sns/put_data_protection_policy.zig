@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Adds or updates an inline policy document that is stored in the specified
-/// Amazon SNS
-/// topic.
 pub const PutDataProtectionPolicyInput = struct {
     /// The JSON serialization of the topic's `DataProtectionPolicy`.
     ///

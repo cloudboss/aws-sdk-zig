@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Describes the default KMS key for EBS encryption by default for your account
-/// in this Region.
-///
-/// For more information, see [Amazon EBS
-/// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
-/// in the *Amazon EBS User Guide*.
 pub const GetEbsDefaultKmsKeyIdInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

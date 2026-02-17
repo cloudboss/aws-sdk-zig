@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const NetworkInsightsAccessScopeAnalysis = @import("network_insights_access_scope_analysis.zig").NetworkInsightsAccessScopeAnalysis;
 const serde = @import("serde.zig");
 
-/// Describes the specified Network Access Scope analyses.
 pub const DescribeNetworkInsightsAccessScopeAnalysesInput = struct {
     /// Filters the results based on the start time. The analysis must have started
     /// on or after this time.

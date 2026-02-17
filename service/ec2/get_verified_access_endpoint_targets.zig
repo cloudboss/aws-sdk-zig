@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessEndpointTarget = @import("verified_access_endpoint_target.zig").VerifiedAccessEndpointTarget;
 const serde = @import("serde.zig");
 
-/// Gets the targets for the specified network CIDR endpoint for Verified
-/// Access.
 pub const GetVerifiedAccessEndpointTargetsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

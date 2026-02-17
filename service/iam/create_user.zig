@@ -7,11 +7,6 @@ const Tag = @import("tag.zig").Tag;
 const User = @import("user.zig").User;
 const serde = @import("serde.zig");
 
-/// Creates a new IAM user for your Amazon Web Services account.
-///
-/// For information about quotas for the number of IAM users you can create, see
-/// [IAM and STS
-/// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
 pub const CreateUserInput = struct {
     /// The path for the user name. For more information about paths, see [IAM
     /// identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the *IAM User Guide*.
@@ -52,8 +47,6 @@ pub const CreateUserInput = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// If any one of the tags is invalid or if you exceed the allowed maximum
     /// number of tags, then the entire request

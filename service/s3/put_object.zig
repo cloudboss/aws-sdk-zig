@@ -14,193 +14,6 @@ const ChecksumType = @import("checksum_type.zig").ChecksumType;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const serde = @import("serde.zig");
 
-/// **Important:**
-///
-/// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
-/// support for Email Grantee Access Control Lists (ACLs). If you attempt to use
-/// an Email Grantee ACL in a request after October 1, 2025,
-/// the request will receive an `HTTP 405` (Method Not Allowed) error.
-///
-/// This change affects the following Amazon Web Services Regions: US East (N.
-/// Virginia), US West (N. California), US West (Oregon), Asia Pacific
-/// (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe (Ireland),
-/// and South America (São Paulo).
-///
-/// Adds an object to a bucket.
-///
-/// **Note:**
-///
-/// * Amazon S3 never adds partial objects; if you receive a success response,
-///   Amazon S3 added the entire
-/// object to the bucket. You cannot use `PutObject` to only update a single
-/// piece of
-/// metadata for an existing object. You must put the entire object with updated
-/// metadata if you want
-/// to update some values.
-///
-/// * If your bucket uses the bucket owner enforced setting for Object
-///   Ownership, ACLs are disabled
-/// and no longer affect permissions. All objects written to the bucket by any
-/// account will be owned
-/// by the bucket owner.
-///
-/// * **Directory buckets** - For directory buckets, you must make requests for
-///   this API operation to the Zonal endpoint. These endpoints support
-///   virtual-hosted-style requests in the format
-///   `https://*amzn-s3-demo-bucket*.s3express-*zone-id*.*region-code*.amazonaws.com/*key-name*
-/// `. Path-style requests are not supported. For more information about
-/// endpoints in Availability Zones, see [Regional and Zonal endpoints for
-/// directory buckets in Availability
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
-/// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
-/// see [Concepts for directory buckets in Local
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
-/// *Amazon S3 User Guide*.
-///
-/// Amazon S3 is a distributed system. If it receives multiple write requests
-/// for the same object
-/// simultaneously, it overwrites all but the last object written. However,
-/// Amazon S3 provides features that can
-/// modify this behavior:
-///
-/// * **S3 Object Lock** - To prevent objects from being deleted
-/// or overwritten, you can use [Amazon S3 Object
-/// Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) in the *Amazon S3 User Guide*.
-///
-/// **Note:**
-///
-/// This functionality is not supported for directory buckets.
-///
-/// * **If-None-Match** - Uploads the object only if the object
-/// key name does not already exist in the specified bucket. Otherwise, Amazon
-/// S3 returns a `412
-/// Precondition Failed` error. If a conflicting operation occurs during the
-/// upload, S3 returns
-/// a `409 ConditionalRequestConflict` response. On a 409 failure, retry the
-/// upload.
-///
-/// Expects the * character (asterisk).
-///
-/// For more information, see [Add preconditions to S3 operations with
-/// conditional
-/// requests](https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html) in the *Amazon S3 User Guide* or [RFC 7232](https://datatracker.ietf.org/doc/rfc7232/).
-///
-/// **Note:**
-///
-/// This functionality is not supported for S3 on Outposts.
-///
-/// * **S3 Versioning** - When you enable versioning for a bucket,
-/// if Amazon S3 receives multiple write requests for the same object
-/// simultaneously, it stores all versions
-/// of the objects. For each write request that is made to the same object,
-/// Amazon S3 automatically generates
-/// a unique version ID of that object being stored in Amazon S3. You can
-/// retrieve, replace, or delete any
-/// version of the object. For more information about versioning, see [Adding
-/// Objects to
-/// Versioning-Enabled
-/// Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html) in the *Amazon S3 User Guide*. For information
-/// about returning the versioning state of a bucket, see
-/// [GetBucketVersioning](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html).
-///
-/// **Note:**
-///
-/// This functionality is not supported for directory buckets.
-///
-/// **Permissions**
-///
-/// * **General purpose bucket permissions** - The following
-/// permissions are required in your policies when your `PutObject` request
-/// includes
-/// specific headers.
-///
-/// * **
-/// `s3:PutObject`
-/// ** - To successfully
-/// complete the `PutObject` request, you must always have the
-/// `s3:PutObject` permission on a bucket to add an object to it.
-///
-/// * **
-/// `s3:PutObjectAcl`
-/// ** - To successfully change the objects ACL of your `PutObject`
-/// request, you must have the `s3:PutObjectAcl`.
-///
-/// * **
-/// `s3:PutObjectTagging`
-/// ** - To successfully set the tag-set with your `PutObject`
-/// request, you must have the `s3:PutObjectTagging`.
-///
-/// * **Directory bucket permissions** - To grant access to this API operation
-///   on a directory bucket, we recommend that you use the [
-/// `CreateSession`
-/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-/// API operation for session-based authorization. Specifically, you grant the
-/// `s3express:CreateSession` permission to the directory bucket in a bucket
-/// policy or an IAM identity-based policy. Then, you make the `CreateSession`
-/// API call on the bucket to obtain a session token. With the session token in
-/// your request header, you can make API requests to this operation. After the
-/// session token expires, you make another `CreateSession` API call to generate
-/// a new session token for use.
-/// Amazon Web Services CLI or SDKs create session and refresh the session token
-/// automatically to avoid service interruptions when a session expires. For
-/// more information about authorization, see [
-/// `CreateSession`
-/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html).
-///
-/// If the object is encrypted with SSE-KMS, you must also have the
-/// `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-/// identity-based policies and KMS key policies for the KMS key.
-///
-/// **Data integrity with Content-MD5**
-///
-/// * **General purpose bucket** - To ensure that data is not
-/// corrupted traversing the network, use the `Content-MD5` header. When you use
-/// this
-/// header, Amazon S3 checks the object against the provided MD5 value and, if
-/// they do not match, Amazon S3
-/// returns an error. Alternatively, when the object's ETag is its MD5 digest,
-/// you can calculate
-/// the MD5 while putting the object to Amazon S3 and compare the returned ETag
-/// to the calculated MD5
-/// value.
-///
-/// * **Directory bucket** -
-/// This functionality is not supported for directory buckets.
-///
-/// **HTTP Host header syntax**
-///
-/// **Directory buckets ** - The HTTP Host header syntax is `
-/// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
-///
-/// **Errors**
-///
-/// * You might receive an `InvalidRequest` error for several reasons. Depending
-///   on the reason for the error, you might receive one of the following
-///   messages:
-///
-/// * Cannot specify both a write offset value and user-defined object metadata
-///   for existing
-/// objects.
-///
-/// * Checksum Type mismatch occurred, expected checksum Type: sha1, actual
-///   checksum Type:
-/// crc32c.
-///
-/// * Request body cannot be empty when 'write offset' is specified.
-///
-/// For more information about related Amazon S3 APIs, see the following:
-///
-/// *
-///   [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
-///
-/// *
-///   [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const PutObjectInput = struct {
     /// The canned ACL to apply to the object. For more information, see [Canned
     /// ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL) in the
@@ -236,8 +49,6 @@ pub const PutObjectInput = struct {
     /// disabling
     /// ACLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// * This functionality is not supported for directory buckets.
     ///
     /// * This functionality is not supported for Amazon S3 on Outposts.
@@ -272,8 +83,6 @@ pub const PutObjectInput = struct {
     /// you provide the access point ARN in place of the bucket name. For more
     /// information about access point ARNs, see [Using access
     /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// Object Lambda access points are not supported by directory buckets.
     ///
@@ -343,8 +152,6 @@ pub const PutObjectInput = struct {
     /// ` doesn't match the checksum algorithm you set through
     /// `x-amz-sdk-checksum-algorithm`, Amazon S3 fails the request with a
     /// `BadDigest` error.
-    ///
-    /// **Note:**
     ///
     /// The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is required for
     /// any request to upload an object with a retention period configured using
@@ -436,16 +243,12 @@ pub const PutObjectInput = struct {
     /// authentication, see [REST
     /// Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
     ///
-    /// **Note:**
-    ///
     /// The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is required for
     /// any request to upload an object with a retention period configured using
     /// Amazon S3 Object Lock. For more
     /// information, see [Uploading objects
     /// to an Object Lock enabled bucket
     /// ](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     content_md5: ?[]const u8 = null,
@@ -467,16 +270,12 @@ pub const PutObjectInput = struct {
 
     /// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
     ///
-    /// **Note:**
-    ///
     /// * This functionality is not supported for directory buckets.
     ///
     /// * This functionality is not supported for Amazon S3 on Outposts.
     grant_full_control: ?[]const u8 = null,
 
     /// Allows grantee to read the object data and its metadata.
-    ///
-    /// **Note:**
     ///
     /// * This functionality is not supported for directory buckets.
     ///
@@ -485,16 +284,12 @@ pub const PutObjectInput = struct {
 
     /// Allows grantee to read the object ACL.
     ///
-    /// **Note:**
-    ///
     /// * This functionality is not supported for directory buckets.
     ///
     /// * This functionality is not supported for Amazon S3 on Outposts.
     grant_read_acp: ?[]const u8 = null,
 
     /// Allows grantee to write the ACL for the applicable object.
-    ///
-    /// **Note:**
     ///
     /// * This functionality is not supported for directory buckets.
     ///
@@ -548,14 +343,10 @@ pub const PutObjectInput = struct {
     /// Lock](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html) in
     /// the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     object_lock_legal_hold_status: ?ObjectLockLegalHoldStatus = null,
 
     /// The Object Lock mode that you want to apply to this object.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     object_lock_mode: ?ObjectLockMode = null,
@@ -563,8 +354,6 @@ pub const PutObjectInput = struct {
     /// The date and time when you want this object's Object Lock to expire. Must be
     /// formatted as a
     /// timestamp parameter.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     object_lock_retain_until_date: ?i64 = null,
@@ -615,8 +404,6 @@ pub const PutObjectInput = struct {
     /// Amazon S3 will use the encryption settings values from the `CreateSession`
     /// request to protect new objects in the directory bucket.
     ///
-    /// **Note:**
-    ///
     /// When you use the CLI or the Amazon Web Services SDKs, for `CreateSession`,
     /// the session token refreshes automatically to avoid service interruptions
     /// when a session expires. The CLI or the Amazon Web Services SDKs use the
@@ -642,8 +429,6 @@ pub const PutObjectInput = struct {
     /// Specifies the algorithm to use when encrypting the object (for example,
     /// `AES256`).
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     sse_customer_algorithm: ?[]const u8 = null,
 
@@ -654,8 +439,6 @@ pub const PutObjectInput = struct {
     /// be appropriate for use with the algorithm specified in the
     /// `x-amz-server-side-encryption-customer-algorithm` header.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     sse_customer_key: ?[]const u8 = null,
 
@@ -663,8 +446,6 @@ pub const PutObjectInput = struct {
     /// 1321. Amazon S3 uses this header
     /// for a message integrity check to ensure that the encryption key was
     /// transmitted without error.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     sse_customer_key_md5: ?[]const u8 = null,
@@ -727,8 +508,6 @@ pub const PutObjectInput = struct {
     /// Classes](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in the
     /// *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// * Directory buckets only support `EXPRESS_ONEZONE` (the S3 Express One Zone
     ///   storage class) in
     /// Availability Zones and `ONEZONE_IA` (the S3 One Zone-Infrequent Access
@@ -741,8 +520,6 @@ pub const PutObjectInput = struct {
     /// The tag-set for the object. The tag-set must be encoded as URL Query
     /// parameters. (For example,
     /// "Key1=Value1")
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     tagging: ?[]const u8 = null,
@@ -772,8 +549,6 @@ pub const PutObjectInput = struct {
     /// [How to Configure Website Page
     /// Redirects](https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     website_redirect_location: ?[]const u8 = null,
 
@@ -782,8 +557,6 @@ pub const PutObjectInput = struct {
     /// the size of the existing object being appended to. If no object exists,
     /// setting this header to 0 will
     /// create a new object.
-    ///
-    /// **Note:**
     ///
     /// This functionality is only supported for objects in the Amazon S3 Express
     /// One Zone storage class in
@@ -891,8 +664,6 @@ pub const PutObjectOutput = struct {
     /// is
     /// URL-encoded.
     ///
-    /// **Note:**
-    ///
     /// Object expiration information is not returned in directory buckets and this
     /// header returns the
     /// value "`NotImplemented`" in all responses for directory buckets.
@@ -903,8 +674,6 @@ pub const PutObjectOutput = struct {
     /// The server-side encryption algorithm used when you store this object in
     /// Amazon S3 or Amazon FSx.
     ///
-    /// **Note:**
-    ///
     /// When accessing data stored in Amazon FSx file systems using S3 access
     /// points, the only valid server side
     /// encryption option is `aws:fsx`.
@@ -912,8 +681,6 @@ pub const PutObjectOutput = struct {
 
     /// The size of the object in bytes. This value is only be present if you append
     /// to an object.
-    ///
-    /// **Note:**
     ///
     /// This functionality is only supported for objects in the Amazon S3 Express
     /// One Zone storage class in
@@ -924,8 +691,6 @@ pub const PutObjectOutput = struct {
     /// requested, the response will
     /// include this header to confirm the encryption algorithm that's used.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     sse_customer_algorithm: ?[]const u8 = null,
 
@@ -934,8 +699,6 @@ pub const PutObjectOutput = struct {
     /// include this header to provide the round-trip message integrity verification
     /// of the customer-provided
     /// encryption key.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     sse_customer_key_md5: ?[]const u8 = null,
@@ -966,8 +729,6 @@ pub const PutObjectOutput = struct {
     /// Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html) in the *Amazon S3 User Guide*. For information about
     /// returning the versioning state of a bucket, see
     /// [GetBucketVersioning](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html).
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8 = null,

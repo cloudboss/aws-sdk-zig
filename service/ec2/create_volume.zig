@@ -13,28 +13,6 @@ const VolumeState = @import("volume_state.zig").VolumeState;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Creates an EBS volume that can be attached to an instance in the same
-/// Availability Zone.
-///
-/// You can create a new empty volume or restore a volume from an EBS snapshot.
-/// Any Amazon Web Services Marketplace product codes from the snapshot are
-/// propagated to the volume.
-///
-/// You can create encrypted volumes. Encrypted volumes must be attached to
-/// instances that
-/// support Amazon EBS encryption. Volumes that are created from encrypted
-/// snapshots are also automatically
-/// encrypted. For more information, see [Amazon EBS
-/// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
-/// in the *Amazon EBS User Guide*.
-///
-/// You can tag your volumes during creation. For more information, see [Tag
-/// your Amazon EC2
-/// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the *Amazon EC2 User Guide*.
-///
-/// For more information, see [Create an Amazon EBS
-/// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-creating-volume.html) in the
-/// *Amazon EBS User Guide*.
 pub const CreateVolumeInput = struct {
     /// The ID of the Availability Zone in which to create the volume. For example,
     /// `us-east-1a`.
@@ -88,8 +66,6 @@ pub const CreateVolumeInput = struct {
     /// * io1: `100 - 64,000` IOPS
     ///
     /// * io2: `100 - 256,000` IOPS
-    ///
-    /// **Note:**
     ///
     /// [
     /// Instances built on the Nitro
@@ -194,8 +170,6 @@ pub const CreateVolumeInput = struct {
     /// initialized at
     /// creation.
     ///
-    /// **Note:**
-    ///
     /// If you specify a snapshot that is enabled for fast snapshot restore and a
     /// volume initialization rate,
     /// the volume will be initialized at the specified rate instead of fast
@@ -222,8 +196,6 @@ pub const CreateVolumeInput = struct {
     ///
     /// * Magnetic: `standard`
     ///
-    /// **Important:**
-    ///
     /// Throughput Optimized HDD (`st1`) and Cold HDD (`sc1`) volumes can't be used
     /// as boot volumes.
     ///
@@ -236,8 +208,6 @@ pub const CreateVolumeInput = struct {
 };
 
 pub const CreateVolumeOutput = struct {
-    /// **Note:**
-    ///
     /// This parameter is not returned by CreateVolume.
     ///
     /// Information about the volume attachments.
@@ -255,8 +225,6 @@ pub const CreateVolumeOutput = struct {
     /// Indicates whether the volume is encrypted.
     encrypted: ?bool = null,
 
-    /// **Note:**
-    ///
     /// This parameter is not returned by CreateVolume.
     ///
     /// Indicates whether the volume was created using fast snapshot restore.
@@ -293,8 +261,6 @@ pub const CreateVolumeOutput = struct {
     /// volume copies.
     source_volume_id: ?[]const u8 = null,
 
-    /// **Note:**
-    ///
     /// This parameter is not returned by CreateVolume.
     ///
     /// Reserved for future use.
@@ -503,7 +469,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "createTime")) {
-                    result.create_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "encrypted")) {
                     result.encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "fastRestored")) {

@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Use this request to opt in a phone number that is opted out, which enables
-/// you to
-/// resume sending SMS messages to the number.
-///
-/// You can opt in a phone number only once every 30 days.
 pub const OptInPhoneNumberInput = struct {
     /// The phone number to opt in. Use E.164 format.
     phone_number: []const u8,

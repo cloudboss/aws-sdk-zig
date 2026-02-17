@@ -6,21 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AttributeSummary = @import("attribute_summary.zig").AttributeSummary;
 const serde = @import("serde.zig");
 
-/// Retrieves a summary of the account status report.
-///
-/// To view the full report, download it from the Amazon S3 bucket where it was
-/// saved.
-/// Reports are accessible only when they have the `complete` status. Reports
-/// with other statuses (`running`, `cancelled`, or
-/// `error`) are not available in the S3 bucket. For more information about
-/// downloading objects from an S3 bucket, see [Downloading
-/// objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/download-objects.html) in
-/// the *Amazon Simple Storage Service User Guide*.
-///
-/// For more information, see [Generating the account status report for
-/// declarative
-/// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html) in the
-/// *Amazon Web Services Organizations User Guide*.
 pub const GetDeclarativePoliciesReportSummaryInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -52,10 +37,10 @@ pub const GetDeclarativePoliciesReportSummaryOutput = struct {
     report_id: ?[]const u8 = null,
 
     /// The name of the Amazon S3 bucket where the report is located.
-    s_3_bucket: ?[]const u8 = null,
+    s3_bucket: ?[]const u8 = null,
 
     /// The prefix for your S3 object.
-    s_3_prefix: ?[]const u8 = null,
+    s3_prefix: ?[]const u8 = null,
 
     /// The time when the report generation started.
     start_time: ?i64 = null,
@@ -159,7 +144,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "attributeSummarySet")) {
                     result.attribute_summaries = try serde.deserializeAttributeSummaryList(&reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "endTime")) {
-                    result.end_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "numberOfAccounts")) {
                     result.number_of_accounts = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "numberOfFailedAccounts")) {
@@ -167,11 +152,11 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "reportId")) {
                     result.report_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Bucket")) {
-                    result.s_3_bucket = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_bucket = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "s3Prefix")) {
-                    result.s_3_prefix = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_prefix = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "startTime")) {
-                    result.start_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.start_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "targetId")) {
                     result.target_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {

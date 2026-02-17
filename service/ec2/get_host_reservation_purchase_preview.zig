@@ -7,14 +7,6 @@ const CurrencyCodeValues = @import("currency_code_values.zig").CurrencyCodeValue
 const Purchase = @import("purchase.zig").Purchase;
 const serde = @import("serde.zig");
 
-/// Preview a reservation purchase with configurations that match those of your
-/// Dedicated
-/// Host. You must have active Dedicated Hosts in your account before you
-/// purchase a
-/// reservation.
-///
-/// This is a preview of the PurchaseHostReservation action and does not
-/// result in the offering being purchased.
 pub const GetHostReservationPurchasePreviewInput = struct {
     /// The IDs of the Dedicated Hosts with which the reservation is associated.
     host_id_set: []const []const u8,

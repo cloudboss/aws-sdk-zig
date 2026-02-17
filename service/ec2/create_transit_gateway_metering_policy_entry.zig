@@ -8,8 +8,6 @@ const TransitGatewayMeteringPayerType = @import("transit_gateway_metering_payer_
 const TransitGatewayMeteringPolicyEntry = @import("transit_gateway_metering_policy_entry.zig").TransitGatewayMeteringPolicyEntry;
 const serde = @import("serde.zig");
 
-/// Creates an entry in a transit gateway metering policy to define traffic
-/// measurement rules.
 pub const CreateTransitGatewayMeteringPolicyEntryInput = struct {
     /// The destination CIDR block for traffic matching.
     destination_cidr_block: ?[]const u8 = null,

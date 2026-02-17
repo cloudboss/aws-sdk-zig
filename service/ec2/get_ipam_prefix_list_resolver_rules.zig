@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamPrefixListResolverRule = @import("ipam_prefix_list_resolver_rule.zig").IpamPrefixListResolverRule;
 const serde = @import("serde.zig");
 
-/// Retrieves the CIDR selection rules for an IPAM prefix list resolver. Use
-/// this operation to view the business logic that determines which CIDRs are
-/// selected for synchronization with prefix lists.
 pub const GetIpamPrefixListResolverRulesInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

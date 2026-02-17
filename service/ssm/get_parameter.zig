@@ -5,18 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Parameter = @import("parameter.zig").Parameter;
 
-/// Get information about a single parameter by specifying the parameter name.
-///
-/// Parameter names can't contain spaces. The service removes any spaces
-/// specified for the
-/// beginning or end of a parameter name. If the specified name for a parameter
-/// contains spaces
-/// between characters, the request fails with a `ValidationException` error.
-///
-/// **Note:**
-///
-/// To get information about more than one parameter at a time, use the
-/// GetParameters operation.
 pub const GetParameterInput = struct {
     /// The name or Amazon Resource Name (ARN) of the parameter that you want to
     /// query. For

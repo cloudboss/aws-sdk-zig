@@ -4,30 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger
-/// a
-/// *kernel panic* (on Linux instances), or a *blue
-/// screen*/*stop error* (on Windows instances). For
-/// instances based on Intel and AMD processors, the interrupt is received as a
-/// *non-maskable interrupt* (NMI).
-///
-/// In general, the operating system crashes and reboots when a kernel panic or
-/// stop error
-/// is triggered. The operating system can also be configured to perform
-/// diagnostic tasks,
-/// such as generating a memory dump file, loading a secondary kernel, or
-/// obtaining a call
-/// trace.
-///
-/// Before sending a diagnostic interrupt to your instance, ensure that its
-/// operating
-/// system is configured to perform the required diagnostic tasks.
-///
-/// For more information about configuring your operating system to generate a
-/// crash dump
-/// when a kernel panic or stop error occurs, see [Send a diagnostic interrupt
-/// (for advanced
-/// users)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html) in the *Amazon EC2 User Guide*.
 pub const SendDiagnosticInterruptInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

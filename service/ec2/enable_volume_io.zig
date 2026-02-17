@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Enables I/O operations for a volume that had I/O operations disabled because
-/// the data on
-/// the volume was potentially inconsistent.
 pub const EnableVolumeIOInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

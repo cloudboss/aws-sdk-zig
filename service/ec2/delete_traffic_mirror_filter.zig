@@ -4,10 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified Traffic Mirror filter.
-///
-/// You cannot delete a Traffic Mirror filter that is in use by a Traffic Mirror
-/// session.
 pub const DeleteTrafficMirrorFilterInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

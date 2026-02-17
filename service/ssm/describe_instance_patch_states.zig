@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstancePatchState = @import("instance_patch_state.zig").InstancePatchState;
 
-/// Retrieves the high-level patch state of one or more managed nodes.
 pub const DescribeInstancePatchStatesInput = struct {
     /// The ID of the managed node for which patch state information should be
     /// retrieved.

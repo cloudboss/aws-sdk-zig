@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VpnConcentrator = @import("vpn_concentrator.zig").VpnConcentrator;
 const serde = @import("serde.zig");
 
-/// Describes one or more of your VPN concentrators.
 pub const DescribeVpnConcentratorsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

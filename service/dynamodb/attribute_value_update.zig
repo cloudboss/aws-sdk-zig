@@ -4,8 +4,6 @@ const AttributeValue = @import("attribute_value.zig").AttributeValue;
 /// For the `UpdateItem` operation, represents the attributes to be modified,
 /// the action to perform on each, and the new value for each.
 ///
-/// **Note:**
-///
 /// You cannot use `UpdateItem` to update any primary key attributes.
 /// Instead, you will need to delete the item, and then use `PutItem` to
 /// create a new item with new attributes.
@@ -44,8 +42,6 @@ pub const AttributeValueUpdate = struct {
     /// also a number, then the `Value` is mathematically added to
     /// the existing attribute. If `Value` is a negative number, then
     /// it is subtracted from the existing attribute.
-    ///
-    /// **Note:**
     ///
     /// If you use `ADD` to increment or decrement a number
     /// value for an item that doesn't exist before the update, DynamoDB

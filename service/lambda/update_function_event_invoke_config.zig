@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DestinationConfig = @import("destination_config.zig").DestinationConfig;
 
-/// Updates the configuration for asynchronous invocation for a function,
-/// version, or alias.
-///
-/// To configure options for asynchronous invocation, use
-/// PutFunctionEventInvokeConfig.
 pub const UpdateFunctionEventInvokeConfigInput = struct {
     /// A destination for events after they have been sent to a function for
     /// processing. **Destinations**
@@ -19,8 +14,6 @@ pub const UpdateFunctionEventInvokeConfigInput = struct {
     /// * **Bucket** - The ARN of an Amazon S3 bucket.
     /// * **Topic** - The ARN of a standard SNS topic.
     /// * **Event Bus** - The ARN of an Amazon EventBridge event bus.
-    ///
-    /// **Note:**
     ///
     /// S3 buckets are supported only for on-failure destinations. To retain records
     /// of successful invocations, use another destination type.
@@ -66,8 +59,6 @@ pub const UpdateFunctionEventInvokeConfigOutput = struct {
     /// * **Bucket** - The ARN of an Amazon S3 bucket.
     /// * **Topic** - The ARN of a standard SNS topic.
     /// * **Event Bus** - The ARN of an Amazon EventBridge event bus.
-    ///
-    /// **Note:**
     ///
     /// S3 buckets are supported only for on-failure destinations. To retain records
     /// of successful invocations, use another destination type.

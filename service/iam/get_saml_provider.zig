@@ -8,14 +8,6 @@ const SAMLPrivateKey = @import("saml_private_key.zig").SAMLPrivateKey;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Returns the SAML provider metadocument that was uploaded when the IAM SAML
-/// provider
-/// resource object was created or updated.
-///
-/// **Note:**
-///
-/// This operation requires [Signature Version
-/// 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 pub const GetSAMLProviderInput = struct {
     /// The Amazon Resource Name (ARN) of the SAML provider resource object in IAM
     /// to get
@@ -140,7 +132,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "AssertionEncryptionMode")) {
                     result.assertion_encryption_mode = std.meta.stringToEnum(assertionEncryptionModeType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateDate")) {
-                    result.create_date = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.create_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "PrivateKeyList")) {
                     result.private_key_list = try serde.deserializeprivateKeyList(&reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "SAMLMetadataDocument")) {
@@ -150,7 +142,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try serde.deserializetagListType(&reader, alloc, "member");
                 } else if (std.mem.eql(u8, e.local, "ValidUntil")) {
-                    result.valid_until = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.valid_until = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

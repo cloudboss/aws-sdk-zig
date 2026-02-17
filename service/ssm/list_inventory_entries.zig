@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InventoryFilter = @import("inventory_filter.zig").InventoryFilter;
 
-/// A list of inventory items returned by the request.
 pub const ListInventoryEntriesInput = struct {
     /// One or more filters. Use a filter to return a more specific list of results.
     filters: ?[]const InventoryFilter = null,

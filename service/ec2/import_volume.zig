@@ -8,20 +8,6 @@ const VolumeDetail = @import("volume_detail.zig").VolumeDetail;
 const ConversionTask = @import("conversion_task.zig").ConversionTask;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This API action supports only single-volume VMs. To import multi-volume VMs,
-/// use
-/// ImportImage instead. To import a disk to a snapshot, use
-/// ImportSnapshot instead.
-///
-/// Creates an import volume task using metadata from the specified disk image.
-///
-/// For information about the import manifest referenced by this API action, see
-/// [VM Import
-/// Manifest](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html).
-///
-/// This API action is not supported by the Command Line Interface (CLI).
 pub const ImportVolumeInput = struct {
     /// The Availability Zone for the resulting EBS volume.
     ///

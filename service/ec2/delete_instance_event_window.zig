@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceEventWindowStateChange = @import("instance_event_window_state_change.zig").InstanceEventWindowStateChange;
 const serde = @import("serde.zig");
 
-/// Deletes the specified event window.
-///
-/// For more information, see [Define event windows for scheduled
-/// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
 pub const DeleteInstanceEventWindowInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

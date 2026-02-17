@@ -5,13 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SSEType = @import("sse_type.zig").SSEType;
 
-/// Describes whether EBS encryption by default is enabled for your account in
-/// the current
-/// Region.
-///
-/// For more information, see [Amazon EBS
-/// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
-/// in the *Amazon EBS User Guide*.
 pub const GetEbsEncryptionByDefaultInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

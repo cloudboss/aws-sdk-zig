@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AccessRequestStatus = @import("access_request_status.zig").AccessRequestStatus;
 const Credentials = @import("credentials.zig").Credentials;
 
-/// Returns a credentials set to be used with just-in-time node access.
 pub const GetAccessTokenInput = struct {
     /// The ID of a just-in-time node access request.
     access_request_id: []const u8,

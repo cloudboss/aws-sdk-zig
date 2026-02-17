@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayAttachmentPropagation = @import("transit_gateway_attachment_propagation.zig").TransitGatewayAttachmentPropagation;
 const serde = @import("serde.zig");
 
-/// Lists the route tables to which the specified resource attachment propagates
-/// routes.
 pub const GetTransitGatewayAttachmentPropagationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

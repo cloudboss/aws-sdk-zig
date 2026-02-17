@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamResourceDiscoveryAssociation = @import("ipam_resource_discovery_association.zig").IpamResourceDiscoveryAssociation;
 const serde = @import("serde.zig");
 
-/// Disassociates a resource discovery from an Amazon VPC IPAM. A resource
-/// discovery is an IPAM component that enables IPAM to manage and monitor
-/// resources that belong to the owning account.
 pub const DisassociateIpamResourceDiscoveryInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

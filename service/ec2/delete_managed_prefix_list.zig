@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ManagedPrefixList = @import("managed_prefix_list.zig").ManagedPrefixList;
 const serde = @import("serde.zig");
 
-/// Deletes the specified managed prefix list. You must first remove all
-/// references to the prefix list in your resources.
 pub const DeleteManagedPrefixListInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

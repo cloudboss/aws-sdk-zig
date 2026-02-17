@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Adds [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to a
-/// function, event source mapping, or code signing configuration.
 pub const TagResourceInput = struct {
     /// The resource's Amazon Resource Name (ARN).
     resource: []const u8,

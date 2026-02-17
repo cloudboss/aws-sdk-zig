@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayMeteringPolicyEntry = @import("transit_gateway_metering_policy_entry.zig").TransitGatewayMeteringPolicyEntry;
 const serde = @import("serde.zig");
 
-/// Retrieves the entries for a transit gateway metering policy.
 pub const GetTransitGatewayMeteringPolicyEntriesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

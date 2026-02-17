@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CapacityManagerDataExportResponse = @import("capacity_manager_data_export_response.zig").CapacityManagerDataExportResponse;
 const serde = @import("serde.zig");
 
-/// Describes one or more Capacity Manager data export configurations. Returns
-/// information about export settings, delivery status, and recent export
-/// activity.
 pub const DescribeCapacityManagerDataExportsInput = struct {
     /// The IDs of the data export configurations to describe. If not specified, all
     /// export configurations are returned.

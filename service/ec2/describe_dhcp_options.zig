@@ -7,15 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const DhcpOptions = @import("dhcp_options.zig").DhcpOptions;
 const serde = @import("serde.zig");
 
-/// Describes your DHCP option sets. The default is to describe all your DHCP
-/// option sets.
-/// Alternatively, you can specify specific DHCP option set IDs or filter the
-/// results to
-/// include only the DHCP option sets that match specific criteria.
-///
-/// For more information, see [DHCP option
-/// sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the
-/// *Amazon VPC User Guide*.
 pub const DescribeDhcpOptionsInput = struct {
     /// The IDs of DHCP option sets.
     dhcp_options_ids: ?[]const []const u8 = null,

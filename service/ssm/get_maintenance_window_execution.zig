@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowExecutionStatus = @import("maintenance_window_execution_status.zig").MaintenanceWindowExecutionStatus;
 
-/// Retrieves details about a specific a maintenance window execution.
 pub const GetMaintenanceWindowExecutionInput = struct {
     /// The ID of the maintenance window execution that includes the task.
     window_execution_id: []const u8,

@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const OperatingSystem = @import("operating_system.zig").OperatingSystem;
 
-/// Retrieves the patch baseline that should be used for the specified patch
-/// group.
 pub const GetPatchBaselineForPatchGroupInput = struct {
     /// Returns the operating system rule specified for patch groups using the patch
     /// baseline.

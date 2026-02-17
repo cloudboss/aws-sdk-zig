@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayRouteTableAssociation = @import("transit_gateway_route_table_association.zig").TransitGatewayRouteTableAssociation;
 const serde = @import("serde.zig");
 
-/// Gets information about the associations for the specified transit gateway
-/// route table.
 pub const GetTransitGatewayRouteTableAssociationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

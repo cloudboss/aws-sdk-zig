@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Enables the outbound identity federation feature for your Amazon Web
-/// Services account. When enabled, IAM principals in your account
-/// can use the `GetWebIdentityToken` API to obtain JSON Web Tokens (JWTs) for
-/// secure authentication with external services.
-/// This operation also generates a unique issuer URL for your Amazon Web
-/// Services account.
 pub const EnableOutboundWebIdentityFederationInput = struct {
 };
 

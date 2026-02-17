@@ -3,8 +3,6 @@ const BlockedEncryptionTypes = @import("blocked_encryption_types.zig").BlockedEn
 
 /// Specifies the default server-side encryption configuration.
 ///
-/// **Note:**
-///
 /// * **General purpose buckets** - If you're specifying a customer
 /// managed KMS key, we recommend using a fully qualified KMS key ARN. If you
 /// use a KMS key
@@ -34,8 +32,6 @@ pub const ServerSideEncryptionRule = struct {
     /// [Blocking or unblocking SSE-C for a general purpose
     /// bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html).
     ///
-    /// **Note:**
-    ///
     /// Currently, this parameter only supports blocking or unblocking server-side
     /// encryption with customer-provided keys (SSE-C). For more information about
     /// SSE-C, see [Using server-side encryption with customer-provided keys
@@ -48,8 +44,6 @@ pub const ServerSideEncryptionRule = struct {
     /// the
     /// `BucketKeyEnabled` element to `true` causes Amazon S3 to use an S3 Bucket
     /// Key.
-    ///
-    /// **Note:**
     ///
     /// * **General purpose buckets** - By default, S3 Bucket Key is not
     /// enabled. For more information, see [Amazon S3 Bucket

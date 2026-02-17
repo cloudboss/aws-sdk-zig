@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PhoneNumberInformation = @import("phone_number_information.zig").PhoneNumberInformation;
 const serde = @import("serde.zig");
 
-/// Lists the calling Amazon Web Services account's dedicated origination
-/// numbers and their metadata.
-/// For more information about origination numbers, see [Origination
-/// numbers](https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html) in the *Amazon SNS Developer
-/// Guide*.
 pub const ListOriginationNumbersInput = struct {
     /// The maximum number of origination numbers to return.
     max_results: ?i32 = null,

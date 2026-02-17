@@ -8,7 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const LocalGatewayRouteTable = @import("local_gateway_route_table.zig").LocalGatewayRouteTable;
 const serde = @import("serde.zig");
 
-/// Creates a local gateway route table.
 pub const CreateLocalGatewayRouteTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

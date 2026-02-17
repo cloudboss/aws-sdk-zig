@@ -11,37 +11,6 @@ const TargetLocation = @import("target_location.zig").TargetLocation;
 const Target = @import("target.zig").Target;
 const AssociationDescription = @import("association_description.zig").AssociationDescription;
 
-/// Updates an association. You can update the association name and version, the
-/// document
-/// version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3)
-/// output. When you
-/// call `UpdateAssociation`, the system removes all optional parameters from
-/// the request
-/// and overwrites the association with null values for those parameters. This
-/// is by design. You must
-/// specify all optional parameters in the call, even if you are not changing
-/// the parameters. This
-/// includes the `Name` parameter. Before calling this API action, we recommend
-/// that you
-/// call the DescribeAssociation API operation and make a note of all optional
-/// parameters required for your `UpdateAssociation` call.
-///
-/// In order to call this API operation, a user, group, or role must be granted
-/// permission to
-/// call the DescribeAssociation API operation. If you don't have permission to
-/// call `DescribeAssociation`, then you receive the following error: `An error
-/// occurred (AccessDeniedException) when calling the UpdateAssociation
-/// operation: User:
-/// isn't authorized to perform: ssm:DescribeAssociation on resource:
-/// `
-///
-/// **Important:**
-///
-/// When you update an association, the association immediately runs against the
-/// specified
-/// targets. You can add the `ApplyOnlyAtCronInterval` parameter to run the
-/// association
-/// during the next schedule run.
 pub const UpdateAssociationInput = struct {
     alarm_configuration: ?AlarmConfiguration = null,
 
@@ -115,8 +84,6 @@ pub const UpdateAssociationInput = struct {
     compliance_severity: ?AssociationComplianceSeverity = null,
 
     /// The document version you want update for the association.
-    ///
-    /// **Important:**
     ///
     /// State Manager doesn't support running associations that use a new version of
     /// a document if
@@ -238,8 +205,6 @@ pub const UpdateAssociationInput = struct {
     /// and rate expressions for Systems
     /// Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html) in the *Amazon Web Services Systems Manager User Guide*.
     ///
-    /// **Note:**
-    ///
     /// To use offsets, you must specify the `ApplyOnlyAtCronInterval` parameter.
     /// This
     /// option tells the system not to run an association immediately after you
@@ -268,8 +233,6 @@ pub const UpdateAssociationInput = struct {
     /// association. Use this action to update an association in multiple Regions
     /// and multiple
     /// accounts.
-    ///
-    /// **Note:**
     ///
     /// The `IncludeChildOrganizationUnits` parameter is not supported by State
     /// Manager.

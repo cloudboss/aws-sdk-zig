@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Updates the description or maximum session duration setting of a role.
 pub const UpdateRoleInput = struct {
     /// The new description that you want to apply to the specified role.
     description: ?[]const u8 = null,
@@ -26,8 +25,6 @@ pub const UpdateRoleInput = struct {
     /// operations to create a console URL. For more information, see [Using IAM
     /// roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html)
     /// in the *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// IAM role credentials provided by Amazon EC2 instances assigned to the role
     /// are not

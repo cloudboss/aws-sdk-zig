@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Disables a virtual private gateway (VGW) from propagating routes to a
-/// specified route
-/// table of a VPC.
 pub const DisableVgwRoutePropagationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

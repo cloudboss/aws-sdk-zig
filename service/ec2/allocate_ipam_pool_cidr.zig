@@ -6,19 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamPoolAllocation = @import("ipam_pool_allocation.zig").IpamPoolAllocation;
 const serde = @import("serde.zig");
 
-/// Allocate a CIDR from an IPAM pool. The Region you use should be the IPAM
-/// pool locale. The locale is the Amazon Web Services Region where this IPAM
-/// pool is available for allocations.
-///
-/// In IPAM, an allocation is a CIDR assignment from an IPAM pool to another
-/// IPAM pool or to a resource. For more information, see [Allocate
-/// CIDRs](https://docs.aws.amazon.com/vpc/latest/ipam/allocate-cidrs-ipam.html)
-/// in the *Amazon VPC IPAM User Guide*.
-///
-/// **Note:**
-///
-/// This action creates an allocation with strong consistency. The returned CIDR
-/// will not overlap with any other allocations from the same pool.
 pub const AllocateIpamPoolCidrInput = struct {
     /// Include a particular CIDR range that can be returned by the pool. Allowed
     /// CIDRs are only allowed if using netmask length for allocation.

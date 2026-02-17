@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ReservedInstancesListing = @import("reserved_instances_listing.zig").ReservedInstancesListing;
 const serde = @import("serde.zig");
 
-/// Cancels the specified Reserved Instance listing in the Reserved Instance
-/// Marketplace.
-///
-/// For more information, see [Sell in the Reserved Instance
-/// Marketplace](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html) in the *Amazon EC2 User Guide*.
 pub const CancelReservedInstancesListingInput = struct {
     /// The ID of the Reserved Instance listing.
     reserved_instances_listing_id: []const u8,

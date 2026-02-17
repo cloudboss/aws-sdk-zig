@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PatchOrchestratorFilter = @import("patch_orchestrator_filter.zig").PatchOrchestratorFilter;
 const PatchBaselineIdentity = @import("patch_baseline_identity.zig").PatchBaselineIdentity;
 
-/// Lists the patch baselines in your Amazon Web Services account.
 pub const DescribePatchBaselinesInput = struct {
     /// Each element in the array is a structure containing a key-value pair.
     ///

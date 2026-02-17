@@ -7,13 +7,6 @@ const IpPermission = @import("ip_permission.zig").IpPermission;
 const SecurityGroupRuleDescription = @import("security_group_rule_description.zig").SecurityGroupRuleDescription;
 const serde = @import("serde.zig");
 
-/// Updates the description of an ingress (inbound) security group rule. You can
-/// replace an
-/// existing description, or add a description to a rule that did not have one
-/// previously.
-/// You can remove a description for a security group rule by omitting the
-/// description
-/// parameter in the request.
 pub const UpdateSecurityGroupRuleDescriptionsIngressInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

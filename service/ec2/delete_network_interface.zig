@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified network interface. You must detach the network
-/// interface before
-/// you can delete it.
 pub const DeleteNetworkInterfaceInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

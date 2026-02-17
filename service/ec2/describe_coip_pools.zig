@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const CoipPool = @import("coip_pool.zig").CoipPool;
 const serde = @import("serde.zig");
 
-/// Describes the specified customer-owned address pools or all of your
-/// customer-owned address pools.
 pub const DescribeCoipPoolsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

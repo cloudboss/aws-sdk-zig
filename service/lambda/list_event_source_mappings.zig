@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const EventSourceMappingConfiguration = @import("event_source_mapping_configuration.zig").EventSourceMappingConfiguration;
 
-/// Lists event source mappings. Specify an `EventSourceArn` to show only event
-/// source mappings for a single event source.
 pub const ListEventSourceMappingsInput = struct {
     /// The Amazon Resource Name (ARN) of the event source.
     ///

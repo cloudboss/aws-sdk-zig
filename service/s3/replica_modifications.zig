@@ -7,8 +7,6 @@ const ReplicaModificationsStatus = @import("replica_modifications_status.zig").R
 /// `Filter` is specified), you can specify this element and set the status to
 /// `Enabled` to replicate modifications on replicas.
 ///
-/// **Note:**
-///
 /// If you don't specify the `Filter` element, Amazon S3 assumes that the
 /// replication
 /// configuration is the earlier version, V1. In the earlier version, this

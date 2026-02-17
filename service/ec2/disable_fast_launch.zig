@@ -9,19 +9,6 @@ const FastLaunchSnapshotConfigurationResponse = @import("fast_launch_snapshot_co
 const FastLaunchStateCode = @import("fast_launch_state_code.zig").FastLaunchStateCode;
 const serde = @import("serde.zig");
 
-/// Discontinue Windows fast launch for a Windows AMI, and clean up existing
-/// pre-provisioned
-/// snapshots. After you disable Windows fast launch, the AMI uses the standard
-/// launch process for
-/// each new instance. Amazon EC2 must remove all pre-provisioned snapshots
-/// before you can enable
-/// Windows fast launch again.
-///
-/// **Note:**
-///
-/// You can only change these settings for Windows AMIs that you own or that
-/// have been
-/// shared with you.
 pub const DisableFastLaunchInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -184,7 +171,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "stateTransitionReason")) {
                     result.state_transition_reason = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "stateTransitionTime")) {
-                    result.state_transition_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.state_transition_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

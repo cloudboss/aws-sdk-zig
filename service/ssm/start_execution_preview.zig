@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExecutionInputs = @import("execution_inputs.zig").ExecutionInputs;
 
-/// Initiates the process of creating a preview showing the effects that running
-/// a specified
-/// Automation runbook would have on the targeted resources.
 pub const StartExecutionPreviewInput = struct {
     /// The name of the Automation runbook to run. The result of the execution
     /// preview indicates

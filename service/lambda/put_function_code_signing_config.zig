@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Update the code signing configuration for the function. Changes to the code
-/// signing configuration take effect the next time a user tries to deploy a
-/// code package to the function.
 pub const PutFunctionCodeSigningConfigInput = struct {
     /// The The Amazon Resource Name (ARN) of the code signing configuration.
     code_signing_config_arn: []const u8,

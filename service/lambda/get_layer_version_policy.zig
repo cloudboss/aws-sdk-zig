@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Returns the permission policy for a version of an [Lambda
-/// layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). For more information, see AddLayerVersionPermission.
 pub const GetLayerVersionPolicyInput = struct {
     /// The name or Amazon Resource Name (ARN) of the layer.
     layer_name: []const u8,

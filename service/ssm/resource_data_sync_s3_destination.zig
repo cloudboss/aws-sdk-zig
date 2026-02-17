@@ -1,5 +1,5 @@
 const ResourceDataSyncDestinationDataSharing = @import("resource_data_sync_destination_data_sharing.zig").ResourceDataSyncDestinationDataSharing;
-const ResourceDataSyncS3Format = @import("resource_data_sync_s_3_format.zig").ResourceDataSyncS3Format;
+const ResourceDataSyncS3Format = @import("resource_data_sync_s3_format.zig").ResourceDataSyncS3Format;
 
 /// Information about the target S3 bucket for the resource data sync.
 pub const ResourceDataSyncS3Destination = struct {

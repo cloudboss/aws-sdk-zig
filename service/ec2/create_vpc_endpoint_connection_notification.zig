@@ -6,16 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ConnectionNotification = @import("connection_notification.zig").ConnectionNotification;
 const serde = @import("serde.zig");
 
-/// Creates a connection notification for a specified VPC endpoint or VPC
-/// endpoint
-/// service. A connection notification notifies you of specific endpoint events.
-/// You must
-/// create an SNS topic to receive notifications. For more information, see
-/// [Creating an Amazon SNS
-/// topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in
-/// the *Amazon SNS Developer Guide*.
-///
-/// You can create a connection notification for interface endpoints only.
 pub const CreateVpcEndpointConnectionNotificationInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the

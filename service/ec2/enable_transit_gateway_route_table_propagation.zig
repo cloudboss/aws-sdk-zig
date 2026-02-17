@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayPropagation = @import("transit_gateway_propagation.zig").TransitGatewayPropagation;
 const serde = @import("serde.zig");
 
-/// Enables the specified attachment to propagate routes to the specified
-/// propagation route table.
 pub const EnableTransitGatewayRouteTablePropagationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

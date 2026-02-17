@@ -6,14 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CarrierGateway = @import("carrier_gateway.zig").CarrierGateway;
 const serde = @import("serde.zig");
 
-/// Deletes a carrier gateway.
-///
-/// **Important:**
-///
-/// If you do not delete the route that contains the carrier gateway as the
-/// Target, the route is a blackhole route. For information about how to delete
-/// a route, see
-/// [DeleteRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html).
 pub const DeleteCarrierGatewayInput = struct {
     /// The ID of the carrier gateway.
     carrier_gateway_id: []const u8,

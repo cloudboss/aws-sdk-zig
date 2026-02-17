@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified Network Access Scope analysis.
 pub const DeleteNetworkInsightsAccessScopeAnalysisInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

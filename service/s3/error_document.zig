@@ -2,8 +2,6 @@
 pub const ErrorDocument = struct {
     /// The object key name to use when a 4XX class error occurs.
     ///
-    /// **Important:**
-    ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using
     /// XML requests. For more information, see [

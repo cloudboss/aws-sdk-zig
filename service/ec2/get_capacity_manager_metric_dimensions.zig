@@ -9,10 +9,6 @@ const Metric = @import("metric.zig").Metric;
 const CapacityManagerDimension = @import("capacity_manager_dimension.zig").CapacityManagerDimension;
 const serde = @import("serde.zig");
 
-/// Retrieves the available dimension values for capacity metrics within a
-/// specified time range. This is useful for discovering what accounts,
-/// regions, instance families, and other dimensions have data available for
-/// filtering and grouping.
 pub const GetCapacityManagerMetricDimensionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request, and provides

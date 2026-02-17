@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LaunchTemplate = @import("launch_template.zig").LaunchTemplate;
 const serde = @import("serde.zig");
 
-/// Modifies a launch template. You can specify which version of the launch
-/// template to
-/// set as the default version. When launching an instance, the default version
-/// applies when
-/// a launch template version is not specified.
 pub const ModifyLaunchTemplateInput = struct {
     /// Unique, case-sensitive identifier you provide to ensure the idempotency of
     /// the

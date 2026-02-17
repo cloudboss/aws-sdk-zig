@@ -7,13 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const InternetGateway = @import("internet_gateway.zig").InternetGateway;
 const serde = @import("serde.zig");
 
-/// Creates an internet gateway for use with a VPC. After creating the internet
-/// gateway,
-/// you attach it to a VPC using AttachInternetGateway.
-///
-/// For more information, see [Internet
-/// gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the
-/// *Amazon VPC User Guide*.
 pub const CreateInternetGatewayInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

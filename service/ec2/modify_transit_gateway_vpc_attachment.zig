@@ -7,7 +7,6 @@ const ModifyTransitGatewayVpcAttachmentRequestOptions = @import("modify_transit_
 const TransitGatewayVpcAttachment = @import("transit_gateway_vpc_attachment.zig").TransitGatewayVpcAttachment;
 const serde = @import("serde.zig");
 
-/// Modifies the specified VPC attachment.
 pub const ModifyTransitGatewayVpcAttachmentInput = struct {
     /// The IDs of one or more subnets to add. You can specify at most one subnet
     /// per Availability Zone.

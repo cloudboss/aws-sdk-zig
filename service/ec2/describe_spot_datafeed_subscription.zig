@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SpotDatafeedSubscription = @import("spot_datafeed_subscription.zig").SpotDatafeedSubscription;
 const serde = @import("serde.zig");
 
-/// Describes the data feed for Spot Instances. For more information, see [Spot
-/// Instance data
-/// feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) in the *Amazon EC2 User Guide*.
 pub const DescribeSpotDatafeedSubscriptionInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

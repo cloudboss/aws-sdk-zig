@@ -13,16 +13,12 @@ const DeleteMarkerReplicationStatus = @import("delete_marker_replication_status.
 /// For more information about delete marker replication, see [Basic Rule
 /// Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html).
 ///
-/// **Note:**
-///
 /// If you are using an earlier version of the replication configuration, Amazon
 /// S3 handles replication of
 /// delete markers differently. For more information, see [Backward
 /// Compatibility](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
 pub const DeleteMarkerReplication = struct {
     /// Indicates whether to replicate delete markers.
-    ///
-    /// **Note:**
     ///
     /// Indicates whether to replicate delete markers.
     status: ?DeleteMarkerReplicationStatus,

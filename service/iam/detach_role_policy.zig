@@ -4,14 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes the specified managed policy from the specified role.
-///
-/// A role can also have inline policies embedded with it. To delete an inline
-/// policy, use
-/// [DeleteRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteRolePolicy.html). For information about policies, see [Managed
-/// policies and inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
-/// *IAM User Guide*.
 pub const DetachRolePolicyInput = struct {
     /// The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     ///

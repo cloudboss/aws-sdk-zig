@@ -5,20 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImageBlockPublicAccessEnabledState = @import("image_block_public_access_enabled_state.zig").ImageBlockPublicAccessEnabledState;
 
-/// Enables *block public access for AMIs* at the account level in the
-/// specified Amazon Web Services Region. This prevents the public sharing of
-/// your AMIs. However, if you already
-/// have public AMIs, they will remain publicly available.
-///
-/// The API can take up to 10 minutes to configure this setting. During this
-/// time, if you run
-/// [GetImageBlockPublicAccessState](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html), the response will be `unblocked`. When
-/// the API has completed the configuration, the response will be
-/// `block-new-sharing`.
-///
-/// For more information, see [Block
-/// public access to your
-/// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-to-amis.html) in the *Amazon EC2 User Guide*.
 pub const EnableImageBlockPublicAccessInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ExecutionPreview = @import("execution_preview.zig").ExecutionPreview;
 const ExecutionPreviewStatus = @import("execution_preview_status.zig").ExecutionPreviewStatus;
 
-/// Initiates the process of retrieving an existing preview that shows the
-/// effects that running
-/// a specified Automation runbook would have on the targeted resources.
 pub const GetExecutionPreviewInput = struct {
     /// The ID of the existing execution preview.
     execution_preview_id: []const u8,

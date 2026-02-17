@@ -10,55 +10,6 @@ const Target = @import("target.zig").Target;
 const MaintenanceWindowTaskInvocationParameters = @import("maintenance_window_task_invocation_parameters.zig").MaintenanceWindowTaskInvocationParameters;
 const MaintenanceWindowTaskParameterValueExpression = @import("maintenance_window_task_parameter_value_expression.zig").MaintenanceWindowTaskParameterValueExpression;
 
-/// Modifies a task assigned to a maintenance window. You can't change the task
-/// type, but you
-/// can change the following values:
-///
-/// * `TaskARN`. For example, you can change a `RUN_COMMAND` task from
-/// `AWS-RunPowerShellScript` to `AWS-RunShellScript`.
-///
-/// * `ServiceRoleArn`
-///
-/// * `TaskInvocationParameters`
-///
-/// * `Priority`
-///
-/// * `MaxConcurrency`
-///
-/// * `MaxErrors`
-///
-/// **Note:**
-///
-/// One or more targets must be specified for maintenance window Run
-/// Command-type tasks.
-/// Depending on the task, targets are optional for other maintenance window
-/// task types (Automation,
-/// Lambda, and Step Functions). For more information about running tasks
-/// that don't specify targets, see [Registering
-/// maintenance window tasks without
-/// targets](https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html) in the
-/// *Amazon Web Services Systems Manager User Guide*.
-///
-/// If the value for a parameter in `UpdateMaintenanceWindowTask` is null, then
-/// the
-/// corresponding field isn't modified. If you set `Replace` to true, then all
-/// fields
-/// required by the RegisterTaskWithMaintenanceWindow operation are required for
-/// this request. Optional fields that aren't specified are set to null.
-///
-/// **Important:**
-///
-/// When you update a maintenance window task that has options specified in
-/// `TaskInvocationParameters`, you must provide again all the
-/// `TaskInvocationParameters` values that you want to retain. The values you
-/// don't
-/// specify again are removed. For example, suppose that when you registered a
-/// Run Command task, you
-/// specified `TaskInvocationParameters` values for `Comment`,
-/// `NotificationConfig`, and `OutputS3BucketName`. If you update the
-/// maintenance window task and specify only a different `OutputS3BucketName`
-/// value, the
-/// values for `Comment` and `NotificationConfig` are removed.
 pub const UpdateMaintenanceWindowTaskInput = struct {
     /// The CloudWatch alarm you want to apply to your maintenance window task.
     alarm_configuration: ?AlarmConfiguration = null,
@@ -93,8 +44,6 @@ pub const UpdateMaintenanceWindowTaskInput = struct {
 
     /// The new logging location in Amazon S3 to specify.
     ///
-    /// **Note:**
-    ///
     /// `LoggingInfo` has been deprecated. To specify an Amazon Simple Storage
     /// Service (Amazon S3) bucket to contain logs, instead use the
     /// `OutputS3BucketName` and `OutputS3KeyPrefix` options in the
@@ -106,8 +55,6 @@ pub const UpdateMaintenanceWindowTaskInput = struct {
 
     /// The new `MaxConcurrency` value you want to specify. `MaxConcurrency`
     /// is the number of targets that are allowed to run this task, in parallel.
-    ///
-    /// **Note:**
     ///
     /// Although this element is listed as "Required: No", a value can be omitted
     /// only when you are
@@ -123,8 +70,6 @@ pub const UpdateMaintenanceWindowTaskInput = struct {
 
     /// The new `MaxErrors` value to specify. `MaxErrors` is the maximum
     /// number of errors that are allowed before the task stops being scheduled.
-    ///
-    /// **Note:**
     ///
     /// Although this element is listed as "Required: No", a value can be omitted
     /// only when you are
@@ -177,8 +122,6 @@ pub const UpdateMaintenanceWindowTaskInput = struct {
     /// specified using
     /// the format ` Key=tag_name,Values=tag_value`.
     ///
-    /// **Note:**
-    ///
     /// One or more targets must be specified for maintenance window Run
     /// Command-type tasks.
     /// Depending on the task, targets are optional for other maintenance window
@@ -197,8 +140,6 @@ pub const UpdateMaintenanceWindowTaskInput = struct {
     /// fields that
     /// match the task type. All other fields should be empty.
     ///
-    /// **Important:**
-    ///
     /// When you update a maintenance window task that has options specified in
     /// `TaskInvocationParameters`, you must provide again all the
     /// `TaskInvocationParameters` values that you want to retain. The values you
@@ -213,8 +154,6 @@ pub const UpdateMaintenanceWindowTaskInput = struct {
     task_invocation_parameters: ?MaintenanceWindowTaskInvocationParameters = null,
 
     /// The parameters to modify.
-    ///
-    /// **Note:**
     ///
     /// `TaskParameters` has been deprecated. To specify parameters to pass to a
     /// task when it runs,
@@ -272,8 +211,6 @@ pub const UpdateMaintenanceWindowTaskOutput = struct {
 
     /// The updated logging information in Amazon S3.
     ///
-    /// **Note:**
-    ///
     /// `LoggingInfo` has been deprecated. To specify an Amazon Simple Storage
     /// Service (Amazon S3) bucket to contain logs, instead use the
     /// `OutputS3BucketName` and `OutputS3KeyPrefix` options in the
@@ -324,8 +261,6 @@ pub const UpdateMaintenanceWindowTaskOutput = struct {
     task_invocation_parameters: ?MaintenanceWindowTaskInvocationParameters = null,
 
     /// The updated parameter values.
-    ///
-    /// **Note:**
     ///
     /// `TaskParameters` has been deprecated. To specify parameters to pass to a
     /// task when it runs,

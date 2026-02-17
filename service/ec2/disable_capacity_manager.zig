@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityManagerStatus = @import("capacity_manager_status.zig").CapacityManagerStatus;
 
-/// Disables EC2 Capacity Manager for your account. This stops data ingestion
-/// and removes access to capacity analytics and optimization recommendations.
-/// Previously collected data is retained but no new data will be processed.
 pub const DisableCapacityManagerInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request.

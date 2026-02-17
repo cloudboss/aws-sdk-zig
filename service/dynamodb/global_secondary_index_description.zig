@@ -22,8 +22,6 @@ pub const GlobalSecondaryIndexDescription = struct {
     /// true. You can't delete the index that is being created when `IndexStatus` is
     /// set to CREATING and `Backfilling` is false.
     ///
-    /// **Note:**
-    ///
     /// For indexes that were created during a `CreateTable` operation, the
     /// `Backfilling` attribute does not appear in the
     /// `DescribeTable` output.
@@ -63,8 +61,6 @@ pub const GlobalSecondaryIndexDescription = struct {
     /// * `HASH` - partition key
     ///
     /// * `RANGE` - sort key
-    ///
-    /// **Note:**
     ///
     /// The partition key of an item is also known as its *hash
     /// attribute*. The term "hash attribute" derives from DynamoDB's usage of an

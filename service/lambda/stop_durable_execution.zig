@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ErrorObject = @import("error_object.zig").ErrorObject;
 
-/// Stops a running [durable
-/// execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html). The execution transitions to STOPPED status and cannot be resumed. Any in-progress operations are terminated.
 pub const StopDurableExecutionInput = struct {
     /// The Amazon Resource Name (ARN) of the durable execution.
     durable_execution_arn: []const u8,

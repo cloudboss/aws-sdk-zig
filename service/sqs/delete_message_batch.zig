@@ -7,17 +7,6 @@ const DeleteMessageBatchRequestEntry = @import("delete_message_batch_request_ent
 const BatchResultErrorEntry = @import("batch_result_error_entry.zig").BatchResultErrorEntry;
 const DeleteMessageBatchResultEntry = @import("delete_message_batch_result_entry.zig").DeleteMessageBatchResultEntry;
 
-/// Deletes up to ten messages from the specified queue. This is a batch version
-/// of
-/// `
-/// DeleteMessage.` The result of the action on each
-/// message is reported individually in the response.
-///
-/// **Important:**
-///
-/// Because the batch request can result in a combination of successful and
-/// unsuccessful actions, you should check for batch errors even when the call
-/// returns an HTTP status code of `200`.
 pub const DeleteMessageBatchInput = struct {
     /// Lists the receipt handles for the messages to be deleted.
     entries: []const DeleteMessageBatchRequestEntry,

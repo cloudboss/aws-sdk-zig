@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamResourceDiscoveryAssociation = @import("ipam_resource_discovery_association.zig").IpamResourceDiscoveryAssociation;
 const serde = @import("serde.zig");
 
-/// Describes resource discovery association with an Amazon VPC IPAM. An
-/// associated resource discovery is a resource discovery that has been
-/// associated with an IPAM..
 pub const DescribeIpamResourceDiscoveryAssociationsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

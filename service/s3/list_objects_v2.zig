@@ -11,114 +11,6 @@ const Object = @import("object.zig").Object;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const serde = @import("serde.zig");
 
-/// Returns some or all (up to 1,000) of the objects in a bucket with each
-/// request. You can use the
-/// request parameters as selection criteria to return a subset of the objects
-/// in a bucket. A `200
-/// OK` response can contain valid or invalid XML. Make sure to design your
-/// application to parse the
-/// contents of the response and handle it appropriately. For more information
-/// about listing objects, see
-/// [Listing object
-/// keys
-/// programmatically](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ListingKeysUsingAPIs.html) in the *Amazon S3 User Guide*. To get a list of your
-/// buckets, see
-/// [ListBuckets](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html).
-///
-/// **Note:**
-///
-/// * **General purpose bucket** - For general purpose buckets,
-/// `ListObjectsV2` doesn't return prefixes that are related only to in-progress
-/// multipart uploads.
-///
-/// * **Directory buckets** - For directory buckets,
-/// `ListObjectsV2` response includes the prefixes that are related only to
-/// in-progress
-/// multipart uploads.
-///
-/// * **Directory buckets** - For directory buckets, you must make requests for
-///   this API operation to the Zonal endpoint. These endpoints support
-///   virtual-hosted-style requests in the format
-///   `https://*amzn-s3-demo-bucket*.s3express-*zone-id*.*region-code*.amazonaws.com/*key-name*
-/// `. Path-style requests are not supported. For more information about
-/// endpoints in Availability Zones, see [Regional and Zonal endpoints for
-/// directory buckets in Availability
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
-/// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
-/// see [Concepts for directory buckets in Local
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
-/// *Amazon S3 User Guide*.
-///
-/// **Permissions**
-///
-/// * **General purpose bucket permissions** - To use this
-/// operation, you must have READ access to the bucket. You must have permission
-/// to perform the
-/// `s3:ListBucket` action. The bucket owner has this permission by default and
-/// can
-/// grant this permission to others. For more information about permissions, see
-/// [Permissions Related to Bucket Subresource
-/// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access
-/// Permissions to Your Amazon S3
-/// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html) in the
-/// *Amazon S3 User Guide*.
-///
-/// * **Directory bucket permissions** - To grant access to this API operation
-///   on a directory bucket, we recommend that you use the [
-/// `CreateSession`
-/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-/// API operation for session-based authorization. Specifically, you grant the
-/// `s3express:CreateSession` permission to the directory bucket in a bucket
-/// policy or an IAM identity-based policy. Then, you make the `CreateSession`
-/// API call on the bucket to obtain a session token. With the session token in
-/// your request header, you can make API requests to this operation. After the
-/// session token expires, you make another `CreateSession` API call to generate
-/// a new session token for use.
-/// Amazon Web Services CLI or SDKs create session and refresh the session token
-/// automatically to avoid service interruptions when a session expires. For
-/// more information about authorization, see [
-/// `CreateSession`
-/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html).
-///
-/// **Sorting order of returned objects**
-///
-/// * **General purpose bucket** - For general purpose buckets,
-/// `ListObjectsV2` returns objects in lexicographical order based on their key
-/// names.
-///
-/// * **Directory bucket** - For directory buckets,
-/// `ListObjectsV2` does not return objects in lexicographical order.
-///
-/// **HTTP Host header syntax**
-///
-/// **Directory buckets ** - The HTTP Host header syntax is `
-/// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
-///
-/// **Important:**
-///
-/// This section describes the latest revision of this action. We recommend that
-/// you use this revised
-/// API operation for application development. For backward compatibility,
-/// Amazon S3 continues to support the
-/// prior version of this API operation,
-/// [ListObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html).
-///
-/// The following operations are related to `ListObjectsV2`:
-///
-/// *
-///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-///
-/// *
-///   [PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-///
-/// *
-///   [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const ListObjectsV2Input = struct {
     /// **Directory buckets** - When you use this operation with a directory bucket,
     /// you must use virtual-hosted-style requests in the format `
@@ -145,8 +37,6 @@ pub const ListObjectsV2Input = struct {
     /// information about access point ARNs, see [Using access
     /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// Object Lambda access points are not supported by directory buckets.
     ///
     /// **S3 on Outposts** - When you use this action with S3 on Outposts, you must
@@ -168,8 +58,6 @@ pub const ListObjectsV2Input = struct {
     /// `CommonPrefixes` is filtered out from results if it is not lexicographically
     /// greater than
     /// the `StartAfter` value.
-    ///
-    /// **Note:**
     ///
     /// * **Directory buckets** - For directory buckets, `/` is the only supported
     ///   delimiter.
@@ -197,8 +85,6 @@ pub const ListObjectsV2Input = struct {
     /// naming
     /// guidelines](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines).
     ///
-    /// **Note:**
-    ///
     /// When using the URL encoding type, non-ASCII characters that are used in an
     /// object's key name will
     /// be percent-encoded according to UTF-8 code values. For example, the object
@@ -215,8 +101,6 @@ pub const ListObjectsV2Input = struct {
     /// owner field with each key in the result, then set the `FetchOwner` field to
     /// `true`.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - For directory buckets, the bucket
     /// owner is returned as the object owner for all objects.
     fetch_owner: ?bool = null,
@@ -231,14 +115,10 @@ pub const ListObjectsV2Input = struct {
     /// that you do not specify
     /// are not returned.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     optional_object_attributes: ?[]const OptionalObjectAttributes = null,
 
     /// Limits the response to keys that begin with the specified prefix.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, only prefixes that end in a
     /// delimiter (`/`) are supported.
@@ -248,16 +128,12 @@ pub const ListObjectsV2Input = struct {
     /// list objects request in V2
     /// style. Bucket owners need not specify this parameter in their requests.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     request_payer: ?RequestPayer = null,
 
     /// StartAfter is where you want Amazon S3 to start listing from. Amazon S3
     /// starts listing after this specified
     /// key. StartAfter can be any key in the bucket.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     start_after: ?[]const u8 = null,
@@ -284,8 +160,6 @@ pub const ListObjectsV2Output = struct {
     /// keys that
     /// roll up into a common prefix count as a single return when calculating the
     /// number of returns.
-    ///
-    /// **Note:**
     ///
     /// * **Directory buckets** - For directory buckets, only prefixes that end in a
     ///   delimiter (`/`) are supported.
@@ -316,8 +190,6 @@ pub const ListObjectsV2Output = struct {
     /// collection. These rolled-up keys are not returned elsewhere in the response.
     /// Each rolled-up result
     /// counts as only one return against the `MaxKeys` value.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, `/` is the only supported
     /// delimiter.
@@ -367,8 +239,6 @@ pub const ListObjectsV2Output = struct {
 
     /// Keys that begin with the indicated prefix.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - For directory buckets, only prefixes that end in a
     /// delimiter (`/`) are supported.
     prefix: ?[]const u8 = null,
@@ -376,8 +246,6 @@ pub const ListObjectsV2Output = struct {
     request_charged: ?RequestCharged = null,
 
     /// If StartAfter was sent with the request, it is included in the response.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     start_after: ?[]const u8 = null,

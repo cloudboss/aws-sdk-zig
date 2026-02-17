@@ -7,14 +7,6 @@ const EnableFastSnapshotRestoreSuccessItem = @import("enable_fast_snapshot_resto
 const EnableFastSnapshotRestoreErrorItem = @import("enable_fast_snapshot_restore_error_item.zig").EnableFastSnapshotRestoreErrorItem;
 const serde = @import("serde.zig");
 
-/// Enables fast snapshot restores for the specified snapshots in the specified
-/// Availability Zones.
-///
-/// You get the full benefit of fast snapshot restores after they enter the
-/// `enabled` state.
-///
-/// For more information, see [Amazon EBS fast snapshot
-/// restore](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-fast-snapshot-restore.html) in the *Amazon EBS User Guide*.
 pub const EnableFastSnapshotRestoresInput = struct {
     /// One or more Availability Zone IDs. For example, `use2-az1`.
     ///

@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DescribeActivationsFilter = @import("describe_activations_filter.zig").DescribeActivationsFilter;
 const Activation = @import("activation.zig").Activation;
 
-/// Describes details about the activation, such as the date and time the
-/// activation was
-/// created, its expiration date, the Identity and Access Management (IAM) role
-/// assigned to
-/// the managed nodes in the activation, and the number of nodes registered by
-/// using this
-/// activation.
 pub const DescribeActivationsInput = struct {
     /// A filter to view information about your activations.
     filters: ?[]const DescribeActivationsFilter = null,

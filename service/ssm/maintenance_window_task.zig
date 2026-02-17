@@ -23,8 +23,6 @@ pub const MaintenanceWindowTask = struct {
 
     /// Information about an S3 bucket to write task-level logs to.
     ///
-    /// **Note:**
-    ///
     /// `LoggingInfo` has been deprecated. To specify an Amazon Simple Storage
     /// Service (Amazon S3) bucket to contain logs, instead use the
     /// `OutputS3BucketName` and `OutputS3KeyPrefix` options in the
@@ -35,8 +33,6 @@ pub const MaintenanceWindowTask = struct {
     logging_info: ?LoggingInfo,
 
     /// The maximum number of targets this task can be run for, in parallel.
-    ///
-    /// **Note:**
     ///
     /// Although this element is listed as "Required: No", a value can be omitted
     /// only when you are
@@ -51,8 +47,6 @@ pub const MaintenanceWindowTask = struct {
     max_concurrency: ?[]const u8,
 
     /// The maximum number of errors allowed before this task stops being scheduled.
-    ///
-    /// **Note:**
     ///
     /// Although this element is listed as "Required: No", a value can be omitted
     /// only when you are
@@ -107,8 +101,6 @@ pub const MaintenanceWindowTask = struct {
     task_arn: ?[]const u8,
 
     /// The parameters that should be passed to the task when it is run.
-    ///
-    /// **Note:**
     ///
     /// `TaskParameters` has been deprecated. To specify parameters to pass to a
     /// task when it runs,

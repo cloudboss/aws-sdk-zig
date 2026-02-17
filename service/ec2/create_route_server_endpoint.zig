@@ -7,15 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const RouteServerEndpoint = @import("route_server_endpoint.zig").RouteServerEndpoint;
 const serde = @import("serde.zig");
 
-/// Creates a new endpoint for a route server in a specified subnet.
-///
-/// A route server endpoint is an Amazon Web Services-managed component inside a
-/// subnet that facilitates [BGP (Border Gateway
-/// Protocol)](https://en.wikipedia.org/wiki/Border_Gateway_Protocol)
-/// connections between your route server and your BGP peers.
-///
-/// For more information see [Dynamic routing in your VPC with VPC Route
-/// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
 pub const CreateRouteServerEndpointInput = struct {
     /// Unique, case-sensitive identifier to ensure idempotency of the request.
     client_token: ?[]const u8 = null,

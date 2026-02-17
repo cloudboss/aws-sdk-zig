@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Sends a successful completion response for a callback operation in a durable
-/// execution. Use this API when an external system has successfully completed a
-/// callback operation.
 pub const SendDurableExecutionCallbackSuccessInput = struct {
     /// The unique identifier for the callback operation.
     callback_id: []const u8,

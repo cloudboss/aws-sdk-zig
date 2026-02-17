@@ -8,15 +8,6 @@ const RemovePrefixListEntry = @import("remove_prefix_list_entry.zig").RemovePref
 const ManagedPrefixList = @import("managed_prefix_list.zig").ManagedPrefixList;
 const serde = @import("serde.zig");
 
-/// Modifies the specified managed prefix list.
-///
-/// Adding or removing entries in a prefix list creates a new version of the
-/// prefix list.
-/// Changing the name of the prefix list does not affect the version.
-///
-/// If you specify a current version number that does not match the true current
-/// version
-/// number, the request fails.
 pub const ModifyManagedPrefixListInput = struct {
     /// One or more entries to add to the prefix list.
     add_entries: ?[]const AddPrefixListEntry = null,

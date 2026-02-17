@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamDiscoveredPublicAddress = @import("ipam_discovered_public_address.zig").IpamDiscoveredPublicAddress;
 const serde = @import("serde.zig");
 
-/// Gets the public IP addresses that have been discovered by IPAM.
 pub const GetIpamDiscoveredPublicAddressesInput = struct {
     /// The Amazon Web Services Region for the IP address.
     address_region: []const u8,
@@ -168,7 +167,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "nextToken")) {
                     result.next_token = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "oldestSampleTime")) {
-                    result.oldest_sample_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.oldest_sample_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

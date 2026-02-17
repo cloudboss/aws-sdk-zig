@@ -4,17 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the permissions boundary for the specified IAM role.
-///
-/// You cannot set the boundary for a service-linked role.
-///
-/// **Important:**
-///
-/// Deleting the permissions boundary for a role might increase its permissions.
-/// For
-/// example, it might allow anyone who assumes the role to perform all the
-/// actions
-/// granted in its permissions policies.
 pub const DeleteRolePermissionsBoundaryInput = struct {
     /// The name (friendly name, not ARN) of the IAM role from which you want to
     /// remove the

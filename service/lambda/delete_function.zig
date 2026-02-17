@@ -4,19 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a Lambda function. To delete a specific function version, use the
-/// `Qualifier` parameter. Otherwise, all versions and aliases are deleted. This
-/// doesn't require the user to have explicit permissions for DeleteAlias.
-///
-/// **Note:**
-///
-/// A deleted Lambda function cannot be recovered. Ensure that you specify the
-/// correct function name and version before deleting.
-///
-/// To delete Lambda event source mappings that invoke a function, use
-/// DeleteEventSourceMapping. For Amazon Web Services services and resources
-/// that invoke your function directly, delete the trigger in the service where
-/// you originally configured it.
 pub const DeleteFunctionInput = struct {
     /// The name or ARN of the Lambda function or version. **Name formats**
     ///

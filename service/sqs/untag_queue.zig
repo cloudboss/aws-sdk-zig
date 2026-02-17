@@ -4,17 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Remove cost allocation tags from the specified Amazon SQS queue. For an
-/// overview, see [Tagging
-/// Your Amazon SQS
-/// Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html) in the *Amazon SQS Developer Guide*.
-///
-/// **Note:**
-///
-/// Cross-account permissions don't apply to this action. For more information,
-/// see [Grant
-/// cross-account permissions to a role and a
-/// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
 pub const UntagQueueInput = struct {
     /// The URL of the queue.
     queue_url: []const u8,

@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExportDescription = @import("export_description.zig").ExportDescription;
 
-/// Describes an existing table export.
 pub const DescribeExportInput = struct {
     /// The Amazon Resource Name (ARN) associated with the export.
     export_arn: []const u8,

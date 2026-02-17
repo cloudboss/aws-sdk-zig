@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// Lists the tags that are attached to the specified IAM customer managed
-/// policy.
-/// The returned list of tags is sorted by tag key. For more information about
-/// tagging, see [Tagging IAM
-/// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
-/// the
-/// *IAM User Guide*.
 pub const ListPolicyTagsInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

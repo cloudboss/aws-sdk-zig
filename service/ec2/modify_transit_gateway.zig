@@ -7,9 +7,6 @@ const ModifyTransitGatewayOptions = @import("modify_transit_gateway_options.zig"
 const TransitGateway = @import("transit_gateway.zig").TransitGateway;
 const serde = @import("serde.zig");
 
-/// Modifies the specified transit gateway. When you modify a transit gateway,
-/// the modified options are applied to new transit gateway attachments only.
-/// Your existing transit gateway attachments are not modified.
 pub const ModifyTransitGatewayInput = struct {
     /// The description for the transit gateway.
     description: ?[]const u8 = null,

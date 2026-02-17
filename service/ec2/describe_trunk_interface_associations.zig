@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TrunkInterfaceAssociation = @import("trunk_interface_association.zig").TrunkInterfaceAssociation;
 const serde = @import("serde.zig");
 
-/// Describes one or more network interface trunk associations.
 pub const DescribeTrunkInterfaceAssociationsInput = struct {
     /// The IDs of the associations.
     association_ids: ?[]const []const u8 = null,

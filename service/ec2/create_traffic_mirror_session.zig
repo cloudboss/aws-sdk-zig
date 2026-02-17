@@ -7,21 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TrafficMirrorSession = @import("traffic_mirror_session.zig").TrafficMirrorSession;
 const serde = @import("serde.zig");
 
-/// Creates a Traffic Mirror session.
-///
-/// A Traffic Mirror session actively copies packets from a Traffic Mirror
-/// source to a Traffic Mirror target. Create a filter, and then assign it
-/// to the session to define a subset of the traffic to mirror, for example all
-/// TCP
-/// traffic.
-///
-/// The Traffic Mirror source and the Traffic Mirror target (monitoring
-/// appliances) can be in the same VPC, or in a different VPC connected via VPC
-/// peering or a transit gateway.
-///
-/// By default, no traffic is mirrored. Use
-/// [CreateTrafficMirrorFilter](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.html) to
-/// create filter rules that specify the traffic to mirror.
 pub const CreateTrafficMirrorSessionInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information, see [How to ensure

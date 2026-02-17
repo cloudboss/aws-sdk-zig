@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayVpcAttachment = @import("transit_gateway_vpc_attachment.zig").TransitGatewayVpcAttachment;
 const serde = @import("serde.zig");
 
-/// Accepts a request to attach a VPC to a transit gateway.
-///
-/// The VPC attachment must be in the `pendingAcceptance` state.
-/// Use DescribeTransitGatewayVpcAttachments to view your pending VPC attachment
-/// requests.
-/// Use RejectTransitGatewayVpcAttachment to reject a VPC attachment request.
 pub const AcceptTransitGatewayVpcAttachmentInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

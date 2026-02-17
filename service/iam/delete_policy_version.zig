@@ -4,18 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified version from the specified managed policy.
-///
-/// You cannot delete the default version from a policy using this operation. To
-/// delete
-/// the default version from a policy, use
-/// [DeletePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeletePolicy.html). To find
-/// out which version of a policy is marked as the default version, use
-/// [ListPolicyVersions](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html).
-///
-/// For information about versions for managed policies, see [Versioning for
-/// managed
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html) in the *IAM User Guide*.
 pub const DeletePolicyVersionInput = struct {
     /// The Amazon Resource Name (ARN) of the IAM policy from which you want to
     /// delete a

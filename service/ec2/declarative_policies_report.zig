@@ -10,10 +10,10 @@ pub const DeclarativePoliciesReport = struct {
     report_id: ?[]const u8,
 
     /// The name of the Amazon S3 bucket where the report is located.
-    s_3_bucket: ?[]const u8,
+    s3_bucket: ?[]const u8,
 
     /// The prefix for your S3 object.
-    s_3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8,
 
     /// The time when the report generation started.
     start_time: ?i64,

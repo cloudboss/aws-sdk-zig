@@ -5,19 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Parameter = @import("parameter.zig").Parameter;
 
-/// Get information about one or more parameters by specifying multiple
-/// parameter names.
-///
-/// **Note:**
-///
-/// To get information about a single parameter, you can use the GetParameter
-/// operation instead.
-///
-/// Parameter names can't contain spaces. The service removes any spaces
-/// specified for the
-/// beginning or end of a parameter name. If the specified name for a parameter
-/// contains spaces
-/// between characters, the request fails with a `ValidationException` error.
 pub const GetParametersInput = struct {
     /// The names or Amazon Resource Names (ARNs) of the parameters that you want to
     /// query. For
@@ -26,8 +13,6 @@ pub const GetParametersInput = struct {
     /// To query by parameter label, use `"Name": "name:label"`. To query by
     /// parameter
     /// version, use `"Name": "name:version"`.
-    ///
-    /// **Note:**
     ///
     /// The results for `GetParameters` requests are listed in alphabetical order in
     /// query responses.

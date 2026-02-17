@@ -13,7 +13,7 @@ pub const CapacityManagerDataExportResponse = struct {
     create_time: ?i64,
 
     /// The S3 URI of the most recently delivered export file.
-    latest_delivery_s_3_location_uri: ?[]const u8,
+    latest_delivery_s3_location_uri: ?[]const u8,
 
     /// The status of the most recent export delivery.
     latest_delivery_status: ?CapacityManagerDataExportStatus,
@@ -29,10 +29,10 @@ pub const CapacityManagerDataExportResponse = struct {
     output_format: ?OutputFormat,
 
     /// The name of the S3 bucket where export files are delivered.
-    s_3_bucket_name: ?[]const u8,
+    s3_bucket_name: ?[]const u8,
 
     /// The S3 key prefix used for organizing export files within the bucket.
-    s_3_bucket_prefix: ?[]const u8,
+    s3_bucket_prefix: ?[]const u8,
 
     /// The frequency at which data exports are generated.
     schedule: ?Schedule,

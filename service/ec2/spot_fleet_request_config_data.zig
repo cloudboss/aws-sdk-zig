@@ -55,8 +55,6 @@ pub const SpotFleetRequestConfigData = struct {
     ///
     /// **lowestPrice (not recommended)**
     ///
-    /// **Important:**
-    ///
     /// We don't recommend the `lowestPrice` allocation strategy because
     /// it has the highest risk of interruption for your Spot Instances.
     ///
@@ -145,8 +143,6 @@ pub const SpotFleetRequestConfigData = struct {
     /// `LaunchTemplateConfigs`. If you include On-Demand capacity in your
     /// request, you must use `LaunchTemplateConfigs`.
     ///
-    /// **Note:**
-    ///
     /// If an AMI specified in a launch specification is deregistered or disabled,
     /// no new
     /// instances can be launched from the AMI. For fleets of type `maintain`, the
@@ -201,8 +197,6 @@ pub const SpotFleetRequestConfigData = struct {
     /// target
     /// capacity.
     ///
-    /// **Note:**
-    ///
     /// If your fleet includes T instances that are configured as `unlimited`,
     /// and if their average CPU usage exceeds the baseline utilization, you will
     /// incur a charge
@@ -245,8 +239,6 @@ pub const SpotFleetRequestConfigData = struct {
     /// instances even
     /// if it hasn’t met the target capacity.
     ///
-    /// **Note:**
-    ///
     /// If your fleet includes T instances that are configured as `unlimited`,
     /// and if their average CPU usage exceeds the baseline utilization, you will
     /// incur a charge
@@ -263,8 +255,6 @@ pub const SpotFleetRequestConfigData = struct {
     /// Instance. We do not recommend
     /// using this parameter because it can lead to increased interruptions. If you
     /// do not specify this parameter, you will pay the current Spot price.
-    ///
-    /// **Important:**
     ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.

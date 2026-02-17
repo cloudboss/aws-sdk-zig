@@ -4,8 +4,6 @@ pub const Bucket = struct {
     /// Amazon Web Services resources across all
     /// of Amazon Web Services.
     ///
-    /// **Note:**
-    ///
     /// This parameter is only supported for S3 directory buckets. For more
     /// information, see [Using tags with
     /// directory

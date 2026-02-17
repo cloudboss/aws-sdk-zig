@@ -7,31 +7,6 @@ const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const OwnershipControls = @import("ownership_controls.zig").OwnershipControls;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Creates or modifies `OwnershipControls` for an Amazon S3 bucket. To use this
-/// operation, you
-/// must have the `s3:PutBucketOwnershipControls` permission. For more
-/// information about Amazon S3
-/// permissions, see [Specifying permissions in a
-/// policy](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-with-s3-actions.html).
-///
-/// For information about Amazon S3 Object Ownership, see [Using object
-/// ownership](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/about-object-ownership.html).
-///
-/// The following operations are related to `PutBucketOwnershipControls`:
-///
-/// * GetBucketOwnershipControls
-///
-/// * DeleteBucketOwnershipControls
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const PutBucketOwnershipControlsInput = struct {
     /// The name of the Amazon S3 bucket whose `OwnershipControls` you want to set.
     bucket: []const u8,

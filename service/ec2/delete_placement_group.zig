@@ -4,12 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified placement group. You must terminate all instances in
-/// the
-/// placement group before you can delete the placement group. For more
-/// information, see
-/// [Placement
-/// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide*.
 pub const DeletePlacementGroupInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

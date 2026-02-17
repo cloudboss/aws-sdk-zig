@@ -8,15 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayPeeringAttachment = @import("transit_gateway_peering_attachment.zig").TransitGatewayPeeringAttachment;
 const serde = @import("serde.zig");
 
-/// Requests a transit gateway peering attachment between the specified transit
-/// gateway
-/// (requester) and a peer transit gateway (accepter). The peer transit gateway
-/// can be in
-/// your account or a different Amazon Web Services account.
-///
-/// After you create the peering attachment, the owner of the accepter transit
-/// gateway
-/// must accept the attachment request.
 pub const CreateTransitGatewayPeeringAttachmentInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

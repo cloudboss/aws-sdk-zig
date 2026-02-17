@@ -32,8 +32,6 @@ pub const BlockedEncryptionTypes = struct {
     /// The object encryption type that you want to block or unblock for an Amazon
     /// S3 general purpose bucket.
     ///
-    /// **Note:**
-    ///
     /// Currently, this parameter only supports blocking or unblocking server side
     /// encryption with customer-provided keys (SSE-C). For more information about
     /// SSE-C, see [Using server-side encryption with customer-provided keys

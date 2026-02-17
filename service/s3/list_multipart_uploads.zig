@@ -10,146 +10,6 @@ const RequestCharged = @import("request_charged.zig").RequestCharged;
 const MultipartUpload = @import("multipart_upload.zig").MultipartUpload;
 const serde = @import("serde.zig");
 
-/// This operation lists in-progress multipart uploads in a bucket. An
-/// in-progress multipart upload is a
-/// multipart upload that has been initiated by the `CreateMultipartUpload`
-/// request, but has not
-/// yet been completed or aborted.
-///
-/// **Note:**
-///
-/// **Directory buckets** - If multipart uploads in a
-/// directory bucket are in progress, you can't delete the bucket until all the
-/// in-progress multipart
-/// uploads are aborted or completed. To delete these in-progress multipart
-/// uploads, use the
-/// `ListMultipartUploads` operation to list the in-progress multipart uploads
-/// in the bucket
-/// and use the `AbortMultipartUpload` operation to abort all the in-progress
-/// multipart
-/// uploads.
-///
-/// The `ListMultipartUploads` operation returns a maximum of 1,000 multipart
-/// uploads in the
-/// response. The limit of 1,000 multipart uploads is also the default value.
-/// You can further limit the
-/// number of uploads in a response by specifying the `max-uploads` request
-/// parameter. If there
-/// are more than 1,000 multipart uploads that satisfy your
-/// `ListMultipartUploads` request, the
-/// response returns an `IsTruncated` element with the value of `true`, a
-/// `NextKeyMarker` element, and a `NextUploadIdMarker` element. To list the
-/// remaining multipart uploads, you need to make subsequent
-/// `ListMultipartUploads` requests. In
-/// these requests, include two query parameters: `key-marker` and
-/// `upload-id-marker`.
-/// Set the value of `key-marker` to the `NextKeyMarker` value from the previous
-/// response. Similarly, set the value of `upload-id-marker` to the
-/// `NextUploadIdMarker` value from the previous response.
-///
-/// **Note:**
-///
-/// **Directory buckets** - The `upload-id-marker`
-/// element and the `NextUploadIdMarker` element aren't supported by directory
-/// buckets. To
-/// list the additional multipart uploads, you only need to set the value of
-/// `key-marker` to
-/// the `NextKeyMarker` value from the previous response.
-///
-/// For more information about multipart uploads, see [Uploading Objects Using
-/// Multipart
-/// Upload](https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in
-/// the *Amazon S3 User Guide*.
-///
-/// **Note:**
-///
-/// **Directory buckets** - For directory buckets, you must make requests for
-/// this API operation to the Zonal endpoint. These endpoints support
-/// virtual-hosted-style requests in the format
-/// `https://*amzn-s3-demo-bucket*.s3express-*zone-id*.*region-code*.amazonaws.com/*key-name*
-/// `. Path-style requests are not supported. For more information about
-/// endpoints in Availability Zones, see [Regional and Zonal endpoints for
-/// directory buckets in Availability
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
-/// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
-/// see [Concepts for directory buckets in Local
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
-/// *Amazon S3 User Guide*.
-///
-/// **Permissions**
-///
-/// * **General purpose bucket permissions** - For information
-/// about permissions required to use the multipart upload API, see [Multipart
-/// Upload and
-/// Permissions](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) in
-/// the *Amazon S3 User Guide*.
-///
-/// * **Directory bucket permissions** - To grant access to this API operation
-///   on a directory bucket, we recommend that you use the [
-/// `CreateSession`
-/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html)
-/// API operation for session-based authorization. Specifically, you grant the
-/// `s3express:CreateSession` permission to the directory bucket in a bucket
-/// policy or an IAM identity-based policy. Then, you make the `CreateSession`
-/// API call on the bucket to obtain a session token. With the session token in
-/// your request header, you can make API requests to this operation. After the
-/// session token expires, you make another `CreateSession` API call to generate
-/// a new session token for use.
-/// Amazon Web Services CLI or SDKs create session and refresh the session token
-/// automatically to avoid service interruptions when a session expires. For
-/// more information about authorization, see [
-/// `CreateSession`
-/// ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html).
-///
-/// **Sorting of multipart uploads in response**
-///
-/// * **General purpose bucket** - In the
-/// `ListMultipartUploads` response, the multipart uploads are sorted based on
-/// two
-/// criteria:
-///
-/// * Key-based sorting - Multipart uploads are initially sorted in ascending
-///   order
-/// based on their object keys.
-///
-/// * Time-based sorting - For uploads that share the same object key, they are
-/// further sorted in ascending order based on the upload initiation time. Among
-/// uploads with
-/// the same key, the one that was initiated first will appear before the ones
-/// that were
-/// initiated later.
-///
-/// * **Directory bucket** - In the
-/// `ListMultipartUploads` response, the multipart uploads aren't sorted
-/// lexicographically based on the object keys.
-///
-/// **HTTP Host header syntax**
-///
-/// **Directory buckets ** - The HTTP Host header syntax is `
-/// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
-///
-/// The following operations are related to `ListMultipartUploads`:
-///
-/// *
-///   [CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
-///
-/// *
-///   [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
-///
-/// *
-///   [CompleteMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
-///
-/// *
-///   [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
-///
-/// *
-///   [AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const ListMultipartUploadsInput = struct {
     /// The name of the bucket to which the multipart upload was initiated.
     ///
@@ -178,8 +38,6 @@ pub const ListMultipartUploadsInput = struct {
     /// information about access point ARNs, see [Using access
     /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// Object Lambda access points are not supported by directory buckets.
     ///
     /// **S3 on Outposts** - When you use this action with S3 on Outposts, you must
@@ -205,8 +63,6 @@ pub const ListMultipartUploadsInput = struct {
     /// greater than
     /// the key-marker.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - For directory buckets, `/` is the only supported
     /// delimiter.
     delimiter: ?[]const u8 = null,
@@ -219,8 +75,6 @@ pub const ListMultipartUploadsInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 
     /// Specifies the multipart upload after which listing should begin.
-    ///
-    /// **Note:**
     ///
     /// * **General purpose buckets** - For general purpose buckets,
     /// `key-marker` is an object key. Together with `upload-id-marker`, this
@@ -260,8 +114,6 @@ pub const ListMultipartUploadsInput = struct {
     /// `prefix` to make groups in the same way that you'd use a folder in a file
     /// system.)
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - For directory buckets, only prefixes that end in a
     /// delimiter (`/`) are supported.
     prefix: ?[]const u8 = null,
@@ -275,8 +127,6 @@ pub const ListMultipartUploadsInput = struct {
     /// for a key equal to the key-marker might be included in the list only if they
     /// have an upload ID
     /// lexicographically greater than the specified `upload-id-marker`.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     upload_id_marker: ?[]const u8 = null,
@@ -294,8 +144,6 @@ pub const ListMultipartUploadsOutput = struct {
     /// prefixes are
     /// returned in the `Prefix` child element.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - For directory buckets, only prefixes that end in a
     /// delimiter (`/`) are supported.
     common_prefixes: ?[]const CommonPrefix = null,
@@ -303,8 +151,6 @@ pub const ListMultipartUploadsOutput = struct {
     /// Contains the delimiter you specified in the request. If you don't specify a
     /// delimiter in your
     /// request, this element is absent from the response.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, `/` is the only supported
     /// delimiter.
@@ -344,16 +190,12 @@ pub const ListMultipartUploadsOutput = struct {
     /// used for the
     /// `upload-id-marker` request parameter in a subsequent request.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     next_upload_id_marker: ?[]const u8 = null,
 
     /// When a prefix is provided in the request, this field contains the specified
     /// prefix. The result
     /// contains only keys starting with the specified prefix.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, only prefixes that end in a
     /// delimiter (`/`) are supported.
@@ -368,8 +210,6 @@ pub const ListMultipartUploadsOutput = struct {
     /// for a key equal to the key-marker might be included in the list only if they
     /// have an upload ID
     /// lexicographically greater than the specified `upload-id-marker`.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     upload_id_marker: ?[]const u8 = null,

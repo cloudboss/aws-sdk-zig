@@ -48,8 +48,6 @@ pub const Instance = struct {
     /// parameter
     /// is the boot mode that is used to boot the instance at launch or start.
     ///
-    /// **Note:**
-    ///
     /// The operating system contained in the AMI must be configured to support the
     /// specified boot mode.
     ///
@@ -60,8 +58,6 @@ pub const Instance = struct {
     boot_mode: ?BootModeValues,
 
     /// The ID of the Capacity Block.
-    ///
-    /// **Note:**
     ///
     /// For P5 instances, a Capacity Block ID refers to a group of instances. For
     /// Trn2u
@@ -99,14 +95,10 @@ pub const Instance = struct {
 
     /// Deprecated.
     ///
-    /// **Note:**
-    ///
     /// Amazon Elastic Graphics reached end of life on January 8, 2024.
     elastic_gpu_associations: ?[]const ElasticGpuAssociation,
 
     /// Deprecated
-    ///
-    /// **Note:**
     ///
     /// Amazon Elastic Inference is no longer available.
     elastic_inference_accelerator_associations: ?[]const ElasticInferenceAcceleratorAssociation,

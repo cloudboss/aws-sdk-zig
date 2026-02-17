@@ -9,11 +9,6 @@ const CapacityBlock = @import("capacity_block.zig").CapacityBlock;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
 const serde = @import("serde.zig");
 
-/// Purchase the Capacity Block for use with your account. With Capacity Blocks
-/// you ensure
-/// GPU capacity is available for machine learning (ML) workloads. You must
-/// specify the ID
-/// of the Capacity Block offering you are purchasing.
 pub const PurchaseCapacityBlockInput = struct {
     /// The ID of the Capacity Block offering.
     capacity_block_offering_id: []const u8,

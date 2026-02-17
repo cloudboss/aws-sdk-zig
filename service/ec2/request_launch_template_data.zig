@@ -24,8 +24,6 @@ const LaunchTemplateTagSpecificationRequest = @import("launch_template_tag_speci
 
 /// The information to include in the launch template.
 ///
-/// **Note:**
-///
 /// You must specify at least one parameter for the launch template data.
 pub const RequestLaunchTemplateData = struct {
     /// The block device mapping.
@@ -77,13 +75,9 @@ pub const RequestLaunchTemplateData = struct {
 
     /// Deprecated.
     ///
-    /// **Note:**
-    ///
     /// Amazon Elastic Graphics reached end of life on January 8, 2024.
     elastic_gpu_specifications: ?[]const ElasticGpuSpecification,
 
-    /// **Note:**
-    ///
     /// Amazon Elastic Inference is no longer available.
     ///
     /// An elastic inference accelerator to associate with the instance. Elastic
@@ -153,8 +147,6 @@ pub const RequestLaunchTemplateData = struct {
     /// ID](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#use-an-ssm-parameter-instead-of-an-ami-id) in the
     /// *Amazon EC2 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// If the launch template will be used for an EC2 Fleet or Spot Fleet, note the
     /// following:
     ///
@@ -200,8 +192,6 @@ pub const RequestLaunchTemplateData = struct {
     /// * `ExcludedInstanceTypes` - The instance types to exclude from the list,
     /// even if they match your specified attributes.
     ///
-    /// **Note:**
-    ///
     /// If you specify `InstanceRequirements`, you can't specify
     /// `InstanceType`.
     ///
@@ -230,8 +220,6 @@ pub const RequestLaunchTemplateData = struct {
 
     /// The ID of the kernel.
     ///
-    /// **Important:**
-    ///
     /// We recommend that you use PV-GRUB instead of kernels and RAM disks. For more
     /// information, see [User provided
     /// kernels](https://docs.aws.amazon.com/linux/al2/ug/UserProvidedKernels.html)
@@ -242,8 +230,6 @@ pub const RequestLaunchTemplateData = struct {
     /// The name of the key pair. You can create a key pair using
     /// [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) or
     /// [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html).
-    ///
-    /// **Important:**
     ///
     /// If you do not specify a key pair, you can't connect to the instance unless
     /// you
@@ -285,8 +271,6 @@ pub const RequestLaunchTemplateData = struct {
     private_dns_name_options: ?LaunchTemplatePrivateDnsNameOptionsRequest,
 
     /// The ID of the RAM disk.
-    ///
-    /// **Important:**
     ///
     /// We recommend that you use PV-GRUB instead of kernels and RAM disks. For more
     /// information, see [User provided

@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DelegationPermission = @import("delegation_permission.zig").DelegationPermission;
 const serde = @import("serde.zig");
 
-/// Creates an IAM delegation request for temporary access delegation.
-///
-/// This API is not available for general use. In order to use this API, a
-/// caller first need to
-/// go through an onboarding process described in the
-/// [partner onboarding
-/// documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html).
 pub const CreateDelegationRequestInput = struct {
     /// A description of the delegation request.
     description: []const u8,

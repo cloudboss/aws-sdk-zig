@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LaunchTemplate = @import("launch_template.zig").LaunchTemplate;
 const serde = @import("serde.zig");
 
-/// Describes one or more launch templates.
 pub const DescribeLaunchTemplatesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

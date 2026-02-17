@@ -7,13 +7,6 @@ const InterfacePermissionType = @import("interface_permission_type.zig").Interfa
 const NetworkInterfacePermission = @import("network_interface_permission.zig").NetworkInterfacePermission;
 const serde = @import("serde.zig");
 
-/// Grants an Amazon Web Services-authorized account permission to attach the
-/// specified
-/// network interface to an instance in their account.
-///
-/// You can grant permission to a single Amazon Web Services account only, and
-/// only one
-/// account at a time.
 pub const CreateNetworkInterfacePermissionInput = struct {
     /// The Amazon Web Services account ID.
     aws_account_id: ?[]const u8 = null,

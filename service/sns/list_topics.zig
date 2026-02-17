@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Topic = @import("topic.zig").Topic;
 const serde = @import("serde.zig");
 
-/// Returns a list of the requester's topics. Each call returns a limited list
-/// of topics,
-/// up to 100. If there are more topics, a `NextToken` is also returned. Use the
-/// `NextToken` parameter in a new `ListTopics` call to get
-/// further results.
-///
-/// This action is throttled at 30 transactions per second (TPS).
 pub const ListTopicsInput = struct {
     /// Token returned by the previous `ListTopics` request.
     next_token: ?[]const u8 = null,

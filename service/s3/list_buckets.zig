@@ -7,38 +7,6 @@ const Bucket = @import("bucket.zig").Bucket;
 const Owner = @import("owner.zig").Owner;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Returns a list of all buckets owned by the authenticated sender of the
-/// request. To grant IAM
-/// permission to use this operation, you must add the `s3:ListAllMyBuckets`
-/// policy action.
-///
-/// For information about Amazon S3 buckets, see [Creating, configuring, and
-/// working with Amazon S3
-/// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html).
-///
-/// **Important:**
-///
-/// We strongly recommend using only paginated `ListBuckets` requests.
-/// Unpaginated
-/// `ListBuckets` requests are only supported for Amazon Web Services accounts
-/// set to the default general
-/// purpose bucket quota of 10,000. If you have an approved general purpose
-/// bucket quota above 10,000, you
-/// must send paginated `ListBuckets` requests to list your account’s buckets.
-/// All unpaginated
-/// `ListBuckets` requests will be rejected for Amazon Web Services accounts
-/// with a general purpose bucket
-/// quota greater than 10,000.
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const ListBucketsInput = struct {
     /// Limits the response to buckets that are located in the specified Amazon Web
     /// Services Region. The Amazon Web Services Region must
@@ -47,8 +15,6 @@ pub const ListBucketsInput = struct {
     /// Region. For a list of the valid values for all of the Amazon Web Services
     /// Regions, see [Regions and
     /// Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
-    ///
-    /// **Note:**
     ///
     /// Requests made to a Regional endpoint that is different from the
     /// `bucket-region`
@@ -67,8 +33,6 @@ pub const ListBucketsInput = struct {
     /// Length Constraints: Minimum length of 0. Maximum length of 1024.
     ///
     /// Required: No.
-    ///
-    /// **Note:**
     ///
     /// If you specify the `bucket-region`, `prefix`, or
     /// `continuation-token` query parameters without using `max-buckets` to set the

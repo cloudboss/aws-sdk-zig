@@ -7,23 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const BundleTask = @import("bundle_task.zig").BundleTask;
 const serde = @import("serde.zig");
 
-/// Describes the specified bundle tasks or all of your bundle tasks.
-///
-/// **Note:**
-///
-/// Completed bundle tasks are listed for only a limited time. If your bundle
-/// task is no
-/// longer in the list, you can still register an AMI from it. Just use
-/// `RegisterImage` with the Amazon S3 bucket name and image manifest name you
-/// provided
-/// to the bundle task.
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures,
-/// might vary. Applications should not assume the elements appear in a
-/// particular order.
 pub const DescribeBundleTasksInput = struct {
     /// The bundle task IDs.
     ///

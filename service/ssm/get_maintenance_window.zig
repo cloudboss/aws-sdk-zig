@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Retrieves a maintenance window.
 pub const GetMaintenanceWindowInput = struct {
     /// The ID of the maintenance window for which you want to retrieve information.
     window_id: []const u8,

@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowFilter = @import("maintenance_window_filter.zig").MaintenanceWindowFilter;
 const MaintenanceWindowTarget = @import("maintenance_window_target.zig").MaintenanceWindowTarget;
 
-/// Lists the targets registered with the maintenance window.
 pub const DescribeMaintenanceWindowTargetsInput = struct {
     /// Optional filters that can be used to narrow down the scope of the returned
     /// window targets.

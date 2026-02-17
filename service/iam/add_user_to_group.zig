@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Adds the specified user to the specified group.
 pub const AddUserToGroupInput = struct {
     /// The name of the group to update.
     ///

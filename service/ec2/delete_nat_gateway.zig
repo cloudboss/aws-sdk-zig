@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified NAT gateway. Deleting a public NAT gateway
-/// disassociates its Elastic IP address,
-/// but does not release the address from your account. Deleting a NAT gateway
-/// does not delete any NAT gateway
-/// routes in your route tables.
 pub const DeleteNatGatewayInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

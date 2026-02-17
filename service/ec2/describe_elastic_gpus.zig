@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ElasticGpus = @import("elastic_gpus.zig").ElasticGpus;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// Amazon Elastic Graphics reached end of life on January 8, 2024.
-///
-/// Describes the Elastic Graphics accelerator associated with your instances.
 pub const DescribeElasticGpusInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

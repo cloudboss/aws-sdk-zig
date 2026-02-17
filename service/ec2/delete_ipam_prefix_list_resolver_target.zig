@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamPrefixListResolverTarget = @import("ipam_prefix_list_resolver_target.zig").IpamPrefixListResolverTarget;
 const serde = @import("serde.zig");
 
-/// Deletes an IPAM prefix list resolver target. This removes the association
-/// between the resolver and the managed prefix list, stopping automatic CIDR
-/// synchronization.
-///
-/// For more information about IPAM prefix list resolver, see [Automate prefix
-/// list updates with
-/// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/automate-prefix-list-updates.html) in the *Amazon VPC IPAM User Guide*.
 pub const DeleteIpamPrefixListResolverTargetInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMulticastDomainAssociations = @import("transit_gateway_multicast_domain_associations.zig").TransitGatewayMulticastDomainAssociations;
 const serde = @import("serde.zig");
 
-/// Disassociates the specified subnets from the transit gateway multicast
-/// domain.
 pub const DisassociateTransitGatewayMulticastDomainInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

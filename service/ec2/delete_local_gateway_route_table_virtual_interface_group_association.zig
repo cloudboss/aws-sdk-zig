@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayRouteTableVirtualInterfaceGroupAssociation = @import("local_gateway_route_table_virtual_interface_group_association.zig").LocalGatewayRouteTableVirtualInterfaceGroupAssociation;
 const serde = @import("serde.zig");
 
-/// Deletes a local gateway route table virtual interface group association.
 pub const DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

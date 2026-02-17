@@ -16,11 +16,6 @@ const TransportProtocol = @import("transport_protocol.zig").TransportProtocol;
 const ClientVpnEndpointStatus = @import("client_vpn_endpoint_status.zig").ClientVpnEndpointStatus;
 const serde = @import("serde.zig");
 
-/// Creates a Client VPN endpoint. A Client VPN endpoint is the resource you
-/// create and configure to
-/// enable and manage client VPN sessions. It is the destination endpoint at
-/// which all client VPN sessions
-/// are terminated.
 pub const CreateClientVpnEndpointInput = struct {
     /// Information about the authentication method to be used to authenticate
     /// clients.

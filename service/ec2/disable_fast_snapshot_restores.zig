@@ -7,8 +7,6 @@ const DisableFastSnapshotRestoreSuccessItem = @import("disable_fast_snapshot_res
 const DisableFastSnapshotRestoreErrorItem = @import("disable_fast_snapshot_restore_error_item.zig").DisableFastSnapshotRestoreErrorItem;
 const serde = @import("serde.zig");
 
-/// Disables fast snapshot restores for the specified snapshots in the specified
-/// Availability Zones.
 pub const DisableFastSnapshotRestoresInput = struct {
     /// One or more Availability Zone IDs. For example, `use2-az1`.
     ///

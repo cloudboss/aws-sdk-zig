@@ -6,15 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ByoipCidr = @import("byoip_cidr.zig").ByoipCidr;
 const serde = @import("serde.zig");
 
-/// Stops advertising an address range that is provisioned as an address pool.
-///
-/// You can perform this operation at most once every 10 seconds, even if you
-/// specify different
-/// address ranges each time.
-///
-/// It can take a few minutes before traffic to the specified addresses stops
-/// routing to Amazon Web Services
-/// because of BGP propagation delays.
 pub const WithdrawByoipCidrInput = struct {
     /// The address range, in CIDR notation.
     cidr: []const u8,

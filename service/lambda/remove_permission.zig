@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Revokes function-use permission from an Amazon Web Services service or
-/// another Amazon Web Services account. You can get the ID of the statement
-/// from the output of GetPolicy.
 pub const RemovePermissionInput = struct {
     /// The name or ARN of the Lambda function, version, or alias. **Name formats**
     ///

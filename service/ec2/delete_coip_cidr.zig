@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CoipCidr = @import("coip_cidr.zig").CoipCidr;
 const serde = @import("serde.zig");
 
-/// Deletes a range of customer-owned IP addresses.
 pub const DeleteCoipCidrInput = struct {
     /// A customer-owned IP address range that you want to delete.
     cidr: []const u8,

@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AddressTransfer = @import("address_transfer.zig").AddressTransfer;
 const serde = @import("serde.zig");
 
-/// Disables Elastic IP address transfer. For more information, see [Transfer
-/// Elastic IP
-/// addresses](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro) in the *Amazon VPC User Guide*.
 pub const DisableAddressTransferInput = struct {
     /// The allocation ID of an Elastic IP address.
     allocation_id: []const u8,

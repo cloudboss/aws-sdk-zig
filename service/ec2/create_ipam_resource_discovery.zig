@@ -8,9 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const IpamResourceDiscovery = @import("ipam_resource_discovery.zig").IpamResourceDiscovery;
 const serde = @import("serde.zig");
 
-/// Creates an IPAM resource discovery. A resource discovery is an IPAM
-/// component that enables IPAM to manage and monitor resources that belong to
-/// the owning account.
 pub const CreateIpamResourceDiscoveryInput = struct {
     /// A client token for the IPAM resource discovery.
     client_token: ?[]const u8 = null,

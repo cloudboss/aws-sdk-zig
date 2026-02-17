@@ -1,6 +1,6 @@
 const VerifiedAccessLogCloudWatchLogsDestinationOptions = @import("verified_access_log_cloud_watch_logs_destination_options.zig").VerifiedAccessLogCloudWatchLogsDestinationOptions;
 const VerifiedAccessLogKinesisDataFirehoseDestinationOptions = @import("verified_access_log_kinesis_data_firehose_destination_options.zig").VerifiedAccessLogKinesisDataFirehoseDestinationOptions;
-const VerifiedAccessLogS3DestinationOptions = @import("verified_access_log_s_3_destination_options.zig").VerifiedAccessLogS3DestinationOptions;
+const VerifiedAccessLogS3DestinationOptions = @import("verified_access_log_s3_destination_options.zig").VerifiedAccessLogS3DestinationOptions;
 
 /// Options for Verified Access logs.
 pub const VerifiedAccessLogOptions = struct {
@@ -19,5 +19,5 @@ pub const VerifiedAccessLogOptions = struct {
     log_version: ?[]const u8,
 
     /// Sends Verified Access logs to Amazon S3.
-    s_3: ?VerifiedAccessLogS3DestinationOptions,
+    s3: ?VerifiedAccessLogS3DestinationOptions,
 };

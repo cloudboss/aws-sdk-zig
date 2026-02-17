@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const HostnameType = @import("hostname_type.zig").HostnameType;
 
-/// Modifies the options for instance hostnames for the specified instance.
 pub const ModifyPrivateDnsNameOptionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

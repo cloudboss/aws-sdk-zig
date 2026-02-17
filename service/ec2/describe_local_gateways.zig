@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LocalGateway = @import("local_gateway.zig").LocalGateway;
 const serde = @import("serde.zig");
 
-/// Describes one or more local gateways. By default, all local gateways are
-/// described.
-/// Alternatively, you can filter the results.
 pub const DescribeLocalGatewaysInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

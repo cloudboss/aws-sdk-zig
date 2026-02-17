@@ -18,65 +18,6 @@ const SourceAccessConfiguration = @import("source_access_configuration.zig").Sou
 const EventSourcePosition = @import("event_source_position.zig").EventSourcePosition;
 const FilterCriteriaError = @import("filter_criteria_error.zig").FilterCriteriaError;
 
-/// Creates a mapping between an event source and an Lambda function. Lambda
-/// reads items from the event source and invokes the function.
-///
-/// For details about how to configure different event sources, see the
-/// following topics.
-///
-/// * [ Amazon DynamoDB
-///   Streams](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping)
-/// * [ Amazon
-///   Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping)
-/// * [ Amazon
-///   SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource)
-/// * [ Amazon MQ and
-///   RabbitMQ](https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping)
-/// * [ Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html)
-/// * [ Apache
-///   Kafka](https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html)
-/// * [ Amazon
-///   DocumentDB](https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html)
-///
-/// The following error handling options are available for stream sources
-/// (DynamoDB, Kinesis, Amazon MSK, and self-managed Apache Kafka):
-///
-/// * `BisectBatchOnFunctionError` – If the function returns an error, split the
-///   batch in two and retry.
-/// * `MaximumRecordAgeInSeconds` – Discard records older than the specified
-///   age. The default value is infinite (-1). When set to infinite (-1), failed
-///   records are retried until the record expires
-/// * `MaximumRetryAttempts` – Discard records after the specified number of
-///   retries. The default value is infinite (-1). When set to infinite (-1),
-///   failed records are retried until the record expires.
-/// * `OnFailure` – Send discarded records to an Amazon SQS queue, Amazon SNS
-///   topic, Kafka topic, or Amazon S3 bucket. For more information, see [Adding
-///   a
-///   destination](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations).
-///
-/// The following option is available only for DynamoDB and Kinesis event
-/// sources:
-///
-/// * `ParallelizationFactor` – Process multiple batches from each shard
-///   concurrently.
-///
-/// For information about which configuration parameters apply to each event
-/// source, see the following topics.
-///
-/// * [ Amazon DynamoDB
-///   Streams](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params)
-/// * [ Amazon
-///   Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params)
-/// * [ Amazon
-///   SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params)
-/// * [ Amazon MQ and
-///   RabbitMQ](https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params)
-/// * [ Amazon
-///   MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms)
-/// * [ Apache
-///   Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms)
-/// * [ Amazon
-///   DocumentDB](https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration)
 pub const CreateEventSourceMappingInput = struct {
     /// Specific configuration settings for an Amazon Managed Streaming for Apache
     /// Kafka (Amazon MSK) event source.
@@ -374,8 +315,6 @@ pub const CreateEventSourceMappingOutput = struct {
     /// Discard records older than the specified age. The default value is -1, which
     /// sets the maximum age to infinite. When the value is set to infinite, Lambda
     /// never discards old records.
-    ///
-    /// **Note:**
     ///
     /// The minimum valid value for maximum record age is 60s. Although values less
     /// than 60 and greater than -1 fall within the parameter's absolute range, they

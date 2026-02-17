@@ -1,4 +1,4 @@
-const AnalyticsS3ExportFileFormat = @import("analytics_s_3_export_file_format.zig").AnalyticsS3ExportFileFormat;
+const AnalyticsS3ExportFileFormat = @import("analytics_s3_export_file_format.zig").AnalyticsS3ExportFileFormat;
 
 /// Contains information about where to publish the analytics results.
 pub const AnalyticsS3BucketDestination = struct {
@@ -8,8 +8,6 @@ pub const AnalyticsS3BucketDestination = struct {
     /// The account ID that owns the destination S3 bucket. If no account ID is
     /// provided, the owner is not
     /// validated before exporting data.
-    ///
-    /// **Note:**
     ///
     /// Although this value is optional, we strongly recommend that you set it to
     /// help prevent problems

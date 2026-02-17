@@ -6,18 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LoginProfile = @import("login_profile.zig").LoginProfile;
 const serde = @import("serde.zig");
 
-/// Creates a password for the specified IAM user. A password allows an IAM user
-/// to
-/// access Amazon Web Services services through the Amazon Web Services
-/// Management Console.
-///
-/// You can use the CLI, the Amazon Web Services API, or the **Users**
-/// page in the IAM console to create a password for any IAM user. Use
-/// [ChangePassword](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html) to update your own existing password in the **My Security Credentials** page in the Amazon Web Services Management Console.
-///
-/// For more information about managing passwords, see [Managing
-/// passwords](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in the
-/// *IAM User Guide*.
 pub const CreateLoginProfileInput = struct {
     /// The new password for the user.
     ///

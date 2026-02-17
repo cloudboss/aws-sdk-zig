@@ -5,13 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Retrieves information about IAM entity usage and IAM quotas in the Amazon
-/// Web Services
-/// account.
-///
-/// For information about IAM quotas, see [IAM and STS
-/// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the
-/// *IAM User Guide*.
 pub const GetAccountSummaryInput = struct {
 };
 

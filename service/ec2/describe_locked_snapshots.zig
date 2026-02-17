@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LockedSnapshotsInfo = @import("locked_snapshots_info.zig").LockedSnapshotsInfo;
 const serde = @import("serde.zig");
 
-/// Describes the lock status for a snapshot.
 pub const DescribeLockedSnapshotsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

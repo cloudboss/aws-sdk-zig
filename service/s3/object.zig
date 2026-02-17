@@ -43,8 +43,6 @@ pub const Object = struct {
     /// and therefore the ETag
     /// will not be an MD5 digest.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - MD5 is not supported by directory buckets.
     e_tag: ?[]const u8,
 
@@ -56,8 +54,6 @@ pub const Object = struct {
     last_modified: ?i64,
 
     /// The owner of the object
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - The bucket owner is returned as the
     /// object owner.
@@ -71,8 +67,6 @@ pub const Object = struct {
     /// Working with archived
     /// objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/archived-objects.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets. Directory buckets
     /// only support `EXPRESS_ONEZONE` (the S3 Express One Zone storage class) in
     /// Availability Zones and `ONEZONE_IA` (the S3 One Zone-Infrequent Access
@@ -83,8 +77,6 @@ pub const Object = struct {
     size: ?i64,
 
     /// The class of storage used to store the object.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** -
     /// Directory buckets only support `EXPRESS_ONEZONE` (the S3 Express One Zone

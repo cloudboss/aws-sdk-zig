@@ -2,7 +2,7 @@ const ExportFormat = @import("export_format.zig").ExportFormat;
 const ExportStatus = @import("export_status.zig").ExportStatus;
 const ExportType = @import("export_type.zig").ExportType;
 const IncrementalExportSpecification = @import("incremental_export_specification.zig").IncrementalExportSpecification;
-const S3SseAlgorithm = @import("s_3_sse_algorithm.zig").S3SseAlgorithm;
+const S3SseAlgorithm = @import("s3_sse_algorithm.zig").S3SseAlgorithm;
 
 /// Represents the properties of the exported table.
 pub const ExportDescription = struct {
@@ -52,16 +52,16 @@ pub const ExportDescription = struct {
     item_count: ?i64,
 
     /// The name of the Amazon S3 bucket containing the export.
-    s_3_bucket: ?[]const u8,
+    s3_bucket: ?[]const u8,
 
     /// The ID of the Amazon Web Services account that owns the bucket containing
     /// the
     /// export.
-    s_3_bucket_owner: ?[]const u8,
+    s3_bucket_owner: ?[]const u8,
 
     /// The Amazon S3 bucket prefix used as the file name and path of the exported
     /// snapshot.
-    s_3_prefix: ?[]const u8,
+    s3_prefix: ?[]const u8,
 
     /// Type of encryption used on the bucket where export data is stored. Valid
     /// values for
@@ -72,11 +72,11 @@ pub const ExportDescription = struct {
     ///
     /// * `KMS` - server-side encryption with KMS managed
     /// keys
-    s_3_sse_algorithm: ?S3SseAlgorithm,
+    s3_sse_algorithm: ?S3SseAlgorithm,
 
     /// The ID of the KMS managed key used to encrypt the S3 bucket where
     /// export data is stored (if applicable).
-    s_3_sse_kms_key_id: ?[]const u8,
+    s3_sse_kms_key_id: ?[]const u8,
 
     /// The time at which the export task began.
     start_time: ?i64,
@@ -101,11 +101,11 @@ pub const ExportDescription = struct {
         .failure_message = "FailureMessage",
         .incremental_export_specification = "IncrementalExportSpecification",
         .item_count = "ItemCount",
-        .s_3_bucket = "S3Bucket",
-        .s_3_bucket_owner = "S3BucketOwner",
-        .s_3_prefix = "S3Prefix",
-        .s_3_sse_algorithm = "S3SseAlgorithm",
-        .s_3_sse_kms_key_id = "S3SseKmsKeyId",
+        .s3_bucket = "S3Bucket",
+        .s3_bucket_owner = "S3BucketOwner",
+        .s3_prefix = "S3Prefix",
+        .s3_sse_algorithm = "S3SseAlgorithm",
+        .s3_sse_kms_key_id = "S3SseKmsKeyId",
         .start_time = "StartTime",
         .table_arn = "TableArn",
         .table_id = "TableId",

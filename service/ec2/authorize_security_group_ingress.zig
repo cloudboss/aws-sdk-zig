@@ -8,39 +8,8 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const SecurityGroupRule = @import("security_group_rule.zig").SecurityGroupRule;
 const serde = @import("serde.zig");
 
-/// Adds the specified inbound (ingress) rules to a security group.
-///
-/// An inbound rule permits instances to receive traffic from the specified IPv4
-/// or IPv6
-/// address range, the IP address ranges that are specified by a prefix list, or
-/// the instances
-/// that are associated with a destination security group. For more information,
-/// see [Security group
-/// rules](https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html).
-///
-/// You must specify exactly one of the following sources: an IPv4 or IPv6
-/// address range,
-/// a prefix list, or a security group. You must specify a protocol for each
-/// rule (for example, TCP).
-/// If the protocol is TCP or UDP, you must also specify a port or port range.
-/// If the protocol is
-/// ICMP or ICMPv6, you must also specify the ICMP/ICMPv6 type and code.
-///
-/// Rule changes are propagated to instances associated with the security group
-/// as quickly
-/// as possible. However, a small delay might occur.
-///
-/// For examples of rules that you can add to security groups for specific
-/// access scenarios,
-/// see [Security group rules for different use
-/// cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *Amazon EC2 User Guide*.
-///
-/// For more information about security group quotas, see [Amazon VPC
-/// quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html) in the *Amazon VPC User Guide*.
 pub const AuthorizeSecurityGroupIngressInput = struct {
     /// The IPv4 address range, in CIDR format.
-    ///
-    /// **Note:**
     ///
     /// Amazon Web Services
     /// [canonicalizes](https://en.wikipedia.org/wiki/Canonicalization) IPv4 and

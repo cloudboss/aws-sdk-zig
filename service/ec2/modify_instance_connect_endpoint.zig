@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const serde = @import("serde.zig");
 
-/// Modifies the specified EC2 Instance Connect Endpoint.
-///
-/// For more information, see [Modify an
-/// EC2 Instance Connect
-/// Endpoint](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/modify-ec2-instance-connect-endpoint.html) in the
-/// *Amazon EC2 User Guide*.
 pub const ModifyInstanceConnectEndpointInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the
@@ -24,8 +18,6 @@ pub const ModifyInstanceConnectEndpointInput = struct {
     instance_connect_endpoint_id: []const u8,
 
     /// The new IP address type for the EC2 Instance Connect Endpoint.
-    ///
-    /// **Note:**
     ///
     /// `PreserveClientIp` is only supported on IPv4 EC2 Instance Connect
     /// Endpoints. To use `PreserveClientIp`, the value for

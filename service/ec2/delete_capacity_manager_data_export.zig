@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes an existing Capacity Manager data export configuration. This stops
-/// future scheduled exports but does not delete previously exported files from
-/// S3.
 pub const DeleteCapacityManagerDataExportInput = struct {
     /// The unique identifier of the data export configuration to delete.
     capacity_manager_data_export_id: []const u8,

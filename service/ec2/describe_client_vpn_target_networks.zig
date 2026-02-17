@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TargetNetwork = @import("target_network.zig").TargetNetwork;
 const serde = @import("serde.zig");
 
-/// Describes the target networks associated with the specified Client VPN
-/// endpoint.
 pub const DescribeClientVpnTargetNetworksInput = struct {
     /// The IDs of the target network associations.
     association_ids: ?[]const []const u8 = null,

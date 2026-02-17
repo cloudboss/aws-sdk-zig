@@ -16,240 +16,6 @@ const CopyObjectResult = @import("copy_object_result.zig").CopyObjectResult;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const serde = @import("serde.zig");
 
-/// Creates a copy of an object that is already stored in Amazon S3.
-///
-/// **Important:**
-///
-/// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
-/// support for Email Grantee Access Control Lists (ACLs). If you attempt to use
-/// an Email Grantee ACL in a request after October 1, 2025,
-/// the request will receive an `HTTP 405` (Method Not Allowed) error.
-///
-/// This change affects the following Amazon Web Services Regions: US East (N.
-/// Virginia), US West (N. California), US West (Oregon), Asia Pacific
-/// (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe (Ireland),
-/// and South America (São Paulo).
-///
-/// **Note:**
-///
-/// You can store individual objects of up to 50 TB in Amazon S3. You create a
-/// copy of your
-/// object up to 5 GB in size in a single atomic action using this API. However,
-/// to copy an
-/// object greater than 5 GB, you must use the multipart upload Upload Part -
-/// Copy
-/// (UploadPartCopy) API. For more information, see [Copy Object Using the REST
-/// Multipart Upload
-/// API](https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjctsUsingRESTMPUapi.html).
-///
-/// You can copy individual objects between general purpose buckets, between
-/// directory buckets, and between
-/// general purpose buckets and directory buckets.
-///
-/// **Note:**
-///
-/// * Amazon S3 supports copy operations using Multi-Region Access Points only
-///   as a destination when
-/// using the Multi-Region Access Point ARN.
-///
-/// * **Directory buckets ** - For directory buckets, you must make requests for
-///   this API operation to the Zonal endpoint. These endpoints support
-///   virtual-hosted-style requests in the format
-///   `https://*amzn-s3-demo-bucket*.s3express-*zone-id*.*region-code*.amazonaws.com/*key-name*
-/// `. Path-style requests are not supported. For more information about
-/// endpoints in Availability Zones, see [Regional and Zonal endpoints for
-/// directory buckets in Availability
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
-/// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
-/// see [Concepts for directory buckets in Local
-/// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
-/// *Amazon S3 User Guide*.
-///
-/// * VPC endpoints don't support cross-Region requests (including copies). If
-///   you're using VPC
-/// endpoints, your source and destination buckets should be in the same Amazon
-/// Web Services Region as your VPC
-/// endpoint.
-///
-/// Both the Region that you want to copy the object from and the Region that
-/// you want to copy the
-/// object to must be enabled for your account. For more information about how
-/// to enable a Region for your
-/// account, see [Enable
-/// or disable a Region for standalone
-/// accounts](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-enable-standalone) in the *Amazon Web Services Account Management
-/// Guide*.
-///
-/// **Important:**
-///
-/// Amazon S3 transfer acceleration does not support cross-Region copies. If you
-/// request a cross-Region
-/// copy using a transfer acceleration endpoint, you get a `400 Bad Request`
-/// error. For more
-/// information, see [Transfer
-/// Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
-///
-/// **Authentication and authorization**
-///
-/// All `CopyObject` requests must be authenticated and signed by using IAM
-/// credentials (access key ID and secret access key for the IAM identities).
-/// All headers with the
-/// `x-amz-` prefix, including `x-amz-copy-source`, must be signed. For more
-/// information, see [REST
-/// Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
-///
-/// **Directory buckets** - You must use the IAM
-/// credentials to authenticate and authorize your access to the `CopyObject`
-/// API
-/// operation, instead of using the temporary security credentials through the
-/// `CreateSession` API operation.
-///
-/// Amazon Web Services CLI or SDKs handles authentication and authorization on
-/// your behalf.
-///
-/// **Permissions**
-///
-/// You must have *read* access to the source object and
-/// *write* access to the destination bucket.
-///
-/// * **General purpose bucket permissions** - You must have
-/// permissions in an IAM policy based on the source and destination bucket
-/// types in a
-/// `CopyObject` operation.
-///
-/// * If the source object is in a general purpose bucket, you must have **
-/// `s3:GetObject`
-/// ** permission to read the source object that is
-/// being copied.
-///
-/// * If the destination bucket is a general purpose bucket, you must have **
-/// `s3:PutObject`
-/// ** permission to write the object copy to the
-/// destination bucket.
-///
-/// * **Directory bucket permissions** - You must have
-/// permissions in a bucket policy or an IAM identity-based policy based on the
-/// source and destination bucket types
-/// in a `CopyObject` operation.
-///
-/// * If the source object that you want to copy is in a directory bucket, you
-///   must have
-/// the **
-/// `s3express:CreateSession`
-/// ** permission in
-/// the `Action` element of a policy to read the object. By default, the session
-/// is
-/// in the `ReadWrite` mode. If you want to restrict the access, you can
-/// explicitly
-/// set the `s3express:SessionMode` condition key to `ReadOnly` on the
-/// copy source bucket.
-///
-/// * If the copy destination is a directory bucket, you must have the **
-/// `s3express:CreateSession`
-/// ** permission in the
-/// `Action` element of a policy to write the object to the destination. The
-/// `s3express:SessionMode` condition key can't be set to `ReadOnly`
-/// on the copy destination bucket.
-///
-/// If the object is encrypted with SSE-KMS, you must also have the
-/// `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
-/// identity-based policies and KMS key policies for the KMS key.
-///
-/// For example policies, see [Example
-/// bucket policies for S3 Express One
-/// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html) and [Amazon Web Services
-/// Identity and Access Management (IAM) identity-based policies for S3 Express
-/// One
-/// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html) in the
-/// *Amazon S3 User Guide*.
-///
-/// **Response and special errors**
-///
-/// When the request is an HTTP 1.1 request, the response is chunk encoded. When
-/// the request is
-/// not an HTTP 1.1 request, the response would not contain the
-/// `Content-Length`. You
-/// always need to read the entire response body to check if the copy succeeds.
-///
-/// * If the copy is successful, you receive a response with information about
-///   the copied
-/// object.
-///
-/// * A copy request might return an error when Amazon S3 receives the copy
-///   request or while Amazon S3 is
-/// copying the files. A `200 OK` response can contain either a success or an
-/// error.
-///
-/// * If the error occurs before the copy action starts, you receive a standard
-///   Amazon S3
-/// error.
-///
-/// * If the error occurs during the copy operation, the error response is
-///   embedded in the
-/// `200 OK` response. For example, in a cross-region copy, you may encounter
-/// throttling and receive a `200 OK` response. For more information, see
-/// [Resolve the Error
-/// 200 response when copying objects to Amazon
-/// S3](https://repost.aws/knowledge-center/s3-resolve-200-internalerror). The
-/// `200 OK` status code
-/// means the copy was accepted, but it doesn't mean the copy is complete.
-/// Another example is
-/// when you disconnect from Amazon S3 before the copy is complete, Amazon S3
-/// might cancel the copy and
-/// you may receive a `200 OK` response. You must stay connected to Amazon S3
-/// until the
-/// entire response is successfully received and processed.
-///
-/// If you call this API operation directly, make sure to design your
-/// application to parse
-/// the content of the response and handle it appropriately. If you use Amazon
-/// Web Services SDKs, SDKs
-/// handle this condition. The SDKs detect the embedded error and apply error
-/// handling per
-/// your configuration settings (including automatically retrying the request as
-/// appropriate).
-/// If the condition persists, the SDKs throw an exception (or, for the SDKs
-/// that don't use
-/// exceptions, they return an error).
-///
-/// **Charge**
-///
-/// The copy request charge is based on the storage class and Region that you
-/// specify for the
-/// destination object. The request can also result in a data retrieval charge
-/// for the source if the
-/// source storage class bills for data retrieval. If the copy source is in a
-/// different region, the
-/// data transfer is billed to the copy source account. For pricing information,
-/// see [Amazon S3 pricing](http://aws.amazon.com/s3/pricing/).
-///
-/// **HTTP Host header syntax**
-///
-/// * **Directory buckets ** - The HTTP Host header syntax is `
-/// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
-///
-/// * **Amazon S3 on Outposts** - When you use this action with
-/// S3 on Outposts through the REST API, you must direct requests to the S3 on
-/// Outposts hostname. The
-/// S3 on Outposts hostname takes the form
-/// `
-/// *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com`.
-/// The hostname isn't required when you use the Amazon Web Services CLI or
-/// SDKs.
-///
-/// The following operations are related to `CopyObject`:
-///
-/// *
-///   [PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-///
-/// *
-///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const CopyObjectInput = struct {
     /// The canned access control list (ACL) to apply to the object.
     ///
@@ -271,8 +37,6 @@ pub const CopyObjectInput = struct {
     /// information, see [Controlling ownership
     /// of objects and disabling
     /// ACLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// * If your destination bucket uses the bucket owner enforced setting for
     ///   Object Ownership, all
@@ -298,8 +62,6 @@ pub const CopyObjectInput = struct {
     /// restrictions, see [Directory bucket naming
     /// rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// Copying objects across different Amazon Web Services Regions isn't supported
     /// when the source or destination
     /// bucket is in Amazon Web Services Local Zones. The source and destination
@@ -319,8 +81,6 @@ pub const CopyObjectInput = struct {
     /// you provide the access point ARN in place of the bucket name. For more
     /// information about access point ARNs, see [Using access
     /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// Object Lambda access points are not supported by directory buckets.
     ///
@@ -360,8 +120,6 @@ pub const CopyObjectInput = struct {
     /// Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in
     /// the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** -
     /// S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects
     /// from general purpose buckets
@@ -391,8 +149,6 @@ pub const CopyObjectInput = struct {
     /// or unsupported values will respond with the HTTP status code `400 Bad
     /// Request`.
     ///
-    /// **Note:**
-    ///
     /// For directory buckets, when you use Amazon Web Services SDKs, `CRC32` is the
     /// default checksum algorithm that's used for performance.
     checksum_algorithm: ?ChecksumAlgorithm = null,
@@ -408,8 +164,6 @@ pub const CopyObjectInput = struct {
     /// what decoding mechanisms
     /// must be applied to obtain the media-type referenced by the Content-Type
     /// header field.
-    ///
-    /// **Note:**
     ///
     /// For directory buckets, only the `aws-chunked` value is supported in this
     /// header field.
@@ -452,8 +206,6 @@ pub const CopyObjectInput = struct {
     ///   by account `123456789012` in Region `us-west-2`, use the URL encoding of
     ///   `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`. The value must be URL encoded.
     ///
-    /// **Note:**
-    ///
     /// * Amazon S3 supports copy operations using Access points only when the
     ///   source and destination buckets are in the same Amazon Web Services Region.
     ///
@@ -488,8 +240,6 @@ pub const CopyObjectInput = struct {
     /// If you do not enable versioning or suspend it on the destination bucket, the
     /// version ID that Amazon S3
     /// generates in the `x-amz-version-id` response header is always null.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - S3 Versioning isn't enabled and supported for
     /// directory buckets.
@@ -553,8 +303,6 @@ pub const CopyObjectInput = struct {
     /// encryption information in your request so that Amazon S3 can decrypt the
     /// object for copying.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported when the source object is in a directory
     /// bucket.
     copy_source_sse_customer_algorithm: ?[]const u8 = null,
@@ -570,8 +318,6 @@ pub const CopyObjectInput = struct {
     /// encryption information in your request so that Amazon S3 can decrypt the
     /// object for copying.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported when the source object is in a directory
     /// bucket.
     copy_source_sse_customer_key: ?[]const u8 = null,
@@ -585,8 +331,6 @@ pub const CopyObjectInput = struct {
     /// must provide the necessary
     /// encryption information in your request so that Amazon S3 can decrypt the
     /// object for copying.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported when the source object is in a directory
     /// bucket.
@@ -607,16 +351,12 @@ pub const CopyObjectInput = struct {
 
     /// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
     ///
-    /// **Note:**
-    ///
     /// * This functionality is not supported for directory buckets.
     ///
     /// * This functionality is not supported for Amazon S3 on Outposts.
     grant_full_control: ?[]const u8 = null,
 
     /// Allows grantee to read the object data and its metadata.
-    ///
-    /// **Note:**
     ///
     /// * This functionality is not supported for directory buckets.
     ///
@@ -625,16 +365,12 @@ pub const CopyObjectInput = struct {
 
     /// Allows grantee to read the object ACL.
     ///
-    /// **Note:**
-    ///
     /// * This functionality is not supported for directory buckets.
     ///
     /// * This functionality is not supported for Amazon S3 on Outposts.
     grant_read_acp: ?[]const u8 = null,
 
     /// Allows grantee to write the ACL for the applicable object.
-    ///
-    /// **Note:**
     ///
     /// * This functionality is not supported for directory buckets.
     ///
@@ -692,8 +428,6 @@ pub const CopyObjectInput = struct {
     /// examples](https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html) in the
     /// *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// `x-amz-website-redirect-location` is unique to each object and is not copied
     /// when using
     /// the `x-amz-metadata-directive` header. To copy the value, you must specify
@@ -702,22 +436,16 @@ pub const CopyObjectInput = struct {
 
     /// Specifies whether you want to apply a legal hold to the object copy.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     object_lock_legal_hold_status: ?ObjectLockLegalHoldStatus = null,
 
     /// The Object Lock mode that you want to apply to the object copy.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     object_lock_mode: ?ObjectLockMode = null,
 
     /// The date and time when you want the Object Lock of the object copy to
     /// expire.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     object_lock_retain_until_date: ?i64 = null,
@@ -828,8 +556,6 @@ pub const CopyObjectInput = struct {
     /// configuration of the
     /// destination bucket, the encryption setting in your request takes precedence.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported when the destination bucket is a
     /// directory bucket.
     sse_customer_algorithm: ?[]const u8 = null,
@@ -841,8 +567,6 @@ pub const CopyObjectInput = struct {
     /// be appropriate for use with the algorithm specified in the
     /// `x-amz-server-side-encryption-customer-algorithm` header.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported when the destination bucket is a
     /// directory bucket.
     sse_customer_key: ?[]const u8 = null,
@@ -851,8 +575,6 @@ pub const CopyObjectInput = struct {
     /// 1321. Amazon S3 uses this header
     /// for a message integrity check to ensure that the encryption key was
     /// transmitted without error.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported when the destination bucket is a
     /// directory bucket.
@@ -913,8 +635,6 @@ pub const CopyObjectInput = struct {
     /// specify a different Storage
     /// Class.
     ///
-    /// **Note:**
-    ///
     /// * **Directory buckets ** -
     /// Directory buckets only support `EXPRESS_ONEZONE` (the S3 Express One Zone
     /// storage class) in Availability Zones and `ONEZONE_IA` (the S3 One
@@ -962,8 +682,6 @@ pub const CopyObjectInput = struct {
     ///
     /// The default value is the empty value.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - For directory buckets in a `CopyObject` operation,
     /// only the empty tag-set is supported. Any requests that attempt to write
     /// non-empty tags into directory buckets will receive a `501 Not Implemented`
@@ -1007,8 +725,6 @@ pub const CopyObjectInput = struct {
     /// that's provided in the request.
     ///
     /// The default value is `COPY`.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets in a `CopyObject` operation,
     /// only the empty tag-set is supported. Any requests that attempt to write
@@ -1058,8 +774,6 @@ pub const CopyObjectInput = struct {
     /// header in
     /// combination with the `x-amz-metadata-directive` header.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     website_redirect_location: ?[]const u8 = null,
 };
@@ -1075,15 +789,11 @@ pub const CopyObjectOutput = struct {
 
     /// Version ID of the source object that was copied.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported when the source object is in a directory
     /// bucket.
     copy_source_version_id: ?[]const u8 = null,
 
     /// If the object expiration is configured, the response includes this header.
-    ///
-    /// **Note:**
     ///
     /// Object expiration information is not returned in directory buckets and this
     /// header returns the
@@ -1095,8 +805,6 @@ pub const CopyObjectOutput = struct {
     /// The server-side encryption algorithm used when you store this object in
     /// Amazon S3 or Amazon FSx.
     ///
-    /// **Note:**
-    ///
     /// When accessing data stored in Amazon FSx file systems using S3 access
     /// points, the only valid server side
     /// encryption option is `aws:fsx`.
@@ -1106,8 +814,6 @@ pub const CopyObjectOutput = struct {
     /// requested, the response will
     /// include this header to confirm the encryption algorithm that's used.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     sse_customer_algorithm: ?[]const u8 = null,
 
@@ -1116,8 +822,6 @@ pub const CopyObjectOutput = struct {
     /// include this header to provide the round-trip message integrity verification
     /// of the customer-provided
     /// encryption key.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     sse_customer_key_md5: ?[]const u8 = null,
@@ -1134,8 +838,6 @@ pub const CopyObjectOutput = struct {
     ssekms_key_id: ?[]const u8 = null,
 
     /// Version ID of the newly created copy.
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8 = null,

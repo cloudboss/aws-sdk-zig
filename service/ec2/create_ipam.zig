@@ -10,17 +10,6 @@ const IpamTier = @import("ipam_tier.zig").IpamTier;
 const Ipam = @import("ipam.zig").Ipam;
 const serde = @import("serde.zig");
 
-/// Create an IPAM. Amazon VPC IP Address Manager (IPAM) is a VPC feature that
-/// you can use
-/// to automate your IP address management workflows including assigning,
-/// tracking,
-/// troubleshooting, and auditing IP addresses across Amazon Web Services
-/// Regions and accounts
-/// throughout your Amazon Web Services Organization.
-///
-/// For more information, see [Create an
-/// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html) in the
-/// *Amazon VPC IPAM User Guide*.
 pub const CreateIpamInput = struct {
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the request. For more information, see [Ensuring

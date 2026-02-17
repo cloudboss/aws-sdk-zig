@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayRouteTable = @import("local_gateway_route_table.zig").LocalGatewayRouteTable;
 const serde = @import("serde.zig");
 
-/// Deletes a local gateway route table.
 pub const DeleteLocalGatewayRouteTableInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

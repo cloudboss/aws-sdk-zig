@@ -24,6 +24,7 @@ pub const ListDeadLetterSourceQueuesPaginator = struct {
 
         const output = try list_dead_letter_source_queues.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -64,6 +65,7 @@ pub const ListQueuesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_queues.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

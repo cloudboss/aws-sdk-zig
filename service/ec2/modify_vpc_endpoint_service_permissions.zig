@@ -6,17 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AddedPrincipal = @import("added_principal.zig").AddedPrincipal;
 const serde = @import("serde.zig");
 
-/// Modifies the permissions for your VPC endpoint service. You can add or
-/// remove permissions
-/// for service consumers (Amazon Web Services accounts, users, and IAM roles)
-/// to connect to
-/// your endpoint service. Principal ARNs with path components aren't supported.
-///
-/// If you grant permissions to all principals, the service is public. Any users
-/// who know the name of a
-/// public service can send a request to attach an endpoint. If the service does
-/// not require manual approval,
-/// attachments are automatically approved.
 pub const ModifyVpcEndpointServicePermissionsInput = struct {
     /// The Amazon Resource Names (ARN) of the principals.
     /// Permissions are granted to the principals in this list.

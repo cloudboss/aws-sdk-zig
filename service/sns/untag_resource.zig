@@ -5,10 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Remove tags from the specified Amazon SNS topic. For an overview, see
-/// [Amazon SNS Tags](https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html)
-/// in the
-/// *Amazon SNS Developer Guide*.
 pub const UntagResourceInput = struct {
     /// The ARN of the topic from which to remove tags.
     resource_arn: []const u8,

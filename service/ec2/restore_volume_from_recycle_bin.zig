@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Restores a volume from the Recycle Bin. For more information, see [Restore
-/// volumes from the Recycle
-/// Bin](https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-volumes.html#recycle-bin-restore-volumes) in the *Amazon EBS User Guide*.
 pub const RestoreVolumeFromRecycleBinInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

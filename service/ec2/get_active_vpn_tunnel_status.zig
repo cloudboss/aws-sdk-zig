@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ActiveVpnTunnelStatus = @import("active_vpn_tunnel_status.zig").ActiveVpnTunnelStatus;
 const serde = @import("serde.zig");
 
-/// Returns the currently negotiated security parameters for an active VPN
-/// tunnel, including IKE version, DH groups, encryption algorithms, and
-/// integrity algorithms.
 pub const GetActiveVpnTunnelStatusInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request.

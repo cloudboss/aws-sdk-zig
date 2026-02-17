@@ -7,9 +7,6 @@ const Group = @import("group.zig").Group;
 const User = @import("user.zig").User;
 const serde = @import("serde.zig");
 
-/// Returns a list of IAM users that are in the specified IAM group. You can
-/// paginate
-/// the results using the `MaxItems` and `Marker` parameters.
 pub const GetGroupInput = struct {
     /// The name of the group.
     ///

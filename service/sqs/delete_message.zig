@@ -4,37 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified message from the specified queue. To select the
-/// message to
-/// delete, use the `ReceiptHandle` of the message (*not* the
-/// `MessageId` which you receive when you send the message). Amazon SQS can
-/// delete a message from a queue even if a visibility timeout setting causes
-/// the message to
-/// be locked by another consumer. Amazon SQS automatically deletes messages
-/// left in a queue
-/// longer than the retention period configured for the queue.
-///
-/// **Note:**
-///
-/// Each time you receive a message, meaning when a consumer retrieves a message
-/// from
-/// the queue, it comes with a unique `ReceiptHandle`. If you receive the
-/// same message more than once, you will get a different `ReceiptHandle`
-/// each time. When you want to delete a message using the `DeleteMessage`
-/// action, you must use the `ReceiptHandle` from the most recent time you
-/// received the message. If you use an old `ReceiptHandle`, the request will
-/// succeed, but the message might not be deleted.
-///
-/// For standard queues, it is possible to receive a message even after you
-/// delete it. This might happen on rare occasions if one of the servers which
-/// stores a
-/// copy of the message is unavailable when you send the request to delete the
-/// message.
-/// The copy remains on the server and might be returned to you during a
-/// subsequent
-/// receive request. You should ensure that your application is idempotent, so
-/// that
-/// receiving a message more than once does not cause issues.
 pub const DeleteMessageInput = struct {
     /// The URL of the Amazon SQS queue from which messages are deleted.
     ///

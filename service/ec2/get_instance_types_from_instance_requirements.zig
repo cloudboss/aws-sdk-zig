@@ -9,25 +9,6 @@ const VirtualizationType = @import("virtualization_type.zig").VirtualizationType
 const InstanceTypeInfoFromInstanceRequirements = @import("instance_type_info_from_instance_requirements.zig").InstanceTypeInfoFromInstanceRequirements;
 const serde = @import("serde.zig");
 
-/// Returns a list of instance types with the specified instance attributes. You
-/// can
-/// use the response to preview the instance types without launching instances.
-/// Note
-/// that the response does not consider capacity.
-///
-/// When you specify multiple parameters, you get instance types that satisfy
-/// all of the
-/// specified parameters. If you specify multiple values for a parameter, you
-/// get instance
-/// types that satisfy any of the specified values.
-///
-/// For more information, see [Preview instance types with specified
-/// attributes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-get-instance-types-from-instance-requirements), [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), and [Spot
-/// placement
-/// score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*, and [Creating
-/// mixed instance groups using attribute-based instance type
-/// selection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html) in the
-/// *Amazon EC2 Auto Scaling User Guide*.
 pub const GetInstanceTypesFromInstanceRequirementsInput = struct {
     /// The processor architecture type.
     architecture_types: []const ArchitectureType,

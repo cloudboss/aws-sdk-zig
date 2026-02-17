@@ -7,67 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VolumeStatusItem = @import("volume_status_item.zig").VolumeStatusItem;
 const serde = @import("serde.zig");
 
-/// Describes the status of the specified volumes. Volume status provides the
-/// result of the
-/// checks performed on your volumes to determine events that can impair the
-/// performance of your
-/// volumes. The performance of a volume can be affected if an issue occurs on
-/// the volume's
-/// underlying host. If the volume's underlying host experiences a power outage
-/// or system issue,
-/// after the system is restored, there could be data inconsistencies on the
-/// volume. Volume events
-/// notify you if this occurs. Volume actions notify you if any action needs to
-/// be taken in
-/// response to the event.
-///
-/// The `DescribeVolumeStatus` operation provides the following information
-/// about
-/// the specified volumes:
-///
-/// *Status*: Reflects the current status of the volume. The possible
-/// values are `ok`, `impaired` , `warning`, or
-/// `insufficient-data`. If all checks pass, the overall status of the volume is
-/// `ok`. If the check fails, the overall status is `impaired`. If the
-/// status is `insufficient-data`, then the checks might still be taking place
-/// on your
-/// volume at the time. We recommend that you retry the request. For more
-/// information about volume
-/// status, see [Monitor the status of your
-/// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-status.html) in the *Amazon EBS User Guide*.
-///
-/// *Events*: Reflect the cause of a volume status and might require you to
-/// take action. For example, if your volume returns an `impaired` status, then
-/// the
-/// volume event might be `potential-data-inconsistency`. This means that your
-/// volume
-/// has been affected by an issue with the underlying host, has all I/O
-/// operations disabled, and
-/// might have inconsistent data.
-///
-/// *Actions*: Reflect the actions you might have to take in response to an
-/// event. For example, if the status of the volume is `impaired` and the volume
-/// event
-/// shows `potential-data-inconsistency`, then the action shows
-/// `enable-volume-io`. This means that you may want to enable the I/O
-/// operations for
-/// the volume and then check the volume for data consistency. For more
-/// information, see
-/// [Work with an
-/// impaired EBS
-/// volume](https://docs.aws.amazon.com/ebs/latest/userguide/work_volumes_impaired.html).
-///
-/// Volume status is based on the volume status checks, and does not reflect the
-/// volume state.
-/// Therefore, volume status does not indicate volumes in the `error` state (for
-/// example, when a volume is incapable of accepting I/O.)
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures, might vary. Applications should not assume the elements appear
-/// in a
-/// particular order.
 pub const DescribeVolumeStatusInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

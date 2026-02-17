@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ClientVpnEndpointStatus = @import("client_vpn_endpoint_status.zig").ClientVpnEndpointStatus;
 const serde = @import("serde.zig");
 
-/// Deletes the specified Client VPN endpoint. You must disassociate all target
-/// networks before you
-/// can delete a Client VPN endpoint.
 pub const DeleteClientVpnEndpointInput = struct {
     /// The ID of the Client VPN to be deleted.
     client_vpn_endpoint_id: []const u8,

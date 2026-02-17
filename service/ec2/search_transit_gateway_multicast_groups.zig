@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayMulticastGroup = @import("transit_gateway_multicast_group.zig").TransitGatewayMulticastGroup;
 const serde = @import("serde.zig");
 
-/// Searches one or more transit gateway multicast groups and returns the group
-/// membership information.
 pub const SearchTransitGatewayMulticastGroupsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

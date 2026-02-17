@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const PublicIpDnsOption = @import("public_ip_dns_option.zig").PublicIpDnsOption;
 
-/// Modify public hostname options for a network interface. For more
-/// information, see [EC2 instance hostnames, DNS names, and
-/// domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *Amazon EC2 User Guide*.
 pub const ModifyPublicIpDnsNameOptionsInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the

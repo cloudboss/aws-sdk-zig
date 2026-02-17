@@ -7,17 +7,6 @@ const Storage = @import("storage.zig").Storage;
 const BundleTask = @import("bundle_task.zig").BundleTask;
 const serde = @import("serde.zig");
 
-/// Bundles an Amazon instance store-backed Windows instance.
-///
-/// During bundling, only the root device volume (C:\) is bundled. Data on other
-/// instance
-/// store volumes is not preserved.
-///
-/// **Note:**
-///
-/// This action is not applicable for Linux/Unix instances or Windows instances
-/// that are
-/// backed by Amazon EBS.
 pub const BundleInstanceInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -98,7 +87,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BundleInstanceInput, config
     }
     try body_buf.appendSlice(alloc, "&InstanceId=");
     try aws.url.appendUrlEncoded(alloc, &body_buf, input.instance_id);
-    if (input.storage.s_3) |sv| {
+    if (input.storage.s3) |sv| {
         if (sv.aws_access_key_id) |sv2| {
             try body_buf.appendSlice(alloc, "&Storage.S3.AWSAccessKeyId=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, sv2);

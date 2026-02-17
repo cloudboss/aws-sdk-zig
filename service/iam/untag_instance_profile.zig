@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Removes the specified tags from the IAM instance profile. For more
-/// information about tagging, see [Tagging IAM
-/// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
-/// the
-/// *IAM User Guide*.
 pub const UntagInstanceProfileInput = struct {
     /// The name of the IAM instance profile from which you want to remove tags.
     ///

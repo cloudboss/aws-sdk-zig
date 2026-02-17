@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayPrefixListReference = @import("transit_gateway_prefix_list_reference.zig").TransitGatewayPrefixListReference;
 const serde = @import("serde.zig");
 
-/// Creates a reference (route) to a prefix list in a specified transit gateway
-/// route table.
 pub const CreateTransitGatewayPrefixListReferenceInput = struct {
     /// Indicates whether to drop traffic that matches this route.
     blackhole: ?bool = null,

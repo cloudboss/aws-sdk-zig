@@ -4,32 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Attaches a resource-based policy document to the resource, which can be a
-/// table or
-/// stream. When you attach a resource-based policy using this API, the policy
-/// application
-/// is [
-/// *eventually consistent*
-/// ](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html).
-///
-/// `PutResourcePolicy` is an idempotent operation; running it multiple times
-/// on the same resource using the same policy document will return the same
-/// revision ID. If
-/// you specify an `ExpectedRevisionId` that doesn't match the current policy's
-/// `RevisionId`, the `PolicyNotFoundException` will be
-/// returned.
-///
-/// **Note:**
-///
-/// `PutResourcePolicy` is an asynchronous operation. If you issue a
-/// `GetResourcePolicy` request immediately after a
-/// `PutResourcePolicy` request, DynamoDB might return your
-/// previous policy, if there was one, or return the
-/// `PolicyNotFoundException`. This is because
-/// `GetResourcePolicy` uses an eventually consistent query, and the
-/// metadata for your policy or table might not be available at that moment.
-/// Wait for a
-/// few seconds, and then try the `GetResourcePolicy` request again.
 pub const PutResourcePolicyInput = struct {
     /// Set this parameter to `true` to confirm that you want to remove your
     /// permissions to change the policy of this resource in the future.
@@ -40,8 +14,6 @@ pub const PutResourcePolicyInput = struct {
     /// the revision ID of your existing policy to make mutating requests against
     /// that
     /// policy.
-    ///
-    /// **Note:**
     ///
     /// When you provide an expected revision ID, if the revision ID of the existing
     /// policy on the resource doesn't match or if there's no policy attached to the

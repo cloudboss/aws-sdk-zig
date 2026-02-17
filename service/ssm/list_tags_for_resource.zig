@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ResourceTypeForTagging = @import("resource_type_for_tagging.zig").ResourceTypeForTagging;
 const Tag = @import("tag.zig").Tag;
 
-/// Returns a list of the tags assigned to the specified resource.
-///
-/// For information about the ID format for each supported resource type, see
-/// AddTagsToResource.
 pub const ListTagsForResourceInput = struct {
     /// The resource ID for which you want to see a list of tags.
     resource_id: []const u8,

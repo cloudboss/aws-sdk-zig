@@ -7,10 +7,6 @@ const InstanceEventWindowDisassociationRequest = @import("instance_event_window_
 const InstanceEventWindow = @import("instance_event_window.zig").InstanceEventWindow;
 const serde = @import("serde.zig");
 
-/// Disassociates one or more targets from an event window.
-///
-/// For more information, see [Define event windows for scheduled
-/// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
 pub const DisassociateInstanceEventWindowInput = struct {
     /// One or more targets to disassociate from the specified event window.
     association_target: InstanceEventWindowDisassociationRequest,

@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const FunctionScalingConfig = @import("function_scaling_config.zig").FunctionScalingConfig;
 
-/// Retrieves the scaling configuration for a Lambda Managed Instances function.
 pub const GetFunctionScalingConfigInput = struct {
     /// The name or ARN of the Lambda function.
     function_name: []const u8,

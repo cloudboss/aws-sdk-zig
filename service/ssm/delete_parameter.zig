@@ -4,13 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Delete a parameter from the system. After deleting a parameter, wait for at
-/// least 30 seconds
-/// to create a parameter with the same name.
 pub const DeleteParameterInput = struct {
     /// The name of the parameter to delete.
-    ///
-    /// **Note:**
     ///
     /// You can't enter the Amazon Resource Name (ARN) for a parameter, only the
     /// parameter name

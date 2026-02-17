@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PatchOrchestratorFilter = @import("patch_orchestrator_filter.zig").PatchOrchestratorFilter;
 const Patch = @import("patch.zig").Patch;
 
-/// Lists all patches eligible to be included in a patch baseline.
-///
-/// **Note:**
-///
-/// Currently, `DescribeAvailablePatches` supports only the Amazon Linux 1,
-/// Amazon
-/// Linux 2, and Windows Server operating systems.
 pub const DescribeAvailablePatchesInput = struct {
     /// Each element in the array is a structure containing a key-value pair.
     ///
@@ -60,8 +53,6 @@ pub const DescribeAvailablePatchesInput = struct {
     /// Sample values: `KB123456` | `KB4516046`
     ///
     /// **Linux**
-    ///
-    /// **Important:**
     ///
     /// When specifying filters for Linux patches, you must specify a key-pair for
     /// `PRODUCT`. For example, using the Command Line Interface (CLI), the

@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// List the functions that use the specified code signing configuration. You
-/// can use this method prior to deleting a code signing configuration, to
-/// verify that no functions are using it.
 pub const ListFunctionsByCodeSigningConfigInput = struct {
     /// The The Amazon Resource Name (ARN) of the code signing configuration.
     code_signing_config_arn: []const u8,

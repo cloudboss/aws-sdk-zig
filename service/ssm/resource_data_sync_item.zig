@@ -1,5 +1,5 @@
 const LastResourceDataSyncStatus = @import("last_resource_data_sync_status.zig").LastResourceDataSyncStatus;
-const ResourceDataSyncS3Destination = @import("resource_data_sync_s_3_destination.zig").ResourceDataSyncS3Destination;
+const ResourceDataSyncS3Destination = @import("resource_data_sync_s3_destination.zig").ResourceDataSyncS3Destination;
 const ResourceDataSyncSourceWithState = @import("resource_data_sync_source_with_state.zig").ResourceDataSyncSourceWithState;
 
 /// Information about a resource data sync configuration, including its current
@@ -19,7 +19,7 @@ pub const ResourceDataSyncItem = struct {
     last_sync_time: ?i64,
 
     /// Configuration information for the target S3 bucket.
-    s_3_destination: ?ResourceDataSyncS3Destination,
+    s3_destination: ?ResourceDataSyncS3Destination,
 
     /// The date and time the configuration was created (UTC).
     sync_created_time: ?i64,
@@ -46,7 +46,7 @@ pub const ResourceDataSyncItem = struct {
         .last_successful_sync_time = "LastSuccessfulSyncTime",
         .last_sync_status_message = "LastSyncStatusMessage",
         .last_sync_time = "LastSyncTime",
-        .s_3_destination = "S3Destination",
+        .s3_destination = "S3Destination",
         .sync_created_time = "SyncCreatedTime",
         .sync_last_modified_time = "SyncLastModifiedTime",
         .sync_name = "SyncName",

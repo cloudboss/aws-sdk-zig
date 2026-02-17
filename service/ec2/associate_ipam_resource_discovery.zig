@@ -7,9 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const IpamResourceDiscoveryAssociation = @import("ipam_resource_discovery_association.zig").IpamResourceDiscoveryAssociation;
 const serde = @import("serde.zig");
 
-/// Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource
-/// discovery is an IPAM component that enables IPAM to manage and monitor
-/// resources that belong to the owning account.
 pub const AssociateIpamResourceDiscoveryInput = struct {
     /// A client token.
     client_token: ?[]const u8 = null,

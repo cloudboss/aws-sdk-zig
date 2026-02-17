@@ -9,8 +9,6 @@ const NotificationConfig = @import("notification_config.zig").NotificationConfig
 /// For information about specifying and updating task parameters, see
 /// RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
 ///
-/// **Note:**
-///
 /// `LoggingInfo` has been deprecated. To specify an Amazon Simple Storage
 /// Service (Amazon S3) bucket to contain logs, instead use the
 /// `OutputS3BucketName` and `OutputS3KeyPrefix` options in the
@@ -65,10 +63,10 @@ pub const MaintenanceWindowRunCommandParameters = struct {
     notification_config: ?NotificationConfig,
 
     /// The name of the Amazon Simple Storage Service (Amazon S3) bucket.
-    output_s_3_bucket_name: ?[]const u8,
+    output_s3_bucket_name: ?[]const u8,
 
     /// The S3 bucket subfolder.
-    output_s_3_key_prefix: ?[]const u8,
+    output_s3_key_prefix: ?[]const u8,
 
     /// The parameters for the `RUN_COMMAND` task execution.
     parameters: ?[]const aws.map.MapEntry([]const []const u8),
@@ -104,8 +102,8 @@ pub const MaintenanceWindowRunCommandParameters = struct {
         .document_hash_type = "DocumentHashType",
         .document_version = "DocumentVersion",
         .notification_config = "NotificationConfig",
-        .output_s_3_bucket_name = "OutputS3BucketName",
-        .output_s_3_key_prefix = "OutputS3KeyPrefix",
+        .output_s3_bucket_name = "OutputS3BucketName",
+        .output_s3_key_prefix = "OutputS3KeyPrefix",
         .parameters = "Parameters",
         .service_role_arn = "ServiceRoleArn",
         .timeout_seconds = "TimeoutSeconds",

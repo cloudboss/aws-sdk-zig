@@ -7,20 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const NetworkInterface = @import("network_interface.zig").NetworkInterface;
 const serde = @import("serde.zig");
 
-/// Describes the specified network interfaces or all your network interfaces.
-///
-/// If you have a large number of network interfaces, the operation fails unless
-/// you use
-/// pagination or one of the following filters: `group-id`,
-/// `mac-address`, `private-dns-name`,
-/// `private-ip-address`, `subnet-id`, or
-/// `vpc-id`.
-///
-/// **Important:**
-///
-/// We strongly recommend using only paginated requests. Unpaginated requests
-/// are
-/// susceptible to throttling and timeouts.
 pub const DescribeNetworkInterfacesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

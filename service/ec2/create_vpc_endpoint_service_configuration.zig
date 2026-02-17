@@ -7,28 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const ServiceConfiguration = @import("service_configuration.zig").ServiceConfiguration;
 const serde = @import("serde.zig");
 
-/// Creates a VPC endpoint service to which service consumers (Amazon Web
-/// Services accounts,
-/// users, and IAM roles) can connect.
-///
-/// Before you create an endpoint service, you must create one of the following
-/// for your service:
-///
-/// * A [Network Load
-///   Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/).
-/// Service consumers connect to your service using an interface endpoint.
-///
-/// * A [Gateway Load
-///   Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/).
-/// Service consumers connect to your service using a Gateway Load Balancer
-/// endpoint.
-///
-/// If you set the private DNS name, you must prove that you own the private DNS
-/// domain
-/// name.
-///
-/// For more information, see the [Amazon Web Services PrivateLink
-/// Guide](https://docs.aws.amazon.com/vpc/latest/privatelink/).
 pub const CreateVpcEndpointServiceConfigurationInput = struct {
     /// Indicates whether requests from service consumers to create an endpoint to
     /// your service must

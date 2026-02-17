@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PolicyVersion = @import("policy_version.zig").PolicyVersion;
 const serde = @import("serde.zig");
 
-/// Lists information about the versions of the specified managed policy,
-/// including the
-/// version that is currently set as the policy's default version.
-///
-/// For more information about managed policies, see [Managed policies and
-/// inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
 pub const ListPolicyVersionsInput = struct {
     /// Use this parameter only when paginating results and only after
     /// you receive a response indicating that the results are truncated. Set it to

@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const MacHost = @import("mac_host.zig").MacHost;
 const serde = @import("serde.zig");
 
-/// Describes the specified EC2 Mac Dedicated Host or all of your EC2 Mac
-/// Dedicated Hosts.
 pub const DescribeMacHostsInput = struct {
     /// The filters.
     ///

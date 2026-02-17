@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ConnectionNotification = @import("connection_notification.zig").ConnectionNotification;
 const serde = @import("serde.zig");
 
-/// Describes the connection notifications for VPC endpoints and VPC endpoint
-/// services.
 pub const DescribeVpcEndpointConnectionNotificationsInput = struct {
     /// The ID of the notification.
     connection_notification_id: ?[]const u8 = null,

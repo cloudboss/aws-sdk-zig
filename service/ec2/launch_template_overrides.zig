@@ -26,8 +26,6 @@ pub const LaunchTemplateOverrides = struct {
     /// same way as
     /// when you specify a list of instance types.
     ///
-    /// **Note:**
-    ///
     /// If you specify `InstanceRequirements`, you can't specify
     /// `InstanceType`.
     instance_requirements: ?InstanceRequirements,
@@ -63,8 +61,6 @@ pub const LaunchTemplateOverrides = struct {
     /// increased interruptions. If you do not specify this parameter, you will pay
     /// the current Spot price.
     ///
-    /// **Important:**
-    ///
     /// If you specify a maximum price, your instances will be interrupted more
     /// frequently than if you do not specify this parameter.
     spot_price: ?[]const u8,
@@ -83,8 +79,6 @@ pub const LaunchTemplateOverrides = struct {
     /// number of instances to the next whole number. If this value is not
     /// specified, the default
     /// is 1.
-    ///
-    /// **Note:**
     ///
     /// When specifying weights, the price used in the `lowestPrice` and
     /// `priceCapacityOptimized` allocation strategies is per

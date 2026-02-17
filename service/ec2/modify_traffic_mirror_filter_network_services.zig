@@ -7,15 +7,6 @@ const TrafficMirrorNetworkService = @import("traffic_mirror_network_service.zig"
 const TrafficMirrorFilter = @import("traffic_mirror_filter.zig").TrafficMirrorFilter;
 const serde = @import("serde.zig");
 
-/// Allows or restricts mirroring network services.
-///
-/// By default, Amazon DNS network services are not eligible for Traffic Mirror.
-/// Use `AddNetworkServices` to add network services to a Traffic Mirror filter.
-/// When a network service is added to the Traffic Mirror filter, all traffic
-/// related to that network service will be mirrored.
-/// When you no longer want to mirror network services, use
-/// `RemoveNetworkServices` to remove the network services from the Traffic
-/// Mirror filter.
 pub const ModifyTrafficMirrorFilterNetworkServicesInput = struct {
     /// The network service, for example Amazon DNS, that you want to mirror.
     add_network_services: ?[]const TrafficMirrorNetworkService = null,

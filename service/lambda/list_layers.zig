@@ -7,10 +7,6 @@ const Architecture = @import("architecture.zig").Architecture;
 const Runtime = @import("runtime.zig").Runtime;
 const LayersListItem = @import("layers_list_item.zig").LayersListItem;
 
-/// Lists [Lambda
-/// layers](https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html)
-/// and shows information about the latest version of each. Specify a [runtime
-/// identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only layers that indicate that they're compatible with that runtime. Specify a compatible architecture to include only layers that are compatible with that [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
 pub const ListLayersInput = struct {
     /// The compatible [instruction set
     /// architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).

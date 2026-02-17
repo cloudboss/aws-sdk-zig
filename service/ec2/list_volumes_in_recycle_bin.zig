@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VolumeRecycleBinInfo = @import("volume_recycle_bin_info.zig").VolumeRecycleBinInfo;
 const serde = @import("serde.zig");
 
-/// Lists one or more volumes that are currently in the Recycle Bin.
 pub const ListVolumesInRecycleBinInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

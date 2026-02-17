@@ -10,8 +10,6 @@ const ModifyVerifiedAccessEndpointRdsOptions = @import("modify_verified_access_e
 const VerifiedAccessEndpoint = @import("verified_access_endpoint.zig").VerifiedAccessEndpoint;
 const serde = @import("serde.zig");
 
-/// Modifies the configuration of the specified Amazon Web Services Verified
-/// Access endpoint.
 pub const ModifyVerifiedAccessEndpointInput = struct {
     /// The CIDR options.
     cidr_options: ?ModifyVerifiedAccessEndpointCidrOptions = null,

@@ -8,12 +8,6 @@ const VpcEncryptionControlMode = @import("vpc_encryption_control_mode.zig").VpcE
 const VpcEncryptionControl = @import("vpc_encryption_control.zig").VpcEncryptionControl;
 const serde = @import("serde.zig");
 
-/// Modifies the encryption control configuration for a VPC. You can update the
-/// encryption mode and exclusion settings for various gateway types and peering
-/// connections.
-///
-/// For more information, see [Enforce VPC encryption in
-/// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
 pub const ModifyVpcEncryptionControlInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -4,24 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Updates the password policy settings for the Amazon Web Services account.
-///
-/// **Note:**
-///
-/// This operation does not support partial updates. No parameters are required,
-/// but
-/// if you do not specify a parameter, that parameter's value reverts to its
-/// default
-/// value. See the **Request Parameters** section for each
-/// parameter's default value. Also note that some parameters do not allow the
-/// default
-/// parameter to be explicitly set. Instead, to invoke the default value, do not
-/// include
-/// that parameter when you invoke the operation.
-///
-/// For more information about using a password policy, see [Managing an IAM
-/// password
-/// policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html) in the *IAM User Guide*.
 pub const UpdateAccountPasswordPolicyInput = struct {
     /// Allows all IAM users in your account to use the Amazon Web Services
     /// Management Console to change their own
@@ -46,8 +28,6 @@ pub const UpdateAccountPasswordPolicyInput = struct {
     /// the default
     /// value of `false`. The result is that IAM users can change their passwords
     /// after they expire and continue to sign in as the user.
-    ///
-    /// **Note:**
     ///
     /// In the Amazon Web Services Management Console, the custom password policy
     /// option **Allow

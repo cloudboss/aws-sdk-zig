@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const EnaSrdSpecification = @import("ena_srd_specification.zig").EnaSrdSpecification;
 const serde = @import("serde.zig");
 
-/// Attaches a network interface to an instance.
 pub const AttachNetworkInterfaceInput = struct {
     /// The index of the device for the network interface attachment.
     device_index: i32,

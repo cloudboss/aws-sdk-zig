@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const KeyPairInfo = @import("key_pair_info.zig").KeyPairInfo;
 const serde = @import("serde.zig");
 
-/// Describes the specified key pairs or all of your key pairs.
-///
-/// For more information about key pairs, see [Amazon EC2 key
-/// pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
-/// in the *Amazon EC2 User Guide*.
 pub const DescribeKeyPairsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

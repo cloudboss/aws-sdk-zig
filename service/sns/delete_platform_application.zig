@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a platform application object for one of the supported push
-/// notification
-/// services, such as APNS and GCM (Firebase Cloud Messaging). For more
-/// information, see
-/// [Using Amazon SNS
-/// Mobile Push
-/// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 pub const DeletePlatformApplicationInput = struct {
     /// `PlatformApplicationArn` of platform application object to delete.
     platform_application_arn: []const u8,

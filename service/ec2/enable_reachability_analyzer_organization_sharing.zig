@@ -4,16 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Establishes a trust relationship between Reachability Analyzer and
-/// Organizations.
-/// This operation must be performed by the management account for the
-/// organization.
-///
-/// After you establish a trust relationship, a user in the management account
-/// or
-/// a delegated administrator account can run a cross-account analysis using
-/// resources
-/// from the member accounts.
 pub const EnableReachabilityAnalyzerOrganizationSharingInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const BundleTask = @import("bundle_task.zig").BundleTask;
 const serde = @import("serde.zig");
 
-/// Cancels a bundling operation for an instance store-backed Windows instance.
 pub const CancelBundleTaskInput = struct {
     /// The ID of the bundle task.
     bundle_id: []const u8,

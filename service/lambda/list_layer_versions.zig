@@ -7,8 +7,6 @@ const Architecture = @import("architecture.zig").Architecture;
 const Runtime = @import("runtime.zig").Runtime;
 const LayerVersionsListItem = @import("layer_versions_list_item.zig").LayerVersionsListItem;
 
-/// Lists the versions of an [Lambda
-/// layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). Versions that have been deleted aren't listed. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only versions that indicate that they're compatible with that runtime. Specify a compatible architecture to include only layer versions that are compatible with that architecture.
 pub const ListLayerVersionsInput = struct {
     /// The compatible [instruction set
     /// architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).

@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const Ec2InstanceConnectEndpoint = @import("ec_2_instance_connect_endpoint.zig").Ec2InstanceConnectEndpoint;
 const serde = @import("serde.zig");
 
-/// Describes the specified EC2 Instance Connect Endpoints or all EC2 Instance
-/// Connect Endpoints.
 pub const DescribeInstanceConnectEndpointsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

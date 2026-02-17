@@ -30,6 +30,7 @@ pub const ListEndpointsByPlatformApplicationPaginator = struct {
 
         const output = try list_endpoints_by_platform_application.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -70,6 +71,7 @@ pub const ListOriginationNumbersPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_origination_numbers.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -112,6 +114,7 @@ pub const ListPhoneNumbersOptedOutPaginator = struct {
 
         const output = try list_phone_numbers_opted_out.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -152,6 +155,7 @@ pub const ListPlatformApplicationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_platform_applications.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -194,6 +198,7 @@ pub const ListSMSSandboxPhoneNumbersPaginator = struct {
 
         const output = try list_sms_sandbox_phone_numbers.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -234,6 +239,7 @@ pub const ListSubscriptionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_subscriptions.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -276,6 +282,7 @@ pub const ListSubscriptionsByTopicPaginator = struct {
 
         const output = try list_subscriptions_by_topic.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -316,6 +323,7 @@ pub const ListTopicsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_topics.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

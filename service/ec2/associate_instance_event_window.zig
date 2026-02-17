@@ -7,12 +7,6 @@ const InstanceEventWindowAssociationRequest = @import("instance_event_window_ass
 const InstanceEventWindow = @import("instance_event_window.zig").InstanceEventWindow;
 const serde = @import("serde.zig");
 
-/// Associates one or more targets with an event window. Only one type of target
-/// (instance
-/// IDs, Dedicated Host IDs, or tags) can be specified with an event window.
-///
-/// For more information, see [Define event windows for scheduled
-/// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
 pub const AssociateInstanceEventWindowInput = struct {
     /// One or more targets associated with the specified event window.
     association_target: InstanceEventWindowAssociationRequest,

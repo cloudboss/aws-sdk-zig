@@ -7,12 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const FlowLog = @import("flow_log.zig").FlowLog;
 const serde = @import("serde.zig");
 
-/// Describes one or more flow logs.
-///
-/// To view the published flow log records, you must view the log destination.
-/// For example,
-/// the CloudWatch Logs log group, the Amazon S3 bucket, or the Kinesis Data
-/// Firehose delivery stream.
 pub const DescribeFlowLogsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

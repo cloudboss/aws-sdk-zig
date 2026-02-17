@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Applies a security group to the association between the target network and
-/// the Client VPN endpoint. This action replaces the existing
-/// security groups with the specified security groups.
 pub const ApplySecurityGroupsToClientVpnTargetNetworkInput = struct {
     /// The ID of the Client VPN endpoint.
     client_vpn_endpoint_id: []const u8,

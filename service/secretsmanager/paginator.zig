@@ -25,6 +25,7 @@ pub const BatchGetSecretValuePaginator = struct {
 
         const output = try batch_get_secret_value.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -66,6 +67,7 @@ pub const ListSecretVersionIdsPaginator = struct {
 
         const output = try list_secret_version_ids.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -106,6 +108,7 @@ pub const ListSecretsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_secrets.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

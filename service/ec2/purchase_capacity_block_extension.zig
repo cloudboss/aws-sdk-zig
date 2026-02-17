@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityBlockExtension = @import("capacity_block_extension.zig").CapacityBlockExtension;
 const serde = @import("serde.zig");
 
-/// Purchase the Capacity Block extension for use with your account. You must
-/// specify the
-/// ID of the Capacity Block extension offering you are purchasing.
 pub const PurchaseCapacityBlockExtensionInput = struct {
     /// The ID of the Capacity Block extension offering to purchase.
     capacity_block_extension_offering_id: []const u8,

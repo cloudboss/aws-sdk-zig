@@ -6,19 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ClassicLinkDnsSupport = @import("classic_link_dns_support.zig").ClassicLinkDnsSupport;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This action is deprecated.
-///
-/// Describes the ClassicLink DNS support status of one or more VPCs. If
-/// enabled, the DNS
-/// hostname of a linked EC2-Classic instance resolves to its private IP address
-/// when
-/// addressed from an instance in the VPC to which it's linked. Similarly, the
-/// DNS hostname
-/// of an instance in a VPC resolves to its private IP address when addressed
-/// from a linked
-/// EC2-Classic instance.
 pub const DescribeVpcClassicLinkDnsSupportInput = struct {
     /// The maximum number of items to return for this request.
     /// To get the next page of items, make another request with the token returned

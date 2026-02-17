@@ -6,16 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const serde = @import("serde.zig");
 
-/// Exports routes from the specified transit gateway route table to the
-/// specified S3 bucket.
-/// By default, all routes are exported. Alternatively, you can filter by CIDR
-/// range.
-///
-/// The routes are saved to the specified bucket in a JSON file. For more
-/// information, see
-/// [Export route tables
-/// to Amazon
-/// S3](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-route-tables.html#tgw-export-route-tables) in the *Amazon Web Services Transit Gateways Guide*.
 pub const ExportTransitGatewayRoutesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,
@@ -54,7 +44,7 @@ pub const ExportTransitGatewayRoutesInput = struct {
     filters: ?[]const Filter = null,
 
     /// The name of the S3 bucket.
-    s_3_bucket: []const u8,
+    s3_bucket: []const u8,
 
     /// The ID of the route table.
     transit_gateway_route_table_id: []const u8,
@@ -63,7 +53,7 @@ pub const ExportTransitGatewayRoutesInput = struct {
 pub const ExportTransitGatewayRoutesOutput = struct {
     /// The URL of the exported file in Amazon S3. For example,
     /// s3://*bucket_name*/VPCTransitGateway/TransitGatewayRouteTables/*file_name*.
-    s_3_location: ?[]const u8 = null,
+    s3_location: ?[]const u8 = null,
 
     _arena: std.heap.ArenaAllocator = undefined,
 
@@ -143,7 +133,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExportTransitGatewayRoutesI
         }
     }
     try body_buf.appendSlice(alloc, "&S3Bucket=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.s_3_bucket);
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.s3_bucket);
     try body_buf.appendSlice(alloc, "&TransitGatewayRouteTableId=");
     try aws.url.appendUrlEncoded(alloc, &body_buf, input.transit_gateway_route_table_id);
 
@@ -177,7 +167,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "s3Location")) {
-                    result.s_3_location = try alloc.dupe(u8, try reader.readElementText());
+                    result.s3_location = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProvisionedConcurrencyStatusEnum = @import("provisioned_concurrency_status_enum.zig").ProvisionedConcurrencyStatusEnum;
 
-/// Retrieves the provisioned concurrency configuration for a function's alias
-/// or version.
 pub const GetProvisionedConcurrencyConfigInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

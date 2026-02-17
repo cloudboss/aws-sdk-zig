@@ -7,22 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const InstanceEventWindow = @import("instance_event_window.zig").InstanceEventWindow;
 const serde = @import("serde.zig");
 
-/// Describes the specified event windows or all event windows.
-///
-/// If you specify event window IDs, the output includes information for only
-/// the specified
-/// event windows. If you specify filters, the output includes information for
-/// only those event
-/// windows that meet the filter criteria. If you do not specify event windows
-/// IDs or filters,
-/// the output includes information for all event windows, which can affect
-/// performance. We
-/// recommend that you use pagination to ensure that the operation returns
-/// quickly and
-/// successfully.
-///
-/// For more information, see [Define event windows for scheduled
-/// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
 pub const DescribeInstanceEventWindowsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

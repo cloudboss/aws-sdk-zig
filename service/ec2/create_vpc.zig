@@ -9,32 +9,6 @@ const VpcEncryptionControlConfiguration = @import("vpc_encryption_control_config
 const Vpc = @import("vpc.zig").Vpc;
 const serde = @import("serde.zig");
 
-/// Creates a VPC with the specified CIDR blocks.
-///
-/// A VPC must have an associated IPv4 CIDR block. You can choose an IPv4 CIDR
-/// block or an
-/// IPAM-allocated IPv4 CIDR block. You can optionally associate an IPv6 CIDR
-/// block with a
-/// VPC. You can choose an IPv6 CIDR block, an Amazon-provided IPv6 CIDR block,
-/// an
-/// IPAM-allocated IPv6 CIDR block, or an IPv6 CIDR block that you brought to
-/// Amazon Web Services. For
-/// more information, see [IP addressing for your VPCs and
-/// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html) in the *Amazon VPC User Guide*.
-///
-/// By default, each instance that you launch in the VPC has the default DHCP
-/// options, which
-/// include only a default DNS server that we provide (AmazonProvidedDNS). For
-/// more
-/// information, see [DHCP option
-/// sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the *Amazon VPC User Guide*.
-///
-/// You can specify DNS options and tenancy for a VPC when you create it. You
-/// can't change
-/// the tenancy of a VPC after you create it. For more information, see [VPC
-/// configuration
-/// options](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc-options.html) in the
-/// *Amazon VPC User Guide*.
 pub const CreateVpcInput = struct {
     /// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the
     /// VPC.

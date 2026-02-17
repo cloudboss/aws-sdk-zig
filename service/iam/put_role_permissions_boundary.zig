@@ -4,27 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Adds or updates the policy that is specified as the IAM role's permissions
-/// boundary.
-/// You can use an Amazon Web Services managed policy or a customer managed
-/// policy to set the boundary for
-/// a role. Use the boundary to control the maximum permissions that the role
-/// can have.
-/// Setting a permissions boundary is an advanced feature that can affect the
-/// permissions
-/// for the role.
-///
-/// You cannot set the boundary for a service-linked role.
-///
-/// **Important:**
-///
-/// Policies used as permissions boundaries do not provide permissions. You must
-/// also
-/// attach a permissions policy to the role. To learn how the effective
-/// permissions for
-/// a role are evaluated, see [IAM JSON policy
-/// evaluation
-/// logic](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html) in the IAM User Guide.
 pub const PutRolePermissionsBoundaryInput = struct {
     /// The ARN of the managed policy that is used to set the permissions boundary
     /// for the

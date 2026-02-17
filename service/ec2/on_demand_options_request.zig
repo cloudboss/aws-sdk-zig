@@ -26,8 +26,6 @@ pub const OnDemandOptionsRequest = struct {
     /// The maximum amount per hour for On-Demand Instances that you're willing to
     /// pay.
     ///
-    /// **Note:**
-    ///
     /// If your fleet includes T instances that are configured as `unlimited`,
     /// and if their average CPU usage exceeds the baseline utilization, you will
     /// incur a charge

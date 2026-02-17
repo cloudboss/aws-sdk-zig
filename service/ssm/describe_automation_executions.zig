@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AutomationExecutionFilter = @import("automation_execution_filter.zig").AutomationExecutionFilter;
 const AutomationExecutionMetadata = @import("automation_execution_metadata.zig").AutomationExecutionMetadata;
 
-/// Provides details about all active and terminated Automation executions.
 pub const DescribeAutomationExecutionsInput = struct {
     /// Filters used to limit the scope of executions that are requested.
     filters: ?[]const AutomationExecutionFilter = null,

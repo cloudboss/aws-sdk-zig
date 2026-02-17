@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamPool = @import("ipam_pool.zig").IpamPool;
 const serde = @import("serde.zig");
 
-/// Get information about your IPAM pools.
 pub const DescribeIpamPoolsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

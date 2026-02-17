@@ -5,22 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Use this request to set the default settings for sending SMS messages and
-/// receiving
-/// daily SMS usage reports.
-///
-/// You can override some of these settings for a single message when you use
-/// the
-/// `Publish` action with the `MessageAttributes.entry.N`
-/// parameter. For more information, see [Publishing to a mobile
-/// phone](https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
-/// in the *Amazon SNS Developer Guide*.
-///
-/// **Note:**
-///
-/// To use this operation, you must grant the Amazon SNS service principal
-/// (`sns.amazonaws.com`) permission to perform the
-/// `s3:ListBucket` action.
 pub const SetSMSAttributesInput = struct {
     /// The default settings for sending SMS messages from your Amazon Web Services
     /// account. You can set
@@ -32,8 +16,6 @@ pub const SetSMSAttributesInput = struct {
     /// SMS message would
     /// incur a cost that exceeds this limit, it stops sending SMS messages within
     /// minutes.
-    ///
-    /// **Important:**
     ///
     /// Amazon SNS stops sending SMS messages within minutes of the limit being
     /// crossed. During

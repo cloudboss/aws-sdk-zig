@@ -7,26 +7,6 @@ const RequestPayer = @import("request_payer.zig").RequestPayer;
 const ObjectLockLegalHold = @import("object_lock_legal_hold.zig").ObjectLockLegalHold;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Gets an object's current legal hold status. For more information, see
-/// [Locking
-/// Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-///
-/// This functionality is not supported for Amazon S3 on Outposts.
-///
-/// The following action is related to `GetObjectLegalHold`:
-///
-/// *
-///   [GetObjectAttributes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const GetObjectLegalHoldInput = struct {
     /// The bucket name containing the object whose legal hold status you want to
     /// retrieve.

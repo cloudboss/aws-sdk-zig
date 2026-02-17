@@ -6,8 +6,6 @@
 /// Working with archived
 /// objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/archived-objects.html) in the *Amazon S3 User Guide*.
 ///
-/// **Note:**
-///
 /// This functionality is not supported for directory buckets. Directory buckets
 /// only support `EXPRESS_ONEZONE` (the S3 Express One Zone storage class) in
 /// Availability Zones and `ONEZONE_IA` (the S3 One Zone-Infrequent Access

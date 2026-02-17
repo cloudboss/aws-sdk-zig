@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Unassigns the specified IPv6 addresses or Prefix Delegation prefixes from a
-/// network
-/// interface.
 pub const UnassignIpv6AddressesInput = struct {
     /// The IPv6 addresses to unassign from the network interface.
     ipv_6_addresses: ?[]const []const u8 = null,

@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayConnect = @import("transit_gateway_connect.zig").TransitGatewayConnect;
 const serde = @import("serde.zig");
 
-/// Describes one or more Connect attachments.
 pub const DescribeTransitGatewayConnectsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

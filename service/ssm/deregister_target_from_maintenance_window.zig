@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes a target from a maintenance window.
 pub const DeregisterTargetFromMaintenanceWindowInput = struct {
     /// The system checks if the target is being referenced by a task. If the target
     /// is being

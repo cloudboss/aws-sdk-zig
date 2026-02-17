@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ManagedPrefixList = @import("managed_prefix_list.zig").ManagedPrefixList;
 const serde = @import("serde.zig");
 
-/// Restores the entries from a previous version of a managed prefix list to a
-/// new version of the prefix list.
 pub const RestoreManagedPrefixListVersionInput = struct {
     /// The current version number for the prefix list.
     current_version: i64,

@@ -6,14 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const User = @import("user.zig").User;
 const serde = @import("serde.zig");
 
-/// Retrieves information about the specified IAM user, including the user's
-/// creation
-/// date, path, unique ID, and ARN.
-///
-/// If you do not specify a user name, IAM determines the user name implicitly
-/// based on
-/// the Amazon Web Services access key ID used to sign the request to this
-/// operation.
 pub const GetUserInput = struct {
     /// The name of the user to get information about.
     ///
@@ -29,8 +21,6 @@ pub const GetUserInput = struct {
 
 pub const GetUserOutput = struct {
     /// A structure containing details about the IAM user.
-    ///
-    /// **Important:**
     ///
     /// Due to a service issue, password last used data does not include password
     /// use from

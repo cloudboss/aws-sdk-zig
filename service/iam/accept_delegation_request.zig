@@ -4,20 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Accepts a delegation request, granting the requested temporary access.
-///
-/// Once the delegation request is accepted, it is eligible to send the exchange
-/// token to the partner.
-/// The
-/// [SendDelegationToken](https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html)
-/// API has to be explicitly called to send the delegation token.
-///
-/// At the time of acceptance, IAM records the details and the state of the
-/// identity that called this API.
-/// This is the identity that gets mapped to the delegated credential.
-///
-/// An accepted request may be rejected before the exchange token is sent to the
-/// partner.
 pub const AcceptDelegationRequestInput = struct {
     /// The unique identifier of the delegation request to accept.
     delegation_request_id: []const u8,

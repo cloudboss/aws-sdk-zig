@@ -9,11 +9,6 @@ const HostRecovery = @import("host_recovery.zig").HostRecovery;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const serde = @import("serde.zig");
 
-/// Allocates a Dedicated Host to your account. At a minimum, specify the
-/// supported
-/// instance type or instance family, the Availability Zone in which to allocate
-/// the host,
-/// and the number of hosts to allocate.
 pub const AllocateHostsInput = struct {
     /// The IDs of the Outpost hardware assets on which to allocate the Dedicated
     /// Hosts. Targeting

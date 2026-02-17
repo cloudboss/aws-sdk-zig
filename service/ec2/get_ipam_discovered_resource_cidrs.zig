@@ -7,10 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamDiscoveredResourceCidr = @import("ipam_discovered_resource_cidr.zig").IpamDiscoveredResourceCidr;
 const serde = @import("serde.zig");
 
-/// Returns the resource CIDRs that are monitored as part of a resource
-/// discovery. A discovered resource is a resource CIDR monitored under a
-/// resource discovery. The following resources can be discovered: VPCs, Public
-/// IPv4 pools, VPC subnets, and Elastic IP addresses.
 pub const GetIpamDiscoveredResourceCidrsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

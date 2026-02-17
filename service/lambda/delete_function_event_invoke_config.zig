@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the configuration for asynchronous invocation for a function,
-/// version, or alias.
-///
-/// To configure options for asynchronous invocation, use
-/// PutFunctionEventInvokeConfig.
 pub const DeleteFunctionEventInvokeConfigInput = struct {
     /// The name or ARN of the Lambda function, version, or alias. **Name formats**
     ///

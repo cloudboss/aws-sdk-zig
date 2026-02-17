@@ -8,8 +8,6 @@ pub const LifecycleExpiration = struct {
     /// must conform to the ISO
     /// 8601 format. The time is always midnight UTC.
     ///
-    /// **Note:**
-    ///
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket
     /// lifecycle configurations.
@@ -25,8 +23,6 @@ pub const LifecycleExpiration = struct {
     /// delete marker will be expired; if set to false the policy takes no action.
     /// This cannot be specified with
     /// Days or Date in a Lifecycle Expiration Policy.
-    ///
-    /// **Note:**
     ///
     /// This parameter applies to general purpose buckets only. It is not supported
     /// for directory bucket

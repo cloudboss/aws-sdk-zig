@@ -6,20 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ImageCriterionRequest = @import("image_criterion_request.zig").ImageCriterionRequest;
 const serde = @import("serde.zig");
 
-/// Sets or replaces the criteria for Allowed AMIs.
-///
-/// **Note:**
-///
-/// The Allowed AMIs feature does not restrict the AMIs owned by your account.
-/// Regardless of
-/// the criteria you set, the AMIs created by your account will always be
-/// discoverable and
-/// usable by users in your account.
-///
-/// For more information, see [Control the discovery and use of AMIs in
-/// Amazon EC2 with Allowed
-/// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html) in
-/// *Amazon EC2 User Guide*.
 pub const ReplaceImageCriteriaInAllowedImagesSettingsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -6,15 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ReservedInstancesConfiguration = @import("reserved_instances_configuration.zig").ReservedInstancesConfiguration;
 const serde = @import("serde.zig");
 
-/// Modifies the configuration of your Reserved Instances, such as the
-/// Availability Zone,
-/// instance count, or instance type. The Reserved Instances to be modified must
-/// be identical,
-/// except for Availability Zone, network platform, and instance type.
-///
-/// For more information, see [Modify Reserved
-/// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html) in the
-/// *Amazon EC2 User Guide*.
 pub const ModifyReservedInstancesInput = struct {
     /// A unique, case-sensitive token you provide to ensure idempotency of your
     /// modification

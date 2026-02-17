@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Changes which network ACL a subnet is associated with. By default when you
-/// create a
-/// subnet, it's automatically associated with the default network ACL. For more
-/// information, see [Network
-/// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the *Amazon VPC User Guide*.
-///
-/// This is an idempotent operation.
 pub const ReplaceNetworkAclAssociationInput = struct {
     /// The ID of the current association between the original network ACL and the
     /// subnet.

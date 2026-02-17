@@ -7,14 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ClassicLinkInstance = @import("classic_link_instance.zig").ClassicLinkInstance;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This action is deprecated.
-///
-/// Describes your linked EC2-Classic instances. This request only returns
-/// information about EC2-Classic instances linked to a VPC through ClassicLink.
-/// You cannot
-/// use this request to return information about other instances.
 pub const DescribeClassicLinkInstancesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

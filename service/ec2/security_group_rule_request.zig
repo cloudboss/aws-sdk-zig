@@ -11,8 +11,6 @@
 ///
 /// * ReferencedGroupId
 ///
-/// **Note:**
-///
 /// Amazon Web Services
 /// [canonicalizes](https://en.wikipedia.org/wiki/Canonicalization) IPv4 and
 /// IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block,

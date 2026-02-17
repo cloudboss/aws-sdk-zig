@@ -13,8 +13,6 @@ pub const WebsiteConfiguration = struct {
 
     /// The redirect behavior for every request to this bucket's website endpoint.
     ///
-    /// **Important:**
-    ///
     /// If you specify this property, you can't specify any other property.
     redirect_all_requests_to: ?RedirectAllRequestsTo,
 

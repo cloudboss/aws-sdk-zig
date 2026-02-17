@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes a resource data sync configuration. After the configuration is
-/// deleted, changes to
-/// data on managed nodes are no longer synced to or from the target. Deleting a
-/// sync configuration
-/// doesn't delete data.
 pub const DeleteResourceDataSyncInput = struct {
     /// The name of the configuration to delete.
     sync_name: []const u8,

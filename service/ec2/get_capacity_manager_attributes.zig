@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityManagerStatus = @import("capacity_manager_status.zig").CapacityManagerStatus;
 const IngestionStatus = @import("ingestion_status.zig").IngestionStatus;
 
-/// Retrieves the current configuration and status of EC2 Capacity Manager for
-/// your account, including enablement status, Organizations access settings,
-/// and data ingestion status.
 pub const GetCapacityManagerAttributesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request, and provides an error response.
@@ -135,13 +132,13 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "dataExportCount")) {
                     result.data_export_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "earliestDatapointTimestamp")) {
-                    result.earliest_datapoint_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.earliest_datapoint_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ingestionStatus")) {
                     result.ingestion_status = std.meta.stringToEnum(IngestionStatus, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ingestionStatusMessage")) {
                     result.ingestion_status_message = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "latestDatapointTimestamp")) {
-                    result.latest_datapoint_timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.latest_datapoint_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "organizationsAccess")) {
                     result.organizations_access = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {

@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const NatGatewayAddress = @import("nat_gateway_address.zig").NatGatewayAddress;
 const serde = @import("serde.zig");
 
-/// Assigns private IPv4 addresses to a private NAT gateway. For more
-/// information, see
-/// [Work with NAT
-/// gateways](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html) in the *Amazon VPC User Guide*.
 pub const AssignPrivateNatGatewayAddressInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

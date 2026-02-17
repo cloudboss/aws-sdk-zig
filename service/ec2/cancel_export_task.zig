@@ -4,11 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Cancels an active export task. The request removes all artifacts of the
-/// export, including any partially-created
-/// Amazon S3 objects. If the export task is complete or is in the process of
-/// transferring the final disk image, the
-/// command fails and returns an error.
 pub const CancelExportTaskInput = struct {
     /// The ID of the export task. This is the ID returned by the
     /// `CreateInstanceExportTask` and `ExportImage` operations.

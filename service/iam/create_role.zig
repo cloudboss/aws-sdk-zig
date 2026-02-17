@@ -7,15 +7,6 @@ const Tag = @import("tag.zig").Tag;
 const Role = @import("role.zig").Role;
 const serde = @import("serde.zig");
 
-/// Creates a new role for your Amazon Web Services account.
-///
-/// For more information about roles, see [IAM
-/// roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in
-/// the
-/// *IAM User Guide*. For information about quotas for role names
-/// and the number of roles you can create, see [IAM and STS
-/// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the
-/// *IAM User Guide*.
 pub const CreateRoleInput = struct {
     /// The trust relationship policy document that grants an entity permission to
     /// assume the
@@ -123,8 +114,6 @@ pub const CreateRoleInput = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    ///
-    /// **Note:**
     ///
     /// If any one of the tags is invalid or if you exceed the allowed maximum
     /// number of tags, then the entire request

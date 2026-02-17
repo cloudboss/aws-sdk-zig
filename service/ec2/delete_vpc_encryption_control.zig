@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const VpcEncryptionControl = @import("vpc_encryption_control.zig").VpcEncryptionControl;
 const serde = @import("serde.zig");
 
-/// Deletes a VPC Encryption Control configuration. This removes the encryption
-/// policy enforcement from the specified VPC.
-///
-/// For more information, see [Enforce VPC encryption in
-/// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
 pub const DeleteVpcEncryptionControlInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

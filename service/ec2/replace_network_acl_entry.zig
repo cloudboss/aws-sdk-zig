@@ -8,10 +8,6 @@ const PortRange = @import("port_range.zig").PortRange;
 const RuleAction = @import("rule_action.zig").RuleAction;
 const serde = @import("serde.zig");
 
-/// Replaces an entry (rule) in a network ACL. For more information, see
-/// [Network
-/// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the
-/// *Amazon VPC User Guide*.
 pub const ReplaceNetworkAclEntryInput = struct {
     /// The IPv4 network range to allow or deny, in CIDR notation (for example
     /// `172.16.0.0/24`).

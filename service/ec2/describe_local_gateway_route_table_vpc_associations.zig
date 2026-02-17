@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LocalGatewayRouteTableVpcAssociation = @import("local_gateway_route_table_vpc_association.zig").LocalGatewayRouteTableVpcAssociation;
 const serde = @import("serde.zig");
 
-/// Describes the specified associations between VPCs and local gateway route
-/// tables.
 pub const DescribeLocalGatewayRouteTableVpcAssociationsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

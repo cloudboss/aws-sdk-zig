@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TrafficMirrorSession = @import("traffic_mirror_session.zig").TrafficMirrorSession;
 const serde = @import("serde.zig");
 
-/// Describes one or more Traffic Mirror sessions. By default, all Traffic
-/// Mirror sessions are described. Alternatively, you can filter the results.
 pub const DescribeTrafficMirrorSessionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

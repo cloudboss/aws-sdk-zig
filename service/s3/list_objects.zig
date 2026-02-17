@@ -11,48 +11,6 @@ const Object = @import("object.zig").Object;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// This operation is not supported for directory buckets.
-///
-/// Returns some or all (up to 1,000) of the objects in a bucket. You can use
-/// the request parameters as
-/// selection criteria to return a subset of the objects in a bucket. A 200 OK
-/// response can contain valid or
-/// invalid XML. Be sure to design your application to parse the contents of the
-/// response and handle it
-/// appropriately.
-///
-/// **Important:**
-///
-/// This action has been revised. We recommend that you use the newer version,
-/// [ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html), when
-/// developing applications. For backward compatibility, Amazon S3 continues to
-/// support
-/// `ListObjects`.
-///
-/// The following operations are related to `ListObjects`:
-///
-/// *
-///   [ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
-///
-/// *
-///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-///
-/// *
-///   [PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-///
-/// *
-///   [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-///
-/// *
-///   [ListBuckets](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
-///
-/// **Important:**
-///
-/// You must URL encode any signed header values that contain spaces. For
-/// example, if your header value is `my file.txt`, containing two spaces after
-/// `my`, you must URL encode this value to `my%20%20file.txt`.
 pub const ListObjectsInput = struct {
     /// The name of the bucket containing the objects.
     ///
@@ -80,8 +38,6 @@ pub const ListObjectsInput = struct {
     /// you provide the access point ARN in place of the bucket name. For more
     /// information about access point ARNs, see [Using access
     /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// Object Lambda access points are not supported by directory buckets.
     ///
@@ -179,8 +135,6 @@ pub const ListObjectsOutput = struct {
     /// naming
     /// guidelines](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines).
     ///
-    /// **Note:**
-    ///
     /// When using the URL encoding type, non-ASCII characters that are used in an
     /// object's key name will
     /// be percent-encoded according to UTF-8 code values. For example, the object
@@ -209,8 +163,6 @@ pub const ListObjectsOutput = struct {
     /// the
     /// subsequent request to get the next set of objects. Amazon S3 lists objects
     /// in alphabetical order.
-    ///
-    /// **Note:**
     ///
     /// This element is returned only if you have the `delimiter` request parameter
     /// specified.

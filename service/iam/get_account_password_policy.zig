@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PasswordPolicy = @import("password_policy.zig").PasswordPolicy;
 const serde = @import("serde.zig");
 
-/// Retrieves the password policy for the Amazon Web Services account. This
-/// tells you the complexity
-/// requirements and mandatory rotation periods for the IAM user passwords in
-/// your account.
-/// For more information about using a password policy, see [Managing an IAM
-/// password
-/// policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html).
 pub const GetAccountPasswordPolicyInput = struct {
 };
 

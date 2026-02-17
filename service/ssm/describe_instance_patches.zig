@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PatchOrchestratorFilter = @import("patch_orchestrator_filter.zig").PatchOrchestratorFilter;
 const PatchComplianceData = @import("patch_compliance_data.zig").PatchComplianceData;
 
-/// Retrieves information about the patches on the specified managed node and
-/// their state
-/// relative to the patch baseline being used for the node.
 pub const DescribeInstancePatchesInput = struct {
     /// Each element in the array is a structure containing a key-value pair.
     ///

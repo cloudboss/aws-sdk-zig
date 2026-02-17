@@ -8,9 +8,6 @@ const InventoryFilter = @import("inventory_filter.zig").InventoryFilter;
 const ResultAttribute = @import("result_attribute.zig").ResultAttribute;
 const InventoryResultEntity = @import("inventory_result_entity.zig").InventoryResultEntity;
 
-/// Query inventory information. This includes managed node status, such as
-/// `Stopped`
-/// or `Terminated`.
 pub const GetInventoryInput = struct {
     /// Returns counts of inventory types based on one or more expressions. For
     /// example, if you

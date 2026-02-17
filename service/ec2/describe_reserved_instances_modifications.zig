@@ -7,24 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ReservedInstancesModification = @import("reserved_instances_modification.zig").ReservedInstancesModification;
 const serde = @import("serde.zig");
 
-/// Describes the modifications made to your Reserved Instances. If no parameter
-/// is specified,
-/// information about all your Reserved Instances modification requests is
-/// returned. If a
-/// modification ID is specified, only information about the specific
-/// modification is
-/// returned.
-///
-/// For more information, see [Modify Reserved
-/// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html) in the
-/// *Amazon EC2 User Guide*.
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures,
-/// might vary. Applications should not assume the elements appear in a
-/// particular order.
 pub const DescribeReservedInstancesModificationsInput = struct {
     /// One or more filters.
     ///

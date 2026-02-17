@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssociationVersionInfo = @import("association_version_info.zig").AssociationVersionInfo;
 
-/// Retrieves all versions of an association for a specific association ID.
 pub const ListAssociationVersionsInput = struct {
     /// The association ID for which you want to view all versions.
     association_id: []const u8,

@@ -4,17 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Gets the console output for the specified instance. For Linux instances, the
-/// instance
-/// console output displays the exact console output that would normally be
-/// displayed on a
-/// physical monitor attached to a computer. For Windows instances, the instance
-/// console
-/// output includes the last three system event log errors.
-///
-/// For more information, see [Instance
-/// console
-/// output](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output) in the *Amazon EC2 User Guide*.
 pub const GetConsoleOutputInput = struct {
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the
@@ -138,7 +127,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "output")) {
                     result.output = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "timestamp")) {
-                    result.timestamp = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

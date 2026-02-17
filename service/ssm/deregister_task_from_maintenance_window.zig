@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes a task from a maintenance window.
 pub const DeregisterTaskFromMaintenanceWindowInput = struct {
     /// The ID of the maintenance window the task should be removed from.
     window_id: []const u8,

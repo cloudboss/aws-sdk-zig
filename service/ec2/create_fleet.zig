@@ -14,17 +14,6 @@ const CreateFleetError = @import("create_fleet_error.zig").CreateFleetError;
 const CreateFleetInstance = @import("create_fleet_instance.zig").CreateFleetInstance;
 const serde = @import("serde.zig");
 
-/// Creates an EC2 Fleet that contains the configuration information for
-/// On-Demand Instances and Spot Instances.
-/// Instances are launched immediately if there is available capacity.
-///
-/// A single EC2 Fleet can include multiple launch specifications that vary by
-/// instance type,
-/// AMI, Availability Zone, or subnet.
-///
-/// For more information, see [EC2
-/// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html)
-/// in the *Amazon EC2 User Guide*.
 pub const CreateFleetInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the

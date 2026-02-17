@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Resets a network interface attribute. You can specify only one attribute at
-/// a
-/// time.
 pub const ResetNetworkInterfaceAttributeInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

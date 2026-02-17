@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Disable the IPAM account. For more information, see [Enable integration with
-/// Organizations](https://docs.aws.amazon.com/vpc/latest/ipam/enable-integ-ipam.html) in the *Amazon VPC IPAM User Guide*.
 pub const DisableIpamOrganizationAdminAccountInput = struct {
     /// The Organizations member account ID that you want to disable as IPAM
     /// account.

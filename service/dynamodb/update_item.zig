@@ -14,18 +14,6 @@ const ReturnValuesOnConditionCheckFailure = @import("return_values_on_condition_
 const ConsumedCapacity = @import("consumed_capacity.zig").ConsumedCapacity;
 const ItemCollectionMetrics = @import("item_collection_metrics.zig").ItemCollectionMetrics;
 
-/// Edits an existing item's attributes, or adds a new item to the table if it
-/// does not
-/// already exist. You can put, delete, or add attribute values. You can also
-/// perform a
-/// conditional update on an existing item (insert a new attribute name-value
-/// pair if it
-/// doesn't exist, or replace an existing name-value pair if it has certain
-/// expected
-/// attribute values).
-///
-/// You can also return the item's attribute values in the same `UpdateItem`
-/// operation using the `ReturnValues` parameter.
 pub const UpdateItemInput = struct {
     /// This is a legacy parameter. Use `UpdateExpression` instead. For more
     /// information, see
@@ -99,8 +87,6 @@ pub const UpdateItemInput = struct {
     /// You could then use this substitution in an expression, as in this example:
     ///
     /// * `#P = :val`
-    ///
-    /// **Note:**
     ///
     /// Tokens that begin with the **:** character are
     /// *expression attribute values*, which are placeholders for the
@@ -237,8 +223,6 @@ pub const UpdateItemInput = struct {
     /// existing attribute. If `Value` is a negative number, then it
     /// is subtracted from the existing attribute.
     ///
-    /// **Note:**
-    ///
     /// If you use `ADD` to increment or decrement a number
     /// value for an item that doesn't exist before the update, DynamoDB
     /// uses `0` as the initial value.
@@ -267,8 +251,6 @@ pub const UpdateItemInput = struct {
     /// existing data type is a set of strings, the `Value` must also
     /// be a set of strings.
     ///
-    /// **Important:**
-    ///
     /// The `ADD` action only supports Number and set data types. In
     /// addition, `ADD` can only be used on top-level attributes, not
     /// nested attributes.
@@ -280,8 +262,6 @@ pub const UpdateItemInput = struct {
     /// set. For example, if the attribute value was the set `[a,b,c]` and
     /// the `DELETE` action specifies `[a,c]`, then the final
     /// attribute value is `[b]`. Specifying an empty set is an error.
-    ///
-    /// **Important:**
     ///
     /// The `DELETE` action only supports set data types. In addition,
     /// `DELETE` can only be used on top-level attributes, not nested

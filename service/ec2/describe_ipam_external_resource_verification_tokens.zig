@@ -7,12 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamExternalResourceVerificationToken = @import("ipam_external_resource_verification_token.zig").IpamExternalResourceVerificationToken;
 const serde = @import("serde.zig");
 
-/// Describe verification tokens.
-///
-/// A verification token is an Amazon Web Services-generated random value that
-/// you can use to prove ownership of an external resource. For example, you can
-/// use a verification token to validate that you control a public IP address
-/// range when you bring an IP address range to Amazon Web Services (BYOIP).
 pub const DescribeIpamExternalResourceVerificationTokensInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

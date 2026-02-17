@@ -6,25 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ParameterStringFilter = @import("parameter_string_filter.zig").ParameterStringFilter;
 const Parameter = @import("parameter.zig").Parameter;
 
-/// Retrieve information about one or more parameters under a specified level in
-/// a hierarchy.
-///
-/// Request results are returned on a best-effort basis. If you specify
-/// `MaxResults`
-/// in the request, the response includes information up to the limit specified.
-/// The number of items
-/// returned, however, can be between zero and the value of `MaxResults`. If the
-/// service
-/// reaches an internal limit while processing the results, it stops the
-/// operation and returns the
-/// matching values up to that point and a `NextToken`. You can specify the
-/// `NextToken` in a subsequent call to get the next set of results.
-///
-/// Parameter names can't contain spaces. The service removes any spaces
-/// specified for the
-/// beginning or end of a parameter name. If the specified name for a parameter
-/// contains spaces
-/// between characters, the request fails with a `ValidationException` error.
 pub const GetParametersByPathInput = struct {
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you
@@ -35,8 +16,6 @@ pub const GetParametersByPathInput = struct {
     next_token: ?[]const u8 = null,
 
     /// Filters to limit the request results.
-    ///
-    /// **Note:**
     ///
     /// The following `Key` values are supported for `GetParametersByPath`:
     /// `Type`, `KeyId`, and `Label`.
@@ -57,8 +36,6 @@ pub const GetParametersByPathInput = struct {
     path: []const u8,
 
     /// Retrieve all parameters within a hierarchy.
-    ///
-    /// **Important:**
     ///
     /// If a user has access to a path, then the user can access all levels of that
     /// path. For

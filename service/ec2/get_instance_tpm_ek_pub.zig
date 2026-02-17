@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const EkPubKeyFormat = @import("ek_pub_key_format.zig").EkPubKeyFormat;
 const EkPubKeyType = @import("ek_pub_key_type.zig").EkPubKeyType;
 
-/// Gets the public endorsement key associated with the Nitro Trusted
-/// Platform Module (NitroTPM) for the specified instance.
 pub const GetInstanceTpmEkPubInput = struct {
     /// Specify this parameter to verify whether the request will succeed, without
     /// actually making the

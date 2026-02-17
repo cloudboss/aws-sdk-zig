@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImportSummary = @import("import_summary.zig").ImportSummary;
 
-/// Lists completed imports within the past 90 days.
 pub const ListImportsInput = struct {
     /// An optional string that, if supplied, must be copied from the output of a
     /// previous

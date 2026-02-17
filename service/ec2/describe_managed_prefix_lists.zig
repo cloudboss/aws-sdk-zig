@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ManagedPrefixList = @import("managed_prefix_list.zig").ManagedPrefixList;
 const serde = @import("serde.zig");
 
-/// Describes your managed prefix lists and any Amazon Web Services-managed
-/// prefix lists.
 pub const DescribeManagedPrefixListsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

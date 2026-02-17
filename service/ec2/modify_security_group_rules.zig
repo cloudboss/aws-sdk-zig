@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SecurityGroupRuleUpdate = @import("security_group_rule_update.zig").SecurityGroupRuleUpdate;
 const serde = @import("serde.zig");
 
-/// Modifies the rules of a security group.
 pub const ModifySecurityGroupRulesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

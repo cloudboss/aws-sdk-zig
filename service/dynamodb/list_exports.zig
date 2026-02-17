@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExportSummary = @import("export_summary.zig").ExportSummary;
 
-/// Lists completed exports within the past 90 days.
 pub const ListExportsInput = struct {
     /// Maximum number of results to return per page.
     max_results: ?i32 = null,

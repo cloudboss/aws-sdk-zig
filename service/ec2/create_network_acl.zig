@@ -7,12 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const NetworkAcl = @import("network_acl.zig").NetworkAcl;
 const serde = @import("serde.zig");
 
-/// Creates a network ACL in a VPC. Network ACLs provide an optional layer of
-/// security (in addition to security groups) for the instances in your VPC.
-///
-/// For more information, see [Network
-/// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the
-/// *Amazon VPC User Guide*.
 pub const CreateNetworkAclInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the

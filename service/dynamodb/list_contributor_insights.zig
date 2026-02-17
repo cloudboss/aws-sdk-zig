@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContributorInsightsSummary = @import("contributor_insights_summary.zig").ContributorInsightsSummary;
 
-/// Returns a list of ContributorInsightsSummary for a table and all its global
-/// secondary
-/// indexes.
 pub const ListContributorInsightsInput = struct {
     /// Maximum number of results to return per page.
     max_results: ?i32 = null,

@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Byoasn = @import("byoasn.zig").Byoasn;
 const serde = @import("serde.zig");
 
-/// Deprovisions your Autonomous System Number (ASN) from your Amazon Web
-/// Services account. This action can only be called after any BYOIP CIDR
-/// associations are removed from your Amazon Web Services account with
-/// [DisassociateIpamByoasn](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIpamByoasn.html).
-/// For more information, see [Tutorial: Bring your ASN to
-/// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
-/// the *Amazon VPC IPAM guide*.
 pub const DeprovisionIpamByoasnInput = struct {
     /// An ASN.
     asn: []const u8,

@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
 const serde = @import("serde.zig");
 
-/// Deletes the specified VPC endpoint connection notifications.
 pub const DeleteVpcEndpointConnectionNotificationsInput = struct {
     /// The IDs of the notifications.
     connection_notification_ids: []const []const u8,

@@ -7,19 +7,6 @@ const CreateAssociationBatchRequestEntry = @import("create_association_batch_req
 const FailedCreateAssociation = @import("failed_create_association.zig").FailedCreateAssociation;
 const AssociationDescription = @import("association_description.zig").AssociationDescription;
 
-/// Associates the specified Amazon Web Services Systems Manager document (SSM
-/// document) with the specified managed nodes
-/// or targets.
-///
-/// When you associate a document with one or more managed nodes using IDs or
-/// tags, Amazon Web Services Systems Manager
-/// Agent (SSM Agent) running on the managed node processes the document and
-/// configures the node as
-/// specified.
-///
-/// If you associate a document with a managed node that already has an
-/// associated document, the
-/// system returns the AssociationAlreadyExists exception.
 pub const CreateAssociationBatchInput = struct {
     /// One or more associations.
     entries: []const CreateAssociationBatchRequestEntry,

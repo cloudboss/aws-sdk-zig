@@ -5,32 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
-/// Associate a set of tags with an Amazon DynamoDB resource. You can then
-/// activate these
-/// user-defined tags so that they appear on the Billing and Cost Management
-/// console for
-/// cost allocation tracking. You can call TagResource up to five times per
-/// second, per
-/// account.
-///
-/// * `TagResource` is an asynchronous operation. If you issue a
-///   ListTagsOfResource request immediately after a
-/// `TagResource` request, DynamoDB might return your
-/// previous tag set, if there was one, or an empty tag set. This is because
-/// `ListTagsOfResource` uses an eventually consistent query, and the
-/// metadata for your tags or table might not be available at that moment. Wait
-/// for
-/// a few seconds, and then try the `ListTagsOfResource` request
-/// again.
-///
-/// * The application or removal of tags using `TagResource` and
-/// `UntagResource` APIs is eventually consistent.
-/// `ListTagsOfResource` API will only reflect the changes after a
-/// few seconds.
-///
-/// For an overview on tagging DynamoDB resources, see [Tagging for
-/// DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
-/// in the *Amazon DynamoDB Developer Guide*.
 pub const TagResourceInput = struct {
     /// Identifies the Amazon DynamoDB resource to which tags should be added. This
     /// value is

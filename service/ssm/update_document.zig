@@ -7,7 +7,6 @@ const AttachmentsSource = @import("attachments_source.zig").AttachmentsSource;
 const DocumentFormat = @import("document_format.zig").DocumentFormat;
 const DocumentDescription = @import("document_description.zig").DocumentDescription;
 
-/// Updates one or more values for an SSM document.
 pub const UpdateDocumentInput = struct {
     /// A list of key-value pairs that describe attachments to a version of a
     /// document.
@@ -33,8 +32,6 @@ pub const UpdateDocumentInput = struct {
     /// the latest version of the document. You can specify the version number of
     /// the latest version or
     /// use the `$LATEST` variable.
-    ///
-    /// **Note:**
     ///
     /// If you change a document version for a State Manager association, Systems
     /// Manager immediately runs

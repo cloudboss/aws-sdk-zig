@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const StepExecutionFilter = @import("step_execution_filter.zig").StepExecutionFilter;
 const StepExecution = @import("step_execution.zig").StepExecution;
 
-/// Information about all active and terminated step executions in an Automation
-/// workflow.
 pub const DescribeAutomationStepExecutionsInput = struct {
     /// The Automation execution ID for which you want step execution descriptions.
     automation_execution_id: []const u8,

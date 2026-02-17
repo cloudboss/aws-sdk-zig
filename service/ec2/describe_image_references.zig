@@ -7,12 +7,6 @@ const ResourceTypeRequest = @import("resource_type_request.zig").ResourceTypeReq
 const ImageReference = @import("image_reference.zig").ImageReference;
 const serde = @import("serde.zig");
 
-/// Describes your Amazon Web Services resources that are referencing the
-/// specified images.
-///
-/// For more information, see [Identify your resources referencing
-/// specified
-/// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-references.html) in the *Amazon EC2 User Guide*.
 pub const DescribeImageReferencesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

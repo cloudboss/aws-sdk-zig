@@ -4,8 +4,6 @@ const ObjectIdentifier = @import("object_identifier.zig").ObjectIdentifier;
 pub const Delete = struct {
     /// The object to delete.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - For directory buckets, an object
     /// that's composed entirely of whitespace characters is not supported by the
     /// `DeleteObjects`

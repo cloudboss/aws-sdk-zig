@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ServiceLinkVirtualInterface = @import("service_link_virtual_interface.zig").ServiceLinkVirtualInterface;
 const serde = @import("serde.zig");
 
-/// Describes the Outpost service link virtual interfaces.
 pub const DescribeServiceLinkVirtualInterfacesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

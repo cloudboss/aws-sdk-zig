@@ -7,7 +7,6 @@ const FunctionUrlAuthType = @import("function_url_auth_type.zig").FunctionUrlAut
 const Cors = @import("cors.zig").Cors;
 const InvokeMode = @import("invoke_mode.zig").InvokeMode;
 
-/// Updates the configuration for a Lambda function URL.
 pub const UpdateFunctionUrlConfigInput = struct {
     /// The type of authentication that your function URL uses. Set to `AWS_IAM` if
     /// you want to restrict access to authenticated users only. Set to `NONE` if

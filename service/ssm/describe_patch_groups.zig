@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PatchOrchestratorFilter = @import("patch_orchestrator_filter.zig").PatchOrchestratorFilter;
 const PatchGroupPatchBaselineMapping = @import("patch_group_patch_baseline_mapping.zig").PatchGroupPatchBaselineMapping;
 
-/// Lists all patch groups that have been registered with patch baselines.
 pub const DescribePatchGroupsInput = struct {
     /// Each element in the array is a structure containing a key-value pair.
     ///

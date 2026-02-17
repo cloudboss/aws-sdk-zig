@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Shows the contents of the Verified Access policy associated with the group.
 pub const GetVerifiedAccessGroupPolicyInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

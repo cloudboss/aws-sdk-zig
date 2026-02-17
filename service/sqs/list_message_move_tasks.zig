@@ -5,21 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ListMessageMoveTasksResultEntry = @import("list_message_move_tasks_result_entry.zig").ListMessageMoveTasksResultEntry;
 
-/// Gets the most recent message movement tasks (up to 10) under a specific
-/// source
-/// queue.
-///
-/// **Note:**
-///
-/// * This action is currently limited to supporting message redrive from
-///   [dead-letter queues
-///   (DLQs)](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html) only. In this context, the source
-/// queue is the dead-letter queue (DLQ), while the destination queue can be the
-/// original source queue (from which the messages were driven to the
-/// dead-letter-queue), or a custom destination queue.
-///
-/// * Only one active message movement task is supported per queue at any given
-/// time.
 pub const ListMessageMoveTasksInput = struct {
     /// The maximum number of results to include in the response. The default is 1,
     /// which

@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const IpamScope = @import("ipam_scope.zig").IpamScope;
 const serde = @import("serde.zig");
 
-/// Get information about your IPAM scopes.
 pub const DescribeIpamScopesInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

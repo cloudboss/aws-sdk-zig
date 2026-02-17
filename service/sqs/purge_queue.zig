@@ -4,25 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes available messages in a queue (including in-flight messages)
-/// specified by the
-/// `QueueURL` parameter.
-///
-/// **Important:**
-///
-/// When you use the `PurgeQueue` action, you can't retrieve any messages
-/// deleted from a queue.
-///
-/// The message deletion process takes up to 60 seconds. We recommend waiting
-/// for 60
-/// seconds regardless of your queue's size.
-///
-/// Messages sent to the queue *before* you call
-/// `PurgeQueue` might be received but are deleted within the next
-/// minute.
-///
-/// Messages sent to the queue *after* you call `PurgeQueue`
-/// might be deleted while the queue is being purged.
 pub const PurgeQueueInput = struct {
     /// The URL of the queue from which the `PurgeQueue` action deletes
     /// messages.

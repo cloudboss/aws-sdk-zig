@@ -4,13 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Adds a new client ID (also known as audience) to the list of client IDs
-/// already
-/// registered for the specified IAM OpenID Connect (OIDC) provider resource.
-///
-/// This operation is idempotent; it does not fail or return an error if you add
-/// an
-/// existing client ID to the provider.
 pub const AddClientIDToOpenIDConnectProviderInput = struct {
     /// The client ID (also known as audience) to add to the IAM OpenID Connect
     /// provider

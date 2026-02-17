@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ImageAncestryEntry = @import("image_ancestry_entry.zig").ImageAncestryEntry;
 const serde = @import("serde.zig");
 
-/// Retrieves the ancestry chain of the specified AMI, tracing its lineage back
-/// to the root
-/// AMI. For more information, see [AMI
-/// ancestry](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-ancestry.html) in
-/// *Amazon EC2 User Guide*.
 pub const GetImageAncestryInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

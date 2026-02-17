@@ -8,10 +8,6 @@ const InterruptionType = @import("interruption_type.zig").InterruptionType;
 const InterruptibleCapacityReservationAllocationStatus = @import("interruptible_capacity_reservation_allocation_status.zig").InterruptibleCapacityReservationAllocationStatus;
 const serde = @import("serde.zig");
 
-/// Creates an interruptible Capacity Reservation by specifying the number of
-/// unused instances you want to allocate from your source reservation. This
-/// helps you make unused capacity available for other workloads within your
-/// account while maintaining control to reclaim it.
 pub const CreateInterruptibleCapacityReservationAllocationInput = struct {
     /// The ID of the source Capacity Reservation from which to create the
     /// interruptible Capacity Reservation. Your Capacity Reservation must be in

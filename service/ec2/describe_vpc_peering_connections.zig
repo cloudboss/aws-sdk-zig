@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const VpcPeeringConnection = @import("vpc_peering_connection.zig").VpcPeeringConnection;
 const serde = @import("serde.zig");
 
-/// Describes your VPC peering connections. The default is to describe all your
-/// VPC peering connections.
-/// Alternatively, you can specify specific VPC peering connection IDs or filter
-/// the results to
-/// include only the VPC peering connections that match specific criteria.
 pub const DescribeVpcPeeringConnectionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

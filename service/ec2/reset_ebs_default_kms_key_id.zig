@@ -4,17 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Resets the default KMS key for EBS encryption for your account in this
-/// Region
-/// to the Amazon Web Services managed KMS key for EBS.
-///
-/// After resetting the default KMS key to the Amazon Web Services managed KMS
-/// key, you can continue to encrypt by a
-/// customer managed KMS key by specifying it when you create the volume. For
-/// more information, see
-/// [Amazon EBS
-/// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
-/// in the *Amazon EBS User Guide*.
 pub const ResetEbsDefaultKmsKeyIdInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

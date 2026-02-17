@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const StopType = @import("stop_type.zig").StopType;
 
-/// Stop an Automation that is currently running.
 pub const StopAutomationExecutionInput = struct {
     /// The execution ID of the Automation to stop.
     automation_execution_id: []const u8,

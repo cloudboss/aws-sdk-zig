@@ -29,6 +29,7 @@ pub const ListContributorInsightsPaginator = struct {
 
         const output = try list_contributor_insights.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -69,6 +70,7 @@ pub const ListExportsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_exports.execute(self.client, self.params, options);
+
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -111,6 +113,7 @@ pub const ListImportsPaginator = struct {
 
         const output = try list_imports.execute(self.client, self.params, options);
 
+
         if (output.next_token) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -152,6 +155,7 @@ pub const ListTablesPaginator = struct {
 
         const output = try list_tables.execute(self.client, self.params, options);
 
+
         if (output.last_evaluated_table_name) |token| {
             if (self.next_token) |old| {
                 self.allocator.free(old);
@@ -186,10 +190,6 @@ pub const QueryPaginator = struct {
     const Self = @This();
 
     pub fn next(self: *Self, options: query_.Options) !query_.QueryOutput {
-        if (self.prev_output) |*prev| {
-            prev.deinit();
-            self.prev_output = null;
-        }
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -197,6 +197,11 @@ pub const QueryPaginator = struct {
         self.params.exclusive_start_key = self.next_token;
 
         const output = try query_.execute(self.client, self.params, options);
+
+        if (self.prev_output) |*prev| {
+            prev.deinit();
+            self.prev_output = null;
+        }
 
         if (output.last_evaluated_key) |token| {
             if (token.len > 0) {
@@ -240,7 +245,6 @@ pub const ScanPaginator = struct {
 
         const output = try scan_.execute(self.client, self.params, options);
 
-        // Deinit prev after execute() — next_token points into prev's arena
         if (self.prev_output) |*prev| {
             prev.deinit();
             self.prev_output = null;

@@ -1,6 +1,6 @@
 const ImportStatus = @import("import_status.zig").ImportStatus;
 const InputFormat = @import("input_format.zig").InputFormat;
-const S3BucketSource = @import("s_3_bucket_source.zig").S3BucketSource;
+const S3BucketSource = @import("s3_bucket_source.zig").S3BucketSource;
 
 /// Summary information about the source file for the import.
 pub const ImportSummary = struct {
@@ -29,7 +29,7 @@ pub const ImportSummary = struct {
     /// S3Bucket (required), S3KeyPrefix (optional) and S3BucketOwner (optional if
     /// the bucket is
     /// owned by the requester).
-    s_3_bucket_source: ?S3BucketSource,
+    s3_bucket_source: ?S3BucketSource,
 
     /// The time at which this import task began.
     start_time: ?i64,
@@ -43,7 +43,7 @@ pub const ImportSummary = struct {
         .import_arn = "ImportArn",
         .import_status = "ImportStatus",
         .input_format = "InputFormat",
-        .s_3_bucket_source = "S3BucketSource",
+        .s3_bucket_source = "S3BucketSource",
         .start_time = "StartTime",
         .table_arn = "TableArn",
     };

@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const EffectivePatch = @import("effective_patch.zig").EffectivePatch;
 
-/// Retrieves the current effective patches (the patch and the approval state)
-/// for the specified
-/// patch baseline. Applies to patch baselines for Windows only.
 pub const DescribeEffectivePatchesForPatchBaselineInput = struct {
     /// The ID of the patch baseline to retrieve the effective patches for.
     baseline_id: []const u8,

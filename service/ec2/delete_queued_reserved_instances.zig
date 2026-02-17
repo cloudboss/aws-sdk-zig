@@ -7,7 +7,6 @@ const FailedQueuedPurchaseDeletion = @import("failed_queued_purchase_deletion.zi
 const SuccessfulQueuedPurchaseDeletion = @import("successful_queued_purchase_deletion.zig").SuccessfulQueuedPurchaseDeletion;
 const serde = @import("serde.zig");
 
-/// Deletes the queued purchases for the specified Reserved Instances.
 pub const DeleteQueuedReservedInstancesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making

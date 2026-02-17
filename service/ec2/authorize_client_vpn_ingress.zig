@@ -6,12 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ClientVpnAuthorizationRuleStatus = @import("client_vpn_authorization_rule_status.zig").ClientVpnAuthorizationRuleStatus;
 const serde = @import("serde.zig");
 
-/// Adds an ingress authorization rule to a Client VPN endpoint. Ingress
-/// authorization rules act as
-/// firewall rules that grant access to networks. You must configure ingress
-/// authorization rules to
-/// enable clients to access resources in Amazon Web Services or on-premises
-/// networks.
 pub const AuthorizeClientVpnIngressInput = struct {
     /// The ID of the group to grant access to, for example, the Active Directory
     /// group or identity provider (IdP) group. Required if `AuthorizeAllGroups` is

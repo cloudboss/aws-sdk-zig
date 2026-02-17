@@ -8,11 +8,6 @@ const Runtime = @import("runtime.zig").Runtime;
 const LayerVersionContentInput = @import("layer_version_content_input.zig").LayerVersionContentInput;
 const LayerVersionContentOutput = @import("layer_version_content_output.zig").LayerVersionContentOutput;
 
-/// Creates an [Lambda
-/// layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) from a ZIP archive. Each time you call `PublishLayerVersion` with the same layer name, a new version is created.
-///
-/// Add layers to your function with CreateFunction or
-/// UpdateFunctionConfiguration.
 pub const PublishLayerVersionInput = struct {
     /// A list of compatible [instruction set
     /// architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).

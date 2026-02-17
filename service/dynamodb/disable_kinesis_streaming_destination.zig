@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const EnableKinesisStreamingConfiguration = @import("enable_kinesis_streaming_configuration.zig").EnableKinesisStreamingConfiguration;
 const DestinationStatus = @import("destination_status.zig").DestinationStatus;
 
-/// Stops replication from the DynamoDB table to the Kinesis data stream. This
-/// is done without deleting either of the resources.
 pub const DisableKinesisStreamingDestinationInput = struct {
     /// The source for the Kinesis streaming information that is being enabled.
     enable_kinesis_streaming_configuration: ?EnableKinesisStreamingConfiguration = null,

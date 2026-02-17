@@ -1,5 +1,3 @@
-/// **Note:**
-///
 /// Amazon Elastic Inference is no longer available.
 ///
 /// Describes the association between an instance and an elastic inference

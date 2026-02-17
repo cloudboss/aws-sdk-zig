@@ -13,32 +13,6 @@ const SnapshotDetail = @import("snapshot_detail.zig").SnapshotDetail;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-/// **Note:**
-///
-/// To import your virtual machines (VMs) with a console-based experience, you
-/// can use the
-/// *Import virtual machine images to Amazon Web Services* template in the
-/// [Migration Hub Orchestrator
-/// console](https://console.aws.amazon.com/migrationhub/orchestrator). For more
-/// information, see the [
-/// *Migration Hub Orchestrator User Guide*
-/// ](https://docs.aws.amazon.com/migrationhub-orchestrator/latest/userguide/import-vm-images.html).
-///
-/// Import single or multi-volume disk images or EBS snapshots into an Amazon
-/// Machine Image (AMI).
-///
-/// **Important:**
-///
-/// Amazon Web Services VM Import/Export strongly recommends specifying a value
-/// for either the
-/// `--license-type` or `--usage-operation` parameter when you create a new
-/// VM Import task. This ensures your operating system is licensed appropriately
-/// and your billing is
-/// optimized.
-///
-/// For more information, see [Importing a
-/// VM as an image using VM
-/// Import/Export](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html) in the *VM Import/Export User Guide*.
 pub const ImportImageInput = struct {
     /// The architecture of the virtual machine.
     ///
@@ -46,8 +20,6 @@ pub const ImportImageInput = struct {
     architecture: ?[]const u8 = null,
 
     /// The boot mode of the virtual machine.
-    ///
-    /// **Note:**
     ///
     /// The `uefi-preferred` boot mode isn't supported for importing images. For
     /// more
@@ -346,7 +318,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportImageInput, config: *
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.UserBucket.S3Bucket=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    if (sv_1.s_3_bucket) |fv_2| {
+                    if (sv_1.s3_bucket) |fv_2| {
                         try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
                     }
                 }
@@ -354,7 +326,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ImportImageInput, config: *
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskContainers.item.{d}.UserBucket.S3Key=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    if (sv_1.s_3_key) |fv_2| {
+                    if (sv_1.s3_key) |fv_2| {
                         try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
                     }
                 }

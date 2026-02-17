@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InventoryDeletionStatusItem = @import("inventory_deletion_status_item.zig").InventoryDeletionStatusItem;
 
-/// Describes a specific delete inventory operation.
 pub const DescribeInventoryDeletionsInput = struct {
     /// Specify the delete inventory ID for which you want information. This ID was
     /// returned by the

@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Returns details about the reserved concurrency configuration for a function.
-/// To set a concurrency limit for a function, use PutFunctionConcurrency.
 pub const GetFunctionConcurrencyInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

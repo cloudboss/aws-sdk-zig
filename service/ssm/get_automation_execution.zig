@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutomationExecution = @import("automation_execution.zig").AutomationExecution;
 
-/// Get detailed information about a particular Automation execution.
 pub const GetAutomationExecutionInput = struct {
     /// The unique identifier for an existing automation execution to examine. The
     /// execution ID is

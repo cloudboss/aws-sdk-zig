@@ -6,10 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Group = @import("group.zig").Group;
 const serde = @import("serde.zig");
 
-/// Creates a new group.
-///
-/// For information about the number of groups you can create, see [IAM and STS
-/// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
 pub const CreateGroupInput = struct {
     /// The name of the group to create. Do not include the path in this value.
     ///

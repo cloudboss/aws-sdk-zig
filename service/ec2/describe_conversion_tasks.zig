@@ -6,14 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ConversionTask = @import("conversion_task.zig").ConversionTask;
 const serde = @import("serde.zig");
 
-/// Describes the specified conversion tasks or all your conversion tasks. For
-/// more information, see the
-/// [VM Import/Export User
-/// Guide](https://docs.aws.amazon.com/vm-import/latest/userguide/).
-///
-/// For information about the import manifest referenced by this API action, see
-/// [VM Import
-/// Manifest](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html).
 pub const DescribeConversionTasksInput = struct {
     /// The conversion task IDs.
     conversion_task_ids: ?[]const []const u8 = null,

@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowExecutionStatus = @import("maintenance_window_execution_status.zig").MaintenanceWindowExecutionStatus;
 const MaintenanceWindowTaskType = @import("maintenance_window_task_type.zig").MaintenanceWindowTaskType;
 
-/// Retrieves information about a specific task running on a specific target.
 pub const GetMaintenanceWindowExecutionTaskInvocationInput = struct {
     /// The invocation ID to retrieve.
     invocation_id: []const u8,

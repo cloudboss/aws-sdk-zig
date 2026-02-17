@@ -12,37 +12,6 @@ const CapacityReservationTenancy = @import("capacity_reservation_tenancy.zig").C
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
 const serde = @import("serde.zig");
 
-/// Creates a new Capacity Reservation with the specified attributes. Capacity
-/// Reservations enable you to reserve capacity for your Amazon EC2 instances in
-/// a specific
-/// Availability Zone for any duration.
-///
-/// You can create a Capacity Reservation at any time, and you can choose when
-/// it starts.
-/// You can create a Capacity Reservation for immediate use or you can request a
-/// Capacity
-/// Reservation for a future date.
-///
-/// For more information, see [ Reserve compute
-/// capacity with On-Demand Capacity
-/// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html) in the
-/// *Amazon EC2 User Guide*.
-///
-/// Your request to create a Capacity Reservation could fail if:
-///
-/// * Amazon EC2 does not have sufficient capacity. In this case, try again
-/// at a later time, try in a different Availability Zone, or request a smaller
-/// Capacity Reservation. If your workload is flexible across instance types and
-/// sizes, try with different instance attributes.
-///
-/// * The requested quantity exceeds your On-Demand Instance quota. In this
-///   case,
-/// increase your On-Demand Instance quota for the requested instance type and
-/// try
-/// again. For more information, see [
-/// Amazon EC2 Service
-/// Quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html) in the
-/// *Amazon EC2 User Guide*.
 pub const CreateCapacityReservationInput = struct {
     /// The Availability Zone in which to create the Capacity Reservation.
     availability_zone: ?[]const u8 = null,
@@ -55,8 +24,6 @@ pub const CreateCapacityReservationInput = struct {
     /// Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     client_token: ?[]const u8 = null,
 
-    /// **Note:**
-    ///
     /// Required for future-dated Capacity Reservations only. To create a Capacity
     /// Reservation for immediate use, omit this parameter.
     ///
@@ -73,8 +40,6 @@ pub const CreateCapacityReservationInput = struct {
     /// duration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cr-concepts.html#cr-commitment-duration).
     commitment_duration: ?i64 = null,
 
-    /// **Note:**
-    ///
     /// Required for future-dated Capacity Reservations only. To create a Capacity
     /// Reservation for immediate use, omit this parameter.
     ///
@@ -144,8 +109,6 @@ pub const CreateCapacityReservationInput = struct {
 
     /// The number of instances for which to reserve capacity.
     ///
-    /// **Note:**
-    ///
     /// You can request future-dated Capacity Reservations for an instance count
     /// with a
     /// minimum of 32 vCPUs. For example, if you request a future-dated Capacity
@@ -171,8 +134,6 @@ pub const CreateCapacityReservationInput = struct {
     /// explicitly target the Capacity Reservation. This ensures that only permitted
     /// instances can use the reserved capacity.
     ///
-    /// **Note:**
-    ///
     /// If you are requesting a future-dated Capacity Reservation, you must specify
     /// `targeted`.
     ///
@@ -184,8 +145,6 @@ pub const CreateCapacityReservationInput = struct {
 
     /// The instance type for which to reserve capacity.
     ///
-    /// **Note:**
-    ///
     /// You can request future-dated Capacity Reservations for instance types in the
     /// C, M,
     /// R, I, T, and G instance families only.
@@ -195,8 +154,6 @@ pub const CreateCapacityReservationInput = struct {
     /// *Amazon EC2 User Guide*.
     instance_type: []const u8,
 
-    /// **Note:**
-    ///
     /// Not supported for future-dated Capacity Reservations.
     ///
     /// The Amazon Resource Name (ARN) of the Outpost on which to create the
@@ -204,8 +161,6 @@ pub const CreateCapacityReservationInput = struct {
     /// Reservation.
     outpost_arn: ?[]const u8 = null,
 
-    /// **Note:**
-    ///
     /// Not supported for future-dated Capacity Reservations.
     ///
     /// The Amazon Resource Name (ARN) of the cluster placement group in which to
@@ -217,8 +172,6 @@ pub const CreateCapacityReservationInput = struct {
     /// the *Amazon EC2 User Guide*.
     placement_group_arn: ?[]const u8 = null,
 
-    /// **Note:**
-    ///
     /// Required for future-dated Capacity Reservations only. To create a Capacity
     /// Reservation for immediate use, omit this parameter.
     ///

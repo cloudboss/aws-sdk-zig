@@ -40,8 +40,6 @@ pub const InventoryFilter = struct {
 
     /// The type of filter.
     ///
-    /// **Note:**
-    ///
     /// The `Exists` filter must be used with aggregators. For more information, see
     /// [Aggregating inventory
     /// data](https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-aggregate.html) in the *Amazon Web Services Systems Manager User Guide*.

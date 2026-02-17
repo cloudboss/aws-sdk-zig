@@ -5,8 +5,6 @@ const Tag = @import("tag.zig").Tag;
 /// specify a tag, you must
 /// specify the resource type to tag, otherwise the request will fail.
 ///
-/// **Note:**
-///
 /// The `Valid Values` lists all the resource types that can be tagged.
 /// However, the action you're using might not support tagging all of these
 /// resource types.

@@ -4,8 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Allows a subscription owner to set an attribute of the subscription to a new
-/// value.
 pub const SetSubscriptionAttributesInput = struct {
     /// A map of attributes with their corresponding values.
     ///

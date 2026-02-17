@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssociationDescription = @import("association_description.zig").AssociationDescription;
 
-/// Describes the association for the specified target or managed node. If you
-/// created the
-/// association by using the `Targets` parameter, then you must retrieve the
-/// association
-/// by using the association ID.
 pub const DescribeAssociationInput = struct {
     /// The association ID for which you want information.
     association_id: ?[]const u8 = null,

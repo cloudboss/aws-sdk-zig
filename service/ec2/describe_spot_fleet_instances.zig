@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ActiveInstance = @import("active_instance.zig").ActiveInstance;
 const serde = @import("serde.zig");
 
-/// Describes the running instances for the specified Spot Fleet.
 pub const DescribeSpotFleetInstancesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

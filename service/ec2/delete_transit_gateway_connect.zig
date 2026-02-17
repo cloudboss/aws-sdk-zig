@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayConnect = @import("transit_gateway_connect.zig").TransitGatewayConnect;
 const serde = @import("serde.zig");
 
-/// Deletes the specified Connect attachment. You must first delete any Connect
-/// peers for
-/// the attachment.
 pub const DeleteTransitGatewayConnectInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

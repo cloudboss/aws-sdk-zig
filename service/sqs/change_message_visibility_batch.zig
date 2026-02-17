@@ -7,22 +7,6 @@ const ChangeMessageVisibilityBatchRequestEntry = @import("change_message_visibil
 const BatchResultErrorEntry = @import("batch_result_error_entry.zig").BatchResultErrorEntry;
 const ChangeMessageVisibilityBatchResultEntry = @import("change_message_visibility_batch_result_entry.zig").ChangeMessageVisibilityBatchResultEntry;
 
-/// Changes the visibility timeout of multiple messages. This is a batch version
-/// of
-/// `
-/// ChangeMessageVisibility.` The result of the action
-/// on each message is reported individually in the response. You can send up to
-/// 10
-/// `
-/// ChangeMessageVisibility
-/// ` requests with each
-/// `ChangeMessageVisibilityBatch` action.
-///
-/// **Important:**
-///
-/// Because the batch request can result in a combination of successful and
-/// unsuccessful actions, you should check for batch errors even when the call
-/// returns an HTTP status code of `200`.
 pub const ChangeMessageVisibilityBatchInput = struct {
     /// Lists the receipt handles of the messages for which the visibility timeout
     /// must be

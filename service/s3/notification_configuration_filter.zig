@@ -1,4 +1,4 @@
-const S3KeyFilter = @import("s_3_key_filter.zig").S3KeyFilter;
+const S3KeyFilter = @import("s3_key_filter.zig").S3KeyFilter;
 
 /// Specifies object key name filtering rules. For information about key name
 /// filtering, see [Configuring

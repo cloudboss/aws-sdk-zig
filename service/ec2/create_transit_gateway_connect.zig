@@ -8,12 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayConnect = @import("transit_gateway_connect.zig").TransitGatewayConnect;
 const serde = @import("serde.zig");
 
-/// Creates a Connect attachment from a specified transit gateway attachment. A
-/// Connect attachment is a GRE-based tunnel attachment that you can use to
-/// establish a connection between a transit gateway and an appliance.
-///
-/// A Connect attachment uses an existing VPC or Amazon Web Services Direct
-/// Connect attachment as the underlying transport mechanism.
 pub const CreateTransitGatewayConnectInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

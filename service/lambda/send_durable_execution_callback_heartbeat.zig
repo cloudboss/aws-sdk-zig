@@ -4,9 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Sends a heartbeat signal for a long-running callback operation to prevent
-/// timeout. Use this API to extend the callback timeout period while the
-/// external operation is still in progress.
 pub const SendDurableExecutionCallbackHeartbeatInput = struct {
     /// The unique identifier for the callback operation.
     callback_id: []const u8,

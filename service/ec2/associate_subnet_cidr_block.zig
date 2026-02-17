@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SubnetIpv6CidrBlockAssociation = @import("subnet_ipv_6_cidr_block_association.zig").SubnetIpv6CidrBlockAssociation;
 const serde = @import("serde.zig");
 
-/// Associates a CIDR block with your subnet. You can only associate a single
-/// IPv6 CIDR
-/// block with your subnet.
 pub const AssociateSubnetCidrBlockInput = struct {
     /// The IPv6 CIDR block for your subnet.
     ipv_6_cidr_block: ?[]const u8 = null,

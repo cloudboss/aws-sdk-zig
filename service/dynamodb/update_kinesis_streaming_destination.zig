@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const UpdateKinesisStreamingConfiguration = @import("update_kinesis_streaming_configuration.zig").UpdateKinesisStreamingConfiguration;
 const DestinationStatus = @import("destination_status.zig").DestinationStatus;
 
-/// The command to update the Kinesis stream destination.
 pub const UpdateKinesisStreamingDestinationInput = struct {
     /// The Amazon Resource Name (ARN) for the Kinesis stream input.
     stream_arn: []const u8,

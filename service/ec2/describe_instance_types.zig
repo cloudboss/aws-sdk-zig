@@ -8,9 +8,6 @@ const InstanceType = @import("instance_type.zig").InstanceType;
 const InstanceTypeInfo = @import("instance_type_info.zig").InstanceTypeInfo;
 const serde = @import("serde.zig");
 
-/// Describes the specified instance types. By default, all instance types for
-/// the current
-/// Region are described. Alternatively, you can filter the results.
 pub const DescribeInstanceTypesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

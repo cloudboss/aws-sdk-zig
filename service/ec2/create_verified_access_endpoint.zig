@@ -14,8 +14,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const VerifiedAccessEndpoint = @import("verified_access_endpoint.zig").VerifiedAccessEndpoint;
 const serde = @import("serde.zig");
 
-/// An Amazon Web Services Verified Access endpoint is where you define your
-/// application along with an optional endpoint-level access policy.
 pub const CreateVerifiedAccessEndpointInput = struct {
     /// The DNS name for users to reach your application.
     application_domain: ?[]const u8 = null,

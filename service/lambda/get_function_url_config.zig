@@ -7,7 +7,6 @@ const FunctionUrlAuthType = @import("function_url_auth_type.zig").FunctionUrlAut
 const Cors = @import("cors.zig").Cors;
 const InvokeMode = @import("invoke_mode.zig").InvokeMode;
 
-/// Returns details about a Lambda function URL.
 pub const GetFunctionUrlConfigInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

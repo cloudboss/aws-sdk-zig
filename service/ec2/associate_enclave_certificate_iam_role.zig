@@ -4,31 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Associates an Identity and Access Management (IAM) role with an Certificate
-/// Manager (ACM) certificate.
-/// This enables the certificate to be used by the ACM for Nitro Enclaves
-/// application inside an enclave. For more
-/// information, see [Certificate Manager for Nitro
-/// Enclaves](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html) in the *Amazon Web Services Nitro Enclaves
-/// User Guide*.
-///
-/// When the IAM role is associated with the ACM certificate, the certificate,
-/// certificate chain, and encrypted
-/// private key are placed in an Amazon S3 location that only the associated IAM
-/// role can access. The private key of the certificate
-/// is encrypted with an Amazon Web Services managed key that has an attached
-/// attestation-based key policy.
-///
-/// To enable the IAM role to access the Amazon S3 object, you must grant it
-/// permission to call `s3:GetObject`
-/// on the Amazon S3 bucket returned by the command. To enable the IAM role to
-/// access the KMS key,
-/// you must grant it permission to call `kms:Decrypt` on the KMS key returned
-/// by the command.
-/// For more information, see [
-/// Grant the role permission to access the certificate and encryption
-/// key](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy) in the
-/// *Amazon Web Services Nitro Enclaves User Guide*.
 pub const AssociateEnclaveCertificateIamRoleInput = struct {
     /// The ARN of the ACM certificate with which to associate the IAM role.
     certificate_arn: []const u8,
@@ -47,12 +22,12 @@ pub const AssociateEnclaveCertificateIamRoleInput = struct {
 
 pub const AssociateEnclaveCertificateIamRoleOutput = struct {
     /// The name of the Amazon S3 bucket to which the certificate was uploaded.
-    certificate_s_3_bucket_name: ?[]const u8 = null,
+    certificate_s3_bucket_name: ?[]const u8 = null,
 
     /// The Amazon S3 object key where the certificate, certificate chain, and
     /// encrypted private key bundle are stored. The
     /// object key is formatted as follows: `role_arn`/`certificate_arn`.
-    certificate_s_3_object_key: ?[]const u8 = null,
+    certificate_s3_object_key: ?[]const u8 = null,
 
     /// The ID of the KMS key used to encrypt the private key of the certificate.
     encryption_kms_key_id: ?[]const u8 = null,
@@ -145,9 +120,9 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "certificateS3BucketName")) {
-                    result.certificate_s_3_bucket_name = try alloc.dupe(u8, try reader.readElementText());
+                    result.certificate_s3_bucket_name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "certificateS3ObjectKey")) {
-                    result.certificate_s_3_object_key = try alloc.dupe(u8, try reader.readElementText());
+                    result.certificate_s3_object_key = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "encryptionKmsKeyId")) {
                     result.encryption_kms_key_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {

@@ -4,15 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Removes the specified managed policy from the specified IAM group.
-///
-/// A group can also have inline policies embedded with it. To delete an inline
-/// policy,
-/// use
-/// [DeleteGroupPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteGroupPolicy.html). For information about policies, see [Managed
-/// policies and inline
-/// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
-/// *IAM User Guide*.
 pub const DetachGroupPolicyInput = struct {
     /// The name (friendly name, not ARN) of the IAM group to detach the policy
     /// from.

@@ -5,27 +5,17 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const QueueAttributeName = @import("queue_attribute_name.zig").QueueAttributeName;
 
-/// Gets attributes for the specified queue.
-///
-/// **Note:**
-///
-/// To determine whether a queue is
-/// [FIFO](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html), you can check whether `QueueName` ends with the `.fifo` suffix.
 pub const GetQueueAttributesInput = struct {
     /// A list of attributes for which to retrieve information.
     ///
     /// The `AttributeNames` parameter is optional, but if you don't specify values
     /// for this parameter, the request returns empty results.
     ///
-    /// **Note:**
-    ///
     /// In the future, new attributes might be added. If you write code that calls
     /// this action, we recommend that you structure your code so that it can handle
     /// new attributes gracefully.
     ///
     /// The following attributes are supported:
-    ///
-    /// **Important:**
     ///
     /// The `ApproximateNumberOfMessagesDelayed`,
     /// `ApproximateNumberOfMessagesNotVisible`, and
@@ -139,8 +129,6 @@ pub const GetQueueAttributesInput = struct {
     /// `redrivePermission` parameter
     /// to `allowAll`.
     ///
-    /// **Note:**
-    ///
     /// The dead-letter queue of a
     /// FIFO queue must also be a FIFO queue. Similarly, the dead-letter
     /// queue of a standard queue must also be a standard queue.
@@ -172,8 +160,6 @@ pub const GetQueueAttributesInput = struct {
     /// FIFO. For more information, see [FIFO queue
     /// logic](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-understanding-logic.html) in the *Amazon SQS Developer
     /// Guide*.
-    ///
-    /// **Note:**
     ///
     /// To determine whether a queue is
     /// [FIFO](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html), you can check whether `QueueName` ends with the `.fifo` suffix.

@@ -72,7 +72,7 @@ const list_directory_buckets = @import("list_directory_buckets.zig");
 const list_multipart_uploads = @import("list_multipart_uploads.zig");
 const list_object_versions = @import("list_object_versions.zig");
 const list_objects = @import("list_objects.zig");
-const list_objects_v_2 = @import("list_objects_v_2.zig");
+const list_objects_v2 = @import("list_objects_v2.zig");
 const list_parts = @import("list_parts.zig");
 const put_bucket_abac = @import("put_bucket_abac.zig");
 const put_bucket_accelerate_configuration = @import("put_bucket_accelerate_configuration.zig");
@@ -154,8 +154,6 @@ pub const Client = struct {
     /// should call the
     /// [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html) API operation and ensure that the parts list is empty.
     ///
-    /// **Note:**
-    ///
     /// * **Directory buckets** - If multipart uploads in a
     /// directory bucket are in progress, you can't delete the bucket until all the
     /// in-progress multipart
@@ -227,8 +225,6 @@ pub const Client = struct {
     /// *
     ///   [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -283,8 +279,6 @@ pub const Client = struct {
     /// see [Amazon S3 Error Best
     /// Practices](https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html).
     ///
-    /// **Important:**
-    ///
     /// You can't use `Content-Type: application/x-www-form-urlencoded` for the
     /// CompleteMultipartUpload requests. Also, if you don't provide a
     /// `Content-Type` header,
@@ -294,8 +288,6 @@ pub const Client = struct {
     /// Multipart
     /// Upload](https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in
     /// the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, you must make requests for
     /// this API operation to the Zonal endpoint. These endpoints support
@@ -405,8 +397,6 @@ pub const Client = struct {
     /// *
     ///   [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -415,8 +405,6 @@ pub const Client = struct {
     }
 
     /// Creates a copy of an object that is already stored in Amazon S3.
-    ///
-    /// **Important:**
     ///
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
     /// support for Email Grantee Access Control Lists (ACLs). If you attempt to use
@@ -427,8 +415,6 @@ pub const Client = struct {
     /// Virginia), US West (N. California), US West (Oregon), Asia Pacific
     /// (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe (Ireland),
     /// and South America (São Paulo).
-    ///
-    /// **Note:**
     ///
     /// You can store individual objects of up to 50 TB in Amazon S3. You create a
     /// copy of your
@@ -443,8 +429,6 @@ pub const Client = struct {
     /// You can copy individual objects between general purpose buckets, between
     /// directory buckets, and between
     /// general purpose buckets and directory buckets.
-    ///
-    /// **Note:**
     ///
     /// * Amazon S3 supports copy operations using Multi-Region Access Points only
     ///   as a destination when
@@ -477,8 +461,6 @@ pub const Client = struct {
     /// or disable a Region for standalone
     /// accounts](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-enable-standalone) in the *Amazon Web Services Account Management
     /// Guide*.
-    ///
-    /// **Important:**
     ///
     /// Amazon S3 transfer acceleration does not support cross-Region copies. If you
     /// request a cross-Region
@@ -643,8 +625,6 @@ pub const Client = struct {
     /// *
     ///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -652,8 +632,6 @@ pub const Client = struct {
         return copy_object.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This action creates an Amazon S3 bucket. To create an Amazon S3 on Outposts
     /// bucket, see [
     /// `CreateBucket`
@@ -669,8 +647,6 @@ pub const Client = struct {
     /// buckets. For more information about
     /// these bucket types, see [Creating, configuring, and working with Amazon S3
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// * **General purpose buckets** - If you send your
     /// `CreateBucket` request to the `s3.amazonaws.com` global endpoint, the
@@ -724,8 +700,6 @@ pub const Client = struct {
     /// `CreateBucket` request includes the `x-amz-object-ownership`
     /// header, then the `s3:PutBucketOwnershipControls` permission is required.
     ///
-    /// **Important:**
-    ///
     /// To set an ACL on a bucket as part of a `CreateBucket` request, you must
     /// explicitly set S3 Object Ownership for the bucket to a different value than
     /// the default,
@@ -772,8 +746,6 @@ pub const Client = struct {
     /// for S3 Express One
     /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Important:**
-    ///
     /// The permissions for ACLs, Object Lock, S3 Object Ownership, and S3 Block
     /// Public Access
     /// are not supported for directory buckets. For directory buckets, all Block
@@ -803,8 +775,6 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
-    ///
-    /// **Important:**
     ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
@@ -852,8 +822,6 @@ pub const Client = struct {
     ///
     /// * `s3:CreateBucketMetadataTableConfiguration`
     ///
-    /// **Note:**
-    ///
     /// The IAM policy action name is the same for the V1 and V2 API operations.
     ///
     /// * `s3tables:CreateTableBucket`
@@ -884,8 +852,6 @@ pub const Client = struct {
     /// *
     ///   [UpdateBucketMetadataJournalTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -893,8 +859,6 @@ pub const Client = struct {
         return create_bucket_metadata_configuration.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// We recommend that you create your S3 Metadata configurations by using the V2
     /// [CreateBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html) API operation. We no longer recommend using the V1
     /// `CreateBucketMetadataTableConfiguration` API operation.
@@ -954,8 +918,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -963,8 +925,6 @@ pub const Client = struct {
         return create_bucket_metadata_table_configuration.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
     /// support for Email Grantee Access Control Lists (ACLs). If you attempt to use
     /// an Email Grantee ACL in a request after October 1, 2025,
@@ -988,8 +948,6 @@ pub const Client = struct {
     /// Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html)
     /// in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// After you initiate a multipart upload and upload one or more parts, to stop
     /// being charged for
     /// storing the uploaded parts, you must either complete or abort the multipart
@@ -1007,8 +965,6 @@ pub const Client = struct {
     /// multipart upload. For more information, see [Aborting
     /// Incomplete Multipart Uploads Using a Bucket Lifecycle
     /// Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config).
-    ///
-    /// **Note:**
     ///
     /// * **Directory buckets ** -
     /// S3 Lifecycle is not supported by directory buckets.
@@ -1125,8 +1081,6 @@ pub const Client = struct {
     ///
     /// * `x-amz-server-side-encryption-context`
     ///
-    /// **Note:**
-    ///
     /// * If you specify `x-amz-server-side-encryption:aws:kms`, but don't
     /// provide `x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
     /// Amazon Web Services managed key (`aws/s3` key) in KMS to protect the data.
@@ -1208,8 +1162,6 @@ pub const Client = struct {
     /// Amazon S3 will use the encryption settings values from the `CreateSession`
     /// request to protect new objects in the directory bucket.
     ///
-    /// **Note:**
-    ///
     /// When you use the CLI or the Amazon Web Services SDKs, for `CreateSession`,
     /// the session token refreshes automatically to avoid service interruptions
     /// when a session expires. The CLI or the Amazon Web Services SDKs use the
@@ -1220,8 +1172,6 @@ pub const Client = struct {
     /// [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html) and [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)),
     /// the encryption request headers must match the default encryption
     /// configuration of the directory bucket.
-    ///
-    /// **Note:**
     ///
     /// For directory buckets, when you perform a `CreateMultipartUpload` operation
     /// and an `UploadPartCopy` operation, the request headers you provide in the
@@ -1250,8 +1200,6 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
-    ///
-    /// **Important:**
     ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
@@ -1306,8 +1254,6 @@ pub const Client = struct {
     /// guidelines and design
     /// patterns](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-optimizing-performance-guidelines-design-patterns.html#s3-express-optimizing-performance-session-authentication) in the
     /// *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// * You must make requests for this API operation to the Zonal endpoint. These
     ///   endpoints support virtual-hosted-style requests in the format
@@ -1388,8 +1334,6 @@ pub const Client = struct {
     /// KMS key (specifically, a [customer managed
     /// key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk)). Then, when a session is created for Zonal endpoint API operations, new objects are automatically encrypted and decrypted with SSE-KMS and S3 Bucket Keys during the session.
     ///
-    /// **Note:**
-    ///
     /// Only 1 [customer managed
     /// key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) is supported per directory bucket for the lifetime of the bucket. The [Amazon Web Services managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk) (`aws/s3`) isn't supported.
     /// After you specify SSE-KMS as your bucket's default encryption configuration
@@ -1409,8 +1353,6 @@ pub const Client = struct {
     /// Amazon S3 will use the encryption settings values from the `CreateSession`
     /// request to protect new objects in the directory bucket.
     ///
-    /// **Note:**
-    ///
     /// When you use the CLI or the Amazon Web Services SDKs, for `CreateSession`,
     /// the session token refreshes automatically to avoid service interruptions
     /// when a session expires. The CLI or the Amazon Web Services SDKs use the
@@ -1427,8 +1369,6 @@ pub const Client = struct {
     /// **Directory buckets ** - The HTTP Host header syntax is `
     /// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1439,8 +1379,6 @@ pub const Client = struct {
     /// Deletes the S3 bucket. All objects (including all object versions and delete
     /// markers) in the bucket
     /// must be deleted before the bucket itself can be deleted.
-    ///
-    /// **Note:**
     ///
     /// * **Directory buckets** - If multipart uploads in a
     /// directory bucket are in progress, you can't delete the bucket until all the
@@ -1488,8 +1426,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1497,8 +1433,6 @@ pub const Client = struct {
         return delete_bucket.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Deletes an analytics configuration for the bucket (specified by the
@@ -1529,8 +1463,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketAnalyticsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1538,8 +1470,6 @@ pub const Client = struct {
         return delete_bucket_analytics_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Deletes the `cors` configuration information set for the bucket.
@@ -1561,8 +1491,6 @@ pub const Client = struct {
     /// *
     ///   [RESTOPTIONSobject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1573,8 +1501,6 @@ pub const Client = struct {
     /// This implementation of the DELETE action resets the default encryption for
     /// the bucket as server-side
     /// encryption with Amazon S3 managed keys (SSE-S3).
-    ///
-    /// **Note:**
     ///
     /// * **General purpose buckets** - For information about the bucket
     /// default encryption feature, see [Amazon S3 Bucket Default
@@ -1624,8 +1550,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketEncryption](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1633,8 +1557,6 @@ pub const Client = struct {
         return delete_bucket_encryption.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Deletes the S3 Intelligent-Tiering configuration from the specified bucket.
@@ -1669,8 +1591,6 @@ pub const Client = struct {
     /// *
     ///   [ListBucketIntelligentTieringConfigurations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1678,8 +1598,6 @@ pub const Client = struct {
         return delete_bucket_intelligent_tiering_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Deletes an S3 Inventory configuration (identified by the inventory ID) from
@@ -1706,8 +1624,6 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListBucketInventoryConfigurations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html)
-    ///
-    /// **Important:**
     ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
@@ -1757,8 +1673,6 @@ pub const Client = struct {
     /// IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User
     /// Guide*.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets ** - For directory buckets, you must make requests for
     /// this API operation to the Regional endpoint. These endpoints support
     /// path-style requests in the format
@@ -1789,8 +1703,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1803,8 +1715,6 @@ pub const Client = struct {
     /// [Accelerating
     /// data discovery with S3
     /// Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// You can use the V2 `DeleteBucketMetadataConfiguration` API operation with V1
     /// or V2
@@ -1822,8 +1732,6 @@ pub const Client = struct {
     /// tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html) in the
     /// *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// The IAM policy action name is the same for the V1 and V2 API operations.
     ///
     /// The following operations are related to `DeleteBucketMetadataConfiguration`:
@@ -1840,8 +1748,6 @@ pub const Client = struct {
     /// *
     ///   [UpdateBucketMetadataJournalTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1849,8 +1755,6 @@ pub const Client = struct {
         return delete_bucket_metadata_configuration.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// We recommend that you delete your S3 Metadata configurations by using the V2
     /// [DeleteBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html) API operation. We no longer recommend using
     /// the V1 `DeleteBucketMetadataTableConfiguration` API operation.
@@ -1866,8 +1770,6 @@ pub const Client = struct {
     /// [Accelerating
     /// data discovery with S3
     /// Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// You can use the V2 `DeleteBucketMetadataConfiguration` API operation with V1
     /// or V2
@@ -1898,8 +1800,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1907,8 +1807,6 @@ pub const Client = struct {
         return delete_bucket_metadata_table_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Deletes a metrics configuration for the Amazon CloudWatch request metrics
@@ -1943,8 +1841,6 @@ pub const Client = struct {
     /// Metrics with Amazon
     /// CloudWatch](https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1952,8 +1848,6 @@ pub const Client = struct {
         return delete_bucket_metrics_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Removes `OwnershipControls` for an Amazon S3 bucket. To use this operation,
@@ -1973,8 +1867,6 @@ pub const Client = struct {
     ///
     /// * PutBucketOwnershipControls
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -1983,8 +1875,6 @@ pub const Client = struct {
     }
 
     /// Deletes the policy of a specified bucket.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets ** - For directory buckets, you must make requests for
     /// this API operation to the Regional endpoint. These endpoints support
@@ -2015,8 +1905,6 @@ pub const Client = struct {
     /// belongs to the bucket owner's account, Amazon S3 returns a `405 Method Not
     /// Allowed`
     /// error.
-    ///
-    /// **Important:**
     ///
     /// To ensure that bucket owners don't inadvertently lock themselves out of
     /// their own buckets,
@@ -2060,8 +1948,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2069,8 +1955,6 @@ pub const Client = struct {
         return delete_bucket_policy.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Deletes the replication configuration from the bucket.
@@ -2082,8 +1966,6 @@ pub const Client = struct {
     /// [Permissions Related to Bucket Subresource
     /// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
-    ///
-    /// **Note:**
     ///
     /// It can take a while for the deletion of a replication configuration to fully
     /// propagate.
@@ -2100,8 +1982,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2109,8 +1989,6 @@ pub const Client = struct {
         return delete_bucket_replication.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Deletes tags from the general purpose bucket if attribute based access
@@ -2135,8 +2013,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2144,8 +2020,6 @@ pub const Client = struct {
         return delete_bucket_tagging.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// This action removes the website configuration for a bucket. Amazon S3
@@ -2176,8 +2050,6 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html)
-    ///
-    /// **Important:**
     ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
@@ -2217,8 +2089,6 @@ pub const Client = struct {
     /// objects from versioning-suspended
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectsfromVersioningSuspendedBuckets.html).
     ///
-    /// **Note:**
-    ///
     /// * **Directory buckets** - S3 Versioning isn't enabled and supported for
     ///   directory buckets. For this API operation, only the `null` value of the
     ///   version ID is supported by directory buckets.
@@ -2256,8 +2126,6 @@ pub const Client = struct {
     /// Guide*. To see sample requests that use versioning, see [Sample
     /// Request](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete).
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - MFA delete is not supported by directory buckets.
     ///
     /// You can delete objects by explicitly calling DELETE Object or calling
@@ -2267,8 +2135,6 @@ pub const Client = struct {
     /// bucket, you must deny them the `s3:DeleteObject`, `s3:DeleteObjectVersion`,
     /// and
     /// `s3:PutLifeCycleConfiguration` actions.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** -
     /// S3 Lifecycle is not supported by directory buckets.
@@ -2289,8 +2155,6 @@ pub const Client = struct {
     /// `s3:DeleteObjectVersion`
     /// ** - To delete a specific version of an object from a versioning-enabled
     /// bucket, you must have the `s3:DeleteObjectVersion` permission.
-    ///
-    /// **Note:**
     ///
     /// If the `s3:DeleteObject` or `s3:DeleteObjectVersion` permissions are
     /// explicitly
@@ -2324,13 +2188,9 @@ pub const Client = struct {
     /// *
     ///   [PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    ///
-    /// **Note:**
     ///
     /// The `If-Match` header is supported for both general purpose and directory
     /// buckets. `IfMatchLastModifiedTime` and `IfMatchSize` is only supported for
@@ -2339,8 +2199,6 @@ pub const Client = struct {
         return delete_object.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Removes the entire tag set from the specified object. For more information
@@ -2365,8 +2223,6 @@ pub const Client = struct {
     /// *
     ///   [GetObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2389,8 +2245,6 @@ pub const Client = struct {
     /// of that delete, success or failure, in the response. If the object specified
     /// in the request isn't found,
     /// Amazon S3 confirms the deletion by returning the result as deleted.
-    ///
-    /// **Note:**
     ///
     /// * **Directory buckets** -
     /// S3 Versioning isn't enabled and supported for directory buckets.
@@ -2430,8 +2284,6 @@ pub const Client = struct {
     /// Delete](https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete) in the
     /// *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - MFA delete is not supported by directory buckets.
     ///
     /// **Permissions**
@@ -2450,8 +2302,6 @@ pub const Client = struct {
     /// `s3:DeleteObjectVersion`
     /// ** - To delete a specific version of an object from a versioning-enabled
     /// bucket, you must specify the `s3:DeleteObjectVersion` permission.
-    ///
-    /// **Note:**
     ///
     /// If the `s3:DeleteObject` or `s3:DeleteObjectVersion` permissions are
     /// explicitly
@@ -2509,8 +2359,6 @@ pub const Client = struct {
     /// *
     ///   [AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2518,8 +2366,6 @@ pub const Client = struct {
         return delete_objects.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Removes the `PublicAccessBlock` configuration for an Amazon S3 bucket. This
@@ -2550,8 +2396,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketPolicyStatus](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2568,8 +2412,6 @@ pub const Client = struct {
         return get_bucket_abac.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// This implementation of the GET action uses the `accelerate` subresource to
@@ -2608,8 +2450,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketAccelerateConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2617,8 +2457,6 @@ pub const Client = struct {
         return get_bucket_accelerate_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// This implementation of the `GET` action uses the `acl` subresource to return
@@ -2641,8 +2479,6 @@ pub const Client = struct {
     /// Error
     /// Codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList).
     ///
-    /// **Note:**
-    ///
     /// If your bucket uses the bucket owner enforced setting for S3 Object
     /// Ownership, requests to read
     /// ACLs are still supported and return the `bucket-owner-full-control` ACL with
@@ -2651,8 +2487,6 @@ pub const Client = struct {
     /// Controlling object ownership and
     /// disabling
     /// ACLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Important:**
     ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
@@ -2666,8 +2500,6 @@ pub const Client = struct {
         return get_bucket_acl.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// This implementation of the GET action returns an analytics configuration
@@ -2698,8 +2530,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketAnalyticsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2707,8 +2537,6 @@ pub const Client = struct {
         return get_bucket_analytics_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the Cross-Origin Resource Sharing (CORS) configuration information
@@ -2742,8 +2570,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketCors](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketCors.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2756,8 +2582,6 @@ pub const Client = struct {
     /// default encryption configuration that uses server-side encryption with
     /// Amazon S3 managed keys (SSE-S3). This operation also returns the
     /// [BucketKeyEnabled](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ServerSideEncryptionRule.html#AmazonS3-Type-ServerSideEncryptionRule-BucketKeyEnabled) and [BlockedEncryptionTypes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ServerSideEncryptionRule.html#AmazonS3-Type-ServerSideEncryptionRule-BlockedEncryptionTypes) statuses.
-    ///
-    /// **Note:**
     ///
     /// * **General purpose buckets** - For information about the bucket
     /// default encryption feature, see [Amazon S3 Bucket Default
@@ -2807,8 +2631,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketEncryption](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2816,8 +2638,6 @@ pub const Client = struct {
         return get_bucket_encryption.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Gets the S3 Intelligent-Tiering configuration from the specified bucket.
@@ -2852,8 +2672,6 @@ pub const Client = struct {
     /// *
     ///   [ListBucketIntelligentTieringConfigurations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2861,8 +2679,6 @@ pub const Client = struct {
         return get_bucket_intelligent_tiering_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns an S3 Inventory configuration (identified by the inventory
@@ -2891,8 +2707,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketInventoryConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketInventoryConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -2915,8 +2729,6 @@ pub const Client = struct {
     /// supported for general purpose
     /// buckets for backward compatibility. For the related API description, see
     /// [GetBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html).
-    ///
-    /// **Note:**
     ///
     /// Lifecyle configurations for directory buckets only support expiring objects
     /// and cancelling
@@ -2957,8 +2769,6 @@ pub const Client = struct {
     /// IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User
     /// Guide*.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets ** - For directory buckets, you must make requests for
     /// this API operation to the Regional endpoint. These endpoints support
     /// path-style requests in the format
@@ -2998,8 +2808,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3007,8 +2815,6 @@ pub const Client = struct {
         return get_bucket_lifecycle_configuration.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// Using the `GetBucketLocation` operation is no longer a best practice. To
     /// return the
     /// Region that a bucket resides in, we recommend that you use the
@@ -3022,8 +2828,6 @@ pub const Client = struct {
     /// `LocationConstraint` request parameter in a `CreateBucket` request. For more
     /// information, see
     /// [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html).
-    ///
-    /// **Note:**
     ///
     /// In a bucket's home Region, calls to the `GetBucketLocation` operation are
     /// governed
@@ -3049,8 +2853,6 @@ pub const Client = struct {
     /// Error
     /// Codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList).
     ///
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// The following operations are related to `GetBucketLocation`:
@@ -3061,8 +2863,6 @@ pub const Client = struct {
     /// *
     ///   [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3070,8 +2870,6 @@ pub const Client = struct {
         return get_bucket_location.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the logging status of a bucket and the permissions users have to
@@ -3086,8 +2884,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketLogging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLogging.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3100,8 +2896,6 @@ pub const Client = struct {
     /// [Accelerating
     /// data discovery with S3
     /// Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// You can use the V2 `GetBucketMetadataConfiguration` API operation with V1 or
     /// V2
@@ -3117,8 +2911,6 @@ pub const Client = struct {
     /// permission. For more information, see [Setting up permissions for
     /// configuring metadata
     /// tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// The IAM policy action name is the same for the V1 and V2 API operations.
     ///
@@ -3136,8 +2928,6 @@ pub const Client = struct {
     /// *
     ///   [UpdateBucketMetadataJournalTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3145,8 +2935,6 @@ pub const Client = struct {
         return get_bucket_metadata_configuration.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// We recommend that you retrieve your S3 Metadata configurations by using the
     /// V2
     /// [GetBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html) API operation. We no longer recommend using the V1
@@ -3163,8 +2951,6 @@ pub const Client = struct {
     /// [Accelerating
     /// data discovery with S3
     /// Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// You can use the V2 `GetBucketMetadataConfiguration` API operation with V1 or
     /// V2
@@ -3194,8 +2980,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3203,8 +2987,6 @@ pub const Client = struct {
         return get_bucket_metadata_table_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Gets a metrics configuration (specified by the metrics configuration ID)
@@ -3238,8 +3020,6 @@ pub const Client = struct {
     /// Metrics with Amazon
     /// CloudWatch](https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3247,8 +3027,6 @@ pub const Client = struct {
         return get_bucket_metrics_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the notification configuration of a bucket.
@@ -3284,8 +3062,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketNotification](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketNotification.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3293,8 +3069,6 @@ pub const Client = struct {
         return get_bucket_notification_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Retrieves `OwnershipControls` for an Amazon S3 bucket. To use this
@@ -3304,8 +3078,6 @@ pub const Client = struct {
     /// see [Specifying
     /// permissions in a
     /// policy](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html).
-    ///
-    /// **Note:**
     ///
     /// A bucket doesn't have `OwnershipControls` settings in the following cases:
     ///
@@ -3328,8 +3100,6 @@ pub const Client = struct {
     ///
     /// * DeleteBucketOwnershipControls
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3338,8 +3108,6 @@ pub const Client = struct {
     }
 
     /// Returns the policy of a specified bucket.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets ** - For directory buckets, you must make requests for
     /// this API operation to the Regional endpoint. These endpoints support
@@ -3370,8 +3138,6 @@ pub const Client = struct {
     /// belongs to the bucket owner's account, Amazon S3 returns a `405 Method Not
     /// Allowed`
     /// error.
-    ///
-    /// **Important:**
     ///
     /// To ensure that bucket owners don't inadvertently lock themselves out of
     /// their own buckets,
@@ -3421,8 +3187,6 @@ pub const Client = struct {
     /// *
     ///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3430,8 +3194,6 @@ pub const Client = struct {
         return get_bucket_policy.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Retrieves the policy status for an Amazon S3 bucket, indicating whether the
@@ -3459,8 +3221,6 @@ pub const Client = struct {
     /// *
     ///   [DeletePublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3468,13 +3228,9 @@ pub const Client = struct {
         return get_bucket_policy_status.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the replication configuration of a bucket.
-    ///
-    /// **Note:**
     ///
     /// It can take a while to propagate the put or delete a replication
     /// configuration to all Amazon S3
@@ -3509,8 +3265,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3518,8 +3272,6 @@ pub const Client = struct {
         return get_bucket_replication.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the request payment configuration of a bucket. To use this version
@@ -3532,8 +3284,6 @@ pub const Client = struct {
     /// *
     ///   [ListObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3541,8 +3291,6 @@ pub const Client = struct {
         return get_bucket_request_payment.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the tag set associated with the general purpose bucket.
@@ -3570,8 +3318,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3579,8 +3325,6 @@ pub const Client = struct {
         return get_bucket_tagging.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the versioning state of a bucket.
@@ -3604,8 +3348,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3613,8 +3355,6 @@ pub const Client = struct {
         return get_bucket_versioning.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the website configuration for a bucket. To host website on Amazon
@@ -3637,8 +3377,6 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html)
-    ///
-    /// **Important:**
     ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
@@ -3815,8 +3553,6 @@ pub const Client = struct {
     ///
     /// * `response-expires`
     ///
-    /// **Note:**
-    ///
     /// When you use these parameters, you must sign the request by using either an
     /// Authorization
     /// header or a presigned URL. These parameters cannot be used with an unsigned
@@ -3836,8 +3572,6 @@ pub const Client = struct {
     /// *
     ///   [GetObjectAcl](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3845,8 +3579,6 @@ pub const Client = struct {
         return get_object.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the access control list (ACL) of an object. To use this operation,
@@ -3861,8 +3593,6 @@ pub const Client = struct {
     /// By default, GET returns ACL information about the current version of an
     /// object. To return ACL
     /// information about a different version, use the versionId subresource.
-    ///
-    /// **Note:**
     ///
     /// If your bucket uses the bucket owner enforced setting for S3 Object
     /// Ownership, requests to read
@@ -3887,8 +3617,6 @@ pub const Client = struct {
     /// *
     ///   [PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -3904,8 +3632,6 @@ pub const Client = struct {
     /// `ListParts`. All of the data returned with both of those individual calls
     /// can be returned
     /// with a single call to `GetObjectAttributes`.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, you must make requests for
     /// this API operation to the Zonal endpoint. These endpoints support
@@ -3979,8 +3705,6 @@ pub const Client = struct {
     ///
     /// **Encryption**
     ///
-    /// **Note:**
-    ///
     /// Encryption request headers, like `x-amz-server-side-encryption`, should not
     /// be
     /// sent for `HEAD` requests if your object uses server-side encryption with Key
@@ -4014,8 +3738,6 @@ pub const Client = struct {
     /// For more information about SSE-C, see [Server-Side Encryption (Using
     /// Customer-Provided Encryption
     /// Keys)](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// **Directory bucket permissions** -
     /// For directory buckets, there are only two supported options for server-side
@@ -4096,8 +3818,6 @@ pub const Client = struct {
     /// *
     ///   [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4105,8 +3825,6 @@ pub const Client = struct {
         return get_object_attributes.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Gets an object's current legal hold status. For more information, see
@@ -4120,8 +3838,6 @@ pub const Client = struct {
     /// *
     ///   [GetObjectAttributes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4129,8 +3845,6 @@ pub const Client = struct {
         return get_object_legal_hold.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Gets the Object Lock configuration for a bucket. The rule specified in the
@@ -4145,8 +3859,6 @@ pub const Client = struct {
     /// *
     ///   [GetObjectAttributes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4154,8 +3866,6 @@ pub const Client = struct {
         return get_object_lock_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Retrieves an object's retention settings. For more information, see [Locking
@@ -4168,8 +3878,6 @@ pub const Client = struct {
     /// *
     ///   [GetObjectAttributes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4177,8 +3885,6 @@ pub const Client = struct {
         return get_object_retention.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the tag-set of an object. You send the GET request against the
@@ -4212,8 +3918,6 @@ pub const Client = struct {
     /// *
     ///   [PutObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4221,15 +3925,11 @@ pub const Client = struct {
         return get_object_tagging.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns torrent files from a bucket. BitTorrent can save you bandwidth when
     /// you're distributing
     /// large files.
-    ///
-    /// **Note:**
     ///
     /// You can get torrent only for objects that are less than 5 GB in size, and
     /// that are not encrypted
@@ -4244,8 +3944,6 @@ pub const Client = struct {
     /// *
     ///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4253,8 +3951,6 @@ pub const Client = struct {
         return get_object_torrent.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Retrieves the `PublicAccessBlock` configuration for an Amazon S3 bucket.
@@ -4268,8 +3964,6 @@ pub const Client = struct {
     /// Amazon S3
     /// permissions, see [Specifying Permissions in a
     /// Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
-    ///
-    /// **Important:**
     ///
     /// When Amazon S3 evaluates the `PublicAccessBlock` configuration for a bucket
     /// or an
@@ -4302,8 +3996,6 @@ pub const Client = struct {
     /// *
     ///   [DeletePublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4322,8 +4014,6 @@ pub const Client = struct {
     /// response header with the correct bucket location so that you can then make a
     /// proper, signed request
     /// to the appropriate Regional endpoint.
-    ///
-    /// **Note:**
     ///
     /// If the bucket doesn't exist or you don't have permission to access it, the
     /// `HEAD`
@@ -4388,8 +4078,6 @@ pub const Client = struct {
     /// **Directory buckets ** - The HTTP Host header syntax is `
     /// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
     ///
-    /// **Note:**
-    ///
     /// You must make requests for this API operation to the Zonal endpoint. These
     /// endpoints support virtual-hosted-style requests in the format
     /// `https://*bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
@@ -4402,8 +4090,6 @@ pub const Client = struct {
     /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
     /// *Amazon S3 User Guide*.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4415,8 +4101,6 @@ pub const Client = struct {
     /// object
     /// itself. This operation is useful if you're interested only in an object's
     /// metadata.
-    ///
-    /// **Note:**
     ///
     /// A `HEAD` request has the same options as a `GET` operation on an object. The
     /// response is identical to the `GET` response except that there is no response
@@ -4487,8 +4171,6 @@ pub const Client = struct {
     ///
     /// **Encryption**
     ///
-    /// **Note:**
-    ///
     /// Encryption request headers, like `x-amz-server-side-encryption`, should not
     /// be
     /// sent for `HEAD` requests if your object uses server-side encryption with Key
@@ -4523,8 +4205,6 @@ pub const Client = struct {
     /// Customer-Provided Encryption
     /// Keys)](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// **Directory bucket ** -
     /// For directory buckets, there are only two supported options for server-side
     /// encryption: SSE-S3 and SSE-KMS. SSE-C isn't supported. For more
@@ -4541,8 +4221,6 @@ pub const Client = struct {
     ///   Method Not
     /// Allowed` error and the `Last-Modified: timestamp` response header.
     ///
-    /// **Note:**
-    ///
     /// * **Directory buckets** -
     /// Delete marker is not supported for directory buckets.
     ///
@@ -4556,8 +4234,6 @@ pub const Client = struct {
     ///
     /// **Directory buckets ** - The HTTP Host header syntax is `
     /// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
-    ///
-    /// **Note:**
     ///
     /// For directory buckets, you must make requests for this API operation to the
     /// Zonal endpoint. These endpoints support virtual-hosted-style requests in the
@@ -4580,8 +4256,6 @@ pub const Client = struct {
     /// *
     ///   [GetObjectAttributes](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4589,8 +4263,6 @@ pub const Client = struct {
         return head_object.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Lists the analytics configurations for the bucket. You can have up to 1,000
@@ -4633,8 +4305,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketAnalyticsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4642,8 +4312,6 @@ pub const Client = struct {
         return list_bucket_analytics_configurations.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Lists the S3 Intelligent-Tiering configuration from the specified bucket.
@@ -4678,8 +4346,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketIntelligentTieringConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4687,8 +4353,6 @@ pub const Client = struct {
         return list_bucket_intelligent_tiering_configurations.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns a list of S3 Inventory configurations for the bucket. You can have
@@ -4729,8 +4393,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketInventoryConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketInventoryConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4738,8 +4400,6 @@ pub const Client = struct {
         return list_bucket_inventory_configurations.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Lists the metrics configurations for the bucket. The metrics configurations
@@ -4784,8 +4444,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4793,8 +4451,6 @@ pub const Client = struct {
         return list_bucket_metrics_configurations.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns a list of all buckets owned by the authenticated sender of the
@@ -4805,8 +4461,6 @@ pub const Client = struct {
     /// For information about Amazon S3 buckets, see [Creating, configuring, and
     /// working with Amazon S3
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html).
-    ///
-    /// **Important:**
     ///
     /// We strongly recommend using only paginated `ListBuckets` requests.
     /// Unpaginated
@@ -4820,8 +4474,6 @@ pub const Client = struct {
     /// with a general purpose bucket
     /// quota greater than 10,000.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -4834,8 +4486,6 @@ pub const Client = struct {
     /// more information about directory buckets, see [Directory
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html) in the
     /// *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets ** - For directory buckets, you must make requests for
     /// this API operation to the Regional endpoint. These endpoints support
@@ -4865,12 +4515,8 @@ pub const Client = struct {
     /// **Directory buckets ** - The HTTP Host header syntax is
     /// `s3express-control.*region*.amazonaws.com`.
     ///
-    /// **Note:**
-    ///
     /// The `BucketRegion` response element is not part of the
     /// `ListDirectoryBuckets` Response Syntax.
-    ///
-    /// **Important:**
     ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
@@ -4884,8 +4530,6 @@ pub const Client = struct {
     /// multipart upload that has been initiated by the `CreateMultipartUpload`
     /// request, but has not
     /// yet been completed or aborted.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - If multipart uploads in a
     /// directory bucket are in progress, you can't delete the bucket until all the
@@ -4916,8 +4560,6 @@ pub const Client = struct {
     /// response. Similarly, set the value of `upload-id-marker` to the
     /// `NextUploadIdMarker` value from the previous response.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - The `upload-id-marker`
     /// element and the `NextUploadIdMarker` element aren't supported by directory
     /// buckets. To
@@ -4929,8 +4571,6 @@ pub const Client = struct {
     /// Multipart
     /// Upload](https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in
     /// the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, you must make requests for
     /// this API operation to the Zonal endpoint. These endpoints support
@@ -5014,8 +4654,6 @@ pub const Client = struct {
     /// *
     ///   [AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5023,8 +4661,6 @@ pub const Client = struct {
         return list_multipart_uploads.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns metadata about all versions of the objects in a bucket. You can also
@@ -5032,13 +4668,9 @@ pub const Client = struct {
     /// as selection criteria to return metadata about a subset of all the object
     /// versions.
     ///
-    /// **Important:**
-    ///
     /// To use this operation, you must have permission to perform the
     /// `s3:ListBucketVersions`
     /// action. Be aware of the name difference.
-    ///
-    /// **Note:**
     ///
     /// A `200 OK` response can contain valid or invalid XML. Make sure to design
     /// your
@@ -5061,8 +4693,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5070,8 +4700,6 @@ pub const Client = struct {
         return list_object_versions.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Returns some or all (up to 1,000) of the objects in a bucket. You can use
@@ -5081,8 +4709,6 @@ pub const Client = struct {
     /// invalid XML. Be sure to design your application to parse the contents of the
     /// response and handle it
     /// appropriately.
-    ///
-    /// **Important:**
     ///
     /// This action has been revised. We recommend that you use the newer version,
     /// [ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html), when
@@ -5107,8 +4733,6 @@ pub const Client = struct {
     /// *
     ///   [ListBuckets](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5129,8 +4753,6 @@ pub const Client = struct {
     /// programmatically](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ListingKeysUsingAPIs.html) in the *Amazon S3 User Guide*. To get a list of your
     /// buckets, see
     /// [ListBuckets](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html).
-    ///
-    /// **Note:**
     ///
     /// * **General purpose bucket** - For general purpose buckets,
     /// `ListObjectsV2` doesn't return prefixes that are related only to in-progress
@@ -5199,8 +4821,6 @@ pub const Client = struct {
     /// **Directory buckets ** - The HTTP Host header syntax is `
     /// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
     ///
-    /// **Important:**
-    ///
     /// This section describes the latest revision of this action. We recommend that
     /// you use this revised
     /// API operation for application development. For backward compatibility,
@@ -5219,13 +4839,11 @@ pub const Client = struct {
     /// *
     ///   [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listObjectsV2(self: *Self, input: list_objects_v_2.ListObjectsV2Input, options: list_objects_v_2.Options) !list_objects_v_2.ListObjectsV2Output {
-        return list_objects_v_2.execute(self, input, options);
+    pub fn listObjectsV2(self: *Self, input: list_objects_v2.ListObjectsV2Input, options: list_objects_v2.Options) !list_objects_v2.ListObjectsV2Output {
+        return list_objects_v2.execute(self, input, options);
     }
 
     /// Lists the parts that have been uploaded for a specific multipart upload.
@@ -5254,8 +4872,6 @@ pub const Client = struct {
     /// Multipart
     /// Upload](https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in
     /// the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, you must make requests for
     /// this API operation to the Zonal endpoint. These endpoints support
@@ -5327,8 +4943,6 @@ pub const Client = struct {
     /// *
     ///   [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5345,8 +4959,6 @@ pub const Client = struct {
         return put_bucket_abac.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Sets the accelerate configuration of an existing bucket. Amazon S3 Transfer
@@ -5392,8 +5004,6 @@ pub const Client = struct {
     /// *
     ///   [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5401,8 +5011,6 @@ pub const Client = struct {
         return put_bucket_accelerate_configuration.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
     /// support for Email Grantee Access Control Lists (ACLs). If you attempt to use
     /// an Email Grantee ACL in a request after October 1, 2025,
@@ -5412,8 +5020,6 @@ pub const Client = struct {
     /// Virginia), US West (N. California), US West (Oregon), Asia Pacific
     /// (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe (Ireland),
     /// and South America (São Paulo).
-    ///
-    /// **Note:**
     ///
     /// This operation is not supported for directory buckets.
     ///
@@ -5429,8 +5035,6 @@ pub const Client = struct {
     ///
     /// * Specify permissions using request headers
     ///
-    /// **Note:**
-    ///
     /// You cannot specify access permission using both the body and the request
     /// headers.
     ///
@@ -5439,8 +5043,6 @@ pub const Client = struct {
     /// request body or the headers. For example, if you have an existing
     /// application that updates a bucket ACL
     /// using the request body, then you can continue to use that approach.
-    ///
-    /// **Important:**
     ///
     /// If your bucket uses the bucket owner enforced setting for S3 Object
     /// Ownership, ACLs are disabled
@@ -5489,8 +5091,6 @@ pub const Client = struct {
     ///
     /// * `emailAddress` – if the value specified is the email address of an
     /// Amazon Web Services account
-    ///
-    /// **Note:**
     ///
     /// Using email addresses to specify a grantee is only supported in the
     /// following Amazon Web Services Regions:
@@ -5558,8 +5158,6 @@ pub const Client = struct {
     /// Object acl
     /// request, appears as the CanonicalUser.
     ///
-    /// **Note:**
-    ///
     /// Using email addresses to specify a grantee is only supported in the
     /// following Amazon Web Services Regions:
     ///
@@ -5594,8 +5192,6 @@ pub const Client = struct {
     /// *
     ///   [GetObjectAcl](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5603,8 +5199,6 @@ pub const Client = struct {
         return put_bucket_acl.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Sets an analytics configuration for the bucket (specified by the analytics
@@ -5626,8 +5220,6 @@ pub const Client = struct {
     /// [Amazon S3 Analytics –
     /// Storage Class
     /// Analysis](https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html).
-    ///
-    /// **Important:**
     ///
     /// You must create a bucket policy on the destination bucket where the exported
     /// file is written to
@@ -5687,8 +5279,6 @@ pub const Client = struct {
     /// *
     ///   [ListBucketAnalyticsConfigurations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5696,8 +5286,6 @@ pub const Client = struct {
         return put_bucket_analytics_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Sets the `cors` configuration for your bucket. If the configuration exists,
@@ -5757,8 +5345,6 @@ pub const Client = struct {
     /// *
     ///   [RESTOPTIONSobject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5769,8 +5355,6 @@ pub const Client = struct {
     /// This operation configures default encryption and Amazon S3 Bucket Keys for
     /// an existing bucket. You can also [block encryption
     /// types](https://docs.aws.amazon.com/AmazonS3/latest/API/API_BlockedEncryptionTypes.html) using this operation.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets ** - For directory buckets, you must make requests for
     /// this API operation to the Regional endpoint. These endpoints support
@@ -5788,8 +5372,6 @@ pub const Client = struct {
     /// By default, all buckets have a default encryption configuration that uses
     /// server-side encryption
     /// with Amazon S3 managed keys (SSE-S3).
-    ///
-    /// **Note:**
     ///
     /// * **General purpose buckets**
     ///
@@ -5847,8 +5429,6 @@ pub const Client = struct {
     /// encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) to SSE-KMS, Amazon S3 validates the KMS key ID provided in
     /// PutBucketEncryption requests.
     ///
-    /// **Important:**
-    ///
     /// If you're specifying a customer managed KMS key, we recommend using a fully
     /// qualified KMS key
     /// ARN. If you use a KMS key alias instead, then KMS resolves the key within
@@ -5902,8 +5482,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketEncryption](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5911,8 +5489,6 @@ pub const Client = struct {
         return put_bucket_encryption.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Puts a S3 Intelligent-Tiering configuration to the specified bucket. You can
@@ -5949,8 +5525,6 @@ pub const Client = struct {
     /// *
     ///   [ListBucketIntelligentTieringConfigurations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html)
     ///
-    /// **Note:**
-    ///
     /// You only need S3 Intelligent-Tiering enabled on a bucket if you want to
     /// automatically move objects
     /// stored in the S3 Intelligent-Tiering storage class to the Archive Access or
@@ -5979,8 +5553,6 @@ pub const Client = struct {
     /// configuration
     /// on the bucket.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -5988,8 +5560,6 @@ pub const Client = struct {
         return put_bucket_intelligent_tiering_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// This implementation of the `PUT` action adds an S3 Inventory configuration
@@ -6015,8 +5585,6 @@ pub const Client = struct {
     /// information, see [Amazon S3
     /// Inventory](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html) in the
     /// Amazon S3 User Guide.
-    ///
-    /// **Important:**
     ///
     /// You must create a bucket policy on the *destination* bucket to grant
     /// permissions to Amazon S3 to write objects to the bucket in the defined
@@ -6085,8 +5653,6 @@ pub const Client = struct {
     /// *
     ///   [ListBucketInventoryConfigurations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6102,8 +5668,6 @@ pub const Client = struct {
     /// lifecycle configuration. For
     /// information about lifecycle configuration, see [Managing your storage
     /// lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html).
-    ///
-    /// **Note:**
     ///
     /// Bucket lifecycle configuration now supports specifying a lifecycle rule
     /// using an object key name
@@ -6133,8 +5697,6 @@ pub const Client = struct {
     /// for general purpose
     /// buckets. For the related API description, see
     /// [PutBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html).
-    ///
-    /// **Note:**
     ///
     /// Lifecyle configurations for directory buckets only support expiring objects
     /// and cancelling
@@ -6211,8 +5773,6 @@ pub const Client = struct {
     /// IAM](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User
     /// Guide*.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets ** - For directory buckets, you must make requests for
     /// this API operation to the Regional endpoint. These endpoints support
     /// path-style requests in the format
@@ -6239,8 +5799,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6248,8 +5806,6 @@ pub const Client = struct {
         return put_bucket_lifecycle_configuration.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
     /// support for Email Grantee Access Control Lists (ACLs). If you attempt to use
     /// an Email Grantee ACL in a request after October 1, 2025,
@@ -6259,8 +5815,6 @@ pub const Client = struct {
     /// Virginia), US West (N. California), US West (Oregon), Asia Pacific
     /// (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe (Ireland),
     /// and South America (São Paulo).
-    ///
-    /// **Note:**
     ///
     /// This operation is not supported for directory buckets.
     ///
@@ -6275,8 +5829,6 @@ pub const Client = struct {
     /// request element to grant access to other people. The `Permissions` request
     /// element specifies
     /// the kind of access the grantee has to the logs.
-    ///
-    /// **Important:**
     ///
     /// If the target bucket for log delivery uses the bucket owner enforced setting
     /// for S3 Object
@@ -6345,8 +5897,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketLogging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6354,8 +5904,6 @@ pub const Client = struct {
         return put_bucket_logging.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Sets a metrics configuration (specified by the metrics configuration ID) for
@@ -6399,8 +5947,6 @@ pub const Client = struct {
     ///
     /// * HTTP Status Code: HTTP 400 Bad Request
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6408,8 +5954,6 @@ pub const Client = struct {
         return put_bucket_metrics_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Enables notifications of specified events for a bucket. For more information
@@ -6463,8 +6007,6 @@ pub const Client = struct {
     /// configuration with the required
     /// `s3:PutBucketNotification` permission.
     ///
-    /// **Note:**
-    ///
     /// The PUT notification is an atomic operation. For example, suppose your
     /// notification configuration
     /// includes SNS topic, SQS queue, and Lambda function configurations. When you
@@ -6487,8 +6029,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketNotificationConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6496,8 +6036,6 @@ pub const Client = struct {
         return put_bucket_notification_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Creates or modifies `OwnershipControls` for an Amazon S3 bucket. To use this
@@ -6516,8 +6054,6 @@ pub const Client = struct {
     ///
     /// * DeleteBucketOwnershipControls
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6526,8 +6062,6 @@ pub const Client = struct {
     }
 
     /// Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets ** - For directory buckets, you must make requests for
     /// this API operation to the Regional endpoint. These endpoints support
@@ -6558,8 +6092,6 @@ pub const Client = struct {
     /// belongs to the bucket owner's account, Amazon S3 returns a `405 Method Not
     /// Allowed`
     /// error.
-    ///
-    /// **Important:**
     ///
     /// To ensure that bucket owners don't inadvertently lock themselves out of
     /// their own buckets,
@@ -6612,8 +6144,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6621,8 +6151,6 @@ pub const Client = struct {
         return put_bucket_policy.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Creates a replication configuration or replaces an existing one. For more
@@ -6656,8 +6184,6 @@ pub const Client = struct {
     /// configuration, you must also add
     /// the following elements: `DeleteMarkerReplication`, `Status`, and
     /// `Priority`.
-    ///
-    /// **Note:**
     ///
     /// If you are using an earlier version of the replication configuration, Amazon
     /// S3 handles replication of
@@ -6699,8 +6225,6 @@ pub const Client = struct {
     /// Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
     ///
-    /// **Note:**
-    ///
     /// To perform this operation, the user or role performing the action must have
     /// the
     /// [iam:PassRole](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) permission.
@@ -6713,8 +6237,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6722,8 +6244,6 @@ pub const Client = struct {
         return put_bucket_replication.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Sets the request payment configuration for a bucket. By default, the bucket
@@ -6742,8 +6262,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketRequestPayment](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketRequestPayment.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6751,8 +6269,6 @@ pub const Client = struct {
         return put_bucket_request_payment.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Sets the tags for a general purpose bucket if attribute based access control
@@ -6771,8 +6287,6 @@ pub const Client = struct {
     /// to see the total cost of that application across several services. For more
     /// information, see [Cost Allocation and
     /// Tagging](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) and [Using Cost Allocation in Amazon S3 Bucket Tags](https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html).
-    ///
-    /// **Note:**
     ///
     /// When this operation sets the tags for a bucket, it will overwrite any
     /// current tags the bucket
@@ -6815,8 +6329,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6824,11 +6336,7 @@ pub const Client = struct {
         return put_bucket_tagging.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
-    ///
-    /// **Note:**
     ///
     /// When you enable versioning on a bucket for the first time, it might take a
     /// short amount of time
@@ -6861,8 +6369,6 @@ pub const Client = struct {
     /// request` header and the `Status` and the `MfaDelete` request elements in a
     /// request to set the versioning state of the bucket.
     ///
-    /// **Important:**
-    ///
     /// If you have an object expiration lifecycle configuration in your
     /// non-versioned bucket and you want
     /// to maintain the same permanent delete behavior when you enable versioning,
@@ -6886,8 +6392,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketVersioning](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6895,8 +6399,6 @@ pub const Client = struct {
         return put_bucket_versioning.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Sets the configuration of the website that is specified in the `website`
@@ -6980,8 +6482,6 @@ pub const Client = struct {
     ///
     /// The maximum request length is limited to 128 KB.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -6989,8 +6489,6 @@ pub const Client = struct {
         return put_bucket_website.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
     /// support for Email Grantee Access Control Lists (ACLs). If you attempt to use
     /// an Email Grantee ACL in a request after October 1, 2025,
@@ -7002,8 +6500,6 @@ pub const Client = struct {
     /// and South America (São Paulo).
     ///
     /// Adds an object to a bucket.
-    ///
-    /// **Note:**
     ///
     /// * Amazon S3 never adds partial objects; if you receive a success response,
     ///   Amazon S3 added the entire
@@ -7042,8 +6538,6 @@ pub const Client = struct {
     /// or overwritten, you can use [Amazon S3 Object
     /// Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for directory buckets.
     ///
     /// * **If-None-Match** - Uploads the object only if the object
@@ -7060,8 +6554,6 @@ pub const Client = struct {
     /// conditional
     /// requests](https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html) in the *Amazon S3 User Guide* or [RFC 7232](https://datatracker.ietf.org/doc/rfc7232/).
     ///
-    /// **Note:**
-    ///
     /// This functionality is not supported for S3 on Outposts.
     ///
     /// * **S3 Versioning** - When you enable versioning for a bucket,
@@ -7077,8 +6569,6 @@ pub const Client = struct {
     /// Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html) in the *Amazon S3 User Guide*. For information
     /// about returning the versioning state of a bucket, see
     /// [GetBucketVersioning](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html).
-    ///
-    /// **Note:**
     ///
     /// This functionality is not supported for directory buckets.
     ///
@@ -7171,8 +6661,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7180,8 +6668,6 @@ pub const Client = struct {
         return put_object.execute(self, input, options);
     }
 
-    /// **Important:**
-    ///
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
     /// support for Email Grantee Access Control Lists (ACLs). If you attempt to use
     /// an Email Grantee ACL in a request after October 1, 2025,
@@ -7191,8 +6677,6 @@ pub const Client = struct {
     /// Virginia), US West (N. California), US West (Oregon), Asia Pacific
     /// (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe (Ireland),
     /// and South America (São Paulo).
-    ///
-    /// **Note:**
     ///
     /// This operation is not supported for directory buckets.
     ///
@@ -7214,8 +6698,6 @@ pub const Client = struct {
     /// information, see [Access Control List (ACL)
     /// Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html)
     /// in the *Amazon S3 User Guide*.
-    ///
-    /// **Important:**
     ///
     /// If your bucket uses the bucket owner enforced setting for S3 Object
     /// Ownership, ACLs are disabled
@@ -7265,8 +6747,6 @@ pub const Client = struct {
     ///
     /// * `emailAddress` – if the value specified is the email address of an
     /// Amazon Web Services account
-    ///
-    /// **Note:**
     ///
     /// Using email addresses to specify a grantee is only supported in the
     /// following Amazon Web Services Regions:
@@ -7333,8 +6813,6 @@ pub const Client = struct {
     /// Object acl
     /// request, appears as the CanonicalUser.
     ///
-    /// **Note:**
-    ///
     /// Using email addresses to specify a grantee is only supported in the
     /// following Amazon Web Services Regions:
     ///
@@ -7373,8 +6851,6 @@ pub const Client = struct {
     /// *
     ///   [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7382,8 +6858,6 @@ pub const Client = struct {
         return put_object_acl.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Applies a legal hold configuration to the specified object. For more
@@ -7392,8 +6866,6 @@ pub const Client = struct {
     ///
     /// This functionality is not supported for Amazon S3 on Outposts.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7401,8 +6873,6 @@ pub const Client = struct {
         return put_object_legal_hold.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Places an Object Lock configuration on the specified bucket. The rule
@@ -7411,8 +6881,6 @@ pub const Client = struct {
     /// specified bucket. For more
     /// information, see [Locking
     /// Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-    ///
-    /// **Note:**
     ///
     /// * The `DefaultRetention` settings require both a mode and a period.
     ///
@@ -7425,8 +6893,6 @@ pub const Client = struct {
     /// Object
     /// Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7434,8 +6900,6 @@ pub const Client = struct {
         return put_object_lock_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Places an Object Retention configuration on an object. For more information,
@@ -7450,8 +6914,6 @@ pub const Client = struct {
     ///
     /// This functionality is not supported for Amazon S3 on Outposts.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7459,8 +6921,6 @@ pub const Client = struct {
         return put_object_retention.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Sets the supplied tag-set to an object that already exists in a bucket. A
@@ -7513,8 +6973,6 @@ pub const Client = struct {
     /// *
     ///   [DeleteObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7522,8 +6980,6 @@ pub const Client = struct {
         return put_object_tagging.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Creates or modifies the `PublicAccessBlock` configuration for an Amazon S3
@@ -7532,8 +6988,6 @@ pub const Client = struct {
     /// more information
     /// about Amazon S3 permissions, see [Specifying Permissions in a
     /// Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
-    ///
-    /// **Important:**
     ///
     /// When Amazon S3 evaluates the `PublicAccessBlock` configuration for a bucket
     /// or an
@@ -7565,8 +7019,6 @@ pub const Client = struct {
     /// * [Using Amazon S3 Block Public
     ///   Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7579,8 +7031,6 @@ pub const Client = struct {
     /// You can use `RenameObject` by specifying an existing object’s name as the
     /// source and the new
     /// name of the object as the destination within the same directory bucket.
-    ///
-    /// **Note:**
     ///
     /// `RenameObject` is only supported for objects stored in the S3 Express One
     /// Zone storage
@@ -7637,8 +7087,6 @@ pub const Client = struct {
     /// **Directory buckets ** - The HTTP Host header syntax is `
     /// *Bucket-name*.s3express-*zone-id*.*region-code*.amazonaws.com`.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7646,8 +7094,6 @@ pub const Client = struct {
         return rename_object.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Restores an archived copy of an object back into Amazon S3
@@ -7842,8 +7288,6 @@ pub const Client = struct {
     /// *
     ///   [GetBucketNotificationConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -7851,8 +7295,6 @@ pub const Client = struct {
         return restore_object.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// This action filters the contents of an Amazon S3 object based on a simple
@@ -7971,8 +7413,6 @@ pub const Client = struct {
     /// *
     ///   [PutBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -8035,8 +7475,6 @@ pub const Client = struct {
     /// *
     ///   [UpdateBucketMetadataJournalTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -8074,8 +7512,6 @@ pub const Client = struct {
     /// *
     ///   [UpdateBucketMetadataInventoryTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataInventoryTableConfiguration.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -8083,8 +7519,6 @@ pub const Client = struct {
         return update_bucket_metadata_journal_table_configuration.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets or Amazon S3 on
     /// Outposts buckets.
     ///
@@ -8131,8 +7565,6 @@ pub const Client = struct {
     /// using Organizations, you can request the ability to use KMS keys owned by
     /// other member
     /// accounts within your organization by contacting Amazon Web Services Support.
-    ///
-    /// **Note:**
     ///
     /// Source objects that are unencrypted, or encrypted with either dual-layer
     /// server-side encryption
@@ -8246,8 +7678,6 @@ pub const Client = struct {
 
     /// Uploads a part in a multipart upload.
     ///
-    /// **Note:**
-    ///
     /// In this operation, you provide new data as a part of an object in your
     /// request. However, you have
     /// an option to specify your existing Amazon S3 object as a data source for the
@@ -8274,8 +7704,6 @@ pub const Client = struct {
     /// limits](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html)
     /// in the *Amazon S3 User Guide*.
     ///
-    /// **Note:**
-    ///
     /// After you initiate multipart upload and upload one or more parts, you must
     /// either complete or
     /// abort multipart upload in order to stop getting charged for storage of the
@@ -8288,8 +7716,6 @@ pub const Client = struct {
     /// Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html)
     /// in the
     /// *Amazon S3 User Guide *.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, you must make requests for
     /// this API operation to the Zonal endpoint. These endpoints support
@@ -8363,8 +7789,6 @@ pub const Client = struct {
     /// Using the Authorization Header (Amazon Web Services Signature Version
     /// 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html).
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - MD5 is not supported by directory buckets. You can
     /// use checksum algorithms to check object integrity.
     ///
@@ -8398,8 +7822,6 @@ pub const Client = struct {
     /// encryption parameters in the initial Initiate Multipart request. For more
     /// information, see
     /// [CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html).
-    ///
-    /// **Note:**
     ///
     /// If you have server-side encryption with customer-provided keys (SSE-C)
     /// blocked for your general purpose bucket, you will get an HTTP 403 Access
@@ -8462,8 +7884,6 @@ pub const Client = struct {
     /// *
     ///   [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -8482,8 +7902,6 @@ pub const Client = struct {
     /// [Multipart upload
     /// limits](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html)
     /// in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// Instead of copying data from an existing object as part data, you might use
     /// the
@@ -8504,8 +7922,6 @@ pub const Client = struct {
     /// action vs. a multipart upload, see [Operations on
     /// Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html) in the
     /// *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** - For directory buckets, you must make requests for
     /// this API operation to the Zonal endpoint. These endpoints support
@@ -8622,8 +8038,6 @@ pub const Client = struct {
     /// [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html) and
     /// [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html).
     ///
-    /// **Note:**
-    ///
     /// If you have server-side encryption with customer-provided keys (SSE-C)
     /// blocked for your general purpose bucket, you will get an HTTP 403 Access
     /// Denied error when you specify the SSE-C request headers while writing new
@@ -8638,8 +8052,6 @@ pub const Client = struct {
     /// For more
     /// information, see [Protecting data with server-side
     /// encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html) in the *Amazon S3 User Guide*.
-    ///
-    /// **Note:**
     ///
     /// For directory buckets, when you perform a `CreateMultipartUpload` operation
     /// and an `UploadPartCopy` operation, the request headers you provide in the
@@ -8696,8 +8108,6 @@ pub const Client = struct {
     /// *
     ///   [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -8705,8 +8115,6 @@ pub const Client = struct {
         return upload_part_copy.execute(self, input, options);
     }
 
-    /// **Note:**
-    ///
     /// This operation is not supported for directory buckets.
     ///
     /// Passes transformed objects to a `GetObject` operation when using Object
@@ -8771,8 +8179,6 @@ pub const Client = struct {
     /// functions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-examples.html) in the
     /// *Amazon S3 User Guide*.
     ///
-    /// **Important:**
-    ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
@@ -8796,7 +8202,7 @@ pub const Client = struct {
         };
     }
 
-    pub fn listObjectsV2Paginator(self: *Self, params: list_objects_v_2.ListObjectsV2Input) paginator.ListObjectsV2Paginator {
+    pub fn listObjectsV2Paginator(self: *Self, params: list_objects_v2.ListObjectsV2Input) paginator.ListObjectsV2Paginator {
         return .{
             .client = self,
             .params = params,

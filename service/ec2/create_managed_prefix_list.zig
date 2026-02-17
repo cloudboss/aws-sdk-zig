@@ -8,8 +8,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const ManagedPrefixList = @import("managed_prefix_list.zig").ManagedPrefixList;
 const serde = @import("serde.zig");
 
-/// Creates a managed prefix list. You can specify entries for the prefix list.
-/// Each entry consists of a CIDR block and an optional description.
 pub const CreateManagedPrefixListInput = struct {
     /// The IP address type.
     ///

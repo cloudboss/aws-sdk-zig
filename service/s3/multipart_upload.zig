@@ -27,15 +27,11 @@ pub const MultipartUpload = struct {
 
     /// Specifies the owner of the object that is part of the multipart upload.
     ///
-    /// **Note:**
-    ///
     /// **Directory buckets** - The bucket owner is returned as the
     /// object owner for all the objects.
     owner: ?Owner,
 
     /// The class of storage used to store the object.
-    ///
-    /// **Note:**
     ///
     /// **Directory buckets** -
     /// Directory buckets only support `EXPRESS_ONEZONE` (the S3 Express One Zone

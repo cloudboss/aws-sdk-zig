@@ -7,7 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const NetworkInsightsAccessScopeAnalysis = @import("network_insights_access_scope_analysis.zig").NetworkInsightsAccessScopeAnalysis;
 const serde = @import("serde.zig");
 
-/// Starts analyzing the specified Network Access Scope.
 pub const StartNetworkInsightsAccessScopeAnalysisInput = struct {
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request. For more information,

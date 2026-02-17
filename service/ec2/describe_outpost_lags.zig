@@ -7,11 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const OutpostLag = @import("outpost_lag.zig").OutpostLag;
 const serde = @import("serde.zig");
 
-/// Describes the Outposts link aggregation groups (LAGs).
-///
-/// **Note:**
-///
-/// LAGs are only available for second-generation Outposts racks at this time.
 pub const DescribeOutpostLagsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResetImageAttributeName = @import("reset_image_attribute_name.zig").ResetImageAttributeName;
 
-/// Resets an attribute of an AMI to its default value.
 pub const ResetImageAttributeInput = struct {
     /// The attribute to reset (currently you can only reset the launch permission
     /// attribute).

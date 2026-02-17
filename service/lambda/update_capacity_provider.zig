@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const CapacityProviderScalingConfig = @import("capacity_provider_scaling_config.zig").CapacityProviderScalingConfig;
 const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 
-/// Updates the configuration of an existing capacity provider.
 pub const UpdateCapacityProviderInput = struct {
     /// The name of the capacity provider to update.
     capacity_provider_name: []const u8,

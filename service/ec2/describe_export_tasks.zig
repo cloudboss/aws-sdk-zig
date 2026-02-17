@@ -7,8 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const ExportTask = @import("export_task.zig").ExportTask;
 const serde = @import("serde.zig");
 
-/// Describes the specified export instance tasks or all of your export instance
-/// tasks.
 pub const DescribeExportTasksInput = struct {
     /// The export task IDs.
     export_task_ids: ?[]const []const u8 = null,

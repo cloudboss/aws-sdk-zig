@@ -10,28 +10,8 @@ const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const BlobAttributeValue = @import("blob_attribute_value.zig").BlobAttributeValue;
 const serde = @import("serde.zig");
 
-/// Modifies the specified attribute of the specified instance. You can specify
-/// only one
-/// attribute at a time.
-///
-/// **Note: **Using this action to change the security groups
-/// associated with an elastic network interface (ENI) attached to an instance
-/// can
-/// result in an error if the instance has more than one ENI. To change the
-/// security groups
-/// associated with an ENI attached to an instance that has multiple ENIs, we
-/// recommend that
-/// you use the ModifyNetworkInterfaceAttribute action.
-///
-/// To modify some attributes, the instance must be stopped. For more
-/// information, see
-/// [Modify a stopped
-/// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html) in the
-/// *Amazon EC2 User Guide*.
 pub const ModifyInstanceAttributeInput = struct {
     /// The name of the attribute to modify.
-    ///
-    /// **Note:**
     ///
     /// When changing the instance type: If the original instance type is configured
     /// for
@@ -40,8 +20,6 @@ pub const ModifyInstanceAttributeInput = struct {
     /// bandwidth, first set the existing bandwidth configuration to `default`
     /// using the ModifyInstanceNetworkPerformanceOptions
     /// operation.
-    ///
-    /// **Important:**
     ///
     /// You can modify the following attributes only: `disableApiTermination` |
     /// `instanceType` | `kernel` | `ramdisk` |

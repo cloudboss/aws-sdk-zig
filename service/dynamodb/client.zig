@@ -98,13 +98,9 @@ pub const Client = struct {
     /// see [Running batch operations with PartiQL for DynamoDB
     /// ](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-reference.multiplestatements.batching.html).
     ///
-    /// **Note:**
-    ///
     /// The entire batch must consist of either read statements or write statements,
     /// you
     /// cannot mix both in one batch.
-    ///
-    /// **Important:**
     ///
     /// A HTTP 200 response does not mean that all statements in the
     /// BatchExecuteStatement
@@ -128,8 +124,6 @@ pub const Client = struct {
     /// the operation returns a value for `UnprocessedKeys`. You can use this value
     /// to retry the operation starting with the next item to get.
     ///
-    /// **Important:**
-    ///
     /// If you request more than 100 items, `BatchGetItem` returns a
     /// `ValidationException` with the message "Too many items requested for
     /// the BatchGetItem call."
@@ -150,8 +144,6 @@ pub const Client = struct {
     /// one* of the items is successfully processed, then
     /// `BatchGetItem` completes successfully, while returning the keys of the
     /// unread items in `UnprocessedKeys`.
-    ///
-    /// **Important:**
     ///
     /// If DynamoDB returns any unprocessed items, you should retry the batch
     /// operation on
@@ -189,8 +181,6 @@ pub const Client = struct {
     /// Tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations) in the *Amazon DynamoDB Developer
     /// Guide*.
     ///
-    /// **Note:**
-    ///
     /// `BatchGetItem` will result in a `ValidationException` if the
     /// same key is specified multiple times.
     pub fn batchGetItem(self: *Self, input: batch_get_item.BatchGetItemInput, options: batch_get_item.Options) !batch_get_item.BatchGetItemOutput {
@@ -208,8 +198,6 @@ pub const Client = struct {
     /// for the API call. For more details on this distinction, see [Naming Rules
     /// and Data
     /// Types](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html).
-    ///
-    /// **Note:**
     ///
     /// `BatchWriteItem` cannot update items. If you perform a
     /// `BatchWriteItem` operation on an existing item, that item's values
@@ -239,8 +227,6 @@ pub const Client = struct {
     /// as exceeding
     /// partition level limits), then `BatchWriteItem` returns a
     /// `ThrottlingException`.
-    ///
-    /// **Important:**
     ///
     /// If DynamoDB returns any unprocessed items, you should retry the batch
     /// operation on
@@ -362,8 +348,6 @@ pub const Client = struct {
     /// the
     /// provided Regions.
     ///
-    /// **Important:**
-    ///
     /// This documentation is for version 2017.11.29 (Legacy) of global tables,
     /// which should be avoided for new global tables. Customers should use [Global
     /// Tables version 2019.11.21
@@ -404,8 +388,6 @@ pub const Client = struct {
     ///
     /// * The local secondary indexes must have the same hash key and sort key (if
     /// present).
-    ///
-    /// **Important:**
     ///
     /// Write capacity settings should be set consistently across your replica
     /// tables and
@@ -487,15 +469,11 @@ pub const Client = struct {
     /// unless you specify an `ExpectedRevisionId`, which will then return a
     /// `PolicyNotFoundException`.
     ///
-    /// **Important:**
-    ///
     /// To make sure that you don't inadvertently lock yourself out of your own
     /// resources,
     /// the root principal in your Amazon Web Services account can perform
     /// `DeleteResourcePolicy` requests, even if your resource-based policy
     /// explicitly denies the root principal's access.
-    ///
-    /// **Note:**
     ///
     /// `DeleteResourcePolicy` is an asynchronous operation. If you issue a
     /// `GetResourcePolicy` request immediately after running the
@@ -516,8 +494,6 @@ pub const Client = struct {
     /// `ResourceInUseException`. If the specified table does not exist, DynamoDB
     /// returns a `ResourceNotFoundException`. If table is already in the
     /// `DELETING` state, no error is returned.
-    ///
-    /// **Note:**
     ///
     /// DynamoDB might continue to accept data read and write operations, such as
     /// `GetItem` and `PutItem`, on a table in the
@@ -590,8 +566,6 @@ pub const Client = struct {
 
     /// Returns information about the specified global table.
     ///
-    /// **Important:**
-    ///
     /// This documentation is for version 2017.11.29 (Legacy) of global tables,
     /// which should be avoided for new global tables. Customers should use [Global
     /// Tables version 2019.11.21
@@ -605,8 +579,6 @@ pub const Client = struct {
     }
 
     /// Describes Region-specific settings for a global table.
-    ///
-    /// **Important:**
     ///
     /// This documentation is for version 2017.11.29 (Legacy) of global tables,
     /// which should be avoided for new global tables. Customers should use [Global
@@ -705,8 +677,6 @@ pub const Client = struct {
     /// the
     /// per-account quotas.
     ///
-    /// **Note:**
-    ///
     /// `DescribeLimits` should only be called periodically. You can expect
     /// throttling errors if you call it more than once in a minute.
     ///
@@ -718,8 +688,6 @@ pub const Client = struct {
     /// Returns information about the table, including the current status of the
     /// table, when
     /// it was created, the primary key schema, and any indexes on the table.
-    ///
-    /// **Note:**
     ///
     /// If you issue a `DescribeTable` request immediately after a
     /// `CreateTable` request, DynamoDB might return a
@@ -785,8 +753,6 @@ pub const Client = struct {
     /// This operation allows you to perform transactional reads or writes on data
     /// stored in
     /// DynamoDB, using PartiQL.
-    ///
-    /// **Note:**
     ///
     /// The entire transaction must consist of either read statements or write
     /// statements,
@@ -904,8 +870,6 @@ pub const Client = struct {
 
     /// Lists all global tables that have a replica in the specified Region.
     ///
-    /// **Important:**
-    ///
     /// This documentation is for version 2017.11.29 (Legacy) of global tables,
     /// which should be avoided for new global tables. Customers should use [Global
     /// Tables version 2019.11.21
@@ -966,8 +930,6 @@ pub const Client = struct {
     /// Invalid Requests with empty values will be rejected with a
     /// `ValidationException` exception.
     ///
-    /// **Note:**
-    ///
     /// To prevent a new item from replacing an existing item, use a conditional
     /// expression that contains the `attribute_not_exists` function with the
     /// name of the attribute being used as the partition key for the table. Since
@@ -995,8 +957,6 @@ pub const Client = struct {
     /// you specify an `ExpectedRevisionId` that doesn't match the current policy's
     /// `RevisionId`, the `PolicyNotFoundException` will be
     /// returned.
-    ///
-    /// **Note:**
     ///
     /// `PutResourcePolicy` is an asynchronous operation. If you issue a
     /// `GetResourcePolicy` request immediately after a
@@ -1035,8 +995,6 @@ pub const Client = struct {
     /// consume the
     /// minimum number of read capacity units for that type of read operation.
     ///
-    /// **Note:**
-    ///
     /// DynamoDB calculates the number of read capacity units consumed based on item
     /// size, not on the amount of data that is returned to an application. The
     /// number of
@@ -1065,8 +1023,6 @@ pub const Client = struct {
     /// the results are returned. A `FilterExpression` cannot contain partition key
     /// or sort key attributes. You need to specify those attributes in the
     /// `KeyConditionExpression`.
-    ///
-    /// **Note:**
     ///
     /// A `Query` operation can return an empty result set and a
     /// `LastEvaluatedKey` if all the items read for the page of results are
@@ -1133,8 +1089,6 @@ pub const Client = struct {
     ///
     /// * Encryption settings
     ///
-    /// **Important:**
-    ///
     /// All these settings come from the current settings of the source table at
     /// the time of restore.
     ///
@@ -1174,8 +1128,6 @@ pub const Client = struct {
     /// `FilterExpression` in the scan request, then `Count` is the
     /// same as `ScannedCount`.
     ///
-    /// **Note:**
-    ///
     /// `Count` and `ScannedCount` only return the count of items
     /// specific to a single scan request and, unless the table is less than 1MB, do
     /// not
@@ -1205,8 +1157,6 @@ pub const Client = struct {
     /// parameter to true. Strong consistency only relates to the consistency of the
     /// read at the
     /// item level.
-    ///
-    /// **Note:**
     ///
     /// DynamoDB does not provide snapshot isolation for a scan operation when the
     /// `ConsistentRead` parameter is set to true. Thus, a DynamoDB scan
@@ -1425,8 +1375,6 @@ pub const Client = struct {
     /// Streams enabled,
     /// and have the same provisioned and maximum write capacity units.
     ///
-    /// **Important:**
-    ///
     /// This documentation is for version 2017.11.29 (Legacy) of global tables,
     /// which should be avoided for new global tables. Customers should use [Global
     /// Tables version 2019.11.21
@@ -1435,8 +1383,6 @@ pub const Client = struct {
     /// To determine which version you're using, see [Determining the global table
     /// version you are
     /// using](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html). To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Upgrading global tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
-    ///
-    /// **Note:**
     ///
     /// If you are using global tables [Version
     /// 2019.11.21](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html) (Current) you can use [UpdateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html) instead.
@@ -1463,8 +1409,6 @@ pub const Client = struct {
     }
 
     /// Updates settings for a global table.
-    ///
-    /// **Important:**
     ///
     /// This documentation is for version 2017.11.29 (Legacy) of global tables,
     /// which should be avoided for new global tables. Customers should use [Global
@@ -1540,8 +1484,6 @@ pub const Client = struct {
     /// less than the
     /// current time, the item is marked as expired and subsequently deleted.
     ///
-    /// **Note:**
-    ///
     /// The epoch time format is the number of seconds elapsed since 12:00:00 AM
     /// January
     /// 1, 1970 UTC.
@@ -1549,8 +1491,6 @@ pub const Client = struct {
     /// DynamoDB deletes expired items on a best-effort basis to ensure availability
     /// of
     /// throughput for other data operations.
-    ///
-    /// **Important:**
     ///
     /// DynamoDB typically deletes expired items within two days of expiration. The
     /// exact

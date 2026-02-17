@@ -9,11 +9,6 @@ const IpamResourceType = @import("ipam_resource_type.zig").IpamResourceType;
 const IpamResourceCidr = @import("ipam_resource_cidr.zig").IpamResourceCidr;
 const serde = @import("serde.zig");
 
-/// Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is
-/// associated with more than one resource discovery, the resource CIDRs across
-/// all of the resource discoveries is returned. A resource discovery is an IPAM
-/// component that enables IPAM to manage and monitor resources that belong to
-/// the owning account.
 pub const GetIpamResourceCidrsInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

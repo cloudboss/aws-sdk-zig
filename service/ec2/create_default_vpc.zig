@@ -6,17 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Vpc = @import("vpc.zig").Vpc;
 const serde = @import("serde.zig");
 
-/// Creates a default VPC with a size `/16` IPv4 CIDR block and a default subnet
-/// in each Availability Zone. For more information about the components of a
-/// default VPC,
-/// see [Default
-/// VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html)
-/// in the *Amazon VPC User Guide*. You cannot specify the components of the
-/// default VPC yourself.
-///
-/// If you deleted your previous default VPC, you can create a default VPC. You
-/// cannot have
-/// more than one default VPC per Region.
 pub const CreateDefaultVpcInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

@@ -7,12 +7,6 @@ const InternetGatewayBlockMode = @import("internet_gateway_block_mode.zig").Inte
 const VpcBlockPublicAccessOptions = @import("vpc_block_public_access_options.zig").VpcBlockPublicAccessOptions;
 const serde = @import("serde.zig");
 
-/// Modify VPC Block Public Access (BPA) options. VPC Block Public Access (BPA)
-/// enables you to block resources in VPCs and subnets that you own in a Region
-/// from reaching or being reached from the internet through internet gateways
-/// and egress-only internet gateways. To learn more about VPC BPA, see [Block
-/// public access to VPCs and
-/// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
 pub const ModifyVpcBlockPublicAccessOptionsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

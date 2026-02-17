@@ -4,10 +4,10 @@ pub const SessionManagerOutputUrl = struct {
     cloud_watch_output_url: ?[]const u8,
 
     /// Reserved for future use.
-    s_3_output_url: ?[]const u8,
+    s3_output_url: ?[]const u8,
 
     pub const json_field_names = .{
         .cloud_watch_output_url = "CloudWatchOutputUrl",
-        .s_3_output_url = "S3OutputUrl",
+        .s3_output_url = "S3OutputUrl",
     };
 };

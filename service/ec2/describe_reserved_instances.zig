@@ -9,17 +9,6 @@ const OfferingTypeValues = @import("offering_type_values.zig").OfferingTypeValue
 const ReservedInstances = @import("reserved_instances.zig").ReservedInstances;
 const serde = @import("serde.zig");
 
-/// Describes one or more of the Reserved Instances that you purchased.
-///
-/// For more information about Reserved Instances, see [Reserved
-/// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html) in the *Amazon EC2 User Guide*.
-///
-/// **Note:**
-///
-/// The order of the elements in the response, including those within nested
-/// structures,
-/// might vary. Applications should not assume the elements appear in a
-/// particular order.
 pub const DescribeReservedInstancesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making

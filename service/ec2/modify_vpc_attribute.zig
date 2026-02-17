@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
 const serde = @import("serde.zig");
 
-/// Modifies the specified attribute of the specified VPC.
 pub const ModifyVpcAttributeInput = struct {
     /// Indicates whether the instances launched in the VPC get DNS hostnames. If
     /// enabled, instances in the VPC get DNS hostnames; otherwise, they do not.

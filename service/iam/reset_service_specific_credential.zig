@@ -6,13 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ServiceSpecificCredential = @import("service_specific_credential.zig").ServiceSpecificCredential;
 const serde = @import("serde.zig");
 
-/// Resets the password for a service-specific credential. The new password is
-/// Amazon Web Services
-/// generated and cryptographically strong. It cannot be configured by the user.
-/// Resetting
-/// the password immediately invalidates the previous password associated with
-/// this
-/// user.
 pub const ResetServiceSpecificCredentialInput = struct {
     /// The unique identifier of the service-specific credential.
     ///
@@ -39,8 +32,6 @@ pub const ResetServiceSpecificCredentialOutput = struct {
     /// A structure with details about the updated service-specific credential,
     /// including the
     /// new password.
-    ///
-    /// **Important:**
     ///
     /// This is the **only** time that you can access the
     /// password. You cannot recover the password later, but you can reset it again.

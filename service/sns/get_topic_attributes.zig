@@ -5,9 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Returns all of the properties of a topic. Topic properties returned might
-/// differ based
-/// on the authorization of the user.
 pub const GetTopicAttributesInput = struct {
     /// The ARN of the topic whose properties you want to get.
     topic_arn: []const u8,
@@ -44,8 +41,6 @@ pub const GetTopicAttributesOutput = struct {
     ///
     /// * When you set `SignatureVersion` to **2**. Amazon SNS uses a Base64-encoded
     ///   **SHA256withRSA** signature.
-    ///
-    /// **Note:**
     ///
     /// If the API response does not include the
     /// `SignatureVersion` attribute, it means that the

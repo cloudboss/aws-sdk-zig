@@ -6,11 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AbacStatus = @import("abac_status.zig").AbacStatus;
 const serde = @import("serde.zig");
 
-/// Returns the attribute-based access control (ABAC) property of the general
-/// purpose bucket. If ABAC is enabled on your bucket, you can use tags on the
-/// bucket for access control. For more information, see [Enabling ABAC in
-/// general purpose
-/// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html).
 pub const GetBucketAbacInput = struct {
     /// The name of the general purpose bucket.
     bucket: []const u8,

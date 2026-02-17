@@ -6,9 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IpamPrefixListResolverVersionEntry = @import("ipam_prefix_list_resolver_version_entry.zig").IpamPrefixListResolverVersionEntry;
 const serde = @import("serde.zig");
 
-/// Retrieves the CIDR entries for a specific version of an IPAM prefix list
-/// resolver. This shows the actual CIDRs that were selected and synchronized at
-/// a particular point in time.
 pub const GetIpamPrefixListResolverVersionEntriesInput = struct {
     /// A check for whether you have the required permissions for the action without
     /// actually making the request

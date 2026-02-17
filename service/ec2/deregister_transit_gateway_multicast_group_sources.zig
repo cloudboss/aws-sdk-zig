@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMulticastDeregisteredGroupSources = @import("transit_gateway_multicast_deregistered_group_sources.zig").TransitGatewayMulticastDeregisteredGroupSources;
 const serde = @import("serde.zig");
 
-/// Deregisters the specified sources (network interfaces) from the transit
-/// gateway multicast group.
 pub const DeregisterTransitGatewayMulticastGroupSourcesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

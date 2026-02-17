@@ -57,8 +57,6 @@ pub const KeysAndAttributes = struct {
     ///
     /// * `#P = :val`
     ///
-    /// **Note:**
-    ///
     /// Tokens that begin with the **:** character are
     /// *expression attribute values*, which are placeholders for the
     /// actual value at runtime.

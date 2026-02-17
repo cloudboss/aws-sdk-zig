@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const Target = @import("target.zig").Target;
 
-/// Starts the workflow for just-in-time node access sessions.
 pub const StartAccessRequestInput = struct {
     /// A brief description explaining why you are requesting access to the node.
     reason: []const u8,

@@ -6,18 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ResponseLaunchTemplateData = @import("response_launch_template_data.zig").ResponseLaunchTemplateData;
 const serde = @import("serde.zig");
 
-/// Retrieves the configuration data of the specified instance. You can use this
-/// data to
-/// create a launch template.
-///
-/// This action calls on other describe actions to get instance information.
-/// Depending on
-/// your instance configuration, you may need to allow the following actions in
-/// your IAM
-/// policy: `DescribeSpotInstanceRequests`,
-/// `DescribeInstanceCreditSpecifications`, `DescribeVolumes`, and
-/// `DescribeInstanceAttribute`.
-/// Or, you can allow `describe*` depending on your instance requirements.
 pub const GetLaunchTemplateDataInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually

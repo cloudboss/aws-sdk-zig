@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayPeeringAttachment = @import("transit_gateway_peering_attachment.zig").TransitGatewayPeeringAttachment;
 const serde = @import("serde.zig");
 
-/// Describes your transit gateway peering attachments.
 pub const DescribeTransitGatewayPeeringAttachmentsInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

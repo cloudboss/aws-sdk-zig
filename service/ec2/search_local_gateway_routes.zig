@@ -7,7 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const LocalGatewayRoute = @import("local_gateway_route.zig").LocalGatewayRoute;
 const serde = @import("serde.zig");
 
-/// Searches for routes in the specified local gateway route table.
 pub const SearchLocalGatewayRoutesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

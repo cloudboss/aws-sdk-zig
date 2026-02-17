@@ -7,8 +7,6 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TransitGatewayMeteringPolicy = @import("transit_gateway_metering_policy.zig").TransitGatewayMeteringPolicy;
 const serde = @import("serde.zig");
 
-/// Creates a metering policy for a transit gateway to track and measure network
-/// traffic.
 pub const CreateTransitGatewayMeteringPolicyInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

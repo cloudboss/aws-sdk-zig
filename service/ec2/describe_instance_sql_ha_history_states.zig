@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const RegisteredInstance = @import("registered_instance.zig").RegisteredInstance;
 const serde = @import("serde.zig");
 
-/// Describes the historical SQL Server High Availability states for Amazon EC2
-/// instances that are enabled for Amazon EC2 High Availability for SQL Server
-/// monitoring.
 pub const DescribeInstanceSqlHaHistoryStatesInput = struct {
     /// Checks whether you have the required permissions for the action,
     /// without actually making the request, and provides an error response. If you

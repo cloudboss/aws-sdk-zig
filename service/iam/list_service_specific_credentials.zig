@@ -6,17 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ServiceSpecificCredentialMetadata = @import("service_specific_credential_metadata.zig").ServiceSpecificCredentialMetadata;
 const serde = @import("serde.zig");
 
-/// Returns information about the service-specific credentials associated with
-/// the
-/// specified IAM user. If none exists, the operation returns an empty list. The
-/// service-specific credentials returned by this operation are used only for
-/// authenticating
-/// the IAM user to a specific service. For more information about using
-/// service-specific
-/// credentials to authenticate to an Amazon Web Services service, see [Set up
-/// service-specific
-/// credentials](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html)
-/// in the CodeCommit User Guide.
 pub const ListServiceSpecificCredentialsInput = struct {
     /// A flag indicating whether to list service specific credentials for all
     /// users. This

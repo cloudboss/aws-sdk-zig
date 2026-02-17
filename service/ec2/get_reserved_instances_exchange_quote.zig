@@ -9,12 +9,6 @@ const ReservedInstanceReservationValue = @import("reserved_instance_reservation_
 const TargetReservationValue = @import("target_reservation_value.zig").TargetReservationValue;
 const serde = @import("serde.zig");
 
-/// Returns a quote and exchange information for exchanging one or more
-/// specified Convertible
-/// Reserved Instances for a new Convertible Reserved Instance. If the exchange
-/// cannot be
-/// performed, the reason is returned in the response. Use
-/// AcceptReservedInstancesExchangeQuote to perform the exchange.
 pub const GetReservedInstancesExchangeQuoteInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making
@@ -176,7 +170,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 } else if (std.mem.eql(u8, e.local, "isValidExchange")) {
                     result.is_valid_exchange = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "outputReservedInstancesWillExpireAt")) {
-                    result.output_reserved_instances_will_expire_at = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.output_reserved_instances_will_expire_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "paymentDue")) {
                     result.payment_due = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "reservedInstanceValueRollup")) {

@@ -5,10 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Endpoint = @import("endpoint.zig").Endpoint;
 
-/// Returns the regional endpoint information. For more information on policy
-/// permissions,
-/// please see [Internetwork traffic
-/// privacy](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/inter-network-traffic-privacy.html#inter-network-traffic-DescribeEndpoints).
 pub const DescribeEndpointsInput = struct {
 };
 

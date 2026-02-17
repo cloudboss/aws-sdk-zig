@@ -5,13 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Operation = @import("operation.zig").Operation;
 
-/// Retrieves the current execution state required for the replay process during
-/// [durable
-/// function](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) execution. This API is used by the Lambda durable functions SDK to get state information needed for replay. You typically don't need to call this API directly as the SDK handles state management automatically.
-///
-/// The response contains operations ordered by start sequence number in
-/// ascending order. Completed operations with children don't include child
-/// operation details since they don't need to be replayed.
 pub const GetDurableExecutionStateInput = struct {
     /// A checkpoint token that identifies the current state of the execution. This
     /// token is provided by the Lambda runtime and ensures that state retrieval is

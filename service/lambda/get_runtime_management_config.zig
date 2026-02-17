@@ -5,12 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const UpdateRuntimeOn = @import("update_runtime_on.zig").UpdateRuntimeOn;
 
-/// Retrieves the runtime management configuration for a function's version. If
-/// the runtime update mode is **Manual**, this includes the ARN of the runtime
-/// version and the runtime update mode. If the runtime update mode is **Auto**
-/// or **Function update**, this includes the runtime update mode and `null` is
-/// returned for the ARN. For more information, see [Runtime
-/// updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html).
 pub const GetRuntimeManagementConfigInput = struct {
     /// The name or ARN of the Lambda function. **Name formats**
     ///

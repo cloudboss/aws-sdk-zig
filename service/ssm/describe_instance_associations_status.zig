@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceAssociationStatusInfo = @import("instance_association_status_info.zig").InstanceAssociationStatusInfo;
 
-/// The status of the associations for the managed nodes.
 pub const DescribeInstanceAssociationsStatusInput = struct {
     /// The managed node IDs for which you want association status information.
     instance_id: []const u8,

@@ -9,8 +9,6 @@ pub const IndexDocument = struct {
     /// slash
     /// character.
     ///
-    /// **Important:**
-    ///
     /// Replacement must be made for object keys containing special characters (such
     /// as carriage returns) when using
     /// XML requests. For more information, see [

@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReportFormatType = @import("report_format_type.zig").ReportFormatType;
 
-/// Retrieves a credential report for the Amazon Web Services account. For more
-/// information about the
-/// credential report, see [Getting credential
-/// reports](https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
-/// the *IAM User Guide*.
 pub const GetCredentialReportInput = struct {
 };
 
@@ -109,7 +104,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
                 if (std.mem.eql(u8, e.local, "Content")) {
                     result.content = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "GeneratedTime")) {
-                    result.generated_time = aws.imds.parseIso8601(try reader.readElementText()) catch null;
+                    result.generated_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "ReportFormat")) {
                     result.report_format = std.meta.stringToEnum(ReportFormatType, try reader.readElementText());
                 } else {

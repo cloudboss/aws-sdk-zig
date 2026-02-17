@@ -7,9 +7,6 @@ const Filter = @import("filter.zig").Filter;
 const TransitGatewayRouteTable = @import("transit_gateway_route_table.zig").TransitGatewayRouteTable;
 const serde = @import("serde.zig");
 
-/// Describes one or more transit gateway route tables. By default, all transit
-/// gateway route tables are described.
-/// Alternatively, you can filter the results.
 pub const DescribeTransitGatewayRouteTablesInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

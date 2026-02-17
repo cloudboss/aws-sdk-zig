@@ -4,7 +4,6 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-/// Deletes the specified key pair, by removing the public key from Amazon EC2.
 pub const DeleteKeyPairInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

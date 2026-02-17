@@ -7,9 +7,6 @@ const MaintenanceWindowResourceType = @import("maintenance_window_resource_type.
 const Target = @import("target.zig").Target;
 const MaintenanceWindowIdentityForTarget = @import("maintenance_window_identity_for_target.zig").MaintenanceWindowIdentityForTarget;
 
-/// Retrieves information about the maintenance window targets or tasks that a
-/// managed node is
-/// associated with.
 pub const DescribeMaintenanceWindowsForTargetInput = struct {
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you

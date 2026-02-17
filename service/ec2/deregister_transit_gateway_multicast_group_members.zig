@@ -6,8 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMulticastDeregisteredGroupMembers = @import("transit_gateway_multicast_deregistered_group_members.zig").TransitGatewayMulticastDeregisteredGroupMembers;
 const serde = @import("serde.zig");
 
-/// Deregisters the specified members (network interfaces) from the transit
-/// gateway multicast group.
 pub const DeregisterTransitGatewayMulticastGroupMembersInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

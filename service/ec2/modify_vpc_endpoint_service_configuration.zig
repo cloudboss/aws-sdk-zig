@@ -5,11 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-/// Modifies the attributes of the specified VPC endpoint service configuration.
-///
-/// If you set or modify the private DNS name, you must prove that you own the
-/// private DNS
-/// domain name.
 pub const ModifyVpcEndpointServiceConfigurationInput = struct {
     /// Indicates whether requests to create an endpoint to the service must be
     /// accepted.

@@ -8,8 +8,6 @@ const VpnConcentratorType = @import("vpn_concentrator_type.zig").VpnConcentrator
 const VpnConcentrator = @import("vpn_concentrator.zig").VpnConcentrator;
 const serde = @import("serde.zig");
 
-/// Creates a VPN concentrator that aggregates multiple VPN connections to a
-/// transit gateway.
 pub const CreateVpnConcentratorInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request,

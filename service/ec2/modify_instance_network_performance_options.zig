@@ -5,8 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceBandwidthWeighting = @import("instance_bandwidth_weighting.zig").InstanceBandwidthWeighting;
 
-/// Change the configuration of the network performance options for an existing
-/// instance.
 pub const ModifyInstanceNetworkPerformanceOptionsInput = struct {
     /// Specify the bandwidth weighting option to boost the associated type of
     /// baseline bandwidth, as follows:

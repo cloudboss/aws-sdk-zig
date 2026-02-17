@@ -3,8 +3,6 @@
 /// For information about specifying and updating task parameters, see
 /// RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
 ///
-/// **Note:**
-///
 /// `LoggingInfo` has been deprecated. To specify an Amazon Simple Storage
 /// Service (Amazon S3) bucket to contain logs, instead use the
 /// `OutputS3BucketName` and `OutputS3KeyPrefix` options in the

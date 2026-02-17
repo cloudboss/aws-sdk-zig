@@ -12,11 +12,6 @@ const AttributeValue = @import("attribute_value.zig").AttributeValue;
 const ProductCode = @import("product_code.zig").ProductCode;
 const serde = @import("serde.zig");
 
-/// Describes the specified attribute of the specified instance. You can specify
-/// only one
-/// attribute at a time. Available attributes include SQL license exemption
-/// configuration
-/// for instances registered with the SQL LE service.
 pub const DescribeInstanceAttributeInput = struct {
     /// The instance attribute.
     ///

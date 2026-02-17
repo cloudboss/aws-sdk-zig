@@ -7,9 +7,6 @@ const IpamPrefixListResolverRuleRequest = @import("ipam_prefix_list_resolver_rul
 const IpamPrefixListResolver = @import("ipam_prefix_list_resolver.zig").IpamPrefixListResolver;
 const serde = @import("serde.zig");
 
-/// Modifies an IPAM prefix list resolver. You can update the description and
-/// CIDR selection rules. Changes to rules will trigger re-evaluation and
-/// potential updates to associated prefix lists.
 pub const ModifyIpamPrefixListResolverInput = struct {
     /// A new description for the IPAM prefix list resolver.
     description: ?[]const u8 = null,

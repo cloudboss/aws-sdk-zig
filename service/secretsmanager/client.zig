@@ -189,8 +189,6 @@ pub const Client = struct {
     /// need `kms:GenerateDataKey` and `kms:Decrypt` permission to the
     /// key.
     ///
-    /// **Important:**
-    ///
     /// When you enter commands in a command shell, there is a risk of the command
     /// history being accessed or utilities having access to your command
     /// parameters. This is a concern if the command includes the value of a secret.
@@ -518,8 +516,6 @@ pub const Client = struct {
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
     ///
-    /// **Important:**
-    ///
     /// When you enter commands in a command shell, there is a risk of the command
     /// history being accessed or utilities having access to your command
     /// parameters. This is a concern if the command includes the value of a secret.
@@ -668,8 +664,6 @@ pub const Client = struct {
     /// For tag quotas and naming restrictions, see [Service quotas for
     /// Tagging](https://docs.aws.amazon.com/general/latest/gr/arg.html#taged-reference-quotas) in the *Amazon Web Services General Reference guide*.
     ///
-    /// **Important:**
-    ///
     /// If you use tags as part of your security strategy, then adding or removing a
     /// tag
     /// can change permissions. If successfully completing this operation would
@@ -699,8 +693,6 @@ pub const Client = struct {
     /// This operation is idempotent. If a requested tag is not attached to the
     /// secret, no
     /// error is returned and the secret metadata is unchanged.
-    ///
-    /// **Important:**
     ///
     /// If you use tags as part of your security strategy, then removing a tag can
     /// change
@@ -787,8 +779,6 @@ pub const Client = struct {
     /// and
     /// decryption](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html).
     ///
-    /// **Important:**
-    ///
     /// When you enter commands in a command shell, there is a risk of the command
     /// history being accessed or utilities having access to your command
     /// parameters. This is a concern if the command includes the value of a secret.
@@ -817,8 +807,6 @@ pub const Client = struct {
     ///
     /// You can move the `AWSCURRENT` staging label to this version by including it
     /// in this call.
-    ///
-    /// **Note:**
     ///
     /// Whenever you move `AWSCURRENT`, Secrets Manager automatically moves the
     /// label

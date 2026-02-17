@@ -5,7 +5,6 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const KinesisDataStreamDestination = @import("kinesis_data_stream_destination.zig").KinesisDataStreamDestination;
 
-/// Returns information about the status of Kinesis streaming.
 pub const DescribeKinesisStreamingDestinationInput = struct {
     /// The name of the table being described. You can also provide the Amazon
     /// Resource Name (ARN) of the table

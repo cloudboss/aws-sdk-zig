@@ -6,7 +6,6 @@ const ServiceError = @import("errors.zig").ServiceError;
 const MetricType = @import("metric_type.zig").MetricType;
 const StatisticType = @import("statistic_type.zig").StatisticType;
 
-/// Disables Infrastructure Performance metric subscriptions.
 pub const DisableAwsNetworkPerformanceMetricSubscriptionInput = struct {
     /// The target Region or Availability Zone that the metric subscription is
     /// disabled for. For example, `eu-north-1`.
