@@ -10,6 +10,8 @@ const Sha1 = std.crypto.hash.Sha1;
 const Credentials = @import("credentials.zig").Credentials;
 const http = @import("http.zig");
 const url_mod = @import("url.zig");
+const endpoint_mod = @import("endpoint.zig");
+const date = @import("date.zig");
 
 pub const SsoProvider = struct {
     sso_account_id: []const u8,
@@ -95,35 +97,8 @@ fn parseExpiresAt(timestamp: []const u8) !i64 {
     else
         timestamp;
 
-    if (ts.len < 19) return error.InvalidTimestamp;
-
-    const year = std.fmt.parseInt(u16, ts[0..4], 10) catch return error.InvalidTimestamp;
-    const month = std.fmt.parseInt(u4, ts[5..7], 10) catch return error.InvalidTimestamp;
-    const day = std.fmt.parseInt(u5, ts[8..10], 10) catch return error.InvalidTimestamp;
-    const hour = std.fmt.parseInt(u5, ts[11..13], 10) catch return error.InvalidTimestamp;
-    const minute = std.fmt.parseInt(u6, ts[14..16], 10) catch return error.InvalidTimestamp;
-    const second = std.fmt.parseInt(u6, ts[17..19], 10) catch return error.InvalidTimestamp;
-
-    const days_before_month = [_]u16{ 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
-    if (month == 0 or month > 12 or day == 0) return error.InvalidTimestamp;
-    var day_of_year: u16 = days_before_month[month - 1] + day - 1;
-    if (month > 2 and isLeapYear(year)) day_of_year += 1;
-
-    var days: i64 = day_of_year;
-    if (year >= 1970) {
-        var y: u16 = 1970;
-        while (y < year) : (y += 1) {
-            days += if (isLeapYear(y)) 366 else 365;
-        }
-    }
-
-    return days * 86400 + @as(i64, hour) * 3600 + @as(i64, minute) * 60 + @as(i64, second);
-}
-
-fn isLeapYear(year: u16) bool {
-    if (@mod(year, 4) != 0) return false;
-    if (@mod(year, 100) != 0) return true;
-    return @mod(year, 400) == 0;
+    // Use date.parseIso8601 which handles ISO 8601 format
+    return date.parseIso8601(ts);
 }
 
 /// Call SSO GetRoleCredentials API
@@ -134,7 +109,8 @@ fn callGetRoleCredentials(
     role_name: []const u8,
     access_token: []const u8,
 ) !Credentials {
-    const endpoint = try std.fmt.allocPrint(allocator, "https://portal.sso.{s}.amazonaws.com", .{sso_region});
+    const partition = endpoint_mod.partitionForRegion(sso_region);
+    const endpoint = try std.fmt.allocPrint(allocator, "https://portal.sso.{s}.{s}", .{ sso_region, partition.dns_suffix });
     defer allocator.free(endpoint);
 
     const host = url_mod.parseHost(endpoint);

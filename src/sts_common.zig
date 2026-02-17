@@ -12,15 +12,17 @@ const signing = @import("signing.zig");
 const http = @import("http.zig");
 const url_mod = @import("url.zig");
 const xml = @import("xml.zig");
+const endpoint_mod = @import("endpoint.zig");
 
 /// Build the STS endpoint URL for a region.
 /// If endpoint_url is provided (e.g. LocalStack), returns a dupe of that.
-/// Otherwise returns https://sts.{region}.amazonaws.com
+/// Otherwise returns https://sts.{region}.{partition.dns_suffix}
 pub fn stsEndpoint(allocator: Allocator, region: []const u8, endpoint_url: ?[]const u8) ![]const u8 {
     if (endpoint_url) |u| {
         return try allocator.dupe(u8, u);
     }
-    return std.fmt.allocPrint(allocator, "https://sts.{s}.amazonaws.com", .{region});
+    const partition = endpoint_mod.partitionForRegion(region);
+    return std.fmt.allocPrint(allocator, "https://sts.{s}.{s}", .{ region, partition.dns_suffix });
 }
 
 /// Build a URL-encoded STS POST body from action name and key-value params.
@@ -205,6 +207,13 @@ test "stsEndpoint with custom endpoint" {
     defer allocator.free(ep);
 
     try std.testing.expectEqualStrings("http://localhost:4566", ep);
+}
+
+test "stsEndpoint with China region" {
+    const allocator = std.testing.allocator;
+    const ep = try stsEndpoint(allocator, "cn-north-1", null);
+    defer allocator.free(ep);
+    try std.testing.expectEqualStrings("https://sts.cn-north-1.amazonaws.com.cn", ep);
 }
 
 test "parseStsCredentials valid XML" {
