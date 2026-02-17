@@ -18,6 +18,7 @@ pub const map = @import("map.zig");
 pub const waiter = @import("waiter.zig");
 pub const sts_common = @import("sts_common.zig");
 pub const web_identity = @import("web_identity.zig");
+pub const process_creds = @import("process.zig");
 
 // Re-exports
 pub const Credentials = credentials.Credentials;
