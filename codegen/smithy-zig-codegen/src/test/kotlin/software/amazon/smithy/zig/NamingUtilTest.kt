@@ -58,4 +58,13 @@ class NamingUtilTest {
     fun hyphenated() {
         assertEquals("kebab_case", NamingUtil.toSnakeCase("kebab-case"))
     }
+
+    @Test
+    fun testSnakeCaseV2Pattern() {
+        assertEquals("list_objects_v2", NamingUtil.toSnakeCase("ListObjectsV2"))
+        assertEquals("list_objects_v3", NamingUtil.toSnakeCase("ListObjectsV3"))
+        assertEquals("get_object", NamingUtil.toSnakeCase("GetObject"))
+        assertEquals("put_bucket_acl", NamingUtil.toSnakeCase("PutBucketACL"))
+        assertEquals("create_multipart_upload", NamingUtil.toSnakeCase("CreateMultipartUpload"))
+    }
 }

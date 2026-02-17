@@ -62,8 +62,10 @@ object NamingUtil {
                 }
             } else if (c.isDigit()) {
                 // If transitioning from non-digit to digit, add underscore
+                // BUT NOT if the previous char is uppercase (e.g., V2, EC2 -- part of acronym)
                 if (i > 0 && result.isNotEmpty() && result.last() != '_' &&
-                    !name[i - 1].isDigit() && name[i - 1] != '_' && name[i - 1] != '-'
+                    !name[i - 1].isDigit() && name[i - 1] != '_' && name[i - 1] != '-' &&
+                    !name[i - 1].isUpperCase()
                 ) {
                     result.append('_')
                 }
