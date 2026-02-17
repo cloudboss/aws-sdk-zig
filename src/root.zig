@@ -16,6 +16,7 @@ pub const xml = @import("xml.zig");
 pub const url = @import("url.zig");
 pub const map = @import("map.zig");
 pub const waiter = @import("waiter.zig");
+pub const sts_common = @import("sts_common.zig");
 
 // Re-exports
 pub const Credentials = credentials.Credentials;
