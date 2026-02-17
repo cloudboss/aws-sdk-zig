@@ -47,9 +47,9 @@ pub const Config = struct {
         const region = try resolveRegion(allocator, options);
         errdefer allocator.free(region);
 
-        // Default to credential chain (environment -> file -> imds -> ecs)
+        // Default to credential chain (environment -> file -> web_identity -> ecs -> imds)
         const credentials = options.credentials orelse CredentialsProvider{
-            .chain = ChainProvider{ .profile = options.profile },
+            .chain = ChainProvider{ .profile = options.profile, .region = region },
         };
 
         return Self{
