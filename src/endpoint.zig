@@ -209,3 +209,123 @@ test "resolveEndpoint endpoint_override" {
     defer allocator.free(host);
     try std.testing.expectEqualStrings("custom.example.com", host);
 }
+
+test "resolveEndpoint fips+dual_stack" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-east-1", .{ .fips = true, .dual_stack = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts-fips.us-east-1.api.aws", host);
+}
+
+test "resolveEndpoint cn standard" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "cn-north-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.cn-north-1.amazonaws.com.cn", host);
+}
+
+test "resolveEndpoint cn dual_stack" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "cn-north-1", .{ .dual_stack = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.cn-north-1.api.amazonwebservices.com.cn", host);
+}
+
+test "resolveEndpoint govcloud standard" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-gov-west-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.us-gov-west-1.amazonaws.com", host);
+}
+
+test "resolveEndpoint govcloud fips" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-gov-west-1", .{ .fips = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts-fips.us-gov-west-1.amazonaws.com", host);
+}
+
+test "resolveEndpoint govcloud dual_stack" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-gov-west-1", .{ .dual_stack = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.us-gov-west-1.api.aws", host);
+}
+
+test "resolveEndpoint iso standard" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-iso-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.us-iso-east-1.c2s.ic.gov", host);
+}
+
+test "resolveEndpoint iso fips" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-iso-east-1", .{ .fips = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts-fips.us-iso-east-1.c2s.ic.gov", host);
+}
+
+test "resolveEndpoint iso-b standard" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-isob-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.us-isob-east-1.sc2s.sgov.gov", host);
+}
+
+test "resolveEndpoint iso-b dual_stack returns error" {
+    const allocator = std.testing.allocator;
+    try std.testing.expectError(
+        error.DualStackNotSupported,
+        resolveEndpoint(allocator, "sts", "us-isob-east-1", .{ .dual_stack = true }),
+    );
+}
+
+test "resolveEndpoint iso-e standard" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "eu-isoe-west-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.eu-isoe-west-1.cloud.adc-e.uk", host);
+}
+
+test "resolveEndpoint iso-f standard" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-isof-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.us-isof-east-1.csp.hci.ic.gov", host);
+}
+
+test "resolveEndpoint eusc standard" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "eusc-de-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.eusc-de-east-1.amazonaws.eu", host);
+}
+
+test "resolveEndpoint eusc fips" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "eusc-de-east-1", .{ .fips = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts-fips.eusc-de-east-1.amazonaws.eu", host);
+}
+
+test "resolveEndpoint eusc dual_stack" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "eusc-de-east-1", .{ .dual_stack = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.eusc-de-east-1.api.amazonwebservices.eu", host);
+}
+
+test "resolveEndpoint unknown region falls back to aws" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "mars-west-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.mars-west-1.amazonaws.com", host);
+}
+
+test "resolveEndpoint override ignores fips and region" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "cn-north-1", .{ .fips = true, .endpoint_override = "localhost:4566" });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("localhost:4566", host);
+}

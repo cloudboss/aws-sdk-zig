@@ -205,3 +205,83 @@ test "dual-stack on us-iso-east-1 returns error" {
         resolveS3Endpoint(allocator, "us-iso-east-1", .{ .dual_stack = true }),
     );
 }
+
+test "s3 virtual-hosted cn" {
+    const allocator = std.testing.allocator;
+    const result = try resolveS3Endpoint(allocator, "cn-north-1", .{ .bucket = "my-bucket" });
+    defer allocator.free(result.host);
+    try std.testing.expectEqualStrings("my-bucket.s3.cn-north-1.amazonaws.com.cn", result.host);
+    try std.testing.expect(!result.use_path_style);
+}
+
+test "s3 virtual-hosted govcloud" {
+    const allocator = std.testing.allocator;
+    const result = try resolveS3Endpoint(allocator, "us-gov-west-1", .{ .bucket = "my-bucket" });
+    defer allocator.free(result.host);
+    try std.testing.expectEqualStrings("my-bucket.s3.us-gov-west-1.amazonaws.com", result.host);
+    try std.testing.expect(!result.use_path_style);
+}
+
+test "s3 fips+dual_stack" {
+    const allocator = std.testing.allocator;
+    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .fips = true, .dual_stack = true });
+    defer allocator.free(result.host);
+    try std.testing.expectEqualStrings("s3-fips.dualstack.us-east-1.amazonaws.com", result.host);
+    try std.testing.expect(result.use_path_style);
+}
+
+test "s3 acceleration+dual_stack" {
+    const allocator = std.testing.allocator;
+    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my-bucket", .use_accelerate = true, .dual_stack = true });
+    defer allocator.free(result.host);
+    try std.testing.expectEqualStrings("my-bucket.s3-accelerate.dualstack.amazonaws.com", result.host);
+    try std.testing.expect(!result.use_path_style);
+}
+
+test "s3 acceleration with path-style returns error" {
+    const allocator = std.testing.allocator;
+    try std.testing.expectError(
+        error.AccelerateNotSupported,
+        resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my-bucket", .use_accelerate = true, .use_path_style = true }),
+    );
+}
+
+test "s3 acceleration without bucket returns error" {
+    const allocator = std.testing.allocator;
+    try std.testing.expectError(
+        error.AccelerateRequiresDnsCompatibleBucket,
+        resolveS3Endpoint(allocator, "us-east-1", .{ .use_accelerate = true }),
+    );
+}
+
+test "s3 acceleration with dotted bucket returns error" {
+    const allocator = std.testing.allocator;
+    try std.testing.expectError(
+        error.AccelerateRequiresDnsCompatibleBucket,
+        resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my.dotted.bucket", .use_accelerate = true }),
+    );
+}
+
+test "s3 no bucket path-style" {
+    const allocator = std.testing.allocator;
+    const result = try resolveS3Endpoint(allocator, "us-east-1", .{});
+    defer allocator.free(result.host);
+    try std.testing.expectEqualStrings("s3.us-east-1.amazonaws.com", result.host);
+    try std.testing.expect(result.use_path_style);
+}
+
+test "s3 endpoint override with bucket" {
+    const allocator = std.testing.allocator;
+    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "test", .endpoint_override = "localhost:4566" });
+    defer allocator.free(result.host);
+    try std.testing.expectEqualStrings("localhost:4566", result.host);
+    try std.testing.expect(!result.use_path_style);
+}
+
+test "s3 endpoint override with dotted bucket" {
+    const allocator = std.testing.allocator;
+    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my.dotted.bucket", .endpoint_override = "localhost:4566" });
+    defer allocator.free(result.host);
+    try std.testing.expectEqualStrings("localhost:4566", result.host);
+    try std.testing.expect(result.use_path_style);
+}
