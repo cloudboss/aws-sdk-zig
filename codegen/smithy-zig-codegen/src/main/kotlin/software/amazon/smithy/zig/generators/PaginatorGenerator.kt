@@ -161,14 +161,6 @@ class PaginatorGenerator(
             op.constName, op.constName, op.outputType,
         )
 
-        // Free previous output if map token (to release arena memory)
-        if (op.isMapToken) {
-            writer.openBlock("if (self.prev_output) |*prev| {")
-            writer.write("prev.deinit();")
-            writer.write("self.prev_output = null;")
-            writer.closeBlock("}")
-        }
-
         writer.openBlock("if (self.done) {")
         writer.write("return error.EndOfPagination;")
         writer.closeBlock("}")
@@ -180,6 +172,17 @@ class PaginatorGenerator(
 
         // Execute
         writer.write("const output = try \$L.execute(self.client, self.params, options);", op.constName)
+        writer.blankLine()
+
+        // Free previous output after execute -- for map tokens, next_token
+        // points into prev_output's arena so it must stay alive until the
+        // token has been serialized into the request.
+        if (op.isMapToken) {
+            writer.openBlock("if (self.prev_output) |*prev| {")
+            writer.write("prev.deinit();")
+            writer.write("self.prev_output = null;")
+            writer.closeBlock("}")
+        }
         writer.blankLine()
 
         // Extract next token

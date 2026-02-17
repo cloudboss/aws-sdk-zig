@@ -232,10 +232,6 @@ pub const ScanPaginator = struct {
     const Self = @This();
 
     pub fn next(self: *Self, options: scan_.Options) !scan_.ScanOutput {
-        if (self.prev_output) |*prev| {
-            prev.deinit();
-            self.prev_output = null;
-        }
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -243,6 +239,12 @@ pub const ScanPaginator = struct {
         self.params.exclusive_start_key = self.next_token;
 
         const output = try scan_.execute(self.client, self.params, options);
+
+        // Deinit prev after execute() — next_token points into prev's arena
+        if (self.prev_output) |*prev| {
+            prev.deinit();
+            self.prev_output = null;
+        }
 
         if (output.last_evaluated_key) |token| {
             if (token.len > 0) {
