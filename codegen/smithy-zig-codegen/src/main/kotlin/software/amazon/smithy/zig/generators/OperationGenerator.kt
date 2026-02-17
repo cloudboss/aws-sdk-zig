@@ -137,13 +137,6 @@ class OperationGenerator(
     }
 
     private fun writeInputStruct(writer: ZigWriter, ctx: OperationContext) {
-        val docs = operation.getTrait(DocumentationTrait::class.java)
-            .map { it.value }
-            .orElse(null)
-        if (docs != null) {
-            writer.writeDocs(docs)
-        }
-
         val inputName = "${operationName}Input"
         writer.openBlock("pub const \$L = struct {", inputName)
 

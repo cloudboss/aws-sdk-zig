@@ -170,6 +170,18 @@ class DocConverterTest {
     }
 
     @Test
+    fun emptyNoteTag() {
+        val result = DocConverter.convert("<note></note>")
+        assertEquals(emptyList<String>(), result)
+    }
+
+    @Test
+    fun emptyImportantTag() {
+        val result = DocConverter.convert("<important></important>")
+        assertEquals(emptyList<String>(), result)
+    }
+
+    @Test
     fun definitionList() {
         val result = DocConverter.convert("<dl><dt>Term</dt><dd>Definition here</dd></dl>")
         assert(result.any { it.contains("**Term**") }) { "Should bold the term" }

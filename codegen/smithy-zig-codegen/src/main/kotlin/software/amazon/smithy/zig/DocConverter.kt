@@ -104,6 +104,10 @@ object DocConverter {
         for (paragraph in decoded.split(Regex("\n\\s*\n"))) {
             val trimmed = paragraph.trim()
             if (trimmed.isEmpty()) continue
+            
+            // Skip bare callout tags with no content (e.g., "**Note:**" or "**Important:**" alone)
+            if (trimmed.matches(Regex("^\\*\\*(Note|Important):\\*\\*\\s*$"))) continue
+            
             if (lines.isNotEmpty()) {
                 lines.add("")
             }
