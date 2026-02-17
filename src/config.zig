@@ -8,6 +8,7 @@ const Allocator = std.mem.Allocator;
 const credentials_mod = @import("credentials.zig");
 const CredentialsProvider = credentials_mod.CredentialsProvider;
 const ChainProvider = credentials_mod.ChainProvider;
+const endpoint_mod = @import("endpoint.zig");
 
 /// Options for Config.load()
 pub const LoadOptions = struct {
@@ -96,23 +97,10 @@ pub const Config = struct {
 
     /// Build service endpoint URL
     pub fn getEndpoint(self: *const Self, service: []const u8, allocator: Allocator) ![]const u8 {
-        if (self.endpoint_url) |url| {
-            return try allocator.dupe(u8, url);
-        }
-
-        const suffix = if (self.use_fips and self.use_dual_stack)
-            "-fips.dualstack"
-        else if (self.use_fips)
-            "-fips"
-        else if (self.use_dual_stack)
-            ".dualstack"
-        else
-            "";
-
-        return std.fmt.allocPrint(allocator, "{s}{s}.{s}.amazonaws.com", .{
-            service,
-            suffix,
-            self.region,
+        return endpoint_mod.resolveEndpoint(allocator, service, self.region, .{
+            .fips = self.use_fips,
+            .dual_stack = self.use_dual_stack,
+            .endpoint_override = self.endpoint_url,
         });
     }
 };
@@ -455,6 +443,13 @@ test "Config getEndpoint with FIPS" {
     defer std.testing.allocator.free(endpoint);
 
     try std.testing.expectEqualStrings("sts-fips.us-east-1.amazonaws.com", endpoint);
+}
+
+test "Config getEndpoint with China region" {
+    const config_val = Config.fromEnvironment("cn-north-1");
+    const ep = try config_val.getEndpoint("sts", std.testing.allocator);
+    defer std.testing.allocator.free(ep);
+    try std.testing.expectEqualStrings("sts.cn-north-1.amazonaws.com.cn", ep);
 }
 
 test "parseRegionFromConfig default profile" {
