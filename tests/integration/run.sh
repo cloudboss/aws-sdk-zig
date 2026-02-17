@@ -51,9 +51,22 @@ start_localstack() {
     echo "Starting LocalStack..."
     docker rm -f "${LOCALSTACK_CONTAINER}" 2>/dev/null || true
 
+    local container_id
+    container_id=$(grep -o '[0-9a-f]\{64\}' /proc/self/cgroup 2>/dev/null | head -1 || true)
+    if [[ -z "${container_id}" ]]; then
+        container_id=$(hostname 2>/dev/null || true)
+    fi
+
+    if [[ -z "${container_id}" ]] || ! docker inspect "${container_id}" >/dev/null 2>&1; then
+        echo "ERROR: Could not detect container ID" >&2
+        exit 1
+    fi
+
+    echo "Sharing network with container ${container_id:0:12}"
+
     local docker_args=(
         -d --name "${LOCALSTACK_CONTAINER}"
-        --network host
+        --network "container:${container_id}"
         -e "SERVICES=${SERVICES}"
     )
 

@@ -66,7 +66,6 @@ test-integration: $(HAS_IMAGE_LOCAL)
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		--group-add $(DOCKER_GID) \
 		--security-opt label=type:container_runtime_t \
-		--network host \
 		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
 		-e SCENARIO=$(SCENARIO) \
@@ -79,7 +78,6 @@ test-integration-tls: $(HAS_IMAGE_LOCAL) certs
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		--group-add $(DOCKER_GID) \
 		--security-opt label=type:container_runtime_t \
-		--network host \
 		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
 		-e SCENARIO=$(SCENARIO) \
