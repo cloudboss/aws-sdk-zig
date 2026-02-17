@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCENARIOS_DIR="${SCRIPT_DIR}/scenarios"
 CERT_DIR="${SCRIPT_DIR}/certs"
-LOCALSTACK_CONTAINER="aws-sdk-zig-localstack"
+LOCALSTACK_CONTAINER=""
 LOCALSTACK_IMG="${LOCALSTACK_IMG:-localstack/localstack:4.3.0}"
 ZIG_BUILD_FLAGS="${ZIG_BUILD_FLAGS:-}"
 # Filter to single scenario if SCENARIO is set
@@ -42,14 +42,15 @@ fi
 # --- LocalStack lifecycle ---
 
 cleanup() {
-    echo "Stopping LocalStack..."
-    docker rm -f "${LOCALSTACK_CONTAINER}" 2>/dev/null || true
+    if [[ -n "${LOCALSTACK_CONTAINER}" ]]; then
+        echo "Stopping LocalStack..."
+        docker rm -f "${LOCALSTACK_CONTAINER}" 2>/dev/null || true
+    fi
 }
 trap cleanup EXIT
 
 start_localstack() {
     echo "Starting LocalStack..."
-    docker rm -f "${LOCALSTACK_CONTAINER}" 2>/dev/null || true
 
     local container_id
     container_id=$(grep -o '[0-9a-f]\{64\}' /proc/self/cgroup 2>/dev/null | head -1 || true)
@@ -65,7 +66,7 @@ start_localstack() {
     echo "Sharing network with container ${container_id:0:12}"
 
     local docker_args=(
-        -d --name "${LOCALSTACK_CONTAINER}"
+        -d
         --network "container:${container_id}"
         -e "SERVICES=${SERVICES}"
     )
@@ -77,7 +78,7 @@ start_localstack() {
         )
     fi
 
-    docker run "${docker_args[@]}" "${LOCALSTACK_IMG}" >/dev/null
+    LOCALSTACK_CONTAINER=$(docker run "${docker_args[@]}" "${LOCALSTACK_IMG}")
 }
 
 wait_for_localstack() {
