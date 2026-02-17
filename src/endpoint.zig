@@ -1,0 +1,211 @@
+//! AWS Partition-Aware Endpoint Resolver
+//!
+//! Resolves service endpoints for all 8 AWS partitions.
+//! For S3-specific endpoint resolution, use s3_endpoint.zig instead.
+
+const std = @import("std");
+
+pub const Partition = struct {
+    name: []const u8,
+    dns_suffix: []const u8,
+    dual_stack_dns_suffix: []const u8,
+    supports_fips: bool,
+    supports_dual_stack: bool,
+};
+
+pub const EndpointOptions = struct {
+    fips: bool = false,
+    dual_stack: bool = false,
+    /// If non-null, return this verbatim (custom endpoint override).
+    endpoint_override: ?[]const u8 = null,
+};
+
+pub const EndpointError = error{
+    FipsNotSupported,
+    DualStackNotSupported,
+};
+
+// Partition table -- ordered from most-specific to least-specific prefix.
+// IMPORTANT: us-isob- must come before us-iso- to avoid false match.
+const PARTITIONS = [_]struct { prefix: []const u8, partition: Partition }{
+    .{ .prefix = "cn-", .partition = .{
+        .name = "aws-cn",
+        .dns_suffix = "amazonaws.com.cn",
+        .dual_stack_dns_suffix = "api.amazonwebservices.com.cn",
+        .supports_fips = false,
+        .supports_dual_stack = true,
+    } },
+    .{ .prefix = "us-gov-", .partition = .{
+        .name = "aws-us-gov",
+        .dns_suffix = "amazonaws.com",
+        .dual_stack_dns_suffix = "api.aws",
+        .supports_fips = true,
+        .supports_dual_stack = true,
+    } },
+    .{ .prefix = "us-isob-", .partition = .{
+        .name = "aws-iso-b",
+        .dns_suffix = "sc2s.sgov.gov",
+        .dual_stack_dns_suffix = "api.aws.scloud",
+        .supports_fips = true,
+        .supports_dual_stack = false,
+    } },
+    .{ .prefix = "us-iso-", .partition = .{
+        .name = "aws-iso",
+        .dns_suffix = "c2s.ic.gov",
+        .dual_stack_dns_suffix = "api.aws.ic.gov",
+        .supports_fips = true,
+        .supports_dual_stack = false,
+    } },
+    .{ .prefix = "eu-isoe-", .partition = .{
+        .name = "aws-iso-e",
+        .dns_suffix = "cloud.adc-e.uk",
+        .dual_stack_dns_suffix = "api.cloud-aws.adc-e.uk",
+        .supports_fips = true,
+        .supports_dual_stack = false,
+    } },
+    .{ .prefix = "us-isof-", .partition = .{
+        .name = "aws-iso-f",
+        .dns_suffix = "csp.hci.ic.gov",
+        .dual_stack_dns_suffix = "api.aws.hci.ic.gov",
+        .supports_fips = true,
+        .supports_dual_stack = false,
+    } },
+    .{ .prefix = "eusc-", .partition = .{
+        .name = "aws-eusc",
+        .dns_suffix = "amazonaws.eu",
+        .dual_stack_dns_suffix = "api.amazonwebservices.eu",
+        .supports_fips = true,
+        .supports_dual_stack = true,
+    } },
+};
+
+const AWS_PARTITION = Partition{
+    .name = "aws",
+    .dns_suffix = "amazonaws.com",
+    .dual_stack_dns_suffix = "api.aws",
+    .supports_fips = true,
+    .supports_dual_stack = true,
+};
+
+/// Returns the partition for a given region string.
+pub fn partitionForRegion(region: []const u8) Partition {
+    for (PARTITIONS) |entry| {
+        if (std.mem.startsWith(u8, region, entry.prefix)) {
+            return entry.partition;
+        }
+    }
+    return AWS_PARTITION;
+}
+
+/// Resolves the endpoint hostname (no scheme, no trailing slash) for a given
+/// service + region + options. Returns allocated string -- caller owns memory.
+/// For S3, do NOT call this -- use s3_endpoint.zig instead.
+pub fn resolveEndpoint(
+    allocator: std.mem.Allocator,
+    service: []const u8,
+    region: []const u8,
+    options: EndpointOptions,
+) (EndpointError || std.mem.Allocator.Error)![]const u8 {
+    if (options.endpoint_override) |override| {
+        return allocator.dupe(u8, override);
+    }
+
+    const partition = partitionForRegion(region);
+
+    if (options.fips and !partition.supports_fips) return error.FipsNotSupported;
+    if (options.dual_stack and !partition.supports_dual_stack) return error.DualStackNotSupported;
+
+    if (options.fips and options.dual_stack) {
+        return std.fmt.allocPrint(allocator, "{s}-fips.{s}.{s}", .{ service, region, partition.dual_stack_dns_suffix });
+    } else if (options.fips) {
+        return std.fmt.allocPrint(allocator, "{s}-fips.{s}.{s}", .{ service, region, partition.dns_suffix });
+    } else if (options.dual_stack) {
+        return std.fmt.allocPrint(allocator, "{s}.{s}.{s}", .{ service, region, partition.dual_stack_dns_suffix });
+    } else {
+        return std.fmt.allocPrint(allocator, "{s}.{s}.{s}", .{ service, region, partition.dns_suffix });
+    }
+}
+
+test "partitionForRegion aws" {
+    const p = partitionForRegion("us-east-1");
+    try std.testing.expectEqualStrings("aws", p.name);
+}
+
+test "partitionForRegion aws-cn" {
+    const p = partitionForRegion("cn-north-1");
+    try std.testing.expectEqualStrings("aws-cn", p.name);
+}
+
+test "partitionForRegion aws-us-gov" {
+    const p = partitionForRegion("us-gov-west-1");
+    try std.testing.expectEqualStrings("aws-us-gov", p.name);
+}
+
+test "partitionForRegion aws-iso" {
+    const p = partitionForRegion("us-iso-east-1");
+    try std.testing.expectEqualStrings("aws-iso", p.name);
+}
+
+test "partitionForRegion aws-iso-b (not aws-iso)" {
+    const p = partitionForRegion("us-isob-east-1");
+    try std.testing.expectEqualStrings("aws-iso-b", p.name);
+}
+
+test "partitionForRegion aws-iso-e" {
+    const p = partitionForRegion("eu-isoe-west-1");
+    try std.testing.expectEqualStrings("aws-iso-e", p.name);
+}
+
+test "partitionForRegion aws-iso-f" {
+    const p = partitionForRegion("us-isof-east-1");
+    try std.testing.expectEqualStrings("aws-iso-f", p.name);
+}
+
+test "partitionForRegion aws-eusc" {
+    const p = partitionForRegion("eusc-de-east-1");
+    try std.testing.expectEqualStrings("aws-eusc", p.name);
+}
+
+test "resolveEndpoint default" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.us-east-1.amazonaws.com", host);
+}
+
+test "resolveEndpoint fips" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-east-1", .{ .fips = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts-fips.us-east-1.amazonaws.com", host);
+}
+
+test "resolveEndpoint dual_stack" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-east-1", .{ .dual_stack = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("sts.us-east-1.api.aws", host);
+}
+
+test "resolveEndpoint fips cn returns error" {
+    const allocator = std.testing.allocator;
+    try std.testing.expectError(
+        error.FipsNotSupported,
+        resolveEndpoint(allocator, "sts", "cn-north-1", .{ .fips = true }),
+    );
+}
+
+test "resolveEndpoint dual_stack iso returns error" {
+    const allocator = std.testing.allocator;
+    try std.testing.expectError(
+        error.DualStackNotSupported,
+        resolveEndpoint(allocator, "sts", "us-iso-east-1", .{ .dual_stack = true }),
+    );
+}
+
+test "resolveEndpoint endpoint_override" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "sts", "us-east-1", .{ .endpoint_override = "custom.example.com" });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("custom.example.com", host);
+}
