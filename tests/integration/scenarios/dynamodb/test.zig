@@ -13,7 +13,7 @@ test "CreateTable, DescribeTable, ListTables, DeleteTable" {
     });
     defer cfg.deinit();
 
-    var client = dynamodb.Client.init(allocator, &cfg);
+    var client = dynamodb.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const table_name = "sdk-zig-integration-test-table";
@@ -105,7 +105,7 @@ test "PutItem and GetItem with map fields" {
     });
     defer cfg.deinit();
 
-    var client = dynamodb.Client.init(allocator, &cfg);
+    var client = dynamodb.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const table_name = "sdk-zig-map-test-table";
@@ -209,7 +209,7 @@ test "Scan paginator collects all items across pages" {
     });
     defer cfg.deinit();
 
-    var client = dynamodb.Client.init(allocator, &cfg);
+    var client = dynamodb.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const table_name = "sdk-zig-paginator-test-table";
@@ -290,7 +290,7 @@ test "DescribeTable returns ResourceNotFoundException for missing table" {
     });
     defer cfg.deinit();
 
-    var client = dynamodb.Client.init(allocator, &cfg);
+    var client = dynamodb.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     var diagnostic: dynamodb.ServiceError = undefined;

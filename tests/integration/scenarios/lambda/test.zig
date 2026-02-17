@@ -13,7 +13,7 @@ test "listFunctions returns successfully" {
     });
     defer cfg.deinit();
 
-    var client = lambda.Client.init(allocator, &cfg);
+    var client = lambda.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     var result = try lambda.list_functions.execute(
@@ -39,7 +39,7 @@ test "getFunction returns ResourceNotFoundException for missing function" {
     });
     defer cfg.deinit();
 
-    var client = lambda.Client.init(allocator, &cfg);
+    var client = lambda.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     var diagnostic: lambda.ServiceError = undefined;

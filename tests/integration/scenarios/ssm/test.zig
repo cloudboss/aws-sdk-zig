@@ -13,7 +13,7 @@ test "PutParameter, GetParameter, DeleteParameter" {
     });
     defer cfg.deinit();
 
-    var client = ssm.Client.init(allocator, &cfg);
+    var client = ssm.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const param_name = "/sdk-zig/test-param";
@@ -68,7 +68,7 @@ test "GetParameter returns error for missing parameter" {
     });
     defer cfg.deinit();
 
-    var client = ssm.Client.init(allocator, &cfg);
+    var client = ssm.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     var diagnostic: ssm.ServiceError = undefined;

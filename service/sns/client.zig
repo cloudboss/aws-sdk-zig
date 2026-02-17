@@ -61,6 +61,14 @@ pub const Client = struct {
         };
     }
 
+    pub fn initWithOptions(allocator: std.mem.Allocator, config: *aws.Config, options: aws.http.RequestOptions) Self {
+        return .{
+            .allocator = allocator,
+            .config = config,
+            .http_client = aws.http.HttpClient.initWithOptions(allocator, options),
+        };
+    }
+
     pub fn deinit(self: *Self) void {
         self.http_client.deinit();
     }

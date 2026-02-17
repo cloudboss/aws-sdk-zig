@@ -13,7 +13,7 @@ test "S3 CRUD: CreateBucket, PutObject, GetObject, DeleteObject, DeleteBucket" {
     });
     defer cfg.deinit();
 
-    var client = s3.Client.init(allocator, &cfg);
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const bucket_name = "sdk-zig-integration-test";
@@ -96,7 +96,7 @@ test "GetObject returns NoSuchKey for missing object" {
     });
     defer cfg.deinit();
 
-    var client = s3.Client.init(allocator, &cfg);
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const bucket_name = "sdk-zig-error-test";
@@ -157,7 +157,7 @@ test "ListObjectsV2 paginator collects all objects across pages" {
     });
     defer cfg.deinit();
 
-    var client = s3.Client.init(allocator, &cfg);
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const bucket_name = "sdk-zig-paginator-test";
@@ -229,7 +229,7 @@ test "presigned GetObject URL retrieves object without signing" {
     });
     defer cfg.deinit();
 
-    var client = s3.Client.init(allocator, &cfg);
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const bucket_name = "sdk-zig-presign-test";
@@ -308,7 +308,7 @@ test "waitUntilBucketExists succeeds after CreateBucket" {
     });
     defer cfg.deinit();
 
-    var client = s3.Client.init(allocator, &cfg);
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const bucket_name = "sdk-zig-waiter-test";

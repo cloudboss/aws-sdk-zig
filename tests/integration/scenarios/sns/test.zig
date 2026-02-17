@@ -14,7 +14,7 @@ test "CreateTopic, Publish, DeleteTopic" {
     });
     defer cfg.deinit();
 
-    var client = sns.Client.init(allocator, &cfg);
+    var client = sns.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const topic_name = "sdk-zig-test-topic";
@@ -59,10 +59,10 @@ test "Subscribe SQS queue to SNS topic and receive message" {
     });
     defer cfg.deinit();
 
-    var sns_client = sns.Client.init(allocator, &cfg);
+    var sns_client = sns.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer sns_client.deinit();
 
-    var sqs_client = sqs.Client.init(allocator, &cfg);
+    var sqs_client = sqs.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer sqs_client.deinit();
 
     // Create SQS queue for subscription

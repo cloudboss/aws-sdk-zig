@@ -36,6 +36,10 @@ pub const RequestOptions = struct {
     max_delay_ms: u32 = 20_000,
     /// Maximum response body size (default: 10MB)
     max_response_size: usize = 10 * 1024 * 1024,
+    /// HTTP connection keep-alive (default: true). Set to false when the
+    /// server may omit Content-Length on responses, which would otherwise
+    /// cause reads to block until the server's keep-alive timeout.
+    keep_alive: bool = true,
 };
 
 /// HTTP request
@@ -216,6 +220,7 @@ pub const HttpClient = struct {
 
         inner.http_request = self.inner.request(request.method.toStd(), uri, .{
             .extra_headers = extra_headers_list.items,
+            .keep_alive = self.default_options.keep_alive,
         }) catch return error.ConnectionFailed;
         errdefer inner.http_request.deinit();
 
@@ -290,6 +295,7 @@ pub const HttpClient = struct {
 
         var req = self.inner.request(request.method.toStd(), uri, .{
             .extra_headers = extra_headers_list.items,
+            .keep_alive = options.keep_alive,
         }) catch return error.ConnectionFailed;
         defer req.deinit();
 

@@ -118,6 +118,16 @@ class ClientGenerator(
         writer.closeBlock("}")
         writer.blankLine()
 
+        // initWithOptions
+        writer.openBlock("pub fn initWithOptions(allocator: std.mem.Allocator, config: *aws.Config, options: aws.http.RequestOptions) Self {")
+        writer.openBlock("return .{")
+        writer.write(".allocator = allocator,")
+        writer.write(".config = config,")
+        writer.write(".http_client = aws.http.HttpClient.initWithOptions(allocator, options),")
+        writer.closeBlock("};")
+        writer.closeBlock("}")
+        writer.blankLine()
+
         // deinit
         writer.openBlock("pub fn deinit(self: *Self) void {")
         writer.write("self.http_client.deinit();")

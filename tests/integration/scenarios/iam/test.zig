@@ -13,7 +13,7 @@ test "IAM CreateUser, GetUser, ListUsers, DeleteUser round-trip" {
     });
     defer cfg.deinit();
 
-    var client = iam.Client.init(allocator, &cfg);
+    var client = iam.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const user_name = "sdk-zig-test-user";
@@ -83,7 +83,7 @@ test "ListUsers paginator collects all users across pages" {
     });
     defer cfg.deinit();
 
-    var client = iam.Client.init(allocator, &cfg);
+    var client = iam.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const user_names = [_][]const u8{ "pag-user-1", "pag-user-2", "pag-user-3" };
@@ -133,7 +133,7 @@ test "waitUntilUserExists succeeds after CreateUser" {
     });
     defer cfg.deinit();
 
-    var client = iam.Client.init(allocator, &cfg);
+    var client = iam.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const user_name = "sdk-zig-waiter-user";
@@ -165,7 +165,7 @@ test "IAM GetUser returns error for nonexistent user" {
     });
     defer cfg.deinit();
 
-    var client = iam.Client.init(allocator, &cfg);
+    var client = iam.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const result = iam.get_user.execute(

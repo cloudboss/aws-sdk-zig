@@ -13,7 +13,7 @@ test "DescribeVpcs returns results" {
     });
     defer cfg.deinit();
 
-    var client = ec2.Client.init(allocator, &cfg);
+    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     var result = try ec2.describe_vpcs.execute(
@@ -42,7 +42,7 @@ test "CreateVpc and DeleteVpc round-trip" {
     });
     defer cfg.deinit();
 
-    var client = ec2.Client.init(allocator, &cfg);
+    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     // Create a VPC

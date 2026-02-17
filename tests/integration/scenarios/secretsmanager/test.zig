@@ -13,7 +13,7 @@ test "CreateSecret, GetSecretValue, DeleteSecret" {
     });
     defer cfg.deinit();
 
-    var client = secretsmanager.Client.init(allocator, &cfg);
+    var client = secretsmanager.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const secret_name = "sdk-zig-test-secret";
@@ -70,7 +70,7 @@ test "GetSecretValue returns error for missing secret" {
     });
     defer cfg.deinit();
 
-    var client = secretsmanager.Client.init(allocator, &cfg);
+    var client = secretsmanager.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     var diagnostic: secretsmanager.ServiceError = undefined;

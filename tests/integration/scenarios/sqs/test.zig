@@ -13,7 +13,7 @@ test "CreateQueue, SendMessage, ReceiveMessage, DeleteMessage, DeleteQueue" {
     });
     defer cfg.deinit();
 
-    var client = sqs.Client.init(allocator, &cfg);
+    var client = sqs.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     const queue_name = "sdk-zig-test-queue";

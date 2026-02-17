@@ -60,7 +60,7 @@ test "SigV4 signed request accepted by STS" {
     try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
 
     // Send the request
-    var client = aws.http.HttpClient.init(allocator);
+    var client = aws.http.HttpClient.initWithOptions(allocator, .{ .keep_alive = false });
     defer client.deinit();
 
     var response = try client.sendRequest(&request);
@@ -120,7 +120,7 @@ test "HTTP client connects to LocalStack" {
     request.tls = endpoint.tls;
     request.port = endpoint.port;
 
-    var client = aws.http.HttpClient.init(allocator);
+    var client = aws.http.HttpClient.initWithOptions(allocator, .{ .keep_alive = false });
     defer client.deinit();
 
     var response = try client.sendRequest(&request);

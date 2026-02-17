@@ -13,7 +13,7 @@ test "getCallerIdentity returns account info from LocalStack" {
     });
     defer cfg.deinit();
 
-    var client = sts.Client.init(allocator, &cfg);
+    var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     var result = try sts.get_caller_identity.execute(
@@ -40,7 +40,7 @@ test "service error populates diagnostic on invalid action" {
     });
     defer cfg.deinit();
 
-    var client = sts.Client.init(allocator, &cfg);
+    var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
     // Use getCallerIdentity with a diagnostic to verify error handling works
