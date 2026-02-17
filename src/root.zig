@@ -11,6 +11,7 @@ pub const config = @import("config.zig");
 pub const errors = @import("errors.zig");
 pub const date = @import("date.zig");
 pub const endpoint = @import("endpoint.zig");
+pub const s3_endpoint = @import("s3_endpoint.zig");
 pub const imds = @import("imds.zig");
 pub const ecs = @import("ecs.zig");
 pub const json = @import("json.zig");
