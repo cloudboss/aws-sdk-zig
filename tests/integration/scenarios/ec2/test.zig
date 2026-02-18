@@ -150,3 +150,28 @@ test "DescribeAvailabilityZones returns zones" {
     const zones = result.availability_zones orelse return error.MissingField;
     try std.testing.expect(zones.len >= 1);
 }
+
+test "DescribeInstances returns successfully" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    var result = try ec2.describe_instances.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer result.deinit();
+
+    // Verify reservations field is non-null (empty list is fine, null is not)
+    _ = result.reservations orelse return error.MissingField;
+}

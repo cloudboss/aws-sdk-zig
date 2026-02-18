@@ -13001,6 +13001,7 @@ pub fn deserializeCreateFleetError(reader: *aws.xml.Reader, alloc: std.mem.Alloc
 }
 
 pub fn deserializeCreateFleetInstance(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !CreateFleetInstance {
+    @setEvalBranchQuota(2000);
     var result: CreateFleetInstance = undefined;
     result.instance_ids = null;
     result.instance_type = null;
@@ -13522,6 +13523,7 @@ pub fn deserializeDescribeFleetError(reader: *aws.xml.Reader, alloc: std.mem.All
 }
 
 pub fn deserializeDescribeFleetsInstances(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !DescribeFleetsInstances {
+    @setEvalBranchQuota(2000);
     var result: DescribeFleetsInstances = undefined;
     result.instance_ids = null;
     result.instance_type = null;
@@ -15209,6 +15211,7 @@ pub fn deserializeFirewallStatelessRule(reader: *aws.xml.Reader, alloc: std.mem.
 }
 
 pub fn deserializeFleetCapacityReservation(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !FleetCapacityReservation {
+    @setEvalBranchQuota(2000);
     var result: FleetCapacityReservation = undefined;
     result.availability_zone = null;
     result.availability_zone_id = null;
@@ -15359,6 +15362,7 @@ pub fn deserializeFleetLaunchTemplateConfig(reader: *aws.xml.Reader, alloc: std.
 }
 
 pub fn deserializeFleetLaunchTemplateOverrides(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !FleetLaunchTemplateOverrides {
+    @setEvalBranchQuota(2000);
     var result: FleetLaunchTemplateOverrides = undefined;
     result.availability_zone = null;
     result.availability_zone_id = null;
@@ -16987,6 +16991,7 @@ pub fn deserializeInitializationStatusDetails(reader: *aws.xml.Reader, alloc: st
 }
 
 pub fn deserializeInstance(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Instance {
+    @setEvalBranchQuota(2000);
     var result: Instance = undefined;
     result.ami_launch_index = null;
     result.architecture = null;
@@ -17518,6 +17523,7 @@ pub fn deserializeInstanceFamilyCreditSpecification(reader: *aws.xml.Reader, all
 }
 
 pub fn deserializeInstanceImageMetadata(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !InstanceImageMetadata {
+    @setEvalBranchQuota(2000);
     var result: InstanceImageMetadata = undefined;
     result.availability_zone = null;
     result.image_metadata = null;
@@ -18375,6 +18381,7 @@ pub fn deserializeInstanceTopology(reader: *aws.xml.Reader, alloc: std.mem.Alloc
 }
 
 pub fn deserializeInstanceTypeInfo(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !InstanceTypeInfo {
+    @setEvalBranchQuota(2000);
     var result: InstanceTypeInfo = undefined;
     result.auto_recovery_supported = null;
     result.bare_metal = null;
@@ -18503,6 +18510,7 @@ pub fn deserializeInstanceTypeInfoFromInstanceRequirements(reader: *aws.xml.Read
 }
 
 pub fn deserializeInstanceTypeOffering(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !InstanceTypeOffering {
+    @setEvalBranchQuota(2000);
     var result: InstanceTypeOffering = undefined;
     result.instance_type = null;
     result.location = null;
@@ -20235,6 +20243,7 @@ pub fn deserializeLaunchPermission(reader: *aws.xml.Reader, alloc: std.mem.Alloc
 }
 
 pub fn deserializeLaunchSpecification(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LaunchSpecification {
+    @setEvalBranchQuota(2000);
     var result: LaunchSpecification = undefined;
     result.addressing_type = null;
     result.block_device_mappings = null;
@@ -20829,6 +20838,7 @@ pub fn deserializeLaunchTemplateNetworkPerformanceOptions(reader: *aws.xml.Reade
 }
 
 pub fn deserializeLaunchTemplateOverrides(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LaunchTemplateOverrides {
+    @setEvalBranchQuota(2000);
     var result: LaunchTemplateOverrides = undefined;
     result.availability_zone = null;
     result.availability_zone_id = null;
@@ -24490,6 +24500,7 @@ pub fn deserializeReservedInstanceReservationValue(reader: *aws.xml.Reader, allo
 }
 
 pub fn deserializeReservedInstances(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ReservedInstances {
+    @setEvalBranchQuota(2000);
     var result: ReservedInstances = undefined;
     result.availability_zone = null;
     result.availability_zone_id = null;
@@ -24563,6 +24574,7 @@ pub fn deserializeReservedInstances(reader: *aws.xml.Reader, alloc: std.mem.Allo
 }
 
 pub fn deserializeReservedInstancesConfiguration(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ReservedInstancesConfiguration {
+    @setEvalBranchQuota(2000);
     var result: ReservedInstancesConfiguration = undefined;
     result.availability_zone = null;
     result.availability_zone_id = null;
@@ -24727,6 +24739,7 @@ pub fn deserializeReservedInstancesModificationResult(reader: *aws.xml.Reader, a
 }
 
 pub fn deserializeReservedInstancesOffering(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ReservedInstancesOffering {
+    @setEvalBranchQuota(2000);
     var result: ReservedInstancesOffering = undefined;
     result.availability_zone = null;
     result.availability_zone_id = null;
@@ -24835,6 +24848,7 @@ pub fn deserializeResponseError(reader: *aws.xml.Reader, alloc: std.mem.Allocato
 }
 
 pub fn deserializeResponseLaunchTemplateData(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ResponseLaunchTemplateData {
+    @setEvalBranchQuota(2000);
     var result: ResponseLaunchTemplateData = undefined;
     result.block_device_mappings = null;
     result.capacity_reservation_specification = null;
@@ -26547,6 +26561,7 @@ pub fn deserializeSpotDatafeedSubscription(reader: *aws.xml.Reader, alloc: std.m
 }
 
 pub fn deserializeSpotFleetLaunchSpecification(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SpotFleetLaunchSpecification {
+    @setEvalBranchQuota(2000);
     var result: SpotFleetLaunchSpecification = undefined;
     result.addressing_type = null;
     result.block_device_mappings = null;
@@ -27023,6 +27038,7 @@ pub fn deserializeSpotPlacementScore(reader: *aws.xml.Reader, alloc: std.mem.All
 }
 
 pub fn deserializeSpotPrice(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SpotPrice {
+    @setEvalBranchQuota(2000);
     var result: SpotPrice = undefined;
     result.availability_zone = null;
     result.availability_zone_id = null;

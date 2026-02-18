@@ -444,6 +444,40 @@ class SerdeGenerator(
         }
     }
 
+    /**
+     * Returns the number of variants in an enum-like shape, or 0 if not an enum.
+     * Used to decide whether to emit @setEvalBranchQuota.
+     */
+    private fun enumVariantCount(shape: Shape): Int {
+        return when (shape) {
+            is EnumShape -> shape.enumValues.size
+            is IntEnumShape -> shape.enumValues.size
+            is StringShape -> if (shape.hasTrait(EnumTrait::class.java))
+                shape.getTrait(EnumTrait::class.java).get().values.size
+            else 0
+            else -> 0
+        }
+    }
+
+    /**
+     * Computes the total stringToEnum branch cost for a struct's members.
+     * Each enum field costs (variant count) branches during comptime evaluation.
+     */
+    private fun totalEnumBranchCost(shape: StructureShape): Int {
+        return shape.allMembers.values.sumOf { member ->
+            val target = model.expectShape(member.target)
+            when {
+                isEnumType(target) -> enumVariantCount(target)
+                // List members whose element type is an enum also cost branches
+                target is ListShape -> {
+                    val elem = model.expectShape(target.member.target)
+                    if (isEnumType(elem)) enumVariantCount(elem) else 0
+                }
+                else -> 0
+            }
+        }
+    }
+
     private fun writeStructDeserializer(writer: ZigWriter, shape: StructureShape) {
         val typeName = shape.id.name
         val fnName = "deserialize$typeName"
@@ -454,6 +488,18 @@ class SerdeGenerator(
             "pub fn \$L(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !\$L {",
             fnName, typeName,
         )
+
+        // Zig's default comptime branch quota is 1000. Large enums (e.g. EC2 InstanceType
+        // with 1170+ variants) exceed this in std.meta.stringToEnum's inline for loop.
+        // Emit @setEvalBranchQuota when the total enum branch cost across all members
+        // would exceed the default limit.
+        val branchCost = totalEnumBranchCost(shape)
+        if (branchCost > 500) {
+            // Round up to the next power of ten above the cost, minimum 2000.
+            val quota = maxOf(2000, (branchCost / 1000 + 1) * 1000)
+            writer.write("@setEvalBranchQuota(\$L);", quota)
+        }
+
         if (!needsAlloc) {
             writer.write("_ = alloc;")
         }
