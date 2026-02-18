@@ -16,8 +16,8 @@
 
     .dependencies = .{
         .zest = .{
-            .url = "git+https://github.com/cloudboss/zest#9c7afe2d8a99620c8c7351c4ceda68da7d5ade64",
-            .hash = "zest-0.1.0-2zk2nkQgAAA5KJn4xngp-phdFTPgTmPCP04kCdelH6pP",
+            .url = "git+https://github.com/cloudboss/zest#7b3397bf606b4ae60996438085e9bd84a5afa0be",
+            .hash = "zest-0.1.0-2zk2niBDAADQEyo3Hw9t9FtL8Yks0GPHF08Vl8aGJ9qR",
         },
     },
 }
