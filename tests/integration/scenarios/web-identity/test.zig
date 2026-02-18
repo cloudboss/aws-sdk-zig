@@ -88,3 +88,57 @@ test "web identity credentials include future expiration timestamp" {
     try std.testing.expect(creds.expiration != null);
     try std.testing.expect(creds.expiration.? > 0);
 }
+
+test "web identity credentials have non-empty session token" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    const token_path = "/tmp/web-identity-token";
+
+    var provider = aws.web_identity.WebIdentityProvider{
+        .role_arn = "arn:aws:iam::000000000000:role/web-identity-test-role",
+        .token_file = token_path,
+        .session_name = "session-token-test",
+        .region = "us-east-1",
+        .endpoint_url = endpoint_url,
+    };
+
+    const creds = try provider.getCredentials(allocator);
+    defer {
+        allocator.free(creds.access_key_id);
+        allocator.free(creds.secret_access_key);
+        if (creds.session_token) |t| allocator.free(t);
+    }
+
+    try std.testing.expect(creds.session_token != null);
+    try std.testing.expect(creds.session_token.?.len > 0);
+}
+
+test "web identity access key differs from static credentials" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    const token_path = "/tmp/web-identity-token";
+
+    var provider = aws.web_identity.WebIdentityProvider{
+        .role_arn = "arn:aws:iam::000000000000:role/web-identity-test-role",
+        .token_file = token_path,
+        .session_name = "key-diff-test",
+        .region = "us-east-1",
+        .endpoint_url = endpoint_url,
+    };
+
+    const creds = try provider.getCredentials(allocator);
+    defer {
+        allocator.free(creds.access_key_id);
+        allocator.free(creds.secret_access_key);
+        if (creds.session_token) |t| allocator.free(t);
+    }
+
+    // Web identity assumed role credentials differ from static "test" key
+    try std.testing.expect(!std.mem.eql(u8, creds.access_key_id, "test"));
+}
