@@ -182,3 +182,126 @@ test "SigV4 signing includes session token header when present" {
     // Response should contain GetCallerIdentityResult
     try std.testing.expect(std.mem.indexOf(u8, response.body, "GetCallerIdentityResult") != null);
 }
+
+test "SigV4 signature includes x-amz-date header" {
+    const allocator = std.testing.allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const sign_alloc = arena.allocator();
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+    const endpoint = parseEndpoint(endpoint_url);
+
+    var request = aws.http.Request.init(endpoint.host);
+    defer request.deinit(sign_alloc);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = endpoint.tls;
+    request.port = endpoint.port;
+    request.body = "Action=GetCallerIdentity&Version=2011-06-15";
+    try request.headers.put(sign_alloc, "content-type", "application/x-www-form-urlencoded");
+
+    const creds = aws.Credentials{
+        .access_key_id = "test",
+        .secret_access_key = "test",
+    };
+    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+
+    // x-amz-date format: YYYYMMDDTHHMMSSZ = 16 characters
+    const date_header = request.headers.get("x-amz-date");
+    try std.testing.expect(date_header != null);
+    try std.testing.expectEqual(@as(usize, 16), date_header.?.len);
+}
+
+test "SigV4 signature includes x-amz-content-sha256 header" {
+    const allocator = std.testing.allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const sign_alloc = arena.allocator();
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+    const endpoint = parseEndpoint(endpoint_url);
+
+    var request = aws.http.Request.init(endpoint.host);
+    defer request.deinit(sign_alloc);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = endpoint.tls;
+    request.port = endpoint.port;
+    request.body = "Action=GetCallerIdentity&Version=2011-06-15";
+    try request.headers.put(sign_alloc, "content-type", "application/x-www-form-urlencoded");
+
+    const creds = aws.Credentials{
+        .access_key_id = "test",
+        .secret_access_key = "test",
+    };
+    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+
+    // SHA-256 hex digest = 64 characters
+    const sha256_header = request.headers.get("x-amz-content-sha256");
+    try std.testing.expect(sha256_header != null);
+    try std.testing.expectEqual(@as(usize, 64), sha256_header.?.len);
+}
+
+test "SigV4 Authorization header starts with AWS4-HMAC-SHA256" {
+    const allocator = std.testing.allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const sign_alloc = arena.allocator();
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+    const endpoint = parseEndpoint(endpoint_url);
+
+    var request = aws.http.Request.init(endpoint.host);
+    defer request.deinit(sign_alloc);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = endpoint.tls;
+    request.port = endpoint.port;
+    request.body = "Action=GetCallerIdentity&Version=2011-06-15";
+    try request.headers.put(sign_alloc, "content-type", "application/x-www-form-urlencoded");
+
+    const creds = aws.Credentials{
+        .access_key_id = "test",
+        .secret_access_key = "test",
+    };
+    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+
+    const auth_header = request.headers.get("authorization");
+    try std.testing.expect(auth_header != null);
+    try std.testing.expect(std.mem.startsWith(u8, auth_header.?, "AWS4-HMAC-SHA256 "));
+}
+
+test "SigV4 signed GET request with empty body succeeds" {
+    const allocator = std.testing.allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const sign_alloc = arena.allocator();
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+    const endpoint = parseEndpoint(endpoint_url);
+
+    var request = aws.http.Request.init(endpoint.host);
+    defer request.deinit(sign_alloc);
+    request.method = .GET;
+    request.path = "/_localstack/health";
+    request.tls = endpoint.tls;
+    request.port = endpoint.port;
+
+    const creds = aws.Credentials{
+        .access_key_id = "test",
+        .secret_access_key = "test",
+    };
+    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "s3");
+
+    var client = aws.http.HttpClient.initWithOptions(allocator, .{ .keep_alive = false });
+    defer client.deinit();
+    var response = try client.sendRequest(&request);
+    defer response.deinit();
+
+    try std.testing.expect(response.isSuccess());
+}
