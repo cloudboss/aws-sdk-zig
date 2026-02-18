@@ -1,7 +1,7 @@
 const std = @import("std");
 const aws = @import("aws");
 
-test "process provider executes command and returns credentials" {
+test "process provider executes command returns credentials" {
     const allocator = std.testing.allocator;
 
     var provider = aws.process_creds.ProcessProvider{
@@ -96,5 +96,34 @@ test "process provider returns error for malformed JSON output" {
     var cp = aws.CredentialsProvider{ .process = provider };
     _ = &cp;
     const result = cp.getCredentials(allocator);
+    try std.testing.expectError(error.CredentialsNotFound, result);
+}
+
+test "process provider credentials have future expiration" {
+    const allocator = std.testing.allocator;
+
+    var provider = aws.process_creds.ProcessProvider{
+        .command = "/tmp/cred-helper.sh",
+    };
+
+    const creds = try provider.getCredentials(allocator);
+    defer {
+        allocator.free(creds.access_key_id);
+        allocator.free(creds.secret_access_key);
+        if (creds.session_token) |t| allocator.free(t);
+    }
+
+    try std.testing.expect(creds.expiration != null);
+    try std.testing.expect(creds.expiration.? > 0);
+}
+
+test "process provider with missing command returns error" {
+    const provider = aws.process_creds.ProcessProvider{
+        .command = "/tmp/nonexistent-cred-helper-xyz.sh",
+    };
+
+    var cp = aws.CredentialsProvider{ .process = provider };
+    _ = &cp;
+    const result = cp.getCredentials(std.testing.allocator);
     try std.testing.expectError(error.CredentialsNotFound, result);
 }
