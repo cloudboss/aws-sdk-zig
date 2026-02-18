@@ -63,3 +63,34 @@ test "getFunction returns ResourceNotFoundException for missing function" {
         },
     }
 }
+
+test "GetAccountSettings returns Lambda account limits" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = lambda.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    var result = try lambda.get_account_settings.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer result.deinit();
+
+    // Verify account_limit is present
+    const account_limit = result.account_limit orelse return error.MissingAccountLimit;
+
+    // Verify required fields are non-null
+    _ = account_limit.total_code_size orelse return error.MissingTotalCodeSize;
+    _ = account_limit.concurrent_executions orelse return error.MissingConcurrentExecutions;
+
+    try std.testing.expect(true);
+}

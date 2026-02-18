@@ -128,3 +128,57 @@ test "HTTP client connects to LocalStack" {
 
     try std.testing.expect(response.isSuccess());
 }
+
+test "SigV4 signing includes session token header when present" {
+    const allocator = std.testing.allocator;
+
+    // Use arena for signing allocations (signing puts owned strings into headers)
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const sign_alloc = arena.allocator();
+
+    // Get endpoint from environment (set by run.sh)
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    const endpoint = parseEndpoint(endpoint_url);
+
+    // Build a GetCallerIdentity request
+    const body = "Action=GetCallerIdentity&Version=2011-06-15";
+
+    var request = aws.http.Request.init(endpoint.host);
+    defer request.deinit(sign_alloc);
+
+    request.method = .POST;
+    request.path = "/";
+    request.tls = endpoint.tls;
+    request.port = endpoint.port;
+    request.body = body;
+
+    try request.headers.put(sign_alloc, "content-type", "application/x-www-form-urlencoded");
+
+    // Sign with test credentials that include a session token
+    const creds = aws.Credentials{
+        .access_key_id = "test",
+        .secret_access_key = "test",
+        .session_token = "test-session-token",
+    };
+    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+
+    // Verify the session token header was added
+    const token_header = request.headers.get("x-amz-security-token");
+    try std.testing.expect(token_header != null);
+    try std.testing.expectEqualStrings("test-session-token", token_header.?);
+
+    // Send the request to verify LocalStack accepts it
+    var client = aws.http.HttpClient.initWithOptions(allocator, .{ .keep_alive = false });
+    defer client.deinit();
+
+    var response = try client.sendRequest(&request);
+    defer response.deinit();
+
+    // Verify success
+    try std.testing.expect(response.isSuccess());
+    // Response should contain GetCallerIdentityResult
+    try std.testing.expect(std.mem.indexOf(u8, response.body, "GetCallerIdentityResult") != null);
+}

@@ -58,3 +58,16 @@ test "IMDS client fills diagnostic on error" {
     try std.testing.expectEqual(@as(u16, 404), diag.http_status);
     try std.testing.expectEqualStrings("metadata request failed", diag.message);
 }
+
+test "IMDS client retrieves identity document fields" {
+    const allocator = std.testing.allocator;
+    var client = try aws.imds.Client.init(allocator, .{});
+    defer client.deinit();
+
+    const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});
+    defer allocator.free(doc);
+
+    try std.testing.expect(std.mem.indexOf(u8, doc, "instanceId") != null);
+    try std.testing.expect(std.mem.indexOf(u8, doc, "region") != null);
+    try std.testing.expect(std.mem.indexOf(u8, doc, "accountId") != null);
+}

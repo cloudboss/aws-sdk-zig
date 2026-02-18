@@ -71,3 +71,30 @@ test "process provider works via CredentialsProvider union" {
 
     try std.testing.expect(creds.access_key_id.len > 0);
 }
+
+test "process provider returns error for malformed JSON output" {
+    const allocator = std.testing.allocator;
+
+    // Create a script that outputs invalid JSON
+    const script_path = "/tmp/cred-helper-badjson.sh";
+    const script_content = "#!/bin/sh\necho '{broken'\n";
+
+    var file = try std.fs.cwd().createFile(script_path, .{});
+    defer file.close();
+    try file.writeAll(script_content);
+
+    // Make the script executable using chmod command
+    var chmod_child = std.process.Child.init(&.{ "chmod", "+x", script_path }, allocator);
+    _ = try chmod_child.spawn();
+    _ = try chmod_child.wait();
+
+    // Create provider with the malformed JSON script
+    const provider = aws.process_creds.ProcessProvider{
+        .command = script_path,
+    };
+
+    var cp = aws.CredentialsProvider{ .process = provider };
+    _ = &cp;
+    const result = cp.getCredentials(allocator);
+    try std.testing.expectError(error.CredentialsNotFound, result);
+}

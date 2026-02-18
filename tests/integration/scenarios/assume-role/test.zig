@@ -105,3 +105,37 @@ test "assume role works via CredentialsProvider union" {
 
     try std.testing.expect(creds.access_key_id.len > 0);
 }
+
+test "assumed role session token has substantial length" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var source = aws.CredentialsProvider{
+        .static = .{
+            .access_key_id = "test",
+            .secret_access_key = "test",
+        },
+    };
+
+    var provider = aws.assume_role.AssumeRoleProvider{
+        .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
+        .session_name = "verify-session-name",
+        .external_id = null,
+        .region = "us-east-1",
+        .source_provider = &source,
+        .endpoint_url = endpoint_url,
+    };
+
+    const creds = try provider.getCredentials(allocator);
+    defer {
+        allocator.free(creds.access_key_id);
+        allocator.free(creds.secret_access_key);
+        if (creds.session_token) |t| allocator.free(t);
+    }
+
+    // Verify session token is non-null and has substantial length
+    try std.testing.expect(creds.session_token != null);
+    try std.testing.expect(creds.session_token.?.len > 20);
+}
