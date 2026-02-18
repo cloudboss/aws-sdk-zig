@@ -328,3 +328,330 @@ test "waitUntilBucketExists succeeds after CreateBucket" {
         defer result.deinit();
     }
 }
+
+test "HeadObject returns metadata for existing object" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    const bucket_name = "sdk-zig-s3-head-object";
+    const object_key = "test-object.txt";
+    const object_body = "head object test content";
+
+    // CreateBucket
+    {
+        var result = try s3.create_bucket.execute(
+            &client,
+            .{ .bucket = bucket_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // PutObject with content-type
+    {
+        var result = try s3.put_object.execute(
+            &client,
+            .{
+                .bucket = bucket_name,
+                .key = object_key,
+                .body = object_body,
+                .content_type = "text/plain",
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // HeadObject -- verify metadata
+    {
+        var result = try s3.head_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = object_key },
+            .{},
+        );
+        defer result.deinit();
+
+        const content_length = result.content_length orelse
+            return error.MissingContentLength;
+        try std.testing.expect(content_length > 0);
+
+        const content_type = result.content_type orelse
+            return error.MissingContentType;
+        try std.testing.expect(
+            std.mem.startsWith(u8, content_type, "text/plain"),
+        );
+    }
+
+    // Cleanup
+    {
+        var result = try s3.delete_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = object_key },
+            .{},
+        );
+        defer result.deinit();
+    }
+    {
+        var result = try s3.delete_bucket.execute(
+            &client,
+            .{ .bucket = bucket_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+}
+
+test "CopyObject duplicates object to new key" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    const bucket_name = "sdk-zig-s3-copy-object";
+    const source_key = "source.txt";
+    const dest_key = "copy.txt";
+    const object_body = "original content";
+
+    // CreateBucket
+    {
+        var result = try s3.create_bucket.execute(
+            &client,
+            .{ .bucket = bucket_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // PutObject -- source
+    {
+        var result = try s3.put_object.execute(
+            &client,
+            .{
+                .bucket = bucket_name,
+                .key = source_key,
+                .body = object_body,
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // CopyObject
+    {
+        var result = try s3.copy_object.execute(
+            &client,
+            .{
+                .bucket = bucket_name,
+                .key = dest_key,
+                .copy_source = bucket_name ++ "/" ++ source_key,
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // GetObject on copy -- verify body matches original
+    {
+        var result = try s3.get_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = dest_key },
+            .{},
+        );
+        defer result.deinit();
+
+        const body = try result.body.readAll(allocator, 10 * 1024 * 1024);
+        defer allocator.free(body);
+        try std.testing.expectEqualStrings(object_body, body);
+    }
+
+    // Cleanup -- delete both keys then bucket
+    {
+        var result = try s3.delete_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = source_key },
+            .{},
+        );
+        defer result.deinit();
+    }
+    {
+        var result = try s3.delete_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = dest_key },
+            .{},
+        );
+        defer result.deinit();
+    }
+    {
+        var result = try s3.delete_bucket.execute(
+            &client,
+            .{ .bucket = bucket_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+}
+
+test "DeleteObjects removes multiple objects in one call" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    const bucket_name = "sdk-zig-s3-delete-objects";
+    const keys = [_][]const u8{ "obj-a", "obj-b", "obj-c" };
+
+    // CreateBucket
+    {
+        var result = try s3.create_bucket.execute(
+            &client,
+            .{ .bucket = bucket_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // PutObject for each key
+    for (keys) |key| {
+        var result = try s3.put_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = key, .body = "data" },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // DeleteObjects -- batch delete all 3
+    {
+        var result = try s3.delete_objects.execute(
+            &client,
+            .{
+                .bucket = bucket_name,
+                .delete = .{
+                    .objects = &.{
+                        .{ .key = "obj-a", .e_tag = null, .last_modified_time = null, .size = null, .version_id = null },
+                        .{ .key = "obj-b", .e_tag = null, .last_modified_time = null, .size = null, .version_id = null },
+                        .{ .key = "obj-c", .e_tag = null, .last_modified_time = null, .size = null, .version_id = null },
+                    },
+                    .quiet = null,
+                },
+            },
+            .{},
+        );
+        defer result.deinit();
+
+        const deleted = result.deleted orelse
+            return error.MissingDeletedList;
+        try std.testing.expectEqual(@as(usize, 3), deleted.len);
+    }
+
+    // Cleanup -- bucket only (objects already deleted)
+    {
+        var result = try s3.delete_bucket.execute(
+            &client,
+            .{ .bucket = bucket_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+}
+
+test "PutObject and GetObject with special characters in key" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = s3.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    const bucket_name = "sdk-zig-s3-special-key";
+    const object_key = "path/to/my file (1).txt";
+    const object_body = "special key content";
+
+    // CreateBucket
+    {
+        var result = try s3.create_bucket.execute(
+            &client,
+            .{ .bucket = bucket_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // PutObject with special-character key
+    {
+        var result = try s3.put_object.execute(
+            &client,
+            .{
+                .bucket = bucket_name,
+                .key = object_key,
+                .body = object_body,
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // GetObject -- verify round-trip with special characters
+    {
+        var result = try s3.get_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = object_key },
+            .{},
+        );
+        defer result.deinit();
+
+        const body = try result.body.readAll(allocator, 10 * 1024 * 1024);
+        defer allocator.free(body);
+        try std.testing.expectEqualStrings(object_body, body);
+    }
+
+    // Cleanup
+    {
+        var result = try s3.delete_object.execute(
+            &client,
+            .{ .bucket = bucket_name, .key = object_key },
+            .{},
+        );
+        defer result.deinit();
+    }
+    {
+        var result = try s3.delete_bucket.execute(
+            &client,
+            .{ .bucket = bucket_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+}

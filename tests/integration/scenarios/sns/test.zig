@@ -134,3 +134,177 @@ test "Subscribe SQS queue to SNS topic and receive message" {
         defer r.deinit();
     }
 }
+
+test "ListTopics includes created topic" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = sns.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    // --- CreateTopic ---
+    var create_result = try sns.create_topic.execute(
+        &client,
+        .{ .name = "sdk-zig-sns-list-topics" },
+        .{},
+    );
+    defer create_result.deinit();
+
+    const topic_arn = create_result.topic_arn orelse return error.MissingTopicArn;
+
+    // --- ListTopics ---
+    var list_result = try sns.list_topics.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer list_result.deinit();
+
+    const topics = list_result.topics orelse return error.MissingTopics;
+    var found = false;
+    for (topics) |topic| {
+        if (topic.topic_arn) |arn| {
+            if (std.mem.eql(u8, arn, topic_arn)) {
+                found = true;
+                break;
+            }
+        }
+    }
+    try std.testing.expect(found);
+
+    // --- Cleanup ---
+    {
+        var r = try sns.delete_topic.execute(&client, .{ .topic_arn = topic_arn }, .{});
+        defer r.deinit();
+    }
+}
+
+test "Publish with subject sets message_id" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = sns.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    // --- CreateTopic ---
+    var create_result = try sns.create_topic.execute(
+        &client,
+        .{ .name = "sdk-zig-sns-publish-subject" },
+        .{},
+    );
+    defer create_result.deinit();
+
+    const topic_arn = create_result.topic_arn orelse return error.MissingTopicArn;
+
+    // --- Publish with subject ---
+    var pub_result = try sns.publish.execute(
+        &client,
+        .{
+            .topic_arn = topic_arn,
+            .message = "hello",
+            .subject = "test subject",
+        },
+        .{},
+    );
+    defer pub_result.deinit();
+
+    const message_id = pub_result.message_id orelse return error.MissingMessageId;
+    try std.testing.expect(message_id.len > 0);
+
+    // --- Cleanup ---
+    {
+        var r = try sns.delete_topic.execute(&client, .{ .topic_arn = topic_arn }, .{});
+        defer r.deinit();
+    }
+}
+
+test "ListSubscriptions returns subscription after Subscribe" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var sns_client = sns.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer sns_client.deinit();
+
+    var sqs_client = sqs.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer sqs_client.deinit();
+
+    // --- CreateQueue (SQS) ---
+    var queue_result = try sqs.create_queue.execute(
+        &sqs_client,
+        .{ .queue_name = "sdk-zig-sns-sub-list-queue" },
+        .{},
+    );
+    defer queue_result.deinit();
+
+    const queue_url = queue_result.queue_url orelse return error.MissingQueueUrl;
+    const queue_arn = "arn:aws:sqs:us-east-1:000000000000:sdk-zig-sns-sub-list-queue";
+
+    // --- CreateTopic ---
+    var topic_result = try sns.create_topic.execute(
+        &sns_client,
+        .{ .name = "sdk-zig-sns-sub-list-topic" },
+        .{},
+    );
+    defer topic_result.deinit();
+
+    const topic_arn = topic_result.topic_arn orelse return error.MissingTopicArn;
+
+    // --- Subscribe ---
+    var sub_result = try sns.subscribe.execute(
+        &sns_client,
+        .{ .topic_arn = topic_arn, .protocol = "sqs", .endpoint = queue_arn },
+        .{},
+    );
+    defer sub_result.deinit();
+
+    // --- ListSubscriptions ---
+    var list_result = try sns.list_subscriptions.execute(
+        &sns_client,
+        .{},
+        .{},
+    );
+    defer list_result.deinit();
+
+    const subscriptions = list_result.subscriptions orelse
+        return error.MissingSubscriptions;
+    try std.testing.expect(subscriptions.len > 0);
+
+    // --- Cleanup ---
+    {
+        var r = try sns.delete_topic.execute(
+            &sns_client,
+            .{ .topic_arn = topic_arn },
+            .{},
+        );
+        defer r.deinit();
+    }
+    {
+        var r = try sqs.delete_queue.execute(
+            &sqs_client,
+            .{ .queue_url = queue_url },
+            .{},
+        );
+        defer r.deinit();
+    }
+}

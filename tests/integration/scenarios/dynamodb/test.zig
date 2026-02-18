@@ -314,3 +314,313 @@ test "DescribeTable returns ResourceNotFoundException for missing table" {
         },
     }
 }
+
+test "Query returns items matching key condition" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = dynamodb.Client.initWithOptions(
+        allocator,
+        &cfg,
+        .{ .keep_alive = false },
+    );
+    defer client.deinit();
+
+    const table_name = "sdk-zig-ddb-query";
+
+    // Create table with composite key (pk + sk)
+    {
+        var result = try dynamodb.create_table.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .key_schema = &.{
+                    .{ .attribute_name = "pk", .key_type = .hash },
+                    .{ .attribute_name = "sk", .key_type = .range },
+                },
+                .attribute_definitions = &.{
+                    .{ .attribute_name = "pk", .attribute_type = .s },
+                    .{ .attribute_name = "sk", .attribute_type = .s },
+                },
+                .billing_mode = .pay_per_request,
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // PutItem 3 items with same pk, different sk
+    for ([_][]const u8{ "sk-1", "sk-2", "sk-3" }) |sk| {
+        var result = try dynamodb.put_item.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .item = &.{
+                    .{ .key = "pk", .value = .{ .s = "partition-1" } },
+                    .{ .key = "sk", .value = .{ .s = sk } },
+                },
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // Query by partition key
+    {
+        var result = try dynamodb.query.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .key_condition_expression = "pk = :pk_val",
+                .expression_attribute_values = &.{
+                    .{
+                        .key = ":pk_val",
+                        .value = .{ .s = "partition-1" },
+                    },
+                },
+            },
+            .{},
+        );
+        defer result.deinit();
+
+        const count = result.count orelse return error.MissingCount;
+        try std.testing.expectEqual(@as(i32, 3), count);
+    }
+
+    // Cleanup
+    {
+        var result = try dynamodb.delete_table.execute(
+            &client,
+            .{ .table_name = table_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+}
+
+test "UpdateItem modifies existing item attribute" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = dynamodb.Client.initWithOptions(
+        allocator,
+        &cfg,
+        .{ .keep_alive = false },
+    );
+    defer client.deinit();
+
+    const table_name = "sdk-zig-ddb-update";
+
+    // Create table
+    {
+        var result = try dynamodb.create_table.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .key_schema = &.{
+                    .{ .attribute_name = "pk", .key_type = .hash },
+                },
+                .attribute_definitions = &.{
+                    .{ .attribute_name = "pk", .attribute_type = .s },
+                },
+                .billing_mode = .pay_per_request,
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // PutItem with initial name
+    {
+        var result = try dynamodb.put_item.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .item = &.{
+                    .{ .key = "pk", .value = .{ .s = "key-1" } },
+                    .{ .key = "name", .value = .{ .s = "Alice" } },
+                },
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // UpdateItem: change name from Alice to Bob
+    {
+        var result = try dynamodb.update_item.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .key = &.{
+                    .{ .key = "pk", .value = .{ .s = "key-1" } },
+                },
+                .update_expression = "SET #n = :val",
+                .expression_attribute_names = &.{
+                    .{ .key = "#n", .value = "name" },
+                },
+                .expression_attribute_values = &.{
+                    .{ .key = ":val", .value = .{ .s = "Bob" } },
+                },
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // GetItem and verify updated value
+    {
+        var result = try dynamodb.get_item.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .key = &.{
+                    .{ .key = "pk", .value = .{ .s = "key-1" } },
+                },
+            },
+            .{},
+        );
+        defer result.deinit();
+
+        const item = result.item orelse return error.MissingItem;
+        var found_name = false;
+        for (item) |entry| {
+            if (std.mem.eql(u8, entry.key, "name")) {
+                switch (entry.value) {
+                    .s => |v| {
+                        try std.testing.expectEqualStrings(
+                            "Bob",
+                            v orelse return error.MissingValue,
+                        );
+                        found_name = true;
+                    },
+                    else => return error.UnexpectedType,
+                }
+            }
+        }
+        try std.testing.expect(found_name);
+    }
+
+    // Cleanup
+    {
+        var result = try dynamodb.delete_table.execute(
+            &client,
+            .{ .table_name = table_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+}
+
+test "BatchWriteItem writes multiple items" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = dynamodb.Client.initWithOptions(
+        allocator,
+        &cfg,
+        .{ .keep_alive = false },
+    );
+    defer client.deinit();
+
+    const table_name = "sdk-zig-ddb-batch";
+
+    // Create table
+    {
+        var result = try dynamodb.create_table.execute(
+            &client,
+            .{
+                .table_name = table_name,
+                .key_schema = &.{
+                    .{ .attribute_name = "pk", .key_type = .hash },
+                },
+                .attribute_definitions = &.{
+                    .{ .attribute_name = "pk", .attribute_type = .s },
+                },
+                .billing_mode = .pay_per_request,
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // BatchWriteItem: put 3 items at once
+    {
+        var result = try dynamodb.batch_write_item.execute(
+            &client,
+            .{
+                .request_items = &.{
+                    .{
+                        .key = table_name,
+                        .value = &.{
+                            .{
+                                .delete_request = null,
+                                .put_request = .{ .item = &.{
+                                    .{ .key = "pk", .value = .{ .s = "batch-1" } },
+                                } },
+                            },
+                            .{
+                                .delete_request = null,
+                                .put_request = .{ .item = &.{
+                                    .{ .key = "pk", .value = .{ .s = "batch-2" } },
+                                } },
+                            },
+                            .{
+                                .delete_request = null,
+                                .put_request = .{ .item = &.{
+                                    .{ .key = "pk", .value = .{ .s = "batch-3" } },
+                                } },
+                            },
+                        },
+                    },
+                },
+            },
+            .{},
+        );
+        defer result.deinit();
+    }
+
+    // Scan to verify all 3 items exist
+    {
+        var result = try dynamodb.scan.execute(
+            &client,
+            .{ .table_name = table_name },
+            .{},
+        );
+        defer result.deinit();
+
+        const count = result.count orelse return error.MissingCount;
+        try std.testing.expectEqual(@as(i32, 3), count);
+    }
+
+    // Cleanup
+    {
+        var result = try dynamodb.delete_table.execute(
+            &client,
+            .{ .table_name = table_name },
+            .{},
+        );
+        defer result.deinit();
+    }
+}

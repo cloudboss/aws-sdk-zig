@@ -92,3 +92,169 @@ test "GetSecretValue returns error for missing secret" {
         },
     }
 }
+
+test "UpdateSecret changes stored value" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = secretsmanager.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    const secret_name = "sdk-zig-sm-update";
+
+    // --- CreateSecret ---
+    var create_result = try secretsmanager.create_secret.execute(
+        &client,
+        .{
+            .name = secret_name,
+            .secret_string = "original-value",
+            .client_request_token = "b1c2d3e4-f5a6-7890-bcde-f01234567890",
+        },
+        .{},
+    );
+    defer create_result.deinit();
+
+    // --- UpdateSecret ---
+    var update_result = try secretsmanager.update_secret.execute(
+        &client,
+        .{ .secret_id = secret_name, .secret_string = "updated-value" },
+        .{},
+    );
+    defer update_result.deinit();
+
+    // --- GetSecretValue ---
+    var get_result = try secretsmanager.get_secret_value.execute(
+        &client,
+        .{ .secret_id = secret_name },
+        .{},
+    );
+    defer get_result.deinit();
+
+    try std.testing.expectEqualStrings(
+        "updated-value",
+        get_result.secret_string orelse return error.MissingSecretString,
+    );
+
+    // --- Cleanup ---
+    var delete_result = try secretsmanager.delete_secret.execute(
+        &client,
+        .{ .secret_id = secret_name, .force_delete_without_recovery = true },
+        .{},
+    );
+    defer delete_result.deinit();
+}
+
+test "ListSecrets returns created secret" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = secretsmanager.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    const secret_name = "sdk-zig-sm-list";
+
+    // --- CreateSecret ---
+    var create_result = try secretsmanager.create_secret.execute(
+        &client,
+        .{
+            .name = secret_name,
+            .secret_string = "list-test-value",
+            .client_request_token = "c2d3e4f5-a6b7-8901-cdef-012345678901",
+        },
+        .{},
+    );
+    defer create_result.deinit();
+
+    // --- ListSecrets ---
+    var list_result = try secretsmanager.list_secrets.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer list_result.deinit();
+
+    const secret_list = list_result.secret_list orelse return error.MissingSecretList;
+    var found = false;
+    for (secret_list) |entry| {
+        if (entry.name) |name| {
+            if (std.mem.eql(u8, name, secret_name)) {
+                found = true;
+                break;
+            }
+        }
+    }
+    try std.testing.expect(found);
+
+    // --- Cleanup ---
+    var delete_result = try secretsmanager.delete_secret.execute(
+        &client,
+        .{ .secret_id = secret_name, .force_delete_without_recovery = true },
+        .{},
+    );
+    defer delete_result.deinit();
+}
+
+test "DescribeSecret returns secret metadata" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = secretsmanager.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    const secret_name = "sdk-zig-sm-describe";
+
+    // --- CreateSecret ---
+    var create_result = try secretsmanager.create_secret.execute(
+        &client,
+        .{
+            .name = secret_name,
+            .secret_string = "describe-test-value",
+            .client_request_token = "d3e4f5a6-b7c8-9012-defa-123456789012",
+        },
+        .{},
+    );
+    defer create_result.deinit();
+
+    // --- DescribeSecret ---
+    var describe_result = try secretsmanager.describe_secret.execute(
+        &client,
+        .{ .secret_id = secret_name },
+        .{},
+    );
+    defer describe_result.deinit();
+
+    try std.testing.expectEqualStrings(
+        secret_name,
+        describe_result.name orelse return error.MissingName,
+    );
+    try std.testing.expect(describe_result.arn != null);
+
+    // --- Cleanup ---
+    var delete_result = try secretsmanager.delete_secret.execute(
+        &client,
+        .{ .secret_id = secret_name, .force_delete_without_recovery = true },
+        .{},
+    );
+    defer delete_result.deinit();
+}
