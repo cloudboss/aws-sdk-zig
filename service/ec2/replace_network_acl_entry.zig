@@ -124,11 +124,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ReplaceNetworkAclEntryInput
     try aws.url.appendUrlEncoded(alloc, &body_buf, if (input.egress) "true" else "false");
     if (input.icmp_type_code) |v| {
         if (v.code) |sv| {
-            try body_buf.appendSlice(alloc, "&IcmpTypeCode.Code=");
+            try body_buf.appendSlice(alloc, "&Icmp.Code=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
         if (v.@"type") |sv| {
-            try body_buf.appendSlice(alloc, "&IcmpTypeCode.Type=");
+            try body_buf.appendSlice(alloc, "&Icmp.Type=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
     }

@@ -107,13 +107,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyManagedPrefixListInpu
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddEntries.member.{d}.Cidr=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddEntry.member.{d}.Cidr=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 try aws.url.appendUrlEncoded(alloc, &body_buf, item.cidr);
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddEntries.member.{d}.Description=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddEntry.member.{d}.Description=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.description) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -148,7 +148,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyManagedPrefixListInpu
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveEntries.member.{d}.Cidr=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveEntry.member.{d}.Cidr=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 try aws.url.appendUrlEncoded(alloc, &body_buf, item.cidr);
             }

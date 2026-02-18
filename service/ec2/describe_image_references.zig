@@ -119,7 +119,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeImageReferencesInpu
     for (input.image_ids, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageIds.member.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageId.member.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(alloc, field_prefix);
         try aws.url.appendUrlEncoded(alloc, &body_buf, item);
     }
@@ -140,7 +140,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeImageReferencesInpu
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceTypes.member.{d}.ResourceType=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.resource_type) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
@@ -151,7 +151,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeImageReferencesInpu
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceTypes.member.{d}.ResourceTypeOptions.member.{d}.OptionName=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceTypeOptions.member.{d}.OptionName=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.option_name) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_2));
@@ -162,7 +162,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeImageReferencesInpu
                             const n_2 = idx_2 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceTypes.member.{d}.ResourceTypeOptions.member.{d}.OptionValues.member.{d}=", .{n, n_1, n_2}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceTypeOptions.member.{d}.OptionValues.member.{d}=", .{n, n_1, n_2}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                             }

@@ -95,7 +95,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteTagsInput, config: *a
     for (input.resources, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Resources.member.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceId.member.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(alloc, field_prefix);
         try aws.url.appendUrlEncoded(alloc, &body_buf, item);
     }
@@ -104,7 +104,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteTagsInput, config: *a
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.item.{d}.Key=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tag.item.{d}.Key=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.key) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -112,7 +112,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteTagsInput, config: *a
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.item.{d}.Value=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tag.item.{d}.Value=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.value) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);

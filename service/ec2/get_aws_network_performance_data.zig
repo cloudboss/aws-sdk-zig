@@ -98,7 +98,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAwsNetworkPerformanceDat
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Destination=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Destination=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.destination) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -106,7 +106,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAwsNetworkPerformanceDat
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Id=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Id=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.id) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -114,7 +114,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAwsNetworkPerformanceDat
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Metric=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Metric=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.metric) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
@@ -122,7 +122,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAwsNetworkPerformanceDat
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Period=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Period=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.period) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
@@ -130,7 +130,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAwsNetworkPerformanceDat
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Source=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Source=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.source) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -138,7 +138,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAwsNetworkPerformanceDat
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQueries.member.{d}.Statistic=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DataQuery.member.{d}.Statistic=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.statistic) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));

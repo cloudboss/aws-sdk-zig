@@ -105,7 +105,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -116,7 +116,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -127,7 +127,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -138,7 +138,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -149,7 +149,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -160,7 +160,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -171,7 +171,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -184,7 +184,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -195,7 +195,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Destination.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Destination.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -210,7 +210,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -221,7 +221,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -232,7 +232,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -243,7 +243,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -254,7 +254,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -265,7 +265,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -276,7 +276,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -289,7 +289,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -300,7 +300,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.Source.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.Source.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -317,7 +317,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.ThroughResources.item.{d}.ResourceStatement.Resources.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.ThroughResources.item.{d}.ResourceStatement.Resources.item.{d}=", .{n, n_1, n_3}) catch continue;
                                     try body_buf.appendSlice(alloc, field_prefix);
                                     try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                                 }
@@ -328,7 +328,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePaths.item.{d}.ThroughResources.item.{d}.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludePath.item.{d}.ThroughResources.item.{d}.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
                                     try body_buf.appendSlice(alloc, field_prefix);
                                     try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                                 }
@@ -349,7 +349,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -360,7 +360,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -371,7 +371,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -382,7 +382,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -393,7 +393,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -404,7 +404,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -415,7 +415,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -428,7 +428,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -439,7 +439,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Destination.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Destination.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -454,7 +454,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.PacketHeaderStatement.DestinationAddresses.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -465,7 +465,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.PacketHeaderStatement.DestinationPorts.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -476,7 +476,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.PacketHeaderStatement.DestinationPrefixLists.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -487,7 +487,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.PacketHeaderStatement.Protocols.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -498,7 +498,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.PacketHeaderStatement.SourceAddresses.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -509,7 +509,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.PacketHeaderStatement.SourcePorts.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -520,7 +520,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.PacketHeaderStatement.SourcePrefixLists.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -533,7 +533,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.ResourceStatement.Resources.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -544,7 +544,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.Source.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.Source.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -561,7 +561,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.ThroughResources.item.{d}.ResourceStatement.Resources.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.ThroughResources.item.{d}.ResourceStatement.Resources.item.{d}=", .{n, n_1, n_3}) catch continue;
                                     try body_buf.appendSlice(alloc, field_prefix);
                                     try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                                 }
@@ -572,7 +572,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPaths.item.{d}.ThroughResources.item.{d}.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MatchPath.item.{d}.ThroughResources.item.{d}.ResourceStatement.ResourceTypes.item.{d}=", .{n, n_1, n_3}) catch continue;
                                     try body_buf.appendSlice(alloc, field_prefix);
                                     try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                                 }
@@ -588,7 +588,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.resource_type) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
@@ -599,7 +599,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -607,7 +607,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNetworkInsightsAccess
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);

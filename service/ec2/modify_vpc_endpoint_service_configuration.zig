@@ -120,7 +120,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointServiceCon
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddGatewayLoadBalancerArns.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddGatewayLoadBalancerArn.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -129,7 +129,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointServiceCon
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddNetworkLoadBalancerArns.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddNetworkLoadBalancerArn.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -138,7 +138,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointServiceCon
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSupportedIpAddressTypes.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSupportedIpAddressType.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -147,7 +147,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointServiceCon
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSupportedRegions.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSupportedRegion.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -164,7 +164,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointServiceCon
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveGatewayLoadBalancerArns.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveGatewayLoadBalancerArn.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -173,7 +173,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointServiceCon
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveNetworkLoadBalancerArns.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveNetworkLoadBalancerArn.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -186,7 +186,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointServiceCon
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSupportedIpAddressTypes.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSupportedIpAddressType.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -195,7 +195,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyVpcEndpointServiceCon
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSupportedRegions.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSupportedRegion.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }

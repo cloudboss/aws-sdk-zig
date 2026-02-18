@@ -17,6 +17,7 @@ import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.TimestampShape
 import software.amazon.smithy.model.shapes.UnionShape
+import software.amazon.smithy.aws.traits.protocols.Ec2QueryNameTrait
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigWriter
@@ -63,7 +64,18 @@ open class AwsQueryProtocol : ProtocolGenerator {
         // Serialize input fields
         for ((memberName, memberShape) in ctx.inputShape.allMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
-            writeFieldSerializer(writer, ctx, memberName, memberShape, targetShape, "input")
+            // EC2 Query protocol uses ec2QueryName trait for the wire name.
+            // When absent, fall back to xmlName (capitalized) which carries the
+            // correct wire name for members like Description -> GroupDescription.
+            // Final fallback is the Smithy member name itself.
+            val queryName = memberShape.getTrait(Ec2QueryNameTrait::class.java)
+                .map { it.value }
+                .orElseGet {
+                    memberShape.getTrait(XmlNameTrait::class.java)
+                        .map { it.value.replaceFirstChar { c -> c.uppercaseChar() } }
+                        .orElse(memberName)
+                }
+            writeFieldSerializer(writer, ctx, queryName, memberShape, targetShape, "input")
         }
 
         writer.blankLine()
@@ -108,7 +120,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         targetShape: Shape,
         accessor: String,
     ) {
-        val fieldName = NamingUtil.toFieldName(smithyName)
+        val fieldName = NamingUtil.toFieldName(memberShape.memberName)
 
         when {
             targetShape is StructureShape -> {

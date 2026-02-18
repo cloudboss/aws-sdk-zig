@@ -85,19 +85,19 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceExportTaskInp
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.export_to_s3_task.container_format) |sv| {
-        try body_buf.appendSlice(alloc, "&ExportToS3Task.ContainerFormat=");
+        try body_buf.appendSlice(alloc, "&ExportToS3.ContainerFormat=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
     }
     if (input.export_to_s3_task.disk_image_format) |sv| {
-        try body_buf.appendSlice(alloc, "&ExportToS3Task.DiskImageFormat=");
+        try body_buf.appendSlice(alloc, "&ExportToS3.DiskImageFormat=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
     }
     if (input.export_to_s3_task.s3_bucket) |sv| {
-        try body_buf.appendSlice(alloc, "&ExportToS3Task.S3Bucket=");
+        try body_buf.appendSlice(alloc, "&ExportToS3.S3Bucket=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
     }
     if (input.export_to_s3_task.s3_prefix) |sv| {
-        try body_buf.appendSlice(alloc, "&ExportToS3Task.S3Prefix=");
+        try body_buf.appendSlice(alloc, "&ExportToS3.S3Prefix=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
     }
     try body_buf.appendSlice(alloc, "&InstanceId=");
@@ -107,7 +107,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceExportTaskInp
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.resource_type) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
@@ -118,7 +118,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceExportTaskInp
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -126,7 +126,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateInstanceExportTaskInp
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);

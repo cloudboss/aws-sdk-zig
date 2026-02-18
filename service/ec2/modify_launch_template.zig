@@ -102,7 +102,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyLaunchTemplateInput, 
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.default_version) |v| {
-        try body_buf.appendSlice(alloc, "&DefaultVersion=");
+        try body_buf.appendSlice(alloc, "&SetDefaultVersion=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     if (input.dry_run) |v| {

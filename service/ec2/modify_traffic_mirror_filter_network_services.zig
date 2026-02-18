@@ -83,7 +83,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyTrafficMirrorFilterNe
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddNetworkServices.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddNetworkService.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -96,7 +96,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyTrafficMirrorFilterNe
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveNetworkServices.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveNetworkService.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }

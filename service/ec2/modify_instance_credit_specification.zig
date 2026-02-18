@@ -97,7 +97,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCreditSpecifi
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceCreditSpecifications.item.{d}.CpuCredits=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceCreditSpecification.item.{d}.CpuCredits=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             if (item.cpu_credits) |fv_1| {
                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -105,7 +105,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceCreditSpecifi
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceCreditSpecifications.item.{d}.InstanceId=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceCreditSpecification.item.{d}.InstanceId=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item.instance_id);
         }

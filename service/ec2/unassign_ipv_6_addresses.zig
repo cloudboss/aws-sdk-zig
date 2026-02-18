@@ -88,7 +88,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UnassignIpv6AddressesInput,
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Ipv6Prefixes.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Ipv6Prefix.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }

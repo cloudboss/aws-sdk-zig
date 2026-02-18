@@ -124,14 +124,14 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ReportInstanceStatusInput, 
     for (input.instances, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Instances.InstanceId.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceId.InstanceId.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(alloc, field_prefix);
         try aws.url.appendUrlEncoded(alloc, &body_buf, item);
     }
     for (input.reason_codes, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReasonCodes.item.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReasonCode.item.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(alloc, field_prefix);
         try aws.url.appendUrlEncoded(alloc, &body_buf, item);
     }

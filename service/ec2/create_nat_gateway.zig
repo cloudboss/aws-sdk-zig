@@ -172,7 +172,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddresses.AvailabilityZoneAddress.{d}.AllocationIds.AllocationId.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddress.AvailabilityZoneAddress.{d}.AllocationIds.AllocationId.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
@@ -180,7 +180,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddresses.AvailabilityZoneAddress.{d}.AvailabilityZone=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddress.AvailabilityZoneAddress.{d}.AvailabilityZone=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.availability_zone) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -188,7 +188,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddresses.AvailabilityZoneAddress.{d}.AvailabilityZoneId=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddress.AvailabilityZoneAddress.{d}.AvailabilityZoneId=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.availability_zone_id) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -216,7 +216,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryAllocationIds.AllocationId.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryAllocationId.AllocationId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -229,7 +229,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryPrivateIpAddresses.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryPrivateIpAddress.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }
@@ -243,7 +243,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.ResourceType=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.resource_type) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
@@ -254,7 +254,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -262,7 +262,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateNatGatewayInput, conf
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecifications.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);

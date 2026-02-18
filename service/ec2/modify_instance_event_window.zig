@@ -125,7 +125,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceEventWindowIn
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRanges.member.{d}.EndHour=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.member.{d}.EndHour=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.end_hour) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
@@ -133,7 +133,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceEventWindowIn
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRanges.member.{d}.EndWeekDay=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.member.{d}.EndWeekDay=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.end_week_day) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
@@ -141,7 +141,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceEventWindowIn
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRanges.member.{d}.StartHour=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.member.{d}.StartHour=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.start_hour) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_1}) catch "");
@@ -149,7 +149,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyInstanceEventWindowIn
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRanges.member.{d}.StartWeekDay=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.member.{d}.StartWeekDay=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.start_week_day) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));

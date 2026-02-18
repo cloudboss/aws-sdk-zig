@@ -124,7 +124,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamResourceDiscovery
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddOperatingRegions.member.{d}.RegionName=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddOperatingRegion.member.{d}.RegionName=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.region_name) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -137,7 +137,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamResourceDiscovery
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddOrganizationalUnitExclusions.member.{d}.OrganizationsEntityPath=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddOrganizationalUnitExclusion.member.{d}.OrganizationsEntityPath=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.organizations_entity_path) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -160,7 +160,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamResourceDiscovery
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveOperatingRegions.member.{d}.RegionName=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveOperatingRegion.member.{d}.RegionName=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.region_name) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -173,7 +173,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamResourceDiscovery
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveOrganizationalUnitExclusions.member.{d}.OrganizationsEntityPath=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveOrganizationalUnitExclusion.member.{d}.OrganizationsEntityPath=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.organizations_entity_path) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);

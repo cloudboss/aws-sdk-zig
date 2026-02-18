@@ -110,7 +110,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeMacModificationTask
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.Filter.{d}.Name=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.Filter.{d}.Name=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.name) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -121,7 +121,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeMacModificationTask
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.Filter.{d}.Values.item.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.Filter.{d}.Values.item.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
@@ -133,7 +133,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeMacModificationTask
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MacModificationTaskIds.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MacModificationTaskId.item.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
             try aws.url.appendUrlEncoded(alloc, &body_buf, item);
         }

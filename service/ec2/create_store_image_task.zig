@@ -95,7 +95,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateStoreImageTaskInput, 
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&S3ObjectTags.item.{d}.Key=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&S3ObjectTag.item.{d}.Key=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.key) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -103,7 +103,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateStoreImageTaskInput, 
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&S3ObjectTags.item.{d}.Value=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&S3ObjectTag.item.{d}.Value=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.value) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);

@@ -261,7 +261,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateSecurityGroupRuleDesc
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRuleDescriptions.item.{d}.Description=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRuleDescription.item.{d}.Description=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.description) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
@@ -269,7 +269,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateSecurityGroupRuleDesc
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRuleDescriptions.item.{d}.SecurityGroupRuleId=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRuleDescription.item.{d}.SecurityGroupRuleId=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
                 if (item.security_group_rule_id) |fv_1| {
                     try aws.url.appendUrlEncoded(alloc, &body_buf, fv_1);
