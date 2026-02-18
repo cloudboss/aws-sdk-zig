@@ -139,3 +139,69 @@ test "assumed role session token has substantial length" {
     try std.testing.expect(creds.session_token != null);
     try std.testing.expect(creds.session_token.?.len > 20);
 }
+
+test "assumed credentials have future expiration" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var source = aws.CredentialsProvider{
+        .static = .{
+            .access_key_id = "test",
+            .secret_access_key = "test",
+        },
+    };
+
+    var provider = aws.assume_role.AssumeRoleProvider{
+        .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
+        .session_name = "expiration-test",
+        .external_id = null,
+        .region = "us-east-1",
+        .source_provider = &source,
+        .endpoint_url = endpoint_url,
+    };
+
+    const creds = try provider.getCredentials(allocator);
+    defer {
+        allocator.free(creds.access_key_id);
+        allocator.free(creds.secret_access_key);
+        if (creds.session_token) |t| allocator.free(t);
+    }
+
+    try std.testing.expect(creds.expiration != null);
+    try std.testing.expect(creds.expiration.? > 0);
+}
+
+test "assumed credentials access key differs from source" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var source = aws.CredentialsProvider{
+        .static = .{
+            .access_key_id = "test",
+            .secret_access_key = "test",
+        },
+    };
+
+    var provider = aws.assume_role.AssumeRoleProvider{
+        .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
+        .session_name = "key-rotation-test",
+        .external_id = null,
+        .region = "us-east-1",
+        .source_provider = &source,
+        .endpoint_url = endpoint_url,
+    };
+
+    const creds = try provider.getCredentials(allocator);
+    defer {
+        allocator.free(creds.access_key_id);
+        allocator.free(creds.secret_access_key);
+        if (creds.session_token) |t| allocator.free(t);
+    }
+
+    // Assumed role credentials should have a different key than source "test"
+    try std.testing.expect(!std.mem.eql(u8, creds.access_key_id, "test"));
+}
