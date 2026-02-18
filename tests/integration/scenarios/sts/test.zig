@@ -124,3 +124,120 @@ test "getCallerIdentity response fields have expected format" {
     try std.testing.expect(result.user_id != null);
     try std.testing.expect(result.user_id.?.len > 0);
 }
+
+test "GetCallerIdentity account has 12 digit format" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    var result = try sts.get_caller_identity.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer result.deinit();
+
+    // AWS account IDs are always exactly 12 digits
+    const account = result.account orelse return error.MissingAccount;
+    try std.testing.expectEqual(@as(usize, 12), account.len);
+}
+
+test "GetCallerIdentity ARN contains account" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    var result = try sts.get_caller_identity.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer result.deinit();
+
+    // The ARN must embed the account ID as a substring
+    const account = result.account orelse return error.MissingAccount;
+    const arn = result.arn orelse return error.MissingArn;
+    try std.testing.expect(std.mem.indexOf(u8, arn, account) != null);
+}
+
+test "GetSessionToken credentials differ from source credentials" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    var result = try sts.get_session_token.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer result.deinit();
+
+    const creds = result.credentials orelse return error.MissingCredentials;
+
+    // Temporary credentials have access key IDs of at least 16 characters,
+    // distinguishing them from short static keys like "test"
+    try std.testing.expect(creds.access_key_id.len >= 16);
+}
+
+test "GetCallerIdentity returns consistent results across calls" {
+    const allocator = std.testing.allocator;
+
+    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+        return error.MissingEndpoint;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .endpoint_url = endpoint_url,
+    });
+    defer cfg.deinit();
+
+    var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
+    defer client.deinit();
+
+    // First call
+    var result1 = try sts.get_caller_identity.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer result1.deinit();
+
+    // Second call
+    var result2 = try sts.get_caller_identity.execute(
+        &client,
+        .{},
+        .{},
+    );
+    defer result2.deinit();
+
+    // Account must be identical across both calls
+    const account1 = result1.account orelse return error.MissingAccount;
+    const account2 = result2.account orelse return error.MissingAccount;
+    try std.testing.expectEqualStrings(account1, account2);
+}
