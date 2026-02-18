@@ -124,7 +124,11 @@ test "UpdateSecret changes stored value" {
     // --- UpdateSecret ---
     var update_result = try secretsmanager.update_secret.execute(
         &client,
-        .{ .secret_id = secret_name, .secret_string = "updated-value" },
+        .{
+            .secret_id = secret_name,
+            .secret_string = "updated-value",
+            .client_request_token = "c2d3e4f5-a6b7-8901-cdef-012345678901",
+        },
         .{},
     );
     defer update_result.deinit();

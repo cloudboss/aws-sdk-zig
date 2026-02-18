@@ -103,12 +103,20 @@ test "CreateSecurityGroup and DeleteSecurityGroup round-trip" {
     var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
-    // Create the security group
+    // Get the default VPC ID (LocalStack requires vpc_id even for default VPC)
+    var vpcs_result = try ec2.describe_vpcs.execute(&client, .{}, .{});
+    defer vpcs_result.deinit();
+    const vpcs = vpcs_result.vpcs orelse return error.MissingVpcs;
+    if (vpcs.len == 0) return error.NoVpcs;
+    const vpc_id = vpcs[0].vpc_id orelse return error.MissingVpcId;
+
+    // Create the security group in the default VPC
     var create_result = try ec2.create_security_group.execute(
         &client,
         .{
             .group_name = "sdk-zig-ec2-sg",
-            .description = "sdk-zig test security group",
+            .description = "sdk-zig-ec2-security-group",
+            .vpc_id = vpc_id,
         },
         .{},
     );
