@@ -71,3 +71,25 @@ test "IMDS client retrieves identity document fields" {
     try std.testing.expect(std.mem.indexOf(u8, doc, "region") != null);
     try std.testing.expect(std.mem.indexOf(u8, doc, "accountId") != null);
 }
+
+test "IMDS identity document includes availability zone" {
+    const allocator = std.testing.allocator;
+    var client = try aws.imds.Client.init(allocator, .{});
+    defer client.deinit();
+
+    const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});
+    defer allocator.free(doc);
+
+    try std.testing.expect(std.mem.indexOf(u8, doc, "availabilityZone") != null);
+}
+
+test "IMDS identity document includes instance type" {
+    const allocator = std.testing.allocator;
+    var client = try aws.imds.Client.init(allocator, .{});
+    defer client.deinit();
+
+    const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});
+    defer allocator.free(doc);
+
+    try std.testing.expect(std.mem.indexOf(u8, doc, "instanceType") != null);
+}
