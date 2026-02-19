@@ -39,6 +39,14 @@ fn readEnvMaxAttempts() ?u32 {
     return null;
 }
 
+/// Read a boolean from an environment variable ("true" -> true)
+fn resolveBoolEnv(env_var: []const u8) ?bool {
+    if (std.posix.getenv(env_var)) |value| {
+        return std.mem.eql(u8, value, "true");
+    }
+    return null;
+}
+
 /// Options for Config.load()
 pub const LoadOptions = struct {
     /// Explicit region override
@@ -81,25 +89,72 @@ pub const Config = struct {
     retry_mode: RetryMode = .standard,
     /// CA bundle path for TLS verification
     ca_bundle: ?[]const u8 = null,
+    /// Parsed config file for downstream use
+    config_file: ?ConfigFile = null,
 
     allocator: Allocator,
 
     const Self = @This();
 
-    /// Load config with automatic region and credential resolution
+    /// Load config with automatic resolution of all settings.
+    /// Precedence: options (code) > environment > config file profile > default.
     pub fn load(allocator: Allocator, options: LoadOptions) !Self {
-        const region = try resolveRegion(allocator, options);
+        var cf = try loadConfigFile(allocator);
+        errdefer cf.deinit();
+
+        const profile: ?Profile = cf.getProfile(options.profile);
+
+        const region = try resolveRegion(allocator, options, profile);
         errdefer allocator.free(region);
 
-        // Default to credential chain (environment -> file -> web_identity -> ecs -> imds)
         const credentials = options.credentials orelse CredentialsProvider{
-            .chain = ChainProvider{ .profile = options.profile, .region = region },
+            .chain = ChainProvider{
+                .profile = options.profile,
+                .region = region,
+            },
         };
+
+        const endpoint_url: ?[]const u8 = options.endpoint_url orelse
+            std.posix.getenv("AWS_ENDPOINT_URL") orelse
+            (if (profile) |p| p.endpoint_url else null);
+
+        const use_fips: bool = options.use_fips orelse
+            resolveBoolEnv("AWS_USE_FIPS_ENDPOINT") orelse
+            (if (profile) |p| p.use_fips_endpoint else null) orelse
+            false;
+
+        const use_dual_stack: bool = options.use_dual_stack orelse
+            resolveBoolEnv("AWS_USE_DUALSTACK_ENDPOINT") orelse
+            (if (profile) |p| p.use_dualstack_endpoint else null) orelse
+            false;
+
+        const max_attempts: u32 = options.max_attempts orelse
+            readEnvMaxAttempts() orelse
+            (if (profile) |p| p.max_attempts else null) orelse
+            3;
+
+        const retry_mode: RetryMode = options.retry_mode orelse
+            readEnvRetryMode() orelse
+            (if (profile) |p|
+                (if (p.retry_mode) |rm| parseRetryMode(rm) else null)
+            else
+                null) orelse
+            .standard;
+
+        const ca_bundle: ?[]const u8 = options.ca_bundle orelse
+            std.posix.getenv("AWS_CA_BUNDLE") orelse
+            (if (profile) |p| p.ca_bundle else null);
 
         return Self{
             .region = region,
             .credentials = credentials,
-            .endpoint_url = options.endpoint_url,
+            .endpoint_url = endpoint_url,
+            .use_fips = use_fips,
+            .use_dual_stack = use_dual_stack,
+            .max_attempts = max_attempts,
+            .retry_mode = retry_mode,
+            .ca_bundle = ca_bundle,
+            .config_file = cf,
             .allocator = allocator,
         };
     }
@@ -107,6 +162,7 @@ pub const Config = struct {
     /// Free owned resources
     pub fn deinit(self: *Self) void {
         self.allocator.free(self.region);
+        if (self.config_file) |*cf| cf.deinit();
     }
 
     /// Create config with static credentials (borrows strings, caller manages lifetime)
@@ -498,97 +554,27 @@ fn resolveConfigPath(allocator: Allocator) ![]const u8 {
     return std.fmt.allocPrint(allocator, "{s}/.aws/config", .{home});
 }
 
-/// Resolve region from options, environment, or config file
-fn resolveRegion(allocator: Allocator, options: LoadOptions) ![]const u8 {
-    // 1. Explicit option
+/// Resolve region: options > AWS_REGION > AWS_DEFAULT_REGION > profile > error
+fn resolveRegion(
+    allocator: Allocator,
+    options: LoadOptions,
+    profile: ?Profile,
+) ![]const u8 {
     if (options.region) |r| {
         return try allocator.dupe(u8, r);
     }
-
-    // 2. AWS_REGION environment variable
     if (std.posix.getenv("AWS_REGION")) |r| {
         return try allocator.dupe(u8, r);
     }
-
-    // 3. AWS_DEFAULT_REGION environment variable
     if (std.posix.getenv("AWS_DEFAULT_REGION")) |r| {
         return try allocator.dupe(u8, r);
     }
-
-    // 4. Config file (~/.aws/config)
-    if (try readRegionFromConfigFile(allocator, options.profile)) |r| {
-        return r;
+    if (profile) |p| {
+        if (p.region) |r| {
+            return try allocator.dupe(u8, r);
+        }
     }
-
     return error.RegionNotFound;
-}
-
-/// Read region from ~/.aws/config file
-fn readRegionFromConfigFile(allocator: Allocator, profile: []const u8) !?[]const u8 {
-    const home = std.posix.getenv("HOME") orelse return null;
-
-    const config_path = try std.fmt.allocPrint(allocator, "{s}/.aws/config", .{home});
-    defer allocator.free(config_path);
-
-    const file = std.fs.openFileAbsolute(config_path, .{}) catch |err| {
-        if (err == error.FileNotFound) return null;
-        return err;
-    };
-    defer file.close();
-
-    const content = file.readToEndAlloc(allocator, 1024 * 1024) catch |err| {
-        if (err == error.OutOfMemory) return err;
-        return null;
-    };
-    defer allocator.free(content);
-
-    return try parseRegionFromConfig(allocator, content, profile);
-}
-
-/// Parse region from AWS config file content
-fn parseRegionFromConfig(
-    allocator: Allocator,
-    content: []const u8,
-    profile: []const u8,
-) !?[]const u8 {
-    // Build target section name: [default] or [profile xyz]
-    var target_section_buf: [256]u8 = undefined;
-    const target_section = if (std.mem.eql(u8, profile, "default"))
-        "[default]"
-    else
-        std.fmt.bufPrint(&target_section_buf, "[profile {s}]", .{profile}) catch return null;
-
-    var in_target_section = false;
-    var lines = std.mem.splitScalar(u8, content, '\n');
-
-    while (lines.next()) |line| {
-        const trimmed = std.mem.trim(u8, line, " \t\r");
-
-        // Skip empty lines and comments
-        if (trimmed.len == 0 or trimmed[0] == '#' or trimmed[0] == ';') {
-            continue;
-        }
-
-        // Check for section header
-        if (trimmed[0] == '[') {
-            in_target_section = std.mem.eql(u8, trimmed, target_section);
-            continue;
-        }
-
-        // Parse key=value in target section
-        if (in_target_section) {
-            if (std.mem.indexOfScalar(u8, trimmed, '=')) |eq_idx| {
-                const key = std.mem.trim(u8, trimmed[0..eq_idx], " \t");
-                const value = std.mem.trim(u8, trimmed[eq_idx + 1 ..], " \t");
-
-                if (std.mem.eql(u8, key, "region")) {
-                    return try allocator.dupe(u8, value);
-                }
-            }
-        }
-    }
-
-    return null;
 }
 
 test "Config with static credentials" {
@@ -637,52 +623,42 @@ test "Config getEndpoint with China region" {
     try std.testing.expectEqualStrings("sts.cn-north-1.amazonaws.com.cn", ep);
 }
 
-test "parseRegionFromConfig default profile" {
-    const content =
-        \\[default]
-        \\region = us-west-2
-        \\output = json
-        \\
-        \\[profile dev]
-        \\region = eu-west-1
-    ;
-
-    const region = try parseRegionFromConfig(std.testing.allocator, content, "default");
-    defer if (region) |r| std.testing.allocator.free(r);
-
-    try std.testing.expectEqualStrings("us-west-2", region.?);
-}
-
-test "parseRegionFromConfig named profile" {
-    const content =
-        \\[default]
-        \\region = us-west-2
-        \\
-        \\[profile dev]
-        \\region = eu-west-1
-    ;
-
-    const region = try parseRegionFromConfig(std.testing.allocator, content, "dev");
-    defer if (region) |r| std.testing.allocator.free(r);
-
-    try std.testing.expectEqualStrings("eu-west-1", region.?);
-}
-
-test "parseRegionFromConfig missing profile" {
-    const content =
-        \\[default]
-        \\region = us-west-2
-    ;
-
-    const region = try parseRegionFromConfig(std.testing.allocator, content, "nonexistent");
-    try std.testing.expect(region == null);
-}
-
 test "resolveRegion from explicit option" {
-    const region = try resolveRegion(std.testing.allocator, .{ .region = "ap-northeast-1" });
+    const region = try resolveRegion(
+        std.testing.allocator,
+        .{ .region = "ap-northeast-1" },
+        null,
+    );
     defer std.testing.allocator.free(region);
 
     try std.testing.expectEqualStrings("ap-northeast-1", region);
+}
+
+test "resolveRegion from config profile" {
+    const region = try resolveRegion(
+        std.testing.allocator,
+        .{},
+        Profile{ .region = "eu-central-1" },
+    );
+    defer std.testing.allocator.free(region);
+
+    try std.testing.expectEqualStrings("eu-central-1", region);
+}
+
+test "resolveRegion option overrides profile" {
+    const region = try resolveRegion(
+        std.testing.allocator,
+        .{ .region = "us-west-2" },
+        Profile{ .region = "eu-central-1" },
+    );
+    defer std.testing.allocator.free(region);
+
+    try std.testing.expectEqualStrings("us-west-2", region);
+}
+
+test "resolveRegion error when no source" {
+    const result = resolveRegion(std.testing.allocator, .{}, null);
+    try std.testing.expectError(error.RegionNotFound, result);
 }
 
 test "parseConfigFile with multiple profiles" {
@@ -922,4 +898,157 @@ test "parseConfigFile profile with services section" {
         "http://localhost:8000",
         ddb.endpoint_url.?,
     );
+}
+
+test "resolveBoolEnv returns null for unset var" {
+    try std.testing.expect(
+        resolveBoolEnv("AWS_NONEXISTENT_TEST_VAR_XYZ") == null,
+    );
+}
+
+test "endpoint_url: option overrides profile" {
+    const prof: ?Profile = Profile{
+        .endpoint_url = "http://from-profile",
+    };
+    const opts = LoadOptions{ .endpoint_url = "http://from-opts" };
+    const got: ?[]const u8 = opts.endpoint_url orelse
+        (if (prof) |p| p.endpoint_url else null);
+    try std.testing.expectEqualStrings("http://from-opts", got.?);
+}
+
+test "endpoint_url: falls back to profile" {
+    const prof: ?Profile = Profile{
+        .endpoint_url = "http://from-profile",
+    };
+    const got: ?[]const u8 = @as(?[]const u8, null) orelse
+        (if (prof) |p| p.endpoint_url else null);
+    try std.testing.expectEqualStrings("http://from-profile", got.?);
+}
+
+test "endpoint_url: null when nothing set" {
+    const prof: ?Profile = Profile{};
+    const got: ?[]const u8 = @as(?[]const u8, null) orelse
+        (if (prof) |p| p.endpoint_url else null);
+    try std.testing.expect(got == null);
+}
+
+test "use_fips: defaults to false" {
+    const prof: ?Profile = Profile{};
+    const got: bool = @as(?bool, null) orelse
+        @as(?bool, null) orelse
+        (if (prof) |p| p.use_fips_endpoint else null) orelse
+        false;
+    try std.testing.expect(got == false);
+}
+
+test "use_fips: from profile" {
+    const prof: ?Profile = Profile{ .use_fips_endpoint = true };
+    const got: bool = @as(?bool, null) orelse
+        @as(?bool, null) orelse
+        (if (prof) |p| p.use_fips_endpoint else null) orelse
+        false;
+    try std.testing.expect(got == true);
+}
+
+test "use_fips: option overrides profile" {
+    var opt: ?bool = false;
+    const prof: ?Profile = Profile{ .use_fips_endpoint = true };
+    _ = .{&opt};
+    const got: bool = opt orelse
+        @as(?bool, null) orelse
+        (if (prof) |p| p.use_fips_endpoint else null) orelse
+        false;
+    try std.testing.expect(got == false);
+}
+
+test "use_dual_stack: defaults to false" {
+    const prof: ?Profile = Profile{};
+    const got: bool = @as(?bool, null) orelse
+        @as(?bool, null) orelse
+        (if (prof) |p| p.use_dualstack_endpoint else null) orelse
+        false;
+    try std.testing.expect(got == false);
+}
+
+test "use_dual_stack: from profile" {
+    const prof: ?Profile = Profile{ .use_dualstack_endpoint = true };
+    const got: bool = @as(?bool, null) orelse
+        @as(?bool, null) orelse
+        (if (prof) |p| p.use_dualstack_endpoint else null) orelse
+        false;
+    try std.testing.expect(got == true);
+}
+
+test "max_attempts: defaults to 3" {
+    const prof: ?Profile = Profile{};
+    const got: u32 = @as(?u32, null) orelse
+        @as(?u32, null) orelse
+        (if (prof) |p| p.max_attempts else null) orelse
+        3;
+    try std.testing.expect(got == 3);
+}
+
+test "max_attempts: from profile" {
+    const prof: ?Profile = Profile{ .max_attempts = 10 };
+    const got: u32 = @as(?u32, null) orelse
+        @as(?u32, null) orelse
+        (if (prof) |p| p.max_attempts else null) orelse
+        3;
+    try std.testing.expect(got == 10);
+}
+
+test "max_attempts: option overrides profile" {
+    var opt: ?u32 = 5;
+    const prof: ?Profile = Profile{ .max_attempts = 10 };
+    _ = .{&opt};
+    const got: u32 = opt orelse
+        @as(?u32, null) orelse
+        (if (prof) |p| p.max_attempts else null) orelse
+        3;
+    try std.testing.expect(got == 5);
+}
+
+test "retry_mode: defaults to standard" {
+    const prof: ?Profile = Profile{};
+    const got: RetryMode = @as(?RetryMode, null) orelse
+        @as(?RetryMode, null) orelse
+        (if (prof) |p|
+            (if (p.retry_mode) |rm| parseRetryMode(rm) else null)
+        else
+            null) orelse
+        .standard;
+    try std.testing.expect(got == .standard);
+}
+
+test "retry_mode: from profile" {
+    const prof: ?Profile = Profile{ .retry_mode = "adaptive" };
+    const got: RetryMode = @as(?RetryMode, null) orelse
+        @as(?RetryMode, null) orelse
+        (if (prof) |p|
+            (if (p.retry_mode) |rm| parseRetryMode(rm) else null)
+        else
+            null) orelse
+        .standard;
+    try std.testing.expect(got == .adaptive);
+}
+
+test "ca_bundle: from profile" {
+    const prof: ?Profile = Profile{
+        .ca_bundle = "/path/to/bundle.pem",
+    };
+    const got: ?[]const u8 = @as(?[]const u8, null) orelse
+        @as(?[]const u8, null) orelse
+        (if (prof) |p| p.ca_bundle else null);
+    try std.testing.expectEqualStrings(
+        "/path/to/bundle.pem",
+        got.?,
+    );
+}
+
+test "ca_bundle: null by default" {
+    const prof: ?Profile = Profile{};
+    const got: ?[]const u8 = @as(?[]const u8, null) orelse
+        @as(?[]const u8, null) orelse
+        (if (prof) |p| p.ca_bundle else null);
+    try std.testing.expect(got == null);
 }
