@@ -31,6 +31,7 @@ pub const user_agent = @import("user_agent.zig");
 pub const Credentials = credentials.Credentials;
 pub const CredentialsProvider = credentials.CredentialsProvider;
 pub const Config = config.Config;
+pub const RetryMode = config.RetryMode;
 pub const Diagnostic = errors.Diagnostic;
 pub const ImdsClient = imds.Client;
 pub const EcsProvider = ecs.Provider;
