@@ -189,15 +189,26 @@ pub const SsoSession = struct {
     sso_registration_scopes: ?[]const u8 = null,
 };
 
-/// Parsed config file containing profiles and SSO sessions
+/// Per-service configuration from [services] sections
+pub const ServiceConfig = struct {
+    endpoint_url: ?[]const u8 = null,
+};
+
+/// Parsed config file containing profiles, SSO sessions, and services
 pub const ConfigFile = struct {
     profiles: std.StringHashMap(Profile),
     sso_sessions: std.StringHashMap(SsoSession),
+    services: std.StringHashMap(std.StringHashMap(ServiceConfig)),
     allocator: Allocator,
 
     pub fn deinit(self: *ConfigFile) void {
         self.profiles.deinit();
         self.sso_sessions.deinit();
+        var it = self.services.valueIterator();
+        while (it.next()) |inner| {
+            inner.deinit();
+        }
+        self.services.deinit();
     }
 
     /// Get a profile by name
@@ -206,33 +217,52 @@ pub const ConfigFile = struct {
     }
 
     /// Get an SSO session by name
-    pub fn getSsoSession(self: *const ConfigFile, name: []const u8) ?SsoSession {
+    pub fn getSsoSession(
+        self: *const ConfigFile,
+        name: []const u8,
+    ) ?SsoSession {
         return self.sso_sessions.get(name);
+    }
+
+    /// Get a services section by name
+    pub fn getServicesSection(
+        self: *const ConfigFile,
+        name: []const u8,
+    ) ?std.StringHashMap(ServiceConfig) {
+        return self.services.get(name);
     }
 };
 
-/// Parse an AWS config file into profiles and SSO sessions.
-/// All returned string values borrow from `content` -- caller must keep content alive.
-pub fn parseConfigFile(allocator: Allocator, content: []const u8) ConfigFile {
+/// Parse an AWS config file into profiles, SSO sessions, and services.
+/// All returned string values borrow from `content` -- caller must
+/// keep content alive.
+pub fn parseConfigFile(
+    allocator: Allocator,
+    content: []const u8,
+) ConfigFile {
     var profiles = std.StringHashMap(Profile).init(allocator);
     var sso_sessions = std.StringHashMap(SsoSession).init(allocator);
+    var services = std.StringHashMap(
+        std.StringHashMap(ServiceConfig),
+    ).init(allocator);
 
     var current_kind: SectionInfo.Kind = .none;
     var current_name: []const u8 = "";
+    var current_service_name: []const u8 = "";
 
     var lines = std.mem.splitScalar(u8, content, '\n');
     while (lines.next()) |line| {
         const trimmed = std.mem.trim(u8, line, " \t\r");
 
-        // Skip empty lines and comments
-        if (trimmed.len == 0 or trimmed[0] == '#' or trimmed[0] == ';') continue;
+        if (trimmed.len == 0 or trimmed[0] == '#' or trimmed[0] == ';')
+            continue;
 
         // Section header
         if (trimmed[0] == '[') {
             const section = parseSectionHeader(trimmed);
             current_kind = section.kind;
             current_name = section.name;
-            // Ensure the section exists in the map
+            current_service_name = "";
             switch (current_kind) {
                 .profile => {
                     if (!profiles.contains(current_name)) {
@@ -244,14 +274,78 @@ pub fn parseConfigFile(allocator: Allocator, content: []const u8) ConfigFile {
                         sso_sessions.put(current_name, .{}) catch {};
                     }
                 },
+                .services => {
+                    if (!services.contains(current_name)) {
+                        services.put(
+                            current_name,
+                            std.StringHashMap(ServiceConfig).init(allocator),
+                        ) catch {};
+                    }
+                },
                 .none => {},
             }
             continue;
         }
 
-        // Key = value
         if (current_kind == .none) continue;
-        const eq_idx = std.mem.indexOfScalar(u8, trimmed, '=') orelse continue;
+
+        // Services sections use nested INI with indentation
+        if (current_kind == .services) {
+            const is_indented = line.len > 0 and
+                (line[0] == ' ' or line[0] == '\t');
+            if (!is_indented) {
+                // Service name line: "dynamodb ="
+                const eq_idx = std.mem.indexOfScalar(
+                    u8,
+                    trimmed,
+                    '=',
+                ) orelse continue;
+                const svc_name = std.mem.trim(
+                    u8,
+                    trimmed[0..eq_idx],
+                    " \t",
+                );
+                current_service_name = svc_name;
+                if (services.getPtr(current_name)) |inner| {
+                    if (!inner.contains(svc_name)) {
+                        inner.put(svc_name, .{}) catch {};
+                    }
+                }
+            } else {
+                // Sub-key line: "  endpoint_url = http://..."
+                if (current_service_name.len == 0) continue;
+                const eq_idx = std.mem.indexOfScalar(
+                    u8,
+                    trimmed,
+                    '=',
+                ) orelse continue;
+                const key = std.mem.trim(
+                    u8,
+                    trimmed[0..eq_idx],
+                    " \t",
+                );
+                const value = std.mem.trim(
+                    u8,
+                    trimmed[eq_idx + 1 ..],
+                    " \t",
+                );
+                if (std.mem.eql(u8, key, "endpoint_url")) {
+                    if (services.getPtr(current_name)) |inner| {
+                        if (inner.getPtr(current_service_name)) |sc| {
+                            sc.endpoint_url = value;
+                        }
+                    }
+                }
+            }
+            continue;
+        }
+
+        // Standard key = value for profiles and sso-sessions
+        const eq_idx = std.mem.indexOfScalar(
+            u8,
+            trimmed,
+            '=',
+        ) orelse continue;
         const key = std.mem.trim(u8, trimmed[0..eq_idx], " \t");
         const value = std.mem.trim(u8, trimmed[eq_idx + 1 ..], " \t");
 
@@ -266,19 +360,20 @@ pub fn parseConfigFile(allocator: Allocator, content: []const u8) ConfigFile {
                     setSsoSessionField(s, key, value);
                 }
             },
-            .none => {},
+            .services, .none => {},
         }
     }
 
     return .{
         .profiles = profiles,
         .sso_sessions = sso_sessions,
+        .services = services,
         .allocator = allocator,
     };
 }
 
 const SectionInfo = struct {
-    const Kind = enum { profile, sso_session, none };
+    const Kind = enum { profile, sso_session, services, none };
     kind: Kind,
     name: []const u8,
 };
@@ -301,6 +396,12 @@ fn parseSectionHeader(header: []const u8) SectionInfo {
     if (std.mem.startsWith(u8, inner, "sso-session ")) {
         const name = std.mem.trim(u8, inner["sso-session ".len..], " \t");
         if (name.len > 0) return .{ .kind = .sso_session, .name = name };
+    }
+
+    // [services name]
+    if (std.mem.startsWith(u8, inner, "services ")) {
+        const name = std.mem.trim(u8, inner["services ".len..], " \t");
+        if (name.len > 0) return .{ .kind = .services, .name = name };
     }
 
     return .{ .kind = .none, .name = "" };
@@ -703,6 +804,10 @@ test "parseSectionHeader" {
 
     const s4 = parseSectionHeader("[unknown]");
     try std.testing.expect(s4.kind == .none);
+
+    const s5 = parseSectionHeader("[services my-services]");
+    try std.testing.expect(s5.kind == .services);
+    try std.testing.expectEqualStrings("my-services", s5.name);
 }
 
 test "parseRetryMode" {
@@ -749,4 +854,72 @@ test "Config defaults" {
     const config = Config.fromEnvironment("us-east-1");
     try std.testing.expect(config.retry_mode == .standard);
     try std.testing.expect(config.ca_bundle == null);
+}
+
+test "parseConfigFile services with multiple services" {
+    const content =
+        "[services my-services]\n" ++
+        "dynamodb =\n" ++
+        "  endpoint_url = http://localhost:8000\n" ++
+        "s3 =\n" ++
+        "  endpoint_url = http://localhost:9000\n";
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    const svc = cf.getServicesSection("my-services").?;
+    const ddb = svc.get("dynamodb").?;
+    try std.testing.expectEqualStrings(
+        "http://localhost:8000",
+        ddb.endpoint_url.?,
+    );
+    const s3 = svc.get("s3").?;
+    try std.testing.expectEqualStrings(
+        "http://localhost:9000",
+        s3.endpoint_url.?,
+    );
+    try std.testing.expect(svc.get("nonexistent") == null);
+}
+
+test "parseConfigFile empty services section" {
+    const content =
+        "[services empty-svc]\n";
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    const svc = cf.getServicesSection("empty-svc").?;
+    try std.testing.expect(svc.count() == 0);
+    try std.testing.expect(cf.getServicesSection("missing") == null);
+}
+
+test "parseConfigFile profile with services section" {
+    const content =
+        "[default]\n" ++
+        "region = us-east-1\n" ++
+        "services = my-services\n" ++
+        "\n" ++
+        "[services my-services]\n" ++
+        "dynamodb =\n" ++
+        "  endpoint_url = http://localhost:8000\n" ++
+        "\n" ++
+        "[profile dev]\n" ++
+        "region = eu-west-1\n";
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    const def = cf.getProfile("default").?;
+    try std.testing.expectEqualStrings("us-east-1", def.region.?);
+    try std.testing.expectEqualStrings("my-services", def.services.?);
+
+    const dev = cf.getProfile("dev").?;
+    try std.testing.expectEqualStrings("eu-west-1", dev.region.?);
+
+    const svc = cf.getServicesSection("my-services").?;
+    const ddb = svc.get("dynamodb").?;
+    try std.testing.expectEqualStrings(
+        "http://localhost:8000",
+        ddb.endpoint_url.?,
+    );
 }
