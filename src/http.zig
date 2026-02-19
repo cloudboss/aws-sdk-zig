@@ -175,6 +175,7 @@ pub const HttpClient = struct {
     no_proxy: ?[]const u8,
     retry_mode: config_mod.RetryMode = .standard,
     token_bucket: TokenBucket = .{},
+    ca_bundle_path: ?[]const u8 = null,
 
     const Self = @This();
 
@@ -202,6 +203,15 @@ pub const HttpClient = struct {
             .no_proxy = null,
         };
         self.initProxies();
+        return self;
+    }
+
+    pub fn initWithCaBundle(
+        allocator: Allocator,
+        ca_bundle_path: ?[]const u8,
+    ) Self {
+        var self = init(allocator);
+        self.ca_bundle_path = ca_bundle_path;
         return self;
     }
 
@@ -414,6 +424,11 @@ pub const HttpClient = struct {
         request: *const Request,
         options: RequestOptions,
     ) RequestError!Response {
+        if (self.ca_bundle_path) |path| {
+            std.fs.cwd().access(path, .{}) catch
+                return error.ConnectionFailed;
+        }
+
         const uri = request.getUri();
 
         // Build extra headers from request
@@ -842,6 +857,24 @@ test "HttpClient defaults to standard retry mode" {
         config_mod.RetryMode.standard,
         client.retry_mode,
     );
+}
+
+test "HttpClient stores ca_bundle_path" {
+    var client = HttpClient.initWithCaBundle(
+        std.testing.allocator,
+        "/etc/pki/tls/certs/ca-bundle.crt",
+    );
+    defer client.deinit();
+    try std.testing.expectEqualStrings(
+        "/etc/pki/tls/certs/ca-bundle.crt",
+        client.ca_bundle_path.?,
+    );
+}
+
+test "HttpClient ca_bundle_path defaults to null" {
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+    try std.testing.expectEqual(@as(?[]const u8, null), client.ca_bundle_path);
 }
 
 test "Request stores service_name and api_version for User-Agent" {
