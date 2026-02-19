@@ -25,6 +25,7 @@ pub const web_identity = @import("web_identity.zig");
 pub const process_creds = @import("process.zig");
 pub const sso = @import("sso.zig");
 pub const assume_role = @import("assume_role.zig");
+pub const user_agent = @import("user_agent.zig");
 
 // Re-exports
 pub const Credentials = credentials.Credentials;
