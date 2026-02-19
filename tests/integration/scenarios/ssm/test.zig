@@ -83,7 +83,7 @@ test "PutParameter returns version number" {
     }
 }
 
-test "GetParameter returns stored parameter name and value" {
+test "GetParameter retrieves stored parameter value" {
     var get_result = try ssm.get_parameter.execute(
         &shared_client,
         .{ .name = "/sdk-zig/shared" },

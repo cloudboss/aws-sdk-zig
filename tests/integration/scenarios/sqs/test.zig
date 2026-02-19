@@ -69,7 +69,7 @@ test "CreateQueue returns queue URL" {
     defer del.deinit();
 }
 
-test "SendMessage returns message ID and MD5" {
+test "SendMessage returns message ID with MD5 checksum" {
     const client = &shared_client.?;
 
     var send_result = try sqs.send_message.execute(
