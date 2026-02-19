@@ -3,6 +3,8 @@ const aws = @import("aws");
 const sns = @import("sns");
 const sqs = @import("sqs");
 
+var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+
 var shared_sns_client: ?sns.Client = null;
 var shared_sqs_client: ?sqs.Client = null;
 var shared_cfg: ?aws.Config = null;
@@ -10,7 +12,7 @@ var shared_topic_arn_buf: [512]u8 = undefined;
 var shared_topic_arn: []const u8 = "";
 
 test "zest.beforeAll" {
-    const allocator = std.testing.allocator;
+    const allocator = gpa.allocator();
     const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
         return error.MissingEndpoint;
     shared_cfg = try aws.Config.load(
@@ -39,6 +41,7 @@ test "zest.beforeAll" {
 }
 
 test "zest.afterAll" {
+    defer _ = gpa.deinit();
     if (shared_sns_client) |*c| {
         if (shared_topic_arn.len > 0) {
             var r = try sns.delete_topic.execute(
