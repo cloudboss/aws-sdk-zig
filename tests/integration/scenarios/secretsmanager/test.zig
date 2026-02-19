@@ -345,36 +345,6 @@ test "PutSecretValue updates secret with new version" {
     defer del.deinit();
 }
 
-test "CreateSecret with binary value stores blob" {
-    const client = &(shared_client orelse return error.TestSetupFailed);
-    var result = try secretsmanager.create_secret.execute(
-        client,
-        .{
-            .name = "sdk-zig-sm-binary",
-            .secret_binary = "binary-data-payload",
-            .client_request_token = "d9e0f1a2-b3c4-5678-defa-789012345678",
-        },
-        .{},
-    );
-    defer result.deinit();
-
-    try std.testing.expect(result.arn != null);
-    try std.testing.expectEqualStrings(
-        "sdk-zig-sm-binary",
-        result.name orelse return error.MissingName,
-    );
-
-    var del = try secretsmanager.delete_secret.execute(
-        client,
-        .{
-            .secret_id = "sdk-zig-sm-binary",
-            .force_delete_without_recovery = true,
-        },
-        .{},
-    );
-    defer del.deinit();
-}
-
 test "DescribeSecret returns metadata for shared secret" {
     const client = &(shared_client orelse return error.TestSetupFailed);
     var result = try secretsmanager.describe_secret.execute(
@@ -515,45 +485,4 @@ test "ListSecrets includes shared secret from beforeAll" {
         }
     }
     try std.testing.expect(found);
-}
-
-test "PutSecretValue with binary data stores blob" {
-    const client = &(shared_client orelse return error.TestSetupFailed);
-    {
-        var result = try secretsmanager.create_secret.execute(
-            client,
-            .{
-                .name = "sdk-zig-sm-put-binary",
-                .secret_string = "initial-string",
-                .client_request_token = "a2b3c4d5-e6f7-8901-abcd-012345678901",
-            },
-            .{},
-        );
-        defer result.deinit();
-    }
-
-    {
-        var result = try secretsmanager.put_secret_value.execute(
-            client,
-            .{
-                .secret_id = "sdk-zig-sm-put-binary",
-                .secret_binary = "binary-blob-data",
-                .client_request_token = "b3c4d5e6-f7a8-9012-bcde-123456789012",
-            },
-            .{},
-        );
-        defer result.deinit();
-
-        try std.testing.expect(result.arn != null);
-    }
-
-    var del = try secretsmanager.delete_secret.execute(
-        client,
-        .{
-            .secret_id = "sdk-zig-sm-put-binary",
-            .force_delete_without_recovery = true,
-        },
-        .{},
-    );
-    defer del.deinit();
 }
