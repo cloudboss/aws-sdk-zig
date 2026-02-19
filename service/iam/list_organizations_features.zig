@@ -57,7 +57,7 @@ pub fn execute(client: *Client, input: ListOrganizationsFeaturesInput, options: 
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListOrganizationsFeaturesInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpoint("iam", alloc);
+    const endpoint = try config.getEndpointForService("iam", "IAM", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

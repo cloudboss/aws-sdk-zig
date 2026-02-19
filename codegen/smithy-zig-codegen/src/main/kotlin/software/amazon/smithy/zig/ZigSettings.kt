@@ -7,7 +7,12 @@ class ZigSettings(
     val service: ShapeId,
     val packageName: String,
     val outputDir: String,
+    var sdkId: String = "",
 ) {
+    init {
+        if (sdkId.isEmpty()) sdkId = packageName
+    }
+
     companion object {
         @JvmStatic
         fun fromNode(node: ObjectNode): ZigSettings {

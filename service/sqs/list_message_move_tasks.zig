@@ -68,7 +68,7 @@ pub fn execute(client: *Client, input: ListMessageMoveTasksInput, options: Optio
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListMessageMoveTasksInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("sqs", alloc);
+    const endpoint = try config.getEndpointForService("sqs", "SQS", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

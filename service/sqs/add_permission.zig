@@ -90,7 +90,7 @@ pub fn execute(client: *Client, input: AddPermissionInput, options: Options) !Ad
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AddPermissionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("sqs", alloc);
+    const endpoint = try config.getEndpointForService("sqs", "SQS", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

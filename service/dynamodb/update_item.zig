@@ -385,7 +385,7 @@ pub fn execute(client: *Client, input: UpdateItemInput, options: Options) !Updat
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateItemInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("dynamodb", alloc);
+    const endpoint = try config.getEndpointForService("dynamodb", "DynamoDB", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

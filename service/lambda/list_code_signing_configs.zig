@@ -71,7 +71,7 @@ pub fn execute(client: *Client, input: ListCodeSigningConfigsInput, options: Opt
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListCodeSigningConfigsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("lambda", alloc);
+    const endpoint = try config.getEndpointForService("lambda", "Lambda", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

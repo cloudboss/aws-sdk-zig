@@ -59,7 +59,7 @@ pub fn execute(client: *Client, input: UntagQueueInput, options: Options) !Untag
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UntagQueueInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("sqs", alloc);
+    const endpoint = try config.getEndpointForService("sqs", "SQS", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -68,7 +68,7 @@ pub fn execute(client: *Client, input: CreateBackupInput, options: Options) !Cre
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateBackupInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("dynamodb", alloc);
+    const endpoint = try config.getEndpointForService("dynamodb", "DynamoDB", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

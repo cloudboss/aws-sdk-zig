@@ -106,6 +106,7 @@ class ClientGenerator(
         writer.blankLine()
 
         writer.write("const Self = @This();")
+        writer.write("pub const sdk_id = \"\$L\";", context.settings().sdkId)
         writer.blankLine()
 
         // init

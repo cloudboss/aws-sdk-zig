@@ -168,7 +168,7 @@ pub fn execute(client: *Client, input: UpdateOpsItemInput, options: Options) !Up
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UpdateOpsItemInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("ssm", alloc);
+    const endpoint = try config.getEndpointForService("ssm", "SSM", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

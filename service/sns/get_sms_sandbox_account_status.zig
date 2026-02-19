@@ -53,7 +53,7 @@ pub fn execute(client: *Client, input: GetSMSSandboxAccountStatusInput, options:
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetSMSSandboxAccountStatusInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpoint("sns", alloc);
+    const endpoint = try config.getEndpointForService("sns", "SNS", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

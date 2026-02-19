@@ -75,7 +75,7 @@ pub fn execute(client: *Client, input: GetSSHPublicKeyInput, options: Options) !
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetSSHPublicKeyInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("iam", alloc);
+    const endpoint = try config.getEndpointForService("iam", "IAM", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

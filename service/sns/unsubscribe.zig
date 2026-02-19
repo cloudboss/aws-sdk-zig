@@ -51,7 +51,7 @@ pub fn execute(client: *Client, input: UnsubscribeInput, options: Options) !Unsu
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UnsubscribeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("sns", alloc);
+    const endpoint = try config.getEndpointForService("sns", "SNS", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

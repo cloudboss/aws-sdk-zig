@@ -52,6 +52,7 @@ pub const Client = struct {
     http_client: aws.http.HttpClient,
 
     const Self = @This();
+    pub const sdk_id = "SNS";
 
     pub fn init(allocator: std.mem.Allocator, config: *aws.Config) Self {
         return .{

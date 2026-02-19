@@ -73,7 +73,7 @@ pub fn execute(client: *Client, input: CreateStoreImageTaskInput, options: Optio
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: CreateStoreImageTaskInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("ec2", alloc);
+    const endpoint = try config.getEndpointForService("ec2", "EC2", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -79,7 +79,7 @@ pub fn execute(client: *Client, input: UploadSigningCertificateInput, options: O
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UploadSigningCertificateInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("iam", alloc);
+    const endpoint = try config.getEndpointForService("iam", "IAM", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

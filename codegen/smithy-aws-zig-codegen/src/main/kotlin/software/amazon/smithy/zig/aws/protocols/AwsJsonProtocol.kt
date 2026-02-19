@@ -25,7 +25,10 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         }
 
         // Build endpoint
-        writer.write("const endpoint = try config.getEndpoint(\"\$L\", alloc);", ctx.settings.packageName)
+        writer.write(
+            "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", alloc);",
+            ctx.settings.packageName, ctx.settings.sdkId,
+        )
         writer.blankLine()
 
         // Parse host from endpoint

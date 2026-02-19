@@ -73,7 +73,7 @@ pub fn execute(client: *Client, input: UntagResourceInput, options: Options) !Un
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: UntagResourceInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("secretsmanager", alloc);
+    const endpoint = try config.getEndpointForService("secretsmanager", "Secrets Manager", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

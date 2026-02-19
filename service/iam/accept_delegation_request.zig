@@ -51,7 +51,7 @@ pub fn execute(client: *Client, input: AcceptDelegationRequestInput, options: Op
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: AcceptDelegationRequestInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("iam", alloc);
+    const endpoint = try config.getEndpointForService("iam", "IAM", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

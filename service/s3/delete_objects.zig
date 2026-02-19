@@ -180,7 +180,7 @@ pub fn execute(client: *Client, input: DeleteObjectsInput, options: Options) !De
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteObjectsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("s3", alloc);
+    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

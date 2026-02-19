@@ -113,7 +113,7 @@ pub fn execute(client: *Client, input: ListBucketsInput, options: Options) !List
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: ListBucketsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("s3", alloc);
+    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

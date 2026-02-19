@@ -51,7 +51,7 @@ pub fn execute(client: *Client, input: DeleteSMSSandboxPhoneNumberInput, options
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DeleteSMSSandboxPhoneNumberInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("sns", alloc);
+    const endpoint = try config.getEndpointForService("sns", "SNS", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

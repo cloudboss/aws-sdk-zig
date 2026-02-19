@@ -94,7 +94,7 @@ pub fn execute(client: *Client, input: GetWebIdentityTokenInput, options: Option
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: GetWebIdentityTokenInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpoint("sts", alloc);
+    const endpoint = try config.getEndpointForService("sts", "STS", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

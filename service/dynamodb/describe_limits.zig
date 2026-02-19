@@ -80,7 +80,7 @@ pub fn execute(client: *Client, input: DescribeLimitsInput, options: Options) !D
 
 fn serializeRequest(alloc: std.mem.Allocator, input: DescribeLimitsInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpoint("dynamodb", alloc);
+    const endpoint = try config.getEndpointForService("dynamodb", "DynamoDB", alloc);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
