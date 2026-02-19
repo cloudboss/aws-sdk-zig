@@ -178,6 +178,7 @@ pub const HttpClient = struct {
     retry_mode: config_mod.RetryMode = .standard,
     token_bucket: TokenBucket = .{},
     ca_bundle_path: ?[]const u8 = null,
+    clock_skew_offset: i64 = 0,
 
     const Self = @This();
 
@@ -266,9 +267,28 @@ pub const HttpClient = struct {
             const result = self.doRequest(request, options);
 
             if (result) |response| {
-                if (response.isRetryable() and
+                const is_clock_skew = isClockSkewError(
+                    response.status,
+                    response.body,
+                );
+                if ((response.isRetryable() or is_clock_skew) and
                     backoff.attempt + 1 < options.max_attempts)
                 {
+                    if (is_clock_skew) {
+                        if (response.headers.get("date")) |date_str| {
+                            if (parseHttpDate(date_str)) |server_s| {
+                                const local_s: i64 = @intCast(
+                                    @divTrunc(
+                                        std.time.nanoTimestamp(),
+                                        std.time.ns_per_s,
+                                    ),
+                                );
+                                self.clock_skew_offset =
+                                    (server_s - local_s) *
+                                    std.time.ns_per_s;
+                            }
+                        }
+                    }
                     if (self.retry_mode == .adaptive) {
                         if (response.status == 429)
                             self.token_bucket.onThrottle()
@@ -276,9 +296,17 @@ pub const HttpClient = struct {
                             self.token_bucket.onThrottle();
                         _ = self.token_bucket.tryAcquire(1.0);
                     }
+                    const retry_after_ms = parseRetryAfter(
+                        response.headers,
+                    );
                     var resp = response;
                     resp.deinit();
-                    backoff.wait();
+                    if (retry_after_ms) |ms| {
+                        std.Thread.sleep(ms * std.time.ns_per_ms);
+                        backoff.attempt = backoff.attempt +| 1;
+                    } else {
+                        backoff.wait();
+                    }
                     continue;
                 }
                 if (self.retry_mode == .adaptive)
@@ -626,6 +654,114 @@ fn algToString(alg: checksum_mod.Algorithm) []const u8 {
         .sha256 => "sha256",
         .sha1 => "sha1",
     };
+}
+
+pub fn isClockSkewError(status: u16, body: []const u8) bool {
+    if (status != 403 and status != 400) return false;
+    const clock_skew_codes = [_][]const u8{
+        "RequestTimeTooSkewed",
+        "RequestExpired",
+        "InvalidSignatureException",
+        "SignatureDoesNotMatch",
+        "AuthFailure",
+        "RequestInTheFuture",
+    };
+    for (clock_skew_codes) |code| {
+        if (std.mem.containsAtLeast(u8, body, 1, code))
+            return true;
+    }
+    return false;
+}
+
+pub fn parseRetryAfter(
+    headers: std.StringHashMapUnmanaged([]const u8),
+) ?u64 {
+    const value = headers.get("retry-after") orelse return null;
+    const seconds = std.fmt.parseInt(
+        u64,
+        std.mem.trim(u8, value, " \t"),
+        10,
+    ) catch return null;
+    return seconds * std.time.ms_per_s;
+}
+
+fn parseHttpDate(date_str: []const u8) ?i64 {
+    const months = [_][]const u8{
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    };
+    var parts_buf: [8][]const u8 = undefined;
+    var parts_count: usize = 0;
+    var iter = std.mem.splitScalar(
+        u8,
+        std.mem.trim(u8, date_str, " \t"),
+        ' ',
+    );
+    while (iter.next()) |part| {
+        if (part.len == 0) continue;
+        if (parts_count >= parts_buf.len) break;
+        parts_buf[parts_count] = part;
+        parts_count += 1;
+    }
+    if (parts_count < 5) return null;
+
+    const day_str = parts_buf[1];
+    const month_str = parts_buf[2];
+    const year_str = parts_buf[3];
+    const time_str = parts_buf[4];
+
+    const day = std.fmt.parseInt(
+        i64,
+        day_str,
+        10,
+    ) catch return null;
+    const year = std.fmt.parseInt(
+        i64,
+        year_str,
+        10,
+    ) catch return null;
+
+    var month: i64 = 0;
+    for (months, 0..) |m, i| {
+        if (std.mem.eql(u8, m, month_str)) {
+            month = @intCast(i + 1);
+            break;
+        }
+    }
+    if (month == 0) return null;
+
+    if (time_str.len < 8) return null;
+    const hour = std.fmt.parseInt(
+        i64,
+        time_str[0..2],
+        10,
+    ) catch return null;
+    const minute = std.fmt.parseInt(
+        i64,
+        time_str[3..5],
+        10,
+    ) catch return null;
+    const second = std.fmt.parseInt(
+        i64,
+        time_str[6..8],
+        10,
+    ) catch return null;
+
+    const y1 = year - 1;
+    const leap_before = @divTrunc(y1, 4) -
+        @divTrunc(y1, 100) + @divTrunc(y1, 400);
+    const epoch_leap: i64 = 477;
+    const leap_days = leap_before - epoch_leap;
+    const years = year - 1970;
+    const month_days = [_]i64{
+        0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334,
+    };
+    const is_leap = (@rem(year, 4) == 0 and
+        @rem(year, 100) != 0) or @rem(year, 400) == 0;
+    const leap_day: i64 = if (is_leap and month > 2) 1 else 0;
+    const days = years * 365 + leap_days +
+        month_days[@intCast(month - 1)] + leap_day + day - 1;
+    return days * 86400 + hour * 3600 + minute * 60 + second;
 }
 
 /// Streaming body for responses where the HTTP connection stays open.
@@ -1027,4 +1163,48 @@ test "checksum computeBase64 and verify round-trip" {
         std.testing.allocator,
     );
     try std.testing.expect(!bad);
+}
+
+test "isClockSkewError detects clock skew codes" {
+    try std.testing.expect(
+        isClockSkewError(403, "RequestTimeTooSkewed: ..."),
+    );
+    try std.testing.expect(
+        isClockSkewError(403, "SignatureDoesNotMatch: ..."),
+    );
+    try std.testing.expect(
+        !isClockSkewError(403, "AccessDenied: ..."),
+    );
+    try std.testing.expect(
+        !isClockSkewError(200, "RequestTimeTooSkewed: ..."),
+    );
+}
+
+test "parseRetryAfter parses integer seconds" {
+    var headers = std.StringHashMapUnmanaged([]const u8){};
+    defer headers.deinit(std.testing.allocator);
+    try headers.put(
+        std.testing.allocator,
+        "retry-after",
+        "5",
+    );
+    const ms = parseRetryAfter(headers);
+    try std.testing.expectEqual(@as(?u64, 5000), ms);
+}
+
+test "parseRetryAfter returns null when header absent" {
+    const headers = std.StringHashMapUnmanaged([]const u8){};
+    try std.testing.expectEqual(
+        @as(?u64, null),
+        parseRetryAfter(headers),
+    );
+}
+
+test "parseHttpDate parses valid HTTP date" {
+    const ts = parseHttpDate("Thu, 01 Jan 2026 00:00:00 GMT");
+    try std.testing.expect(ts != null);
+    try std.testing.expectEqual(
+        @as(i64, 1767225600),
+        ts.?,
+    );
 }
