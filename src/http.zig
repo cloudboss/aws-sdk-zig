@@ -5,6 +5,7 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
+const checksum_mod = @import("checksum.zig");
 const config_mod = @import("config.zig");
 const user_agent_mod = @import("user_agent.zig");
 
@@ -57,6 +58,7 @@ pub const Request = struct {
     tls: bool = true,
     service_name: []const u8 = "",
     api_version: []const u8 = "",
+    checksum_algorithm: ?checksum_mod.Algorithm = null,
 
     const Self = @This();
 
@@ -458,6 +460,46 @@ pub const HttpClient = struct {
             }) catch {};
         }
 
+        // Inject checksum header when algorithm is specified
+        var checksum_header_name: ?[]const u8 = null;
+        var checksum_header_value: ?[]const u8 = null;
+        var checksum_alg_upper: ?[]const u8 = null;
+        defer if (checksum_header_name) |h| self.allocator.free(h);
+        defer if (checksum_header_value) |v| self.allocator.free(v);
+        defer if (checksum_alg_upper) |u| self.allocator.free(u);
+        if (request.checksum_algorithm) |alg| {
+            const body_data = request.body orelse "";
+            const alg_name = algToString(alg);
+            if (checksum_mod.computeBase64(
+                self.allocator,
+                alg,
+                body_data,
+            )) |b64| {
+                checksum_header_value = b64;
+                if (std.fmt.allocPrint(
+                    self.allocator,
+                    "x-amz-checksum-{s}",
+                    .{alg_name},
+                )) |hname| {
+                    checksum_header_name = hname;
+                    extra_headers_list.append(self.allocator, .{
+                        .name = hname,
+                        .value = b64,
+                    }) catch {};
+                } else |_| {}
+                checksum_alg_upper = std.ascii.allocUpperString(
+                    self.allocator,
+                    alg_name,
+                ) catch null;
+                if (checksum_alg_upper) |upper| {
+                    extra_headers_list.append(self.allocator, .{
+                        .name = "x-amz-sdk-checksum-algorithm",
+                        .value = upper,
+                    }) catch {};
+                }
+            } else |_| {}
+        }
+
         var req = self.inner.request(request.method.toStd(), uri, .{
             .extra_headers = extra_headers_list.items,
             .keep_alive = options.keep_alive,
@@ -513,6 +555,32 @@ pub const HttpClient = struct {
             return if (err == error.StreamTooLong) error.ResponseTooLarge else error.RequestFailed;
         };
 
+        if (request.checksum_algorithm) |alg| {
+            const alg_name = algToString(alg);
+            var key_buf: [64]u8 = undefined;
+            const header_key = std.fmt.bufPrint(
+                &key_buf,
+                "x-amz-checksum-{s}",
+                .{alg_name},
+            ) catch null;
+            if (header_key) |k| {
+                if (resp_headers.get(k)) |expected| {
+                    const ok = checksum_mod.verify(
+                        alg,
+                        body,
+                        expected,
+                        self.allocator,
+                    ) catch false;
+                    if (!ok) {
+                        std.log.warn(
+                            "Response checksum mismatch for {s}",
+                            .{alg_name},
+                        );
+                    }
+                }
+            }
+        }
+
         return Response{
             .status = @intFromEnum(response.head.status),
             .body = body,
@@ -549,6 +617,15 @@ pub fn shouldBypassProxy(
         }
     }
     return false;
+}
+
+fn algToString(alg: checksum_mod.Algorithm) []const u8 {
+    return switch (alg) {
+        .crc32 => "crc32",
+        .crc32c => "crc32c",
+        .sha256 => "sha256",
+        .sha1 => "sha1",
+    };
 }
 
 /// Streaming body for responses where the HTTP connection stays open.
@@ -898,4 +975,56 @@ test "Request stores service_name and api_version for User-Agent" {
     try std.testing.expect(
         std.mem.containsAtLeast(u8, ua, 1, "api/sts#2011-06-15"),
     );
+}
+
+test "Request checksum_algorithm defaults to null" {
+    const request = Request.init("s3.us-east-1.amazonaws.com");
+    try std.testing.expectEqual(
+        @as(?checksum_mod.Algorithm, null),
+        request.checksum_algorithm,
+    );
+}
+
+test "algToString maps algorithms to header names" {
+    try std.testing.expectEqualStrings(
+        "crc32",
+        algToString(.crc32),
+    );
+    try std.testing.expectEqualStrings(
+        "crc32c",
+        algToString(.crc32c),
+    );
+    try std.testing.expectEqualStrings(
+        "sha256",
+        algToString(.sha256),
+    );
+    try std.testing.expectEqualStrings(
+        "sha1",
+        algToString(.sha1),
+    );
+}
+
+test "checksum computeBase64 and verify round-trip" {
+    const b64 = try checksum_mod.computeBase64(
+        std.testing.allocator,
+        .crc32,
+        "test",
+    );
+    defer std.testing.allocator.free(b64);
+
+    const ok = try checksum_mod.verify(
+        .crc32,
+        "test",
+        b64,
+        std.testing.allocator,
+    );
+    try std.testing.expect(ok);
+
+    const bad = try checksum_mod.verify(
+        .crc32,
+        "test",
+        "AAAA",
+        std.testing.allocator,
+    );
+    try std.testing.expect(!bad);
 }
