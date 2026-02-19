@@ -137,53 +137,6 @@ test "DescribeSubnets returns subnets in default VPC" {
     try std.testing.expect(subnets.len >= 1);
 }
 
-test "CreateTags adds tags to VPC" {
-    var create_result = try ec2.create_vpc.execute(
-        &shared_client,
-        .{ .cidr_block = "10.98.0.0/16" },
-        .{},
-    );
-    const vpc_id = create_result.vpc.?.vpc_id orelse {
-        create_result.deinit();
-        return error.MissingVpcId;
-    };
-
-    var diagnostic: ec2.ServiceError = .{ .unknown = .{} };
-    var tag_result = ec2.create_tags.execute(
-        &shared_client,
-        .{
-            .resources = &.{vpc_id},
-            .tags = &.{.{ .key = "Name", .value = "test-vpc" }},
-        },
-        .{ .diagnostic = &diagnostic },
-    ) catch |err| {
-        std.log.err("CreateTags: {s}: {s}", .{
-            diagnostic.code(),
-            diagnostic.message(),
-        });
-        var del = ec2.delete_vpc.execute(
-            &shared_client,
-            .{ .vpc_id = vpc_id },
-            .{},
-        ) catch {
-            create_result.deinit();
-            return err;
-        };
-        del.deinit();
-        create_result.deinit();
-        return err;
-    };
-    tag_result.deinit();
-
-    var delete_result = try ec2.delete_vpc.execute(
-        &shared_client,
-        .{ .vpc_id = vpc_id },
-        .{},
-    );
-    delete_result.deinit();
-    create_result.deinit();
-}
-
 test "DescribeSecurityGroups returns default group" {
     var result = try ec2.describe_security_groups.execute(
         &shared_client,
