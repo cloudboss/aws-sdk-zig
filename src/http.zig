@@ -5,6 +5,8 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
+const user_agent_mod = @import("user_agent.zig");
+
 /// HTTP methods
 pub const Method = enum {
     GET,
@@ -52,6 +54,8 @@ pub const Request = struct {
     headers: std.StringHashMapUnmanaged([]const u8),
     body: ?[]const u8 = null,
     tls: bool = true,
+    service_name: []const u8 = "",
+    api_version: []const u8 = "",
 
     const Self = @This();
 
@@ -269,6 +273,19 @@ pub const HttpClient = struct {
             }) catch return error.OutOfMemory;
         }
 
+        const ua = user_agent_mod.buildUserAgent(
+            self.allocator,
+            request.service_name,
+            request.api_version,
+        ) catch null;
+        defer if (ua) |s| self.allocator.free(s);
+        if (ua) |s| {
+            extra_headers_list.append(self.allocator, .{
+                .name = "User-Agent",
+                .value = s,
+            }) catch {};
+        }
+
         // Heap-allocate Inner for pointer stability
         const inner = self.allocator.create(StreamingBody.Inner) catch return error.OutOfMemory;
         errdefer self.allocator.destroy(inner);
@@ -358,6 +375,19 @@ pub const HttpClient = struct {
                 .name = entry.key_ptr.*,
                 .value = entry.value_ptr.*,
             }) catch return error.OutOfMemory;
+        }
+
+        const ua = user_agent_mod.buildUserAgent(
+            self.allocator,
+            request.service_name,
+            request.api_version,
+        ) catch null;
+        defer if (ua) |s| self.allocator.free(s);
+        if (ua) |s| {
+            extra_headers_list.append(self.allocator, .{
+                .name = "User-Agent",
+                .value = s,
+            }) catch {};
         }
 
         var req = self.inner.request(request.method.toStd(), uri, .{
@@ -710,5 +740,28 @@ test "shouldBypassProxy multiple entries" {
     );
     try std.testing.expect(
         !shouldBypassProxy("external.com", list),
+    );
+}
+
+test "Request stores service_name and api_version for User-Agent" {
+    var request = Request.init("sts.us-east-1.amazonaws.com");
+    request.service_name = "sts";
+    request.api_version = "2011-06-15";
+
+    try std.testing.expectEqualStrings("sts", request.service_name);
+    try std.testing.expectEqualStrings("2011-06-15", request.api_version);
+
+    const ua = try user_agent_mod.buildUserAgent(
+        std.testing.allocator,
+        request.service_name,
+        request.api_version,
+    );
+    defer std.testing.allocator.free(ua);
+
+    try std.testing.expect(
+        std.mem.startsWith(u8, ua, "aws-sdk-zig/"),
+    );
+    try std.testing.expect(
+        std.mem.containsAtLeast(u8, ua, 1, "api/sts#2011-06-15"),
     );
 }
