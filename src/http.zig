@@ -5,6 +5,7 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
+const config_mod = @import("config.zig");
 const user_agent_mod = @import("user_agent.zig");
 
 /// HTTP methods
@@ -125,6 +126,46 @@ pub const RequestError = error{
     OutOfMemory,
 };
 
+/// Token bucket for adaptive retry rate limiting.
+/// Tracks available capacity and adjusts refill rate based on
+/// throttle/success signals from the service.
+pub const TokenBucket = struct {
+    max_capacity: f64 = 500.0,
+    current_capacity: f64 = 500.0,
+    refill_rate: f64 = 0.0,
+    last_refill_time_ns: i128 = 0,
+
+    pub fn tryAcquire(self: *TokenBucket, cost: f64) bool {
+        self.refill();
+        if (self.current_capacity >= cost) {
+            self.current_capacity -= cost;
+            return true;
+        }
+        return false;
+    }
+
+    pub fn refill(self: *TokenBucket) void {
+        if (self.refill_rate <= 0.0) return;
+        const now_ns = std.time.nanoTimestamp();
+        const elapsed_s: f64 =
+            @as(f64, @floatFromInt(now_ns - self.last_refill_time_ns)) / 1e9;
+        self.current_capacity = @min(
+            self.max_capacity,
+            self.current_capacity + elapsed_s * self.refill_rate,
+        );
+        self.last_refill_time_ns = now_ns;
+    }
+
+    pub fn onThrottle(self: *TokenBucket) void {
+        self.refill_rate = @max(1.0, self.refill_rate * 0.7);
+        self.current_capacity = @max(0.0, self.current_capacity - 5.0);
+    }
+
+    pub fn onSuccess(self: *TokenBucket) void {
+        self.refill_rate = @min(500.0, self.refill_rate + 0.5);
+    }
+};
+
 /// Persistent HTTP client wrapper for connection pooling and retries
 pub const HttpClient = struct {
     inner: std.http.Client,
@@ -132,6 +173,8 @@ pub const HttpClient = struct {
     default_options: RequestOptions,
     proxy_arena: std.heap.ArenaAllocator,
     no_proxy: ?[]const u8,
+    retry_mode: config_mod.RetryMode = .standard,
+    token_bucket: TokenBucket = .{},
 
     const Self = @This();
 
@@ -211,13 +254,23 @@ pub const HttpClient = struct {
             const result = self.doRequest(request, options);
 
             if (result) |response| {
-                // Check if we should retry based on status code
-                if (response.isRetryable() and backoff.attempt + 1 < options.max_attempts) {
+                if (response.isRetryable() and
+                    backoff.attempt + 1 < options.max_attempts)
+                {
+                    if (self.retry_mode == .adaptive) {
+                        if (response.status == 429)
+                            self.token_bucket.onThrottle()
+                        else
+                            self.token_bucket.onThrottle();
+                        _ = self.token_bucket.tryAcquire(1.0);
+                    }
                     var resp = response;
                     resp.deinit();
                     backoff.wait();
                     continue;
                 }
+                if (self.retry_mode == .adaptive)
+                    self.token_bucket.onSuccess();
                 return response;
             } else |err| {
                 // Don't retry on non-transient errors
@@ -740,6 +793,54 @@ test "shouldBypassProxy multiple entries" {
     );
     try std.testing.expect(
         !shouldBypassProxy("external.com", list),
+    );
+}
+
+test "TokenBucket tryAcquire tracks capacity" {
+    var bucket = TokenBucket{};
+    try std.testing.expectEqual(@as(f64, 500.0), bucket.current_capacity);
+
+    try std.testing.expect(bucket.tryAcquire(1.0));
+    try std.testing.expectEqual(@as(f64, 499.0), bucket.current_capacity);
+
+    try std.testing.expect(bucket.tryAcquire(499.0));
+    try std.testing.expectEqual(@as(f64, 0.0), bucket.current_capacity);
+
+    try std.testing.expect(!bucket.tryAcquire(1.0));
+}
+
+test "TokenBucket onThrottle reduces rate and capacity" {
+    var bucket = TokenBucket{ .refill_rate = 10.0 };
+    bucket.onThrottle();
+    try std.testing.expectEqual(@as(f64, 7.0), bucket.refill_rate);
+    try std.testing.expectEqual(@as(f64, 495.0), bucket.current_capacity);
+
+    // Rate floor is 1.0
+    bucket.refill_rate = 1.0;
+    bucket.onThrottle();
+    try std.testing.expectEqual(@as(f64, 1.0), bucket.refill_rate);
+}
+
+test "TokenBucket onSuccess increases rate" {
+    var bucket = TokenBucket{};
+    try std.testing.expectEqual(@as(f64, 0.0), bucket.refill_rate);
+    bucket.onSuccess();
+    try std.testing.expectEqual(@as(f64, 0.5), bucket.refill_rate);
+    bucket.onSuccess();
+    try std.testing.expectEqual(@as(f64, 1.0), bucket.refill_rate);
+
+    // Rate ceiling is 500.0
+    bucket.refill_rate = 500.0;
+    bucket.onSuccess();
+    try std.testing.expectEqual(@as(f64, 500.0), bucket.refill_rate);
+}
+
+test "HttpClient defaults to standard retry mode" {
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+    try std.testing.expectEqual(
+        config_mod.RetryMode.standard,
+        client.retry_mode,
     );
 }
 
