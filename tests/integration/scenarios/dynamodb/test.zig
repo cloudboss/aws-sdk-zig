@@ -5,11 +5,13 @@ const dynamodb = @import("dynamodb");
 var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
 var shared_client: dynamodb.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_init = false;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
     const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
         return error.MissingEndpoint;
+    if (endpoint_url.len == 0) return error.MissingEndpoint;
     shared_cfg = try aws.Config.load(allocator, .{ .endpoint_url = endpoint_url });
     shared_client = dynamodb.Client.initWithOptions(
         allocator,
@@ -30,9 +32,12 @@ test "zest.beforeAll" {
         .billing_mode = .pay_per_request,
     }, .{});
     defer r.deinit();
+    shared_init = true;
 }
 
 test "zest.afterAll" {
+    defer _ = gpa.deinit();
+    if (!shared_init) return;
     {
         var r = try dynamodb.delete_table.execute(
             &shared_client,
@@ -43,7 +48,6 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
-    _ = gpa.deinit();
 }
 
 test "CreateTable returns table description with correct name" {

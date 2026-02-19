@@ -5,23 +5,27 @@ const lambda = @import("lambda");
 var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
 var shared_client: lambda.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_init = false;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
     const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
         return error.MissingEndpoint;
+    if (endpoint_url.len == 0) return error.MissingEndpoint;
     shared_cfg = try aws.Config.load(allocator, .{ .endpoint_url = endpoint_url });
     shared_client = lambda.Client.initWithOptions(
         allocator,
         &shared_cfg,
         .{ .keep_alive = false },
     );
+    shared_init = true;
 }
 
 test "zest.afterAll" {
+    defer _ = gpa.deinit();
+    if (!shared_init) return;
     shared_client.deinit();
     shared_cfg.deinit();
-    _ = gpa.deinit();
 }
 
 test "ListFunctions returns successfully" {

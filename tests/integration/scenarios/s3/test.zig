@@ -5,11 +5,13 @@ const s3 = @import("s3");
 var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
 var shared_client: s3.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_init = false;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
     const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
         return error.MissingEndpoint;
+    if (endpoint_url.len == 0) return error.MissingEndpoint;
     shared_cfg = try aws.Config.load(allocator, .{ .endpoint_url = endpoint_url });
     shared_client = s3.Client.initWithOptions(
         allocator,
@@ -60,9 +62,12 @@ test "zest.beforeAll" {
         );
         defer r.deinit();
     }
+    shared_init = true;
 }
 
 test "zest.afterAll" {
+    defer _ = gpa.deinit();
+    if (!shared_init) return;
     const keys = [_][]const u8{
         "hello.txt",
         "prefix-a/file.txt",
@@ -92,7 +97,6 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
-    _ = gpa.deinit();
 }
 
 test "CreateBucket returns successfully" {
