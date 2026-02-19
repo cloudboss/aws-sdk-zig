@@ -2,37 +2,82 @@ const std = @import("std");
 const aws = @import("aws");
 const sqs = @import("sqs");
 
-test "CreateQueue, SendMessage, ReceiveMessage, DeleteMessage, DeleteQueue" {
-    const allocator = std.testing.allocator;
+var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var shared_client: ?sqs.Client = null;
+var shared_cfg: ?aws.Config = null;
+var shared_queue_url_buf: [512]u8 = undefined;
+var shared_queue_url: []const u8 = "";
 
+test "zest.beforeAll" {
+    const allocator = gpa.allocator();
     const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
         return error.MissingEndpoint;
+    shared_cfg = try aws.Config.load(allocator, .{ .endpoint_url = endpoint_url });
+    shared_client = sqs.Client.initWithOptions(
+        allocator,
+        &shared_cfg.?,
+        .{ .keep_alive = false },
+    );
+    var r = try sqs.create_queue.execute(
+        &shared_client.?,
+        .{ .queue_name = "sdk-zig-sqs-shared" },
+        .{},
+    );
+    defer r.deinit();
+    const url = r.queue_url orelse return error.MissingQueueUrl;
+    @memcpy(shared_queue_url_buf[0..url.len], url);
+    shared_queue_url = shared_queue_url_buf[0..url.len];
+}
 
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
+test "zest.afterAll" {
+    if (shared_client) |*c| {
+        defer c.deinit();
+        if (shared_queue_url.len > 0) {
+            if (sqs.delete_queue.execute(
+                c,
+                .{ .queue_url = shared_queue_url },
+                .{},
+            )) |r_| {
+                var r = r_;
+                r.deinit();
+            } else |_| {}
+        }
+    }
+    if (shared_cfg) |*cfg| cfg.deinit();
+    _ = gpa.deinit();
+}
 
-    var client = sqs.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
-    defer client.deinit();
+test "CreateQueue returns queue URL" {
+    const client = &shared_client.?;
 
-    const queue_name = "sdk-zig-test-queue";
-    const message_body = "Hello from aws-sdk-zig integration test!";
-
-    // --- CreateQueue ---
     var create_result = try sqs.create_queue.execute(
-        &client,
-        .{ .queue_name = queue_name },
+        client,
+        .{ .queue_name = "sdk-zig-sqs-create" },
         .{},
     );
     defer create_result.deinit();
 
-    const queue_url = create_result.queue_url orelse return error.MissingQueueUrl;
+    const queue_url = create_result.queue_url orelse
+        return error.MissingQueueUrl;
+    try std.testing.expect(queue_url.len > 0);
 
-    // --- SendMessage ---
+    var del = try sqs.delete_queue.execute(
+        client,
+        .{ .queue_url = queue_url },
+        .{},
+    );
+    defer del.deinit();
+}
+
+test "SendMessage returns message ID and MD5" {
+    const client = &shared_client.?;
+
     var send_result = try sqs.send_message.execute(
-        &client,
-        .{ .queue_url = queue_url, .message_body = message_body },
+        client,
+        .{
+            .queue_url = shared_queue_url,
+            .message_body = "test message for send",
+        },
         .{},
     );
     defer send_result.deinit();
@@ -40,59 +85,132 @@ test "CreateQueue, SendMessage, ReceiveMessage, DeleteMessage, DeleteQueue" {
     try std.testing.expect(send_result.message_id != null);
     try std.testing.expect(send_result.md5_of_message_body != null);
 
-    // --- ReceiveMessage ---
+    // Drain the sent message so subsequent tests start clean.
+    var recv = try sqs.receive_message.execute(
+        client,
+        .{
+            .queue_url = shared_queue_url,
+            .max_number_of_messages = 1,
+            .wait_time_seconds = 5,
+        },
+        .{},
+    );
+    defer recv.deinit();
+    if (recv.messages) |msgs| {
+        if (msgs.len > 0) {
+            if (msgs[0].receipt_handle) |rh| {
+                var d = try sqs.delete_message.execute(
+                    client,
+                    .{
+                        .queue_url = shared_queue_url,
+                        .receipt_handle = rh,
+                    },
+                    .{},
+                );
+                defer d.deinit();
+            }
+        }
+    }
+}
+
+test "ReceiveMessage returns sent message body" {
+    const client = &shared_client.?;
+    const body = "receive-body-check";
+
+    var send_result = try sqs.send_message.execute(
+        client,
+        .{ .queue_url = shared_queue_url, .message_body = body },
+        .{},
+    );
+    defer send_result.deinit();
+
     var recv_result = try sqs.receive_message.execute(
-        &client,
-        .{ .queue_url = queue_url, .max_number_of_messages = 1, .wait_time_seconds = 5 },
+        client,
+        .{
+            .queue_url = shared_queue_url,
+            .max_number_of_messages = 1,
+            .wait_time_seconds = 5,
+        },
         .{},
     );
     defer recv_result.deinit();
 
-    const messages = recv_result.messages orelse return error.MissingMessages;
+    const messages = recv_result.messages orelse
+        return error.MissingMessages;
     try std.testing.expect(messages.len > 0);
-    try std.testing.expectEqualStrings(message_body, messages[0].body orelse
-        return error.MissingBody);
+    try std.testing.expectEqualStrings(
+        body,
+        messages[0].body orelse return error.MissingBody,
+    );
 
-    // --- DeleteMessage ---
-    const receipt_handle = messages[0].receipt_handle orelse return error.MissingReceiptHandle;
-    var del_msg_result = try sqs.delete_message.execute(
-        &client,
-        .{ .queue_url = queue_url, .receipt_handle = receipt_handle },
+    // Clean up the received message.
+    const receipt = messages[0].receipt_handle orelse
+        return error.MissingReceiptHandle;
+    var del = try sqs.delete_message.execute(
+        client,
+        .{ .queue_url = shared_queue_url, .receipt_handle = receipt },
         .{},
     );
-    defer del_msg_result.deinit();
-
-    // --- DeleteQueue ---
-    var del_queue_result = try sqs.delete_queue.execute(
-        &client,
-        .{ .queue_url = queue_url },
-        .{},
-    );
-    defer del_queue_result.deinit();
+    defer del.deinit();
 }
 
-test "SendMessageBatch sends multiple messages in one call" {
-    const allocator = std.testing.allocator;
+test "DeleteMessage removes message from queue" {
+    const client = &shared_client.?;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = sqs.Client.initWithOptions(
-        allocator,
-        &cfg,
-        .{ .keep_alive = false },
+    var send_result = try sqs.send_message.execute(
+        client,
+        .{ .queue_url = shared_queue_url, .message_body = "delete-me" },
+        .{},
     );
-    defer client.deinit();
+    defer send_result.deinit();
 
-    // --- CreateQueue ---
+    var recv_result = try sqs.receive_message.execute(
+        client,
+        .{
+            .queue_url = shared_queue_url,
+            .max_number_of_messages = 1,
+            .wait_time_seconds = 5,
+        },
+        .{},
+    );
+    defer recv_result.deinit();
+
+    const messages = recv_result.messages orelse
+        return error.MissingMessages;
+    try std.testing.expect(messages.len > 0);
+    const receipt = messages[0].receipt_handle orelse
+        return error.MissingReceiptHandle;
+
+    var del_msg = try sqs.delete_message.execute(
+        client,
+        .{ .queue_url = shared_queue_url, .receipt_handle = receipt },
+        .{},
+    );
+    defer del_msg.deinit();
+
+    // Verify queue is now empty.
+    var recv2 = try sqs.receive_message.execute(
+        client,
+        .{
+            .queue_url = shared_queue_url,
+            .max_number_of_messages = 1,
+            .wait_time_seconds = 0,
+        },
+        .{},
+    );
+    defer recv2.deinit();
+
+    if (recv2.messages) |msgs| {
+        try std.testing.expectEqual(0, msgs.len);
+    }
+}
+
+test "DeleteQueue removes queue" {
+    const client = &shared_client.?;
+
     var create_result = try sqs.create_queue.execute(
-        &client,
-        .{ .queue_name = "sdk-zig-sqs-batch-send" },
+        client,
+        .{ .queue_name = "sdk-zig-sqs-delete" },
         .{},
     );
     defer create_result.deinit();
@@ -100,9 +218,42 @@ test "SendMessageBatch sends multiple messages in one call" {
     const queue_url = create_result.queue_url orelse
         return error.MissingQueueUrl;
 
-    // --- SendMessageBatch ---
+    {
+        var del = try sqs.delete_queue.execute(
+            client,
+            .{ .queue_url = queue_url },
+            .{},
+        );
+        defer del.deinit();
+    }
+
+    var list_result = try sqs.list_queues.execute(client, .{}, .{});
+    defer list_result.deinit();
+
+    if (list_result.queue_urls) |urls| {
+        for (urls) |url| {
+            if (std.mem.indexOf(u8, url, "sdk-zig-sqs-delete") != null) {
+                return error.QueueStillExists;
+            }
+        }
+    }
+}
+
+test "SendMessageBatch sends multiple messages in one call" {
+    const client = &shared_client.?;
+
+    var create_result = try sqs.create_queue.execute(
+        client,
+        .{ .queue_name = "sdk-zig-sqs-batch" },
+        .{},
+    );
+    defer create_result.deinit();
+
+    const queue_url = create_result.queue_url orelse
+        return error.MissingQueueUrl;
+
     var batch_result = try sqs.send_message_batch.execute(
-        &client,
+        client,
         .{
             .queue_url = queue_url,
             .entries = &.{
@@ -143,49 +294,21 @@ test "SendMessageBatch sends multiple messages in one call" {
         return error.MissingSuccessful;
     try std.testing.expectEqual(3, successful.len);
 
-    // --- DeleteQueue ---
-    var del_queue_result = try sqs.delete_queue.execute(
-        &client,
+    var del = try sqs.delete_queue.execute(
+        client,
         .{ .queue_url = queue_url },
         .{},
     );
-    defer del_queue_result.deinit();
+    defer del.deinit();
 }
 
 test "GetQueueAttributes returns queue metadata" {
-    const allocator = std.testing.allocator;
+    const client = &shared_client.?;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = sqs.Client.initWithOptions(
-        allocator,
-        &cfg,
-        .{ .keep_alive = false },
-    );
-    defer client.deinit();
-
-    // --- CreateQueue ---
-    var create_result = try sqs.create_queue.execute(
-        &client,
-        .{ .queue_name = "sdk-zig-sqs-attributes" },
-        .{},
-    );
-    defer create_result.deinit();
-
-    const queue_url = create_result.queue_url orelse
-        return error.MissingQueueUrl;
-
-    // --- GetQueueAttributes ---
     var attr_result = try sqs.get_queue_attributes.execute(
-        &client,
+        client,
         .{
-            .queue_url = queue_url,
+            .queue_url = shared_queue_url,
             .attribute_names = &.{.all},
         },
         .{},
@@ -193,38 +316,14 @@ test "GetQueueAttributes returns queue metadata" {
     defer attr_result.deinit();
 
     try std.testing.expect(attr_result.attributes != null);
-
-    // --- DeleteQueue ---
-    var del_queue_result = try sqs.delete_queue.execute(
-        &client,
-        .{ .queue_url = queue_url },
-        .{},
-    );
-    defer del_queue_result.deinit();
 }
 
 test "ListQueues returns created queue URL" {
-    const allocator = std.testing.allocator;
+    const client = &shared_client.?;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = sqs.Client.initWithOptions(
-        allocator,
-        &cfg,
-        .{ .keep_alive = false },
-    );
-    defer client.deinit();
-
-    // --- CreateQueue ---
     var create_result = try sqs.create_queue.execute(
-        &client,
-        .{ .queue_name = "sdk-zig-sqs-list-queues" },
+        client,
+        .{ .queue_name = "sdk-zig-sqs-list" },
         .{},
     );
     defer create_result.deinit();
@@ -232,60 +331,34 @@ test "ListQueues returns created queue URL" {
     const queue_url = create_result.queue_url orelse
         return error.MissingQueueUrl;
 
-    // --- ListQueues ---
-    var list_result = try sqs.list_queues.execute(
-        &client,
-        .{},
-        .{},
-    );
+    var list_result = try sqs.list_queues.execute(client, .{}, .{});
     defer list_result.deinit();
 
     const urls = list_result.queue_urls orelse
         return error.MissingQueueUrls;
     var found = false;
     for (urls) |url| {
-        if (std.mem.indexOf(
-            u8,
-            url,
-            "sdk-zig-sqs-list-queues",
-        ) != null) {
+        if (std.mem.indexOf(u8, url, "sdk-zig-sqs-list") != null) {
             found = true;
             break;
         }
     }
     try std.testing.expect(found);
 
-    // --- DeleteQueue ---
-    var del_queue_result = try sqs.delete_queue.execute(
-        &client,
+    var del = try sqs.delete_queue.execute(
+        client,
         .{ .queue_url = queue_url },
         .{},
     );
-    defer del_queue_result.deinit();
+    defer del.deinit();
 }
 
 test "ReceiveMessage returns empty when queue is empty" {
-    const allocator = std.testing.allocator;
+    const client = &shared_client.?;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = sqs.Client.initWithOptions(
-        allocator,
-        &cfg,
-        .{ .keep_alive = false },
-    );
-    defer client.deinit();
-
-    // --- CreateQueue ---
     var create_result = try sqs.create_queue.execute(
-        &client,
-        .{ .queue_name = "sdk-zig-sqs-empty-receive" },
+        client,
+        .{ .queue_name = "sdk-zig-sqs-empty" },
         .{},
     );
     defer create_result.deinit();
@@ -293,9 +366,8 @@ test "ReceiveMessage returns empty when queue is empty" {
     const queue_url = create_result.queue_url orelse
         return error.MissingQueueUrl;
 
-    // --- ReceiveMessage (empty queue) ---
     var recv_result = try sqs.receive_message.execute(
-        &client,
+        client,
         .{
             .queue_url = queue_url,
             .wait_time_seconds = 0,
@@ -309,11 +381,276 @@ test "ReceiveMessage returns empty when queue is empty" {
         try std.testing.expectEqual(0, messages.len);
     }
 
-    // --- DeleteQueue ---
-    var del_queue_result = try sqs.delete_queue.execute(
-        &client,
+    var del = try sqs.delete_queue.execute(
+        client,
         .{ .queue_url = queue_url },
         .{},
     );
-    defer del_queue_result.deinit();
+    defer del.deinit();
+}
+
+test "GetQueueUrl returns URL for named queue" {
+    const client = &shared_client.?;
+
+    var create_result = try sqs.create_queue.execute(
+        client,
+        .{ .queue_name = "sdk-zig-sqs-geturl" },
+        .{},
+    );
+    defer create_result.deinit();
+
+    const created_url = create_result.queue_url orelse
+        return error.MissingQueueUrl;
+
+    var url_result = try sqs.get_queue_url.execute(
+        client,
+        .{ .queue_name = "sdk-zig-sqs-geturl" },
+        .{},
+    );
+    defer url_result.deinit();
+
+    const fetched_url = url_result.queue_url orelse
+        return error.MissingQueueUrl;
+    try std.testing.expectEqualStrings(created_url, fetched_url);
+
+    var del = try sqs.delete_queue.execute(
+        client,
+        .{ .queue_url = created_url },
+        .{},
+    );
+    defer del.deinit();
+}
+
+test "PurgeQueue removes all messages" {
+    const client = &shared_client.?;
+
+    var create_result = try sqs.create_queue.execute(
+        client,
+        .{ .queue_name = "sdk-zig-sqs-purge" },
+        .{},
+    );
+    defer create_result.deinit();
+
+    const queue_url = create_result.queue_url orelse
+        return error.MissingQueueUrl;
+
+    {
+        var r = try sqs.send_message.execute(
+            client,
+            .{ .queue_url = queue_url, .message_body = "purge-1" },
+            .{},
+        );
+        defer r.deinit();
+    }
+    {
+        var r = try sqs.send_message.execute(
+            client,
+            .{ .queue_url = queue_url, .message_body = "purge-2" },
+            .{},
+        );
+        defer r.deinit();
+    }
+
+    {
+        var r = try sqs.purge_queue.execute(
+            client,
+            .{ .queue_url = queue_url },
+            .{},
+        );
+        defer r.deinit();
+    }
+
+    var recv = try sqs.receive_message.execute(
+        client,
+        .{
+            .queue_url = queue_url,
+            .wait_time_seconds = 0,
+            .max_number_of_messages = 10,
+        },
+        .{},
+    );
+    defer recv.deinit();
+
+    if (recv.messages) |msgs| {
+        try std.testing.expectEqual(0, msgs.len);
+    }
+
+    var del = try sqs.delete_queue.execute(
+        client,
+        .{ .queue_url = queue_url },
+        .{},
+    );
+    defer del.deinit();
+}
+
+test "SendMessageBatch returns correct successful count" {
+    const client = &shared_client.?;
+
+    var create_result = try sqs.create_queue.execute(
+        client,
+        .{ .queue_name = "sdk-zig-sqs-batch-count" },
+        .{},
+    );
+    defer create_result.deinit();
+
+    const queue_url = create_result.queue_url orelse
+        return error.MissingQueueUrl;
+
+    var batch = try sqs.send_message_batch.execute(
+        client,
+        .{
+            .queue_url = queue_url,
+            .entries = &.{
+                .{
+                    .id = "a",
+                    .message_body = "alpha",
+                    .delay_seconds = null,
+                    .message_attributes = null,
+                    .message_deduplication_id = null,
+                    .message_group_id = null,
+                    .message_system_attributes = null,
+                },
+                .{
+                    .id = "b",
+                    .message_body = "beta",
+                    .delay_seconds = null,
+                    .message_attributes = null,
+                    .message_deduplication_id = null,
+                    .message_group_id = null,
+                    .message_system_attributes = null,
+                },
+                .{
+                    .id = "c",
+                    .message_body = "gamma",
+                    .delay_seconds = null,
+                    .message_attributes = null,
+                    .message_deduplication_id = null,
+                    .message_group_id = null,
+                    .message_system_attributes = null,
+                },
+            },
+        },
+        .{},
+    );
+    defer batch.deinit();
+
+    const successful = batch.successful orelse
+        return error.MissingSuccessful;
+    try std.testing.expectEqual(3, successful.len);
+
+    var del = try sqs.delete_queue.execute(
+        client,
+        .{ .queue_url = queue_url },
+        .{},
+    );
+    defer del.deinit();
+}
+
+test "CreateQueue with attributes sets visibility timeout" {
+    const client = &shared_client.?;
+
+    var create_result = try sqs.create_queue.execute(
+        client,
+        .{
+            .queue_name = "sdk-zig-sqs-attrs-create",
+            .attributes = &.{
+                .{ .key = "VisibilityTimeout", .value = "30" },
+            },
+        },
+        .{},
+    );
+    defer create_result.deinit();
+
+    const queue_url = create_result.queue_url orelse
+        return error.MissingQueueUrl;
+    try std.testing.expect(queue_url.len > 0);
+
+    var del = try sqs.delete_queue.execute(
+        client,
+        .{ .queue_url = queue_url },
+        .{},
+    );
+    defer del.deinit();
+}
+
+test "ChangeMessageVisibility extends visibility timeout" {
+    const client = &shared_client.?;
+
+    var create_result = try sqs.create_queue.execute(
+        client,
+        .{ .queue_name = "sdk-zig-sqs-visibility" },
+        .{},
+    );
+    defer create_result.deinit();
+
+    const queue_url = create_result.queue_url orelse
+        return error.MissingQueueUrl;
+
+    {
+        var r = try sqs.send_message.execute(
+            client,
+            .{ .queue_url = queue_url, .message_body = "visibility-test" },
+            .{},
+        );
+        defer r.deinit();
+    }
+
+    // Receive makes the message invisible for the default timeout.
+    var recv1 = try sqs.receive_message.execute(
+        client,
+        .{
+            .queue_url = queue_url,
+            .max_number_of_messages = 1,
+            .wait_time_seconds = 5,
+        },
+        .{},
+    );
+    defer recv1.deinit();
+
+    const messages = recv1.messages orelse return error.MissingMessages;
+    try std.testing.expect(messages.len > 0);
+    const receipt = messages[0].receipt_handle orelse
+        return error.MissingReceiptHandle;
+
+    // Set visibility timeout to 0 so the message becomes immediately visible.
+    {
+        var r = try sqs.change_message_visibility.execute(
+            client,
+            .{
+                .queue_url = queue_url,
+                .receipt_handle = receipt,
+                .visibility_timeout = 0,
+            },
+            .{},
+        );
+        defer r.deinit();
+    }
+
+    // The message should be receivable again.
+    var recv2 = try sqs.receive_message.execute(
+        client,
+        .{
+            .queue_url = queue_url,
+            .max_number_of_messages = 1,
+            .wait_time_seconds = 5,
+        },
+        .{},
+    );
+    defer recv2.deinit();
+
+    const msgs2 = recv2.messages orelse return error.MissingMessages;
+    try std.testing.expect(msgs2.len > 0);
+    try std.testing.expectEqualStrings(
+        "visibility-test",
+        msgs2[0].body orelse return error.MissingBody,
+    );
+
+    {
+        var r = try sqs.delete_queue.execute(
+            client,
+            .{ .queue_url = queue_url },
+            .{},
+        );
+        defer r.deinit();
+    }
 }
