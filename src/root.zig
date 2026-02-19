@@ -4,6 +4,7 @@
 
 const std = @import("std");
 
+pub const checksum = @import("checksum.zig");
 pub const credentials = @import("credentials.zig");
 pub const signing = @import("signing.zig");
 pub const http = @import("http.zig");
