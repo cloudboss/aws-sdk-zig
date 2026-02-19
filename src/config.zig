@@ -91,6 +91,8 @@ pub const Config = struct {
     ca_bundle: ?[]const u8 = null,
     /// Parsed config file for downstream use
     config_file: ?ConfigFile = null,
+    /// Profile name for config file lookups
+    profile: []const u8 = "default",
 
     allocator: Allocator,
 
@@ -155,6 +157,7 @@ pub const Config = struct {
             .retry_mode = retry_mode,
             .ca_bundle = ca_bundle,
             .config_file = cf,
+            .profile = options.profile,
             .allocator = allocator,
         };
     }
@@ -195,14 +198,157 @@ pub const Config = struct {
     }
 
     /// Build service endpoint URL
-    pub fn getEndpoint(self: *const Self, service: []const u8, allocator: Allocator) ![]const u8 {
+    pub fn getEndpoint(
+        self: *const Self,
+        service: []const u8,
+        allocator: Allocator,
+    ) ![]const u8 {
         return endpoint_mod.resolveEndpoint(allocator, service, self.region, .{
             .fips = self.use_fips,
             .dual_stack = self.use_dual_stack,
             .endpoint_override = self.endpoint_url,
         });
     }
+
+    /// Resolve endpoint URL for a specific service with full
+    /// 6-level precedence:
+    ///   1. self.endpoint_url (code-level override)
+    ///   2. AWS_ENDPOINT_URL_{SDK_ID} (per-service env var)
+    ///   3. AWS_ENDPOINT_URL (global env var)
+    ///   4. Services section endpoint (from config file)
+    ///   5. Profile endpoint_url (from config file)
+    ///   6. Partition-based default
+    ///
+    /// Levels 2-5 are skipped when
+    /// AWS_IGNORE_CONFIGURED_ENDPOINT_URLS is "true" or the
+    /// profile sets ignore_configured_endpoint_urls.
+    pub fn getEndpointForService(
+        self: *const Self,
+        service: []const u8,
+        sdk_id: []const u8,
+        allocator: Allocator,
+    ) ![]const u8 {
+        // Level 1: Code-level override always wins
+        if (self.endpoint_url) |url| {
+            return try allocator.dupe(u8, url);
+        }
+
+        const ignore = shouldIgnoreConfiguredEndpoints(
+            self.config_file,
+            self.profile,
+        );
+
+        if (!ignore) {
+            // Level 2: Per-service env var
+            var env_buf: [256]u8 = undefined;
+            const prefix = "AWS_ENDPOINT_URL_";
+            @memcpy(env_buf[0..prefix.len], prefix);
+            const upper = sdkIdToEnvKey(
+                sdk_id,
+                env_buf[prefix.len..],
+            );
+            const key_len = prefix.len + upper.len;
+            env_buf[key_len] = 0;
+            if (std.posix.getenv(
+                env_buf[0..key_len :0],
+            )) |url| {
+                return try allocator.dupe(u8, url);
+            }
+
+            // Level 3: Global endpoint env var
+            if (std.posix.getenv(
+                "AWS_ENDPOINT_URL",
+            )) |url| {
+                return try allocator.dupe(u8, url);
+            }
+
+            if (self.config_file) |cf| {
+                if (cf.getProfile(self.profile)) |p| {
+                    // Level 4: Services section
+                    if (p.services) |svc_name| {
+                        if (cf.getServicesSection(
+                            svc_name,
+                        )) |section| {
+                            var cfg_buf: [256]u8 = undefined;
+                            const cfg_key = sdkIdToConfigKey(
+                                sdk_id,
+                                &cfg_buf,
+                            );
+                            if (section.get(cfg_key)) |sc| {
+                                if (sc.endpoint_url) |url| {
+                                    return try allocator.dupe(
+                                        u8,
+                                        url,
+                                    );
+                                }
+                            }
+                        }
+                    }
+
+                    // Level 5: Profile endpoint_url
+                    if (p.endpoint_url) |url| {
+                        return try allocator.dupe(u8, url);
+                    }
+                }
+            }
+        }
+
+        // Level 6: Partition-based default
+        return endpoint_mod.resolveEndpoint(
+            allocator,
+            service,
+            self.region,
+            .{
+                .fips = self.use_fips,
+                .dual_stack = self.use_dual_stack,
+            },
+        );
+    }
 };
+
+/// Check whether configured endpoint URLs should be ignored
+/// (env var or profile setting).
+fn shouldIgnoreConfiguredEndpoints(
+    config_file: ?ConfigFile,
+    profile_name: []const u8,
+) bool {
+    if (std.posix.getenv(
+        "AWS_IGNORE_CONFIGURED_ENDPOINT_URLS",
+    )) |v| {
+        if (std.mem.eql(u8, v, "true")) return true;
+    }
+    if (config_file) |cf| {
+        if (cf.getProfile(profile_name)) |p| {
+            return p.ignore_configured_endpoint_urls orelse
+                false;
+        }
+    }
+    return false;
+}
+
+/// Transform SDK ID to uppercase with underscores for env var keys.
+/// "Secrets Manager" -> "SECRETS_MANAGER"
+fn sdkIdToEnvKey(sdk_id: []const u8, buf: []u8) []const u8 {
+    for (sdk_id, 0..) |c, i| {
+        buf[i] = if (c == ' ')
+            @as(u8, '_')
+        else
+            std.ascii.toUpper(c);
+    }
+    return buf[0..sdk_id.len];
+}
+
+/// Transform SDK ID to lowercase with underscores for config keys.
+/// "Secrets Manager" -> "secrets_manager"
+fn sdkIdToConfigKey(sdk_id: []const u8, buf: []u8) []const u8 {
+    for (sdk_id, 0..) |c, i| {
+        buf[i] = if (c == ' ')
+            @as(u8, '_')
+        else
+            std.ascii.toLower(c);
+    }
+    return buf[0..sdk_id.len];
+}
 
 /// Profile settings from ~/.aws/config
 pub const Profile = struct {
@@ -1051,4 +1197,219 @@ test "ca_bundle: null by default" {
         @as(?[]const u8, null) orelse
         (if (prof) |p| p.ca_bundle else null);
     try std.testing.expect(got == null);
+}
+
+test "sdkIdToEnvKey" {
+    var buf: [256]u8 = undefined;
+    try std.testing.expectEqualStrings(
+        "SECRETS_MANAGER",
+        sdkIdToEnvKey("Secrets Manager", &buf),
+    );
+    try std.testing.expectEqualStrings(
+        "STS",
+        sdkIdToEnvKey("STS", &buf),
+    );
+    try std.testing.expectEqualStrings(
+        "S3",
+        sdkIdToEnvKey("S3", &buf),
+    );
+    try std.testing.expectEqualStrings(
+        "ELASTIC_LOAD_BALANCING",
+        sdkIdToEnvKey("Elastic Load Balancing", &buf),
+    );
+}
+
+test "sdkIdToConfigKey" {
+    var buf: [256]u8 = undefined;
+    try std.testing.expectEqualStrings(
+        "secrets_manager",
+        sdkIdToConfigKey("Secrets Manager", &buf),
+    );
+    try std.testing.expectEqualStrings(
+        "sts",
+        sdkIdToConfigKey("STS", &buf),
+    );
+    try std.testing.expectEqualStrings(
+        "s3",
+        sdkIdToConfigKey("S3", &buf),
+    );
+}
+
+test "getEndpointForService: code override wins" {
+    var config = Config.fromEnvironment("us-east-1");
+    config.endpoint_url = "http://localhost:4566";
+
+    const ep = try config.getEndpointForService(
+        "sts",
+        "STS",
+        std.testing.allocator,
+    );
+    defer std.testing.allocator.free(ep);
+
+    try std.testing.expectEqualStrings(
+        "http://localhost:4566",
+        ep,
+    );
+}
+
+test "getEndpointForService: partition default" {
+    const config = Config.fromEnvironment("us-west-2");
+
+    const ep = try config.getEndpointForService(
+        "sts",
+        "STS",
+        std.testing.allocator,
+    );
+    defer std.testing.allocator.free(ep);
+
+    try std.testing.expectEqualStrings(
+        "sts.us-west-2.amazonaws.com",
+        ep,
+    );
+}
+
+test "getEndpointForService: services section lookup" {
+    const content =
+        "[default]\n" ++
+        "region = us-east-1\n" ++
+        "services = my-services\n" ++
+        "\n" ++
+        "[services my-services]\n" ++
+        "secrets_manager =\n" ++
+        "  endpoint_url = http://secrets-svc:8080\n";
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    var config = Config.fromEnvironment("us-east-1");
+    config.config_file = cf;
+    config.profile = "default";
+
+    const ep = try config.getEndpointForService(
+        "secretsmanager",
+        "Secrets Manager",
+        std.testing.allocator,
+    );
+    defer std.testing.allocator.free(ep);
+
+    try std.testing.expectEqualStrings(
+        "http://secrets-svc:8080",
+        ep,
+    );
+}
+
+test "getEndpointForService: profile endpoint_url" {
+    const content =
+        "[default]\n" ++
+        "region = us-east-1\n" ++
+        "endpoint_url = http://profile-endpoint\n";
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    var config = Config.fromEnvironment("us-east-1");
+    config.config_file = cf;
+    config.profile = "default";
+
+    const ep = try config.getEndpointForService(
+        "sts",
+        "STS",
+        std.testing.allocator,
+    );
+    defer std.testing.allocator.free(ep);
+
+    try std.testing.expectEqualStrings(
+        "http://profile-endpoint",
+        ep,
+    );
+}
+
+test "getEndpointForService: ignore flag skips config" {
+    const content =
+        "[default]\n" ++
+        "region = us-east-1\n" ++
+        "endpoint_url = http://profile-endpoint\n" ++
+        "ignore_configured_endpoint_urls = true\n" ++
+        "services = my-services\n" ++
+        "\n" ++
+        "[services my-services]\n" ++
+        "sts =\n" ++
+        "  endpoint_url = http://services-sts\n";
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    var config = Config.fromEnvironment("us-east-1");
+    config.config_file = cf;
+    config.profile = "default";
+
+    const ep = try config.getEndpointForService(
+        "sts",
+        "STS",
+        std.testing.allocator,
+    );
+    defer std.testing.allocator.free(ep);
+
+    // Ignore flag causes fallback to partition default
+    try std.testing.expectEqualStrings(
+        "sts.us-east-1.amazonaws.com",
+        ep,
+    );
+}
+
+test "getEndpointForService: services beats profile" {
+    const content =
+        "[default]\n" ++
+        "region = us-east-1\n" ++
+        "endpoint_url = http://profile-endpoint\n" ++
+        "services = my-services\n" ++
+        "\n" ++
+        "[services my-services]\n" ++
+        "sts =\n" ++
+        "  endpoint_url = http://services-sts\n";
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    var config = Config.fromEnvironment("us-east-1");
+    config.config_file = cf;
+    config.profile = "default";
+
+    const ep = try config.getEndpointForService(
+        "sts",
+        "STS",
+        std.testing.allocator,
+    );
+    defer std.testing.allocator.free(ep);
+
+    try std.testing.expectEqualStrings(
+        "http://services-sts",
+        ep,
+    );
+}
+
+test "getEndpointForService: code override beats ignore" {
+    const content =
+        "[default]\n" ++
+        "ignore_configured_endpoint_urls = true\n";
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    var config = Config.fromEnvironment("us-east-1");
+    config.config_file = cf;
+    config.profile = "default";
+    config.endpoint_url = "http://code-override";
+
+    const ep = try config.getEndpointForService(
+        "sts",
+        "STS",
+        std.testing.allocator,
+    );
+    defer std.testing.allocator.free(ep);
+
+    try std.testing.expectEqualStrings(
+        "http://code-override",
+        ep,
+    );
 }
