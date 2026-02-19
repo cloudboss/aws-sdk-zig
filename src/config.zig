@@ -10,6 +10,35 @@ const CredentialsProvider = credentials_mod.CredentialsProvider;
 const ChainProvider = credentials_mod.ChainProvider;
 const endpoint_mod = @import("endpoint.zig");
 
+/// Retry mode for transient failures
+pub const RetryMode = enum { standard, adaptive };
+
+/// Parse retry mode from string value
+pub fn parseRetryMode(value: []const u8) ?RetryMode {
+    if (std.mem.eql(u8, value, "standard")) {
+        return .standard;
+    } else if (std.mem.eql(u8, value, "adaptive")) {
+        return .adaptive;
+    }
+    return null;
+}
+
+/// Read retry mode from AWS_RETRY_MODE environment variable
+fn readEnvRetryMode() ?RetryMode {
+    if (std.posix.getenv("AWS_RETRY_MODE")) |value| {
+        return parseRetryMode(value);
+    }
+    return null;
+}
+
+/// Read max attempts from AWS_MAX_ATTEMPTS environment variable
+fn readEnvMaxAttempts() ?u32 {
+    if (std.posix.getenv("AWS_MAX_ATTEMPTS")) |value| {
+        return std.fmt.parseInt(u32, value, 10) catch null;
+    }
+    return null;
+}
+
 /// Options for Config.load()
 pub const LoadOptions = struct {
     /// Explicit region override
@@ -20,6 +49,16 @@ pub const LoadOptions = struct {
     profile: []const u8 = "default",
     /// Custom endpoint URL (for LocalStack, etc.)
     endpoint_url: ?[]const u8 = null,
+    /// Use FIPS endpoints
+    use_fips: ?bool = null,
+    /// Use dual-stack endpoints
+    use_dual_stack: ?bool = null,
+    /// Maximum retry attempts
+    max_attempts: ?u32 = null,
+    /// Retry mode
+    retry_mode: ?RetryMode = null,
+    /// CA bundle path
+    ca_bundle: ?[]const u8 = null,
 };
 
 /// AWS SDK configuration shared across service clients
@@ -38,6 +77,10 @@ pub const Config = struct {
     use_fips: bool = false,
     /// Use dual-stack endpoints
     use_dual_stack: bool = false,
+    /// Retry mode for transient failures
+    retry_mode: RetryMode = .standard,
+    /// CA bundle path for TLS verification
+    ca_bundle: ?[]const u8 = null,
 
     allocator: Allocator,
 
@@ -124,6 +167,19 @@ pub const Profile = struct {
     sso_region: ?[]const u8 = null,
     // SSO (session-based)
     sso_session: ?[]const u8 = null,
+    // Endpoint and service configuration
+    endpoint_url: ?[]const u8 = null,
+    services: ?[]const u8 = null,
+    use_fips_endpoint: ?bool = null,
+    use_dualstack_endpoint: ?bool = null,
+    max_attempts: ?u32 = null,
+    retry_mode: ?[]const u8 = null,
+    ec2_metadata_service_endpoint: ?[]const u8 = null,
+    ec2_metadata_service_endpoint_mode: ?[]const u8 = null,
+    ca_bundle: ?[]const u8 = null,
+    s3_addressing_style: ?[]const u8 = null,
+    s3_use_accelerate_endpoint: ?bool = null,
+    ignore_configured_endpoint_urls: ?bool = null,
 };
 
 /// SSO session settings from ~/.aws/config [sso-session name] sections
@@ -275,6 +331,30 @@ fn setProfileField(p: *Profile, key: []const u8, value: []const u8) void {
         p.sso_region = value;
     } else if (std.mem.eql(u8, key, "sso_session")) {
         p.sso_session = value;
+    } else if (std.mem.eql(u8, key, "endpoint_url")) {
+        p.endpoint_url = value;
+    } else if (std.mem.eql(u8, key, "services")) {
+        p.services = value;
+    } else if (std.mem.eql(u8, key, "use_fips_endpoint")) {
+        p.use_fips_endpoint = std.mem.eql(u8, value, "true");
+    } else if (std.mem.eql(u8, key, "use_dualstack_endpoint")) {
+        p.use_dualstack_endpoint = std.mem.eql(u8, value, "true");
+    } else if (std.mem.eql(u8, key, "max_attempts")) {
+        p.max_attempts = std.fmt.parseInt(u32, value, 10) catch null;
+    } else if (std.mem.eql(u8, key, "retry_mode")) {
+        p.retry_mode = value;
+    } else if (std.mem.eql(u8, key, "ec2_metadata_service_endpoint")) {
+        p.ec2_metadata_service_endpoint = value;
+    } else if (std.mem.eql(u8, key, "ec2_metadata_service_endpoint_mode")) {
+        p.ec2_metadata_service_endpoint_mode = value;
+    } else if (std.mem.eql(u8, key, "ca_bundle")) {
+        p.ca_bundle = value;
+    } else if (std.mem.eql(u8, key, "s3_addressing_style")) {
+        p.s3_addressing_style = value;
+    } else if (std.mem.eql(u8, key, "s3_use_accelerate_endpoint")) {
+        p.s3_use_accelerate_endpoint = std.mem.eql(u8, value, "true");
+    } else if (std.mem.eql(u8, key, "ignore_configured_endpoint_urls")) {
+        p.ignore_configured_endpoint_urls = std.mem.eql(u8, value, "true");
     }
 }
 
@@ -365,7 +445,11 @@ fn readRegionFromConfigFile(allocator: Allocator, profile: []const u8) !?[]const
 }
 
 /// Parse region from AWS config file content
-fn parseRegionFromConfig(allocator: Allocator, content: []const u8, profile: []const u8) !?[]const u8 {
+fn parseRegionFromConfig(
+    allocator: Allocator,
+    content: []const u8,
+    profile: []const u8,
+) !?[]const u8 {
     // Build target section name: [default] or [profile xyz]
     var target_section_buf: [256]u8 = undefined;
     const target_section = if (std.mem.eql(u8, profile, "default"))
@@ -535,12 +619,21 @@ test "parseConfigFile with multiple profiles" {
 
     // eks-pod profile
     const eks = cf.getProfile("eks-pod").?;
-    try std.testing.expectEqualStrings("arn:aws:iam::123456789012:role/MyRole", eks.role_arn.?);
-    try std.testing.expectEqualStrings("/var/run/secrets/token", eks.web_identity_token_file.?);
+    try std.testing.expectEqualStrings(
+        "arn:aws:iam::123456789012:role/MyRole",
+        eks.role_arn.?,
+    );
+    try std.testing.expectEqualStrings(
+        "/var/run/secrets/token",
+        eks.web_identity_token_file.?,
+    );
 
     // custom-tool profile
     const custom = cf.getProfile("custom-tool").?;
-    try std.testing.expectEqualStrings("/usr/local/bin/my-cred-helper", custom.credential_process.?);
+    try std.testing.expectEqualStrings(
+        "/usr/local/bin/my-cred-helper",
+        custom.credential_process.?,
+    );
 
     // nonexistent
     try std.testing.expect(cf.getProfile("nonexistent") == null);
@@ -610,4 +703,50 @@ test "parseSectionHeader" {
 
     const s4 = parseSectionHeader("[unknown]");
     try std.testing.expect(s4.kind == .none);
+}
+
+test "parseRetryMode" {
+    try std.testing.expect(parseRetryMode("standard") == .standard);
+    try std.testing.expect(parseRetryMode("adaptive") == .adaptive);
+    try std.testing.expect(parseRetryMode("invalid") == null);
+    try std.testing.expect(parseRetryMode("") == null);
+}
+
+test "Profile with new endpoint fields" {
+    const content =
+        \\[default]
+        \\region = us-east-1
+        \\endpoint_url = http://localhost:4566
+        \\use_fips_endpoint = true
+        \\max_attempts = 5
+    ;
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    const def = cf.getProfile("default").?;
+    try std.testing.expectEqualStrings("us-east-1", def.region.?);
+    try std.testing.expectEqualStrings("http://localhost:4566", def.endpoint_url.?);
+    try std.testing.expect(def.use_fips_endpoint == true);
+    try std.testing.expect(def.max_attempts == 5);
+}
+
+test "Profile with invalid max_attempts" {
+    const content =
+        \\[default]
+        \\region = us-east-1
+        \\max_attempts = invalid
+    ;
+
+    var cf = parseConfigFile(std.testing.allocator, content);
+    defer cf.deinit();
+
+    const def = cf.getProfile("default").?;
+    try std.testing.expect(def.max_attempts == null);
+}
+
+test "Config defaults" {
+    const config = Config.fromEnvironment("us-east-1");
+    try std.testing.expect(config.retry_mode == .standard);
+    try std.testing.expect(config.ca_bundle == null);
 }
