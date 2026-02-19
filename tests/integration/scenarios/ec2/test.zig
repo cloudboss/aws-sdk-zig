@@ -2,82 +2,64 @@ const std = @import("std");
 const aws = @import("aws");
 const ec2 = @import("ec2");
 
-test "DescribeVpcs returns results" {
-    const allocator = std.testing.allocator;
+var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var shared_client: ec2.Client = undefined;
+var shared_cfg: aws.Config = undefined;
+var shared_init = false;
 
+test "zest.beforeAll" {
+    const allocator = gpa.allocator();
     const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
         return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
-    defer client.deinit();
-
-    var result = try ec2.describe_vpcs.execute(
-        &client,
-        .{},
-        .{},
+    if (endpoint_url.len == 0) return error.MissingEndpoint;
+    shared_cfg = try aws.Config.load(allocator, .{ .endpoint_url = endpoint_url });
+    shared_client = ec2.Client.initWithOptions(
+        allocator,
+        &shared_cfg,
+        .{ .keep_alive = false },
     );
+    shared_init = true;
+}
+
+test "zest.afterAll" {
+    defer _ = gpa.deinit();
+    if (!shared_init) return;
+    shared_client.deinit();
+    shared_cfg.deinit();
+}
+
+test "DescribeVpcs returns results" {
+    var result = try ec2.describe_vpcs.execute(&shared_client, .{}, .{});
     defer result.deinit();
 
-    // LocalStack returns a default VPC
     const vpcs = result.vpcs orelse return error.MissingVpcs;
     try std.testing.expect(vpcs.len >= 1);
-    // Default VPC should have a vpc_id and cidr_block
     try std.testing.expect(vpcs[0].vpc_id != null);
     try std.testing.expect(vpcs[0].cidr_block != null);
 }
 
-test "CreateVpc and DeleteVpc round-trip" {
-    const allocator = std.testing.allocator;
+test "CreateVpc returns successfully" {
+    var result = try ec2.create_vpc.execute(
+        &shared_client,
+        .{ .cidr_block = "10.99.0.0/16" },
+        .{},
+    );
+    const vpc_id = result.vpc.?.vpc_id orelse {
+        result.deinit();
+        return error.MissingVpcId;
+    };
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
-    defer client.deinit();
-
-    // Create a VPC
-    {
-        var result = try ec2.create_vpc.execute(
-            &client,
-            .{ .cidr_block = "10.99.0.0/16" },
-            .{},
-        );
-        defer result.deinit();
-    }
-
-    // Delete the VPC (need vpc-id from response, but response parsing is limited;
-    // just verify the create call succeeded without error)
+    var delete_result = try ec2.delete_vpc.execute(
+        &shared_client,
+        .{ .vpc_id = vpc_id },
+        .{},
+    );
+    delete_result.deinit();
+    result.deinit();
 }
 
 test "DescribeVpcs returns VPC with expected fields" {
-    const allocator = std.testing.allocator;
-
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
-    defer client.deinit();
-
-    var result = try ec2.describe_vpcs.execute(
-        &client,
-        .{},
-        .{},
-    );
+    var result = try ec2.describe_vpcs.execute(&shared_client, .{}, .{});
     defer result.deinit();
 
     const vpcs = result.vpcs orelse return error.MissingField;
@@ -89,30 +71,15 @@ test "DescribeVpcs returns VPC with expected fields" {
     if (vpc.state == null) return error.MissingField;
 }
 
-test "CreateSecurityGroup and DeleteSecurityGroup round-trip" {
-    const allocator = std.testing.allocator;
-
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
-    defer client.deinit();
-
-    // Get the default VPC ID (LocalStack requires vpc_id even for default VPC)
-    var vpcs_result = try ec2.describe_vpcs.execute(&client, .{}, .{});
+test "CreateSecurityGroup returns group ID" {
+    var vpcs_result = try ec2.describe_vpcs.execute(&shared_client, .{}, .{});
     defer vpcs_result.deinit();
     const vpcs = vpcs_result.vpcs orelse return error.MissingVpcs;
     if (vpcs.len == 0) return error.NoVpcs;
     const vpc_id = vpcs[0].vpc_id orelse return error.MissingVpcId;
 
-    // Create the security group in the default VPC
     var create_result = try ec2.create_security_group.execute(
-        &client,
+        &shared_client,
         .{
             .group_name = "sdk-zig-ec2-sg",
             .description = "sdk-zig-ec2-security-group",
@@ -120,66 +87,198 @@ test "CreateSecurityGroup and DeleteSecurityGroup round-trip" {
         },
         .{},
     );
-    defer create_result.deinit();
 
-    const group_id = create_result.group_id orelse return error.MissingGroupId;
+    const group_id = create_result.group_id orelse {
+        create_result.deinit();
+        return error.MissingGroupId;
+    };
 
-    // Delete using the group_id (owned by create_result's arena, still alive)
     var delete_result = try ec2.delete_security_group.execute(
-        &client,
+        &shared_client,
         .{ .group_id = group_id },
         .{},
     );
-    defer delete_result.deinit();
+    delete_result.deinit();
+    create_result.deinit();
 }
 
 test "DescribeAvailabilityZones returns zones" {
-    const allocator = std.testing.allocator;
-
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
-    defer client.deinit();
-
     var result = try ec2.describe_availability_zones.execute(
-        &client,
+        &shared_client,
         .{},
         .{},
     );
     defer result.deinit();
 
-    // LocalStack returns at least one availability zone
     const zones = result.availability_zones orelse return error.MissingField;
     try std.testing.expect(zones.len >= 1);
 }
 
 test "DescribeInstances returns successfully" {
-    const allocator = std.testing.allocator;
-
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
-    defer cfg.deinit();
-
-    var client = ec2.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
-    defer client.deinit();
-
     var result = try ec2.describe_instances.execute(
-        &client,
+        &shared_client,
         .{},
         .{},
     );
     defer result.deinit();
 
-    // Verify reservations field is non-null (empty list is fine, null is not)
     _ = result.reservations orelse return error.MissingField;
+}
+
+test "DescribeSubnets returns subnets in default VPC" {
+    var result = try ec2.describe_subnets.execute(
+        &shared_client,
+        .{},
+        .{},
+    );
+    defer result.deinit();
+
+    const subnets = result.subnets orelse return error.MissingField;
+    try std.testing.expect(subnets.len >= 1);
+}
+
+test "CreateTags adds tags to VPC" {
+    var create_result = try ec2.create_vpc.execute(
+        &shared_client,
+        .{ .cidr_block = "10.98.0.0/16" },
+        .{},
+    );
+    const vpc_id = create_result.vpc.?.vpc_id orelse {
+        create_result.deinit();
+        return error.MissingVpcId;
+    };
+
+    var diagnostic: ec2.ServiceError = .{ .unknown = .{} };
+    var tag_result = ec2.create_tags.execute(
+        &shared_client,
+        .{
+            .resources = &.{vpc_id},
+            .tags = &.{.{ .key = "Name", .value = "test-vpc" }},
+        },
+        .{ .diagnostic = &diagnostic },
+    ) catch |err| {
+        std.log.err("CreateTags: {s}: {s}", .{
+            diagnostic.code(),
+            diagnostic.message(),
+        });
+        var del = ec2.delete_vpc.execute(
+            &shared_client,
+            .{ .vpc_id = vpc_id },
+            .{},
+        ) catch {
+            create_result.deinit();
+            return err;
+        };
+        del.deinit();
+        create_result.deinit();
+        return err;
+    };
+    tag_result.deinit();
+
+    var delete_result = try ec2.delete_vpc.execute(
+        &shared_client,
+        .{ .vpc_id = vpc_id },
+        .{},
+    );
+    delete_result.deinit();
+    create_result.deinit();
+}
+
+test "DescribeSecurityGroups returns default group" {
+    var result = try ec2.describe_security_groups.execute(
+        &shared_client,
+        .{},
+        .{},
+    );
+    defer result.deinit();
+
+    const groups = result.security_groups orelse return error.MissingField;
+    try std.testing.expect(groups.len >= 1);
+}
+
+test "DescribeSecurityGroups with filter returns matching group" {
+    var vpcs_result = try ec2.describe_vpcs.execute(&shared_client, .{}, .{});
+    defer vpcs_result.deinit();
+    const vpcs = vpcs_result.vpcs orelse return error.MissingVpcs;
+    if (vpcs.len == 0) return error.NoVpcs;
+    const vpc_id = vpcs[0].vpc_id orelse return error.MissingVpcId;
+
+    var create_result = try ec2.create_security_group.execute(
+        &shared_client,
+        .{
+            .group_name = "sdk-zig-ec2-filter-sg",
+            .description = "sdk-zig-ec2-filter-security-group",
+            .vpc_id = vpc_id,
+        },
+        .{},
+    );
+    const group_id = create_result.group_id orelse {
+        create_result.deinit();
+        return error.MissingGroupId;
+    };
+
+    var describe_result = try ec2.describe_security_groups.execute(
+        &shared_client,
+        .{
+            .filters = &.{.{
+                .name = "group-name",
+                .values = &.{"sdk-zig-ec2-filter-sg"},
+            }},
+        },
+        .{},
+    );
+    defer describe_result.deinit();
+
+    const groups = describe_result.security_groups orelse {
+        var del = try ec2.delete_security_group.execute(
+            &shared_client,
+            .{ .group_id = group_id },
+            .{},
+        );
+        del.deinit();
+        create_result.deinit();
+        return error.MissingField;
+    };
+    try std.testing.expect(groups.len >= 1);
+
+    var delete_result = try ec2.delete_security_group.execute(
+        &shared_client,
+        .{ .group_id = group_id },
+        .{},
+    );
+    delete_result.deinit();
+    create_result.deinit();
+}
+
+test "AllocateAddress returns allocation ID" {
+    var result = try ec2.allocate_address.execute(
+        &shared_client,
+        .{ .domain = .vpc },
+        .{},
+    );
+    const allocation_id = result.allocation_id orelse {
+        result.deinit();
+        return error.MissingAllocationId;
+    };
+
+    var release_result = try ec2.release_address.execute(
+        &shared_client,
+        .{ .allocation_id = allocation_id },
+        .{},
+    );
+    release_result.deinit();
+    result.deinit();
+}
+
+test "DescribeRegions returns AWS regions" {
+    var result = try ec2.describe_regions.execute(
+        &shared_client,
+        .{},
+        .{},
+    );
+    defer result.deinit();
+
+    const regions = result.regions orelse return error.MissingField;
+    try std.testing.expect(regions.len >= 1);
+    try std.testing.expect(regions[0].region_name != null);
 }
