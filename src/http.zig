@@ -126,27 +126,50 @@ pub const HttpClient = struct {
     inner: std.http.Client,
     allocator: Allocator,
     default_options: RequestOptions,
+    proxy_arena: std.heap.ArenaAllocator,
+    no_proxy: ?[]const u8,
 
     const Self = @This();
 
     pub fn init(allocator: Allocator) Self {
-        return .{
-            .inner = std.http.Client{ .allocator = allocator },
+        var self: Self = .{
+            .inner = .{ .allocator = allocator },
             .allocator = allocator,
             .default_options = .{},
+            .proxy_arena = std.heap.ArenaAllocator.init(allocator),
+            .no_proxy = null,
         };
+        self.initProxies();
+        return self;
     }
 
-    pub fn initWithOptions(allocator: Allocator, options: RequestOptions) Self {
-        return .{
-            .inner = std.http.Client{ .allocator = allocator },
+    pub fn initWithOptions(
+        allocator: Allocator,
+        options: RequestOptions,
+    ) Self {
+        var self: Self = .{
+            .inner = .{ .allocator = allocator },
             .allocator = allocator,
             .default_options = options,
+            .proxy_arena = std.heap.ArenaAllocator.init(allocator),
+            .no_proxy = null,
         };
+        self.initProxies();
+        return self;
     }
 
     pub fn deinit(self: *Self) void {
         self.inner.deinit();
+        self.proxy_arena.deinit();
+    }
+
+    fn initProxies(self: *Self) void {
+        const arena = self.proxy_arena.allocator();
+        self.inner.initDefaultProxies(arena) catch {};
+        self.no_proxy =
+            std.process.getEnvVarOwned(arena, "NO_PROXY") catch
+                std.process.getEnvVarOwned(arena, "no_proxy") catch
+                null;
     }
 
     /// Send request with default options
@@ -160,6 +183,21 @@ pub const HttpClient = struct {
         request: *const Request,
         options: RequestOptions,
     ) RequestError!Response {
+        const bypass = shouldBypassProxy(
+            request.host,
+            self.no_proxy,
+        );
+        const saved_http_proxy = self.inner.http_proxy;
+        const saved_https_proxy = self.inner.https_proxy;
+        if (bypass) {
+            self.inner.http_proxy = null;
+            self.inner.https_proxy = null;
+        }
+        defer {
+            self.inner.http_proxy = saved_http_proxy;
+            self.inner.https_proxy = saved_https_proxy;
+        }
+
         var backoff = Backoff{
             .base_ms = options.base_delay_ms,
             .cap_ms = options.max_delay_ms,
@@ -196,7 +234,25 @@ pub const HttpClient = struct {
 
     /// Send a request and return a streaming response (connection stays open for body reads).
     /// No retry logic -- streaming responses cannot be replayed.
-    pub fn sendStreamingRequest(self: *Self, request: *const Request) RequestError!StreamingResponse {
+    pub fn sendStreamingRequest(
+        self: *Self,
+        request: *const Request,
+    ) RequestError!StreamingResponse {
+        const bypass = shouldBypassProxy(
+            request.host,
+            self.no_proxy,
+        );
+        const saved_http_proxy = self.inner.http_proxy;
+        const saved_https_proxy = self.inner.https_proxy;
+        if (bypass) {
+            self.inner.http_proxy = null;
+            self.inner.https_proxy = null;
+        }
+        defer {
+            self.inner.http_proxy = saved_http_proxy;
+            self.inner.https_proxy = saved_https_proxy;
+        }
+
         const uri = request.getUri();
 
         // Build extra headers from request
@@ -229,7 +285,9 @@ pub const HttpClient = struct {
             const req_body = request.body orelse "";
             if (req_body.len > 0 or request.method.toStd().requestHasBody()) {
                 inner.http_request.transfer_encoding = .{ .content_length = req_body.len };
-                var body_writer = inner.http_request.sendBodyUnflushed(&.{}) catch return error.RequestFailed;
+                var body_writer = inner.http_request.sendBodyUnflushed(
+                    &.{},
+                ) catch return error.RequestFailed;
                 if (req_body.len > 0) {
                     body_writer.writer.writeAll(req_body) catch return error.RequestFailed;
                 }
@@ -242,7 +300,9 @@ pub const HttpClient = struct {
 
         // Receive response head
         var redirect_buf: [8192]u8 = undefined;
-        var response = inner.http_request.receiveHead(&redirect_buf) catch return error.RequestFailed;
+        var response = inner.http_request.receiveHead(
+            &redirect_buf,
+        ) catch return error.RequestFailed;
 
         // Extract status and response headers before calling reader()
         // (reader() invalidates head string pointers)
@@ -251,7 +311,10 @@ pub const HttpClient = struct {
         var resp_headers = std.StringHashMapUnmanaged([]const u8){};
         var header_iter = response.head.iterateHeaders();
         while (header_iter.next()) |header| {
-            const key = std.ascii.allocLowerString(self.allocator, header.name) catch return error.OutOfMemory;
+            const key = std.ascii.allocLowerString(
+                self.allocator,
+                header.name,
+            ) catch return error.OutOfMemory;
             const value = self.allocator.dupe(u8, header.value) catch {
                 self.allocator.free(key);
                 return error.OutOfMemory;
@@ -276,7 +339,11 @@ pub const HttpClient = struct {
     }
 
     /// Perform a single request attempt
-    fn doRequest(self: *Self, request: *const Request, options: RequestOptions) RequestError!Response {
+    fn doRequest(
+        self: *Self,
+        request: *const Request,
+        options: RequestOptions,
+    ) RequestError!Response {
         const uri = request.getUri();
 
         // Build extra headers from request
@@ -323,7 +390,10 @@ pub const HttpClient = struct {
         var resp_headers = std.StringHashMapUnmanaged([]const u8){};
         var header_iter = response.head.iterateHeaders();
         while (header_iter.next()) |header| {
-            const key = std.ascii.allocLowerString(self.allocator, header.name) catch return error.OutOfMemory;
+            const key = std.ascii.allocLowerString(
+                self.allocator,
+                header.name,
+            ) catch return error.OutOfMemory;
             const value = self.allocator.dupe(u8, header.value) catch {
                 self.allocator.free(key);
                 return error.OutOfMemory;
@@ -353,6 +423,35 @@ pub const HttpClient = struct {
         };
     }
 };
+
+/// Check if a host should bypass the proxy based on the NO_PROXY list.
+///
+/// Entries are comma-separated. Matching rules:
+/// - "*" bypasses all hosts
+/// - Exact match (case-insensitive)
+/// - Domain suffix: ".example.com" matches "api.example.com"
+pub fn shouldBypassProxy(
+    host: []const u8,
+    no_proxy_list: ?[]const u8,
+) bool {
+    const list = no_proxy_list orelse return false;
+    if (list.len == 0) return false;
+
+    var iter = std.mem.splitScalar(u8, list, ',');
+    while (iter.next()) |raw_entry| {
+        const entry = std.mem.trim(u8, raw_entry, " \t");
+        if (entry.len == 0) continue;
+        if (std.mem.eql(u8, entry, "*")) return true;
+        if (std.ascii.eqlIgnoreCase(entry, host))
+            return true;
+        if (entry[0] == '.' and host.len >= entry.len) {
+            const suffix = host[host.len - entry.len ..];
+            if (std.ascii.eqlIgnoreCase(suffix, entry))
+                return true;
+        }
+    }
+    return false;
+}
 
 /// Streaming body for responses where the HTTP connection stays open.
 /// Used for `@streaming` blob payloads (e.g., S3 GetObject).
@@ -484,20 +583,40 @@ test "Request getUri with port" {
 }
 
 test "Response status helpers" {
-    const success = Response{ .status = 200, .body = "", .headers = .{}, .allocator = std.testing.allocator };
+    const success = Response{
+        .status = 200,
+        .body = "",
+        .headers = .{},
+        .allocator = std.testing.allocator,
+    };
     try std.testing.expect(success.isSuccess());
     try std.testing.expect(!success.isServerError());
     try std.testing.expect(!success.isRetryable());
 
-    const server_error = Response{ .status = 503, .body = "", .headers = .{}, .allocator = std.testing.allocator };
+    const server_error = Response{
+        .status = 503,
+        .body = "",
+        .headers = .{},
+        .allocator = std.testing.allocator,
+    };
     try std.testing.expect(!server_error.isSuccess());
     try std.testing.expect(server_error.isServerError());
     try std.testing.expect(server_error.isRetryable());
 
-    const rate_limit = Response{ .status = 429, .body = "", .headers = .{}, .allocator = std.testing.allocator };
+    const rate_limit = Response{
+        .status = 429,
+        .body = "",
+        .headers = .{},
+        .allocator = std.testing.allocator,
+    };
     try std.testing.expect(rate_limit.isRetryable());
 
-    const not_found = Response{ .status = 404, .body = "", .headers = .{}, .allocator = std.testing.allocator };
+    const not_found = Response{
+        .status = 404,
+        .body = "",
+        .headers = .{},
+        .allocator = std.testing.allocator,
+    };
     try std.testing.expect(!not_found.isRetryable());
 }
 
@@ -532,4 +651,64 @@ test "RequestOptions defaults" {
     try std.testing.expectEqual(@as(u32, 3), opts.max_attempts);
     try std.testing.expectEqual(@as(u32, 100), opts.base_delay_ms);
     try std.testing.expectEqual(@as(u32, 20_000), opts.max_delay_ms);
+}
+
+test "shouldBypassProxy returns false for null list" {
+    try std.testing.expect(!shouldBypassProxy("example.com", null));
+}
+
+test "shouldBypassProxy returns false for empty list" {
+    try std.testing.expect(!shouldBypassProxy("example.com", ""));
+}
+
+test "shouldBypassProxy wildcard bypasses all" {
+    try std.testing.expect(shouldBypassProxy("anything.com", "*"));
+    try std.testing.expect(shouldBypassProxy("localhost", "foo, *"));
+}
+
+test "shouldBypassProxy exact match" {
+    try std.testing.expect(
+        shouldBypassProxy("example.com", "example.com"),
+    );
+    try std.testing.expect(
+        !shouldBypassProxy("other.com", "example.com"),
+    );
+}
+
+test "shouldBypassProxy case insensitive match" {
+    try std.testing.expect(
+        shouldBypassProxy("Example.COM", "example.com"),
+    );
+    try std.testing.expect(
+        shouldBypassProxy("example.com", "EXAMPLE.COM"),
+    );
+}
+
+test "shouldBypassProxy domain suffix" {
+    try std.testing.expect(
+        shouldBypassProxy("api.example.com", ".example.com"),
+    );
+    try std.testing.expect(
+        shouldBypassProxy("deep.sub.example.com", ".example.com"),
+    );
+    // Bare domain does not match suffix rule
+    try std.testing.expect(
+        !shouldBypassProxy("example.com", ".example.com"),
+    );
+    // Partial name overlap is not a match
+    try std.testing.expect(
+        !shouldBypassProxy("notexample.com", ".example.com"),
+    );
+}
+
+test "shouldBypassProxy multiple entries" {
+    const list = "a.com, b.com, .internal.net";
+    try std.testing.expect(shouldBypassProxy("a.com", list));
+    try std.testing.expect(shouldBypassProxy("b.com", list));
+    try std.testing.expect(
+        shouldBypassProxy("svc.internal.net", list),
+    );
+    try std.testing.expect(
+        !shouldBypassProxy("external.com", list),
+    );
 }
