@@ -10,6 +10,7 @@ const web_identity = @import("web_identity.zig");
 const process = @import("process.zig");
 const sso = @import("sso.zig");
 const assume_role = @import("assume_role.zig");
+const config_mod = @import("config.zig");
 
 /// AWS credentials for request signing
 pub const Credentials = struct {
@@ -224,7 +225,10 @@ pub const FileProvider = struct {
 };
 
 /// Automatic credential chain provider
-/// Tries providers in order: environment -> file -> web_identity -> ecs -> imds
+///
+/// Tries providers in order: environment -> file ->
+/// profile_assume_role -> profile_sso -> profile_process ->
+/// profile_web_identity -> web_identity -> ecs -> imds
 pub const ChainProvider = struct {
     /// Cached credentials from last successful retrieval
     cached: ?Credentials = null,
@@ -248,6 +252,10 @@ pub const ChainProvider = struct {
     const ProviderType = enum {
         environment,
         file,
+        profile_assume_role,
+        profile_sso,
+        profile_process,
+        profile_web_identity,
         web_identity,
         ecs,
         imds,
@@ -274,7 +282,17 @@ pub const ChainProvider = struct {
         }
 
         // Try each provider in order
-        const providers = [_]ProviderType{ .environment, .file, .web_identity, .ecs, .imds };
+        const providers = [_]ProviderType{
+            .environment,
+            .file,
+            .profile_assume_role,
+            .profile_sso,
+            .profile_process,
+            .profile_web_identity,
+            .web_identity,
+            .ecs,
+            .imds,
+        };
         for (providers) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
                 self.cached = creds;
@@ -295,6 +313,118 @@ pub const ChainProvider = struct {
             .file => blk: {
                 var fp = FileProvider{ .profile = self.profile };
                 break :blk fp.load(allocator);
+            },
+            .profile_assume_role => blk: {
+                var cf = config_mod.loadConfigFile(
+                    allocator,
+                ) catch
+                    break :blk error.CredentialsNotFound;
+                defer cf.deinit();
+                const p = cf.getProfile(
+                    self.profile orelse "default",
+                ) orelse
+                    break :blk error.CredentialsNotFound;
+                const role_arn = p.role_arn orelse
+                    break :blk error.CredentialsNotFound;
+                const src_profile = p.source_profile orelse
+                    break :blk error.CredentialsNotFound;
+                const region = self.region orelse
+                    break :blk error.CredentialsNotFound;
+                var fp = FileProvider{
+                    .profile = src_profile,
+                };
+                const source_creds = fp.load(
+                    allocator,
+                ) catch
+                    break :blk error.CredentialsNotFound;
+                var source = CredentialsProvider{
+                    .static = source_creds,
+                };
+                var ar = assume_role.AssumeRoleProvider{
+                    .role_arn = role_arn,
+                    .session_name = p.role_session_name orelse
+                        "aws-sdk-zig",
+                    .external_id = p.external_id,
+                    .region = region,
+                    .source_provider = &source,
+                    .endpoint_url = self.endpoint_url,
+                };
+                break :blk ar.getCredentials(allocator);
+            },
+            .profile_sso => blk: {
+                var cf = config_mod.loadConfigFile(
+                    allocator,
+                ) catch
+                    break :blk error.CredentialsNotFound;
+                defer cf.deinit();
+                const p = cf.getProfile(
+                    self.profile orelse "default",
+                ) orelse
+                    break :blk error.CredentialsNotFound;
+                const sso_session_name = p.sso_session orelse
+                    break :blk error.CredentialsNotFound;
+                const acct = p.sso_account_id orelse
+                    break :blk error.CredentialsNotFound;
+                const role = p.sso_role_name orelse
+                    break :blk error.CredentialsNotFound;
+                const session = cf.getSsoSession(
+                    sso_session_name,
+                ) orelse
+                    break :blk error.CredentialsNotFound;
+                const sso_region = session.sso_region orelse
+                    p.sso_region orelse
+                    break :blk error.CredentialsNotFound;
+                var sp = sso.SsoProvider{
+                    .sso_account_id = acct,
+                    .sso_role_name = role,
+                    .sso_region = sso_region,
+                    .cache_key = sso_session_name,
+                };
+                break :blk sp.getCredentials(allocator);
+            },
+            .profile_process => blk: {
+                var cf = config_mod.loadConfigFile(
+                    allocator,
+                ) catch
+                    break :blk error.CredentialsNotFound;
+                defer cf.deinit();
+                const p = cf.getProfile(
+                    self.profile orelse "default",
+                ) orelse
+                    break :blk error.CredentialsNotFound;
+                const command = p.credential_process orelse
+                    break :blk error.CredentialsNotFound;
+                var pp = process.ProcessProvider{
+                    .command = command,
+                };
+                break :blk pp.getCredentials(allocator);
+            },
+            .profile_web_identity => blk: {
+                var cf = config_mod.loadConfigFile(
+                    allocator,
+                ) catch
+                    break :blk error.CredentialsNotFound;
+                defer cf.deinit();
+                const p = cf.getProfile(
+                    self.profile orelse "default",
+                ) orelse
+                    break :blk error.CredentialsNotFound;
+                const token_file =
+                    p.web_identity_token_file orelse
+                    break :blk error.CredentialsNotFound;
+                const role_arn = p.role_arn orelse
+                    break :blk error.CredentialsNotFound;
+                const region = self.region orelse
+                    break :blk error.CredentialsNotFound;
+                var wp = web_identity.WebIdentityProvider{
+                    .role_arn = role_arn,
+                    .token_file = token_file,
+                    .session_name = p.role_session_name orelse
+                        "aws-sdk-zig",
+                    .region = region,
+                    .endpoint_url = self.endpoint_url,
+                };
+                break :blk wp.getCredentials(allocator);
             },
             .web_identity => blk: {
                 // Only attempt if env vars are set
@@ -554,4 +684,49 @@ test "chain provider clear cache" {
     try std.testing.expect(chain.cached != null);
     chain.clearCache();
     try std.testing.expect(chain.cached == null);
+}
+
+test "profile_assume_role skips when profile lacks role_arn" {
+    var chain = ChainProvider{
+        .profile = "no-such-profile",
+        .region = "us-east-1",
+    };
+    const result = chain.tryProvider(
+        std.testing.allocator,
+        .profile_assume_role,
+    );
+    try std.testing.expectError(
+        error.CredentialsNotFound,
+        result,
+    );
+}
+
+test "profile_process skips when profile lacks credential_process" {
+    var chain = ChainProvider{
+        .profile = "no-such-profile",
+        .region = "us-east-1",
+    };
+    const result = chain.tryProvider(
+        std.testing.allocator,
+        .profile_process,
+    );
+    try std.testing.expectError(
+        error.CredentialsNotFound,
+        result,
+    );
+}
+
+test "profile_sso skips when profile lacks sso_session" {
+    var chain = ChainProvider{
+        .profile = "no-such-profile",
+        .region = "us-east-1",
+    };
+    const result = chain.tryProvider(
+        std.testing.allocator,
+        .profile_sso,
+    );
+    try std.testing.expectError(
+        error.CredentialsNotFound,
+        result,
+    );
 }
