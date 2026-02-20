@@ -11,6 +11,9 @@ test "Config.load resolves settings from config file" {
     var cfg = try aws.Config.load(allocator, .{});
     defer cfg.deinit();
 
+    // No explicit profile and no AWS_PROFILE -- must fall back to "default".
+    try std.testing.expectEqualStrings("default", cfg.profile);
+
     try std.testing.expectEqual(@as(u32, 7), cfg.max_attempts);
     try std.testing.expectEqual(
         aws.RetryMode.adaptive,
