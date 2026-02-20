@@ -211,20 +211,13 @@ pub const FileProvider = struct {
         return std.fmt.allocPrint(allocator, "{s}/.aws/credentials", .{home});
     }
 
-    /// Resolve profile name
+    /// Resolve profile name.
+    ///
+    /// AWS_PROFILE is resolved centrally in Config.load, which passes
+    /// the result through ChainProvider.profile. This method only
+    /// handles the explicit-or-default fallback.
     fn resolveProfile(self: *Self) []const u8 {
-        // 1. Explicit profile
-        if (self.profile) |p| {
-            return p;
-        }
-
-        // 2. AWS_PROFILE environment variable
-        if (std.posix.getenv("AWS_PROFILE")) |p| {
-            return p;
-        }
-
-        // 3. Default
-        return "default";
+        return self.profile orelse "default";
     }
 };
 

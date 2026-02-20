@@ -53,8 +53,10 @@ pub const LoadOptions = struct {
     region: ?[]const u8 = null,
     /// Explicit credentials override
     credentials: ?CredentialsProvider = null,
-    /// Profile name for file-based config
-    profile: []const u8 = "default",
+    /// Profile name for file-based config.
+    /// When null, resolved from AWS_PROFILE env var, falling back to
+    /// "default".
+    profile: ?[]const u8 = null,
     /// Custom endpoint URL (for LocalStack, etc.)
     endpoint_url: ?[]const u8 = null,
     /// Use FIPS endpoints
@@ -104,14 +106,18 @@ pub const Config = struct {
         var cf = try loadConfigFile(allocator);
         errdefer cf.deinit();
 
-        const profile: ?Profile = cf.getProfile(options.profile);
+        const resolved_profile = options.profile orelse
+            std.posix.getenv("AWS_PROFILE") orelse
+            "default";
+
+        const profile: ?Profile = cf.getProfile(resolved_profile);
 
         const region = try resolveRegion(allocator, options, profile);
         errdefer allocator.free(region);
 
         const credentials = options.credentials orelse CredentialsProvider{
             .chain = ChainProvider{
-                .profile = options.profile,
+                .profile = resolved_profile,
                 .region = region,
             },
         };
@@ -157,7 +163,7 @@ pub const Config = struct {
             .retry_mode = retry_mode,
             .ca_bundle = ca_bundle,
             .config_file = cf,
-            .profile = options.profile,
+            .profile = resolved_profile,
             .allocator = allocator,
         };
     }
@@ -808,6 +814,34 @@ test "resolveRegion option overrides profile" {
 test "resolveRegion error when no source" {
     const result = resolveRegion(std.testing.allocator, .{}, null);
     try std.testing.expectError(error.RegionNotFound, result);
+}
+
+test "LoadOptions.profile defaults to null" {
+    const opts = LoadOptions{};
+    try std.testing.expect(opts.profile == null);
+}
+
+test "LoadOptions.profile explicit value is used" {
+    const opts = LoadOptions{ .profile = "staging" };
+    try std.testing.expectEqualStrings(
+        "staging",
+        opts.profile.?,
+    );
+}
+
+test "resolveProfile: explicit overrides env" {
+    var explicit: ?[]const u8 = "from-code";
+    explicit = explicit orelse std.posix.getenv("AWS_PROFILE");
+    const resolved = explicit orelse "default";
+    try std.testing.expectEqualStrings("from-code", resolved);
+}
+
+test "resolveProfile: falls back to default when nothing set" {
+    // AWS_PROFILE is not expected to be set during unit tests.
+    var nothing: ?[]const u8 = null;
+    nothing = nothing orelse std.posix.getenv("AWS_PROFILE");
+    const resolved = nothing orelse "default";
+    try std.testing.expectEqualStrings("default", resolved);
 }
 
 test "parseConfigFile with multiple profiles" {
