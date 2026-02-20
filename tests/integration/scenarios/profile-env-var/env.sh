@@ -1,0 +1,4 @@
+unset AWS_ACCESS_KEY_ID
+unset AWS_SECRET_ACCESS_KEY
+export AWS_PROFILE=custom-profile
+export AWS_SHARED_CREDENTIALS_FILE=/tmp/test-profile-credentials
