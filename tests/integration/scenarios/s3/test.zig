@@ -9,10 +9,7 @@ var shared_init = false;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-    if (endpoint_url.len == 0) return error.MissingEndpoint;
-    shared_cfg = try aws.Config.load(allocator, .{ .endpoint_url = endpoint_url });
+    shared_cfg = try aws.Config.load(allocator, .{});
     shared_client = s3.Client.initWithOptions(
         allocator,
         &shared_cfg,

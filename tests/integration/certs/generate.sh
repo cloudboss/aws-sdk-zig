@@ -33,6 +33,7 @@ DNS.1 = *.amazonaws.com
 DNS.2 = *.us-east-1.amazonaws.com
 DNS.3 = *.us-west-2.amazonaws.com
 DNS.4 = localhost
+DNS.5 = endpoint.test
 IP.1 = 127.0.0.1
 EOF
 

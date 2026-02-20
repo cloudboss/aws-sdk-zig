@@ -5,14 +5,10 @@ const sts = @import("sts");
 test "credential_process from profile resolves credentials" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
     // AWS_CONFIG_FILE points to a config with [profile test-process]
     // containing credential_process = /tmp/cred-process.sh.
     var cfg = try aws.Config.load(allocator, .{
         .profile = "test-process",
-        .endpoint_url = endpoint_url,
     });
     defer cfg.deinit();
 

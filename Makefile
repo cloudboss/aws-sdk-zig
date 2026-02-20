@@ -60,35 +60,14 @@ test: $(HAS_IMAGE_LOCAL)
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build test $(ZIG_BUILD_FLAGS)"
 
-test-integration: $(HAS_IMAGE_LOCAL)
-	@docker run --rm \
-		-v $(DIR_ROOT):/code \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		--group-add $(DOCKER_GID) \
-		--security-opt label=type:container_runtime_t \
-		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
-		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
-		-e SCENARIO=$(SCENARIO) \
-		-w /code \
-		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh"
-
-test-integration-tls: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
-	@printf '%s\n' \
-		'127.0.0.1 localhost' \
-		'::1 localhost' \
-		'127.0.0.1 sts.us-east-1.amazonaws.com' \
-		'127.0.0.1 s3.us-east-1.amazonaws.com' \
-		'127.0.0.1 dynamodb.us-east-1.amazonaws.com' \
-		'127.0.0.1 iam.us-east-1.amazonaws.com' \
-		'127.0.0.1 lambda.us-east-1.amazonaws.com' \
-		> $(DIR_OUT)/tls-hosts
+test-integration: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 	@docker run --rm $(CTR_IMAGE_LOCAL) cat /etc/ssl/certs/ca-certificates.crt \
 		> $(DIR_OUT)/tls-ca-bundle.crt
 	@cat tests/integration/certs/ca.crt >> $(DIR_OUT)/tls-ca-bundle.crt
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $(DIR_ROOT)/$(DIR_OUT)/tls-hosts:/etc/hosts \
+		-v $(DIR_ROOT)/tests/integration/tls-hosts:/etc/hosts \
 		-v $(DIR_ROOT)/$(DIR_OUT)/tls-ca-bundle.crt:/etc/ssl/certs/ca-certificates.crt:ro \
 		--group-add $(DOCKER_GID) \
 		--security-opt label=type:container_runtime_t \
@@ -98,7 +77,7 @@ test-integration-tls: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 		-e AWS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
 		-e TLS_CERT_HOST_PATH=$(DIR_ROOT)/tests/integration/certs/server.pem \
 		-w /code \
-		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh --tls"
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh"
 
 SERVICES = sts dynamodb lambda s3 ec2 iam secretsmanager ssm sqs sns
 
@@ -145,4 +124,4 @@ certs:
 clean:
 	@rm -rf $(DIR_OUT)
 
-.PHONY: build test test-integration test-integration-tls fetch-models codegen certs clean
+.PHONY: build test test-integration fetch-models codegen certs clean

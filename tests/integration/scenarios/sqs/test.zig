@@ -10,9 +10,7 @@ var shared_queue_url: []const u8 = "";
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-    shared_cfg = try aws.Config.load(allocator, .{ .endpoint_url = endpoint_url });
+    shared_cfg = try aws.Config.load(allocator, .{});
     shared_client = sqs.Client.initWithOptions(
         allocator,
         &shared_cfg.?,

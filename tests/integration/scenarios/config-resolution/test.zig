@@ -5,15 +5,10 @@ const sts = @import("sts");
 test "Config.load resolves settings from config file" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
     // AWS_CONFIG_FILE points to a temp file with max_attempts=7
     // and retry_mode=adaptive under [default]. These settings
     // have no env-var overrides, so they must come from the file.
-    var cfg = try aws.Config.load(allocator, .{
-        .endpoint_url = endpoint_url,
-    });
+    var cfg = try aws.Config.load(allocator, .{});
     defer cfg.deinit();
 
     try std.testing.expectEqual(@as(u32, 7), cfg.max_attempts);

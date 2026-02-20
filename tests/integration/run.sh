@@ -30,15 +30,9 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
         done < "${scenario_dir}/services"
     fi
 done
-TLS_MODE=false
 PASS=0
 FAIL=0
 ERRORS=()
-
-if [[ "${1:-}" == "--tls" ]]; then
-    TLS_MODE=true
-    shift
-fi
 
 # --- LocalStack lifecycle ---
 
@@ -72,19 +66,18 @@ start_localstack() {
         -e "SERVICES=${SERVICES}"
     )
 
-    if [[ "${TLS_MODE}" == "true" ]]; then
-        docker_args+=(
-            -v "${TLS_CERT_HOST_PATH}:/etc/localstack/server.pem:ro"
-            -e "CUSTOM_SSL_CERT_PATH=/etc/localstack/server.pem"
-            -e "SKIP_SSL_CERT_DOWNLOAD=1"
-        )
-    fi
+    docker_args+=(
+        -v "${TLS_CERT_HOST_PATH}:/etc/localstack/server.pem:ro"
+        -e "CUSTOM_SSL_CERT_PATH=/etc/localstack/server.pem"
+        -e "SKIP_SSL_CERT_DOWNLOAD=1"
+        -e "GATEWAY_LISTEN=:443"
+    )
 
     LOCALSTACK_CONTAINER=$(docker run "${docker_args[@]}" "${LOCALSTACK_IMG}")
 }
 
 wait_for_localstack() {
-    local endpoint="http://localhost:4566"
+    local endpoint="https://localhost"
     echo "Waiting for LocalStack at ${endpoint}..."
     for i in $(seq 1 30); do
         if curl -sf "${endpoint}/_localstack/health" >/dev/null 2>&1; then
@@ -103,12 +96,6 @@ setup_environment() {
     export AWS_ACCESS_KEY_ID=test
     export AWS_SECRET_ACCESS_KEY=test
     export AWS_DEFAULT_REGION=us-east-1
-
-    if [[ "${TLS_MODE}" == "true" ]]; then
-        export AWS_ENDPOINT_URL="https://localhost:4566"
-    else
-        export AWS_ENDPOINT_URL="http://localhost:4566"
-    fi
 }
 
 # --- Run tests ---
@@ -119,8 +106,7 @@ setup_environment
 
 echo ""
 echo "=== AWS SDK for Zig - Integration Tests ==="
-echo "Endpoint: ${AWS_ENDPOINT_URL}"
-echo "TLS Mode: ${TLS_MODE}"
+echo "Endpoint: https://localhost"
 echo ""
 
 for scenario_dir in "${SCENARIO_DIRS[@]}"; do
@@ -130,7 +116,7 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
     # Run setup script if present
     if [[ -f "${scenario_dir}/setup.sh" ]]; then
         echo "  Running setup..."
-        if ! bash "${scenario_dir}/setup.sh"; then
+        if ! AWS_ENDPOINT_URL=https://localhost bash "${scenario_dir}/setup.sh"; then
             echo "  SETUP FAILED: ${scenario}"
             ERRORS+=("${scenario} (setup)")
             FAIL=$((FAIL + 1))
@@ -158,7 +144,7 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
     # Run per-scenario teardown if present
     if [[ -f "${scenario_dir}/teardown.sh" ]]; then
         echo "  Running teardown..."
-        bash "${scenario_dir}/teardown.sh" || true
+        AWS_ENDPOINT_URL=https://localhost bash "${scenario_dir}/teardown.sh" || true
     fi
 
     echo ""

@@ -4,9 +4,6 @@ const aws = @import("aws");
 test "assume role provider gets temporary credentials" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
     // Source credentials: static from test environment
     var source = aws.CredentialsProvider{
         .static = .{
@@ -21,7 +18,6 @@ test "assume role provider gets temporary credentials" {
         .external_id = null,
         .region = "us-east-1",
         .source_provider = &source,
-        .endpoint_url = endpoint_url,
     };
 
     const creds = try provider.getCredentials(allocator);
@@ -41,9 +37,6 @@ test "assume role provider gets temporary credentials" {
 test "assume role with external id" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
     var source = aws.CredentialsProvider{
         .static = .{
             .access_key_id = "test",
@@ -57,7 +50,6 @@ test "assume role with external id" {
         .external_id = "my-external-id-123",
         .region = "us-east-1",
         .source_provider = &source,
-        .endpoint_url = endpoint_url,
     };
 
     const creds = try provider.getCredentials(allocator);
@@ -75,9 +67,6 @@ test "assume role with external id" {
 test "assume role works via CredentialsProvider union" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
     var source = aws.CredentialsProvider{
         .static = .{
             .access_key_id = "test",
@@ -92,7 +81,6 @@ test "assume role works via CredentialsProvider union" {
             .external_id = null,
             .region = "us-east-1",
             .source_provider = &source,
-            .endpoint_url = endpoint_url,
         },
     };
 
@@ -109,9 +97,6 @@ test "assume role works via CredentialsProvider union" {
 test "assumed role session token has substantial length" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
     var source = aws.CredentialsProvider{
         .static = .{
             .access_key_id = "test",
@@ -125,7 +110,6 @@ test "assumed role session token has substantial length" {
         .external_id = null,
         .region = "us-east-1",
         .source_provider = &source,
-        .endpoint_url = endpoint_url,
     };
 
     const creds = try provider.getCredentials(allocator);
@@ -143,9 +127,6 @@ test "assumed role session token has substantial length" {
 test "assumed credentials have future expiration" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
     var source = aws.CredentialsProvider{
         .static = .{
             .access_key_id = "test",
@@ -159,7 +140,6 @@ test "assumed credentials have future expiration" {
         .external_id = null,
         .region = "us-east-1",
         .source_provider = &source,
-        .endpoint_url = endpoint_url,
     };
 
     const creds = try provider.getCredentials(allocator);
@@ -176,9 +156,6 @@ test "assumed credentials have future expiration" {
 test "assumed credentials access key differs from source" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
-        return error.MissingEndpoint;
-
     var source = aws.CredentialsProvider{
         .static = .{
             .access_key_id = "test",
@@ -192,7 +169,6 @@ test "assumed credentials access key differs from source" {
         .external_id = null,
         .region = "us-east-1",
         .source_provider = &source,
-        .endpoint_url = endpoint_url,
     };
 
     const creds = try provider.getCredentials(allocator);
