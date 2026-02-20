@@ -402,6 +402,8 @@ pub const ConfigFile = struct {
     sso_sessions: std.StringHashMap(SsoSession),
     services: std.StringHashMap(std.StringHashMap(ServiceConfig)),
     allocator: Allocator,
+    /// Raw file content; all string fields in profiles/sessions borrow from this
+    content: ?[]const u8 = null,
 
     pub fn deinit(self: *ConfigFile) void {
         self.profiles.deinit();
@@ -411,6 +413,7 @@ pub const ConfigFile = struct {
             inner.deinit();
         }
         self.services.deinit();
+        if (self.content) |c| self.allocator.free(c);
     }
 
     /// Get a profile by name
@@ -687,9 +690,9 @@ pub fn loadConfigFile(allocator: Allocator) !ConfigFile {
         if (err == error.OutOfMemory) return err;
         return parseConfigFile(allocator, "");
     };
-    defer allocator.free(content);
-
-    return parseConfigFile(allocator, content);
+    var cf = parseConfigFile(allocator, content);
+    cf.content = content;
+    return cf;
 }
 
 fn resolveConfigPath(allocator: Allocator) ![]const u8 {

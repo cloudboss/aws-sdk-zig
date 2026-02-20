@@ -56,12 +56,16 @@ pub const CredentialsProvider = union(enum) {
     };
 
     /// Retrieve credentials from this provider
-    pub fn getCredentials(self: *CredentialsProvider, allocator: Allocator) GetCredentialsError!Credentials {
+    pub fn getCredentials(
+        self: *CredentialsProvider,
+        allocator: Allocator,
+    ) GetCredentialsError!Credentials {
         return switch (self.*) {
             .static => |creds| creds,
             .environment => getFromEnvironment(),
             .file => |*f| f.load(allocator) catch return error.CredentialsNotFound,
-            .web_identity => |*w| w.getCredentials(allocator) catch return error.CredentialsNotFound,
+            .web_identity => |*w| w.getCredentials(allocator) catch
+                return error.CredentialsNotFound,
             .imds => |*i| i.load(allocator) catch return error.CredentialsNotFound,
             .ecs => |*e| e.load(allocator) catch return error.CredentialsNotFound,
             .process => |*p| p.getCredentials(allocator) catch return error.CredentialsNotFound,
@@ -439,7 +443,8 @@ pub const ChainProvider = struct {
                     self.web_identity_provider = web_identity.WebIdentityProvider{
                         .role_arn = role_arn,
                         .token_file = token_file,
-                        .session_name = std.posix.getenv("AWS_ROLE_SESSION_NAME") orelse "aws-sdk-zig",
+                        .session_name = std.posix.getenv("AWS_ROLE_SESSION_NAME") orelse
+                            "aws-sdk-zig",
                         .region = region,
                         .endpoint_url = self.endpoint_url,
                     };
