@@ -90,19 +90,10 @@ wait_for_localstack() {
     exit 1
 }
 
-# --- Configure environment ---
-
-setup_environment() {
-    export AWS_ACCESS_KEY_ID=test
-    export AWS_SECRET_ACCESS_KEY=test
-    export AWS_DEFAULT_REGION=us-east-1
-}
-
 # --- Run tests ---
 
 start_localstack
 wait_for_localstack
-setup_environment
 
 echo ""
 echo "=== AWS SDK for Zig - Integration Tests ==="
@@ -113,10 +104,12 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
     scenario=$(basename "$scenario_dir")
     echo "--- Running: ${scenario} ---"
 
-    # Run setup script if present
+    # Run setup script inside a child shell so it gets the base
+    # environment defaults without polluting the parent shell.
     if [[ -f "${scenario_dir}/setup.sh" ]]; then
         echo "  Running setup..."
-        if ! AWS_ENDPOINT_URL=https://localhost bash "${scenario_dir}/setup.sh"; then
+        if ! /bin/sh -c \
+            ". '${SCRIPT_DIR}/env.sh' && AWS_ENDPOINT_URL=https://localhost bash '${scenario_dir}/setup.sh'"; then
             echo "  SETUP FAILED: ${scenario}"
             ERRORS+=("${scenario} (setup)")
             FAIL=$((FAIL + 1))
@@ -124,15 +117,15 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
         fi
     fi
 
-    # Source per-scenario environment if present
-    if [[ -f "${scenario_dir}/env.sh" ]]; then
-        echo "  Sourcing env.sh..."
-        source "${scenario_dir}/env.sh"
-    fi
-
-    # Build and run test
+    # Build and run the test inside a child shell that sources the base
+    # environment defaults and any per-scenario overrides, preventing
+    # env var changes from one scenario bleeding into the next.
     echo "  Building and running test..."
-    if zig build "integration-test-${scenario}" ${ZIG_BUILD_FLAGS} 2>&1; then
+    env_cmd=". '${SCRIPT_DIR}/env.sh'"
+    if [[ -f "${scenario_dir}/env.sh" ]]; then
+        env_cmd="${env_cmd} && . '${scenario_dir}/env.sh'"
+    fi
+    if /bin/sh -c "${env_cmd} && zig build 'integration-test-${scenario}' ${ZIG_BUILD_FLAGS}" 2>&1; then
         echo "  PASS: ${scenario}"
         PASS=$((PASS + 1))
     else
@@ -141,10 +134,13 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
         FAIL=$((FAIL + 1))
     fi
 
-    # Run per-scenario teardown if present
+    # Run per-scenario teardown inside a child shell so it gets the
+    # base environment defaults without polluting the parent shell.
     if [[ -f "${scenario_dir}/teardown.sh" ]]; then
         echo "  Running teardown..."
-        AWS_ENDPOINT_URL=https://localhost bash "${scenario_dir}/teardown.sh" || true
+        /bin/sh -c \
+            ". '${SCRIPT_DIR}/env.sh' && AWS_ENDPOINT_URL=https://localhost bash '${scenario_dir}/teardown.sh'" \
+            || true
     fi
 
     echo ""
