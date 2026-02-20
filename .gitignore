@@ -14,5 +14,8 @@ codegen/.gradle/
 # Fetched AWS service models
 codegen/sdk-codegen/model/
 
+# Sisyphus orchestrator working directory
+.sisyphus/
+
 PLAN.md
 PHASE*.md
