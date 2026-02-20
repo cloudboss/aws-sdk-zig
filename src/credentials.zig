@@ -191,7 +191,7 @@ pub const FileProvider = struct {
         defer allocator.free(content);
 
         const profile = self.resolveProfile();
-        return parseCredentialsFile(content, profile);
+        return parseCredentialsFile(allocator, content, profile);
     }
 
     /// Resolve credentials file path
@@ -486,7 +486,11 @@ pub const ChainProvider = struct {
 };
 
 /// Parse AWS credentials file content and extract credentials for profile
-fn parseCredentialsFile(content: []const u8, profile: []const u8) !Credentials {
+fn parseCredentialsFile(
+    allocator: Allocator,
+    content: []const u8,
+    profile: []const u8,
+) !Credentials {
     // Build target section: [profile_name]
     var target_section_buf: [258]u8 = undefined;
     const target_section = std.fmt.bufPrint(&target_section_buf, "[{s}]", .{profile}) catch {
@@ -538,10 +542,19 @@ fn parseCredentialsFile(content: []const u8, profile: []const u8) !Credentials {
     const ak = access_key orelse return error.CredentialsNotFound;
     const sk = secret_key orelse return error.CredentialsNotFound;
 
+    const ak_owned = try allocator.dupe(u8, ak);
+    errdefer allocator.free(ak_owned);
+    const sk_owned = try allocator.dupe(u8, sk);
+    errdefer allocator.free(sk_owned);
+    const token_owned = if (session_token) |t|
+        try allocator.dupe(u8, t)
+    else
+        null;
+
     return Credentials{
-        .access_key_id = ak,
-        .secret_access_key = sk,
-        .session_token = session_token,
+        .access_key_id = ak_owned,
+        .secret_access_key = sk_owned,
+        .session_token = token_owned,
     };
 }
 
@@ -592,7 +605,9 @@ test "parseCredentialsFile default profile" {
         \\aws_secret_access_key = je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
     ;
 
-    const creds = try parseCredentialsFile(content, "default");
+    const creds = try parseCredentialsFile(std.testing.allocator, content, "default");
+    defer std.testing.allocator.free(creds.access_key_id);
+    defer std.testing.allocator.free(creds.secret_access_key);
     try std.testing.expectEqualStrings("AKIAIOSFODNN7EXAMPLE", creds.access_key_id);
     try std.testing.expectEqualStrings("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY", creds.secret_access_key);
     try std.testing.expect(creds.session_token == null);
@@ -609,7 +624,9 @@ test "parseCredentialsFile named profile" {
         \\aws_secret_access_key = je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
     ;
 
-    const creds = try parseCredentialsFile(content, "dev");
+    const creds = try parseCredentialsFile(std.testing.allocator, content, "dev");
+    defer std.testing.allocator.free(creds.access_key_id);
+    defer std.testing.allocator.free(creds.secret_access_key);
     try std.testing.expectEqualStrings("AKIAI44QH8DHBEXAMPLE", creds.access_key_id);
     try std.testing.expectEqualStrings("je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY", creds.secret_access_key);
 }
@@ -622,7 +639,10 @@ test "parseCredentialsFile with session token" {
         \\aws_session_token = tokenXXX
     ;
 
-    const creds = try parseCredentialsFile(content, "default");
+    const creds = try parseCredentialsFile(std.testing.allocator, content, "default");
+    defer std.testing.allocator.free(creds.access_key_id);
+    defer std.testing.allocator.free(creds.secret_access_key);
+    defer if (creds.session_token) |t| std.testing.allocator.free(t);
     try std.testing.expectEqualStrings("ASIAXXX", creds.access_key_id);
     try std.testing.expectEqualStrings("secretXXX", creds.secret_access_key);
     try std.testing.expectEqualStrings("tokenXXX", creds.session_token.?);
@@ -635,7 +655,7 @@ test "parseCredentialsFile missing profile" {
         \\aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
     ;
 
-    const result = parseCredentialsFile(content, "nonexistent");
+    const result = parseCredentialsFile(std.testing.allocator, content, "nonexistent");
     try std.testing.expectError(error.CredentialsNotFound, result);
 }
 
@@ -645,7 +665,7 @@ test "parseCredentialsFile missing secret key" {
         \\aws_access_key_id = AKIAIOSFODNN7EXAMPLE
     ;
 
-    const result = parseCredentialsFile(content, "default");
+    const result = parseCredentialsFile(std.testing.allocator, content, "default");
     try std.testing.expectError(error.CredentialsNotFound, result);
 }
 
@@ -659,9 +679,32 @@ test "parseCredentialsFile with comments and whitespace" {
         \\
     ;
 
-    const creds = try parseCredentialsFile(content, "default");
+    const creds = try parseCredentialsFile(std.testing.allocator, content, "default");
+    defer std.testing.allocator.free(creds.access_key_id);
+    defer std.testing.allocator.free(creds.secret_access_key);
     try std.testing.expectEqualStrings("AKIAIOSFODNN7EXAMPLE", creds.access_key_id);
     try std.testing.expectEqualStrings("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY", creds.secret_access_key);
+}
+
+test "parseCredentialsFile returns owned strings surviving source free" {
+    const allocator = std.testing.allocator;
+
+    // Simulate FileProvider.load: read into a buffer, parse, free buffer.
+    const source = try allocator.dupe(u8,
+        \\[default]
+        \\aws_access_key_id = AKIAOWNEDTEST
+        \\aws_secret_access_key = OwnedSecretKey
+    );
+
+    const creds = try parseCredentialsFile(allocator, source, "default");
+    defer allocator.free(creds.access_key_id);
+    defer allocator.free(creds.secret_access_key);
+
+    // Free the source buffer -- the strings must survive.
+    allocator.free(source);
+
+    try std.testing.expectEqualStrings("AKIAOWNEDTEST", creds.access_key_id);
+    try std.testing.expectEqualStrings("OwnedSecretKey", creds.secret_access_key);
 }
 
 test "chain provider caches credentials" {
