@@ -67,7 +67,7 @@ pub fn execute(client: *Client, input: ListImagesInRecycleBinInput, options: Opt
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status);
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
         }
         return error.ServiceError;
     }
@@ -156,16 +156,22 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestID") orelse "";
+    const owned_message = try alloc.dupe(u8, error_message);
+    errdefer alloc.free(owned_message);
+    const owned_request_id = try alloc.dupe(u8, request_id);
+    errdefer alloc.free(owned_request_id);
 
 
+    const owned_code = try alloc.dupe(u8, error_code);
     return .{ .unknown = .{
-        .code = error_code,
-        .message = error_message,
-        .request_id = request_id,
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
         .http_status = status,
+        ._allocator = alloc,
     } };
 }

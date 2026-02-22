@@ -47,6 +47,7 @@ pub const InstanceProfileExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.getInstanceProfile(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntityException")) {
                     return .retry;
                 }
@@ -98,6 +99,7 @@ pub const PolicyExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.getPolicy(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
                     return .retry;
                 }
@@ -149,6 +151,7 @@ pub const RoleExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.getRole(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
                     return .retry;
                 }
@@ -200,6 +203,7 @@ pub const UserExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.getUser(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
                     return .retry;
                 }

@@ -46,7 +46,7 @@ pub fn execute(client: *Client, input: UntagQueueInput, options: Options) !Untag
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status);
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
         }
         return error.ServiceError;
     }
@@ -87,7 +87,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return .{};
 }
 
-fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -96,180 +96,214 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    const owned_message = try alloc.dupe(u8, error_message);
+    errdefer alloc.free(owned_message);
+    const owned_request_id = try alloc.dupe(u8, "");
+    errdefer alloc.free(owned_request_id);
 
     if (std.mem.eql(u8, error_code, "BatchEntryIdsNotDistinct")) {
         return .{ .batch_entry_ids_not_distinct = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "BatchRequestTooLong")) {
         return .{ .batch_request_too_long = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "EmptyBatchRequest")) {
         return .{ .empty_batch_request = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAddress")) {
         return .{ .invalid_address = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAttributeName")) {
         return .{ .invalid_attribute_name = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAttributeValue")) {
         return .{ .invalid_attribute_value = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidBatchEntryId")) {
         return .{ .invalid_batch_entry_id = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidIdFormat")) {
         return .{ .invalid_id_format = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidMessageContents")) {
         return .{ .invalid_message_contents = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidSecurity")) {
         return .{ .invalid_security = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "KmsAccessDenied")) {
         return .{ .kms_access_denied = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "KmsDisabled")) {
         return .{ .kms_disabled = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "KmsInvalidKeyUsage")) {
         return .{ .kms_invalid_key_usage = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "KmsInvalidState")) {
         return .{ .kms_invalid_state = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "KmsNotFound")) {
         return .{ .kms_not_found = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "KmsOptInRequired")) {
         return .{ .kms_opt_in_required = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "KmsThrottled")) {
         return .{ .kms_throttled = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "MessageNotInflight")) {
         return .{ .message_not_inflight = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "OverLimit")) {
         return .{ .over_limit = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "PurgeQueueInProgress")) {
         return .{ .purge_queue_in_progress = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "QueueDeletedRecently")) {
         return .{ .queue_deleted_recently = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "QueueDoesNotExist")) {
         return .{ .queue_does_not_exist = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "QueueNameExists")) {
         return .{ .queue_name_exists = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "ReceiptHandleIsInvalid")) {
         return .{ .receipt_handle_is_invalid = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "RequestThrottled")) {
         return .{ .request_throttled = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .resource_not_found_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "TooManyEntriesInBatchRequest")) {
         return .{ .too_many_entries_in_batch_request = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "UnsupportedOperation")) {
         return .{ .unsupported_operation = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
 
+    const owned_code = try alloc.dupe(u8, error_code);
     return .{ .unknown = .{
-        .code = error_code,
-        .message = error_message,
-        .request_id = "",
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
         .http_status = status,
+        ._allocator = alloc,
     } };
 }

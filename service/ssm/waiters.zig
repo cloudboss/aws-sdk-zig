@@ -44,6 +44,7 @@ pub const CommandExecutedWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output = self.client.getCommandInvocation(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvocationDoesNotExist")) {
                     return .retry;
                 }

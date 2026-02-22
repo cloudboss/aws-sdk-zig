@@ -26,6 +26,24 @@ pub const ServiceError = union(enum) {
             .unknown => |e| e.request_id,
         };
     }
+
+    pub fn deinit(self: *ServiceError) void {
+        switch (self.*) {
+            .unknown => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.code);
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+            inline else => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+        }
+    }
 };
 
 pub const UnknownServiceError = struct {
@@ -33,4 +51,5 @@ pub const UnknownServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
     http_status: u16 = 0,
+    _allocator: ?std.mem.Allocator = null,
 };

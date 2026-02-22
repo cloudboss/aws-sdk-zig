@@ -227,6 +227,7 @@ pub const TableExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output = self.client.describeTable(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
                     return .retry;
                 }
@@ -285,6 +286,7 @@ pub const TableNotExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeTable(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
                     return .success;
                 }

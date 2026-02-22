@@ -55,6 +55,7 @@ pub const ImageExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeImages(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidAMIID.NotFound")) {
                     return .retry;
                 }
@@ -106,6 +107,7 @@ pub const InstanceExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeInstances(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
                     return .retry;
                 }
@@ -157,6 +159,7 @@ pub const InstanceRunningWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeInstances(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
                     return .retry;
                 }
@@ -208,6 +211,7 @@ pub const InstanceStatusOkWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeInstanceStatus(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
                     return .retry;
                 }
@@ -259,6 +263,7 @@ pub const InternetGatewayExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeInternetGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInternetGateway.NotFound")) {
                     return .retry;
                 }
@@ -310,6 +315,7 @@ pub const KeyPairExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeKeyPairs(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidKeyPair.NotFound")) {
                     return .retry;
                 }
@@ -361,6 +367,7 @@ pub const NatGatewayAvailableWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeNatGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NatGatewayNotFound")) {
                     return .retry;
                 }
@@ -412,6 +419,7 @@ pub const NatGatewayDeletedWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeNatGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NatGatewayNotFound")) {
                     return .success;
                 }
@@ -463,6 +471,7 @@ pub const NetworkInterfaceAvailableWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeNetworkInterfaces(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidNetworkInterfaceID.NotFound")) {
                     return .failure;
                 }
@@ -514,6 +523,7 @@ pub const SecurityGroupExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeSecurityGroups(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidGroup.NotFound")) {
                     return .retry;
                 }
@@ -565,6 +575,7 @@ pub const SpotInstanceRequestFulfilledWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeSpotInstanceRequests(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidSpotInstanceRequestID.NotFound")) {
                     return .retry;
                 }
@@ -616,6 +627,7 @@ pub const VolumeDeletedWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeVolumes(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVolume.NotFound")) {
                     return .success;
                 }
@@ -667,6 +679,7 @@ pub const VpcExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeVpcs(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcID.NotFound")) {
                     return .retry;
                 }
@@ -718,6 +731,7 @@ pub const VpcPeeringConnectionDeletedWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeVpcPeeringConnections(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcPeeringConnectionID.NotFound")) {
                     return .success;
                 }
@@ -769,6 +783,7 @@ pub const VpcPeeringConnectionExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.describeVpcPeeringConnections(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcPeeringConnectionID.NotFound")) {
                     return .retry;
                 }

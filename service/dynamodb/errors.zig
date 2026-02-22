@@ -201,181 +201,234 @@ pub const ServiceError = union(enum) {
             .unknown => |e| e.request_id,
         };
     }
+
+    pub fn deinit(self: *ServiceError) void {
+        switch (self.*) {
+            .unknown => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.code);
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+            inline else => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+        }
+    }
 };
 
 pub const BackupInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const BackupNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ConditionalCheckFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ContinuousBackupsUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const DuplicateItemException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ExportConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ExportNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const GlobalTableAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const GlobalTableNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const IdempotentParameterMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ImportConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ImportNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const IndexNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidEndpointException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidExportTimeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidRestoreTimeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ItemCollectionSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PointInTimeRecoveryUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PolicyNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ProvisionedThroughputExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ReplicaAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ReplicaNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ReplicatedWriteConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const RequestLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TableAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TableInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TableNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TransactionCanceledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TransactionConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TransactionInProgressException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UnknownServiceError = struct {
@@ -383,4 +436,5 @@ pub const UnknownServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
     http_status: u16 = 0,
+    _allocator: ?std.mem.Allocator = null,
 };

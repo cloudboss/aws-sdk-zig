@@ -201,181 +201,234 @@ pub const ServiceError = union(enum) {
             .unknown => |e| e.request_id,
         };
     }
+
+    pub fn deinit(self: *ServiceError) void {
+        switch (self.*) {
+            .unknown => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.code);
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+            inline else => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+        }
+    }
 };
 
 pub const AccountNotManagementOrDelegatedAdministratorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const CallerIsNotManagementAccountException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const CredentialReportExpiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const CredentialReportNotPresentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const CredentialReportNotReadyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const DeleteConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const DuplicateCertificateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const DuplicateSSHPublicKeyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const EntityAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const EntityTemporarilyUnmodifiableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const FeatureDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const FeatureEnabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidAuthenticationCodeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidCertificateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidInputException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidPublicKeyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidUserTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KeyPairMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const MalformedCertificateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const MalformedPolicyDocumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const NoSuchEntityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const OpenIdIdpCommunicationErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const OrganizationNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const OrganizationNotInAllFeaturesModeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PasswordPolicyViolationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PolicyEvaluationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PolicyNotAttachableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ReportGenerationLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ServiceAccessNotEnabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ServiceFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ServiceNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UnmodifiableEntityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UnrecognizedPublicKeyEncodingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UnknownServiceError = struct {
@@ -383,4 +436,5 @@ pub const UnknownServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
     http_status: u16 = 0,
+    _allocator: ?std.mem.Allocator = null,
 };

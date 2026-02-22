@@ -100,7 +100,7 @@ pub fn execute(client: *Client, input: AssumeRootInput, options: Options) !Assum
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status);
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
         }
         return error.ServiceError;
     }
@@ -180,88 +180,106 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
+    const owned_message = try alloc.dupe(u8, error_message);
+    errdefer alloc.free(owned_message);
+    const owned_request_id = try alloc.dupe(u8, request_id);
+    errdefer alloc.free(owned_request_id);
 
     if (std.mem.eql(u8, error_code, "ExpiredTokenException")) {
         return .{ .expired_token_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "ExpiredTradeInTokenException")) {
         return .{ .expired_trade_in_token_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "IDPCommunicationErrorException")) {
         return .{ .idp_communication_error_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "IDPRejectedClaimException")) {
         return .{ .idp_rejected_claim_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAuthorizationMessageException")) {
         return .{ .invalid_authorization_message_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidIdentityTokenException")) {
         return .{ .invalid_identity_token_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "JWTPayloadSizeExceededException")) {
         return .{ .jwt_payload_size_exceeded_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "MalformedPolicyDocumentException")) {
         return .{ .malformed_policy_document_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "OutboundWebIdentityFederationDisabledException")) {
         return .{ .outbound_web_identity_federation_disabled_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "PackedPolicyTooLargeException")) {
         return .{ .packed_policy_too_large_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "RegionDisabledException")) {
         return .{ .region_disabled_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "SessionDurationEscalationException")) {
         return .{ .session_duration_escalation_exception = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
 
+    const owned_code = try alloc.dupe(u8, error_code);
     return .{ .unknown = .{
-        .code = error_code,
-        .message = error_message,
-        .request_id = request_id,
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
         .http_status = status,
+        ._allocator = alloc,
     } };
 }

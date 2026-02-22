@@ -86,66 +86,96 @@ pub const ServiceError = union(enum) {
             .unknown => |e| e.request_id,
         };
     }
+
+    pub fn deinit(self: *ServiceError) void {
+        switch (self.*) {
+            .unknown => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.code);
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+            inline else => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+        }
+    }
 };
 
 pub const DecryptionFailure = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const EncryptionFailure = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InternalServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const MalformedPolicyDocumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PreconditionNotMetException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PublicPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ResourceExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UnknownServiceError = struct {
@@ -153,4 +183,5 @@ pub const UnknownServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
     http_status: u16 = 0,
+    _allocator: ?std.mem.Allocator = null,
 };

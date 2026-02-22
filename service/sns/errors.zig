@@ -196,176 +196,228 @@ pub const ServiceError = union(enum) {
             .unknown => |e| e.request_id,
         };
     }
+
+    pub fn deinit(self: *ServiceError) void {
+        switch (self.*) {
+            .unknown => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.code);
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+            inline else => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+        }
+    }
 };
 
 pub const AuthorizationErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const BatchEntryIdsNotDistinctException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const BatchRequestTooLongException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ConcurrentAccessException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const EmptyBatchRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const EndpointDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const FilterPolicyLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InternalErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidBatchEntryIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidParameterValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidSecurityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KMSAccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KMSDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KMSInvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KMSNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KMSOptInRequired = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KMSThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const NotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const OptedOutException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PlatformApplicationDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ReplayLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const StaleTagException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const SubscriptionLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TagLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TagPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ThrottledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TooManyEntriesInBatchRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TopicLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UserErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const VerificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UnknownServiceError = struct {
@@ -373,4 +425,5 @@ pub const UnknownServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
     http_status: u16 = 0,
+    _allocator: ?std.mem.Allocator = null,
 };

@@ -166,146 +166,192 @@ pub const ServiceError = union(enum) {
             .unknown => |e| e.request_id,
         };
     }
+
+    pub fn deinit(self: *ServiceError) void {
+        switch (self.*) {
+            .unknown => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.code);
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+            inline else => |e| {
+                if (e._allocator) |a| {
+                    a.free(e.message);
+                    a.free(e.request_id);
+                }
+            },
+        }
+    }
 };
 
 pub const BatchEntryIdsNotDistinct = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const BatchRequestTooLong = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const EmptyBatchRequest = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidAddress = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidAttributeName = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidAttributeValue = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidBatchEntryId = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidIdFormat = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidMessageContents = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const InvalidSecurity = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KmsAccessDenied = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KmsDisabled = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KmsInvalidKeyUsage = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KmsInvalidState = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KmsNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KmsOptInRequired = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const KmsThrottled = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const MessageNotInflight = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const OverLimit = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const PurgeQueueInProgress = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const QueueDeletedRecently = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const QueueDoesNotExist = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const QueueNameExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ReceiptHandleIsInvalid = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const RequestThrottled = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const TooManyEntriesInBatchRequest = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UnsupportedOperation = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+    _allocator: ?std.mem.Allocator = null,
 };
 
 pub const UnknownServiceError = struct {
@@ -313,4 +359,5 @@ pub const UnknownServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
     http_status: u16 = 0,
+    _allocator: ?std.mem.Allocator = null,
 };

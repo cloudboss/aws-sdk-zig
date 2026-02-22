@@ -171,6 +171,7 @@ pub const FunctionExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.getFunction(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
                     return .retry;
                 }

@@ -66,7 +66,7 @@ pub fn execute(client: *Client, input: GetResourcePolicyInput, options: Options)
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status);
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
         }
         return error.ServiceError;
     }
@@ -106,7 +106,7 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return aws.json.parseJsonObject(GetResourcePolicyOutput, body, alloc);
 }
 
-fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
         if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
@@ -115,84 +115,102 @@ fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    const owned_message = try alloc.dupe(u8, error_message);
+    errdefer alloc.free(owned_message);
+    const owned_request_id = try alloc.dupe(u8, "");
+    errdefer alloc.free(owned_request_id);
 
     if (std.mem.eql(u8, error_code, "DecryptionFailure")) {
         return .{ .decryption_failure = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "EncryptionFailure")) {
         return .{ .encryption_failure = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InternalServiceError")) {
         return .{ .internal_service_error = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidNextTokenException")) {
         return .{ .invalid_next_token_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
         return .{ .invalid_parameter_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidRequestException")) {
         return .{ .invalid_request_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .limit_exceeded_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "MalformedPolicyDocumentException")) {
         return .{ .malformed_policy_document_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "PreconditionNotMetException")) {
         return .{ .precondition_not_met_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "PublicPolicyException")) {
         return .{ .public_policy_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "ResourceExistsException")) {
         return .{ .resource_exists_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .resource_not_found_exception = .{
-            .message = error_message,
-            .request_id = "",
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
 
+    const owned_code = try alloc.dupe(u8, error_code);
     return .{ .unknown = .{
-        .code = error_code,
-        .message = error_message,
-        .request_id = "",
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
         .http_status = status,
+        ._allocator = alloc,
     } };
 }

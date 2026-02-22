@@ -45,6 +45,7 @@ pub const BucketExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.headBucket(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NotFound")) {
                     return .retry;
                 }
@@ -96,6 +97,7 @@ pub const BucketNotExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.headBucket(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NotFound")) {
                     return .success;
                 }
@@ -147,6 +149,7 @@ pub const ObjectExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.headObject(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NotFound")) {
                     return .retry;
                 }
@@ -198,6 +201,7 @@ pub const ObjectNotExistsWaiter = struct {
         var diagnostic: @import("errors.zig").ServiceError = undefined;
         var output_ = self.client.headObject(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
+                defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NotFound")) {
                     return .success;
                 }

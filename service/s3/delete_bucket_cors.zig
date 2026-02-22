@@ -43,7 +43,7 @@ pub fn execute(client: *Client, input: DeleteBucketCorsInput, options: Options) 
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status);
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
         }
         return error.ServiceError;
     }
@@ -100,106 +100,127 @@ fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: s
     return result;
 }
 
-fn parseErrorResponse(body: []const u8, status: u16) ServiceError {
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
+    const owned_message = try alloc.dupe(u8, error_message);
+    errdefer alloc.free(owned_message);
+    const owned_request_id = try alloc.dupe(u8, request_id);
+    errdefer alloc.free(owned_request_id);
 
     if (std.mem.eql(u8, error_code, "AccessDenied")) {
         return .{ .access_denied = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "BucketAlreadyExists")) {
         return .{ .bucket_already_exists = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "BucketAlreadyOwnedByYou")) {
         return .{ .bucket_already_owned_by_you = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "EncryptionTypeMismatch")) {
         return .{ .encryption_type_mismatch = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "IdempotencyParameterMismatch")) {
         return .{ .idempotency_parameter_mismatch = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidObjectState")) {
         return .{ .invalid_object_state = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidRequest")) {
         return .{ .invalid_request = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "InvalidWriteOffset")) {
         return .{ .invalid_write_offset = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "NoSuchBucket")) {
         return .{ .no_such_bucket = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "NoSuchKey")) {
         return .{ .no_such_key = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "NoSuchUpload")) {
         return .{ .no_such_upload = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "NotFound")) {
         return .{ .not_found = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "ObjectAlreadyInActiveTierError")) {
         return .{ .object_already_in_active_tier_error = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "ObjectNotInActiveTierError")) {
         return .{ .object_not_in_active_tier_error = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
     if (std.mem.eql(u8, error_code, "TooManyParts")) {
         return .{ .too_many_parts = .{
-            .message = error_message,
-            .request_id = request_id,
+            .message = owned_message,
+            .request_id = owned_request_id,
+            ._allocator = alloc,
         } };
     }
 
+    const owned_code = try alloc.dupe(u8, error_code);
     return .{ .unknown = .{
-        .code = error_code,
-        .message = error_message,
-        .request_id = request_id,
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
         .http_status = status,
+        ._allocator = alloc,
     } };
 }
