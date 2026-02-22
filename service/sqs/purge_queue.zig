@@ -45,7 +45,7 @@ pub fn execute(client: *Client, input: PurgeQueueInput, options: Options) !Purge
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
@@ -95,214 +95,186 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    const owned_message = try alloc.dupe(u8, error_message);
-    errdefer alloc.free(owned_message);
-    const owned_request_id = try alloc.dupe(u8, "");
-    errdefer alloc.free(owned_request_id);
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
 
     if (std.mem.eql(u8, error_code, "BatchEntryIdsNotDistinct")) {
-        return .{ .batch_entry_ids_not_distinct = .{
+        return .{ .arena = arena, .kind = .{ .batch_entry_ids_not_distinct = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "BatchRequestTooLong")) {
-        return .{ .batch_request_too_long = .{
+        return .{ .arena = arena, .kind = .{ .batch_request_too_long = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "EmptyBatchRequest")) {
-        return .{ .empty_batch_request = .{
+        return .{ .arena = arena, .kind = .{ .empty_batch_request = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAddress")) {
-        return .{ .invalid_address = .{
+        return .{ .arena = arena, .kind = .{ .invalid_address = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAttributeName")) {
-        return .{ .invalid_attribute_name = .{
+        return .{ .arena = arena, .kind = .{ .invalid_attribute_name = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAttributeValue")) {
-        return .{ .invalid_attribute_value = .{
+        return .{ .arena = arena, .kind = .{ .invalid_attribute_value = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidBatchEntryId")) {
-        return .{ .invalid_batch_entry_id = .{
+        return .{ .arena = arena, .kind = .{ .invalid_batch_entry_id = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidIdFormat")) {
-        return .{ .invalid_id_format = .{
+        return .{ .arena = arena, .kind = .{ .invalid_id_format = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidMessageContents")) {
-        return .{ .invalid_message_contents = .{
+        return .{ .arena = arena, .kind = .{ .invalid_message_contents = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidSecurity")) {
-        return .{ .invalid_security = .{
+        return .{ .arena = arena, .kind = .{ .invalid_security = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "KmsAccessDenied")) {
-        return .{ .kms_access_denied = .{
+        return .{ .arena = arena, .kind = .{ .kms_access_denied = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "KmsDisabled")) {
-        return .{ .kms_disabled = .{
+        return .{ .arena = arena, .kind = .{ .kms_disabled = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "KmsInvalidKeyUsage")) {
-        return .{ .kms_invalid_key_usage = .{
+        return .{ .arena = arena, .kind = .{ .kms_invalid_key_usage = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "KmsInvalidState")) {
-        return .{ .kms_invalid_state = .{
+        return .{ .arena = arena, .kind = .{ .kms_invalid_state = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "KmsNotFound")) {
-        return .{ .kms_not_found = .{
+        return .{ .arena = arena, .kind = .{ .kms_not_found = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "KmsOptInRequired")) {
-        return .{ .kms_opt_in_required = .{
+        return .{ .arena = arena, .kind = .{ .kms_opt_in_required = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "KmsThrottled")) {
-        return .{ .kms_throttled = .{
+        return .{ .arena = arena, .kind = .{ .kms_throttled = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "MessageNotInflight")) {
-        return .{ .message_not_inflight = .{
+        return .{ .arena = arena, .kind = .{ .message_not_inflight = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "OverLimit")) {
-        return .{ .over_limit = .{
+        return .{ .arena = arena, .kind = .{ .over_limit = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "PurgeQueueInProgress")) {
-        return .{ .purge_queue_in_progress = .{
+        return .{ .arena = arena, .kind = .{ .purge_queue_in_progress = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "QueueDeletedRecently")) {
-        return .{ .queue_deleted_recently = .{
+        return .{ .arena = arena, .kind = .{ .queue_deleted_recently = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "QueueDoesNotExist")) {
-        return .{ .queue_does_not_exist = .{
+        return .{ .arena = arena, .kind = .{ .queue_does_not_exist = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "QueueNameExists")) {
-        return .{ .queue_name_exists = .{
+        return .{ .arena = arena, .kind = .{ .queue_name_exists = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ReceiptHandleIsInvalid")) {
-        return .{ .receipt_handle_is_invalid = .{
+        return .{ .arena = arena, .kind = .{ .receipt_handle_is_invalid = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "RequestThrottled")) {
-        return .{ .request_throttled = .{
+        return .{ .arena = arena, .kind = .{ .request_throttled = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
-        return .{ .resource_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "TooManyEntriesInBatchRequest")) {
-        return .{ .too_many_entries_in_batch_request = .{
+        return .{ .arena = arena, .kind = .{ .too_many_entries_in_batch_request = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "UnsupportedOperation")) {
-        return .{ .unsupported_operation = .{
+        return .{ .arena = arena, .kind = .{ .unsupported_operation = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
 
-    const owned_code = try alloc.dupe(u8, error_code);
-    return .{ .unknown = .{
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
         .code = owned_code,
         .message = owned_message,
         .request_id = owned_request_id,
         .http_status = status,
-        ._allocator = alloc,
-    } };
+    } } };
 }

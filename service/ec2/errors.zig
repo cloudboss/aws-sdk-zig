@@ -1,48 +1,55 @@
 const std = @import("std");
 
-pub const ServiceError = union(enum) {
-    unknown: UnknownServiceError,
+pub const ServiceError = struct {
+    arena: ?std.heap.ArenaAllocator = null,
+    kind: Kind,
+
+    pub const Kind = union(enum) {
+        unknown: UnknownServiceError,
+
+        pub fn code(self: Kind) []const u8 {
+            return switch (self) {
+                .unknown => |e| e.code,
+            };
+        }
+
+        pub fn message(self: Kind) []const u8 {
+            return switch (self) {
+                .unknown => |e| e.message,
+            };
+        }
+
+        pub fn httpStatus(self: Kind) u16 {
+            return switch (self) {
+                .unknown => |e| e.http_status,
+            };
+        }
+
+        pub fn requestId(self: Kind) []const u8 {
+            return switch (self) {
+                .unknown => |e| e.request_id,
+            };
+        }
+    };
+
+    pub fn deinit(self: *ServiceError) void {
+        if (self.arena) |*a| a.deinit();
+    }
 
     pub fn code(self: ServiceError) []const u8 {
-        return switch (self) {
-            .unknown => |e| e.code,
-        };
+        return self.kind.code();
     }
 
     pub fn message(self: ServiceError) []const u8 {
-        return switch (self) {
-            .unknown => |e| e.message,
-        };
+        return self.kind.message();
     }
 
     pub fn httpStatus(self: ServiceError) u16 {
-        return switch (self) {
-            .unknown => |e| e.http_status,
-        };
+        return self.kind.httpStatus();
     }
 
     pub fn requestId(self: ServiceError) []const u8 {
-        return switch (self) {
-            .unknown => |e| e.request_id,
-        };
-    }
-
-    pub fn deinit(self: *ServiceError) void {
-        switch (self.*) {
-            .unknown => |e| {
-                if (e._allocator) |a| {
-                    a.free(e.code);
-                    a.free(e.message);
-                    a.free(e.request_id);
-                }
-            },
-            inline else => |e| {
-                if (e._allocator) |a| {
-                    a.free(e.message);
-                    a.free(e.request_id);
-                }
-            },
-        }
+        return self.kind.requestId();
     }
 };
 
@@ -51,5 +58,4 @@ pub const UnknownServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
     http_status: u16 = 0,
-    _allocator: ?std.mem.Allocator = null,
 };

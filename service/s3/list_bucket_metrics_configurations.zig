@@ -73,7 +73,7 @@ pub fn execute(client: *Client, input: ListBucketMetricsConfigurationsInput, opt
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
@@ -168,123 +168,108 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    const owned_message = try alloc.dupe(u8, error_message);
-    errdefer alloc.free(owned_message);
-    const owned_request_id = try alloc.dupe(u8, request_id);
-    errdefer alloc.free(owned_request_id);
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, request_id);
 
     if (std.mem.eql(u8, error_code, "AccessDenied")) {
-        return .{ .access_denied = .{
+        return .{ .arena = arena, .kind = .{ .access_denied = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "BucketAlreadyExists")) {
-        return .{ .bucket_already_exists = .{
+        return .{ .arena = arena, .kind = .{ .bucket_already_exists = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "BucketAlreadyOwnedByYou")) {
-        return .{ .bucket_already_owned_by_you = .{
+        return .{ .arena = arena, .kind = .{ .bucket_already_owned_by_you = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "EncryptionTypeMismatch")) {
-        return .{ .encryption_type_mismatch = .{
+        return .{ .arena = arena, .kind = .{ .encryption_type_mismatch = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "IdempotencyParameterMismatch")) {
-        return .{ .idempotency_parameter_mismatch = .{
+        return .{ .arena = arena, .kind = .{ .idempotency_parameter_mismatch = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidObjectState")) {
-        return .{ .invalid_object_state = .{
+        return .{ .arena = arena, .kind = .{ .invalid_object_state = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidRequest")) {
-        return .{ .invalid_request = .{
+        return .{ .arena = arena, .kind = .{ .invalid_request = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidWriteOffset")) {
-        return .{ .invalid_write_offset = .{
+        return .{ .arena = arena, .kind = .{ .invalid_write_offset = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "NoSuchBucket")) {
-        return .{ .no_such_bucket = .{
+        return .{ .arena = arena, .kind = .{ .no_such_bucket = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "NoSuchKey")) {
-        return .{ .no_such_key = .{
+        return .{ .arena = arena, .kind = .{ .no_such_key = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "NoSuchUpload")) {
-        return .{ .no_such_upload = .{
+        return .{ .arena = arena, .kind = .{ .no_such_upload = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "NotFound")) {
-        return .{ .not_found = .{
+        return .{ .arena = arena, .kind = .{ .not_found = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ObjectAlreadyInActiveTierError")) {
-        return .{ .object_already_in_active_tier_error = .{
+        return .{ .arena = arena, .kind = .{ .object_already_in_active_tier_error = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ObjectNotInActiveTierError")) {
-        return .{ .object_not_in_active_tier_error = .{
+        return .{ .arena = arena, .kind = .{ .object_not_in_active_tier_error = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "TooManyParts")) {
-        return .{ .too_many_parts = .{
+        return .{ .arena = arena, .kind = .{ .too_many_parts = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
 
-    const owned_code = try alloc.dupe(u8, error_code);
-    return .{ .unknown = .{
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
         .code = owned_code,
         .message = owned_message,
         .request_id = owned_request_id,
         .http_status = status,
-        ._allocator = alloc,
-    } };
+    } } };
 }

@@ -38,7 +38,7 @@ pub fn execute(client: *Client, input: SendDelegationTokenInput, options: Option
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
@@ -90,263 +90,228 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    const owned_message = try alloc.dupe(u8, error_message);
-    errdefer alloc.free(owned_message);
-    const owned_request_id = try alloc.dupe(u8, request_id);
-    errdefer alloc.free(owned_request_id);
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, request_id);
 
     if (std.mem.eql(u8, error_code, "AccountNotManagementOrDelegatedAdministratorException")) {
-        return .{ .account_not_management_or_delegated_administrator_exception = .{
+        return .{ .arena = arena, .kind = .{ .account_not_management_or_delegated_administrator_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "CallerIsNotManagementAccountException")) {
-        return .{ .caller_is_not_management_account_exception = .{
+        return .{ .arena = arena, .kind = .{ .caller_is_not_management_account_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
-        return .{ .concurrent_modification_exception = .{
+        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "CredentialReportExpiredException")) {
-        return .{ .credential_report_expired_exception = .{
+        return .{ .arena = arena, .kind = .{ .credential_report_expired_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "CredentialReportNotPresentException")) {
-        return .{ .credential_report_not_present_exception = .{
+        return .{ .arena = arena, .kind = .{ .credential_report_not_present_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "CredentialReportNotReadyException")) {
-        return .{ .credential_report_not_ready_exception = .{
+        return .{ .arena = arena, .kind = .{ .credential_report_not_ready_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "DeleteConflictException")) {
-        return .{ .delete_conflict_exception = .{
+        return .{ .arena = arena, .kind = .{ .delete_conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "DuplicateCertificateException")) {
-        return .{ .duplicate_certificate_exception = .{
+        return .{ .arena = arena, .kind = .{ .duplicate_certificate_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "DuplicateSSHPublicKeyException")) {
-        return .{ .duplicate_ssh_public_key_exception = .{
+        return .{ .arena = arena, .kind = .{ .duplicate_ssh_public_key_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "EntityAlreadyExistsException")) {
-        return .{ .entity_already_exists_exception = .{
+        return .{ .arena = arena, .kind = .{ .entity_already_exists_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "EntityTemporarilyUnmodifiableException")) {
-        return .{ .entity_temporarily_unmodifiable_exception = .{
+        return .{ .arena = arena, .kind = .{ .entity_temporarily_unmodifiable_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "FeatureDisabledException")) {
-        return .{ .feature_disabled_exception = .{
+        return .{ .arena = arena, .kind = .{ .feature_disabled_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "FeatureEnabledException")) {
-        return .{ .feature_enabled_exception = .{
+        return .{ .arena = arena, .kind = .{ .feature_enabled_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAuthenticationCodeException")) {
-        return .{ .invalid_authentication_code_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_authentication_code_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidCertificateException")) {
-        return .{ .invalid_certificate_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_certificate_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidInputException")) {
-        return .{ .invalid_input_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_input_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidPublicKeyException")) {
-        return .{ .invalid_public_key_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_public_key_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidUserTypeException")) {
-        return .{ .invalid_user_type_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_user_type_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "KeyPairMismatchException")) {
-        return .{ .key_pair_mismatch_exception = .{
+        return .{ .arena = arena, .kind = .{ .key_pair_mismatch_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
-        return .{ .limit_exceeded_exception = .{
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "MalformedCertificateException")) {
-        return .{ .malformed_certificate_exception = .{
+        return .{ .arena = arena, .kind = .{ .malformed_certificate_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "MalformedPolicyDocumentException")) {
-        return .{ .malformed_policy_document_exception = .{
+        return .{ .arena = arena, .kind = .{ .malformed_policy_document_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "NoSuchEntityException")) {
-        return .{ .no_such_entity_exception = .{
+        return .{ .arena = arena, .kind = .{ .no_such_entity_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "OpenIdIdpCommunicationErrorException")) {
-        return .{ .open_id_idp_communication_error_exception = .{
+        return .{ .arena = arena, .kind = .{ .open_id_idp_communication_error_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
-        return .{ .organization_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "OrganizationNotInAllFeaturesModeException")) {
-        return .{ .organization_not_in_all_features_mode_exception = .{
+        return .{ .arena = arena, .kind = .{ .organization_not_in_all_features_mode_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "PasswordPolicyViolationException")) {
-        return .{ .password_policy_violation_exception = .{
+        return .{ .arena = arena, .kind = .{ .password_policy_violation_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "PolicyEvaluationException")) {
-        return .{ .policy_evaluation_exception = .{
+        return .{ .arena = arena, .kind = .{ .policy_evaluation_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "PolicyNotAttachableException")) {
-        return .{ .policy_not_attachable_exception = .{
+        return .{ .arena = arena, .kind = .{ .policy_not_attachable_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ReportGenerationLimitExceededException")) {
-        return .{ .report_generation_limit_exceeded_exception = .{
+        return .{ .arena = arena, .kind = .{ .report_generation_limit_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ServiceAccessNotEnabledException")) {
-        return .{ .service_access_not_enabled_exception = .{
+        return .{ .arena = arena, .kind = .{ .service_access_not_enabled_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ServiceFailureException")) {
-        return .{ .service_failure_exception = .{
+        return .{ .arena = arena, .kind = .{ .service_failure_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ServiceNotSupportedException")) {
-        return .{ .service_not_supported_exception = .{
+        return .{ .arena = arena, .kind = .{ .service_not_supported_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "UnmodifiableEntityException")) {
-        return .{ .unmodifiable_entity_exception = .{
+        return .{ .arena = arena, .kind = .{ .unmodifiable_entity_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "UnrecognizedPublicKeyEncodingException")) {
-        return .{ .unrecognized_public_key_encoding_exception = .{
+        return .{ .arena = arena, .kind = .{ .unrecognized_public_key_encoding_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
 
-    const owned_code = try alloc.dupe(u8, error_code);
-    return .{ .unknown = .{
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
         .code = owned_code,
         .message = owned_message,
         .request_id = owned_request_id,
         .http_status = status,
-        ._allocator = alloc,
-    } };
+    } } };
 }

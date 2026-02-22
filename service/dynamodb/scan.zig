@@ -392,7 +392,7 @@ pub fn execute(client: *Client, input: ScanInput, options: Options) !ScanOutput 
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
@@ -441,263 +441,228 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
         break :blk type_str;
     };
     const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    const owned_message = try alloc.dupe(u8, error_message);
-    errdefer alloc.free(owned_message);
-    const owned_request_id = try alloc.dupe(u8, "");
-    errdefer alloc.free(owned_request_id);
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
 
     if (std.mem.eql(u8, error_code, "BackupInUseException")) {
-        return .{ .backup_in_use_exception = .{
+        return .{ .arena = arena, .kind = .{ .backup_in_use_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "BackupNotFoundException")) {
-        return .{ .backup_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .backup_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ConditionalCheckFailedException")) {
-        return .{ .conditional_check_failed_exception = .{
+        return .{ .arena = arena, .kind = .{ .conditional_check_failed_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ContinuousBackupsUnavailableException")) {
-        return .{ .continuous_backups_unavailable_exception = .{
+        return .{ .arena = arena, .kind = .{ .continuous_backups_unavailable_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "DuplicateItemException")) {
-        return .{ .duplicate_item_exception = .{
+        return .{ .arena = arena, .kind = .{ .duplicate_item_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ExportConflictException")) {
-        return .{ .export_conflict_exception = .{
+        return .{ .arena = arena, .kind = .{ .export_conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ExportNotFoundException")) {
-        return .{ .export_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .export_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "GlobalTableAlreadyExistsException")) {
-        return .{ .global_table_already_exists_exception = .{
+        return .{ .arena = arena, .kind = .{ .global_table_already_exists_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "GlobalTableNotFoundException")) {
-        return .{ .global_table_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .global_table_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "IdempotentParameterMismatchException")) {
-        return .{ .idempotent_parameter_mismatch_exception = .{
+        return .{ .arena = arena, .kind = .{ .idempotent_parameter_mismatch_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ImportConflictException")) {
-        return .{ .import_conflict_exception = .{
+        return .{ .arena = arena, .kind = .{ .import_conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ImportNotFoundException")) {
-        return .{ .import_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .import_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "IndexNotFoundException")) {
-        return .{ .index_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .index_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InternalServerError")) {
-        return .{ .internal_server_error = .{
+        return .{ .arena = arena, .kind = .{ .internal_server_error = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidEndpointException")) {
-        return .{ .invalid_endpoint_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_endpoint_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidExportTimeException")) {
-        return .{ .invalid_export_time_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_export_time_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidRestoreTimeException")) {
-        return .{ .invalid_restore_time_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_restore_time_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ItemCollectionSizeLimitExceededException")) {
-        return .{ .item_collection_size_limit_exceeded_exception = .{
+        return .{ .arena = arena, .kind = .{ .item_collection_size_limit_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
-        return .{ .limit_exceeded_exception = .{
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "PointInTimeRecoveryUnavailableException")) {
-        return .{ .point_in_time_recovery_unavailable_exception = .{
+        return .{ .arena = arena, .kind = .{ .point_in_time_recovery_unavailable_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "PolicyNotFoundException")) {
-        return .{ .policy_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .policy_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ProvisionedThroughputExceededException")) {
-        return .{ .provisioned_throughput_exceeded_exception = .{
+        return .{ .arena = arena, .kind = .{ .provisioned_throughput_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ReplicaAlreadyExistsException")) {
-        return .{ .replica_already_exists_exception = .{
+        return .{ .arena = arena, .kind = .{ .replica_already_exists_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ReplicaNotFoundException")) {
-        return .{ .replica_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .replica_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ReplicatedWriteConflictException")) {
-        return .{ .replicated_write_conflict_exception = .{
+        return .{ .arena = arena, .kind = .{ .replicated_write_conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "RequestLimitExceeded")) {
-        return .{ .request_limit_exceeded = .{
+        return .{ .arena = arena, .kind = .{ .request_limit_exceeded = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ResourceInUseException")) {
-        return .{ .resource_in_use_exception = .{
+        return .{ .arena = arena, .kind = .{ .resource_in_use_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
-        return .{ .resource_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "TableAlreadyExistsException")) {
-        return .{ .table_already_exists_exception = .{
+        return .{ .arena = arena, .kind = .{ .table_already_exists_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "TableInUseException")) {
-        return .{ .table_in_use_exception = .{
+        return .{ .arena = arena, .kind = .{ .table_in_use_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "TableNotFoundException")) {
-        return .{ .table_not_found_exception = .{
+        return .{ .arena = arena, .kind = .{ .table_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ThrottlingException")) {
-        return .{ .throttling_exception = .{
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "TransactionCanceledException")) {
-        return .{ .transaction_canceled_exception = .{
+        return .{ .arena = arena, .kind = .{ .transaction_canceled_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "TransactionConflictException")) {
-        return .{ .transaction_conflict_exception = .{
+        return .{ .arena = arena, .kind = .{ .transaction_conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "TransactionInProgressException")) {
-        return .{ .transaction_in_progress_exception = .{
+        return .{ .arena = arena, .kind = .{ .transaction_in_progress_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
 
-    const owned_code = try alloc.dupe(u8, error_code);
-    return .{ .unknown = .{
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
         .code = owned_code,
         .message = owned_message,
         .request_id = owned_request_id,
         .http_status = status,
-        ._allocator = alloc,
-    } };
+    } } };
 }

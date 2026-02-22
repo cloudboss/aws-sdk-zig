@@ -100,7 +100,7 @@ pub fn execute(client: *Client, input: AssumeRootInput, options: Options) !Assum
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
         }
         return error.ServiceError;
     }
@@ -184,102 +184,90 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
     const error_message = aws.xml.findElement(body, "Message") orelse "";
     const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    const owned_message = try alloc.dupe(u8, error_message);
-    errdefer alloc.free(owned_message);
-    const owned_request_id = try alloc.dupe(u8, request_id);
-    errdefer alloc.free(owned_request_id);
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, request_id);
 
     if (std.mem.eql(u8, error_code, "ExpiredTokenException")) {
-        return .{ .expired_token_exception = .{
+        return .{ .arena = arena, .kind = .{ .expired_token_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "ExpiredTradeInTokenException")) {
-        return .{ .expired_trade_in_token_exception = .{
+        return .{ .arena = arena, .kind = .{ .expired_trade_in_token_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "IDPCommunicationErrorException")) {
-        return .{ .idp_communication_error_exception = .{
+        return .{ .arena = arena, .kind = .{ .idp_communication_error_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "IDPRejectedClaimException")) {
-        return .{ .idp_rejected_claim_exception = .{
+        return .{ .arena = arena, .kind = .{ .idp_rejected_claim_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidAuthorizationMessageException")) {
-        return .{ .invalid_authorization_message_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_authorization_message_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "InvalidIdentityTokenException")) {
-        return .{ .invalid_identity_token_exception = .{
+        return .{ .arena = arena, .kind = .{ .invalid_identity_token_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "JWTPayloadSizeExceededException")) {
-        return .{ .jwt_payload_size_exceeded_exception = .{
+        return .{ .arena = arena, .kind = .{ .jwt_payload_size_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "MalformedPolicyDocumentException")) {
-        return .{ .malformed_policy_document_exception = .{
+        return .{ .arena = arena, .kind = .{ .malformed_policy_document_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "OutboundWebIdentityFederationDisabledException")) {
-        return .{ .outbound_web_identity_federation_disabled_exception = .{
+        return .{ .arena = arena, .kind = .{ .outbound_web_identity_federation_disabled_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "PackedPolicyTooLargeException")) {
-        return .{ .packed_policy_too_large_exception = .{
+        return .{ .arena = arena, .kind = .{ .packed_policy_too_large_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "RegionDisabledException")) {
-        return .{ .region_disabled_exception = .{
+        return .{ .arena = arena, .kind = .{ .region_disabled_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
     if (std.mem.eql(u8, error_code, "SessionDurationEscalationException")) {
-        return .{ .session_duration_escalation_exception = .{
+        return .{ .arena = arena, .kind = .{ .session_duration_escalation_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
-            ._allocator = alloc,
-        } };
+        } } };
     }
 
-    const owned_code = try alloc.dupe(u8, error_code);
-    return .{ .unknown = .{
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
         .code = owned_code,
         .message = owned_message,
         .request_id = owned_request_id,
         .http_status = status,
-        ._allocator = alloc,
-    } };
+    } } };
 }
