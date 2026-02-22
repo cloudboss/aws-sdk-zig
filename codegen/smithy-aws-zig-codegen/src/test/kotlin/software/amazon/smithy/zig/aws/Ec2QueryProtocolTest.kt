@@ -200,6 +200,7 @@ class Ec2QueryProtocolTest {
             op.contains("\"InvalidParameterException\""),
             "Missing error code matching for InvalidParameterException",
         )
+        assertTrue(op.contains("alloc: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     // ---- Helper functions are present ----

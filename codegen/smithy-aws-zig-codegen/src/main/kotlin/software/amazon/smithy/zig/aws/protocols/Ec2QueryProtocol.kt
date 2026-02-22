@@ -16,29 +16,36 @@ class Ec2QueryProtocol : AwsQueryProtocol() {
     }
 
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
-        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16) ServiceError {")
+        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {")
 
         writer.write("const error_code = aws.xml.findElement(body, \"Code\") orelse \"Unknown\";")
         writer.write("const error_message = aws.xml.findElement(body, \"Message\") orelse \"\";")
         writer.write("const request_id = aws.xml.findElement(body, \"RequestID\") orelse \"\";")
+        writer.write("const owned_message = try alloc.dupe(u8, error_message);")
+        writer.write("errdefer alloc.free(owned_message);")
+        writer.write("const owned_request_id = try alloc.dupe(u8, request_id);")
+        writer.write("errdefer alloc.free(owned_request_id);")
         writer.blankLine()
 
         // Match error codes to ServiceError variants
         for (info in ctx.errorInfos) {
             writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
             writer.write("return .{ .\$L = .{", info.variantName)
-            writer.write("    .message = error_message,")
-            writer.write("    .request_id = request_id,")
+            writer.write("    .message = owned_message,")
+            writer.write("    .request_id = owned_request_id,")
+            writer.write("    ._allocator = alloc,")
             writer.write("} };")
             writer.closeBlock("}")
         }
 
         writer.blankLine()
+        writer.write("const owned_code = try alloc.dupe(u8, error_code);")
         writer.write("return .{ .unknown = .{")
-        writer.write("    .code = error_code,")
-        writer.write("    .message = error_message,")
-        writer.write("    .request_id = request_id,")
+        writer.write("    .code = owned_code,")
+        writer.write("    .message = owned_message,")
+        writer.write("    .request_id = owned_request_id,")
         writer.write("    .http_status = status,")
+        writer.write("    ._allocator = alloc,")
         writer.write("} };")
 
         writer.closeBlock("}")

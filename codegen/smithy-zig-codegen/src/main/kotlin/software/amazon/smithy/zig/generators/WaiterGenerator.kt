@@ -217,6 +217,7 @@ class WaiterGenerator(
 
         if (errorAcceptors.isNotEmpty()) {
             writer.openBlock("if (err == error.ServiceError) {")
+            writer.write("defer diagnostic.deinit();")
             for (ea in errorAcceptors) {
                 writer.openBlock("if (std.mem.eql(u8, diagnostic.code(), \"\$L\")) {", ea.errorType!!)
                 writer.write("return .\$L;", ea.state.name.lowercase())

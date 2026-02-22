@@ -509,6 +509,7 @@ class RestJsonProtocolTest {
             op.contains("__type"),
             "Should extract error code from __type field (same as AWS JSON)",
         )
+        assertTrue(op.contains("alloc: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     @Test

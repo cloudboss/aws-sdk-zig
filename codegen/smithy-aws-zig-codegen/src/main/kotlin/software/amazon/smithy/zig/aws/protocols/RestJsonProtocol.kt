@@ -603,7 +603,7 @@ class RestJsonProtocol : ProtocolGenerator {
 
     override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
         // Error parsing is the same as AWS JSON: __type field or x-amzn-ErrorType header
-        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16) ServiceError {")
+        writer.openBlock("fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {")
 
         // Extract error code from __type, stripping namespace prefix
         writer.openBlock("const error_code = blk: {")
@@ -616,24 +616,31 @@ class RestJsonProtocol : ProtocolGenerator {
 
         // Extract error message
         writer.write("const error_message = aws.json.findJsonValue(body, \"message\") orelse aws.json.findJsonValue(body, \"Message\") orelse \"\";")
+        writer.write("const owned_message = try alloc.dupe(u8, error_message);")
+        writer.write("errdefer alloc.free(owned_message);")
+        writer.write("const owned_request_id = try alloc.dupe(u8, \"\");")
+        writer.write("errdefer alloc.free(owned_request_id);")
         writer.blankLine()
 
         // Match error codes to ServiceError variants
         for (info in ctx.errorInfos) {
             writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
             writer.write("return .{ .\$L = .{", info.variantName)
-            writer.write("    .message = error_message,")
-            writer.write("    .request_id = \"\",")
+            writer.write("    .message = owned_message,")
+            writer.write("    .request_id = owned_request_id,")
+            writer.write("    ._allocator = alloc,")
             writer.write("} };")
             writer.closeBlock("}")
         }
 
         writer.blankLine()
+        writer.write("const owned_code = try alloc.dupe(u8, error_code);")
         writer.write("return .{ .unknown = .{")
-        writer.write("    .code = error_code,")
-        writer.write("    .message = error_message,")
-        writer.write("    .request_id = \"\",")
+        writer.write("    .code = owned_code,")
+        writer.write("    .message = owned_message,")
+        writer.write("    .request_id = owned_request_id,")
         writer.write("    .http_status = status,")
+        writer.write("    ._allocator = alloc,")
         writer.write("} };")
 
         writer.closeBlock("}")

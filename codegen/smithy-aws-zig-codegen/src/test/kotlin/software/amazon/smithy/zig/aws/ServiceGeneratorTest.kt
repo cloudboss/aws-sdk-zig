@@ -200,6 +200,8 @@ class ServiceGeneratorTest {
         assertTrue(errors.contains("pub const ExpiredTokenException = struct"), "Missing ExpiredTokenException struct")
         assertTrue(errors.contains("pub const InternalError = struct"), "Missing InternalError struct")
         assertTrue(errors.contains("pub const UnknownServiceError = struct"), "Missing UnknownServiceError struct")
+        assertTrue(errors.contains("_allocator: ?std.mem.Allocator"), "Missing _allocator field")
+        assertTrue(errors.contains("pub fn deinit("), "Missing deinit method")
     }
 
     // ---- Client Generator Tests ----

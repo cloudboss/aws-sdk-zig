@@ -275,7 +275,7 @@ class OperationGenerator(
         // Check for errors
         writer.openBlock("if (!response.isSuccess()) {")
         writer.openBlock("if (options.diagnostic) |d| {")
-        writer.write("d.* = parseErrorResponse(response.body, response.status);")
+        writer.write("d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(response.status) } };")
         writer.closeBlock("}")
         writer.write("return error.ServiceError;")
         writer.closeBlock("}")
@@ -327,7 +327,7 @@ class OperationGenerator(
         writer.write("const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;")
         writer.write("defer client.allocator.free(error_body);")
         writer.openBlock("if (options.diagnostic) |d| {")
-        writer.write("d.* = parseErrorResponse(error_body, stream_resp.status);")
+        writer.write("d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } };")
         writer.closeBlock("}")
         writer.write("return error.ServiceError;")
         writer.closeBlock("}")

@@ -127,6 +127,26 @@ class ErrorGenerator(
         writer.closeBlock("};")
         writer.closeBlock("}")
 
+        writer.blankLine()
+
+        writer.openBlock("pub fn deinit(self: *ServiceError) void {")
+        writer.openBlock("switch (self.*) {")
+        writer.openBlock(".unknown => |e| {")
+        writer.openBlock("if (e._allocator) |a| {")
+        writer.write("a.free(e.code);")
+        writer.write("a.free(e.message);")
+        writer.write("a.free(e.request_id);")
+        writer.closeBlock("}")
+        writer.closeBlock("},")
+        writer.openBlock("inline else => |e| {")
+        writer.openBlock("if (e._allocator) |a| {")
+        writer.write("a.free(e.message);")
+        writer.write("a.free(e.request_id);")
+        writer.closeBlock("}")
+        writer.closeBlock("},")
+        writer.closeBlock("}")
+        writer.closeBlock("}")
+
         writer.closeBlock("};")
     }
 
@@ -134,6 +154,7 @@ class ErrorGenerator(
         writer.openBlock("pub const \$L = struct {", info.structName)
         writer.write("message: []const u8 = \"\",")
         writer.write("request_id: []const u8 = \"\",")
+        writer.write("_allocator: ?std.mem.Allocator = null,")
         writer.closeBlock("};")
     }
 
@@ -143,6 +164,7 @@ class ErrorGenerator(
         writer.write("message: []const u8 = \"\",")
         writer.write("request_id: []const u8 = \"\",")
         writer.write("http_status: u16 = 0,")
+        writer.write("_allocator: ?std.mem.Allocator = null,")
         writer.closeBlock("};")
     }
 }

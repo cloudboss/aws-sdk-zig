@@ -291,8 +291,8 @@ class WaiterGeneratorTest {
         val files = generateFiles(buildSuccessWaiterModel(), "test#TestService", "test_service")
         val waitersFile = files["waiters.zig"]!!
         assertTrue(
-            waitersFile.contains("diagnostic.code()") && waitersFile.contains("\"NotFound\""),
-            "Missing errorType check for NotFound",
+            waitersFile.contains("diagnostic.code()") && waitersFile.contains("\"NotFound\"") && waitersFile.contains("diagnostic.deinit()"),
+            "Missing errorType check for NotFound or diagnostic.deinit()",
         )
     }
 

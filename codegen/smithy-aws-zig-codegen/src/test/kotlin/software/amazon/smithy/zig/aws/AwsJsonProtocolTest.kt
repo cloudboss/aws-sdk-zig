@@ -288,6 +288,7 @@ class AwsJsonProtocolTest {
             op.contains("__type"),
             "Should extract error code from __type field",
         )
+        assertTrue(op.contains("alloc: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     @Test

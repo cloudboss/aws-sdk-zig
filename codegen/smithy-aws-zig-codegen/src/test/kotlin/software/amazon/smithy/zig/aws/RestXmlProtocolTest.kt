@@ -680,6 +680,7 @@ class RestXmlProtocolTest {
             op.contains("aws.xml.findElement(body, \"Code\")"),
             "Should extract error code from XML <Code> element",
         )
+        assertTrue(op.contains("alloc: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
         assertTrue(
             op.contains("aws.xml.findElement(body, \"Message\")"),
             "Should extract error message from XML <Message> element",
