@@ -7,7 +7,7 @@ pub fn build(b: *std.Build) void {
     const zest = b.dependency("zest", .{});
 
     // AWS Runtime Library module
-    const aws_module = b.createModule(.{
+    const aws_module = b.addModule("aws", .{
         .root_source_file = b.path("src/root.zig"),
         .target = target,
         .optimize = optimize,
@@ -16,16 +16,16 @@ pub fn build(b: *std.Build) void {
     // Auto-discover service modules from service/*/root.zig
     const services_path = "service";
     var service_modules = std.StringHashMap(*std.Build.Module).init(b.allocator);
-    if (std.fs.cwd().openDir(services_path, .{ .iterate = true })) |dir| {
+    if (b.build_root.handle.openDir(services_path, .{ .iterate = true })) |dir| {
         var services_dir = dir;
         defer services_dir.close();
         var svc_iter = services_dir.iterate();
         while (svc_iter.next() catch null) |entry| {
             if (entry.kind != .directory) continue;
             const root_path = b.fmt("{s}/{s}/root.zig", .{ services_path, entry.name });
-            std.fs.cwd().access(root_path, .{}) catch continue;
+            b.build_root.handle.access(root_path, .{}) catch continue;
 
-            const svc_module = b.createModule(.{
+            const svc_module = b.addModule(entry.name, .{
                 .root_source_file = b.path(root_path),
                 .target = target,
                 .optimize = optimize,
@@ -96,7 +96,7 @@ pub fn build(b: *std.Build) void {
 
     // Integration tests: auto-discover scenarios from tests/integration/scenarios/
     const scenarios_path = "tests/integration/scenarios";
-    var scenarios_dir = std.fs.cwd().openDir(scenarios_path, .{ .iterate = true }) catch return;
+    var scenarios_dir = b.build_root.handle.openDir(scenarios_path, .{ .iterate = true }) catch return;
     defer scenarios_dir.close();
 
     var iter = scenarios_dir.iterate();
@@ -106,7 +106,7 @@ pub fn build(b: *std.Build) void {
         const test_path = b.fmt("{s}/{s}/test.zig", .{ scenarios_path, entry.name });
 
         // Verify test.zig exists
-        std.fs.cwd().access(test_path, .{}) catch continue;
+        b.build_root.handle.access(test_path, .{}) catch continue;
 
         const integration_module = b.createModule(.{
             .root_source_file = b.path(test_path),

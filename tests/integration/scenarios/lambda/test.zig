@@ -61,6 +61,7 @@ test "GetFunction returns ResourceNotFoundException for missing function" {
     );
 
     try std.testing.expectError(error.ServiceError, result);
+    defer diagnostic.deinit();
 
     switch (diagnostic) {
         .resource_not_found_exception => |e| {
@@ -84,6 +85,7 @@ test "GetFunction error diagnostic has parseable code" {
         .{ .diagnostic = &diagnostic },
     ) catch |err| {
         try std.testing.expectEqual(error.ServiceError, err);
+        defer diagnostic.deinit();
         const code = diagnostic.code();
         try std.testing.expect(code.len > 0);
         return;

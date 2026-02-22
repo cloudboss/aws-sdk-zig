@@ -133,6 +133,7 @@ test "GetSecretValue returns error for missing secret" {
     );
 
     try std.testing.expectError(error.ServiceError, result);
+    defer diagnostic.deinit();
 
     switch (diagnostic) {
         .resource_not_found_exception => |e| {
@@ -394,6 +395,7 @@ test "GetSecretValue for deleted secret returns error" {
     );
 
     try std.testing.expectError(error.ServiceError, result);
+    defer diagnostic.deinit();
 
     switch (diagnostic) {
         .resource_not_found_exception => {},

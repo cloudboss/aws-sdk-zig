@@ -5,7 +5,6 @@
 
 const std = @import("std");
 const Allocator = std.mem.Allocator;
-
 const Scanner = std.json.Scanner;
 const Token = Scanner.Token;
 
@@ -881,6 +880,47 @@ test "findJsonValue both message variants" {
     const json = "{\"Message\":\"uppercase\"}";
     try std.testing.expect(findJsonValue(json, "message") == null);
     try std.testing.expectEqualStrings("uppercase", findJsonValue(json, "Message").?);
+}
+
+test "findJsonValue returns slice into input buffer" {
+    const json =
+        "{\"__type\":\"ResourceNotFoundException\"," ++
+        "\"message\":\"Table not found\"}";
+    const value = findJsonValue(json, "__type").?;
+    try std.testing.expect(
+        @intFromPtr(value.ptr) >= @intFromPtr(json.ptr),
+    );
+    try std.testing.expect(
+        @intFromPtr(value.ptr) < @intFromPtr(json.ptr) + json.len,
+    );
+}
+
+test "duped error strings survive source buffer free" {
+    const alloc = std.testing.allocator;
+    const body = try alloc.dupe(
+        u8,
+        "{\"__type\":\"ResourceNotFoundException\"," ++
+            "\"message\":\"Table not found\"}",
+    );
+    const raw_message = findJsonValue(body, "message") orelse "";
+    const owned_message = try alloc.dupe(u8, raw_message);
+    defer alloc.free(owned_message);
+    const owned_request_id = try alloc.dupe(u8, "");
+    defer alloc.free(owned_request_id);
+    alloc.free(body);
+    try std.testing.expectEqualStrings(
+        "Table not found",
+        owned_message,
+    );
+    try std.testing.expectEqualStrings("", owned_request_id);
+}
+
+test "duping empty string produces valid owned slice" {
+    const alloc = std.testing.allocator;
+    const owned = try alloc.dupe(u8, "");
+    defer alloc.free(owned);
+    try std.testing.expectEqualStrings("", owned);
+    try std.testing.expectEqual(@as(usize, 0), owned.len);
 }
 
 test "parse string map entries" {

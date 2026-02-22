@@ -8,14 +8,18 @@ _output/
 tests/integration/certs/ca.*
 tests/integration/certs/server.*
 
-# Gradle Kotlin DSL cache (cannot be relocated)
-codegen/.gradle/
-
 # Fetched AWS service models
 codegen/sdk-codegen/model/
 
 # Sisyphus orchestrator working directory
 .sisyphus/
 
+# Gradle caches (cannot be relocated)
+.gradle/
+.gradle-tmp/
+.gradle-cache-tmp/
+
+# Compiled Zig static library
+libroot.a
 PLAN.md
 PHASE*.md

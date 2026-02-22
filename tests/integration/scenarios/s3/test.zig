@@ -174,6 +174,7 @@ test "DeleteObject removes object from bucket" {
     );
 
     try std.testing.expectError(error.ServiceError, result);
+    defer diagnostic.deinit();
 
     switch (diagnostic) {
         .no_such_key => {},
@@ -212,6 +213,7 @@ test "GetObject returns NoSuchKey for missing object" {
     );
 
     try std.testing.expectError(error.ServiceError, result);
+    defer diagnostic.deinit();
 
     switch (diagnostic) {
         .no_such_key => {},
