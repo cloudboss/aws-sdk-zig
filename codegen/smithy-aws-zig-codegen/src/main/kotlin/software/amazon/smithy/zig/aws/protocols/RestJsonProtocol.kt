@@ -616,32 +616,31 @@ class RestJsonProtocol : ProtocolGenerator {
 
         // Extract error message
         writer.write("const error_message = aws.json.findJsonValue(body, \"message\") orelse aws.json.findJsonValue(body, \"Message\") orelse \"\";")
-        writer.write("const owned_message = try alloc.dupe(u8, error_message);")
-        writer.write("errdefer alloc.free(owned_message);")
-        writer.write("const owned_request_id = try alloc.dupe(u8, \"\");")
-        writer.write("errdefer alloc.free(owned_request_id);")
+        writer.write("var arena = std.heap.ArenaAllocator.init(alloc);")
+        writer.write("errdefer arena.deinit();")
+        writer.write("const arena_alloc = arena.allocator();")
+        writer.write("const owned_message = try arena_alloc.dupe(u8, error_message);")
+        writer.write("const owned_request_id = try arena_alloc.dupe(u8, \"\");")
         writer.blankLine()
 
         // Match error codes to ServiceError variants
         for (info in ctx.errorInfos) {
             writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
-            writer.write("return .{ .\$L = .{", info.variantName)
+            writer.write("return .{ .arena = arena, .kind = .{ .\$L = .{", info.variantName)
             writer.write("    .message = owned_message,")
             writer.write("    .request_id = owned_request_id,")
-            writer.write("    ._allocator = alloc,")
-            writer.write("} };")
+            writer.write("} } };")
             writer.closeBlock("}")
         }
 
         writer.blankLine()
-        writer.write("const owned_code = try alloc.dupe(u8, error_code);")
-        writer.write("return .{ .unknown = .{")
+        writer.write("const owned_code = try arena_alloc.dupe(u8, error_code);")
+        writer.write("return .{ .arena = arena, .kind = .{ .unknown = .{")
         writer.write("    .code = owned_code,")
         writer.write("    .message = owned_message,")
         writer.write("    .request_id = owned_request_id,")
         writer.write("    .http_status = status,")
-        writer.write("    ._allocator = alloc,")
-        writer.write("} };")
+        writer.write("} } };")
 
         writer.closeBlock("}")
     }

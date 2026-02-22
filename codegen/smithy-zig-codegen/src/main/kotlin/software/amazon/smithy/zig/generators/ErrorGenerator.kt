@@ -72,17 +72,19 @@ class ErrorGenerator(
     }
 
     private fun writeServiceErrorUnion(writer: ZigWriter, errors: List<ErrorInfo>) {
-        writer.openBlock("pub const ServiceError = union(enum) {")
+        writer.openBlock("pub const ServiceError = struct {")
+        writer.write("arena: ?std.heap.ArenaAllocator = null,")
+        writer.write("kind: Kind,")
+        writer.blankLine()
 
+        writer.openBlock("pub const Kind = union(enum) {")
         for (info in errors) {
             writer.write("\$L: \$L,", info.variantName, info.structName)
         }
         writer.write("unknown: UnknownServiceError,")
-
         writer.blankLine()
 
-        // code() method
-        writer.openBlock("pub fn code(self: ServiceError) []const u8 {")
+        writer.openBlock("pub fn code(self: Kind) []const u8 {")
         writer.openBlock("return switch (self) {")
         for (info in errors) {
             writer.write(".\$L => \"\$L\",", info.variantName, info.smithyName)
@@ -90,11 +92,9 @@ class ErrorGenerator(
         writer.write(".unknown => |e| e.code,")
         writer.closeBlock("};")
         writer.closeBlock("}")
-
         writer.blankLine()
 
-        // message() method
-        writer.openBlock("pub fn message(self: ServiceError) []const u8 {")
+        writer.openBlock("pub fn message(self: Kind) []const u8 {")
         writer.openBlock("return switch (self) {")
         for (info in errors) {
             writer.write(".\$L => |e| e.message,", info.variantName)
@@ -102,11 +102,9 @@ class ErrorGenerator(
         writer.write(".unknown => |e| e.message,")
         writer.closeBlock("};")
         writer.closeBlock("}")
-
         writer.blankLine()
 
-        // httpStatus() method
-        writer.openBlock("pub fn httpStatus(self: ServiceError) u16 {")
+        writer.openBlock("pub fn httpStatus(self: Kind) u16 {")
         writer.openBlock("return switch (self) {")
         for (info in errors) {
             writer.write(".\$L => \$L,", info.variantName, info.httpStatus)
@@ -114,11 +112,9 @@ class ErrorGenerator(
         writer.write(".unknown => |e| e.http_status,")
         writer.closeBlock("};")
         writer.closeBlock("}")
-
         writer.blankLine()
 
-        // requestId() method
-        writer.openBlock("pub fn requestId(self: ServiceError) []const u8 {")
+        writer.openBlock("pub fn requestId(self: Kind) []const u8 {")
         writer.openBlock("return switch (self) {")
         for (info in errors) {
             writer.write(".\$L => |e| e.request_id,", info.variantName)
@@ -126,27 +122,32 @@ class ErrorGenerator(
         writer.write(".unknown => |e| e.request_id,")
         writer.closeBlock("};")
         writer.closeBlock("}")
-
+        writer.closeBlock("};")
         writer.blankLine()
 
         writer.openBlock("pub fn deinit(self: *ServiceError) void {")
-        writer.openBlock("switch (self.*) {")
-        writer.openBlock(".unknown => |e| {")
-        writer.openBlock("if (e._allocator) |a| {")
-        writer.write("a.free(e.code);")
-        writer.write("a.free(e.message);")
-        writer.write("a.free(e.request_id);")
+        writer.write("if (self.arena) |*a| a.deinit();")
         writer.closeBlock("}")
-        writer.closeBlock("},")
-        writer.openBlock("inline else => |e| {")
-        writer.openBlock("if (e._allocator) |a| {")
-        writer.write("a.free(e.message);")
-        writer.write("a.free(e.request_id);")
-        writer.closeBlock("}")
-        writer.closeBlock("},")
-        writer.closeBlock("}")
-        writer.closeBlock("}")
+        writer.blankLine()
 
+        writer.openBlock("pub fn code(self: ServiceError) []const u8 {")
+        writer.write("return self.kind.code();")
+        writer.closeBlock("}")
+        writer.blankLine()
+
+        writer.openBlock("pub fn message(self: ServiceError) []const u8 {")
+        writer.write("return self.kind.message();")
+        writer.closeBlock("}")
+        writer.blankLine()
+
+        writer.openBlock("pub fn httpStatus(self: ServiceError) u16 {")
+        writer.write("return self.kind.httpStatus();")
+        writer.closeBlock("}")
+        writer.blankLine()
+
+        writer.openBlock("pub fn requestId(self: ServiceError) []const u8 {")
+        writer.write("return self.kind.requestId();")
+        writer.closeBlock("}")
         writer.closeBlock("};")
     }
 
@@ -154,7 +155,6 @@ class ErrorGenerator(
         writer.openBlock("pub const \$L = struct {", info.structName)
         writer.write("message: []const u8 = \"\",")
         writer.write("request_id: []const u8 = \"\",")
-        writer.write("_allocator: ?std.mem.Allocator = null,")
         writer.closeBlock("};")
     }
 
@@ -164,7 +164,6 @@ class ErrorGenerator(
         writer.write("message: []const u8 = \"\",")
         writer.write("request_id: []const u8 = \"\",")
         writer.write("http_status: u16 = 0,")
-        writer.write("_allocator: ?std.mem.Allocator = null,")
         writer.closeBlock("};")
     }
 }
