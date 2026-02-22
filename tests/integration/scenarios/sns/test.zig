@@ -36,7 +36,6 @@ test "zest.beforeAll" {
 }
 
 test "zest.afterAll" {
-    defer _ = gpa.deinit();
     if (shared_sns_client) |*c| {
         if (shared_topic_arn.len > 0) {
             var r = try sns.delete_topic.execute(
@@ -50,6 +49,7 @@ test "zest.afterAll" {
     }
     if (shared_sqs_client) |*c| c.deinit();
     if (shared_cfg) |*cfg| cfg.deinit();
+    try std.testing.expect(gpa.deinit() == .ok);
 }
 
 test "CreateTopic returns topic ARN" {

@@ -42,7 +42,7 @@ test "zest.afterAll" {
         }
     }
     if (shared_cfg) |*cfg| cfg.deinit();
-    _ = gpa.deinit();
+    try std.testing.expect(gpa.deinit() == .ok);
 }
 
 test "CreateQueue returns queue URL" {

@@ -52,7 +52,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
-    _ = gpa.deinit();
+    try std.testing.expect(gpa.deinit() == .ok);
 }
 
 test "PutParameter returns version number" {

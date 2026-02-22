@@ -19,10 +19,13 @@ test "zest.beforeAll" {
 }
 
 test "zest.afterAll" {
-    defer _ = gpa.deinit();
-    if (!shared_init) return;
+    if (!shared_init) {
+        _ = gpa.deinit();
+        return;
+    }
     shared_client.deinit();
     shared_cfg.deinit();
+    try std.testing.expect(gpa.deinit() == .ok);
 }
 
 test "ListFunctions returns successfully" {

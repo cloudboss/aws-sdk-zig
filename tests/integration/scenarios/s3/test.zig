@@ -63,8 +63,10 @@ test "zest.beforeAll" {
 }
 
 test "zest.afterAll" {
-    defer _ = gpa.deinit();
-    if (!shared_init) return;
+    if (!shared_init) {
+        _ = gpa.deinit();
+        return;
+    }
     const keys = [_][]const u8{
         "hello.txt",
         "prefix-a/file.txt",
@@ -94,6 +96,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
+    try std.testing.expect(gpa.deinit() == .ok);
 }
 
 test "CreateBucket returns successfully" {

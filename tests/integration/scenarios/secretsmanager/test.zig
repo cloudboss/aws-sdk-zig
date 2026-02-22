@@ -27,10 +27,6 @@ test "zest.beforeAll" {
 }
 
 test "zest.afterAll" {
-    defer _ = gpa.deinit();
-    defer {
-        if (shared_cfg) |*cfg| cfg.deinit();
-    }
     if (shared_client) |*c| {
         defer c.deinit();
         var r = secretsmanager.delete_secret.execute(c, .{
@@ -41,10 +37,14 @@ test "zest.afterAll" {
                 "afterAll: failed to delete shared secret: {s}",
                 .{@errorName(err)},
             );
+            if (shared_cfg) |*cfg| cfg.deinit();
+            _ = gpa.deinit();
             return;
         };
         r.deinit();
     }
+    if (shared_cfg) |*cfg| cfg.deinit();
+    try std.testing.expect(gpa.deinit() == .ok);
 }
 
 test "CreateSecret returns valid response fields" {
