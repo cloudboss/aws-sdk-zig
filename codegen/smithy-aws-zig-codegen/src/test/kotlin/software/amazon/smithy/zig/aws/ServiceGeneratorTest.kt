@@ -157,7 +157,10 @@ class ServiceGeneratorTest {
         val files = generateAndGetFiles()
         val errors = files["errors.zig"]!!
 
-        assertTrue(errors.contains("pub const ServiceError = union(enum)"), "Missing ServiceError union")
+        assertTrue(errors.contains("pub const ServiceError = struct"), "Missing ServiceError struct")
+        assertTrue(errors.contains("arena: ?std.heap.ArenaAllocator = null"), "Missing arena field")
+        assertTrue(errors.contains("kind: Kind"), "Missing kind field")
+        assertTrue(errors.contains("pub const Kind = union(enum)"), "Missing Kind union")
         assertTrue(errors.contains("expired_token_exception: ExpiredTokenException"), "Missing ExpiredTokenException variant")
         assertTrue(errors.contains("internal_error: InternalError"), "Missing InternalError variant")
         assertTrue(errors.contains("unknown: UnknownServiceError"), "Missing unknown variant")
@@ -200,8 +203,7 @@ class ServiceGeneratorTest {
         assertTrue(errors.contains("pub const ExpiredTokenException = struct"), "Missing ExpiredTokenException struct")
         assertTrue(errors.contains("pub const InternalError = struct"), "Missing InternalError struct")
         assertTrue(errors.contains("pub const UnknownServiceError = struct"), "Missing UnknownServiceError struct")
-        assertTrue(errors.contains("_allocator: ?std.mem.Allocator"), "Missing _allocator field")
-        assertTrue(errors.contains("pub fn deinit("), "Missing deinit method")
+        assertTrue(errors.contains("pub fn deinit(self: *ServiceError)"), "Missing deinit method")
     }
 
     // ---- Client Generator Tests ----
