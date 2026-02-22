@@ -179,7 +179,7 @@ test "DeleteObject removes object from bucket" {
     try std.testing.expectError(error.ServiceError, result);
     defer diagnostic.deinit();
 
-    switch (diagnostic) {
+    switch (diagnostic.kind) {
         .no_such_key => {},
         else => {
             std.log.err("expected NoSuchKey, got: {s}", .{diagnostic.code()});
@@ -218,7 +218,7 @@ test "GetObject returns NoSuchKey for missing object" {
     try std.testing.expectError(error.ServiceError, result);
     defer diagnostic.deinit();
 
-    switch (diagnostic) {
+    switch (diagnostic.kind) {
         .no_such_key => {},
         else => {
             std.log.err("expected NoSuchKey, got: {s}", .{diagnostic.code()});

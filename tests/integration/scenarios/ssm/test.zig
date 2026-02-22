@@ -136,7 +136,7 @@ test "DeleteParameter removes parameter" {
 
     try std.testing.expectError(error.ServiceError, result);
     defer diagnostic.deinit();
-    switch (diagnostic) {
+    switch (diagnostic.kind) {
         .parameter_not_found => {},
         else => {
             std.log.err(
@@ -159,7 +159,7 @@ test "GetParameter returns error for missing parameter" {
     try std.testing.expectError(error.ServiceError, result);
     defer diagnostic.deinit();
 
-    switch (diagnostic) {
+    switch (diagnostic.kind) {
         .parameter_not_found => |e| {
             try std.testing.expect(e.message.len > 0);
         },
@@ -541,7 +541,7 @@ test "DeleteParameter for nonexistent parameter returns error" {
 
     try std.testing.expectError(error.ServiceError, result);
     defer diagnostic.deinit();
-    switch (diagnostic) {
+    switch (diagnostic.kind) {
         .parameter_not_found => {},
         else => {
             std.log.err(

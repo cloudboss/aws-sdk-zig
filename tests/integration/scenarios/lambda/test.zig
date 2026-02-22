@@ -66,7 +66,7 @@ test "GetFunction returns ResourceNotFoundException for missing function" {
     try std.testing.expectError(error.ServiceError, result);
     defer diagnostic.deinit();
 
-    switch (diagnostic) {
+    switch (diagnostic.kind) {
         .resource_not_found_exception => |e| {
             try std.testing.expect(e.message.len > 0);
         },

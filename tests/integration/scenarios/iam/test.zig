@@ -590,7 +590,7 @@ test "GetUser returns NoSuchEntity for nonexistent user with diagnostic" {
     } else |err| {
         try std.testing.expectEqual(error.ServiceError, err);
         defer diagnostic.deinit();
-        switch (diagnostic) {
+        switch (diagnostic.kind) {
             .no_such_entity_exception => {},
             // LocalStack may return an unrecognised code that maps to unknown
             .unknown => |u| try std.testing.expect(u.http_status == 404),
@@ -623,7 +623,7 @@ test "CreateUser with duplicate name returns EntityAlreadyExists" {
     } else |err| {
         try std.testing.expectEqual(error.ServiceError, err);
         defer diagnostic.deinit();
-        switch (diagnostic) {
+        switch (diagnostic.kind) {
             .entity_already_exists_exception => {},
             // LocalStack may return an unrecognised code that maps to unknown
             .unknown => |u| try std.testing.expect(u.http_status == 409),

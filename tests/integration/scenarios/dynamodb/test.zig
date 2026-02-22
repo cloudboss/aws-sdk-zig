@@ -287,7 +287,7 @@ test "DescribeTable returns ResourceNotFoundException for missing table" {
     try std.testing.expectError(error.ServiceError, result);
     defer diagnostic.deinit();
 
-    switch (diagnostic) {
+    switch (diagnostic.kind) {
         .resource_not_found_exception => |e| {
             try std.testing.expect(e.message.len > 0);
         },
@@ -597,7 +597,7 @@ test "PutItem with failing condition returns ConditionalCheckFailedException" {
     try std.testing.expectError(error.ServiceError, result);
     defer diagnostic.deinit();
 
-    switch (diagnostic) {
+    switch (diagnostic.kind) {
         .conditional_check_failed_exception => |e| {
             try std.testing.expect(e.message.len > 0);
         },
