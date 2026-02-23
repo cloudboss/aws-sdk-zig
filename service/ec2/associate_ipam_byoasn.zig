@@ -24,19 +24,13 @@ pub const AssociateIpamByoasnInput = struct {
 pub const AssociateIpamByoasnOutput = struct {
     /// The ASN and BYOIP CIDR association.
     asn_association: ?AsnAssociation = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *AssociateIpamByoasnOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: AssociateIpamByoasnInput, options: Options) !AssociateIpamByoasnOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateIpamByoasnInput, options: Options) !AssociateIpamByoasnOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -57,10 +51,7 @@ pub fn execute(client: *Client, input: AssociateIpamByoasnInput, options: Option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

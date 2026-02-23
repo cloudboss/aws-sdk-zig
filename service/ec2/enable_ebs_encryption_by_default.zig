@@ -16,19 +16,13 @@ pub const EnableEbsEncryptionByDefaultInput = struct {
 pub const EnableEbsEncryptionByDefaultOutput = struct {
     /// The updated status of encryption by default.
     ebs_encryption_by_default: ?bool = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *EnableEbsEncryptionByDefaultOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: EnableEbsEncryptionByDefaultInput, options: Options) !EnableEbsEncryptionByDefaultOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableEbsEncryptionByDefaultInput, options: Options) !EnableEbsEncryptionByDefaultOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -49,10 +43,7 @@ pub fn execute(client: *Client, input: EnableEbsEncryptionByDefaultInput, option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

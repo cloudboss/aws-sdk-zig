@@ -38,19 +38,13 @@ pub const UploadSigningCertificateInput = struct {
 pub const UploadSigningCertificateOutput = struct {
     /// Information about the certificate.
     certificate: ?SigningCertificate = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *UploadSigningCertificateOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: UploadSigningCertificateInput, options: Options) !UploadSigningCertificateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UploadSigningCertificateInput, options: Options) !UploadSigningCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -71,10 +65,7 @@ pub fn execute(client: *Client, input: UploadSigningCertificateInput, options: O
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

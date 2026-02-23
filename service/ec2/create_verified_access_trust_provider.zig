@@ -70,19 +70,13 @@ pub const CreateVerifiedAccessTrustProviderInput = struct {
 pub const CreateVerifiedAccessTrustProviderOutput = struct {
     /// Details about the Verified Access trust provider.
     verified_access_trust_provider: ?VerifiedAccessTrustProvider = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CreateVerifiedAccessTrustProviderOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CreateVerifiedAccessTrustProviderInput, options: Options) !CreateVerifiedAccessTrustProviderOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVerifiedAccessTrustProviderInput, options: Options) !CreateVerifiedAccessTrustProviderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -103,10 +97,7 @@ pub fn execute(client: *Client, input: CreateVerifiedAccessTrustProviderInput, o
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

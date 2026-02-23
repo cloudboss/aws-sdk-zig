@@ -47,12 +47,6 @@ pub const ListLayerVersionsOutput = struct {
     /// A pagination token returned when the response doesn't contain all versions.
     next_marker: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ListLayerVersionsOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .layer_versions = "LayerVersions",
         .next_marker = "NextMarker",
@@ -63,7 +57,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ListLayerVersionsInput, options: Options) !ListLayerVersionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListLayerVersionsInput, options: Options) !ListLayerVersionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -84,10 +78,7 @@ pub fn execute(client: *Client, input: ListLayerVersionsInput, options: Options)
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

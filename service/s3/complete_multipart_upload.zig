@@ -330,19 +330,13 @@ pub const CompleteMultipartUploadOutput = struct {
     ///
     /// This functionality is not supported for directory buckets.
     version_id: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CompleteMultipartUploadOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CompleteMultipartUploadInput, options: Options) !CompleteMultipartUploadOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteMultipartUploadInput, options: Options) !CompleteMultipartUploadOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -363,10 +357,7 @@ pub fn execute(client: *Client, input: CompleteMultipartUploadInput, options: Op
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

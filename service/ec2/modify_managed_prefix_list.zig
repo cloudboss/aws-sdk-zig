@@ -52,19 +52,13 @@ pub const ModifyManagedPrefixListInput = struct {
 pub const ModifyManagedPrefixListOutput = struct {
     /// Information about the prefix list.
     prefix_list: ?ManagedPrefixList = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ModifyManagedPrefixListOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ModifyManagedPrefixListInput, options: Options) !ModifyManagedPrefixListOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyManagedPrefixListInput, options: Options) !ModifyManagedPrefixListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -85,10 +79,7 @@ pub fn execute(client: *Client, input: ModifyManagedPrefixListInput, options: Op
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

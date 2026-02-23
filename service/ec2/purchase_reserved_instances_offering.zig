@@ -39,19 +39,13 @@ pub const PurchaseReservedInstancesOfferingOutput = struct {
     /// information, see [Crossing pricing
     /// tiers](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-reserved-instances-application.html#crossing-pricing-tiers) in the *Amazon EC2 User Guide*.
     reserved_instances_id: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *PurchaseReservedInstancesOfferingOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: PurchaseReservedInstancesOfferingInput, options: Options) !PurchaseReservedInstancesOfferingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PurchaseReservedInstancesOfferingInput, options: Options) !PurchaseReservedInstancesOfferingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -72,10 +66,7 @@ pub fn execute(client: *Client, input: PurchaseReservedInstancesOfferingInput, o
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

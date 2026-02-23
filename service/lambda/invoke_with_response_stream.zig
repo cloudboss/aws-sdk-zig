@@ -76,12 +76,6 @@ pub const InvokeWithResponseStreamOutput = struct {
     /// invocation type, this status code is 204.
     status_code: ?i32 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *InvokeWithResponseStreamOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .event_stream = "EventStream",
         .executed_version = "ExecutedVersion",
@@ -94,7 +88,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: InvokeWithResponseStreamInput, options: Options) !InvokeWithResponseStreamOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeWithResponseStreamInput, options: Options) !InvokeWithResponseStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -115,10 +109,7 @@ pub fn execute(client: *Client, input: InvokeWithResponseStreamInput, options: O
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

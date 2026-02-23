@@ -36,63 +36,76 @@ test "zest.afterAll" {
 }
 
 test "CreateUser returns successfully" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const user_name = "sdk-zig-iam-create-user";
 
-    var create = try iam.create_user.execute(
+    const create = try iam.create_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
-    var del = try iam.delete_user.execute(
+    const del = try iam.delete_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "GetUser returns created user with correct name" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const user_name = "sdk-zig-iam-get-user";
 
-    var create = try iam.create_user.execute(
+    const create = try iam.create_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
-    var get = try iam.get_user.execute(
+    const get = try iam.get_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer get.deinit();
 
     const user = get.user orelse return error.MissingUser;
     try std.testing.expectEqualStrings(user_name, user.user_name);
 
-    var del = try iam.delete_user.execute(
+    const del = try iam.delete_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "ListUsers includes created user" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const user_name = "sdk-zig-iam-list-user";
 
-    var create = try iam.create_user.execute(
+    const create = try iam.create_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
-    var list = try iam.list_users.execute(&shared_client, .{}, .{});
-    defer list.deinit();
+    const list = try iam.list_users.execute(&shared_client, arena.allocator(), .{}, .{});
 
     const users = list.users orelse return error.MissingUsers;
     var found = false;
@@ -104,33 +117,40 @@ test "ListUsers includes created user" {
     }
     try std.testing.expect(found);
 
-    var del = try iam.delete_user.execute(
+    const del = try iam.delete_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "DeleteUser removes user" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const user_name = "sdk-zig-iam-delete-user";
 
-    var create = try iam.create_user.execute(
+    const create = try iam.create_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
-    var del = try iam.delete_user.execute(
+    const del = try iam.delete_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 
     const result = iam.get_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
@@ -138,228 +158,263 @@ test "DeleteUser removes user" {
 }
 
 test "CreateRole returns role with correct name" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const role_name = "sdk-zig-iam-create-role";
 
-    var create = try iam.create_role.execute(
+    const create = try iam.create_role.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .role_name = role_name,
             .assume_role_policy_document = trust_policy,
         },
         .{},
     );
-    defer create.deinit();
 
     const role = create.role orelse return error.MissingRole;
     try std.testing.expectEqualStrings(role_name, role.role_name);
     try std.testing.expect(role.arn.len > 0);
 
-    var del = try iam.delete_role.execute(
+    const del = try iam.delete_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "GetRole returns created role" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const role_name = "sdk-zig-iam-get-role";
 
-    var create = try iam.create_role.execute(
+    const create = try iam.create_role.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .role_name = role_name,
             .assume_role_policy_document = trust_policy,
         },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
-    var get = try iam.get_role.execute(
+    const get = try iam.get_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer get.deinit();
 
     const role = get.role orelse return error.MissingRole;
     try std.testing.expectEqualStrings(role_name, role.role_name);
 
-    var del = try iam.delete_role.execute(
+    const del = try iam.delete_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "DeleteRole removes role" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const role_name = "sdk-zig-iam-del-role";
 
-    var create = try iam.create_role.execute(
+    const create = try iam.create_role.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .role_name = role_name,
             .assume_role_policy_document = trust_policy,
         },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
-    var del = try iam.delete_role.execute(
+    const del = try iam.delete_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "CreatePolicy returns policy ARN" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const policy_name = "sdk-zig-iam-create-pol";
 
-    var create = try iam.create_policy.execute(
+    const create = try iam.create_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .policy_name = policy_name,
             .policy_document = policy_document,
         },
         .{},
     );
-    defer create.deinit();
 
     const policy = create.policy orelse return error.MissingPolicy;
     const arn = policy.arn orelse return error.MissingPolicyArn;
     try std.testing.expect(arn.len > 0);
 
-    var del = try iam.delete_policy.execute(
+    const del = try iam.delete_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .policy_arn = arn },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "DeletePolicy removes policy" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const policy_name = "sdk-zig-iam-del-pol";
 
-    var create = try iam.create_policy.execute(
+    const create = try iam.create_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .policy_name = policy_name,
             .policy_document = policy_document,
         },
         .{},
     );
-    defer create.deinit();
 
     const policy = create.policy orelse return error.MissingPolicy;
     const arn = policy.arn orelse return error.MissingPolicyArn;
 
-    var del = try iam.delete_policy.execute(
+    const del = try iam.delete_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .policy_arn = arn },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "AttachRolePolicy links policy to role" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const role_name = "sdk-zig-iam-attach-r1";
     const policy_name = "sdk-zig-iam-attach-p1";
 
-    var cr = try iam.create_role.execute(
+    const cr = try iam.create_role.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .role_name = role_name,
             .assume_role_policy_document = trust_policy,
         },
         .{},
     );
-    defer cr.deinit();
+    _ = cr;
 
-    var cp = try iam.create_policy.execute(
+    const cp = try iam.create_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .policy_name = policy_name,
             .policy_document = policy_document,
         },
         .{},
     );
-    defer cp.deinit();
 
     const pol = cp.policy orelse return error.MissingPolicy;
     const arn = pol.arn orelse return error.MissingPolicyArn;
 
-    var attach = try iam.attach_role_policy.execute(
+    const attach = try iam.attach_role_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name, .policy_arn = arn },
         .{},
     );
-    defer attach.deinit();
+    _ = attach;
 
     // cleanup: detach, delete role, delete policy
-    var detach = try iam.detach_role_policy.execute(
+    const detach = try iam.detach_role_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name, .policy_arn = arn },
         .{},
     );
-    defer detach.deinit();
+    _ = detach;
 
-    var dr = try iam.delete_role.execute(
+    const dr = try iam.delete_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer dr.deinit();
+    _ = dr;
 
-    var dp = try iam.delete_policy.execute(
+    const dp = try iam.delete_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .policy_arn = arn },
         .{},
     );
-    defer dp.deinit();
+    _ = dp;
 }
 
 test "ListAttachedRolePolicies includes attached policy" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const role_name = "sdk-zig-iam-attach-r2";
     const policy_name = "sdk-zig-iam-attach-p2";
 
-    var cr = try iam.create_role.execute(
+    const cr = try iam.create_role.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .role_name = role_name,
             .assume_role_policy_document = trust_policy,
         },
         .{},
     );
-    defer cr.deinit();
+    _ = cr;
 
-    var cp = try iam.create_policy.execute(
+    const cp = try iam.create_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .policy_name = policy_name,
             .policy_document = policy_document,
         },
         .{},
     );
-    defer cp.deinit();
 
     const pol = cp.policy orelse return error.MissingPolicy;
     const arn = pol.arn orelse return error.MissingPolicyArn;
 
-    var attach = try iam.attach_role_policy.execute(
+    const attach = try iam.attach_role_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name, .policy_arn = arn },
         .{},
     );
-    defer attach.deinit();
+    _ = attach;
 
-    var list = try iam.list_attached_role_policies.execute(
+    const list = try iam.list_attached_role_policies.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer list.deinit();
 
     const policies = list.attached_policies orelse
         return error.MissingAttachedPolicies;
@@ -375,107 +430,122 @@ test "ListAttachedRolePolicies includes attached policy" {
     try std.testing.expect(found);
 
     // cleanup
-    var detach = try iam.detach_role_policy.execute(
+    const detach = try iam.detach_role_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name, .policy_arn = arn },
         .{},
     );
-    defer detach.deinit();
+    _ = detach;
 
-    var dr = try iam.delete_role.execute(
+    const dr = try iam.delete_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer dr.deinit();
+    _ = dr;
 
-    var dp = try iam.delete_policy.execute(
+    const dp = try iam.delete_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .policy_arn = arn },
         .{},
     );
-    defer dp.deinit();
+    _ = dp;
 }
 
 test "DetachRolePolicy removes policy from role" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const role_name = "sdk-zig-iam-attach-r3";
     const policy_name = "sdk-zig-iam-attach-p3";
 
-    var cr = try iam.create_role.execute(
+    const cr = try iam.create_role.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .role_name = role_name,
             .assume_role_policy_document = trust_policy,
         },
         .{},
     );
-    defer cr.deinit();
+    _ = cr;
 
-    var cp = try iam.create_policy.execute(
+    const cp = try iam.create_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .policy_name = policy_name,
             .policy_document = policy_document,
         },
         .{},
     );
-    defer cp.deinit();
 
     const pol = cp.policy orelse return error.MissingPolicy;
     const arn = pol.arn orelse return error.MissingPolicyArn;
 
-    var attach = try iam.attach_role_policy.execute(
+    const attach = try iam.attach_role_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name, .policy_arn = arn },
         .{},
     );
-    defer attach.deinit();
+    _ = attach;
 
-    var detach = try iam.detach_role_policy.execute(
+    const detach = try iam.detach_role_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name, .policy_arn = arn },
         .{},
     );
-    defer detach.deinit();
+    _ = detach;
 
     // verify empty after detach
-    var list = try iam.list_attached_role_policies.execute(
+    const list = try iam.list_attached_role_policies.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer list.deinit();
 
     if (list.attached_policies) |policies_list| {
         try std.testing.expectEqual(@as(usize, 0), policies_list.len);
     }
 
     // cleanup
-    var dr = try iam.delete_role.execute(
+    const dr = try iam.delete_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer dr.deinit();
+    _ = dr;
 
-    var dp = try iam.delete_policy.execute(
+    const dp = try iam.delete_policy.execute(
         &shared_client,
+        arena.allocator(),
         .{ .policy_arn = arn },
         .{},
     );
-    defer dp.deinit();
+    _ = dp;
 }
 
 test "ListUsers paginator collects all users across pages" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const user_names = [_][]const u8{ "pag-user-1", "pag-user-2", "pag-user-3" };
 
     for (user_names) |name| {
-        var result = try iam.create_user.execute(
+        const result = try iam.create_user.execute(
             &shared_client,
+            arena.allocator(),
             .{ .user_name = name },
             .{},
         );
-        defer result.deinit();
+        _ = result;
     }
 
     var pag = shared_client.listUsersPaginator(.{ .max_items = 1 });
@@ -484,8 +554,7 @@ test "ListUsers paginator collects all users across pages" {
     var total_users: usize = 0;
     var pages: usize = 0;
     while (!pag.done) {
-        var output = try pag.next(.{});
-        defer output.deinit();
+        const output = try pag.next(arena.allocator(), .{});
 
         if (output.users) |users| {
             total_users += users.len;
@@ -497,38 +566,48 @@ test "ListUsers paginator collects all users across pages" {
     try std.testing.expect(pages >= 1);
 
     for (user_names) |name| {
-        var result = try iam.delete_user.execute(
+        const result = try iam.delete_user.execute(
             &shared_client,
+            arena.allocator(),
             .{ .user_name = name },
             .{},
         );
-        defer result.deinit();
+        _ = result;
     }
 }
 
 test "waitUntilUserExists succeeds after CreateUser" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const user_name = "sdk-zig-waiter-user";
 
-    var create = try iam.create_user.execute(
+    const create = try iam.create_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
     try shared_client.waitUntilUserExists(.{ .user_name = user_name });
 
-    var del = try iam.delete_user.execute(
+    const del = try iam.delete_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "GetUser returns error for nonexistent user" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const result = iam.get_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = "nonexistent-user-12345" },
         .{},
     );
@@ -536,20 +615,23 @@ test "GetUser returns error for nonexistent user" {
 }
 
 test "ListRoles includes created role" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const role_name = "sdk-zig-iam-list-role";
 
-    var create = try iam.create_role.execute(
+    const create = try iam.create_role.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .role_name = role_name,
             .assume_role_policy_document = trust_policy,
         },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
-    var list = try iam.list_roles.execute(&shared_client, .{}, .{});
-    defer list.deinit();
+    const list = try iam.list_roles.execute(&shared_client, arena.allocator(), .{}, .{});
 
     const roles = list.roles orelse return error.MissingRoles;
     var found = false;
@@ -561,26 +643,33 @@ test "ListRoles includes created role" {
     }
     try std.testing.expect(found);
 
-    var del = try iam.delete_role.execute(
+    const del = try iam.delete_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = role_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "ListPolicies returns policies" {
-    var list = try iam.list_policies.execute(&shared_client, .{}, .{});
-    defer list.deinit();
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const list = try iam.list_policies.execute(&shared_client, arena.allocator(), .{}, .{});
 
     // LocalStack always returns the policies list (possibly empty)
     try std.testing.expect(list.policies != null);
 }
 
 test "GetUser returns NoSuchEntity for nonexistent user with diagnostic" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     var diagnostic: iam.ServiceError = undefined;
     const result = iam.get_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = "nonexistent-user-diag" },
         .{ .diagnostic = &diagnostic },
     );
@@ -600,25 +689,28 @@ test "GetUser returns NoSuchEntity for nonexistent user with diagnostic" {
 }
 
 test "CreateUser with duplicate name returns EntityAlreadyExists" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const user_name = "sdk-zig-iam-dup-user";
 
-    var create = try iam.create_user.execute(
+    const create = try iam.create_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer create.deinit();
+    _ = create;
 
     var diagnostic: iam.ServiceError = undefined;
     const dup = iam.create_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{ .diagnostic = &diagnostic },
     );
 
-    if (dup) |*r| {
-        var result = r.*;
-        result.deinit();
+    if (dup) |_| {
         return error.ExpectedServiceError;
     } else |err| {
         try std.testing.expectEqual(error.ServiceError, err);
@@ -631,17 +723,22 @@ test "CreateUser with duplicate name returns EntityAlreadyExists" {
         }
     }
 
-    var del = try iam.delete_user.execute(
+    const del = try iam.delete_user.execute(
         &shared_client,
+        arena.allocator(),
         .{ .user_name = user_name },
         .{},
     );
-    defer del.deinit();
+    _ = del;
 }
 
 test "GetRole returns error for nonexistent role" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const result = iam.get_role.execute(
         &shared_client,
+        arena.allocator(),
         .{ .role_name = "nonexistent-role-12345" },
         .{},
     );

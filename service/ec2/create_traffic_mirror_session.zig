@@ -77,19 +77,13 @@ pub const CreateTrafficMirrorSessionOutput = struct {
 
     /// Information about the Traffic Mirror session.
     traffic_mirror_session: ?TrafficMirrorSession = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CreateTrafficMirrorSessionOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CreateTrafficMirrorSessionInput, options: Options) !CreateTrafficMirrorSessionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTrafficMirrorSessionInput, options: Options) !CreateTrafficMirrorSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -110,10 +104,7 @@ pub fn execute(client: *Client, input: CreateTrafficMirrorSessionInput, options:
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

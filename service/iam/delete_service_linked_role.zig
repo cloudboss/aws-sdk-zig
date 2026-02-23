@@ -15,19 +15,13 @@ pub const DeleteServiceLinkedRoleOutput = struct {
     /// This identifier is returned in the format
     /// `task/aws-service-role///`.
     deletion_task_id: []const u8,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DeleteServiceLinkedRoleOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DeleteServiceLinkedRoleInput, options: Options) !DeleteServiceLinkedRoleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteServiceLinkedRoleInput, options: Options) !DeleteServiceLinkedRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -48,10 +42,7 @@ pub fn execute(client: *Client, input: DeleteServiceLinkedRoleInput, options: Op
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

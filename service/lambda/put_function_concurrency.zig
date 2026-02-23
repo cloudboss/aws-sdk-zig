@@ -31,12 +31,6 @@ pub const PutFunctionConcurrencyOutput = struct {
     /// concurrency](https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html).
     reserved_concurrent_executions: ?i32 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *PutFunctionConcurrencyOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .reserved_concurrent_executions = "ReservedConcurrentExecutions",
     };
@@ -46,7 +40,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: PutFunctionConcurrencyInput, options: Options) !PutFunctionConcurrencyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutFunctionConcurrencyInput, options: Options) !PutFunctionConcurrencyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -67,10 +61,7 @@ pub fn execute(client: *Client, input: PutFunctionConcurrencyInput, options: Opt
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

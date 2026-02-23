@@ -21,19 +21,13 @@ pub const DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput = st
 pub const DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput = struct {
     /// Information about the association.
     local_gateway_route_table_virtual_interface_group_association: ?LocalGatewayRouteTableVirtualInterfaceGroupAssociation = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: Options) !DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: Options) !DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -54,10 +48,7 @@ pub fn execute(client: *Client, input: DeleteLocalGatewayRouteTableVirtualInterf
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

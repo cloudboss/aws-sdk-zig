@@ -40,19 +40,13 @@ pub const ModifySpotFleetRequestOutput = struct {
     /// If the request succeeds, the response returns `true`. If the request fails,
     /// no response is returned, and instead an error message is returned.
     @"return": ?bool = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ModifySpotFleetRequestOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ModifySpotFleetRequestInput, options: Options) !ModifySpotFleetRequestOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySpotFleetRequestInput, options: Options) !ModifySpotFleetRequestOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -73,10 +67,7 @@ pub fn execute(client: *Client, input: ModifySpotFleetRequestInput, options: Opt
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

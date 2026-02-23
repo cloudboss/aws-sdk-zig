@@ -59,19 +59,13 @@ pub const DescribeClassicLinkInstancesOutput = struct {
     /// The token to include in another request to get the next page of items. This
     /// value is `null` when there are no more items to return.
     next_token: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeClassicLinkInstancesOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeClassicLinkInstancesInput, options: Options) !DescribeClassicLinkInstancesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeClassicLinkInstancesInput, options: Options) !DescribeClassicLinkInstancesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -92,10 +86,7 @@ pub fn execute(client: *Client, input: DescribeClassicLinkInstancesInput, option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

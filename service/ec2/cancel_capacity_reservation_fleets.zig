@@ -26,19 +26,13 @@ pub const CancelCapacityReservationFleetsOutput = struct {
     /// Information about the Capacity Reservation Fleets that were successfully
     /// cancelled.
     successful_fleet_cancellations: ?[]const CapacityReservationFleetCancellationState = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CancelCapacityReservationFleetsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CancelCapacityReservationFleetsInput, options: Options) !CancelCapacityReservationFleetsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelCapacityReservationFleetsInput, options: Options) !CancelCapacityReservationFleetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -59,10 +53,7 @@ pub fn execute(client: *Client, input: CancelCapacityReservationFleetsInput, opt
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

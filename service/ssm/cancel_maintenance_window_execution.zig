@@ -17,12 +17,6 @@ pub const CancelMaintenanceWindowExecutionOutput = struct {
     /// The ID of the maintenance window execution that has been stopped.
     window_execution_id: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CancelMaintenanceWindowExecutionOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .window_execution_id = "WindowExecutionId",
     };
@@ -32,7 +26,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CancelMaintenanceWindowExecutionInput, options: Options) !CancelMaintenanceWindowExecutionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelMaintenanceWindowExecutionInput, options: Options) !CancelMaintenanceWindowExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -53,10 +47,7 @@ pub fn execute(client: *Client, input: CancelMaintenanceWindowExecutionInput, op
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

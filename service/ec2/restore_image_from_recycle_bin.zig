@@ -19,19 +19,13 @@ pub const RestoreImageFromRecycleBinInput = struct {
 pub const RestoreImageFromRecycleBinOutput = struct {
     /// Returns `true` if the request succeeds; otherwise, it returns an error.
     @"return": ?bool = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *RestoreImageFromRecycleBinOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: RestoreImageFromRecycleBinInput, options: Options) !RestoreImageFromRecycleBinOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreImageFromRecycleBinInput, options: Options) !RestoreImageFromRecycleBinOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -52,10 +46,7 @@ pub fn execute(client: *Client, input: RestoreImageFromRecycleBinInput, options:
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

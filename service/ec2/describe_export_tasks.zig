@@ -18,19 +18,13 @@ pub const DescribeExportTasksInput = struct {
 pub const DescribeExportTasksOutput = struct {
     /// Information about the export tasks.
     export_tasks: ?[]const ExportTask = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeExportTasksOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeExportTasksInput, options: Options) !DescribeExportTasksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeExportTasksInput, options: Options) !DescribeExportTasksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -51,10 +45,7 @@ pub fn execute(client: *Client, input: DescribeExportTasksInput, options: Option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

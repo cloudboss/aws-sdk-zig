@@ -47,15 +47,14 @@ pub const GetAccountAuthorizationDetailsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_account_authorization_details.Options) !get_account_authorization_details.GetAccountAuthorizationDetailsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_account_authorization_details.Options) !get_account_authorization_details.GetAccountAuthorizationDetailsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try get_account_authorization_details.execute(self.client, self.params, options);
-
+        const output = try get_account_authorization_details.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -89,15 +88,14 @@ pub const GetGroupPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_group.Options) !get_group.GetGroupOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_group.Options) !get_group.GetGroupOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try get_group.execute(self.client, self.params, options);
-
+        const output = try get_group.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -131,15 +129,14 @@ pub const ListAccessKeysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_access_keys.Options) !list_access_keys.ListAccessKeysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_access_keys.Options) !list_access_keys.ListAccessKeysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_access_keys.execute(self.client, self.params, options);
-
+        const output = try list_access_keys.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -173,15 +170,14 @@ pub const ListAccountAliasesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_account_aliases.Options) !list_account_aliases.ListAccountAliasesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_account_aliases.Options) !list_account_aliases.ListAccountAliasesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_account_aliases.execute(self.client, self.params, options);
-
+        const output = try list_account_aliases.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -215,15 +211,14 @@ pub const ListAttachedGroupPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_attached_group_policies.Options) !list_attached_group_policies.ListAttachedGroupPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_attached_group_policies.Options) !list_attached_group_policies.ListAttachedGroupPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_attached_group_policies.execute(self.client, self.params, options);
-
+        const output = try list_attached_group_policies.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -257,15 +252,14 @@ pub const ListAttachedRolePoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_attached_role_policies.Options) !list_attached_role_policies.ListAttachedRolePoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_attached_role_policies.Options) !list_attached_role_policies.ListAttachedRolePoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_attached_role_policies.execute(self.client, self.params, options);
-
+        const output = try list_attached_role_policies.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -299,15 +293,14 @@ pub const ListAttachedUserPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_attached_user_policies.Options) !list_attached_user_policies.ListAttachedUserPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_attached_user_policies.Options) !list_attached_user_policies.ListAttachedUserPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_attached_user_policies.execute(self.client, self.params, options);
-
+        const output = try list_attached_user_policies.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -341,15 +334,14 @@ pub const ListEntitiesForPolicyPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_entities_for_policy.Options) !list_entities_for_policy.ListEntitiesForPolicyOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_entities_for_policy.Options) !list_entities_for_policy.ListEntitiesForPolicyOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_entities_for_policy.execute(self.client, self.params, options);
-
+        const output = try list_entities_for_policy.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -383,15 +375,14 @@ pub const ListGroupPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_group_policies.Options) !list_group_policies.ListGroupPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_group_policies.Options) !list_group_policies.ListGroupPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_group_policies.execute(self.client, self.params, options);
-
+        const output = try list_group_policies.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -425,15 +416,14 @@ pub const ListGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_groups.Options) !list_groups.ListGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_groups.execute(self.client, self.params, options);
-
+        const output = try list_groups.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -467,15 +457,14 @@ pub const ListGroupsForUserPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_groups_for_user.Options) !list_groups_for_user.ListGroupsForUserOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_groups_for_user.Options) !list_groups_for_user.ListGroupsForUserOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_groups_for_user.execute(self.client, self.params, options);
-
+        const output = try list_groups_for_user.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -509,15 +498,14 @@ pub const ListInstanceProfileTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_instance_profile_tags.Options) !list_instance_profile_tags.ListInstanceProfileTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_instance_profile_tags.Options) !list_instance_profile_tags.ListInstanceProfileTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_instance_profile_tags.execute(self.client, self.params, options);
-
+        const output = try list_instance_profile_tags.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -551,15 +539,14 @@ pub const ListInstanceProfilesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_instance_profiles.Options) !list_instance_profiles.ListInstanceProfilesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_instance_profiles.Options) !list_instance_profiles.ListInstanceProfilesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_instance_profiles.execute(self.client, self.params, options);
-
+        const output = try list_instance_profiles.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -593,15 +580,14 @@ pub const ListInstanceProfilesForRolePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_instance_profiles_for_role.Options) !list_instance_profiles_for_role.ListInstanceProfilesForRoleOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_instance_profiles_for_role.Options) !list_instance_profiles_for_role.ListInstanceProfilesForRoleOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_instance_profiles_for_role.execute(self.client, self.params, options);
-
+        const output = try list_instance_profiles_for_role.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -635,15 +621,14 @@ pub const ListMFADeviceTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_mfa_device_tags.Options) !list_mfa_device_tags.ListMFADeviceTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_mfa_device_tags.Options) !list_mfa_device_tags.ListMFADeviceTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_mfa_device_tags.execute(self.client, self.params, options);
-
+        const output = try list_mfa_device_tags.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -677,15 +662,14 @@ pub const ListMFADevicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_mfa_devices.Options) !list_mfa_devices.ListMFADevicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_mfa_devices.Options) !list_mfa_devices.ListMFADevicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_mfa_devices.execute(self.client, self.params, options);
-
+        const output = try list_mfa_devices.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -719,15 +703,14 @@ pub const ListOpenIDConnectProviderTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_open_id_connect_provider_tags.Options) !list_open_id_connect_provider_tags.ListOpenIDConnectProviderTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_open_id_connect_provider_tags.Options) !list_open_id_connect_provider_tags.ListOpenIDConnectProviderTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_open_id_connect_provider_tags.execute(self.client, self.params, options);
-
+        const output = try list_open_id_connect_provider_tags.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -761,15 +744,14 @@ pub const ListPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_policies.Options) !list_policies.ListPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_policies.Options) !list_policies.ListPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_policies.execute(self.client, self.params, options);
-
+        const output = try list_policies.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -803,15 +785,14 @@ pub const ListPolicyTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_policy_tags.Options) !list_policy_tags.ListPolicyTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_policy_tags.Options) !list_policy_tags.ListPolicyTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_policy_tags.execute(self.client, self.params, options);
-
+        const output = try list_policy_tags.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -845,15 +826,14 @@ pub const ListPolicyVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_policy_versions.Options) !list_policy_versions.ListPolicyVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_policy_versions.Options) !list_policy_versions.ListPolicyVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_policy_versions.execute(self.client, self.params, options);
-
+        const output = try list_policy_versions.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -887,15 +867,14 @@ pub const ListRolePoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_role_policies.Options) !list_role_policies.ListRolePoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_role_policies.Options) !list_role_policies.ListRolePoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_role_policies.execute(self.client, self.params, options);
-
+        const output = try list_role_policies.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -929,15 +908,14 @@ pub const ListRoleTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_role_tags.Options) !list_role_tags.ListRoleTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_role_tags.Options) !list_role_tags.ListRoleTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_role_tags.execute(self.client, self.params, options);
-
+        const output = try list_role_tags.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -971,15 +949,14 @@ pub const ListRolesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_roles.Options) !list_roles.ListRolesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_roles.Options) !list_roles.ListRolesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_roles.execute(self.client, self.params, options);
-
+        const output = try list_roles.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1013,15 +990,14 @@ pub const ListSAMLProviderTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_saml_provider_tags.Options) !list_saml_provider_tags.ListSAMLProviderTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_saml_provider_tags.Options) !list_saml_provider_tags.ListSAMLProviderTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_saml_provider_tags.execute(self.client, self.params, options);
-
+        const output = try list_saml_provider_tags.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1055,15 +1031,14 @@ pub const ListServerCertificateTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_server_certificate_tags.Options) !list_server_certificate_tags.ListServerCertificateTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_server_certificate_tags.Options) !list_server_certificate_tags.ListServerCertificateTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_server_certificate_tags.execute(self.client, self.params, options);
-
+        const output = try list_server_certificate_tags.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1097,15 +1072,14 @@ pub const ListServerCertificatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_server_certificates.Options) !list_server_certificates.ListServerCertificatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_server_certificates.Options) !list_server_certificates.ListServerCertificatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_server_certificates.execute(self.client, self.params, options);
-
+        const output = try list_server_certificates.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1139,15 +1113,14 @@ pub const ListSigningCertificatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_signing_certificates.Options) !list_signing_certificates.ListSigningCertificatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_signing_certificates.Options) !list_signing_certificates.ListSigningCertificatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_signing_certificates.execute(self.client, self.params, options);
-
+        const output = try list_signing_certificates.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1181,15 +1154,14 @@ pub const ListSSHPublicKeysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_ssh_public_keys.Options) !list_ssh_public_keys.ListSSHPublicKeysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_ssh_public_keys.Options) !list_ssh_public_keys.ListSSHPublicKeysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_ssh_public_keys.execute(self.client, self.params, options);
-
+        const output = try list_ssh_public_keys.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1223,15 +1195,14 @@ pub const ListUserPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_user_policies.Options) !list_user_policies.ListUserPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_user_policies.Options) !list_user_policies.ListUserPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_user_policies.execute(self.client, self.params, options);
-
+        const output = try list_user_policies.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1265,15 +1236,14 @@ pub const ListUserTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_user_tags.Options) !list_user_tags.ListUserTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_user_tags.Options) !list_user_tags.ListUserTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_user_tags.execute(self.client, self.params, options);
-
+        const output = try list_user_tags.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1307,15 +1277,14 @@ pub const ListUsersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_users.Options) !list_users.ListUsersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_users.execute(self.client, self.params, options);
-
+        const output = try list_users.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1349,15 +1318,14 @@ pub const ListVirtualMFADevicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_virtual_mfa_devices.Options) !list_virtual_mfa_devices.ListVirtualMFADevicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_virtual_mfa_devices.Options) !list_virtual_mfa_devices.ListVirtualMFADevicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_virtual_mfa_devices.execute(self.client, self.params, options);
-
+        const output = try list_virtual_mfa_devices.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1391,15 +1359,14 @@ pub const SimulateCustomPolicyPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: simulate_custom_policy.Options) !simulate_custom_policy.SimulateCustomPolicyOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: simulate_custom_policy.Options) !simulate_custom_policy.SimulateCustomPolicyOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try simulate_custom_policy.execute(self.client, self.params, options);
-
+        const output = try simulate_custom_policy.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {
@@ -1433,15 +1400,14 @@ pub const SimulatePrincipalPolicyPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: simulate_principal_policy.Options) !simulate_principal_policy.SimulatePrincipalPolicyOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: simulate_principal_policy.Options) !simulate_principal_policy.SimulatePrincipalPolicyOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try simulate_principal_policy.execute(self.client, self.params, options);
-
+        const output = try simulate_principal_policy.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {

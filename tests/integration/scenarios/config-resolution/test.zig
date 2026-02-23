@@ -29,12 +29,15 @@ test "Config.load resolves settings from config file" {
     );
     defer client.deinit();
 
-    var result = try sts.get_caller_identity.execute(
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    const result = try sts.get_caller_identity.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     try std.testing.expect(result.account != null);
     try std.testing.expect(result.arn != null);

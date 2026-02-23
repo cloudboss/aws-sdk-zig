@@ -22,19 +22,13 @@ pub const GetAssociatedEnclaveCertificateIamRolesInput = struct {
 pub const GetAssociatedEnclaveCertificateIamRolesOutput = struct {
     /// Information about the associated IAM roles.
     associated_roles: ?[]const AssociatedRole = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetAssociatedEnclaveCertificateIamRolesOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetAssociatedEnclaveCertificateIamRolesInput, options: Options) !GetAssociatedEnclaveCertificateIamRolesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssociatedEnclaveCertificateIamRolesInput, options: Options) !GetAssociatedEnclaveCertificateIamRolesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -55,10 +49,7 @@ pub fn execute(client: *Client, input: GetAssociatedEnclaveCertificateIamRolesIn
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

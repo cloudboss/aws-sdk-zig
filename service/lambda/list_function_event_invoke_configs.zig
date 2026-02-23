@@ -38,12 +38,6 @@ pub const ListFunctionEventInvokeConfigsOutput = struct {
     /// The pagination token that's included if more results are available.
     next_marker: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ListFunctionEventInvokeConfigsOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .function_event_invoke_configs = "FunctionEventInvokeConfigs",
         .next_marker = "NextMarker",
@@ -54,7 +48,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ListFunctionEventInvokeConfigsInput, options: Options) !ListFunctionEventInvokeConfigsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFunctionEventInvokeConfigsInput, options: Options) !ListFunctionEventInvokeConfigsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -75,10 +69,7 @@ pub fn execute(client: *Client, input: ListFunctionEventInvokeConfigsInput, opti
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

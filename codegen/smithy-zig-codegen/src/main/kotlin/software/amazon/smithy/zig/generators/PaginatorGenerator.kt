@@ -147,9 +147,6 @@ class PaginatorGenerator(
         }
         writer.write("done: bool = false,")
         writer.write("allocator: std.mem.Allocator,")
-        if (op.isMapToken) {
-            writer.write("prev_output: ?\$L.\$L = null,", op.constName, op.outputType)
-        }
         writer.blankLine()
 
         writer.write("const Self = @This();")
@@ -157,7 +154,7 @@ class PaginatorGenerator(
 
         // next() method
         writer.openBlock(
-            "pub fn next(self: *Self, options: \$L.Options) !\$L.\$L {",
+            "pub fn next(self: *Self, allocator: std.mem.Allocator, options: \$L.Options) !\$L.\$L {",
             op.constName, op.constName, op.outputType,
         )
 
@@ -170,23 +167,13 @@ class PaginatorGenerator(
         writer.write("self.params.\$L = self.next_token;", op.inputTokenField)
         writer.blankLine()
 
-        // Execute
-        writer.write("const output = try \$L.execute(self.client, self.params, options);", op.constName)
-        writer.blankLine()
-
-        // Free previous output after execute -- for map tokens, next_token
-        // points into prev_output's arena so it must stay alive until the
-        // token has been serialized into the request.
-        if (op.isMapToken) {
-            writer.openBlock("if (self.prev_output) |*prev| {")
-            writer.write("prev.deinit();")
-            writer.write("self.prev_output = null;")
-            writer.closeBlock("}")
-        }
+        // Execute with caller-provided allocator
+        writer.write("const output = try \$L.execute(self.client, allocator, self.params, options);", op.constName)
         writer.blankLine()
 
         // Extract next token
         if (op.isMapToken) {
+            // Map token points into caller's allocator -- caller must not free between pages
             writer.openBlock("if (output.\$L) |token| {", op.outputTokenField)
             writer.openBlock("if (token.len > 0) {")
             writer.write("self.next_token = token;")
@@ -218,26 +205,18 @@ class PaginatorGenerator(
         }
         writer.blankLine()
 
-        if (op.isMapToken) {
-            writer.write("self.prev_output = output;")
-        }
-
         writer.write("return output;")
         writer.closeBlock("}")
         writer.blankLine()
 
-        // deinit()
-        writer.openBlock("pub fn deinit(self: *Self) void {")
-        if (op.isMapToken) {
-            writer.openBlock("if (self.prev_output) |*prev| {")
-            writer.write("prev.deinit();")
-            writer.closeBlock("}")
-        } else {
+        // deinit() -- only needed for string tokens (duped into self.allocator)
+        if (!op.isMapToken) {
+            writer.openBlock("pub fn deinit(self: *Self) void {")
             writer.openBlock("if (self.next_token) |token| {")
             writer.write("self.allocator.free(token);")
             writer.closeBlock("}")
+            writer.closeBlock("}")
         }
-        writer.closeBlock("}")
 
         writer.closeBlock("};")
     }

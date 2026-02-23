@@ -41,19 +41,13 @@ pub const UpdateSecurityGroupRuleDescriptionsIngressInput = struct {
 pub const UpdateSecurityGroupRuleDescriptionsIngressOutput = struct {
     /// Returns `true` if the request succeeds; otherwise, returns an error.
     @"return": ?bool = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *UpdateSecurityGroupRuleDescriptionsIngressOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: UpdateSecurityGroupRuleDescriptionsIngressInput, options: Options) !UpdateSecurityGroupRuleDescriptionsIngressOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSecurityGroupRuleDescriptionsIngressInput, options: Options) !UpdateSecurityGroupRuleDescriptionsIngressOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -74,10 +68,7 @@ pub fn execute(client: *Client, input: UpdateSecurityGroupRuleDescriptionsIngres
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

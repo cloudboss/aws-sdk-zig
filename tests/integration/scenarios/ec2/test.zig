@@ -29,8 +29,10 @@ test "zest.afterAll" {
 }
 
 test "DescribeVpcs returns results" {
-    var result = try ec2.describe_vpcs.execute(&shared_client, .{}, .{});
-    defer result.deinit();
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.describe_vpcs.execute(&shared_client, arena.allocator(), .{}, .{});
 
     const vpcs = result.vpcs orelse return error.MissingVpcs;
     try std.testing.expect(vpcs.len >= 1);
@@ -39,28 +41,32 @@ test "DescribeVpcs returns results" {
 }
 
 test "CreateVpc returns successfully" {
-    var result = try ec2.create_vpc.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.create_vpc.execute(
         &shared_client,
+        arena.allocator(),
         .{ .cidr_block = "10.99.0.0/16" },
         .{},
     );
     const vpc_id = result.vpc.?.vpc_id orelse {
-        result.deinit();
         return error.MissingVpcId;
     };
 
-    var delete_result = try ec2.delete_vpc.execute(
+    _ = try ec2.delete_vpc.execute(
         &shared_client,
+        arena.allocator(),
         .{ .vpc_id = vpc_id },
         .{},
     );
-    delete_result.deinit();
-    result.deinit();
 }
 
 test "DescribeVpcs returns VPC with expected fields" {
-    var result = try ec2.describe_vpcs.execute(&shared_client, .{}, .{});
-    defer result.deinit();
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.describe_vpcs.execute(&shared_client, arena.allocator(), .{}, .{});
 
     const vpcs = result.vpcs orelse return error.MissingField;
     try std.testing.expect(vpcs.len >= 1);
@@ -72,14 +78,17 @@ test "DescribeVpcs returns VPC with expected fields" {
 }
 
 test "CreateSecurityGroup returns group ID" {
-    var vpcs_result = try ec2.describe_vpcs.execute(&shared_client, .{}, .{});
-    defer vpcs_result.deinit();
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const vpcs_result = try ec2.describe_vpcs.execute(&shared_client, arena.allocator(), .{}, .{});
     const vpcs = vpcs_result.vpcs orelse return error.MissingVpcs;
     if (vpcs.len == 0) return error.NoVpcs;
     const vpc_id = vpcs[0].vpc_id orelse return error.MissingVpcId;
 
-    var create_result = try ec2.create_security_group.execute(
+    const create_result = try ec2.create_security_group.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .group_name = "sdk-zig-ec2-sg",
             .description = "sdk-zig-ec2-security-group",
@@ -89,75 +98,88 @@ test "CreateSecurityGroup returns group ID" {
     );
 
     const group_id = create_result.group_id orelse {
-        create_result.deinit();
         return error.MissingGroupId;
     };
 
-    var delete_result = try ec2.delete_security_group.execute(
+    _ = try ec2.delete_security_group.execute(
         &shared_client,
+        arena.allocator(),
         .{ .group_id = group_id },
         .{},
     );
-    delete_result.deinit();
-    create_result.deinit();
 }
 
 test "DescribeAvailabilityZones returns zones" {
-    var result = try ec2.describe_availability_zones.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.describe_availability_zones.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const zones = result.availability_zones orelse return error.MissingField;
     try std.testing.expect(zones.len >= 1);
 }
 
 test "DescribeInstances returns successfully" {
-    var result = try ec2.describe_instances.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.describe_instances.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     _ = result.reservations orelse return error.MissingField;
 }
 
 test "DescribeSubnets returns subnets in default VPC" {
-    var result = try ec2.describe_subnets.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.describe_subnets.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const subnets = result.subnets orelse return error.MissingField;
     try std.testing.expect(subnets.len >= 1);
 }
 
 test "DescribeSecurityGroups returns default group" {
-    var result = try ec2.describe_security_groups.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.describe_security_groups.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const groups = result.security_groups orelse return error.MissingField;
     try std.testing.expect(groups.len >= 1);
 }
 
 test "DescribeSecurityGroups with filter returns matching group" {
-    var vpcs_result = try ec2.describe_vpcs.execute(&shared_client, .{}, .{});
-    defer vpcs_result.deinit();
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const vpcs_result = try ec2.describe_vpcs.execute(&shared_client, arena.allocator(), .{}, .{});
     const vpcs = vpcs_result.vpcs orelse return error.MissingVpcs;
     if (vpcs.len == 0) return error.NoVpcs;
     const vpc_id = vpcs[0].vpc_id orelse return error.MissingVpcId;
 
-    var create_result = try ec2.create_security_group.execute(
+    const create_result = try ec2.create_security_group.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .group_name = "sdk-zig-ec2-filter-sg",
             .description = "sdk-zig-ec2-filter-security-group",
@@ -166,12 +188,12 @@ test "DescribeSecurityGroups with filter returns matching group" {
         .{},
     );
     const group_id = create_result.group_id orelse {
-        create_result.deinit();
         return error.MissingGroupId;
     };
 
-    var describe_result = try ec2.describe_security_groups.execute(
+    const describe_result = try ec2.describe_security_groups.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .filters = &.{.{
                 .name = "group-name",
@@ -180,56 +202,58 @@ test "DescribeSecurityGroups with filter returns matching group" {
         },
         .{},
     );
-    defer describe_result.deinit();
 
     const groups = describe_result.security_groups orelse {
-        var del = try ec2.delete_security_group.execute(
+        _ = try ec2.delete_security_group.execute(
             &shared_client,
+            arena.allocator(),
             .{ .group_id = group_id },
             .{},
         );
-        del.deinit();
-        create_result.deinit();
         return error.MissingField;
     };
     try std.testing.expect(groups.len >= 1);
 
-    var delete_result = try ec2.delete_security_group.execute(
+    _ = try ec2.delete_security_group.execute(
         &shared_client,
+        arena.allocator(),
         .{ .group_id = group_id },
         .{},
     );
-    delete_result.deinit();
-    create_result.deinit();
 }
 
 test "AllocateAddress returns allocation ID" {
-    var result = try ec2.allocate_address.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.allocate_address.execute(
         &shared_client,
+        arena.allocator(),
         .{ .domain = .vpc },
         .{},
     );
     const allocation_id = result.allocation_id orelse {
-        result.deinit();
         return error.MissingAllocationId;
     };
 
-    var release_result = try ec2.release_address.execute(
+    _ = try ec2.release_address.execute(
         &shared_client,
+        arena.allocator(),
         .{ .allocation_id = allocation_id },
         .{},
     );
-    release_result.deinit();
-    result.deinit();
 }
 
 test "DescribeRegions returns AWS regions" {
-    var result = try ec2.describe_regions.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try ec2.describe_regions.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const regions = result.regions orelse return error.MissingField;
     try std.testing.expect(regions.len >= 1);

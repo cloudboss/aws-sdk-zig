@@ -17,15 +17,14 @@ pub const ListBucketsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_buckets.Options) !list_buckets.ListBucketsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_buckets.Options) !list_buckets.ListBucketsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.continuation_token = self.next_token;
 
-        const output = try list_buckets.execute(self.client, self.params, options);
-
+        const output = try list_buckets.execute(self.client, allocator, self.params, options);
 
         if (output.continuation_token) |token| {
             if (self.next_token) |old| {
@@ -59,15 +58,14 @@ pub const ListDirectoryBucketsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_directory_buckets.Options) !list_directory_buckets.ListDirectoryBucketsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_directory_buckets.Options) !list_directory_buckets.ListDirectoryBucketsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.continuation_token = self.next_token;
 
-        const output = try list_directory_buckets.execute(self.client, self.params, options);
-
+        const output = try list_directory_buckets.execute(self.client, allocator, self.params, options);
 
         if (output.continuation_token) |token| {
             if (self.next_token) |old| {
@@ -101,15 +99,14 @@ pub const ListObjectsV2Paginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_objects_v2.Options) !list_objects_v2.ListObjectsV2Output {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_objects_v2.Options) !list_objects_v2.ListObjectsV2Output {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.continuation_token = self.next_token;
 
-        const output = try list_objects_v2.execute(self.client, self.params, options);
-
+        const output = try list_objects_v2.execute(self.client, allocator, self.params, options);
 
         if (output.next_continuation_token) |token| {
             if (self.next_token) |old| {
@@ -143,15 +140,14 @@ pub const ListPartsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_parts.Options) !list_parts.ListPartsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_parts.Options) !list_parts.ListPartsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.part_number_marker = self.next_token;
 
-        const output = try list_parts.execute(self.client, self.params, options);
-
+        const output = try list_parts.execute(self.client, allocator, self.params, options);
 
         if (output.next_part_number_marker) |token| {
             if (self.next_token) |old| {

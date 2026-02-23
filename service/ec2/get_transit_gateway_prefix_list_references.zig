@@ -55,19 +55,13 @@ pub const GetTransitGatewayPrefixListReferencesOutput = struct {
 
     /// Information about the prefix list references.
     transit_gateway_prefix_list_references: ?[]const TransitGatewayPrefixListReference = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetTransitGatewayPrefixListReferencesOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetTransitGatewayPrefixListReferencesInput, options: Options) !GetTransitGatewayPrefixListReferencesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTransitGatewayPrefixListReferencesInput, options: Options) !GetTransitGatewayPrefixListReferencesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -88,10 +82,7 @@ pub fn execute(client: *Client, input: GetTransitGatewayPrefixListReferencesInpu
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

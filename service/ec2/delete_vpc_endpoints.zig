@@ -21,19 +21,13 @@ pub const DeleteVpcEndpointsInput = struct {
 pub const DeleteVpcEndpointsOutput = struct {
     /// Information about the VPC endpoints that were not successfully deleted.
     unsuccessful: ?[]const UnsuccessfulItem = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DeleteVpcEndpointsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DeleteVpcEndpointsInput, options: Options) !DeleteVpcEndpointsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVpcEndpointsInput, options: Options) !DeleteVpcEndpointsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -54,10 +48,7 @@ pub fn execute(client: *Client, input: DeleteVpcEndpointsInput, options: Options
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

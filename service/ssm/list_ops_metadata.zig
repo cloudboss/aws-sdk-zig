@@ -35,12 +35,6 @@ pub const ListOpsMetadataOutput = struct {
     /// Returns a list of OpsMetadata objects.
     ops_metadata_list: ?[]const OpsMetadata = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ListOpsMetadataOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .next_token = "NextToken",
         .ops_metadata_list = "OpsMetadataList",
@@ -51,7 +45,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ListOpsMetadataInput, options: Options) !ListOpsMetadataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOpsMetadataInput, options: Options) !ListOpsMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -72,10 +66,7 @@ pub fn execute(client: *Client, input: ListOpsMetadataInput, options: Options) !
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

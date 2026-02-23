@@ -24,12 +24,6 @@ pub const CreateBackupOutput = struct {
     /// Contains the details of the backup created for the table.
     backup_details: ?BackupDetails = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CreateBackupOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .backup_details = "BackupDetails",
     };
@@ -39,7 +33,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CreateBackupInput, options: Options) !CreateBackupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBackupInput, options: Options) !CreateBackupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -60,10 +54,7 @@ pub fn execute(client: *Client, input: CreateBackupInput, options: Options) !Cre
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

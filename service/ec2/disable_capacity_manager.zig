@@ -24,19 +24,13 @@ pub const DisableCapacityManagerOutput = struct {
     /// Indicates whether Organizations access is enabled. This will be `false`
     /// after disabling Capacity Manager.
     organizations_access: ?bool = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DisableCapacityManagerOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DisableCapacityManagerInput, options: Options) !DisableCapacityManagerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableCapacityManagerInput, options: Options) !DisableCapacityManagerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -57,10 +51,7 @@ pub fn execute(client: *Client, input: DisableCapacityManagerInput, options: Opt
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

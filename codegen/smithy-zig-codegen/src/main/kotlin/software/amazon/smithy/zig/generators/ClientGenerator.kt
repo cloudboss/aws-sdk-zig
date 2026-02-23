@@ -141,13 +141,13 @@ class ClientGenerator(
                 writer.writeDocs(op.docs)
             }
             writer.openBlock(
-                "pub fn \$L(self: *Self, input: \$L.\$L, options: \$L.Options) !\$L.\$L {",
+                "pub fn \$L(self: *Self, allocator: std.mem.Allocator, input: \$L.\$L, options: \$L.Options) !\$L.\$L {",
                 op.methodName,
                 op.constName, op.inputType,
                 op.constName,
                 op.constName, op.outputType,
             )
-            writer.write("return \$L.execute(self, input, options);", op.constName)
+            writer.write("return \$L.execute(self, allocator, input, options);", op.constName)
             writer.closeBlock("}")
         }
 
@@ -177,12 +177,12 @@ class ClientGenerator(
             writer.blankLine()
             val presignMethodName = "presign${op.operationName}"
             writer.openBlock(
-                "pub fn \$L(self: *Self, input: \$L.\$L, options: \$L.PresignOptions) ![]const u8 {",
+                "pub fn \$L(self: *Self, allocator: std.mem.Allocator, input: \$L.\$L, options: \$L.PresignOptions) ![]const u8 {",
                 presignMethodName,
                 op.constName, op.inputType,
                 op.constName,
             )
-            writer.write("return \$L.presign(self, input, options);", op.constName)
+            writer.write("return \$L.presign(self, allocator, input, options);", op.constName)
             writer.closeBlock("}")
         }
 

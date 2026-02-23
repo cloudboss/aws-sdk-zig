@@ -110,19 +110,13 @@ pub const GetTopicAttributesOutput = struct {
     /// * `FifoTopic` – When this is set to `true`, a FIFO
     /// topic is created.
     attributes: ?[]const aws.map.StringMapEntry = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetTopicAttributesOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetTopicAttributesInput, options: Options) !GetTopicAttributesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTopicAttributesInput, options: Options) !GetTopicAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -143,10 +137,7 @@ pub fn execute(client: *Client, input: GetTopicAttributesInput, options: Options
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

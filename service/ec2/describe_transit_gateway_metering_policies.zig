@@ -38,19 +38,13 @@ pub const DescribeTransitGatewayMeteringPoliciesOutput = struct {
 
     /// Information about the transit gateway metering policies.
     transit_gateway_metering_policies: ?[]const TransitGatewayMeteringPolicy = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeTransitGatewayMeteringPoliciesOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeTransitGatewayMeteringPoliciesInput, options: Options) !DescribeTransitGatewayMeteringPoliciesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTransitGatewayMeteringPoliciesInput, options: Options) !DescribeTransitGatewayMeteringPoliciesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -71,10 +65,7 @@ pub fn execute(client: *Client, input: DescribeTransitGatewayMeteringPoliciesInp
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

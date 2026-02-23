@@ -57,12 +57,6 @@ pub const ListDocumentMetadataHistoryOutput = struct {
     /// can specify in a subsequent call to get the next set of results.
     next_token: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ListDocumentMetadataHistoryOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .author = "Author",
         .document_version = "DocumentVersion",
@@ -76,7 +70,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ListDocumentMetadataHistoryInput, options: Options) !ListDocumentMetadataHistoryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDocumentMetadataHistoryInput, options: Options) !ListDocumentMetadataHistoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -97,10 +91,7 @@ pub fn execute(client: *Client, input: ListDocumentMetadataHistoryInput, options
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

@@ -17,12 +17,6 @@ pub const CancelMessageMoveTaskOutput = struct {
     /// The approximate number of messages already moved to the destination queue.
     approximate_number_of_messages_moved: ?i64 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CancelMessageMoveTaskOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .approximate_number_of_messages_moved = "ApproximateNumberOfMessagesMoved",
     };
@@ -32,7 +26,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CancelMessageMoveTaskInput, options: Options) !CancelMessageMoveTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelMessageMoveTaskInput, options: Options) !CancelMessageMoveTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -53,10 +47,7 @@ pub fn execute(client: *Client, input: CancelMessageMoveTaskInput, options: Opti
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

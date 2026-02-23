@@ -150,19 +150,13 @@ pub const DescribeReservedInstancesOfferingsOutput = struct {
 
     /// A list of Reserved Instances offerings.
     reserved_instances_offerings: ?[]const ReservedInstancesOffering = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeReservedInstancesOfferingsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeReservedInstancesOfferingsInput, options: Options) !DescribeReservedInstancesOfferingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReservedInstancesOfferingsInput, options: Options) !DescribeReservedInstancesOfferingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -183,10 +177,7 @@ pub fn execute(client: *Client, input: DescribeReservedInstancesOfferingsInput, 
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

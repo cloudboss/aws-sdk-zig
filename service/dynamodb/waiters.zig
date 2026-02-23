@@ -44,10 +44,12 @@ pub const ContributorInsightsEnabledWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        var output = self.client.describeContributorInsights(self.params, .{}) catch  {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        const output = self.client.describeContributorInsights(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
-        defer output.deinit();
 
         if (output.contributor_insights_status) |val_0| {
             if (std.mem.eql(u8, @tagName(val_0), "ENABLED")) {
@@ -99,10 +101,12 @@ pub const ExportCompletedWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        var output = self.client.describeExport(self.params, .{}) catch  {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        const output = self.client.describeExport(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
-        defer output.deinit();
 
         if (output.export_description) |val_0| {
             if (val_0.export_status) |val_1| {
@@ -158,10 +162,12 @@ pub const ImportCompletedWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
-        var output = self.client.describeImport(self.params, .{}) catch  {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        const output = self.client.describeImport(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
-        defer output.deinit();
 
         if (output.import_table_description) |val_0| {
             if (val_0.import_status) |val_1| {
@@ -224,8 +230,11 @@ pub const TableExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output = self.client.describeTable(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        const output = self.client.describeTable(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
@@ -234,7 +243,6 @@ pub const TableExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output.deinit();
 
         if (output.table) |val_0| {
             if (val_0.table_status) |val_1| {
@@ -283,8 +291,11 @@ pub const TableNotExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeTable(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeTable(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
@@ -293,7 +304,6 @@ pub const TableNotExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }

@@ -194,22 +194,26 @@ class WaiterGenerator(
 
         writer.openBlock("fn poll(self: *Self) aws.waiter.AcceptorState {")
 
+        // Local arena for the operation output -- freed at end of poll
+        writer.write("var arena = std.heap.ArenaAllocator.init(self.client.allocator);")
+        writer.write("defer arena.deinit();")
+        writer.blankLine()
+
         val hasOutputAcceptors = waiter.acceptors.any { it.type == AcceptorType.OUTPUT_PATH }
         val errorAcceptors = waiter.acceptors.filter { it.type == AcceptorType.ERROR_TYPE }
         val needsDiagnostic = errorAcceptors.isNotEmpty()
-        // Always capture the result to deinit it (avoid leaking the response arena)
-        val resultPrefix = if (hasOutputAcceptors) "var output = " else "var output_ = "
+        val resultPrefix = if (hasOutputAcceptors) "const output = " else "_ = "
         val errCapture = if (needsDiagnostic) "|err|" else ""
 
         if (needsDiagnostic) {
             writer.write("var diagnostic: @import(\"errors.zig\").ServiceError = undefined;")
             writer.write(
-                "\$Lself.client.\$L(self.params, .{ .diagnostic = &diagnostic }) catch \$L {",
+                "\$Lself.client.\$L(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch \$L {",
                 resultPrefix, methodName, errCapture,
             )
         } else {
             writer.write(
-                "\$Lself.client.\$L(self.params, .{}) catch \$L {",
+                "\$Lself.client.\$L(arena.allocator(), self.params, .{}) catch \$L {",
                 resultPrefix, methodName, errCapture,
             )
         }
@@ -228,11 +232,6 @@ class WaiterGenerator(
 
         writer.write("return .retry;")
         writer.closeBlock("};")
-        if (hasOutputAcceptors) {
-            writer.write("defer output.deinit();")
-        } else {
-            writer.write("defer output_.deinit();")
-        }
         writer.blankLine()
 
         // Success-path acceptors (operation succeeded)

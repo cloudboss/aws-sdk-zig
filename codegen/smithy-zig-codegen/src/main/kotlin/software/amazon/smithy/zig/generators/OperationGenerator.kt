@@ -212,23 +212,19 @@ class OperationGenerator(
             firstField = false
         }
 
-        writer.blankLine()
-        writer.write("_arena: std.heap.ArenaAllocator = undefined,")
-        writer.blankLine()
-
-        writer.openBlock("pub fn deinit(self: *\$L) void {", outputName)
-
-        // For streaming outputs, close the HTTP connection before freeing arena
-        for ((memberName, memberShape) in outputShape.allMembers) {
-            val targetShape = model.expectShape(memberShape.target)
-            if (ctx.isStreamingBlob(targetShape)) {
-                val fieldName = NamingUtil.toFieldName(memberName)
-                writer.write("self.\$L.deinit();", fieldName)
+        // Streaming outputs need deinit() for HTTP body cleanup only
+        if (isStreaming) {
+            writer.blankLine()
+            writer.openBlock("pub fn deinit(self: *\$L) void {", outputName)
+            for ((memberName, memberShape) in outputShape.allMembers) {
+                val targetShape = model.expectShape(memberShape.target)
+                if (ctx.isStreamingBlob(targetShape)) {
+                    val fieldName = NamingUtil.toFieldName(memberName)
+                    writer.write("self.\$L.deinit();", fieldName)
+                }
             }
+            writer.closeBlock("}")
         }
-
-        writer.write("self._arena.deinit();")
-        writer.closeBlock("}")
 
         if (isJsonProtocol()) {
             writeJsonFieldNames(writer, outputShape)
@@ -248,7 +244,7 @@ class OperationGenerator(
         val outputName = "${operationName}Output"
 
         writer.openBlock(
-            "pub fn execute(client: *Client, input: \$L, options: Options) !\$L {",
+            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: Options) !\$L {",
             inputName, outputName,
         )
 
@@ -281,11 +277,8 @@ class OperationGenerator(
         writer.closeBlock("}")
         writer.blankLine()
 
-        // Deserialize with a response arena that the caller owns via result.deinit()
-        writer.write("var resp_arena = std.heap.ArenaAllocator.init(client.allocator);")
-        writer.write("errdefer resp_arena.deinit();")
-        writer.write("var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());")
-        writer.write("result._arena = resp_arena;")
+        // Deserialize into caller-provided allocator
+        writer.write("const result = try deserializeResponse(response.body, response.status, response.headers, allocator);")
         writer.write("return result;")
 
         writer.closeBlock("}")
@@ -296,7 +289,7 @@ class OperationGenerator(
         val outputName = "${operationName}Output"
 
         writer.openBlock(
-            "pub fn execute(client: *Client, input: \$L, options: Options) !\$L {",
+            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: Options) !\$L {",
             inputName, outputName,
         )
 
@@ -333,11 +326,8 @@ class OperationGenerator(
         writer.closeBlock("}")
         writer.blankLine()
 
-        // Deserialize with a response arena that the caller owns via result.deinit()
-        writer.write("var resp_arena = std.heap.ArenaAllocator.init(client.allocator);")
-        writer.write("errdefer resp_arena.deinit();")
-        writer.write("var result = try deserializeStreamingResponse(&stream_resp, resp_arena.allocator());")
-        writer.write("result._arena = resp_arena;")
+        // Deserialize into caller-provided allocator
+        writer.write("const result = try deserializeStreamingResponse(&stream_resp, allocator);")
         writer.write("return result;")
 
         writer.closeBlock("}")
@@ -356,7 +346,7 @@ class OperationGenerator(
         writer.blankLine()
 
         writer.openBlock(
-            "pub fn presign(client: *Client, input: \$L, options: PresignOptions) ![]const u8 {",
+            "pub fn presign(client: *Client, allocator: std.mem.Allocator, input: \$L, options: PresignOptions) ![]const u8 {",
             inputName,
         )
 
@@ -373,7 +363,7 @@ class OperationGenerator(
         writer.blankLine()
 
         writer.openBlock("return aws.signing.presignRequest(")
-        writer.write("client.allocator,")
+        writer.write("allocator,")
         writer.write("&request,")
         writer.write("creds,")
         writer.write("client.config.region,")

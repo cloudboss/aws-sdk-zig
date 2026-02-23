@@ -18,12 +18,6 @@ pub const DescribeGlobalTableOutput = struct {
     /// Contains the details of the global table.
     global_table_description: ?GlobalTableDescription = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeGlobalTableOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .global_table_description = "GlobalTableDescription",
     };
@@ -33,7 +27,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeGlobalTableInput, options: Options) !DescribeGlobalTableOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeGlobalTableInput, options: Options) !DescribeGlobalTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -54,10 +48,7 @@ pub fn execute(client: *Client, input: DescribeGlobalTableInput, options: Option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

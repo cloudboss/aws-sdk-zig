@@ -63,19 +63,13 @@ pub const ListUserTagsOutput = struct {
     /// of a key name and an associated value. If no tags are attached to the
     /// specified resource, the response contains an empty list.
     tags: ?[]const Tag = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ListUserTagsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ListUserTagsInput, options: Options) !ListUserTagsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListUserTagsInput, options: Options) !ListUserTagsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -96,10 +90,7 @@ pub fn execute(client: *Client, input: ListUserTagsInput, options: Options) !Lis
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

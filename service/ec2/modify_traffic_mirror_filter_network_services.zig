@@ -29,19 +29,13 @@ pub const ModifyTrafficMirrorFilterNetworkServicesInput = struct {
 pub const ModifyTrafficMirrorFilterNetworkServicesOutput = struct {
     /// The Traffic Mirror filter that the network service is associated with.
     traffic_mirror_filter: ?TrafficMirrorFilter = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ModifyTrafficMirrorFilterNetworkServicesOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ModifyTrafficMirrorFilterNetworkServicesInput, options: Options) !ModifyTrafficMirrorFilterNetworkServicesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyTrafficMirrorFilterNetworkServicesInput, options: Options) !ModifyTrafficMirrorFilterNetworkServicesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -62,10 +56,7 @@ pub fn execute(client: *Client, input: ModifyTrafficMirrorFilterNetworkServicesI
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

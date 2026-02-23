@@ -502,11 +502,8 @@ pub const GetObjectOutput = struct {
     /// This functionality is not supported for directory buckets.
     website_redirect_location: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
     pub fn deinit(self: *GetObjectOutput) void {
         self.body.deinit();
-        self._arena.deinit();
     }
 };
 
@@ -514,7 +511,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetObjectInput, options: Options) !GetObjectOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectInput, options: Options) !GetObjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 
@@ -537,10 +534,7 @@ pub fn execute(client: *Client, input: GetObjectInput, options: Options) !GetObj
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeStreamingResponse(&stream_resp, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeStreamingResponse(&stream_resp, allocator);
     return result;
 }
 
@@ -548,7 +542,7 @@ pub const PresignOptions = struct {
     expires_seconds: u64 = 3600,
 };
 
-pub fn presign(client: *Client, input: GetObjectInput, options: PresignOptions) ![]const u8 {
+pub fn presign(client: *Client, allocator: std.mem.Allocator, input: GetObjectInput, options: PresignOptions) ![]const u8 {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -559,7 +553,7 @@ pub fn presign(client: *Client, input: GetObjectInput, options: PresignOptions) 
     const creds = try client.config.credentials.getCredentials(alloc);
 
     return aws.signing.presignRequest(
-        client.allocator,
+        allocator,
         &request,
         creds,
         client.config.region,

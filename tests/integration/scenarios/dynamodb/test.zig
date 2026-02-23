@@ -16,7 +16,10 @@ test "zest.beforeAll" {
         .{ .keep_alive = false },
     );
 
-    var r = try dynamodb.create_table.execute(&shared_client, .{
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key_schema = &.{
             .{ .attribute_name = "pk", .key_type = .hash },
@@ -28,7 +31,6 @@ test "zest.beforeAll" {
         },
         .billing_mode = .pay_per_request,
     }, .{});
-    defer r.deinit();
     shared_init = true;
 }
 
@@ -38,12 +40,14 @@ test "zest.afterAll" {
         return;
     }
     {
-        var r = try dynamodb.delete_table.execute(
+        var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+        defer arena.deinit();
+        _ = try dynamodb.delete_table.execute(
             &shared_client,
+            arena.allocator(),
             .{ .table_name = "sdk-zig-ddb-shared" },
             .{},
         );
-        defer r.deinit();
     }
     shared_client.deinit();
     shared_cfg.deinit();
@@ -53,7 +57,10 @@ test "zest.afterAll" {
 test "CreateTable returns table description with correct name" {
     const table_name = "sdk-zig-ddb-create-test";
 
-    var result = try dynamodb.create_table.execute(&shared_client, .{
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
         .table_name = table_name,
         .key_schema = &.{
             .{ .attribute_name = "pk", .key_type = .hash },
@@ -63,7 +70,6 @@ test "CreateTable returns table description with correct name" {
         },
         .billing_mode = .pay_per_request,
     }, .{});
-    defer result.deinit();
 
     const desc = result.table_description orelse return error.MissingTableDescription;
     try std.testing.expectEqualStrings(
@@ -71,21 +77,24 @@ test "CreateTable returns table description with correct name" {
         desc.table_name orelse return error.MissingTableName,
     );
 
-    var del = try dynamodb.delete_table.execute(
+    _ = try dynamodb.delete_table.execute(
         &shared_client,
+        arena.allocator(),
         .{ .table_name = table_name },
         .{},
     );
-    defer del.deinit();
 }
 
 test "DescribeTable returns key schema with attribute definitions" {
-    var result = try dynamodb.describe_table.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try dynamodb.describe_table.execute(
         &shared_client,
+        arena.allocator(),
         .{ .table_name = "sdk-zig-ddb-shared" },
         .{},
     );
-    defer result.deinit();
 
     const table = result.table orelse return error.MissingTable;
     try std.testing.expectEqualStrings(
@@ -97,12 +106,15 @@ test "DescribeTable returns key schema with attribute definitions" {
 }
 
 test "ListTables includes created table" {
-    var result = try dynamodb.list_tables.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try dynamodb.list_tables.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const table_names = result.table_names orelse return error.MissingTableNames;
     var found = false;
@@ -118,8 +130,11 @@ test "ListTables includes created table" {
 test "DeleteTable returns table description" {
     const table_name = "sdk-zig-ddb-delete-test";
 
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.create_table.execute(&shared_client, .{
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -129,15 +144,14 @@ test "DeleteTable returns table description" {
             },
             .billing_mode = .pay_per_request,
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.delete_table.execute(
+    const result = try dynamodb.delete_table.execute(
         &shared_client,
+        arena.allocator(),
         .{ .table_name = table_name },
         .{},
     );
-    defer result.deinit();
 
     try std.testing.expect(result.table_description != null);
 }
@@ -145,8 +159,11 @@ test "DeleteTable returns table description" {
 test "PutItem stores item retrievable via GetItem" {
     const table_name = "sdk-zig-ddb-put-get";
 
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.create_table.execute(&shared_client, .{
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -156,19 +173,18 @@ test "PutItem stores item retrievable via GetItem" {
             },
             .billing_mode = .pay_per_request,
         }, .{});
-        defer r.deinit();
     }
     defer {
-        var r = dynamodb.delete_table.execute(
+        _ = dynamodb.delete_table.execute(
             &shared_client,
+            arena.allocator(),
             .{ .table_name = table_name },
             .{},
         ) catch unreachable;
-        defer r.deinit();
     }
 
     {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "test-key-1" } },
@@ -176,16 +192,14 @@ test "PutItem stores item retrievable via GetItem" {
                 .{ .key = "age", .value = .{ .n = "30" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.get_item.execute(&shared_client, .{
+    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
         .table_name = table_name,
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "test-key-1" } },
         },
     }, .{});
-    defer result.deinit();
 
     const item = result.item orelse return error.MissingItem;
     var found_name = false;
@@ -222,8 +236,11 @@ test "PutItem stores item retrievable via GetItem" {
 test "Scan paginator collects all items across pages" {
     const table_name = "sdk-zig-ddb-paginator";
 
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.create_table.execute(&shared_client, .{
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -233,39 +250,36 @@ test "Scan paginator collects all items across pages" {
             },
             .billing_mode = .pay_per_request,
         }, .{});
-        defer r.deinit();
     }
     defer {
-        var r = dynamodb.delete_table.execute(
+        _ = dynamodb.delete_table.execute(
             &shared_client,
+            arena.allocator(),
             .{ .table_name = table_name },
             .{},
         ) catch unreachable;
-        defer r.deinit();
     }
 
     for (0..5) |i| {
         var key_buf: [16]u8 = undefined;
         const key = std.fmt.bufPrint(&key_buf, "item-{d}", .{i + 1}) catch
             unreachable;
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = key } },
             },
         }, .{});
-        defer r.deinit();
     }
 
     var pag = shared_client.scanPaginator(
         .{ .table_name = table_name, .limit = 2 },
     );
-    defer pag.deinit();
 
     var total_items: usize = 0;
     var pages: usize = 0;
     while (!pag.done) {
-        const output = try pag.next(.{});
+        const output = try pag.next(arena.allocator(), .{});
         if (output.items) |items| {
             total_items += items.len;
         }
@@ -277,9 +291,13 @@ test "Scan paginator collects all items across pages" {
 }
 
 test "DescribeTable returns ResourceNotFoundException for missing table" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     var diagnostic: dynamodb.ServiceError = undefined;
     const result = dynamodb.describe_table.execute(
         &shared_client,
+        arena.allocator(),
         .{ .table_name = "nonexistent-table-12345" },
         .{ .diagnostic = &diagnostic },
     );
@@ -304,8 +322,11 @@ test "DescribeTable returns ResourceNotFoundException for missing table" {
 test "Query returns items matching key condition" {
     const table_name = "sdk-zig-ddb-query";
 
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.create_table.execute(&shared_client, .{
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -317,36 +338,33 @@ test "Query returns items matching key condition" {
             },
             .billing_mode = .pay_per_request,
         }, .{});
-        defer r.deinit();
     }
     defer {
-        var r = dynamodb.delete_table.execute(
+        _ = dynamodb.delete_table.execute(
             &shared_client,
+            arena.allocator(),
             .{ .table_name = table_name },
             .{},
         ) catch unreachable;
-        defer r.deinit();
     }
 
     for ([_][]const u8{ "sk-1", "sk-2", "sk-3" }) |sk| {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "partition-1" } },
                 .{ .key = "sk", .value = .{ .s = sk } },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.query.execute(&shared_client, .{
+    const result = try dynamodb.query.execute(&shared_client, arena.allocator(), .{
         .table_name = table_name,
         .key_condition_expression = "pk = :pk_val",
         .expression_attribute_values = &.{
             .{ .key = ":pk_val", .value = .{ .s = "partition-1" } },
         },
     }, .{});
-    defer result.deinit();
 
     const count = result.count orelse return error.MissingCount;
     try std.testing.expectEqual(@as(i32, 3), count);
@@ -355,8 +373,11 @@ test "Query returns items matching key condition" {
 test "UpdateItem modifies existing item attribute" {
     const table_name = "sdk-zig-ddb-update";
 
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.create_table.execute(&shared_client, .{
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -366,30 +387,28 @@ test "UpdateItem modifies existing item attribute" {
             },
             .billing_mode = .pay_per_request,
         }, .{});
-        defer r.deinit();
     }
     defer {
-        var r = dynamodb.delete_table.execute(
+        _ = dynamodb.delete_table.execute(
             &shared_client,
+            arena.allocator(),
             .{ .table_name = table_name },
             .{},
         ) catch unreachable;
-        defer r.deinit();
     }
 
     {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "key-1" } },
                 .{ .key = "name", .value = .{ .s = "Alice" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
     {
-        var r = try dynamodb.update_item.execute(&shared_client, .{
+        _ = try dynamodb.update_item.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key = &.{
                 .{ .key = "pk", .value = .{ .s = "key-1" } },
@@ -402,16 +421,14 @@ test "UpdateItem modifies existing item attribute" {
                 .{ .key = ":val", .value = .{ .s = "Bob" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.get_item.execute(&shared_client, .{
+    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
         .table_name = table_name,
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "key-1" } },
         },
     }, .{});
-    defer result.deinit();
 
     const item = result.item orelse return error.MissingItem;
     var found_name = false;
@@ -435,8 +452,11 @@ test "UpdateItem modifies existing item attribute" {
 test "BatchWriteItem writes multiple items" {
     const table_name = "sdk-zig-ddb-batch";
 
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.create_table.execute(&shared_client, .{
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -446,19 +466,18 @@ test "BatchWriteItem writes multiple items" {
             },
             .billing_mode = .pay_per_request,
         }, .{});
-        defer r.deinit();
     }
     defer {
-        var r = dynamodb.delete_table.execute(
+        _ = dynamodb.delete_table.execute(
             &shared_client,
+            arena.allocator(),
             .{ .table_name = table_name },
             .{},
         ) catch unreachable;
-        defer r.deinit();
     }
 
     {
-        var r = try dynamodb.batch_write_item.execute(&shared_client, .{
+        _ = try dynamodb.batch_write_item.execute(&shared_client, arena.allocator(), .{
             .request_items = &.{
                 .{
                     .key = table_name,
@@ -485,71 +504,75 @@ test "BatchWriteItem writes multiple items" {
                 },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.scan.execute(
+    const result = try dynamodb.scan.execute(
         &shared_client,
+        arena.allocator(),
         .{ .table_name = table_name },
         .{},
     );
-    defer result.deinit();
 
     const count = result.count orelse return error.MissingCount;
     try std.testing.expectEqual(@as(i32, 3), count);
 }
 
 test "DeleteItem removes item from table" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "del-test" } },
                 .{ .key = "sk", .value = .{ .s = "1" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
     {
-        var r = try dynamodb.delete_item.execute(&shared_client, .{
+        _ = try dynamodb.delete_item.execute(&shared_client, arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .key = &.{
                 .{ .key = "pk", .value = .{ .s = "del-test" } },
                 .{ .key = "sk", .value = .{ .s = "1" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.get_item.execute(&shared_client, .{
+    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "del-test" } },
             .{ .key = "sk", .value = .{ .s = "1" } },
         },
     }, .{});
-    defer result.deinit();
 
     try std.testing.expect(result.item == null);
 }
 
 test "GetItem returns null for nonexistent key" {
-    var result = try dynamodb.get_item.execute(&shared_client, .{
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "nonexistent" } },
             .{ .key = "sk", .value = .{ .s = "0" } },
         },
     }, .{});
-    defer result.deinit();
 
     try std.testing.expect(result.item == null);
 }
 
 test "PutItem with conditional expression succeeds" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "cond-ok" } },
@@ -557,35 +580,35 @@ test "PutItem with conditional expression succeeds" {
             },
             .condition_expression = "attribute_not_exists(pk)",
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.get_item.execute(&shared_client, .{
+    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "cond-ok" } },
             .{ .key = "sk", .value = .{ .s = "1" } },
         },
     }, .{});
-    defer result.deinit();
 
     try std.testing.expect(result.item != null);
 }
 
 test "PutItem with failing condition returns ConditionalCheckFailedException" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "cond-fail" } },
                 .{ .key = "sk", .value = .{ .s = "1" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
     var diagnostic: dynamodb.ServiceError = undefined;
-    const result = dynamodb.put_item.execute(&shared_client, .{
+    const result = dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .item = &.{
             .{ .key = "pk", .value = .{ .s = "cond-fail" } },
@@ -614,8 +637,11 @@ test "PutItem with failing condition returns ConditionalCheckFailedException" {
 test "Scan returns all items without filter" {
     const table_name = "sdk-zig-ddb-scan-all";
 
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.create_table.execute(&shared_client, .{
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -625,33 +651,31 @@ test "Scan returns all items without filter" {
             },
             .billing_mode = .pay_per_request,
         }, .{});
-        defer r.deinit();
     }
     defer {
-        var r = dynamodb.delete_table.execute(
+        _ = dynamodb.delete_table.execute(
             &shared_client,
+            arena.allocator(),
             .{ .table_name = table_name },
             .{},
         ) catch unreachable;
-        defer r.deinit();
     }
 
     for ([_][]const u8{ "a", "b", "c" }) |pk| {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = pk } },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.scan.execute(
+    const result = try dynamodb.scan.execute(
         &shared_client,
+        arena.allocator(),
         .{ .table_name = table_name },
         .{},
     );
-    defer result.deinit();
 
     const count = result.count orelse return error.MissingCount;
     try std.testing.expectEqual(@as(i32, 3), count);
@@ -660,8 +684,11 @@ test "Scan returns all items without filter" {
 test "Query with sort key begins_with returns filtered results" {
     const table_name = "sdk-zig-ddb-query-bw";
 
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.create_table.execute(&shared_client, .{
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -673,29 +700,27 @@ test "Query with sort key begins_with returns filtered results" {
             },
             .billing_mode = .pay_per_request,
         }, .{});
-        defer r.deinit();
     }
     defer {
-        var r = dynamodb.delete_table.execute(
+        _ = dynamodb.delete_table.execute(
             &shared_client,
+            arena.allocator(),
             .{ .table_name = table_name },
             .{},
         ) catch unreachable;
-        defer r.deinit();
     }
 
     for ([_][]const u8{ "a-1", "a-2", "b-1" }) |sk| {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "p1" } },
                 .{ .key = "sk", .value = .{ .s = sk } },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.query.execute(&shared_client, .{
+    const result = try dynamodb.query.execute(&shared_client, arena.allocator(), .{
         .table_name = table_name,
         .key_condition_expression = "pk = :pk_val AND begins_with(sk, :sk_prefix)",
         .expression_attribute_values = &.{
@@ -703,35 +728,35 @@ test "Query with sort key begins_with returns filtered results" {
             .{ .key = ":sk_prefix", .value = .{ .s = "a-" } },
         },
     }, .{});
-    defer result.deinit();
 
     const count = result.count orelse return error.MissingCount;
     try std.testing.expectEqual(@as(i32, 2), count);
 }
 
 test "BatchGetItem retrieves multiple items" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "bg-1" } },
                 .{ .key = "sk", .value = .{ .s = "1" } },
             },
         }, .{});
-        defer r.deinit();
     }
     {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "bg-2" } },
                 .{ .key = "sk", .value = .{ .s = "1" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.batch_get_item.execute(&shared_client, .{
+    const result = try dynamodb.batch_get_item.execute(&shared_client, arena.allocator(), .{
         .request_items = &.{
             .{
                 .key = "sdk-zig-ddb-shared",
@@ -754,7 +779,6 @@ test "BatchGetItem retrieves multiple items" {
             },
         },
     }, .{});
-    defer result.deinit();
 
     const responses = result.responses orelse return error.MissingResponses;
     var total: usize = 0;
@@ -765,8 +789,11 @@ test "BatchGetItem retrieves multiple items" {
 }
 
 test "UpdateItem with ADD increments number attribute" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try dynamodb.put_item.execute(&shared_client, .{
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "add-test" } },
@@ -774,11 +801,10 @@ test "UpdateItem with ADD increments number attribute" {
                 .{ .key = "count", .value = .{ .n = "5" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
     {
-        var r = try dynamodb.update_item.execute(&shared_client, .{
+        _ = try dynamodb.update_item.execute(&shared_client, arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .key = &.{
                 .{ .key = "pk", .value = .{ .s = "add-test" } },
@@ -792,17 +818,15 @@ test "UpdateItem with ADD increments number attribute" {
                 .{ .key = ":inc", .value = .{ .n = "1" } },
             },
         }, .{});
-        defer r.deinit();
     }
 
-    var result = try dynamodb.get_item.execute(&shared_client, .{
+    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "add-test" } },
             .{ .key = "sk", .value = .{ .s = "1" } },
         },
     }, .{});
-    defer result.deinit();
 
     const item = result.item orelse return error.MissingItem;
     var found_count = false;

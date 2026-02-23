@@ -25,12 +25,6 @@ pub const RemoveRegionsFromReplicationOutput = struct {
     /// The status of replicas for this secret after you remove Regions.
     replication_status: ?[]const ReplicationStatusType = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *RemoveRegionsFromReplicationOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .arn = "ARN",
         .replication_status = "ReplicationStatus",
@@ -41,7 +35,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: RemoveRegionsFromReplicationInput, options: Options) !RemoveRegionsFromReplicationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveRegionsFromReplicationInput, options: Options) !RemoveRegionsFromReplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -62,10 +56,7 @@ pub fn execute(client: *Client, input: RemoveRegionsFromReplicationInput, option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

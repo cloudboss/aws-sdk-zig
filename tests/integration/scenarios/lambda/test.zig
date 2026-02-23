@@ -29,36 +29,47 @@ test "zest.afterAll" {
 }
 
 test "ListFunctions returns successfully" {
-    var result = try lambda.list_functions.execute(&shared_client, .{}, .{});
-    defer result.deinit();
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.list_functions.execute(&shared_client, arena.allocator(), .{}, .{});
 
     const functions = result.functions orelse return error.MissingFunctions;
     try std.testing.expectEqual(@as(usize, 0), functions.len);
 }
 
 test "ListFunctions with max_items returns successfully" {
-    var result = try lambda.list_functions.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.list_functions.execute(
         &shared_client,
+        arena.allocator(),
         .{ .max_items = 1 },
         .{},
     );
-    defer result.deinit();
 
     const functions = result.functions orelse return error.MissingFunctions;
     try std.testing.expectEqual(@as(usize, 0), functions.len);
 }
 
 test "ListFunctions next_marker is null on empty result" {
-    var result = try lambda.list_functions.execute(&shared_client, .{}, .{});
-    defer result.deinit();
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.list_functions.execute(&shared_client, arena.allocator(), .{}, .{});
 
     try std.testing.expect(result.next_marker == null);
 }
 
 test "GetFunction returns ResourceNotFoundException for missing function" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     var diagnostic: lambda.ServiceError = undefined;
     const result = lambda.get_function.execute(
         &shared_client,
+        arena.allocator(),
         .{ .function_name = "nonexistent-function-12345" },
         .{ .diagnostic = &diagnostic },
     );
@@ -81,9 +92,13 @@ test "GetFunction returns ResourceNotFoundException for missing function" {
 }
 
 test "GetFunction error diagnostic has parseable code" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     var diagnostic: lambda.ServiceError = undefined;
     _ = lambda.get_function.execute(
         &shared_client,
+        arena.allocator(),
         .{ .function_name = "no-such-fn-abc-789" },
         .{ .diagnostic = &diagnostic },
     ) catch |err| {
@@ -97,23 +112,29 @@ test "GetFunction error diagnostic has parseable code" {
 }
 
 test "GetAccountSettings returns Lambda account limits" {
-    var result = try lambda.get_account_settings.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.get_account_settings.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     _ = result.account_limit orelse return error.MissingAccountLimit;
 }
 
 test "GetAccountSettings total_code_size is non-negative" {
-    var result = try lambda.get_account_settings.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.get_account_settings.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const limit = result.account_limit orelse return error.MissingAccountLimit;
     const total_code_size = limit.total_code_size orelse
@@ -122,12 +143,15 @@ test "GetAccountSettings total_code_size is non-negative" {
 }
 
 test "GetAccountSettings concurrent_executions is positive" {
-    var result = try lambda.get_account_settings.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.get_account_settings.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const limit = result.account_limit orelse return error.MissingAccountLimit;
     const concurrent = limit.concurrent_executions orelse
@@ -136,12 +160,15 @@ test "GetAccountSettings concurrent_executions is positive" {
 }
 
 test "GetAccountSettings code_size_unzipped is positive" {
-    var result = try lambda.get_account_settings.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.get_account_settings.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const limit = result.account_limit orelse return error.MissingAccountLimit;
     const unzipped = limit.code_size_unzipped orelse
@@ -150,12 +177,15 @@ test "GetAccountSettings code_size_unzipped is positive" {
 }
 
 test "GetAccountSettings account_usage is present" {
-    var result = try lambda.get_account_settings.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.get_account_settings.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const usage = result.account_usage orelse return error.MissingAccountUsage;
     const function_count = usage.function_count orelse
@@ -164,12 +194,15 @@ test "GetAccountSettings account_usage is present" {
 }
 
 test "GetAccountSettings account_limit has all expected fields" {
-    var result = try lambda.get_account_settings.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try lambda.get_account_settings.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const limit = result.account_limit orelse return error.MissingAccountLimit;
     _ = limit.total_code_size orelse return error.MissingField;

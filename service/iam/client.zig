@@ -223,8 +223,8 @@ pub const Client = struct {
     ///
     /// An accepted request may be rejected before the exchange token is sent to the
     /// partner.
-    pub fn acceptDelegationRequest(self: *Self, input: accept_delegation_request.AcceptDelegationRequestInput, options: accept_delegation_request.Options) !accept_delegation_request.AcceptDelegationRequestOutput {
-        return accept_delegation_request.execute(self, input, options);
+    pub fn acceptDelegationRequest(self: *Self, allocator: std.mem.Allocator, input: accept_delegation_request.AcceptDelegationRequestInput, options: accept_delegation_request.Options) !accept_delegation_request.AcceptDelegationRequestOutput {
+        return accept_delegation_request.execute(self, allocator, input, options);
     }
 
     /// Adds a new client ID (also known as audience) to the list of client IDs
@@ -234,8 +234,8 @@ pub const Client = struct {
     /// This operation is idempotent; it does not fail or return an error if you add
     /// an
     /// existing client ID to the provider.
-    pub fn addClientIdToOpenIdConnectProvider(self: *Self, input: add_client_id_to_open_id_connect_provider.AddClientIDToOpenIDConnectProviderInput, options: add_client_id_to_open_id_connect_provider.Options) !add_client_id_to_open_id_connect_provider.AddClientIDToOpenIDConnectProviderOutput {
-        return add_client_id_to_open_id_connect_provider.execute(self, input, options);
+    pub fn addClientIdToOpenIdConnectProvider(self: *Self, allocator: std.mem.Allocator, input: add_client_id_to_open_id_connect_provider.AddClientIDToOpenIDConnectProviderInput, options: add_client_id_to_open_id_connect_provider.Options) !add_client_id_to_open_id_connect_provider.AddClientIDToOpenIDConnectProviderOutput {
+        return add_client_id_to_open_id_connect_provider.execute(self, allocator, input, options);
     }
 
     /// Adds the specified IAM role to the specified instance profile. An instance
@@ -270,13 +270,13 @@ pub const Client = struct {
     /// see [Using
     /// instance
     /// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
-    pub fn addRoleToInstanceProfile(self: *Self, input: add_role_to_instance_profile.AddRoleToInstanceProfileInput, options: add_role_to_instance_profile.Options) !add_role_to_instance_profile.AddRoleToInstanceProfileOutput {
-        return add_role_to_instance_profile.execute(self, input, options);
+    pub fn addRoleToInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: add_role_to_instance_profile.AddRoleToInstanceProfileInput, options: add_role_to_instance_profile.Options) !add_role_to_instance_profile.AddRoleToInstanceProfileOutput {
+        return add_role_to_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Adds the specified user to the specified group.
-    pub fn addUserToGroup(self: *Self, input: add_user_to_group.AddUserToGroupInput, options: add_user_to_group.Options) !add_user_to_group.AddUserToGroupOutput {
-        return add_user_to_group.execute(self, input, options);
+    pub fn addUserToGroup(self: *Self, allocator: std.mem.Allocator, input: add_user_to_group.AddUserToGroupInput, options: add_user_to_group.Options) !add_user_to_group.AddUserToGroupOutput {
+        return add_user_to_group.execute(self, allocator, input, options);
     }
 
     /// Associates a delegation request with the current identity.
@@ -307,8 +307,8 @@ pub const Client = struct {
     /// [
     /// Managing Permissions for Delegation
     /// Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
-    pub fn associateDelegationRequest(self: *Self, input: associate_delegation_request.AssociateDelegationRequestInput, options: associate_delegation_request.Options) !associate_delegation_request.AssociateDelegationRequestOutput {
-        return associate_delegation_request.execute(self, input, options);
+    pub fn associateDelegationRequest(self: *Self, allocator: std.mem.Allocator, input: associate_delegation_request.AssociateDelegationRequestInput, options: associate_delegation_request.Options) !associate_delegation_request.AssociateDelegationRequestOutput {
+        return associate_delegation_request.execute(self, allocator, input, options);
     }
 
     /// Attaches the specified managed policy to the specified IAM group.
@@ -326,8 +326,8 @@ pub const Client = struct {
     ///
     /// For more information about policies, see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn attachGroupPolicy(self: *Self, input: attach_group_policy.AttachGroupPolicyInput, options: attach_group_policy.Options) !attach_group_policy.AttachGroupPolicyOutput {
-        return attach_group_policy.execute(self, input, options);
+    pub fn attachGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: attach_group_policy.AttachGroupPolicyInput, options: attach_group_policy.Options) !attach_group_policy.AttachGroupPolicyOutput {
+        return attach_group_policy.execute(self, allocator, input, options);
     }
 
     /// Attaches the specified managed policy to the specified IAM role. When you
@@ -357,8 +357,8 @@ pub const Client = struct {
     /// To learn more, see [Validating IAM
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html)
     /// in the *IAM User Guide*.
-    pub fn attachRolePolicy(self: *Self, input: attach_role_policy.AttachRolePolicyInput, options: attach_role_policy.Options) !attach_role_policy.AttachRolePolicyOutput {
-        return attach_role_policy.execute(self, input, options);
+    pub fn attachRolePolicy(self: *Self, allocator: std.mem.Allocator, input: attach_role_policy.AttachRolePolicyInput, options: attach_role_policy.Options) !attach_role_policy.AttachRolePolicyOutput {
+        return attach_role_policy.execute(self, allocator, input, options);
     }
 
     /// Attaches the specified managed policy to the specified user.
@@ -375,8 +375,8 @@ pub const Client = struct {
     ///
     /// For more information about policies, see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn attachUserPolicy(self: *Self, input: attach_user_policy.AttachUserPolicyInput, options: attach_user_policy.Options) !attach_user_policy.AttachUserPolicyOutput {
-        return attach_user_policy.execute(self, input, options);
+    pub fn attachUserPolicy(self: *Self, allocator: std.mem.Allocator, input: attach_user_policy.AttachUserPolicyInput, options: attach_user_policy.Options) !attach_user_policy.AttachUserPolicyOutput {
+        return attach_user_policy.execute(self, allocator, input, options);
     }
 
     /// Changes the password of the IAM user who is calling this operation. This
@@ -394,8 +394,8 @@ pub const Client = struct {
     /// modifying passwords, see [Managing
     /// passwords](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in the
     /// *IAM User Guide*.
-    pub fn changePassword(self: *Self, input: change_password.ChangePasswordInput, options: change_password.Options) !change_password.ChangePasswordOutput {
-        return change_password.execute(self, input, options);
+    pub fn changePassword(self: *Self, allocator: std.mem.Allocator, input: change_password.ChangePasswordInput, options: change_password.Options) !change_password.ChangePasswordOutput {
+        return change_password.execute(self, allocator, input, options);
     }
 
     /// Creates a new Amazon Web Services secret access key and corresponding Amazon
@@ -422,8 +422,8 @@ pub const Client = struct {
     /// file) if you want to be able to access it again. If a secret key is lost,
     /// you can
     /// delete the access keys for the associated user and then create new keys.
-    pub fn createAccessKey(self: *Self, input: create_access_key.CreateAccessKeyInput, options: create_access_key.Options) !create_access_key.CreateAccessKeyOutput {
-        return create_access_key.execute(self, input, options);
+    pub fn createAccessKey(self: *Self, allocator: std.mem.Allocator, input: create_access_key.CreateAccessKeyInput, options: create_access_key.Options) !create_access_key.CreateAccessKeyOutput {
+        return create_access_key.execute(self, allocator, input, options);
     }
 
     /// Creates an alias for your Amazon Web Services account. For information about
@@ -432,8 +432,8 @@ pub const Client = struct {
     /// listing an Amazon Web Services account
     /// alias](https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html) in the *Amazon Web Services Sign-In User
     /// Guide*.
-    pub fn createAccountAlias(self: *Self, input: create_account_alias.CreateAccountAliasInput, options: create_account_alias.Options) !create_account_alias.CreateAccountAliasOutput {
-        return create_account_alias.execute(self, input, options);
+    pub fn createAccountAlias(self: *Self, allocator: std.mem.Allocator, input: create_account_alias.CreateAccountAliasInput, options: create_account_alias.Options) !create_account_alias.CreateAccountAliasOutput {
+        return create_account_alias.execute(self, allocator, input, options);
     }
 
     /// Creates an IAM delegation request for temporary access delegation.
@@ -443,16 +443,16 @@ pub const Client = struct {
     /// go through an onboarding process described in the
     /// [partner onboarding
     /// documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html).
-    pub fn createDelegationRequest(self: *Self, input: create_delegation_request.CreateDelegationRequestInput, options: create_delegation_request.Options) !create_delegation_request.CreateDelegationRequestOutput {
-        return create_delegation_request.execute(self, input, options);
+    pub fn createDelegationRequest(self: *Self, allocator: std.mem.Allocator, input: create_delegation_request.CreateDelegationRequestInput, options: create_delegation_request.Options) !create_delegation_request.CreateDelegationRequestOutput {
+        return create_delegation_request.execute(self, allocator, input, options);
     }
 
     /// Creates a new group.
     ///
     /// For information about the number of groups you can create, see [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
-    pub fn createGroup(self: *Self, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
-        return create_group.execute(self, input, options);
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+        return create_group.execute(self, allocator, input, options);
     }
 
     /// Creates a new instance profile. For information about instance profiles, see
@@ -465,8 +465,8 @@ pub const Client = struct {
     /// For information about the number of instance profiles you can create, see
     /// [IAM object
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
-    pub fn createInstanceProfile(self: *Self, input: create_instance_profile.CreateInstanceProfileInput, options: create_instance_profile.Options) !create_instance_profile.CreateInstanceProfileOutput {
-        return create_instance_profile.execute(self, input, options);
+    pub fn createInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: create_instance_profile.CreateInstanceProfileInput, options: create_instance_profile.Options) !create_instance_profile.CreateInstanceProfileOutput {
+        return create_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Creates a password for the specified IAM user. A password allows an IAM user
@@ -481,8 +481,8 @@ pub const Client = struct {
     /// For more information about managing passwords, see [Managing
     /// passwords](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in the
     /// *IAM User Guide*.
-    pub fn createLoginProfile(self: *Self, input: create_login_profile.CreateLoginProfileInput, options: create_login_profile.Options) !create_login_profile.CreateLoginProfileOutput {
-        return create_login_profile.execute(self, input, options);
+    pub fn createLoginProfile(self: *Self, allocator: std.mem.Allocator, input: create_login_profile.CreateLoginProfileInput, options: create_login_profile.Options) !create_login_profile.CreateLoginProfileOutput {
+        return create_login_profile.execute(self, allocator, input, options);
     }
 
     /// Creates an IAM entity to describe an identity provider (IdP) that supports
@@ -536,8 +536,8 @@ pub const Client = struct {
     /// operation creates. Therefore, it is best to limit access to the
     /// [CreateOpenIDConnectProvider](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html) operation to highly privileged
     /// users.
-    pub fn createOpenIdConnectProvider(self: *Self, input: create_open_id_connect_provider.CreateOpenIDConnectProviderInput, options: create_open_id_connect_provider.Options) !create_open_id_connect_provider.CreateOpenIDConnectProviderOutput {
-        return create_open_id_connect_provider.execute(self, input, options);
+    pub fn createOpenIdConnectProvider(self: *Self, allocator: std.mem.Allocator, input: create_open_id_connect_provider.CreateOpenIDConnectProviderInput, options: create_open_id_connect_provider.Options) !create_open_id_connect_provider.CreateOpenIDConnectProviderOutput {
+        return create_open_id_connect_provider.execute(self, allocator, input, options);
     }
 
     /// Creates a new managed policy for your Amazon Web Services account.
@@ -558,8 +558,8 @@ pub const Client = struct {
     /// policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
     /// *IAM User Guide*.
-    pub fn createPolicy(self: *Self, input: create_policy.CreatePolicyInput, options: create_policy.Options) !create_policy.CreatePolicyOutput {
-        return create_policy.execute(self, input, options);
+    pub fn createPolicy(self: *Self, allocator: std.mem.Allocator, input: create_policy.CreatePolicyInput, options: create_policy.Options) !create_policy.CreatePolicyOutput {
+        return create_policy.execute(self, allocator, input, options);
     }
 
     /// Creates a new version of the specified managed policy. To update a managed
@@ -578,8 +578,8 @@ pub const Client = struct {
     /// For more information about managed policy versions, see [Versioning for
     /// managed
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html) in the *IAM User Guide*.
-    pub fn createPolicyVersion(self: *Self, input: create_policy_version.CreatePolicyVersionInput, options: create_policy_version.Options) !create_policy_version.CreatePolicyVersionOutput {
-        return create_policy_version.execute(self, input, options);
+    pub fn createPolicyVersion(self: *Self, allocator: std.mem.Allocator, input: create_policy_version.CreatePolicyVersionInput, options: create_policy_version.Options) !create_policy_version.CreatePolicyVersionOutput {
+        return create_policy_version.execute(self, allocator, input, options);
     }
 
     /// Creates a new role for your Amazon Web Services account.
@@ -591,8 +591,8 @@ pub const Client = struct {
     /// and the number of roles you can create, see [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the
     /// *IAM User Guide*.
-    pub fn createRole(self: *Self, input: create_role.CreateRoleInput, options: create_role.Options) !create_role.CreateRoleOutput {
-        return create_role.execute(self, input, options);
+    pub fn createRole(self: *Self, allocator: std.mem.Allocator, input: create_role.CreateRoleInput, options: create_role.Options) !create_role.CreateRoleOutput {
+        return create_role.execute(self, allocator, input, options);
     }
 
     /// Creates an IAM resource that describes an identity provider (IdP) that
@@ -626,8 +626,8 @@ pub const Client = struct {
     /// federated users to access the Amazon Web Services Management
     /// Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html) and [About SAML 2.0-based
     /// federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html) in the *IAM User Guide*.
-    pub fn createSamlProvider(self: *Self, input: create_saml_provider.CreateSAMLProviderInput, options: create_saml_provider.Options) !create_saml_provider.CreateSAMLProviderOutput {
-        return create_saml_provider.execute(self, input, options);
+    pub fn createSamlProvider(self: *Self, allocator: std.mem.Allocator, input: create_saml_provider.CreateSAMLProviderInput, options: create_saml_provider.Options) !create_saml_provider.CreateSAMLProviderOutput {
+        return create_saml_provider.execute(self, allocator, input, options);
     }
 
     /// Creates an IAM role that is linked to a specific Amazon Web Services
@@ -646,8 +646,8 @@ pub const Client = struct {
     /// To attach a policy to this service-linked role, you must make the request
     /// using the
     /// Amazon Web Services service that depends on this role.
-    pub fn createServiceLinkedRole(self: *Self, input: create_service_linked_role.CreateServiceLinkedRoleInput, options: create_service_linked_role.Options) !create_service_linked_role.CreateServiceLinkedRoleOutput {
-        return create_service_linked_role.execute(self, input, options);
+    pub fn createServiceLinkedRole(self: *Self, allocator: std.mem.Allocator, input: create_service_linked_role.CreateServiceLinkedRoleInput, options: create_service_linked_role.Options) !create_service_linked_role.CreateServiceLinkedRoleOutput {
+        return create_service_linked_role.execute(self, allocator, input, options);
     }
 
     /// Generates a set of credentials consisting of a user name and password that
@@ -670,8 +670,8 @@ pub const Client = struct {
     /// [Service-specific credentials for IAM
     /// users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_bedrock.html) in the
     /// *IAM User Guide*.
-    pub fn createServiceSpecificCredential(self: *Self, input: create_service_specific_credential.CreateServiceSpecificCredentialInput, options: create_service_specific_credential.Options) !create_service_specific_credential.CreateServiceSpecificCredentialOutput {
-        return create_service_specific_credential.execute(self, input, options);
+    pub fn createServiceSpecificCredential(self: *Self, allocator: std.mem.Allocator, input: create_service_specific_credential.CreateServiceSpecificCredentialInput, options: create_service_specific_credential.Options) !create_service_specific_credential.CreateServiceSpecificCredentialOutput {
+        return create_service_specific_credential.execute(self, allocator, input, options);
     }
 
     /// Creates a new IAM user for your Amazon Web Services account.
@@ -679,8 +679,8 @@ pub const Client = struct {
     /// For information about quotas for the number of IAM users you can create, see
     /// [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the *IAM User Guide*.
-    pub fn createUser(self: *Self, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
-        return create_user.execute(self, input, options);
+    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
+        return create_user.execute(self, allocator, input, options);
     }
 
     /// Creates a new virtual MFA device for the Amazon Web Services account. After
@@ -706,8 +706,8 @@ pub const Client = struct {
     /// provision your virtual device, you should ensure that the information is
     /// destroyed
     /// following secure procedures.
-    pub fn createVirtualMfaDevice(self: *Self, input: create_virtual_mfa_device.CreateVirtualMFADeviceInput, options: create_virtual_mfa_device.Options) !create_virtual_mfa_device.CreateVirtualMFADeviceOutput {
-        return create_virtual_mfa_device.execute(self, input, options);
+    pub fn createVirtualMfaDevice(self: *Self, allocator: std.mem.Allocator, input: create_virtual_mfa_device.CreateVirtualMFADeviceInput, options: create_virtual_mfa_device.Options) !create_virtual_mfa_device.CreateVirtualMFADeviceOutput {
+        return create_virtual_mfa_device.execute(self, allocator, input, options);
     }
 
     /// Deactivates the specified MFA device and removes it from association with
@@ -719,8 +719,8 @@ pub const Client = struct {
     /// multi-factor authentication (MFA)
     /// device](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the
     /// *IAM User Guide*.
-    pub fn deactivateMfaDevice(self: *Self, input: deactivate_mfa_device.DeactivateMFADeviceInput, options: deactivate_mfa_device.Options) !deactivate_mfa_device.DeactivateMFADeviceOutput {
-        return deactivate_mfa_device.execute(self, input, options);
+    pub fn deactivateMfaDevice(self: *Self, allocator: std.mem.Allocator, input: deactivate_mfa_device.DeactivateMFADeviceInput, options: deactivate_mfa_device.Options) !deactivate_mfa_device.DeactivateMFADeviceOutput {
+        return deactivate_mfa_device.execute(self, allocator, input, options);
     }
 
     /// Deletes the access key pair associated with the specified IAM user.
@@ -733,8 +733,8 @@ pub const Client = struct {
     /// manage Amazon Web Services account root
     /// user credentials even if the Amazon Web Services account has no associated
     /// users.
-    pub fn deleteAccessKey(self: *Self, input: delete_access_key.DeleteAccessKeyInput, options: delete_access_key.Options) !delete_access_key.DeleteAccessKeyOutput {
-        return delete_access_key.execute(self, input, options);
+    pub fn deleteAccessKey(self: *Self, allocator: std.mem.Allocator, input: delete_access_key.DeleteAccessKeyInput, options: delete_access_key.Options) !delete_access_key.DeleteAccessKeyOutput {
+        return delete_access_key.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Amazon Web Services account alias. For information
@@ -743,21 +743,21 @@ pub const Client = struct {
     /// listing an Amazon Web Services account
     /// alias](https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html) in the *Amazon Web Services Sign-In User
     /// Guide*.
-    pub fn deleteAccountAlias(self: *Self, input: delete_account_alias.DeleteAccountAliasInput, options: delete_account_alias.Options) !delete_account_alias.DeleteAccountAliasOutput {
-        return delete_account_alias.execute(self, input, options);
+    pub fn deleteAccountAlias(self: *Self, allocator: std.mem.Allocator, input: delete_account_alias.DeleteAccountAliasInput, options: delete_account_alias.Options) !delete_account_alias.DeleteAccountAliasOutput {
+        return delete_account_alias.execute(self, allocator, input, options);
     }
 
     /// Deletes the password policy for the Amazon Web Services account. There are
     /// no parameters.
-    pub fn deleteAccountPasswordPolicy(self: *Self, input: delete_account_password_policy.DeleteAccountPasswordPolicyInput, options: delete_account_password_policy.Options) !delete_account_password_policy.DeleteAccountPasswordPolicyOutput {
-        return delete_account_password_policy.execute(self, input, options);
+    pub fn deleteAccountPasswordPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_account_password_policy.DeleteAccountPasswordPolicyInput, options: delete_account_password_policy.Options) !delete_account_password_policy.DeleteAccountPasswordPolicyOutput {
+        return delete_account_password_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified IAM group. The group must not contain any users or
     /// have any
     /// attached policies.
-    pub fn deleteGroup(self: *Self, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
-        return delete_group.execute(self, input, options);
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+        return delete_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified inline policy that is embedded in the specified IAM
@@ -769,8 +769,8 @@ pub const Client = struct {
     /// [DetachGroupPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachGroupPolicy.html).
     /// For more information about policies, refer to [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn deleteGroupPolicy(self: *Self, input: delete_group_policy.DeleteGroupPolicyInput, options: delete_group_policy.Options) !delete_group_policy.DeleteGroupPolicyOutput {
-        return delete_group_policy.execute(self, input, options);
+    pub fn deleteGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_group_policy.DeleteGroupPolicyInput, options: delete_group_policy.Options) !delete_group_policy.DeleteGroupPolicyOutput {
+        return delete_group_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified instance profile. The instance profile must not have
@@ -787,8 +787,8 @@ pub const Client = struct {
     /// For more information about instance profiles, see [Using
     /// instance
     /// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
-    pub fn deleteInstanceProfile(self: *Self, input: delete_instance_profile.DeleteInstanceProfileInput, options: delete_instance_profile.Options) !delete_instance_profile.DeleteInstanceProfileOutput {
-        return delete_instance_profile.execute(self, input, options);
+    pub fn deleteInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: delete_instance_profile.DeleteInstanceProfileInput, options: delete_instance_profile.Options) !delete_instance_profile.DeleteInstanceProfileOutput {
+        return delete_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes the password for the specified IAM user or root user, For more
@@ -813,8 +813,8 @@ pub const Client = struct {
     /// [UpdateAccessKey](https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAccessKey.html)
     /// and
     /// [DeleteAccessKey](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccessKey.html).
-    pub fn deleteLoginProfile(self: *Self, input: delete_login_profile.DeleteLoginProfileInput, options: delete_login_profile.Options) !delete_login_profile.DeleteLoginProfileOutput {
-        return delete_login_profile.execute(self, input, options);
+    pub fn deleteLoginProfile(self: *Self, allocator: std.mem.Allocator, input: delete_login_profile.DeleteLoginProfileInput, options: delete_login_profile.Options) !delete_login_profile.DeleteLoginProfileOutput {
+        return delete_login_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes an OpenID Connect identity provider (IdP) resource object in IAM.
@@ -828,8 +828,8 @@ pub const Client = struct {
     /// This operation is idempotent; it does not fail or return an error if you
     /// call the
     /// operation for a provider that does not exist.
-    pub fn deleteOpenIdConnectProvider(self: *Self, input: delete_open_id_connect_provider.DeleteOpenIDConnectProviderInput, options: delete_open_id_connect_provider.Options) !delete_open_id_connect_provider.DeleteOpenIDConnectProviderOutput {
-        return delete_open_id_connect_provider.execute(self, input, options);
+    pub fn deleteOpenIdConnectProvider(self: *Self, allocator: std.mem.Allocator, input: delete_open_id_connect_provider.DeleteOpenIDConnectProviderInput, options: delete_open_id_connect_provider.Options) !delete_open_id_connect_provider.DeleteOpenIDConnectProviderOutput {
+        return delete_open_id_connect_provider.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified managed policy.
@@ -860,8 +860,8 @@ pub const Client = struct {
     ///
     /// For information about managed policies, see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn deletePolicy(self: *Self, input: delete_policy.DeletePolicyInput, options: delete_policy.Options) !delete_policy.DeletePolicyOutput {
-        return delete_policy.execute(self, input, options);
+    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: delete_policy.Options) !delete_policy.DeletePolicyOutput {
+        return delete_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified version from the specified managed policy.
@@ -876,8 +876,8 @@ pub const Client = struct {
     /// For information about versions for managed policies, see [Versioning for
     /// managed
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html) in the *IAM User Guide*.
-    pub fn deletePolicyVersion(self: *Self, input: delete_policy_version.DeletePolicyVersionInput, options: delete_policy_version.Options) !delete_policy_version.DeletePolicyVersionOutput {
-        return delete_policy_version.execute(self, input, options);
+    pub fn deletePolicyVersion(self: *Self, allocator: std.mem.Allocator, input: delete_policy_version.DeletePolicyVersionInput, options: delete_policy_version.Options) !delete_policy_version.DeletePolicyVersionOutput {
+        return delete_policy_version.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified role. Unlike the Amazon Web Services Management
@@ -906,8 +906,8 @@ pub const Client = struct {
     /// about to delete. Deleting a role or instance profile that is associated with
     /// a
     /// running instance will break any applications running on the instance.
-    pub fn deleteRole(self: *Self, input: delete_role.DeleteRoleInput, options: delete_role.Options) !delete_role.DeleteRoleOutput {
-        return delete_role.execute(self, input, options);
+    pub fn deleteRole(self: *Self, allocator: std.mem.Allocator, input: delete_role.DeleteRoleInput, options: delete_role.Options) !delete_role.DeleteRoleOutput {
+        return delete_role.execute(self, allocator, input, options);
     }
 
     /// Deletes the permissions boundary for the specified IAM role.
@@ -919,8 +919,8 @@ pub const Client = struct {
     /// example, it might allow anyone who assumes the role to perform all the
     /// actions
     /// granted in its permissions policies.
-    pub fn deleteRolePermissionsBoundary(self: *Self, input: delete_role_permissions_boundary.DeleteRolePermissionsBoundaryInput, options: delete_role_permissions_boundary.Options) !delete_role_permissions_boundary.DeleteRolePermissionsBoundaryOutput {
-        return delete_role_permissions_boundary.execute(self, input, options);
+    pub fn deleteRolePermissionsBoundary(self: *Self, allocator: std.mem.Allocator, input: delete_role_permissions_boundary.DeleteRolePermissionsBoundaryInput, options: delete_role_permissions_boundary.Options) !delete_role_permissions_boundary.DeleteRolePermissionsBoundaryOutput {
+        return delete_role_permissions_boundary.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified inline policy that is embedded in the specified IAM
@@ -932,8 +932,8 @@ pub const Client = struct {
     /// [DetachRolePolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachRolePolicy.html).
     /// For more information about policies, refer to [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn deleteRolePolicy(self: *Self, input: delete_role_policy.DeleteRolePolicyInput, options: delete_role_policy.Options) !delete_role_policy.DeleteRolePolicyOutput {
-        return delete_role_policy.execute(self, input, options);
+    pub fn deleteRolePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_role_policy.DeleteRolePolicyInput, options: delete_role_policy.Options) !delete_role_policy.DeleteRolePolicyOutput {
+        return delete_role_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a SAML provider resource in IAM.
@@ -946,8 +946,8 @@ pub const Client = struct {
     ///
     /// This operation requires [Signature Version
     /// 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn deleteSamlProvider(self: *Self, input: delete_saml_provider.DeleteSAMLProviderInput, options: delete_saml_provider.Options) !delete_saml_provider.DeleteSAMLProviderOutput {
-        return delete_saml_provider.execute(self, input, options);
+    pub fn deleteSamlProvider(self: *Self, allocator: std.mem.Allocator, input: delete_saml_provider.DeleteSAMLProviderInput, options: delete_saml_provider.Options) !delete_saml_provider.DeleteSAMLProviderOutput {
+        return delete_saml_provider.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified server certificate.
@@ -973,8 +973,8 @@ pub const Client = struct {
     /// see
     /// [DeleteLoadBalancerListeners](https://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html) in the *Elastic Load Balancing API
     /// Reference*.
-    pub fn deleteServerCertificate(self: *Self, input: delete_server_certificate.DeleteServerCertificateInput, options: delete_server_certificate.Options) !delete_server_certificate.DeleteServerCertificateOutput {
-        return delete_server_certificate.execute(self, input, options);
+    pub fn deleteServerCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_server_certificate.DeleteServerCertificateInput, options: delete_server_certificate.Options) !delete_server_certificate.DeleteServerCertificateOutput {
+        return delete_server_certificate.execute(self, allocator, input, options);
     }
 
     /// Submits a service-linked role deletion request and returns a
@@ -1007,13 +1007,13 @@ pub const Client = struct {
     /// concepts: Amazon Web Services service-linked
     /// role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role) in the
     /// *IAM User Guide*.
-    pub fn deleteServiceLinkedRole(self: *Self, input: delete_service_linked_role.DeleteServiceLinkedRoleInput, options: delete_service_linked_role.Options) !delete_service_linked_role.DeleteServiceLinkedRoleOutput {
-        return delete_service_linked_role.execute(self, input, options);
+    pub fn deleteServiceLinkedRole(self: *Self, allocator: std.mem.Allocator, input: delete_service_linked_role.DeleteServiceLinkedRoleInput, options: delete_service_linked_role.Options) !delete_service_linked_role.DeleteServiceLinkedRoleOutput {
+        return delete_service_linked_role.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified service-specific credential.
-    pub fn deleteServiceSpecificCredential(self: *Self, input: delete_service_specific_credential.DeleteServiceSpecificCredentialInput, options: delete_service_specific_credential.Options) !delete_service_specific_credential.DeleteServiceSpecificCredentialOutput {
-        return delete_service_specific_credential.execute(self, input, options);
+    pub fn deleteServiceSpecificCredential(self: *Self, allocator: std.mem.Allocator, input: delete_service_specific_credential.DeleteServiceSpecificCredentialInput, options: delete_service_specific_credential.Options) !delete_service_specific_credential.DeleteServiceSpecificCredentialOutput {
+        return delete_service_specific_credential.execute(self, allocator, input, options);
     }
 
     /// Deletes a signing certificate associated with the specified IAM user.
@@ -1026,8 +1026,8 @@ pub const Client = struct {
     /// manage Amazon Web Services account root
     /// user credentials even if the Amazon Web Services account has no associated
     /// IAM users.
-    pub fn deleteSigningCertificate(self: *Self, input: delete_signing_certificate.DeleteSigningCertificateInput, options: delete_signing_certificate.Options) !delete_signing_certificate.DeleteSigningCertificateOutput {
-        return delete_signing_certificate.execute(self, input, options);
+    pub fn deleteSigningCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_signing_certificate.DeleteSigningCertificateInput, options: delete_signing_certificate.Options) !delete_signing_certificate.DeleteSigningCertificateOutput {
+        return delete_signing_certificate.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified SSH public key.
@@ -1039,8 +1039,8 @@ pub const Client = struct {
     /// to authenticate to an CodeCommit repository, see [Set up CodeCommit for
     /// SSH
     /// connections](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html) in the *CodeCommit User Guide*.
-    pub fn deleteSshPublicKey(self: *Self, input: delete_ssh_public_key.DeleteSSHPublicKeyInput, options: delete_ssh_public_key.Options) !delete_ssh_public_key.DeleteSSHPublicKeyOutput {
-        return delete_ssh_public_key.execute(self, input, options);
+    pub fn deleteSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: delete_ssh_public_key.DeleteSSHPublicKeyInput, options: delete_ssh_public_key.Options) !delete_ssh_public_key.DeleteSSHPublicKeyOutput {
+        return delete_ssh_public_key.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified IAM user. Unlike the Amazon Web Services Management
@@ -1076,8 +1076,8 @@ pub const Client = struct {
     ///
     /// * Group memberships
     ///   ([RemoveUserFromGroup](https://docs.aws.amazon.com/IAM/latest/APIReference/API_RemoveUserFromGroup.html))
-    pub fn deleteUser(self: *Self, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
-        return delete_user.execute(self, input, options);
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+        return delete_user.execute(self, allocator, input, options);
     }
 
     /// Deletes the permissions boundary for the specified IAM user.
@@ -1086,8 +1086,8 @@ pub const Client = struct {
     /// by
     /// allowing the user to perform all the actions granted in its permissions
     /// policies.
-    pub fn deleteUserPermissionsBoundary(self: *Self, input: delete_user_permissions_boundary.DeleteUserPermissionsBoundaryInput, options: delete_user_permissions_boundary.Options) !delete_user_permissions_boundary.DeleteUserPermissionsBoundaryOutput {
-        return delete_user_permissions_boundary.execute(self, input, options);
+    pub fn deleteUserPermissionsBoundary(self: *Self, allocator: std.mem.Allocator, input: delete_user_permissions_boundary.DeleteUserPermissionsBoundaryInput, options: delete_user_permissions_boundary.Options) !delete_user_permissions_boundary.DeleteUserPermissionsBoundaryOutput {
+        return delete_user_permissions_boundary.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified inline policy that is embedded in the specified IAM
@@ -1099,8 +1099,8 @@ pub const Client = struct {
     /// [DetachUserPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DetachUserPolicy.html).
     /// For more information about policies, refer to [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn deleteUserPolicy(self: *Self, input: delete_user_policy.DeleteUserPolicyInput, options: delete_user_policy.Options) !delete_user_policy.DeleteUserPolicyOutput {
-        return delete_user_policy.execute(self, input, options);
+    pub fn deleteUserPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_user_policy.DeleteUserPolicyInput, options: delete_user_policy.Options) !delete_user_policy.DeleteUserPolicyOutput {
+        return delete_user_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a virtual MFA device.
@@ -1109,8 +1109,8 @@ pub const Client = struct {
     /// For
     /// information about deactivating MFA devices, see
     /// [DeactivateMFADevice](https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeactivateMFADevice.html).
-    pub fn deleteVirtualMfaDevice(self: *Self, input: delete_virtual_mfa_device.DeleteVirtualMFADeviceInput, options: delete_virtual_mfa_device.Options) !delete_virtual_mfa_device.DeleteVirtualMFADeviceOutput {
-        return delete_virtual_mfa_device.execute(self, input, options);
+    pub fn deleteVirtualMfaDevice(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_mfa_device.DeleteVirtualMFADeviceInput, options: delete_virtual_mfa_device.Options) !delete_virtual_mfa_device.DeleteVirtualMFADeviceOutput {
+        return delete_virtual_mfa_device.execute(self, allocator, input, options);
     }
 
     /// Removes the specified managed policy from the specified IAM group.
@@ -1122,8 +1122,8 @@ pub const Client = struct {
     /// policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
     /// *IAM User Guide*.
-    pub fn detachGroupPolicy(self: *Self, input: detach_group_policy.DetachGroupPolicyInput, options: detach_group_policy.Options) !detach_group_policy.DetachGroupPolicyOutput {
-        return detach_group_policy.execute(self, input, options);
+    pub fn detachGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: detach_group_policy.DetachGroupPolicyInput, options: detach_group_policy.Options) !detach_group_policy.DetachGroupPolicyOutput {
+        return detach_group_policy.execute(self, allocator, input, options);
     }
 
     /// Removes the specified managed policy from the specified role.
@@ -1134,8 +1134,8 @@ pub const Client = struct {
     /// policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
     /// *IAM User Guide*.
-    pub fn detachRolePolicy(self: *Self, input: detach_role_policy.DetachRolePolicyInput, options: detach_role_policy.Options) !detach_role_policy.DetachRolePolicyOutput {
-        return detach_role_policy.execute(self, input, options);
+    pub fn detachRolePolicy(self: *Self, allocator: std.mem.Allocator, input: detach_role_policy.DetachRolePolicyInput, options: detach_role_policy.Options) !detach_role_policy.DetachRolePolicyOutput {
+        return detach_role_policy.execute(self, allocator, input, options);
     }
 
     /// Removes the specified managed policy from the specified user.
@@ -1146,8 +1146,8 @@ pub const Client = struct {
     /// policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the
     /// *IAM User Guide*.
-    pub fn detachUserPolicy(self: *Self, input: detach_user_policy.DetachUserPolicyInput, options: detach_user_policy.Options) !detach_user_policy.DetachUserPolicyOutput {
-        return detach_user_policy.execute(self, input, options);
+    pub fn detachUserPolicy(self: *Self, allocator: std.mem.Allocator, input: detach_user_policy.DetachUserPolicyInput, options: detach_user_policy.Options) !detach_user_policy.DetachUserPolicyOutput {
+        return detach_user_policy.execute(self, allocator, input, options);
     }
 
     /// Disables the management of privileged root user credentials across member
@@ -1157,8 +1157,8 @@ pub const Client = struct {
     /// delegated administrator for IAM can no longer manage root user credentials
     /// for member
     /// accounts in your organization.
-    pub fn disableOrganizationsRootCredentialsManagement(self: *Self, input: disable_organizations_root_credentials_management.DisableOrganizationsRootCredentialsManagementInput, options: disable_organizations_root_credentials_management.Options) !disable_organizations_root_credentials_management.DisableOrganizationsRootCredentialsManagementOutput {
-        return disable_organizations_root_credentials_management.execute(self, input, options);
+    pub fn disableOrganizationsRootCredentialsManagement(self: *Self, allocator: std.mem.Allocator, input: disable_organizations_root_credentials_management.DisableOrganizationsRootCredentialsManagementInput, options: disable_organizations_root_credentials_management.Options) !disable_organizations_root_credentials_management.DisableOrganizationsRootCredentialsManagementOutput {
+        return disable_organizations_root_credentials_management.execute(self, allocator, input, options);
     }
 
     /// Disables root user sessions for privileged tasks across member accounts in
@@ -1168,8 +1168,8 @@ pub const Client = struct {
     /// administrator for IAM can no longer perform privileged tasks on member
     /// accounts in
     /// your organization.
-    pub fn disableOrganizationsRootSessions(self: *Self, input: disable_organizations_root_sessions.DisableOrganizationsRootSessionsInput, options: disable_organizations_root_sessions.Options) !disable_organizations_root_sessions.DisableOrganizationsRootSessionsOutput {
-        return disable_organizations_root_sessions.execute(self, input, options);
+    pub fn disableOrganizationsRootSessions(self: *Self, allocator: std.mem.Allocator, input: disable_organizations_root_sessions.DisableOrganizationsRootSessionsInput, options: disable_organizations_root_sessions.Options) !disable_organizations_root_sessions.DisableOrganizationsRootSessionsOutput {
+        return disable_organizations_root_sessions.execute(self, allocator, input, options);
     }
 
     /// Disables the outbound identity federation feature for your Amazon Web
@@ -1177,8 +1177,8 @@ pub const Client = struct {
     /// use the `GetWebIdentityToken` API to obtain JSON Web Tokens (JWTs) for
     /// authentication with external services. This operation
     /// does not affect tokens that were issued before the feature was disabled.
-    pub fn disableOutboundWebIdentityFederation(self: *Self, input: disable_outbound_web_identity_federation.DisableOutboundWebIdentityFederationInput, options: disable_outbound_web_identity_federation.Options) !disable_outbound_web_identity_federation.DisableOutboundWebIdentityFederationOutput {
-        return disable_outbound_web_identity_federation.execute(self, input, options);
+    pub fn disableOutboundWebIdentityFederation(self: *Self, allocator: std.mem.Allocator, input: disable_outbound_web_identity_federation.DisableOutboundWebIdentityFederationInput, options: disable_outbound_web_identity_federation.Options) !disable_outbound_web_identity_federation.DisableOutboundWebIdentityFederationOutput {
+        return disable_outbound_web_identity_federation.execute(self, allocator, input, options);
     }
 
     /// Enables the specified MFA device and associates it with the specified IAM
@@ -1186,8 +1186,8 @@ pub const Client = struct {
     /// enabled, the MFA device is required for every subsequent login by the IAM
     /// user
     /// associated with the device.
-    pub fn enableMfaDevice(self: *Self, input: enable_mfa_device.EnableMFADeviceInput, options: enable_mfa_device.Options) !enable_mfa_device.EnableMFADeviceOutput {
-        return enable_mfa_device.execute(self, input, options);
+    pub fn enableMfaDevice(self: *Self, allocator: std.mem.Allocator, input: enable_mfa_device.EnableMFADeviceInput, options: enable_mfa_device.Options) !enable_mfa_device.EnableMFADeviceOutput {
+        return enable_mfa_device.execute(self, allocator, input, options);
     }
 
     /// Enables the management of privileged root user credentials across member
@@ -1211,8 +1211,8 @@ pub const Client = struct {
     /// [IAM and
     /// Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-iam.html) in the *Organizations User
     /// Guide*.
-    pub fn enableOrganizationsRootCredentialsManagement(self: *Self, input: enable_organizations_root_credentials_management.EnableOrganizationsRootCredentialsManagementInput, options: enable_organizations_root_credentials_management.Options) !enable_organizations_root_credentials_management.EnableOrganizationsRootCredentialsManagementOutput {
-        return enable_organizations_root_credentials_management.execute(self, input, options);
+    pub fn enableOrganizationsRootCredentialsManagement(self: *Self, allocator: std.mem.Allocator, input: enable_organizations_root_credentials_management.EnableOrganizationsRootCredentialsManagementInput, options: enable_organizations_root_credentials_management.Options) !enable_organizations_root_credentials_management.EnableOrganizationsRootCredentialsManagementOutput {
+        return enable_organizations_root_credentials_management.execute(self, allocator, input, options);
     }
 
     /// Allows the management account or delegated administrator to perform
@@ -1234,8 +1234,8 @@ pub const Client = struct {
     /// [IAM and
     /// Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-ra.html) in the *Organizations User
     /// Guide*.
-    pub fn enableOrganizationsRootSessions(self: *Self, input: enable_organizations_root_sessions.EnableOrganizationsRootSessionsInput, options: enable_organizations_root_sessions.Options) !enable_organizations_root_sessions.EnableOrganizationsRootSessionsOutput {
-        return enable_organizations_root_sessions.execute(self, input, options);
+    pub fn enableOrganizationsRootSessions(self: *Self, allocator: std.mem.Allocator, input: enable_organizations_root_sessions.EnableOrganizationsRootSessionsInput, options: enable_organizations_root_sessions.Options) !enable_organizations_root_sessions.EnableOrganizationsRootSessionsOutput {
+        return enable_organizations_root_sessions.execute(self, allocator, input, options);
     }
 
     /// Enables the outbound identity federation feature for your Amazon Web
@@ -1244,8 +1244,8 @@ pub const Client = struct {
     /// secure authentication with external services.
     /// This operation also generates a unique issuer URL for your Amazon Web
     /// Services account.
-    pub fn enableOutboundWebIdentityFederation(self: *Self, input: enable_outbound_web_identity_federation.EnableOutboundWebIdentityFederationInput, options: enable_outbound_web_identity_federation.Options) !enable_outbound_web_identity_federation.EnableOutboundWebIdentityFederationOutput {
-        return enable_outbound_web_identity_federation.execute(self, input, options);
+    pub fn enableOutboundWebIdentityFederation(self: *Self, allocator: std.mem.Allocator, input: enable_outbound_web_identity_federation.EnableOutboundWebIdentityFederationInput, options: enable_outbound_web_identity_federation.Options) !enable_outbound_web_identity_federation.EnableOutboundWebIdentityFederationOutput {
+        return enable_outbound_web_identity_federation.execute(self, allocator, input, options);
     }
 
     /// Generates a credential report for the Amazon Web Services account. For more
@@ -1253,8 +1253,8 @@ pub const Client = struct {
     /// credential report, see [Getting credential
     /// reports](https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
     /// the *IAM User Guide*.
-    pub fn generateCredentialReport(self: *Self, input: generate_credential_report.GenerateCredentialReportInput, options: generate_credential_report.Options) !generate_credential_report.GenerateCredentialReportOutput {
-        return generate_credential_report.execute(self, input, options);
+    pub fn generateCredentialReport(self: *Self, allocator: std.mem.Allocator, input: generate_credential_report.GenerateCredentialReportInput, options: generate_credential_report.Options) !generate_credential_report.GenerateCredentialReportOutput {
+        return generate_credential_report.execute(self, allocator, input, options);
     }
 
     /// Generates a report for service last accessed data for Organizations. You can
@@ -1426,8 +1426,8 @@ pub const Client = struct {
     /// scope by
     /// viewing user
     /// activity](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html) in the *IAM User Guide*.
-    pub fn generateOrganizationsAccessReport(self: *Self, input: generate_organizations_access_report.GenerateOrganizationsAccessReportInput, options: generate_organizations_access_report.Options) !generate_organizations_access_report.GenerateOrganizationsAccessReportOutput {
-        return generate_organizations_access_report.execute(self, input, options);
+    pub fn generateOrganizationsAccessReport(self: *Self, allocator: std.mem.Allocator, input: generate_organizations_access_report.GenerateOrganizationsAccessReportInput, options: generate_organizations_access_report.Options) !generate_organizations_access_report.GenerateOrganizationsAccessReportOutput {
+        return generate_organizations_access_report.execute(self, allocator, input, options);
     }
 
     /// Generates a report that includes details about when an IAM resource (user,
@@ -1507,16 +1507,16 @@ pub const Client = struct {
     /// [Reducing permissions using service last accessed
     /// data](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html) in the
     /// *IAM User Guide*.
-    pub fn generateServiceLastAccessedDetails(self: *Self, input: generate_service_last_accessed_details.GenerateServiceLastAccessedDetailsInput, options: generate_service_last_accessed_details.Options) !generate_service_last_accessed_details.GenerateServiceLastAccessedDetailsOutput {
-        return generate_service_last_accessed_details.execute(self, input, options);
+    pub fn generateServiceLastAccessedDetails(self: *Self, allocator: std.mem.Allocator, input: generate_service_last_accessed_details.GenerateServiceLastAccessedDetailsInput, options: generate_service_last_accessed_details.Options) !generate_service_last_accessed_details.GenerateServiceLastAccessedDetailsOutput {
+        return generate_service_last_accessed_details.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about when the specified access key was last used. The
     /// information includes the date and time of last use, along with the Amazon
     /// Web Services service and
     /// Region that were specified in the last request made with that key.
-    pub fn getAccessKeyLastUsed(self: *Self, input: get_access_key_last_used.GetAccessKeyLastUsedInput, options: get_access_key_last_used.Options) !get_access_key_last_used.GetAccessKeyLastUsedOutput {
-        return get_access_key_last_used.execute(self, input, options);
+    pub fn getAccessKeyLastUsed(self: *Self, allocator: std.mem.Allocator, input: get_access_key_last_used.GetAccessKeyLastUsedInput, options: get_access_key_last_used.Options) !get_access_key_last_used.GetAccessKeyLastUsedOutput {
+        return get_access_key_last_used.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about all IAM users, groups, roles, and policies in
@@ -1539,8 +1539,8 @@ pub const Client = struct {
     /// You can optionally filter the results using the `Filter` parameter. You can
     /// paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn getAccountAuthorizationDetails(self: *Self, input: get_account_authorization_details.GetAccountAuthorizationDetailsInput, options: get_account_authorization_details.Options) !get_account_authorization_details.GetAccountAuthorizationDetailsOutput {
-        return get_account_authorization_details.execute(self, input, options);
+    pub fn getAccountAuthorizationDetails(self: *Self, allocator: std.mem.Allocator, input: get_account_authorization_details.GetAccountAuthorizationDetailsInput, options: get_account_authorization_details.Options) !get_account_authorization_details.GetAccountAuthorizationDetailsOutput {
+        return get_account_authorization_details.execute(self, allocator, input, options);
     }
 
     /// Retrieves the password policy for the Amazon Web Services account. This
@@ -1550,8 +1550,8 @@ pub const Client = struct {
     /// For more information about using a password policy, see [Managing an IAM
     /// password
     /// policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html).
-    pub fn getAccountPasswordPolicy(self: *Self, input: get_account_password_policy.GetAccountPasswordPolicyInput, options: get_account_password_policy.Options) !get_account_password_policy.GetAccountPasswordPolicyOutput {
-        return get_account_password_policy.execute(self, input, options);
+    pub fn getAccountPasswordPolicy(self: *Self, allocator: std.mem.Allocator, input: get_account_password_policy.GetAccountPasswordPolicyInput, options: get_account_password_policy.Options) !get_account_password_policy.GetAccountPasswordPolicyOutput {
+        return get_account_password_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about IAM entity usage and IAM quotas in the Amazon
@@ -1561,8 +1561,8 @@ pub const Client = struct {
     /// For information about IAM quotas, see [IAM and STS
     /// quotas](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in the
     /// *IAM User Guide*.
-    pub fn getAccountSummary(self: *Self, input: get_account_summary.GetAccountSummaryInput, options: get_account_summary.Options) !get_account_summary.GetAccountSummaryOutput {
-        return get_account_summary.execute(self, input, options);
+    pub fn getAccountSummary(self: *Self, allocator: std.mem.Allocator, input: get_account_summary.GetAccountSummaryInput, options: get_account_summary.Options) !get_account_summary.GetAccountSummaryOutput {
+        return get_account_summary.execute(self, allocator, input, options);
     }
 
     /// Gets a list of all of the context keys referenced in the input policies. The
@@ -1583,8 +1583,8 @@ pub const Client = struct {
     /// here for clarity but must be URL encoded to be included as a part of a real
     /// HTML
     /// request.
-    pub fn getContextKeysForCustomPolicy(self: *Self, input: get_context_keys_for_custom_policy.GetContextKeysForCustomPolicyInput, options: get_context_keys_for_custom_policy.Options) !get_context_keys_for_custom_policy.GetContextKeysForCustomPolicyOutput {
-        return get_context_keys_for_custom_policy.execute(self, input, options);
+    pub fn getContextKeysForCustomPolicy(self: *Self, allocator: std.mem.Allocator, input: get_context_keys_for_custom_policy.GetContextKeysForCustomPolicyInput, options: get_context_keys_for_custom_policy.Options) !get_context_keys_for_custom_policy.GetContextKeysForCustomPolicyOutput {
+        return get_context_keys_for_custom_policy.execute(self, allocator, input, options);
     }
 
     /// Gets a list of all of the context keys referenced in all the IAM policies
@@ -1615,8 +1615,8 @@ pub const Client = struct {
     /// [GetContextKeysForPrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html) to understand what key names and values
     /// you must supply when you call
     /// [SimulatePrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html).
-    pub fn getContextKeysForPrincipalPolicy(self: *Self, input: get_context_keys_for_principal_policy.GetContextKeysForPrincipalPolicyInput, options: get_context_keys_for_principal_policy.Options) !get_context_keys_for_principal_policy.GetContextKeysForPrincipalPolicyOutput {
-        return get_context_keys_for_principal_policy.execute(self, input, options);
+    pub fn getContextKeysForPrincipalPolicy(self: *Self, allocator: std.mem.Allocator, input: get_context_keys_for_principal_policy.GetContextKeysForPrincipalPolicyInput, options: get_context_keys_for_principal_policy.Options) !get_context_keys_for_principal_policy.GetContextKeysForPrincipalPolicyOutput {
+        return get_context_keys_for_principal_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves a credential report for the Amazon Web Services account. For more
@@ -1624,8 +1624,8 @@ pub const Client = struct {
     /// credential report, see [Getting credential
     /// reports](https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
     /// the *IAM User Guide*.
-    pub fn getCredentialReport(self: *Self, input: get_credential_report.GetCredentialReportInput, options: get_credential_report.Options) !get_credential_report.GetCredentialReportOutput {
-        return get_credential_report.execute(self, input, options);
+    pub fn getCredentialReport(self: *Self, allocator: std.mem.Allocator, input: get_credential_report.GetCredentialReportInput, options: get_credential_report.Options) !get_credential_report.GetCredentialReportOutput {
+        return get_credential_report.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specific delegation request.
@@ -1642,15 +1642,15 @@ pub const Client = struct {
     /// [
     /// Managing Permissions for Delegation
     /// Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
-    pub fn getDelegationRequest(self: *Self, input: get_delegation_request.GetDelegationRequestInput, options: get_delegation_request.Options) !get_delegation_request.GetDelegationRequestOutput {
-        return get_delegation_request.execute(self, input, options);
+    pub fn getDelegationRequest(self: *Self, allocator: std.mem.Allocator, input: get_delegation_request.GetDelegationRequestInput, options: get_delegation_request.Options) !get_delegation_request.GetDelegationRequestOutput {
+        return get_delegation_request.execute(self, allocator, input, options);
     }
 
     /// Returns a list of IAM users that are in the specified IAM group. You can
     /// paginate
     /// the results using the `MaxItems` and `Marker` parameters.
-    pub fn getGroup(self: *Self, input: get_group.GetGroupInput, options: get_group.Options) !get_group.GetGroupOutput {
-        return get_group.execute(self, input, options);
+    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: get_group.Options) !get_group.GetGroupOutput {
+        return get_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified inline policy document that is embedded in the
@@ -1676,8 +1676,8 @@ pub const Client = struct {
     ///
     /// For more information about policies, see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn getGroupPolicy(self: *Self, input: get_group_policy.GetGroupPolicyInput, options: get_group_policy.Options) !get_group_policy.GetGroupPolicyOutput {
-        return get_group_policy.execute(self, input, options);
+    pub fn getGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: get_group_policy.GetGroupPolicyInput, options: get_group_policy.Options) !get_group_policy.GetGroupPolicyOutput {
+        return get_group_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves a human readable summary for a given entity. At this time, the
@@ -1702,8 +1702,8 @@ pub const Client = struct {
     /// [GetDelegationRequest](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetDelegationRequest.html)
     /// for a given delegation request will always be able to retrieve the human
     /// readable summary for that request.
-    pub fn getHumanReadableSummary(self: *Self, input: get_human_readable_summary.GetHumanReadableSummaryInput, options: get_human_readable_summary.Options) !get_human_readable_summary.GetHumanReadableSummaryOutput {
-        return get_human_readable_summary.execute(self, input, options);
+    pub fn getHumanReadableSummary(self: *Self, allocator: std.mem.Allocator, input: get_human_readable_summary.GetHumanReadableSummaryInput, options: get_human_readable_summary.Options) !get_human_readable_summary.GetHumanReadableSummaryOutput {
+        return get_human_readable_summary.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified instance profile, including the
@@ -1713,8 +1713,8 @@ pub const Client = struct {
     /// [Using
     /// instance
     /// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
-    pub fn getInstanceProfile(self: *Self, input: get_instance_profile.GetInstanceProfileInput, options: get_instance_profile.Options) !get_instance_profile.GetInstanceProfileOutput {
-        return get_instance_profile.execute(self, input, options);
+    pub fn getInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: get_instance_profile.GetInstanceProfileInput, options: get_instance_profile.Options) !get_instance_profile.GetInstanceProfileOutput {
+        return get_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Retrieves the user name for the specified IAM user. A login profile is
@@ -1735,20 +1735,20 @@ pub const Client = struct {
     /// login profile
     /// unless you create a password for the user to access the Amazon Web Services
     /// Management Console.
-    pub fn getLoginProfile(self: *Self, input: get_login_profile.GetLoginProfileInput, options: get_login_profile.Options) !get_login_profile.GetLoginProfileOutput {
-        return get_login_profile.execute(self, input, options);
+    pub fn getLoginProfile(self: *Self, allocator: std.mem.Allocator, input: get_login_profile.GetLoginProfileInput, options: get_login_profile.Options) !get_login_profile.GetLoginProfileOutput {
+        return get_login_profile.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an MFA device for a specified user.
-    pub fn getMfaDevice(self: *Self, input: get_mfa_device.GetMFADeviceInput, options: get_mfa_device.Options) !get_mfa_device.GetMFADeviceOutput {
-        return get_mfa_device.execute(self, input, options);
+    pub fn getMfaDevice(self: *Self, allocator: std.mem.Allocator, input: get_mfa_device.GetMFADeviceInput, options: get_mfa_device.Options) !get_mfa_device.GetMFADeviceOutput {
+        return get_mfa_device.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified OpenID Connect (OIDC) provider
     /// resource object
     /// in IAM.
-    pub fn getOpenIdConnectProvider(self: *Self, input: get_open_id_connect_provider.GetOpenIDConnectProviderInput, options: get_open_id_connect_provider.Options) !get_open_id_connect_provider.GetOpenIDConnectProviderOutput {
-        return get_open_id_connect_provider.execute(self, input, options);
+    pub fn getOpenIdConnectProvider(self: *Self, allocator: std.mem.Allocator, input: get_open_id_connect_provider.GetOpenIDConnectProviderInput, options: get_open_id_connect_provider.Options) !get_open_id_connect_provider.GetOpenIDConnectProviderOutput {
+        return get_open_id_connect_provider.execute(self, allocator, input, options);
     }
 
     /// Retrieves the service last accessed data report for Organizations that was
@@ -1784,8 +1784,8 @@ pub const Client = struct {
     /// it failed.
     ///
     /// By default, the list is sorted by service namespace.
-    pub fn getOrganizationsAccessReport(self: *Self, input: get_organizations_access_report.GetOrganizationsAccessReportInput, options: get_organizations_access_report.Options) !get_organizations_access_report.GetOrganizationsAccessReportOutput {
-        return get_organizations_access_report.execute(self, input, options);
+    pub fn getOrganizationsAccessReport(self: *Self, allocator: std.mem.Allocator, input: get_organizations_access_report.GetOrganizationsAccessReportInput, options: get_organizations_access_report.Options) !get_organizations_access_report.GetOrganizationsAccessReportOutput {
+        return get_organizations_access_report.execute(self, allocator, input, options);
     }
 
     /// Retrieves the configuration information for the outbound identity federation
@@ -1794,8 +1794,8 @@ pub const Client = struct {
     /// Amazon Web Services account and the current enabled/disabled status of the
     /// feature. Use this operation to obtain the issuer URL that you need to
     /// configure trust relationships with external services.
-    pub fn getOutboundWebIdentityFederationInfo(self: *Self, input: get_outbound_web_identity_federation_info.GetOutboundWebIdentityFederationInfoInput, options: get_outbound_web_identity_federation_info.Options) !get_outbound_web_identity_federation_info.GetOutboundWebIdentityFederationInfoOutput {
-        return get_outbound_web_identity_federation_info.execute(self, input, options);
+    pub fn getOutboundWebIdentityFederationInfo(self: *Self, allocator: std.mem.Allocator, input: get_outbound_web_identity_federation_info.GetOutboundWebIdentityFederationInfoInput, options: get_outbound_web_identity_federation_info.Options) !get_outbound_web_identity_federation_info.GetOutboundWebIdentityFederationInfoOutput {
+        return get_outbound_web_identity_federation_info.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified managed policy, including the
@@ -1819,8 +1819,8 @@ pub const Client = struct {
     ///
     /// For more information about policies, see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn getPolicy(self: *Self, input: get_policy.GetPolicyInput, options: get_policy.Options) !get_policy.GetPolicyOutput {
-        return get_policy.execute(self, input, options);
+    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: get_policy.Options) !get_policy.GetPolicyOutput {
+        return get_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified version of the specified managed
@@ -1852,8 +1852,8 @@ pub const Client = struct {
     /// For more information about managed policy versions, see [Versioning for
     /// managed
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html) in the *IAM User Guide*.
-    pub fn getPolicyVersion(self: *Self, input: get_policy_version.GetPolicyVersionInput, options: get_policy_version.Options) !get_policy_version.GetPolicyVersionOutput {
-        return get_policy_version.execute(self, input, options);
+    pub fn getPolicyVersion(self: *Self, allocator: std.mem.Allocator, input: get_policy_version.GetPolicyVersionInput, options: get_policy_version.Options) !get_policy_version.GetPolicyVersionOutput {
+        return get_policy_version.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified role, including the role's path,
@@ -1873,8 +1873,8 @@ pub const Client = struct {
     /// the Java SDK. Other languages and SDKs provide similar functionality, and
     /// some SDKs do this decoding
     /// automatically.
-    pub fn getRole(self: *Self, input: get_role.GetRoleInput, options: get_role.Options) !get_role.GetRoleOutput {
-        return get_role.execute(self, input, options);
+    pub fn getRole(self: *Self, allocator: std.mem.Allocator, input: get_role.GetRoleInput, options: get_role.Options) !get_role.GetRoleOutput {
+        return get_role.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified inline policy document that is embedded with the
@@ -1905,8 +1905,8 @@ pub const Client = struct {
     /// roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn getRolePolicy(self: *Self, input: get_role_policy.GetRolePolicyInput, options: get_role_policy.Options) !get_role_policy.GetRolePolicyOutput {
-        return get_role_policy.execute(self, input, options);
+    pub fn getRolePolicy(self: *Self, allocator: std.mem.Allocator, input: get_role_policy.GetRolePolicyInput, options: get_role_policy.Options) !get_role_policy.GetRolePolicyOutput {
+        return get_role_policy.execute(self, allocator, input, options);
     }
 
     /// Returns the SAML provider metadocument that was uploaded when the IAM SAML
@@ -1915,8 +1915,8 @@ pub const Client = struct {
     ///
     /// This operation requires [Signature Version
     /// 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn getSamlProvider(self: *Self, input: get_saml_provider.GetSAMLProviderInput, options: get_saml_provider.Options) !get_saml_provider.GetSAMLProviderOutput {
-        return get_saml_provider.execute(self, input, options);
+    pub fn getSamlProvider(self: *Self, allocator: std.mem.Allocator, input: get_saml_provider.GetSAMLProviderInput, options: get_saml_provider.Options) !get_saml_provider.GetSAMLProviderOutput {
+        return get_saml_provider.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified server certificate stored in IAM.
@@ -1927,8 +1927,8 @@ pub const Client = struct {
     /// topic includes a list of Amazon Web Services services that can use the
     /// server certificates that you
     /// manage with IAM.
-    pub fn getServerCertificate(self: *Self, input: get_server_certificate.GetServerCertificateInput, options: get_server_certificate.Options) !get_server_certificate.GetServerCertificateOutput {
-        return get_server_certificate.execute(self, input, options);
+    pub fn getServerCertificate(self: *Self, allocator: std.mem.Allocator, input: get_server_certificate.GetServerCertificateInput, options: get_server_certificate.Options) !get_server_certificate.GetServerCertificateOutput {
+        return get_server_certificate.execute(self, allocator, input, options);
     }
 
     /// Retrieves a service last accessed report that was created using the
@@ -1990,8 +1990,8 @@ pub const Client = struct {
     /// [Reducing permissions using service last accessed
     /// data](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html) in the
     /// *IAM User Guide*.
-    pub fn getServiceLastAccessedDetails(self: *Self, input: get_service_last_accessed_details.GetServiceLastAccessedDetailsInput, options: get_service_last_accessed_details.Options) !get_service_last_accessed_details.GetServiceLastAccessedDetailsOutput {
-        return get_service_last_accessed_details.execute(self, input, options);
+    pub fn getServiceLastAccessedDetails(self: *Self, allocator: std.mem.Allocator, input: get_service_last_accessed_details.GetServiceLastAccessedDetailsInput, options: get_service_last_accessed_details.Options) !get_service_last_accessed_details.GetServiceLastAccessedDetailsOutput {
+        return get_service_last_accessed_details.execute(self, allocator, input, options);
     }
 
     /// After you generate a group or policy report using the
@@ -2022,8 +2022,8 @@ pub const Client = struct {
     /// By default, the list of associated entities is sorted by date, with the most
     /// recent
     /// access listed first.
-    pub fn getServiceLastAccessedDetailsWithEntities(self: *Self, input: get_service_last_accessed_details_with_entities.GetServiceLastAccessedDetailsWithEntitiesInput, options: get_service_last_accessed_details_with_entities.Options) !get_service_last_accessed_details_with_entities.GetServiceLastAccessedDetailsWithEntitiesOutput {
-        return get_service_last_accessed_details_with_entities.execute(self, input, options);
+    pub fn getServiceLastAccessedDetailsWithEntities(self: *Self, allocator: std.mem.Allocator, input: get_service_last_accessed_details_with_entities.GetServiceLastAccessedDetailsWithEntitiesInput, options: get_service_last_accessed_details_with_entities.Options) !get_service_last_accessed_details_with_entities.GetServiceLastAccessedDetailsWithEntitiesOutput {
+        return get_service_last_accessed_details_with_entities.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status of your service-linked role deletion. After you use
@@ -2033,8 +2033,8 @@ pub const Client = struct {
     /// If the deletion fails, this operation returns the reason that it failed, if
     /// that
     /// information is returned by the service.
-    pub fn getServiceLinkedRoleDeletionStatus(self: *Self, input: get_service_linked_role_deletion_status.GetServiceLinkedRoleDeletionStatusInput, options: get_service_linked_role_deletion_status.Options) !get_service_linked_role_deletion_status.GetServiceLinkedRoleDeletionStatusOutput {
-        return get_service_linked_role_deletion_status.execute(self, input, options);
+    pub fn getServiceLinkedRoleDeletionStatus(self: *Self, allocator: std.mem.Allocator, input: get_service_linked_role_deletion_status.GetServiceLinkedRoleDeletionStatusInput, options: get_service_linked_role_deletion_status.Options) !get_service_linked_role_deletion_status.GetServiceLinkedRoleDeletionStatusOutput {
+        return get_service_linked_role_deletion_status.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified SSH public key, including metadata about the key.
@@ -2045,8 +2045,8 @@ pub const Client = struct {
     /// using SSH keys
     /// to authenticate to an CodeCommit repository, see [Set up CodeCommit for SSH
     /// connections](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html) in the *CodeCommit User Guide*.
-    pub fn getSshPublicKey(self: *Self, input: get_ssh_public_key.GetSSHPublicKeyInput, options: get_ssh_public_key.Options) !get_ssh_public_key.GetSSHPublicKeyOutput {
-        return get_ssh_public_key.execute(self, input, options);
+    pub fn getSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: get_ssh_public_key.GetSSHPublicKeyInput, options: get_ssh_public_key.Options) !get_ssh_public_key.GetSSHPublicKeyOutput {
+        return get_ssh_public_key.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified IAM user, including the user's
@@ -2057,8 +2057,8 @@ pub const Client = struct {
     /// based on
     /// the Amazon Web Services access key ID used to sign the request to this
     /// operation.
-    pub fn getUser(self: *Self, input: get_user.GetUserInput, options: get_user.Options) !get_user.GetUserOutput {
-        return get_user.execute(self, input, options);
+    pub fn getUser(self: *Self, allocator: std.mem.Allocator, input: get_user.GetUserInput, options: get_user.Options) !get_user.GetUserOutput {
+        return get_user.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified inline policy document that is embedded in the
@@ -2084,8 +2084,8 @@ pub const Client = struct {
     ///
     /// For more information about policies, see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn getUserPolicy(self: *Self, input: get_user_policy.GetUserPolicyInput, options: get_user_policy.Options) !get_user_policy.GetUserPolicyOutput {
-        return get_user_policy.execute(self, input, options);
+    pub fn getUserPolicy(self: *Self, allocator: std.mem.Allocator, input: get_user_policy.GetUserPolicyInput, options: get_user_policy.Options) !get_user_policy.GetUserPolicyOutput {
+        return get_user_policy.execute(self, allocator, input, options);
     }
 
     /// Returns information about the access key IDs associated with the specified
@@ -2111,8 +2111,8 @@ pub const Client = struct {
     /// To ensure the security of your Amazon Web Services account, the secret
     /// access key is accessible
     /// only during key and user creation.
-    pub fn listAccessKeys(self: *Self, input: list_access_keys.ListAccessKeysInput, options: list_access_keys.Options) !list_access_keys.ListAccessKeysOutput {
-        return list_access_keys.execute(self, input, options);
+    pub fn listAccessKeys(self: *Self, allocator: std.mem.Allocator, input: list_access_keys.ListAccessKeysInput, options: list_access_keys.Options) !list_access_keys.ListAccessKeysOutput {
+        return list_access_keys.execute(self, allocator, input, options);
     }
 
     /// Lists the account alias associated with the Amazon Web Services account
@@ -2122,8 +2122,8 @@ pub const Client = struct {
     /// deleting, and listing an Amazon Web Services account
     /// alias](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#CreateAccountAlias) in the
     /// *IAM User Guide*.
-    pub fn listAccountAliases(self: *Self, input: list_account_aliases.ListAccountAliasesInput, options: list_account_aliases.Options) !list_account_aliases.ListAccountAliasesOutput {
-        return list_account_aliases.execute(self, input, options);
+    pub fn listAccountAliases(self: *Self, allocator: std.mem.Allocator, input: list_account_aliases.ListAccountAliasesInput, options: list_account_aliases.Options) !list_account_aliases.ListAccountAliasesOutput {
+        return list_account_aliases.execute(self, allocator, input, options);
     }
 
     /// Lists all managed policies that are attached to the specified IAM group.
@@ -2142,8 +2142,8 @@ pub const Client = struct {
     /// attached to the specified group (or none that match the specified path
     /// prefix), the
     /// operation returns an empty list.
-    pub fn listAttachedGroupPolicies(self: *Self, input: list_attached_group_policies.ListAttachedGroupPoliciesInput, options: list_attached_group_policies.Options) !list_attached_group_policies.ListAttachedGroupPoliciesOutput {
-        return list_attached_group_policies.execute(self, input, options);
+    pub fn listAttachedGroupPolicies(self: *Self, allocator: std.mem.Allocator, input: list_attached_group_policies.ListAttachedGroupPoliciesInput, options: list_attached_group_policies.Options) !list_attached_group_policies.ListAttachedGroupPoliciesOutput {
+        return list_attached_group_policies.execute(self, allocator, input, options);
     }
 
     /// Lists all managed policies that are attached to the specified IAM role.
@@ -2162,8 +2162,8 @@ pub const Client = struct {
     /// attached to the specified role (or none that match the specified path
     /// prefix), the
     /// operation returns an empty list.
-    pub fn listAttachedRolePolicies(self: *Self, input: list_attached_role_policies.ListAttachedRolePoliciesInput, options: list_attached_role_policies.Options) !list_attached_role_policies.ListAttachedRolePoliciesOutput {
-        return list_attached_role_policies.execute(self, input, options);
+    pub fn listAttachedRolePolicies(self: *Self, allocator: std.mem.Allocator, input: list_attached_role_policies.ListAttachedRolePoliciesInput, options: list_attached_role_policies.Options) !list_attached_role_policies.ListAttachedRolePoliciesOutput {
+        return list_attached_role_policies.execute(self, allocator, input, options);
     }
 
     /// Lists all managed policies that are attached to the specified IAM user.
@@ -2182,8 +2182,8 @@ pub const Client = struct {
     /// attached to the specified group (or none that match the specified path
     /// prefix), the
     /// operation returns an empty list.
-    pub fn listAttachedUserPolicies(self: *Self, input: list_attached_user_policies.ListAttachedUserPoliciesInput, options: list_attached_user_policies.Options) !list_attached_user_policies.ListAttachedUserPoliciesOutput {
-        return list_attached_user_policies.execute(self, input, options);
+    pub fn listAttachedUserPolicies(self: *Self, allocator: std.mem.Allocator, input: list_attached_user_policies.ListAttachedUserPoliciesInput, options: list_attached_user_policies.Options) !list_attached_user_policies.ListAttachedUserPoliciesOutput {
+        return list_attached_user_policies.execute(self, allocator, input, options);
     }
 
     /// Lists delegation requests based on the specified criteria.
@@ -2196,8 +2196,8 @@ pub const Client = struct {
     /// [
     /// Managing Permissions for Delegation
     /// Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
-    pub fn listDelegationRequests(self: *Self, input: list_delegation_requests.ListDelegationRequestsInput, options: list_delegation_requests.Options) !list_delegation_requests.ListDelegationRequestsOutput {
-        return list_delegation_requests.execute(self, input, options);
+    pub fn listDelegationRequests(self: *Self, allocator: std.mem.Allocator, input: list_delegation_requests.ListDelegationRequestsInput, options: list_delegation_requests.Options) !list_delegation_requests.ListDelegationRequestsOutput {
+        return list_delegation_requests.execute(self, allocator, input, options);
     }
 
     /// Lists all IAM users, groups, and roles that the specified managed policy is
@@ -2212,8 +2212,8 @@ pub const Client = struct {
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listEntitiesForPolicy(self: *Self, input: list_entities_for_policy.ListEntitiesForPolicyInput, options: list_entities_for_policy.Options) !list_entities_for_policy.ListEntitiesForPolicyOutput {
-        return list_entities_for_policy.execute(self, input, options);
+    pub fn listEntitiesForPolicy(self: *Self, allocator: std.mem.Allocator, input: list_entities_for_policy.ListEntitiesForPolicyInput, options: list_entities_for_policy.Options) !list_entities_for_policy.ListEntitiesForPolicyOutput {
+        return list_entities_for_policy.execute(self, allocator, input, options);
     }
 
     /// Lists the names of the inline policies that are embedded in the specified
@@ -2232,24 +2232,24 @@ pub const Client = struct {
     /// parameters. If there are no inline policies embedded with the specified
     /// group, the
     /// operation returns an empty list.
-    pub fn listGroupPolicies(self: *Self, input: list_group_policies.ListGroupPoliciesInput, options: list_group_policies.Options) !list_group_policies.ListGroupPoliciesOutput {
-        return list_group_policies.execute(self, input, options);
+    pub fn listGroupPolicies(self: *Self, allocator: std.mem.Allocator, input: list_group_policies.ListGroupPoliciesInput, options: list_group_policies.Options) !list_group_policies.ListGroupPoliciesOutput {
+        return list_group_policies.execute(self, allocator, input, options);
     }
 
     /// Lists the IAM groups that have the specified path prefix.
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listGroups(self: *Self, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
-        return list_groups.execute(self, input, options);
+    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
+        return list_groups.execute(self, allocator, input, options);
     }
 
     /// Lists the IAM groups that the specified IAM user belongs to.
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listGroupsForUser(self: *Self, input: list_groups_for_user.ListGroupsForUserInput, options: list_groups_for_user.Options) !list_groups_for_user.ListGroupsForUserOutput {
-        return list_groups_for_user.execute(self, input, options);
+    pub fn listGroupsForUser(self: *Self, allocator: std.mem.Allocator, input: list_groups_for_user.ListGroupsForUserInput, options: list_groups_for_user.Options) !list_groups_for_user.ListGroupsForUserOutput {
+        return list_groups_for_user.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified IAM instance profile. The
@@ -2258,8 +2258,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn listInstanceProfileTags(self: *Self, input: list_instance_profile_tags.ListInstanceProfileTagsInput, options: list_instance_profile_tags.Options) !list_instance_profile_tags.ListInstanceProfileTagsOutput {
-        return list_instance_profile_tags.execute(self, input, options);
+    pub fn listInstanceProfileTags(self: *Self, allocator: std.mem.Allocator, input: list_instance_profile_tags.ListInstanceProfileTagsInput, options: list_instance_profile_tags.Options) !list_instance_profile_tags.ListInstanceProfileTagsOutput {
+        return list_instance_profile_tags.execute(self, allocator, input, options);
     }
 
     /// Lists the instance profiles that have the specified path prefix. If there
@@ -2278,8 +2278,8 @@ pub const Client = struct {
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listInstanceProfiles(self: *Self, input: list_instance_profiles.ListInstanceProfilesInput, options: list_instance_profiles.Options) !list_instance_profiles.ListInstanceProfilesOutput {
-        return list_instance_profiles.execute(self, input, options);
+    pub fn listInstanceProfiles(self: *Self, allocator: std.mem.Allocator, input: list_instance_profiles.ListInstanceProfilesInput, options: list_instance_profiles.Options) !list_instance_profiles.ListInstanceProfilesOutput {
+        return list_instance_profiles.execute(self, allocator, input, options);
     }
 
     /// Lists the instance profiles that have the specified associated IAM role. If
@@ -2292,8 +2292,8 @@ pub const Client = struct {
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listInstanceProfilesForRole(self: *Self, input: list_instance_profiles_for_role.ListInstanceProfilesForRoleInput, options: list_instance_profiles_for_role.Options) !list_instance_profiles_for_role.ListInstanceProfilesForRoleOutput {
-        return list_instance_profiles_for_role.execute(self, input, options);
+    pub fn listInstanceProfilesForRole(self: *Self, allocator: std.mem.Allocator, input: list_instance_profiles_for_role.ListInstanceProfilesForRoleInput, options: list_instance_profiles_for_role.Options) !list_instance_profiles_for_role.ListInstanceProfilesForRoleOutput {
+        return list_instance_profiles_for_role.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified IAM virtual multi-factor
@@ -2302,8 +2302,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn listMfaDeviceTags(self: *Self, input: list_mfa_device_tags.ListMFADeviceTagsInput, options: list_mfa_device_tags.Options) !list_mfa_device_tags.ListMFADeviceTagsOutput {
-        return list_mfa_device_tags.execute(self, input, options);
+    pub fn listMfaDeviceTags(self: *Self, allocator: std.mem.Allocator, input: list_mfa_device_tags.ListMFADeviceTagsInput, options: list_mfa_device_tags.Options) !list_mfa_device_tags.ListMFADeviceTagsOutput {
+        return list_mfa_device_tags.execute(self, allocator, input, options);
     }
 
     /// Lists the MFA devices for an IAM user. If the request includes a IAM user
@@ -2316,8 +2316,8 @@ pub const Client = struct {
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listMfaDevices(self: *Self, input: list_mfa_devices.ListMFADevicesInput, options: list_mfa_devices.Options) !list_mfa_devices.ListMFADevicesOutput {
-        return list_mfa_devices.execute(self, input, options);
+    pub fn listMfaDevices(self: *Self, allocator: std.mem.Allocator, input: list_mfa_devices.ListMFADevicesInput, options: list_mfa_devices.Options) !list_mfa_devices.ListMFADevicesOutput {
+        return list_mfa_devices.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified OpenID Connect
@@ -2330,8 +2330,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn listOpenIdConnectProviderTags(self: *Self, input: list_open_id_connect_provider_tags.ListOpenIDConnectProviderTagsInput, options: list_open_id_connect_provider_tags.Options) !list_open_id_connect_provider_tags.ListOpenIDConnectProviderTagsOutput {
-        return list_open_id_connect_provider_tags.execute(self, input, options);
+    pub fn listOpenIdConnectProviderTags(self: *Self, allocator: std.mem.Allocator, input: list_open_id_connect_provider_tags.ListOpenIDConnectProviderTagsInput, options: list_open_id_connect_provider_tags.Options) !list_open_id_connect_provider_tags.ListOpenIDConnectProviderTagsOutput {
+        return list_open_id_connect_provider_tags.execute(self, allocator, input, options);
     }
 
     /// Lists information about the IAM OpenID Connect (OIDC) provider resource
@@ -2343,16 +2343,16 @@ pub const Client = struct {
     /// tags, even though they are an attribute of the returned object. To view all
     /// of the information for an OIDC provider, see
     /// [GetOpenIDConnectProvider](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOpenIDConnectProvider.html).
-    pub fn listOpenIdConnectProviders(self: *Self, input: list_open_id_connect_providers.ListOpenIDConnectProvidersInput, options: list_open_id_connect_providers.Options) !list_open_id_connect_providers.ListOpenIDConnectProvidersOutput {
-        return list_open_id_connect_providers.execute(self, input, options);
+    pub fn listOpenIdConnectProviders(self: *Self, allocator: std.mem.Allocator, input: list_open_id_connect_providers.ListOpenIDConnectProvidersInput, options: list_open_id_connect_providers.Options) !list_open_id_connect_providers.ListOpenIDConnectProvidersOutput {
+        return list_open_id_connect_providers.execute(self, allocator, input, options);
     }
 
     /// Lists the centralized root access features enabled for your organization.
     /// For more
     /// information, see [Centrally manage root access for member
     /// accounts](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management).
-    pub fn listOrganizationsFeatures(self: *Self, input: list_organizations_features.ListOrganizationsFeaturesInput, options: list_organizations_features.Options) !list_organizations_features.ListOrganizationsFeaturesOutput {
-        return list_organizations_features.execute(self, input, options);
+    pub fn listOrganizationsFeatures(self: *Self, allocator: std.mem.Allocator, input: list_organizations_features.ListOrganizationsFeaturesInput, options: list_organizations_features.Options) !list_organizations_features.ListOrganizationsFeaturesOutput {
+        return list_organizations_features.execute(self, allocator, input, options);
     }
 
     /// Lists all the managed policies that are available in your Amazon Web
@@ -2379,8 +2379,8 @@ pub const Client = struct {
     /// tags, even though they are an attribute of the returned object. To view all
     /// of the information for a customer manged policy, see
     /// [GetPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html).
-    pub fn listPolicies(self: *Self, input: list_policies.ListPoliciesInput, options: list_policies.Options) !list_policies.ListPoliciesOutput {
-        return list_policies.execute(self, input, options);
+    pub fn listPolicies(self: *Self, allocator: std.mem.Allocator, input: list_policies.ListPoliciesInput, options: list_policies.Options) !list_policies.ListPoliciesOutput {
+        return list_policies.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of policies that the IAM identity (user, group, or role)
@@ -2434,8 +2434,8 @@ pub const Client = struct {
     /// for a user or role, use the
     /// [GetUser](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUser.html) or [GetRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRole.html)
     /// operations.
-    pub fn listPoliciesGrantingServiceAccess(self: *Self, input: list_policies_granting_service_access.ListPoliciesGrantingServiceAccessInput, options: list_policies_granting_service_access.Options) !list_policies_granting_service_access.ListPoliciesGrantingServiceAccessOutput {
-        return list_policies_granting_service_access.execute(self, input, options);
+    pub fn listPoliciesGrantingServiceAccess(self: *Self, allocator: std.mem.Allocator, input: list_policies_granting_service_access.ListPoliciesGrantingServiceAccessInput, options: list_policies_granting_service_access.Options) !list_policies_granting_service_access.ListPoliciesGrantingServiceAccessOutput {
+        return list_policies_granting_service_access.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified IAM customer managed
@@ -2445,8 +2445,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn listPolicyTags(self: *Self, input: list_policy_tags.ListPolicyTagsInput, options: list_policy_tags.Options) !list_policy_tags.ListPolicyTagsOutput {
-        return list_policy_tags.execute(self, input, options);
+    pub fn listPolicyTags(self: *Self, allocator: std.mem.Allocator, input: list_policy_tags.ListPolicyTagsInput, options: list_policy_tags.Options) !list_policy_tags.ListPolicyTagsOutput {
+        return list_policy_tags.execute(self, allocator, input, options);
     }
 
     /// Lists information about the versions of the specified managed policy,
@@ -2456,8 +2456,8 @@ pub const Client = struct {
     /// For more information about managed policies, see [Managed policies and
     /// inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn listPolicyVersions(self: *Self, input: list_policy_versions.ListPolicyVersionsInput, options: list_policy_versions.Options) !list_policy_versions.ListPolicyVersionsOutput {
-        return list_policy_versions.execute(self, input, options);
+    pub fn listPolicyVersions(self: *Self, allocator: std.mem.Allocator, input: list_policy_versions.ListPolicyVersionsInput, options: list_policy_versions.Options) !list_policy_versions.ListPolicyVersionsOutput {
+        return list_policy_versions.execute(self, allocator, input, options);
     }
 
     /// Lists the names of the inline policies that are embedded in the specified
@@ -2476,8 +2476,8 @@ pub const Client = struct {
     /// parameters. If there are no inline policies embedded with the specified
     /// role, the
     /// operation returns an empty list.
-    pub fn listRolePolicies(self: *Self, input: list_role_policies.ListRolePoliciesInput, options: list_role_policies.Options) !list_role_policies.ListRolePoliciesOutput {
-        return list_role_policies.execute(self, input, options);
+    pub fn listRolePolicies(self: *Self, allocator: std.mem.Allocator, input: list_role_policies.ListRolePoliciesInput, options: list_role_policies.Options) !list_role_policies.ListRolePoliciesOutput {
+        return list_role_policies.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified role. The returned list of
@@ -2486,8 +2486,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn listRoleTags(self: *Self, input: list_role_tags.ListRoleTagsInput, options: list_role_tags.Options) !list_role_tags.ListRoleTagsOutput {
-        return list_role_tags.execute(self, input, options);
+    pub fn listRoleTags(self: *Self, allocator: std.mem.Allocator, input: list_role_tags.ListRoleTagsInput, options: list_role_tags.Options) !list_role_tags.ListRoleTagsOutput {
+        return list_role_tags.execute(self, allocator, input, options);
     }
 
     /// Lists the IAM roles that have the specified path prefix. If there are none,
@@ -2512,8 +2512,8 @@ pub const Client = struct {
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listRoles(self: *Self, input: list_roles.ListRolesInput, options: list_roles.Options) !list_roles.ListRolesOutput {
-        return list_roles.execute(self, input, options);
+    pub fn listRoles(self: *Self, allocator: std.mem.Allocator, input: list_roles.ListRolesInput, options: list_roles.Options) !list_roles.ListRolesOutput {
+        return list_roles.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified Security Assertion Markup
@@ -2526,8 +2526,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn listSamlProviderTags(self: *Self, input: list_saml_provider_tags.ListSAMLProviderTagsInput, options: list_saml_provider_tags.Options) !list_saml_provider_tags.ListSAMLProviderTagsOutput {
-        return list_saml_provider_tags.execute(self, input, options);
+    pub fn listSamlProviderTags(self: *Self, allocator: std.mem.Allocator, input: list_saml_provider_tags.ListSAMLProviderTagsInput, options: list_saml_provider_tags.Options) !list_saml_provider_tags.ListSAMLProviderTagsOutput {
+        return list_saml_provider_tags.execute(self, allocator, input, options);
     }
 
     /// Lists the SAML provider resource objects defined in IAM in the account.
@@ -2539,8 +2539,8 @@ pub const Client = struct {
     ///
     /// This operation requires [Signature Version
     /// 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn listSamlProviders(self: *Self, input: list_saml_providers.ListSAMLProvidersInput, options: list_saml_providers.Options) !list_saml_providers.ListSAMLProvidersOutput {
-        return list_saml_providers.execute(self, input, options);
+    pub fn listSamlProviders(self: *Self, allocator: std.mem.Allocator, input: list_saml_providers.ListSAMLProvidersInput, options: list_saml_providers.Options) !list_saml_providers.ListSAMLProvidersOutput {
+        return list_saml_providers.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified IAM server certificate.
@@ -2558,8 +2558,8 @@ pub const Client = struct {
     /// server
     /// certificates, [Working with server
     /// certificates](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html) in the *IAM User Guide*.
-    pub fn listServerCertificateTags(self: *Self, input: list_server_certificate_tags.ListServerCertificateTagsInput, options: list_server_certificate_tags.Options) !list_server_certificate_tags.ListServerCertificateTagsOutput {
-        return list_server_certificate_tags.execute(self, input, options);
+    pub fn listServerCertificateTags(self: *Self, allocator: std.mem.Allocator, input: list_server_certificate_tags.ListServerCertificateTagsInput, options: list_server_certificate_tags.Options) !list_server_certificate_tags.ListServerCertificateTagsOutput {
+        return list_server_certificate_tags.execute(self, allocator, input, options);
     }
 
     /// Lists the server certificates stored in IAM that have the specified path
@@ -2581,8 +2581,8 @@ pub const Client = struct {
     /// tags, even though they are an attribute of the returned object. To view all
     /// of the information for a servercertificate, see
     /// [GetServerCertificate](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServerCertificate.html).
-    pub fn listServerCertificates(self: *Self, input: list_server_certificates.ListServerCertificatesInput, options: list_server_certificates.Options) !list_server_certificates.ListServerCertificatesOutput {
-        return list_server_certificates.execute(self, input, options);
+    pub fn listServerCertificates(self: *Self, allocator: std.mem.Allocator, input: list_server_certificates.ListServerCertificatesInput, options: list_server_certificates.Options) !list_server_certificates.ListServerCertificatesOutput {
+        return list_server_certificates.execute(self, allocator, input, options);
     }
 
     /// Returns information about the service-specific credentials associated with
@@ -2596,8 +2596,8 @@ pub const Client = struct {
     /// service-specific
     /// credentials](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html)
     /// in the CodeCommit User Guide.
-    pub fn listServiceSpecificCredentials(self: *Self, input: list_service_specific_credentials.ListServiceSpecificCredentialsInput, options: list_service_specific_credentials.Options) !list_service_specific_credentials.ListServiceSpecificCredentialsOutput {
-        return list_service_specific_credentials.execute(self, input, options);
+    pub fn listServiceSpecificCredentials(self: *Self, allocator: std.mem.Allocator, input: list_service_specific_credentials.ListServiceSpecificCredentialsInput, options: list_service_specific_credentials.Options) !list_service_specific_credentials.ListServiceSpecificCredentialsOutput {
+        return list_service_specific_credentials.execute(self, allocator, input, options);
     }
 
     /// Returns information about the signing certificates associated with the
@@ -2617,8 +2617,8 @@ pub const Client = struct {
     /// this operation to manage Amazon Web Services account root user credentials
     /// even if the Amazon Web Services account has no
     /// associated users.
-    pub fn listSigningCertificates(self: *Self, input: list_signing_certificates.ListSigningCertificatesInput, options: list_signing_certificates.Options) !list_signing_certificates.ListSigningCertificatesOutput {
-        return list_signing_certificates.execute(self, input, options);
+    pub fn listSigningCertificates(self: *Self, allocator: std.mem.Allocator, input: list_signing_certificates.ListSigningCertificatesInput, options: list_signing_certificates.Options) !list_signing_certificates.ListSigningCertificatesOutput {
+        return list_signing_certificates.execute(self, allocator, input, options);
     }
 
     /// Returns information about the SSH public keys associated with the specified
@@ -2636,8 +2636,8 @@ pub const Client = struct {
     /// Although each user is limited to a small number of keys, you can still
     /// paginate the
     /// results using the `MaxItems` and `Marker` parameters.
-    pub fn listSshPublicKeys(self: *Self, input: list_ssh_public_keys.ListSSHPublicKeysInput, options: list_ssh_public_keys.Options) !list_ssh_public_keys.ListSSHPublicKeysOutput {
-        return list_ssh_public_keys.execute(self, input, options);
+    pub fn listSshPublicKeys(self: *Self, allocator: std.mem.Allocator, input: list_ssh_public_keys.ListSSHPublicKeysInput, options: list_ssh_public_keys.Options) !list_ssh_public_keys.ListSSHPublicKeysOutput {
+        return list_ssh_public_keys.execute(self, allocator, input, options);
     }
 
     /// Lists the names of the inline policies embedded in the specified IAM user.
@@ -2654,8 +2654,8 @@ pub const Client = struct {
     /// parameters. If there are no inline policies embedded with the specified
     /// user, the
     /// operation returns an empty list.
-    pub fn listUserPolicies(self: *Self, input: list_user_policies.ListUserPoliciesInput, options: list_user_policies.Options) !list_user_policies.ListUserPoliciesOutput {
-        return list_user_policies.execute(self, input, options);
+    pub fn listUserPolicies(self: *Self, allocator: std.mem.Allocator, input: list_user_policies.ListUserPoliciesInput, options: list_user_policies.Options) !list_user_policies.ListUserPoliciesOutput {
+        return list_user_policies.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified IAM user. The returned
@@ -2664,8 +2664,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn listUserTags(self: *Self, input: list_user_tags.ListUserTagsInput, options: list_user_tags.Options) !list_user_tags.ListUserTagsOutput {
-        return list_user_tags.execute(self, input, options);
+    pub fn listUserTags(self: *Self, allocator: std.mem.Allocator, input: list_user_tags.ListUserTagsInput, options: list_user_tags.Options) !list_user_tags.ListUserTagsOutput {
+        return list_user_tags.execute(self, allocator, input, options);
     }
 
     /// Lists the IAM users that have the specified path prefix. If no path prefix
@@ -2687,8 +2687,8 @@ pub const Client = struct {
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listUsers(self: *Self, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
-        return list_users.execute(self, input, options);
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+        return list_users.execute(self, allocator, input, options);
     }
 
     /// Lists the virtual MFA devices defined in the Amazon Web Services account by
@@ -2706,8 +2706,8 @@ pub const Client = struct {
     ///
     /// You can paginate the results using the `MaxItems` and `Marker`
     /// parameters.
-    pub fn listVirtualMfaDevices(self: *Self, input: list_virtual_mfa_devices.ListVirtualMFADevicesInput, options: list_virtual_mfa_devices.Options) !list_virtual_mfa_devices.ListVirtualMFADevicesOutput {
-        return list_virtual_mfa_devices.execute(self, input, options);
+    pub fn listVirtualMfaDevices(self: *Self, allocator: std.mem.Allocator, input: list_virtual_mfa_devices.ListVirtualMFADevicesInput, options: list_virtual_mfa_devices.Options) !list_virtual_mfa_devices.ListVirtualMFADevicesOutput {
+        return list_virtual_mfa_devices.execute(self, allocator, input, options);
     }
 
     /// Adds or updates an inline policy document that is embedded in the specified
@@ -2737,8 +2737,8 @@ pub const Client = struct {
     /// API with IAM, see [Making query
     /// requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html) in the
     /// *IAM User Guide*.
-    pub fn putGroupPolicy(self: *Self, input: put_group_policy.PutGroupPolicyInput, options: put_group_policy.Options) !put_group_policy.PutGroupPolicyOutput {
-        return put_group_policy.execute(self, input, options);
+    pub fn putGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: put_group_policy.PutGroupPolicyInput, options: put_group_policy.Options) !put_group_policy.PutGroupPolicyOutput {
+        return put_group_policy.execute(self, allocator, input, options);
     }
 
     /// Adds or updates the policy that is specified as the IAM role's permissions
@@ -2760,8 +2760,8 @@ pub const Client = struct {
     /// a role are evaluated, see [IAM JSON policy
     /// evaluation
     /// logic](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html) in the IAM User Guide.
-    pub fn putRolePermissionsBoundary(self: *Self, input: put_role_permissions_boundary.PutRolePermissionsBoundaryInput, options: put_role_permissions_boundary.Options) !put_role_permissions_boundary.PutRolePermissionsBoundaryOutput {
-        return put_role_permissions_boundary.execute(self, input, options);
+    pub fn putRolePermissionsBoundary(self: *Self, allocator: std.mem.Allocator, input: put_role_permissions_boundary.PutRolePermissionsBoundaryInput, options: put_role_permissions_boundary.Options) !put_role_permissions_boundary.PutRolePermissionsBoundaryOutput {
+        return put_role_permissions_boundary.execute(self, allocator, input, options);
     }
 
     /// Adds or updates an inline policy document that is embedded in the specified
@@ -2805,8 +2805,8 @@ pub const Client = struct {
     /// API with IAM, see [Making query
     /// requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html) in the
     /// *IAM User Guide*.
-    pub fn putRolePolicy(self: *Self, input: put_role_policy.PutRolePolicyInput, options: put_role_policy.Options) !put_role_policy.PutRolePolicyOutput {
-        return put_role_policy.execute(self, input, options);
+    pub fn putRolePolicy(self: *Self, allocator: std.mem.Allocator, input: put_role_policy.PutRolePolicyInput, options: put_role_policy.Options) !put_role_policy.PutRolePolicyOutput {
+        return put_role_policy.execute(self, allocator, input, options);
     }
 
     /// Adds or updates the policy that is specified as the IAM user's permissions
@@ -2825,8 +2825,8 @@ pub const Client = struct {
     /// permissions for a user are evaluated, see [IAM JSON policy
     /// evaluation
     /// logic](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html) in the IAM User Guide.
-    pub fn putUserPermissionsBoundary(self: *Self, input: put_user_permissions_boundary.PutUserPermissionsBoundaryInput, options: put_user_permissions_boundary.Options) !put_user_permissions_boundary.PutUserPermissionsBoundaryOutput {
-        return put_user_permissions_boundary.execute(self, input, options);
+    pub fn putUserPermissionsBoundary(self: *Self, allocator: std.mem.Allocator, input: put_user_permissions_boundary.PutUserPermissionsBoundaryInput, options: put_user_permissions_boundary.Options) !put_user_permissions_boundary.PutUserPermissionsBoundaryOutput {
+        return put_user_permissions_boundary.execute(self, allocator, input, options);
     }
 
     /// Adds or updates an inline policy document that is embedded in the specified
@@ -2856,8 +2856,8 @@ pub const Client = struct {
     /// API with IAM, see [Making query
     /// requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html) in the
     /// *IAM User Guide*.
-    pub fn putUserPolicy(self: *Self, input: put_user_policy.PutUserPolicyInput, options: put_user_policy.Options) !put_user_policy.PutUserPolicyOutput {
-        return put_user_policy.execute(self, input, options);
+    pub fn putUserPolicy(self: *Self, allocator: std.mem.Allocator, input: put_user_policy.PutUserPolicyInput, options: put_user_policy.Options) !put_user_policy.PutUserPolicyOutput {
+        return put_user_policy.execute(self, allocator, input, options);
     }
 
     /// Rejects a delegation request, denying the requested temporary access.
@@ -2872,8 +2872,8 @@ pub const Client = struct {
     /// [
     /// Managing Permissions for Delegation
     /// Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
-    pub fn rejectDelegationRequest(self: *Self, input: reject_delegation_request.RejectDelegationRequestInput, options: reject_delegation_request.Options) !reject_delegation_request.RejectDelegationRequestOutput {
-        return reject_delegation_request.execute(self, input, options);
+    pub fn rejectDelegationRequest(self: *Self, allocator: std.mem.Allocator, input: reject_delegation_request.RejectDelegationRequestInput, options: reject_delegation_request.Options) !reject_delegation_request.RejectDelegationRequestOutput {
+        return reject_delegation_request.execute(self, allocator, input, options);
     }
 
     /// Removes the specified client ID (also known as audience) from the list of
@@ -2884,8 +2884,8 @@ pub const Client = struct {
     /// This operation is idempotent; it does not fail or return an error if you try
     /// to remove
     /// a client ID that does not exist.
-    pub fn removeClientIdFromOpenIdConnectProvider(self: *Self, input: remove_client_id_from_open_id_connect_provider.RemoveClientIDFromOpenIDConnectProviderInput, options: remove_client_id_from_open_id_connect_provider.Options) !remove_client_id_from_open_id_connect_provider.RemoveClientIDFromOpenIDConnectProviderOutput {
-        return remove_client_id_from_open_id_connect_provider.execute(self, input, options);
+    pub fn removeClientIdFromOpenIdConnectProvider(self: *Self, allocator: std.mem.Allocator, input: remove_client_id_from_open_id_connect_provider.RemoveClientIDFromOpenIDConnectProviderInput, options: remove_client_id_from_open_id_connect_provider.Options) !remove_client_id_from_open_id_connect_provider.RemoveClientIDFromOpenIDConnectProviderOutput {
+        return remove_client_id_from_open_id_connect_provider.execute(self, allocator, input, options);
     }
 
     /// Removes the specified IAM role from the specified Amazon EC2 instance
@@ -2906,13 +2906,13 @@ pub const Client = struct {
     /// see [Using
     /// instance
     /// profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) in the *IAM User Guide*.
-    pub fn removeRoleFromInstanceProfile(self: *Self, input: remove_role_from_instance_profile.RemoveRoleFromInstanceProfileInput, options: remove_role_from_instance_profile.Options) !remove_role_from_instance_profile.RemoveRoleFromInstanceProfileOutput {
-        return remove_role_from_instance_profile.execute(self, input, options);
+    pub fn removeRoleFromInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: remove_role_from_instance_profile.RemoveRoleFromInstanceProfileInput, options: remove_role_from_instance_profile.Options) !remove_role_from_instance_profile.RemoveRoleFromInstanceProfileOutput {
+        return remove_role_from_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Removes the specified user from the specified group.
-    pub fn removeUserFromGroup(self: *Self, input: remove_user_from_group.RemoveUserFromGroupInput, options: remove_user_from_group.Options) !remove_user_from_group.RemoveUserFromGroupOutput {
-        return remove_user_from_group.execute(self, input, options);
+    pub fn removeUserFromGroup(self: *Self, allocator: std.mem.Allocator, input: remove_user_from_group.RemoveUserFromGroupInput, options: remove_user_from_group.Options) !remove_user_from_group.RemoveUserFromGroupOutput {
+        return remove_user_from_group.execute(self, allocator, input, options);
     }
 
     /// Resets the password for a service-specific credential. The new password is
@@ -2922,8 +2922,8 @@ pub const Client = struct {
     /// the password immediately invalidates the previous password associated with
     /// this
     /// user.
-    pub fn resetServiceSpecificCredential(self: *Self, input: reset_service_specific_credential.ResetServiceSpecificCredentialInput, options: reset_service_specific_credential.Options) !reset_service_specific_credential.ResetServiceSpecificCredentialOutput {
-        return reset_service_specific_credential.execute(self, input, options);
+    pub fn resetServiceSpecificCredential(self: *Self, allocator: std.mem.Allocator, input: reset_service_specific_credential.ResetServiceSpecificCredentialInput, options: reset_service_specific_credential.Options) !reset_service_specific_credential.ResetServiceSpecificCredentialOutput {
+        return reset_service_specific_credential.execute(self, allocator, input, options);
     }
 
     /// Synchronizes the specified MFA device with its IAM resource object on the
@@ -2933,8 +2933,8 @@ pub const Client = struct {
     /// For more information about creating and working with virtual MFA devices,
     /// see [Using a virtual MFA
     /// device](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the *IAM User Guide*.
-    pub fn resyncMfaDevice(self: *Self, input: resync_mfa_device.ResyncMFADeviceInput, options: resync_mfa_device.Options) !resync_mfa_device.ResyncMFADeviceOutput {
-        return resync_mfa_device.execute(self, input, options);
+    pub fn resyncMfaDevice(self: *Self, allocator: std.mem.Allocator, input: resync_mfa_device.ResyncMFADeviceInput, options: resync_mfa_device.Options) !resync_mfa_device.ResyncMFADeviceOutput {
+        return resync_mfa_device.execute(self, allocator, input, options);
     }
 
     /// Sends the exchange token for an accepted delegation request.
@@ -2953,8 +2953,8 @@ pub const Client = struct {
     /// [
     /// Managing Permissions for Delegation
     /// Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
-    pub fn sendDelegationToken(self: *Self, input: send_delegation_token.SendDelegationTokenInput, options: send_delegation_token.Options) !send_delegation_token.SendDelegationTokenOutput {
-        return send_delegation_token.execute(self, input, options);
+    pub fn sendDelegationToken(self: *Self, allocator: std.mem.Allocator, input: send_delegation_token.SendDelegationTokenInput, options: send_delegation_token.Options) !send_delegation_token.SendDelegationTokenOutput {
+        return send_delegation_token.execute(self, allocator, input, options);
     }
 
     /// Sets the specified version of the specified policy as the policy's default
@@ -2968,8 +2968,8 @@ pub const Client = struct {
     ///
     /// For information about managed policies, see [Managed policies and inline
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html) in the *IAM User Guide*.
-    pub fn setDefaultPolicyVersion(self: *Self, input: set_default_policy_version.SetDefaultPolicyVersionInput, options: set_default_policy_version.Options) !set_default_policy_version.SetDefaultPolicyVersionOutput {
-        return set_default_policy_version.execute(self, input, options);
+    pub fn setDefaultPolicyVersion(self: *Self, allocator: std.mem.Allocator, input: set_default_policy_version.SetDefaultPolicyVersionInput, options: set_default_policy_version.Options) !set_default_policy_version.SetDefaultPolicyVersionOutput {
+        return set_default_policy_version.execute(self, allocator, input, options);
     }
 
     /// Sets the specified version of the global endpoint token as the token version
@@ -3009,8 +3009,8 @@ pub const Client = struct {
     /// To view the current session token version, see the
     /// `GlobalEndpointTokenVersion` entry in the response of the
     /// [GetAccountSummary](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountSummary.html) operation.
-    pub fn setSecurityTokenServicePreferences(self: *Self, input: set_security_token_service_preferences.SetSecurityTokenServicePreferencesInput, options: set_security_token_service_preferences.Options) !set_security_token_service_preferences.SetSecurityTokenServicePreferencesOutput {
-        return set_security_token_service_preferences.execute(self, input, options);
+    pub fn setSecurityTokenServicePreferences(self: *Self, allocator: std.mem.Allocator, input: set_security_token_service_preferences.SetSecurityTokenServicePreferencesInput, options: set_security_token_service_preferences.Options) !set_security_token_service_preferences.SetSecurityTokenServicePreferencesOutput {
+        return set_security_token_service_preferences.execute(self, allocator, input, options);
     }
 
     /// Simulate how a set of IAM policies and optionally a resource-based policy
@@ -3055,8 +3055,8 @@ pub const Client = struct {
     /// policies with the IAM policy simulator
     /// ](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in the
     /// *IAM User Guide*.
-    pub fn simulateCustomPolicy(self: *Self, input: simulate_custom_policy.SimulateCustomPolicyInput, options: simulate_custom_policy.Options) !simulate_custom_policy.SimulateCustomPolicyOutput {
-        return simulate_custom_policy.execute(self, input, options);
+    pub fn simulateCustomPolicy(self: *Self, allocator: std.mem.Allocator, input: simulate_custom_policy.SimulateCustomPolicyInput, options: simulate_custom_policy.Options) !simulate_custom_policy.SimulateCustomPolicyOutput {
+        return simulate_custom_policy.execute(self, allocator, input, options);
     }
 
     /// Simulate how a set of IAM policies attached to an IAM entity works with a
@@ -3115,8 +3115,8 @@ pub const Client = struct {
     /// policies with the IAM policy simulator
     /// ](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in the
     /// *IAM User Guide*.
-    pub fn simulatePrincipalPolicy(self: *Self, input: simulate_principal_policy.SimulatePrincipalPolicyInput, options: simulate_principal_policy.Options) !simulate_principal_policy.SimulatePrincipalPolicyOutput {
-        return simulate_principal_policy.execute(self, input, options);
+    pub fn simulatePrincipalPolicy(self: *Self, allocator: std.mem.Allocator, input: simulate_principal_policy.SimulatePrincipalPolicyInput, options: simulate_principal_policy.Options) !simulate_principal_policy.SimulatePrincipalPolicyOutput {
+        return simulate_principal_policy.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an IAM instance profile. If a tag with the same key
@@ -3157,8 +3157,8 @@ pub const Client = struct {
     /// need to store an array, you can store comma-separated values in the string.
     /// However, you
     /// must interpret the value in your code.
-    pub fn tagInstanceProfile(self: *Self, input: tag_instance_profile.TagInstanceProfileInput, options: tag_instance_profile.Options) !tag_instance_profile.TagInstanceProfileOutput {
-        return tag_instance_profile.execute(self, input, options);
+    pub fn tagInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: tag_instance_profile.TagInstanceProfileInput, options: tag_instance_profile.Options) !tag_instance_profile.TagInstanceProfileOutput {
+        return tag_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an IAM virtual multi-factor authentication (MFA)
@@ -3201,8 +3201,8 @@ pub const Client = struct {
     /// need to store an array, you can store comma-separated values in the string.
     /// However, you
     /// must interpret the value in your code.
-    pub fn tagMfaDevice(self: *Self, input: tag_mfa_device.TagMFADeviceInput, options: tag_mfa_device.Options) !tag_mfa_device.TagMFADeviceOutput {
-        return tag_mfa_device.execute(self, input, options);
+    pub fn tagMfaDevice(self: *Self, allocator: std.mem.Allocator, input: tag_mfa_device.TagMFADeviceInput, options: tag_mfa_device.Options) !tag_mfa_device.TagMFADeviceOutput {
+        return tag_mfa_device.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an OpenID Connect (OIDC)-compatible identity
@@ -3247,8 +3247,8 @@ pub const Client = struct {
     /// need to store an array, you can store comma-separated values in the string.
     /// However, you
     /// must interpret the value in your code.
-    pub fn tagOpenIdConnectProvider(self: *Self, input: tag_open_id_connect_provider.TagOpenIDConnectProviderInput, options: tag_open_id_connect_provider.Options) !tag_open_id_connect_provider.TagOpenIDConnectProviderOutput {
-        return tag_open_id_connect_provider.execute(self, input, options);
+    pub fn tagOpenIdConnectProvider(self: *Self, allocator: std.mem.Allocator, input: tag_open_id_connect_provider.TagOpenIDConnectProviderInput, options: tag_open_id_connect_provider.Options) !tag_open_id_connect_provider.TagOpenIDConnectProviderOutput {
+        return tag_open_id_connect_provider.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an IAM customer managed policy. If a tag with the
@@ -3289,8 +3289,8 @@ pub const Client = struct {
     /// need to store an array, you can store comma-separated values in the string.
     /// However, you
     /// must interpret the value in your code.
-    pub fn tagPolicy(self: *Self, input: tag_policy.TagPolicyInput, options: tag_policy.Options) !tag_policy.TagPolicyOutput {
-        return tag_policy.execute(self, input, options);
+    pub fn tagPolicy(self: *Self, allocator: std.mem.Allocator, input: tag_policy.TagPolicyInput, options: tag_policy.Options) !tag_policy.TagPolicyOutput {
+        return tag_policy.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an IAM role. The role can be a regular role or a
@@ -3342,8 +3342,8 @@ pub const Client = struct {
     /// identities](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
     /// in the
     /// *IAM User Guide*.
-    pub fn tagRole(self: *Self, input: tag_role.TagRoleInput, options: tag_role.Options) !tag_role.TagRoleOutput {
-        return tag_role.execute(self, input, options);
+    pub fn tagRole(self: *Self, allocator: std.mem.Allocator, input: tag_role.TagRoleInput, options: tag_role.Options) !tag_role.TagRoleOutput {
+        return tag_role.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to a Security Assertion Markup Language (SAML)
@@ -3389,8 +3389,8 @@ pub const Client = struct {
     /// need to store an array, you can store comma-separated values in the string.
     /// However, you
     /// must interpret the value in your code.
-    pub fn tagSamlProvider(self: *Self, input: tag_saml_provider.TagSAMLProviderInput, options: tag_saml_provider.Options) !tag_saml_provider.TagSAMLProviderOutput {
-        return tag_saml_provider.execute(self, input, options);
+    pub fn tagSamlProvider(self: *Self, allocator: std.mem.Allocator, input: tag_saml_provider.TagSAMLProviderInput, options: tag_saml_provider.Options) !tag_saml_provider.TagSAMLProviderOutput {
+        return tag_saml_provider.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an IAM server certificate. If a tag with the same
@@ -3442,8 +3442,8 @@ pub const Client = struct {
     /// need to store an array, you can store comma-separated values in the string.
     /// However, you
     /// must interpret the value in your code.
-    pub fn tagServerCertificate(self: *Self, input: tag_server_certificate.TagServerCertificateInput, options: tag_server_certificate.Options) !tag_server_certificate.TagServerCertificateOutput {
-        return tag_server_certificate.execute(self, input, options);
+    pub fn tagServerCertificate(self: *Self, allocator: std.mem.Allocator, input: tag_server_certificate.TagServerCertificateInput, options: tag_server_certificate.Options) !tag_server_certificate.TagServerCertificateOutput {
+        return tag_server_certificate.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an IAM user. If a tag with the same key name
@@ -3494,8 +3494,8 @@ pub const Client = struct {
     /// identities](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
     /// in the
     /// *IAM User Guide*.
-    pub fn tagUser(self: *Self, input: tag_user.TagUserInput, options: tag_user.Options) !tag_user.TagUserOutput {
-        return tag_user.execute(self, input, options);
+    pub fn tagUser(self: *Self, allocator: std.mem.Allocator, input: tag_user.TagUserInput, options: tag_user.Options) !tag_user.TagUserOutput {
+        return tag_user.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the IAM instance profile. For more
@@ -3503,8 +3503,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn untagInstanceProfile(self: *Self, input: untag_instance_profile.UntagInstanceProfileInput, options: untag_instance_profile.Options) !untag_instance_profile.UntagInstanceProfileOutput {
-        return untag_instance_profile.execute(self, input, options);
+    pub fn untagInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: untag_instance_profile.UntagInstanceProfileInput, options: untag_instance_profile.Options) !untag_instance_profile.UntagInstanceProfileOutput {
+        return untag_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the IAM virtual multi-factor authentication
@@ -3513,8 +3513,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn untagMfaDevice(self: *Self, input: untag_mfa_device.UntagMFADeviceInput, options: untag_mfa_device.Options) !untag_mfa_device.UntagMFADeviceOutput {
-        return untag_mfa_device.execute(self, input, options);
+    pub fn untagMfaDevice(self: *Self, allocator: std.mem.Allocator, input: untag_mfa_device.UntagMFADeviceInput, options: untag_mfa_device.Options) !untag_mfa_device.UntagMFADeviceOutput {
+        return untag_mfa_device.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the specified OpenID Connect
@@ -3526,8 +3526,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn untagOpenIdConnectProvider(self: *Self, input: untag_open_id_connect_provider.UntagOpenIDConnectProviderInput, options: untag_open_id_connect_provider.Options) !untag_open_id_connect_provider.UntagOpenIDConnectProviderOutput {
-        return untag_open_id_connect_provider.execute(self, input, options);
+    pub fn untagOpenIdConnectProvider(self: *Self, allocator: std.mem.Allocator, input: untag_open_id_connect_provider.UntagOpenIDConnectProviderInput, options: untag_open_id_connect_provider.Options) !untag_open_id_connect_provider.UntagOpenIDConnectProviderOutput {
+        return untag_open_id_connect_provider.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the customer managed policy. For more
@@ -3535,8 +3535,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn untagPolicy(self: *Self, input: untag_policy.UntagPolicyInput, options: untag_policy.Options) !untag_policy.UntagPolicyOutput {
-        return untag_policy.execute(self, input, options);
+    pub fn untagPolicy(self: *Self, allocator: std.mem.Allocator, input: untag_policy.UntagPolicyInput, options: untag_policy.Options) !untag_policy.UntagPolicyOutput {
+        return untag_policy.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the role. For more information about
@@ -3544,8 +3544,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn untagRole(self: *Self, input: untag_role.UntagRoleInput, options: untag_role.Options) !untag_role.UntagRoleOutput {
-        return untag_role.execute(self, input, options);
+    pub fn untagRole(self: *Self, allocator: std.mem.Allocator, input: untag_role.UntagRoleInput, options: untag_role.Options) !untag_role.UntagRoleOutput {
+        return untag_role.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the specified Security Assertion Markup
@@ -3554,8 +3554,8 @@ pub const Client = struct {
     /// [About web identity
     /// federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html). For more information about tagging, see [Tagging IAM resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the
     /// *IAM User Guide*.
-    pub fn untagSamlProvider(self: *Self, input: untag_saml_provider.UntagSAMLProviderInput, options: untag_saml_provider.Options) !untag_saml_provider.UntagSAMLProviderOutput {
-        return untag_saml_provider.execute(self, input, options);
+    pub fn untagSamlProvider(self: *Self, allocator: std.mem.Allocator, input: untag_saml_provider.UntagSAMLProviderInput, options: untag_saml_provider.Options) !untag_saml_provider.UntagSAMLProviderOutput {
+        return untag_saml_provider.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the IAM server certificate.
@@ -3571,8 +3571,8 @@ pub const Client = struct {
     /// server
     /// certificates, [Working with server
     /// certificates](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html) in the *IAM User Guide*.
-    pub fn untagServerCertificate(self: *Self, input: untag_server_certificate.UntagServerCertificateInput, options: untag_server_certificate.Options) !untag_server_certificate.UntagServerCertificateOutput {
-        return untag_server_certificate.execute(self, input, options);
+    pub fn untagServerCertificate(self: *Self, allocator: std.mem.Allocator, input: untag_server_certificate.UntagServerCertificateInput, options: untag_server_certificate.Options) !untag_server_certificate.UntagServerCertificateOutput {
+        return untag_server_certificate.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the user. For more information about
@@ -3580,8 +3580,8 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
     /// the
     /// *IAM User Guide*.
-    pub fn untagUser(self: *Self, input: untag_user.UntagUserInput, options: untag_user.Options) !untag_user.UntagUserOutput {
-        return untag_user.execute(self, input, options);
+    pub fn untagUser(self: *Self, allocator: std.mem.Allocator, input: untag_user.UntagUserInput, options: untag_user.Options) !untag_user.UntagUserOutput {
+        return untag_user.execute(self, allocator, input, options);
     }
 
     /// Changes the status of the specified access key from Active to Inactive, or
@@ -3601,8 +3601,8 @@ pub const Client = struct {
     /// For information about rotating keys, see [Managing keys and
     /// certificates](https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html)
     /// in the *IAM User Guide*.
-    pub fn updateAccessKey(self: *Self, input: update_access_key.UpdateAccessKeyInput, options: update_access_key.Options) !update_access_key.UpdateAccessKeyOutput {
-        return update_access_key.execute(self, input, options);
+    pub fn updateAccessKey(self: *Self, allocator: std.mem.Allocator, input: update_access_key.UpdateAccessKeyInput, options: update_access_key.Options) !update_access_key.UpdateAccessKeyOutput {
+        return update_access_key.execute(self, allocator, input, options);
     }
 
     /// Updates the password policy settings for the Amazon Web Services account.
@@ -3621,8 +3621,8 @@ pub const Client = struct {
     /// For more information about using a password policy, see [Managing an IAM
     /// password
     /// policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html) in the *IAM User Guide*.
-    pub fn updateAccountPasswordPolicy(self: *Self, input: update_account_password_policy.UpdateAccountPasswordPolicyInput, options: update_account_password_policy.Options) !update_account_password_policy.UpdateAccountPasswordPolicyOutput {
-        return update_account_password_policy.execute(self, input, options);
+    pub fn updateAccountPasswordPolicy(self: *Self, allocator: std.mem.Allocator, input: update_account_password_policy.UpdateAccountPasswordPolicyInput, options: update_account_password_policy.Options) !update_account_password_policy.UpdateAccountPasswordPolicyOutput {
+        return update_account_password_policy.execute(self, allocator, input, options);
     }
 
     /// Updates the policy that grants an IAM entity permission to assume a role.
@@ -3632,8 +3632,8 @@ pub const Client = struct {
     /// [Using roles to
     /// delegate permissions and federate
     /// identities](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html).
-    pub fn updateAssumeRolePolicy(self: *Self, input: update_assume_role_policy.UpdateAssumeRolePolicyInput, options: update_assume_role_policy.Options) !update_assume_role_policy.UpdateAssumeRolePolicyOutput {
-        return update_assume_role_policy.execute(self, input, options);
+    pub fn updateAssumeRolePolicy(self: *Self, allocator: std.mem.Allocator, input: update_assume_role_policy.UpdateAssumeRolePolicyInput, options: update_assume_role_policy.Options) !update_assume_role_policy.UpdateAssumeRolePolicyOutput {
+        return update_assume_role_policy.execute(self, allocator, input, options);
     }
 
     /// Updates an existing delegation request with additional information. When the
@@ -3646,8 +3646,8 @@ pub const Client = struct {
     /// [
     /// Managing Permissions for Delegation
     /// Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions).
-    pub fn updateDelegationRequest(self: *Self, input: update_delegation_request.UpdateDelegationRequestInput, options: update_delegation_request.Options) !update_delegation_request.UpdateDelegationRequestOutput {
-        return update_delegation_request.execute(self, input, options);
+    pub fn updateDelegationRequest(self: *Self, allocator: std.mem.Allocator, input: update_delegation_request.UpdateDelegationRequestInput, options: update_delegation_request.Options) !update_delegation_request.UpdateDelegationRequestOutput {
+        return update_delegation_request.execute(self, allocator, input, options);
     }
 
     /// Updates the name and/or the path of the specified IAM group.
@@ -3667,8 +3667,8 @@ pub const Client = struct {
     /// the `Managers` group, but not the `MGRs` group, then the
     /// update fails. For more information about permissions, see [Access
     /// management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html).
-    pub fn updateGroup(self: *Self, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
-        return update_group.execute(self, input, options);
+    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
+        return update_group.execute(self, allocator, input, options);
     }
 
     /// Changes the password for the specified IAM user. You can use the CLI, the
@@ -3682,8 +3682,8 @@ pub const Client = struct {
     /// For more information about modifying passwords, see [Managing
     /// passwords](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in the
     /// *IAM User Guide*.
-    pub fn updateLoginProfile(self: *Self, input: update_login_profile.UpdateLoginProfileInput, options: update_login_profile.Options) !update_login_profile.UpdateLoginProfileOutput {
-        return update_login_profile.execute(self, input, options);
+    pub fn updateLoginProfile(self: *Self, allocator: std.mem.Allocator, input: update_login_profile.UpdateLoginProfileInput, options: update_login_profile.Options) !update_login_profile.UpdateLoginProfileOutput {
+        return update_login_profile.execute(self, allocator, input, options);
     }
 
     /// Replaces the existing list of server certificate thumbprints associated with
@@ -3715,13 +3715,13 @@ pub const Client = struct {
     /// validated by the thumbprint. Therefore, it is best to limit access to the
     /// `UpdateOpenIDConnectProviderThumbprint` operation to highly
     /// privileged users.
-    pub fn updateOpenIdConnectProviderThumbprint(self: *Self, input: update_open_id_connect_provider_thumbprint.UpdateOpenIDConnectProviderThumbprintInput, options: update_open_id_connect_provider_thumbprint.Options) !update_open_id_connect_provider_thumbprint.UpdateOpenIDConnectProviderThumbprintOutput {
-        return update_open_id_connect_provider_thumbprint.execute(self, input, options);
+    pub fn updateOpenIdConnectProviderThumbprint(self: *Self, allocator: std.mem.Allocator, input: update_open_id_connect_provider_thumbprint.UpdateOpenIDConnectProviderThumbprintInput, options: update_open_id_connect_provider_thumbprint.Options) !update_open_id_connect_provider_thumbprint.UpdateOpenIDConnectProviderThumbprintOutput {
+        return update_open_id_connect_provider_thumbprint.execute(self, allocator, input, options);
     }
 
     /// Updates the description or maximum session duration setting of a role.
-    pub fn updateRole(self: *Self, input: update_role.UpdateRoleInput, options: update_role.Options) !update_role.UpdateRoleOutput {
-        return update_role.execute(self, input, options);
+    pub fn updateRole(self: *Self, allocator: std.mem.Allocator, input: update_role.UpdateRoleInput, options: update_role.Options) !update_role.UpdateRoleOutput {
+        return update_role.execute(self, allocator, input, options);
     }
 
     /// Use
@@ -3730,8 +3730,8 @@ pub const Client = struct {
     /// Modifies only the description of a role. This operation performs the same
     /// function as
     /// the `Description` parameter in the `UpdateRole` operation.
-    pub fn updateRoleDescription(self: *Self, input: update_role_description.UpdateRoleDescriptionInput, options: update_role_description.Options) !update_role_description.UpdateRoleDescriptionOutput {
-        return update_role_description.execute(self, input, options);
+    pub fn updateRoleDescription(self: *Self, allocator: std.mem.Allocator, input: update_role_description.UpdateRoleDescriptionInput, options: update_role_description.Options) !update_role_description.UpdateRoleDescriptionOutput {
+        return update_role_description.execute(self, allocator, input, options);
     }
 
     /// Updates the metadata document, SAML encryption settings, and private keys
@@ -3739,8 +3739,8 @@ pub const Client = struct {
     /// existing SAML provider. To rotate private keys, add your new private key and
     /// then remove
     /// the old key in a separate request.
-    pub fn updateSamlProvider(self: *Self, input: update_saml_provider.UpdateSAMLProviderInput, options: update_saml_provider.Options) !update_saml_provider.UpdateSAMLProviderOutput {
-        return update_saml_provider.execute(self, input, options);
+    pub fn updateSamlProvider(self: *Self, allocator: std.mem.Allocator, input: update_saml_provider.UpdateSAMLProviderInput, options: update_saml_provider.Options) !update_saml_provider.UpdateSAMLProviderOutput {
+        return update_saml_provider.execute(self, allocator, input, options);
     }
 
     /// Updates the name and/or the path of the specified server certificate stored
@@ -3772,8 +3772,8 @@ pub const Client = struct {
     /// about permissions, see [Access
     /// management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in
     /// the *IAM User Guide*.
-    pub fn updateServerCertificate(self: *Self, input: update_server_certificate.UpdateServerCertificateInput, options: update_server_certificate.Options) !update_server_certificate.UpdateServerCertificateOutput {
-        return update_server_certificate.execute(self, input, options);
+    pub fn updateServerCertificate(self: *Self, allocator: std.mem.Allocator, input: update_server_certificate.UpdateServerCertificateInput, options: update_server_certificate.Options) !update_server_certificate.UpdateServerCertificateOutput {
+        return update_server_certificate.execute(self, allocator, input, options);
     }
 
     /// Sets the status of a service-specific credential to `Active` or
@@ -3781,8 +3781,8 @@ pub const Client = struct {
     /// for authentication to the service. This operation can be used to disable a
     /// user's
     /// service-specific credential as part of a credential rotation work flow.
-    pub fn updateServiceSpecificCredential(self: *Self, input: update_service_specific_credential.UpdateServiceSpecificCredentialInput, options: update_service_specific_credential.Options) !update_service_specific_credential.UpdateServiceSpecificCredentialOutput {
-        return update_service_specific_credential.execute(self, input, options);
+    pub fn updateServiceSpecificCredential(self: *Self, allocator: std.mem.Allocator, input: update_service_specific_credential.UpdateServiceSpecificCredentialInput, options: update_service_specific_credential.Options) !update_service_specific_credential.UpdateServiceSpecificCredentialOutput {
+        return update_service_specific_credential.execute(self, allocator, input, options);
     }
 
     /// Changes the status of the specified user signing certificate from active to
@@ -3798,8 +3798,8 @@ pub const Client = struct {
     /// to manage Amazon Web Services account root user credentials even if the
     /// Amazon Web Services account has no associated
     /// users.
-    pub fn updateSigningCertificate(self: *Self, input: update_signing_certificate.UpdateSigningCertificateInput, options: update_signing_certificate.Options) !update_signing_certificate.UpdateSigningCertificateOutput {
-        return update_signing_certificate.execute(self, input, options);
+    pub fn updateSigningCertificate(self: *Self, allocator: std.mem.Allocator, input: update_signing_certificate.UpdateSigningCertificateInput, options: update_signing_certificate.Options) !update_signing_certificate.UpdateSigningCertificateOutput {
+        return update_signing_certificate.execute(self, allocator, input, options);
     }
 
     /// Sets the status of an IAM user's SSH public key to active or inactive. SSH
@@ -3815,8 +3815,8 @@ pub const Client = struct {
     /// to authenticate to an CodeCommit repository, see [Set up CodeCommit for
     /// SSH
     /// connections](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html) in the *CodeCommit User Guide*.
-    pub fn updateSshPublicKey(self: *Self, input: update_ssh_public_key.UpdateSSHPublicKeyInput, options: update_ssh_public_key.Options) !update_ssh_public_key.UpdateSSHPublicKeyOutput {
-        return update_ssh_public_key.execute(self, input, options);
+    pub fn updateSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: update_ssh_public_key.UpdateSSHPublicKeyInput, options: update_ssh_public_key.Options) !update_ssh_public_key.UpdateSSHPublicKeyOutput {
+        return update_ssh_public_key.execute(self, allocator, input, options);
     }
 
     /// Updates the name and/or the path of the specified IAM user.
@@ -3835,8 +3835,8 @@ pub const Client = struct {
     /// permission on all (*). For more information about permissions, see
     /// [Permissions and
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html).
-    pub fn updateUser(self: *Self, input: update_user.UpdateUserInput, options: update_user.Options) !update_user.UpdateUserOutput {
-        return update_user.execute(self, input, options);
+    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: update_user.Options) !update_user.UpdateUserOutput {
+        return update_user.execute(self, allocator, input, options);
     }
 
     /// Uploads a server certificate entity for the Amazon Web Services account. The
@@ -3878,8 +3878,8 @@ pub const Client = struct {
     /// making HTTP query
     /// requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html)
     /// in the *IAM User Guide*.
-    pub fn uploadServerCertificate(self: *Self, input: upload_server_certificate.UploadServerCertificateInput, options: upload_server_certificate.Options) !upload_server_certificate.UploadServerCertificateOutput {
-        return upload_server_certificate.execute(self, input, options);
+    pub fn uploadServerCertificate(self: *Self, allocator: std.mem.Allocator, input: upload_server_certificate.UploadServerCertificateInput, options: upload_server_certificate.Options) !upload_server_certificate.UploadServerCertificateOutput {
+        return upload_server_certificate.execute(self, allocator, input, options);
     }
 
     /// Uploads an X.509 signing certificate and associates it with the specified
@@ -3913,8 +3913,8 @@ pub const Client = struct {
     /// requests](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html) in the *Amazon Web Services General Reference*. For
     /// general information about using the Query API with IAM, see [Making query
     /// requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html) in the *IAM User Guide*.
-    pub fn uploadSigningCertificate(self: *Self, input: upload_signing_certificate.UploadSigningCertificateInput, options: upload_signing_certificate.Options) !upload_signing_certificate.UploadSigningCertificateOutput {
-        return upload_signing_certificate.execute(self, input, options);
+    pub fn uploadSigningCertificate(self: *Self, allocator: std.mem.Allocator, input: upload_signing_certificate.UploadSigningCertificateInput, options: upload_signing_certificate.Options) !upload_signing_certificate.UploadSigningCertificateOutput {
+        return upload_signing_certificate.execute(self, allocator, input, options);
     }
 
     /// Uploads an SSH public key and associates it with the specified IAM user.
@@ -3926,8 +3926,8 @@ pub const Client = struct {
     /// to authenticate to an CodeCommit repository, see [Set up CodeCommit for
     /// SSH
     /// connections](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html) in the *CodeCommit User Guide*.
-    pub fn uploadSshPublicKey(self: *Self, input: upload_ssh_public_key.UploadSSHPublicKeyInput, options: upload_ssh_public_key.Options) !upload_ssh_public_key.UploadSSHPublicKeyOutput {
-        return upload_ssh_public_key.execute(self, input, options);
+    pub fn uploadSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: upload_ssh_public_key.UploadSSHPublicKeyInput, options: upload_ssh_public_key.Options) !upload_ssh_public_key.UploadSSHPublicKeyOutput {
+        return upload_ssh_public_key.execute(self, allocator, input, options);
     }
 
     pub fn getAccountAuthorizationDetailsPaginator(self: *Self, params: get_account_authorization_details.GetAccountAuthorizationDetailsInput) paginator.GetAccountAuthorizationDetailsPaginator {

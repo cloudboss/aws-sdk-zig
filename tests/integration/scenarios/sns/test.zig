@@ -24,26 +24,32 @@ test "zest.beforeAll" {
         &shared_cfg.?,
         .{ .keep_alive = false },
     );
-    var r = try sns.create_topic.execute(
-        &shared_sns_client.?,
-        .{ .name = "sdk-zig-sns-shared" },
-        .{},
-    );
-    defer r.deinit();
-    const arn = r.topic_arn orelse return error.MissingTopicArn;
-    @memcpy(shared_topic_arn_buf[0..arn.len], arn);
-    shared_topic_arn = shared_topic_arn_buf[0..arn.len];
+    {
+        var arena = std.heap.ArenaAllocator.init(allocator);
+        defer arena.deinit();
+        const r = try sns.create_topic.execute(
+            &shared_sns_client.?,
+            arena.allocator(),
+            .{ .name = "sdk-zig-sns-shared" },
+            .{},
+        );
+        const arn = r.topic_arn orelse return error.MissingTopicArn;
+        @memcpy(shared_topic_arn_buf[0..arn.len], arn);
+        shared_topic_arn = shared_topic_arn_buf[0..arn.len];
+    }
 }
 
 test "zest.afterAll" {
     if (shared_sns_client) |*c| {
         if (shared_topic_arn.len > 0) {
-            var r = try sns.delete_topic.execute(
+            var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+            defer arena.deinit();
+            _ = try sns.delete_topic.execute(
                 c,
+                arena.allocator(),
                 .{ .topic_arn = shared_topic_arn },
                 .{},
             );
-            defer r.deinit();
         }
         c.deinit();
     }
@@ -53,65 +59,74 @@ test "zest.afterAll" {
 }
 
 test "CreateTopic returns topic ARN" {
-    var create_result = try sns.create_topic.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const create_result = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-create" },
         .{},
     );
-    defer create_result.deinit();
 
     const topic_arn = create_result.topic_arn orelse
         return error.MissingTopicArn;
     try std.testing.expect(topic_arn.len > 0);
 
-    var del = try sns.delete_topic.execute(
+    _ = try sns.delete_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .topic_arn = topic_arn },
         .{},
     );
-    defer del.deinit();
 }
 
 test "Publish to topic returns message ID" {
-    var pub_result = try sns.publish.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const pub_result = try sns.publish.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{
             .topic_arn = shared_topic_arn,
             .message = "Hello from aws-sdk-zig!",
         },
         .{},
     );
-    defer pub_result.deinit();
 
     try std.testing.expect(pub_result.message_id != null);
 }
 
 test "DeleteTopic removes topic" {
-    var create_result = try sns.create_topic.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const create_result = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-delete" },
         .{},
     );
-    defer create_result.deinit();
 
     const topic_arn = create_result.topic_arn orelse
         return error.MissingTopicArn;
 
     {
-        var del = try sns.delete_topic.execute(
+        _ = try sns.delete_topic.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .topic_arn = topic_arn },
             .{},
         );
-        defer del.deinit();
     }
 
-    var list_result = try sns.list_topics.execute(
+    const list_result = try sns.list_topics.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer list_result.deinit();
 
     if (list_result.topics) |topics| {
         for (topics) |topic| {
@@ -125,12 +140,15 @@ test "DeleteTopic removes topic" {
 }
 
 test "SNS delivers published message to SQS subscription" {
-    var queue_result = try sqs.create_queue.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const queue_result = try sqs.create_queue.execute(
         &shared_sqs_client.?,
+        arena.allocator(),
         .{ .queue_name = "sdk-zig-sns-sub-queue" },
         .{},
     );
-    defer queue_result.deinit();
 
     const queue_url = queue_result.queue_url orelse
         return error.MissingQueueUrl;
@@ -143,18 +161,19 @@ test "SNS delivers published message to SQS subscription" {
         .{queue_name},
     ) catch return error.ArnTooLong;
 
-    var topic_result = try sns.create_topic.execute(
+    const topic_result = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sub-test-topic" },
         .{},
     );
-    defer topic_result.deinit();
 
     const topic_arn = topic_result.topic_arn orelse
         return error.MissingTopicArn;
 
-    var sub_result = try sns.subscribe.execute(
+    const sub_result = try sns.subscribe.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{
             .topic_arn = topic_arn,
             .protocol = "sqs",
@@ -162,22 +181,23 @@ test "SNS delivers published message to SQS subscription" {
         },
         .{},
     );
-    defer sub_result.deinit();
 
     try std.testing.expect(sub_result.subscription_arn != null);
 
-    var pub_result = try sns.publish.execute(
+    const pub_result = try sns.publish.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{
             .topic_arn = topic_arn,
             .message = "SNS-to-SQS test message",
         },
         .{},
     );
-    defer pub_result.deinit();
+    _ = pub_result;
 
-    var recv_result = try sqs.receive_message.execute(
+    const recv_result = try sqs.receive_message.execute(
         &shared_sqs_client.?,
+        arena.allocator(),
         .{
             .queue_url = queue_url,
             .max_number_of_messages = 1,
@@ -185,7 +205,6 @@ test "SNS delivers published message to SQS subscription" {
         },
         .{},
     );
-    defer recv_result.deinit();
 
     const messages = recv_result.messages orelse
         return error.MissingMessages;
@@ -197,40 +216,43 @@ test "SNS delivers published message to SQS subscription" {
     );
 
     {
-        var r = try sns.delete_topic.execute(
+        _ = try sns.delete_topic.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .topic_arn = topic_arn },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try sqs.delete_queue.execute(
+        _ = try sqs.delete_queue.execute(
             &shared_sqs_client.?,
+            arena.allocator(),
             .{ .queue_url = queue_url },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "ListTopics includes created topic" {
-    var create_result = try sns.create_topic.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const create_result = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-list-topics" },
         .{},
     );
-    defer create_result.deinit();
 
     const topic_arn = create_result.topic_arn orelse
         return error.MissingTopicArn;
 
-    var list_result = try sns.list_topics.execute(
+    const list_result = try sns.list_topics.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer list_result.deinit();
 
     const topics = list_result.topics orelse return error.MissingTopics;
     var found = false;
@@ -245,18 +267,22 @@ test "ListTopics includes created topic" {
     try std.testing.expect(found);
 
     {
-        var r = try sns.delete_topic.execute(
+        _ = try sns.delete_topic.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .topic_arn = topic_arn },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "Publish with subject sets message_id" {
-    var pub_result = try sns.publish.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const pub_result = try sns.publish.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{
             .topic_arn = shared_topic_arn,
             .message = "hello",
@@ -264,7 +290,6 @@ test "Publish with subject sets message_id" {
         },
         .{},
     );
-    defer pub_result.deinit();
 
     const message_id = pub_result.message_id orelse
         return error.MissingMessageId;
@@ -272,30 +297,34 @@ test "Publish with subject sets message_id" {
 }
 
 test "ListSubscriptions returns subscription after Subscribe" {
-    var queue_result = try sqs.create_queue.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const queue_result = try sqs.create_queue.execute(
         &shared_sqs_client.?,
+        arena.allocator(),
         .{ .queue_name = "sdk-zig-sns-sub-list-queue" },
         .{},
     );
-    defer queue_result.deinit();
 
     const queue_url = queue_result.queue_url orelse
         return error.MissingQueueUrl;
     const queue_arn =
         "arn:aws:sqs:us-east-1:000000000000:sdk-zig-sns-sub-list-queue";
 
-    var topic_result = try sns.create_topic.execute(
+    const topic_result = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-sub-list-topic" },
         .{},
     );
-    defer topic_result.deinit();
 
     const topic_arn = topic_result.topic_arn orelse
         return error.MissingTopicArn;
 
-    var sub_result = try sns.subscribe.execute(
+    const sub_result = try sns.subscribe.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{
             .topic_arn = topic_arn,
             .protocol = "sqs",
@@ -303,62 +332,66 @@ test "ListSubscriptions returns subscription after Subscribe" {
         },
         .{},
     );
-    defer sub_result.deinit();
+    _ = sub_result;
 
-    var list_result = try sns.list_subscriptions.execute(
+    const list_result = try sns.list_subscriptions.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer list_result.deinit();
 
     const subscriptions = list_result.subscriptions orelse
         return error.MissingSubscriptions;
     try std.testing.expect(subscriptions.len > 0);
 
     {
-        var r = try sns.delete_topic.execute(
+        _ = try sns.delete_topic.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .topic_arn = topic_arn },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try sqs.delete_queue.execute(
+        _ = try sqs.delete_queue.execute(
             &shared_sqs_client.?,
+            arena.allocator(),
             .{ .queue_url = queue_url },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "Unsubscribe removes subscription" {
-    var topic_result = try sns.create_topic.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const topic_result = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-unsub-topic" },
         .{},
     );
-    defer topic_result.deinit();
 
     const topic_arn = topic_result.topic_arn orelse
         return error.MissingTopicArn;
 
-    var queue_result = try sqs.create_queue.execute(
+    const queue_result = try sqs.create_queue.execute(
         &shared_sqs_client.?,
+        arena.allocator(),
         .{ .queue_name = "sdk-zig-sns-unsub-queue" },
         .{},
     );
-    defer queue_result.deinit();
 
     const queue_url = queue_result.queue_url orelse
         return error.MissingQueueUrl;
     const queue_arn =
         "arn:aws:sqs:us-east-1:000000000000:sdk-zig-sns-unsub-queue";
 
-    var sub_result = try sns.subscribe.execute(
+    const sub_result = try sns.subscribe.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{
             .topic_arn = topic_arn,
             .protocol = "sqs",
@@ -366,26 +399,25 @@ test "Unsubscribe removes subscription" {
         },
         .{},
     );
-    defer sub_result.deinit();
 
     const subscription_arn = sub_result.subscription_arn orelse
         return error.MissingSubscriptionArn;
 
     {
-        var r = try sns.unsubscribe.execute(
+        _ = try sns.unsubscribe.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .subscription_arn = subscription_arn },
             .{},
         );
-        defer r.deinit();
     }
 
-    var list_result = try sns.list_subscriptions_by_topic.execute(
+    const list_result = try sns.list_subscriptions_by_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .topic_arn = topic_arn },
         .{},
     );
-    defer list_result.deinit();
 
     if (list_result.subscriptions) |subs| {
         for (subs) |sub| {
@@ -398,48 +430,55 @@ test "Unsubscribe removes subscription" {
     }
 
     {
-        var r = try sns.delete_topic.execute(
+        _ = try sns.delete_topic.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .topic_arn = topic_arn },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try sqs.delete_queue.execute(
+        _ = try sqs.delete_queue.execute(
             &shared_sqs_client.?,
+            arena.allocator(),
             .{ .queue_url = queue_url },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "GetTopicAttributes returns topic metadata" {
-    var attr_result = try sns.get_topic_attributes.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const attr_result = try sns.get_topic_attributes.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .topic_arn = shared_topic_arn },
         .{},
     );
-    defer attr_result.deinit();
 
     try std.testing.expect(attr_result.attributes != null);
 }
 
 test "SetTopicAttributes updates display name" {
-    var create_result = try sns.create_topic.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const create_result = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-setattr" },
         .{},
     );
-    defer create_result.deinit();
 
     const topic_arn = create_result.topic_arn orelse
         return error.MissingTopicArn;
 
     {
-        var r = try sns.set_topic_attributes.execute(
+        _ = try sns.set_topic_attributes.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{
                 .topic_arn = topic_arn,
                 .attribute_name = "DisplayName",
@@ -447,15 +486,14 @@ test "SetTopicAttributes updates display name" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
-    var attr_result = try sns.get_topic_attributes.execute(
+    const attr_result = try sns.get_topic_attributes.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .topic_arn = topic_arn },
         .{},
     );
-    defer attr_result.deinit();
 
     const attrs = attr_result.attributes orelse
         return error.MissingAttributes;
@@ -473,20 +511,24 @@ test "SetTopicAttributes updates display name" {
     try std.testing.expect(found);
 
     {
-        var r = try sns.delete_topic.execute(
+        _ = try sns.delete_topic.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .topic_arn = topic_arn },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "Publish to nonexistent topic returns error" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const fake_arn =
         "arn:aws:sns:us-east-1:000000000000:does-not-exist";
     const result = sns.publish.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .topic_arn = fake_arn, .message = "should fail" },
         .{},
     );
@@ -494,22 +536,25 @@ test "Publish to nonexistent topic returns error" {
 }
 
 test "CreateTopic is idempotent" {
-    var first = try sns.create_topic.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const first = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-idempotent" },
         .{},
     );
-    defer first.deinit();
 
     const first_arn = first.topic_arn orelse
         return error.MissingTopicArn;
 
-    var second = try sns.create_topic.execute(
+    const second = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-idempotent" },
         .{},
     );
-    defer second.deinit();
 
     const second_arn = second.topic_arn orelse
         return error.MissingTopicArn;
@@ -517,40 +562,44 @@ test "CreateTopic is idempotent" {
     try std.testing.expectEqualStrings(first_arn, second_arn);
 
     {
-        var r = try sns.delete_topic.execute(
+        _ = try sns.delete_topic.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .topic_arn = first_arn },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "ListSubscriptionsByTopic returns scoped results" {
-    var topic_result = try sns.create_topic.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const topic_result = try sns.create_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .name = "sdk-zig-sns-listsub-bytopic" },
         .{},
     );
-    defer topic_result.deinit();
 
     const topic_arn = topic_result.topic_arn orelse
         return error.MissingTopicArn;
 
-    var queue_result = try sqs.create_queue.execute(
+    const queue_result = try sqs.create_queue.execute(
         &shared_sqs_client.?,
+        arena.allocator(),
         .{ .queue_name = "sdk-zig-sns-listsub-bt-q" },
         .{},
     );
-    defer queue_result.deinit();
 
     const queue_url = queue_result.queue_url orelse
         return error.MissingQueueUrl;
     const queue_arn =
         "arn:aws:sqs:us-east-1:000000000000:sdk-zig-sns-listsub-bt-q";
 
-    var sub_result = try sns.subscribe.execute(
+    const sub_result = try sns.subscribe.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{
             .topic_arn = topic_arn,
             .protocol = "sqs",
@@ -558,33 +607,33 @@ test "ListSubscriptionsByTopic returns scoped results" {
         },
         .{},
     );
-    defer sub_result.deinit();
+    _ = sub_result;
 
-    var list_result = try sns.list_subscriptions_by_topic.execute(
+    const list_result = try sns.list_subscriptions_by_topic.execute(
         &shared_sns_client.?,
+        arena.allocator(),
         .{ .topic_arn = topic_arn },
         .{},
     );
-    defer list_result.deinit();
 
     const subs = list_result.subscriptions orelse
         return error.MissingSubscriptions;
     try std.testing.expect(subs.len > 0);
 
     {
-        var r = try sns.delete_topic.execute(
+        _ = try sns.delete_topic.execute(
             &shared_sns_client.?,
+            arena.allocator(),
             .{ .topic_arn = topic_arn },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try sqs.delete_queue.execute(
+        _ = try sqs.delete_queue.execute(
             &shared_sqs_client.?,
+            arena.allocator(),
             .{ .queue_url = queue_url },
             .{},
         );
-        defer r.deinit();
     }
 }

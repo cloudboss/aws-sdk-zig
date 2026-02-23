@@ -40,19 +40,13 @@ pub const CreateTransitGatewayPeeringAttachmentInput = struct {
 pub const CreateTransitGatewayPeeringAttachmentOutput = struct {
     /// The transit gateway peering attachment.
     transit_gateway_peering_attachment: ?TransitGatewayPeeringAttachment = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CreateTransitGatewayPeeringAttachmentOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CreateTransitGatewayPeeringAttachmentInput, options: Options) !CreateTransitGatewayPeeringAttachmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTransitGatewayPeeringAttachmentInput, options: Options) !CreateTransitGatewayPeeringAttachmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -73,10 +67,7 @@ pub fn execute(client: *Client, input: CreateTransitGatewayPeeringAttachmentInpu
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

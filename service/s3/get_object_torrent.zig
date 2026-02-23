@@ -28,11 +28,8 @@ pub const GetObjectTorrentOutput = struct {
 
     request_charged: ?RequestCharged = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
     pub fn deinit(self: *GetObjectTorrentOutput) void {
         self.body.deinit();
-        self._arena.deinit();
     }
 };
 
@@ -40,7 +37,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetObjectTorrentInput, options: Options) !GetObjectTorrentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectTorrentInput, options: Options) !GetObjectTorrentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 
@@ -63,10 +60,7 @@ pub fn execute(client: *Client, input: GetObjectTorrentInput, options: Options) 
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeStreamingResponse(&stream_resp, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeStreamingResponse(&stream_resp, allocator);
     return result;
 }
 

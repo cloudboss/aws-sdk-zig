@@ -78,19 +78,13 @@ pub const ModifyCapacityReservationInput = struct {
 pub const ModifyCapacityReservationOutput = struct {
     /// Returns `true` if the request succeeds; otherwise, it returns an error.
     @"return": ?bool = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ModifyCapacityReservationOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ModifyCapacityReservationInput, options: Options) !ModifyCapacityReservationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyCapacityReservationInput, options: Options) !ModifyCapacityReservationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -111,10 +105,7 @@ pub fn execute(client: *Client, input: ModifyCapacityReservationInput, options: 
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

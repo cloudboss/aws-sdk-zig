@@ -34,12 +34,6 @@ pub const DescribeAssociationOutput = struct {
     /// Information about the association.
     association_description: ?AssociationDescription = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeAssociationOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .association_description = "AssociationDescription",
     };
@@ -49,7 +43,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeAssociationInput, options: Options) !DescribeAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAssociationInput, options: Options) !DescribeAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -70,10 +64,7 @@ pub fn execute(client: *Client, input: DescribeAssociationInput, options: Option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

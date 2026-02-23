@@ -34,19 +34,13 @@ pub const CopyFpgaImageInput = struct {
 pub const CopyFpgaImageOutput = struct {
     /// The ID of the new AFI.
     fpga_image_id: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CopyFpgaImageOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CopyFpgaImageInput, options: Options) !CopyFpgaImageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CopyFpgaImageInput, options: Options) !CopyFpgaImageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -67,10 +61,7 @@ pub fn execute(client: *Client, input: CopyFpgaImageInput, options: Options) !Co
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

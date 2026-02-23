@@ -14,19 +14,13 @@ pub const GenerateCredentialReportOutput = struct {
 
     /// Information about the state of the credential report.
     state: ?ReportStateType = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GenerateCredentialReportOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GenerateCredentialReportInput, options: Options) !GenerateCredentialReportOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GenerateCredentialReportInput, options: Options) !GenerateCredentialReportOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -47,10 +41,7 @@ pub fn execute(client: *Client, input: GenerateCredentialReportInput, options: O
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

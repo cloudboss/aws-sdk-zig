@@ -25,19 +25,13 @@ pub const CreateVpcEncryptionControlInput = struct {
 pub const CreateVpcEncryptionControlOutput = struct {
     /// Information about the VPC Encryption Control configuration.
     vpc_encryption_control: ?VpcEncryptionControl = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CreateVpcEncryptionControlOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CreateVpcEncryptionControlInput, options: Options) !CreateVpcEncryptionControlOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVpcEncryptionControlInput, options: Options) !CreateVpcEncryptionControlOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -58,10 +52,7 @@ pub fn execute(client: *Client, input: CreateVpcEncryptionControlInput, options:
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

@@ -28,19 +28,13 @@ pub const GetFlowLogsIntegrationTemplateInput = struct {
 pub const GetFlowLogsIntegrationTemplateOutput = struct {
     /// The generated CloudFormation template.
     result: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetFlowLogsIntegrationTemplateOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetFlowLogsIntegrationTemplateInput, options: Options) !GetFlowLogsIntegrationTemplateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetFlowLogsIntegrationTemplateInput, options: Options) !GetFlowLogsIntegrationTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -61,10 +55,7 @@ pub fn execute(client: *Client, input: GetFlowLogsIntegrationTemplateInput, opti
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

@@ -26,12 +26,6 @@ pub const UpdateTimeToLiveOutput = struct {
     /// Represents the output of an `UpdateTimeToLive` operation.
     time_to_live_specification: ?TimeToLiveSpecification = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *UpdateTimeToLiveOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .time_to_live_specification = "TimeToLiveSpecification",
     };
@@ -41,7 +35,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: UpdateTimeToLiveInput, options: Options) !UpdateTimeToLiveOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTimeToLiveInput, options: Options) !UpdateTimeToLiveOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -62,10 +56,7 @@ pub fn execute(client: *Client, input: UpdateTimeToLiveInput, options: Options) 
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

@@ -16,8 +16,9 @@ test "zest.beforeAll" {
         .{ .keep_alive = false },
     );
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            allocator,
             .{
                 .name = "/sdk-zig/shared",
                 .value = "shared-param-value",
@@ -26,7 +27,6 @@ test "zest.beforeAll" {
             },
             .{},
         );
-        defer r.deinit();
     }
     setup_done = true;
 }
@@ -37,8 +37,9 @@ test "zest.afterAll" {
         return;
     }
     {
-        var r = ssm.delete_parameter.execute(
+        _ = ssm.delete_parameter.execute(
             &shared_client,
+            gpa.allocator(),
             .{ .name = "/sdk-zig/shared" },
             .{},
         ) catch |err| {
@@ -48,7 +49,6 @@ test "zest.afterAll" {
             _ = gpa.deinit();
             return err;
         };
-        r.deinit();
     }
     shared_client.deinit();
     shared_cfg.deinit();
@@ -56,8 +56,12 @@ test "zest.afterAll" {
 }
 
 test "PutParameter returns version number" {
-    var put_result = try ssm.put_parameter.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const put_result = try ssm.put_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .name = "/sdk-zig/put-version",
             .value = "version-test",
@@ -66,28 +70,30 @@ test "PutParameter returns version number" {
         },
         .{},
     );
-    defer put_result.deinit();
 
     try std.testing.expect(put_result.version != null);
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/put-version" },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "GetParameter retrieves stored parameter value" {
-    var get_result = try ssm.get_parameter.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const get_result = try ssm.get_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{ .name = "/sdk-zig/shared" },
         .{},
     );
-    defer get_result.deinit();
 
     const param = get_result.parameter orelse return error.MissingParameter;
     try std.testing.expectEqualStrings(
@@ -101,10 +107,14 @@ test "GetParameter retrieves stored parameter value" {
 }
 
 test "DeleteParameter removes parameter" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     // Create own resource
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = "/sdk-zig/delete-removes",
                 .value = "to-be-deleted",
@@ -113,23 +123,23 @@ test "DeleteParameter removes parameter" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
     // Delete it
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/delete-removes" },
             .{},
         );
-        defer r.deinit();
     }
 
     // Verify get returns error
     var diagnostic: ssm.ServiceError = undefined;
     const result = ssm.get_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{ .name = "/sdk-zig/delete-removes" },
         .{ .diagnostic = &diagnostic },
     );
@@ -149,9 +159,13 @@ test "DeleteParameter removes parameter" {
 }
 
 test "GetParameter returns error for missing parameter" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     var diagnostic: ssm.ServiceError = undefined;
     const result = ssm.get_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{ .name = "/nonexistent/param-12345" },
         .{ .diagnostic = &diagnostic },
     );
@@ -174,9 +188,13 @@ test "GetParameter returns error for missing parameter" {
 }
 
 test "GetParametersByPath returns parameters under prefix" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = "/sdk-zig/path-test/param-a",
                 .value = "value-a",
@@ -185,11 +203,11 @@ test "GetParametersByPath returns parameters under prefix" {
             },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = "/sdk-zig/path-test/param-b",
                 .value = "value-b",
@@ -198,41 +216,44 @@ test "GetParametersByPath returns parameters under prefix" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
-    var result = try ssm.get_parameters_by_path.execute(
+    const result = try ssm.get_parameters_by_path.execute(
         &shared_client,
+        arena.allocator(),
         .{ .path = "/sdk-zig/path-test", .recursive = false },
         .{},
     );
-    defer result.deinit();
 
     const params = result.parameters orelse return error.MissingParameters;
     try std.testing.expect(params.len >= 2);
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/path-test/param-a" },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/path-test/param-b" },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "PutParameter with SecureString type stores successfully" {
-    var put_result = try ssm.put_parameter.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const put_result = try ssm.put_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .name = "/sdk-zig/secure-string-test",
             .value = "secret-value",
@@ -241,16 +262,15 @@ test "PutParameter with SecureString type stores successfully" {
         },
         .{},
     );
-    defer put_result.deinit();
 
     try std.testing.expect(put_result.version != null);
 
-    var get_result = try ssm.get_parameter.execute(
+    const get_result = try ssm.get_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{ .name = "/sdk-zig/secure-string-test" },
         .{},
     );
-    defer get_result.deinit();
 
     const param = get_result.parameter orelse return error.MissingParameter;
     try std.testing.expectEqualStrings(
@@ -261,19 +281,23 @@ test "PutParameter with SecureString type stores successfully" {
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/secure-string-test" },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "DescribeParameters includes created parameter" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = "/sdk-zig/describe-test",
                 .value = "describe-value",
@@ -282,33 +306,36 @@ test "DescribeParameters includes created parameter" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
-    var result = try ssm.describe_parameters.execute(
+    const result = try ssm.describe_parameters.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const params = result.parameters orelse return error.MissingParameters;
     try std.testing.expect(params.len > 0);
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/describe-test" },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "PutParameter with StringList type stores list value" {
-    var put_result = try ssm.put_parameter.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const put_result = try ssm.put_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .name = "/sdk-zig/string-list-test",
             .value = "item1,item2,item3",
@@ -317,28 +344,31 @@ test "PutParameter with StringList type stores list value" {
         },
         .{},
     );
-    defer put_result.deinit();
 
     try std.testing.expect(put_result.version != null);
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/string-list-test" },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "GetParameter with decryption returns SecureString value" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const param_name = "/sdk-zig/decrypt-test";
     const secret_value = "my-secret-value";
 
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = param_name,
                 .value = secret_value,
@@ -347,15 +377,14 @@ test "GetParameter with decryption returns SecureString value" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
-    var get_result = try ssm.get_parameter.execute(
+    const get_result = try ssm.get_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{ .name = param_name, .with_decryption = true },
         .{},
     );
-    defer get_result.deinit();
 
     const param = get_result.parameter orelse return error.MissingParameter;
     try std.testing.expectEqualStrings(
@@ -365,21 +394,25 @@ test "GetParameter with decryption returns SecureString value" {
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = param_name },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "PutParameter with overwrite updates existing value" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     const param_name = "/sdk-zig/overwrite-test";
 
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = param_name,
                 .value = "original-value",
@@ -388,12 +421,12 @@ test "PutParameter with overwrite updates existing value" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = param_name,
                 .value = "updated-value",
@@ -402,15 +435,14 @@ test "PutParameter with overwrite updates existing value" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
-    var get_result = try ssm.get_parameter.execute(
+    const get_result = try ssm.get_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{ .name = param_name },
         .{},
     );
-    defer get_result.deinit();
 
     const param = get_result.parameter orelse return error.MissingParameter;
     try std.testing.expectEqualStrings(
@@ -420,19 +452,23 @@ test "PutParameter with overwrite updates existing value" {
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = param_name },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "GetParametersByPath with recursive flag returns nested params" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = "/sdk-zig/recurse/a",
                 .value = "val-a",
@@ -441,11 +477,11 @@ test "GetParametersByPath with recursive flag returns nested params" {
             },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = "/sdk-zig/recurse/b/c",
                 .value = "val-bc",
@@ -454,42 +490,45 @@ test "GetParametersByPath with recursive flag returns nested params" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
-    var result = try ssm.get_parameters_by_path.execute(
+    const result = try ssm.get_parameters_by_path.execute(
         &shared_client,
+        arena.allocator(),
         .{ .path = "/sdk-zig/recurse", .recursive = true },
         .{},
     );
-    defer result.deinit();
 
     const params = result.parameters orelse return error.MissingParameters;
     try std.testing.expect(params.len >= 2);
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/recurse/a" },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/recurse/b/c" },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "DescribeParameters returns parameter metadata with type field" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var r = try ssm.put_parameter.execute(
+        _ = try ssm.put_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .name = "/sdk-zig/describe-type-test",
                 .value = "type-test-value",
@@ -498,15 +537,14 @@ test "DescribeParameters returns parameter metadata with type field" {
             },
             .{},
         );
-        defer r.deinit();
     }
 
-    var result = try ssm.describe_parameters.execute(
+    const result = try ssm.describe_parameters.execute(
         &shared_client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const params = result.parameters orelse return error.MissingParameters;
     var found = false;
@@ -522,19 +560,23 @@ test "DescribeParameters returns parameter metadata with type field" {
 
     // Cleanup
     {
-        var r = try ssm.delete_parameter.execute(
+        _ = try ssm.delete_parameter.execute(
             &shared_client,
+            arena.allocator(),
             .{ .name = "/sdk-zig/describe-type-test" },
             .{},
         );
-        defer r.deinit();
     }
 }
 
 test "DeleteParameter for nonexistent parameter returns error" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     var diagnostic: ssm.ServiceError = undefined;
     const result = ssm.delete_parameter.execute(
         &shared_client,
+        arena.allocator(),
         .{ .name = "/sdk-zig/definitely-does-not-exist" },
         .{ .diagnostic = &diagnostic },
     );

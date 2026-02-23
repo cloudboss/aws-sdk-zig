@@ -373,19 +373,13 @@ pub const AssumeRoleOutput = struct {
     /// underscores or
     /// any of the following characters: =,.@-
     source_identity: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *AssumeRoleOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: AssumeRoleInput, options: Options) !AssumeRoleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssumeRoleInput, options: Options) !AssumeRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -406,10 +400,7 @@ pub fn execute(client: *Client, input: AssumeRoleInput, options: Options) !Assum
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

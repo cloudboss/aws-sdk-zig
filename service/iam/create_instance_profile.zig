@@ -49,19 +49,13 @@ pub const CreateInstanceProfileInput = struct {
 pub const CreateInstanceProfileOutput = struct {
     /// A structure containing details about the new instance profile.
     instance_profile: ?InstanceProfile = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CreateInstanceProfileOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CreateInstanceProfileInput, options: Options) !CreateInstanceProfileOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateInstanceProfileInput, options: Options) !CreateInstanceProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -82,10 +76,7 @@ pub fn execute(client: *Client, input: CreateInstanceProfileInput, options: Opti
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

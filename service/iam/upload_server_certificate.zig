@@ -122,19 +122,13 @@ pub const UploadServerCertificateOutput = struct {
     /// the
     /// *IAM User Guide*.
     tags: ?[]const Tag = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *UploadServerCertificateOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: UploadServerCertificateInput, options: Options) !UploadServerCertificateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UploadServerCertificateInput, options: Options) !UploadServerCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -155,10 +149,7 @@ pub fn execute(client: *Client, input: UploadServerCertificateInput, options: Op
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

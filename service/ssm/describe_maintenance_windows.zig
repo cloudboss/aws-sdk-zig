@@ -39,12 +39,6 @@ pub const DescribeMaintenanceWindowsOutput = struct {
     /// Information about the maintenance windows.
     window_identities: ?[]const MaintenanceWindowIdentity = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeMaintenanceWindowsOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .next_token = "NextToken",
         .window_identities = "WindowIdentities",
@@ -55,7 +49,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeMaintenanceWindowsInput, options: Options) !DescribeMaintenanceWindowsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMaintenanceWindowsInput, options: Options) !DescribeMaintenanceWindowsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -76,10 +70,7 @@ pub fn execute(client: *Client, input: DescribeMaintenanceWindowsInput, options:
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

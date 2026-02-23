@@ -63,15 +63,14 @@ pub const DescribeActivationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_activations.Options) !describe_activations.DescribeActivationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_activations.Options) !describe_activations.DescribeActivationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_activations.execute(self.client, self.params, options);
-
+        const output = try describe_activations.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -105,15 +104,14 @@ pub const DescribeAssociationExecutionTargetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_association_execution_targets.Options) !describe_association_execution_targets.DescribeAssociationExecutionTargetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_association_execution_targets.Options) !describe_association_execution_targets.DescribeAssociationExecutionTargetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_association_execution_targets.execute(self.client, self.params, options);
-
+        const output = try describe_association_execution_targets.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -147,15 +145,14 @@ pub const DescribeAssociationExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_association_executions.Options) !describe_association_executions.DescribeAssociationExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_association_executions.Options) !describe_association_executions.DescribeAssociationExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_association_executions.execute(self.client, self.params, options);
-
+        const output = try describe_association_executions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -189,15 +186,14 @@ pub const DescribeAutomationExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_automation_executions.Options) !describe_automation_executions.DescribeAutomationExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_automation_executions.Options) !describe_automation_executions.DescribeAutomationExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_automation_executions.execute(self.client, self.params, options);
-
+        const output = try describe_automation_executions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -231,15 +227,14 @@ pub const DescribeAutomationStepExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_automation_step_executions.Options) !describe_automation_step_executions.DescribeAutomationStepExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_automation_step_executions.Options) !describe_automation_step_executions.DescribeAutomationStepExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_automation_step_executions.execute(self.client, self.params, options);
-
+        const output = try describe_automation_step_executions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -273,15 +268,14 @@ pub const DescribeAvailablePatchesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_available_patches.Options) !describe_available_patches.DescribeAvailablePatchesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_available_patches.Options) !describe_available_patches.DescribeAvailablePatchesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_available_patches.execute(self.client, self.params, options);
-
+        const output = try describe_available_patches.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -315,15 +309,14 @@ pub const DescribeEffectiveInstanceAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_effective_instance_associations.Options) !describe_effective_instance_associations.DescribeEffectiveInstanceAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_effective_instance_associations.Options) !describe_effective_instance_associations.DescribeEffectiveInstanceAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_effective_instance_associations.execute(self.client, self.params, options);
-
+        const output = try describe_effective_instance_associations.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -357,15 +350,14 @@ pub const DescribeEffectivePatchesForPatchBaselinePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_effective_patches_for_patch_baseline.Options) !describe_effective_patches_for_patch_baseline.DescribeEffectivePatchesForPatchBaselineOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_effective_patches_for_patch_baseline.Options) !describe_effective_patches_for_patch_baseline.DescribeEffectivePatchesForPatchBaselineOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_effective_patches_for_patch_baseline.execute(self.client, self.params, options);
-
+        const output = try describe_effective_patches_for_patch_baseline.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -399,15 +391,14 @@ pub const DescribeInstanceAssociationsStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_instance_associations_status.Options) !describe_instance_associations_status.DescribeInstanceAssociationsStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_instance_associations_status.Options) !describe_instance_associations_status.DescribeInstanceAssociationsStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_instance_associations_status.execute(self.client, self.params, options);
-
+        const output = try describe_instance_associations_status.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -441,15 +432,14 @@ pub const DescribeInstanceInformationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_instance_information.Options) !describe_instance_information.DescribeInstanceInformationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_instance_information.Options) !describe_instance_information.DescribeInstanceInformationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_instance_information.execute(self.client, self.params, options);
-
+        const output = try describe_instance_information.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -483,15 +473,14 @@ pub const DescribeInstancePatchStatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_instance_patch_states.Options) !describe_instance_patch_states.DescribeInstancePatchStatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_instance_patch_states.Options) !describe_instance_patch_states.DescribeInstancePatchStatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_instance_patch_states.execute(self.client, self.params, options);
-
+        const output = try describe_instance_patch_states.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -525,15 +514,14 @@ pub const DescribeInstancePatchStatesForPatchGroupPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_instance_patch_states_for_patch_group.Options) !describe_instance_patch_states_for_patch_group.DescribeInstancePatchStatesForPatchGroupOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_instance_patch_states_for_patch_group.Options) !describe_instance_patch_states_for_patch_group.DescribeInstancePatchStatesForPatchGroupOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_instance_patch_states_for_patch_group.execute(self.client, self.params, options);
-
+        const output = try describe_instance_patch_states_for_patch_group.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -567,15 +555,14 @@ pub const DescribeInstancePatchesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_instance_patches.Options) !describe_instance_patches.DescribeInstancePatchesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_instance_patches.Options) !describe_instance_patches.DescribeInstancePatchesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_instance_patches.execute(self.client, self.params, options);
-
+        const output = try describe_instance_patches.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -609,15 +596,14 @@ pub const DescribeInstancePropertiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_instance_properties.Options) !describe_instance_properties.DescribeInstancePropertiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_instance_properties.Options) !describe_instance_properties.DescribeInstancePropertiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_instance_properties.execute(self.client, self.params, options);
-
+        const output = try describe_instance_properties.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -651,15 +637,14 @@ pub const DescribeInventoryDeletionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_inventory_deletions.Options) !describe_inventory_deletions.DescribeInventoryDeletionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_inventory_deletions.Options) !describe_inventory_deletions.DescribeInventoryDeletionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_inventory_deletions.execute(self.client, self.params, options);
-
+        const output = try describe_inventory_deletions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -693,15 +678,14 @@ pub const DescribeMaintenanceWindowExecutionTaskInvocationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_maintenance_window_execution_task_invocations.Options) !describe_maintenance_window_execution_task_invocations.DescribeMaintenanceWindowExecutionTaskInvocationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_maintenance_window_execution_task_invocations.Options) !describe_maintenance_window_execution_task_invocations.DescribeMaintenanceWindowExecutionTaskInvocationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_maintenance_window_execution_task_invocations.execute(self.client, self.params, options);
-
+        const output = try describe_maintenance_window_execution_task_invocations.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -735,15 +719,14 @@ pub const DescribeMaintenanceWindowExecutionTasksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_maintenance_window_execution_tasks.Options) !describe_maintenance_window_execution_tasks.DescribeMaintenanceWindowExecutionTasksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_maintenance_window_execution_tasks.Options) !describe_maintenance_window_execution_tasks.DescribeMaintenanceWindowExecutionTasksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_maintenance_window_execution_tasks.execute(self.client, self.params, options);
-
+        const output = try describe_maintenance_window_execution_tasks.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -777,15 +760,14 @@ pub const DescribeMaintenanceWindowExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_maintenance_window_executions.Options) !describe_maintenance_window_executions.DescribeMaintenanceWindowExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_maintenance_window_executions.Options) !describe_maintenance_window_executions.DescribeMaintenanceWindowExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_maintenance_window_executions.execute(self.client, self.params, options);
-
+        const output = try describe_maintenance_window_executions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -819,15 +801,14 @@ pub const DescribeMaintenanceWindowSchedulePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_maintenance_window_schedule.Options) !describe_maintenance_window_schedule.DescribeMaintenanceWindowScheduleOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_maintenance_window_schedule.Options) !describe_maintenance_window_schedule.DescribeMaintenanceWindowScheduleOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_maintenance_window_schedule.execute(self.client, self.params, options);
-
+        const output = try describe_maintenance_window_schedule.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -861,15 +842,14 @@ pub const DescribeMaintenanceWindowTargetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_maintenance_window_targets.Options) !describe_maintenance_window_targets.DescribeMaintenanceWindowTargetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_maintenance_window_targets.Options) !describe_maintenance_window_targets.DescribeMaintenanceWindowTargetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_maintenance_window_targets.execute(self.client, self.params, options);
-
+        const output = try describe_maintenance_window_targets.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -903,15 +883,14 @@ pub const DescribeMaintenanceWindowTasksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_maintenance_window_tasks.Options) !describe_maintenance_window_tasks.DescribeMaintenanceWindowTasksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_maintenance_window_tasks.Options) !describe_maintenance_window_tasks.DescribeMaintenanceWindowTasksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_maintenance_window_tasks.execute(self.client, self.params, options);
-
+        const output = try describe_maintenance_window_tasks.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -945,15 +924,14 @@ pub const DescribeMaintenanceWindowsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_maintenance_windows.Options) !describe_maintenance_windows.DescribeMaintenanceWindowsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_maintenance_windows.Options) !describe_maintenance_windows.DescribeMaintenanceWindowsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_maintenance_windows.execute(self.client, self.params, options);
-
+        const output = try describe_maintenance_windows.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -987,15 +965,14 @@ pub const DescribeMaintenanceWindowsForTargetPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_maintenance_windows_for_target.Options) !describe_maintenance_windows_for_target.DescribeMaintenanceWindowsForTargetOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_maintenance_windows_for_target.Options) !describe_maintenance_windows_for_target.DescribeMaintenanceWindowsForTargetOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_maintenance_windows_for_target.execute(self.client, self.params, options);
-
+        const output = try describe_maintenance_windows_for_target.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1029,15 +1006,14 @@ pub const DescribeOpsItemsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_ops_items.Options) !describe_ops_items.DescribeOpsItemsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_ops_items.Options) !describe_ops_items.DescribeOpsItemsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_ops_items.execute(self.client, self.params, options);
-
+        const output = try describe_ops_items.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1071,15 +1047,14 @@ pub const DescribeParametersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_parameters.Options) !describe_parameters.DescribeParametersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_parameters.Options) !describe_parameters.DescribeParametersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_parameters.execute(self.client, self.params, options);
-
+        const output = try describe_parameters.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1113,15 +1088,14 @@ pub const DescribePatchBaselinesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_patch_baselines.Options) !describe_patch_baselines.DescribePatchBaselinesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_patch_baselines.Options) !describe_patch_baselines.DescribePatchBaselinesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_patch_baselines.execute(self.client, self.params, options);
-
+        const output = try describe_patch_baselines.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1155,15 +1129,14 @@ pub const DescribePatchGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_patch_groups.Options) !describe_patch_groups.DescribePatchGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_patch_groups.Options) !describe_patch_groups.DescribePatchGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_patch_groups.execute(self.client, self.params, options);
-
+        const output = try describe_patch_groups.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1197,15 +1170,14 @@ pub const DescribePatchPropertiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_patch_properties.Options) !describe_patch_properties.DescribePatchPropertiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_patch_properties.Options) !describe_patch_properties.DescribePatchPropertiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_patch_properties.execute(self.client, self.params, options);
-
+        const output = try describe_patch_properties.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1239,15 +1211,14 @@ pub const DescribeSessionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: describe_sessions.Options) !describe_sessions.DescribeSessionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_sessions.Options) !describe_sessions.DescribeSessionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try describe_sessions.execute(self.client, self.params, options);
-
+        const output = try describe_sessions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1281,15 +1252,14 @@ pub const GetInventoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_inventory.Options) !get_inventory.GetInventoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_inventory.Options) !get_inventory.GetInventoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try get_inventory.execute(self.client, self.params, options);
-
+        const output = try get_inventory.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1323,15 +1293,14 @@ pub const GetInventorySchemaPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_inventory_schema.Options) !get_inventory_schema.GetInventorySchemaOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_inventory_schema.Options) !get_inventory_schema.GetInventorySchemaOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try get_inventory_schema.execute(self.client, self.params, options);
-
+        const output = try get_inventory_schema.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1365,15 +1334,14 @@ pub const GetOpsSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_ops_summary.Options) !get_ops_summary.GetOpsSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_ops_summary.Options) !get_ops_summary.GetOpsSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try get_ops_summary.execute(self.client, self.params, options);
-
+        const output = try get_ops_summary.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1407,15 +1375,14 @@ pub const GetParameterHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_parameter_history.Options) !get_parameter_history.GetParameterHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_parameter_history.Options) !get_parameter_history.GetParameterHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try get_parameter_history.execute(self.client, self.params, options);
-
+        const output = try get_parameter_history.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1449,15 +1416,14 @@ pub const GetParametersByPathPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_parameters_by_path.Options) !get_parameters_by_path.GetParametersByPathOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_parameters_by_path.Options) !get_parameters_by_path.GetParametersByPathOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try get_parameters_by_path.execute(self.client, self.params, options);
-
+        const output = try get_parameters_by_path.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1491,15 +1457,14 @@ pub const GetResourcePoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_resource_policies.Options) !get_resource_policies.GetResourcePoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_resource_policies.Options) !get_resource_policies.GetResourcePoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try get_resource_policies.execute(self.client, self.params, options);
-
+        const output = try get_resource_policies.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1533,15 +1498,14 @@ pub const ListAssociationVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_association_versions.Options) !list_association_versions.ListAssociationVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_association_versions.Options) !list_association_versions.ListAssociationVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_association_versions.execute(self.client, self.params, options);
-
+        const output = try list_association_versions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1575,15 +1539,14 @@ pub const ListAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_associations.Options) !list_associations.ListAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_associations.Options) !list_associations.ListAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_associations.execute(self.client, self.params, options);
-
+        const output = try list_associations.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1617,15 +1580,14 @@ pub const ListCommandInvocationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_command_invocations.Options) !list_command_invocations.ListCommandInvocationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_command_invocations.Options) !list_command_invocations.ListCommandInvocationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_command_invocations.execute(self.client, self.params, options);
-
+        const output = try list_command_invocations.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1659,15 +1621,14 @@ pub const ListCommandsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_commands.Options) !list_commands.ListCommandsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_commands.Options) !list_commands.ListCommandsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_commands.execute(self.client, self.params, options);
-
+        const output = try list_commands.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1701,15 +1662,14 @@ pub const ListComplianceItemsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_compliance_items.Options) !list_compliance_items.ListComplianceItemsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_compliance_items.Options) !list_compliance_items.ListComplianceItemsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_compliance_items.execute(self.client, self.params, options);
-
+        const output = try list_compliance_items.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1743,15 +1703,14 @@ pub const ListComplianceSummariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_compliance_summaries.Options) !list_compliance_summaries.ListComplianceSummariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_compliance_summaries.Options) !list_compliance_summaries.ListComplianceSummariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_compliance_summaries.execute(self.client, self.params, options);
-
+        const output = try list_compliance_summaries.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1785,15 +1744,14 @@ pub const ListDocumentVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_document_versions.Options) !list_document_versions.ListDocumentVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_document_versions.Options) !list_document_versions.ListDocumentVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_document_versions.execute(self.client, self.params, options);
-
+        const output = try list_document_versions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1827,15 +1785,14 @@ pub const ListDocumentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_documents.Options) !list_documents.ListDocumentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_documents.Options) !list_documents.ListDocumentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_documents.execute(self.client, self.params, options);
-
+        const output = try list_documents.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1869,15 +1826,14 @@ pub const ListNodesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_nodes.Options) !list_nodes.ListNodesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_nodes.Options) !list_nodes.ListNodesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_nodes.execute(self.client, self.params, options);
-
+        const output = try list_nodes.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1911,15 +1867,14 @@ pub const ListNodesSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_nodes_summary.Options) !list_nodes_summary.ListNodesSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_nodes_summary.Options) !list_nodes_summary.ListNodesSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_nodes_summary.execute(self.client, self.params, options);
-
+        const output = try list_nodes_summary.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1953,15 +1908,14 @@ pub const ListOpsItemEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_ops_item_events.Options) !list_ops_item_events.ListOpsItemEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_ops_item_events.Options) !list_ops_item_events.ListOpsItemEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_ops_item_events.execute(self.client, self.params, options);
-
+        const output = try list_ops_item_events.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -1995,15 +1949,14 @@ pub const ListOpsItemRelatedItemsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_ops_item_related_items.Options) !list_ops_item_related_items.ListOpsItemRelatedItemsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_ops_item_related_items.Options) !list_ops_item_related_items.ListOpsItemRelatedItemsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_ops_item_related_items.execute(self.client, self.params, options);
-
+        const output = try list_ops_item_related_items.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2037,15 +1990,14 @@ pub const ListOpsMetadataPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_ops_metadata.Options) !list_ops_metadata.ListOpsMetadataOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_ops_metadata.Options) !list_ops_metadata.ListOpsMetadataOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_ops_metadata.execute(self.client, self.params, options);
-
+        const output = try list_ops_metadata.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2079,15 +2031,14 @@ pub const ListResourceComplianceSummariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_resource_compliance_summaries.Options) !list_resource_compliance_summaries.ListResourceComplianceSummariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resource_compliance_summaries.Options) !list_resource_compliance_summaries.ListResourceComplianceSummariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_resource_compliance_summaries.execute(self.client, self.params, options);
-
+        const output = try list_resource_compliance_summaries.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -2121,15 +2072,14 @@ pub const ListResourceDataSyncPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_resource_data_sync.Options) !list_resource_data_sync.ListResourceDataSyncOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resource_data_sync.Options) !list_resource_data_sync.ListResourceDataSyncOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_resource_data_sync.execute(self.client, self.params, options);
-
+        const output = try list_resource_data_sync.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

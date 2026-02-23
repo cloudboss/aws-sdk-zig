@@ -27,19 +27,13 @@ pub const ApplySecurityGroupsToClientVpnTargetNetworkInput = struct {
 pub const ApplySecurityGroupsToClientVpnTargetNetworkOutput = struct {
     /// The IDs of the applied security groups.
     security_group_ids: ?[]const []const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ApplySecurityGroupsToClientVpnTargetNetworkOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ApplySecurityGroupsToClientVpnTargetNetworkInput, options: Options) !ApplySecurityGroupsToClientVpnTargetNetworkOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ApplySecurityGroupsToClientVpnTargetNetworkInput, options: Options) !ApplySecurityGroupsToClientVpnTargetNetworkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -60,10 +54,7 @@ pub fn execute(client: *Client, input: ApplySecurityGroupsToClientVpnTargetNetwo
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

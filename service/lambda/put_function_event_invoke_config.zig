@@ -76,12 +76,6 @@ pub const PutFunctionEventInvokeConfigOutput = struct {
     /// The maximum number of times to retry when the function returns an error.
     maximum_retry_attempts: ?i32 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *PutFunctionEventInvokeConfigOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .destination_config = "DestinationConfig",
         .function_arn = "FunctionArn",
@@ -95,7 +89,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: PutFunctionEventInvokeConfigInput, options: Options) !PutFunctionEventInvokeConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutFunctionEventInvokeConfigInput, options: Options) !PutFunctionEventInvokeConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -116,10 +110,7 @@ pub fn execute(client: *Client, input: PutFunctionEventInvokeConfigInput, option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

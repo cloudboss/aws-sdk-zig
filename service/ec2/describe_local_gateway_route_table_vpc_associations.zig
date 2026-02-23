@@ -56,19 +56,13 @@ pub const DescribeLocalGatewayRouteTableVpcAssociationsOutput = struct {
     /// The token to use to retrieve the next page of results. This value is `null`
     /// when there are no more results to return.
     next_token: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeLocalGatewayRouteTableVpcAssociationsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeLocalGatewayRouteTableVpcAssociationsInput, options: Options) !DescribeLocalGatewayRouteTableVpcAssociationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLocalGatewayRouteTableVpcAssociationsInput, options: Options) !DescribeLocalGatewayRouteTableVpcAssociationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -89,10 +83,7 @@ pub fn execute(client: *Client, input: DescribeLocalGatewayRouteTableVpcAssociat
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

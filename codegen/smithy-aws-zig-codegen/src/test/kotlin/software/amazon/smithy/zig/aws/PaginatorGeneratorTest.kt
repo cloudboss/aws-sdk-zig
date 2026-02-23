@@ -325,12 +325,12 @@ class PaginatorGeneratorTest {
     }
 
     @Test
-    fun mapTokenTracksPrevOutput() {
+    fun mapTokenNoPrevOutput() {
         val files = generateFiles(buildMapTokenModel())
         val paginator = files["paginator.zig"]!!
-        assertTrue(
+        assertFalse(
             paginator.contains("prev_output"),
-            "Map token paginator should track previous output",
+            "Map token paginator should not track previous output",
         )
     }
 

@@ -14,22 +14,28 @@ test "zest.beforeAll" {
         &shared_cfg.?,
         .{ .keep_alive = false },
     );
-    var result = try secretsmanager.create_secret.execute(
-        &shared_client.?,
-        .{
-            .name = "sdk-zig-sm-shared",
-            .secret_string = "shared-secret-value",
-            .client_request_token = "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        },
-        .{},
-    );
-    defer result.deinit();
+    {
+        var arena = std.heap.ArenaAllocator.init(allocator);
+        defer arena.deinit();
+        _ = try secretsmanager.create_secret.execute(
+            &shared_client.?,
+            arena.allocator(),
+            .{
+                .name = "sdk-zig-sm-shared",
+                .secret_string = "shared-secret-value",
+                .client_request_token = "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            },
+            .{},
+        );
+    }
 }
 
 test "zest.afterAll" {
     if (shared_client) |*c| {
         defer c.deinit();
-        var r = secretsmanager.delete_secret.execute(c, .{
+        var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+        defer arena.deinit();
+        _ = secretsmanager.delete_secret.execute(c, arena.allocator(), .{
             .secret_id = "sdk-zig-sm-shared",
             .force_delete_without_recovery = true,
         }, .{}) catch |err| {
@@ -41,7 +47,6 @@ test "zest.afterAll" {
             _ = gpa.deinit();
             return;
         };
-        r.deinit();
     }
     if (shared_cfg) |*cfg| cfg.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
@@ -49,8 +54,12 @@ test "zest.afterAll" {
 
 test "CreateSecret returns valid response fields" {
     const client = &(shared_client orelse return error.TestSetupFailed);
-    var result = try secretsmanager.create_secret.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try secretsmanager.create_secret.execute(
         client,
+        arena.allocator(),
         .{
             .name = "sdk-zig-sm-create-test",
             .secret_string = "create-test-value",
@@ -58,7 +67,6 @@ test "CreateSecret returns valid response fields" {
         },
         .{},
     );
-    defer result.deinit();
 
     try std.testing.expect(result.arn != null);
     try std.testing.expectEqualStrings(
@@ -66,25 +74,28 @@ test "CreateSecret returns valid response fields" {
         result.name orelse return error.MissingName,
     );
 
-    var del = try secretsmanager.delete_secret.execute(
+    _ = try secretsmanager.delete_secret.execute(
         client,
+        arena.allocator(),
         .{
             .secret_id = "sdk-zig-sm-create-test",
             .force_delete_without_recovery = true,
         },
         .{},
     );
-    defer del.deinit();
 }
 
 test "GetSecretValue returns stored secret string" {
     const client = &(shared_client orelse return error.TestSetupFailed);
-    var result = try secretsmanager.get_secret_value.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try secretsmanager.get_secret_value.execute(
         client,
+        arena.allocator(),
         .{ .secret_id = "sdk-zig-sm-shared" },
         .{},
     );
-    defer result.deinit();
 
     try std.testing.expectEqualStrings(
         "shared-secret-value",
@@ -94,9 +105,13 @@ test "GetSecretValue returns stored secret string" {
 
 test "DeleteSecret with force removes secret" {
     const client = &(shared_client orelse return error.TestSetupFailed);
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var result = try secretsmanager.create_secret.execute(
+        _ = try secretsmanager.create_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .name = "sdk-zig-sm-delete-test",
                 .secret_string = "delete-me",
@@ -104,18 +119,17 @@ test "DeleteSecret with force removes secret" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
-    var result = try secretsmanager.delete_secret.execute(
+    const result = try secretsmanager.delete_secret.execute(
         client,
+        arena.allocator(),
         .{
             .secret_id = "sdk-zig-sm-delete-test",
             .force_delete_without_recovery = true,
         },
         .{},
     );
-    defer result.deinit();
 
     try std.testing.expectEqualStrings(
         "sdk-zig-sm-delete-test",
@@ -125,9 +139,13 @@ test "DeleteSecret with force removes secret" {
 
 test "GetSecretValue returns error for missing secret" {
     const client = &(shared_client orelse return error.TestSetupFailed);
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     var diagnostic: secretsmanager.ServiceError = undefined;
     const result = secretsmanager.get_secret_value.execute(
         client,
+        arena.allocator(),
         .{ .secret_id = "nonexistent-secret-12345" },
         .{ .diagnostic = &diagnostic },
     );
@@ -151,9 +169,13 @@ test "GetSecretValue returns error for missing secret" {
 
 test "UpdateSecret changes stored value" {
     const client = &(shared_client orelse return error.TestSetupFailed);
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var result = try secretsmanager.create_secret.execute(
+        _ = try secretsmanager.create_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .name = "sdk-zig-sm-update",
                 .secret_string = "original-value",
@@ -161,12 +183,12 @@ test "UpdateSecret changes stored value" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try secretsmanager.update_secret.execute(
+        _ = try secretsmanager.update_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .secret_id = "sdk-zig-sm-update",
                 .secret_string = "updated-value",
@@ -174,16 +196,15 @@ test "UpdateSecret changes stored value" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try secretsmanager.get_secret_value.execute(
+        const result = try secretsmanager.get_secret_value.execute(
             client,
+            arena.allocator(),
             .{ .secret_id = "sdk-zig-sm-update" },
             .{},
         );
-        defer result.deinit();
 
         try std.testing.expectEqualStrings(
             "updated-value",
@@ -191,22 +212,26 @@ test "UpdateSecret changes stored value" {
         );
     }
 
-    var del = try secretsmanager.delete_secret.execute(
+    _ = try secretsmanager.delete_secret.execute(
         client,
+        arena.allocator(),
         .{
             .secret_id = "sdk-zig-sm-update",
             .force_delete_without_recovery = true,
         },
         .{},
     );
-    defer del.deinit();
 }
 
 test "ListSecrets returns created secret" {
     const client = &(shared_client orelse return error.TestSetupFailed);
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var result = try secretsmanager.create_secret.execute(
+        _ = try secretsmanager.create_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .name = "sdk-zig-sm-list",
                 .secret_string = "list-test-value",
@@ -214,15 +239,14 @@ test "ListSecrets returns created secret" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
-    var list_result = try secretsmanager.list_secrets.execute(
+    const list_result = try secretsmanager.list_secrets.execute(
         client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer list_result.deinit();
 
     const secret_list = list_result.secret_list orelse
         return error.MissingSecretList;
@@ -237,22 +261,26 @@ test "ListSecrets returns created secret" {
     }
     try std.testing.expect(found);
 
-    var del = try secretsmanager.delete_secret.execute(
+    _ = try secretsmanager.delete_secret.execute(
         client,
+        arena.allocator(),
         .{
             .secret_id = "sdk-zig-sm-list",
             .force_delete_without_recovery = true,
         },
         .{},
     );
-    defer del.deinit();
 }
 
 test "DescribeSecret returns secret metadata" {
     const client = &(shared_client orelse return error.TestSetupFailed);
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var result = try secretsmanager.create_secret.execute(
+        _ = try secretsmanager.create_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .name = "sdk-zig-sm-describe",
                 .secret_string = "describe-test-value",
@@ -260,16 +288,15 @@ test "DescribeSecret returns secret metadata" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try secretsmanager.describe_secret.execute(
+        const result = try secretsmanager.describe_secret.execute(
             client,
+            arena.allocator(),
             .{ .secret_id = "sdk-zig-sm-describe" },
             .{},
         );
-        defer result.deinit();
 
         try std.testing.expectEqualStrings(
             "sdk-zig-sm-describe",
@@ -278,22 +305,26 @@ test "DescribeSecret returns secret metadata" {
         try std.testing.expect(result.arn != null);
     }
 
-    var del = try secretsmanager.delete_secret.execute(
+    _ = try secretsmanager.delete_secret.execute(
         client,
+        arena.allocator(),
         .{
             .secret_id = "sdk-zig-sm-describe",
             .force_delete_without_recovery = true,
         },
         .{},
     );
-    defer del.deinit();
 }
 
 test "PutSecretValue updates secret with new version" {
     const client = &(shared_client orelse return error.TestSetupFailed);
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var result = try secretsmanager.create_secret.execute(
+        _ = try secretsmanager.create_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .name = "sdk-zig-sm-put-version",
                 .secret_string = "version-one",
@@ -301,12 +332,12 @@ test "PutSecretValue updates secret with new version" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try secretsmanager.put_secret_value.execute(
+        const result = try secretsmanager.put_secret_value.execute(
             client,
+            arena.allocator(),
             .{
                 .secret_id = "sdk-zig-sm-put-version",
                 .secret_string = "version-two",
@@ -314,18 +345,17 @@ test "PutSecretValue updates secret with new version" {
             },
             .{},
         );
-        defer result.deinit();
 
         try std.testing.expect(result.version_id != null);
     }
 
     {
-        var result = try secretsmanager.get_secret_value.execute(
+        const result = try secretsmanager.get_secret_value.execute(
             client,
+            arena.allocator(),
             .{ .secret_id = "sdk-zig-sm-put-version" },
             .{},
         );
-        defer result.deinit();
 
         try std.testing.expectEqualStrings(
             "version-two",
@@ -333,25 +363,28 @@ test "PutSecretValue updates secret with new version" {
         );
     }
 
-    var del = try secretsmanager.delete_secret.execute(
+    _ = try secretsmanager.delete_secret.execute(
         client,
+        arena.allocator(),
         .{
             .secret_id = "sdk-zig-sm-put-version",
             .force_delete_without_recovery = true,
         },
         .{},
     );
-    defer del.deinit();
 }
 
 test "DescribeSecret returns metadata for shared secret" {
     const client = &(shared_client orelse return error.TestSetupFailed);
-    var result = try secretsmanager.describe_secret.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try secretsmanager.describe_secret.execute(
         client,
+        arena.allocator(),
         .{ .secret_id = "sdk-zig-sm-shared" },
         .{},
     );
-    defer result.deinit();
 
     try std.testing.expect(result.arn != null);
     try std.testing.expectEqualStrings(
@@ -362,9 +395,13 @@ test "DescribeSecret returns metadata for shared secret" {
 
 test "GetSecretValue for deleted secret returns error" {
     const client = &(shared_client orelse return error.TestSetupFailed);
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var result = try secretsmanager.create_secret.execute(
+        _ = try secretsmanager.create_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .name = "sdk-zig-sm-get-deleted",
                 .secret_string = "soon-to-be-deleted",
@@ -372,24 +409,24 @@ test "GetSecretValue for deleted secret returns error" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try secretsmanager.delete_secret.execute(
+        _ = try secretsmanager.delete_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .secret_id = "sdk-zig-sm-get-deleted",
                 .force_delete_without_recovery = true,
             },
             .{},
         );
-        defer result.deinit();
     }
 
     var diagnostic: secretsmanager.ServiceError = undefined;
     const result = secretsmanager.get_secret_value.execute(
         client,
+        arena.allocator(),
         .{ .secret_id = "sdk-zig-sm-get-deleted" },
         .{ .diagnostic = &diagnostic },
     );
@@ -411,9 +448,13 @@ test "GetSecretValue for deleted secret returns error" {
 
 test "TagResource adds tags to secret" {
     const client = &(shared_client orelse return error.TestSetupFailed);
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
     {
-        var result = try secretsmanager.create_secret.execute(
+        _ = try secretsmanager.create_secret.execute(
             client,
+            arena.allocator(),
             .{
                 .name = "sdk-zig-sm-tag",
                 .secret_string = "tag-test-value",
@@ -421,12 +462,12 @@ test "TagResource adds tags to secret" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try secretsmanager.tag_resource.execute(
+        _ = try secretsmanager.tag_resource.execute(
             client,
+            arena.allocator(),
             .{
                 .secret_id = "sdk-zig-sm-tag",
                 .tags = &.{
@@ -436,16 +477,15 @@ test "TagResource adds tags to secret" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try secretsmanager.describe_secret.execute(
+        const result = try secretsmanager.describe_secret.execute(
             client,
+            arena.allocator(),
             .{ .secret_id = "sdk-zig-sm-tag" },
             .{},
         );
-        defer result.deinit();
 
         try std.testing.expectEqualStrings(
             "sdk-zig-sm-tag",
@@ -453,25 +493,28 @@ test "TagResource adds tags to secret" {
         );
     }
 
-    var del = try secretsmanager.delete_secret.execute(
+    _ = try secretsmanager.delete_secret.execute(
         client,
+        arena.allocator(),
         .{
             .secret_id = "sdk-zig-sm-tag",
             .force_delete_without_recovery = true,
         },
         .{},
     );
-    defer del.deinit();
 }
 
 test "ListSecrets includes shared secret from beforeAll" {
     const client = &(shared_client orelse return error.TestSetupFailed);
-    var result = try secretsmanager.list_secrets.execute(
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const result = try secretsmanager.list_secrets.execute(
         client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const secret_list = result.secret_list orelse
         return error.MissingSecretList;

@@ -229,8 +229,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn abortMultipartUpload(self: *Self, input: abort_multipart_upload.AbortMultipartUploadInput, options: abort_multipart_upload.Options) !abort_multipart_upload.AbortMultipartUploadOutput {
-        return abort_multipart_upload.execute(self, input, options);
+    pub fn abortMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: abort_multipart_upload.AbortMultipartUploadInput, options: abort_multipart_upload.Options) !abort_multipart_upload.AbortMultipartUploadOutput {
+        return abort_multipart_upload.execute(self, allocator, input, options);
     }
 
     /// Completes a multipart upload by assembling previously uploaded parts.
@@ -401,8 +401,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn completeMultipartUpload(self: *Self, input: complete_multipart_upload.CompleteMultipartUploadInput, options: complete_multipart_upload.Options) !complete_multipart_upload.CompleteMultipartUploadOutput {
-        return complete_multipart_upload.execute(self, input, options);
+    pub fn completeMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: complete_multipart_upload.CompleteMultipartUploadInput, options: complete_multipart_upload.Options) !complete_multipart_upload.CompleteMultipartUploadOutput {
+        return complete_multipart_upload.execute(self, allocator, input, options);
     }
 
     /// Creates a copy of an object that is already stored in Amazon S3.
@@ -629,8 +629,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn copyObject(self: *Self, input: copy_object.CopyObjectInput, options: copy_object.Options) !copy_object.CopyObjectOutput {
-        return copy_object.execute(self, input, options);
+    pub fn copyObject(self: *Self, allocator: std.mem.Allocator, input: copy_object.CopyObjectInput, options: copy_object.Options) !copy_object.CopyObjectOutput {
+        return copy_object.execute(self, allocator, input, options);
     }
 
     /// This action creates an Amazon S3 bucket. To create an Amazon S3 on Outposts
@@ -780,8 +780,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn createBucket(self: *Self, input: create_bucket.CreateBucketInput, options: create_bucket.Options) !create_bucket.CreateBucketOutput {
-        return create_bucket.execute(self, input, options);
+    pub fn createBucket(self: *Self, allocator: std.mem.Allocator, input: create_bucket.CreateBucketInput, options: create_bucket.Options) !create_bucket.CreateBucketOutput {
+        return create_bucket.execute(self, allocator, input, options);
     }
 
     /// Creates an S3 Metadata V2 metadata configuration for a general purpose
@@ -856,8 +856,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn createBucketMetadataConfiguration(self: *Self, input: create_bucket_metadata_configuration.CreateBucketMetadataConfigurationInput, options: create_bucket_metadata_configuration.Options) !create_bucket_metadata_configuration.CreateBucketMetadataConfigurationOutput {
-        return create_bucket_metadata_configuration.execute(self, input, options);
+    pub fn createBucketMetadataConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_bucket_metadata_configuration.CreateBucketMetadataConfigurationInput, options: create_bucket_metadata_configuration.Options) !create_bucket_metadata_configuration.CreateBucketMetadataConfigurationOutput {
+        return create_bucket_metadata_configuration.execute(self, allocator, input, options);
     }
 
     /// We recommend that you create your S3 Metadata configurations by using the V2
@@ -922,8 +922,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn createBucketMetadataTableConfiguration(self: *Self, input: create_bucket_metadata_table_configuration.CreateBucketMetadataTableConfigurationInput, options: create_bucket_metadata_table_configuration.Options) !create_bucket_metadata_table_configuration.CreateBucketMetadataTableConfigurationOutput {
-        return create_bucket_metadata_table_configuration.execute(self, input, options);
+    pub fn createBucketMetadataTableConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_bucket_metadata_table_configuration.CreateBucketMetadataTableConfigurationInput, options: create_bucket_metadata_table_configuration.Options) !create_bucket_metadata_table_configuration.CreateBucketMetadataTableConfigurationOutput {
+        return create_bucket_metadata_table_configuration.execute(self, allocator, input, options);
     }
 
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
@@ -1205,8 +1205,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn createMultipartUpload(self: *Self, input: create_multipart_upload.CreateMultipartUploadInput, options: create_multipart_upload.Options) !create_multipart_upload.CreateMultipartUploadOutput {
-        return create_multipart_upload.execute(self, input, options);
+    pub fn createMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: create_multipart_upload.CreateMultipartUploadInput, options: create_multipart_upload.Options) !create_multipart_upload.CreateMultipartUploadOutput {
+        return create_multipart_upload.execute(self, allocator, input, options);
     }
 
     /// Creates a session that establishes temporary security credentials to support
@@ -1373,8 +1373,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn createSession(self: *Self, input: create_session.CreateSessionInput, options: create_session.Options) !create_session.CreateSessionOutput {
-        return create_session.execute(self, input, options);
+    pub fn createSession(self: *Self, allocator: std.mem.Allocator, input: create_session.CreateSessionInput, options: create_session.Options) !create_session.CreateSessionOutput {
+        return create_session.execute(self, allocator, input, options);
     }
 
     /// Deletes the S3 bucket. All objects (including all object versions and delete
@@ -1430,8 +1430,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucket(self: *Self, input: delete_bucket.DeleteBucketInput, options: delete_bucket.Options) !delete_bucket.DeleteBucketOutput {
-        return delete_bucket.execute(self, input, options);
+    pub fn deleteBucket(self: *Self, allocator: std.mem.Allocator, input: delete_bucket.DeleteBucketInput, options: delete_bucket.Options) !delete_bucket.DeleteBucketOutput {
+        return delete_bucket.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -1467,8 +1467,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketAnalyticsConfiguration(self: *Self, input: delete_bucket_analytics_configuration.DeleteBucketAnalyticsConfigurationInput, options: delete_bucket_analytics_configuration.Options) !delete_bucket_analytics_configuration.DeleteBucketAnalyticsConfigurationOutput {
-        return delete_bucket_analytics_configuration.execute(self, input, options);
+    pub fn deleteBucketAnalyticsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_analytics_configuration.DeleteBucketAnalyticsConfigurationInput, options: delete_bucket_analytics_configuration.Options) !delete_bucket_analytics_configuration.DeleteBucketAnalyticsConfigurationOutput {
+        return delete_bucket_analytics_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -1495,8 +1495,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketCors(self: *Self, input: delete_bucket_cors.DeleteBucketCorsInput, options: delete_bucket_cors.Options) !delete_bucket_cors.DeleteBucketCorsOutput {
-        return delete_bucket_cors.execute(self, input, options);
+    pub fn deleteBucketCors(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_cors.DeleteBucketCorsInput, options: delete_bucket_cors.Options) !delete_bucket_cors.DeleteBucketCorsOutput {
+        return delete_bucket_cors.execute(self, allocator, input, options);
     }
 
     /// This implementation of the DELETE action resets the default encryption for
@@ -1554,8 +1554,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketEncryption(self: *Self, input: delete_bucket_encryption.DeleteBucketEncryptionInput, options: delete_bucket_encryption.Options) !delete_bucket_encryption.DeleteBucketEncryptionOutput {
-        return delete_bucket_encryption.execute(self, input, options);
+    pub fn deleteBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_encryption.DeleteBucketEncryptionInput, options: delete_bucket_encryption.Options) !delete_bucket_encryption.DeleteBucketEncryptionOutput {
+        return delete_bucket_encryption.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -1595,8 +1595,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketIntelligentTieringConfiguration(self: *Self, input: delete_bucket_intelligent_tiering_configuration.DeleteBucketIntelligentTieringConfigurationInput, options: delete_bucket_intelligent_tiering_configuration.Options) !delete_bucket_intelligent_tiering_configuration.DeleteBucketIntelligentTieringConfigurationOutput {
-        return delete_bucket_intelligent_tiering_configuration.execute(self, input, options);
+    pub fn deleteBucketIntelligentTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_intelligent_tiering_configuration.DeleteBucketIntelligentTieringConfigurationInput, options: delete_bucket_intelligent_tiering_configuration.Options) !delete_bucket_intelligent_tiering_configuration.DeleteBucketIntelligentTieringConfigurationOutput {
+        return delete_bucket_intelligent_tiering_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -1629,8 +1629,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketInventoryConfiguration(self: *Self, input: delete_bucket_inventory_configuration.DeleteBucketInventoryConfigurationInput, options: delete_bucket_inventory_configuration.Options) !delete_bucket_inventory_configuration.DeleteBucketInventoryConfigurationOutput {
-        return delete_bucket_inventory_configuration.execute(self, input, options);
+    pub fn deleteBucketInventoryConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_inventory_configuration.DeleteBucketInventoryConfigurationInput, options: delete_bucket_inventory_configuration.Options) !delete_bucket_inventory_configuration.DeleteBucketInventoryConfigurationOutput {
+        return delete_bucket_inventory_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the lifecycle configuration from the specified bucket. Amazon S3
@@ -1707,8 +1707,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketLifecycle(self: *Self, input: delete_bucket_lifecycle.DeleteBucketLifecycleInput, options: delete_bucket_lifecycle.Options) !delete_bucket_lifecycle.DeleteBucketLifecycleOutput {
-        return delete_bucket_lifecycle.execute(self, input, options);
+    pub fn deleteBucketLifecycle(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_lifecycle.DeleteBucketLifecycleInput, options: delete_bucket_lifecycle.Options) !delete_bucket_lifecycle.DeleteBucketLifecycleOutput {
+        return delete_bucket_lifecycle.execute(self, allocator, input, options);
     }
 
     /// Deletes an S3 Metadata configuration from a general purpose bucket. For more
@@ -1752,8 +1752,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketMetadataConfiguration(self: *Self, input: delete_bucket_metadata_configuration.DeleteBucketMetadataConfigurationInput, options: delete_bucket_metadata_configuration.Options) !delete_bucket_metadata_configuration.DeleteBucketMetadataConfigurationOutput {
-        return delete_bucket_metadata_configuration.execute(self, input, options);
+    pub fn deleteBucketMetadataConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_metadata_configuration.DeleteBucketMetadataConfigurationInput, options: delete_bucket_metadata_configuration.Options) !delete_bucket_metadata_configuration.DeleteBucketMetadataConfigurationOutput {
+        return delete_bucket_metadata_configuration.execute(self, allocator, input, options);
     }
 
     /// We recommend that you delete your S3 Metadata configurations by using the V2
@@ -1804,8 +1804,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketMetadataTableConfiguration(self: *Self, input: delete_bucket_metadata_table_configuration.DeleteBucketMetadataTableConfigurationInput, options: delete_bucket_metadata_table_configuration.Options) !delete_bucket_metadata_table_configuration.DeleteBucketMetadataTableConfigurationOutput {
-        return delete_bucket_metadata_table_configuration.execute(self, input, options);
+    pub fn deleteBucketMetadataTableConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_metadata_table_configuration.DeleteBucketMetadataTableConfigurationInput, options: delete_bucket_metadata_table_configuration.Options) !delete_bucket_metadata_table_configuration.DeleteBucketMetadataTableConfigurationOutput {
+        return delete_bucket_metadata_table_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -1845,8 +1845,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketMetricsConfiguration(self: *Self, input: delete_bucket_metrics_configuration.DeleteBucketMetricsConfigurationInput, options: delete_bucket_metrics_configuration.Options) !delete_bucket_metrics_configuration.DeleteBucketMetricsConfigurationOutput {
-        return delete_bucket_metrics_configuration.execute(self, input, options);
+    pub fn deleteBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_metrics_configuration.DeleteBucketMetricsConfigurationInput, options: delete_bucket_metrics_configuration.Options) !delete_bucket_metrics_configuration.DeleteBucketMetricsConfigurationOutput {
+        return delete_bucket_metrics_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -1871,8 +1871,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketOwnershipControls(self: *Self, input: delete_bucket_ownership_controls.DeleteBucketOwnershipControlsInput, options: delete_bucket_ownership_controls.Options) !delete_bucket_ownership_controls.DeleteBucketOwnershipControlsOutput {
-        return delete_bucket_ownership_controls.execute(self, input, options);
+    pub fn deleteBucketOwnershipControls(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_ownership_controls.DeleteBucketOwnershipControlsInput, options: delete_bucket_ownership_controls.Options) !delete_bucket_ownership_controls.DeleteBucketOwnershipControlsOutput {
+        return delete_bucket_ownership_controls.execute(self, allocator, input, options);
     }
 
     /// Deletes the policy of a specified bucket.
@@ -1952,8 +1952,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketPolicy(self: *Self, input: delete_bucket_policy.DeleteBucketPolicyInput, options: delete_bucket_policy.Options) !delete_bucket_policy.DeleteBucketPolicyOutput {
-        return delete_bucket_policy.execute(self, input, options);
+    pub fn deleteBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_policy.DeleteBucketPolicyInput, options: delete_bucket_policy.Options) !delete_bucket_policy.DeleteBucketPolicyOutput {
+        return delete_bucket_policy.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -1986,8 +1986,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketReplication(self: *Self, input: delete_bucket_replication.DeleteBucketReplicationInput, options: delete_bucket_replication.Options) !delete_bucket_replication.DeleteBucketReplicationOutput {
-        return delete_bucket_replication.execute(self, input, options);
+    pub fn deleteBucketReplication(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_replication.DeleteBucketReplicationInput, options: delete_bucket_replication.Options) !delete_bucket_replication.DeleteBucketReplicationOutput {
+        return delete_bucket_replication.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2017,8 +2017,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketTagging(self: *Self, input: delete_bucket_tagging.DeleteBucketTaggingInput, options: delete_bucket_tagging.Options) !delete_bucket_tagging.DeleteBucketTaggingOutput {
-        return delete_bucket_tagging.execute(self, input, options);
+    pub fn deleteBucketTagging(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_tagging.DeleteBucketTaggingInput, options: delete_bucket_tagging.Options) !delete_bucket_tagging.DeleteBucketTaggingOutput {
+        return delete_bucket_tagging.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2055,8 +2055,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteBucketWebsite(self: *Self, input: delete_bucket_website.DeleteBucketWebsiteInput, options: delete_bucket_website.Options) !delete_bucket_website.DeleteBucketWebsiteOutput {
-        return delete_bucket_website.execute(self, input, options);
+    pub fn deleteBucketWebsite(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_website.DeleteBucketWebsiteInput, options: delete_bucket_website.Options) !delete_bucket_website.DeleteBucketWebsiteOutput {
+        return delete_bucket_website.execute(self, allocator, input, options);
     }
 
     /// Removes an object from a bucket. The behavior depends on the bucket's
@@ -2196,8 +2196,8 @@ pub const Client = struct {
     /// The `If-Match` header is supported for both general purpose and directory
     /// buckets. `IfMatchLastModifiedTime` and `IfMatchSize` is only supported for
     /// directory buckets.
-    pub fn deleteObject(self: *Self, input: delete_object.DeleteObjectInput, options: delete_object.Options) !delete_object.DeleteObjectOutput {
-        return delete_object.execute(self, input, options);
+    pub fn deleteObject(self: *Self, allocator: std.mem.Allocator, input: delete_object.DeleteObjectInput, options: delete_object.Options) !delete_object.DeleteObjectOutput {
+        return delete_object.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2227,8 +2227,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteObjectTagging(self: *Self, input: delete_object_tagging.DeleteObjectTaggingInput, options: delete_object_tagging.Options) !delete_object_tagging.DeleteObjectTaggingOutput {
-        return delete_object_tagging.execute(self, input, options);
+    pub fn deleteObjectTagging(self: *Self, allocator: std.mem.Allocator, input: delete_object_tagging.DeleteObjectTaggingInput, options: delete_object_tagging.Options) !delete_object_tagging.DeleteObjectTaggingOutput {
+        return delete_object_tagging.execute(self, allocator, input, options);
     }
 
     /// This operation enables you to delete multiple objects from a bucket using a
@@ -2363,8 +2363,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deleteObjects(self: *Self, input: delete_objects.DeleteObjectsInput, options: delete_objects.Options) !delete_objects.DeleteObjectsOutput {
-        return delete_objects.execute(self, input, options);
+    pub fn deleteObjects(self: *Self, allocator: std.mem.Allocator, input: delete_objects.DeleteObjectsInput, options: delete_objects.Options) !delete_objects.DeleteObjectsOutput {
+        return delete_objects.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2400,8 +2400,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn deletePublicAccessBlock(self: *Self, input: delete_public_access_block.DeletePublicAccessBlockInput, options: delete_public_access_block.Options) !delete_public_access_block.DeletePublicAccessBlockOutput {
-        return delete_public_access_block.execute(self, input, options);
+    pub fn deletePublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: delete_public_access_block.DeletePublicAccessBlockInput, options: delete_public_access_block.Options) !delete_public_access_block.DeletePublicAccessBlockOutput {
+        return delete_public_access_block.execute(self, allocator, input, options);
     }
 
     /// Returns the attribute-based access control (ABAC) property of the general
@@ -2409,8 +2409,8 @@ pub const Client = struct {
     /// bucket for access control. For more information, see [Enabling ABAC in
     /// general purpose
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html).
-    pub fn getBucketAbac(self: *Self, input: get_bucket_abac.GetBucketAbacInput, options: get_bucket_abac.Options) !get_bucket_abac.GetBucketAbacOutput {
-        return get_bucket_abac.execute(self, input, options);
+    pub fn getBucketAbac(self: *Self, allocator: std.mem.Allocator, input: get_bucket_abac.GetBucketAbacInput, options: get_bucket_abac.Options) !get_bucket_abac.GetBucketAbacOutput {
+        return get_bucket_abac.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2454,8 +2454,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketAccelerateConfiguration(self: *Self, input: get_bucket_accelerate_configuration.GetBucketAccelerateConfigurationInput, options: get_bucket_accelerate_configuration.Options) !get_bucket_accelerate_configuration.GetBucketAccelerateConfigurationOutput {
-        return get_bucket_accelerate_configuration.execute(self, input, options);
+    pub fn getBucketAccelerateConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_accelerate_configuration.GetBucketAccelerateConfigurationInput, options: get_bucket_accelerate_configuration.Options) !get_bucket_accelerate_configuration.GetBucketAccelerateConfigurationOutput {
+        return get_bucket_accelerate_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2497,8 +2497,8 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html)
-    pub fn getBucketAcl(self: *Self, input: get_bucket_acl.GetBucketAclInput, options: get_bucket_acl.Options) !get_bucket_acl.GetBucketAclOutput {
-        return get_bucket_acl.execute(self, input, options);
+    pub fn getBucketAcl(self: *Self, allocator: std.mem.Allocator, input: get_bucket_acl.GetBucketAclInput, options: get_bucket_acl.Options) !get_bucket_acl.GetBucketAclOutput {
+        return get_bucket_acl.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2534,8 +2534,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketAnalyticsConfiguration(self: *Self, input: get_bucket_analytics_configuration.GetBucketAnalyticsConfigurationInput, options: get_bucket_analytics_configuration.Options) !get_bucket_analytics_configuration.GetBucketAnalyticsConfigurationOutput {
-        return get_bucket_analytics_configuration.execute(self, input, options);
+    pub fn getBucketAnalyticsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_analytics_configuration.GetBucketAnalyticsConfigurationInput, options: get_bucket_analytics_configuration.Options) !get_bucket_analytics_configuration.GetBucketAnalyticsConfigurationOutput {
+        return get_bucket_analytics_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2574,8 +2574,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketCors(self: *Self, input: get_bucket_cors.GetBucketCorsInput, options: get_bucket_cors.Options) !get_bucket_cors.GetBucketCorsOutput {
-        return get_bucket_cors.execute(self, input, options);
+    pub fn getBucketCors(self: *Self, allocator: std.mem.Allocator, input: get_bucket_cors.GetBucketCorsInput, options: get_bucket_cors.Options) !get_bucket_cors.GetBucketCorsOutput {
+        return get_bucket_cors.execute(self, allocator, input, options);
     }
 
     /// Returns the default encryption configuration for an Amazon S3 bucket. By
@@ -2635,8 +2635,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketEncryption(self: *Self, input: get_bucket_encryption.GetBucketEncryptionInput, options: get_bucket_encryption.Options) !get_bucket_encryption.GetBucketEncryptionOutput {
-        return get_bucket_encryption.execute(self, input, options);
+    pub fn getBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: get_bucket_encryption.GetBucketEncryptionInput, options: get_bucket_encryption.Options) !get_bucket_encryption.GetBucketEncryptionOutput {
+        return get_bucket_encryption.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2676,8 +2676,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketIntelligentTieringConfiguration(self: *Self, input: get_bucket_intelligent_tiering_configuration.GetBucketIntelligentTieringConfigurationInput, options: get_bucket_intelligent_tiering_configuration.Options) !get_bucket_intelligent_tiering_configuration.GetBucketIntelligentTieringConfigurationOutput {
-        return get_bucket_intelligent_tiering_configuration.execute(self, input, options);
+    pub fn getBucketIntelligentTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_intelligent_tiering_configuration.GetBucketIntelligentTieringConfigurationInput, options: get_bucket_intelligent_tiering_configuration.Options) !get_bucket_intelligent_tiering_configuration.GetBucketIntelligentTieringConfigurationOutput {
+        return get_bucket_intelligent_tiering_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2711,8 +2711,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketInventoryConfiguration(self: *Self, input: get_bucket_inventory_configuration.GetBucketInventoryConfigurationInput, options: get_bucket_inventory_configuration.Options) !get_bucket_inventory_configuration.GetBucketInventoryConfigurationOutput {
-        return get_bucket_inventory_configuration.execute(self, input, options);
+    pub fn getBucketInventoryConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_inventory_configuration.GetBucketInventoryConfigurationInput, options: get_bucket_inventory_configuration.Options) !get_bucket_inventory_configuration.GetBucketInventoryConfigurationOutput {
+        return get_bucket_inventory_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the lifecycle configuration information set on the bucket. For
@@ -2812,8 +2812,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketLifecycleConfiguration(self: *Self, input: get_bucket_lifecycle_configuration.GetBucketLifecycleConfigurationInput, options: get_bucket_lifecycle_configuration.Options) !get_bucket_lifecycle_configuration.GetBucketLifecycleConfigurationOutput {
-        return get_bucket_lifecycle_configuration.execute(self, input, options);
+    pub fn getBucketLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_lifecycle_configuration.GetBucketLifecycleConfigurationInput, options: get_bucket_lifecycle_configuration.Options) !get_bucket_lifecycle_configuration.GetBucketLifecycleConfigurationOutput {
+        return get_bucket_lifecycle_configuration.execute(self, allocator, input, options);
     }
 
     /// Using the `GetBucketLocation` operation is no longer a best practice. To
@@ -2867,8 +2867,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketLocation(self: *Self, input: get_bucket_location.GetBucketLocationInput, options: get_bucket_location.Options) !get_bucket_location.GetBucketLocationOutput {
-        return get_bucket_location.execute(self, input, options);
+    pub fn getBucketLocation(self: *Self, allocator: std.mem.Allocator, input: get_bucket_location.GetBucketLocationInput, options: get_bucket_location.Options) !get_bucket_location.GetBucketLocationOutput {
+        return get_bucket_location.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -2888,8 +2888,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketLogging(self: *Self, input: get_bucket_logging.GetBucketLoggingInput, options: get_bucket_logging.Options) !get_bucket_logging.GetBucketLoggingOutput {
-        return get_bucket_logging.execute(self, input, options);
+    pub fn getBucketLogging(self: *Self, allocator: std.mem.Allocator, input: get_bucket_logging.GetBucketLoggingInput, options: get_bucket_logging.Options) !get_bucket_logging.GetBucketLoggingOutput {
+        return get_bucket_logging.execute(self, allocator, input, options);
     }
 
     /// Retrieves the S3 Metadata configuration for a general purpose bucket. For
@@ -2932,8 +2932,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketMetadataConfiguration(self: *Self, input: get_bucket_metadata_configuration.GetBucketMetadataConfigurationInput, options: get_bucket_metadata_configuration.Options) !get_bucket_metadata_configuration.GetBucketMetadataConfigurationOutput {
-        return get_bucket_metadata_configuration.execute(self, input, options);
+    pub fn getBucketMetadataConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_metadata_configuration.GetBucketMetadataConfigurationInput, options: get_bucket_metadata_configuration.Options) !get_bucket_metadata_configuration.GetBucketMetadataConfigurationOutput {
+        return get_bucket_metadata_configuration.execute(self, allocator, input, options);
     }
 
     /// We recommend that you retrieve your S3 Metadata configurations by using the
@@ -2984,8 +2984,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketMetadataTableConfiguration(self: *Self, input: get_bucket_metadata_table_configuration.GetBucketMetadataTableConfigurationInput, options: get_bucket_metadata_table_configuration.Options) !get_bucket_metadata_table_configuration.GetBucketMetadataTableConfigurationOutput {
-        return get_bucket_metadata_table_configuration.execute(self, input, options);
+    pub fn getBucketMetadataTableConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_metadata_table_configuration.GetBucketMetadataTableConfigurationInput, options: get_bucket_metadata_table_configuration.Options) !get_bucket_metadata_table_configuration.GetBucketMetadataTableConfigurationOutput {
+        return get_bucket_metadata_table_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3024,8 +3024,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketMetricsConfiguration(self: *Self, input: get_bucket_metrics_configuration.GetBucketMetricsConfigurationInput, options: get_bucket_metrics_configuration.Options) !get_bucket_metrics_configuration.GetBucketMetricsConfigurationOutput {
-        return get_bucket_metrics_configuration.execute(self, input, options);
+    pub fn getBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_metrics_configuration.GetBucketMetricsConfigurationInput, options: get_bucket_metrics_configuration.Options) !get_bucket_metrics_configuration.GetBucketMetricsConfigurationOutput {
+        return get_bucket_metrics_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3066,8 +3066,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketNotificationConfiguration(self: *Self, input: get_bucket_notification_configuration.GetBucketNotificationConfigurationInput, options: get_bucket_notification_configuration.Options) !get_bucket_notification_configuration.GetBucketNotificationConfigurationOutput {
-        return get_bucket_notification_configuration.execute(self, input, options);
+    pub fn getBucketNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_notification_configuration.GetBucketNotificationConfigurationInput, options: get_bucket_notification_configuration.Options) !get_bucket_notification_configuration.GetBucketNotificationConfigurationOutput {
+        return get_bucket_notification_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3104,8 +3104,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketOwnershipControls(self: *Self, input: get_bucket_ownership_controls.GetBucketOwnershipControlsInput, options: get_bucket_ownership_controls.Options) !get_bucket_ownership_controls.GetBucketOwnershipControlsOutput {
-        return get_bucket_ownership_controls.execute(self, input, options);
+    pub fn getBucketOwnershipControls(self: *Self, allocator: std.mem.Allocator, input: get_bucket_ownership_controls.GetBucketOwnershipControlsInput, options: get_bucket_ownership_controls.Options) !get_bucket_ownership_controls.GetBucketOwnershipControlsOutput {
+        return get_bucket_ownership_controls.execute(self, allocator, input, options);
     }
 
     /// Returns the policy of a specified bucket.
@@ -3191,8 +3191,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketPolicy(self: *Self, input: get_bucket_policy.GetBucketPolicyInput, options: get_bucket_policy.Options) !get_bucket_policy.GetBucketPolicyOutput {
-        return get_bucket_policy.execute(self, input, options);
+    pub fn getBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: get_bucket_policy.GetBucketPolicyInput, options: get_bucket_policy.Options) !get_bucket_policy.GetBucketPolicyOutput {
+        return get_bucket_policy.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3225,8 +3225,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketPolicyStatus(self: *Self, input: get_bucket_policy_status.GetBucketPolicyStatusInput, options: get_bucket_policy_status.Options) !get_bucket_policy_status.GetBucketPolicyStatusOutput {
-        return get_bucket_policy_status.execute(self, input, options);
+    pub fn getBucketPolicyStatus(self: *Self, allocator: std.mem.Allocator, input: get_bucket_policy_status.GetBucketPolicyStatusInput, options: get_bucket_policy_status.Options) !get_bucket_policy_status.GetBucketPolicyStatusOutput {
+        return get_bucket_policy_status.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3269,8 +3269,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketReplication(self: *Self, input: get_bucket_replication.GetBucketReplicationInput, options: get_bucket_replication.Options) !get_bucket_replication.GetBucketReplicationOutput {
-        return get_bucket_replication.execute(self, input, options);
+    pub fn getBucketReplication(self: *Self, allocator: std.mem.Allocator, input: get_bucket_replication.GetBucketReplicationInput, options: get_bucket_replication.Options) !get_bucket_replication.GetBucketReplicationOutput {
+        return get_bucket_replication.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3288,8 +3288,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketRequestPayment(self: *Self, input: get_bucket_request_payment.GetBucketRequestPaymentInput, options: get_bucket_request_payment.Options) !get_bucket_request_payment.GetBucketRequestPaymentOutput {
-        return get_bucket_request_payment.execute(self, input, options);
+    pub fn getBucketRequestPayment(self: *Self, allocator: std.mem.Allocator, input: get_bucket_request_payment.GetBucketRequestPaymentInput, options: get_bucket_request_payment.Options) !get_bucket_request_payment.GetBucketRequestPaymentOutput {
+        return get_bucket_request_payment.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3322,8 +3322,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketTagging(self: *Self, input: get_bucket_tagging.GetBucketTaggingInput, options: get_bucket_tagging.Options) !get_bucket_tagging.GetBucketTaggingOutput {
-        return get_bucket_tagging.execute(self, input, options);
+    pub fn getBucketTagging(self: *Self, allocator: std.mem.Allocator, input: get_bucket_tagging.GetBucketTaggingInput, options: get_bucket_tagging.Options) !get_bucket_tagging.GetBucketTaggingOutput {
+        return get_bucket_tagging.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3352,8 +3352,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketVersioning(self: *Self, input: get_bucket_versioning.GetBucketVersioningInput, options: get_bucket_versioning.Options) !get_bucket_versioning.GetBucketVersioningOutput {
-        return get_bucket_versioning.execute(self, input, options);
+    pub fn getBucketVersioning(self: *Self, allocator: std.mem.Allocator, input: get_bucket_versioning.GetBucketVersioningInput, options: get_bucket_versioning.Options) !get_bucket_versioning.GetBucketVersioningOutput {
+        return get_bucket_versioning.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3382,8 +3382,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getBucketWebsite(self: *Self, input: get_bucket_website.GetBucketWebsiteInput, options: get_bucket_website.Options) !get_bucket_website.GetBucketWebsiteOutput {
-        return get_bucket_website.execute(self, input, options);
+    pub fn getBucketWebsite(self: *Self, allocator: std.mem.Allocator, input: get_bucket_website.GetBucketWebsiteInput, options: get_bucket_website.Options) !get_bucket_website.GetBucketWebsiteOutput {
+        return get_bucket_website.execute(self, allocator, input, options);
     }
 
     /// Retrieves an object from Amazon S3.
@@ -3576,8 +3576,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getObject(self: *Self, input: get_object.GetObjectInput, options: get_object.Options) !get_object.GetObjectOutput {
-        return get_object.execute(self, input, options);
+    pub fn getObject(self: *Self, allocator: std.mem.Allocator, input: get_object.GetObjectInput, options: get_object.Options) !get_object.GetObjectOutput {
+        return get_object.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3621,8 +3621,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getObjectAcl(self: *Self, input: get_object_acl.GetObjectAclInput, options: get_object_acl.Options) !get_object_acl.GetObjectAclOutput {
-        return get_object_acl.execute(self, input, options);
+    pub fn getObjectAcl(self: *Self, allocator: std.mem.Allocator, input: get_object_acl.GetObjectAclInput, options: get_object_acl.Options) !get_object_acl.GetObjectAclOutput {
+        return get_object_acl.execute(self, allocator, input, options);
     }
 
     /// Retrieves all of the metadata from an object without returning the object
@@ -3822,8 +3822,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getObjectAttributes(self: *Self, input: get_object_attributes.GetObjectAttributesInput, options: get_object_attributes.Options) !get_object_attributes.GetObjectAttributesOutput {
-        return get_object_attributes.execute(self, input, options);
+    pub fn getObjectAttributes(self: *Self, allocator: std.mem.Allocator, input: get_object_attributes.GetObjectAttributesInput, options: get_object_attributes.Options) !get_object_attributes.GetObjectAttributesOutput {
+        return get_object_attributes.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3842,8 +3842,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getObjectLegalHold(self: *Self, input: get_object_legal_hold.GetObjectLegalHoldInput, options: get_object_legal_hold.Options) !get_object_legal_hold.GetObjectLegalHoldOutput {
-        return get_object_legal_hold.execute(self, input, options);
+    pub fn getObjectLegalHold(self: *Self, allocator: std.mem.Allocator, input: get_object_legal_hold.GetObjectLegalHoldInput, options: get_object_legal_hold.Options) !get_object_legal_hold.GetObjectLegalHoldOutput {
+        return get_object_legal_hold.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3863,8 +3863,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getObjectLockConfiguration(self: *Self, input: get_object_lock_configuration.GetObjectLockConfigurationInput, options: get_object_lock_configuration.Options) !get_object_lock_configuration.GetObjectLockConfigurationOutput {
-        return get_object_lock_configuration.execute(self, input, options);
+    pub fn getObjectLockConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_object_lock_configuration.GetObjectLockConfigurationInput, options: get_object_lock_configuration.Options) !get_object_lock_configuration.GetObjectLockConfigurationOutput {
+        return get_object_lock_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3882,8 +3882,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getObjectRetention(self: *Self, input: get_object_retention.GetObjectRetentionInput, options: get_object_retention.Options) !get_object_retention.GetObjectRetentionOutput {
-        return get_object_retention.execute(self, input, options);
+    pub fn getObjectRetention(self: *Self, allocator: std.mem.Allocator, input: get_object_retention.GetObjectRetentionInput, options: get_object_retention.Options) !get_object_retention.GetObjectRetentionOutput {
+        return get_object_retention.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3922,8 +3922,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getObjectTagging(self: *Self, input: get_object_tagging.GetObjectTaggingInput, options: get_object_tagging.Options) !get_object_tagging.GetObjectTaggingOutput {
-        return get_object_tagging.execute(self, input, options);
+    pub fn getObjectTagging(self: *Self, allocator: std.mem.Allocator, input: get_object_tagging.GetObjectTaggingInput, options: get_object_tagging.Options) !get_object_tagging.GetObjectTaggingOutput {
+        return get_object_tagging.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3948,8 +3948,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getObjectTorrent(self: *Self, input: get_object_torrent.GetObjectTorrentInput, options: get_object_torrent.Options) !get_object_torrent.GetObjectTorrentOutput {
-        return get_object_torrent.execute(self, input, options);
+    pub fn getObjectTorrent(self: *Self, allocator: std.mem.Allocator, input: get_object_torrent.GetObjectTorrentInput, options: get_object_torrent.Options) !get_object_torrent.GetObjectTorrentOutput {
+        return get_object_torrent.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -4000,8 +4000,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn getPublicAccessBlock(self: *Self, input: get_public_access_block.GetPublicAccessBlockInput, options: get_public_access_block.Options) !get_public_access_block.GetPublicAccessBlockOutput {
-        return get_public_access_block.execute(self, input, options);
+    pub fn getPublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: get_public_access_block.GetPublicAccessBlockInput, options: get_public_access_block.Options) !get_public_access_block.GetPublicAccessBlockOutput {
+        return get_public_access_block.execute(self, allocator, input, options);
     }
 
     /// You can use this operation to determine if a bucket exists and if you have
@@ -4094,8 +4094,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn headBucket(self: *Self, input: head_bucket.HeadBucketInput, options: head_bucket.Options) !head_bucket.HeadBucketOutput {
-        return head_bucket.execute(self, input, options);
+    pub fn headBucket(self: *Self, allocator: std.mem.Allocator, input: head_bucket.HeadBucketInput, options: head_bucket.Options) !head_bucket.HeadBucketOutput {
+        return head_bucket.execute(self, allocator, input, options);
     }
 
     /// The `HEAD` operation retrieves metadata from an object without returning the
@@ -4260,8 +4260,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn headObject(self: *Self, input: head_object.HeadObjectInput, options: head_object.Options) !head_object.HeadObjectOutput {
-        return head_object.execute(self, input, options);
+    pub fn headObject(self: *Self, allocator: std.mem.Allocator, input: head_object.HeadObjectInput, options: head_object.Options) !head_object.HeadObjectOutput {
+        return head_object.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -4309,8 +4309,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listBucketAnalyticsConfigurations(self: *Self, input: list_bucket_analytics_configurations.ListBucketAnalyticsConfigurationsInput, options: list_bucket_analytics_configurations.Options) !list_bucket_analytics_configurations.ListBucketAnalyticsConfigurationsOutput {
-        return list_bucket_analytics_configurations.execute(self, input, options);
+    pub fn listBucketAnalyticsConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_bucket_analytics_configurations.ListBucketAnalyticsConfigurationsInput, options: list_bucket_analytics_configurations.Options) !list_bucket_analytics_configurations.ListBucketAnalyticsConfigurationsOutput {
+        return list_bucket_analytics_configurations.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -4350,8 +4350,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listBucketIntelligentTieringConfigurations(self: *Self, input: list_bucket_intelligent_tiering_configurations.ListBucketIntelligentTieringConfigurationsInput, options: list_bucket_intelligent_tiering_configurations.Options) !list_bucket_intelligent_tiering_configurations.ListBucketIntelligentTieringConfigurationsOutput {
-        return list_bucket_intelligent_tiering_configurations.execute(self, input, options);
+    pub fn listBucketIntelligentTieringConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_bucket_intelligent_tiering_configurations.ListBucketIntelligentTieringConfigurationsInput, options: list_bucket_intelligent_tiering_configurations.Options) !list_bucket_intelligent_tiering_configurations.ListBucketIntelligentTieringConfigurationsOutput {
+        return list_bucket_intelligent_tiering_configurations.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -4397,8 +4397,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listBucketInventoryConfigurations(self: *Self, input: list_bucket_inventory_configurations.ListBucketInventoryConfigurationsInput, options: list_bucket_inventory_configurations.Options) !list_bucket_inventory_configurations.ListBucketInventoryConfigurationsOutput {
-        return list_bucket_inventory_configurations.execute(self, input, options);
+    pub fn listBucketInventoryConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_bucket_inventory_configurations.ListBucketInventoryConfigurationsInput, options: list_bucket_inventory_configurations.Options) !list_bucket_inventory_configurations.ListBucketInventoryConfigurationsOutput {
+        return list_bucket_inventory_configurations.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -4448,8 +4448,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listBucketMetricsConfigurations(self: *Self, input: list_bucket_metrics_configurations.ListBucketMetricsConfigurationsInput, options: list_bucket_metrics_configurations.Options) !list_bucket_metrics_configurations.ListBucketMetricsConfigurationsOutput {
-        return list_bucket_metrics_configurations.execute(self, input, options);
+    pub fn listBucketMetricsConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_bucket_metrics_configurations.ListBucketMetricsConfigurationsInput, options: list_bucket_metrics_configurations.Options) !list_bucket_metrics_configurations.ListBucketMetricsConfigurationsOutput {
+        return list_bucket_metrics_configurations.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -4478,8 +4478,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listBuckets(self: *Self, input: list_buckets.ListBucketsInput, options: list_buckets.Options) !list_buckets.ListBucketsOutput {
-        return list_buckets.execute(self, input, options);
+    pub fn listBuckets(self: *Self, allocator: std.mem.Allocator, input: list_buckets.ListBucketsInput, options: list_buckets.Options) !list_buckets.ListBucketsOutput {
+        return list_buckets.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all Amazon S3 directory buckets owned by the authenticated
@@ -4522,8 +4522,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listDirectoryBuckets(self: *Self, input: list_directory_buckets.ListDirectoryBucketsInput, options: list_directory_buckets.Options) !list_directory_buckets.ListDirectoryBucketsOutput {
-        return list_directory_buckets.execute(self, input, options);
+    pub fn listDirectoryBuckets(self: *Self, allocator: std.mem.Allocator, input: list_directory_buckets.ListDirectoryBucketsInput, options: list_directory_buckets.Options) !list_directory_buckets.ListDirectoryBucketsOutput {
+        return list_directory_buckets.execute(self, allocator, input, options);
     }
 
     /// This operation lists in-progress multipart uploads in a bucket. An
@@ -4658,8 +4658,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listMultipartUploads(self: *Self, input: list_multipart_uploads.ListMultipartUploadsInput, options: list_multipart_uploads.Options) !list_multipart_uploads.ListMultipartUploadsOutput {
-        return list_multipart_uploads.execute(self, input, options);
+    pub fn listMultipartUploads(self: *Self, allocator: std.mem.Allocator, input: list_multipart_uploads.ListMultipartUploadsInput, options: list_multipart_uploads.Options) !list_multipart_uploads.ListMultipartUploadsOutput {
+        return list_multipart_uploads.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -4697,8 +4697,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listObjectVersions(self: *Self, input: list_object_versions.ListObjectVersionsInput, options: list_object_versions.Options) !list_object_versions.ListObjectVersionsOutput {
-        return list_object_versions.execute(self, input, options);
+    pub fn listObjectVersions(self: *Self, allocator: std.mem.Allocator, input: list_object_versions.ListObjectVersionsInput, options: list_object_versions.Options) !list_object_versions.ListObjectVersionsOutput {
+        return list_object_versions.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -4737,8 +4737,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listObjects(self: *Self, input: list_objects.ListObjectsInput, options: list_objects.Options) !list_objects.ListObjectsOutput {
-        return list_objects.execute(self, input, options);
+    pub fn listObjects(self: *Self, allocator: std.mem.Allocator, input: list_objects.ListObjectsInput, options: list_objects.Options) !list_objects.ListObjectsOutput {
+        return list_objects.execute(self, allocator, input, options);
     }
 
     /// Returns some or all (up to 1,000) of the objects in a bucket with each
@@ -4843,8 +4843,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listObjectsV2(self: *Self, input: list_objects_v2.ListObjectsV2Input, options: list_objects_v2.Options) !list_objects_v2.ListObjectsV2Output {
-        return list_objects_v2.execute(self, input, options);
+    pub fn listObjectsV2(self: *Self, allocator: std.mem.Allocator, input: list_objects_v2.ListObjectsV2Input, options: list_objects_v2.Options) !list_objects_v2.ListObjectsV2Output {
+        return list_objects_v2.execute(self, allocator, input, options);
     }
 
     /// Lists the parts that have been uploaded for a specific multipart upload.
@@ -4947,8 +4947,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn listParts(self: *Self, input: list_parts.ListPartsInput, options: list_parts.Options) !list_parts.ListPartsOutput {
-        return list_parts.execute(self, input, options);
+    pub fn listParts(self: *Self, allocator: std.mem.Allocator, input: list_parts.ListPartsInput, options: list_parts.Options) !list_parts.ListPartsOutput {
+        return list_parts.execute(self, allocator, input, options);
     }
 
     /// Sets the attribute-based access control (ABAC) property of the general
@@ -4956,8 +4956,8 @@ pub const Client = struct {
     /// action. When you enable ABAC, you can use tags for access control on your
     /// buckets. Additionally, when ABAC is enabled, you must use the
     /// [TagResource](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UntagResource.html) actions to manage tags on your buckets. You can nolonger use the [PutBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html) and [DeleteBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html) actions to tag your bucket. For more information, see [Enabling ABAC in general purpose buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html).
-    pub fn putBucketAbac(self: *Self, input: put_bucket_abac.PutBucketAbacInput, options: put_bucket_abac.Options) !put_bucket_abac.PutBucketAbacOutput {
-        return put_bucket_abac.execute(self, input, options);
+    pub fn putBucketAbac(self: *Self, allocator: std.mem.Allocator, input: put_bucket_abac.PutBucketAbacInput, options: put_bucket_abac.Options) !put_bucket_abac.PutBucketAbacOutput {
+        return put_bucket_abac.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -5008,8 +5008,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketAccelerateConfiguration(self: *Self, input: put_bucket_accelerate_configuration.PutBucketAccelerateConfigurationInput, options: put_bucket_accelerate_configuration.Options) !put_bucket_accelerate_configuration.PutBucketAccelerateConfigurationOutput {
-        return put_bucket_accelerate_configuration.execute(self, input, options);
+    pub fn putBucketAccelerateConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_accelerate_configuration.PutBucketAccelerateConfigurationInput, options: put_bucket_accelerate_configuration.Options) !put_bucket_accelerate_configuration.PutBucketAccelerateConfigurationOutput {
+        return put_bucket_accelerate_configuration.execute(self, allocator, input, options);
     }
 
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
@@ -5196,8 +5196,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketAcl(self: *Self, input: put_bucket_acl.PutBucketAclInput, options: put_bucket_acl.Options) !put_bucket_acl.PutBucketAclOutput {
-        return put_bucket_acl.execute(self, input, options);
+    pub fn putBucketAcl(self: *Self, allocator: std.mem.Allocator, input: put_bucket_acl.PutBucketAclInput, options: put_bucket_acl.Options) !put_bucket_acl.PutBucketAclOutput {
+        return put_bucket_acl.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -5283,8 +5283,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketAnalyticsConfiguration(self: *Self, input: put_bucket_analytics_configuration.PutBucketAnalyticsConfigurationInput, options: put_bucket_analytics_configuration.Options) !put_bucket_analytics_configuration.PutBucketAnalyticsConfigurationOutput {
-        return put_bucket_analytics_configuration.execute(self, input, options);
+    pub fn putBucketAnalyticsConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_analytics_configuration.PutBucketAnalyticsConfigurationInput, options: put_bucket_analytics_configuration.Options) !put_bucket_analytics_configuration.PutBucketAnalyticsConfigurationOutput {
+        return put_bucket_analytics_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -5349,8 +5349,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketCors(self: *Self, input: put_bucket_cors.PutBucketCorsInput, options: put_bucket_cors.Options) !put_bucket_cors.PutBucketCorsOutput {
-        return put_bucket_cors.execute(self, input, options);
+    pub fn putBucketCors(self: *Self, allocator: std.mem.Allocator, input: put_bucket_cors.PutBucketCorsInput, options: put_bucket_cors.Options) !put_bucket_cors.PutBucketCorsOutput {
+        return put_bucket_cors.execute(self, allocator, input, options);
     }
 
     /// This operation configures default encryption and Amazon S3 Bucket Keys for
@@ -5486,8 +5486,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketEncryption(self: *Self, input: put_bucket_encryption.PutBucketEncryptionInput, options: put_bucket_encryption.Options) !put_bucket_encryption.PutBucketEncryptionOutput {
-        return put_bucket_encryption.execute(self, input, options);
+    pub fn putBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: put_bucket_encryption.PutBucketEncryptionInput, options: put_bucket_encryption.Options) !put_bucket_encryption.PutBucketEncryptionOutput {
+        return put_bucket_encryption.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -5557,8 +5557,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketIntelligentTieringConfiguration(self: *Self, input: put_bucket_intelligent_tiering_configuration.PutBucketIntelligentTieringConfigurationInput, options: put_bucket_intelligent_tiering_configuration.Options) !put_bucket_intelligent_tiering_configuration.PutBucketIntelligentTieringConfigurationOutput {
-        return put_bucket_intelligent_tiering_configuration.execute(self, input, options);
+    pub fn putBucketIntelligentTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_intelligent_tiering_configuration.PutBucketIntelligentTieringConfigurationInput, options: put_bucket_intelligent_tiering_configuration.Options) !put_bucket_intelligent_tiering_configuration.PutBucketIntelligentTieringConfigurationOutput {
+        return put_bucket_intelligent_tiering_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -5657,8 +5657,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketInventoryConfiguration(self: *Self, input: put_bucket_inventory_configuration.PutBucketInventoryConfigurationInput, options: put_bucket_inventory_configuration.Options) !put_bucket_inventory_configuration.PutBucketInventoryConfigurationOutput {
-        return put_bucket_inventory_configuration.execute(self, input, options);
+    pub fn putBucketInventoryConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_inventory_configuration.PutBucketInventoryConfigurationInput, options: put_bucket_inventory_configuration.Options) !put_bucket_inventory_configuration.PutBucketInventoryConfigurationOutput {
+        return put_bucket_inventory_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates a new lifecycle configuration for the bucket or replaces an existing
@@ -5803,8 +5803,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketLifecycleConfiguration(self: *Self, input: put_bucket_lifecycle_configuration.PutBucketLifecycleConfigurationInput, options: put_bucket_lifecycle_configuration.Options) !put_bucket_lifecycle_configuration.PutBucketLifecycleConfigurationOutput {
-        return put_bucket_lifecycle_configuration.execute(self, input, options);
+    pub fn putBucketLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_lifecycle_configuration.PutBucketLifecycleConfigurationInput, options: put_bucket_lifecycle_configuration.Options) !put_bucket_lifecycle_configuration.PutBucketLifecycleConfigurationOutput {
+        return put_bucket_lifecycle_configuration.execute(self, allocator, input, options);
     }
 
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
@@ -5901,8 +5901,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketLogging(self: *Self, input: put_bucket_logging.PutBucketLoggingInput, options: put_bucket_logging.Options) !put_bucket_logging.PutBucketLoggingOutput {
-        return put_bucket_logging.execute(self, input, options);
+    pub fn putBucketLogging(self: *Self, allocator: std.mem.Allocator, input: put_bucket_logging.PutBucketLoggingInput, options: put_bucket_logging.Options) !put_bucket_logging.PutBucketLoggingOutput {
+        return put_bucket_logging.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -5951,8 +5951,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketMetricsConfiguration(self: *Self, input: put_bucket_metrics_configuration.PutBucketMetricsConfigurationInput, options: put_bucket_metrics_configuration.Options) !put_bucket_metrics_configuration.PutBucketMetricsConfigurationOutput {
-        return put_bucket_metrics_configuration.execute(self, input, options);
+    pub fn putBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_metrics_configuration.PutBucketMetricsConfigurationInput, options: put_bucket_metrics_configuration.Options) !put_bucket_metrics_configuration.PutBucketMetricsConfigurationOutput {
+        return put_bucket_metrics_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6033,8 +6033,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketNotificationConfiguration(self: *Self, input: put_bucket_notification_configuration.PutBucketNotificationConfigurationInput, options: put_bucket_notification_configuration.Options) !put_bucket_notification_configuration.PutBucketNotificationConfigurationOutput {
-        return put_bucket_notification_configuration.execute(self, input, options);
+    pub fn putBucketNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_notification_configuration.PutBucketNotificationConfigurationInput, options: put_bucket_notification_configuration.Options) !put_bucket_notification_configuration.PutBucketNotificationConfigurationOutput {
+        return put_bucket_notification_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6058,8 +6058,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketOwnershipControls(self: *Self, input: put_bucket_ownership_controls.PutBucketOwnershipControlsInput, options: put_bucket_ownership_controls.Options) !put_bucket_ownership_controls.PutBucketOwnershipControlsOutput {
-        return put_bucket_ownership_controls.execute(self, input, options);
+    pub fn putBucketOwnershipControls(self: *Self, allocator: std.mem.Allocator, input: put_bucket_ownership_controls.PutBucketOwnershipControlsInput, options: put_bucket_ownership_controls.Options) !put_bucket_ownership_controls.PutBucketOwnershipControlsOutput {
+        return put_bucket_ownership_controls.execute(self, allocator, input, options);
     }
 
     /// Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
@@ -6148,8 +6148,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketPolicy(self: *Self, input: put_bucket_policy.PutBucketPolicyInput, options: put_bucket_policy.Options) !put_bucket_policy.PutBucketPolicyOutput {
-        return put_bucket_policy.execute(self, input, options);
+    pub fn putBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: put_bucket_policy.PutBucketPolicyInput, options: put_bucket_policy.Options) !put_bucket_policy.PutBucketPolicyOutput {
+        return put_bucket_policy.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6241,8 +6241,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketReplication(self: *Self, input: put_bucket_replication.PutBucketReplicationInput, options: put_bucket_replication.Options) !put_bucket_replication.PutBucketReplicationOutput {
-        return put_bucket_replication.execute(self, input, options);
+    pub fn putBucketReplication(self: *Self, allocator: std.mem.Allocator, input: put_bucket_replication.PutBucketReplicationInput, options: put_bucket_replication.Options) !put_bucket_replication.PutBucketReplicationOutput {
+        return put_bucket_replication.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6266,8 +6266,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketRequestPayment(self: *Self, input: put_bucket_request_payment.PutBucketRequestPaymentInput, options: put_bucket_request_payment.Options) !put_bucket_request_payment.PutBucketRequestPaymentOutput {
-        return put_bucket_request_payment.execute(self, input, options);
+    pub fn putBucketRequestPayment(self: *Self, allocator: std.mem.Allocator, input: put_bucket_request_payment.PutBucketRequestPaymentInput, options: put_bucket_request_payment.Options) !put_bucket_request_payment.PutBucketRequestPaymentOutput {
+        return put_bucket_request_payment.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6333,8 +6333,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketTagging(self: *Self, input: put_bucket_tagging.PutBucketTaggingInput, options: put_bucket_tagging.Options) !put_bucket_tagging.PutBucketTaggingOutput {
-        return put_bucket_tagging.execute(self, input, options);
+    pub fn putBucketTagging(self: *Self, allocator: std.mem.Allocator, input: put_bucket_tagging.PutBucketTaggingInput, options: put_bucket_tagging.Options) !put_bucket_tagging.PutBucketTaggingOutput {
+        return put_bucket_tagging.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6396,8 +6396,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketVersioning(self: *Self, input: put_bucket_versioning.PutBucketVersioningInput, options: put_bucket_versioning.Options) !put_bucket_versioning.PutBucketVersioningOutput {
-        return put_bucket_versioning.execute(self, input, options);
+    pub fn putBucketVersioning(self: *Self, allocator: std.mem.Allocator, input: put_bucket_versioning.PutBucketVersioningInput, options: put_bucket_versioning.Options) !put_bucket_versioning.PutBucketVersioningOutput {
+        return put_bucket_versioning.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6486,8 +6486,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putBucketWebsite(self: *Self, input: put_bucket_website.PutBucketWebsiteInput, options: put_bucket_website.Options) !put_bucket_website.PutBucketWebsiteOutput {
-        return put_bucket_website.execute(self, input, options);
+    pub fn putBucketWebsite(self: *Self, allocator: std.mem.Allocator, input: put_bucket_website.PutBucketWebsiteInput, options: put_bucket_website.Options) !put_bucket_website.PutBucketWebsiteOutput {
+        return put_bucket_website.execute(self, allocator, input, options);
     }
 
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
@@ -6665,8 +6665,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putObject(self: *Self, input: put_object.PutObjectInput, options: put_object.Options) !put_object.PutObjectOutput {
-        return put_object.execute(self, input, options);
+    pub fn putObject(self: *Self, allocator: std.mem.Allocator, input: put_object.PutObjectInput, options: put_object.Options) !put_object.PutObjectOutput {
+        return put_object.execute(self, allocator, input, options);
     }
 
     /// End of support notice: As of October 1, 2025, Amazon S3 has discontinued
@@ -6855,8 +6855,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putObjectAcl(self: *Self, input: put_object_acl.PutObjectAclInput, options: put_object_acl.Options) !put_object_acl.PutObjectAclOutput {
-        return put_object_acl.execute(self, input, options);
+    pub fn putObjectAcl(self: *Self, allocator: std.mem.Allocator, input: put_object_acl.PutObjectAclInput, options: put_object_acl.Options) !put_object_acl.PutObjectAclOutput {
+        return put_object_acl.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6870,8 +6870,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putObjectLegalHold(self: *Self, input: put_object_legal_hold.PutObjectLegalHoldInput, options: put_object_legal_hold.Options) !put_object_legal_hold.PutObjectLegalHoldOutput {
-        return put_object_legal_hold.execute(self, input, options);
+    pub fn putObjectLegalHold(self: *Self, allocator: std.mem.Allocator, input: put_object_legal_hold.PutObjectLegalHoldInput, options: put_object_legal_hold.Options) !put_object_legal_hold.PutObjectLegalHoldOutput {
+        return put_object_legal_hold.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6897,8 +6897,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putObjectLockConfiguration(self: *Self, input: put_object_lock_configuration.PutObjectLockConfigurationInput, options: put_object_lock_configuration.Options) !put_object_lock_configuration.PutObjectLockConfigurationOutput {
-        return put_object_lock_configuration.execute(self, input, options);
+    pub fn putObjectLockConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_object_lock_configuration.PutObjectLockConfigurationInput, options: put_object_lock_configuration.Options) !put_object_lock_configuration.PutObjectLockConfigurationOutput {
+        return put_object_lock_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6918,8 +6918,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putObjectRetention(self: *Self, input: put_object_retention.PutObjectRetentionInput, options: put_object_retention.Options) !put_object_retention.PutObjectRetentionOutput {
-        return put_object_retention.execute(self, input, options);
+    pub fn putObjectRetention(self: *Self, allocator: std.mem.Allocator, input: put_object_retention.PutObjectRetentionInput, options: put_object_retention.Options) !put_object_retention.PutObjectRetentionOutput {
+        return put_object_retention.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -6977,8 +6977,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putObjectTagging(self: *Self, input: put_object_tagging.PutObjectTaggingInput, options: put_object_tagging.Options) !put_object_tagging.PutObjectTaggingOutput {
-        return put_object_tagging.execute(self, input, options);
+    pub fn putObjectTagging(self: *Self, allocator: std.mem.Allocator, input: put_object_tagging.PutObjectTaggingInput, options: put_object_tagging.Options) !put_object_tagging.PutObjectTaggingOutput {
+        return put_object_tagging.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -7023,8 +7023,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn putPublicAccessBlock(self: *Self, input: put_public_access_block.PutPublicAccessBlockInput, options: put_public_access_block.Options) !put_public_access_block.PutPublicAccessBlockOutput {
-        return put_public_access_block.execute(self, input, options);
+    pub fn putPublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: put_public_access_block.PutPublicAccessBlockInput, options: put_public_access_block.Options) !put_public_access_block.PutPublicAccessBlockOutput {
+        return put_public_access_block.execute(self, allocator, input, options);
     }
 
     /// Renames an existing object in a directory bucket that uses the S3 Express
@@ -7091,8 +7091,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn renameObject(self: *Self, input: rename_object.RenameObjectInput, options: rename_object.Options) !rename_object.RenameObjectOutput {
-        return rename_object.execute(self, input, options);
+    pub fn renameObject(self: *Self, allocator: std.mem.Allocator, input: rename_object.RenameObjectInput, options: rename_object.Options) !rename_object.RenameObjectOutput {
+        return rename_object.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -7292,8 +7292,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn restoreObject(self: *Self, input: restore_object.RestoreObjectInput, options: restore_object.Options) !restore_object.RestoreObjectOutput {
-        return restore_object.execute(self, input, options);
+    pub fn restoreObject(self: *Self, allocator: std.mem.Allocator, input: restore_object.RestoreObjectInput, options: restore_object.Options) !restore_object.RestoreObjectOutput {
+        return restore_object.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -7417,8 +7417,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn selectObjectContent(self: *Self, input: select_object_content.SelectObjectContentInput, options: select_object_content.Options) !select_object_content.SelectObjectContentOutput {
-        return select_object_content.execute(self, input, options);
+    pub fn selectObjectContent(self: *Self, allocator: std.mem.Allocator, input: select_object_content.SelectObjectContentInput, options: select_object_content.Options) !select_object_content.SelectObjectContentOutput {
+        return select_object_content.execute(self, allocator, input, options);
     }
 
     /// Enables or disables a live inventory table for an S3 Metadata configuration
@@ -7479,8 +7479,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn updateBucketMetadataInventoryTableConfiguration(self: *Self, input: update_bucket_metadata_inventory_table_configuration.UpdateBucketMetadataInventoryTableConfigurationInput, options: update_bucket_metadata_inventory_table_configuration.Options) !update_bucket_metadata_inventory_table_configuration.UpdateBucketMetadataInventoryTableConfigurationOutput {
-        return update_bucket_metadata_inventory_table_configuration.execute(self, input, options);
+    pub fn updateBucketMetadataInventoryTableConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_bucket_metadata_inventory_table_configuration.UpdateBucketMetadataInventoryTableConfigurationInput, options: update_bucket_metadata_inventory_table_configuration.Options) !update_bucket_metadata_inventory_table_configuration.UpdateBucketMetadataInventoryTableConfigurationOutput {
+        return update_bucket_metadata_inventory_table_configuration.execute(self, allocator, input, options);
     }
 
     /// Enables or disables journal table record expiration for an S3 Metadata
@@ -7516,8 +7516,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn updateBucketMetadataJournalTableConfiguration(self: *Self, input: update_bucket_metadata_journal_table_configuration.UpdateBucketMetadataJournalTableConfigurationInput, options: update_bucket_metadata_journal_table_configuration.Options) !update_bucket_metadata_journal_table_configuration.UpdateBucketMetadataJournalTableConfigurationOutput {
-        return update_bucket_metadata_journal_table_configuration.execute(self, input, options);
+    pub fn updateBucketMetadataJournalTableConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_bucket_metadata_journal_table_configuration.UpdateBucketMetadataJournalTableConfigurationInput, options: update_bucket_metadata_journal_table_configuration.Options) !update_bucket_metadata_journal_table_configuration.UpdateBucketMetadataJournalTableConfigurationOutput {
+        return update_bucket_metadata_journal_table_configuration.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets or Amazon S3 on
@@ -7673,8 +7673,8 @@ pub const Client = struct {
     /// `UpdateObjectEncryption` request. You can't use the `UpdateObjectEncryption`
     /// operation with objects that have an Object Lock compliance mode retention
     /// period applied to them.
-    pub fn updateObjectEncryption(self: *Self, input: update_object_encryption.UpdateObjectEncryptionInput, options: update_object_encryption.Options) !update_object_encryption.UpdateObjectEncryptionOutput {
-        return update_object_encryption.execute(self, input, options);
+    pub fn updateObjectEncryption(self: *Self, allocator: std.mem.Allocator, input: update_object_encryption.UpdateObjectEncryptionInput, options: update_object_encryption.Options) !update_object_encryption.UpdateObjectEncryptionOutput {
+        return update_object_encryption.execute(self, allocator, input, options);
     }
 
     /// Uploads a part in a multipart upload.
@@ -7888,8 +7888,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn uploadPart(self: *Self, input: upload_part.UploadPartInput, options: upload_part.Options) !upload_part.UploadPartOutput {
-        return upload_part.execute(self, input, options);
+    pub fn uploadPart(self: *Self, allocator: std.mem.Allocator, input: upload_part.UploadPartInput, options: upload_part.Options) !upload_part.UploadPartOutput {
+        return upload_part.execute(self, allocator, input, options);
     }
 
     /// Uploads a part by copying data from an existing object as data source. To
@@ -8112,8 +8112,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn uploadPartCopy(self: *Self, input: upload_part_copy.UploadPartCopyInput, options: upload_part_copy.Options) !upload_part_copy.UploadPartCopyOutput {
-        return upload_part_copy.execute(self, input, options);
+    pub fn uploadPartCopy(self: *Self, allocator: std.mem.Allocator, input: upload_part_copy.UploadPartCopyInput, options: upload_part_copy.Options) !upload_part_copy.UploadPartCopyOutput {
+        return upload_part_copy.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -8183,8 +8183,8 @@ pub const Client = struct {
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
-    pub fn writeGetObjectResponse(self: *Self, input: write_get_object_response.WriteGetObjectResponseInput, options: write_get_object_response.Options) !write_get_object_response.WriteGetObjectResponseOutput {
-        return write_get_object_response.execute(self, input, options);
+    pub fn writeGetObjectResponse(self: *Self, allocator: std.mem.Allocator, input: write_get_object_response.WriteGetObjectResponseInput, options: write_get_object_response.Options) !write_get_object_response.WriteGetObjectResponseOutput {
+        return write_get_object_response.execute(self, allocator, input, options);
     }
 
     pub fn listBucketsPaginator(self: *Self, params: list_buckets.ListBucketsInput) paginator.ListBucketsPaginator {
@@ -8219,28 +8219,28 @@ pub const Client = struct {
         };
     }
 
-    pub fn presignDeleteObject(self: *Self, input: delete_object.DeleteObjectInput, options: delete_object.PresignOptions) ![]const u8 {
-        return delete_object.presign(self, input, options);
+    pub fn presignDeleteObject(self: *Self, allocator: std.mem.Allocator, input: delete_object.DeleteObjectInput, options: delete_object.PresignOptions) ![]const u8 {
+        return delete_object.presign(self, allocator, input, options);
     }
 
-    pub fn presignGetObject(self: *Self, input: get_object.GetObjectInput, options: get_object.PresignOptions) ![]const u8 {
-        return get_object.presign(self, input, options);
+    pub fn presignGetObject(self: *Self, allocator: std.mem.Allocator, input: get_object.GetObjectInput, options: get_object.PresignOptions) ![]const u8 {
+        return get_object.presign(self, allocator, input, options);
     }
 
-    pub fn presignHeadBucket(self: *Self, input: head_bucket.HeadBucketInput, options: head_bucket.PresignOptions) ![]const u8 {
-        return head_bucket.presign(self, input, options);
+    pub fn presignHeadBucket(self: *Self, allocator: std.mem.Allocator, input: head_bucket.HeadBucketInput, options: head_bucket.PresignOptions) ![]const u8 {
+        return head_bucket.presign(self, allocator, input, options);
     }
 
-    pub fn presignHeadObject(self: *Self, input: head_object.HeadObjectInput, options: head_object.PresignOptions) ![]const u8 {
-        return head_object.presign(self, input, options);
+    pub fn presignHeadObject(self: *Self, allocator: std.mem.Allocator, input: head_object.HeadObjectInput, options: head_object.PresignOptions) ![]const u8 {
+        return head_object.presign(self, allocator, input, options);
     }
 
-    pub fn presignPutObject(self: *Self, input: put_object.PutObjectInput, options: put_object.PresignOptions) ![]const u8 {
-        return put_object.presign(self, input, options);
+    pub fn presignPutObject(self: *Self, allocator: std.mem.Allocator, input: put_object.PutObjectInput, options: put_object.PresignOptions) ![]const u8 {
+        return put_object.presign(self, allocator, input, options);
     }
 
-    pub fn presignUploadPart(self: *Self, input: upload_part.UploadPartInput, options: upload_part.PresignOptions) ![]const u8 {
-        return upload_part.presign(self, input, options);
+    pub fn presignUploadPart(self: *Self, allocator: std.mem.Allocator, input: upload_part.UploadPartInput, options: upload_part.PresignOptions) ![]const u8 {
+        return upload_part.presign(self, allocator, input, options);
     }
 
     pub fn waitUntilBucketExists(self: *Self, params: head_bucket.HeadBucketInput) aws.waiter.WaiterError!void {

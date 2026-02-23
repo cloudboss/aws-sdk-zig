@@ -45,12 +45,6 @@ pub const DescribeMaintenanceWindowExecutionTasksOutput = struct {
     /// Information about the task executions.
     window_execution_task_identities: ?[]const MaintenanceWindowExecutionTaskIdentity = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeMaintenanceWindowExecutionTasksOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .next_token = "NextToken",
         .window_execution_task_identities = "WindowExecutionTaskIdentities",
@@ -61,7 +55,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeMaintenanceWindowExecutionTasksInput, options: Options) !DescribeMaintenanceWindowExecutionTasksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMaintenanceWindowExecutionTasksInput, options: Options) !DescribeMaintenanceWindowExecutionTasksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -82,10 +76,7 @@ pub fn execute(client: *Client, input: DescribeMaintenanceWindowExecutionTasksIn
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

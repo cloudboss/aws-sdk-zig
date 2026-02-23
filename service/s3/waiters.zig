@@ -42,8 +42,11 @@ pub const BucketExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.headBucket(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.headBucket(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NotFound")) {
@@ -52,7 +55,6 @@ pub const BucketExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .success;
     }
@@ -94,8 +96,11 @@ pub const BucketNotExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.headBucket(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.headBucket(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NotFound")) {
@@ -104,7 +109,6 @@ pub const BucketNotExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -146,8 +150,11 @@ pub const ObjectExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.headObject(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.headObject(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NotFound")) {
@@ -156,7 +163,6 @@ pub const ObjectExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .success;
     }
@@ -198,8 +204,11 @@ pub const ObjectNotExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.headObject(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.headObject(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NotFound")) {
@@ -208,7 +217,6 @@ pub const ObjectNotExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }

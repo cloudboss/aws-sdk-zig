@@ -34,19 +34,13 @@ pub const ModifyVpcBlockPublicAccessOptionsInput = struct {
 pub const ModifyVpcBlockPublicAccessOptionsOutput = struct {
     /// Details related to the VPC Block Public Access (BPA) options.
     vpc_block_public_access_options: ?VpcBlockPublicAccessOptions = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ModifyVpcBlockPublicAccessOptionsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ModifyVpcBlockPublicAccessOptionsInput, options: Options) !ModifyVpcBlockPublicAccessOptionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVpcBlockPublicAccessOptionsInput, options: Options) !ModifyVpcBlockPublicAccessOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -67,10 +61,7 @@ pub fn execute(client: *Client, input: ModifyVpcBlockPublicAccessOptionsInput, o
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

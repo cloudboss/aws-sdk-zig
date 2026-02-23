@@ -539,19 +539,13 @@ pub const HeadObjectOutput = struct {
     ///
     /// This functionality is not supported for directory buckets.
     website_redirect_location: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *HeadObjectOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: HeadObjectInput, options: Options) !HeadObjectOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: HeadObjectInput, options: Options) !HeadObjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -572,10 +566,7 @@ pub fn execute(client: *Client, input: HeadObjectInput, options: Options) !HeadO
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 
@@ -583,7 +574,7 @@ pub const PresignOptions = struct {
     expires_seconds: u64 = 3600,
 };
 
-pub fn presign(client: *Client, input: HeadObjectInput, options: PresignOptions) ![]const u8 {
+pub fn presign(client: *Client, allocator: std.mem.Allocator, input: HeadObjectInput, options: PresignOptions) ![]const u8 {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -594,7 +585,7 @@ pub fn presign(client: *Client, input: HeadObjectInput, options: PresignOptions)
     const creds = try client.config.credentials.getCredentials(alloc);
 
     return aws.signing.presignRequest(
-        client.allocator,
+        allocator,
         &request,
         creds,
         client.config.region,

@@ -18,12 +18,6 @@ pub const DescribeExportOutput = struct {
     /// Represents the properties of the export.
     export_description: ?ExportDescription = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeExportOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .export_description = "ExportDescription",
     };
@@ -33,7 +27,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeExportInput, options: Options) !DescribeExportOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeExportInput, options: Options) !DescribeExportOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -54,10 +48,7 @@ pub fn execute(client: *Client, input: DescribeExportInput, options: Options) !D
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

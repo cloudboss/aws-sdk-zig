@@ -11,12 +11,15 @@ test "getCallerIdentity returns account info from LocalStack" {
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
-    var result = try sts.get_caller_identity.execute(
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    const result = try sts.get_caller_identity.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     // LocalStack returns dummy account info
     try std.testing.expect(result.account != null);
@@ -33,16 +36,19 @@ test "service error populates diagnostic on invalid action" {
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
     // Use getCallerIdentity with a diagnostic to verify error handling works
     // when the response is successful (no error case). This at least exercises
     // the full execute -> serialize -> sign -> send -> deserialize path.
     var diagnostic: sts.ServiceError = undefined;
-    var result = try sts.get_caller_identity.execute(
+    const result = try sts.get_caller_identity.execute(
         &client,
+        arena.allocator(),
         .{},
         .{ .diagnostic = &diagnostic },
     );
-    defer result.deinit();
 
     // Should succeed -- this confirms the full round-trip works with diagnostics
     try std.testing.expect(result.account != null);
@@ -57,12 +63,15 @@ test "getSessionToken returns temporary credentials" {
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
-    var result = try sts.get_session_token.execute(
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    const result = try sts.get_session_token.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     // GetSessionToken wraps credentials in a nested struct
     try std.testing.expect(result.credentials != null);
@@ -86,12 +95,15 @@ test "getCallerIdentity response fields have expected format" {
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
-    var result = try sts.get_caller_identity.execute(
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    const result = try sts.get_caller_identity.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     // Account must be present
     try std.testing.expect(result.account != null);
@@ -114,12 +126,15 @@ test "GetCallerIdentity account has 12 digit format" {
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
-    var result = try sts.get_caller_identity.execute(
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    const result = try sts.get_caller_identity.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     // AWS account IDs are always exactly 12 digits
     const account = result.account orelse return error.MissingAccount;
@@ -135,12 +150,15 @@ test "GetCallerIdentity ARN contains account" {
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
-    var result = try sts.get_caller_identity.execute(
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    const result = try sts.get_caller_identity.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     // The ARN must embed the account ID as a substring
     const account = result.account orelse return error.MissingAccount;
@@ -157,12 +175,15 @@ test "GetSessionToken credentials differ from source credentials" {
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
-    var result = try sts.get_session_token.execute(
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    const result = try sts.get_session_token.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result.deinit();
 
     const creds = result.credentials orelse return error.MissingCredentials;
 
@@ -180,21 +201,24 @@ test "GetCallerIdentity returns consistent results across calls" {
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
     defer client.deinit();
 
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
     // First call
-    var result1 = try sts.get_caller_identity.execute(
+    const result1 = try sts.get_caller_identity.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result1.deinit();
 
     // Second call
-    var result2 = try sts.get_caller_identity.execute(
+    const result2 = try sts.get_caller_identity.execute(
         &client,
+        arena.allocator(),
         .{},
         .{},
     );
-    defer result2.deinit();
 
     // Account must be identical across both calls
     const account1 = result1.account orelse return error.MissingAccount;

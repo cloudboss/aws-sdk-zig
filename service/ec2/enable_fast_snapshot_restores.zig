@@ -42,19 +42,13 @@ pub const EnableFastSnapshotRestoresOutput = struct {
     /// Information about the snapshots for which fast snapshot restores could not
     /// be enabled.
     unsuccessful: ?[]const EnableFastSnapshotRestoreErrorItem = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *EnableFastSnapshotRestoresOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: EnableFastSnapshotRestoresInput, options: Options) !EnableFastSnapshotRestoresOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableFastSnapshotRestoresInput, options: Options) !EnableFastSnapshotRestoresOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -75,10 +69,7 @@ pub fn execute(client: *Client, input: EnableFastSnapshotRestoresInput, options:
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

@@ -52,8 +52,11 @@ pub const ImageExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeImages(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeImages(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidAMIID.NotFound")) {
@@ -62,7 +65,6 @@ pub const ImageExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -104,8 +106,11 @@ pub const InstanceExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeInstances(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeInstances(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
@@ -114,7 +119,6 @@ pub const InstanceExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -156,8 +160,11 @@ pub const InstanceRunningWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeInstances(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeInstances(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
@@ -166,7 +173,6 @@ pub const InstanceRunningWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -208,8 +214,11 @@ pub const InstanceStatusOkWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeInstanceStatus(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeInstanceStatus(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInstanceID.NotFound")) {
@@ -218,7 +227,6 @@ pub const InstanceStatusOkWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -260,8 +268,11 @@ pub const InternetGatewayExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeInternetGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeInternetGateways(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidInternetGateway.NotFound")) {
@@ -270,7 +281,6 @@ pub const InternetGatewayExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -312,8 +322,11 @@ pub const KeyPairExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeKeyPairs(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeKeyPairs(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidKeyPair.NotFound")) {
@@ -322,7 +335,6 @@ pub const KeyPairExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -364,8 +376,11 @@ pub const NatGatewayAvailableWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeNatGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeNatGateways(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NatGatewayNotFound")) {
@@ -374,7 +389,6 @@ pub const NatGatewayAvailableWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -416,8 +430,11 @@ pub const NatGatewayDeletedWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeNatGateways(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeNatGateways(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NatGatewayNotFound")) {
@@ -426,7 +443,6 @@ pub const NatGatewayDeletedWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -468,8 +484,11 @@ pub const NetworkInterfaceAvailableWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeNetworkInterfaces(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeNetworkInterfaces(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidNetworkInterfaceID.NotFound")) {
@@ -478,7 +497,6 @@ pub const NetworkInterfaceAvailableWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -520,8 +538,11 @@ pub const SecurityGroupExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeSecurityGroups(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeSecurityGroups(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidGroup.NotFound")) {
@@ -530,7 +551,6 @@ pub const SecurityGroupExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -572,8 +592,11 @@ pub const SpotInstanceRequestFulfilledWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeSpotInstanceRequests(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeSpotInstanceRequests(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidSpotInstanceRequestID.NotFound")) {
@@ -582,7 +605,6 @@ pub const SpotInstanceRequestFulfilledWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -624,8 +646,11 @@ pub const VolumeDeletedWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeVolumes(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeVolumes(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVolume.NotFound")) {
@@ -634,7 +659,6 @@ pub const VolumeDeletedWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -676,8 +700,11 @@ pub const VpcExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeVpcs(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeVpcs(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcID.NotFound")) {
@@ -686,7 +713,6 @@ pub const VpcExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .success;
     }
@@ -728,8 +754,11 @@ pub const VpcPeeringConnectionDeletedWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeVpcPeeringConnections(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeVpcPeeringConnections(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcPeeringConnectionID.NotFound")) {
@@ -738,7 +767,6 @@ pub const VpcPeeringConnectionDeletedWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .retry;
     }
@@ -780,8 +808,11 @@ pub const VpcPeeringConnectionExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.describeVpcPeeringConnections(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.describeVpcPeeringConnections(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidVpcPeeringConnectionID.NotFound")) {
@@ -790,7 +821,6 @@ pub const VpcPeeringConnectionExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .success;
     }

@@ -29,15 +29,14 @@ pub const GetDurableExecutionHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_durable_execution_history.Options) !get_durable_execution_history.GetDurableExecutionHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_durable_execution_history.Options) !get_durable_execution_history.GetDurableExecutionHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try get_durable_execution_history.execute(self.client, self.params, options);
-
+        const output = try get_durable_execution_history.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -71,15 +70,14 @@ pub const GetDurableExecutionStatePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: get_durable_execution_state.Options) !get_durable_execution_state.GetDurableExecutionStateOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_durable_execution_state.Options) !get_durable_execution_state.GetDurableExecutionStateOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try get_durable_execution_state.execute(self.client, self.params, options);
-
+        const output = try get_durable_execution_state.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -113,15 +111,14 @@ pub const ListAliasesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_aliases.Options) !list_aliases.ListAliasesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_aliases.Options) !list_aliases.ListAliasesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_aliases.execute(self.client, self.params, options);
-
+        const output = try list_aliases.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -155,15 +152,14 @@ pub const ListCapacityProvidersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_capacity_providers.Options) !list_capacity_providers.ListCapacityProvidersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_capacity_providers.Options) !list_capacity_providers.ListCapacityProvidersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_capacity_providers.execute(self.client, self.params, options);
-
+        const output = try list_capacity_providers.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -197,15 +193,14 @@ pub const ListCodeSigningConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_code_signing_configs.Options) !list_code_signing_configs.ListCodeSigningConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_code_signing_configs.Options) !list_code_signing_configs.ListCodeSigningConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_code_signing_configs.execute(self.client, self.params, options);
-
+        const output = try list_code_signing_configs.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -239,15 +234,14 @@ pub const ListDurableExecutionsByFunctionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_durable_executions_by_function.Options) !list_durable_executions_by_function.ListDurableExecutionsByFunctionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_durable_executions_by_function.Options) !list_durable_executions_by_function.ListDurableExecutionsByFunctionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_durable_executions_by_function.execute(self.client, self.params, options);
-
+        const output = try list_durable_executions_by_function.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -281,15 +275,14 @@ pub const ListEventSourceMappingsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_event_source_mappings.Options) !list_event_source_mappings.ListEventSourceMappingsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_event_source_mappings.Options) !list_event_source_mappings.ListEventSourceMappingsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_event_source_mappings.execute(self.client, self.params, options);
-
+        const output = try list_event_source_mappings.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -323,15 +316,14 @@ pub const ListFunctionEventInvokeConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_function_event_invoke_configs.Options) !list_function_event_invoke_configs.ListFunctionEventInvokeConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_function_event_invoke_configs.Options) !list_function_event_invoke_configs.ListFunctionEventInvokeConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_function_event_invoke_configs.execute(self.client, self.params, options);
-
+        const output = try list_function_event_invoke_configs.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -365,15 +357,14 @@ pub const ListFunctionUrlConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_function_url_configs.Options) !list_function_url_configs.ListFunctionUrlConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_function_url_configs.Options) !list_function_url_configs.ListFunctionUrlConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_function_url_configs.execute(self.client, self.params, options);
-
+        const output = try list_function_url_configs.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -407,15 +398,14 @@ pub const ListFunctionVersionsByCapacityProviderPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_function_versions_by_capacity_provider.Options) !list_function_versions_by_capacity_provider.ListFunctionVersionsByCapacityProviderOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_function_versions_by_capacity_provider.Options) !list_function_versions_by_capacity_provider.ListFunctionVersionsByCapacityProviderOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_function_versions_by_capacity_provider.execute(self.client, self.params, options);
-
+        const output = try list_function_versions_by_capacity_provider.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -449,15 +439,14 @@ pub const ListFunctionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_functions.Options) !list_functions.ListFunctionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_functions.Options) !list_functions.ListFunctionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_functions.execute(self.client, self.params, options);
-
+        const output = try list_functions.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -491,15 +480,14 @@ pub const ListFunctionsByCodeSigningConfigPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_functions_by_code_signing_config.Options) !list_functions_by_code_signing_config.ListFunctionsByCodeSigningConfigOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_functions_by_code_signing_config.Options) !list_functions_by_code_signing_config.ListFunctionsByCodeSigningConfigOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_functions_by_code_signing_config.execute(self.client, self.params, options);
-
+        const output = try list_functions_by_code_signing_config.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -533,15 +521,14 @@ pub const ListLayerVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_layer_versions.Options) !list_layer_versions.ListLayerVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_layer_versions.Options) !list_layer_versions.ListLayerVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_layer_versions.execute(self.client, self.params, options);
-
+        const output = try list_layer_versions.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -575,15 +562,14 @@ pub const ListLayersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_layers.Options) !list_layers.ListLayersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_layers.Options) !list_layers.ListLayersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_layers.execute(self.client, self.params, options);
-
+        const output = try list_layers.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -617,15 +603,14 @@ pub const ListProvisionedConcurrencyConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_provisioned_concurrency_configs.Options) !list_provisioned_concurrency_configs.ListProvisionedConcurrencyConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_provisioned_concurrency_configs.Options) !list_provisioned_concurrency_configs.ListProvisionedConcurrencyConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_provisioned_concurrency_configs.execute(self.client, self.params, options);
-
+        const output = try list_provisioned_concurrency_configs.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {
@@ -659,15 +644,14 @@ pub const ListVersionsByFunctionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_versions_by_function.Options) !list_versions_by_function.ListVersionsByFunctionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_versions_by_function.Options) !list_versions_by_function.ListVersionsByFunctionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.marker = self.next_token;
 
-        const output = try list_versions_by_function.execute(self.client, self.params, options);
-
+        const output = try list_versions_by_function.execute(self.client, allocator, self.params, options);
 
         if (output.next_marker) |token| {
             if (self.next_token) |old| {

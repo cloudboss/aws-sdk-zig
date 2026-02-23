@@ -41,19 +41,13 @@ pub const EnableSnapshotBlockPublicAccessOutput = struct {
     /// either `block-all-sharing` or `block-new-sharing` if the request
     /// succeeds.
     state: ?SnapshotBlockPublicAccessState = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *EnableSnapshotBlockPublicAccessOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: EnableSnapshotBlockPublicAccessInput, options: Options) !EnableSnapshotBlockPublicAccessOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableSnapshotBlockPublicAccessInput, options: Options) !EnableSnapshotBlockPublicAccessOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -74,10 +68,7 @@ pub fn execute(client: *Client, input: EnableSnapshotBlockPublicAccessInput, opt
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

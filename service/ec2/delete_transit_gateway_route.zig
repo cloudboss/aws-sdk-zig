@@ -25,19 +25,13 @@ pub const DeleteTransitGatewayRouteInput = struct {
 pub const DeleteTransitGatewayRouteOutput = struct {
     /// Information about the route.
     route: ?TransitGatewayRoute = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DeleteTransitGatewayRouteOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DeleteTransitGatewayRouteInput, options: Options) !DeleteTransitGatewayRouteOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTransitGatewayRouteInput, options: Options) !DeleteTransitGatewayRouteOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -58,10 +52,7 @@ pub fn execute(client: *Client, input: DeleteTransitGatewayRouteInput, options: 
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

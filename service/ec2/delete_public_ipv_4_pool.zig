@@ -25,19 +25,13 @@ pub const DeletePublicIpv4PoolInput = struct {
 pub const DeletePublicIpv4PoolOutput = struct {
     /// Information about the result of deleting the public IPv4 pool.
     return_value: ?bool = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DeletePublicIpv4PoolOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DeletePublicIpv4PoolInput, options: Options) !DeletePublicIpv4PoolOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePublicIpv4PoolInput, options: Options) !DeletePublicIpv4PoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -58,10 +52,7 @@ pub fn execute(client: *Client, input: DeletePublicIpv4PoolInput, options: Optio
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

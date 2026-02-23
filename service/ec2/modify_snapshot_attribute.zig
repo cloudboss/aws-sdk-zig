@@ -37,19 +37,13 @@ pub const ModifySnapshotAttributeInput = struct {
 };
 
 pub const ModifySnapshotAttributeOutput = struct {
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ModifySnapshotAttributeOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ModifySnapshotAttributeInput, options: Options) !ModifySnapshotAttributeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySnapshotAttributeInput, options: Options) !ModifySnapshotAttributeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -70,10 +64,7 @@ pub fn execute(client: *Client, input: ModifySnapshotAttributeInput, options: Op
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

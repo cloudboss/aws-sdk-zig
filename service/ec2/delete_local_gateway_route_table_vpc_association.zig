@@ -21,19 +21,13 @@ pub const DeleteLocalGatewayRouteTableVpcAssociationInput = struct {
 pub const DeleteLocalGatewayRouteTableVpcAssociationOutput = struct {
     /// Information about the association.
     local_gateway_route_table_vpc_association: ?LocalGatewayRouteTableVpcAssociation = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DeleteLocalGatewayRouteTableVpcAssociationOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DeleteLocalGatewayRouteTableVpcAssociationInput, options: Options) !DeleteLocalGatewayRouteTableVpcAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLocalGatewayRouteTableVpcAssociationInput, options: Options) !DeleteLocalGatewayRouteTableVpcAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -54,10 +48,7 @@ pub fn execute(client: *Client, input: DeleteLocalGatewayRouteTableVpcAssociatio
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

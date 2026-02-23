@@ -53,19 +53,13 @@ pub const ModifyRouteServerInput = struct {
 pub const ModifyRouteServerOutput = struct {
     /// Information about the modified route server.
     route_server: ?RouteServer = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ModifyRouteServerOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ModifyRouteServerInput, options: Options) !ModifyRouteServerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyRouteServerInput, options: Options) !ModifyRouteServerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -86,10 +80,7 @@ pub fn execute(client: *Client, input: ModifyRouteServerInput, options: Options)
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

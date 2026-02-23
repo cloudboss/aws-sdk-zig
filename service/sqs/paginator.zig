@@ -15,15 +15,14 @@ pub const ListDeadLetterSourceQueuesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_dead_letter_source_queues.Options) !list_dead_letter_source_queues.ListDeadLetterSourceQueuesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_dead_letter_source_queues.Options) !list_dead_letter_source_queues.ListDeadLetterSourceQueuesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_dead_letter_source_queues.execute(self.client, self.params, options);
-
+        const output = try list_dead_letter_source_queues.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -57,15 +56,14 @@ pub const ListQueuesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_queues.Options) !list_queues.ListQueuesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_queues.Options) !list_queues.ListQueuesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_queues.execute(self.client, self.params, options);
-
+        const output = try list_queues.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

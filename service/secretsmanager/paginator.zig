@@ -16,15 +16,14 @@ pub const BatchGetSecretValuePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: batch_get_secret_value.Options) !batch_get_secret_value.BatchGetSecretValueOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: batch_get_secret_value.Options) !batch_get_secret_value.BatchGetSecretValueOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try batch_get_secret_value.execute(self.client, self.params, options);
-
+        const output = try batch_get_secret_value.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -58,15 +57,14 @@ pub const ListSecretVersionIdsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_secret_version_ids.Options) !list_secret_version_ids.ListSecretVersionIdsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_secret_version_ids.Options) !list_secret_version_ids.ListSecretVersionIdsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_secret_version_ids.execute(self.client, self.params, options);
-
+        const output = try list_secret_version_ids.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -100,15 +98,14 @@ pub const ListSecretsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_secrets.Options) !list_secrets.ListSecretsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_secrets.Options) !list_secrets.ListSecretsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_secrets.execute(self.client, self.params, options);
-
+        const output = try list_secrets.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

@@ -30,12 +30,6 @@ pub const GetExecutionPreviewOutput = struct {
     /// Supplemental information about the current status of the execution preview.
     status_message: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetExecutionPreviewOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .ended_at = "EndedAt",
         .execution_preview = "ExecutionPreview",
@@ -49,7 +43,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetExecutionPreviewInput, options: Options) !GetExecutionPreviewOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetExecutionPreviewInput, options: Options) !GetExecutionPreviewOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -70,10 +64,7 @@ pub fn execute(client: *Client, input: GetExecutionPreviewInput, options: Option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

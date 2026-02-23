@@ -33,19 +33,13 @@ pub const GetTransitGatewayPolicyTableEntriesInput = struct {
 pub const GetTransitGatewayPolicyTableEntriesOutput = struct {
     /// The entries for the transit gateway policy table.
     transit_gateway_policy_table_entries: ?[]const TransitGatewayPolicyTableEntry = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetTransitGatewayPolicyTableEntriesOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetTransitGatewayPolicyTableEntriesInput, options: Options) !GetTransitGatewayPolicyTableEntriesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTransitGatewayPolicyTableEntriesInput, options: Options) !GetTransitGatewayPolicyTableEntriesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -66,10 +60,7 @@ pub fn execute(client: *Client, input: GetTransitGatewayPolicyTableEntriesInput,
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

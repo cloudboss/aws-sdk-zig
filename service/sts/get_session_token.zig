@@ -58,19 +58,13 @@ pub const GetSessionTokenOutput = struct {
     /// We
     /// strongly recommend that you make no assumptions about the maximum size.
     credentials: ?Credentials = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetSessionTokenOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetSessionTokenInput, options: Options) !GetSessionTokenOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionTokenInput, options: Options) !GetSessionTokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -91,10 +85,7 @@ pub fn execute(client: *Client, input: GetSessionTokenInput, options: Options) !
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

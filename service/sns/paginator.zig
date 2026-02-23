@@ -21,15 +21,14 @@ pub const ListEndpointsByPlatformApplicationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_endpoints_by_platform_application.Options) !list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_endpoints_by_platform_application.Options) !list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_endpoints_by_platform_application.execute(self.client, self.params, options);
-
+        const output = try list_endpoints_by_platform_application.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -63,15 +62,14 @@ pub const ListOriginationNumbersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_origination_numbers.Options) !list_origination_numbers.ListOriginationNumbersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_origination_numbers.Options) !list_origination_numbers.ListOriginationNumbersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_origination_numbers.execute(self.client, self.params, options);
-
+        const output = try list_origination_numbers.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -105,15 +103,14 @@ pub const ListPhoneNumbersOptedOutPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_phone_numbers_opted_out.Options) !list_phone_numbers_opted_out.ListPhoneNumbersOptedOutOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_phone_numbers_opted_out.Options) !list_phone_numbers_opted_out.ListPhoneNumbersOptedOutOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_phone_numbers_opted_out.execute(self.client, self.params, options);
-
+        const output = try list_phone_numbers_opted_out.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -147,15 +144,14 @@ pub const ListPlatformApplicationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_platform_applications.Options) !list_platform_applications.ListPlatformApplicationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_platform_applications.Options) !list_platform_applications.ListPlatformApplicationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_platform_applications.execute(self.client, self.params, options);
-
+        const output = try list_platform_applications.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -189,15 +185,14 @@ pub const ListSMSSandboxPhoneNumbersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_sms_sandbox_phone_numbers.Options) !list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_sms_sandbox_phone_numbers.Options) !list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_sms_sandbox_phone_numbers.execute(self.client, self.params, options);
-
+        const output = try list_sms_sandbox_phone_numbers.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -231,15 +226,14 @@ pub const ListSubscriptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_subscriptions.Options) !list_subscriptions.ListSubscriptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_subscriptions.Options) !list_subscriptions.ListSubscriptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_subscriptions.execute(self.client, self.params, options);
-
+        const output = try list_subscriptions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -273,15 +267,14 @@ pub const ListSubscriptionsByTopicPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_subscriptions_by_topic.Options) !list_subscriptions_by_topic.ListSubscriptionsByTopicOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_subscriptions_by_topic.Options) !list_subscriptions_by_topic.ListSubscriptionsByTopicOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_subscriptions_by_topic.execute(self.client, self.params, options);
-
+        const output = try list_subscriptions_by_topic.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -315,15 +308,14 @@ pub const ListTopicsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_topics.Options) !list_topics.ListTopicsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_topics.Options) !list_topics.ListTopicsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_topics.execute(self.client, self.params, options);
-
+        const output = try list_topics.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

@@ -96,19 +96,13 @@ pub const CreateReplaceRootVolumeTaskInput = struct {
 pub const CreateReplaceRootVolumeTaskOutput = struct {
     /// Information about the root volume replacement task.
     replace_root_volume_task: ?ReplaceRootVolumeTask = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CreateReplaceRootVolumeTaskOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CreateReplaceRootVolumeTaskInput, options: Options) !CreateReplaceRootVolumeTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateReplaceRootVolumeTaskInput, options: Options) !CreateReplaceRootVolumeTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -129,10 +123,7 @@ pub fn execute(client: *Client, input: CreateReplaceRootVolumeTaskInput, options
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

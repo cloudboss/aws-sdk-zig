@@ -108,8 +108,8 @@ pub const Client = struct {
     /// succeeded. Error details for individual statements can be found under the
     /// [Error](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchStatementResponse.html#DDB-Type-BatchStatementResponse-Error) field of the `BatchStatementResponse` for each
     /// statement.
-    pub fn batchExecuteStatement(self: *Self, input: batch_execute_statement.BatchExecuteStatementInput, options: batch_execute_statement.Options) !batch_execute_statement.BatchExecuteStatementOutput {
-        return batch_execute_statement.execute(self, input, options);
+    pub fn batchExecuteStatement(self: *Self, allocator: std.mem.Allocator, input: batch_execute_statement.BatchExecuteStatementInput, options: batch_execute_statement.Options) !batch_execute_statement.BatchExecuteStatementOutput {
+        return batch_execute_statement.execute(self, allocator, input, options);
     }
 
     /// The `BatchGetItem` operation returns the attributes of one or more items
@@ -184,8 +184,8 @@ pub const Client = struct {
     ///
     /// `BatchGetItem` will result in a `ValidationException` if the
     /// same key is specified multiple times.
-    pub fn batchGetItem(self: *Self, input: batch_get_item.BatchGetItemInput, options: batch_get_item.Options) !batch_get_item.BatchGetItemOutput {
-        return batch_get_item.execute(self, input, options);
+    pub fn batchGetItem(self: *Self, allocator: std.mem.Allocator, input: batch_get_item.BatchGetItemInput, options: batch_get_item.Options) !batch_get_item.BatchGetItemOutput {
+        return batch_get_item.execute(self, allocator, input, options);
     }
 
     /// The `BatchWriteItem` operation puts or deletes multiple items in one or
@@ -297,8 +297,8 @@ pub const Client = struct {
     /// * Any individual items with keys exceeding the key length limits. For a
     /// partition key, the limit is 2048 bytes and for a sort key, the limit is 1024
     /// bytes.
-    pub fn batchWriteItem(self: *Self, input: batch_write_item.BatchWriteItemInput, options: batch_write_item.Options) !batch_write_item.BatchWriteItemOutput {
-        return batch_write_item.execute(self, input, options);
+    pub fn batchWriteItem(self: *Self, allocator: std.mem.Allocator, input: batch_write_item.BatchWriteItemInput, options: batch_write_item.Options) !batch_write_item.BatchWriteItemOutput {
+        return batch_write_item.execute(self, allocator, input, options);
     }
 
     /// Creates a backup for an existing table.
@@ -339,8 +339,8 @@ pub const Client = struct {
     /// * Streams
     ///
     /// * Provisioned read and write capacity
-    pub fn createBackup(self: *Self, input: create_backup.CreateBackupInput, options: create_backup.Options) !create_backup.CreateBackupOutput {
-        return create_backup.execute(self, input, options);
+    pub fn createBackup(self: *Self, allocator: std.mem.Allocator, input: create_backup.CreateBackupInput, options: create_backup.Options) !create_backup.CreateBackupOutput {
+        return create_backup.execute(self, allocator, input, options);
     }
 
     /// Creates a global table from an existing table. A global table creates a
@@ -403,8 +403,8 @@ pub const Client = struct {
     /// provision equal replicated write capacity units to matching secondary
     /// indexes across
     /// your global table.
-    pub fn createGlobalTable(self: *Self, input: create_global_table.CreateGlobalTableInput, options: create_global_table.Options) !create_global_table.CreateGlobalTableOutput {
-        return create_global_table.execute(self, input, options);
+    pub fn createGlobalTable(self: *Self, allocator: std.mem.Allocator, input: create_global_table.CreateGlobalTableInput, options: create_global_table.Options) !create_global_table.CreateGlobalTableOutput {
+        return create_global_table.execute(self, allocator, input, options);
     }
 
     /// The `CreateTable` operation adds a new table to your account. In an Amazon
@@ -426,16 +426,16 @@ pub const Client = struct {
     /// secondary indexes can be in the `CREATING` state at any given time.
     ///
     /// You can use the `DescribeTable` action to check the table status.
-    pub fn createTable(self: *Self, input: create_table.CreateTableInput, options: create_table.Options) !create_table.CreateTableOutput {
-        return create_table.execute(self, input, options);
+    pub fn createTable(self: *Self, allocator: std.mem.Allocator, input: create_table.CreateTableInput, options: create_table.Options) !create_table.CreateTableOutput {
+        return create_table.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing backup of a table.
     ///
     /// You can call `DeleteBackup` at a maximum rate of 10 times per
     /// second.
-    pub fn deleteBackup(self: *Self, input: delete_backup.DeleteBackupInput, options: delete_backup.Options) !delete_backup.DeleteBackupOutput {
-        return delete_backup.execute(self, input, options);
+    pub fn deleteBackup(self: *Self, allocator: std.mem.Allocator, input: delete_backup.DeleteBackupInput, options: delete_backup.Options) !delete_backup.DeleteBackupOutput {
+        return delete_backup.execute(self, allocator, input, options);
     }
 
     /// Deletes a single item in a table by primary key. You can perform a
@@ -457,8 +457,8 @@ pub const Client = struct {
     /// If those conditions are met, DynamoDB performs the delete. Otherwise, the
     /// item is not
     /// deleted.
-    pub fn deleteItem(self: *Self, input: delete_item.DeleteItemInput, options: delete_item.Options) !delete_item.DeleteItemOutput {
-        return delete_item.execute(self, input, options);
+    pub fn deleteItem(self: *Self, allocator: std.mem.Allocator, input: delete_item.DeleteItemInput, options: delete_item.Options) !delete_item.DeleteItemOutput {
+        return delete_item.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource-based policy attached to the resource, which can be a
@@ -483,8 +483,8 @@ pub const Client = struct {
     /// have been
     /// deleted yet. Wait for a few seconds, and then try the `GetResourcePolicy`
     /// request again.
-    pub fn deleteResourcePolicy(self: *Self, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
-        return delete_resource_policy.execute(self, input, options);
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+        return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// The `DeleteTable` operation deletes a table and all of its items. After a
@@ -510,16 +510,16 @@ pub const Client = struct {
     /// deleted after 24 hours.
     ///
     /// Use the `DescribeTable` action to check the status of the table.
-    pub fn deleteTable(self: *Self, input: delete_table.DeleteTableInput, options: delete_table.Options) !delete_table.DeleteTableOutput {
-        return delete_table.execute(self, input, options);
+    pub fn deleteTable(self: *Self, allocator: std.mem.Allocator, input: delete_table.DeleteTableInput, options: delete_table.Options) !delete_table.DeleteTableOutput {
+        return delete_table.execute(self, allocator, input, options);
     }
 
     /// Describes an existing backup of a table.
     ///
     /// You can call `DescribeBackup` at a maximum rate of 10 times per
     /// second.
-    pub fn describeBackup(self: *Self, input: describe_backup.DescribeBackupInput, options: describe_backup.Options) !describe_backup.DescribeBackupOutput {
-        return describe_backup.execute(self, input, options);
+    pub fn describeBackup(self: *Self, allocator: std.mem.Allocator, input: describe_backup.DescribeBackupInput, options: describe_backup.Options) !describe_backup.DescribeBackupOutput {
+        return describe_backup.execute(self, allocator, input, options);
     }
 
     /// Checks the status of continuous backups and point in time recovery on the
@@ -541,28 +541,28 @@ pub const Client = struct {
     ///
     /// You can call `DescribeContinuousBackups` at a maximum rate of 10 times per
     /// second.
-    pub fn describeContinuousBackups(self: *Self, input: describe_continuous_backups.DescribeContinuousBackupsInput, options: describe_continuous_backups.Options) !describe_continuous_backups.DescribeContinuousBackupsOutput {
-        return describe_continuous_backups.execute(self, input, options);
+    pub fn describeContinuousBackups(self: *Self, allocator: std.mem.Allocator, input: describe_continuous_backups.DescribeContinuousBackupsInput, options: describe_continuous_backups.Options) !describe_continuous_backups.DescribeContinuousBackupsOutput {
+        return describe_continuous_backups.execute(self, allocator, input, options);
     }
 
     /// Returns information about contributor insights for a given table or global
     /// secondary
     /// index.
-    pub fn describeContributorInsights(self: *Self, input: describe_contributor_insights.DescribeContributorInsightsInput, options: describe_contributor_insights.Options) !describe_contributor_insights.DescribeContributorInsightsOutput {
-        return describe_contributor_insights.execute(self, input, options);
+    pub fn describeContributorInsights(self: *Self, allocator: std.mem.Allocator, input: describe_contributor_insights.DescribeContributorInsightsInput, options: describe_contributor_insights.Options) !describe_contributor_insights.DescribeContributorInsightsOutput {
+        return describe_contributor_insights.execute(self, allocator, input, options);
     }
 
     /// Returns the regional endpoint information. For more information on policy
     /// permissions,
     /// please see [Internetwork traffic
     /// privacy](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/inter-network-traffic-privacy.html#inter-network-traffic-DescribeEndpoints).
-    pub fn describeEndpoints(self: *Self, input: describe_endpoints.DescribeEndpointsInput, options: describe_endpoints.Options) !describe_endpoints.DescribeEndpointsOutput {
-        return describe_endpoints.execute(self, input, options);
+    pub fn describeEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_endpoints.DescribeEndpointsInput, options: describe_endpoints.Options) !describe_endpoints.DescribeEndpointsOutput {
+        return describe_endpoints.execute(self, allocator, input, options);
     }
 
     /// Describes an existing table export.
-    pub fn describeExport(self: *Self, input: describe_export.DescribeExportInput, options: describe_export.Options) !describe_export.DescribeExportOutput {
-        return describe_export.execute(self, input, options);
+    pub fn describeExport(self: *Self, allocator: std.mem.Allocator, input: describe_export.DescribeExportInput, options: describe_export.Options) !describe_export.DescribeExportOutput {
+        return describe_export.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified global table.
@@ -575,8 +575,8 @@ pub const Client = struct {
     /// To determine which version you're using, see [Determining the global table
     /// version you are
     /// using](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html). To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Upgrading global tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
-    pub fn describeGlobalTable(self: *Self, input: describe_global_table.DescribeGlobalTableInput, options: describe_global_table.Options) !describe_global_table.DescribeGlobalTableOutput {
-        return describe_global_table.execute(self, input, options);
+    pub fn describeGlobalTable(self: *Self, allocator: std.mem.Allocator, input: describe_global_table.DescribeGlobalTableInput, options: describe_global_table.Options) !describe_global_table.DescribeGlobalTableOutput {
+        return describe_global_table.execute(self, allocator, input, options);
     }
 
     /// Describes Region-specific settings for a global table.
@@ -589,18 +589,18 @@ pub const Client = struct {
     /// To determine which version you're using, see [Determining the global table
     /// version you are
     /// using](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html). To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Upgrading global tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
-    pub fn describeGlobalTableSettings(self: *Self, input: describe_global_table_settings.DescribeGlobalTableSettingsInput, options: describe_global_table_settings.Options) !describe_global_table_settings.DescribeGlobalTableSettingsOutput {
-        return describe_global_table_settings.execute(self, input, options);
+    pub fn describeGlobalTableSettings(self: *Self, allocator: std.mem.Allocator, input: describe_global_table_settings.DescribeGlobalTableSettingsInput, options: describe_global_table_settings.Options) !describe_global_table_settings.DescribeGlobalTableSettingsOutput {
+        return describe_global_table_settings.execute(self, allocator, input, options);
     }
 
     /// Represents the properties of the import.
-    pub fn describeImport(self: *Self, input: describe_import.DescribeImportInput, options: describe_import.Options) !describe_import.DescribeImportOutput {
-        return describe_import.execute(self, input, options);
+    pub fn describeImport(self: *Self, allocator: std.mem.Allocator, input: describe_import.DescribeImportInput, options: describe_import.Options) !describe_import.DescribeImportOutput {
+        return describe_import.execute(self, allocator, input, options);
     }
 
     /// Returns information about the status of Kinesis streaming.
-    pub fn describeKinesisStreamingDestination(self: *Self, input: describe_kinesis_streaming_destination.DescribeKinesisStreamingDestinationInput, options: describe_kinesis_streaming_destination.Options) !describe_kinesis_streaming_destination.DescribeKinesisStreamingDestinationOutput {
-        return describe_kinesis_streaming_destination.execute(self, input, options);
+    pub fn describeKinesisStreamingDestination(self: *Self, allocator: std.mem.Allocator, input: describe_kinesis_streaming_destination.DescribeKinesisStreamingDestinationInput, options: describe_kinesis_streaming_destination.Options) !describe_kinesis_streaming_destination.DescribeKinesisStreamingDestinationOutput {
+        return describe_kinesis_streaming_destination.execute(self, allocator, input, options);
     }
 
     /// Returns the current provisioned-capacity quotas for your Amazon Web Services
@@ -682,8 +682,8 @@ pub const Client = struct {
     /// throttling errors if you call it more than once in a minute.
     ///
     /// The `DescribeLimits` Request element has no content.
-    pub fn describeLimits(self: *Self, input: describe_limits.DescribeLimitsInput, options: describe_limits.Options) !describe_limits.DescribeLimitsOutput {
-        return describe_limits.execute(self, input, options);
+    pub fn describeLimits(self: *Self, allocator: std.mem.Allocator, input: describe_limits.DescribeLimitsInput, options: describe_limits.Options) !describe_limits.DescribeLimitsOutput {
+        return describe_limits.execute(self, allocator, input, options);
     }
 
     /// Returns information about the table, including the current status of the
@@ -697,24 +697,24 @@ pub const Client = struct {
     /// for your table might not be available at that moment. Wait for a few
     /// seconds, and
     /// then try the `DescribeTable` request again.
-    pub fn describeTable(self: *Self, input: describe_table.DescribeTableInput, options: describe_table.Options) !describe_table.DescribeTableOutput {
-        return describe_table.execute(self, input, options);
+    pub fn describeTable(self: *Self, allocator: std.mem.Allocator, input: describe_table.DescribeTableInput, options: describe_table.Options) !describe_table.DescribeTableOutput {
+        return describe_table.execute(self, allocator, input, options);
     }
 
     /// Describes auto scaling settings across replicas of the global table at once.
-    pub fn describeTableReplicaAutoScaling(self: *Self, input: describe_table_replica_auto_scaling.DescribeTableReplicaAutoScalingInput, options: describe_table_replica_auto_scaling.Options) !describe_table_replica_auto_scaling.DescribeTableReplicaAutoScalingOutput {
-        return describe_table_replica_auto_scaling.execute(self, input, options);
+    pub fn describeTableReplicaAutoScaling(self: *Self, allocator: std.mem.Allocator, input: describe_table_replica_auto_scaling.DescribeTableReplicaAutoScalingInput, options: describe_table_replica_auto_scaling.Options) !describe_table_replica_auto_scaling.DescribeTableReplicaAutoScalingOutput {
+        return describe_table_replica_auto_scaling.execute(self, allocator, input, options);
     }
 
     /// Gives a description of the Time to Live (TTL) status on the specified table.
-    pub fn describeTimeToLive(self: *Self, input: describe_time_to_live.DescribeTimeToLiveInput, options: describe_time_to_live.Options) !describe_time_to_live.DescribeTimeToLiveOutput {
-        return describe_time_to_live.execute(self, input, options);
+    pub fn describeTimeToLive(self: *Self, allocator: std.mem.Allocator, input: describe_time_to_live.DescribeTimeToLiveInput, options: describe_time_to_live.Options) !describe_time_to_live.DescribeTimeToLiveOutput {
+        return describe_time_to_live.execute(self, allocator, input, options);
     }
 
     /// Stops replication from the DynamoDB table to the Kinesis data stream. This
     /// is done without deleting either of the resources.
-    pub fn disableKinesisStreamingDestination(self: *Self, input: disable_kinesis_streaming_destination.DisableKinesisStreamingDestinationInput, options: disable_kinesis_streaming_destination.Options) !disable_kinesis_streaming_destination.DisableKinesisStreamingDestinationOutput {
-        return disable_kinesis_streaming_destination.execute(self, input, options);
+    pub fn disableKinesisStreamingDestination(self: *Self, allocator: std.mem.Allocator, input: disable_kinesis_streaming_destination.DisableKinesisStreamingDestinationInput, options: disable_kinesis_streaming_destination.Options) !disable_kinesis_streaming_destination.DisableKinesisStreamingDestinationOutput {
+        return disable_kinesis_streaming_destination.execute(self, allocator, input, options);
     }
 
     /// Starts table data replication to the specified Kinesis data stream at a
@@ -724,8 +724,8 @@ pub const Client = struct {
     /// use DescribeKinesisStreamingDestination to check if streaming to the Kinesis
     /// data stream
     /// is ACTIVE.
-    pub fn enableKinesisStreamingDestination(self: *Self, input: enable_kinesis_streaming_destination.EnableKinesisStreamingDestinationInput, options: enable_kinesis_streaming_destination.Options) !enable_kinesis_streaming_destination.EnableKinesisStreamingDestinationOutput {
-        return enable_kinesis_streaming_destination.execute(self, input, options);
+    pub fn enableKinesisStreamingDestination(self: *Self, allocator: std.mem.Allocator, input: enable_kinesis_streaming_destination.EnableKinesisStreamingDestinationInput, options: enable_kinesis_streaming_destination.Options) !enable_kinesis_streaming_destination.EnableKinesisStreamingDestinationOutput {
+        return enable_kinesis_streaming_destination.execute(self, allocator, input, options);
     }
 
     /// This operation allows you to perform reads and singleton writes on data
@@ -747,8 +747,8 @@ pub const Client = struct {
     /// `LastEvaluatedKey` is present in the response, you need to paginate the
     /// result set. If `NextToken` is present, you need to paginate the result set
     /// and include `NextToken`.
-    pub fn executeStatement(self: *Self, input: execute_statement.ExecuteStatementInput, options: execute_statement.Options) !execute_statement.ExecuteStatementOutput {
-        return execute_statement.execute(self, input, options);
+    pub fn executeStatement(self: *Self, allocator: std.mem.Allocator, input: execute_statement.ExecuteStatementInput, options: execute_statement.Options) !execute_statement.ExecuteStatementOutput {
+        return execute_statement.execute(self, allocator, input, options);
     }
 
     /// This operation allows you to perform transactional reads or writes on data
@@ -763,8 +763,8 @@ pub const Client = struct {
     /// similar
     /// manner to `ConditionCheck` in the
     /// [TransactWriteItems](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html#transaction-apis-txwriteitems) API.
-    pub fn executeTransaction(self: *Self, input: execute_transaction.ExecuteTransactionInput, options: execute_transaction.Options) !execute_transaction.ExecuteTransactionOutput {
-        return execute_transaction.execute(self, input, options);
+    pub fn executeTransaction(self: *Self, allocator: std.mem.Allocator, input: execute_transaction.ExecuteTransactionInput, options: execute_transaction.Options) !execute_transaction.ExecuteTransactionOutput {
+        return execute_transaction.execute(self, allocator, input, options);
     }
 
     /// Exports table data to an S3 bucket. The table must have point in time
@@ -772,8 +772,8 @@ pub const Client = struct {
     /// enabled, and you can export data from any time within the point in time
     /// recovery
     /// window.
-    pub fn exportTableToPointInTime(self: *Self, input: export_table_to_point_in_time.ExportTableToPointInTimeInput, options: export_table_to_point_in_time.Options) !export_table_to_point_in_time.ExportTableToPointInTimeOutput {
-        return export_table_to_point_in_time.execute(self, input, options);
+    pub fn exportTableToPointInTime(self: *Self, allocator: std.mem.Allocator, input: export_table_to_point_in_time.ExportTableToPointInTimeInput, options: export_table_to_point_in_time.Options) !export_table_to_point_in_time.ExportTableToPointInTimeOutput {
+        return export_table_to_point_in_time.execute(self, allocator, input, options);
     }
 
     /// The `GetItem` operation returns a set of attributes for the item with the
@@ -784,8 +784,8 @@ pub const Client = struct {
     /// application requires a strongly consistent read, set `ConsistentRead` to
     /// `true`. Although a strongly consistent read might take more time than an
     /// eventually consistent read, it always returns the last updated value.
-    pub fn getItem(self: *Self, input: get_item.GetItemInput, options: get_item.Options) !get_item.GetItemOutput {
-        return get_item.execute(self, input, options);
+    pub fn getItem(self: *Self, allocator: std.mem.Allocator, input: get_item.GetItemInput, options: get_item.Options) !get_item.GetItemOutput {
+        return get_item.execute(self, allocator, input, options);
     }
 
     /// Returns the resource-based policy document attached to the resource, which
@@ -824,13 +824,13 @@ pub const Client = struct {
     /// resource.
     /// Policies that you attach while creating a table using the `CreateTable`
     /// request will always be applied to all requests for that table.
-    pub fn getResourcePolicy(self: *Self, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
-        return get_resource_policy.execute(self, input, options);
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+        return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Imports table data from an S3 bucket.
-    pub fn importTable(self: *Self, input: import_table.ImportTableInput, options: import_table.Options) !import_table.ImportTableOutput {
-        return import_table.execute(self, input, options);
+    pub fn importTable(self: *Self, allocator: std.mem.Allocator, input: import_table.ImportTableInput, options: import_table.Options) !import_table.ImportTableOutput {
+        return import_table.execute(self, allocator, input, options);
     }
 
     /// List DynamoDB backups that are associated with an Amazon Web Services
@@ -853,20 +853,20 @@ pub const Client = struct {
     /// Backup, use the [Amazon Web Services Backup
     /// list
     /// API.](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListBackupJobs.html)
-    pub fn listBackups(self: *Self, input: list_backups.ListBackupsInput, options: list_backups.Options) !list_backups.ListBackupsOutput {
-        return list_backups.execute(self, input, options);
+    pub fn listBackups(self: *Self, allocator: std.mem.Allocator, input: list_backups.ListBackupsInput, options: list_backups.Options) !list_backups.ListBackupsOutput {
+        return list_backups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of ContributorInsightsSummary for a table and all its global
     /// secondary
     /// indexes.
-    pub fn listContributorInsights(self: *Self, input: list_contributor_insights.ListContributorInsightsInput, options: list_contributor_insights.Options) !list_contributor_insights.ListContributorInsightsOutput {
-        return list_contributor_insights.execute(self, input, options);
+    pub fn listContributorInsights(self: *Self, allocator: std.mem.Allocator, input: list_contributor_insights.ListContributorInsightsInput, options: list_contributor_insights.Options) !list_contributor_insights.ListContributorInsightsOutput {
+        return list_contributor_insights.execute(self, allocator, input, options);
     }
 
     /// Lists completed exports within the past 90 days.
-    pub fn listExports(self: *Self, input: list_exports.ListExportsInput, options: list_exports.Options) !list_exports.ListExportsOutput {
-        return list_exports.execute(self, input, options);
+    pub fn listExports(self: *Self, allocator: std.mem.Allocator, input: list_exports.ListExportsInput, options: list_exports.Options) !list_exports.ListExportsOutput {
+        return list_exports.execute(self, allocator, input, options);
     }
 
     /// Lists all global tables that have a replica in the specified Region.
@@ -879,21 +879,21 @@ pub const Client = struct {
     /// To determine which version you're using, see [Determining the global table
     /// version you are
     /// using](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html). To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Upgrading global tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
-    pub fn listGlobalTables(self: *Self, input: list_global_tables.ListGlobalTablesInput, options: list_global_tables.Options) !list_global_tables.ListGlobalTablesOutput {
-        return list_global_tables.execute(self, input, options);
+    pub fn listGlobalTables(self: *Self, allocator: std.mem.Allocator, input: list_global_tables.ListGlobalTablesInput, options: list_global_tables.Options) !list_global_tables.ListGlobalTablesOutput {
+        return list_global_tables.execute(self, allocator, input, options);
     }
 
     /// Lists completed imports within the past 90 days.
-    pub fn listImports(self: *Self, input: list_imports.ListImportsInput, options: list_imports.Options) !list_imports.ListImportsOutput {
-        return list_imports.execute(self, input, options);
+    pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: list_imports.Options) !list_imports.ListImportsOutput {
+        return list_imports.execute(self, allocator, input, options);
     }
 
     /// Returns an array of table names associated with the current account and
     /// endpoint. The
     /// output from `ListTables` is paginated, with each page returning a maximum of
     /// 100 table names.
-    pub fn listTables(self: *Self, input: list_tables.ListTablesInput, options: list_tables.Options) !list_tables.ListTablesOutput {
-        return list_tables.execute(self, input, options);
+    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: list_tables.Options) !list_tables.ListTablesOutput {
+        return list_tables.execute(self, allocator, input, options);
     }
 
     /// List all tags on an Amazon DynamoDB resource. You can call
@@ -903,8 +903,8 @@ pub const Client = struct {
     /// For an overview on tagging DynamoDB resources, see [Tagging for
     /// DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
     /// in the *Amazon DynamoDB Developer Guide*.
-    pub fn listTagsOfResource(self: *Self, input: list_tags_of_resource.ListTagsOfResourceInput, options: list_tags_of_resource.Options) !list_tags_of_resource.ListTagsOfResourceOutput {
-        return list_tags_of_resource.execute(self, input, options);
+    pub fn listTagsOfResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_of_resource.ListTagsOfResourceInput, options: list_tags_of_resource.Options) !list_tags_of_resource.ListTagsOfResourceOutput {
+        return list_tags_of_resource.execute(self, allocator, input, options);
     }
 
     /// Creates a new item, or replaces an old item with a new item. If an item that
@@ -940,8 +940,8 @@ pub const Client = struct {
     ///
     /// For more information about `PutItem`, see [Working with
     /// Items](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html) in the *Amazon DynamoDB Developer Guide*.
-    pub fn putItem(self: *Self, input: put_item.PutItemInput, options: put_item.Options) !put_item.PutItemOutput {
-        return put_item.execute(self, input, options);
+    pub fn putItem(self: *Self, allocator: std.mem.Allocator, input: put_item.PutItemInput, options: put_item.Options) !put_item.PutItemOutput {
+        return put_item.execute(self, allocator, input, options);
     }
 
     /// Attaches a resource-based policy document to the resource, which can be a
@@ -968,8 +968,8 @@ pub const Client = struct {
     /// metadata for your policy or table might not be available at that moment.
     /// Wait for a
     /// few seconds, and then try the `GetResourcePolicy` request again.
-    pub fn putResourcePolicy(self: *Self, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
-        return put_resource_policy.execute(self, input, options);
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+        return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// You must provide the name of the partition key attribute and a single value
@@ -1037,8 +1037,8 @@ pub const Client = struct {
     /// reads only, so
     /// do not specify `ConsistentRead` when querying a global secondary
     /// index.
-    pub fn query(self: *Self, input: query_.QueryInput, options: query_.Options) !query_.QueryOutput {
-        return query_.execute(self, input, options);
+    pub fn query(self: *Self, allocator: std.mem.Allocator, input: query_.QueryInput, options: query_.Options) !query_.QueryOutput {
+        return query_.execute(self, allocator, input, options);
     }
 
     /// Creates a new table from an existing backup. Any number of users can execute
@@ -1061,8 +1061,8 @@ pub const Client = struct {
     /// * Stream settings
     ///
     /// * Time to Live (TTL) settings
-    pub fn restoreTableFromBackup(self: *Self, input: restore_table_from_backup.RestoreTableFromBackupInput, options: restore_table_from_backup.Options) !restore_table_from_backup.RestoreTableFromBackupOutput {
-        return restore_table_from_backup.execute(self, input, options);
+    pub fn restoreTableFromBackup(self: *Self, allocator: std.mem.Allocator, input: restore_table_from_backup.RestoreTableFromBackupInput, options: restore_table_from_backup.Options) !restore_table_from_backup.RestoreTableFromBackupOutput {
+        return restore_table_from_backup.execute(self, allocator, input, options);
     }
 
     /// Restores the specified table to the specified point in time within
@@ -1108,8 +1108,8 @@ pub const Client = struct {
     /// * Time to Live (TTL) settings
     ///
     /// * Point in time recovery settings
-    pub fn restoreTableToPointInTime(self: *Self, input: restore_table_to_point_in_time.RestoreTableToPointInTimeInput, options: restore_table_to_point_in_time.Options) !restore_table_to_point_in_time.RestoreTableToPointInTimeOutput {
-        return restore_table_to_point_in_time.execute(self, input, options);
+    pub fn restoreTableToPointInTime(self: *Self, allocator: std.mem.Allocator, input: restore_table_to_point_in_time.RestoreTableToPointInTimeInput, options: restore_table_to_point_in_time.Options) !restore_table_to_point_in_time.RestoreTableToPointInTimeOutput {
+        return restore_table_to_point_in_time.execute(self, allocator, input, options);
     }
 
     /// The `Scan` operation returns one or more items and item attributes by
@@ -1164,8 +1164,8 @@ pub const Client = struct {
     /// operation does not guarantee that all reads in a scan see a consistent
     /// snapshot of
     /// the table when the scan operation was requested.
-    pub fn scan(self: *Self, input: scan_.ScanInput, options: scan_.Options) !scan_.ScanOutput {
-        return scan_.execute(self, input, options);
+    pub fn scan(self: *Self, allocator: std.mem.Allocator, input: scan_.ScanInput, options: scan_.Options) !scan_.ScanOutput {
+        return scan_.execute(self, allocator, input, options);
     }
 
     /// Associate a set of tags with an Amazon DynamoDB resource. You can then
@@ -1194,8 +1194,8 @@ pub const Client = struct {
     /// For an overview on tagging DynamoDB resources, see [Tagging for
     /// DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
     /// in the *Amazon DynamoDB Developer Guide*.
-    pub fn tagResource(self: *Self, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
-        return tag_resource.execute(self, input, options);
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+        return tag_resource.execute(self, allocator, input, options);
     }
 
     /// `TransactGetItems` is a synchronous operation that atomically retrieves
@@ -1223,8 +1223,8 @@ pub const Client = struct {
     /// * There is a user error, such as an invalid data format.
     ///
     /// * The aggregate size of the items in the transaction exceeded 4 MB.
-    pub fn transactGetItems(self: *Self, input: transact_get_items.TransactGetItemsInput, options: transact_get_items.Options) !transact_get_items.TransactGetItemsOutput {
-        return transact_get_items.execute(self, input, options);
+    pub fn transactGetItems(self: *Self, allocator: std.mem.Allocator, input: transact_get_items.TransactGetItemsInput, options: transact_get_items.Options) !transact_get_items.TransactGetItemsOutput {
+        return transact_get_items.execute(self, allocator, input, options);
     }
 
     /// `TransactWriteItems` is a synchronous write operation that groups up to 100
@@ -1302,8 +1302,8 @@ pub const Client = struct {
     /// * The aggregate size of the items in the transaction exceeds 4 MB.
     ///
     /// * There is a user error, such as an invalid data format.
-    pub fn transactWriteItems(self: *Self, input: transact_write_items.TransactWriteItemsInput, options: transact_write_items.Options) !transact_write_items.TransactWriteItemsOutput {
-        return transact_write_items.execute(self, input, options);
+    pub fn transactWriteItems(self: *Self, allocator: std.mem.Allocator, input: transact_write_items.TransactWriteItemsInput, options: transact_write_items.Options) !transact_write_items.TransactWriteItemsOutput {
+        return transact_write_items.execute(self, allocator, input, options);
     }
 
     /// Removes the association of tags from an Amazon DynamoDB resource. You can
@@ -1328,8 +1328,8 @@ pub const Client = struct {
     /// For an overview on tagging DynamoDB resources, see [Tagging for
     /// DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
     /// in the *Amazon DynamoDB Developer Guide*.
-    pub fn untagResource(self: *Self, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
-        return untag_resource.execute(self, input, options);
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+        return untag_resource.execute(self, allocator, input, options);
     }
 
     /// `UpdateContinuousBackups` enables or disables point in time recovery for
@@ -1347,8 +1347,8 @@ pub const Client = struct {
     /// You can restore your table to any point in time in the last 35 days. You can
     /// set the
     /// `RecoveryPeriodInDays` to any value between 1 and 35 days.
-    pub fn updateContinuousBackups(self: *Self, input: update_continuous_backups.UpdateContinuousBackupsInput, options: update_continuous_backups.Options) !update_continuous_backups.UpdateContinuousBackupsOutput {
-        return update_continuous_backups.execute(self, input, options);
+    pub fn updateContinuousBackups(self: *Self, allocator: std.mem.Allocator, input: update_continuous_backups.UpdateContinuousBackupsInput, options: update_continuous_backups.Options) !update_continuous_backups.UpdateContinuousBackupsOutput {
+        return update_continuous_backups.execute(self, allocator, input, options);
     }
 
     /// Updates the status for contributor insights for a specific table or index.
@@ -1364,8 +1364,8 @@ pub const Client = struct {
     /// customer managed key, you should not enable CloudWatch Contributor Insights
     /// for DynamoDB
     /// for this table.
-    pub fn updateContributorInsights(self: *Self, input: update_contributor_insights.UpdateContributorInsightsInput, options: update_contributor_insights.Options) !update_contributor_insights.UpdateContributorInsightsOutput {
-        return update_contributor_insights.execute(self, input, options);
+    pub fn updateContributorInsights(self: *Self, allocator: std.mem.Allocator, input: update_contributor_insights.UpdateContributorInsightsInput, options: update_contributor_insights.Options) !update_contributor_insights.UpdateContributorInsightsOutput {
+        return update_contributor_insights.execute(self, allocator, input, options);
     }
 
     /// Adds or removes replicas in the specified global table. The global table
@@ -1405,8 +1405,8 @@ pub const Client = struct {
     /// * The global secondary indexes must have the same provisioned and maximum
     ///   write
     /// capacity units.
-    pub fn updateGlobalTable(self: *Self, input: update_global_table.UpdateGlobalTableInput, options: update_global_table.Options) !update_global_table.UpdateGlobalTableOutput {
-        return update_global_table.execute(self, input, options);
+    pub fn updateGlobalTable(self: *Self, allocator: std.mem.Allocator, input: update_global_table.UpdateGlobalTableInput, options: update_global_table.Options) !update_global_table.UpdateGlobalTableOutput {
+        return update_global_table.execute(self, allocator, input, options);
     }
 
     /// Updates settings for a global table.
@@ -1419,8 +1419,8 @@ pub const Client = struct {
     /// To determine which version you're using, see [Determining the global table
     /// version you are
     /// using](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html). To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Upgrading global tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
-    pub fn updateGlobalTableSettings(self: *Self, input: update_global_table_settings.UpdateGlobalTableSettingsInput, options: update_global_table_settings.Options) !update_global_table_settings.UpdateGlobalTableSettingsOutput {
-        return update_global_table_settings.execute(self, input, options);
+    pub fn updateGlobalTableSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_table_settings.UpdateGlobalTableSettingsInput, options: update_global_table_settings.Options) !update_global_table_settings.UpdateGlobalTableSettingsOutput {
+        return update_global_table_settings.execute(self, allocator, input, options);
     }
 
     /// Edits an existing item's attributes, or adds a new item to the table if it
@@ -1435,13 +1435,13 @@ pub const Client = struct {
     ///
     /// You can also return the item's attribute values in the same `UpdateItem`
     /// operation using the `ReturnValues` parameter.
-    pub fn updateItem(self: *Self, input: update_item.UpdateItemInput, options: update_item.Options) !update_item.UpdateItemOutput {
-        return update_item.execute(self, input, options);
+    pub fn updateItem(self: *Self, allocator: std.mem.Allocator, input: update_item.UpdateItemInput, options: update_item.Options) !update_item.UpdateItemOutput {
+        return update_item.execute(self, allocator, input, options);
     }
 
     /// The command to update the Kinesis stream destination.
-    pub fn updateKinesisStreamingDestination(self: *Self, input: update_kinesis_streaming_destination.UpdateKinesisStreamingDestinationInput, options: update_kinesis_streaming_destination.Options) !update_kinesis_streaming_destination.UpdateKinesisStreamingDestinationOutput {
-        return update_kinesis_streaming_destination.execute(self, input, options);
+    pub fn updateKinesisStreamingDestination(self: *Self, allocator: std.mem.Allocator, input: update_kinesis_streaming_destination.UpdateKinesisStreamingDestinationInput, options: update_kinesis_streaming_destination.Options) !update_kinesis_streaming_destination.UpdateKinesisStreamingDestinationOutput {
+        return update_kinesis_streaming_destination.execute(self, allocator, input, options);
     }
 
     /// Modifies the provisioned throughput settings, global secondary indexes, or
@@ -1463,13 +1463,13 @@ pub const Client = struct {
     /// `UPDATING`, you can't issue another `UpdateTable` request.
     /// When the table returns to the `ACTIVE` state, the `UpdateTable`
     /// operation is complete.
-    pub fn updateTable(self: *Self, input: update_table.UpdateTableInput, options: update_table.Options) !update_table.UpdateTableOutput {
-        return update_table.execute(self, input, options);
+    pub fn updateTable(self: *Self, allocator: std.mem.Allocator, input: update_table.UpdateTableInput, options: update_table.Options) !update_table.UpdateTableOutput {
+        return update_table.execute(self, allocator, input, options);
     }
 
     /// Updates auto scaling settings on your global tables at once.
-    pub fn updateTableReplicaAutoScaling(self: *Self, input: update_table_replica_auto_scaling.UpdateTableReplicaAutoScalingInput, options: update_table_replica_auto_scaling.Options) !update_table_replica_auto_scaling.UpdateTableReplicaAutoScalingOutput {
-        return update_table_replica_auto_scaling.execute(self, input, options);
+    pub fn updateTableReplicaAutoScaling(self: *Self, allocator: std.mem.Allocator, input: update_table_replica_auto_scaling.UpdateTableReplicaAutoScalingInput, options: update_table_replica_auto_scaling.Options) !update_table_replica_auto_scaling.UpdateTableReplicaAutoScalingOutput {
+        return update_table_replica_auto_scaling.execute(self, allocator, input, options);
     }
 
     /// The `UpdateTimeToLive` method enables or disables Time to Live (TTL) for
@@ -1510,8 +1510,8 @@ pub const Client = struct {
     /// For more information, see [Time To
     /// Live](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html) in the
     /// Amazon DynamoDB Developer Guide.
-    pub fn updateTimeToLive(self: *Self, input: update_time_to_live.UpdateTimeToLiveInput, options: update_time_to_live.Options) !update_time_to_live.UpdateTimeToLiveOutput {
-        return update_time_to_live.execute(self, input, options);
+    pub fn updateTimeToLive(self: *Self, allocator: std.mem.Allocator, input: update_time_to_live.UpdateTimeToLiveInput, options: update_time_to_live.Options) !update_time_to_live.UpdateTimeToLiveOutput {
+        return update_time_to_live.execute(self, allocator, input, options);
     }
 
     pub fn listContributorInsightsPaginator(self: *Self, params: list_contributor_insights.ListContributorInsightsInput) paginator.ListContributorInsightsPaginator {

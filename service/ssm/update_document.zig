@@ -69,12 +69,6 @@ pub const UpdateDocumentOutput = struct {
     /// A description of the document that was updated.
     document_description: ?DocumentDescription = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *UpdateDocumentOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .document_description = "DocumentDescription",
     };
@@ -84,7 +78,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: UpdateDocumentInput, options: Options) !UpdateDocumentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDocumentInput, options: Options) !UpdateDocumentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -105,10 +99,7 @@ pub fn execute(client: *Client, input: UpdateDocumentInput, options: Options) !U
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

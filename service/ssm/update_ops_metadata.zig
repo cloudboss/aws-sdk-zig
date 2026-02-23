@@ -26,12 +26,6 @@ pub const UpdateOpsMetadataOutput = struct {
     /// The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.
     ops_metadata_arn: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *UpdateOpsMetadataOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .ops_metadata_arn = "OpsMetadataArn",
     };
@@ -41,7 +35,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: UpdateOpsMetadataInput, options: Options) !UpdateOpsMetadataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateOpsMetadataInput, options: Options) !UpdateOpsMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -62,10 +56,7 @@ pub fn execute(client: *Client, input: UpdateOpsMetadataInput, options: Options)
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

@@ -83,8 +83,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn batchGetSecretValue(self: *Self, input: batch_get_secret_value.BatchGetSecretValueInput, options: batch_get_secret_value.Options) !batch_get_secret_value.BatchGetSecretValueOutput {
-        return batch_get_secret_value.execute(self, input, options);
+    pub fn batchGetSecretValue(self: *Self, allocator: std.mem.Allocator, input: batch_get_secret_value.BatchGetSecretValueInput, options: batch_get_secret_value.Options) !batch_get_secret_value.BatchGetSecretValueOutput {
+        return batch_get_secret_value.execute(self, allocator, input, options);
     }
 
     /// Turns off automatic rotation, and if a rotation is currently in progress,
@@ -116,8 +116,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn cancelRotateSecret(self: *Self, input: cancel_rotate_secret.CancelRotateSecretInput, options: cancel_rotate_secret.Options) !cancel_rotate_secret.CancelRotateSecretOutput {
-        return cancel_rotate_secret.execute(self, input, options);
+    pub fn cancelRotateSecret(self: *Self, allocator: std.mem.Allocator, input: cancel_rotate_secret.CancelRotateSecretInput, options: cancel_rotate_secret.Options) !cancel_rotate_secret.CancelRotateSecretOutput {
+        return cancel_rotate_secret.execute(self, allocator, input, options);
     }
 
     /// Creates a new secret. A *secret* can be a password, a set of
@@ -196,8 +196,8 @@ pub const Client = struct {
     /// Learn how to [Mitigate the risks of using command-line tools to store
     /// Secrets Manager
     /// secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
-    pub fn createSecret(self: *Self, input: create_secret.CreateSecretInput, options: create_secret.Options) !create_secret.CreateSecretOutput {
-        return create_secret.execute(self, input, options);
+    pub fn createSecret(self: *Self, allocator: std.mem.Allocator, input: create_secret.CreateSecretInput, options: create_secret.Options) !create_secret.CreateSecretOutput {
+        return create_secret.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource-based permission policy attached to the secret. To
@@ -216,8 +216,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn deleteResourcePolicy(self: *Self, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
-        return delete_resource_policy.execute(self, input, options);
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+        return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a secret and all of its versions. You can specify a recovery window
@@ -277,8 +277,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn deleteSecret(self: *Self, input: delete_secret.DeleteSecretInput, options: delete_secret.Options) !delete_secret.DeleteSecretOutput {
-        return delete_secret.execute(self, input, options);
+    pub fn deleteSecret(self: *Self, allocator: std.mem.Allocator, input: delete_secret.DeleteSecretInput, options: delete_secret.Options) !delete_secret.DeleteSecretOutput {
+        return delete_secret.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of a secret. It does not include the encrypted secret
@@ -297,8 +297,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn describeSecret(self: *Self, input: describe_secret.DescribeSecretInput, options: describe_secret.Options) !describe_secret.DescribeSecretOutput {
-        return describe_secret.execute(self, input, options);
+    pub fn describeSecret(self: *Self, allocator: std.mem.Allocator, input: describe_secret.DescribeSecretInput, options: describe_secret.Options) !describe_secret.DescribeSecretOutput {
+        return describe_secret.execute(self, allocator, input, options);
     }
 
     /// Generates a random password. We recommend that you specify the maximum
@@ -320,8 +320,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn getRandomPassword(self: *Self, input: get_random_password.GetRandomPasswordInput, options: get_random_password.Options) !get_random_password.GetRandomPasswordOutput {
-        return get_random_password.execute(self, input, options);
+    pub fn getRandomPassword(self: *Self, allocator: std.mem.Allocator, input: get_random_password.GetRandomPasswordInput, options: get_random_password.Options) !get_random_password.GetRandomPasswordOutput {
+        return get_random_password.execute(self, allocator, input, options);
     }
 
     /// Retrieves the JSON text of the resource-based policy document attached to
@@ -342,8 +342,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn getResourcePolicy(self: *Self, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
-        return get_resource_policy.execute(self, input, options);
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+        return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves the contents of the encrypted fields `SecretString` or
@@ -377,8 +377,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn getSecretValue(self: *Self, input: get_secret_value.GetSecretValueInput, options: get_secret_value.Options) !get_secret_value.GetSecretValueOutput {
-        return get_secret_value.execute(self, input, options);
+    pub fn getSecretValue(self: *Self, allocator: std.mem.Allocator, input: get_secret_value.GetSecretValueInput, options: get_secret_value.Options) !get_secret_value.GetSecretValueOutput {
+        return get_secret_value.execute(self, allocator, input, options);
     }
 
     /// Lists the versions of a secret. Secrets Manager uses staging labels to
@@ -401,8 +401,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn listSecretVersionIds(self: *Self, input: list_secret_version_ids.ListSecretVersionIdsInput, options: list_secret_version_ids.Options) !list_secret_version_ids.ListSecretVersionIdsOutput {
-        return list_secret_version_ids.execute(self, input, options);
+    pub fn listSecretVersionIds(self: *Self, allocator: std.mem.Allocator, input: list_secret_version_ids.ListSecretVersionIdsInput, options: list_secret_version_ids.Options) !list_secret_version_ids.ListSecretVersionIdsOutput {
+        return list_secret_version_ids.execute(self, allocator, input, options);
     }
 
     /// Lists the secrets that are stored by Secrets Manager in the Amazon Web
@@ -438,8 +438,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn listSecrets(self: *Self, input: list_secrets.ListSecretsInput, options: list_secrets.Options) !list_secrets.ListSecretsOutput {
-        return list_secrets.execute(self, input, options);
+    pub fn listSecrets(self: *Self, allocator: std.mem.Allocator, input: list_secrets.ListSecretsInput, options: list_secrets.Options) !list_secrets.ListSecretsOutput {
+        return list_secrets.execute(self, allocator, input, options);
     }
 
     /// Attaches a resource-based permission policy to a secret. A resource-based
@@ -464,8 +464,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn putResourcePolicy(self: *Self, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
-        return put_resource_policy.execute(self, input, options);
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+        return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Creates a new version of your secret by creating a new encrypted value and
@@ -523,8 +523,8 @@ pub const Client = struct {
     /// Learn how to [Mitigate the risks of using command-line tools to store
     /// Secrets Manager
     /// secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
-    pub fn putSecretValue(self: *Self, input: put_secret_value.PutSecretValueInput, options: put_secret_value.Options) !put_secret_value.PutSecretValueOutput {
-        return put_secret_value.execute(self, input, options);
+    pub fn putSecretValue(self: *Self, allocator: std.mem.Allocator, input: put_secret_value.PutSecretValueInput, options: put_secret_value.Options) !put_secret_value.PutSecretValueOutput {
+        return put_secret_value.execute(self, allocator, input, options);
     }
 
     /// For a secret that is replicated to other Regions, deletes the secret
@@ -544,8 +544,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn removeRegionsFromReplication(self: *Self, input: remove_regions_from_replication.RemoveRegionsFromReplicationInput, options: remove_regions_from_replication.Options) !remove_regions_from_replication.RemoveRegionsFromReplicationOutput {
-        return remove_regions_from_replication.execute(self, input, options);
+    pub fn removeRegionsFromReplication(self: *Self, allocator: std.mem.Allocator, input: remove_regions_from_replication.RemoveRegionsFromReplicationInput, options: remove_regions_from_replication.Options) !remove_regions_from_replication.RemoveRegionsFromReplicationOutput {
+        return remove_regions_from_replication.execute(self, allocator, input, options);
     }
 
     /// Replicates the secret to a new Regions. See [Multi-Region
@@ -568,8 +568,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn replicateSecretToRegions(self: *Self, input: replicate_secret_to_regions.ReplicateSecretToRegionsInput, options: replicate_secret_to_regions.Options) !replicate_secret_to_regions.ReplicateSecretToRegionsOutput {
-        return replicate_secret_to_regions.execute(self, input, options);
+    pub fn replicateSecretToRegions(self: *Self, allocator: std.mem.Allocator, input: replicate_secret_to_regions.ReplicateSecretToRegionsInput, options: replicate_secret_to_regions.Options) !replicate_secret_to_regions.ReplicateSecretToRegionsOutput {
+        return replicate_secret_to_regions.execute(self, allocator, input, options);
     }
 
     /// Cancels the scheduled deletion of a secret by removing the `DeletedDate`
@@ -587,8 +587,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn restoreSecret(self: *Self, input: restore_secret.RestoreSecretInput, options: restore_secret.Options) !restore_secret.RestoreSecretOutput {
-        return restore_secret.execute(self, input, options);
+    pub fn restoreSecret(self: *Self, allocator: std.mem.Allocator, input: restore_secret.RestoreSecretInput, options: restore_secret.Options) !restore_secret.RestoreSecretOutput {
+        return restore_secret.execute(self, allocator, input, options);
     }
 
     /// Configures and starts the asynchronous process of rotating the secret. For
@@ -628,8 +628,8 @@ pub const Client = struct {
     /// need `lambda:InvokeFunction` permissions on the rotation function. For more
     /// information, see [ Permissions for
     /// rotation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html).
-    pub fn rotateSecret(self: *Self, input: rotate_secret.RotateSecretInput, options: rotate_secret.Options) !rotate_secret.RotateSecretOutput {
-        return rotate_secret.execute(self, input, options);
+    pub fn rotateSecret(self: *Self, allocator: std.mem.Allocator, input: rotate_secret.RotateSecretInput, options: rotate_secret.Options) !rotate_secret.RotateSecretOutput {
+        return rotate_secret.execute(self, allocator, input, options);
     }
 
     /// Removes the link between the replica secret and the primary secret and
@@ -652,8 +652,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn stopReplicationToReplica(self: *Self, input: stop_replication_to_replica.StopReplicationToReplicaInput, options: stop_replication_to_replica.Options) !stop_replication_to_replica.StopReplicationToReplicaOutput {
-        return stop_replication_to_replica.execute(self, input, options);
+    pub fn stopReplicationToReplica(self: *Self, allocator: std.mem.Allocator, input: stop_replication_to_replica.StopReplicationToReplicaInput, options: stop_replication_to_replica.Options) !stop_replication_to_replica.StopReplicationToReplicaOutput {
+        return stop_replication_to_replica.execute(self, allocator, input, options);
     }
 
     /// Attaches tags to a secret. Tags consist of a key name and a value. Tags are
@@ -685,8 +685,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn tagResource(self: *Self, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
-        return tag_resource.execute(self, input, options);
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+        return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes specific tags from a secret.
@@ -715,8 +715,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn untagResource(self: *Self, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
-        return untag_resource.execute(self, input, options);
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+        return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Modifies the details of a secret, including metadata and the secret value.
@@ -786,8 +786,8 @@ pub const Client = struct {
     /// Learn how to [Mitigate the risks of using command-line tools to store
     /// Secrets Manager
     /// secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html).
-    pub fn updateSecret(self: *Self, input: update_secret.UpdateSecretInput, options: update_secret.Options) !update_secret.UpdateSecretOutput {
-        return update_secret.execute(self, input, options);
+    pub fn updateSecret(self: *Self, allocator: std.mem.Allocator, input: update_secret.UpdateSecretInput, options: update_secret.Options) !update_secret.UpdateSecretOutput {
+        return update_secret.execute(self, allocator, input, options);
     }
 
     /// Modifies the staging labels attached to a version of a secret. Secrets
@@ -831,8 +831,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn updateSecretVersionStage(self: *Self, input: update_secret_version_stage.UpdateSecretVersionStageInput, options: update_secret_version_stage.Options) !update_secret_version_stage.UpdateSecretVersionStageOutput {
-        return update_secret_version_stage.execute(self, input, options);
+    pub fn updateSecretVersionStage(self: *Self, allocator: std.mem.Allocator, input: update_secret_version_stage.UpdateSecretVersionStageInput, options: update_secret_version_stage.Options) !update_secret_version_stage.UpdateSecretVersionStageOutput {
+        return update_secret_version_stage.execute(self, allocator, input, options);
     }
 
     /// Validates that a resource policy does not grant a wide range of principals
@@ -864,8 +864,8 @@ pub const Client = struct {
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions) and [Authentication
     /// and access control in Secrets
     /// Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
-    pub fn validateResourcePolicy(self: *Self, input: validate_resource_policy.ValidateResourcePolicyInput, options: validate_resource_policy.Options) !validate_resource_policy.ValidateResourcePolicyOutput {
-        return validate_resource_policy.execute(self, input, options);
+    pub fn validateResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: validate_resource_policy.ValidateResourcePolicyInput, options: validate_resource_policy.Options) !validate_resource_policy.ValidateResourcePolicyOutput {
+        return validate_resource_policy.execute(self, allocator, input, options);
     }
 
     pub fn batchGetSecretValuePaginator(self: *Self, params: batch_get_secret_value.BatchGetSecretValueInput) paginator.BatchGetSecretValuePaginator {

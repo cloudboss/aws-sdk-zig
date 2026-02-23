@@ -9,6 +9,8 @@ var shared_init = false;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     shared_cfg = try aws.Config.load(allocator, .{});
     shared_client = s3.Client.initWithOptions(
         allocator,
@@ -16,16 +18,17 @@ test "zest.beforeAll" {
         .{ .keep_alive = false },
     );
     {
-        var r = try s3.create_bucket.execute(
+        _ = try s3.create_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-shared" },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = "sdk-zig-s3-shared",
                 .key = "hello.txt",
@@ -33,11 +36,11 @@ test "zest.beforeAll" {
             },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = "sdk-zig-s3-shared",
                 .key = "prefix-a/file.txt",
@@ -45,11 +48,11 @@ test "zest.beforeAll" {
             },
             .{},
         );
-        defer r.deinit();
     }
     {
-        var r = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = "sdk-zig-s3-shared",
                 .key = "prefix-b/file.txt",
@@ -57,7 +60,6 @@ test "zest.beforeAll" {
             },
             .{},
         );
-        defer r.deinit();
     }
     shared_init = true;
 }
@@ -67,6 +69,9 @@ test "zest.afterAll" {
         _ = gpa.deinit();
         return;
     }
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     const keys = [_][]const u8{
         "hello.txt",
         "prefix-a/file.txt",
@@ -79,20 +84,20 @@ test "zest.afterAll" {
         "special key (1).txt",
     };
     for (keys) |key| {
-        var r = s3.delete_object.execute(
+        _ = s3.delete_object.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-shared", .key = key },
             .{},
         ) catch continue;
-        r.deinit();
     }
     {
-        var r = try s3.delete_bucket.execute(
+        _ = try s3.delete_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-shared" },
             .{},
         );
-        defer r.deinit();
     }
     shared_client.deinit();
     shared_cfg.deinit();
@@ -100,27 +105,34 @@ test "zest.afterAll" {
 }
 
 test "CreateBucket returns successfully" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     {
-        var result = try s3.create_bucket.execute(
+        _ = try s3.create_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-create-test" },
             .{},
         );
-        defer result.deinit();
     }
     {
-        var result = try s3.delete_bucket.execute(
+        _ = try s3.delete_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-create-test" },
             .{},
         );
-        defer result.deinit();
     }
 }
 
 test "PutObject stores object in bucket" {
-    var result = try s3.put_object.execute(
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    _ = try s3.put_object.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .bucket = "sdk-zig-s3-shared",
             .key = "put-test.txt",
@@ -128,14 +140,16 @@ test "PutObject stores object in bucket" {
         },
         .{},
     );
-    defer result.deinit();
 }
 
 test "GetObject retrieves stored object with correct body" {
     const allocator = std.testing.allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
 
     var result = try s3.get_object.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .key = "hello.txt" },
         .{},
     );
@@ -147,9 +161,13 @@ test "GetObject retrieves stored object with correct body" {
 }
 
 test "DeleteObject removes object from bucket" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     {
-        var result = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = "sdk-zig-s3-shared",
                 .key = "delete-me.txt",
@@ -157,21 +175,21 @@ test "DeleteObject removes object from bucket" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try s3.delete_object.execute(
+        _ = try s3.delete_object.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-shared", .key = "delete-me.txt" },
             .{},
         );
-        defer result.deinit();
     }
 
     var diagnostic: s3.ServiceError = undefined;
     const result = s3.get_object.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .key = "delete-me.txt" },
         .{ .diagnostic = &diagnostic },
     );
@@ -189,28 +207,35 @@ test "DeleteObject removes object from bucket" {
 }
 
 test "DeleteBucket removes empty bucket" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     {
-        var result = try s3.create_bucket.execute(
+        _ = try s3.create_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-delete-test" },
             .{},
         );
-        defer result.deinit();
     }
     {
-        var result = try s3.delete_bucket.execute(
+        _ = try s3.delete_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-delete-test" },
             .{},
         );
-        defer result.deinit();
     }
 }
 
 test "GetObject returns NoSuchKey for missing object" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     var diagnostic: s3.ServiceError = undefined;
     const result = s3.get_object.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .key = "nonexistent-key-12345" },
         .{ .diagnostic = &diagnostic },
     );
@@ -228,16 +253,19 @@ test "GetObject returns NoSuchKey for missing object" {
 }
 
 test "ListObjectsV2 paginator collects all objects across pages" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     const bucket_name = "sdk-zig-s3-paginator";
     const obj_count = 5;
 
     {
-        var result = try s3.create_bucket.execute(
+        _ = try s3.create_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = bucket_name },
             .{},
         );
-        defer result.deinit();
     }
 
     var key_bufs: [obj_count][16]u8 = undefined;
@@ -245,12 +273,12 @@ test "ListObjectsV2 paginator collects all objects across pages" {
     for (0..obj_count) |i| {
         keys[i] = std.fmt.bufPrint(&key_bufs[i], "obj-{d}", .{i + 1}) catch
             unreachable;
-        var result = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = bucket_name, .key = keys[i], .body = "data" },
             .{},
         );
-        defer result.deinit();
     }
 
     var pag = shared_client.listObjectsV2Paginator(
@@ -261,8 +289,7 @@ test "ListObjectsV2 paginator collects all objects across pages" {
     var total_keys: usize = 0;
     var pages: usize = 0;
     while (!pag.done) {
-        var output = try pag.next(.{});
-        defer output.deinit();
+        const output = try pag.next(arena.allocator(), .{});
 
         if (output.contents) |contents| {
             total_keys += contents.len;
@@ -274,32 +301,33 @@ test "ListObjectsV2 paginator collects all objects across pages" {
     try std.testing.expect(pages >= 3);
 
     for (0..obj_count) |i| {
-        var result = try s3.delete_object.execute(
+        _ = try s3.delete_object.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = bucket_name, .key = keys[i] },
             .{},
         );
-        defer result.deinit();
     }
     {
-        var result = try s3.delete_bucket.execute(
+        _ = try s3.delete_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = bucket_name },
             .{},
         );
-        defer result.deinit();
     }
 }
 
 test "presigned GetObject URL retrieves object without signing" {
     const allocator = std.testing.allocator;
-    const client_alloc = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
 
     const presigned_url = try shared_client.presignGetObject(
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .key = "hello.txt" },
         .{ .expires_seconds = 60 },
     );
-    defer client_alloc.free(presigned_url);
 
     var http_client = std.http.Client{ .allocator = allocator };
     defer http_client.deinit();
@@ -331,13 +359,16 @@ test "presigned GetObject URL retrieves object without signing" {
 }
 
 test "waitUntilBucketExists succeeds after CreateBucket" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     {
-        var result = try s3.create_bucket.execute(
+        _ = try s3.create_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-waiter" },
             .{},
         );
-        defer result.deinit();
     }
 
     try shared_client.waitUntilBucketExists(
@@ -345,19 +376,23 @@ test "waitUntilBucketExists succeeds after CreateBucket" {
     );
 
     {
-        var result = try s3.delete_bucket.execute(
+        _ = try s3.delete_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = "sdk-zig-s3-waiter" },
             .{},
         );
-        defer result.deinit();
     }
 }
 
 test "HeadObject returns metadata for existing object" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     {
-        var result = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = "sdk-zig-s3-shared",
                 .key = "content-type-test.txt",
@@ -366,15 +401,14 @@ test "HeadObject returns metadata for existing object" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
-    var result = try s3.head_object.execute(
+    const result = try s3.head_object.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .key = "content-type-test.txt" },
         .{},
     );
-    defer result.deinit();
 
     const content_length = result.content_length orelse
         return error.MissingContentLength;
@@ -389,10 +423,13 @@ test "HeadObject returns metadata for existing object" {
 
 test "CopyObject duplicates object to new key" {
     const allocator = std.testing.allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
 
     {
-        var result = try s3.copy_object.execute(
+        _ = try s3.copy_object.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = "sdk-zig-s3-shared",
                 .key = "hello-copy.txt",
@@ -400,11 +437,11 @@ test "CopyObject duplicates object to new key" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     var result = try s3.get_object.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .key = "hello-copy.txt" },
         .{},
     );
@@ -416,30 +453,34 @@ test "CopyObject duplicates object to new key" {
 }
 
 test "DeleteObjects removes multiple objects in one call" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     const bucket_name = "sdk-zig-s3-delete-objects";
     const keys = [_][]const u8{ "obj-a", "obj-b", "obj-c" };
 
     {
-        var result = try s3.create_bucket.execute(
+        _ = try s3.create_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = bucket_name },
             .{},
         );
-        defer result.deinit();
     }
 
     for (keys) |key| {
-        var result = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = bucket_name, .key = key, .body = "data" },
             .{},
         );
-        defer result.deinit();
     }
 
     {
-        var result = try s3.delete_objects.execute(
+        const result = try s3.delete_objects.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = bucket_name,
                 .delete = .{
@@ -471,7 +512,6 @@ test "DeleteObjects removes multiple objects in one call" {
             },
             .{},
         );
-        defer result.deinit();
 
         const deleted = result.deleted orelse
             return error.MissingDeletedList;
@@ -479,23 +519,26 @@ test "DeleteObjects removes multiple objects in one call" {
     }
 
     {
-        var result = try s3.delete_bucket.execute(
+        _ = try s3.delete_bucket.execute(
             &shared_client,
+            arena.allocator(),
             .{ .bucket = bucket_name },
             .{},
         );
-        defer result.deinit();
     }
 }
 
 test "PutObject round-trips special characters in key" {
     const allocator = std.testing.allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     const object_key = "special key (1).txt";
     const object_body = "special key content";
 
     {
-        var result = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = "sdk-zig-s3-shared",
                 .key = object_key,
@@ -503,11 +546,11 @@ test "PutObject round-trips special characters in key" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
     var result = try s3.get_object.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .key = object_key },
         .{},
     );
@@ -519,8 +562,10 @@ test "PutObject round-trips special characters in key" {
 }
 
 test "ListBuckets includes shared bucket" {
-    var result = try s3.list_buckets.execute(&shared_client, .{}, .{});
-    defer result.deinit();
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const result = try s3.list_buckets.execute(&shared_client, arena.allocator(), .{}, .{});
 
     const buckets = result.buckets orelse return error.MissingBucketList;
     var found = false;
@@ -536,9 +581,13 @@ test "ListBuckets includes shared bucket" {
 }
 
 test "PutObject with empty body stores zero-length object" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     {
-        var result = try s3.put_object.execute(
+        _ = try s3.put_object.execute(
             &shared_client,
+            arena.allocator(),
             .{
                 .bucket = "sdk-zig-s3-shared",
                 .key = "empty.txt",
@@ -546,15 +595,14 @@ test "PutObject with empty body stores zero-length object" {
             },
             .{},
         );
-        defer result.deinit();
     }
 
-    var result = try s3.head_object.execute(
+    const result = try s3.head_object.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .key = "empty.txt" },
         .{},
     );
-    defer result.deinit();
 
     const content_length = result.content_length orelse
         return error.MissingContentLength;
@@ -562,29 +610,39 @@ test "PutObject with empty body stores zero-length object" {
 }
 
 test "ListObjectsV2 with prefix filters results" {
-    var result = try s3.list_objects_v2.execute(
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const result = try s3.list_objects_v2.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .prefix = "prefix-a/" },
         .{},
     );
-    defer result.deinit();
 
     const contents = result.contents orelse return error.MissingContents;
     try std.testing.expectEqual(@as(usize, 1), contents.len);
 }
 
 test "CreateBucket that already exists returns successfully" {
-    var result = try s3.create_bucket.execute(
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    _ = try s3.create_bucket.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared" },
         .{},
     );
-    defer result.deinit();
 }
 
 test "HeadObject returns error for missing object" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
     const result = s3.head_object.execute(
         &shared_client,
+        arena.allocator(),
         .{
             .bucket = "sdk-zig-s3-shared",
             .key = "nonexistent-12345.txt",
@@ -595,12 +653,15 @@ test "HeadObject returns error for missing object" {
 }
 
 test "ListObjectsV2 returns empty for prefix with no objects" {
-    var result = try s3.list_objects_v2.execute(
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const result = try s3.list_objects_v2.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .prefix = "no-match-xyz/" },
         .{},
     );
-    defer result.deinit();
 
     if (result.contents) |contents| {
         try std.testing.expectEqual(@as(usize, 0), contents.len);
@@ -608,12 +669,15 @@ test "ListObjectsV2 returns empty for prefix with no objects" {
 }
 
 test "ListObjectsV2 with max_keys limits result count" {
-    var result = try s3.list_objects_v2.execute(
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const result = try s3.list_objects_v2.execute(
         &shared_client,
+        arena.allocator(),
         .{ .bucket = "sdk-zig-s3-shared", .max_keys = 1 },
         .{},
     );
-    defer result.deinit();
 
     if (result.contents) |contents| {
         try std.testing.expect(contents.len <= 1);

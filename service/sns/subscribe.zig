@@ -167,19 +167,13 @@ pub const SubscribeOutput = struct {
     /// `ReturnSubscriptionArn` is true, then the value is always the
     /// subscription ARN, even if the subscription requires confirmation.
     subscription_arn: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *SubscribeOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: SubscribeInput, options: Options) !SubscribeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SubscribeInput, options: Options) !SubscribeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -200,10 +194,7 @@ pub fn execute(client: *Client, input: SubscribeInput, options: Options) !Subscr
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

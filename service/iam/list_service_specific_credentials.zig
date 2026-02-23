@@ -64,19 +64,13 @@ pub const ListServiceSpecificCredentialsOutput = struct {
     /// A list of structures that each contain details about a service-specific
     /// credential.
     service_specific_credentials: ?[]const ServiceSpecificCredentialMetadata = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ListServiceSpecificCredentialsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ListServiceSpecificCredentialsInput, options: Options) !ListServiceSpecificCredentialsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListServiceSpecificCredentialsInput, options: Options) !ListServiceSpecificCredentialsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -97,10 +91,7 @@ pub fn execute(client: *Client, input: ListServiceSpecificCredentialsInput, opti
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

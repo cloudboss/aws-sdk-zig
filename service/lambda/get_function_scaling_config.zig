@@ -30,12 +30,6 @@ pub const GetFunctionScalingConfigOutput = struct {
     /// The scaling configuration that was requested for the function.
     requested_function_scaling_config: ?FunctionScalingConfig = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetFunctionScalingConfigOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .applied_function_scaling_config = "AppliedFunctionScalingConfig",
         .function_arn = "FunctionArn",
@@ -47,7 +41,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetFunctionScalingConfigInput, options: Options) !GetFunctionScalingConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetFunctionScalingConfigInput, options: Options) !GetFunctionScalingConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -68,10 +62,7 @@ pub fn execute(client: *Client, input: GetFunctionScalingConfigInput, options: O
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

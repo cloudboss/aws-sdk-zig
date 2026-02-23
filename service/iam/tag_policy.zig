@@ -22,19 +22,13 @@ pub const TagPolicyInput = struct {
 };
 
 pub const TagPolicyOutput = struct {
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *TagPolicyOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: TagPolicyInput, options: Options) !TagPolicyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagPolicyInput, options: Options) !TagPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -55,10 +49,7 @@ pub fn execute(client: *Client, input: TagPolicyInput, options: Options) !TagPol
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

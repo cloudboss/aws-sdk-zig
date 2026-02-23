@@ -54,19 +54,13 @@ pub const ExportTransitGatewayRoutesOutput = struct {
     /// The URL of the exported file in Amazon S3. For example,
     /// s3://*bucket_name*/VPCTransitGateway/TransitGatewayRouteTables/*file_name*.
     s3_location: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ExportTransitGatewayRoutesOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ExportTransitGatewayRoutesInput, options: Options) !ExportTransitGatewayRoutesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportTransitGatewayRoutesInput, options: Options) !ExportTransitGatewayRoutesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -87,10 +81,7 @@ pub fn execute(client: *Client, input: ExportTransitGatewayRoutesInput, options:
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

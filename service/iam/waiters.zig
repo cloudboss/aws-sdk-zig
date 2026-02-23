@@ -44,8 +44,11 @@ pub const InstanceProfileExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.getInstanceProfile(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.getInstanceProfile(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntityException")) {
@@ -54,7 +57,6 @@ pub const InstanceProfileExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .success;
     }
@@ -96,8 +98,11 @@ pub const PolicyExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.getPolicy(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.getPolicy(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
@@ -106,7 +111,6 @@ pub const PolicyExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .success;
     }
@@ -148,8 +152,11 @@ pub const RoleExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.getRole(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.getRole(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
@@ -158,7 +165,6 @@ pub const RoleExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .success;
     }
@@ -200,8 +206,11 @@ pub const UserExistsWaiter = struct {
     }
 
     fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
         var diagnostic: @import("errors.zig").ServiceError = undefined;
-        var output_ = self.client.getUser(self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+        _ = self.client.getUser(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
             if (err == error.ServiceError) {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "NoSuchEntity")) {
@@ -210,7 +219,6 @@ pub const UserExistsWaiter = struct {
             }
             return .retry;
         };
-        defer output_.deinit();
 
         return .success;
     }

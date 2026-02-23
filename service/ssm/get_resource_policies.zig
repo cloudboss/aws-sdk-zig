@@ -34,12 +34,6 @@ pub const GetResourcePoliciesOutput = struct {
     /// An array of the `Policy` object.
     policies: ?[]const GetResourcePoliciesResponseEntry = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetResourcePoliciesOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .next_token = "NextToken",
         .policies = "Policies",
@@ -50,7 +44,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetResourcePoliciesInput, options: Options) !GetResourcePoliciesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourcePoliciesInput, options: Options) !GetResourcePoliciesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -71,10 +65,7 @@ pub fn execute(client: *Client, input: GetResourcePoliciesInput, options: Option
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

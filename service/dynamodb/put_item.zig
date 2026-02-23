@@ -251,12 +251,6 @@ pub const PutItemOutput = struct {
     /// precision or accuracy of the estimate.
     item_collection_metrics: ?ItemCollectionMetrics = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *PutItemOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .attributes = "Attributes",
         .consumed_capacity = "ConsumedCapacity",
@@ -268,7 +262,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: PutItemInput, options: Options) !PutItemOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutItemInput, options: Options) !PutItemOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -289,10 +283,7 @@ pub fn execute(client: *Client, input: PutItemInput, options: Options) !PutItemO
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

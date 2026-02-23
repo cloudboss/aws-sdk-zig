@@ -21,19 +21,13 @@ pub const GetNetworkInsightsAccessScopeContentInput = struct {
 pub const GetNetworkInsightsAccessScopeContentOutput = struct {
     /// The Network Access Scope content.
     network_insights_access_scope_content: ?NetworkInsightsAccessScopeContent = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetNetworkInsightsAccessScopeContentOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetNetworkInsightsAccessScopeContentInput, options: Options) !GetNetworkInsightsAccessScopeContentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetNetworkInsightsAccessScopeContentInput, options: Options) !GetNetworkInsightsAccessScopeContentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -54,10 +48,7 @@ pub fn execute(client: *Client, input: GetNetworkInsightsAccessScopeContentInput
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

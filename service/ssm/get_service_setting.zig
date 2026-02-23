@@ -39,12 +39,6 @@ pub const GetServiceSettingOutput = struct {
     /// The query result of the current service setting.
     service_setting: ?ServiceSetting = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetServiceSettingOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .service_setting = "ServiceSetting",
     };
@@ -54,7 +48,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetServiceSettingInput, options: Options) !GetServiceSettingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceSettingInput, options: Options) !GetServiceSettingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -75,10 +69,7 @@ pub fn execute(client: *Client, input: GetServiceSettingInput, options: Options)
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

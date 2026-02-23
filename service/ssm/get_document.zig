@@ -98,12 +98,6 @@ pub const GetDocumentOutput = struct {
     /// unique across all versions of a document, and can't be changed.
     version_name: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetDocumentOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .attachments_content = "AttachmentsContent",
         .content = "Content",
@@ -125,7 +119,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetDocumentInput, options: Options) !GetDocumentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDocumentInput, options: Options) !GetDocumentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -146,10 +140,7 @@ pub fn execute(client: *Client, input: GetDocumentInput, options: Options) !GetD
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

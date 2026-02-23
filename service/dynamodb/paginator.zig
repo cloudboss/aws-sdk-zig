@@ -20,15 +20,14 @@ pub const ListContributorInsightsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_contributor_insights.Options) !list_contributor_insights.ListContributorInsightsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_contributor_insights.Options) !list_contributor_insights.ListContributorInsightsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_contributor_insights.execute(self.client, self.params, options);
-
+        const output = try list_contributor_insights.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -62,15 +61,14 @@ pub const ListExportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_exports.Options) !list_exports.ListExportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_exports.Options) !list_exports.ListExportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_exports.execute(self.client, self.params, options);
-
+        const output = try list_exports.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -104,15 +102,14 @@ pub const ListImportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_imports.Options) !list_imports.ListImportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_imports.Options) !list_imports.ListImportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.next_token = self.next_token;
 
-        const output = try list_imports.execute(self.client, self.params, options);
-
+        const output = try list_imports.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -146,15 +143,14 @@ pub const ListTablesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: list_tables.Options) !list_tables.ListTablesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tables.Options) !list_tables.ListTablesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.exclusive_start_table_name = self.next_token;
 
-        const output = try list_tables.execute(self.client, self.params, options);
-
+        const output = try list_tables.execute(self.client, allocator, self.params, options);
 
         if (output.last_evaluated_table_name) |token| {
             if (self.next_token) |old| {
@@ -185,23 +181,17 @@ pub const QueryPaginator = struct {
     next_token: ?[]const aws.map.MapEntry(AttributeValue) = null,
     done: bool = false,
     allocator: std.mem.Allocator,
-    prev_output: ?query_.QueryOutput = null,
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: query_.Options) !query_.QueryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: query_.Options) !query_.QueryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.exclusive_start_key = self.next_token;
 
-        const output = try query_.execute(self.client, self.params, options);
-
-        if (self.prev_output) |*prev| {
-            prev.deinit();
-            self.prev_output = null;
-        }
+        const output = try query_.execute(self.client, allocator, self.params, options);
 
         if (output.last_evaluated_key) |token| {
             if (token.len > 0) {
@@ -215,15 +205,9 @@ pub const QueryPaginator = struct {
             self.done = true;
         }
 
-        self.prev_output = output;
         return output;
     }
 
-    pub fn deinit(self: *Self) void {
-        if (self.prev_output) |*prev| {
-            prev.deinit();
-        }
-    }
 };
 
 pub const ScanPaginator = struct {
@@ -232,23 +216,17 @@ pub const ScanPaginator = struct {
     next_token: ?[]const aws.map.MapEntry(AttributeValue) = null,
     done: bool = false,
     allocator: std.mem.Allocator,
-    prev_output: ?scan_.ScanOutput = null,
 
     const Self = @This();
 
-    pub fn next(self: *Self, options: scan_.Options) !scan_.ScanOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: scan_.Options) !scan_.ScanOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
 
         self.params.exclusive_start_key = self.next_token;
 
-        const output = try scan_.execute(self.client, self.params, options);
-
-        if (self.prev_output) |*prev| {
-            prev.deinit();
-            self.prev_output = null;
-        }
+        const output = try scan_.execute(self.client, allocator, self.params, options);
 
         if (output.last_evaluated_key) |token| {
             if (token.len > 0) {
@@ -262,13 +240,7 @@ pub const ScanPaginator = struct {
             self.done = true;
         }
 
-        self.prev_output = output;
         return output;
     }
 
-    pub fn deinit(self: *Self) void {
-        if (self.prev_output) |*prev| {
-            prev.deinit();
-        }
-    }
 };

@@ -30,19 +30,13 @@ pub const CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput = s
     /// Information about the local gateway route table virtual interface group
     /// association.
     local_gateway_route_table_virtual_interface_group_association: ?LocalGatewayRouteTableVirtualInterfaceGroupAssociation = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: Options) !CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: Options) !CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -63,10 +57,7 @@ pub fn execute(client: *Client, input: CreateLocalGatewayRouteTableVirtualInterf
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

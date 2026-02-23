@@ -23,12 +23,6 @@ pub const DescribeKinesisStreamingDestinationOutput = struct {
     /// The name of the table being described.
     table_name: ?[]const u8 = null,
 
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *DescribeKinesisStreamingDestinationOutput) void {
-        self._arena.deinit();
-    }
-
     pub const json_field_names = .{
         .kinesis_data_stream_destinations = "KinesisDataStreamDestinations",
         .table_name = "TableName",
@@ -39,7 +33,7 @@ pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: DescribeKinesisStreamingDestinationInput, options: Options) !DescribeKinesisStreamingDestinationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeKinesisStreamingDestinationInput, options: Options) !DescribeKinesisStreamingDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -60,10 +54,7 @@ pub fn execute(client: *Client, input: DescribeKinesisStreamingDestinationInput,
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

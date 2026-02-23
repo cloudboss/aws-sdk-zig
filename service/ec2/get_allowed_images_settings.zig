@@ -46,19 +46,13 @@ pub const GetAllowedImagesSettingsOutput = struct {
     /// * `enabled`: Only AMIs matching the image criteria are discoverable and
     /// available for use.
     state: ?[]const u8 = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *GetAllowedImagesSettingsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: GetAllowedImagesSettingsInput, options: Options) !GetAllowedImagesSettingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAllowedImagesSettingsInput, options: Options) !GetAllowedImagesSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -79,10 +73,7 @@ pub fn execute(client: *Client, input: GetAllowedImagesSettingsInput, options: O
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 

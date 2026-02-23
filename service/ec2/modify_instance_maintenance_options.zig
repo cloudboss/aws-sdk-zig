@@ -69,19 +69,13 @@ pub const ModifyInstanceMaintenanceOptionsOutput = struct {
     /// migration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration) in the
     /// *Amazon EC2 User Guide*.
     reboot_migration: ?InstanceRebootMigrationState = null,
-
-    _arena: std.heap.ArenaAllocator = undefined,
-
-    pub fn deinit(self: *ModifyInstanceMaintenanceOptionsOutput) void {
-        self._arena.deinit();
-    }
 };
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
 };
 
-pub fn execute(client: *Client, input: ModifyInstanceMaintenanceOptionsInput, options: Options) !ModifyInstanceMaintenanceOptionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyInstanceMaintenanceOptionsInput, options: Options) !ModifyInstanceMaintenanceOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -102,10 +96,7 @@ pub fn execute(client: *Client, input: ModifyInstanceMaintenanceOptionsInput, op
         return error.ServiceError;
     }
 
-    var resp_arena = std.heap.ArenaAllocator.init(client.allocator);
-    errdefer resp_arena.deinit();
-    var result = try deserializeResponse(response.body, response.status, response.headers, resp_arena.allocator());
-    result._arena = resp_arena;
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
     return result;
 }
 
