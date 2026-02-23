@@ -167,6 +167,7 @@ pub const HttpClient = struct {
     token_bucket: TokenBucket = .{},
     ca_bundle_path: ?[]const u8 = null,
     clock_skew_offset: i64 = 0,
+    timeout_ms: u32 = 30_000,
 
     const Self = @This();
 
@@ -400,6 +401,11 @@ pub const HttpClient = struct {
         }) catch return error.ConnectionFailed;
         errdefer inner.http_request.deinit();
 
+        if (self.timeout_ms > 0) {
+            if (inner.http_request.connection) |conn| {
+                setSocketTimeouts(conn, self.timeout_ms);
+            }
+        }
         // Send request with or without body
         {
             const req_body = request.body orelse "";
@@ -544,6 +550,11 @@ pub const HttpClient = struct {
         }) catch return error.ConnectionFailed;
         defer req.deinit();
 
+        if (self.timeout_ms > 0) {
+            if (req.connection) |conn| {
+                setSocketTimeouts(conn, self.timeout_ms);
+            }
+        }
         // Send request with or without body
         {
             const req_body = request.body orelse "";
@@ -627,6 +638,31 @@ pub const HttpClient = struct {
         };
     }
 };
+
+fn setSocketTimeouts(
+    conn: *std.http.Client.Connection,
+    timeout_ms: u32,
+) void {
+    const fd = conn.stream_reader.getStream().handle;
+    const sec: isize = @intCast(timeout_ms / 1000);
+    const usec: isize = @intCast(
+        @as(u64, timeout_ms % 1000) * 1000,
+    );
+    const tv = std.posix.timeval{ .sec = sec, .usec = usec };
+    const opt_bytes = std.mem.asBytes(&tv);
+    std.posix.setsockopt(
+        fd,
+        std.posix.SOL.SOCKET,
+        std.posix.SO.RCVTIMEO,
+        opt_bytes,
+    ) catch {};
+    std.posix.setsockopt(
+        fd,
+        std.posix.SOL.SOCKET,
+        std.posix.SO.SNDTIMEO,
+        opt_bytes,
+    ) catch {};
+}
 
 /// Check if a host should bypass the proxy based on the NO_PROXY list.
 ///
@@ -1128,6 +1164,15 @@ test "HttpClient ca_bundle_path defaults to null" {
     var client = HttpClient.init(std.testing.allocator);
     defer client.deinit();
     try std.testing.expectEqual(@as(?[]const u8, null), client.ca_bundle_path);
+}
+
+test "HttpClient timeout_ms defaults to 30s" {
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+    try std.testing.expectEqual(
+        @as(u32, 30_000),
+        client.timeout_ms,
+    );
 }
 
 test "Request stores service_name and api_version for User-Agent" {

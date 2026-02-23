@@ -39,6 +39,14 @@ fn readEnvMaxAttempts() ?u32 {
     return null;
 }
 
+/// Read request timeout from AWS_REQUEST_TIMEOUT env var
+fn readEnvRequestTimeout() ?u32 {
+    if (std.posix.getenv("AWS_REQUEST_TIMEOUT")) |value| {
+        return std.fmt.parseInt(u32, value, 10) catch null;
+    }
+    return null;
+}
+
 /// Read a boolean from an environment variable ("true" -> true)
 fn resolveBoolEnv(env_var: []const u8) ?bool {
     if (std.posix.getenv(env_var)) |value| {
@@ -69,6 +77,8 @@ pub const LoadOptions = struct {
     retry_mode: ?RetryMode = null,
     /// CA bundle path
     ca_bundle: ?[]const u8 = null,
+    /// Request timeout in milliseconds
+    timeout_ms: ?u32 = null,
 };
 
 /// AWS SDK configuration shared across service clients
@@ -153,6 +163,9 @@ pub const Config = struct {
             std.posix.getenv("AWS_CA_BUNDLE") orelse
             (if (profile) |p| p.ca_bundle else null);
 
+        const timeout_ms: u32 = options.timeout_ms orelse
+            readEnvRequestTimeout() orelse
+            30_000;
         return Self{
             .region = region,
             .credentials = credentials,
@@ -162,6 +175,7 @@ pub const Config = struct {
             .max_attempts = max_attempts,
             .retry_mode = retry_mode,
             .ca_bundle = ca_bundle,
+            .timeout_ms = timeout_ms,
             .config_file = cf,
             .profile = resolved_profile,
             .allocator = allocator,
@@ -1013,6 +1027,14 @@ test "Config defaults" {
     const config = Config.fromEnvironment("us-east-1");
     try std.testing.expect(config.retry_mode == .standard);
     try std.testing.expect(config.ca_bundle == null);
+}
+
+test "Config defaults include timeout_ms" {
+    const config = Config.fromEnvironment("us-east-1");
+    try std.testing.expectEqual(
+        @as(u32, 30_000),
+        config.timeout_ms,
+    );
 }
 
 test "parseConfigFile services with multiple services" {
