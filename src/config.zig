@@ -1037,6 +1037,16 @@ test "Config defaults include timeout_ms" {
     );
 }
 
+test "readEnvRequestTimeout reads AWS_REQUEST_TIMEOUT" {
+    const old_len = std.os.environ.len;
+    const entry: [*:0]u8 = @constCast("AWS_REQUEST_TIMEOUT=5000");
+    std.os.environ.len += 1;
+    std.os.environ[old_len] = entry;
+    defer std.os.environ.len = old_len;
+    const val = readEnvRequestTimeout();
+    try std.testing.expectEqual(@as(?u32, 5000), val);
+}
+
 test "parseConfigFile services with multiple services" {
     const content =
         "[services my-services]\n" ++

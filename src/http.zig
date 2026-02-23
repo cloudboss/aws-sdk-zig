@@ -192,6 +192,11 @@ pub const HttpClient = struct {
             .no_proxy = null,
         };
         self.initProxies();
+        if (std.posix.getenv("AWS_REQUEST_TIMEOUT")) |val| {
+            if (std.fmt.parseInt(u32, val, 10)) |ms| {
+                self.timeout_ms = ms;
+            } else |_| {}
+        }
         return self;
     }
 
@@ -1371,6 +1376,17 @@ test "HttpClient timeout_ms defaults to 30s" {
         @as(u32, 30_000),
         client.timeout_ms,
     );
+}
+
+test "HttpClient.init reads AWS_REQUEST_TIMEOUT env var" {
+    const old_len = std.os.environ.len;
+    const entry: [*:0]u8 = @constCast("AWS_REQUEST_TIMEOUT=5000");
+    std.os.environ.len += 1;
+    std.os.environ[old_len] = entry;
+    defer std.os.environ.len = old_len;
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+    try std.testing.expectEqual(@as(u32, 5000), client.timeout_ms);
 }
 
 test "Request stores service_name and api_version for User-Agent" {
