@@ -7,6 +7,7 @@ const Allocator = std.mem.Allocator;
 
 const checksum_mod = @import("checksum.zig");
 const config_mod = @import("config.zig");
+const errors = @import("errors.zig");
 const user_agent_mod = @import("user_agent.zig");
 
 /// HTTP methods
@@ -34,8 +35,8 @@ pub const Method = enum {
 pub const RequestOptions = struct {
     /// Maximum retry attempts (default: 3)
     max_attempts: u32 = 3,
-    /// Base delay for exponential backoff in milliseconds (default: 100ms)
-    base_delay_ms: u32 = 100,
+    /// Base delay for exponential backoff in milliseconds (default: 1000ms)
+    base_delay_ms: u32 = 1_000,
     /// Maximum delay cap in milliseconds (default: 20 seconds)
     max_delay_ms: u32 = 20_000,
     /// Maximum response body size (default: 10MB)
@@ -114,8 +115,8 @@ pub const Response = struct {
     }
 
     pub fn isRetryable(self: Self) bool {
-        // Retry on 5xx server errors and specific 4xx errors
-        return self.status >= 500 or self.status == 429 or self.status == 408;
+        return self.status == 500 or self.status == 502 or
+            self.status == 503 or self.status == 504;
     }
 };
 
@@ -134,11 +135,8 @@ pub const RequestError = error{
 pub const TokenBucket = struct {
     max_capacity: f64 = 500.0,
     current_capacity: f64 = 500.0,
-    refill_rate: f64 = 0.0,
-    last_refill_time_ns: i128 = 0,
 
     pub fn tryAcquire(self: *TokenBucket, cost: f64) bool {
-        self.refill();
         if (self.current_capacity >= cost) {
             self.current_capacity -= cost;
             return true;
@@ -146,25 +144,15 @@ pub const TokenBucket = struct {
         return false;
     }
 
-    pub fn refill(self: *TokenBucket) void {
-        if (self.refill_rate <= 0.0) return;
-        const now_ns = std.time.nanoTimestamp();
-        const elapsed_s: f64 =
-            @as(f64, @floatFromInt(now_ns - self.last_refill_time_ns)) / 1e9;
-        self.current_capacity = @min(
-            self.max_capacity,
-            self.current_capacity + elapsed_s * self.refill_rate,
-        );
-        self.last_refill_time_ns = now_ns;
-    }
-
     pub fn onThrottle(self: *TokenBucket) void {
-        self.refill_rate = @max(1.0, self.refill_rate * 0.7);
         self.current_capacity = @max(0.0, self.current_capacity - 5.0);
     }
 
     pub fn onSuccess(self: *TokenBucket) void {
-        self.refill_rate = @min(500.0, self.refill_rate + 0.5);
+        self.current_capacity = @min(
+            self.max_capacity,
+            self.current_capacity + 1.0,
+        );
     }
 };
 
@@ -271,7 +259,19 @@ pub const HttpClient = struct {
                     response.status,
                     response.body,
                 );
-                if ((response.isRetryable() or is_clock_skew) and
+                const is_throttle_error = errors.bodyContainsErrorCode(
+                    response.body,
+                    errors.throttling_error_codes[0..],
+                );
+                const is_timeout_error = errors.bodyContainsErrorCode(
+                    response.body,
+                    errors.transient_error_codes[0..],
+                );
+                const is_retryable = response.isRetryable() or
+                    is_clock_skew or
+                    is_throttle_error or
+                    is_timeout_error;
+                if (is_retryable and
                     backoff.attempt + 1 < options.max_attempts)
                 {
                     if (is_clock_skew) {
@@ -290,11 +290,14 @@ pub const HttpClient = struct {
                         }
                     }
                     if (self.retry_mode == .adaptive) {
-                        if (response.status == 429)
+                        const retry_cost: f64 = if (is_timeout_error)
+                            10.0
+                        else
+                            5.0;
+                        if (is_throttle_error)
                             self.token_bucket.onThrottle()
                         else
-                            self.token_bucket.onThrottle();
-                        _ = self.token_bucket.tryAcquire(1.0);
+                            _ = self.token_bucket.tryAcquire(retry_cost);
                     }
                     const retry_after_ms = parseRetryAfter(
                         response.headers,
@@ -319,6 +322,13 @@ pub const HttpClient = struct {
                 }
                 // Retry on connection/request failures
                 if (backoff.attempt + 1 < options.max_attempts) {
+                    if (self.retry_mode == .adaptive) {
+                        const retry_cost: f64 = if (err == error.ConnectionTimedOut)
+                            10.0
+                        else
+                            5.0;
+                        _ = self.token_bucket.tryAcquire(retry_cost);
+                    }
                     backoff.wait();
                     continue;
                 }
@@ -651,6 +661,7 @@ fn algToString(alg: checksum_mod.Algorithm) []const u8 {
     return switch (alg) {
         .crc32 => "crc32",
         .crc32c => "crc32c",
+
         .sha256 => "sha256",
         .sha1 => "sha1",
     };
@@ -676,13 +687,13 @@ pub fn isClockSkewError(status: u16, body: []const u8) bool {
 pub fn parseRetryAfter(
     headers: std.StringHashMapUnmanaged([]const u8),
 ) ?u64 {
-    const value = headers.get("retry-after") orelse return null;
-    const seconds = std.fmt.parseInt(
+    const value = headers.get("x-amz-retry-after") orelse return null;
+    const millis = std.fmt.parseInt(
         u64,
         std.mem.trim(u8, value, " \t"),
         10,
     ) catch return null;
-    return seconds * std.time.ms_per_s;
+    return millis;
 }
 
 fn parseHttpDate(date_str: []const u8) ?i64 {
@@ -905,7 +916,7 @@ test "Response status helpers" {
     try std.testing.expect(!success.isRetryable());
 
     const server_error = Response{
-        .status = 503,
+        .status = 500,
         .body = "",
         .headers = .{},
         .allocator = std.testing.allocator,
@@ -914,13 +925,37 @@ test "Response status helpers" {
     try std.testing.expect(server_error.isServerError());
     try std.testing.expect(server_error.isRetryable());
 
-    const rate_limit = Response{
+    const gateway_timeout = Response{
+        .status = 504,
+        .body = "",
+        .headers = .{},
+        .allocator = std.testing.allocator,
+    };
+    try std.testing.expect(gateway_timeout.isRetryable());
+
+    const not_retryable = Response{
         .status = 429,
         .body = "",
         .headers = .{},
         .allocator = std.testing.allocator,
     };
-    try std.testing.expect(rate_limit.isRetryable());
+    try std.testing.expect(!not_retryable.isRetryable());
+
+    const timeout = Response{
+        .status = 408,
+        .body = "",
+        .headers = .{},
+        .allocator = std.testing.allocator,
+    };
+    try std.testing.expect(!timeout.isRetryable());
+
+    const not_supported = Response{
+        .status = 505,
+        .body = "",
+        .headers = .{},
+        .allocator = std.testing.allocator,
+    };
+    try std.testing.expect(!not_supported.isRetryable());
 
     const not_found = Response{
         .status = 404,
@@ -960,7 +995,7 @@ test "Backoff reset" {
 test "RequestOptions defaults" {
     const opts = RequestOptions{};
     try std.testing.expectEqual(@as(u32, 3), opts.max_attempts);
-    try std.testing.expectEqual(@as(u32, 100), opts.base_delay_ms);
+    try std.testing.expectEqual(@as(u32, 1_000), opts.base_delay_ms);
     try std.testing.expectEqual(@as(u32, 20_000), opts.max_delay_ms);
 }
 
@@ -1037,30 +1072,35 @@ test "TokenBucket tryAcquire tracks capacity" {
     try std.testing.expect(!bucket.tryAcquire(1.0));
 }
 
-test "TokenBucket onThrottle reduces rate and capacity" {
-    var bucket = TokenBucket{ .refill_rate = 10.0 };
+test "TokenBucket onThrottle reduces capacity" {
+    var bucket = TokenBucket{};
     bucket.onThrottle();
-    try std.testing.expectEqual(@as(f64, 7.0), bucket.refill_rate);
     try std.testing.expectEqual(@as(f64, 495.0), bucket.current_capacity);
-
-    // Rate floor is 1.0
-    bucket.refill_rate = 1.0;
-    bucket.onThrottle();
-    try std.testing.expectEqual(@as(f64, 1.0), bucket.refill_rate);
 }
 
-test "TokenBucket onSuccess increases rate" {
+test "TokenBucket onSuccess adds tokens" {
     var bucket = TokenBucket{};
-    try std.testing.expectEqual(@as(f64, 0.0), bucket.refill_rate);
     bucket.onSuccess();
-    try std.testing.expectEqual(@as(f64, 0.5), bucket.refill_rate);
+    try std.testing.expectEqual(@as(f64, 500.0), bucket.current_capacity);
+    bucket.current_capacity = 499.0;
     bucket.onSuccess();
-    try std.testing.expectEqual(@as(f64, 1.0), bucket.refill_rate);
+    try std.testing.expectEqual(@as(f64, 500.0), bucket.current_capacity);
+}
 
-    // Rate ceiling is 500.0
-    bucket.refill_rate = 500.0;
-    bucket.onSuccess();
-    try std.testing.expectEqual(@as(f64, 500.0), bucket.refill_rate);
+test "TokenBucket retry costs" {
+    var bucket = TokenBucket{};
+    try std.testing.expect(bucket.tryAcquire(5.0));
+    try std.testing.expectEqual(@as(f64, 495.0), bucket.current_capacity);
+    try std.testing.expect(bucket.tryAcquire(10.0));
+    try std.testing.expectEqual(@as(f64, 485.0), bucket.current_capacity);
+}
+
+test "TokenBucket cost limits" {
+    var bucket = TokenBucket{ .current_capacity = 4.0 };
+    try std.testing.expect(!bucket.tryAcquire(5.0));
+    try std.testing.expectEqual(@as(f64, 4.0), bucket.current_capacity);
+    try std.testing.expect(!bucket.tryAcquire(10.0));
+    try std.testing.expectEqual(@as(f64, 4.0), bucket.current_capacity);
 }
 
 test "HttpClient defaults to standard retry mode" {
@@ -1130,6 +1170,7 @@ test "algToString maps algorithms to header names" {
         "crc32c",
         algToString(.crc32c),
     );
+
     try std.testing.expectEqualStrings(
         "sha256",
         algToString(.sha256),
@@ -1180,16 +1221,16 @@ test "isClockSkewError detects clock skew codes" {
     );
 }
 
-test "parseRetryAfter parses integer seconds" {
+test "parseRetryAfter parses integer milliseconds" {
     var headers = std.StringHashMapUnmanaged([]const u8){};
     defer headers.deinit(std.testing.allocator);
     try headers.put(
         std.testing.allocator,
-        "retry-after",
-        "5",
+        "x-amz-retry-after",
+        "2500",
     );
     const ms = parseRetryAfter(headers);
-    try std.testing.expectEqual(@as(?u64, 5000), ms);
+    try std.testing.expectEqual(@as(?u64, 2500), ms);
 }
 
 test "parseRetryAfter returns null when header absent" {

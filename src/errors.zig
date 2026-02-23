@@ -17,16 +17,7 @@ pub const Diagnostic = struct {
 
     /// Check if this error is retryable
     pub fn isRetryable(self: *const Diagnostic) bool {
-        // Throttling errors
-        if (std.mem.eql(u8, self.code, "Throttling") or
-            std.mem.eql(u8, self.code, "ThrottlingException") or
-            std.mem.eql(u8, self.code, "RequestThrottled") or
-            std.mem.eql(u8, self.code, "RequestThrottledException") or
-            std.mem.eql(u8, self.code, "ProvisionedThroughputExceededException") or
-            std.mem.eql(u8, self.code, "TooManyRequestsException"))
-        {
-            return true;
-        }
+        if (isThrottlingError(self.code) or isTransientErrorCode(self.code)) return true;
 
         // Service unavailable / transient errors
         if (self.http_status == 500 or
@@ -39,7 +30,58 @@ pub const Diagnostic = struct {
 
         return false;
     }
+
+    pub fn isTransientError(self: *const Diagnostic) bool {
+        return isTransientErrorCode(self.code);
+    }
 };
+
+pub const throttling_error_codes = [_][]const u8{
+    "Throttling",
+    "ThrottlingException",
+    "ThrottledException",
+    "RequestThrottledException",
+    "TooManyRequestsException",
+    "ProvisionedThroughputExceededException",
+    "TransactionInProgressException",
+    "RequestLimitExceeded",
+    "BandwidthLimitExceeded",
+    "LimitExceededException",
+    "RequestThrottled",
+    "SlowDown",
+    "PriorRequestNotComplete",
+    "EC2ThrottledException",
+};
+
+pub const transient_error_codes = [_][]const u8{
+    "RequestTimeout",
+    "RequestTimeoutException",
+};
+
+pub fn isThrottlingError(code: []const u8) bool {
+    return matchesErrorCode(code, throttling_error_codes[0..]);
+}
+
+pub fn isTransientErrorCode(code: []const u8) bool {
+    return matchesErrorCode(code, transient_error_codes[0..]);
+}
+
+pub fn bodyContainsErrorCode(
+    body: []const u8,
+    codes: []const []const u8,
+) bool {
+    for (codes) |code| {
+        if (std.mem.indexOf(u8, body, code) != null) return true;
+    }
+    return false;
+}
+
+fn matchesErrorCode(code: []const u8, codes: []const []const u8) bool {
+    for (codes) |known| {
+        if (std.mem.eql(u8, code, known)) return true;
+    }
+    return false;
+}
 
 /// Calculate exponential backoff delay for retry
 pub fn calculateBackoff(attempt: u32, base_delay_ms: u32, max_delay_ms: u32) u64 {
@@ -71,6 +113,15 @@ test "Diagnostic isRetryable" {
     };
     try std.testing.expect(throttling.isRetryable());
 
+    const timeout = Diagnostic{
+        .code = "RequestTimeout",
+        .message = "timed out",
+        .request_id = "321",
+        .http_status = 400,
+    };
+    try std.testing.expect(timeout.isRetryable());
+    try std.testing.expect(timeout.isTransientError());
+
     const server_error = Diagnostic{
         .code = "InternalServerError",
         .message = "Internal error",
@@ -86,6 +137,27 @@ test "Diagnostic isRetryable" {
         .http_status = 400,
     };
     try std.testing.expect(!client_error.isRetryable());
+    try std.testing.expect(!client_error.isTransientError());
+}
+
+test "isThrottlingError recognizes all throttle codes" {
+    for (throttling_error_codes) |code| {
+        try std.testing.expect(isThrottlingError(code));
+    }
+    try std.testing.expect(!isThrottlingError("RequestTimeout"));
+}
+
+test "isTransientError recognizes timeout codes" {
+    for (transient_error_codes) |code| {
+        try std.testing.expect(isTransientErrorCode(code));
+    }
+    try std.testing.expect(!isTransientErrorCode("Throttling"));
+}
+
+test "bodyContainsErrorCode finds codes in body" {
+    const body = "Error: RequestTimeoutException occurred";
+    try std.testing.expect(bodyContainsErrorCode(body, transient_error_codes[0..]));
+    try std.testing.expect(!bodyContainsErrorCode(body, throttling_error_codes[0..]));
 }
 
 test "calculateBackoff" {

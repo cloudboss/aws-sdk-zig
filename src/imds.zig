@@ -72,7 +72,7 @@ pub const Client = struct {
             .token_ttl = options.token_ttl,
             .http_client = http.HttpClient.initWithOptions(allocator, .{
                 .max_attempts = 3,
-                .base_delay_ms = 100,
+                .base_delay_ms = 1_000,
                 .max_delay_ms = 1_000,
                 .max_response_size = 64 * 1024,
             }),
