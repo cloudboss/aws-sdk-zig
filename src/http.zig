@@ -47,6 +47,13 @@ pub const RequestOptions = struct {
     keep_alive: bool = true,
 };
 
+/// Stall detection for streaming response bodies.
+pub const StallProtectionOptions = struct {
+    min_throughput_bytes_per_sec: u32 = 1,
+    grace_period_seconds: u32 = 20,
+    enabled: bool = true,
+};
+
 /// HTTP request
 pub const Request = struct {
     method: Method = .POST,
@@ -125,6 +132,7 @@ pub const RequestError = error{
     ConnectionFailed,
     RequestFailed,
     ResponseTooLarge,
+    StreamStalled,
     MaxRetriesExceeded,
     OutOfMemory,
 };
@@ -168,6 +176,7 @@ pub const HttpClient = struct {
     ca_bundle_path: ?[]const u8 = null,
     clock_skew_offset: i64 = 0,
     timeout_ms: u32 = 30_000,
+    stall_protection: StallProtectionOptions = .{},
 
     const Self = @This();
 
@@ -459,7 +468,10 @@ pub const HttpClient = struct {
         return StreamingResponse{
             .status = status,
             .headers = resp_headers,
-            .body = StreamingBody{ ._inner = inner },
+            .body = StreamingBody{
+                ._inner = inner,
+                .stall_protection = self.stall_protection,
+            },
             .allocator = self.allocator,
         };
     }
@@ -815,6 +827,13 @@ fn parseHttpDate(date_str: []const u8) ?i64 {
 /// Used for `@streaming` blob payloads (e.g., S3 GetObject).
 pub const StreamingBody = struct {
     _inner: *Inner,
+    stall_protection: StallProtectionOptions,
+
+    pub const StallState = struct {
+        last_check_ns: i128,
+        last_check_bytes: usize,
+        consecutive_low_seconds: u32,
+    };
 
     const Inner = struct {
         http_request: std.http.Client.Request,
@@ -825,12 +844,74 @@ pub const StreamingBody = struct {
 
     /// Read entire remaining body into memory.
     pub fn readAll(self: *StreamingBody, allocator: Allocator, max_size: usize) ![]const u8 {
-        return self._inner.body_reader.allocRemaining(
-            allocator,
-            std.Io.Limit.limited(max_size),
-        ) catch |err| {
-            return if (err == error.StreamTooLong) error.ResponseTooLarge else error.RequestFailed;
+        var list: std.ArrayListUnmanaged(u8) = .{};
+        errdefer list.deinit(allocator);
+
+        var total_read: usize = 0;
+        var buf: [8192]u8 = undefined;
+
+        const options = self.stall_protection;
+        var stall_state = StallState{
+            .last_check_ns = std.time.nanoTimestamp(),
+            .last_check_bytes = 0,
+            .consecutive_low_seconds = 0,
         };
+
+        while (true) {
+            const remaining = max_size - total_read;
+            const max_chunk = remaining +| 1;
+            const chunk_len = @min(buf.len, max_chunk);
+            var buffers = [_][]u8{buf[0..chunk_len]};
+            const read_len = self._inner.body_reader.readVec(&buffers) catch |err| switch (err) {
+                error.EndOfStream => 0,
+                else => return error.RequestFailed,
+            };
+            if (read_len == 0) break;
+            if (read_len > remaining) return error.ResponseTooLarge;
+
+            list.appendSlice(allocator, buf[0..read_len]) catch return error.OutOfMemory;
+            total_read += read_len;
+
+            const now_ns = std.time.nanoTimestamp();
+            try updateStallState(options, total_read, now_ns, &stall_state);
+        }
+
+        return list.toOwnedSlice(allocator);
+    }
+
+    pub fn updateStallState(
+        options: StallProtectionOptions,
+        total_read: usize,
+        now_ns: i128,
+        stall_state: *StallState,
+    ) RequestError!void {
+        if (!options.enabled) return;
+
+        const elapsed_ns = now_ns - stall_state.last_check_ns;
+        if (elapsed_ns <= 0) {
+            stall_state.last_check_ns = now_ns;
+            return;
+        }
+
+        const ns_per_s: i128 = std.time.ns_per_s;
+        if (elapsed_ns < ns_per_s) return;
+
+        const elapsed_seconds: u32 = @intCast(@divTrunc(elapsed_ns, ns_per_s));
+        const bytes_since_check = total_read - stall_state.last_check_bytes;
+        const throughput = @divTrunc(bytes_since_check, @as(usize, elapsed_seconds));
+
+        if (throughput < @as(usize, options.min_throughput_bytes_per_sec)) {
+            stall_state.consecutive_low_seconds +|= elapsed_seconds;
+        } else {
+            stall_state.consecutive_low_seconds = 0;
+        }
+
+        if (stall_state.consecutive_low_seconds >= options.grace_period_seconds) {
+            return error.StreamStalled;
+        }
+
+        stall_state.last_check_ns += @as(i128, elapsed_seconds) * ns_per_s;
+        stall_state.last_check_bytes = total_read;
     }
 
     pub fn deinit(self: *StreamingBody) void {
@@ -1033,6 +1114,69 @@ test "RequestOptions defaults" {
     try std.testing.expectEqual(@as(u32, 3), opts.max_attempts);
     try std.testing.expectEqual(@as(u32, 1_000), opts.base_delay_ms);
     try std.testing.expectEqual(@as(u32, 20_000), opts.max_delay_ms);
+}
+
+test "StallProtectionOptions defaults" {
+    const opts = StallProtectionOptions{};
+    try std.testing.expectEqual(@as(u32, 1), opts.min_throughput_bytes_per_sec);
+    try std.testing.expectEqual(@as(u32, 20), opts.grace_period_seconds);
+    try std.testing.expect(opts.enabled);
+}
+
+test "StreamingBody stall protection disabled" {
+    const options = StallProtectionOptions{ .enabled = false };
+    var stall_state = StreamingBody.StallState{
+        .last_check_ns = 0,
+        .last_check_bytes = 0,
+        .consecutive_low_seconds = 0,
+    };
+    const now_ns: i128 = std.time.ns_per_s * 60;
+    try StreamingBody.updateStallState(
+        options,
+        0,
+        now_ns,
+        &stall_state,
+    );
+    try std.testing.expectEqual(@as(u32, 0), stall_state.consecutive_low_seconds);
+}
+
+test "StreamingBody stall protection honors thresholds" {
+    const options = StallProtectionOptions{
+        .min_throughput_bytes_per_sec = 10,
+        .grace_period_seconds = 3,
+        .enabled = true,
+    };
+    var stall_state = StreamingBody.StallState{
+        .last_check_ns = 0,
+        .last_check_bytes = 0,
+        .consecutive_low_seconds = 0,
+    };
+
+    try StreamingBody.updateStallState(
+        options,
+        0,
+        std.time.ns_per_s * 2,
+        &stall_state,
+    );
+    try std.testing.expectEqual(@as(u32, 2), stall_state.consecutive_low_seconds);
+
+    try StreamingBody.updateStallState(
+        options,
+        30,
+        std.time.ns_per_s * 3,
+        &stall_state,
+    );
+    try std.testing.expectEqual(@as(u32, 0), stall_state.consecutive_low_seconds);
+
+    try std.testing.expectError(
+        error.StreamStalled,
+        StreamingBody.updateStallState(
+            options,
+            30,
+            std.time.ns_per_s * 6,
+            &stall_state,
+        ),
+    );
 }
 
 test "shouldBypassProxy returns false for null list" {

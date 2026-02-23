@@ -293,6 +293,7 @@ fn fillDiagnosticFromError(diagnostic: ?*errors.Diagnostic, err: http.RequestErr
                 error.ConnectionFailed => 0,
                 error.RequestFailed => 0,
                 error.ResponseTooLarge => 0,
+                error.StreamStalled => 0,
                 error.MaxRetriesExceeded => 0,
                 error.OutOfMemory => 0,
             },
