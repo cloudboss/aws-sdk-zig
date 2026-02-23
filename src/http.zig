@@ -661,7 +661,7 @@ fn algToString(alg: checksum_mod.Algorithm) []const u8 {
     return switch (alg) {
         .crc32 => "crc32",
         .crc32c => "crc32c",
-
+        .crc64nvme => "crc64nvme",
         .sha256 => "sha256",
         .sha1 => "sha1",
     };
@@ -1169,6 +1169,10 @@ test "algToString maps algorithms to header names" {
     try std.testing.expectEqualStrings(
         "crc32c",
         algToString(.crc32c),
+    );
+    try std.testing.expectEqualStrings(
+        "crc64nvme",
+        algToString(.crc64nvme),
     );
 
     try std.testing.expectEqualStrings(

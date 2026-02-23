@@ -9,6 +9,7 @@ const Allocator = std.mem.Allocator;
 pub const Algorithm = enum {
     crc32,
     crc32c,
+    crc64nvme,
     sha256,
     sha1,
 };
@@ -19,6 +20,34 @@ pub fn computeCrc32(data: []const u8) u32 {
 
 pub fn computeCrc32c(data: []const u8) u32 {
     return std.hash.crc.Crc32Iscsi.hash(data);
+}
+
+pub fn computeCrc64Nvme(data: []const u8) u64 {
+    const table = comptime blk: {
+        @setEvalBranchQuota(4096);
+        var entries: [256]u64 = undefined;
+        var i: u64 = 0;
+        while (i < entries.len) : (i += 1) {
+            var crc = i;
+            var bit: u8 = 0;
+            while (bit < 8) : (bit += 1) {
+                if ((crc & 1) == 1) {
+                    crc = (crc >> 1) ^ 0x9A6C9329AC4BC9B5;
+                } else {
+                    crc >>= 1;
+                }
+            }
+            entries[i] = crc;
+        }
+        break :blk entries;
+    };
+
+    var crc: u64 = 0xFFFFFFFFFFFFFFFF;
+    for (data) |byte| {
+        const index: usize = @intCast((crc ^ byte) & 0xFF);
+        crc = (crc >> 8) ^ table[index];
+    }
+    return crc ^ 0xFFFFFFFFFFFFFFFF;
 }
 
 pub fn computeSha256(
@@ -41,7 +70,17 @@ pub fn computeBase64(
 ) ![]const u8 {
     const Encoder = std.base64.standard.Encoder;
     switch (algorithm) {
-        .crc32, .crc32c => {
+        .crc32, .crc32c, .crc64nvme => {
+            if (algorithm == .crc64nvme) {
+                const value = computeCrc64Nvme(data);
+                var bytes: [8]u8 = undefined;
+                std.mem.writeInt(u64, &bytes, value, .big);
+                const size = Encoder.calcSize(8);
+                const buf = try allocator.alloc(u8, size);
+                _ = Encoder.encode(buf, &bytes);
+                return buf;
+            }
+
             const value: u32 = switch (algorithm) {
                 .crc32 => computeCrc32(data),
                 .crc32c => computeCrc32c(data),
@@ -109,6 +148,16 @@ test "CRC32C of '123456789'" {
     try testing.expectEqual(@as(u32, 0xE3069283), result);
 }
 
+test "CRC64NVME of '123456789'" {
+    const result = computeCrc64Nvme("123456789");
+    try testing.expectEqual(@as(u64, 0xAE8B14860A799888), result);
+}
+
+test "CRC64NVME of empty string" {
+    const result = computeCrc64Nvme("");
+    try testing.expectEqual(@as(u64, 0x0000000000000000), result);
+}
+
 test "SHA256 of empty string" {
     var digest: [32]u8 = undefined;
     computeSha256("", &digest);
@@ -160,6 +209,16 @@ test "base64 of CRC32C('123456789')" {
     defer testing.allocator.free(b64);
     // 0xE3069283 big-endian = [0xE3, 0x06, 0x92, 0x83]
     try testing.expectEqualStrings("4waSgw==", b64);
+}
+
+test "base64 of CRC64NVME('123456789')" {
+    const b64 = try computeBase64(
+        testing.allocator,
+        .crc64nvme,
+        "123456789",
+    );
+    defer testing.allocator.free(b64);
+    try testing.expectEqualStrings("rosUhgp5mIg=", b64);
 }
 
 test "base64 of SHA256('')" {
