@@ -33,10 +33,10 @@ pub const Method = enum {
 
 /// HTTP request options
 pub const RequestOptions = struct {
-    /// Maximum retry attempts (default: 3)
-    max_attempts: u32 = 3,
-    /// Base delay for exponential backoff in milliseconds (default: 1000ms)
-    base_delay_ms: u32 = 1_000,
+    /// Maximum retry attempts (null = use HttpClient.default_max_attempts)
+    max_attempts: ?u32 = null,
+    /// Base delay for exponential backoff in ms (null = use HttpClient.default_base_delay_ms)
+    base_delay_ms: ?u32 = null,
     /// Maximum delay cap in milliseconds (default: 20 seconds)
     max_delay_ms: u32 = 20_000,
     /// Maximum response body size (default: 10MB)
@@ -48,6 +48,16 @@ pub const RequestOptions = struct {
     /// Automatically compute CRC32 checksum for S3 uploads when
     /// none is specified (default: true). Set to false to disable.
     auto_checksum: bool = true,
+
+    /// Return options with only max_attempts set; all other fields use client defaults.
+    pub fn withMaxAttempts(n: u32) RequestOptions {
+        return .{ .max_attempts = n };
+    }
+
+    /// Return options with only base_delay_ms set; all other fields use client defaults.
+    pub fn withBaseDelayMs(ms: u32) RequestOptions {
+        return .{ .base_delay_ms = ms };
+    }
 };
 
 /// Stall detection for streaming response bodies.
@@ -186,6 +196,8 @@ pub const HttpClient = struct {
     timeout_ms: u32 = 30_000,
     stall_protection: StallProtectionOptions = .{},
     interceptors: []const Interceptor = &.{},
+    default_max_attempts: u32 = 3,
+    default_base_delay_ms: u32 = 1_000,
 
     const Self = @This();
 
@@ -270,12 +282,14 @@ pub const HttpClient = struct {
             self.inner.https_proxy = saved_https_proxy;
         }
 
+        const max_attempts = options.max_attempts orelse self.default_max_attempts;
+        const base_delay_ms = options.base_delay_ms orelse self.default_base_delay_ms;
         var backoff = Backoff{
-            .base_ms = options.base_delay_ms,
+            .base_ms = base_delay_ms,
             .cap_ms = options.max_delay_ms,
         };
 
-        while (backoff.attempt < options.max_attempts) {
+        while (backoff.attempt < max_attempts) {
             const result = self.doRequest(request, options);
 
             if (result) |response| {
@@ -296,7 +310,7 @@ pub const HttpClient = struct {
                     is_throttle_error or
                     is_timeout_error;
                 if (is_retryable and
-                    backoff.attempt + 1 < options.max_attempts)
+                    backoff.attempt + 1 < max_attempts)
                 {
                     if (is_clock_skew) {
                         if (response.headers.get("date")) |date_str| {
@@ -345,7 +359,7 @@ pub const HttpClient = struct {
                     return err;
                 }
                 // Retry on connection/request failures
-                if (backoff.attempt + 1 < options.max_attempts) {
+                if (backoff.attempt + 1 < max_attempts) {
                     if (self.retry_mode == .adaptive) {
                         const retry_cost: f64 = if (err == error.ConnectionTimedOut)
                             10.0
@@ -1267,9 +1281,44 @@ test "Backoff reset" {
 
 test "RequestOptions defaults" {
     const opts = RequestOptions{};
-    try std.testing.expectEqual(@as(u32, 3), opts.max_attempts);
-    try std.testing.expectEqual(@as(u32, 1_000), opts.base_delay_ms);
+    try std.testing.expectEqual(@as(?u32, null), opts.max_attempts);
+    try std.testing.expectEqual(@as(?u32, null), opts.base_delay_ms);
     try std.testing.expectEqual(@as(u32, 20_000), opts.max_delay_ms);
+}
+
+test "HttpClient exposes default_max_attempts and default_base_delay_ms" {
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+    try std.testing.expectEqual(@as(u32, 3), client.default_max_attempts);
+    try std.testing.expectEqual(@as(u32, 1_000), client.default_base_delay_ms);
+}
+
+test "per-call max_attempts overrides HttpClient default" {
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+    client.default_max_attempts = 5;
+    const opts = RequestOptions{ .max_attempts = 1 };
+    const effective = opts.max_attempts orelse client.default_max_attempts;
+    try std.testing.expectEqual(@as(u32, 1), effective);
+}
+
+test "null max_attempts falls back to HttpClient default" {
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+    client.default_max_attempts = 7;
+    const opts = RequestOptions{};
+    const effective = opts.max_attempts orelse client.default_max_attempts;
+    try std.testing.expectEqual(@as(u32, 7), effective);
+}
+
+test "RequestOptions convenience builders" {
+    const with_attempts = RequestOptions.withMaxAttempts(5);
+    try std.testing.expectEqual(@as(?u32, 5), with_attempts.max_attempts);
+    try std.testing.expectEqual(@as(?u32, null), with_attempts.base_delay_ms);
+
+    const with_delay = RequestOptions.withBaseDelayMs(250);
+    try std.testing.expectEqual(@as(?u32, null), with_delay.max_attempts);
+    try std.testing.expectEqual(@as(?u32, 250), with_delay.base_delay_ms);
 }
 
 test "StallProtectionOptions defaults" {
