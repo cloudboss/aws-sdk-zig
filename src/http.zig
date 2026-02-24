@@ -10,6 +10,8 @@ const config_mod = @import("config.zig");
 const errors = @import("errors.zig");
 const user_agent_mod = @import("user_agent.zig");
 
+const log = std.log.scoped(.aws_sdk);
+
 /// HTTP methods
 pub const Method = enum {
     GET,
@@ -291,6 +293,13 @@ pub const HttpClient = struct {
 
         var invocation_id: [36]u8 = undefined;
         generateUuidV4(&invocation_id);
+        const start_ns = std.time.nanoTimestamp();
+        log.debug("aws request start: {s} {s}{s} invocation={s}", .{
+            @tagName(request.method),
+            request.host,
+            request.path,
+            invocation_id,
+        });
         while (backoff.attempt < max_attempts) {
             const result = self.doRequest(request, options, &invocation_id);
 
@@ -342,6 +351,7 @@ pub const HttpClient = struct {
                     const retry_after_ms = parseRetryAfter(
                         response.headers,
                     );
+                    const retry_status = response.status;
                     var resp = response;
                     resp.deinit();
                     if (retry_after_ms) |ms| {
@@ -350,14 +360,30 @@ pub const HttpClient = struct {
                     } else {
                         backoff.wait();
                     }
+                    log.debug(
+                        "aws request retry: attempt={d} status={d} invocation={s}",
+                        .{ backoff.attempt, retry_status, invocation_id },
+                    );
                     continue;
                 }
                 if (self.retry_mode == .adaptive)
                     self.token_bucket.onSuccess();
+                const elapsed_ms = @divTrunc(
+                    std.time.nanoTimestamp() - start_ns,
+                    std.time.ns_per_ms,
+                );
+                log.debug(
+                    "aws request success: status={d} elapsed_ms={d} invocation={s}",
+                    .{ response.status, elapsed_ms, invocation_id },
+                );
                 return response;
             } else |err| {
                 // Don't retry on non-transient errors
                 if (err == error.ResponseTooLarge or err == error.OutOfMemory) {
+                    log.debug(
+                        "aws request failed: {s} invocation={s}",
+                        .{ @errorName(err), invocation_id },
+                    );
                     return err;
                 }
                 // Retry on connection/request failures
@@ -372,10 +398,18 @@ pub const HttpClient = struct {
                     backoff.wait();
                     continue;
                 }
+                log.debug(
+                    "aws request failed after {d} attempts: {s} invocation={s}",
+                    .{ backoff.attempt + 1, @errorName(err), invocation_id },
+                );
                 return err;
             }
         }
 
+        log.debug(
+            "aws request exceeded max retries: attempts={d} invocation={s}",
+            .{ max_attempts, invocation_id },
+        );
         return error.MaxRetriesExceeded;
     }
 
