@@ -289,8 +289,10 @@ pub const HttpClient = struct {
             .cap_ms = options.max_delay_ms,
         };
 
+        var invocation_id: [36]u8 = undefined;
+        generateUuidV4(&invocation_id);
         while (backoff.attempt < max_attempts) {
-            const result = self.doRequest(request, options);
+            const result = self.doRequest(request, options, &invocation_id);
 
             if (result) |response| {
                 const is_clock_skew = isClockSkewError(
@@ -509,6 +511,7 @@ pub const HttpClient = struct {
         self: *Self,
         request: *const Request,
         options: RequestOptions,
+        invocation_id: []const u8,
     ) RequestError!Response {
         if (self.ca_bundle_path) |path| {
             std.fs.cwd().access(path, .{}) catch
@@ -543,6 +546,10 @@ pub const HttpClient = struct {
                 .value = s,
             }) catch {};
         }
+        extra_headers_list.append(self.allocator, .{
+            .name = "amz-sdk-invocation-id",
+            .value = invocation_id,
+        }) catch {};
 
         // Auto-compute CRC32 for S3 when no algorithm is specified
         const effective_checksum_alg: ?checksum_mod.Algorithm =
@@ -739,6 +746,27 @@ pub const HttpClient = struct {
         return final_response;
     }
 };
+
+/// Generate a UUID v4 string into buf.
+/// Uses std.crypto.random for cryptographically secure random bytes.
+/// Version bits are set to 0100 and variant bits to 10xx per RFC 4122.
+pub fn generateUuidV4(buf: *[36]u8) void {
+    var bytes: [16]u8 = undefined;
+    std.crypto.random.bytes(&bytes);
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    const hex = "0123456789abcdef";
+    var i: usize = 0;
+    for (bytes, 0..) |b, idx| {
+        if (idx == 4 or idx == 6 or idx == 8 or idx == 10) {
+            buf[i] = '-';
+            i += 1;
+        }
+        buf[i] = hex[b >> 4];
+        buf[i + 1] = hex[b & 0x0f];
+        i += 2;
+    }
+}
 
 fn setSocketTimeouts(
     conn: *std.http.Client.Connection,
@@ -1819,4 +1847,59 @@ test "auto_checksum false disables S3 auto-checksum" {
         @as(?checksum_mod.Algorithm, null),
         effective,
     );
+}
+
+test "generateUuidV4 produces valid UUID v4 format" {
+    var buf: [36]u8 = undefined;
+    generateUuidV4(&buf);
+    const s = buf[0..];
+    try std.testing.expectEqual(@as(usize, 36), s.len);
+    try std.testing.expectEqual(@as(u8, '-'), s[8]);
+    try std.testing.expectEqual(@as(u8, '-'), s[13]);
+    try std.testing.expectEqual(@as(u8, '-'), s[18]);
+    try std.testing.expectEqual(@as(u8, '-'), s[23]);
+    try std.testing.expectEqual(@as(u8, '4'), s[14]);
+    try std.testing.expect(s[19] == '8' or s[19] == '9' or
+        s[19] == 'a' or s[19] == 'b');
+    for (s, 0..) |c, i| {
+        if (i == 8 or i == 13 or i == 18 or i == 23) continue;
+        try std.testing.expect(
+            (c >= '0' and c <= '9') or (c >= 'a' and c <= 'f'),
+        );
+    }
+}
+
+test "generateUuidV4 produces unique values" {
+    var buf1: [36]u8 = undefined;
+    var buf2: [36]u8 = undefined;
+    generateUuidV4(&buf1);
+    generateUuidV4(&buf2);
+    try std.testing.expect(!std.mem.eql(u8, &buf1, &buf2));
+}
+
+test "HttpClient sends amz-sdk-invocation-id header" {
+    const responses = [_][]const u8{
+        "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 1, .keep_alive = false },
+    );
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(u16, 200), response.status);
 }
