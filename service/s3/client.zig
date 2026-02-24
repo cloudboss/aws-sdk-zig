@@ -1,7 +1,6 @@
 const aws = @import("aws");
 const std = @import("std");
 
-
 const abort_multipart_upload = @import("abort_multipart_upload.zig");
 const complete_multipart_upload = @import("complete_multipart_upload.zig");
 const copy_object = @import("copy_object.zig");
@@ -112,6 +111,10 @@ const write_get_object_response = @import("write_get_object_response.zig");
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
+const s3_interceptors = [_]aws.http.Interceptor{
+    aws.s3_interceptor.S3ChecksumInterceptor.interceptor(),
+};
+
 pub const Client = struct {
     allocator: std.mem.Allocator,
     config: *aws.Config,
@@ -121,18 +124,22 @@ pub const Client = struct {
     pub const sdk_id = "S3";
 
     pub fn init(allocator: std.mem.Allocator, config: *aws.Config) Self {
+        var http_client = aws.http.HttpClient.init(allocator);
+        http_client.interceptors = &s3_interceptors;
         return .{
             .allocator = allocator,
             .config = config,
-            .http_client = aws.http.HttpClient.init(allocator),
+            .http_client = http_client,
         };
     }
 
     pub fn initWithOptions(allocator: std.mem.Allocator, config: *aws.Config, options: aws.http.RequestOptions) Self {
+        var http_client = aws.http.HttpClient.initWithOptions(allocator, options);
+        http_client.interceptors = &s3_interceptors;
         return .{
             .allocator = allocator,
             .config = config,
-            .http_client = aws.http.HttpClient.initWithOptions(allocator, options),
+            .http_client = http_client,
         };
     }
 

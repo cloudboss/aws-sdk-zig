@@ -8,6 +8,7 @@ pub const checksum = @import("checksum.zig");
 pub const credentials = @import("credentials.zig");
 pub const signing = @import("signing.zig");
 pub const http = @import("http.zig");
+pub const s3_interceptor = @import("s3_interceptor.zig");
 pub const config = @import("config.zig");
 pub const errors = @import("errors.zig");
 pub const date = @import("date.zig");

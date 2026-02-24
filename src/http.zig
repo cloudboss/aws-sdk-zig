@@ -47,9 +47,6 @@ pub const RequestOptions = struct {
     /// server may omit Content-Length on responses, which would otherwise
     /// cause reads to block until the server's keep-alive timeout.
     keep_alive: bool = true,
-    /// Automatically compute CRC32 checksum for S3 uploads when
-    /// none is specified (default: true). Set to false to disable.
-    auto_checksum: bool = true,
 
     /// Return options with only max_attempts set; all other fields use client defaults.
     pub fn withMaxAttempts(n: u32) RequestOptions {
@@ -585,14 +582,8 @@ pub const HttpClient = struct {
             .value = invocation_id,
         }) catch {};
 
-        // Auto-compute CRC32 for S3 when no algorithm is specified
         const effective_checksum_alg: ?checksum_mod.Algorithm =
-            if (options.auto_checksum and
-            std.mem.eql(u8, request.service_name, "s3") and
-            request.checksum_algorithm == null)
-                .crc32
-            else
-                request.checksum_algorithm;
+            request.checksum_algorithm;
 
         // Inject checksum header when algorithm is specified
         var checksum_header_name: ?[]const u8 = null;
@@ -720,48 +711,6 @@ pub const HttpClient = struct {
                             .{alg_name},
                         );
                     }
-                }
-            }
-        }
-
-        // Auto-validate S3 response checksums from headers
-        if (options.auto_checksum and
-            std.mem.eql(u8, request.service_name, "s3") and
-            request.checksum_algorithm == null)
-        {
-            const alg_headers = [_]struct {
-                alg: checksum_mod.Algorithm,
-                header: []const u8,
-            }{
-                .{ .alg = .crc32, .header = "x-amz-checksum-crc32" },
-                .{
-                    .alg = .crc32c,
-                    .header = "x-amz-checksum-crc32c",
-                },
-                .{
-                    .alg = .sha256,
-                    .header = "x-amz-checksum-sha256",
-                },
-                .{
-                    .alg = .sha1,
-                    .header = "x-amz-checksum-sha1",
-                },
-            };
-            for (alg_headers) |entry| {
-                if (resp_headers.get(entry.header)) |expected| {
-                    const ok = checksum_mod.verify(
-                        entry.alg,
-                        body,
-                        expected,
-                        self.allocator,
-                    ) catch false;
-                    if (!ok) {
-                        std.log.warn(
-                            "S3 response checksum mismatch for {s}",
-                            .{entry.header},
-                        );
-                    }
-                    break;
                 }
             }
         }
@@ -1823,63 +1772,6 @@ test "parseHttpDate parses valid HTTP date" {
     try std.testing.expectEqual(
         @as(i64, 1767225600),
         ts.?,
-    );
-}
-
-test "S3 auto-checksum sets CRC32 when none specified" {
-    const options = RequestOptions{};
-    var request = Request.init("s3.amazonaws.com");
-    defer request.deinit(std.testing.allocator);
-    request.service_name = "s3";
-    request.checksum_algorithm = null;
-    const effective: ?checksum_mod.Algorithm =
-        if (options.auto_checksum and
-        std.mem.eql(u8, request.service_name, "s3") and
-        request.checksum_algorithm == null)
-            .crc32
-        else
-            request.checksum_algorithm;
-    try std.testing.expectEqual(
-        @as(?checksum_mod.Algorithm, .crc32),
-        effective,
-    );
-}
-
-test "non-S3 service does not auto-compute checksum" {
-    const options = RequestOptions{};
-    var request = Request.init("sts.amazonaws.com");
-    defer request.deinit(std.testing.allocator);
-    request.service_name = "sts";
-    request.checksum_algorithm = null;
-    const effective: ?checksum_mod.Algorithm =
-        if (options.auto_checksum and
-        std.mem.eql(u8, request.service_name, "s3") and
-        request.checksum_algorithm == null)
-            .crc32
-        else
-            request.checksum_algorithm;
-    try std.testing.expectEqual(
-        @as(?checksum_mod.Algorithm, null),
-        effective,
-    );
-}
-
-test "auto_checksum false disables S3 auto-checksum" {
-    const options = RequestOptions{ .auto_checksum = false };
-    var request = Request.init("s3.amazonaws.com");
-    defer request.deinit(std.testing.allocator);
-    request.service_name = "s3";
-    request.checksum_algorithm = null;
-    const effective: ?checksum_mod.Algorithm =
-        if (options.auto_checksum and
-        std.mem.eql(u8, request.service_name, "s3") and
-        request.checksum_algorithm == null)
-            .crc32
-        else
-            request.checksum_algorithm;
-    try std.testing.expectEqual(
-        @as(?checksum_mod.Algorithm, null),
-        effective,
     );
 }
 
