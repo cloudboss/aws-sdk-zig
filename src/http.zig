@@ -140,6 +140,11 @@ pub const RequestError = error{
     OutOfMemory,
 };
 
+pub const Interceptor = struct {
+    pre_send: ?*const fn (*const Request) void = null,
+    post_receive: ?*const fn (*const Response) void = null,
+};
+
 /// Token bucket for adaptive retry rate limiting.
 /// Tracks available capacity and adjusts refill rate based on
 /// throttle/success signals from the service.
@@ -180,6 +185,7 @@ pub const HttpClient = struct {
     clock_skew_offset: i64 = 0,
     timeout_ms: u32 = 30_000,
     stall_protection: StallProtectionOptions = .{},
+    interceptors: []const Interceptor = &.{},
 
     const Self = @This();
 
@@ -573,6 +579,10 @@ pub const HttpClient = struct {
             } else |_| {}
         }
 
+        for (self.interceptors) |ic| {
+            if (ic.pre_send) |hook| hook(request);
+        }
+
         var req = self.inner.request(request.method.toStd(), uri, .{
             .extra_headers = extra_headers_list.items,
             .keep_alive = options.keep_alive,
@@ -701,12 +711,18 @@ pub const HttpClient = struct {
             }
         }
 
-        return Response{
+        var final_response = Response{
             .status = @intFromEnum(response.head.status),
             .body = body,
             .headers = resp_headers,
             .allocator = self.allocator,
         };
+
+        for (self.interceptors) |ic| {
+            if (ic.post_receive) |hook| hook(&final_response);
+        }
+
+        return final_response;
     }
 };
 
@@ -1059,6 +1075,87 @@ pub fn sendRequestWithOptions(
 
 // Tests
 
+const TestServer = struct {
+    server: std.net.Server,
+    address: std.net.Address,
+    responses: []const []const u8,
+    thread: ?std.Thread = null,
+
+    const Self = @This();
+
+    pub fn init(responses: []const []const u8) !Self {
+        const loopback = try std.net.Address.parseIp4("127.0.0.1", 0);
+        const server = try loopback.listen(.{ .reuse_address = true });
+        return .{
+            .server = server,
+            .address = server.listen_address,
+            .responses = responses,
+        };
+    }
+
+    pub fn start(self: *Self) !void {
+        self.thread = try std.Thread.spawn(.{}, run, .{self});
+    }
+
+    pub fn deinit(self: *Self) void {
+        self.server.deinit();
+        if (self.thread) |thread| thread.join();
+    }
+
+    fn run(self: *Self) void {
+        var idx: usize = 0;
+        while (idx < self.responses.len) : (idx += 1) {
+            var conn = self.server.accept() catch return;
+            handleConnection(&conn, self.responses[idx]);
+        }
+    }
+
+    fn handleConnection(conn: *std.net.Server.Connection, response_bytes: []const u8) void {
+        defer conn.stream.close();
+        readRequest(conn);
+        conn.stream.writeAll(response_bytes) catch {};
+    }
+
+    fn readRequest(conn: *std.net.Server.Connection) void {
+        var buf: [4096]u8 = undefined;
+        var total: usize = 0;
+        while (true) {
+            const read_len = conn.stream.read(&buf) catch return;
+            if (read_len == 0) return;
+            total += read_len;
+            if (std.mem.indexOf(u8, buf[0..read_len], "\r\n\r\n") != null)
+                return;
+            if (total > 16 * 1024) return;
+        }
+    }
+};
+
+const HookState = struct {
+    pre_count: usize = 0,
+    post_count: usize = 0,
+    statuses: [2]u16 = .{ 0, 0 },
+    status_index: usize = 0,
+};
+
+var hook_state: ?*HookState = null;
+
+fn testPreSend(request: *const Request) void {
+    _ = request;
+    if (hook_state) |state| {
+        state.pre_count += 1;
+    }
+}
+
+fn testPostReceive(response: *const Response) void {
+    if (hook_state) |state| {
+        state.post_count += 1;
+        if (state.status_index < state.statuses.len) {
+            state.statuses[state.status_index] = response.status;
+            state.status_index += 1;
+        }
+    }
+}
+
 test "Request getUri" {
     var request = Request.init("sts.us-east-1.amazonaws.com");
     request.path = "/";
@@ -1349,6 +1446,111 @@ test "HttpClient defaults to standard retry mode" {
         config_mod.RetryMode.standard,
         client.retry_mode,
     );
+}
+
+test "HttpClient interceptors fire on success" {
+    const responses = [_][]const u8{
+        "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+
+    var state = HookState{};
+    hook_state = &state;
+    defer hook_state = null;
+
+    client.interceptors = &[_]Interceptor{
+        .{ .pre_send = testPreSend, .post_receive = testPostReceive },
+    };
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 1, .keep_alive = false },
+    );
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(usize, 1), state.pre_count);
+    try std.testing.expectEqual(@as(usize, 1), state.post_count);
+    try std.testing.expectEqual(@as(u16, 200), state.statuses[0]);
+}
+
+test "HttpClient interceptors fire per retry" {
+    const responses = [_][]const u8{
+        "HTTP/1.1 500 Internal Server Error\r\nContent-Length: 0\r\n" ++
+            "Connection: close\r\n\r\n",
+        "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+
+    var state = HookState{};
+    hook_state = &state;
+    defer hook_state = null;
+
+    client.interceptors = &[_]Interceptor{
+        .{ .pre_send = testPreSend, .post_receive = testPostReceive },
+    };
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 2, .keep_alive = false },
+    );
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(u16, 200), response.status);
+    try std.testing.expectEqual(@as(usize, 2), state.pre_count);
+    try std.testing.expectEqual(@as(usize, 2), state.post_count);
+    try std.testing.expectEqual(@as(u16, 500), state.statuses[0]);
+    try std.testing.expectEqual(@as(u16, 200), state.statuses[1]);
+}
+
+test "HttpClient interceptors empty slice is no-op" {
+    const responses = [_][]const u8{
+        "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator);
+    defer client.deinit();
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 1, .keep_alive = false },
+    );
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(u16, 200), response.status);
 }
 
 test "HttpClient stores ca_bundle_path" {
