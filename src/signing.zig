@@ -6,12 +6,14 @@ const std = @import("std");
 const Allocator = std.mem.Allocator;
 const Hmac = std.crypto.auth.hmac.sha2.HmacSha256;
 const Sha256 = std.crypto.hash.sha2.Sha256;
+const EcdsaP256Sha256 = std.crypto.sign.ecdsa.EcdsaP256Sha256;
 
 const Credentials = @import("credentials.zig").Credentials;
 const http = @import("http.zig");
 const gzip_mod = @import("gzip.zig");
 
 pub const algorithm = "AWS4-HMAC-SHA256";
+pub const algorithm_sigv4a = "AWS4-ECDSA-P256-SHA256";
 
 /// Options for presigning a request.
 pub const PresignOptions = struct {
@@ -318,22 +320,69 @@ pub fn signRequest(
     });
     defer allocator.free(string_to_sign);
 
-    // Calculate signature
-    const signing_key = deriveSigningKey(credentials.secret_access_key, datestamp, region, service);
-    var signature: [Hmac.mac_length]u8 = undefined;
-    Hmac.create(&signature, string_to_sign, &signing_key);
-    const signature_hex = std.fmt.bytesToHex(&signature, .lower);
-
-    // Build authorization header
-    const authorization = try std.fmt.allocPrint(allocator, "{s} Credential={s}/{s}, SignedHeaders={s}, Signature={s}", .{
-        algorithm,
-        credentials.access_key_id,
-        credential_scope,
-        canonical_result.signed_headers,
-        signature_hex,
-    });
-
-    try request.headers.put(allocator, "authorization", authorization);
+    switch (request.signing_algorithm) {
+        .sigv4 => {
+            const signing_key = deriveSigningKey(
+                credentials.secret_access_key,
+                datestamp,
+                region,
+                service,
+            );
+            var signature: [Hmac.mac_length]u8 = undefined;
+            Hmac.create(&signature, string_to_sign, &signing_key);
+            const signature_hex = std.fmt.bytesToHex(&signature, .lower);
+            const authorization = try std.fmt.allocPrint(
+                allocator,
+                "{s} Credential={s}/{s}, SignedHeaders={s}, Signature={s}",
+                .{
+                    algorithm,
+                    credentials.access_key_id,
+                    credential_scope,
+                    canonical_result.signed_headers,
+                    signature_hex,
+                },
+            );
+            try request.headers.put(allocator, "authorization", authorization);
+        },
+        .sigv4a => {
+            const credential_scope_v4a = try std.fmt.allocPrint(
+                allocator,
+                "{s}/*/{s}/aws4_request",
+                .{ datestamp, service },
+            );
+            defer allocator.free(credential_scope_v4a);
+            const string_to_sign_v4a = try std.fmt.allocPrint(
+                allocator,
+                "{s}\n{s}\n{s}\n{s}",
+                .{
+                    algorithm_sigv4a,
+                    datetime,
+                    credential_scope_v4a,
+                    canonical_request_hash_hex,
+                },
+            );
+            defer allocator.free(string_to_sign_v4a);
+            const key_pair = try deriveSigningKeyV4a(
+                credentials.secret_access_key,
+                credentials.access_key_id,
+            );
+            const sig = try key_pair.sign(string_to_sign_v4a, null);
+            const sig_bytes = sig.toBytes();
+            const sig_hex = std.fmt.bytesToHex(&sig_bytes, .lower);
+            const authorization = try std.fmt.allocPrint(
+                allocator,
+                "{s} Credential={s}/{s}, SignedHeaders={s}, Signature={s}",
+                .{
+                    algorithm_sigv4a,
+                    credentials.access_key_id,
+                    credential_scope_v4a,
+                    canonical_result.signed_headers,
+                    sig_hex,
+                },
+            );
+            try request.headers.put(allocator, "authorization", authorization);
+        },
+    }
 }
 
 /// Format timestamp as AWS date (YYYYMMDD'T'HHMMSS'Z')
@@ -382,6 +431,60 @@ fn deriveSigningKey(
     Hmac.create(&k_signing, "aws4_request", &k_service);
 
     return k_signing;
+}
+
+fn deriveSigningKeyV4a(
+    secret_access_key: []const u8,
+    access_key_id: []const u8,
+) !EcdsaP256Sha256.KeyPair {
+    const order = comptime blk: {
+        break :blk [32]u8{
+            0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00,
+            0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+            0xBC, 0xE6, 0xFA, 0xAD, 0xA7, 0x17, 0x9E, 0x84,
+            0xF3, 0xB9, 0xCA, 0xC2, 0xFC, 0x63, 0x25, 0x51,
+        };
+    };
+
+    var ikm: [261]u8 = undefined;
+    @memcpy(ikm[0..5], "AWS4A");
+    const ikm_len = 5 + secret_access_key.len;
+    @memcpy(ikm[5..ikm_len], secret_access_key);
+
+    var counter: u8 = 1;
+    while (counter < 255) : (counter += 1) {
+        var msg: [256 + 2]u8 = undefined;
+        @memcpy(msg[0..access_key_id.len], access_key_id);
+        msg[access_key_id.len] = 0x00;
+        msg[access_key_id.len + 1] = counter;
+        const msg_len = access_key_id.len + 2;
+
+        var derived: [Hmac.mac_length]u8 = undefined;
+        Hmac.create(&derived, msg[0..msg_len], ikm[0..ikm_len]);
+
+        var is_zero = true;
+        for (derived) |b| {
+            if (b != 0) {
+                is_zero = false;
+                break;
+            }
+        }
+        if (is_zero) continue;
+
+        var less_than_order = false;
+        for (0..32) |i| {
+            if (derived[i] < order[i]) {
+                less_than_order = true;
+                break;
+            }
+            if (derived[i] > order[i]) break;
+        }
+        if (!less_than_order) continue;
+
+        const sk = EcdsaP256Sha256.SecretKey.fromBytes(derived) catch continue;
+        return EcdsaP256Sha256.KeyPair.fromSecretKey(sk) catch continue;
+    }
+    return error.KeyDerivationFailed;
 }
 
 const CanonicalResult = struct {
@@ -922,6 +1025,54 @@ test "signRequest null compression is no-op" {
     try std.testing.expect(request.headers.get("content-encoding") == null);
 }
 
+test "signRequest SigV4a produces ECDSA signature" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    var request = http.Request.init("sts.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/";
+    request.signing_algorithm = .sigv4a;
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    try signRequest(allocator, &request, creds, "us-east-1", "sts");
+
+    const authorization = request.headers.get("authorization") orelse "";
+    try std.testing.expect(
+        std.mem.indexOf(u8, authorization, algorithm_sigv4a) != null,
+    );
+    try std.testing.expect(std.mem.indexOf(u8, authorization, "/*/") != null);
+}
+
+test "signRequest SigV4 still works unchanged" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    var request = http.Request.init("sts.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/";
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    try signRequest(allocator, &request, creds, "us-east-1", "sts");
+
+    const authorization = request.headers.get("authorization") orelse "";
+    try std.testing.expect(
+        std.mem.indexOf(u8, authorization, algorithm) != null,
+    );
+}
+
 test "signRequest hashes compressed body" {
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
     defer arena.deinit();
@@ -951,5 +1102,70 @@ test "signRequest hashes compressed body" {
     try std.testing.expectEqualStrings(
         &payload_hash_hex,
         request.headers.get("x-amz-content-sha256") orelse "",
+    );
+}
+
+test "signRequest SigV4a hashes compressed body" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+    request.signing_algorithm = .sigv4a;
+
+    const body = try allocator.alloc(u8, 2000);
+    @memset(body, 'd');
+    request.body = body;
+    request.request_compression = .gzip;
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+
+    const compressed = request.body.?;
+    var payload_hash: [Sha256.digest_length]u8 = undefined;
+    Sha256.hash(compressed, &payload_hash, .{});
+    const payload_hash_hex = std.fmt.bytesToHex(&payload_hash, .lower);
+    try std.testing.expectEqualStrings(
+        &payload_hash_hex,
+        request.headers.get("x-amz-content-sha256") orelse "",
+    );
+    const authorization = request.headers.get("authorization") orelse "";
+    try std.testing.expect(
+        std.mem.indexOf(u8, authorization, algorithm_sigv4a) != null,
+    );
+}
+
+test "signRequest content-encoding is in signed headers" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+
+    const body = try allocator.alloc(u8, 2000);
+    @memset(body, 'e');
+    request.body = body;
+    request.request_compression = .gzip;
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+
+    const authorization = request.headers.get("authorization") orelse "";
+    try std.testing.expect(
+        std.mem.indexOf(u8, authorization, "content-encoding") != null,
     );
 }

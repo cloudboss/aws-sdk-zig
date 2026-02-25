@@ -70,6 +70,11 @@ pub const CompressionAlgorithm = enum {
     gzip,
 };
 
+pub const SigningAlgorithm = enum {
+    sigv4,
+    sigv4a,
+};
+
 /// HTTP request
 pub const Request = struct {
     method: Method = .POST,
@@ -84,6 +89,7 @@ pub const Request = struct {
     api_version: []const u8 = "",
     checksum_algorithm: ?checksum_mod.Algorithm = null,
     request_compression: ?CompressionAlgorithm = null,
+    signing_algorithm: SigningAlgorithm = .sigv4,
 
     const Self = @This();
 
