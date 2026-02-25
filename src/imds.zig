@@ -290,6 +290,7 @@ fn fillDiagnosticFromError(diagnostic: ?*errors.Diagnostic, err: http.RequestErr
         diag.* = .{
             .message = message,
             .http_status = switch (err) {
+                error.ChecksumMismatch => 0,
                 error.ConnectionFailed => 0,
                 error.RequestFailed => 0,
                 error.ResponseTooLarge => 0,

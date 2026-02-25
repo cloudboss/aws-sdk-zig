@@ -141,6 +141,7 @@ pub const Response = struct {
 
 /// Request error types
 pub const RequestError = error{
+    ChecksumMismatch,
     ConnectionFailed,
     RequestFailed,
     ResponseTooLarge,
@@ -151,7 +152,7 @@ pub const RequestError = error{
 
 pub const Interceptor = struct {
     pre_send: ?*const fn (*const Request) void = null,
-    post_receive: ?*const fn (*const Response) void = null,
+    post_receive: ?*const fn (*const Response) RequestError!void = null,
 };
 
 /// Token bucket for adaptive retry rate limiting.
@@ -723,7 +724,7 @@ pub const HttpClient = struct {
         };
 
         for (self.interceptors) |ic| {
-            if (ic.post_receive) |hook| hook(&final_response);
+            if (ic.post_receive) |hook| hook(&final_response) catch |err| return err;
         }
 
         return final_response;
@@ -1171,7 +1172,7 @@ fn testPreSend(request: *const Request) void {
     }
 }
 
-fn testPostReceive(response: *const Response) void {
+fn testPostReceive(response: *const Response) RequestError!void {
     if (hook_state) |state| {
         state.post_count += 1;
         if (state.status_index < state.statuses.len) {

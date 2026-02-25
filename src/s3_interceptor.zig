@@ -14,7 +14,7 @@ pub const S3ChecksumInterceptor = struct {
         _ = request;
     }
 
-    fn postReceive(response: *const http.Response) void {
+    fn postReceive(response: *const http.Response) http.RequestError!void {
         const alg_headers = [_]struct {
             alg: checksum_mod.Algorithm,
             header: []const u8,
@@ -32,12 +32,7 @@ pub const S3ChecksumInterceptor = struct {
                     expected,
                     response.allocator,
                 ) catch false;
-                if (!ok) {
-                    log.warn(
-                        "S3 response checksum mismatch for {s}",
-                        .{entry.header},
-                    );
-                }
+                if (!ok) return error.ChecksumMismatch;
                 break;
             }
         }
@@ -82,10 +77,10 @@ test "post_receive validates CRC32 header" {
     );
     defer response.deinit();
 
-    S3ChecksumInterceptor.postReceive(&response);
+    try S3ChecksumInterceptor.postReceive(&response);
 }
 
-test "post_receive logs warning for mismatched checksum" {
+test "post_receive returns error on mismatched checksum" {
     const payload = "test";
     var response = try makeResponse(
         std.testing.allocator,
@@ -95,15 +90,10 @@ test "post_receive logs warning for mismatched checksum" {
     );
     defer response.deinit();
 
-    const ok = try checksum_mod.verify(
-        .crc32,
-        payload,
-        "AAAA",
-        std.testing.allocator,
+    try std.testing.expectError(
+        error.ChecksumMismatch,
+        S3ChecksumInterceptor.postReceive(&response),
     );
-    try std.testing.expect(!ok);
-
-    S3ChecksumInterceptor.postReceive(&response);
 }
 
 test "interceptor returns a configured http.Interceptor" {
