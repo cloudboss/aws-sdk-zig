@@ -116,13 +116,29 @@ pub fn resolveEndpoint(
     if (options.dual_stack and !partition.supports_dual_stack) return error.DualStackNotSupported;
 
     if (options.fips and options.dual_stack) {
-        return std.fmt.allocPrint(allocator, "{s}-fips.{s}.{s}", .{ service, region, partition.dual_stack_dns_suffix });
+        return std.fmt.allocPrint(
+            allocator,
+            "{s}-fips.{s}.{s}",
+            .{ service, region, partition.dual_stack_dns_suffix },
+        );
     } else if (options.fips) {
-        return std.fmt.allocPrint(allocator, "{s}-fips.{s}.{s}", .{ service, region, partition.dns_suffix });
+        return std.fmt.allocPrint(
+            allocator,
+            "{s}-fips.{s}.{s}",
+            .{ service, region, partition.dns_suffix },
+        );
     } else if (options.dual_stack) {
-        return std.fmt.allocPrint(allocator, "{s}.{s}.{s}", .{ service, region, partition.dual_stack_dns_suffix });
+        return std.fmt.allocPrint(
+            allocator,
+            "{s}.{s}.{s}",
+            .{ service, region, partition.dual_stack_dns_suffix },
+        );
     } else {
-        return std.fmt.allocPrint(allocator, "{s}.{s}.{s}", .{ service, region, partition.dns_suffix });
+        return std.fmt.allocPrint(
+            allocator,
+            "{s}.{s}.{s}",
+            .{ service, region, partition.dns_suffix },
+        );
     }
 }
 
@@ -205,14 +221,24 @@ test "resolveEndpoint dual_stack iso returns error" {
 
 test "resolveEndpoint endpoint_override" {
     const allocator = std.testing.allocator;
-    const host = try resolveEndpoint(allocator, "sts", "us-east-1", .{ .endpoint_override = "custom.example.com" });
+    const host = try resolveEndpoint(
+        allocator,
+        "sts",
+        "us-east-1",
+        .{ .endpoint_override = "custom.example.com" },
+    );
     defer allocator.free(host);
     try std.testing.expectEqualStrings("custom.example.com", host);
 }
 
 test "resolveEndpoint fips+dual_stack" {
     const allocator = std.testing.allocator;
-    const host = try resolveEndpoint(allocator, "sts", "us-east-1", .{ .fips = true, .dual_stack = true });
+    const host = try resolveEndpoint(
+        allocator,
+        "sts",
+        "us-east-1",
+        .{ .fips = true, .dual_stack = true },
+    );
     defer allocator.free(host);
     try std.testing.expectEqualStrings("sts-fips.us-east-1.api.aws", host);
 }
@@ -325,7 +351,12 @@ test "resolveEndpoint unknown region falls back to aws" {
 
 test "resolveEndpoint override ignores fips and region" {
     const allocator = std.testing.allocator;
-    const host = try resolveEndpoint(allocator, "sts", "cn-north-1", .{ .fips = true, .endpoint_override = "localhost:4566" });
+    const host = try resolveEndpoint(
+        allocator,
+        "sts",
+        "cn-north-1",
+        .{ .fips = true, .endpoint_override = "localhost:4566" },
+    );
     defer allocator.free(host);
     try std.testing.expectEqualStrings("localhost:4566", host);
 }

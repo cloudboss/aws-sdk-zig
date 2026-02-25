@@ -34,7 +34,11 @@ pub const S3EndpointOptions = struct {
 /// alphanumeric characters and hyphens, has no dots, and starts/ends with alphanumeric.
 pub fn isDnsCompatible(bucket: []const u8) bool {
     if (bucket.len < 3 or bucket.len > 63) return false;
-    if (!std.ascii.isAlphanumeric(bucket[0]) or !std.ascii.isAlphanumeric(bucket[bucket.len - 1])) return false;
+    if (!std.ascii.isAlphanumeric(bucket[0]) or
+        !std.ascii.isAlphanumeric(bucket[bucket.len - 1]))
+    {
+        return false;
+    }
 
     for (bucket) |c| {
         switch (c) {
@@ -75,16 +79,28 @@ pub fn resolveS3Endpoint(
 
         // Acceleration endpoints have no region component.
         const host = if (options.dual_stack)
-            try std.fmt.allocPrint(allocator, "{s}.s3-accelerate.dualstack.{s}", .{ bucket, partition.dns_suffix })
+            try std.fmt.allocPrint(
+                allocator,
+                "{s}.s3-accelerate.dualstack.{s}",
+                .{ bucket, partition.dns_suffix },
+            )
         else
-            try std.fmt.allocPrint(allocator, "{s}.s3-accelerate.{s}", .{ bucket, partition.dns_suffix });
+            try std.fmt.allocPrint(
+                allocator,
+                "{s}.s3-accelerate.{s}",
+                .{ bucket, partition.dns_suffix },
+            );
 
         return .{ .host = host, .use_path_style = false };
     }
 
     // Build the base host (without bucket prefix).
     const base_host = if (options.fips and options.dual_stack)
-        try std.fmt.allocPrint(allocator, "s3-fips.dualstack.{s}.{s}", .{ region, partition.dns_suffix })
+        try std.fmt.allocPrint(
+            allocator,
+            "s3-fips.dualstack.{s}.{s}",
+            .{ region, partition.dns_suffix },
+        )
     else if (options.fips)
         try std.fmt.allocPrint(allocator, "s3-fips.{s}.{s}", .{ region, partition.dns_suffix })
     else if (options.dual_stack)
@@ -146,7 +162,11 @@ test "path-style for dotted bucket" {
 
 test "explicit path-style" {
     const allocator = std.testing.allocator;
-    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my-bucket", .use_path_style = true });
+    const result = try resolveS3Endpoint(
+        allocator,
+        "us-east-1",
+        .{ .bucket = "my-bucket", .use_path_style = true },
+    );
     defer allocator.free(result.host);
     try std.testing.expectEqualStrings("s3.us-east-1.amazonaws.com", result.host);
     try std.testing.expect(result.use_path_style);
@@ -154,9 +174,16 @@ test "explicit path-style" {
 
 test "dual-stack" {
     const allocator = std.testing.allocator;
-    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my-bucket", .dual_stack = true });
+    const result = try resolveS3Endpoint(
+        allocator,
+        "us-east-1",
+        .{ .bucket = "my-bucket", .dual_stack = true },
+    );
     defer allocator.free(result.host);
-    try std.testing.expectEqualStrings("my-bucket.s3.dualstack.us-east-1.amazonaws.com", result.host);
+    try std.testing.expectEqualStrings(
+        "my-bucket.s3.dualstack.us-east-1.amazonaws.com",
+        result.host,
+    );
 }
 
 test "fips" {
@@ -168,7 +195,11 @@ test "fips" {
 
 test "acceleration" {
     const allocator = std.testing.allocator;
-    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my-bucket", .use_accelerate = true });
+    const result = try resolveS3Endpoint(
+        allocator,
+        "us-east-1",
+        .{ .bucket = "my-bucket", .use_accelerate = true },
+    );
     defer allocator.free(result.host);
     try std.testing.expectEqualStrings("my-bucket.s3-accelerate.amazonaws.com", result.host);
     try std.testing.expect(!result.use_path_style);
@@ -178,7 +209,11 @@ test "acceleration with fips returns error" {
     const allocator = std.testing.allocator;
     try std.testing.expectError(
         error.AccelerateNotSupported,
-        resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my-bucket", .use_accelerate = true, .fips = true }),
+        resolveS3Endpoint(
+            allocator,
+            "us-east-1",
+            .{ .bucket = "my-bucket", .use_accelerate = true, .fips = true },
+        ),
     );
 }
 
@@ -186,7 +221,11 @@ test "acceleration on cn-north-1 returns error" {
     const allocator = std.testing.allocator;
     try std.testing.expectError(
         error.AccelerateNotSupported,
-        resolveS3Endpoint(allocator, "cn-north-1", .{ .bucket = "my-bucket", .use_accelerate = true }),
+        resolveS3Endpoint(
+            allocator,
+            "cn-north-1",
+            .{ .bucket = "my-bucket", .use_accelerate = true },
+        ),
     );
 }
 
@@ -224,7 +263,11 @@ test "s3 virtual-hosted govcloud" {
 
 test "s3 fips+dual_stack" {
     const allocator = std.testing.allocator;
-    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .fips = true, .dual_stack = true });
+    const result = try resolveS3Endpoint(
+        allocator,
+        "us-east-1",
+        .{ .fips = true, .dual_stack = true },
+    );
     defer allocator.free(result.host);
     try std.testing.expectEqualStrings("s3-fips.dualstack.us-east-1.amazonaws.com", result.host);
     try std.testing.expect(result.use_path_style);
@@ -232,9 +275,20 @@ test "s3 fips+dual_stack" {
 
 test "s3 acceleration+dual_stack" {
     const allocator = std.testing.allocator;
-    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my-bucket", .use_accelerate = true, .dual_stack = true });
+    const result = try resolveS3Endpoint(
+        allocator,
+        "us-east-1",
+        .{
+            .bucket = "my-bucket",
+            .use_accelerate = true,
+            .dual_stack = true,
+        },
+    );
     defer allocator.free(result.host);
-    try std.testing.expectEqualStrings("my-bucket.s3-accelerate.dualstack.amazonaws.com", result.host);
+    try std.testing.expectEqualStrings(
+        "my-bucket.s3-accelerate.dualstack.amazonaws.com",
+        result.host,
+    );
     try std.testing.expect(!result.use_path_style);
 }
 
@@ -242,7 +296,15 @@ test "s3 acceleration with path-style returns error" {
     const allocator = std.testing.allocator;
     try std.testing.expectError(
         error.AccelerateNotSupported,
-        resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my-bucket", .use_accelerate = true, .use_path_style = true }),
+        resolveS3Endpoint(
+            allocator,
+            "us-east-1",
+            .{
+                .bucket = "my-bucket",
+                .use_accelerate = true,
+                .use_path_style = true,
+            },
+        ),
     );
 }
 
@@ -258,7 +320,11 @@ test "s3 acceleration with dotted bucket returns error" {
     const allocator = std.testing.allocator;
     try std.testing.expectError(
         error.AccelerateRequiresDnsCompatibleBucket,
-        resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my.dotted.bucket", .use_accelerate = true }),
+        resolveS3Endpoint(
+            allocator,
+            "us-east-1",
+            .{ .bucket = "my.dotted.bucket", .use_accelerate = true },
+        ),
     );
 }
 
@@ -272,7 +338,11 @@ test "s3 no bucket path-style" {
 
 test "s3 endpoint override with bucket" {
     const allocator = std.testing.allocator;
-    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "test", .endpoint_override = "localhost:4566" });
+    const result = try resolveS3Endpoint(
+        allocator,
+        "us-east-1",
+        .{ .bucket = "test", .endpoint_override = "localhost:4566" },
+    );
     defer allocator.free(result.host);
     try std.testing.expectEqualStrings("localhost:4566", result.host);
     try std.testing.expect(!result.use_path_style);
@@ -280,7 +350,14 @@ test "s3 endpoint override with bucket" {
 
 test "s3 endpoint override with dotted bucket" {
     const allocator = std.testing.allocator;
-    const result = try resolveS3Endpoint(allocator, "us-east-1", .{ .bucket = "my.dotted.bucket", .endpoint_override = "localhost:4566" });
+    const result = try resolveS3Endpoint(
+        allocator,
+        "us-east-1",
+        .{
+            .bucket = "my.dotted.bucket",
+            .endpoint_override = "localhost:4566",
+        },
+    );
     defer allocator.free(result.host);
     try std.testing.expectEqualStrings("localhost:4566", result.host);
     try std.testing.expect(result.use_path_style);
