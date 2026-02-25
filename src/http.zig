@@ -975,10 +975,10 @@ pub const StreamingBody = struct {
             const chunk_len = @min(buf.len, max_chunk);
             var buffers = [_][]u8{buf[0..chunk_len]};
             const read_len = self._inner.body_reader.readVec(&buffers) catch |err| switch (err) {
-                error.EndOfStream => 0,
+                error.EndOfStream => break,
                 else => return error.RequestFailed,
             };
-            if (read_len == 0) break;
+            if (read_len == 0) continue;
             if (read_len > remaining) return error.ResponseTooLarge;
 
             list.appendSlice(allocator, buf[0..read_len]) catch return error.OutOfMemory;
