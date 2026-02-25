@@ -60,7 +60,11 @@ pub fn presignRequest(
         else
             true;
         if (!is_default_port) {
-            const host_with_port = try std.fmt.allocPrint(allocator, "{s}:{d}", .{ request.host, request.port.? });
+            const host_with_port = try std.fmt.allocPrint(
+                allocator,
+                "{s}:{d}",
+                .{ request.host, request.port.? },
+            );
             allocated_host = host_with_port;
             try headers.put(allocator, "host", host_with_port);
         } else {
@@ -74,7 +78,10 @@ pub fn presignRequest(
     defer allocator.free(headers_result.signed);
 
     // Canonical URI
-    const canonical_uri = try encodeUri(allocator, if (request.path.len == 0) "/" else request.path);
+    const canonical_uri = try encodeUri(
+        allocator,
+        if (request.path.len == 0) "/" else request.path,
+    );
     defer allocator.free(canonical_uri);
 
     // Build the canonical query string: existing params + X-Amz-* presign params, sorted.
@@ -259,7 +266,11 @@ pub fn signRequest(
 
     // Add required headers (dupe stack values onto heap so they survive after return)
     try request.headers.put(allocator, "x-amz-date", try allocator.dupe(u8, &datetime));
-    try request.headers.put(allocator, "x-amz-content-sha256", try allocator.dupe(u8, &payload_hash_hex));
+    try request.headers.put(
+        allocator,
+        "x-amz-content-sha256",
+        try allocator.dupe(u8, &payload_hash_hex),
+    );
     if (credentials.session_token) |token| {
         try request.headers.put(allocator, "x-amz-security-token", token);
     }
@@ -271,7 +282,11 @@ pub fn signRequest(
         else
             true;
         if (!is_default_port) {
-            const host_with_port = try std.fmt.allocPrint(allocator, "{s}:{d}", .{ request.host, request.port.? });
+            const host_with_port = try std.fmt.allocPrint(
+                allocator,
+                "{s}:{d}",
+                .{ request.host, request.port.? },
+            );
             try request.headers.put(allocator, "host", host_with_port);
         } else {
             try request.headers.put(allocator, "host", request.host);
@@ -381,7 +396,10 @@ fn buildCanonicalRequest(
     payload_hash: []const u8,
 ) !CanonicalResult {
     const method = @tagName(request.method);
-    const canonical_uri = try encodeUri(allocator, if (request.path.len == 0) "/" else request.path);
+    const canonical_uri = try encodeUri(
+        allocator,
+        if (request.path.len == 0) "/" else request.path,
+    );
     defer allocator.free(canonical_uri);
 
     const canonical_query = try canonicalizeQueryString(allocator, request.query);
@@ -651,7 +669,10 @@ test "canonicalizeQueryString empty" {
 test "canonicalizeQueryString sorts parameters" {
     const allocator = std.testing.allocator;
 
-    const result = try canonicalizeQueryString(allocator, "Version=2011-06-15&Action=GetCallerIdentity");
+    const result = try canonicalizeQueryString(
+        allocator,
+        "Version=2011-06-15&Action=GetCallerIdentity",
+    );
     defer allocator.free(result);
     try std.testing.expectEqualStrings("Action=GetCallerIdentity&Version=2011-06-15", result);
 }
@@ -689,7 +710,10 @@ test "canonicalizeHeaders" {
 test "trimAndNormalizeHeaderValue" {
     try std.testing.expectEqualStrings("value", trimAndNormalizeHeaderValue("  value  "));
     try std.testing.expectEqualStrings("value", trimAndNormalizeHeaderValue("\tvalue\t"));
-    try std.testing.expectEqualStrings("hello world", trimAndNormalizeHeaderValue("  hello world  "));
+    try std.testing.expectEqualStrings(
+        "hello world",
+        trimAndNormalizeHeaderValue("  hello world  "),
+    );
 }
 
 test "presignRequest produces valid URL" {
@@ -709,7 +733,13 @@ test "presignRequest produces valid URL" {
     defer allocator.free(url);
 
     // URL should start with https and contain all required SigV4 query params
-    try std.testing.expect(std.mem.startsWith(u8, url, "https://my-bucket.s3.us-east-1.amazonaws.com/my-key.txt?"));
+    try std.testing.expect(
+        std.mem.startsWith(
+            u8,
+            url,
+            "https://my-bucket.s3.us-east-1.amazonaws.com/my-key.txt?",
+        ),
+    );
     try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Algorithm=AWS4-HMAC-SHA256") != null);
     try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Credential=") != null);
     try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Date=") != null);
@@ -732,7 +762,14 @@ test "presignRequest with session token" {
         .session_token = "TOKEN123",
     };
 
-    const url = try presignRequest(allocator, &request, creds, "us-west-2", "s3", .{ .expires_seconds = 900 });
+    const url = try presignRequest(
+        allocator,
+        &request,
+        creds,
+        "us-west-2",
+        "s3",
+        .{ .expires_seconds = 900 },
+    );
     defer allocator.free(url);
 
     try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Security-Token=TOKEN123") != null);
@@ -778,7 +815,9 @@ test "presignRequest with existing query params" {
     defer allocator.free(url);
 
     // Existing param should be present alongside the signing params
-    try std.testing.expect(std.mem.indexOf(u8, url, "response-content-disposition=attachment") != null);
+    try std.testing.expect(
+        std.mem.indexOf(u8, url, "response-content-disposition=attachment") != null,
+    );
     try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Algorithm=") != null);
 }
 
