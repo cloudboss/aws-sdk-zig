@@ -66,6 +66,10 @@ pub const StallProtectionOptions = struct {
     enabled: bool = true,
 };
 
+pub const CompressionAlgorithm = enum {
+    gzip,
+};
+
 /// HTTP request
 pub const Request = struct {
     method: Method = .POST,
@@ -79,6 +83,7 @@ pub const Request = struct {
     service_name: []const u8 = "",
     api_version: []const u8 = "",
     checksum_algorithm: ?checksum_mod.Algorithm = null,
+    request_compression: ?CompressionAlgorithm = null,
 
     const Self = @This();
 

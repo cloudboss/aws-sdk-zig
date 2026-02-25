@@ -28,6 +28,7 @@ pub const sso = @import("sso.zig");
 pub const assume_role = @import("assume_role.zig");
 pub const user_agent = @import("user_agent.zig");
 pub const event_stream = @import("event_stream.zig");
+pub const gzip = @import("gzip.zig");
 
 // Re-exports
 pub const Credentials = credentials.Credentials;

@@ -9,6 +9,7 @@ const Sha256 = std.crypto.hash.sha2.Sha256;
 
 const Credentials = @import("credentials.zig").Credentials;
 const http = @import("http.zig");
+const gzip_mod = @import("gzip.zig");
 
 pub const algorithm = "AWS4-HMAC-SHA256";
 
@@ -233,6 +234,22 @@ pub fn signRequest(
     const timestamp = std.time.timestamp();
     const datetime = formatAmzDate(timestamp);
     const datestamp = datetime[0..8];
+
+    // Compress body if requested and body exceeds threshold
+    const COMPRESSION_THRESHOLD = 1024;
+
+    if (request.request_compression) |compression_algorithm| {
+        const body = request.body orelse "";
+        if (body.len >= COMPRESSION_THRESHOLD) {
+            switch (compression_algorithm) {
+                .gzip => {
+                    const compressed_bytes = try gzip_mod.compress(allocator, body);
+                    request.body = compressed_bytes;
+                    try request.headers.put(allocator, "content-encoding", "gzip");
+                },
+            }
+        }
+    }
 
     // Hash payload
     const payload = request.body orelse "";
@@ -786,4 +803,114 @@ test "buildPresignCanonicalQuery sorts params" {
 
     try std.testing.expect(alpha_pos < algo_pos);
     try std.testing.expect(algo_pos < zebra_pos);
+}
+
+test "signRequest gzip compresses large body" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+
+    const body = try allocator.alloc(u8, 2000);
+    @memset(body, 'a');
+    request.body = body;
+    request.request_compression = .gzip;
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+
+    try std.testing.expect(request.body != null);
+    const compressed = request.body.?;
+    try std.testing.expect(compressed.len < 2000);
+    try std.testing.expectEqualStrings(
+        "gzip",
+        request.headers.get("content-encoding") orelse "",
+    );
+}
+
+test "signRequest does not compress small body" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+
+    const body = try allocator.alloc(u8, 100);
+    @memset(body, 'b');
+    request.body = body;
+    request.request_compression = .gzip;
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+
+    try std.testing.expectEqualSlices(u8, body, request.body.?);
+    try std.testing.expect(request.headers.get("content-encoding") == null);
+}
+
+test "signRequest null compression is no-op" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+    request.body = "payload";
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+
+    try std.testing.expect(request.headers.get("content-encoding") == null);
+}
+
+test "signRequest hashes compressed body" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+
+    const body = try allocator.alloc(u8, 2000);
+    @memset(body, 'c');
+    request.body = body;
+    request.request_compression = .gzip;
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+
+    const compressed = request.body.?;
+    var payload_hash: [Sha256.digest_length]u8 = undefined;
+    Sha256.hash(compressed, &payload_hash, .{});
+    const payload_hash_hex = std.fmt.bytesToHex(&payload_hash, .lower);
+    try std.testing.expectEqualStrings(
+        &payload_hash_hex,
+        request.headers.get("x-amz-content-sha256") orelse "",
+    );
 }
