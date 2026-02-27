@@ -5,40 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const GetResourcePoliciesResponseEntry = @import("get_resource_policies_response_entry.zig").GetResourcePoliciesResponseEntry;
 
-pub const GetResourcePoliciesInput = struct {
-    /// The maximum number of items to return for this call. The call also returns a
-    /// token that you
-    /// can specify in a subsequent call to get the next set of results.
-    max_results: ?i32 = null,
+const GetResourcePoliciesInput = @import("get_resource_policies_request.zig").GetResourcePoliciesRequest;
 
-    /// A token to start the list. Use this token to get the next set of results.
-    next_token: ?[]const u8 = null,
-
-    /// Amazon Resource Name (ARN) of the resource to which the policies are
-    /// attached.
-    resource_arn: []const u8,
-
-    pub const json_field_names = .{
-        .max_results = "MaxResults",
-        .next_token = "NextToken",
-        .resource_arn = "ResourceArn",
-    };
-};
-
-pub const GetResourcePoliciesOutput = struct {
-    /// The token for the next set of items to return. Use this token to get the
-    /// next set of
-    /// results.
-    next_token: ?[]const u8 = null,
-
-    /// An array of the `Policy` object.
-    policies: ?[]const GetResourcePoliciesResponseEntry = null,
-
-    pub const json_field_names = .{
-        .next_token = "NextToken",
-        .policies = "Policies",
-    };
-};
+const GetResourcePoliciesOutput = @import("get_resource_policies_response.zig").GetResourcePoliciesResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

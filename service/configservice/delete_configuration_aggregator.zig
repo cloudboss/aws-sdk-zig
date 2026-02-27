@@ -13,7 +13,7 @@ pub const DeleteConfigurationAggregatorInput = struct {
     };
 };
 
-pub const DeleteConfigurationAggregatorOutput = struct {};
+const DeleteConfigurationAggregatorOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

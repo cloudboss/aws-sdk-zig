@@ -13,7 +13,7 @@ pub const DeleteStudioInput = struct {
     };
 };
 
-pub const DeleteStudioOutput = struct {};
+const DeleteStudioOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

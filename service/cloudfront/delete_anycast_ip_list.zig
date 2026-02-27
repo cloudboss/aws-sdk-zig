@@ -13,7 +13,7 @@ pub const DeleteAnycastIpListInput = struct {
     if_match: []const u8,
 };
 
-pub const DeleteAnycastIpListOutput = struct {};
+const DeleteAnycastIpListOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_keyspace = @import("create_keyspace.zig");
+pub const create_table = @import("create_table.zig");
+pub const create_type = @import("create_type.zig");
+pub const delete_keyspace = @import("delete_keyspace.zig");
+pub const delete_table = @import("delete_table.zig");
+pub const delete_type = @import("delete_type.zig");
+pub const get_keyspace = @import("get_keyspace.zig");
+pub const get_table = @import("get_table.zig");
+pub const get_table_auto_scaling_settings = @import("get_table_auto_scaling_settings.zig");
+pub const get_type = @import("get_type.zig");
+pub const list_keyspaces = @import("list_keyspaces.zig");
+pub const list_tables = @import("list_tables.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_types = @import("list_types.zig");
+pub const restore_table = @import("restore_table.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_keyspace = @import("update_keyspace.zig");
+pub const update_table = @import("update_table.zig");

@@ -37,7 +37,7 @@ pub const UpdatePrimaryRegionInput = struct {
     };
 };
 
-pub const UpdatePrimaryRegionOutput = struct {};
+const UpdatePrimaryRegionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

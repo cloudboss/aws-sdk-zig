@@ -5,23 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Cluster = @import("cluster.zig").Cluster;
 
-pub const DescribeClusterInput = struct {
-    /// The name of your cluster.
-    name: []const u8,
+const DescribeClusterInput = @import("describe_cluster_request.zig").DescribeClusterRequest;
 
-    pub const json_field_names = .{
-        .name = "name",
-    };
-};
-
-pub const DescribeClusterOutput = struct {
-    /// The full description of your specified cluster.
-    cluster: ?Cluster = null,
-
-    pub const json_field_names = .{
-        .cluster = "cluster",
-    };
-};
+const DescribeClusterOutput = @import("describe_cluster_response.zig").DescribeClusterResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -30,7 +30,7 @@ pub const AdminRemoveUserFromGroupInput = struct {
     };
 };
 
-pub const AdminRemoveUserFromGroupOutput = struct {};
+const AdminRemoveUserFromGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

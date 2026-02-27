@@ -25,7 +25,7 @@ pub const PutThirdPartyJobFailureResultInput = struct {
     };
 };
 
-pub const PutThirdPartyJobFailureResultOutput = struct {};
+const PutThirdPartyJobFailureResultOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

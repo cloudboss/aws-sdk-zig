@@ -49,7 +49,7 @@ pub const PutPublicAccessBlockInput = struct {
     public_access_block_configuration: PublicAccessBlockConfiguration,
 };
 
-pub const PutPublicAccessBlockOutput = struct {};
+const PutPublicAccessBlockOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

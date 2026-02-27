@@ -29,7 +29,7 @@ pub const PutLogGroupDeletionProtectionInput = struct {
     };
 };
 
-pub const PutLogGroupDeletionProtectionOutput = struct {};
+const PutLogGroupDeletionProtectionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

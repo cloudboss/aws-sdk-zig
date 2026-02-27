@@ -1,0 +1,31 @@
+pub const IpAddressStatus = enum {
+    creating,
+    failed_creation,
+    attaching,
+    attached,
+    remap_detaching,
+    remap_attaching,
+    detaching,
+    failed_resource_gone,
+    deleting,
+    delete_failed_fas_expired,
+    updating,
+    update_failed,
+    isolated,
+
+    pub const json_field_names = .{
+        .creating = "Creating",
+        .failed_creation = "FailedCreation",
+        .attaching = "Attaching",
+        .attached = "Attached",
+        .remap_detaching = "RemapDetaching",
+        .remap_attaching = "RemapAttaching",
+        .detaching = "Detaching",
+        .failed_resource_gone = "FailedResourceGone",
+        .deleting = "Deleting",
+        .delete_failed_fas_expired = "DeleteFailedFasExpired",
+        .updating = "Updating",
+        .update_failed = "UpdateFailed",
+        .isolated = "Isolated",
+    };
+};

@@ -5,57 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = struct {
-    /// The parameter for receiving additional results if you receive a
-    /// `NextToken` response in a previous request. A `NextToken` response
-    /// indicates that more output is available. Set this parameter to the value of
-    /// the previous
-    /// call's `NextToken` response to indicate where the output should continue
-    /// from.
-    next_token: ?[]const u8 = null,
+const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 
-    /// The ID of the resource with the tags to list.
-    ///
-    /// You can specify any of the following taggable resources.
-    ///
-    /// * Amazon Web Services account – specify the account ID number.
-    ///
-    /// * Organizational unit – specify the OU ID that begins with `ou-` and
-    /// looks similar to: `ou-*1a2b-34uvwxyz*
-    /// `
-    ///
-    /// * Root – specify the root ID that begins with `r-` and looks similar
-    /// to: `r-*1a2b*
-    /// `
-    ///
-    /// * Policy – specify the policy ID that begins with `p-` andlooks
-    /// similar to: `p-*12abcdefg3*
-    /// `
-    resource_id: []const u8,
-
-    pub const json_field_names = .{
-        .next_token = "NextToken",
-        .resource_id = "ResourceId",
-    };
-};
-
-pub const ListTagsForResourceOutput = struct {
-    /// If present, indicates that more output is available than is
-    /// included in the current response. Use this value in the `NextToken` request
-    /// parameter
-    /// in a subsequent call to the operation to get the next part of the output.
-    /// You should repeat this
-    /// until the `NextToken` response element comes back as `null`.
-    next_token: ?[]const u8 = null,
-
-    /// The tags that are assigned to the resource.
-    tags: ?[]const Tag = null,
-
-    pub const json_field_names = .{
-        .next_token = "NextToken",
-        .tags = "Tags",
-    };
-};
+const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

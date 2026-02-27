@@ -38,7 +38,7 @@ pub const DeleteCustomDBEngineVersionInput = struct {
     engine_version: []const u8,
 };
 
-const DeleteCustomDBEngineVersionOutput = @import("db_engine_version.zig").DeleteCustomDBEngineVersionOutput;
+const DeleteCustomDBEngineVersionOutput = @import("db_engine_version.zig").DBEngineVersion;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

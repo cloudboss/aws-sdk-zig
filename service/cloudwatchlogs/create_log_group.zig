@@ -75,7 +75,7 @@ pub const CreateLogGroupInput = struct {
     };
 };
 
-pub const CreateLogGroupOutput = struct {};
+const CreateLogGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -19,7 +19,7 @@ pub const DetachVpnGatewayInput = struct {
     vpn_gateway_id: []const u8,
 };
 
-pub const DetachVpnGatewayOutput = struct {};
+const DetachVpnGatewayOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

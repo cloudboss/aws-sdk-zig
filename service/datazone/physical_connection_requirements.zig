@@ -1,0 +1,22 @@
+/// Physical connection requirements of a connection.
+pub const PhysicalConnectionRequirements = struct {
+    /// The availability zone of the physical connection requirements of a
+    /// connection.
+    availability_zone: ?[]const u8,
+
+    /// The group ID list of the physical connection requirements of a connection.
+    security_group_id_list: ?[]const []const u8,
+
+    /// The subnet ID of the physical connection requirements of a connection.
+    subnet_id: ?[]const u8,
+
+    /// The subnet ID list of the physical connection requirements of a connection.
+    subnet_id_list: ?[]const []const u8,
+
+    pub const json_field_names = .{
+        .availability_zone = "availabilityZone",
+        .security_group_id_list = "securityGroupIdList",
+        .subnet_id = "subnetId",
+        .subnet_id_list = "subnetIdList",
+    };
+};

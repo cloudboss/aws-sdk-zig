@@ -1,0 +1,31 @@
+pub const NamedEntityAggType = enum {
+    sum,
+    min,
+    max,
+    count,
+    average,
+    distinct_count,
+    stdev,
+    stdevp,
+    @"var",
+    varp,
+    percentile,
+    median,
+    custom,
+
+    pub const json_field_names = .{
+        .sum = "SUM",
+        .min = "MIN",
+        .max = "MAX",
+        .count = "COUNT",
+        .average = "AVERAGE",
+        .distinct_count = "DISTINCT_COUNT",
+        .stdev = "STDEV",
+        .stdevp = "STDEVP",
+        .@"var" = "VAR",
+        .varp = "VARP",
+        .percentile = "PERCENTILE",
+        .median = "MEDIAN",
+        .custom = "CUSTOM",
+    };
+};

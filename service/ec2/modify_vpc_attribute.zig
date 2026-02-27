@@ -36,7 +36,7 @@ pub const ModifyVpcAttributeInput = struct {
     vpc_id: []const u8,
 };
 
-pub const ModifyVpcAttributeOutput = struct {};
+const ModifyVpcAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,174 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+
+pub const DeletePolicyInput = struct {
+    /// If `True`, the request performs cleanup according to the policy type.
+    ///
+    /// For WAF and Shield Advanced policies, the cleanup does the following:
+    ///
+    /// * Deletes rule groups created by Firewall Manager
+    ///
+    /// * Removes web ACLs from in-scope resources
+    ///
+    /// * Deletes web ACLs that contain no rules or rule groups
+    ///
+    /// For security group policies, the cleanup does the following for each
+    /// security group in
+    /// the policy:
+    ///
+    /// * Disassociates the security group from in-scope resources
+    ///
+    /// * Deletes the security group if it was created through Firewall Manager and
+    ///   if it's
+    /// no longer associated with any resources through another policy
+    ///
+    /// For security group common policies, even if set to `False`, Firewall Manager
+    /// deletes all security groups created by Firewall Manager that aren't
+    /// associated with any other resources through another policy.
+    ///
+    /// After the cleanup, in-scope resources are no longer protected by web ACLs in
+    /// this policy.
+    /// Protection of out-of-scope resources remains unchanged. Scope is determined
+    /// by tags that you
+    /// create and accounts that you associate with the policy. When creating the
+    /// policy, if you
+    /// specify that only resources in specific accounts or with specific tags are
+    /// in scope of the
+    /// policy, those accounts and resources are handled by the policy. All others
+    /// are out of scope.
+    /// If you don't specify tags or accounts, all resources are in scope.
+    delete_all_policy_resources: bool = false,
+
+    /// The ID of the policy that you want to delete. You can retrieve this ID from
+    /// `PutPolicy` and `ListPolicies`.
+    policy_id: []const u8,
+
+    pub const json_field_names = .{
+        .delete_all_policy_resources = "DeleteAllPolicyResources",
+        .policy_id = "PolicyId",
+    };
+};
+
+const DeletePolicyOutput = struct {};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePolicyInput, options: Options) !DeletePolicyOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "fms");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: DeletePolicyInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("fms", "FMS", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "AWSFMS_20180101.DeletePolicy");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeletePolicyOutput {
+    _ = status;
+    _ = headers;
+    _ = body;
+    _ = alloc;
+    return .{};
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "InternalErrorException")) {
+        return .{ .arena = arena, .kind = .{ .internal_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInputException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_input_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOperationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_operation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidTypeException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_type_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

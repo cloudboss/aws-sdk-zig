@@ -13,7 +13,7 @@ pub const DeleteComputeQuotaInput = struct {
     };
 };
 
-pub const DeleteComputeQuotaOutput = struct {};
+const DeleteComputeQuotaOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

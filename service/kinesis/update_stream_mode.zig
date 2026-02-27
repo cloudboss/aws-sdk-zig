@@ -32,7 +32,7 @@ pub const UpdateStreamModeInput = struct {
     };
 };
 
-pub const UpdateStreamModeOutput = struct {};
+const UpdateStreamModeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

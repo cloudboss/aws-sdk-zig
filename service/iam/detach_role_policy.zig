@@ -21,7 +21,7 @@ pub const DetachRolePolicyInput = struct {
     role_name: []const u8,
 };
 
-pub const DetachRolePolicyOutput = struct {};
+const DetachRolePolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

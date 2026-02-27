@@ -1,0 +1,31 @@
+pub const Channel = enum {
+    aws_marketing_central,
+    content_syndication,
+    display,
+    email,
+    live_event,
+    out_of_home,
+    print,
+    search,
+    social,
+    telemarketing,
+    tv,
+    video,
+    virtual_event,
+
+    pub const json_field_names = .{
+        .aws_marketing_central = "AWS_MARKETING_CENTRAL",
+        .content_syndication = "CONTENT_SYNDICATION",
+        .display = "DISPLAY",
+        .email = "EMAIL",
+        .live_event = "LIVE_EVENT",
+        .out_of_home = "OUT_OF_HOME",
+        .print = "PRINT",
+        .search = "SEARCH",
+        .social = "SOCIAL",
+        .telemarketing = "TELEMARKETING",
+        .tv = "TV",
+        .video = "VIDEO",
+        .virtual_event = "VIRTUAL_EVENT",
+    };
+};

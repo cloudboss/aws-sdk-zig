@@ -12,7 +12,7 @@ pub const DeleteRealtimeLogConfigInput = struct {
     name: ?[]const u8 = null,
 };
 
-pub const DeleteRealtimeLogConfigOutput = struct {};
+const DeleteRealtimeLogConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

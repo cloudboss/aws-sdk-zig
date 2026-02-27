@@ -21,7 +21,7 @@ pub const DeleteRouteRequestParameterInput = struct {
     };
 };
 
-pub const DeleteRouteRequestParameterOutput = struct {};
+const DeleteRouteRequestParameterOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

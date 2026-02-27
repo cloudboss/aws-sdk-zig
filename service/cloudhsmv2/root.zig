@@ -1,0 +1,23 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const copy_backup_to_region = @import("copy_backup_to_region.zig");
+pub const create_cluster = @import("create_cluster.zig");
+pub const create_hsm = @import("create_hsm.zig");
+pub const delete_backup = @import("delete_backup.zig");
+pub const delete_cluster = @import("delete_cluster.zig");
+pub const delete_hsm = @import("delete_hsm.zig");
+pub const delete_resource_policy = @import("delete_resource_policy.zig");
+pub const describe_backups = @import("describe_backups.zig");
+pub const describe_clusters = @import("describe_clusters.zig");
+pub const get_resource_policy = @import("get_resource_policy.zig");
+pub const initialize_cluster = @import("initialize_cluster.zig");
+pub const list_tags = @import("list_tags.zig");
+pub const modify_backup_attributes = @import("modify_backup_attributes.zig");
+pub const modify_cluster = @import("modify_cluster.zig");
+pub const put_resource_policy = @import("put_resource_policy.zig");
+pub const restore_backup = @import("restore_backup.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");

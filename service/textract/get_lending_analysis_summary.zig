@@ -1,0 +1,240 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const DocumentMetadata = @import("document_metadata.zig").DocumentMetadata;
+const JobStatus = @import("job_status.zig").JobStatus;
+const LendingSummary = @import("lending_summary.zig").LendingSummary;
+const Warning = @import("warning.zig").Warning;
+
+pub const GetLendingAnalysisSummaryInput = struct {
+    /// A unique identifier for the lending or text-detection job. The `JobId` is
+    /// returned from StartLendingAnalysis. A `JobId` value is only valid for 7
+    /// days.
+    job_id: []const u8,
+
+    pub const json_field_names = .{
+        .job_id = "JobId",
+    };
+};
+
+pub const GetLendingAnalysisSummaryOutput = struct {
+    /// The current model version of the Analyze Lending API.
+    analyze_lending_model_version: ?[]const u8 = null,
+
+    document_metadata: ?DocumentMetadata = null,
+
+    /// The current status of the lending analysis job.
+    job_status: ?JobStatus = null,
+
+    /// Returns if the lending analysis could not be completed. Contains explanation
+    /// for what error
+    /// occurred.
+    status_message: ?[]const u8 = null,
+
+    /// Contains summary information for documents grouped by type.
+    summary: ?LendingSummary = null,
+
+    /// A list of warnings that occurred during the lending analysis operation.
+    warnings: ?[]const Warning = null,
+
+    pub const json_field_names = .{
+        .analyze_lending_model_version = "AnalyzeLendingModelVersion",
+        .document_metadata = "DocumentMetadata",
+        .job_status = "JobStatus",
+        .status_message = "StatusMessage",
+        .summary = "Summary",
+        .warnings = "Warnings",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetLendingAnalysisSummaryInput, options: Options) !GetLendingAnalysisSummaryOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "textract");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetLendingAnalysisSummaryInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("textract", "Textract", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "Textract.GetLendingAnalysisSummary");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetLendingAnalysisSummaryOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(GetLendingAnalysisSummaryOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BadDocumentException")) {
+        return .{ .arena = arena, .kind = .{ .bad_document_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DocumentTooLargeException")) {
+        return .{ .arena = arena, .kind = .{ .document_too_large_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "HumanLoopQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .human_loop_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IdempotentParameterMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .idempotent_parameter_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerError")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidJobIdException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_job_id_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidKMSKeyException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_kms_key_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidS3ObjectException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_s3_object_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ProvisionedThroughputExceededException")) {
+        return .{ .arena = arena, .kind = .{ .provisioned_throughput_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedDocumentException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_document_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

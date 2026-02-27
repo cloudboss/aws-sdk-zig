@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const apply_pending_maintenance_action = @import("apply_pending_maintenance_action.zig");
+pub const copy_cluster_snapshot = @import("copy_cluster_snapshot.zig");
+pub const create_cluster = @import("create_cluster.zig");
+pub const create_cluster_snapshot = @import("create_cluster_snapshot.zig");
+pub const delete_cluster = @import("delete_cluster.zig");
+pub const delete_cluster_snapshot = @import("delete_cluster_snapshot.zig");
+pub const get_cluster = @import("get_cluster.zig");
+pub const get_cluster_snapshot = @import("get_cluster_snapshot.zig");
+pub const get_pending_maintenance_action = @import("get_pending_maintenance_action.zig");
+pub const list_cluster_snapshots = @import("list_cluster_snapshots.zig");
+pub const list_clusters = @import("list_clusters.zig");
+pub const list_pending_maintenance_actions = @import("list_pending_maintenance_actions.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const restore_cluster_from_snapshot = @import("restore_cluster_from_snapshot.zig");
+pub const start_cluster = @import("start_cluster.zig");
+pub const stop_cluster = @import("stop_cluster.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_cluster = @import("update_cluster.zig");

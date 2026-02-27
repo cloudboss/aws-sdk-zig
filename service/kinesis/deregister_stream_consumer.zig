@@ -37,7 +37,7 @@ pub const DeregisterStreamConsumerInput = struct {
     };
 };
 
-pub const DeregisterStreamConsumerOutput = struct {};
+const DeregisterStreamConsumerOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

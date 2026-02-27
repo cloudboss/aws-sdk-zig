@@ -70,7 +70,7 @@ pub const PutBucketAclInput = struct {
     grant_write_acp: ?[]const u8 = null,
 };
 
-pub const PutBucketAclOutput = struct {};
+const PutBucketAclOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

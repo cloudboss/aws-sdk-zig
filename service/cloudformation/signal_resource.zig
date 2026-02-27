@@ -31,7 +31,7 @@ pub const SignalResourceInput = struct {
     unique_id: []const u8,
 };
 
-pub const SignalResourceOutput = struct {};
+const SignalResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

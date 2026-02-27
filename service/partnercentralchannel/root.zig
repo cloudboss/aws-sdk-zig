@@ -1,0 +1,22 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const accept_channel_handshake = @import("accept_channel_handshake.zig");
+pub const cancel_channel_handshake = @import("cancel_channel_handshake.zig");
+pub const create_channel_handshake = @import("create_channel_handshake.zig");
+pub const create_program_management_account = @import("create_program_management_account.zig");
+pub const create_relationship = @import("create_relationship.zig");
+pub const delete_program_management_account = @import("delete_program_management_account.zig");
+pub const delete_relationship = @import("delete_relationship.zig");
+pub const get_relationship = @import("get_relationship.zig");
+pub const list_channel_handshakes = @import("list_channel_handshakes.zig");
+pub const list_program_management_accounts = @import("list_program_management_accounts.zig");
+pub const list_relationships = @import("list_relationships.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const reject_channel_handshake = @import("reject_channel_handshake.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_program_management_account = @import("update_program_management_account.zig");
+pub const update_relationship = @import("update_relationship.zig");

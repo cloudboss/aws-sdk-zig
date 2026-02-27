@@ -17,7 +17,7 @@ pub const DeleteLogStreamInput = struct {
     };
 };
 
-pub const DeleteLogStreamOutput = struct {};
+const DeleteLogStreamOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

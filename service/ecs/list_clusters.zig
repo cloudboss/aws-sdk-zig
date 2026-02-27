@@ -4,54 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const ListClustersInput = struct {
-    /// The maximum number of cluster results that `ListClusters` returned in
-    /// paginated output. When this parameter is used, `ListClusters` only returns
-    /// `maxResults` results in a single page along with a `nextToken`
-    /// response element. The remaining results of the initial request can be seen
-    /// by sending
-    /// another `ListClusters` request with the returned `nextToken`
-    /// value. This value can be between 1 and 100. If this parameter isn't used,
-    /// then
-    /// `ListClusters` returns up to 100 results and a `nextToken`
-    /// value if applicable.
-    max_results: ?i32 = null,
+const ListClustersInput = @import("list_clusters_request.zig").ListClustersRequest;
 
-    /// The `nextToken` value returned from a `ListClusters` request
-    /// indicating that more results are available to fulfill the request and
-    /// further calls are
-    /// needed. If `maxResults` was provided, it's possible the number of results to
-    /// be fewer than `maxResults`.
-    ///
-    /// This token should be treated as an opaque identifier that is only used to
-    /// retrieve
-    /// the next items in a list and not for other programmatic purposes.
-    next_token: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .max_results = "maxResults",
-        .next_token = "nextToken",
-    };
-};
-
-pub const ListClustersOutput = struct {
-    /// The list of full Amazon Resource Name (ARN) entries for each cluster that's
-    /// associated
-    /// with your account.
-    cluster_arns: ?[]const []const u8 = null,
-
-    /// The `nextToken` value to include in a future `ListClusters`
-    /// request. When the results of a `ListClusters` request exceed
-    /// `maxResults`, this value can be used to retrieve the next page of
-    /// results. This value is `null` when there are no more results to
-    /// return.
-    next_token: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .cluster_arns = "clusterArns",
-        .next_token = "nextToken",
-    };
-};
+const ListClustersOutput = @import("list_clusters_response.zig").ListClustersResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

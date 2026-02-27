@@ -1,0 +1,26 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const associate_whats_app_business_account = @import("associate_whats_app_business_account.zig");
+pub const create_whats_app_message_template = @import("create_whats_app_message_template.zig");
+pub const create_whats_app_message_template_from_library = @import("create_whats_app_message_template_from_library.zig");
+pub const create_whats_app_message_template_media = @import("create_whats_app_message_template_media.zig");
+pub const delete_whats_app_message_media = @import("delete_whats_app_message_media.zig");
+pub const delete_whats_app_message_template = @import("delete_whats_app_message_template.zig");
+pub const disassociate_whats_app_business_account = @import("disassociate_whats_app_business_account.zig");
+pub const get_linked_whats_app_business_account = @import("get_linked_whats_app_business_account.zig");
+pub const get_linked_whats_app_business_account_phone_number = @import("get_linked_whats_app_business_account_phone_number.zig");
+pub const get_whats_app_message_media = @import("get_whats_app_message_media.zig");
+pub const get_whats_app_message_template = @import("get_whats_app_message_template.zig");
+pub const list_linked_whats_app_business_accounts = @import("list_linked_whats_app_business_accounts.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_whats_app_message_templates = @import("list_whats_app_message_templates.zig");
+pub const list_whats_app_template_library = @import("list_whats_app_template_library.zig");
+pub const post_whats_app_message_media = @import("post_whats_app_message_media.zig");
+pub const put_whats_app_business_account_event_destinations = @import("put_whats_app_business_account_event_destinations.zig");
+pub const send_whats_app_message = @import("send_whats_app_message.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_whats_app_message_template = @import("update_whats_app_message_template.zig");

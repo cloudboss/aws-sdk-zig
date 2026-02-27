@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_index = @import("create_index.zig");
+pub const create_vector_bucket = @import("create_vector_bucket.zig");
+pub const delete_index = @import("delete_index.zig");
+pub const delete_vector_bucket = @import("delete_vector_bucket.zig");
+pub const delete_vector_bucket_policy = @import("delete_vector_bucket_policy.zig");
+pub const delete_vectors = @import("delete_vectors.zig");
+pub const get_index = @import("get_index.zig");
+pub const get_vector_bucket = @import("get_vector_bucket.zig");
+pub const get_vector_bucket_policy = @import("get_vector_bucket_policy.zig");
+pub const get_vectors = @import("get_vectors.zig");
+pub const list_indexes = @import("list_indexes.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_vector_buckets = @import("list_vector_buckets.zig");
+pub const list_vectors = @import("list_vectors.zig");
+pub const put_vector_bucket_policy = @import("put_vector_bucket_policy.zig");
+pub const put_vectors = @import("put_vectors.zig");
+pub const query_vectors = @import("query_vectors.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");

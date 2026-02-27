@@ -13,7 +13,7 @@ pub const DeleteUserPoolInput = struct {
     };
 };
 
-pub const DeleteUserPoolOutput = struct {};
+const DeleteUserPoolOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

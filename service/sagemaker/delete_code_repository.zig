@@ -13,7 +13,7 @@ pub const DeleteCodeRepositoryInput = struct {
     };
 };
 
-pub const DeleteCodeRepositoryOutput = struct {};
+const DeleteCodeRepositoryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,248 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const AdapterVersionDatasetConfig = @import("adapter_version_dataset_config.zig").AdapterVersionDatasetConfig;
+const OutputConfig = @import("output_config.zig").OutputConfig;
+
+pub const CreateAdapterVersionInput = struct {
+    /// A string containing a unique ID for the adapter that will receive a new
+    /// version.
+    adapter_id: []const u8,
+
+    /// Idempotent token is used to recognize the request. If the same token is used
+    /// with multiple
+    /// CreateAdapterVersion requests, the same session is returned.
+    /// This token is employed to avoid unintentionally creating the same session
+    /// multiple times.
+    client_request_token: ?[]const u8 = null,
+
+    /// Specifies a dataset used to train a new adapter version. Takes a
+    /// ManifestS3Object as the
+    /// value.
+    dataset_config: AdapterVersionDatasetConfig,
+
+    /// The identifier for your AWS Key Management Service key (AWS KMS key). Used
+    /// to encrypt your documents.
+    kms_key_id: ?[]const u8 = null,
+
+    output_config: OutputConfig,
+
+    /// A set of tags (key-value pairs) that you want to attach to the adapter
+    /// version.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .adapter_id = "AdapterId",
+        .client_request_token = "ClientRequestToken",
+        .dataset_config = "DatasetConfig",
+        .kms_key_id = "KMSKeyId",
+        .output_config = "OutputConfig",
+        .tags = "Tags",
+    };
+};
+
+pub const CreateAdapterVersionOutput = struct {
+    /// A string containing the unique ID for the adapter that has received a new
+    /// version.
+    adapter_id: ?[]const u8 = null,
+
+    /// A string describing the new version of the adapter.
+    adapter_version: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .adapter_id = "AdapterId",
+        .adapter_version = "AdapterVersion",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAdapterVersionInput, options: Options) !CreateAdapterVersionOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "textract");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateAdapterVersionInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("textract", "Textract", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "Textract.CreateAdapterVersion");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateAdapterVersionOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreateAdapterVersionOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BadDocumentException")) {
+        return .{ .arena = arena, .kind = .{ .bad_document_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DocumentTooLargeException")) {
+        return .{ .arena = arena, .kind = .{ .document_too_large_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "HumanLoopQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .human_loop_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IdempotentParameterMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .idempotent_parameter_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerError")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidJobIdException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_job_id_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidKMSKeyException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_kms_key_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidS3ObjectException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_s3_object_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ProvisionedThroughputExceededException")) {
+        return .{ .arena = arena, .kind = .{ .provisioned_throughput_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedDocumentException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_document_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

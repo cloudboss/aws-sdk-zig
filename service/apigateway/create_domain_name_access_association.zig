@@ -29,7 +29,7 @@ pub const CreateDomainNameAccessAssociationInput = struct {
     };
 };
 
-const CreateDomainNameAccessAssociationOutput = @import("domain_name_access_association.zig").CreateDomainNameAccessAssociationOutput;
+const CreateDomainNameAccessAssociationOutput = @import("domain_name_access_association.zig").DomainNameAccessAssociation;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

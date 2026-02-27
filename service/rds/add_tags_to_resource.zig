@@ -17,7 +17,7 @@ pub const AddTagsToResourceInput = struct {
     tags: []const Tag,
 };
 
-pub const AddTagsToResourceOutput = struct {};
+const AddTagsToResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

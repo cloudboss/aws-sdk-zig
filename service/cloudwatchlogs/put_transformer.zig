@@ -23,7 +23,7 @@ pub const PutTransformerInput = struct {
     };
 };
 
-pub const PutTransformerOutput = struct {};
+const PutTransformerOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

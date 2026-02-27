@@ -21,7 +21,7 @@ pub const ResetImageAttributeInput = struct {
     image_id: []const u8,
 };
 
-pub const ResetImageAttributeOutput = struct {};
+const ResetImageAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

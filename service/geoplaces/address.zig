@@ -1,0 +1,99 @@
+const Country = @import("country.zig").Country;
+const Region = @import("region.zig").Region;
+const SecondaryAddressComponent = @import("secondary_address_component.zig").SecondaryAddressComponent;
+const StreetComponents = @import("street_components.zig").StreetComponents;
+const SubRegion = @import("sub_region.zig").SubRegion;
+
+/// The place address.
+pub const Address = struct {
+    /// The number that identifies an address within a street.
+    address_number: ?[]const u8,
+
+    /// Name of the block.
+    ///
+    /// Example: `Sunny Mansion 203 block: 2 Chome`
+    block: ?[]const u8,
+
+    /// The name of the building at the address.
+    building: ?[]const u8,
+
+    /// The country component of the address.
+    country: ?Country,
+
+    /// The district or division of a locality associated with this address.
+    district: ?[]const u8,
+
+    /// Name of the streets in the intersection.
+    ///
+    /// Example: `["Friedrichstraße","Unter den Linden"]`
+    intersection: ?[]const []const u8,
+
+    /// Assembled address value built out of the address components, according to
+    /// the regional postal rules. This is the correctly formatted address.
+    label: ?[]const u8,
+
+    /// The city or locality of the address.
+    ///
+    /// Example: `Vancouver`.
+    locality: ?[]const u8,
+
+    /// An alphanumeric string included in a postal address to facilitate mail
+    /// sorting, such as post code, postcode, or ZIP code, for which the result
+    /// should possess.
+    postal_code: ?[]const u8,
+
+    /// The region or state results should be present in.
+    ///
+    /// Example: `North Rhine-Westphalia`.
+    region: ?Region,
+
+    /// Components that correspond to secondary identifiers on an Address. Secondary
+    /// address components include information such as Suite or Unit Number,
+    /// Building, or Floor.
+    ///
+    /// Coverage for `Address.SecondaryAddressComponents` is available in the
+    /// following countries:
+    ///
+    /// AUS, CAN, NZL, USA, PRI
+    secondary_address_components: ?[]const SecondaryAddressComponent,
+
+    /// The name of the street results should be present in.
+    street: ?[]const u8,
+
+    /// Components of the street.
+    ///
+    /// Example: Younge from the "Younge street".
+    street_components: ?[]const StreetComponents,
+
+    /// Name of sub-block.
+    ///
+    /// Example: `Sunny Mansion 203 sub-block: 4`
+    sub_block: ?[]const u8,
+
+    /// A subdivision of a district.
+    ///
+    /// Example: `Minden-Lübbecke`.
+    sub_district: ?[]const u8,
+
+    /// The sub-region or county for which results should be present in.
+    sub_region: ?SubRegion,
+
+    pub const json_field_names = .{
+        .address_number = "AddressNumber",
+        .block = "Block",
+        .building = "Building",
+        .country = "Country",
+        .district = "District",
+        .intersection = "Intersection",
+        .label = "Label",
+        .locality = "Locality",
+        .postal_code = "PostalCode",
+        .region = "Region",
+        .secondary_address_components = "SecondaryAddressComponents",
+        .street = "Street",
+        .street_components = "StreetComponents",
+        .sub_block = "SubBlock",
+        .sub_district = "SubDistrict",
+        .sub_region = "SubRegion",
+    };
+};

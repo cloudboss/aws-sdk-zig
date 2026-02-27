@@ -28,7 +28,7 @@ pub const OverrideStageConditionInput = struct {
     };
 };
 
-pub const OverrideStageConditionOutput = struct {};
+const OverrideStageConditionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

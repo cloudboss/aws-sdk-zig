@@ -1,0 +1,9 @@
+/// The details of the policy grant.
+pub const CreateDomainUnitPolicyGrantDetail = struct {
+    /// Specifies whether the policy grant is applied to child domain units.
+    include_child_domain_units: ?bool,
+
+    pub const json_field_names = .{
+        .include_child_domain_units = "includeChildDomainUnits",
+    };
+};

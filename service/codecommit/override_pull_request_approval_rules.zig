@@ -30,7 +30,7 @@ pub const OverridePullRequestApprovalRulesInput = struct {
     };
 };
 
-pub const OverridePullRequestApprovalRulesOutput = struct {};
+const OverridePullRequestApprovalRulesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

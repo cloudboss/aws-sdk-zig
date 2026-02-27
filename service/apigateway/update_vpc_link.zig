@@ -21,7 +21,7 @@ pub const UpdateVpcLinkInput = struct {
     };
 };
 
-const UpdateVpcLinkOutput = @import("vpc_link.zig").UpdateVpcLinkOutput;
+const UpdateVpcLinkOutput = @import("vpc_link.zig").VpcLink;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

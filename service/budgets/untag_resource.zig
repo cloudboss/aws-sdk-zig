@@ -4,20 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const UntagResourceInput = struct {
-    /// The unique identifier for the resource.
-    resource_arn: []const u8,
+const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
 
-    /// The key that's associated with the tag.
-    resource_tag_keys: []const []const u8,
-
-    pub const json_field_names = .{
-        .resource_arn = "ResourceARN",
-        .resource_tag_keys = "ResourceTagKeys",
-    };
-};
-
-pub const UntagResourceOutput = struct {};
+const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

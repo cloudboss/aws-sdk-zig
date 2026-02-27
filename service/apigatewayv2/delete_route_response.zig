@@ -21,7 +21,7 @@ pub const DeleteRouteResponseInput = struct {
     };
 };
 
-pub const DeleteRouteResponseOutput = struct {};
+const DeleteRouteResponseOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

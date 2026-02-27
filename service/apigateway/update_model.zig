@@ -23,7 +23,7 @@ pub const UpdateModelInput = struct {
     };
 };
 
-const UpdateModelOutput = @import("model.zig").UpdateModelOutput;
+const UpdateModelOutput = @import("model.zig").Model;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

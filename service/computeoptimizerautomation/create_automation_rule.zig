@@ -1,0 +1,296 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const Criteria = @import("criteria.zig").Criteria;
+const OrganizationConfiguration = @import("organization_configuration.zig").OrganizationConfiguration;
+const RecommendedActionType = @import("recommended_action_type.zig").RecommendedActionType;
+const RuleType = @import("rule_type.zig").RuleType;
+const Schedule = @import("schedule.zig").Schedule;
+const RuleStatus = @import("rule_status.zig").RuleStatus;
+const Tag = @import("tag.zig").Tag;
+
+pub const CreateAutomationRuleInput = struct {
+    /// A unique identifier to ensure idempotency of the request.
+    client_token: ?[]const u8 = null,
+
+    /// A set of conditions that specify which recommended action qualify for
+    /// implementation. When a rule is active and a recommended action matches these
+    /// criteria, Compute Optimizer implements the action at the scheduled run time.
+    criteria: ?Criteria = null,
+
+    /// A description of the automation rule.
+    description: ?[]const u8 = null,
+
+    /// The name of the automation rule.
+    name: []const u8,
+
+    /// Configuration for organization-level rules. Required for OrganizationRule
+    /// type.
+    organization_configuration: ?OrganizationConfiguration = null,
+
+    /// A string representation of a decimal number between 0 and 1 (having up to 30
+    /// digits after the decimal point) that determines the priority of the rule.
+    /// When multiple rules match the same recommended action, Compute Optimizer
+    /// assigns the action to the rule with the lowest priority value (highest
+    /// priority), even if that rule is scheduled to run later than other matching
+    /// rules.
+    priority: ?[]const u8 = null,
+
+    /// The types of recommended actions this rule will automate.
+    recommended_action_types: []const RecommendedActionType,
+
+    /// The type of rule.
+    ///
+    /// Only the management account or a delegated administrator can set the
+    /// ruleType to be OrganizationRule.
+    rule_type: RuleType,
+
+    /// The schedule for when the rule should run.
+    schedule: Schedule,
+
+    /// The status of the rule
+    status: RuleStatus,
+
+    /// The tags to associate with the rule.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .client_token = "clientToken",
+        .criteria = "criteria",
+        .description = "description",
+        .name = "name",
+        .organization_configuration = "organizationConfiguration",
+        .priority = "priority",
+        .recommended_action_types = "recommendedActionTypes",
+        .rule_type = "ruleType",
+        .schedule = "schedule",
+        .status = "status",
+        .tags = "tags",
+    };
+};
+
+pub const CreateAutomationRuleOutput = struct {
+    /// The timestamp when the automation rule was created.
+    created_timestamp: ?i64 = null,
+
+    criteria: ?Criteria = null,
+
+    /// A description of the automation rule. Can be up to 1024 characters long and
+    /// contain alphanumeric characters, underscores, hyphens, spaces, and certain
+    /// special characters.
+    description: ?[]const u8 = null,
+
+    /// The name of the automation rule. Must be 1-128 characters long and contain
+    /// only alphanumeric characters, underscores, and hyphens.
+    name: ?[]const u8 = null,
+
+    /// Configuration settings for organization-wide rules, including rule
+    /// application order and target account IDs.
+    organization_configuration: ?OrganizationConfiguration = null,
+
+    /// The priority level of the automation rule, used to determine execution order
+    /// when multiple rules apply to the same resource.
+    priority: ?[]const u8 = null,
+
+    /// List of recommended action types that this rule can execute, such as
+    /// SnapshotAndDeleteUnattachedEbsVolume or UpgradeEbsVolumeType.
+    recommended_action_types: ?[]const RecommendedActionType = null,
+
+    /// The Amazon Resource Name (ARN) of the created rule.
+    rule_arn: ?[]const u8 = null,
+
+    /// The unique identifier of the created rule.
+    rule_id: ?[]const u8 = null,
+
+    /// The revision number of the automation rule. This is incremented each time
+    /// the rule is updated.
+    rule_revision: ?i64 = null,
+
+    /// The type of automation rule. Can be either OrganizationRule for
+    /// organization-wide rules or AccountRule for account-specific rules.
+    rule_type: ?RuleType = null,
+
+    /// The schedule configuration for when the automation rule should execute,
+    /// including cron expression, timezone, and execution window.
+    schedule: ?Schedule = null,
+
+    /// The current status of the automation rule. Can be Active or Inactive.
+    status: ?RuleStatus = null,
+
+    /// A list of key-value pairs used to categorize and organize the automation
+    /// rule. Maximum of 200 tags allowed.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .created_timestamp = "createdTimestamp",
+        .criteria = "criteria",
+        .description = "description",
+        .name = "name",
+        .organization_configuration = "organizationConfiguration",
+        .priority = "priority",
+        .recommended_action_types = "recommendedActionTypes",
+        .rule_arn = "ruleArn",
+        .rule_id = "ruleId",
+        .rule_revision = "ruleRevision",
+        .rule_type = "ruleType",
+        .schedule = "schedule",
+        .status = "status",
+        .tags = "tags",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAutomationRuleInput, options: Options) !CreateAutomationRuleOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "computeoptimizerautomation");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateAutomationRuleInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("computeoptimizerautomation", "Compute Optimizer Automation", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.0");
+    try request.headers.put(alloc, "X-Amz-Target", "ComputeOptimizerAutomationService.CreateAutomationRule");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateAutomationRuleOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreateAutomationRuleOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ForbiddenException")) {
+        return .{ .arena = arena, .kind = .{ .forbidden_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IdempotencyTokenInUseException")) {
+        return .{ .arena = arena, .kind = .{ .idempotency_token_in_use_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IdempotentParameterMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .idempotent_parameter_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterValueException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_value_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotManagementAccountException")) {
+        return .{ .arena = arena, .kind = .{ .not_management_account_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OptInRequiredException")) {
+        return .{ .arena = arena, .kind = .{ .opt_in_required_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableException")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

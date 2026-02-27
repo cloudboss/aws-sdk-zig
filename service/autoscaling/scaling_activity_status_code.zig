@@ -1,0 +1,18 @@
+pub const ScalingActivityStatusCode = enum {
+    pending_spot_bid_placement,
+    waiting_for_spot_instance_request_id,
+    waiting_for_spot_instance_id,
+    waiting_for_instance_id,
+    pre_in_service,
+    in_progress,
+    waiting_for_elb_connection_draining,
+    mid_lifecycle_action,
+    waiting_for_instance_warmup,
+    successful,
+    failed,
+    cancelled,
+    waiting_for_connection_draining,
+    waiting_for_in_place_update_to_start,
+    waiting_for_in_place_update_to_finalize,
+    in_place_update_in_progress,
+};

@@ -1,0 +1,20 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_deployment = @import("create_deployment.zig");
+pub const delete_deployment = @import("delete_deployment.zig");
+pub const get_deployment = @import("get_deployment.zig");
+pub const get_deployment_pattern_version = @import("get_deployment_pattern_version.zig");
+pub const get_workload = @import("get_workload.zig");
+pub const get_workload_deployment_pattern = @import("get_workload_deployment_pattern.zig");
+pub const list_deployment_events = @import("list_deployment_events.zig");
+pub const list_deployment_pattern_versions = @import("list_deployment_pattern_versions.zig");
+pub const list_deployments = @import("list_deployments.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_workload_deployment_patterns = @import("list_workload_deployment_patterns.zig");
+pub const list_workloads = @import("list_workloads.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_deployment = @import("update_deployment.zig");

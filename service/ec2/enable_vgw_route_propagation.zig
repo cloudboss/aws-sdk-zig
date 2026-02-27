@@ -24,7 +24,7 @@ pub const EnableVgwRoutePropagationInput = struct {
     route_table_id: []const u8,
 };
 
-pub const EnableVgwRoutePropagationOutput = struct {};
+const EnableVgwRoutePropagationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

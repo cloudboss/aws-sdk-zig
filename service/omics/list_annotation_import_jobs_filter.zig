@@ -1,0 +1,15 @@
+const JobStatus = @import("job_status.zig").JobStatus;
+
+/// A filter for annotation import jobs.
+pub const ListAnnotationImportJobsFilter = struct {
+    /// A status to filter on.
+    status: ?JobStatus,
+
+    /// A store name to filter on.
+    store_name: ?[]const u8,
+
+    pub const json_field_names = .{
+        .status = "status",
+        .store_name = "storeName",
+    };
+};

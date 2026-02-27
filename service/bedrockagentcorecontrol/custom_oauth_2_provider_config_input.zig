@@ -1,0 +1,19 @@
+const Oauth2Discovery = @import("oauth_2_discovery.zig").Oauth2Discovery;
+
+/// Input configuration for a custom OAuth2 provider.
+pub const CustomOauth2ProviderConfigInput = struct {
+    /// The client ID for the custom OAuth2 provider.
+    client_id: []const u8,
+
+    /// The client secret for the custom OAuth2 provider.
+    client_secret: []const u8,
+
+    /// The OAuth2 discovery information for the custom provider.
+    oauth_discovery: Oauth2Discovery,
+
+    pub const json_field_names = .{
+        .client_id = "clientId",
+        .client_secret = "clientSecret",
+        .oauth_discovery = "oauthDiscovery",
+    };
+};

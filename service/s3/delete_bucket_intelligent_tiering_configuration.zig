@@ -18,7 +18,7 @@ pub const DeleteBucketIntelligentTieringConfigurationInput = struct {
     id: []const u8,
 };
 
-pub const DeleteBucketIntelligentTieringConfigurationOutput = struct {};
+const DeleteBucketIntelligentTieringConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

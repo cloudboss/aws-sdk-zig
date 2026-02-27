@@ -31,7 +31,7 @@ pub const CreateDBClusterEndpointInput = struct {
     tags: ?[]const Tag = null,
 };
 
-const CreateDBClusterEndpointOutput = @import("db_cluster_endpoint.zig").CreateDBClusterEndpointOutput;
+const CreateDBClusterEndpointOutput = @import("db_cluster_endpoint.zig").DBClusterEndpoint;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

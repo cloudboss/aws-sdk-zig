@@ -6,17 +6,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-pub const TagResourceInput = struct {
-    /// The ARN of the topic to which to add tags.
-    resource_arn: []const u8,
+const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
 
-    /// The tags to be added to the specified topic. A tag consists of a required
-    /// key and an
-    /// optional value.
-    tags: []const Tag,
-};
-
-pub const TagResourceOutput = struct {};
+const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

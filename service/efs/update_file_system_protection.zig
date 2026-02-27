@@ -37,7 +37,7 @@ pub const UpdateFileSystemProtectionInput = struct {
     };
 };
 
-const UpdateFileSystemProtectionOutput = @import("file_system_protection_description.zig").UpdateFileSystemProtectionOutput;
+const UpdateFileSystemProtectionOutput = @import("file_system_protection_description.zig").FileSystemProtectionDescription;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

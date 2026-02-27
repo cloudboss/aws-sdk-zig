@@ -1,0 +1,51 @@
+/// Provides the details of the `SignalExternalWorkflowExecution` decision.
+///
+/// **Access Control**
+///
+/// You can use IAM policies to control this decision's access to Amazon SWF
+/// resources as follows:
+///
+/// * Use a `Resource` element with the domain name to limit the action to only
+/// specified domains.
+///
+/// * Use an `Action` element to allow or deny permission to call this action.
+///
+/// * You cannot use an IAM policy to constrain this action's parameters.
+///
+/// If the caller doesn't have sufficient permissions to invoke the action, or
+/// the
+/// parameter values fall outside the specified constraints, the action fails.
+/// The associated event attribute's
+/// `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+/// example IAM policies, see
+/// [Using IAM to Manage Access to Amazon SWF
+/// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
+pub const SignalExternalWorkflowExecutionDecisionAttributes = struct {
+    /// The data attached to the event that can be used by the decider in subsequent
+    /// decision tasks.
+    control: ?[]const u8,
+
+    /// The input data to be provided with the signal. The target workflow execution
+    /// uses the signal
+    /// name and input data to process the signal.
+    input: ?[]const u8,
+
+    /// The `runId` of the workflow execution to be signaled.
+    run_id: ?[]const u8,
+
+    /// The name of the signal.The target workflow execution uses the signal name
+    /// and input to
+    /// process the signal.
+    signal_name: []const u8,
+
+    /// The `workflowId` of the workflow execution to be signaled.
+    workflow_id: []const u8,
+
+    pub const json_field_names = .{
+        .control = "control",
+        .input = "input",
+        .run_id = "runId",
+        .signal_name = "signalName",
+        .workflow_id = "workflowId",
+    };
+};

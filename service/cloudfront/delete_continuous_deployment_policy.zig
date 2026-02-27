@@ -13,7 +13,7 @@ pub const DeleteContinuousDeploymentPolicyInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteContinuousDeploymentPolicyOutput = struct {};
+const DeleteContinuousDeploymentPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,7 @@ pub const DeleteDeploymentInput = struct {
     };
 };
 
-pub const DeleteDeploymentOutput = struct {};
+const DeleteDeploymentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,7 @@ pub const UntagOpenIDConnectProviderInput = struct {
     tag_keys: []const []const u8,
 };
 
-pub const UntagOpenIDConnectProviderOutput = struct {};
+const UntagOpenIDConnectProviderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

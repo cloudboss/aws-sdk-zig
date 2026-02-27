@@ -1,0 +1,16 @@
+const TestCaseEntryPointType = @import("test_case_entry_point_type.zig").TestCaseEntryPointType;
+const VoiceCallEntryPointParameters = @import("voice_call_entry_point_parameters.zig").VoiceCallEntryPointParameters;
+
+/// Defines the starting point for a test case.
+pub const TestCaseEntryPoint = struct {
+    /// The type of entry point.
+    type: ?TestCaseEntryPointType,
+
+    /// Parameters for voice call entry point.
+    voice_call_entry_point_parameters: ?VoiceCallEntryPointParameters,
+
+    pub const json_field_names = .{
+        .type = "Type",
+        .voice_call_entry_point_parameters = "VoiceCallEntryPointParameters",
+    };
+};

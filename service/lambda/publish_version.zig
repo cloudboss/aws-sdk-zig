@@ -65,7 +65,7 @@ pub const PublishVersionInput = struct {
     };
 };
 
-const PublishVersionOutput = @import("function_configuration.zig").PublishVersionOutput;
+const PublishVersionOutput = @import("function_configuration.zig").FunctionConfiguration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

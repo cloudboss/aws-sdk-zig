@@ -13,7 +13,7 @@ pub const DeleteCloudFrontOriginAccessIdentityInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteCloudFrontOriginAccessIdentityOutput = struct {};
+const DeleteCloudFrontOriginAccessIdentityOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

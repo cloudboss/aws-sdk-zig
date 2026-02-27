@@ -10,7 +10,7 @@ pub const CancelExportTaskInput = struct {
     export_task_id: []const u8,
 };
 
-pub const CancelExportTaskOutput = struct {};
+const CancelExportTaskOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

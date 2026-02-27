@@ -24,7 +24,7 @@ pub const UpdateDocumentationPartInput = struct {
     };
 };
 
-const UpdateDocumentationPartOutput = @import("documentation_part.zig").UpdateDocumentationPartOutput;
+const UpdateDocumentationPartOutput = @import("documentation_part.zig").DocumentationPart;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

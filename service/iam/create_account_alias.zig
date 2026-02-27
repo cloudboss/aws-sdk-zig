@@ -16,7 +16,7 @@ pub const CreateAccountAliasInput = struct {
     account_alias: []const u8,
 };
 
-pub const CreateAccountAliasOutput = struct {};
+const CreateAccountAliasOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

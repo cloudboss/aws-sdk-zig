@@ -31,7 +31,7 @@ pub const SetEndpointAttributesInput = struct {
     endpoint_arn: []const u8,
 };
 
-pub const SetEndpointAttributesOutput = struct {};
+const SetEndpointAttributesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

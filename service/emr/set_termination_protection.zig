@@ -22,7 +22,7 @@ pub const SetTerminationProtectionInput = struct {
     };
 };
 
-pub const SetTerminationProtectionOutput = struct {};
+const SetTerminationProtectionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,7 +14,7 @@ pub const DeleteBucketCorsInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const DeleteBucketCorsOutput = struct {};
+const DeleteBucketCorsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

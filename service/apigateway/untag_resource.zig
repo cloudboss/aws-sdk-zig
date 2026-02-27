@@ -4,20 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const UntagResourceInput = struct {
-    /// The ARN of a resource that can be tagged.
-    resource_arn: []const u8,
+const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
 
-    /// The Tag keys to delete.
-    tag_keys: []const []const u8,
-
-    pub const json_field_names = .{
-        .resource_arn = "resourceArn",
-        .tag_keys = "tagKeys",
-    };
-};
-
-pub const UntagResourceOutput = struct {};
+const UntagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

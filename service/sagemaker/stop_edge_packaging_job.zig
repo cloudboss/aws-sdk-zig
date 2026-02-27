@@ -13,7 +13,7 @@ pub const StopEdgePackagingJobInput = struct {
     };
 };
 
-pub const StopEdgePackagingJobOutput = struct {};
+const StopEdgePackagingJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

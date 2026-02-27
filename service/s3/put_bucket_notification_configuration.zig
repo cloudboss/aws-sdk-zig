@@ -22,7 +22,7 @@ pub const PutBucketNotificationConfigurationInput = struct {
     skip_destination_validation: ?bool = null,
 };
 
-pub const PutBucketNotificationConfigurationOutput = struct {};
+const PutBucketNotificationConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

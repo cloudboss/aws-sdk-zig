@@ -1,0 +1,19 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const delete_scaling_policy = @import("delete_scaling_policy.zig");
+pub const delete_scheduled_action = @import("delete_scheduled_action.zig");
+pub const deregister_scalable_target = @import("deregister_scalable_target.zig");
+pub const describe_scalable_targets = @import("describe_scalable_targets.zig");
+pub const describe_scaling_activities = @import("describe_scaling_activities.zig");
+pub const describe_scaling_policies = @import("describe_scaling_policies.zig");
+pub const describe_scheduled_actions = @import("describe_scheduled_actions.zig");
+pub const get_predictive_scaling_forecast = @import("get_predictive_scaling_forecast.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const put_scaling_policy = @import("put_scaling_policy.zig");
+pub const put_scheduled_action = @import("put_scheduled_action.zig");
+pub const register_scalable_target = @import("register_scalable_target.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");

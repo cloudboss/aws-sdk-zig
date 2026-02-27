@@ -27,7 +27,7 @@ pub const ModifyIdFormatInput = struct {
     use_long_ids: bool,
 };
 
-pub const ModifyIdFormatOutput = struct {};
+const ModifyIdFormatOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

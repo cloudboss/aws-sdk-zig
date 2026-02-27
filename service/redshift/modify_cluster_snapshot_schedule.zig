@@ -20,7 +20,7 @@ pub const ModifyClusterSnapshotScheduleInput = struct {
     schedule_identifier: ?[]const u8 = null,
 };
 
-pub const ModifyClusterSnapshotScheduleOutput = struct {};
+const ModifyClusterSnapshotScheduleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

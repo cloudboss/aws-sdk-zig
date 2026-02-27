@@ -1,0 +1,296 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ReplicationConfigurationDataPlaneRouting = @import("replication_configuration_data_plane_routing.zig").ReplicationConfigurationDataPlaneRouting;
+const ReplicationConfigurationDefaultLargeStagingDiskType = @import("replication_configuration_default_large_staging_disk_type.zig").ReplicationConfigurationDefaultLargeStagingDiskType;
+const ReplicationConfigurationEbsEncryption = @import("replication_configuration_ebs_encryption.zig").ReplicationConfigurationEbsEncryption;
+const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
+
+pub const CreateReplicationConfigurationTemplateInput = struct {
+    /// Request to associate the default Application Migration Service Security
+    /// group with the Replication Settings template.
+    associate_default_security_group: bool,
+
+    /// Request to configure bandwidth throttling during Replication Settings
+    /// template creation.
+    bandwidth_throttling: i64 = 0,
+
+    /// Request to create Public IP during Replication Settings template creation.
+    create_public_ip: bool,
+
+    /// Request to configure data plane routing during Replication Settings template
+    /// creation.
+    data_plane_routing: ReplicationConfigurationDataPlaneRouting,
+
+    /// Request to configure the default large staging disk EBS volume type during
+    /// Replication Settings template creation.
+    default_large_staging_disk_type: ReplicationConfigurationDefaultLargeStagingDiskType,
+
+    /// Request to configure EBS encryption during Replication Settings template
+    /// creation.
+    ebs_encryption: ReplicationConfigurationEbsEncryption,
+
+    /// Request to configure an EBS encryption key during Replication Settings
+    /// template creation.
+    ebs_encryption_key_arn: ?[]const u8 = null,
+
+    /// Request to configure the internet protocol to IPv4 or IPv6.
+    internet_protocol: ?InternetProtocol = null,
+
+    /// Request to configure the Replication Server instance type during Replication
+    /// Settings template creation.
+    replication_server_instance_type: []const u8,
+
+    /// Request to configure the Replication Server Security group ID during
+    /// Replication Settings template creation.
+    replication_servers_security_groups_i_ds: []const []const u8,
+
+    /// Request to configure the Staging Area subnet ID during Replication Settings
+    /// template creation.
+    staging_area_subnet_id: []const u8,
+
+    /// Request to configure Staging Area tags during Replication Settings template
+    /// creation.
+    staging_area_tags: []const aws.map.StringMapEntry,
+
+    /// Request to configure tags during Replication Settings template creation.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// Request to use Dedicated Replication Servers during Replication Settings
+    /// template creation.
+    use_dedicated_replication_server: bool,
+
+    /// Request to use Fips Endpoint during Replication Settings template creation.
+    use_fips_endpoint: ?bool = null,
+
+    pub const json_field_names = .{
+        .associate_default_security_group = "associateDefaultSecurityGroup",
+        .bandwidth_throttling = "bandwidthThrottling",
+        .create_public_ip = "createPublicIP",
+        .data_plane_routing = "dataPlaneRouting",
+        .default_large_staging_disk_type = "defaultLargeStagingDiskType",
+        .ebs_encryption = "ebsEncryption",
+        .ebs_encryption_key_arn = "ebsEncryptionKeyArn",
+        .internet_protocol = "internetProtocol",
+        .replication_server_instance_type = "replicationServerInstanceType",
+        .replication_servers_security_groups_i_ds = "replicationServersSecurityGroupsIDs",
+        .staging_area_subnet_id = "stagingAreaSubnetId",
+        .staging_area_tags = "stagingAreaTags",
+        .tags = "tags",
+        .use_dedicated_replication_server = "useDedicatedReplicationServer",
+        .use_fips_endpoint = "useFipsEndpoint",
+    };
+};
+
+const CreateReplicationConfigurationTemplateOutput = @import("replication_configuration_template.zig").ReplicationConfigurationTemplate;
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateReplicationConfigurationTemplateInput, options: Options) !CreateReplicationConfigurationTemplateOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "mgn");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateReplicationConfigurationTemplateInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("mgn", "mgn", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const path = "/CreateReplicationConfigurationTemplate";
+
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(alloc, "{");
+
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"associateDefaultSecurityGroup\":");
+    try aws.json.writeValue(@TypeOf(input.associate_default_security_group), input.associate_default_security_group, alloc, &body_buf);
+    has_prev = true;
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"bandwidthThrottling\":");
+    try aws.json.writeValue(@TypeOf(input.bandwidth_throttling), input.bandwidth_throttling, alloc, &body_buf);
+    has_prev = true;
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"createPublicIP\":");
+    try aws.json.writeValue(@TypeOf(input.create_public_ip), input.create_public_ip, alloc, &body_buf);
+    has_prev = true;
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"dataPlaneRouting\":");
+    try aws.json.writeValue(@TypeOf(input.data_plane_routing), input.data_plane_routing, alloc, &body_buf);
+    has_prev = true;
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"defaultLargeStagingDiskType\":");
+    try aws.json.writeValue(@TypeOf(input.default_large_staging_disk_type), input.default_large_staging_disk_type, alloc, &body_buf);
+    has_prev = true;
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"ebsEncryption\":");
+    try aws.json.writeValue(@TypeOf(input.ebs_encryption), input.ebs_encryption, alloc, &body_buf);
+    has_prev = true;
+    if (input.ebs_encryption_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ebsEncryptionKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.internet_protocol) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"internetProtocol\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"replicationServerInstanceType\":");
+    try aws.json.writeValue(@TypeOf(input.replication_server_instance_type), input.replication_server_instance_type, alloc, &body_buf);
+    has_prev = true;
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"replicationServersSecurityGroupsIDs\":");
+    try aws.json.writeValue(@TypeOf(input.replication_servers_security_groups_i_ds), input.replication_servers_security_groups_i_ds, alloc, &body_buf);
+    has_prev = true;
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"stagingAreaSubnetId\":");
+    try aws.json.writeValue(@TypeOf(input.staging_area_subnet_id), input.staging_area_subnet_id, alloc, &body_buf);
+    has_prev = true;
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"stagingAreaTags\":");
+    try aws.json.writeValue(@TypeOf(input.staging_area_tags), input.staging_area_tags, alloc, &body_buf);
+    has_prev = true;
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"useDedicatedReplicationServer\":");
+    try aws.json.writeValue(@TypeOf(input.use_dedicated_replication_server), input.use_dedicated_replication_server, alloc, &body_buf);
+    has_prev = true;
+    if (input.use_fips_endpoint) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"useFipsEndpoint\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(alloc, "}");
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateReplicationConfigurationTemplateOutput {
+    var result: CreateReplicationConfigurationTemplateOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(CreateReplicationConfigurationTemplateOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UninitializedAccountException")) {
+        return .{ .arena = arena, .kind = .{ .uninitialized_account_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

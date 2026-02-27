@@ -47,7 +47,7 @@ pub const PutMethodResponseInput = struct {
     };
 };
 
-const PutMethodResponseOutput = @import("method_response.zig").PutMethodResponseOutput;
+const PutMethodResponseOutput = @import("method_response.zig").MethodResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

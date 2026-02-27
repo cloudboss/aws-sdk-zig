@@ -61,7 +61,7 @@ pub const CreateSnapshotInput = struct {
     volume_id: []const u8,
 };
 
-const CreateSnapshotOutput = @import("snapshot.zig").CreateSnapshotOutput;
+const CreateSnapshotOutput = @import("snapshot.zig").Snapshot;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

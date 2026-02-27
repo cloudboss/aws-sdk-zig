@@ -11,7 +11,7 @@ pub const RebootDBShardGroupInput = struct {
     db_shard_group_identifier: []const u8,
 };
 
-const RebootDBShardGroupOutput = @import("db_shard_group.zig").RebootDBShardGroupOutput;
+const RebootDBShardGroupOutput = @import("db_shard_group.zig").DBShardGroup;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

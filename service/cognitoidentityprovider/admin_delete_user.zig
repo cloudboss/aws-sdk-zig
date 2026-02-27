@@ -23,7 +23,7 @@ pub const AdminDeleteUserInput = struct {
     };
 };
 
-pub const AdminDeleteUserOutput = struct {};
+const AdminDeleteUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

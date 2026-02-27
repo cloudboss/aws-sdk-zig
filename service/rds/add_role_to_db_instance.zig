@@ -18,7 +18,7 @@ pub const AddRoleToDBInstanceInput = struct {
     role_arn: []const u8,
 };
 
-pub const AddRoleToDBInstanceOutput = struct {};
+const AddRoleToDBInstanceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

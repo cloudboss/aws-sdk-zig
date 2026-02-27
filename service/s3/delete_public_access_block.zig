@@ -15,7 +15,7 @@ pub const DeletePublicAccessBlockInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const DeletePublicAccessBlockOutput = struct {};
+const DeletePublicAccessBlockOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

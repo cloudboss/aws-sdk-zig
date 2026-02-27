@@ -13,7 +13,7 @@ pub const DeleteModelExplainabilityJobDefinitionInput = struct {
     };
 };
 
-pub const DeleteModelExplainabilityJobDefinitionOutput = struct {};
+const DeleteModelExplainabilityJobDefinitionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

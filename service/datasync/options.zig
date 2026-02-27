@@ -1,0 +1,324 @@
+const Atime = @import("atime.zig").Atime;
+const Gid = @import("gid.zig").Gid;
+const LogLevel = @import("log_level.zig").LogLevel;
+const Mtime = @import("mtime.zig").Mtime;
+const ObjectTags = @import("object_tags.zig").ObjectTags;
+const OverwriteMode = @import("overwrite_mode.zig").OverwriteMode;
+const PosixPermissions = @import("posix_permissions.zig").PosixPermissions;
+const PreserveDeletedFiles = @import("preserve_deleted_files.zig").PreserveDeletedFiles;
+const PreserveDevices = @import("preserve_devices.zig").PreserveDevices;
+const SmbSecurityDescriptorCopyFlags = @import("smb_security_descriptor_copy_flags.zig").SmbSecurityDescriptorCopyFlags;
+const TaskQueueing = @import("task_queueing.zig").TaskQueueing;
+const TransferMode = @import("transfer_mode.zig").TransferMode;
+const Uid = @import("uid.zig").Uid;
+const VerifyMode = @import("verify_mode.zig").VerifyMode;
+
+/// Indicates how your transfer task is configured. These options include how
+/// DataSync handles files, objects, and their associated metadata during your
+/// transfer. You
+/// also can specify how to verify data integrity, set bandwidth limits for your
+/// task, among other
+/// options.
+///
+/// Each option has a default value. Unless you need to, you don't have to
+/// configure any
+/// option before calling
+/// [StartTaskExecution](https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
+///
+/// You also can override your task options for each task execution. For
+/// example, you might
+/// want to adjust the `LogLevel` for an individual execution.
+pub const Options = struct {
+    /// Specifies whether to preserve metadata indicating the last time a file was
+    /// read or
+    /// written to.
+    ///
+    /// The behavior of `Atime` isn't fully standard across platforms, so DataSync
+    /// can only do this on a best-effort basis.
+    ///
+    /// * `BEST_EFFORT` (default) - DataSync attempts to preserve the
+    /// original `Atime` attribute on all source files (that is, the version before
+    /// the
+    /// `PREPARING` steps of the task execution). This option is
+    /// recommended.
+    ///
+    /// * `NONE` - Ignores `Atime`.
+    ///
+    /// If `Atime` is set to `BEST_EFFORT`, `Mtime` must be set
+    /// to `PRESERVE`.
+    ///
+    /// If `Atime` is set to `NONE`, `Mtime` must also be
+    /// `NONE`.
+    atime: ?Atime,
+
+    /// Limits the bandwidth used by a DataSync task. For example, if you want
+    /// DataSync to use a maximum of 1 MB, set this value to `1048576`
+    /// (`=1024*1024`).
+    bytes_per_second: ?i64,
+
+    /// Specifies the POSIX group ID (GID) of the file's owners.
+    ///
+    /// * `INT_VALUE` (default) - Preserves the integer value of user ID (UID) and
+    /// GID, which is recommended.
+    ///
+    /// * `NONE` - Ignores UID and GID.
+    ///
+    /// For more information, see [Understanding how DataSync handles file and
+    /// object
+    /// metadata](https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html).
+    gid: ?Gid,
+
+    /// Specifies the type of logs that DataSync publishes to a Amazon CloudWatch
+    /// Logs
+    /// log group. To specify the log group, see
+    /// [CloudWatchLogGroupArn](https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateTask.html#DataSync-CreateTask-request-CloudWatchLogGroupArn).
+    ///
+    /// * `BASIC` - Publishes logs with only basic information (such as transfer
+    /// errors).
+    ///
+    /// * `TRANSFER` - Publishes logs for all files or objects that your DataSync
+    ///   task transfers and performs data-integrity checks on.
+    ///
+    /// * `OFF` - No logs are published.
+    log_level: ?LogLevel,
+
+    /// Specifies whether to preserve metadata indicating the last time that a file
+    /// was written
+    /// to before the `PREPARING` step of your task execution. This option is
+    /// required when
+    /// you need to run the a task more than once.
+    ///
+    /// * `PRESERVE` (default) - Preserves original `Mtime`, which is
+    /// recommended.
+    ///
+    /// * `NONE` - Ignores `Mtime`.
+    ///
+    /// If `Mtime` is set to `PRESERVE`, `Atime` must be set to
+    /// `BEST_EFFORT`.
+    ///
+    /// If `Mtime` is set to `NONE`, `Atime` must also be set
+    /// to `NONE`.
+    mtime: ?Mtime,
+
+    /// Specifies whether you want DataSync to `PRESERVE` object tags
+    /// (default behavior) when transferring between object storage systems. If you
+    /// want your DataSync task to ignore object tags, specify the `NONE` value.
+    object_tags: ?ObjectTags,
+
+    /// Specifies whether DataSync should modify or preserve data at the destination
+    /// location.
+    ///
+    /// * `ALWAYS` (default) - DataSync modifies data in the destination
+    /// location when source data (including metadata) has changed.
+    ///
+    /// If DataSync overwrites objects, you might incur additional charges for
+    /// certain Amazon S3 storage classes (for example, for retrieval or early
+    /// deletion).
+    /// For more information, see [Storage
+    /// class considerations with Amazon S3
+    /// transfers](https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
+    ///
+    /// * `NEVER` - DataSync doesn't overwrite data in the destination
+    /// location even if the source data has changed. You can use this option to
+    /// protect against
+    /// overwriting changes made to files or objects in the destination.
+    overwrite_mode: ?OverwriteMode,
+
+    /// Specifies which users or groups can access a file for a specific purpose
+    /// such as reading,
+    /// writing, or execution of the file.
+    ///
+    /// For more information, see [Understanding how DataSync handles file and
+    /// object
+    /// metadata](https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html).
+    ///
+    /// * `PRESERVE` (default) - Preserves POSIX-style permissions, which is
+    /// recommended.
+    ///
+    /// * `NONE` - Ignores POSIX-style permissions.
+    ///
+    /// DataSync can preserve extant permissions of a source location.
+    posix_permissions: ?PosixPermissions,
+
+    /// Specifies whether files in the destination location that don't exist in the
+    /// source
+    /// should be preserved. This option can affect your Amazon S3 storage cost. If
+    /// your task
+    /// deletes objects, you might incur minimum storage duration charges for
+    /// certain storage classes.
+    /// For detailed information, see [Considerations
+    /// when working with Amazon S3 storage classes in
+    /// DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
+    ///
+    /// * `PRESERVE` (default) - Ignores such destination files, which is
+    /// recommended.
+    ///
+    /// * `REMOVE` - Deletes destination files that aren’t present in the
+    /// source.
+    ///
+    /// If you set this parameter to `REMOVE`, you can't set
+    /// `TransferMode` to `ALL`. When you transfer all data, DataSync doesn't scan
+    /// your destination location and doesn't know what to delete.
+    preserve_deleted_files: ?PreserveDeletedFiles,
+
+    /// Specifies whether DataSync should preserve the metadata of block and
+    /// character devices in the source location and recreate the files with that
+    /// device name and
+    /// metadata on the destination. DataSync copies only the name and metadata of
+    /// such
+    /// devices.
+    ///
+    /// DataSync can't copy the actual contents of these devices because they're
+    /// nonterminal and don't return an end-of-file (EOF) marker.
+    ///
+    /// * `NONE` (default) - Ignores special devices (recommended).
+    ///
+    /// * `PRESERVE` - Preserves character and block device metadata. This option
+    /// currently isn't supported for Amazon EFS.
+    preserve_devices: ?PreserveDevices,
+
+    /// Specifies which components of the SMB security descriptor are copied from
+    /// source to
+    /// destination objects.
+    ///
+    /// This value is only used for transfers between SMB and Amazon FSx for Windows
+    /// File Server
+    /// locations or between two FSx for Windows File Server locations. For more
+    /// information, see [Understanding how
+    /// DataSync handles file and object
+    /// metadata](https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html).
+    ///
+    /// * `OWNER_DACL` (default) - For each copied object, DataSync copies
+    /// the following metadata:
+    ///
+    /// * The object owner.
+    ///
+    /// * NTFS discretionary access control lists (DACLs), which determine whether
+    ///   to grant
+    /// access to an object.
+    ///
+    /// DataSync won't copy NTFS system access control lists (SACLs) with this
+    /// option.
+    ///
+    /// * `OWNER_DACL_SACL` - For each copied object, DataSync copies the
+    /// following metadata:
+    ///
+    /// * The object owner.
+    ///
+    /// * NTFS discretionary access control lists (DACLs), which determine whether
+    ///   to grant
+    /// access to an object.
+    ///
+    /// * SACLs, which are used by administrators to log attempts to access a
+    ///   secured
+    /// object.
+    ///
+    /// Copying SACLs requires granting additional permissions to the Windows user
+    /// that
+    /// DataSync uses to access your SMB location. For information about choosing
+    /// a user with the right permissions, see required permissions for
+    /// [SMB](https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions), [FSx for Windows File Server](https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions), or [FSx for ONTAP](https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb) (depending on the type of
+    /// location in your transfer).
+    ///
+    /// * `NONE` - None of the SMB security descriptor components are copied.
+    /// Destination objects are owned by the user that was provided for accessing
+    /// the destination
+    /// location. DACLs and SACLs are set based on the destination server’s
+    /// configuration.
+    security_descriptor_copy_flags: ?SmbSecurityDescriptorCopyFlags,
+
+    /// Specifies whether your transfer tasks should be put into a queue during
+    /// certain scenarios
+    /// when [running multiple
+    /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#running-multiple-tasks). This is `ENABLED` by default.
+    task_queueing: ?TaskQueueing,
+
+    /// Specifies whether DataSync transfers only the data (including metadata) that
+    /// differs between locations following an initial copy or transfers all data
+    /// every time you run
+    /// the task. If you're planning on recurring transfers, you might only want to
+    /// transfer what's
+    /// changed since your previous task execution.
+    ///
+    /// * `CHANGED` (default) - After your initial full transfer, DataSync
+    /// copies only the data and metadata that differs between the source and
+    /// destination
+    /// location.
+    ///
+    /// * `ALL` - DataSync copies everything in the source to the
+    /// destination without comparing differences between the locations.
+    transfer_mode: ?TransferMode,
+
+    /// Specifies the POSIX user ID (UID) of the file's owner.
+    ///
+    /// * `INT_VALUE` (default) - Preserves the integer value of UID and group ID
+    /// (GID), which is recommended.
+    ///
+    /// * `NONE` - Ignores UID and GID.
+    ///
+    /// For more information, see [Metadata copied by
+    /// DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied).
+    uid: ?Uid,
+
+    /// Specifies if and how DataSync checks the integrity of your data at the end
+    /// of
+    /// your transfer.
+    ///
+    /// * `ONLY_FILES_TRANSFERRED` (recommended) - DataSync calculates
+    /// the checksum of transferred data (including metadata) at the source
+    /// location. At the end
+    /// of the transfer, DataSync then compares this checksum to the checksum
+    /// calculated
+    /// on that data at the destination.
+    ///
+    /// This is the default option for [Enhanced mode
+    /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html).
+    ///
+    /// We recommend this option when transferring to S3 Glacier Flexible Retrieval
+    /// or S3 Glacier Deep Archive storage classes. For more information, see
+    /// [Storage
+    /// class considerations with Amazon S3
+    /// locations](https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
+    ///
+    /// * `POINT_IN_TIME_CONSISTENT` - At the end of the transfer, DataSync checks
+    ///   the entire source and destination to verify that both locations are
+    /// fully synchronized.
+    ///
+    /// The is the default option for [Basic mode
+    /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html) and
+    /// isn't currently supported with Enhanced mode tasks.
+    ///
+    /// If you use a
+    /// [manifest](https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html),
+    /// DataSync only scans and verifies what's listed in the manifest.
+    ///
+    /// You can't use this option when transferring to S3 Glacier Flexible Retrieval
+    /// or S3 Glacier Deep Archive storage classes. For more information, see
+    /// [Storage
+    /// class considerations with Amazon S3
+    /// locations](https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
+    ///
+    /// * `NONE` - DataSync performs data integrity checks only during
+    /// your transfer. Unlike other options, there's no additional verification at
+    /// the end of your
+    /// transfer.
+    verify_mode: ?VerifyMode,
+
+    pub const json_field_names = .{
+        .atime = "Atime",
+        .bytes_per_second = "BytesPerSecond",
+        .gid = "Gid",
+        .log_level = "LogLevel",
+        .mtime = "Mtime",
+        .object_tags = "ObjectTags",
+        .overwrite_mode = "OverwriteMode",
+        .posix_permissions = "PosixPermissions",
+        .preserve_deleted_files = "PreserveDeletedFiles",
+        .preserve_devices = "PreserveDevices",
+        .security_descriptor_copy_flags = "SecurityDescriptorCopyFlags",
+        .task_queueing = "TaskQueueing",
+        .transfer_mode = "TransferMode",
+        .uid = "Uid",
+        .verify_mode = "VerifyMode",
+    };
+};

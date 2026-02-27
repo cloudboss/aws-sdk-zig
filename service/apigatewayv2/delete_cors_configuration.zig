@@ -13,7 +13,7 @@ pub const DeleteCorsConfigurationInput = struct {
     };
 };
 
-pub const DeleteCorsConfigurationOutput = struct {};
+const DeleteCorsConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

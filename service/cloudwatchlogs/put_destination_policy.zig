@@ -38,7 +38,7 @@ pub const PutDestinationPolicyInput = struct {
     };
 };
 
-pub const PutDestinationPolicyOutput = struct {};
+const PutDestinationPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

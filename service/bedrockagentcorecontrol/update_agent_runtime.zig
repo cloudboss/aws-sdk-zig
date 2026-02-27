@@ -1,0 +1,331 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const AgentRuntimeArtifact = @import("agent_runtime_artifact.zig").AgentRuntimeArtifact;
+const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
+const LifecycleConfiguration = @import("lifecycle_configuration.zig").LifecycleConfiguration;
+const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
+const ProtocolConfiguration = @import("protocol_configuration.zig").ProtocolConfiguration;
+const RequestHeaderConfiguration = @import("request_header_configuration.zig").RequestHeaderConfiguration;
+const AgentRuntimeStatus = @import("agent_runtime_status.zig").AgentRuntimeStatus;
+const WorkloadIdentityDetails = @import("workload_identity_details.zig").WorkloadIdentityDetails;
+
+pub const UpdateAgentRuntimeInput = struct {
+    /// The updated artifact of the AgentCore Runtime.
+    agent_runtime_artifact: AgentRuntimeArtifact,
+
+    /// The unique identifier of the AgentCore Runtime to update.
+    agent_runtime_id: []const u8,
+
+    /// The updated authorizer configuration for the AgentCore Runtime.
+    authorizer_configuration: ?AuthorizerConfiguration = null,
+
+    /// A unique, case-sensitive identifier to ensure idempotency of the request.
+    client_token: ?[]const u8 = null,
+
+    /// The updated description of the AgentCore Runtime.
+    description: ?[]const u8 = null,
+
+    /// Updated environment variables to set in the AgentCore Runtime environment.
+    environment_variables: ?[]const aws.map.StringMapEntry = null,
+
+    /// The updated life cycle configuration for the AgentCore Runtime.
+    lifecycle_configuration: ?LifecycleConfiguration = null,
+
+    /// The updated network configuration for the AgentCore Runtime.
+    network_configuration: NetworkConfiguration,
+
+    protocol_configuration: ?ProtocolConfiguration = null,
+
+    /// The updated configuration for HTTP request headers that will be passed
+    /// through to the runtime.
+    request_header_configuration: ?RequestHeaderConfiguration = null,
+
+    /// The updated IAM role ARN that provides permissions for the AgentCore
+    /// Runtime.
+    role_arn: []const u8,
+
+    pub const json_field_names = .{
+        .agent_runtime_artifact = "agentRuntimeArtifact",
+        .agent_runtime_id = "agentRuntimeId",
+        .authorizer_configuration = "authorizerConfiguration",
+        .client_token = "clientToken",
+        .description = "description",
+        .environment_variables = "environmentVariables",
+        .lifecycle_configuration = "lifecycleConfiguration",
+        .network_configuration = "networkConfiguration",
+        .protocol_configuration = "protocolConfiguration",
+        .request_header_configuration = "requestHeaderConfiguration",
+        .role_arn = "roleArn",
+    };
+};
+
+pub const UpdateAgentRuntimeOutput = struct {
+    /// The Amazon Resource Name (ARN) of the updated AgentCore Runtime.
+    agent_runtime_arn: []const u8,
+
+    /// The unique identifier of the updated AgentCore Runtime.
+    agent_runtime_id: []const u8,
+
+    /// The version of the updated AgentCore Runtime.
+    agent_runtime_version: []const u8,
+
+    /// The timestamp when the AgentCore Runtime was created.
+    created_at: i64,
+
+    /// The timestamp when the AgentCore Runtime was last updated.
+    last_updated_at: i64,
+
+    /// The current status of the updated AgentCore Runtime.
+    status: AgentRuntimeStatus,
+
+    /// The workload identity details for the updated AgentCore Runtime.
+    workload_identity_details: ?WorkloadIdentityDetails = null,
+
+    pub const json_field_names = .{
+        .agent_runtime_arn = "agentRuntimeArn",
+        .agent_runtime_id = "agentRuntimeId",
+        .agent_runtime_version = "agentRuntimeVersion",
+        .created_at = "createdAt",
+        .last_updated_at = "lastUpdatedAt",
+        .status = "status",
+        .workload_identity_details = "workloadIdentityDetails",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAgentRuntimeInput, options: Options) !UpdateAgentRuntimeOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrockagentcorecontrol");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: UpdateAgentRuntimeInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("bedrockagentcorecontrol", "Bedrock AgentCore Control", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/runtimes/");
+    try path_buf.appendSlice(alloc, input.agent_runtime_id);
+    try path_buf.appendSlice(alloc, "/");
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(alloc, "{");
+
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"agentRuntimeArtifact\":");
+    try aws.json.writeValue(@TypeOf(input.agent_runtime_artifact), input.agent_runtime_artifact, alloc, &body_buf);
+    has_prev = true;
+    if (input.authorizer_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"authorizerConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.client_token) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"clientToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.description) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.environment_variables) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"environmentVariables\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.lifecycle_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"lifecycleConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"networkConfiguration\":");
+    try aws.json.writeValue(@TypeOf(input.network_configuration), input.network_configuration, alloc, &body_buf);
+    has_prev = true;
+    if (input.protocol_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"protocolConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.request_header_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"requestHeaderConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"roleArn\":");
+    try aws.json.writeValue(@TypeOf(input.role_arn), input.role_arn, alloc, &body_buf);
+    has_prev = true;
+
+    try body_buf.appendSlice(alloc, "}");
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .PUT;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateAgentRuntimeOutput {
+    var result: UpdateAgentRuntimeOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(UpdateAgentRuntimeOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DecryptionFailure")) {
+        return .{ .arena = arena, .kind = .{ .decryption_failure = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "EncryptionFailure")) {
+        return .{ .arena = arena, .kind = .{ .encryption_failure = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceLimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .resource_limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceException")) {
+        return .{ .arena = arena, .kind = .{ .service_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottledException")) {
+        return .{ .arena = arena, .kind = .{ .throttled_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
+        return .{ .arena = arena, .kind = .{ .unauthorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

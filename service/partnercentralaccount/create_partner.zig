@@ -1,0 +1,210 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const AllianceLeadContact = @import("alliance_lead_contact.zig").AllianceLeadContact;
+const PrimarySolutionType = @import("primary_solution_type.zig").PrimarySolutionType;
+const Tag = @import("tag.zig").Tag;
+const PartnerDomain = @import("partner_domain.zig").PartnerDomain;
+const PartnerProfile = @import("partner_profile.zig").PartnerProfile;
+
+pub const CreatePartnerInput = struct {
+    /// The primary contact person for alliance and partnership matters.
+    alliance_lead_contact: AllianceLeadContact,
+
+    /// The catalog identifier where the partner account will be created.
+    catalog: []const u8,
+
+    /// A unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request.
+    client_token: ?[]const u8 = null,
+
+    /// The verification code sent to the alliance lead contact's email to confirm
+    /// account creation.
+    email_verification_code: []const u8,
+
+    /// The legal name of the organization becoming a partner.
+    legal_name: []const u8,
+
+    /// The primary type of solution or service the partner provides (e.g.,
+    /// consulting, software, managed services).
+    primary_solution_type: PrimarySolutionType,
+
+    /// A list of tags to associate with the partner account for organization and
+    /// billing purposes.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .alliance_lead_contact = "AllianceLeadContact",
+        .catalog = "Catalog",
+        .client_token = "ClientToken",
+        .email_verification_code = "EmailVerificationCode",
+        .legal_name = "LegalName",
+        .primary_solution_type = "PrimarySolutionType",
+        .tags = "Tags",
+    };
+};
+
+pub const CreatePartnerOutput = struct {
+    /// The alliance lead contact information for the partner account.
+    alliance_lead_contact: ?AllianceLeadContact = null,
+
+    /// The Amazon Resource Name (ARN) of the created partner account.
+    arn: []const u8,
+
+    /// The list of verified email domains associated with AWS training and
+    /// certification credentials for the partner organization.
+    aws_training_certification_email_domains: ?[]const PartnerDomain = null,
+
+    /// The catalog identifier where the partner account was created.
+    catalog: []const u8,
+
+    /// The timestamp when the partner account was created.
+    created_at: i64,
+
+    /// The unique identifier of the created partner account.
+    id: []const u8,
+
+    /// The legal name of the partner organization.
+    legal_name: []const u8,
+
+    /// The partner profile information including display name, description, and
+    /// other public details.
+    profile: ?PartnerProfile = null,
+
+    pub const json_field_names = .{
+        .alliance_lead_contact = "AllianceLeadContact",
+        .arn = "Arn",
+        .aws_training_certification_email_domains = "AwsTrainingCertificationEmailDomains",
+        .catalog = "Catalog",
+        .created_at = "CreatedAt",
+        .id = "Id",
+        .legal_name = "LegalName",
+        .profile = "Profile",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePartnerInput, options: Options) !CreatePartnerOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "partnercentralaccount");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreatePartnerInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("partnercentralaccount", "PartnerCentral Account", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.0");
+    try request.headers.put(alloc, "X-Amz-Target", "PartnerCentralAccount.CreatePartner");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreatePartnerOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreatePartnerOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

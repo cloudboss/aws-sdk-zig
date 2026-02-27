@@ -25,7 +25,7 @@ pub const GetBasePathMappingInput = struct {
     };
 };
 
-const GetBasePathMappingOutput = @import("base_path_mapping.zig").GetBasePathMappingOutput;
+const GetBasePathMappingOutput = @import("base_path_mapping.zig").BasePathMapping;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

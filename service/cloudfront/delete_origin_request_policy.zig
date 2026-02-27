@@ -16,7 +16,7 @@ pub const DeleteOriginRequestPolicyInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteOriginRequestPolicyOutput = struct {};
+const DeleteOriginRequestPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

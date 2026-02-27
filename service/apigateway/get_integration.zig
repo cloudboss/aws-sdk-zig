@@ -27,7 +27,7 @@ pub const GetIntegrationInput = struct {
     };
 };
 
-const GetIntegrationOutput = @import("integration.zig").GetIntegrationOutput;
+const GetIntegrationOutput = @import("integration.zig").Integration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

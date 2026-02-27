@@ -1,0 +1,194 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const DataSource = @import("data_source.zig").DataSource;
+const ImportMode = @import("import_mode.zig").ImportMode;
+const Tag = @import("tag.zig").Tag;
+
+pub const CreateDatasetImportJobInput = struct {
+    /// The ARN of the dataset that receives the imported data.
+    dataset_arn: []const u8,
+
+    /// The Amazon S3 bucket that contains the training data to import.
+    data_source: DataSource,
+
+    /// Specify how to add the new records to an existing dataset. The default
+    /// import mode is `FULL`. If you haven't imported bulk records into the dataset
+    /// previously, you
+    /// can only specify `FULL`.
+    ///
+    /// * Specify `FULL` to overwrite all existing bulk data in
+    /// your dataset. Data you imported individually is not replaced.
+    ///
+    /// * Specify `INCREMENTAL` to append the new records to the
+    /// existing data in your dataset. Amazon Personalize replaces any record with
+    /// the
+    /// same ID with the new one.
+    import_mode: ?ImportMode = null,
+
+    /// The name for the dataset import job.
+    job_name: []const u8,
+
+    /// If you created a metric attribution, specify whether to publish metrics for
+    /// this import job to Amazon S3
+    publish_attribution_metrics_to_s3: ?bool = null,
+
+    /// The ARN of the IAM role that has permissions to read from the Amazon S3
+    /// data source.
+    role_arn: ?[]const u8 = null,
+
+    /// A list of
+    /// [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset import job.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .dataset_arn = "datasetArn",
+        .data_source = "dataSource",
+        .import_mode = "importMode",
+        .job_name = "jobName",
+        .publish_attribution_metrics_to_s3 = "publishAttributionMetricsToS3",
+        .role_arn = "roleArn",
+        .tags = "tags",
+    };
+};
+
+pub const CreateDatasetImportJobOutput = struct {
+    /// The ARN of the dataset import job.
+    dataset_import_job_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .dataset_import_job_arn = "datasetImportJobArn",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDatasetImportJobInput, options: Options) !CreateDatasetImportJobOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "personalize");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateDatasetImportJobInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("personalize", "Personalize", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "AmazonPersonalize.CreateDatasetImportJob");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateDatasetImportJobOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreateDatasetImportJobOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "InvalidInputException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_input_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidNextTokenException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_next_token_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .resource_already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceInUseException")) {
+        return .{ .arena = arena, .kind = .{ .resource_in_use_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagKeysException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_tag_keys_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_tags_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

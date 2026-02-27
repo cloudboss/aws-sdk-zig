@@ -1,0 +1,351 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const WaypointOptimizationAvoidanceOptions = @import("waypoint_optimization_avoidance_options.zig").WaypointOptimizationAvoidanceOptions;
+const WaypointOptimizationClusteringOptions = @import("waypoint_optimization_clustering_options.zig").WaypointOptimizationClusteringOptions;
+const WaypointOptimizationDestinationOptions = @import("waypoint_optimization_destination_options.zig").WaypointOptimizationDestinationOptions;
+const WaypointOptimizationDriverOptions = @import("waypoint_optimization_driver_options.zig").WaypointOptimizationDriverOptions;
+const WaypointOptimizationExclusionOptions = @import("waypoint_optimization_exclusion_options.zig").WaypointOptimizationExclusionOptions;
+const WaypointOptimizationSequencingObjective = @import("waypoint_optimization_sequencing_objective.zig").WaypointOptimizationSequencingObjective;
+const WaypointOptimizationOriginOptions = @import("waypoint_optimization_origin_options.zig").WaypointOptimizationOriginOptions;
+const WaypointOptimizationTrafficOptions = @import("waypoint_optimization_traffic_options.zig").WaypointOptimizationTrafficOptions;
+const WaypointOptimizationTravelMode = @import("waypoint_optimization_travel_mode.zig").WaypointOptimizationTravelMode;
+const WaypointOptimizationTravelModeOptions = @import("waypoint_optimization_travel_mode_options.zig").WaypointOptimizationTravelModeOptions;
+const WaypointOptimizationWaypoint = @import("waypoint_optimization_waypoint.zig").WaypointOptimizationWaypoint;
+const WaypointOptimizationConnection = @import("waypoint_optimization_connection.zig").WaypointOptimizationConnection;
+const WaypointOptimizationImpedingWaypoint = @import("waypoint_optimization_impeding_waypoint.zig").WaypointOptimizationImpedingWaypoint;
+const WaypointOptimizationOptimizedWaypoint = @import("waypoint_optimization_optimized_waypoint.zig").WaypointOptimizationOptimizedWaypoint;
+const WaypointOptimizationTimeBreakdown = @import("waypoint_optimization_time_breakdown.zig").WaypointOptimizationTimeBreakdown;
+
+pub const OptimizeWaypointsInput = struct {
+    /// Features that are avoided. Avoidance is on a best-case basis. If an
+    /// avoidance can't be satisfied for a particular case, this setting is ignored.
+    avoid: ?WaypointOptimizationAvoidanceOptions = null,
+
+    /// Clustering allows you to specify how nearby waypoints can be clustered to
+    /// improve the optimized sequence.
+    clustering: ?WaypointOptimizationClusteringOptions = null,
+
+    /// Departure time from the waypoint.
+    ///
+    /// Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
+    ///
+    /// Examples:
+    ///
+    /// `2020-04-22T17:57:24Z`
+    ///
+    /// `2020-04-22T17:57:24+02:00`
+    departure_time: ?[]const u8 = null,
+
+    /// The final position for the route in the World Geodetic System (WGS 84)
+    /// format: `[longitude, latitude]`.
+    destination: ?[]const f64 = null,
+
+    /// Destination related options.
+    destination_options: ?WaypointOptimizationDestinationOptions = null,
+
+    /// Driver related options.
+    driver: ?WaypointOptimizationDriverOptions = null,
+
+    /// Features to be strictly excluded while calculating the route.
+    exclude: ?WaypointOptimizationExclusionOptions = null,
+
+    /// Optional: The API key to be used for authorization. Either an API key or
+    /// valid SigV4 signature must be provided when making a request.
+    key: ?[]const u8 = null,
+
+    /// Specifies the optimization criteria for the calculated sequence.
+    ///
+    /// Default Value: `FastestRoute`.
+    optimize_sequencing_for: ?WaypointOptimizationSequencingObjective = null,
+
+    /// The start position for the route.
+    origin: []const f64,
+
+    /// Origin related options.
+    origin_options: ?WaypointOptimizationOriginOptions = null,
+
+    /// Traffic-related options.
+    traffic: ?WaypointOptimizationTrafficOptions = null,
+
+    /// Specifies the mode of transport when calculating a route. Used in estimating
+    /// the speed of travel and road compatibility.
+    ///
+    /// Default Value: `Car`
+    travel_mode: ?WaypointOptimizationTravelMode = null,
+
+    /// Travel mode related options for the provided travel mode.
+    travel_mode_options: ?WaypointOptimizationTravelModeOptions = null,
+
+    /// List of waypoints between the `Origin` and `Destination`.
+    waypoints: ?[]const WaypointOptimizationWaypoint = null,
+
+    pub const json_field_names = .{
+        .avoid = "Avoid",
+        .clustering = "Clustering",
+        .departure_time = "DepartureTime",
+        .destination = "Destination",
+        .destination_options = "DestinationOptions",
+        .driver = "Driver",
+        .exclude = "Exclude",
+        .key = "Key",
+        .optimize_sequencing_for = "OptimizeSequencingFor",
+        .origin = "Origin",
+        .origin_options = "OriginOptions",
+        .traffic = "Traffic",
+        .travel_mode = "TravelMode",
+        .travel_mode_options = "TravelModeOptions",
+        .waypoints = "Waypoints",
+    };
+};
+
+pub const OptimizeWaypointsOutput = struct {
+    /// Details about the connection from one waypoint to the next, within the
+    /// optimized sequence.
+    connections: ?[]const WaypointOptimizationConnection = null,
+
+    /// Overall distance to travel the whole sequence.
+    distance: i64 = 0,
+
+    /// Overall duration to travel the whole sequence.
+    ///
+    /// **Unit**: `seconds`
+    duration: i64 = 0,
+
+    /// Returns waypoints that caused the optimization problem to fail, and the
+    /// constraints that were unsatisfied leading to the failure.
+    impeding_waypoints: ?[]const WaypointOptimizationImpedingWaypoint = null,
+
+    /// Waypoints in the order of the optimized sequence.
+    optimized_waypoints: ?[]const WaypointOptimizationOptimizedWaypoint = null,
+
+    /// The pricing bucket for which the query is charged at.
+    pricing_bucket: []const u8,
+
+    /// Time breakdown for the sequence.
+    time_breakdown: ?WaypointOptimizationTimeBreakdown = null,
+
+    pub const json_field_names = .{
+        .connections = "Connections",
+        .distance = "Distance",
+        .duration = "Duration",
+        .impeding_waypoints = "ImpedingWaypoints",
+        .optimized_waypoints = "OptimizedWaypoints",
+        .pricing_bucket = "PricingBucket",
+        .time_breakdown = "TimeBreakdown",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: OptimizeWaypointsInput, options: Options) !OptimizeWaypointsOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "georoutes");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: OptimizeWaypointsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("georoutes", "Geo Routes", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const path = "/optimize-waypoints";
+
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    if (input.key) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "key=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(alloc);
+
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(alloc, "{");
+
+    if (input.avoid) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Avoid\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.clustering) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Clustering\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.departure_time) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"DepartureTime\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.destination) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Destination\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.destination_options) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"DestinationOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.driver) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Driver\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.exclude) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Exclude\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.optimize_sequencing_for) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"OptimizeSequencingFor\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"Origin\":");
+    try aws.json.writeValue(@TypeOf(input.origin), input.origin, alloc, &body_buf);
+    has_prev = true;
+    if (input.origin_options) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"OriginOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.traffic) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Traffic\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.travel_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"TravelMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.travel_mode_options) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"TravelModeOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.waypoints) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"Waypoints\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(alloc, "}");
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !OptimizeWaypointsOutput {
+    var result: OptimizeWaypointsOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(OptimizeWaypointsOutput, body, alloc);
+    }
+    _ = status;
+    if (headers.get("x-amz-geo-pricing-bucket")) |value| {
+        result.pricing_bucket = try alloc.dupe(u8, value);
+    }
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

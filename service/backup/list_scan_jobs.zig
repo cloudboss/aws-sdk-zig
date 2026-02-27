@@ -1,0 +1,349 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const MalwareScanner = @import("malware_scanner.zig").MalwareScanner;
+const ScanResourceType = @import("scan_resource_type.zig").ScanResourceType;
+const ScanResultStatus = @import("scan_result_status.zig").ScanResultStatus;
+const ScanState = @import("scan_state.zig").ScanState;
+const ScanJob = @import("scan_job.zig").ScanJob;
+
+pub const ListScanJobsInput = struct {
+    /// The account ID to list the jobs from. Returns only backup jobs associated
+    /// with the specified account ID.
+    ///
+    /// If used from an Amazon Web Services Organizations management account,
+    /// passing `*` returns all jobs across the organization.
+    ///
+    /// Pattern: `^[0-9]{12}$`
+    by_account_id: ?[]const u8 = null,
+
+    /// Returns only scan jobs that will be stored in the specified backup vault.
+    /// Backup vaults are identified by names that are unique to the account
+    /// used to create them and the Amazon Web Services Region where they are
+    /// created.
+    ///
+    /// Pattern: `^[a-zA-Z0-9\-\_\.]{2,50}$`
+    by_backup_vault_name: ?[]const u8 = null,
+
+    /// Returns only scan jobs completed after a date expressed in Unix format and
+    /// Coordinated Universal Time (UTC).
+    by_complete_after: ?i64 = null,
+
+    /// Returns only backup jobs completed before a date expressed in Unix format
+    /// and Coordinated Universal Time (UTC).
+    by_complete_before: ?i64 = null,
+
+    /// Returns only the scan jobs for the specified malware scanner. Currently only
+    /// supports `GUARDDUTY`.
+    by_malware_scanner: ?MalwareScanner = null,
+
+    /// Returns only the scan jobs that are ran against the specified recovery
+    /// point.
+    by_recovery_point_arn: ?[]const u8 = null,
+
+    /// Returns only scan jobs that match the specified resource Amazon Resource
+    /// Name (ARN).
+    by_resource_arn: ?[]const u8 = null,
+
+    /// Returns restore testing selections by the specified restore testing
+    /// plan name.
+    ///
+    /// * `EBS`for Amazon Elastic Block Store
+    ///
+    /// * `EC2`for Amazon Elastic Compute Cloud
+    ///
+    /// * `S3`for Amazon Simple Storage Service (Amazon S3)
+    ///
+    /// Pattern: `^[a-zA-Z0-9\-\_\.]{1,50}$`
+    by_resource_type: ?ScanResourceType = null,
+
+    /// Returns only the scan jobs for the specified scan results:
+    ///
+    /// * `THREATS_FOUND`
+    ///
+    /// * `NO_THREATS_FOUND`
+    by_scan_result_status: ?ScanResultStatus = null,
+
+    /// Returns only the scan jobs for the specified scanning job state.
+    by_state: ?ScanState = null,
+
+    /// The maximum number of items to be returned.
+    ///
+    /// Valid Range: Minimum value of 1. Maximum value of 1000.
+    max_results: ?i32 = null,
+
+    /// The next item following a partial list of returned items. For example, if a
+    /// request is made to
+    /// return `MaxResults` number of items, `NextToken` allows you to return more
+    /// items
+    /// in your list starting at the location pointed to by the next token.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .by_account_id = "ByAccountId",
+        .by_backup_vault_name = "ByBackupVaultName",
+        .by_complete_after = "ByCompleteAfter",
+        .by_complete_before = "ByCompleteBefore",
+        .by_malware_scanner = "ByMalwareScanner",
+        .by_recovery_point_arn = "ByRecoveryPointArn",
+        .by_resource_arn = "ByResourceArn",
+        .by_resource_type = "ByResourceType",
+        .by_scan_result_status = "ByScanResultStatus",
+        .by_state = "ByState",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListScanJobsOutput = struct {
+    /// The next item following a partial list of returned items. For example, if a
+    /// request is made to
+    /// return `MaxResults` number of items, `NextToken` allows you to return more
+    /// items
+    /// in your list starting at the location pointed to by the next token.
+    next_token: ?[]const u8 = null,
+
+    /// An array of structures containing metadata about your scan jobs returned in
+    /// JSON format.
+    scan_jobs: ?[]const ScanJob = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .scan_jobs = "ScanJobs",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListScanJobsInput, options: Options) !ListScanJobsOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "backup");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: ListScanJobsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("backup", "Backup", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const path = "/scan/jobs";
+
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    if (input.by_account_id) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByAccountId=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.by_backup_vault_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByBackupVaultName=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.by_complete_after) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByCompleteAfter=");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(alloc, num_str);
+        }
+        query_has_prev = true;
+    }
+    if (input.by_complete_before) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByCompleteBefore=");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(alloc, num_str);
+        }
+        query_has_prev = true;
+    }
+    if (input.by_malware_scanner) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByMalwareScanner=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
+        query_has_prev = true;
+    }
+    if (input.by_recovery_point_arn) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByRecoveryPointArn=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.by_resource_arn) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByResourceArn=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.by_resource_type) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByResourceType=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
+        query_has_prev = true;
+    }
+    if (input.by_scan_result_status) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByScanResultStatus=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
+        query_has_prev = true;
+    }
+    if (input.by_state) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "ByState=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
+        query_has_prev = true;
+    }
+    if (input.max_results) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "MaxResults=");
+        {
+            const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(alloc, num_str);
+        }
+        query_has_prev = true;
+    }
+    if (input.next_token) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "NextToken=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListScanJobsOutput {
+    var result: ListScanJobsOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(ListScanJobsOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DependencyFailureException")) {
+        return .{ .arena = arena, .kind = .{ .dependency_failure_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterValueException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_value_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRequestException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidResourceStateException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_resource_state_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MissingParameterValueException")) {
+        return .{ .arena = arena, .kind = .{ .missing_parameter_value_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableException")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

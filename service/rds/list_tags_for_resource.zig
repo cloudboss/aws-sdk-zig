@@ -7,21 +7,9 @@ const Filter = @import("filter.zig").Filter;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-pub const ListTagsForResourceInput = struct {
-    /// This parameter isn't currently supported.
-    filters: ?[]const Filter = null,
+const ListTagsForResourceInput = @import("list_tags_for_resource_message.zig").ListTagsForResourceMessage;
 
-    /// The Amazon RDS resource with tags to be listed. This value is an Amazon
-    /// Resource Name (ARN). For information about creating an ARN, see [
-    /// Constructing an ARN for Amazon
-    /// RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing) in the *Amazon RDS User Guide*.
-    resource_name: []const u8,
-};
-
-pub const ListTagsForResourceOutput = struct {
-    /// List of tags returned by the `ListTagsForResource` operation.
-    tag_list: ?[]const Tag = null,
-};
+const ListTagsForResourceOutput = @import("tag_list_message.zig").TagListMessage;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

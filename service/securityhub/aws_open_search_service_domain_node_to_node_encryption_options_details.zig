@@ -1,0 +1,9 @@
+/// Provides details about the configuration for node-to-node encryption.
+pub const AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails = struct {
+    /// Whether node-to-node encryption is enabled.
+    enabled: ?bool,
+
+    pub const json_field_names = .{
+        .enabled = "Enabled",
+    };
+};

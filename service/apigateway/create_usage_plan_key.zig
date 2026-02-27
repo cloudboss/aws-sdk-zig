@@ -22,7 +22,7 @@ pub const CreateUsagePlanKeyInput = struct {
     };
 };
 
-const CreateUsagePlanKeyOutput = @import("usage_plan_key.zig").CreateUsagePlanKeyOutput;
+const CreateUsagePlanKeyOutput = @import("usage_plan_key.zig").UsagePlanKey;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

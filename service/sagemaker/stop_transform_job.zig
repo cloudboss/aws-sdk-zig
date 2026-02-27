@@ -13,7 +13,7 @@ pub const StopTransformJobInput = struct {
     };
 };
 
-pub const StopTransformJobOutput = struct {};
+const StopTransformJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -101,7 +101,7 @@ pub const UpdateFunctionCodeInput = struct {
     };
 };
 
-const UpdateFunctionCodeOutput = @import("function_configuration.zig").UpdateFunctionCodeOutput;
+const UpdateFunctionCodeOutput = @import("function_configuration.zig").FunctionConfiguration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

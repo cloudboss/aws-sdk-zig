@@ -50,7 +50,7 @@ pub const PutFunctionEventInvokeConfigInput = struct {
     };
 };
 
-const PutFunctionEventInvokeConfigOutput = @import("function_event_invoke_config.zig").PutFunctionEventInvokeConfigOutput;
+const PutFunctionEventInvokeConfigOutput = @import("function_event_invoke_config.zig").FunctionEventInvokeConfig;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -32,7 +32,7 @@ pub const DisableKeyRotationInput = struct {
     };
 };
 
-pub const DisableKeyRotationOutput = struct {};
+const DisableKeyRotationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

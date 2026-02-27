@@ -6,23 +6,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-pub const ListTagsForResourceInput = struct {
-    /// The Amazon Resource Name (ARN) of the resource for which you want the list
-    /// of tags,
-    /// for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or
-    /// `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
-    ///
-    /// For more information about ARNs, see [Amazon Resource Names (ARNs)
-    /// and Amazon Web
-    /// Services Service
-    /// Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-    resource_name: []const u8,
-};
+const ListTagsForResourceInput = @import("list_tags_for_resource_message.zig").ListTagsForResourceMessage;
 
-pub const ListTagsForResourceOutput = struct {
-    /// A list of tags as key-value pairs.
-    tag_list: ?[]const Tag = null,
-};
+const ListTagsForResourceOutput = @import("tag_list_message.zig").TagListMessage;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

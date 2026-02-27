@@ -21,7 +21,7 @@ pub const CreateTagsInput = struct {
     tags: []const Tag,
 };
 
-pub const CreateTagsOutput = struct {};
+const CreateTagsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

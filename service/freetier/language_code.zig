@@ -1,0 +1,31 @@
+pub const LanguageCode = enum {
+    en_us,
+    en_gb,
+    id_id,
+    de_de,
+    es_es,
+    fr_fr,
+    ja_jp,
+    it_it,
+    pt_pt,
+    ko_kr,
+    zh_cn,
+    zh_tw,
+    tr_tr,
+
+    pub const json_field_names = .{
+        .en_us = "EN_US",
+        .en_gb = "EN_GB",
+        .id_id = "ID_ID",
+        .de_de = "DE_DE",
+        .es_es = "ES_ES",
+        .fr_fr = "FR_FR",
+        .ja_jp = "JA_JP",
+        .it_it = "IT_IT",
+        .pt_pt = "PT_PT",
+        .ko_kr = "KO_KR",
+        .zh_cn = "ZH_CN",
+        .zh_tw = "ZH_TW",
+        .tr_tr = "TR_TR",
+    };
+};

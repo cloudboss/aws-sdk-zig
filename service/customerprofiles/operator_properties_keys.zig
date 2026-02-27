@@ -1,0 +1,33 @@
+pub const OperatorPropertiesKeys = enum {
+    value,
+    values,
+    data_type,
+    upper_bound,
+    lower_bound,
+    source_data_type,
+    destination_data_type,
+    validation_action,
+    mask_value,
+    mask_length,
+    truncate_length,
+    math_operation_fields_order,
+    concat_format,
+    subfield_category_map,
+
+    pub const json_field_names = .{
+        .value = "VALUE",
+        .values = "VALUES",
+        .data_type = "DATA_TYPE",
+        .upper_bound = "UPPER_BOUND",
+        .lower_bound = "LOWER_BOUND",
+        .source_data_type = "SOURCE_DATA_TYPE",
+        .destination_data_type = "DESTINATION_DATA_TYPE",
+        .validation_action = "VALIDATION_ACTION",
+        .mask_value = "MASK_VALUE",
+        .mask_length = "MASK_LENGTH",
+        .truncate_length = "TRUNCATE_LENGTH",
+        .math_operation_fields_order = "MATH_OPERATION_FIELDS_ORDER",
+        .concat_format = "CONCAT_FORMAT",
+        .subfield_category_map = "SUBFIELD_CATEGORY_MAP",
+    };
+};

@@ -24,7 +24,7 @@ pub const ModifyIntegrationInput = struct {
     integration_name: ?[]const u8 = null,
 };
 
-const ModifyIntegrationOutput = @import("integration.zig").ModifyIntegrationOutput;
+const ModifyIntegrationOutput = @import("integration.zig").Integration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

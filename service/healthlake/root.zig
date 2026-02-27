@@ -1,0 +1,19 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+pub const waiters = @import("waiters.zig");
+
+pub const create_fhir_datastore = @import("create_fhir_datastore.zig");
+pub const delete_fhir_datastore = @import("delete_fhir_datastore.zig");
+pub const describe_fhir_datastore = @import("describe_fhir_datastore.zig");
+pub const describe_fhir_export_job = @import("describe_fhir_export_job.zig");
+pub const describe_fhir_import_job = @import("describe_fhir_import_job.zig");
+pub const list_fhir_datastores = @import("list_fhir_datastores.zig");
+pub const list_fhir_export_jobs = @import("list_fhir_export_jobs.zig");
+pub const list_fhir_import_jobs = @import("list_fhir_import_jobs.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const start_fhir_export_job = @import("start_fhir_export_job.zig");
+pub const start_fhir_import_job = @import("start_fhir_import_job.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");

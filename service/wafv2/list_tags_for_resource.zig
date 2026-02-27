@@ -5,48 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagInfoForResource = @import("tag_info_for_resource.zig").TagInfoForResource;
 
-pub const ListTagsForResourceInput = struct {
-    /// The maximum number of objects that you want WAF to return for this request.
-    /// If more
-    /// objects are available, in the response, WAF provides a
-    /// `NextMarker` value that you can use in a subsequent call to get the next
-    /// batch of objects.
-    limit: ?i32 = null,
+const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 
-    /// When you request a list of objects with a `Limit` setting, if the number of
-    /// objects that are still available
-    /// for retrieval exceeds the limit, WAF returns a `NextMarker`
-    /// value in the response. To retrieve the next batch of objects, provide the
-    /// marker from the prior call in your next request.
-    next_marker: ?[]const u8 = null,
-
-    /// The Amazon Resource Name (ARN) of the resource.
-    resource_arn: []const u8,
-
-    pub const json_field_names = .{
-        .limit = "Limit",
-        .next_marker = "NextMarker",
-        .resource_arn = "ResourceARN",
-    };
-};
-
-pub const ListTagsForResourceOutput = struct {
-    /// When you request a list of objects with a `Limit` setting, if the number of
-    /// objects that are still available
-    /// for retrieval exceeds the limit, WAF returns a `NextMarker`
-    /// value in the response. To retrieve the next batch of objects, provide the
-    /// marker from the prior call in your next request.
-    next_marker: ?[]const u8 = null,
-
-    /// The collection of tagging definitions for the resource. If you specified a
-    /// `Limit` in your request, this might not be the full list.
-    tag_info_for_resource: ?TagInfoForResource = null,
-
-    pub const json_field_names = .{
-        .next_marker = "NextMarker",
-        .tag_info_for_resource = "TagInfoForResource",
-    };
-};
+const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

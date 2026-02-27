@@ -27,7 +27,7 @@ pub const AddTagsToStreamInput = struct {
     };
 };
 
-pub const AddTagsToStreamOutput = struct {};
+const AddTagsToStreamOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

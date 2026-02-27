@@ -1,0 +1,31 @@
+pub const GlueConnectionType = enum {
+    snowflake,
+    bigquery,
+    documentdb,
+    dynamodb,
+    mysql,
+    opensearch,
+    oracle,
+    postgresql,
+    redshift,
+    saphana,
+    sqlserver,
+    teradata,
+    vertica,
+
+    pub const json_field_names = .{
+        .snowflake = "SNOWFLAKE",
+        .bigquery = "BIGQUERY",
+        .documentdb = "DOCUMENTDB",
+        .dynamodb = "DYNAMODB",
+        .mysql = "MYSQL",
+        .opensearch = "OPENSEARCH",
+        .oracle = "ORACLE",
+        .postgresql = "POSTGRESQL",
+        .redshift = "REDSHIFT",
+        .saphana = "SAPHANA",
+        .sqlserver = "SQLSERVER",
+        .teradata = "TERADATA",
+        .vertica = "VERTICA",
+    };
+};

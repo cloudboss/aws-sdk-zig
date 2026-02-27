@@ -4,21 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const UntagResourceInput = struct {
-    /// The Amazon Resource Name (ARN) of the resource that you want to remove tags
-    /// from. To get the ARN, send a GET request with the resource name.
-    arn: []const u8,
+const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
 
-    /// The keys of the tags that you want to remove from the resource.
-    tag_keys: ?[]const []const u8 = null,
-
-    pub const json_field_names = .{
-        .arn = "Arn",
-        .tag_keys = "TagKeys",
-    };
-};
-
-pub const UntagResourceOutput = struct {};
+const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

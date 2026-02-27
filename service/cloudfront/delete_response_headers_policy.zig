@@ -18,7 +18,7 @@ pub const DeleteResponseHeadersPolicyInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteResponseHeadersPolicyOutput = struct {};
+const DeleteResponseHeadersPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

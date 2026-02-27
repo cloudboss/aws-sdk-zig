@@ -50,7 +50,7 @@ pub const AssociateKmsKeyInput = struct {
     };
 };
 
-pub const AssociateKmsKeyOutput = struct {};
+const AssociateKmsKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

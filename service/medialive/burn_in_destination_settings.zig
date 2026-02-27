@@ -1,0 +1,137 @@
+const BurnInAlignment = @import("burn_in_alignment.zig").BurnInAlignment;
+const BurnInBackgroundColor = @import("burn_in_background_color.zig").BurnInBackgroundColor;
+const InputLocation = @import("input_location.zig").InputLocation;
+const BurnInFontColor = @import("burn_in_font_color.zig").BurnInFontColor;
+const BurnInOutlineColor = @import("burn_in_outline_color.zig").BurnInOutlineColor;
+const BurnInShadowColor = @import("burn_in_shadow_color.zig").BurnInShadowColor;
+const BurnInDestinationSubtitleRows = @import("burn_in_destination_subtitle_rows.zig").BurnInDestinationSubtitleRows;
+const BurnInTeletextGridControl = @import("burn_in_teletext_grid_control.zig").BurnInTeletextGridControl;
+
+/// Burn In Destination Settings
+pub const BurnInDestinationSettings = struct {
+    /// If no explicit xPosition or yPosition is provided, setting alignment to
+    /// centered will place the captions at the bottom center of the output.
+    /// Similarly, setting a left alignment will align captions to the bottom left
+    /// of the output. If x and y positions are given in conjunction with the
+    /// alignment parameter, the font will be justified (either left or centered)
+    /// relative to those coordinates. Selecting "smart" justification will
+    /// left-justify live subtitles and center-justify pre-recorded subtitles. All
+    /// burn-in and DVB-Sub font settings must match.
+    alignment: ?BurnInAlignment,
+
+    /// Specifies the color of the rectangle behind the captions. All burn-in and
+    /// DVB-Sub font settings must match.
+    background_color: ?BurnInBackgroundColor,
+
+    /// Specifies the opacity of the background rectangle. 255 is opaque; 0 is
+    /// transparent. Leaving this parameter out is equivalent to setting it to 0
+    /// (transparent). All burn-in and DVB-Sub font settings must match.
+    background_opacity: ?i32,
+
+    /// External font file used for caption burn-in. File extension must be 'ttf' or
+    /// 'tte'. Although the user can select output fonts for many different types of
+    /// input captions, embedded, STL and teletext sources use a strict grid system.
+    /// Using external fonts with these caption sources could cause unexpected
+    /// display of proportional fonts. All burn-in and DVB-Sub font settings must
+    /// match.
+    font: ?InputLocation,
+
+    /// Specifies the color of the burned-in captions. This option is not valid for
+    /// source captions that are STL, 608/embedded or teletext. These source
+    /// settings are already pre-defined by the caption stream. All burn-in and
+    /// DVB-Sub font settings must match.
+    font_color: ?BurnInFontColor,
+
+    /// Specifies the opacity of the burned-in captions. 255 is opaque; 0 is
+    /// transparent. All burn-in and DVB-Sub font settings must match.
+    font_opacity: ?i32,
+
+    /// Font resolution in DPI (dots per inch); default is 96 dpi. All burn-in and
+    /// DVB-Sub font settings must match.
+    font_resolution: ?i32,
+
+    /// When set to 'auto' fontSize will scale depending on the size of the output.
+    /// Giving a positive integer will specify the exact font size in points. All
+    /// burn-in and DVB-Sub font settings must match.
+    font_size: ?[]const u8,
+
+    /// Specifies font outline color. This option is not valid for source captions
+    /// that are either 608/embedded or teletext. These source settings are already
+    /// pre-defined by the caption stream. All burn-in and DVB-Sub font settings
+    /// must match.
+    outline_color: ?BurnInOutlineColor,
+
+    /// Specifies font outline size in pixels. This option is not valid for source
+    /// captions that are either 608/embedded or teletext. These source settings are
+    /// already pre-defined by the caption stream. All burn-in and DVB-Sub font
+    /// settings must match.
+    outline_size: ?i32,
+
+    /// Specifies the color of the shadow cast by the captions. All burn-in and
+    /// DVB-Sub font settings must match.
+    shadow_color: ?BurnInShadowColor,
+
+    /// Specifies the opacity of the shadow. 255 is opaque; 0 is transparent.
+    /// Leaving this parameter out is equivalent to setting it to 0 (transparent).
+    /// All burn-in and DVB-Sub font settings must match.
+    shadow_opacity: ?i32,
+
+    /// Specifies the horizontal offset of the shadow relative to the captions in
+    /// pixels. A value of -2 would result in a shadow offset 2 pixels to the left.
+    /// All burn-in and DVB-Sub font settings must match.
+    shadow_x_offset: ?i32,
+
+    /// Specifies the vertical offset of the shadow relative to the captions in
+    /// pixels. A value of -2 would result in a shadow offset 2 pixels above the
+    /// text. All burn-in and DVB-Sub font settings must match.
+    shadow_y_offset: ?i32,
+
+    /// Applies only when the input captions are Teletext and the output captions
+    /// are DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap.
+    /// The captions bitmap is 700 wide × 576 high and will be laid over the video.
+    /// For example, a value of 16 divides the bitmap into 16 lines, with each line
+    /// 36 pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter
+    /// the same number in every encode in every output that converts the same
+    /// Teletext source to DVB-Sub or Burn-in.
+    subtitle_rows: ?BurnInDestinationSubtitleRows,
+
+    /// Controls whether a fixed grid size will be used to generate the output
+    /// subtitles bitmap. Only applicable for Teletext inputs and DVB-Sub/Burn-in
+    /// outputs.
+    teletext_grid_control: ?BurnInTeletextGridControl,
+
+    /// Specifies the horizontal position of the caption relative to the left side
+    /// of the output in pixels. A value of 10 would result in the captions starting
+    /// 10 pixels from the left of the output. If no explicit xPosition is provided,
+    /// the horizontal caption position will be determined by the alignment
+    /// parameter. All burn-in and DVB-Sub font settings must match.
+    x_position: ?i32,
+
+    /// Specifies the vertical position of the caption relative to the top of the
+    /// output in pixels. A value of 10 would result in the captions starting 10
+    /// pixels from the top of the output. If no explicit yPosition is provided, the
+    /// caption will be positioned towards the bottom of the output. All burn-in and
+    /// DVB-Sub font settings must match.
+    y_position: ?i32,
+
+    pub const json_field_names = .{
+        .alignment = "Alignment",
+        .background_color = "BackgroundColor",
+        .background_opacity = "BackgroundOpacity",
+        .font = "Font",
+        .font_color = "FontColor",
+        .font_opacity = "FontOpacity",
+        .font_resolution = "FontResolution",
+        .font_size = "FontSize",
+        .outline_color = "OutlineColor",
+        .outline_size = "OutlineSize",
+        .shadow_color = "ShadowColor",
+        .shadow_opacity = "ShadowOpacity",
+        .shadow_x_offset = "ShadowXOffset",
+        .shadow_y_offset = "ShadowYOffset",
+        .subtitle_rows = "SubtitleRows",
+        .teletext_grid_control = "TeletextGridControl",
+        .x_position = "XPosition",
+        .y_position = "YPosition",
+    };
+};

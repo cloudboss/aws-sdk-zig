@@ -17,7 +17,7 @@ pub const RejectDomainNameAccessAssociationInput = struct {
     };
 };
 
-pub const RejectDomainNameAccessAssociationOutput = struct {};
+const RejectDomainNameAccessAssociationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

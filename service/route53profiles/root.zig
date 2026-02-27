@@ -1,0 +1,21 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const associate_profile = @import("associate_profile.zig");
+pub const associate_resource_to_profile = @import("associate_resource_to_profile.zig");
+pub const create_profile = @import("create_profile.zig");
+pub const delete_profile = @import("delete_profile.zig");
+pub const disassociate_profile = @import("disassociate_profile.zig");
+pub const disassociate_resource_from_profile = @import("disassociate_resource_from_profile.zig");
+pub const get_profile = @import("get_profile.zig");
+pub const get_profile_association = @import("get_profile_association.zig");
+pub const get_profile_resource_association = @import("get_profile_resource_association.zig");
+pub const list_profile_associations = @import("list_profile_associations.zig");
+pub const list_profile_resource_associations = @import("list_profile_resource_associations.zig");
+pub const list_profiles = @import("list_profiles.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_profile_resource_association = @import("update_profile_resource_association.zig");

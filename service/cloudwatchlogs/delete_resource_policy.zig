@@ -4,28 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteResourcePolicyInput = struct {
-    /// The expected revision ID of the resource policy. Required when deleting a
-    /// resource-scoped
-    /// policy to prevent concurrent modifications.
-    expected_revision_id: ?[]const u8 = null,
+const DeleteResourcePolicyInput = @import("delete_resource_policy_request.zig").DeleteResourcePolicyRequest;
 
-    /// The name of the policy to be revoked. This parameter is required.
-    policy_name: ?[]const u8 = null,
-
-    /// The ARN of the CloudWatch Logs resource for which the resource policy needs
-    /// to be
-    /// deleted
-    resource_arn: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .expected_revision_id = "expectedRevisionId",
-        .policy_name = "policyName",
-        .resource_arn = "resourceArn",
-    };
-};
-
-pub const DeleteResourcePolicyOutput = struct {};
+const DeleteResourcePolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

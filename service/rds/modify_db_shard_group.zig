@@ -28,7 +28,7 @@ pub const ModifyDBShardGroupInput = struct {
     min_acu: ?f64 = null,
 };
 
-const ModifyDBShardGroupOutput = @import("db_shard_group.zig").ModifyDBShardGroupOutput;
+const ModifyDBShardGroupOutput = @import("db_shard_group.zig").DBShardGroup;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

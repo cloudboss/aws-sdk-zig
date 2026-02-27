@@ -4,20 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const TagResourceInput = struct {
-    /// The Amazon Resource Name (ARN) for the GuardDuty resource to apply a tag to.
-    resource_arn: []const u8,
+const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
 
-    /// The tags to be added to a resource.
-    tags: []const aws.map.StringMapEntry,
-
-    pub const json_field_names = .{
-        .resource_arn = "ResourceArn",
-        .tags = "Tags",
-    };
-};
-
-pub const TagResourceOutput = struct {};
+const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

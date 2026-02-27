@@ -1,0 +1,20 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const accept_primary_email_update = @import("accept_primary_email_update.zig");
+pub const delete_alternate_contact = @import("delete_alternate_contact.zig");
+pub const disable_region = @import("disable_region.zig");
+pub const enable_region = @import("enable_region.zig");
+pub const get_account_information = @import("get_account_information.zig");
+pub const get_alternate_contact = @import("get_alternate_contact.zig");
+pub const get_contact_information = @import("get_contact_information.zig");
+pub const get_gov_cloud_account_information = @import("get_gov_cloud_account_information.zig");
+pub const get_primary_email = @import("get_primary_email.zig");
+pub const get_region_opt_status = @import("get_region_opt_status.zig");
+pub const list_regions = @import("list_regions.zig");
+pub const put_account_name = @import("put_account_name.zig");
+pub const put_alternate_contact = @import("put_alternate_contact.zig");
+pub const put_contact_information = @import("put_contact_information.zig");
+pub const start_primary_email_update = @import("start_primary_email_update.zig");

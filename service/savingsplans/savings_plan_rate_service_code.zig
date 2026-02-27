@@ -1,0 +1,33 @@
+pub const SavingsPlanRateServiceCode = enum {
+    ec2,
+    fargate,
+    fargate_eks,
+    lambda,
+    sagemaker,
+    rds,
+    aurora,
+    dynamodb,
+    elasticache,
+    docdb,
+    neptune,
+    timestream,
+    mcs,
+    dms,
+
+    pub const json_field_names = .{
+        .ec2 = "EC2",
+        .fargate = "FARGATE",
+        .fargate_eks = "FARGATE_EKS",
+        .lambda = "LAMBDA",
+        .sagemaker = "SAGEMAKER",
+        .rds = "RDS",
+        .aurora = "AURORA",
+        .dynamodb = "DYNAMODB",
+        .elasticache = "ELASTICACHE",
+        .docdb = "DOCDB",
+        .neptune = "NEPTUNE",
+        .timestream = "TIMESTREAM",
+        .mcs = "MCS",
+        .dms = "DMS",
+    };
+};

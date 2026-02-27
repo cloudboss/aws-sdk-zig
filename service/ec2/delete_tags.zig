@@ -37,7 +37,7 @@ pub const DeleteTagsInput = struct {
     tags: ?[]const Tag = null,
 };
 
-pub const DeleteTagsOutput = struct {};
+const DeleteTagsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

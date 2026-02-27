@@ -11,7 +11,7 @@ pub const DeleteUserInput = struct {
     user_id: []const u8,
 };
 
-const DeleteUserOutput = @import("user.zig").DeleteUserOutput;
+const DeleteUserOutput = @import("user.zig").User;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

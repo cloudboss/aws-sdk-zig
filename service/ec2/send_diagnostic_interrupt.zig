@@ -16,7 +16,7 @@ pub const SendDiagnosticInterruptInput = struct {
     instance_id: []const u8,
 };
 
-pub const SendDiagnosticInterruptOutput = struct {};
+const SendDiagnosticInterruptOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

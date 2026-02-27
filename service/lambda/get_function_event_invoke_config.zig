@@ -28,7 +28,7 @@ pub const GetFunctionEventInvokeConfigInput = struct {
     };
 };
 
-const GetFunctionEventInvokeConfigOutput = @import("function_event_invoke_config.zig").GetFunctionEventInvokeConfigOutput;
+const GetFunctionEventInvokeConfigOutput = @import("function_event_invoke_config.zig").FunctionEventInvokeConfig;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

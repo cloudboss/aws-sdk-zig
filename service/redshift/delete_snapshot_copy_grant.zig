@@ -9,7 +9,7 @@ pub const DeleteSnapshotCopyGrantInput = struct {
     snapshot_copy_grant_name: []const u8,
 };
 
-pub const DeleteSnapshotCopyGrantOutput = struct {};
+const DeleteSnapshotCopyGrantOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

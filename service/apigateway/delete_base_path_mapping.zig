@@ -24,7 +24,7 @@ pub const DeleteBasePathMappingInput = struct {
     };
 };
 
-pub const DeleteBasePathMappingOutput = struct {};
+const DeleteBasePathMappingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

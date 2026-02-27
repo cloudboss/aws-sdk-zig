@@ -51,7 +51,7 @@ pub const StopStreamEncryptionInput = struct {
     };
 };
 
-pub const StopStreamEncryptionOutput = struct {};
+const StopStreamEncryptionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -27,7 +27,7 @@ pub const AdminForgetDeviceInput = struct {
     };
 };
 
-pub const AdminForgetDeviceOutput = struct {};
+const AdminForgetDeviceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

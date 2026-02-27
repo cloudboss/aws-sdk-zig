@@ -1,0 +1,8 @@
+pub const DeleteDomainRequest = struct {
+    /// The unique name of the domain.
+    domain_name: []const u8,
+
+    pub const json_field_names = .{
+        .domain_name = "DomainName",
+    };
+};

@@ -16,7 +16,7 @@ pub const DeleteNetworkInterfaceInput = struct {
     network_interface_id: []const u8,
 };
 
-pub const DeleteNetworkInterfaceOutput = struct {};
+const DeleteNetworkInterfaceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

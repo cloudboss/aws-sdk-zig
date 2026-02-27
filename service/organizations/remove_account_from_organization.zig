@@ -17,7 +17,7 @@ pub const RemoveAccountFromOrganizationInput = struct {
     };
 };
 
-pub const RemoveAccountFromOrganizationOutput = struct {};
+const RemoveAccountFromOrganizationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

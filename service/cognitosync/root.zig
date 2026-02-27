@@ -1,0 +1,21 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+
+pub const bulk_publish = @import("bulk_publish.zig");
+pub const delete_dataset = @import("delete_dataset.zig");
+pub const describe_dataset = @import("describe_dataset.zig");
+pub const describe_identity_pool_usage = @import("describe_identity_pool_usage.zig");
+pub const describe_identity_usage = @import("describe_identity_usage.zig");
+pub const get_bulk_publish_details = @import("get_bulk_publish_details.zig");
+pub const get_cognito_events = @import("get_cognito_events.zig");
+pub const get_identity_pool_configuration = @import("get_identity_pool_configuration.zig");
+pub const list_datasets = @import("list_datasets.zig");
+pub const list_identity_pool_usage = @import("list_identity_pool_usage.zig");
+pub const list_records = @import("list_records.zig");
+pub const register_device = @import("register_device.zig");
+pub const set_cognito_events = @import("set_cognito_events.zig");
+pub const set_identity_pool_configuration = @import("set_identity_pool_configuration.zig");
+pub const subscribe_to_dataset = @import("subscribe_to_dataset.zig");
+pub const unsubscribe_from_dataset = @import("unsubscribe_from_dataset.zig");
+pub const update_records = @import("update_records.zig");

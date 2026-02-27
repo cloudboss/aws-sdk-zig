@@ -38,7 +38,7 @@ pub const DisableStageTransitionInput = struct {
     };
 };
 
-pub const DisableStageTransitionOutput = struct {};
+const DisableStageTransitionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

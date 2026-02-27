@@ -4,37 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const UntagResourceInput = struct {
-    /// The Amazon Resource Name (ARN) that identifies the resource for which to
-    /// list the tags. The following resources are supported:
-    ///
-    /// * `ConfigurationRecorder`
-    ///
-    /// * `ConfigRule`
-    ///
-    /// * `OrganizationConfigRule`
-    ///
-    /// * `ConformancePack`
-    ///
-    /// * `OrganizationConformancePack`
-    ///
-    /// * `ConfigurationAggregator`
-    ///
-    /// * `AggregationAuthorization`
-    ///
-    /// * `StoredQuery`
-    resource_arn: []const u8,
+const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
 
-    /// The keys of the tags to be removed.
-    tag_keys: []const []const u8,
-
-    pub const json_field_names = .{
-        .resource_arn = "ResourceArn",
-        .tag_keys = "TagKeys",
-    };
-};
-
-pub const UntagResourceOutput = struct {};
+const UntagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

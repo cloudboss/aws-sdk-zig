@@ -17,7 +17,7 @@ pub const DeleteDocumentationPartInput = struct {
     };
 };
 
-pub const DeleteDocumentationPartOutput = struct {};
+const DeleteDocumentationPartOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -53,7 +53,7 @@ pub const CreateStreamInput = struct {
     };
 };
 
-pub const CreateStreamOutput = struct {};
+const CreateStreamOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

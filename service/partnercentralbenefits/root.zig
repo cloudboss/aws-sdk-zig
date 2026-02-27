@@ -1,0 +1,22 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const amend_benefit_application = @import("amend_benefit_application.zig");
+pub const associate_benefit_application_resource = @import("associate_benefit_application_resource.zig");
+pub const cancel_benefit_application = @import("cancel_benefit_application.zig");
+pub const create_benefit_application = @import("create_benefit_application.zig");
+pub const disassociate_benefit_application_resource = @import("disassociate_benefit_application_resource.zig");
+pub const get_benefit = @import("get_benefit.zig");
+pub const get_benefit_allocation = @import("get_benefit_allocation.zig");
+pub const get_benefit_application = @import("get_benefit_application.zig");
+pub const list_benefit_allocations = @import("list_benefit_allocations.zig");
+pub const list_benefit_applications = @import("list_benefit_applications.zig");
+pub const list_benefits = @import("list_benefits.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const recall_benefit_application = @import("recall_benefit_application.zig");
+pub const submit_benefit_application = @import("submit_benefit_application.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_benefit_application = @import("update_benefit_application.zig");

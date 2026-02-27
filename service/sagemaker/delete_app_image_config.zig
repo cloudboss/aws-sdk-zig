@@ -13,7 +13,7 @@ pub const DeleteAppImageConfigInput = struct {
     };
 };
 
-pub const DeleteAppImageConfigOutput = struct {};
+const DeleteAppImageConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

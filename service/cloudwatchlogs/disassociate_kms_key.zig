@@ -46,7 +46,7 @@ pub const DisassociateKmsKeyInput = struct {
     };
 };
 
-pub const DisassociateKmsKeyOutput = struct {};
+const DisassociateKmsKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

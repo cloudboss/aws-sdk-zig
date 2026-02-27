@@ -7,35 +7,9 @@ const CodeGenEdge = @import("code_gen_edge.zig").CodeGenEdge;
 const CodeGenNode = @import("code_gen_node.zig").CodeGenNode;
 const Language = @import("language.zig").Language;
 
-pub const CreateScriptInput = struct {
-    /// A list of the edges in the DAG.
-    dag_edges: ?[]const CodeGenEdge = null,
+const CreateScriptInput = @import("create_script_request.zig").CreateScriptRequest;
 
-    /// A list of the nodes in the DAG.
-    dag_nodes: ?[]const CodeGenNode = null,
-
-    /// The programming language of the resulting code from the DAG.
-    language: ?Language = null,
-
-    pub const json_field_names = .{
-        .dag_edges = "DagEdges",
-        .dag_nodes = "DagNodes",
-        .language = "Language",
-    };
-};
-
-pub const CreateScriptOutput = struct {
-    /// The Python script generated from the DAG.
-    python_script: ?[]const u8 = null,
-
-    /// The Scala code generated from the DAG.
-    scala_code: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .python_script = "PythonScript",
-        .scala_code = "ScalaCode",
-    };
-};
+const CreateScriptOutput = @import("create_script_response.zig").CreateScriptResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

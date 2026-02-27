@@ -48,7 +48,7 @@ pub const PutUserPolicyInput = struct {
     user_name: []const u8,
 };
 
-pub const PutUserPolicyOutput = struct {};
+const PutUserPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,7 +18,7 @@ pub const AddRoleToDBClusterInput = struct {
     role_arn: []const u8,
 };
 
-pub const AddRoleToDBClusterOutput = struct {};
+const AddRoleToDBClusterOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,33 @@
+pub const ProjectVersionStatus = enum {
+    training_in_progress,
+    training_completed,
+    training_failed,
+    starting,
+    running,
+    failed,
+    stopping,
+    stopped,
+    deleting,
+    copying_in_progress,
+    copying_completed,
+    copying_failed,
+    deprecated,
+    expired,
+
+    pub const json_field_names = .{
+        .training_in_progress = "TRAINING_IN_PROGRESS",
+        .training_completed = "TRAINING_COMPLETED",
+        .training_failed = "TRAINING_FAILED",
+        .starting = "STARTING",
+        .running = "RUNNING",
+        .failed = "FAILED",
+        .stopping = "STOPPING",
+        .stopped = "STOPPED",
+        .deleting = "DELETING",
+        .copying_in_progress = "COPYING_IN_PROGRESS",
+        .copying_completed = "COPYING_COMPLETED",
+        .copying_failed = "COPYING_FAILED",
+        .deprecated = "DEPRECATED",
+        .expired = "EXPIRED",
+    };
+};

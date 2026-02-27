@@ -1,0 +1,31 @@
+pub const InstanceStorageResourceType = enum {
+    chat_transcripts,
+    call_recordings,
+    scheduled_reports,
+    media_streams,
+    contact_trace_records,
+    agent_events,
+    real_time_contact_analysis_segments,
+    attachments,
+    contact_evaluations,
+    screen_recordings,
+    real_time_contact_analysis_chat_segments,
+    real_time_contact_analysis_voice_segments,
+    email_messages,
+
+    pub const json_field_names = .{
+        .chat_transcripts = "CHAT_TRANSCRIPTS",
+        .call_recordings = "CALL_RECORDINGS",
+        .scheduled_reports = "SCHEDULED_REPORTS",
+        .media_streams = "MEDIA_STREAMS",
+        .contact_trace_records = "CONTACT_TRACE_RECORDS",
+        .agent_events = "AGENT_EVENTS",
+        .real_time_contact_analysis_segments = "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
+        .attachments = "ATTACHMENTS",
+        .contact_evaluations = "CONTACT_EVALUATIONS",
+        .screen_recordings = "SCREEN_RECORDINGS",
+        .real_time_contact_analysis_chat_segments = "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS",
+        .real_time_contact_analysis_voice_segments = "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS",
+        .email_messages = "EMAIL_MESSAGES",
+    };
+};

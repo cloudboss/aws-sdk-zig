@@ -10,7 +10,7 @@ pub const ExecuteStackRefactorInput = struct {
     stack_refactor_id: []const u8,
 };
 
-pub const ExecuteStackRefactorOutput = struct {};
+const ExecuteStackRefactorOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

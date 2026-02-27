@@ -4,24 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const ListTagsForResourceInput = struct {
-    /// The Amazon Resource Name (ARN) that identifies the resource to list tags
-    /// for.
-    resource_arn: []const u8,
+const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 
-    pub const json_field_names = .{
-        .resource_arn = "resourceArn",
-    };
-};
-
-pub const ListTagsForResourceOutput = struct {
-    /// The tags for the resource.
-    tags: ?[]const aws.map.StringMapEntry = null,
-
-    pub const json_field_names = .{
-        .tags = "tags",
-    };
-};
+const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

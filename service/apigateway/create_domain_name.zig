@@ -107,7 +107,7 @@ pub const CreateDomainNameInput = struct {
     };
 };
 
-const CreateDomainNameOutput = @import("domain_name.zig").CreateDomainNameOutput;
+const CreateDomainNameOutput = @import("domain_name.zig").DomainName;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

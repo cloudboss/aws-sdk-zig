@@ -39,7 +39,7 @@ pub const CreateAliasInput = struct {
     };
 };
 
-const CreateAliasOutput = @import("alias_configuration.zig").CreateAliasOutput;
+const CreateAliasOutput = @import("alias_configuration.zig").AliasConfiguration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

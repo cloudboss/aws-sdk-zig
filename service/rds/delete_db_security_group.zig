@@ -18,7 +18,7 @@ pub const DeleteDBSecurityGroupInput = struct {
     db_security_group_name: []const u8,
 };
 
-pub const DeleteDBSecurityGroupOutput = struct {};
+const DeleteDBSecurityGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

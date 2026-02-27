@@ -11,7 +11,7 @@ pub const DeleteCacheSecurityGroupInput = struct {
     cache_security_group_name: []const u8,
 };
 
-pub const DeleteCacheSecurityGroupOutput = struct {};
+const DeleteCacheSecurityGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

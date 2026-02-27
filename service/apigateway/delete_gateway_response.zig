@@ -18,7 +18,7 @@ pub const DeleteGatewayResponseInput = struct {
     };
 };
 
-pub const DeleteGatewayResponseOutput = struct {};
+const DeleteGatewayResponseOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

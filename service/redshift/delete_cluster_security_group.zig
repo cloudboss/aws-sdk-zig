@@ -9,7 +9,7 @@ pub const DeleteClusterSecurityGroupInput = struct {
     cluster_security_group_name: []const u8,
 };
 
-pub const DeleteClusterSecurityGroupOutput = struct {};
+const DeleteClusterSecurityGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

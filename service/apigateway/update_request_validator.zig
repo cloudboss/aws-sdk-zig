@@ -23,7 +23,7 @@ pub const UpdateRequestValidatorInput = struct {
     };
 };
 
-const UpdateRequestValidatorOutput = @import("request_validator.zig").UpdateRequestValidatorOutput;
+const UpdateRequestValidatorOutput = @import("request_validator.zig").RequestValidator;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

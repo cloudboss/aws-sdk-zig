@@ -1,0 +1,259 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const RuleState = @import("rule_state.zig").RuleState;
+const Tag = @import("tag.zig").Tag;
+
+pub const PutRuleInput = struct {
+    /// A description of the rule.
+    description: ?[]const u8 = null,
+
+    /// The name or ARN of the event bus to associate with this rule. If you omit
+    /// this, the
+    /// default event bus is used.
+    event_bus_name: ?[]const u8 = null,
+
+    /// The event pattern. For more information, see [Amazon EventBridge event
+    /// patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html) in the *
+    /// Amazon EventBridge User Guide*
+    /// .
+    event_pattern: ?[]const u8 = null,
+
+    /// The name of the rule that you are creating or updating.
+    name: []const u8,
+
+    /// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
+    ///
+    /// If you're setting an event bus in another account as the target and that
+    /// account granted
+    /// permission to your account through an organization instead of directly by
+    /// the account ID, you
+    /// must specify a `RoleArn` with proper permissions in the `Target`
+    /// structure, instead of here in this parameter.
+    role_arn: ?[]const u8 = null,
+
+    /// The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5
+    /// minutes)".
+    schedule_expression: ?[]const u8 = null,
+
+    /// The state of the rule.
+    ///
+    /// Valid values include:
+    ///
+    /// * `DISABLED`: The rule is disabled. EventBridge does not match any events
+    ///   against the rule.
+    ///
+    /// * `ENABLED`: The rule is enabled.
+    /// EventBridge matches events against the rule, *except* for Amazon Web
+    /// Services management events delivered through CloudTrail.
+    ///
+    /// * `ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS`: The rule is enabled for
+    ///   all
+    /// events, including Amazon Web Services management events delivered through
+    /// CloudTrail.
+    ///
+    /// Management events provide visibility into management operations that are
+    /// performed on
+    /// resources in your Amazon Web Services account. These are also known as
+    /// control plane
+    /// operations. For more information, see [Logging management
+    /// events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events) in the *CloudTrail User
+    /// Guide*, and [Filtering management events from Amazon Web Services
+    /// services](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail) in the
+    /// *
+    /// Amazon EventBridge User Guide*
+    /// .
+    ///
+    /// This value is only valid for rules on the
+    /// [default](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses) event bus
+    /// or [custom event
+    /// buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html).
+    /// It does not apply to [partner event
+    /// buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html).
+    state: ?RuleState = null,
+
+    /// The list of key-value pairs to associate with the rule.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .description = "Description",
+        .event_bus_name = "EventBusName",
+        .event_pattern = "EventPattern",
+        .name = "Name",
+        .role_arn = "RoleArn",
+        .schedule_expression = "ScheduleExpression",
+        .state = "State",
+        .tags = "Tags",
+    };
+};
+
+pub const PutRuleOutput = struct {
+    /// The Amazon Resource Name (ARN) of the rule.
+    rule_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .rule_arn = "RuleArn",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRuleInput, options: Options) !PutRuleOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "eventbridge");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: PutRuleInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("eventbridge", "EventBridge", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "AWSEvents.PutRule");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutRuleOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(PutRuleOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IllegalStatusException")) {
+        return .{ .arena = arena, .kind = .{ .illegal_status_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalException")) {
+        return .{ .arena = arena, .kind = .{ .internal_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidEventPatternException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_event_pattern_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidStateException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_state_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ManagedRuleException")) {
+        return .{ .arena = arena, .kind = .{ .managed_rule_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OperationDisabledException")) {
+        return .{ .arena = arena, .kind = .{ .operation_disabled_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PolicyLengthExceededException")) {
+        return .{ .arena = arena, .kind = .{ .policy_length_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .resource_already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

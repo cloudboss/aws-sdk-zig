@@ -19,7 +19,7 @@ pub const GenerateClientCertificateInput = struct {
     };
 };
 
-const GenerateClientCertificateOutput = @import("client_certificate.zig").GenerateClientCertificateOutput;
+const GenerateClientCertificateOutput = @import("client_certificate.zig").ClientCertificate;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,193 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const RecordDetail = @import("record_detail.zig").RecordDetail;
+
+pub const TerminateProvisionedProductInput = struct {
+    /// The language code.
+    ///
+    /// * `jp` - Japanese
+    ///
+    /// * `zh` - Chinese
+    accept_language: ?[]const u8 = null,
+
+    /// If set to true, Service Catalog stops managing the specified provisioned
+    /// product even
+    /// if it cannot delete the underlying resources.
+    ignore_errors: bool = false,
+
+    /// The identifier of the provisioned product. You cannot specify both
+    /// `ProvisionedProductName` and `ProvisionedProductId`.
+    provisioned_product_id: ?[]const u8 = null,
+
+    /// The name of the provisioned product. You cannot specify both
+    /// `ProvisionedProductName` and `ProvisionedProductId`.
+    provisioned_product_name: ?[]const u8 = null,
+
+    /// When this boolean parameter is set to true, the
+    /// `TerminateProvisionedProduct` API deletes
+    /// the Service Catalog provisioned product. However, it does not remove the
+    /// CloudFormation
+    /// stack, stack set, or the underlying resources of the deleted provisioned
+    /// product. The
+    /// default value is false.
+    retain_physical_resources: bool = false,
+
+    /// An idempotency token that uniquely identifies the termination request. This
+    /// token is
+    /// only valid during the termination process. After the provisioned product is
+    /// terminated,
+    /// subsequent requests to terminate the same provisioned product always return
+    /// **ResourceNotFound**.
+    terminate_token: []const u8,
+
+    pub const json_field_names = .{
+        .accept_language = "AcceptLanguage",
+        .ignore_errors = "IgnoreErrors",
+        .provisioned_product_id = "ProvisionedProductId",
+        .provisioned_product_name = "ProvisionedProductName",
+        .retain_physical_resources = "RetainPhysicalResources",
+        .terminate_token = "TerminateToken",
+    };
+};
+
+pub const TerminateProvisionedProductOutput = struct {
+    /// Information about the result of this request.
+    record_detail: ?RecordDetail = null,
+
+    pub const json_field_names = .{
+        .record_detail = "RecordDetail",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TerminateProvisionedProductInput, options: Options) !TerminateProvisionedProductOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "servicecatalog");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: TerminateProvisionedProductInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("servicecatalog", "Service Catalog", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "AWS242ServiceCatalogService.TerminateProvisionedProduct");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !TerminateProvisionedProductOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(TerminateProvisionedProductOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "DuplicateResourceException")) {
+        return .{ .arena = arena, .kind = .{ .duplicate_resource_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParametersException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameters_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidStateException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_state_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OperationNotSupportedException")) {
+        return .{ .arena = arena, .kind = .{ .operation_not_supported_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceInUseException")) {
+        return .{ .arena = arena, .kind = .{ .resource_in_use_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TagOptionNotMigratedException")) {
+        return .{ .arena = arena, .kind = .{ .tag_option_not_migrated_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

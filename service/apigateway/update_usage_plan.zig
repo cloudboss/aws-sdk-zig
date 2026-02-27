@@ -22,7 +22,7 @@ pub const UpdateUsagePlanInput = struct {
     };
 };
 
-const UpdateUsagePlanOutput = @import("usage_plan.zig").UpdateUsagePlanOutput;
+const UpdateUsagePlanOutput = @import("usage_plan.zig").UsagePlan;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

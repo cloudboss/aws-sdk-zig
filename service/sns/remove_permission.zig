@@ -12,7 +12,7 @@ pub const RemovePermissionInput = struct {
     topic_arn: []const u8,
 };
 
-pub const RemovePermissionOutput = struct {};
+const RemovePermissionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

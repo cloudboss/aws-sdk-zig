@@ -13,7 +13,7 @@ pub const DeletePipelineInput = struct {
     };
 };
 
-pub const DeletePipelineOutput = struct {};
+const DeletePipelineOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

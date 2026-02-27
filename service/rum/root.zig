@@ -1,0 +1,25 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const batch_create_rum_metric_definitions = @import("batch_create_rum_metric_definitions.zig");
+pub const batch_delete_rum_metric_definitions = @import("batch_delete_rum_metric_definitions.zig");
+pub const batch_get_rum_metric_definitions = @import("batch_get_rum_metric_definitions.zig");
+pub const create_app_monitor = @import("create_app_monitor.zig");
+pub const delete_app_monitor = @import("delete_app_monitor.zig");
+pub const delete_resource_policy = @import("delete_resource_policy.zig");
+pub const delete_rum_metrics_destination = @import("delete_rum_metrics_destination.zig");
+pub const get_app_monitor = @import("get_app_monitor.zig");
+pub const get_app_monitor_data = @import("get_app_monitor_data.zig");
+pub const get_resource_policy = @import("get_resource_policy.zig");
+pub const list_app_monitors = @import("list_app_monitors.zig");
+pub const list_rum_metrics_destinations = @import("list_rum_metrics_destinations.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const put_resource_policy = @import("put_resource_policy.zig");
+pub const put_rum_events = @import("put_rum_events.zig");
+pub const put_rum_metrics_destination = @import("put_rum_metrics_destination.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_app_monitor = @import("update_app_monitor.zig");
+pub const update_rum_metric_definition = @import("update_rum_metric_definition.zig");

@@ -19,7 +19,7 @@ pub const DeleteManagedLoginBrandingInput = struct {
     };
 };
 
-pub const DeleteManagedLoginBrandingOutput = struct {};
+const DeleteManagedLoginBrandingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

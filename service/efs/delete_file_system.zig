@@ -13,7 +13,7 @@ pub const DeleteFileSystemInput = struct {
     };
 };
 
-pub const DeleteFileSystemOutput = struct {};
+const DeleteFileSystemOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

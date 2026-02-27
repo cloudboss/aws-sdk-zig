@@ -35,7 +35,7 @@ pub const UpdateDeviceFleetInput = struct {
     };
 };
 
-pub const UpdateDeviceFleetOutput = struct {};
+const UpdateDeviceFleetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

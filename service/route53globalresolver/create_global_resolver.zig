@@ -1,0 +1,271 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const CRResourceStatus = @import("cr_resource_status.zig").CRResourceStatus;
+
+pub const CreateGlobalResolverInput = struct {
+    /// A unique string that identifies the request and ensures idempotency. If you
+    /// make multiple requests with the same client token, only one Route 53 Global
+    /// Resolver is created.
+    client_token: ?[]const u8 = null,
+
+    /// An optional description for the Route 53 Global Resolver instance. Maximum
+    /// length of 1024 characters.
+    description: ?[]const u8 = null,
+
+    /// A descriptive name for the Route 53 Global Resolver instance. Maximum length
+    /// of 64 characters.
+    name: []const u8,
+
+    /// The AWS region where query resolution logs and metrics will be aggregated
+    /// and delivered. If not specified, logging is not enabled.
+    observability_region: ?[]const u8 = null,
+
+    /// List of AWS regions where the Route 53 Global Resolver will operate. The
+    /// resolver will be distributed across these regions to provide global
+    /// availability and low-latency DNS resolution.
+    regions: []const []const u8,
+
+    /// Tags to associate with the Route 53 Global Resolver. Tags are key-value
+    /// pairs that help you organize and identify your resources.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .client_token = "clientToken",
+        .description = "description",
+        .name = "name",
+        .observability_region = "observabilityRegion",
+        .regions = "regions",
+        .tags = "tags",
+    };
+};
+
+pub const CreateGlobalResolverOutput = struct {
+    /// The Amazon Resource Name (ARN) of the Route 53 Global Resolver.
+    arn: []const u8,
+
+    /// The unique string that identifies the request and ensures idempotency.
+    client_token: []const u8,
+
+    /// The date and time when the Route 53 Global Resolver was created.
+    created_at: i64,
+
+    /// The description of the Route 53 Global Resolver.
+    description: ?[]const u8 = null,
+
+    /// The hostname that DNS clients should use for TLS certificate validation when
+    /// connecting to the Route 53 Global Resolver. This value resolves to the
+    /// global anycast IP addresses for the resolver.
+    dns_name: []const u8,
+
+    /// The unique identifier for the Route 53 Global Resolver.
+    id: []const u8,
+
+    /// The global anycast IPv4 addresses associated with the Route 53 Global
+    /// Resolver. DNS clients can send queries to these addresses from anywhere on
+    /// the internet.
+    ipv_4_addresses: ?[]const []const u8 = null,
+
+    /// The name of the Route 53 Global Resolver.
+    name: []const u8,
+
+    /// The AWS Region where observability data for the Route 53 Global Resolver is
+    /// stored.
+    observability_region: ?[]const u8 = null,
+
+    /// The AWS Regions where the Route 53 Global Resolver is deployed and
+    /// operational.
+    regions: ?[]const []const u8 = null,
+
+    /// The current status of the Route 53 Global Resolver. Possible values are
+    /// CREATING (being provisioned), UPDATING (being modified), OPERATIONAL (ready
+    /// to serve queries), or DELETING (being removed).
+    status: CRResourceStatus,
+
+    /// The date and time when the Route 53 Global Resolver was last updated.
+    updated_at: i64,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+        .client_token = "clientToken",
+        .created_at = "createdAt",
+        .description = "description",
+        .dns_name = "dnsName",
+        .id = "id",
+        .ipv_4_addresses = "ipv4Addresses",
+        .name = "name",
+        .observability_region = "observabilityRegion",
+        .regions = "regions",
+        .status = "status",
+        .updated_at = "updatedAt",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateGlobalResolverInput, options: Options) !CreateGlobalResolverOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "route53globalresolver");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateGlobalResolverInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("route53globalresolver", "Route53GlobalResolver", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const path = "/global-resolver";
+
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(alloc, "{");
+
+    if (input.client_token) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"clientToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.description) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"name\":");
+    try aws.json.writeValue(@TypeOf(input.name), input.name, alloc, &body_buf);
+    has_prev = true;
+    if (input.observability_region) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"observabilityRegion\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"regions\":");
+    try aws.json.writeValue(@TypeOf(input.regions), input.regions, alloc, &body_buf);
+    has_prev = true;
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(alloc, "}");
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateGlobalResolverOutput {
+    var result: CreateGlobalResolverOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(CreateGlobalResolverOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

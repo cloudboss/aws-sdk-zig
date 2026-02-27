@@ -1,0 +1,71 @@
+const ResourceDetails = @import("resource_details.zig").ResourceDetails;
+const EstimatedMonthlySavings = @import("estimated_monthly_savings.zig").EstimatedMonthlySavings;
+const RecommendedActionType = @import("recommended_action_type.zig").RecommendedActionType;
+const Tag = @import("tag.zig").Tag;
+const ResourceType = @import("resource_type.zig").ResourceType;
+
+/// Contains information about a recommended action that can be applied to
+/// optimize an Amazon Web Services resource.
+pub const RecommendedAction = struct {
+    /// The Amazon Web Services account ID that owns the resource.
+    account_id: ?[]const u8,
+
+    current_resource_details: ?ResourceDetails,
+
+    /// A summary of the resource's current configuration.
+    current_resource_summary: ?[]const u8,
+
+    estimated_monthly_savings: ?EstimatedMonthlySavings,
+
+    /// The number of days of historical data used to generate the recommendation.
+    look_back_period_in_days: ?i32,
+
+    /// The unique identifier of the recommended action.
+    recommended_action_id: ?[]const u8,
+
+    /// The type of action being recommended.
+    recommended_action_type: ?RecommendedActionType,
+
+    recommended_resource_details: ?ResourceDetails,
+
+    /// A summary of the resource's recommended configuration.
+    recommended_resource_summary: ?[]const u8,
+
+    /// The Amazon Web Services Region where the resource is located.
+    region: ?[]const u8,
+
+    /// The Amazon Resource Name (ARN) of the resource that the recommendation
+    /// applies to.
+    resource_arn: ?[]const u8,
+
+    /// The ID of the resource that the recommendation applies to.
+    resource_id: ?[]const u8,
+
+    /// The tags associated with the resource.
+    resource_tags: ?[]const Tag,
+
+    /// The type of resource being evaluated.
+    resource_type: ?ResourceType,
+
+    /// Indicates whether implementing the recommended action requires a resource
+    /// restart.
+    restart_needed: ?bool,
+
+    pub const json_field_names = .{
+        .account_id = "accountId",
+        .current_resource_details = "currentResourceDetails",
+        .current_resource_summary = "currentResourceSummary",
+        .estimated_monthly_savings = "estimatedMonthlySavings",
+        .look_back_period_in_days = "lookBackPeriodInDays",
+        .recommended_action_id = "recommendedActionId",
+        .recommended_action_type = "recommendedActionType",
+        .recommended_resource_details = "recommendedResourceDetails",
+        .recommended_resource_summary = "recommendedResourceSummary",
+        .region = "region",
+        .resource_arn = "resourceArn",
+        .resource_id = "resourceId",
+        .resource_tags = "resourceTags",
+        .resource_type = "resourceType",
+        .restart_needed = "restartNeeded",
+    };
+};

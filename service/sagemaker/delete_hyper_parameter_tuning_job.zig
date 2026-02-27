@@ -13,7 +13,7 @@ pub const DeleteHyperParameterTuningJobInput = struct {
     };
 };
 
-pub const DeleteHyperParameterTuningJobOutput = struct {};
+const DeleteHyperParameterTuningJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

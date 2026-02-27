@@ -106,7 +106,7 @@ pub const PutKeyPolicyInput = struct {
     };
 };
 
-pub const PutKeyPolicyOutput = struct {};
+const PutKeyPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

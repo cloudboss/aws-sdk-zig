@@ -18,7 +18,7 @@ pub const DisassociateApprovalRuleTemplateFromRepositoryInput = struct {
     };
 };
 
-pub const DisassociateApprovalRuleTemplateFromRepositoryOutput = struct {};
+const DisassociateApprovalRuleTemplateFromRepositoryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

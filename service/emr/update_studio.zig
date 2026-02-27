@@ -40,7 +40,7 @@ pub const UpdateStudioInput = struct {
     };
 };
 
-pub const UpdateStudioOutput = struct {};
+const UpdateStudioOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

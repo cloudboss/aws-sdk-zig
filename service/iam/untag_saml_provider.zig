@@ -22,7 +22,7 @@ pub const UntagSAMLProviderInput = struct {
     tag_keys: []const []const u8,
 };
 
-pub const UntagSAMLProviderOutput = struct {};
+const UntagSAMLProviderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

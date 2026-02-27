@@ -13,7 +13,7 @@ pub const DeleteIntegrationInput = struct {
     integration_identifier: []const u8,
 };
 
-const DeleteIntegrationOutput = @import("integration.zig").DeleteIntegrationOutput;
+const DeleteIntegrationOutput = @import("integration.zig").Integration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

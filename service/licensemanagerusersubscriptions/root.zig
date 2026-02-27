@@ -1,0 +1,22 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const associate_user = @import("associate_user.zig");
+pub const create_license_server_endpoint = @import("create_license_server_endpoint.zig");
+pub const delete_license_server_endpoint = @import("delete_license_server_endpoint.zig");
+pub const deregister_identity_provider = @import("deregister_identity_provider.zig");
+pub const disassociate_user = @import("disassociate_user.zig");
+pub const list_identity_providers = @import("list_identity_providers.zig");
+pub const list_instances = @import("list_instances.zig");
+pub const list_license_server_endpoints = @import("list_license_server_endpoints.zig");
+pub const list_product_subscriptions = @import("list_product_subscriptions.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_user_associations = @import("list_user_associations.zig");
+pub const register_identity_provider = @import("register_identity_provider.zig");
+pub const start_product_subscription = @import("start_product_subscription.zig");
+pub const stop_product_subscription = @import("stop_product_subscription.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_identity_provider_settings = @import("update_identity_provider_settings.zig");

@@ -16,7 +16,7 @@ pub const DeleteRouteTableInput = struct {
     route_table_id: []const u8,
 };
 
-pub const DeleteRouteTableOutput = struct {};
+const DeleteRouteTableOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,7 @@ pub const StopInferenceRecommendationsJobInput = struct {
     };
 };
 
-pub const StopInferenceRecommendationsJobOutput = struct {};
+const StopInferenceRecommendationsJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

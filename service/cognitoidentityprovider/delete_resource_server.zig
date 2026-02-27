@@ -17,7 +17,7 @@ pub const DeleteResourceServerInput = struct {
     };
 };
 
-pub const DeleteResourceServerOutput = struct {};
+const DeleteResourceServerOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

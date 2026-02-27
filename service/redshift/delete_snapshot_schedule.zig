@@ -9,7 +9,7 @@ pub const DeleteSnapshotScheduleInput = struct {
     schedule_identifier: []const u8,
 };
 
-pub const DeleteSnapshotScheduleOutput = struct {};
+const DeleteSnapshotScheduleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

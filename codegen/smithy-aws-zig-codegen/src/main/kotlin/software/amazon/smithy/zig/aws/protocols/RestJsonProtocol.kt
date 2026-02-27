@@ -364,7 +364,15 @@ class RestJsonProtocol : ProtocolGenerator {
                     writer.write("const body = input.\$L orelse \"\";", fieldName)
                 }
             } else {
-                writer.write("const body: ?[]const u8 = null;")
+                // Structure/union payload: serialize the member as JSON
+                if (memberShape.isRequired) {
+                    writer.write("const body = try aws.json.jsonStringify(input.\$L, alloc);", fieldName)
+                } else {
+                    writer.write(
+                        "const body: ?[]const u8 = if (input.\$L) |v| try aws.json.jsonStringify(v, alloc) else null;",
+                        fieldName,
+                    )
+                }
             }
             writer.blankLine()
             return

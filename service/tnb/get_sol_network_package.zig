@@ -1,0 +1,196 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const GetSolNetworkPackageMetadata = @import("get_sol_network_package_metadata.zig").GetSolNetworkPackageMetadata;
+const NsdOnboardingState = @import("nsd_onboarding_state.zig").NsdOnboardingState;
+const NsdOperationalState = @import("nsd_operational_state.zig").NsdOperationalState;
+const NsdUsageState = @import("nsd_usage_state.zig").NsdUsageState;
+
+pub const GetSolNetworkPackageInput = struct {
+    /// ID of the network service descriptor in the network package.
+    nsd_info_id: []const u8,
+
+    pub const json_field_names = .{
+        .nsd_info_id = "nsdInfoId",
+    };
+};
+
+pub const GetSolNetworkPackageOutput = struct {
+    /// Network package ARN.
+    arn: []const u8,
+
+    /// Network package ID.
+    id: []const u8,
+
+    metadata: ?GetSolNetworkPackageMetadata = null,
+
+    /// Network service descriptor ID.
+    nsd_id: []const u8,
+
+    /// Network service descriptor name.
+    nsd_name: []const u8,
+
+    /// Network service descriptor onboarding state.
+    nsd_onboarding_state: NsdOnboardingState,
+
+    /// Network service descriptor operational state.
+    nsd_operational_state: NsdOperationalState,
+
+    /// Network service descriptor usage state.
+    nsd_usage_state: NsdUsageState,
+
+    /// Network service descriptor version.
+    nsd_version: []const u8,
+
+    /// A tag is a label that you assign to an Amazon Web Services resource. Each
+    /// tag consists of a key and an optional value. You can use tags to search and
+    /// filter your resources or track your Amazon Web Services costs.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// Identifies the function package for the function package descriptor
+    /// referenced by the
+    /// onboarded network package.
+    vnf_pkg_ids: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+        .id = "id",
+        .metadata = "metadata",
+        .nsd_id = "nsdId",
+        .nsd_name = "nsdName",
+        .nsd_onboarding_state = "nsdOnboardingState",
+        .nsd_operational_state = "nsdOperationalState",
+        .nsd_usage_state = "nsdUsageState",
+        .nsd_version = "nsdVersion",
+        .tags = "tags",
+        .vnf_pkg_ids = "vnfPkgIds",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSolNetworkPackageInput, options: Options) !GetSolNetworkPackageOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "tnb");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetSolNetworkPackageInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("tnb", "tnb", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/sol/nsd/v1/ns_descriptors/");
+    try path_buf.appendSlice(alloc, input.nsd_info_id);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetSolNetworkPackageOutput {
+    var result: GetSolNetworkPackageOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetSolNetworkPackageOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

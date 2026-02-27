@@ -1,0 +1,39 @@
+const IamIdentityCenterGroupAttribute = @import("iam_identity_center_group_attribute.zig").IamIdentityCenterGroupAttribute;
+const IamIdentityCenterUserAttribute = @import("iam_identity_center_user_attribute.zig").IamIdentityCenterUserAttribute;
+
+/// Describes IAM Identity Center options for an OpenSearch Serverless security
+/// configuration in the form of a key-value map.
+pub const IamIdentityCenterConfigOptions = struct {
+    /// The ARN of the IAM Identity Center application used to integrate with
+    /// OpenSearch Serverless.
+    application_arn: ?[]const u8,
+
+    /// The description of the IAM Identity Center application used to integrate
+    /// with OpenSearch Serverless.
+    application_description: ?[]const u8,
+
+    /// The name of the IAM Identity Center application used to integrate with
+    /// OpenSearch Serverless.
+    application_name: ?[]const u8,
+
+    /// The group attribute for this IAM Identity Center integration. Defaults to
+    /// `GroupId`.
+    group_attribute: ?IamIdentityCenterGroupAttribute,
+
+    /// The ARN of the IAM Identity Center instance used to integrate with
+    /// OpenSearch Serverless.
+    instance_arn: ?[]const u8,
+
+    /// The user attribute for this IAM Identity Center integration. Defaults to
+    /// `UserId`
+    user_attribute: ?IamIdentityCenterUserAttribute,
+
+    pub const json_field_names = .{
+        .application_arn = "applicationArn",
+        .application_description = "applicationDescription",
+        .application_name = "applicationName",
+        .group_attribute = "groupAttribute",
+        .instance_arn = "instanceArn",
+        .user_attribute = "userAttribute",
+    };
+};

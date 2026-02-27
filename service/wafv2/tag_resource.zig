@@ -5,20 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = struct {
-    /// The Amazon Resource Name (ARN) of the resource.
-    resource_arn: []const u8,
+const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
 
-    /// An array of key:value pairs to associate with the resource.
-    tags: []const Tag,
-
-    pub const json_field_names = .{
-        .resource_arn = "ResourceARN",
-        .tags = "Tags",
-    };
-};
-
-pub const TagResourceOutput = struct {};
+const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

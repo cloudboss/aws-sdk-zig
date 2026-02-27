@@ -13,7 +13,7 @@ pub const DisablePortalInput = struct {
     };
 };
 
-pub const DisablePortalOutput = struct {};
+const DisablePortalOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

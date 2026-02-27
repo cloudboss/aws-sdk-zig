@@ -18,7 +18,7 @@ pub const CreateEdgeDeploymentStageInput = struct {
     };
 };
 
-pub const CreateEdgeDeploymentStageOutput = struct {};
+const CreateEdgeDeploymentStageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

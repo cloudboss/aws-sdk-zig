@@ -12,7 +12,7 @@ pub const UpdateDelegationRequestInput = struct {
     notes: ?[]const u8 = null,
 };
 
-pub const UpdateDelegationRequestOutput = struct {};
+const UpdateDelegationRequestOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,26 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const cancel_session = @import("cancel_session.zig");
+pub const create_approval_team = @import("create_approval_team.zig");
+pub const create_identity_source = @import("create_identity_source.zig");
+pub const delete_identity_source = @import("delete_identity_source.zig");
+pub const delete_inactive_approval_team_version = @import("delete_inactive_approval_team_version.zig");
+pub const get_approval_team = @import("get_approval_team.zig");
+pub const get_identity_source = @import("get_identity_source.zig");
+pub const get_policy_version = @import("get_policy_version.zig");
+pub const get_resource_policy = @import("get_resource_policy.zig");
+pub const get_session = @import("get_session.zig");
+pub const list_approval_teams = @import("list_approval_teams.zig");
+pub const list_identity_sources = @import("list_identity_sources.zig");
+pub const list_policies = @import("list_policies.zig");
+pub const list_policy_versions = @import("list_policy_versions.zig");
+pub const list_resource_policies = @import("list_resource_policies.zig");
+pub const list_sessions = @import("list_sessions.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const start_active_approval_team_deletion = @import("start_active_approval_team_deletion.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_approval_team = @import("update_approval_team.zig");

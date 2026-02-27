@@ -4,32 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteResourcePolicyInput = struct {
-    /// The ARN or name of the secret to delete the attached resource-based policy
-    /// for.
-    ///
-    /// For an ARN, we recommend that you specify a complete ARN rather
-    /// than a partial ARN. See [Finding a secret from a partial
-    /// ARN](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
-    secret_id: []const u8,
+const DeleteResourcePolicyInput = @import("delete_resource_policy_request.zig").DeleteResourcePolicyRequest;
 
-    pub const json_field_names = .{
-        .secret_id = "SecretId",
-    };
-};
-
-pub const DeleteResourcePolicyOutput = struct {
-    /// The ARN of the secret that the resource-based policy was deleted for.
-    arn: ?[]const u8 = null,
-
-    /// The name of the secret that the resource-based policy was deleted for.
-    name: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .arn = "ARN",
-        .name = "Name",
-    };
-};
+const DeleteResourcePolicyOutput = @import("delete_resource_policy_response.zig").DeleteResourcePolicyResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

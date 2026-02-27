@@ -63,7 +63,7 @@ pub const PutBucketEncryptionInput = struct {
     server_side_encryption_configuration: ServerSideEncryptionConfiguration,
 };
 
-pub const PutBucketEncryptionOutput = struct {};
+const PutBucketEncryptionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -32,7 +32,7 @@ pub const DeleteAppInput = struct {
     };
 };
 
-pub const DeleteAppOutput = struct {};
+const DeleteAppOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

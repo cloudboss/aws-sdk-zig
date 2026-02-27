@@ -103,7 +103,7 @@ pub const PutSubscriptionFilterInput = struct {
     };
 };
 
-pub const PutSubscriptionFilterOutput = struct {};
+const PutSubscriptionFilterOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

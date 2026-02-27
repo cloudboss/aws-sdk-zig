@@ -22,7 +22,7 @@ pub const SetKeepJobFlowAliveWhenNoStepsInput = struct {
     };
 };
 
-pub const SetKeepJobFlowAliveWhenNoStepsOutput = struct {};
+const SetKeepJobFlowAliveWhenNoStepsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

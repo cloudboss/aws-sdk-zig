@@ -13,7 +13,7 @@ pub const DeleteDataQualityJobDefinitionInput = struct {
     };
 };
 
-pub const DeleteDataQualityJobDefinitionOutput = struct {};
+const DeleteDataQualityJobDefinitionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

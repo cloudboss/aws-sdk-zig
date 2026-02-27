@@ -19,7 +19,7 @@ pub const UpdateApiKeyInput = struct {
     };
 };
 
-const UpdateApiKeyOutput = @import("api_key.zig").UpdateApiKeyOutput;
+const UpdateApiKeyOutput = @import("api_key.zig").ApiKey;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

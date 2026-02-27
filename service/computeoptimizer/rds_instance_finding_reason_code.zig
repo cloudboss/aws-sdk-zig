@@ -1,0 +1,33 @@
+pub const RDSInstanceFindingReasonCode = enum {
+    cpu_over_provisioned,
+    network_bandwidth_over_provisioned,
+    ebs_iops_over_provisioned,
+    ebs_iops_under_provisioned,
+    ebs_throughput_over_provisioned,
+    cpu_under_provisioned,
+    network_bandwidth_under_provisioned,
+    ebs_throughput_under_provisioned,
+    new_generation_db_instance_class_available,
+    new_engine_version_available,
+    db_cluster_writer_under_provisioned,
+    memory_under_provisioned,
+    instance_storage_read_iops_under_provisioned,
+    instance_storage_write_iops_under_provisioned,
+
+    pub const json_field_names = .{
+        .cpu_over_provisioned = "CPU_OVER_PROVISIONED",
+        .network_bandwidth_over_provisioned = "NETWORK_BANDWIDTH_OVER_PROVISIONED",
+        .ebs_iops_over_provisioned = "EBS_IOPS_OVER_PROVISIONED",
+        .ebs_iops_under_provisioned = "EBS_IOPS_UNDER_PROVISIONED",
+        .ebs_throughput_over_provisioned = "EBS_THROUGHPUT_OVER_PROVISIONED",
+        .cpu_under_provisioned = "CPU_UNDER_PROVISIONED",
+        .network_bandwidth_under_provisioned = "NETWORK_BANDWIDTH_UNDER_PROVISIONED",
+        .ebs_throughput_under_provisioned = "EBS_THROUGHPUT_UNDER_PROVISIONED",
+        .new_generation_db_instance_class_available = "NEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLE",
+        .new_engine_version_available = "NEW_ENGINE_VERSION_AVAILABLE",
+        .db_cluster_writer_under_provisioned = "DB_CLUSTER_WRITER_UNDER_PROVISIONED",
+        .memory_under_provisioned = "MEMORY_UNDER_PROVISIONED",
+        .instance_storage_read_iops_under_provisioned = "INSTANCE_STORAGE_READ_IOPS_UNDER_PROVISIONED",
+        .instance_storage_write_iops_under_provisioned = "INSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONED",
+    };
+};

@@ -21,7 +21,7 @@ pub const CreateBranchInput = struct {
     };
 };
 
-pub const CreateBranchOutput = struct {};
+const CreateBranchOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

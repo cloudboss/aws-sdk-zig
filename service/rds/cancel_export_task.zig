@@ -11,7 +11,7 @@ pub const CancelExportTaskInput = struct {
     export_task_identifier: []const u8,
 };
 
-const CancelExportTaskOutput = @import("export_task.zig").CancelExportTaskOutput;
+const CancelExportTaskOutput = @import("export_task.zig").ExportTask;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

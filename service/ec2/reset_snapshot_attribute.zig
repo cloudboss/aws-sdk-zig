@@ -22,7 +22,7 @@ pub const ResetSnapshotAttributeInput = struct {
     snapshot_id: []const u8,
 };
 
-pub const ResetSnapshotAttributeOutput = struct {};
+const ResetSnapshotAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -29,7 +29,7 @@ pub const MergeShardsInput = struct {
     };
 };
 
-pub const MergeShardsOutput = struct {};
+const MergeShardsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

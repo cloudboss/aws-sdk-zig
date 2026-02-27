@@ -22,7 +22,7 @@ pub const CreateResourceInput = struct {
     };
 };
 
-const CreateResourceOutput = @import("resource.zig").CreateResourceOutput;
+const CreateResourceOutput = @import("resource.zig").Resource;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

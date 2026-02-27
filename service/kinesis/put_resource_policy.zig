@@ -23,7 +23,7 @@ pub const PutResourcePolicyInput = struct {
     };
 };
 
-pub const PutResourcePolicyOutput = struct {};
+const PutResourcePolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

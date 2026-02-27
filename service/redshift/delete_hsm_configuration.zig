@@ -9,7 +9,7 @@ pub const DeleteHsmConfigurationInput = struct {
     hsm_configuration_identifier: []const u8,
 };
 
-pub const DeleteHsmConfigurationOutput = struct {};
+const DeleteHsmConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,7 @@ pub const RebootInstancesInput = struct {
     instance_ids: []const []const u8,
 };
 
-pub const RebootInstancesOutput = struct {};
+const RebootInstancesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

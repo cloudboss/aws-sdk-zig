@@ -24,7 +24,7 @@ pub const RemoveRoleFromInstanceProfileInput = struct {
     role_name: []const u8,
 };
 
-pub const RemoveRoleFromInstanceProfileOutput = struct {};
+const RemoveRoleFromInstanceProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

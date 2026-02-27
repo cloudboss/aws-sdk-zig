@@ -1,0 +1,342 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const Replication = @import("replication.zig").Replication;
+
+pub const StartReplicationInput = struct {
+    /// Indicates when you want a change data capture (CDC) operation to start. Use
+    /// either
+    /// `CdcStartPosition` or `CdcStartTime` to specify when you want a
+    /// CDC operation to start. Specifying both values results in an error.
+    ///
+    /// The value can be in date, checkpoint, or LSN/SCN format.
+    cdc_start_position: ?[]const u8 = null,
+
+    /// Indicates the start time for a change data capture (CDC) operation. Use
+    /// either
+    /// `CdcStartTime` or `CdcStartPosition` to specify when you want a
+    /// CDC operation to start. Specifying both values results in an error.
+    cdc_start_time: ?i64 = null,
+
+    /// Indicates when you want a change data capture (CDC) operation to stop. The
+    /// value can be
+    /// either server time or commit time.
+    cdc_stop_position: ?[]const u8 = null,
+
+    /// User-defined settings for the premigration assessment. The possible values
+    /// are:
+    ///
+    /// * `ResultLocationFolder`: The folder within an Amazon S3 bucket where
+    /// you want DMS to store the results of this assessment run.
+    ///
+    /// * `ResultEncryptionMode`: The supported values are `SSE_KMS`
+    /// and `SSE_S3`. If these values are not provided, then the files are not
+    /// encrypted at rest. For more information, see [Creating
+    /// Amazon Web Services KMS keys to encrypt Amazon S3 target
+    /// objects](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.KMSKeys).
+    ///
+    /// * `ResultKmsKeyArn`: The ARN of a customer KMS encryption key that you
+    /// specify when you set `ResultEncryptionMode` to
+    /// `SSE_KMS`.
+    ///
+    /// * `IncludeOnly`: A space-separated list of names for specific individual
+    /// assessments that you want to include. These names come from the default list
+    /// of
+    /// individual assessments that Database Migration Service supports for the
+    /// associated migration.
+    ///
+    /// * `Exclude`: A space-separated list of names for specific individual
+    /// assessments that you want to exclude. These names come from the default list
+    /// of
+    /// individual assessments that Database Migration Service supports for the
+    /// associated migration.
+    ///
+    /// * `FailOnAssessmentFailure`: A configurable setting you can set to
+    /// `true` (the default setting) or `false`. Use this setting to
+    /// to stop the replication from starting automatically if the assessment fails.
+    /// This can
+    /// help you evaluate the issue that is preventing the replication from running
+    /// successfully.
+    premigration_assessment_settings: ?[]const u8 = null,
+
+    /// The Amazon Resource Name of the replication for which to start replication.
+    replication_config_arn: []const u8,
+
+    /// The replication type.
+    ///
+    /// When the replication type is `full-load` or `full-load-and-cdc`,
+    /// the only valid value for the first run of the replication is
+    /// `start-replication`. This option will start the replication.
+    ///
+    /// You can also use ReloadTables to reload specific tables that failed
+    /// during replication instead of restarting the replication.
+    ///
+    /// The `resume-processing` option isn't applicable for a full-load replication,
+    /// because you can't resume partially loaded tables during the full load phase.
+    ///
+    /// For a `full-load-and-cdc` replication, DMS migrates table data, and then
+    /// applies data changes that occur on the source. To load all the tables again,
+    /// and start
+    /// capturing source changes, use `reload-target`. Otherwise use
+    /// `resume-processing`, to replicate the changes from the last stop
+    /// position.
+    start_replication_type: []const u8,
+
+    pub const json_field_names = .{
+        .cdc_start_position = "CdcStartPosition",
+        .cdc_start_time = "CdcStartTime",
+        .cdc_stop_position = "CdcStopPosition",
+        .premigration_assessment_settings = "PremigrationAssessmentSettings",
+        .replication_config_arn = "ReplicationConfigArn",
+        .start_replication_type = "StartReplicationType",
+    };
+};
+
+pub const StartReplicationOutput = struct {
+    /// The replication that DMS started.
+    replication: ?Replication = null,
+
+    pub const json_field_names = .{
+        .replication = "Replication",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartReplicationInput, options: Options) !StartReplicationOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "databasemigrationservice");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: StartReplicationInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("databasemigrationservice", "Database Migration Service", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "AmazonDMSv20160101.StartReplication");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StartReplicationOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(StartReplicationOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedFault")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CollectorNotFoundFault")) {
+        return .{ .arena = arena, .kind = .{ .collector_not_found_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "FailedDependencyFault")) {
+        return .{ .arena = arena, .kind = .{ .failed_dependency_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InsufficientResourceCapacityFault")) {
+        return .{ .arena = arena, .kind = .{ .insufficient_resource_capacity_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidCertificateFault")) {
+        return .{ .arena = arena, .kind = .{ .invalid_certificate_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOperationFault")) {
+        return .{ .arena = arena, .kind = .{ .invalid_operation_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidResourceStateFault")) {
+        return .{ .arena = arena, .kind = .{ .invalid_resource_state_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSubnet")) {
+        return .{ .arena = arena, .kind = .{ .invalid_subnet = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KMSAccessDeniedFault")) {
+        return .{ .arena = arena, .kind = .{ .kms_access_denied_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KMSDisabledFault")) {
+        return .{ .arena = arena, .kind = .{ .kms_disabled_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KMSFault")) {
+        return .{ .arena = arena, .kind = .{ .kms_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KMSInvalidStateFault")) {
+        return .{ .arena = arena, .kind = .{ .kms_invalid_state_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KMSKeyNotAccessibleFault")) {
+        return .{ .arena = arena, .kind = .{ .kms_key_not_accessible_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KMSNotFoundFault")) {
+        return .{ .arena = arena, .kind = .{ .kms_not_found_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KMSThrottlingFault")) {
+        return .{ .arena = arena, .kind = .{ .kms_throttling_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ReplicationSubnetGroupDoesNotCoverEnoughAZs")) {
+        return .{ .arena = arena, .kind = .{ .replication_subnet_group_does_not_cover_enough_a_zs = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsFault")) {
+        return .{ .arena = arena, .kind = .{ .resource_already_exists_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundFault")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceQuotaExceededFault")) {
+        return .{ .arena = arena, .kind = .{ .resource_quota_exceeded_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3AccessDeniedFault")) {
+        return .{ .arena = arena, .kind = .{ .s3_access_denied_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3ResourceNotFoundFault")) {
+        return .{ .arena = arena, .kind = .{ .s3_resource_not_found_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SNSInvalidTopicFault")) {
+        return .{ .arena = arena, .kind = .{ .sns_invalid_topic_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SNSNoAuthorizationFault")) {
+        return .{ .arena = arena, .kind = .{ .sns_no_authorization_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "StorageQuotaExceededFault")) {
+        return .{ .arena = arena, .kind = .{ .storage_quota_exceeded_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SubnetAlreadyInUse")) {
+        return .{ .arena = arena, .kind = .{ .subnet_already_in_use = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UpgradeDependencyFailureFault")) {
+        return .{ .arena = arena, .kind = .{ .upgrade_dependency_failure_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

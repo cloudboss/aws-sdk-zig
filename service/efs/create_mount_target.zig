@@ -60,7 +60,7 @@ pub const CreateMountTargetInput = struct {
     };
 };
 
-const CreateMountTargetOutput = @import("mount_target_description.zig").CreateMountTargetOutput;
+const CreateMountTargetOutput = @import("mount_target_description.zig").MountTargetDescription;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

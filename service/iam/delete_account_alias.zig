@@ -16,7 +16,7 @@ pub const DeleteAccountAliasInput = struct {
     account_alias: []const u8,
 };
 
-pub const DeleteAccountAliasOutput = struct {};
+const DeleteAccountAliasOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

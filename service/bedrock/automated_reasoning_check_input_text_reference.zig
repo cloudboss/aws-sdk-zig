@@ -1,0 +1,10 @@
+/// References a portion of the original input text that corresponds to logical
+/// elements.
+pub const AutomatedReasoningCheckInputTextReference = struct {
+    /// The specific text from the original input that this reference points to.
+    text: ?[]const u8,
+
+    pub const json_field_names = .{
+        .text = "text",
+    };
+};

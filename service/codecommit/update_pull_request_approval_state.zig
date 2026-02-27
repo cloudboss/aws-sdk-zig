@@ -22,7 +22,7 @@ pub const UpdatePullRequestApprovalStateInput = struct {
     };
 };
 
-pub const UpdatePullRequestApprovalStateOutput = struct {};
+const UpdatePullRequestApprovalStateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

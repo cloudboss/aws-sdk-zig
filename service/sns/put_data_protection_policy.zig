@@ -20,7 +20,7 @@ pub const PutDataProtectionPolicyInput = struct {
     resource_arn: []const u8,
 };
 
-pub const PutDataProtectionPolicyOutput = struct {};
+const PutDataProtectionPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

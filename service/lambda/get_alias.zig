@@ -26,7 +26,7 @@ pub const GetAliasInput = struct {
     };
 };
 
-const GetAliasOutput = @import("alias_configuration.zig").GetAliasOutput;
+const GetAliasOutput = @import("alias_configuration.zig").AliasConfiguration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

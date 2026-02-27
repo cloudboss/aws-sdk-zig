@@ -1,0 +1,33 @@
+pub const SingularConnectorOperator = enum {
+    projection,
+    equal_to,
+    addition,
+    multiplication,
+    division,
+    subtraction,
+    mask_all,
+    mask_first_n,
+    mask_last_n,
+    validate_non_null,
+    validate_non_zero,
+    validate_non_negative,
+    validate_numeric,
+    no_op,
+
+    pub const json_field_names = .{
+        .projection = "PROJECTION",
+        .equal_to = "EQUAL_TO",
+        .addition = "ADDITION",
+        .multiplication = "MULTIPLICATION",
+        .division = "DIVISION",
+        .subtraction = "SUBTRACTION",
+        .mask_all = "MASK_ALL",
+        .mask_first_n = "MASK_FIRST_N",
+        .mask_last_n = "MASK_LAST_N",
+        .validate_non_null = "VALIDATE_NON_NULL",
+        .validate_non_zero = "VALIDATE_NON_ZERO",
+        .validate_non_negative = "VALIDATE_NON_NEGATIVE",
+        .validate_numeric = "VALIDATE_NUMERIC",
+        .no_op = "NO_OP",
+    };
+};

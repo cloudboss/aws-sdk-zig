@@ -13,7 +13,7 @@ pub const DeleteFieldLevelEncryptionProfileInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteFieldLevelEncryptionProfileOutput = struct {};
+const DeleteFieldLevelEncryptionProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

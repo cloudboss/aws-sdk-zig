@@ -1,0 +1,33 @@
+pub const OcsfNumberField = enum {
+    activity_id,
+    compliance_status_id,
+    confidence_score,
+    severity_id,
+    status_id,
+    finding_info_related_events_count,
+    evidences_api_response_code,
+    evidences_dst_endpoint_autonomous_system_number,
+    evidences_dst_endpoint_port,
+    evidences_src_endpoint_autonomous_system_number,
+    evidences_src_endpoint_port,
+    resources_image_in_use_count,
+    vulnerabilities_cve_cvss_base_score,
+    vendor_attributes_severity_id,
+
+    pub const json_field_names = .{
+        .activity_id = "ACTIVITY_ID",
+        .compliance_status_id = "COMPLIANCE_STATUS_ID",
+        .confidence_score = "CONFIDENCE_SCORE",
+        .severity_id = "SEVERITY_ID",
+        .status_id = "STATUS_ID",
+        .finding_info_related_events_count = "FINDING_INFO_RELATED_EVENTS_COUNT",
+        .evidences_api_response_code = "EVIDENCES_API_RESPONSE_CODE",
+        .evidences_dst_endpoint_autonomous_system_number = "EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER",
+        .evidences_dst_endpoint_port = "EVIDENCES_DST_ENDPOINT_PORT",
+        .evidences_src_endpoint_autonomous_system_number = "EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER",
+        .evidences_src_endpoint_port = "EVIDENCES_SRC_ENDPOINT_PORT",
+        .resources_image_in_use_count = "RESOURCES_IMAGE_IN_USE_COUNT",
+        .vulnerabilities_cve_cvss_base_score = "VULNERABILITIES_CVE_CVSS_BASE_SCORE",
+        .vendor_attributes_severity_id = "VENDOR_ATTRIBUTES_SEVERITY_ID",
+    };
+};

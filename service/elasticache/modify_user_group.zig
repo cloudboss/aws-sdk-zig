@@ -20,7 +20,7 @@ pub const ModifyUserGroupInput = struct {
     user_ids_to_remove: ?[]const []const u8 = null,
 };
 
-const ModifyUserGroupOutput = @import("user_group.zig").ModifyUserGroupOutput;
+const ModifyUserGroupOutput = @import("user_group.zig").UserGroup;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

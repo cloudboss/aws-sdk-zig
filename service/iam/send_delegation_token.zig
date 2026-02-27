@@ -9,7 +9,7 @@ pub const SendDelegationTokenInput = struct {
     delegation_request_id: []const u8,
 };
 
-pub const SendDelegationTokenOutput = struct {};
+const SendDelegationTokenOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

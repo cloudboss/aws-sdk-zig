@@ -24,7 +24,7 @@ pub const RemoveTagsFromCertificateInput = struct {
     };
 };
 
-pub const RemoveTagsFromCertificateOutput = struct {};
+const RemoveTagsFromCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

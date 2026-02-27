@@ -9,7 +9,7 @@ pub const DeleteRedshiftIdcApplicationInput = struct {
     redshift_idc_application_arn: []const u8,
 };
 
-pub const DeleteRedshiftIdcApplicationOutput = struct {};
+const DeleteRedshiftIdcApplicationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -379,7 +379,7 @@ pub const RunInstancesInput = struct {
     user_data: ?[]const u8 = null,
 };
 
-const RunInstancesOutput = @import("reservation.zig").RunInstancesOutput;
+const RunInstancesOutput = @import("reservation.zig").Reservation;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

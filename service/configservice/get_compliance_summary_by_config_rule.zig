@@ -5,7 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ComplianceSummary = @import("compliance_summary.zig").ComplianceSummary;
 
-pub const GetComplianceSummaryByConfigRuleInput = struct {};
+const GetComplianceSummaryByConfigRuleInput = struct {};
 
 pub const GetComplianceSummaryByConfigRuleOutput = struct {
     /// The number of Config rules that are compliant and the

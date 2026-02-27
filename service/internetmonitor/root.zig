@@ -1,0 +1,21 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_monitor = @import("create_monitor.zig");
+pub const delete_monitor = @import("delete_monitor.zig");
+pub const get_health_event = @import("get_health_event.zig");
+pub const get_internet_event = @import("get_internet_event.zig");
+pub const get_monitor = @import("get_monitor.zig");
+pub const get_query_results = @import("get_query_results.zig");
+pub const get_query_status = @import("get_query_status.zig");
+pub const list_health_events = @import("list_health_events.zig");
+pub const list_internet_events = @import("list_internet_events.zig");
+pub const list_monitors = @import("list_monitors.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const start_query = @import("start_query.zig");
+pub const stop_query = @import("stop_query.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_monitor = @import("update_monitor.zig");

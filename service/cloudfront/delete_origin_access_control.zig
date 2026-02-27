@@ -13,7 +13,7 @@ pub const DeleteOriginAccessControlInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteOriginAccessControlOutput = struct {};
+const DeleteOriginAccessControlOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -155,7 +155,7 @@ pub const ModifyInstanceAttributeInput = struct {
     value: ?[]const u8 = null,
 };
 
-pub const ModifyInstanceAttributeOutput = struct {};
+const ModifyInstanceAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

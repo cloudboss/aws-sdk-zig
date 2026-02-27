@@ -17,7 +17,7 @@ pub const StopEdgeDeploymentStageInput = struct {
     };
 };
 
-pub const StopEdgeDeploymentStageOutput = struct {};
+const StopEdgeDeploymentStageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

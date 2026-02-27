@@ -13,7 +13,7 @@ pub const StopNotebookExecutionInput = struct {
     };
 };
 
-pub const StopNotebookExecutionOutput = struct {};
+const StopNotebookExecutionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

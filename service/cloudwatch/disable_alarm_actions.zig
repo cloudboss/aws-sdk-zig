@@ -14,7 +14,7 @@ pub const DisableAlarmActionsInput = struct {
     };
 };
 
-pub const DisableAlarmActionsOutput = struct {};
+const DisableAlarmActionsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

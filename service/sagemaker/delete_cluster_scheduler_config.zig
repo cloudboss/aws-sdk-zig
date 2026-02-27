@@ -13,7 +13,7 @@ pub const DeleteClusterSchedulerConfigInput = struct {
     };
 };
 
-pub const DeleteClusterSchedulerConfigOutput = struct {};
+const DeleteClusterSchedulerConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,26 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const associate_created_artifact = @import("associate_created_artifact.zig");
+pub const associate_discovered_resource = @import("associate_discovered_resource.zig");
+pub const associate_source_resource = @import("associate_source_resource.zig");
+pub const create_progress_update_stream = @import("create_progress_update_stream.zig");
+pub const delete_progress_update_stream = @import("delete_progress_update_stream.zig");
+pub const describe_application_state = @import("describe_application_state.zig");
+pub const describe_migration_task = @import("describe_migration_task.zig");
+pub const disassociate_created_artifact = @import("disassociate_created_artifact.zig");
+pub const disassociate_discovered_resource = @import("disassociate_discovered_resource.zig");
+pub const disassociate_source_resource = @import("disassociate_source_resource.zig");
+pub const import_migration_task = @import("import_migration_task.zig");
+pub const list_application_states = @import("list_application_states.zig");
+pub const list_created_artifacts = @import("list_created_artifacts.zig");
+pub const list_discovered_resources = @import("list_discovered_resources.zig");
+pub const list_migration_task_updates = @import("list_migration_task_updates.zig");
+pub const list_migration_tasks = @import("list_migration_tasks.zig");
+pub const list_progress_update_streams = @import("list_progress_update_streams.zig");
+pub const list_source_resources = @import("list_source_resources.zig");
+pub const notify_application_state = @import("notify_application_state.zig");
+pub const notify_migration_task_state = @import("notify_migration_task_state.zig");
+pub const put_resource_attributes = @import("put_resource_attributes.zig");

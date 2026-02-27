@@ -87,7 +87,7 @@ pub const PutMetricDataInput = struct {
     };
 };
 
-pub const PutMetricDataOutput = struct {};
+const PutMetricDataOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

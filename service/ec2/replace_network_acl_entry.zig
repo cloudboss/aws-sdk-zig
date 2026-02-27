@@ -61,7 +61,7 @@ pub const ReplaceNetworkAclEntryInput = struct {
     rule_number: i32,
 };
 
-pub const ReplaceNetworkAclEntryOutput = struct {};
+const ReplaceNetworkAclEntryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

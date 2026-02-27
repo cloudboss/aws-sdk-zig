@@ -16,7 +16,7 @@ pub const DeleteNetworkAclInput = struct {
     network_acl_id: []const u8,
 };
 
-pub const DeleteNetworkAclOutput = struct {};
+const DeleteNetworkAclOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -39,7 +39,7 @@ pub const UpdateStudioSessionMappingInput = struct {
     };
 };
 
-pub const UpdateStudioSessionMappingOutput = struct {};
+const UpdateStudioSessionMappingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -24,7 +24,7 @@ pub const UpdateMaxRecordSizeInput = struct {
     };
 };
 
-pub const UpdateMaxRecordSizeOutput = struct {};
+const UpdateMaxRecordSizeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

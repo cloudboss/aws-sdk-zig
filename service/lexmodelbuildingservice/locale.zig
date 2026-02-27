@@ -1,0 +1,31 @@
+pub const Locale = enum {
+    de_de,
+    en_au,
+    en_gb,
+    en_in,
+    en_us,
+    es_419,
+    es_es,
+    es_us,
+    fr_fr,
+    fr_ca,
+    it_it,
+    ja_jp,
+    ko_kr,
+
+    pub const json_field_names = .{
+        .de_de = "DE_DE",
+        .en_au = "EN_AU",
+        .en_gb = "EN_GB",
+        .en_in = "EN_IN",
+        .en_us = "EN_US",
+        .es_419 = "ES_419",
+        .es_es = "ES_ES",
+        .es_us = "ES_US",
+        .fr_fr = "FR_FR",
+        .fr_ca = "FR_CA",
+        .it_it = "IT_IT",
+        .ja_jp = "JA_JP",
+        .ko_kr = "KO_KR",
+    };
+};

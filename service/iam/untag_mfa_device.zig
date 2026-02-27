@@ -23,7 +23,7 @@ pub const UntagMFADeviceInput = struct {
     tag_keys: []const []const u8,
 };
 
-pub const UntagMFADeviceOutput = struct {};
+const UntagMFADeviceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

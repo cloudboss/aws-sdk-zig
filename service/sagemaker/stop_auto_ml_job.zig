@@ -13,7 +13,7 @@ pub const StopAutoMLJobInput = struct {
     };
 };
 
-pub const StopAutoMLJobOutput = struct {};
+const StopAutoMLJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

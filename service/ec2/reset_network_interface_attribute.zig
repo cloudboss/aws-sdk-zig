@@ -20,7 +20,7 @@ pub const ResetNetworkInterfaceAttributeInput = struct {
     source_dest_check: ?[]const u8 = null,
 };
 
-pub const ResetNetworkInterfaceAttributeOutput = struct {};
+const ResetNetworkInterfaceAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

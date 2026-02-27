@@ -23,7 +23,7 @@ pub const PutAccountConfigurationInput = struct {
     };
 };
 
-pub const PutAccountConfigurationOutput = struct {};
+const PutAccountConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -46,7 +46,7 @@ pub const PutResourceConfigInput = struct {
     };
 };
 
-pub const PutResourceConfigOutput = struct {};
+const PutResourceConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

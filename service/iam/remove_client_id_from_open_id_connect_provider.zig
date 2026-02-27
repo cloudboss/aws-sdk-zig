@@ -20,7 +20,7 @@ pub const RemoveClientIDFromOpenIDConnectProviderInput = struct {
     open_id_connect_provider_arn: []const u8,
 };
 
-pub const RemoveClientIDFromOpenIDConnectProviderOutput = struct {};
+const RemoveClientIDFromOpenIDConnectProviderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

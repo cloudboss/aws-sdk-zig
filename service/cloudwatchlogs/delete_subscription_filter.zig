@@ -17,7 +17,7 @@ pub const DeleteSubscriptionFilterInput = struct {
     };
 };
 
-pub const DeleteSubscriptionFilterOutput = struct {};
+const DeleteSubscriptionFilterOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

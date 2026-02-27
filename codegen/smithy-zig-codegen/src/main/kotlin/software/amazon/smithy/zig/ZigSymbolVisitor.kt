@@ -100,7 +100,13 @@ class ZigSymbolVisitor(private val model: Model, private val packageName: String
         }
     }
 
-    override fun structureShape(shape: StructureShape): Symbol = namedShape(shape)
+    override fun structureShape(shape: StructureShape): Symbol {
+        // Smithy prelude shapes (e.g. smithy.api#Unit) have no generated files.
+        if (shape.id.namespace == "smithy.api") {
+            return simpleSymbol("struct {}")
+        }
+        return namedShape(shape)
+    }
 
     override fun unionShape(shape: UnionShape): Symbol = namedShape(shape)
 

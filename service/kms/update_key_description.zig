@@ -31,7 +31,7 @@ pub const UpdateKeyDescriptionInput = struct {
     };
 };
 
-pub const UpdateKeyDescriptionOutput = struct {};
+const UpdateKeyDescriptionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

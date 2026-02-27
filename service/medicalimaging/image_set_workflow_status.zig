@@ -1,0 +1,31 @@
+pub const ImageSetWorkflowStatus = enum {
+    created,
+    copied,
+    copying,
+    copying_with_read_only_access,
+    copy_failed,
+    updating,
+    updated,
+    update_failed,
+    deleting,
+    deleted,
+    importing,
+    imported,
+    import_failed,
+
+    pub const json_field_names = .{
+        .created = "CREATED",
+        .copied = "COPIED",
+        .copying = "COPYING",
+        .copying_with_read_only_access = "COPYING_WITH_READ_ONLY_ACCESS",
+        .copy_failed = "COPY_FAILED",
+        .updating = "UPDATING",
+        .updated = "UPDATED",
+        .update_failed = "UPDATE_FAILED",
+        .deleting = "DELETING",
+        .deleted = "DELETED",
+        .importing = "IMPORTING",
+        .imported = "IMPORTED",
+        .import_failed = "IMPORT_FAILED",
+    };
+};

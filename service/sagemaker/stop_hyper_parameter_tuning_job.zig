@@ -13,7 +13,7 @@ pub const StopHyperParameterTuningJobInput = struct {
     };
 };
 
-pub const StopHyperParameterTuningJobOutput = struct {};
+const StopHyperParameterTuningJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

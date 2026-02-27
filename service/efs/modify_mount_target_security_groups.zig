@@ -17,7 +17,7 @@ pub const ModifyMountTargetSecurityGroupsInput = struct {
     };
 };
 
-pub const ModifyMountTargetSecurityGroupsOutput = struct {};
+const ModifyMountTargetSecurityGroupsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

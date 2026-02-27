@@ -10,7 +10,7 @@ pub const DeleteEventSubscriptionInput = struct {
     subscription_name: []const u8,
 };
 
-pub const DeleteEventSubscriptionOutput = struct {};
+const DeleteEventSubscriptionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

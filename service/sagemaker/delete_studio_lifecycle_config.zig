@@ -14,7 +14,7 @@ pub const DeleteStudioLifecycleConfigInput = struct {
     };
 };
 
-pub const DeleteStudioLifecycleConfigOutput = struct {};
+const DeleteStudioLifecycleConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

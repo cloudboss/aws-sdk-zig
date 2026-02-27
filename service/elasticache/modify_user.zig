@@ -30,7 +30,7 @@ pub const ModifyUserInput = struct {
     user_id: []const u8,
 };
 
-const ModifyUserOutput = @import("user.zig").ModifyUserOutput;
+const ModifyUserOutput = @import("user.zig").User;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

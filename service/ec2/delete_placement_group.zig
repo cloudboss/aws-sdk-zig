@@ -16,7 +16,7 @@ pub const DeletePlacementGroupInput = struct {
     group_name: []const u8,
 };
 
-pub const DeletePlacementGroupOutput = struct {};
+const DeletePlacementGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

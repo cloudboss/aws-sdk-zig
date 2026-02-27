@@ -18,7 +18,7 @@ pub const DeleteStageInput = struct {
     };
 };
 
-pub const DeleteStageOutput = struct {};
+const DeleteStageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

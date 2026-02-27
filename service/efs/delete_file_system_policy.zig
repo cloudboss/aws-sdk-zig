@@ -14,7 +14,7 @@ pub const DeleteFileSystemPolicyInput = struct {
     };
 };
 
-pub const DeleteFileSystemPolicyOutput = struct {};
+const DeleteFileSystemPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

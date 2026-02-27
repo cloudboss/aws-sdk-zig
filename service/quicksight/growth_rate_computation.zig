@@ -1,0 +1,28 @@
+const DimensionField = @import("dimension_field.zig").DimensionField;
+const MeasureField = @import("measure_field.zig").MeasureField;
+
+/// The growth rate computation configuration.
+pub const GrowthRateComputation = struct {
+    /// The ID for a computation.
+    computation_id: []const u8,
+
+    /// The name of a computation.
+    name: ?[]const u8,
+
+    /// The period size setup of a growth rate computation.
+    period_size: ?i32,
+
+    /// The time field that is used in a computation.
+    time: ?DimensionField,
+
+    /// The value field that is used in a computation.
+    value: ?MeasureField,
+
+    pub const json_field_names = .{
+        .computation_id = "ComputationId",
+        .name = "Name",
+        .period_size = "PeriodSize",
+        .time = "Time",
+        .value = "Value",
+    };
+};

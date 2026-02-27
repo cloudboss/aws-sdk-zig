@@ -12,7 +12,7 @@ pub const DeleteTrustStoreInput = struct {
     if_match: []const u8,
 };
 
-pub const DeleteTrustStoreOutput = struct {};
+const DeleteTrustStoreOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

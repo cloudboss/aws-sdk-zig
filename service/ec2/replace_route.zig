@@ -69,7 +69,7 @@ pub const ReplaceRouteInput = struct {
     vpc_peering_connection_id: ?[]const u8 = null,
 };
 
-pub const ReplaceRouteOutput = struct {};
+const ReplaceRouteOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

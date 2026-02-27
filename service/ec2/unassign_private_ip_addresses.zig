@@ -18,7 +18,7 @@ pub const UnassignPrivateIpAddressesInput = struct {
     private_ip_addresses: ?[]const []const u8 = null,
 };
 
-pub const UnassignPrivateIpAddressesOutput = struct {};
+const UnassignPrivateIpAddressesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

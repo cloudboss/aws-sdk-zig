@@ -19,7 +19,7 @@ pub const RemoveRoleFromDBClusterInput = struct {
     role_arn: []const u8,
 };
 
-pub const RemoveRoleFromDBClusterOutput = struct {};
+const RemoveRoleFromDBClusterOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

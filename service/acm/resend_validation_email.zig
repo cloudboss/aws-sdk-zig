@@ -40,7 +40,7 @@ pub const ResendValidationEmailInput = struct {
     };
 };
 
-pub const ResendValidationEmailOutput = struct {};
+const ResendValidationEmailOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

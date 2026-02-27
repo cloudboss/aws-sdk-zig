@@ -1,0 +1,20 @@
+/// Describes a tag for an Auto Scaling group.
+pub const TagDescription = struct {
+    /// The tag key.
+    key: ?[]const u8,
+
+    /// Determines whether the tag is added to new instances as they are launched in
+    /// the
+    /// group.
+    propagate_at_launch: ?bool,
+
+    /// The name of the group.
+    resource_id: ?[]const u8,
+
+    /// The type of resource. The only supported value is
+    /// `auto-scaling-group`.
+    resource_type: ?[]const u8,
+
+    /// The tag value.
+    value: ?[]const u8,
+};

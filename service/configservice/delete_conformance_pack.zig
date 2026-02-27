@@ -13,7 +13,7 @@ pub const DeleteConformancePackInput = struct {
     };
 };
 
-pub const DeleteConformancePackOutput = struct {};
+const DeleteConformancePackOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

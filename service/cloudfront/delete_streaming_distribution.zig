@@ -13,7 +13,7 @@ pub const DeleteStreamingDistributionInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteStreamingDistributionOutput = struct {};
+const DeleteStreamingDistributionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

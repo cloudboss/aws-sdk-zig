@@ -24,7 +24,7 @@ pub const GetDomainNameInput = struct {
     };
 };
 
-const GetDomainNameOutput = @import("domain_name.zig").GetDomainNameOutput;
+const GetDomainNameOutput = @import("domain_name.zig").DomainName;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,7 +18,7 @@ pub const DeletePendingAggregationRequestInput = struct {
     };
 };
 
-pub const DeletePendingAggregationRequestOutput = struct {};
+const DeletePendingAggregationRequestOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

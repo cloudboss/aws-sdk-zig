@@ -42,7 +42,7 @@ pub const CreateIntegrationInput = struct {
     target_arn: []const u8,
 };
 
-const CreateIntegrationOutput = @import("integration.zig").CreateIntegrationOutput;
+const CreateIntegrationOutput = @import("integration.zig").Integration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

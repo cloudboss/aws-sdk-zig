@@ -41,7 +41,7 @@ pub const UpdateFileSystemInput = struct {
     };
 };
 
-const UpdateFileSystemOutput = @import("file_system_description.zig").UpdateFileSystemOutput;
+const UpdateFileSystemOutput = @import("file_system_description.zig").FileSystemDescription;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

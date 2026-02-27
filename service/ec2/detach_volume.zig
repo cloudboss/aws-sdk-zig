@@ -37,7 +37,7 @@ pub const DetachVolumeInput = struct {
     volume_id: []const u8,
 };
 
-const DetachVolumeOutput = @import("volume_attachment.zig").DetachVolumeOutput;
+const DetachVolumeOutput = @import("volume_attachment.zig").VolumeAttachment;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

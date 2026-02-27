@@ -1,0 +1,22 @@
+const aws = @import("aws");
+
+const ResourceIdentifier = @import("resource_identifier.zig").ResourceIdentifier;
+const ResourceType = @import("resource_type.zig").ResourceType;
+
+/// Information about the resource that was noncompliant with the audit check.
+pub const NonCompliantResource = struct {
+    /// Other information about the noncompliant resource.
+    additional_info: ?[]const aws.map.StringMapEntry,
+
+    /// Information that identifies the noncompliant resource.
+    resource_identifier: ?ResourceIdentifier,
+
+    /// The type of the noncompliant resource.
+    resource_type: ?ResourceType,
+
+    pub const json_field_names = .{
+        .additional_info = "additionalInfo",
+        .resource_identifier = "resourceIdentifier",
+        .resource_type = "resourceType",
+    };
+};

@@ -22,7 +22,7 @@ pub const DeleteSSHPublicKeyInput = struct {
     user_name: []const u8,
 };
 
-pub const DeleteSSHPublicKeyOutput = struct {};
+const DeleteSSHPublicKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

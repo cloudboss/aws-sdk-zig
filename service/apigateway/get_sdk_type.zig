@@ -14,7 +14,7 @@ pub const GetSdkTypeInput = struct {
     };
 };
 
-const GetSdkTypeOutput = @import("sdk_type.zig").GetSdkTypeOutput;
+const GetSdkTypeOutput = @import("sdk_type.zig").SdkType;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

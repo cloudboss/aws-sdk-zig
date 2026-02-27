@@ -27,7 +27,7 @@ pub const DeleteFunctionEventInvokeConfigInput = struct {
     };
 };
 
-pub const DeleteFunctionEventInvokeConfigOutput = struct {};
+const DeleteFunctionEventInvokeConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

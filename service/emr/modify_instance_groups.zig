@@ -18,7 +18,7 @@ pub const ModifyInstanceGroupsInput = struct {
     };
 };
 
-pub const ModifyInstanceGroupsOutput = struct {};
+const ModifyInstanceGroupsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

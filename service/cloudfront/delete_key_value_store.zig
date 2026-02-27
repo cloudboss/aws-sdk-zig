@@ -12,7 +12,7 @@ pub const DeleteKeyValueStoreInput = struct {
     name: []const u8,
 };
 
-pub const DeleteKeyValueStoreOutput = struct {};
+const DeleteKeyValueStoreOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -187,7 +187,7 @@ pub const SetTopicAttributesInput = struct {
     topic_arn: []const u8,
 };
 
-pub const SetTopicAttributesOutput = struct {};
+const SetTopicAttributesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

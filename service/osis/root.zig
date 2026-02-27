@@ -1,0 +1,27 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_pipeline = @import("create_pipeline.zig");
+pub const create_pipeline_endpoint = @import("create_pipeline_endpoint.zig");
+pub const delete_pipeline = @import("delete_pipeline.zig");
+pub const delete_pipeline_endpoint = @import("delete_pipeline_endpoint.zig");
+pub const delete_resource_policy = @import("delete_resource_policy.zig");
+pub const get_pipeline = @import("get_pipeline.zig");
+pub const get_pipeline_blueprint = @import("get_pipeline_blueprint.zig");
+pub const get_pipeline_change_progress = @import("get_pipeline_change_progress.zig");
+pub const get_resource_policy = @import("get_resource_policy.zig");
+pub const list_pipeline_blueprints = @import("list_pipeline_blueprints.zig");
+pub const list_pipeline_endpoint_connections = @import("list_pipeline_endpoint_connections.zig");
+pub const list_pipeline_endpoints = @import("list_pipeline_endpoints.zig");
+pub const list_pipelines = @import("list_pipelines.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const put_resource_policy = @import("put_resource_policy.zig");
+pub const revoke_pipeline_endpoint_connections = @import("revoke_pipeline_endpoint_connections.zig");
+pub const start_pipeline = @import("start_pipeline.zig");
+pub const stop_pipeline = @import("stop_pipeline.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_pipeline = @import("update_pipeline.zig");
+pub const validate_pipeline = @import("validate_pipeline.zig");

@@ -4,16 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteAccessPointInput = struct {
-    /// The ID of the access point that you want to delete.
-    access_point_id: []const u8,
+const DeleteAccessPointInput = @import("delete_access_point_request.zig").DeleteAccessPointRequest;
 
-    pub const json_field_names = .{
-        .access_point_id = "AccessPointId",
-    };
-};
-
-pub const DeleteAccessPointOutput = struct {};
+const DeleteAccessPointOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

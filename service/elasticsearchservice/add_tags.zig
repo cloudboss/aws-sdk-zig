@@ -5,20 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
-pub const AddTagsInput = struct {
-    /// Specify the `ARN` for which you want to add the tags.
-    arn: []const u8,
+const AddTagsInput = @import("add_tags_request.zig").AddTagsRequest;
 
-    /// List of `Tag` that need to be added for the Elasticsearch domain.
-    tag_list: []const Tag,
-
-    pub const json_field_names = .{
-        .arn = "ARN",
-        .tag_list = "TagList",
-    };
-};
-
-pub const AddTagsOutput = struct {};
+const AddTagsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

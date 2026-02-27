@@ -14,7 +14,7 @@ pub const StopConfigurationRecorderInput = struct {
     };
 };
 
-pub const StopConfigurationRecorderOutput = struct {};
+const StopConfigurationRecorderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

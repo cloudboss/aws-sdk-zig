@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_cluster = @import("create_cluster.zig");
+pub const create_compute_node_group = @import("create_compute_node_group.zig");
+pub const create_queue = @import("create_queue.zig");
+pub const delete_cluster = @import("delete_cluster.zig");
+pub const delete_compute_node_group = @import("delete_compute_node_group.zig");
+pub const delete_queue = @import("delete_queue.zig");
+pub const get_cluster = @import("get_cluster.zig");
+pub const get_compute_node_group = @import("get_compute_node_group.zig");
+pub const get_queue = @import("get_queue.zig");
+pub const list_clusters = @import("list_clusters.zig");
+pub const list_compute_node_groups = @import("list_compute_node_groups.zig");
+pub const list_queues = @import("list_queues.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const register_compute_node_group_instance = @import("register_compute_node_group_instance.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_cluster = @import("update_cluster.zig");
+pub const update_compute_node_group = @import("update_compute_node_group.zig");
+pub const update_queue = @import("update_queue.zig");

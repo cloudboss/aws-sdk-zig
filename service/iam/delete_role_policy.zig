@@ -26,7 +26,7 @@ pub const DeleteRolePolicyInput = struct {
     role_name: []const u8,
 };
 
-pub const DeleteRolePolicyOutput = struct {};
+const DeleteRolePolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

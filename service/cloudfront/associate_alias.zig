@@ -13,7 +13,7 @@ pub const AssociateAliasInput = struct {
     target_distribution_id: []const u8,
 };
 
-pub const AssociateAliasOutput = struct {};
+const AssociateAliasOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

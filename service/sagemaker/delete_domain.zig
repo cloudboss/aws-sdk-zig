@@ -20,7 +20,7 @@ pub const DeleteDomainInput = struct {
     };
 };
 
-pub const DeleteDomainOutput = struct {};
+const DeleteDomainOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

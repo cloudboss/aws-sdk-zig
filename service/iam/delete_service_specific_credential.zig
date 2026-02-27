@@ -29,7 +29,7 @@ pub const DeleteServiceSpecificCredentialInput = struct {
     user_name: ?[]const u8 = null,
 };
 
-pub const DeleteServiceSpecificCredentialOutput = struct {};
+const DeleteServiceSpecificCredentialOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

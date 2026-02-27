@@ -1,0 +1,31 @@
+pub const SavingsPlanProductType = enum {
+    ec2,
+    fargate,
+    lambda,
+    sagemaker,
+    rds,
+    dsql,
+    dynamodb,
+    elasticache,
+    docdb,
+    neptune,
+    timestream,
+    keyspaces,
+    dms,
+
+    pub const json_field_names = .{
+        .ec2 = "EC2",
+        .fargate = "FARGATE",
+        .lambda = "LAMBDA",
+        .sagemaker = "SAGEMAKER",
+        .rds = "RDS",
+        .dsql = "DSQL",
+        .dynamodb = "DYNAMODB",
+        .elasticache = "ELASTICACHE",
+        .docdb = "DOCDB",
+        .neptune = "NEPTUNE",
+        .timestream = "TIMESTREAM",
+        .keyspaces = "KEYSPACES",
+        .dms = "DMS",
+    };
+};

@@ -27,7 +27,7 @@ pub const ReleaseAddressInput = struct {
     public_ip: ?[]const u8 = null,
 };
 
-pub const ReleaseAddressOutput = struct {};
+const ReleaseAddressOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

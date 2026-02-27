@@ -4,20 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteSpaceInput = struct {
-    /// The ID of the associated domain.
-    domain_id: []const u8,
+const DeleteSpaceInput = @import("delete_space_request.zig").DeleteSpaceRequest;
 
-    /// The name of the space.
-    space_name: []const u8,
-
-    pub const json_field_names = .{
-        .domain_id = "DomainId",
-        .space_name = "SpaceName",
-    };
-};
-
-pub const DeleteSpaceOutput = struct {};
+const DeleteSpaceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

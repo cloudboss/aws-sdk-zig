@@ -32,7 +32,7 @@ pub const SetAlarmStateInput = struct {
     };
 };
 
-pub const SetAlarmStateOutput = struct {};
+const SetAlarmStateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,7 +22,7 @@ pub const DeleteRouteSettingsInput = struct {
     };
 };
 
-pub const DeleteRouteSettingsOutput = struct {};
+const DeleteRouteSettingsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

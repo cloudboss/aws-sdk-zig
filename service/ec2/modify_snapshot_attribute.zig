@@ -36,7 +36,7 @@ pub const ModifySnapshotAttributeInput = struct {
     user_ids: ?[]const []const u8 = null,
 };
 
-pub const ModifySnapshotAttributeOutput = struct {};
+const ModifySnapshotAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

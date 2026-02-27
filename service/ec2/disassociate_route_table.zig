@@ -17,7 +17,7 @@ pub const DisassociateRouteTableInput = struct {
     dry_run: ?bool = null,
 };
 
-pub const DisassociateRouteTableOutput = struct {};
+const DisassociateRouteTableOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

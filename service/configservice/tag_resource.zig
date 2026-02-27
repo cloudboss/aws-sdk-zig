@@ -5,37 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = struct {
-    /// The Amazon Resource Name (ARN) that identifies the resource for which to
-    /// list the tags. The following resources are supported:
-    ///
-    /// * `ConfigurationRecorder`
-    ///
-    /// * `ConfigRule`
-    ///
-    /// * `OrganizationConfigRule`
-    ///
-    /// * `ConformancePack`
-    ///
-    /// * `OrganizationConformancePack`
-    ///
-    /// * `ConfigurationAggregator`
-    ///
-    /// * `AggregationAuthorization`
-    ///
-    /// * `StoredQuery`
-    resource_arn: []const u8,
+const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
 
-    /// An array of tag object.
-    tags: []const Tag,
-
-    pub const json_field_names = .{
-        .resource_arn = "ResourceArn",
-        .tags = "Tags",
-    };
-};
-
-pub const TagResourceOutput = struct {};
+const TagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

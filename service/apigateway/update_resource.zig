@@ -24,7 +24,7 @@ pub const UpdateResourceInput = struct {
     };
 };
 
-const UpdateResourceOutput = @import("resource.zig").UpdateResourceOutput;
+const UpdateResourceOutput = @import("resource.zig").Resource;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,7 @@ pub const DeleteFunctionCodeSigningConfigInput = struct {
     };
 };
 
-pub const DeleteFunctionCodeSigningConfigOutput = struct {};
+const DeleteFunctionCodeSigningConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

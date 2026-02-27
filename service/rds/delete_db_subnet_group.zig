@@ -16,7 +16,7 @@ pub const DeleteDBSubnetGroupInput = struct {
     db_subnet_group_name: []const u8,
 };
 
-pub const DeleteDBSubnetGroupOutput = struct {};
+const DeleteDBSubnetGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

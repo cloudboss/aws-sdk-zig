@@ -15,7 +15,7 @@ pub const DeleteBucketMetadataTableConfigurationInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const DeleteBucketMetadataTableConfigurationOutput = struct {};
+const DeleteBucketMetadataTableConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

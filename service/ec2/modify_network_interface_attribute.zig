@@ -93,7 +93,7 @@ pub const ModifyNetworkInterfaceAttributeInput = struct {
     source_dest_check: ?AttributeBooleanValue = null,
 };
 
-pub const ModifyNetworkInterfaceAttributeOutput = struct {};
+const ModifyNetworkInterfaceAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

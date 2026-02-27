@@ -486,7 +486,7 @@ pub const PutMetricAlarmInput = struct {
     };
 };
 
-pub const PutMetricAlarmOutput = struct {};
+const PutMetricAlarmOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -41,7 +41,7 @@ pub const UpdateLogAnomalyDetectorInput = struct {
     };
 };
 
-pub const UpdateLogAnomalyDetectorOutput = struct {};
+const UpdateLogAnomalyDetectorOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

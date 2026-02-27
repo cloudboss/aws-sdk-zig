@@ -15,7 +15,7 @@ pub const DeleteClusterParameterGroupInput = struct {
     parameter_group_name: []const u8,
 };
 
-pub const DeleteClusterParameterGroupOutput = struct {};
+const DeleteClusterParameterGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_parallel_data = @import("create_parallel_data.zig");
+pub const delete_parallel_data = @import("delete_parallel_data.zig");
+pub const delete_terminology = @import("delete_terminology.zig");
+pub const describe_text_translation_job = @import("describe_text_translation_job.zig");
+pub const get_parallel_data = @import("get_parallel_data.zig");
+pub const get_terminology = @import("get_terminology.zig");
+pub const import_terminology = @import("import_terminology.zig");
+pub const list_languages = @import("list_languages.zig");
+pub const list_parallel_data = @import("list_parallel_data.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_terminologies = @import("list_terminologies.zig");
+pub const list_text_translation_jobs = @import("list_text_translation_jobs.zig");
+pub const start_text_translation_job = @import("start_text_translation_job.zig");
+pub const stop_text_translation_job = @import("stop_text_translation_job.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const translate_document = @import("translate_document.zig");
+pub const translate_text = @import("translate_text.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_parallel_data = @import("update_parallel_data.zig");

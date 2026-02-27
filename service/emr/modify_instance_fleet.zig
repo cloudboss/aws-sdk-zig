@@ -18,7 +18,7 @@ pub const ModifyInstanceFleetInput = struct {
     };
 };
 
-pub const ModifyInstanceFleetOutput = struct {};
+const ModifyInstanceFleetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

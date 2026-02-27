@@ -20,7 +20,7 @@ pub const ForgetDeviceInput = struct {
     };
 };
 
-pub const ForgetDeviceOutput = struct {};
+const ForgetDeviceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

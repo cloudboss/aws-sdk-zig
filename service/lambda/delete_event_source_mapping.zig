@@ -27,7 +27,7 @@ pub const DeleteEventSourceMappingInput = struct {
     };
 };
 
-const DeleteEventSourceMappingOutput = @import("event_source_mapping_configuration.zig").DeleteEventSourceMappingOutput;
+const DeleteEventSourceMappingOutput = @import("event_source_mapping_configuration.zig").EventSourceMappingConfiguration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

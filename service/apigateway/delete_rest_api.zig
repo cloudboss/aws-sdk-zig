@@ -13,7 +13,7 @@ pub const DeleteRestApiInput = struct {
     };
 };
 
-pub const DeleteRestApiOutput = struct {};
+const DeleteRestApiOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

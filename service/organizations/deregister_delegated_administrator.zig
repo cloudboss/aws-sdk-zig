@@ -29,7 +29,7 @@ pub const DeregisterDelegatedAdministratorInput = struct {
     };
 };
 
-pub const DeregisterDelegatedAdministratorOutput = struct {};
+const DeregisterDelegatedAdministratorOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

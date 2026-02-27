@@ -1,0 +1,208 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const Tag = @import("tag.zig").Tag;
+const DomainDescription = @import("domain_description.zig").DomainDescription;
+
+pub const CreateDomainInput = struct {
+    /// The name of the domain to create. All domain names in an Amazon Web Services
+    /// Region that are in the
+    /// same Amazon Web Services account must be unique. The domain name is used as
+    /// the prefix in DNS hostnames. Do
+    /// not use sensitive information in a domain name because it is publicly
+    /// discoverable.
+    domain: []const u8,
+
+    /// The encryption key for the domain. This is used to encrypt content stored in
+    /// a domain.
+    /// An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key
+    /// alias, or a key
+    /// alias ARN. To specify an `encryptionKey`, your IAM role must have
+    /// `kms:DescribeKey` and `kms:CreateGrant` permissions on the encryption
+    /// key that is used. For more information, see
+    /// [DescribeKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax) in the *Key Management Service API Reference*
+    /// and [Key Management Service API Permissions
+    /// Reference](https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) in the *Key Management Service Developer Guide*.
+    ///
+    /// CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric
+    /// CMK with your
+    /// domain. For more information, see [Using symmetric and asymmetric
+    /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.
+    encryption_key: ?[]const u8 = null,
+
+    /// One or more tag key-value pairs for the domain.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .domain = "domain",
+        .encryption_key = "encryptionKey",
+        .tags = "tags",
+    };
+};
+
+pub const CreateDomainOutput = struct {
+    /// Contains information about the created domain after processing the request.
+    domain: ?DomainDescription = null,
+
+    pub const json_field_names = .{
+        .domain = "domain",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDomainInput, options: Options) !CreateDomainOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codeartifact");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateDomainInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("codeartifact", "codeartifact", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const path = "/v1/domain";
+
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+    try query_buf.appendSlice(alloc, "domain=");
+    try aws.url.appendUrlEncoded(alloc, &query_buf, input.domain);
+    query_has_prev = true;
+    const query = try query_buf.toOwnedSlice(alloc);
+
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(alloc, "{");
+
+    if (input.encryption_key) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"encryptionKey\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(alloc, "}");
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateDomainOutput {
+    var result: CreateDomainOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(CreateDomainOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

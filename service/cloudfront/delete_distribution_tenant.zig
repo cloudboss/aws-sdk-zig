@@ -14,7 +14,7 @@ pub const DeleteDistributionTenantInput = struct {
     if_match: []const u8,
 };
 
-pub const DeleteDistributionTenantOutput = struct {};
+const DeleteDistributionTenantOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

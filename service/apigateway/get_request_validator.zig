@@ -17,7 +17,7 @@ pub const GetRequestValidatorInput = struct {
     };
 };
 
-const GetRequestValidatorOutput = @import("request_validator.zig").GetRequestValidatorOutput;
+const GetRequestValidatorOutput = @import("request_validator.zig").RequestValidator;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

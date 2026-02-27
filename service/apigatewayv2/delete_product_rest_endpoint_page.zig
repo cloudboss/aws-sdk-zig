@@ -17,7 +17,7 @@ pub const DeleteProductRestEndpointPageInput = struct {
     };
 };
 
-pub const DeleteProductRestEndpointPageOutput = struct {};
+const DeleteProductRestEndpointPageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

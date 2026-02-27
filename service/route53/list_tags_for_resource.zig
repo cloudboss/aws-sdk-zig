@@ -7,23 +7,9 @@ const TagResourceType = @import("tag_resource_type.zig").TagResourceType;
 const ResourceTagSet = @import("resource_tag_set.zig").ResourceTagSet;
 const serde = @import("serde.zig");
 
-pub const ListTagsForResourceInput = struct {
-    /// The ID of the resource for which you want to retrieve tags.
-    resource_id: []const u8,
+const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 
-    /// The type of the resource.
-    ///
-    /// * The resource type for health checks is `healthcheck`.
-    ///
-    /// * The resource type for hosted zones is `hostedzone`.
-    resource_type: TagResourceType,
-};
-
-pub const ListTagsForResourceOutput = struct {
-    /// A `ResourceTagSet` containing tags associated with the specified
-    /// resource.
-    resource_tag_set: ?ResourceTagSet = null,
-};
+const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

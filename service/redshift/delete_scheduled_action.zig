@@ -9,7 +9,7 @@ pub const DeleteScheduledActionInput = struct {
     scheduled_action_name: []const u8,
 };
 
-pub const DeleteScheduledActionOutput = struct {};
+const DeleteScheduledActionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

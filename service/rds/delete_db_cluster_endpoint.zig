@@ -11,7 +11,7 @@ pub const DeleteDBClusterEndpointInput = struct {
     db_cluster_endpoint_identifier: []const u8,
 };
 
-const DeleteDBClusterEndpointOutput = @import("db_cluster_endpoint.zig").DeleteDBClusterEndpointOutput;
+const DeleteDBClusterEndpointOutput = @import("db_cluster_endpoint.zig").DBClusterEndpoint;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -30,7 +30,7 @@ pub const EnableStageTransitionInput = struct {
     };
 };
 
-pub const EnableStageTransitionOutput = struct {};
+const EnableStageTransitionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

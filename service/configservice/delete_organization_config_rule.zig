@@ -13,7 +13,7 @@ pub const DeleteOrganizationConfigRuleInput = struct {
     };
 };
 
-pub const DeleteOrganizationConfigRuleOutput = struct {};
+const DeleteOrganizationConfigRuleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

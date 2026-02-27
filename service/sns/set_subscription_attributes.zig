@@ -65,7 +65,7 @@ pub const SetSubscriptionAttributesInput = struct {
     subscription_arn: []const u8,
 };
 
-pub const SetSubscriptionAttributesOutput = struct {};
+const SetSubscriptionAttributesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

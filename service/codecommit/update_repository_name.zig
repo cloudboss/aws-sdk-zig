@@ -17,7 +17,7 @@ pub const UpdateRepositoryNameInput = struct {
     };
 };
 
-pub const UpdateRepositoryNameOutput = struct {};
+const UpdateRepositoryNameOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

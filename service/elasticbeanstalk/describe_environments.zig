@@ -1,0 +1,330 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const EnvironmentDescription = @import("environment_description.zig").EnvironmentDescription;
+const serde = @import("serde.zig");
+
+pub const DescribeEnvironmentsInput = struct {
+    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+    /// include only
+    /// those that are associated with this application.
+    application_name: ?[]const u8 = null,
+
+    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+    /// include only
+    /// those that have the specified IDs.
+    environment_ids: ?[]const []const u8 = null,
+
+    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+    /// include only
+    /// those that have the specified names.
+    environment_names: ?[]const []const u8 = null,
+
+    /// If specified when `IncludeDeleted` is set to `true`, then
+    /// environments deleted after this date are displayed.
+    included_deleted_back_to: ?i64 = null,
+
+    /// Indicates whether to include deleted environments:
+    ///
+    /// `true`: Environments that have been deleted after
+    /// `IncludedDeletedBackTo` are displayed.
+    ///
+    /// `false`: Do not include deleted environments.
+    include_deleted: ?bool = null,
+
+    /// For a paginated request. Specify a maximum number of environments to include
+    /// in
+    /// each response.
+    ///
+    /// If no `MaxRecords` is specified, all available environments are
+    /// retrieved in a single response.
+    max_records: ?i32 = null,
+
+    /// For a paginated request. Specify a token from a previous response page to
+    /// retrieve the next response page. All other
+    /// parameter values must be identical to the ones specified in the initial
+    /// request.
+    ///
+    /// If no `NextToken` is specified, the first page is retrieved.
+    next_token: ?[]const u8 = null,
+
+    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+    /// include only
+    /// those that are associated with this application version.
+    version_label: ?[]const u8 = null,
+};
+
+pub const DescribeEnvironmentsOutput = struct {
+    /// Returns an EnvironmentDescription list.
+    environments: ?[]const EnvironmentDescription = null,
+
+    /// In a paginated request, the token that you can pass in a subsequent request
+    /// to get the
+    /// next response page.
+    next_token: ?[]const u8 = null,
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeEnvironmentsInput, options: Options) !DescribeEnvironmentsOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "elasticbeanstalk");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: DescribeEnvironmentsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("elasticbeanstalk", "Elastic Beanstalk", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var body_buf: std.ArrayList(u8) = .{};
+
+    try body_buf.appendSlice(alloc, "Action=DescribeEnvironments&Version=2010-12-01");
+    if (input.application_name) |v| {
+        try body_buf.appendSlice(alloc, "&ApplicationName=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.environment_ids) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EnvironmentIds.member.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.environment_names) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EnvironmentNames.member.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(alloc, field_prefix);
+            try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+        }
+    }
+    if (input.included_deleted_back_to) |v| {
+        try body_buf.appendSlice(alloc, "&IncludedDeletedBackTo=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    if (input.include_deleted) |v| {
+        try body_buf.appendSlice(alloc, "&IncludeDeleted=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (v) "true" else "false");
+    }
+    if (input.max_records) |v| {
+        try body_buf.appendSlice(alloc, "&MaxRecords=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{v}) catch "");
+    }
+    if (input.next_token) |v| {
+        try body_buf.appendSlice(alloc, "&NextToken=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+    }
+    if (input.version_label) |v| {
+        try body_buf.appendSlice(alloc, "&VersionLabel=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+    }
+
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeEnvironmentsOutput {
+    _ = status;
+    _ = headers;
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "DescribeEnvironmentsResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: DescribeEnvironmentsOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Environments")) {
+                    result.environments = try serde.deserializeEnvironmentDescriptionsList(&reader, alloc, "member");
+                } else if (std.mem.eql(u8, e.local, "NextToken")) {
+                    result.next_token = try alloc.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestId") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, request_id);
+
+    if (std.mem.eql(u8, error_code, "CodeBuildNotInServiceRegionException")) {
+        return .{ .arena = arena, .kind = .{ .code_build_not_in_service_region_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ElasticBeanstalkServiceException")) {
+        return .{ .arena = arena, .kind = .{ .elastic_beanstalk_service_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InsufficientPrivilegesException")) {
+        return .{ .arena = arena, .kind = .{ .insufficient_privileges_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRequestException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ManagedActionInvalidStateException")) {
+        return .{ .arena = arena, .kind = .{ .managed_action_invalid_state_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OperationInProgressException")) {
+        return .{ .arena = arena, .kind = .{ .operation_in_progress_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PlatformVersionStillReferencedException")) {
+        return .{ .arena = arena, .kind = .{ .platform_version_still_referenced_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceTypeNotSupportedException")) {
+        return .{ .arena = arena, .kind = .{ .resource_type_not_supported_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3LocationNotInServiceRegionException")) {
+        return .{ .arena = arena, .kind = .{ .s3_location_not_in_service_region_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3SubscriptionRequiredException")) {
+        return .{ .arena = arena, .kind = .{ .s3_subscription_required_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SourceBundleDeletionException")) {
+        return .{ .arena = arena, .kind = .{ .source_bundle_deletion_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyApplicationVersionsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_application_versions_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyApplicationsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_applications_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyBucketsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_buckets_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyConfigurationTemplatesException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_configuration_templates_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyEnvironmentsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_environments_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyPlatformsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_platforms_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_tags_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

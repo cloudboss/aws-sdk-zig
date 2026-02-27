@@ -29,7 +29,7 @@ pub const AttachVolumeInput = struct {
     volume_id: []const u8,
 };
 
-const AttachVolumeOutput = @import("volume_attachment.zig").AttachVolumeOutput;
+const AttachVolumeOutput = @import("volume_attachment.zig").VolumeAttachment;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

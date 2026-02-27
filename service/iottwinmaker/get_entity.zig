@@ -1,0 +1,239 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ComponentResponse = @import("component_response.zig").ComponentResponse;
+const Status = @import("status.zig").Status;
+
+pub const GetEntityInput = struct {
+    /// The ID of the entity.
+    entity_id: []const u8,
+
+    /// The ID of the workspace.
+    workspace_id: []const u8,
+
+    pub const json_field_names = .{
+        .entity_id = "entityId",
+        .workspace_id = "workspaceId",
+    };
+};
+
+pub const GetEntityOutput = struct {
+    /// This flag notes whether all components are returned in the API response. The
+    /// maximum number of components returned is 30.
+    are_all_components_returned: ?bool = null,
+
+    /// The ARN of the entity.
+    arn: []const u8,
+
+    /// An object that maps strings to the components in the entity. Each string in
+    /// the mapping
+    /// must be unique to this object.
+    components: ?[]const aws.map.MapEntry(ComponentResponse) = null,
+
+    /// The date and time when the entity was created.
+    creation_date_time: i64,
+
+    /// The description of the entity.
+    description: ?[]const u8 = null,
+
+    /// The ID of the entity.
+    entity_id: []const u8,
+
+    /// The name of the entity.
+    entity_name: []const u8,
+
+    /// A Boolean value that specifies whether the entity has associated child
+    /// entities.
+    has_child_entities: bool,
+
+    /// The ID of the parent entity for this entity.
+    parent_entity_id: []const u8,
+
+    /// The current status of the entity.
+    status: ?Status = null,
+
+    /// The syncSource of the sync job, if this entity was created by a sync job.
+    sync_source: ?[]const u8 = null,
+
+    /// The date and time when the entity was last updated.
+    update_date_time: i64,
+
+    /// The ID of the workspace.
+    workspace_id: []const u8,
+
+    pub const json_field_names = .{
+        .are_all_components_returned = "areAllComponentsReturned",
+        .arn = "arn",
+        .components = "components",
+        .creation_date_time = "creationDateTime",
+        .description = "description",
+        .entity_id = "entityId",
+        .entity_name = "entityName",
+        .has_child_entities = "hasChildEntities",
+        .parent_entity_id = "parentEntityId",
+        .status = "status",
+        .sync_source = "syncSource",
+        .update_date_time = "updateDateTime",
+        .workspace_id = "workspaceId",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetEntityInput, options: Options) !GetEntityOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iottwinmaker");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetEntityInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("iottwinmaker", "IoTTwinMaker", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/workspaces/");
+    try path_buf.appendSlice(alloc, input.workspace_id);
+    try path_buf.appendSlice(alloc, "/entities/");
+    try path_buf.appendSlice(alloc, input.entity_id);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetEntityOutput {
+    var result: GetEntityOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetEntityOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConnectorFailureException")) {
+        return .{ .arena = arena, .kind = .{ .connector_failure_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConnectorTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .connector_timeout_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "QueryTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .query_timeout_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_tags_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

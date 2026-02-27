@@ -5,7 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourcePolicy = @import("resource_policy.zig").ResourcePolicy;
 
-pub const DescribeResourcePolicyInput = struct {};
+const DescribeResourcePolicyInput = struct {};
 
 pub const DescribeResourcePolicyOutput = struct {
     /// A structure that contains details about the resource policy.

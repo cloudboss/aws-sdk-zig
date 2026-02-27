@@ -18,7 +18,7 @@ pub const ResetAuthorizersCacheInput = struct {
     };
 };
 
-pub const ResetAuthorizersCacheOutput = struct {};
+const ResetAuthorizersCacheOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,7 +14,7 @@ pub const DeleteFeatureGroupInput = struct {
     };
 };
 
-pub const DeleteFeatureGroupOutput = struct {};
+const DeleteFeatureGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

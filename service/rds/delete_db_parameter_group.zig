@@ -15,7 +15,7 @@ pub const DeleteDBParameterGroupInput = struct {
     db_parameter_group_name: []const u8,
 };
 
-pub const DeleteDBParameterGroupOutput = struct {};
+const DeleteDBParameterGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

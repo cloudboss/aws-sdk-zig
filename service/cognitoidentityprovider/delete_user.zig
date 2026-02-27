@@ -15,7 +15,7 @@ pub const DeleteUserInput = struct {
     };
 };
 
-pub const DeleteUserOutput = struct {};
+const DeleteUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

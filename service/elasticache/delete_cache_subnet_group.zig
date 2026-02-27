@@ -12,7 +12,7 @@ pub const DeleteCacheSubnetGroupInput = struct {
     cache_subnet_group_name: []const u8,
 };
 
-pub const DeleteCacheSubnetGroupOutput = struct {};
+const DeleteCacheSubnetGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

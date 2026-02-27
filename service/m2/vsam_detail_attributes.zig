@@ -1,0 +1,40 @@
+const AlternateKey = @import("alternate_key.zig").AlternateKey;
+const PrimaryKey = @import("primary_key.zig").PrimaryKey;
+
+/// The attributes of a VSAM type data set.
+pub const VsamDetailAttributes = struct {
+    /// The alternate key definitions, if any. A legacy dataset might not have any
+    /// alternate key
+    /// defined, but if those alternate keys definitions exist, provide them as some
+    /// applications
+    /// will make use of them.
+    alternate_keys: ?[]const AlternateKey,
+
+    /// If set to True, enforces loading the data set into cache before it’s used by
+    /// the
+    /// application.
+    cache_at_startup: ?bool,
+
+    /// Indicates whether indexes for this dataset are stored as compressed values.
+    /// If you have
+    /// a large data set (typically > 100 Mb), consider setting this flag to True.
+    compressed: ?bool,
+
+    /// The character set used by the data set. Can be ASCII, EBCDIC, or unknown.
+    encoding: ?[]const u8,
+
+    /// The primary key of the data set.
+    primary_key: ?PrimaryKey,
+
+    /// The record format of the data set.
+    record_format: ?[]const u8,
+
+    pub const json_field_names = .{
+        .alternate_keys = "alternateKeys",
+        .cache_at_startup = "cacheAtStartup",
+        .compressed = "compressed",
+        .encoding = "encoding",
+        .primary_key = "primaryKey",
+        .record_format = "recordFormat",
+    };
+};

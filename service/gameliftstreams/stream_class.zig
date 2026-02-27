@@ -1,0 +1,31 @@
+pub const StreamClass = enum {
+    gen_4_n_high,
+    gen_4_n_ultra,
+    gen_4_n_win_2022,
+    gen_5_n_high,
+    gen_5_n_ultra,
+    gen_5_n_win_2022,
+    gen_6_n_small,
+    gen_6_n_medium,
+    gen_6_n_high,
+    gen_6_n_ultra,
+    gen_6_n_ultra_win_2022,
+    gen_6_n_pro,
+    gen_6_n_pro_win_2022,
+
+    pub const json_field_names = .{
+        .gen_4_n_high = "gen4n_high",
+        .gen_4_n_ultra = "gen4n_ultra",
+        .gen_4_n_win_2022 = "gen4n_win2022",
+        .gen_5_n_high = "gen5n_high",
+        .gen_5_n_ultra = "gen5n_ultra",
+        .gen_5_n_win_2022 = "gen5n_win2022",
+        .gen_6_n_small = "gen6n_small",
+        .gen_6_n_medium = "gen6n_medium",
+        .gen_6_n_high = "gen6n_high",
+        .gen_6_n_ultra = "gen6n_ultra",
+        .gen_6_n_ultra_win_2022 = "gen6n_ultra_win2022",
+        .gen_6_n_pro = "gen6n_pro",
+        .gen_6_n_pro_win_2022 = "gen6n_pro_win2022",
+    };
+};

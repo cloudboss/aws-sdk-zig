@@ -44,7 +44,7 @@ pub const AttachPolicyInput = struct {
     };
 };
 
-pub const AttachPolicyOutput = struct {};
+const AttachPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

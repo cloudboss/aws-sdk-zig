@@ -13,7 +13,7 @@ pub const DeleteDomainNameAccessAssociationInput = struct {
     };
 };
 
-pub const DeleteDomainNameAccessAssociationOutput = struct {};
+const DeleteDomainNameAccessAssociationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

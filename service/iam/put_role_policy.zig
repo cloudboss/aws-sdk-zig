@@ -48,7 +48,7 @@ pub const PutRolePolicyInput = struct {
     role_name: []const u8,
 };
 
-pub const PutRolePolicyOutput = struct {};
+const PutRolePolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

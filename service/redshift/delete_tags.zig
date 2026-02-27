@@ -5,17 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-pub const DeleteTagsInput = struct {
-    /// The Amazon Resource Name (ARN) from which you want to remove the tag or
-    /// tags. For
-    /// example, `arn:aws:redshift:us-east-2:123456789:cluster:t1`.
-    resource_name: []const u8,
+const DeleteTagsInput = @import("delete_tags_message.zig").DeleteTagsMessage;
 
-    /// The tag key that you want to delete.
-    tag_keys: []const []const u8,
-};
-
-pub const DeleteTagsOutput = struct {};
+const DeleteTagsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

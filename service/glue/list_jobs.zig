@@ -4,36 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const ListJobsInput = struct {
-    /// The maximum size of a list to return.
-    max_results: ?i32 = null,
+const ListJobsInput = @import("list_jobs_request.zig").ListJobsRequest;
 
-    /// A continuation token, if this is a continuation request.
-    next_token: ?[]const u8 = null,
-
-    /// Specifies to return only these tagged resources.
-    tags: ?[]const aws.map.StringMapEntry = null,
-
-    pub const json_field_names = .{
-        .max_results = "MaxResults",
-        .next_token = "NextToken",
-        .tags = "Tags",
-    };
-};
-
-pub const ListJobsOutput = struct {
-    /// The names of all jobs in the account, or the jobs with the specified tags.
-    job_names: ?[]const []const u8 = null,
-
-    /// A continuation token, if the returned list does not contain the
-    /// last metric available.
-    next_token: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .job_names = "JobNames",
-        .next_token = "NextToken",
-    };
-};
+const ListJobsOutput = @import("list_jobs_response.zig").ListJobsResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

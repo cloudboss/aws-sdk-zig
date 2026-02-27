@@ -66,7 +66,7 @@ pub const DeleteStackInput = struct {
     stack_name: []const u8,
 };
 
-pub const DeleteStackOutput = struct {};
+const DeleteStackOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

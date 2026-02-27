@@ -4,36 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const UntagResourceInput = struct {
-    /// The ID of the resource to remove a tag from.
-    ///
-    /// You can specify any of the following taggable resources.
-    ///
-    /// * Amazon Web Services account – specify the account ID number.
-    ///
-    /// * Organizational unit – specify the OU ID that begins with `ou-` and
-    /// looks similar to: `ou-*1a2b-34uvwxyz*
-    /// `
-    ///
-    /// * Root – specify the root ID that begins with `r-` and looks similar
-    /// to: `r-*1a2b*
-    /// `
-    ///
-    /// * Policy – specify the policy ID that begins with `p-` andlooks
-    /// similar to: `p-*12abcdefg3*
-    /// `
-    resource_id: []const u8,
+const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
 
-    /// The list of keys for tags to remove from the specified resource.
-    tag_keys: []const []const u8,
-
-    pub const json_field_names = .{
-        .resource_id = "ResourceId",
-        .tag_keys = "TagKeys",
-    };
-};
-
-pub const UntagResourceOutput = struct {};
+const UntagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

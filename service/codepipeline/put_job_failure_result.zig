@@ -20,7 +20,7 @@ pub const PutJobFailureResultInput = struct {
     };
 };
 
-pub const PutJobFailureResultOutput = struct {};
+const PutJobFailureResultOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -32,7 +32,7 @@ pub const UpdateFeatureMetadataInput = struct {
     };
 };
 
-pub const UpdateFeatureMetadataOutput = struct {};
+const UpdateFeatureMetadataOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

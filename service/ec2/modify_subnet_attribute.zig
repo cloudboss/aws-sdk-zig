@@ -90,7 +90,7 @@ pub const ModifySubnetAttributeInput = struct {
     subnet_id: []const u8,
 };
 
-pub const ModifySubnetAttributeOutput = struct {};
+const ModifySubnetAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

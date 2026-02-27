@@ -1,0 +1,19 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_suite_definition = @import("create_suite_definition.zig");
+pub const delete_suite_definition = @import("delete_suite_definition.zig");
+pub const get_endpoint = @import("get_endpoint.zig");
+pub const get_suite_definition = @import("get_suite_definition.zig");
+pub const get_suite_run = @import("get_suite_run.zig");
+pub const get_suite_run_report = @import("get_suite_run_report.zig");
+pub const list_suite_definitions = @import("list_suite_definitions.zig");
+pub const list_suite_runs = @import("list_suite_runs.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const start_suite_run = @import("start_suite_run.zig");
+pub const stop_suite_run = @import("stop_suite_run.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_suite_definition = @import("update_suite_definition.zig");

@@ -17,7 +17,7 @@ pub const DeleteTransformerInput = struct {
     };
 };
 
-pub const DeleteTransformerOutput = struct {};
+const DeleteTransformerOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

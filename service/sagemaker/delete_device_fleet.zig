@@ -13,7 +13,7 @@ pub const DeleteDeviceFleetInput = struct {
     };
 };
 
-pub const DeleteDeviceFleetOutput = struct {};
+const DeleteDeviceFleetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,7 @@ pub const DeleteInferenceComponentInput = struct {
     };
 };
 
-pub const DeleteInferenceComponentOutput = struct {};
+const DeleteInferenceComponentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

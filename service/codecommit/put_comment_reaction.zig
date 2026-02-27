@@ -21,7 +21,7 @@ pub const PutCommentReactionInput = struct {
     };
 };
 
-pub const PutCommentReactionOutput = struct {};
+const PutCommentReactionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

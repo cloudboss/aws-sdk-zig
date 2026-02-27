@@ -25,7 +25,7 @@ pub const PutFunctionConcurrencyInput = struct {
     };
 };
 
-const PutFunctionConcurrencyOutput = @import("concurrency.zig").PutFunctionConcurrencyOutput;
+const PutFunctionConcurrencyOutput = @import("concurrency.zig").Concurrency;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

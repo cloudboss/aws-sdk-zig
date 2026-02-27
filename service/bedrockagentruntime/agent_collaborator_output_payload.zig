@@ -1,0 +1,21 @@
+const ReturnControlPayload = @import("return_control_payload.zig").ReturnControlPayload;
+const PayloadType = @import("payload_type.zig").PayloadType;
+
+/// Output from an agent collaborator. The output can be text or an action
+/// invocation result.
+pub const AgentCollaboratorOutputPayload = struct {
+    /// An action invocation result.
+    return_control_payload: ?ReturnControlPayload,
+
+    /// Text output.
+    text: ?[]const u8,
+
+    /// The type of output.
+    type: ?PayloadType,
+
+    pub const json_field_names = .{
+        .return_control_payload = "returnControlPayload",
+        .text = "text",
+        .type = "type",
+    };
+};

@@ -13,7 +13,7 @@ pub const DeleteLogGroupInput = struct {
     };
 };
 
-pub const DeleteLogGroupOutput = struct {};
+const DeleteLogGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

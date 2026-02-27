@@ -47,7 +47,7 @@ pub const CreateStudioSessionMappingInput = struct {
     };
 };
 
-pub const CreateStudioSessionMappingOutput = struct {};
+const CreateStudioSessionMappingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

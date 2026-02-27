@@ -16,7 +16,7 @@ pub const DeleteLogAnomalyDetectorInput = struct {
     };
 };
 
-pub const DeleteLogAnomalyDetectorOutput = struct {};
+const DeleteLogAnomalyDetectorOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

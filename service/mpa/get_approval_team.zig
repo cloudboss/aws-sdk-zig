@@ -1,0 +1,237 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ApprovalStrategyResponse = @import("approval_strategy_response.zig").ApprovalStrategyResponse;
+const GetApprovalTeamResponseApprover = @import("get_approval_team_response_approver.zig").GetApprovalTeamResponseApprover;
+const PendingUpdate = @import("pending_update.zig").PendingUpdate;
+const PolicyReference = @import("policy_reference.zig").PolicyReference;
+const ApprovalTeamStatus = @import("approval_team_status.zig").ApprovalTeamStatus;
+const ApprovalTeamStatusCode = @import("approval_team_status_code.zig").ApprovalTeamStatusCode;
+
+pub const GetApprovalTeamInput = struct {
+    /// Amazon Resource Name (ARN) for the team.
+    arn: []const u8,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+    };
+};
+
+pub const GetApprovalTeamOutput = struct {
+    /// An `ApprovalStrategyResponse` object. Contains details for how the team
+    /// grants approval.
+    approval_strategy: ?ApprovalStrategyResponse = null,
+
+    /// An array of `GetApprovalTeamResponseApprover ` objects. Contains details for
+    /// the approvers in the team.
+    approvers: ?[]const GetApprovalTeamResponseApprover = null,
+
+    /// Amazon Resource Name (ARN) for the team.
+    arn: ?[]const u8 = null,
+
+    /// Timestamp when the team was created.
+    creation_time: ?i64 = null,
+
+    /// Description for the team.
+    description: ?[]const u8 = null,
+
+    /// Timestamp when the team was last updated.
+    last_update_time: ?i64 = null,
+
+    /// Name of the approval team.
+    name: ?[]const u8 = null,
+
+    /// Total number of approvers in the team.
+    number_of_approvers: ?i32 = null,
+
+    /// A `PendingUpdate` object. Contains details for the pending updates for the
+    /// team, if applicable.
+    pending_update: ?PendingUpdate = null,
+
+    /// An array of `PolicyReference` objects. Contains a list of policies that
+    /// define the permissions for team resources.
+    policies: ?[]const PolicyReference = null,
+
+    /// Status for the team. For more information, see [Team
+    /// health](https://docs.aws.amazon.com/mpa/latest/userguide/mpa-health.html) in
+    /// the *Multi-party approval User Guide*.
+    status: ?ApprovalTeamStatus = null,
+
+    /// Status code for the approval team. For more information, see [Team
+    /// health](https://docs.aws.amazon.com/mpa/latest/userguide/mpa-health.html) in
+    /// the *Multi-party approval User Guide*.
+    status_code: ?ApprovalTeamStatusCode = null,
+
+    /// Message describing the status for the team.
+    status_message: ?[]const u8 = null,
+
+    /// Amazon Resource Name (ARN) for the session.
+    update_session_arn: ?[]const u8 = null,
+
+    /// Version ID for the team.
+    version_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .approval_strategy = "ApprovalStrategy",
+        .approvers = "Approvers",
+        .arn = "Arn",
+        .creation_time = "CreationTime",
+        .description = "Description",
+        .last_update_time = "LastUpdateTime",
+        .name = "Name",
+        .number_of_approvers = "NumberOfApprovers",
+        .pending_update = "PendingUpdate",
+        .policies = "Policies",
+        .status = "Status",
+        .status_code = "StatusCode",
+        .status_message = "StatusMessage",
+        .update_session_arn = "UpdateSessionArn",
+        .version_id = "VersionId",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetApprovalTeamInput, options: Options) !GetApprovalTeamOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "mpa");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetApprovalTeamInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("mpa", "MPA", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/approval-teams/");
+    try path_buf.appendSlice(alloc, input.arn);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetApprovalTeamOutput {
+    var result: GetApprovalTeamOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetApprovalTeamOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_tags_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

@@ -15,7 +15,7 @@ pub const DeleteDBClusterParameterGroupInput = struct {
     db_cluster_parameter_group_name: []const u8,
 };
 
-pub const DeleteDBClusterParameterGroupOutput = struct {};
+const DeleteDBClusterParameterGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

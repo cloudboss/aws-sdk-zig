@@ -17,7 +17,7 @@ pub const UntagLogGroupInput = struct {
     };
 };
 
-pub const UntagLogGroupOutput = struct {};
+const UntagLogGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

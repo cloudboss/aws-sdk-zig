@@ -17,7 +17,7 @@ pub const FlushStageCacheInput = struct {
     };
 };
 
-pub const FlushStageCacheOutput = struct {};
+const FlushStageCacheOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

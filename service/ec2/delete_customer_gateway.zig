@@ -16,7 +16,7 @@ pub const DeleteCustomerGatewayInput = struct {
     dry_run: ?bool = null,
 };
 
-pub const DeleteCustomerGatewayOutput = struct {};
+const DeleteCustomerGatewayOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

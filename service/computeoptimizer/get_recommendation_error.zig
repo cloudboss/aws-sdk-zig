@@ -1,0 +1,23 @@
+/// Describes an error experienced when getting recommendations.
+///
+/// For example, an error is returned if you request recommendations for an
+/// unsupported
+/// Amazon EC2 Auto Scaling group, or if you request recommendations for an
+/// instance of an
+/// unsupported instance family.
+pub const GetRecommendationError = struct {
+    /// The error code.
+    code: ?[]const u8,
+
+    /// The ID of the error.
+    identifier: ?[]const u8,
+
+    /// The message, or reason, for the error.
+    message: ?[]const u8,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .identifier = "identifier",
+        .message = "message",
+    };
+};

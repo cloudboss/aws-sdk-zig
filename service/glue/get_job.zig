@@ -14,14 +14,7 @@ pub const GetJobInput = struct {
     };
 };
 
-pub const GetJobOutput = struct {
-    /// The requested job definition.
-    job: ?Job = null,
-
-    pub const json_field_names = .{
-        .job = "Job",
-    };
-};
+const GetJobOutput = @import("get_job_response.zig").GetJobResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

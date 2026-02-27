@@ -13,7 +13,7 @@ pub const DeleteDistributionInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteDistributionOutput = struct {};
+const DeleteDistributionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -20,7 +20,7 @@ pub const AssociateDhcpOptionsInput = struct {
     vpc_id: []const u8,
 };
 
-pub const AssociateDhcpOptionsOutput = struct {};
+const AssociateDhcpOptionsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

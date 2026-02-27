@@ -23,7 +23,7 @@ pub const RegisterDevicesInput = struct {
     };
 };
 
-pub const RegisterDevicesOutput = struct {};
+const RegisterDevicesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

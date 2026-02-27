@@ -5,7 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Organization = @import("organization.zig").Organization;
 
-pub const DescribeOrganizationInput = struct {};
+const DescribeOrganizationInput = struct {};
 
 pub const DescribeOrganizationOutput = struct {
     /// A structure that contains information about the organization.

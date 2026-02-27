@@ -1,0 +1,20 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const cancel_query = @import("cancel_query.zig");
+pub const create_scheduled_query = @import("create_scheduled_query.zig");
+pub const delete_scheduled_query = @import("delete_scheduled_query.zig");
+pub const describe_account_settings = @import("describe_account_settings.zig");
+pub const describe_endpoints = @import("describe_endpoints.zig");
+pub const describe_scheduled_query = @import("describe_scheduled_query.zig");
+pub const execute_scheduled_query = @import("execute_scheduled_query.zig");
+pub const list_scheduled_queries = @import("list_scheduled_queries.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const prepare_query = @import("prepare_query.zig");
+pub const query = @import("query.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_account_settings = @import("update_account_settings.zig");
+pub const update_scheduled_query = @import("update_scheduled_query.zig");

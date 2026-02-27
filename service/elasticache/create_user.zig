@@ -37,7 +37,7 @@ pub const CreateUserInput = struct {
     user_name: []const u8,
 };
 
-const CreateUserOutput = @import("user.zig").CreateUserOutput;
+const CreateUserOutput = @import("user.zig").User;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

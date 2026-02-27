@@ -1,0 +1,258 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ForecastGeofenceEventsDeviceState = @import("forecast_geofence_events_device_state.zig").ForecastGeofenceEventsDeviceState;
+const DistanceUnit = @import("distance_unit.zig").DistanceUnit;
+const SpeedUnit = @import("speed_unit.zig").SpeedUnit;
+const ForecastedEvent = @import("forecasted_event.zig").ForecastedEvent;
+
+pub const ForecastGeofenceEventsInput = struct {
+    /// The name of the geofence collection.
+    collection_name: []const u8,
+
+    /// Represents the device's state, including its current position and speed.
+    /// When speed is omitted, this API performs a *containment check*. The
+    /// *containment check* operation returns `IDLE` events for geofences where the
+    /// device is currently inside of, but no other events.
+    device_state: ForecastGeofenceEventsDeviceState,
+
+    /// The distance unit used for the `NearestDistance` property returned in a
+    /// forecasted event. The measurement system must match for `DistanceUnit` and
+    /// `SpeedUnit`; if `Kilometers` is specified for `DistanceUnit`, then
+    /// `SpeedUnit` must be `KilometersPerHour`.
+    ///
+    /// Default Value: `Kilometers`
+    distance_unit: ?DistanceUnit = null,
+
+    /// An optional limit for the number of resources returned in a single call.
+    ///
+    /// Default value: `20`
+    max_results: ?i32 = null,
+
+    /// The pagination token specifying which page of results to return in the
+    /// response. If no token is provided, the default page is the first page.
+    ///
+    /// Default value: `null`
+    next_token: ?[]const u8 = null,
+
+    /// The speed unit for the device captured by the device state. The measurement
+    /// system must match for `DistanceUnit` and `SpeedUnit`; if `Kilometers` is
+    /// specified for `DistanceUnit`, then `SpeedUnit` must be `KilometersPerHour`.
+    ///
+    /// Default Value: `KilometersPerHour`.
+    speed_unit: ?SpeedUnit = null,
+
+    /// The forward-looking time window for forecasting, specified in minutes. The
+    /// API only returns events that are predicted to occur within this time
+    /// horizon. When no value is specified, this API performs a *containment
+    /// check*. The *containment check* operation returns `IDLE` events for
+    /// geofences where the device is currently inside of, but no other events.
+    time_horizon_minutes: ?f64 = null,
+
+    pub const json_field_names = .{
+        .collection_name = "CollectionName",
+        .device_state = "DeviceState",
+        .distance_unit = "DistanceUnit",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .speed_unit = "SpeedUnit",
+        .time_horizon_minutes = "TimeHorizonMinutes",
+    };
+};
+
+pub const ForecastGeofenceEventsOutput = struct {
+    /// The distance unit for the forecasted events.
+    distance_unit: DistanceUnit,
+
+    /// The list of forecasted events.
+    forecasted_events: ?[]const ForecastedEvent = null,
+
+    /// The pagination token specifying which page of results to return in the
+    /// response. If no token is provided, the default page is the first page.
+    next_token: ?[]const u8 = null,
+
+    /// The speed unit for the forecasted events.
+    speed_unit: SpeedUnit,
+
+    pub const json_field_names = .{
+        .distance_unit = "DistanceUnit",
+        .forecasted_events = "ForecastedEvents",
+        .next_token = "NextToken",
+        .speed_unit = "SpeedUnit",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ForecastGeofenceEventsInput, options: Options) !ForecastGeofenceEventsOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "location");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: ForecastGeofenceEventsInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("location", "Location", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/geofencing/v0/collections/");
+    try path_buf.appendSlice(alloc, input.collection_name);
+    try path_buf.appendSlice(alloc, "/forecast-geofence-events");
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(alloc, "{");
+
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"DeviceState\":");
+    try aws.json.writeValue(@TypeOf(input.device_state), input.device_state, alloc, &body_buf);
+    has_prev = true;
+    if (input.distance_unit) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"DistanceUnit\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.max_results) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"MaxResults\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.next_token) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"NextToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.speed_unit) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"SpeedUnit\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.time_horizon_minutes) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"TimeHorizonMinutes\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(alloc, "}");
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ForecastGeofenceEventsOutput {
+    var result: ForecastGeofenceEventsOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(ForecastGeofenceEventsOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

@@ -13,7 +13,7 @@ pub const DeleteSpotDatafeedSubscriptionInput = struct {
     dry_run: ?bool = null,
 };
 
-pub const DeleteSpotDatafeedSubscriptionOutput = struct {};
+const DeleteSpotDatafeedSubscriptionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

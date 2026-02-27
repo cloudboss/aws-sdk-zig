@@ -29,7 +29,7 @@ pub const PutRolePermissionsBoundaryInput = struct {
     role_name: []const u8,
 };
 
-pub const PutRolePermissionsBoundaryOutput = struct {};
+const PutRolePermissionsBoundaryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,16 +22,18 @@ pub fn build(b: *std.Build) void {
         var svc_iter = services_dir.iterate();
         while (svc_iter.next() catch null) |entry| {
             if (entry.kind != .directory) continue;
-            const root_path = b.fmt("{s}/{s}/root.zig", .{ services_path, entry.name });
+            // Dupe the name so the hash key outlives the directory iterator buffer
+            const name = b.allocator.dupe(u8, entry.name) catch continue;
+            const root_path = b.fmt("{s}/{s}/root.zig", .{ services_path, name });
             b.build_root.handle.access(root_path, .{}) catch continue;
 
-            const svc_module = b.addModule(entry.name, .{
+            const svc_module = b.addModule(name, .{
                 .root_source_file = b.path(root_path),
                 .target = target,
                 .optimize = optimize,
             });
             svc_module.addImport("aws", aws_module);
-            service_modules.put(entry.name, svc_module) catch {};
+            service_modules.put(name, svc_module) catch {};
         }
     } else |_| {}
 

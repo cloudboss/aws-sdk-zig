@@ -5,23 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Cluster = @import("cluster.zig").Cluster;
 
-pub const DeleteClusterInput = struct {
-    /// The short name or full Amazon Resource Name (ARN) of the cluster to delete.
-    cluster: []const u8,
+const DeleteClusterInput = @import("delete_cluster_request.zig").DeleteClusterRequest;
 
-    pub const json_field_names = .{
-        .cluster = "cluster",
-    };
-};
-
-pub const DeleteClusterOutput = struct {
-    /// The full description of the deleted cluster.
-    cluster: ?Cluster = null,
-
-    pub const json_field_names = .{
-        .cluster = "cluster",
-    };
-};
+const DeleteClusterOutput = @import("delete_cluster_response.zig").DeleteClusterResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

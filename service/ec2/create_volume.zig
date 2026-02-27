@@ -207,7 +207,7 @@ pub const CreateVolumeInput = struct {
     volume_type: ?VolumeType = null,
 };
 
-const CreateVolumeOutput = @import("volume.zig").CreateVolumeOutput;
+const CreateVolumeOutput = @import("volume.zig").Volume;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

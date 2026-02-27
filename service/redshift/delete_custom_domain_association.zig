@@ -12,7 +12,7 @@ pub const DeleteCustomDomainAssociationInput = struct {
     custom_domain_name: []const u8,
 };
 
-pub const DeleteCustomDomainAssociationOutput = struct {};
+const DeleteCustomDomainAssociationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

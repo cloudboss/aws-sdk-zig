@@ -20,7 +20,7 @@ pub const SetUnhealthyNodeReplacementInput = struct {
     };
 };
 
-pub const SetUnhealthyNodeReplacementOutput = struct {};
+const SetUnhealthyNodeReplacementOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

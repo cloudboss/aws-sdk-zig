@@ -16,7 +16,7 @@ pub const PurgeQueueInput = struct {
     };
 };
 
-pub const PurgeQueueOutput = struct {};
+const PurgeQueueOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

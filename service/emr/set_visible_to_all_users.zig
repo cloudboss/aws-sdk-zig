@@ -24,7 +24,7 @@ pub const SetVisibleToAllUsersInput = struct {
     };
 };
 
-pub const SetVisibleToAllUsersOutput = struct {};
+const SetVisibleToAllUsersOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

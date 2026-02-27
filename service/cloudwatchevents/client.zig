@@ -1,0 +1,835 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const activate_event_source = @import("activate_event_source.zig");
+const cancel_replay = @import("cancel_replay.zig");
+const create_api_destination = @import("create_api_destination.zig");
+const create_archive = @import("create_archive.zig");
+const create_connection = @import("create_connection.zig");
+const create_event_bus = @import("create_event_bus.zig");
+const create_partner_event_source = @import("create_partner_event_source.zig");
+const deactivate_event_source = @import("deactivate_event_source.zig");
+const deauthorize_connection = @import("deauthorize_connection.zig");
+const delete_api_destination = @import("delete_api_destination.zig");
+const delete_archive = @import("delete_archive.zig");
+const delete_connection = @import("delete_connection.zig");
+const delete_event_bus = @import("delete_event_bus.zig");
+const delete_partner_event_source = @import("delete_partner_event_source.zig");
+const delete_rule = @import("delete_rule.zig");
+const describe_api_destination = @import("describe_api_destination.zig");
+const describe_archive = @import("describe_archive.zig");
+const describe_connection = @import("describe_connection.zig");
+const describe_event_bus = @import("describe_event_bus.zig");
+const describe_event_source = @import("describe_event_source.zig");
+const describe_partner_event_source = @import("describe_partner_event_source.zig");
+const describe_replay = @import("describe_replay.zig");
+const describe_rule = @import("describe_rule.zig");
+const disable_rule = @import("disable_rule.zig");
+const enable_rule = @import("enable_rule.zig");
+const list_api_destinations = @import("list_api_destinations.zig");
+const list_archives = @import("list_archives.zig");
+const list_connections = @import("list_connections.zig");
+const list_event_buses = @import("list_event_buses.zig");
+const list_event_sources = @import("list_event_sources.zig");
+const list_partner_event_source_accounts = @import("list_partner_event_source_accounts.zig");
+const list_partner_event_sources = @import("list_partner_event_sources.zig");
+const list_replays = @import("list_replays.zig");
+const list_rule_names_by_target = @import("list_rule_names_by_target.zig");
+const list_rules = @import("list_rules.zig");
+const list_tags_for_resource = @import("list_tags_for_resource.zig");
+const list_targets_by_rule = @import("list_targets_by_rule.zig");
+const put_events = @import("put_events.zig");
+const put_partner_events = @import("put_partner_events.zig");
+const put_permission = @import("put_permission.zig");
+const put_rule = @import("put_rule.zig");
+const put_targets = @import("put_targets.zig");
+const remove_permission = @import("remove_permission.zig");
+const remove_targets = @import("remove_targets.zig");
+const start_replay = @import("start_replay.zig");
+const tag_resource = @import("tag_resource.zig");
+const test_event_pattern = @import("test_event_pattern.zig");
+const untag_resource = @import("untag_resource.zig");
+const update_api_destination = @import("update_api_destination.zig");
+const update_archive = @import("update_archive.zig");
+const update_connection = @import("update_connection.zig");
+
+pub const Client = struct {
+    allocator: std.mem.Allocator,
+    config: *aws.Config,
+    http_client: aws.http.HttpClient,
+
+    const Self = @This();
+    pub const sdk_id = "CloudWatch Events";
+
+    pub fn init(allocator: std.mem.Allocator, config: *aws.Config) Self {
+        return .{
+            .allocator = allocator,
+            .config = config,
+            .http_client = aws.http.HttpClient.init(allocator),
+        };
+    }
+
+    pub fn initWithOptions(allocator: std.mem.Allocator, config: *aws.Config, options: aws.http.RequestOptions) Self {
+        return .{
+            .allocator = allocator,
+            .config = config,
+            .http_client = aws.http.HttpClient.initWithOptions(allocator, options),
+        };
+    }
+
+    pub fn deinit(self: *Self) void {
+        self.http_client.deinit();
+    }
+
+    /// Activates a partner event source that has been deactivated. Once activated,
+    /// your matching
+    /// event bus will start receiving events from the event source.
+    pub fn activateEventSource(self: *Self, allocator: std.mem.Allocator, input: activate_event_source.ActivateEventSourceInput, options: activate_event_source.Options) !activate_event_source.ActivateEventSourceOutput {
+        return activate_event_source.execute(self, allocator, input, options);
+    }
+
+    /// Cancels the specified replay.
+    pub fn cancelReplay(self: *Self, allocator: std.mem.Allocator, input: cancel_replay.CancelReplayInput, options: cancel_replay.Options) !cancel_replay.CancelReplayOutput {
+        return cancel_replay.execute(self, allocator, input, options);
+    }
+
+    /// Creates an API destination, which is an HTTP invocation endpoint configured
+    /// as a target
+    /// for events.
+    pub fn createApiDestination(self: *Self, allocator: std.mem.Allocator, input: create_api_destination.CreateApiDestinationInput, options: create_api_destination.Options) !create_api_destination.CreateApiDestinationOutput {
+        return create_api_destination.execute(self, allocator, input, options);
+    }
+
+    /// Creates an archive of events with the specified settings. When you create an
+    /// archive,
+    /// incoming events might not immediately start being sent to the archive. Allow
+    /// a short period of
+    /// time for changes to take effect. If you do not specify a pattern to filter
+    /// events sent to the
+    /// archive, all events are sent to the archive except replayed events. Replayed
+    /// events are not
+    /// sent to an archive.
+    pub fn createArchive(self: *Self, allocator: std.mem.Allocator, input: create_archive.CreateArchiveInput, options: create_archive.Options) !create_archive.CreateArchiveOutput {
+        return create_archive.execute(self, allocator, input, options);
+    }
+
+    /// Creates a connection. A connection defines the authorization type and
+    /// credentials to use
+    /// for authorization with an API destination HTTP endpoint.
+    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: create_connection.Options) !create_connection.CreateConnectionOutput {
+        return create_connection.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new event bus within your account. This can be a custom event bus
+    /// which you can
+    /// use to receive events from your custom applications and services, or it can
+    /// be a partner event
+    /// bus which can be matched to a partner event source.
+    pub fn createEventBus(self: *Self, allocator: std.mem.Allocator, input: create_event_bus.CreateEventBusInput, options: create_event_bus.Options) !create_event_bus.CreateEventBusOutput {
+        return create_event_bus.execute(self, allocator, input, options);
+    }
+
+    /// Called by an SaaS partner to create a partner event source. This operation
+    /// is not used by
+    /// Amazon Web Services customers.
+    ///
+    /// Each partner event source can be used by one Amazon Web Services account to
+    /// create a matching partner
+    /// event bus in that Amazon Web Services account. A SaaS partner must create
+    /// one partner event source for each
+    /// Amazon Web Services account that wants to receive those event types.
+    ///
+    /// A partner event source creates events based on resources within the SaaS
+    /// partner's service
+    /// or application.
+    ///
+    /// An Amazon Web Services account that creates a partner event bus that matches
+    /// the partner event source can
+    /// use that event bus to receive events from the partner, and then process them
+    /// using Amazon Web Services Events
+    /// rules and targets.
+    ///
+    /// Partner event source names follow this format:
+    ///
+    /// `
+    /// *partner_name*/*event_namespace*/*event_name*
+    /// `
+    ///
+    /// *partner_name* is determined during partner registration and identifies
+    /// the partner to Amazon Web Services customers. *event_namespace* is
+    /// determined by the
+    /// partner and is a way for the partner to categorize their events.
+    /// *event_name* is determined by the partner, and should uniquely identify
+    /// an event-generating resource within the partner system. The combination of
+    /// *event_namespace* and *event_name* should help Amazon Web Services
+    /// customers decide whether to create an event bus to receive these events.
+    pub fn createPartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: create_partner_event_source.CreatePartnerEventSourceInput, options: create_partner_event_source.Options) !create_partner_event_source.CreatePartnerEventSourceOutput {
+        return create_partner_event_source.execute(self, allocator, input, options);
+    }
+
+    /// You can use this operation to temporarily stop receiving events from the
+    /// specified partner
+    /// event source. The matching event bus is not deleted.
+    ///
+    /// When you deactivate a partner event source, the source goes into PENDING
+    /// state. If it
+    /// remains in PENDING state for more than two weeks, it is deleted.
+    ///
+    /// To activate a deactivated partner event source, use
+    /// [ActivateEventSource](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ActivateEventSource.html).
+    pub fn deactivateEventSource(self: *Self, allocator: std.mem.Allocator, input: deactivate_event_source.DeactivateEventSourceInput, options: deactivate_event_source.Options) !deactivate_event_source.DeactivateEventSourceOutput {
+        return deactivate_event_source.execute(self, allocator, input, options);
+    }
+
+    /// Removes all authorization parameters from the connection. This lets you
+    /// remove the secret
+    /// from the connection so you can reuse it without having to create a new
+    /// connection.
+    pub fn deauthorizeConnection(self: *Self, allocator: std.mem.Allocator, input: deauthorize_connection.DeauthorizeConnectionInput, options: deauthorize_connection.Options) !deauthorize_connection.DeauthorizeConnectionOutput {
+        return deauthorize_connection.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified API destination.
+    pub fn deleteApiDestination(self: *Self, allocator: std.mem.Allocator, input: delete_api_destination.DeleteApiDestinationInput, options: delete_api_destination.Options) !delete_api_destination.DeleteApiDestinationOutput {
+        return delete_api_destination.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified archive.
+    pub fn deleteArchive(self: *Self, allocator: std.mem.Allocator, input: delete_archive.DeleteArchiveInput, options: delete_archive.Options) !delete_archive.DeleteArchiveOutput {
+        return delete_archive.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a connection.
+    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: delete_connection.Options) !delete_connection.DeleteConnectionOutput {
+        return delete_connection.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified custom event bus or partner event bus. All rules
+    /// associated with
+    /// this event bus need to be deleted. You can't delete your account's default
+    /// event bus.
+    pub fn deleteEventBus(self: *Self, allocator: std.mem.Allocator, input: delete_event_bus.DeleteEventBusInput, options: delete_event_bus.Options) !delete_event_bus.DeleteEventBusOutput {
+        return delete_event_bus.execute(self, allocator, input, options);
+    }
+
+    /// This operation is used by SaaS partners to delete a partner event source.
+    /// This operation
+    /// is not used by Amazon Web Services customers.
+    ///
+    /// When you delete an event source, the status of the corresponding partner
+    /// event bus in the
+    /// Amazon Web Services customer account becomes DELETED.
+    pub fn deletePartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: delete_partner_event_source.DeletePartnerEventSourceInput, options: delete_partner_event_source.Options) !delete_partner_event_source.DeletePartnerEventSourceOutput {
+        return delete_partner_event_source.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified rule.
+    ///
+    /// Before you can delete the rule, you must remove all targets, using
+    /// [RemoveTargets](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemoveTargets.html).
+    ///
+    /// When you delete a rule, incoming events might continue to match to the
+    /// deleted rule. Allow
+    /// a short period of time for changes to take effect.
+    ///
+    /// If you call delete rule multiple times for the same rule, all calls will
+    /// succeed. When you
+    /// call delete rule for a non-existent custom eventbus,
+    /// `ResourceNotFoundException` is
+    /// returned.
+    ///
+    /// Managed rules are rules created and managed by another Amazon Web Services
+    /// service on your behalf. These
+    /// rules are created by those other Amazon Web Services services to support
+    /// functionality in those services. You
+    /// can delete these rules using the `Force` option, but you should do so only
+    /// if you
+    /// are sure the other service is not still using that rule.
+    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: delete_rule.Options) !delete_rule.DeleteRuleOutput {
+        return delete_rule.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details about an API destination.
+    pub fn describeApiDestination(self: *Self, allocator: std.mem.Allocator, input: describe_api_destination.DescribeApiDestinationInput, options: describe_api_destination.Options) !describe_api_destination.DescribeApiDestinationOutput {
+        return describe_api_destination.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details about an archive.
+    pub fn describeArchive(self: *Self, allocator: std.mem.Allocator, input: describe_archive.DescribeArchiveInput, options: describe_archive.Options) !describe_archive.DescribeArchiveOutput {
+        return describe_archive.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details about a connection.
+    pub fn describeConnection(self: *Self, allocator: std.mem.Allocator, input: describe_connection.DescribeConnectionInput, options: describe_connection.Options) !describe_connection.DescribeConnectionOutput {
+        return describe_connection.execute(self, allocator, input, options);
+    }
+
+    /// Displays details about an event bus in your account. This can include the
+    /// external Amazon Web Services
+    /// accounts that are permitted to write events to your default event bus, and
+    /// the associated
+    /// policy. For custom event buses and partner event buses, it displays the
+    /// name, ARN, policy,
+    /// state, and creation time.
+    ///
+    /// To enable your account to receive events from other accounts on its default
+    /// event bus,
+    /// use
+    /// [PutPermission](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html).
+    ///
+    /// For more information about partner event buses, see
+    /// [CreateEventBus](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html).
+    pub fn describeEventBus(self: *Self, allocator: std.mem.Allocator, input: describe_event_bus.DescribeEventBusInput, options: describe_event_bus.Options) !describe_event_bus.DescribeEventBusOutput {
+        return describe_event_bus.execute(self, allocator, input, options);
+    }
+
+    /// This operation lists details about a partner event source that is shared
+    /// with your
+    /// account.
+    pub fn describeEventSource(self: *Self, allocator: std.mem.Allocator, input: describe_event_source.DescribeEventSourceInput, options: describe_event_source.Options) !describe_event_source.DescribeEventSourceOutput {
+        return describe_event_source.execute(self, allocator, input, options);
+    }
+
+    /// An SaaS partner can use this operation to list details about a partner event
+    /// source that
+    /// they have created. Amazon Web Services customers do not use this operation.
+    /// Instead, Amazon Web Services customers can use
+    /// [DescribeEventSource](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DescribeEventSource.html)
+    /// to see details about a partner event source that is
+    /// shared with them.
+    pub fn describePartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: describe_partner_event_source.DescribePartnerEventSourceInput, options: describe_partner_event_source.Options) !describe_partner_event_source.DescribePartnerEventSourceOutput {
+        return describe_partner_event_source.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details about a replay. Use `DescribeReplay` to determine the
+    /// progress of a running replay. A replay processes events to replay based on
+    /// the time in the
+    /// event, and replays them using 1 minute intervals. If you use `StartReplay`
+    /// and
+    /// specify an `EventStartTime` and an `EventEndTime` that covers a 20
+    /// minute time range, the events are replayed from the first minute of that 20
+    /// minute range
+    /// first. Then the events from the second minute are replayed. You can use
+    /// `DescribeReplay` to determine the progress of a replay. The value returned
+    /// for
+    /// `EventLastReplayedTime` indicates the time within the specified time range
+    /// associated with the last event replayed.
+    pub fn describeReplay(self: *Self, allocator: std.mem.Allocator, input: describe_replay.DescribeReplayInput, options: describe_replay.Options) !describe_replay.DescribeReplayOutput {
+        return describe_replay.execute(self, allocator, input, options);
+    }
+
+    /// Describes the specified rule.
+    ///
+    /// DescribeRule does not list the targets of a rule. To see the targets
+    /// associated with a
+    /// rule, use
+    /// [ListTargetsByRule](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html).
+    pub fn describeRule(self: *Self, allocator: std.mem.Allocator, input: describe_rule.DescribeRuleInput, options: describe_rule.Options) !describe_rule.DescribeRuleOutput {
+        return describe_rule.execute(self, allocator, input, options);
+    }
+
+    /// Disables the specified rule. A disabled rule won't match any events, and
+    /// won't
+    /// self-trigger if it has a schedule expression.
+    ///
+    /// When you disable a rule, incoming events might continue to match to the
+    /// disabled rule.
+    /// Allow a short period of time for changes to take effect.
+    pub fn disableRule(self: *Self, allocator: std.mem.Allocator, input: disable_rule.DisableRuleInput, options: disable_rule.Options) !disable_rule.DisableRuleOutput {
+        return disable_rule.execute(self, allocator, input, options);
+    }
+
+    /// Enables the specified rule. If the rule does not exist, the operation fails.
+    ///
+    /// When you enable a rule, incoming events might not immediately start matching
+    /// to a newly
+    /// enabled rule. Allow a short period of time for changes to take effect.
+    pub fn enableRule(self: *Self, allocator: std.mem.Allocator, input: enable_rule.EnableRuleInput, options: enable_rule.Options) !enable_rule.EnableRuleOutput {
+        return enable_rule.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of API destination in the account in the current Region.
+    pub fn listApiDestinations(self: *Self, allocator: std.mem.Allocator, input: list_api_destinations.ListApiDestinationsInput, options: list_api_destinations.Options) !list_api_destinations.ListApiDestinationsOutput {
+        return list_api_destinations.execute(self, allocator, input, options);
+    }
+
+    /// Lists your archives. You can either list all the archives or you can provide
+    /// a prefix to
+    /// match to the archive names. Filter parameters are exclusive.
+    pub fn listArchives(self: *Self, allocator: std.mem.Allocator, input: list_archives.ListArchivesInput, options: list_archives.Options) !list_archives.ListArchivesOutput {
+        return list_archives.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of connections from the account.
+    pub fn listConnections(self: *Self, allocator: std.mem.Allocator, input: list_connections.ListConnectionsInput, options: list_connections.Options) !list_connections.ListConnectionsOutput {
+        return list_connections.execute(self, allocator, input, options);
+    }
+
+    /// Lists all the event buses in your account, including the default event bus,
+    /// custom event
+    /// buses, and partner event buses.
+    pub fn listEventBuses(self: *Self, allocator: std.mem.Allocator, input: list_event_buses.ListEventBusesInput, options: list_event_buses.Options) !list_event_buses.ListEventBusesOutput {
+        return list_event_buses.execute(self, allocator, input, options);
+    }
+
+    /// You can use this to see all the partner event sources that have been shared
+    /// with your Amazon Web Services
+    /// account. For more information about partner event sources, see
+    /// [CreateEventBus](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html).
+    pub fn listEventSources(self: *Self, allocator: std.mem.Allocator, input: list_event_sources.ListEventSourcesInput, options: list_event_sources.Options) !list_event_sources.ListEventSourcesOutput {
+        return list_event_sources.execute(self, allocator, input, options);
+    }
+
+    /// An SaaS partner can use this operation to display the Amazon Web Services
+    /// account ID that a particular
+    /// partner event source name is associated with. This operation is not used by
+    /// Amazon Web Services
+    /// customers.
+    pub fn listPartnerEventSourceAccounts(self: *Self, allocator: std.mem.Allocator, input: list_partner_event_source_accounts.ListPartnerEventSourceAccountsInput, options: list_partner_event_source_accounts.Options) !list_partner_event_source_accounts.ListPartnerEventSourceAccountsOutput {
+        return list_partner_event_source_accounts.execute(self, allocator, input, options);
+    }
+
+    /// An SaaS partner can use this operation to list all the partner event source
+    /// names that
+    /// they have created. This operation is not used by Amazon Web Services
+    /// customers.
+    pub fn listPartnerEventSources(self: *Self, allocator: std.mem.Allocator, input: list_partner_event_sources.ListPartnerEventSourcesInput, options: list_partner_event_sources.Options) !list_partner_event_sources.ListPartnerEventSourcesOutput {
+        return list_partner_event_sources.execute(self, allocator, input, options);
+    }
+
+    /// Lists your replays. You can either list all the replays or you can provide a
+    /// prefix to
+    /// match to the replay names. Filter parameters are exclusive.
+    pub fn listReplays(self: *Self, allocator: std.mem.Allocator, input: list_replays.ListReplaysInput, options: list_replays.Options) !list_replays.ListReplaysOutput {
+        return list_replays.execute(self, allocator, input, options);
+    }
+
+    /// Lists the rules for the specified target. You can see which of the rules in
+    /// Amazon
+    /// EventBridge can invoke a specific target in your account.
+    pub fn listRuleNamesByTarget(self: *Self, allocator: std.mem.Allocator, input: list_rule_names_by_target.ListRuleNamesByTargetInput, options: list_rule_names_by_target.Options) !list_rule_names_by_target.ListRuleNamesByTargetOutput {
+        return list_rule_names_by_target.execute(self, allocator, input, options);
+    }
+
+    /// Lists your Amazon EventBridge rules. You can either list all the rules or
+    /// you can provide
+    /// a prefix to match to the rule names.
+    ///
+    /// ListRules does not list the targets of a rule. To see the targets associated
+    /// with a rule,
+    /// use
+    /// [ListTargetsByRule](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html).
+    pub fn listRules(self: *Self, allocator: std.mem.Allocator, input: list_rules.ListRulesInput, options: list_rules.Options) !list_rules.ListRulesOutput {
+        return list_rules.execute(self, allocator, input, options);
+    }
+
+    /// Displays the tags associated with an EventBridge resource. In EventBridge,
+    /// rules and event
+    /// buses can be tagged.
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+        return list_tags_for_resource.execute(self, allocator, input, options);
+    }
+
+    /// Lists the targets assigned to the specified rule.
+    pub fn listTargetsByRule(self: *Self, allocator: std.mem.Allocator, input: list_targets_by_rule.ListTargetsByRuleInput, options: list_targets_by_rule.Options) !list_targets_by_rule.ListTargetsByRuleOutput {
+        return list_targets_by_rule.execute(self, allocator, input, options);
+    }
+
+    /// Sends custom events to Amazon EventBridge so that they can be matched to
+    /// rules.
+    pub fn putEvents(self: *Self, allocator: std.mem.Allocator, input: put_events.PutEventsInput, options: put_events.Options) !put_events.PutEventsOutput {
+        return put_events.execute(self, allocator, input, options);
+    }
+
+    /// This is used by SaaS partners to write events to a customer's partner event
+    /// bus. Amazon Web Services
+    /// customers do not use this operation.
+    pub fn putPartnerEvents(self: *Self, allocator: std.mem.Allocator, input: put_partner_events.PutPartnerEventsInput, options: put_partner_events.Options) !put_partner_events.PutPartnerEventsOutput {
+        return put_partner_events.execute(self, allocator, input, options);
+    }
+
+    /// Running `PutPermission` permits the specified Amazon Web Services account or
+    /// Amazon Web Services organization
+    /// to put events to the specified *event bus*. Amazon EventBridge (CloudWatch
+    /// Events) rules in your account are triggered by these events arriving to an
+    /// event bus in your
+    /// account.
+    ///
+    /// For another account to send events to your account, that external account
+    /// must have an
+    /// EventBridge rule with your account's event bus as a target.
+    ///
+    /// To enable multiple Amazon Web Services accounts to put events to your event
+    /// bus, run
+    /// `PutPermission` once for each of these accounts. Or, if all the accounts are
+    /// members of the same Amazon Web Services organization, you can run
+    /// `PutPermission` once specifying
+    /// `Principal` as "*" and specifying the Amazon Web Services organization ID in
+    /// `Condition`, to grant permissions to all accounts in that organization.
+    ///
+    /// If you grant permissions using an organization, then accounts in that
+    /// organization must
+    /// specify a `RoleArn` with proper permissions when they use `PutTarget` to
+    /// add your account's event bus as a target. For more information, see [Sending
+    /// and
+    /// Receiving Events Between Amazon Web Services
+    /// Accounts](https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html) in the *Amazon EventBridge User
+    /// Guide*.
+    ///
+    /// The permission policy on the event bus cannot exceed 10 KB in size.
+    pub fn putPermission(self: *Self, allocator: std.mem.Allocator, input: put_permission.PutPermissionInput, options: put_permission.Options) !put_permission.PutPermissionOutput {
+        return put_permission.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates the specified rule. Rules are enabled by default, or
+    /// based on value of
+    /// the state. You can disable a rule using
+    /// [DisableRule](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DisableRule.html).
+    ///
+    /// A single rule watches for events from a single event bus. Events generated
+    /// by Amazon Web Services services
+    /// go to your account's default event bus. Events generated by SaaS partner
+    /// services or
+    /// applications go to the matching partner event bus. If you have custom
+    /// applications or
+    /// services, you can specify whether their events go to your default event bus
+    /// or a custom event
+    /// bus that you have created. For more information, see
+    /// [CreateEventBus](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html).
+    ///
+    /// If you are updating an existing rule, the rule is replaced with what you
+    /// specify in this
+    /// `PutRule` command. If you omit arguments in `PutRule`, the old values
+    /// for those arguments are not kept. Instead, they are replaced with null
+    /// values.
+    ///
+    /// When you create or update a rule, incoming events might not immediately
+    /// start matching to
+    /// new or updated rules. Allow a short period of time for changes to take
+    /// effect.
+    ///
+    /// A rule must contain at least an EventPattern or ScheduleExpression. Rules
+    /// with
+    /// EventPatterns are triggered when a matching event is observed. Rules with
+    /// ScheduleExpressions
+    /// self-trigger based on the given schedule. A rule can have both an
+    /// EventPattern and a
+    /// ScheduleExpression, in which case the rule triggers on matching events as
+    /// well as on a
+    /// schedule.
+    ///
+    /// When you initially create a rule, you can optionally assign one or more tags
+    /// to the rule.
+    /// Tags can help you organize and categorize your resources. You can also use
+    /// them to scope user
+    /// permissions, by granting a user permission to access or change only rules
+    /// with certain tag
+    /// values. To use the `PutRule` operation and assign tags, you must have both
+    /// the
+    /// `events:PutRule` and `events:TagResource` permissions.
+    ///
+    /// If you are updating an existing rule, any tags you specify in the `PutRule`
+    /// operation are ignored. To update the tags of an existing rule, use
+    /// [TagResource](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_UntagResource.html).
+    ///
+    /// Most services in Amazon Web Services treat : or / as the same character in
+    /// Amazon Resource Names (ARNs).
+    /// However, EventBridge uses an exact match in event patterns and rules. Be
+    /// sure to use the
+    /// correct ARN characters when creating event patterns so that they match the
+    /// ARN syntax in the
+    /// event you want to match.
+    ///
+    /// In EventBridge, it is possible to create rules that lead to infinite loops,
+    /// where a rule
+    /// is fired repeatedly. For example, a rule might detect that ACLs have changed
+    /// on an S3 bucket,
+    /// and trigger software to change them to the desired state. If the rule is not
+    /// written
+    /// carefully, the subsequent change to the ACLs fires the rule again, creating
+    /// an infinite
+    /// loop.
+    ///
+    /// To prevent this, write the rules so that the triggered actions do not
+    /// re-fire the same
+    /// rule. For example, your rule could fire only if ACLs are found to be in a
+    /// bad state, instead
+    /// of after any change.
+    ///
+    /// An infinite loop can quickly cause higher than expected charges. We
+    /// recommend that you use
+    /// budgeting, which alerts you when charges exceed your specified limit. For
+    /// more information,
+    /// see [Managing Your Costs with
+    /// Budgets](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html).
+    pub fn putRule(self: *Self, allocator: std.mem.Allocator, input: put_rule.PutRuleInput, options: put_rule.Options) !put_rule.PutRuleOutput {
+        return put_rule.execute(self, allocator, input, options);
+    }
+
+    /// Adds the specified targets to the specified rule, or updates the targets if
+    /// they are
+    /// already associated with the rule.
+    ///
+    /// Targets are the resources that are invoked when a rule is triggered.
+    ///
+    /// You can configure the following as targets for Events:
+    ///
+    /// * [API
+    /// destination](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html)
+    ///
+    /// * Amazon API Gateway REST API endpoints
+    ///
+    /// * API Gateway
+    ///
+    /// * Batch job queue
+    ///
+    /// * CloudWatch Logs group
+    ///
+    /// * CodeBuild project
+    ///
+    /// * CodePipeline
+    ///
+    /// * Amazon EC2 `CreateSnapshot` API call
+    ///
+    /// * Amazon EC2 `RebootInstances` API call
+    ///
+    /// * Amazon EC2 `StopInstances` API call
+    ///
+    /// * Amazon EC2 `TerminateInstances` API call
+    ///
+    /// * Amazon ECS tasks
+    ///
+    /// * Event bus in a different Amazon Web Services account or Region.
+    ///
+    /// You can use an event bus in the US East (N. Virginia) us-east-1, US West
+    /// (Oregon)
+    /// us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.
+    ///
+    /// * Firehose delivery stream (Firehose)
+    ///
+    /// * Inspector assessment template (Amazon Inspector)
+    ///
+    /// * Kinesis stream (Kinesis Data Stream)
+    ///
+    /// * Lambda function
+    ///
+    /// * Redshift clusters (Data API statement execution)
+    ///
+    /// * Amazon SNS topic
+    ///
+    /// * Amazon SQS queues (includes FIFO queues
+    ///
+    /// * SSM Automation
+    ///
+    /// * SSM OpsItem
+    ///
+    /// * SSM Run Command
+    ///
+    /// * Step Functions state machines
+    ///
+    /// Creating rules with built-in targets is supported only in the Amazon Web
+    /// Services Management Console. The
+    /// built-in targets are `EC2 CreateSnapshot API call`, `EC2 RebootInstances API
+    /// call`, `EC2 StopInstances API call`, and `EC2 TerminateInstances API
+    /// call`.
+    ///
+    /// For some target types, `PutTargets` provides target-specific parameters. If
+    /// the
+    /// target is a Kinesis data stream, you can optionally specify which shard the
+    /// event goes to by
+    /// using the `KinesisParameters` argument. To invoke a command on multiple EC2
+    /// instances with one rule, you can use the `RunCommandParameters` field.
+    ///
+    /// To be able to make API calls against the resources that you own, Amazon
+    /// EventBridge
+    /// needs the appropriate permissions. For Lambda and Amazon SNS
+    /// resources, EventBridge relies on resource-based policies. For EC2 instances,
+    /// Kinesis Data Streams,
+    /// Step Functions state machines and API Gateway REST APIs, EventBridge relies
+    /// on
+    /// IAM roles that you specify in the `RoleARN` argument in `PutTargets`.
+    /// For more information, see [Authentication
+    /// and Access
+    /// Control](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) in the *Amazon EventBridge User Guide*.
+    ///
+    /// If another Amazon Web Services account is in the same region and has granted
+    /// you permission (using
+    /// `PutPermission`), you can send events to that account. Set that account's
+    /// event
+    /// bus as a target of the rules in your account. To send the matched events to
+    /// the other account,
+    /// specify that account's event bus as the `Arn` value when you run
+    /// `PutTargets`. If your account sends events to another account, your account
+    /// is
+    /// charged for each sent event. Each event sent to another account is charged
+    /// as a custom event.
+    /// The account receiving the event is not charged. For more information, see
+    /// [Amazon EventBridge
+    /// Pricing](http://aws.amazon.com/eventbridge/pricing/).
+    ///
+    /// `Input`, `InputPath`, and `InputTransformer` are not
+    /// available with `PutTarget` if the target is an event bus of a different
+    /// Amazon Web Services
+    /// account.
+    ///
+    /// If you are setting the event bus of another account as the target, and that
+    /// account
+    /// granted permission to your account through an organization instead of
+    /// directly by the account
+    /// ID, then you must specify a `RoleArn` with proper permissions in the
+    /// `Target` structure. For more information, see [Sending and
+    /// Receiving Events Between Amazon Web Services
+    /// Accounts](https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html) in the *Amazon EventBridge User
+    /// Guide*.
+    ///
+    /// For more information about enabling cross-account events, see
+    /// [PutPermission](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html).
+    ///
+    /// **Input**, **InputPath**, and
+    /// **InputTransformer** are mutually exclusive and optional
+    /// parameters of a target. When a rule is triggered due to a matched event:
+    ///
+    /// * If none of the following arguments are specified for a target, then the
+    ///   entire event
+    /// is passed to the target in JSON format (unless the target is Amazon EC2 Run
+    /// Command or
+    /// Amazon ECS task, in which case nothing from the event is passed to the
+    /// target).
+    ///
+    /// * If **Input** is specified in the form of valid JSON, then
+    /// the matched event is overridden with this constant.
+    ///
+    /// * If **InputPath** is specified in the form of JSONPath
+    /// (for example, `$.detail`), then only the part of the event specified in the
+    /// path is passed to the target (for example, only the detail part of the event
+    /// is
+    /// passed).
+    ///
+    /// * If **InputTransformer** is specified, then one or more
+    /// specified JSONPaths are extracted from the event and used as values in a
+    /// template that you
+    /// specify as the input to the target.
+    ///
+    /// When you specify `InputPath` or `InputTransformer`, you must use
+    /// JSON dot notation, not bracket notation.
+    ///
+    /// When you add targets to a rule and the associated rule triggers soon after,
+    /// new or updated
+    /// targets might not be immediately invoked. Allow a short period of time for
+    /// changes to take
+    /// effect.
+    ///
+    /// This action can partially fail if too many requests are made at the same
+    /// time. If that
+    /// happens, `FailedEntryCount` is non-zero in the response and each entry in
+    /// `FailedEntries` provides the ID of the failed target and the error code.
+    pub fn putTargets(self: *Self, allocator: std.mem.Allocator, input: put_targets.PutTargetsInput, options: put_targets.Options) !put_targets.PutTargetsOutput {
+        return put_targets.execute(self, allocator, input, options);
+    }
+
+    /// Revokes the permission of another Amazon Web Services account to be able to
+    /// put events to the specified
+    /// event bus. Specify the account to revoke by the `StatementId` value that you
+    /// associated with the account when you granted it permission with
+    /// `PutPermission`.
+    /// You can find the `StatementId` by using
+    /// [DescribeEventBus](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DescribeEventBus.html).
+    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: remove_permission.Options) !remove_permission.RemovePermissionOutput {
+        return remove_permission.execute(self, allocator, input, options);
+    }
+
+    /// Removes the specified targets from the specified rule. When the rule is
+    /// triggered, those
+    /// targets are no longer be invoked.
+    ///
+    /// When you remove a target, when the associated rule triggers, removed targets
+    /// might
+    /// continue to be invoked. Allow a short period of time for changes to take
+    /// effect.
+    ///
+    /// This action can partially fail if too many requests are made at the same
+    /// time. If that
+    /// happens, `FailedEntryCount` is non-zero in the response and each entry in
+    /// `FailedEntries` provides the ID of the failed target and the error code.
+    pub fn removeTargets(self: *Self, allocator: std.mem.Allocator, input: remove_targets.RemoveTargetsInput, options: remove_targets.Options) !remove_targets.RemoveTargetsOutput {
+        return remove_targets.execute(self, allocator, input, options);
+    }
+
+    /// Starts the specified replay. Events are not necessarily replayed in the
+    /// exact same order
+    /// that they were added to the archive. A replay processes events to replay
+    /// based on the time in
+    /// the event, and replays them using 1 minute intervals. If you specify an
+    /// `EventStartTime` and an `EventEndTime` that covers a 20 minute time
+    /// range, the events are replayed from the first minute of that 20 minute range
+    /// first. Then the
+    /// events from the second minute are replayed. You can use `DescribeReplay` to
+    /// determine the progress of a replay. The value returned for
+    /// `EventLastReplayedTime`
+    /// indicates the time within the specified time range associated with the last
+    /// event
+    /// replayed.
+    pub fn startReplay(self: *Self, allocator: std.mem.Allocator, input: start_replay.StartReplayInput, options: start_replay.Options) !start_replay.StartReplayOutput {
+        return start_replay.execute(self, allocator, input, options);
+    }
+
+    /// Assigns one or more tags (key-value pairs) to the specified EventBridge
+    /// resource. Tags can
+    /// help you organize and categorize your resources. You can also use them to
+    /// scope user
+    /// permissions by granting a user permission to access or change only resources
+    /// with certain tag
+    /// values. In EventBridge, rules and event buses can be tagged.
+    ///
+    /// Tags don't have any semantic meaning to Amazon Web Services and are
+    /// interpreted strictly as strings of
+    /// characters.
+    ///
+    /// You can use the `TagResource` action with a resource that already has tags.
+    /// If
+    /// you specify a new tag key, this tag is appended to the list of tags
+    /// associated with the
+    /// resource. If you specify a tag key that is already associated with the
+    /// resource, the new tag
+    /// value that you specify replaces the previous value for that tag.
+    ///
+    /// You can associate as many as 50 tags with a resource.
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+        return tag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Tests whether the specified event pattern matches the provided event.
+    ///
+    /// Most services in Amazon Web Services treat : or / as the same character in
+    /// Amazon Resource Names (ARNs).
+    /// However, EventBridge uses an exact match in event patterns and rules. Be
+    /// sure to use the
+    /// correct ARN characters when creating event patterns so that they match the
+    /// ARN syntax in the
+    /// event you want to match.
+    pub fn testEventPattern(self: *Self, allocator: std.mem.Allocator, input: test_event_pattern.TestEventPatternInput, options: test_event_pattern.Options) !test_event_pattern.TestEventPatternOutput {
+        return test_event_pattern.execute(self, allocator, input, options);
+    }
+
+    /// Removes one or more tags from the specified EventBridge resource. In Amazon
+    /// EventBridge
+    /// (CloudWatch Events), rules and event buses can be tagged.
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+        return untag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Updates an API destination.
+    pub fn updateApiDestination(self: *Self, allocator: std.mem.Allocator, input: update_api_destination.UpdateApiDestinationInput, options: update_api_destination.Options) !update_api_destination.UpdateApiDestinationOutput {
+        return update_api_destination.execute(self, allocator, input, options);
+    }
+
+    /// Updates the specified archive.
+    pub fn updateArchive(self: *Self, allocator: std.mem.Allocator, input: update_archive.UpdateArchiveInput, options: update_archive.Options) !update_archive.UpdateArchiveOutput {
+        return update_archive.execute(self, allocator, input, options);
+    }
+
+    /// Updates settings for a connection.
+    pub fn updateConnection(self: *Self, allocator: std.mem.Allocator, input: update_connection.UpdateConnectionInput, options: update_connection.Options) !update_connection.UpdateConnectionOutput {
+        return update_connection.execute(self, allocator, input, options);
+    }
+};

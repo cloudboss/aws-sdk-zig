@@ -1,0 +1,20 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const cancel_practice_run = @import("cancel_practice_run.zig");
+pub const cancel_zonal_shift = @import("cancel_zonal_shift.zig");
+pub const create_practice_run_configuration = @import("create_practice_run_configuration.zig");
+pub const delete_practice_run_configuration = @import("delete_practice_run_configuration.zig");
+pub const get_autoshift_observer_notification_status = @import("get_autoshift_observer_notification_status.zig");
+pub const get_managed_resource = @import("get_managed_resource.zig");
+pub const list_autoshifts = @import("list_autoshifts.zig");
+pub const list_managed_resources = @import("list_managed_resources.zig");
+pub const list_zonal_shifts = @import("list_zonal_shifts.zig");
+pub const start_practice_run = @import("start_practice_run.zig");
+pub const start_zonal_shift = @import("start_zonal_shift.zig");
+pub const update_autoshift_observer_notification_status = @import("update_autoshift_observer_notification_status.zig");
+pub const update_practice_run_configuration = @import("update_practice_run_configuration.zig");
+pub const update_zonal_autoshift_configuration = @import("update_zonal_autoshift_configuration.zig");
+pub const update_zonal_shift = @import("update_zonal_shift.zig");

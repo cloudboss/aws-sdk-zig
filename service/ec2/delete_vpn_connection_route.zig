@@ -12,7 +12,7 @@ pub const DeleteVpnConnectionRouteInput = struct {
     vpn_connection_id: []const u8,
 };
 
-pub const DeleteVpnConnectionRouteOutput = struct {};
+const DeleteVpnConnectionRouteOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

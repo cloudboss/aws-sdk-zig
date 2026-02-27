@@ -19,7 +19,7 @@ pub const RenewCertificateInput = struct {
     };
 };
 
-pub const RenewCertificateOutput = struct {};
+const RenewCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

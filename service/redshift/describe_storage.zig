@@ -4,7 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeStorageInput = struct {};
+const DescribeStorageInput = struct {};
 
 pub const DescribeStorageOutput = struct {
     /// The total amount of storage currently used for snapshots.

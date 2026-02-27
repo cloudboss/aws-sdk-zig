@@ -18,7 +18,7 @@ pub const DeleteUsagePlanKeyInput = struct {
     };
 };
 
-pub const DeleteUsagePlanKeyOutput = struct {};
+const DeleteUsagePlanKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

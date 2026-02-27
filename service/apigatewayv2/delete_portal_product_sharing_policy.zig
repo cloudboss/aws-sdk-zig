@@ -13,7 +13,7 @@ pub const DeletePortalProductSharingPolicyInput = struct {
     };
 };
 
-pub const DeletePortalProductSharingPolicyOutput = struct {};
+const DeletePortalProductSharingPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,25 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+pub const waiters = @import("waiters.zig");
+
+pub const add_profile_permission = @import("add_profile_permission.zig");
+pub const cancel_signing_profile = @import("cancel_signing_profile.zig");
+pub const describe_signing_job = @import("describe_signing_job.zig");
+pub const get_revocation_status = @import("get_revocation_status.zig");
+pub const get_signing_platform = @import("get_signing_platform.zig");
+pub const get_signing_profile = @import("get_signing_profile.zig");
+pub const list_profile_permissions = @import("list_profile_permissions.zig");
+pub const list_signing_jobs = @import("list_signing_jobs.zig");
+pub const list_signing_platforms = @import("list_signing_platforms.zig");
+pub const list_signing_profiles = @import("list_signing_profiles.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const put_signing_profile = @import("put_signing_profile.zig");
+pub const remove_profile_permission = @import("remove_profile_permission.zig");
+pub const revoke_signature = @import("revoke_signature.zig");
+pub const revoke_signing_profile = @import("revoke_signing_profile.zig");
+pub const sign_payload = @import("sign_payload.zig");
+pub const start_signing_job = @import("start_signing_job.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");

@@ -98,7 +98,7 @@ pub const CreateAuthorizerInput = struct {
     };
 };
 
-const CreateAuthorizerOutput = @import("authorizer.zig").CreateAuthorizerOutput;
+const CreateAuthorizerOutput = @import("authorizer.zig").Authorizer;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

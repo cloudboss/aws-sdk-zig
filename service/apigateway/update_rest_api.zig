@@ -24,7 +24,7 @@ pub const UpdateRestApiInput = struct {
     };
 };
 
-const UpdateRestApiOutput = @import("rest_api.zig").UpdateRestApiOutput;
+const UpdateRestApiOutput = @import("rest_api.zig").RestApi;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

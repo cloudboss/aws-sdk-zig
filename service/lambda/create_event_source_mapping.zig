@@ -217,7 +217,7 @@ pub const CreateEventSourceMappingInput = struct {
     };
 };
 
-const CreateEventSourceMappingOutput = @import("event_source_mapping_configuration.zig").CreateEventSourceMappingOutput;
+const CreateEventSourceMappingOutput = @import("event_source_mapping_configuration.zig").EventSourceMappingConfiguration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

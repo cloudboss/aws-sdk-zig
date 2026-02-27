@@ -24,7 +24,7 @@ pub const DisableKeyInput = struct {
     };
 };
 
-pub const DisableKeyOutput = struct {};
+const DisableKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

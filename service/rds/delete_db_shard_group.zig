@@ -11,7 +11,7 @@ pub const DeleteDBShardGroupInput = struct {
     db_shard_group_identifier: []const u8,
 };
 
-const DeleteDBShardGroupOutput = @import("db_shard_group.zig").DeleteDBShardGroupOutput;
+const DeleteDBShardGroupOutput = @import("db_shard_group.zig").DBShardGroup;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

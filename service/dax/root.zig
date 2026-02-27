@@ -1,0 +1,25 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+
+pub const create_cluster = @import("create_cluster.zig");
+pub const create_parameter_group = @import("create_parameter_group.zig");
+pub const create_subnet_group = @import("create_subnet_group.zig");
+pub const decrease_replication_factor = @import("decrease_replication_factor.zig");
+pub const delete_cluster = @import("delete_cluster.zig");
+pub const delete_parameter_group = @import("delete_parameter_group.zig");
+pub const delete_subnet_group = @import("delete_subnet_group.zig");
+pub const describe_clusters = @import("describe_clusters.zig");
+pub const describe_default_parameters = @import("describe_default_parameters.zig");
+pub const describe_events = @import("describe_events.zig");
+pub const describe_parameter_groups = @import("describe_parameter_groups.zig");
+pub const describe_parameters = @import("describe_parameters.zig");
+pub const describe_subnet_groups = @import("describe_subnet_groups.zig");
+pub const increase_replication_factor = @import("increase_replication_factor.zig");
+pub const list_tags = @import("list_tags.zig");
+pub const reboot_node = @import("reboot_node.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_cluster = @import("update_cluster.zig");
+pub const update_parameter_group = @import("update_parameter_group.zig");
+pub const update_subnet_group = @import("update_subnet_group.zig");

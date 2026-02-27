@@ -1,0 +1,18 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_notification_rule = @import("create_notification_rule.zig");
+pub const delete_notification_rule = @import("delete_notification_rule.zig");
+pub const delete_target = @import("delete_target.zig");
+pub const describe_notification_rule = @import("describe_notification_rule.zig");
+pub const list_event_types = @import("list_event_types.zig");
+pub const list_notification_rules = @import("list_notification_rules.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_targets = @import("list_targets.zig");
+pub const subscribe = @import("subscribe.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const unsubscribe = @import("unsubscribe.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_notification_rule = @import("update_notification_rule.zig");

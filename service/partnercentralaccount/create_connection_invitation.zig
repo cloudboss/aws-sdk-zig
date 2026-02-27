@@ -1,0 +1,230 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ConnectionType = @import("connection_type.zig").ConnectionType;
+const ParticipantType = @import("participant_type.zig").ParticipantType;
+const InvitationStatus = @import("invitation_status.zig").InvitationStatus;
+
+pub const CreateConnectionInvitationInput = struct {
+    /// The catalog identifier where the connection invitation will be created.
+    catalog: []const u8,
+
+    /// A unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request.
+    client_token: []const u8,
+
+    /// The type of connection being requested (e.g., reseller, distributor,
+    /// technology partner).
+    connection_type: ConnectionType,
+
+    /// The email address of the person to send the connection invitation to.
+    email: []const u8,
+
+    /// A custom message to include with the connection invitation.
+    message: []const u8,
+
+    /// The name of the person sending the connection invitation.
+    name: []const u8,
+
+    /// The identifier of the organization or partner to invite for connection.
+    receiver_identifier: []const u8,
+
+    pub const json_field_names = .{
+        .catalog = "Catalog",
+        .client_token = "ClientToken",
+        .connection_type = "ConnectionType",
+        .email = "Email",
+        .message = "Message",
+        .name = "Name",
+        .receiver_identifier = "ReceiverIdentifier",
+    };
+};
+
+pub const CreateConnectionInvitationOutput = struct {
+    /// The Amazon Resource Name (ARN) of the created connection invitation.
+    arn: []const u8,
+
+    /// The catalog identifier where the connection invitation was created.
+    catalog: []const u8,
+
+    /// The identifier of the connection associated with this invitation.
+    connection_id: ?[]const u8 = null,
+
+    /// The type of connection being requested in the invitation.
+    connection_type: ConnectionType,
+
+    /// The timestamp when the connection invitation was created.
+    created_at: i64,
+
+    /// The timestamp when the connection invitation will expire if not responded
+    /// to.
+    expires_at: ?i64 = null,
+
+    /// The unique identifier of the created connection invitation.
+    id: []const u8,
+
+    /// The custom message included with the connection invitation.
+    invitation_message: []const u8,
+
+    /// The email address of the person who sent the connection invitation.
+    inviter_email: []const u8,
+
+    /// The name of the person who sent the connection invitation.
+    inviter_name: []const u8,
+
+    /// The identifier of the organization or partner being invited.
+    other_participant_identifier: []const u8,
+
+    /// The type of participant (inviter or invitee) in the connection invitation.
+    participant_type: ParticipantType,
+
+    /// The current status of the connection invitation (pending, accepted,
+    /// rejected, etc.).
+    status: InvitationStatus,
+
+    /// The timestamp when the connection invitation was last updated.
+    updated_at: i64,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .catalog = "Catalog",
+        .connection_id = "ConnectionId",
+        .connection_type = "ConnectionType",
+        .created_at = "CreatedAt",
+        .expires_at = "ExpiresAt",
+        .id = "Id",
+        .invitation_message = "InvitationMessage",
+        .inviter_email = "InviterEmail",
+        .inviter_name = "InviterName",
+        .other_participant_identifier = "OtherParticipantIdentifier",
+        .participant_type = "ParticipantType",
+        .status = "Status",
+        .updated_at = "UpdatedAt",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConnectionInvitationInput, options: Options) !CreateConnectionInvitationOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "partnercentralaccount");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateConnectionInvitationInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("partnercentralaccount", "PartnerCentral Account", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.0");
+    try request.headers.put(alloc, "X-Amz-Target", "PartnerCentralAccount.CreateConnectionInvitation");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateConnectionInvitationOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreateConnectionInvitationOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

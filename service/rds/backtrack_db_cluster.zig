@@ -45,7 +45,7 @@ pub const BacktrackDBClusterInput = struct {
     use_earliest_time_on_point_in_time_unavailable: ?bool = null,
 };
 
-const BacktrackDBClusterOutput = @import("db_cluster_backtrack.zig").BacktrackDBClusterOutput;
+const BacktrackDBClusterOutput = @import("db_cluster_backtrack.zig").DBClusterBacktrack;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

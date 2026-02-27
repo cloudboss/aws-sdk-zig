@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_batch_load_task = @import("create_batch_load_task.zig");
+pub const create_database = @import("create_database.zig");
+pub const create_table = @import("create_table.zig");
+pub const delete_database = @import("delete_database.zig");
+pub const delete_table = @import("delete_table.zig");
+pub const describe_batch_load_task = @import("describe_batch_load_task.zig");
+pub const describe_database = @import("describe_database.zig");
+pub const describe_endpoints = @import("describe_endpoints.zig");
+pub const describe_table = @import("describe_table.zig");
+pub const list_batch_load_tasks = @import("list_batch_load_tasks.zig");
+pub const list_databases = @import("list_databases.zig");
+pub const list_tables = @import("list_tables.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const resume_batch_load_task = @import("resume_batch_load_task.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_database = @import("update_database.zig");
+pub const update_table = @import("update_table.zig");
+pub const write_records = @import("write_records.zig");

@@ -45,7 +45,7 @@ pub const PutBucketTaggingInput = struct {
     tagging: Tagging,
 };
 
-pub const PutBucketTaggingOutput = struct {};
+const PutBucketTaggingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

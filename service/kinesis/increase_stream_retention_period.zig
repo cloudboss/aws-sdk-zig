@@ -27,7 +27,7 @@ pub const IncreaseStreamRetentionPeriodInput = struct {
     };
 };
 
-pub const IncreaseStreamRetentionPeriodOutput = struct {};
+const IncreaseStreamRetentionPeriodOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

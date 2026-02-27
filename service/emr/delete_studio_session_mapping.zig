@@ -35,7 +35,7 @@ pub const DeleteStudioSessionMappingInput = struct {
     };
 };
 
-pub const DeleteStudioSessionMappingOutput = struct {};
+const DeleteStudioSessionMappingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

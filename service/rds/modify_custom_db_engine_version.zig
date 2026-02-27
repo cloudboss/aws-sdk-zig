@@ -62,7 +62,7 @@ pub const ModifyCustomDBEngineVersionInput = struct {
     status: ?CustomEngineVersionStatus = null,
 };
 
-const ModifyCustomDBEngineVersionOutput = @import("db_engine_version.zig").ModifyCustomDBEngineVersionOutput;
+const ModifyCustomDBEngineVersionOutput = @import("db_engine_version.zig").DBEngineVersion;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

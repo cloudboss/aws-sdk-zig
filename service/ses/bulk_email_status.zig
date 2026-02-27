@@ -1,0 +1,16 @@
+pub const BulkEmailStatus = enum {
+    success,
+    message_rejected,
+    mail_from_domain_not_verified,
+    configuration_set_does_not_exist,
+    template_does_not_exist,
+    account_suspended,
+    account_throttled,
+    account_daily_quota_exceeded,
+    invalid_sending_pool_name,
+    account_sending_paused,
+    configuration_set_sending_paused,
+    invalid_parameter_value,
+    transient_failure,
+    failed,
+};

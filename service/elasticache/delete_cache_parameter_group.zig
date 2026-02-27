@@ -12,7 +12,7 @@ pub const DeleteCacheParameterGroupInput = struct {
     cache_parameter_group_name: []const u8,
 };
 
-pub const DeleteCacheParameterGroupOutput = struct {};
+const DeleteCacheParameterGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

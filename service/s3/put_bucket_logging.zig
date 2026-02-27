@@ -41,7 +41,7 @@ pub const PutBucketLoggingInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const PutBucketLoggingOutput = struct {};
+const PutBucketLoggingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

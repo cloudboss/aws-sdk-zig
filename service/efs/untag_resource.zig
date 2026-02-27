@@ -4,22 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const UntagResourceInput = struct {
-    /// Specifies the EFS resource that you want to remove tags from.
-    resource_id: []const u8,
+const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
 
-    /// The keys of the key-value tag pairs that you want to remove from the
-    /// specified
-    /// EFS resource.
-    tag_keys: []const []const u8,
-
-    pub const json_field_names = .{
-        .resource_id = "ResourceId",
-        .tag_keys = "TagKeys",
-    };
-};
-
-pub const UntagResourceOutput = struct {};
+const UntagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

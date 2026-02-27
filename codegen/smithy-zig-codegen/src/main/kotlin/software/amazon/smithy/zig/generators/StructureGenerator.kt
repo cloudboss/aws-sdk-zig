@@ -141,6 +141,8 @@ class StructureGenerator(
         val result = mutableSetOf<String>()
 
         fun collectFromShape(targetShape: software.amazon.smithy.model.shapes.Shape) {
+            // Skip Smithy prelude shapes -- they have no generated files.
+            if (targetShape.id.namespace == "smithy.api") return
             when (targetShape) {
                 is StructureShape -> result.add(targetShape.id.name)
                 is EnumShape -> result.add(targetShape.id.name)

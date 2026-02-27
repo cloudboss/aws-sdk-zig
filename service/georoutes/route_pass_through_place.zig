@@ -1,0 +1,17 @@
+/// The place where the waypoint is passed through and not treated as a stop.
+pub const RoutePassThroughPlace = struct {
+    /// Position provided in the request.
+    original_position: ?[]const f64,
+
+    /// Position defined as `[longitude, latitude]`.
+    position: []const f64,
+
+    /// Index of the waypoint in the request.
+    waypoint_index: ?i32,
+
+    pub const json_field_names = .{
+        .original_position = "OriginalPosition",
+        .position = "Position",
+        .waypoint_index = "WaypointIndex",
+    };
+};

@@ -1,0 +1,31 @@
+pub const BatchReadExceptionType = enum {
+    validation_exception,
+    invalid_arn_exception,
+    resource_not_found_exception,
+    invalid_next_token_exception,
+    access_denied_exception,
+    not_node_exception,
+    facet_validation_exception,
+    cannot_list_parent_of_root_exception,
+    not_index_exception,
+    not_policy_exception,
+    directory_not_enabled_exception,
+    limit_exceeded_exception,
+    internal_service_exception,
+
+    pub const json_field_names = .{
+        .validation_exception = "ValidationException",
+        .invalid_arn_exception = "InvalidArnException",
+        .resource_not_found_exception = "ResourceNotFoundException",
+        .invalid_next_token_exception = "InvalidNextTokenException",
+        .access_denied_exception = "AccessDeniedException",
+        .not_node_exception = "NotNodeException",
+        .facet_validation_exception = "FacetValidationException",
+        .cannot_list_parent_of_root_exception = "CannotListParentOfRootException",
+        .not_index_exception = "NotIndexException",
+        .not_policy_exception = "NotPolicyException",
+        .directory_not_enabled_exception = "DirectoryNotEnabledException",
+        .limit_exceeded_exception = "LimitExceededException",
+        .internal_service_exception = "InternalServiceException",
+    };
+};

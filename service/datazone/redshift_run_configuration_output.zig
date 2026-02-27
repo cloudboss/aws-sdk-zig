@@ -1,0 +1,35 @@
+const RedshiftCredentialConfiguration = @import("redshift_credential_configuration.zig").RedshiftCredentialConfiguration;
+const RedshiftStorage = @import("redshift_storage.zig").RedshiftStorage;
+const RelationalFilterConfiguration = @import("relational_filter_configuration.zig").RelationalFilterConfiguration;
+
+/// The configuration details of the Amazon Redshift data source.
+pub const RedshiftRunConfigurationOutput = struct {
+    /// The ID of the Amazon Web Services account included in the configuration
+    /// details of the Amazon Redshift data source.
+    account_id: ?[]const u8,
+
+    /// The data access role included in the configuration details of the Amazon
+    /// Redshift data source.
+    data_access_role: ?[]const u8,
+
+    redshift_credential_configuration: ?RedshiftCredentialConfiguration,
+
+    redshift_storage: RedshiftStorage,
+
+    /// The Amazon Web Services region included in the configuration details of the
+    /// Amazon Redshift data source.
+    region: ?[]const u8,
+
+    /// The relational filger configurations included in the configuration details
+    /// of the Amazon Redshift data source.
+    relational_filter_configurations: []const RelationalFilterConfiguration,
+
+    pub const json_field_names = .{
+        .account_id = "accountId",
+        .data_access_role = "dataAccessRole",
+        .redshift_credential_configuration = "redshiftCredentialConfiguration",
+        .redshift_storage = "redshiftStorage",
+        .region = "region",
+        .relational_filter_configurations = "relationalFilterConfigurations",
+    };
+};

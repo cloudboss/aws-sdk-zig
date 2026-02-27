@@ -1,0 +1,31 @@
+pub const DecisionType = enum {
+    schedule_activity_task,
+    request_cancel_activity_task,
+    complete_workflow_execution,
+    fail_workflow_execution,
+    cancel_workflow_execution,
+    continue_as_new_workflow_execution,
+    record_marker,
+    start_timer,
+    cancel_timer,
+    signal_external_workflow_execution,
+    request_cancel_external_workflow_execution,
+    start_child_workflow_execution,
+    schedule_lambda_function,
+
+    pub const json_field_names = .{
+        .schedule_activity_task = "ScheduleActivityTask",
+        .request_cancel_activity_task = "RequestCancelActivityTask",
+        .complete_workflow_execution = "CompleteWorkflowExecution",
+        .fail_workflow_execution = "FailWorkflowExecution",
+        .cancel_workflow_execution = "CancelWorkflowExecution",
+        .continue_as_new_workflow_execution = "ContinueAsNewWorkflowExecution",
+        .record_marker = "RecordMarker",
+        .start_timer = "StartTimer",
+        .cancel_timer = "CancelTimer",
+        .signal_external_workflow_execution = "SignalExternalWorkflowExecution",
+        .request_cancel_external_workflow_execution = "RequestCancelExternalWorkflowExecution",
+        .start_child_workflow_execution = "StartChildWorkflowExecution",
+        .schedule_lambda_function = "ScheduleLambdaFunction",
+    };
+};

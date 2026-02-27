@@ -5,7 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExpiryEventsConfiguration = @import("expiry_events_configuration.zig").ExpiryEventsConfiguration;
 
-pub const GetAccountConfigurationInput = struct {};
+const GetAccountConfigurationInput = struct {};
 
 pub const GetAccountConfigurationOutput = struct {
     /// Expiration events configuration options associated with the Amazon Web

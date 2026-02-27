@@ -95,8 +95,9 @@ class WaiterGenerator(
             is Matcher.OutputMember -> {
                 val pathMatcher = matcher.value
                 val rawPath = pathMatcher.path
-                // Skip complex JMESPath expressions we can't translate to Zig field access
-                if (rawPath.contains("[") || rawPath.contains("(") || rawPath.contains("|")) {
+                // Only accept simple dot-separated field paths (e.g. "table.status")
+                // Skip complex JMESPath with operators, functions, filters, etc.
+                if (!rawPath.matches(Regex("^[a-zA-Z_][a-zA-Z0-9_]*(\\.[a-zA-Z_][a-zA-Z0-9_]*)*$"))) {
                     return null
                 }
                 val pathSegments = rawPath.split(".").map { NamingUtil.toFieldName(it) }

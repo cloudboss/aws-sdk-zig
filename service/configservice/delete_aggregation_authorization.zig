@@ -18,7 +18,7 @@ pub const DeleteAggregationAuthorizationInput = struct {
     };
 };
 
-pub const DeleteAggregationAuthorizationOutput = struct {};
+const DeleteAggregationAuthorizationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

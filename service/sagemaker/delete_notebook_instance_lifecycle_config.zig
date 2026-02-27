@@ -13,7 +13,7 @@ pub const DeleteNotebookInstanceLifecycleConfigInput = struct {
     };
 };
 
-pub const DeleteNotebookInstanceLifecycleConfigOutput = struct {};
+const DeleteNotebookInstanceLifecycleConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

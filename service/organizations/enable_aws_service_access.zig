@@ -18,7 +18,7 @@ pub const EnableAWSServiceAccessInput = struct {
     };
 };
 
-pub const EnableAWSServiceAccessOutput = struct {};
+const EnableAWSServiceAccessOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

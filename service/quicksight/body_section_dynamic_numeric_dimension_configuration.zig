@@ -1,0 +1,20 @@
+const ColumnIdentifier = @import("column_identifier.zig").ColumnIdentifier;
+const ColumnSort = @import("column_sort.zig").ColumnSort;
+
+/// Describes the **Numeric** dataset column and constraints for the dynamic
+/// values used to repeat the contents of a section.
+pub const BodySectionDynamicNumericDimensionConfiguration = struct {
+    column: ColumnIdentifier,
+
+    /// Number of values to use from the column for repetition.
+    limit: ?i32,
+
+    /// Sort criteria on the column values that you use for repetition.
+    sort_by_metrics: ?[]const ColumnSort,
+
+    pub const json_field_names = .{
+        .column = "Column",
+        .limit = "Limit",
+        .sort_by_metrics = "SortByMetrics",
+    };
+};

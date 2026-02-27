@@ -1,0 +1,33 @@
+pub const EventErrorCode = enum {
+    insufficient_capabilities,
+    quota_exceeded,
+    publisher_not_found,
+    bitrate_exceeded,
+    resolution_exceeded,
+    stream_duration_exceeded,
+    invalid_audio_codec,
+    invalid_video_codec,
+    invalid_protocol,
+    invalid_stream_key,
+    reuse_of_stream_key,
+    b_frame_present,
+    invalid_input,
+    internal_server_exception,
+
+    pub const json_field_names = .{
+        .insufficient_capabilities = "INSUFFICIENT_CAPABILITIES",
+        .quota_exceeded = "QUOTA_EXCEEDED",
+        .publisher_not_found = "PUBLISHER_NOT_FOUND",
+        .bitrate_exceeded = "BITRATE_EXCEEDED",
+        .resolution_exceeded = "RESOLUTION_EXCEEDED",
+        .stream_duration_exceeded = "STREAM_DURATION_EXCEEDED",
+        .invalid_audio_codec = "INVALID_AUDIO_CODEC",
+        .invalid_video_codec = "INVALID_VIDEO_CODEC",
+        .invalid_protocol = "INVALID_PROTOCOL",
+        .invalid_stream_key = "INVALID_STREAM_KEY",
+        .reuse_of_stream_key = "REUSE_OF_STREAM_KEY",
+        .b_frame_present = "B_FRAME_PRESENT",
+        .invalid_input = "INVALID_INPUT",
+        .internal_server_exception = "INTERNAL_SERVER_EXCEPTION",
+    };
+};

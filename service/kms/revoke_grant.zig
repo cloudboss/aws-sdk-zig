@@ -39,7 +39,7 @@ pub const RevokeGrantInput = struct {
     };
 };
 
-pub const RevokeGrantOutput = struct {};
+const RevokeGrantOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

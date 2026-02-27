@@ -16,7 +16,7 @@ pub const DeleteVpnConnectionInput = struct {
     vpn_connection_id: []const u8,
 };
 
-pub const DeleteVpnConnectionOutput = struct {};
+const DeleteVpnConnectionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

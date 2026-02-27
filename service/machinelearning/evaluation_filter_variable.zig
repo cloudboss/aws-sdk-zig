@@ -1,0 +1,43 @@
+/// A list of the variables to use in searching or filtering `Evaluation`.
+///
+/// * `CreatedAt` - Sets the search criteria to `Evaluation` creation date.
+///
+/// * `Status` - Sets the search criteria to `Evaluation` status.
+///
+/// * `Name` - Sets the search criteria to the contents of `Evaluation`
+/// ** **
+/// `Name`.
+///
+/// * `IAMUser` - Sets the search criteria to the user account that invoked an
+///   evaluation.
+///
+/// * `MLModelId` - Sets the search criteria to the `Predictor` that was
+///   evaluated.
+///
+/// * `DataSourceId` - Sets the search criteria to the `DataSource` used in
+///   evaluation.
+///
+/// * `DataUri` - Sets the search criteria to the data file(s) used in
+///   evaluation. The URL can identify either a file or an Amazon Simple Storage
+///   Service (Amazon S3) bucket or directory.
+pub const EvaluationFilterVariable = enum {
+    created_at,
+    last_updated_at,
+    status,
+    name,
+    iam_user,
+    ml_model_id,
+    datasource_id,
+    data_uri,
+
+    pub const json_field_names = .{
+        .created_at = "CREATED_AT",
+        .last_updated_at = "LAST_UPDATED_AT",
+        .status = "STATUS",
+        .name = "NAME",
+        .iam_user = "IAM_USER",
+        .ml_model_id = "ML_MODEL_ID",
+        .datasource_id = "DATASOURCE_ID",
+        .data_uri = "DATA_URI",
+    };
+};

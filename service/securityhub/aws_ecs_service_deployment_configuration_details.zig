@@ -1,0 +1,42 @@
+const AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails = @import("aws_ecs_service_deployment_configuration_deployment_circuit_breaker_details.zig").AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails;
+
+/// Optional deployment parameters for the service.
+pub const AwsEcsServiceDeploymentConfigurationDetails = struct {
+    /// Determines whether a service deployment fails if a service cannot reach a
+    /// steady state.
+    deployment_circuit_breaker: ?AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails,
+
+    /// For a service that uses the rolling update (`ECS`) deployment type, the
+    /// maximum number of tasks in a service that are allowed in the `RUNNING` or
+    /// `PENDING` state during a deployment, and for tasks that use the EC2 launch
+    /// type, when any container instances are in the `DRAINING` state. Provided as
+    /// a percentage of the desired number of tasks. The default value is 200%.
+    ///
+    /// For a service that uses the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
+    /// deployment types, and tasks that use the EC2 launch type, the maximum number
+    /// of tasks in the service that remain in the `RUNNING` state while the
+    /// container instances are in the `DRAINING` state.
+    ///
+    /// For the Fargate launch type, the maximum percent value is not used.
+    maximum_percent: ?i32,
+
+    /// For a service that uses the rolling update (`ECS`) deployment type, the
+    /// minimum number of tasks in a service that must remain in the `RUNNING` state
+    /// during a deployment, and while any container instances are in the `DRAINING`
+    /// state if the service contains tasks using the EC2 launch type. Expressed as
+    /// a percentage of the desired number of tasks. The default value is 100%.
+    ///
+    /// For a service that uses the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
+    /// deployment types and tasks that use the EC2 launch type, the minimum number
+    /// of the tasks in the service that remain in the `RUNNING` state while the
+    /// container instances are in the `DRAINING` state.
+    ///
+    /// For the Fargate launch type, the minimum healthy percent value is not used.
+    minimum_healthy_percent: ?i32,
+
+    pub const json_field_names = .{
+        .deployment_circuit_breaker = "DeploymentCircuitBreaker",
+        .maximum_percent = "MaximumPercent",
+        .minimum_healthy_percent = "MinimumHealthyPercent",
+    };
+};

@@ -1,0 +1,20 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+pub const waiters = @import("waiters.zig");
+
+pub const associate_repository = @import("associate_repository.zig");
+pub const create_code_review = @import("create_code_review.zig");
+pub const describe_code_review = @import("describe_code_review.zig");
+pub const describe_recommendation_feedback = @import("describe_recommendation_feedback.zig");
+pub const describe_repository_association = @import("describe_repository_association.zig");
+pub const disassociate_repository = @import("disassociate_repository.zig");
+pub const list_code_reviews = @import("list_code_reviews.zig");
+pub const list_recommendation_feedback = @import("list_recommendation_feedback.zig");
+pub const list_recommendations = @import("list_recommendations.zig");
+pub const list_repository_associations = @import("list_repository_associations.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const put_recommendation_feedback = @import("put_recommendation_feedback.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");

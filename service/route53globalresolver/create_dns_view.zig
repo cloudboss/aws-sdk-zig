@@ -1,0 +1,285 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const DnsSecValidationType = @import("dns_sec_validation_type.zig").DnsSecValidationType;
+const EdnsClientSubnetType = @import("edns_client_subnet_type.zig").EdnsClientSubnetType;
+const FirewallRulesFailOpenType = @import("firewall_rules_fail_open_type.zig").FirewallRulesFailOpenType;
+const ProfileResourceStatus = @import("profile_resource_status.zig").ProfileResourceStatus;
+
+pub const CreateDNSViewInput = struct {
+    /// A unique string that identifies the request and ensures idempotency.
+    client_token: ?[]const u8 = null,
+
+    /// An optional description for the DNS view.
+    description: ?[]const u8 = null,
+
+    /// Whether to enable DNSSEC validation for DNS queries in this DNS view. When
+    /// enabled, the resolver verifies the authenticity and integrity of DNS
+    /// responses from public name servers for DNSSEC-signed domains.
+    dnssec_validation: DnsSecValidationType = "DISABLED",
+
+    /// Whether to enable EDNS Client Subnet injection for DNS queries in this DNS
+    /// view. When enabled, client subnet information is forwarded to provide more
+    /// accurate geographic-based DNS responses.
+    edns_client_subnet: EdnsClientSubnetType = "DISABLED",
+
+    /// Determines the behavior when Route 53 Global Resolver cannot apply DNS
+    /// firewall rules due to service impairment. When enabled, DNS queries are
+    /// allowed through; when disabled, queries are blocked.
+    firewall_rules_fail_open: FirewallRulesFailOpenType = "DISABLED",
+
+    /// The ID of the Route 53 Global Resolver to associate with this DNS view.
+    global_resolver_id: []const u8,
+
+    /// A descriptive name for the DNS view.
+    name: []const u8,
+
+    /// Tags to associate with the DNS view.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .client_token = "clientToken",
+        .description = "description",
+        .dnssec_validation = "dnssecValidation",
+        .edns_client_subnet = "ednsClientSubnet",
+        .firewall_rules_fail_open = "firewallRulesFailOpen",
+        .global_resolver_id = "globalResolverId",
+        .name = "name",
+        .tags = "tags",
+    };
+};
+
+pub const CreateDNSViewOutput = struct {
+    /// The Amazon Resource Name (ARN) of the DNS view.
+    arn: []const u8,
+
+    /// The unique string that identifies the request and ensures idempotency.
+    client_token: ?[]const u8 = null,
+
+    /// The date and time when the DNS view was created.
+    created_at: i64,
+
+    /// The description of the DNS view.
+    description: ?[]const u8 = null,
+
+    /// Whether DNSSEC validation is enabled for DNS queries in this DNS view.
+    dnssec_validation: DnsSecValidationType,
+
+    /// Whether EDNS Client Subnet injection is enabled for DNS queries in this DNS
+    /// view.
+    edns_client_subnet: EdnsClientSubnetType,
+
+    /// The behavior when Route 53 Global Resolver cannot apply DNS firewall rules
+    /// due to service impairment.
+    firewall_rules_fail_open: FirewallRulesFailOpenType,
+
+    /// The ID of the Route 53 Global Resolver instance the DNS view is created for.
+    global_resolver_id: []const u8,
+
+    /// The unique identifier for the DNS view.
+    id: []const u8,
+
+    /// The descriptive name of the DNS view.
+    name: []const u8,
+
+    /// The operational status of the DNS view.
+    status: ProfileResourceStatus,
+
+    /// The date and time when the DNS view was last updated.
+    updated_at: i64,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+        .client_token = "clientToken",
+        .created_at = "createdAt",
+        .description = "description",
+        .dnssec_validation = "dnssecValidation",
+        .edns_client_subnet = "ednsClientSubnet",
+        .firewall_rules_fail_open = "firewallRulesFailOpen",
+        .global_resolver_id = "globalResolverId",
+        .id = "id",
+        .name = "name",
+        .status = "status",
+        .updated_at = "updatedAt",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDNSViewInput, options: Options) !CreateDNSViewOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "route53globalresolver");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateDNSViewInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("route53globalresolver", "Route53GlobalResolver", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/dns-views/");
+    try path_buf.appendSlice(alloc, input.global_resolver_id);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(alloc, "{");
+
+    if (input.client_token) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"clientToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.description) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.dnssec_validation) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"dnssecValidation\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.edns_client_subnet) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"ednsClientSubnet\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (input.firewall_rules_fail_open) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"firewallRulesFailOpen\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+    if (has_prev) try body_buf.appendSlice(alloc, ",");
+    try body_buf.appendSlice(alloc, "\"name\":");
+    try aws.json.writeValue(@TypeOf(input.name), input.name, alloc, &body_buf);
+    has_prev = true;
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(alloc, ",");
+        try body_buf.appendSlice(alloc, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(alloc, "}");
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateDNSViewOutput {
+    var result: CreateDNSViewOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(CreateDNSViewOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

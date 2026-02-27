@@ -9,7 +9,7 @@ pub const DeleteClusterSubnetGroupInput = struct {
     cluster_subnet_group_name: []const u8,
 };
 
-pub const DeleteClusterSubnetGroupOutput = struct {};
+const DeleteClusterSubnetGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

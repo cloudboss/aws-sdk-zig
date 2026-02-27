@@ -26,7 +26,7 @@ pub const DeleteHubContentInput = struct {
     };
 };
 
-pub const DeleteHubContentOutput = struct {};
+const DeleteHubContentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

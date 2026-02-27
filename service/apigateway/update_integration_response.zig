@@ -32,7 +32,7 @@ pub const UpdateIntegrationResponseInput = struct {
     };
 };
 
-const UpdateIntegrationResponseOutput = @import("integration_response.zig").UpdateIntegrationResponseOutput;
+const UpdateIntegrationResponseOutput = @import("integration_response.zig").IntegrationResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

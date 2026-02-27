@@ -17,7 +17,7 @@ pub const DeleteMetricFilterInput = struct {
     };
 };
 
-pub const DeleteMetricFilterOutput = struct {};
+const DeleteMetricFilterOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

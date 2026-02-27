@@ -1,0 +1,90 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const delete_report_definition = @import("delete_report_definition.zig");
+const get_report_definition = @import("get_report_definition.zig");
+const import_application_usage = @import("import_application_usage.zig");
+const list_report_definitions = @import("list_report_definitions.zig");
+const put_report_definition = @import("put_report_definition.zig");
+const update_report_definition = @import("update_report_definition.zig");
+const paginator = @import("paginator.zig");
+
+pub const Client = struct {
+    allocator: std.mem.Allocator,
+    config: *aws.Config,
+    http_client: aws.http.HttpClient,
+
+    const Self = @This();
+    pub const sdk_id = "ApplicationCostProfiler";
+
+    pub fn init(allocator: std.mem.Allocator, config: *aws.Config) Self {
+        return .{
+            .allocator = allocator,
+            .config = config,
+            .http_client = aws.http.HttpClient.init(allocator),
+        };
+    }
+
+    pub fn initWithOptions(allocator: std.mem.Allocator, config: *aws.Config, options: aws.http.RequestOptions) Self {
+        return .{
+            .allocator = allocator,
+            .config = config,
+            .http_client = aws.http.HttpClient.initWithOptions(allocator, options),
+        };
+    }
+
+    pub fn deinit(self: *Self) void {
+        self.http_client.deinit();
+    }
+
+    /// Deletes the specified report definition in AWS Application Cost Profiler.
+    /// This stops the report from being
+    /// generated.
+    pub fn deleteReportDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_report_definition.DeleteReportDefinitionInput, options: delete_report_definition.Options) !delete_report_definition.DeleteReportDefinitionOutput {
+        return delete_report_definition.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the definition of a report already configured in AWS Application
+    /// Cost Profiler.
+    pub fn getReportDefinition(self: *Self, allocator: std.mem.Allocator, input: get_report_definition.GetReportDefinitionInput, options: get_report_definition.Options) !get_report_definition.GetReportDefinitionOutput {
+        return get_report_definition.execute(self, allocator, input, options);
+    }
+
+    /// Ingests application usage data from Amazon Simple Storage Service (Amazon
+    /// S3).
+    ///
+    /// The data must already exist in the S3 location. As part of the action, AWS
+    /// Application Cost Profiler
+    /// copies the object from your S3 bucket to an S3 bucket owned by Amazon for
+    /// processing
+    /// asynchronously.
+    pub fn importApplicationUsage(self: *Self, allocator: std.mem.Allocator, input: import_application_usage.ImportApplicationUsageInput, options: import_application_usage.Options) !import_application_usage.ImportApplicationUsageOutput {
+        return import_application_usage.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of all reports and their configurations for your AWS
+    /// account.
+    ///
+    /// The maximum number of reports is one.
+    pub fn listReportDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_report_definitions.ListReportDefinitionsInput, options: list_report_definitions.Options) !list_report_definitions.ListReportDefinitionsOutput {
+        return list_report_definitions.execute(self, allocator, input, options);
+    }
+
+    /// Creates the report definition for a report in Application Cost Profiler.
+    pub fn putReportDefinition(self: *Self, allocator: std.mem.Allocator, input: put_report_definition.PutReportDefinitionInput, options: put_report_definition.Options) !put_report_definition.PutReportDefinitionOutput {
+        return put_report_definition.execute(self, allocator, input, options);
+    }
+
+    /// Updates existing report in AWS Application Cost Profiler.
+    pub fn updateReportDefinition(self: *Self, allocator: std.mem.Allocator, input: update_report_definition.UpdateReportDefinitionInput, options: update_report_definition.Options) !update_report_definition.UpdateReportDefinitionOutput {
+        return update_report_definition.execute(self, allocator, input, options);
+    }
+
+    pub fn listReportDefinitionsPaginator(self: *Self, params: list_report_definitions.ListReportDefinitionsInput) paginator.ListReportDefinitionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+            .allocator = self.allocator,
+        };
+    }
+};

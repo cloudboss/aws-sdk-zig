@@ -23,7 +23,7 @@ pub const ResetInstanceAttributeInput = struct {
     instance_id: []const u8,
 };
 
-pub const ResetInstanceAttributeOutput = struct {};
+const ResetInstanceAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

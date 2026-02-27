@@ -16,7 +16,7 @@ pub const DeleteDhcpOptionsInput = struct {
     dry_run: ?bool = null,
 };
 
-pub const DeleteDhcpOptionsOutput = struct {};
+const DeleteDhcpOptionsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

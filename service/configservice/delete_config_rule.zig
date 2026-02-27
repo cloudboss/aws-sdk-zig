@@ -14,7 +14,7 @@ pub const DeleteConfigRuleInput = struct {
     };
 };
 
-pub const DeleteConfigRuleOutput = struct {};
+const DeleteConfigRuleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

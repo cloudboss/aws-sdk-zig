@@ -13,7 +13,7 @@ pub const DeleteCompilationJobInput = struct {
     };
 };
 
-pub const DeleteCompilationJobOutput = struct {};
+const DeleteCompilationJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

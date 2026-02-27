@@ -1,0 +1,274 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const HealthEventsConfig = @import("health_events_config.zig").HealthEventsConfig;
+const InternetMeasurementsLogDelivery = @import("internet_measurements_log_delivery.zig").InternetMeasurementsLogDelivery;
+const MonitorProcessingStatusCode = @import("monitor_processing_status_code.zig").MonitorProcessingStatusCode;
+const MonitorConfigState = @import("monitor_config_state.zig").MonitorConfigState;
+
+pub const GetMonitorInput = struct {
+    /// The account ID for an account that you've set up cross-account sharing for
+    /// in Amazon CloudWatch Internet Monitor. You configure cross-account
+    /// sharing by using Amazon CloudWatch Observability Access Manager. For more
+    /// information, see
+    /// [Internet Monitor cross-account
+    /// observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html) in the Amazon CloudWatch Internet Monitor User Guide.
+    linked_account_id: ?[]const u8 = null,
+
+    /// The name of the monitor.
+    monitor_name: []const u8,
+
+    pub const json_field_names = .{
+        .linked_account_id = "LinkedAccountId",
+        .monitor_name = "MonitorName",
+    };
+};
+
+pub const GetMonitorOutput = struct {
+    /// The time when the monitor was created.
+    created_at: i64,
+
+    /// The list of health event threshold configurations. The threshold percentage
+    /// for a health score determines, along with other configuration
+    /// information, when Internet Monitor creates a health event when there's an
+    /// internet issue that affects your application end users.
+    ///
+    /// For more information, see [
+    /// Change health event
+    /// thresholds](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview) in the Internet Monitor section of the *CloudWatch User Guide*.
+    health_events_config: ?HealthEventsConfig = null,
+
+    /// Publish internet measurements for Internet Monitor to another location, such
+    /// as an Amazon S3 bucket. The measurements are also published to Amazon
+    /// CloudWatch Logs.
+    internet_measurements_log_delivery: ?InternetMeasurementsLogDelivery = null,
+
+    /// The maximum number of city-networks to monitor for your resources. A
+    /// city-network is the location (city) where clients access your
+    /// application resources from and the ASN or network provider, such as an
+    /// internet service provider (ISP), that clients access the resources
+    /// through. This limit can help control billing costs.
+    ///
+    /// To learn more, see [Choosing a city-network maximum value
+    /// ](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html) in the Amazon CloudWatch Internet Monitor section of the *CloudWatch User Guide*.
+    max_city_networks_to_monitor: ?i32 = null,
+
+    /// The last time that the monitor was modified.
+    modified_at: i64,
+
+    /// The Amazon Resource Name (ARN) of the monitor.
+    monitor_arn: []const u8,
+
+    /// The name of the monitor.
+    monitor_name: []const u8,
+
+    /// The health of the data processing for the monitor.
+    processing_status: ?MonitorProcessingStatusCode = null,
+
+    /// Additional information about the health of the data processing for the
+    /// monitor.
+    processing_status_info: ?[]const u8 = null,
+
+    /// The resources monitored by the monitor. Resources are listed by their Amazon
+    /// Resource Names (ARNs).
+    resources: ?[]const []const u8 = null,
+
+    /// The status of the monitor.
+    status: MonitorConfigState,
+
+    /// The tags that have been added to monitor.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// The percentage of the internet-facing traffic for your application to
+    /// monitor with this monitor. If you set a city-networks
+    /// maximum, that limit overrides the traffic percentage that you set.
+    ///
+    /// To learn more, see [Choosing an application traffic percentage to monitor
+    /// ](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html) in the Amazon CloudWatch Internet Monitor section of the *CloudWatch User Guide*.
+    traffic_percentage_to_monitor: ?i32 = null,
+
+    pub const json_field_names = .{
+        .created_at = "CreatedAt",
+        .health_events_config = "HealthEventsConfig",
+        .internet_measurements_log_delivery = "InternetMeasurementsLogDelivery",
+        .max_city_networks_to_monitor = "MaxCityNetworksToMonitor",
+        .modified_at = "ModifiedAt",
+        .monitor_arn = "MonitorArn",
+        .monitor_name = "MonitorName",
+        .processing_status = "ProcessingStatus",
+        .processing_status_info = "ProcessingStatusInfo",
+        .resources = "Resources",
+        .status = "Status",
+        .tags = "Tags",
+        .traffic_percentage_to_monitor = "TrafficPercentageToMonitor",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMonitorInput, options: Options) !GetMonitorOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "internetmonitor");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetMonitorInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("internetmonitor", "InternetMonitor", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/v20210603/Monitors/");
+    try path_buf.appendSlice(alloc, input.monitor_name);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    if (input.linked_account_id) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "LinkedAccountId=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetMonitorOutput {
+    var result: GetMonitorOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetMonitorOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BadRequestException")) {
+        return .{ .arena = arena, .kind = .{ .bad_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerErrorException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyRequestsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_requests_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

@@ -13,7 +13,7 @@ pub const DeleteModelBiasJobDefinitionInput = struct {
     };
 };
 
-pub const DeleteModelBiasJobDefinitionOutput = struct {};
+const DeleteModelBiasJobDefinitionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

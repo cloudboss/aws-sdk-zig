@@ -13,7 +13,7 @@ pub const DeleteAlgorithmInput = struct {
     };
 };
 
-pub const DeleteAlgorithmOutput = struct {};
+const DeleteAlgorithmOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

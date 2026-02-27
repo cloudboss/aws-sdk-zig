@@ -4,20 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const PutResourcePolicyInput = struct {
-    /// The JSON-formatted resource policy to create.
-    policy_document: []const u8,
+const PutResourcePolicyInput = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
 
-    /// The Amazon Resource Name (ARN) of the CloudFront resource for which the
-    /// policy is being created.
-    resource_arn: []const u8,
-};
-
-pub const PutResourcePolicyOutput = struct {
-    /// The Amazon Resource Name (ARN) of the CloudFront resource for which the
-    /// policy was created.
-    resource_arn: ?[]const u8 = null,
-};
+const PutResourcePolicyOutput = @import("put_resource_policy_result.zig").PutResourcePolicyResult;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -28,7 +28,7 @@ pub const UpdateStageInput = struct {
     };
 };
 
-const UpdateStageOutput = @import("stage.zig").UpdateStageOutput;
+const UpdateStageOutput = @import("stage.zig").Stage;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

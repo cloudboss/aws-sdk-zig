@@ -22,7 +22,7 @@ pub const UntagPolicyInput = struct {
     tag_keys: []const []const u8,
 };
 
-pub const UntagPolicyOutput = struct {};
+const UntagPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

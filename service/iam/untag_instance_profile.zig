@@ -21,7 +21,7 @@ pub const UntagInstanceProfileInput = struct {
     tag_keys: []const []const u8,
 };
 
-pub const UntagInstanceProfileOutput = struct {};
+const UntagInstanceProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

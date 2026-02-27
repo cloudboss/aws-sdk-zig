@@ -29,7 +29,7 @@ pub const DeleteBucketInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const DeleteBucketOutput = struct {};
+const DeleteBucketOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

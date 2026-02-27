@@ -47,7 +47,7 @@ pub const PutJobSuccessResultInput = struct {
     };
 };
 
-pub const PutJobSuccessResultOutput = struct {};
+const PutJobSuccessResultOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

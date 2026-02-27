@@ -32,7 +32,7 @@ pub const PutGatewayResponseInput = struct {
     };
 };
 
-const PutGatewayResponseOutput = @import("gateway_response.zig").PutGatewayResponseOutput;
+const PutGatewayResponseOutput = @import("gateway_response.zig").GatewayResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -81,7 +81,7 @@ pub const ModifyImageAttributeInput = struct {
     value: ?[]const u8 = null,
 };
 
-pub const ModifyImageAttributeOutput = struct {};
+const ModifyImageAttributeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

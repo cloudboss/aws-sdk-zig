@@ -13,7 +13,7 @@ pub const StopMonitoringScheduleInput = struct {
     };
 };
 
-pub const StopMonitoringScheduleOutput = struct {};
+const StopMonitoringScheduleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,20 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteRouteInput = struct {
-    /// The API identifier.
-    api_id: []const u8,
+const DeleteRouteInput = @import("delete_route_request.zig").DeleteRouteRequest;
 
-    /// The route ID.
-    route_id: []const u8,
-
-    pub const json_field_names = .{
-        .api_id = "ApiId",
-        .route_id = "RouteId",
-    };
-};
-
-pub const DeleteRouteOutput = struct {};
+const DeleteRouteOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

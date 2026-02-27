@@ -29,7 +29,7 @@ pub const UpdateSSHPublicKeyInput = struct {
     user_name: []const u8,
 };
 
-pub const UpdateSSHPublicKeyOutput = struct {};
+const UpdateSSHPublicKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

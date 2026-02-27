@@ -19,7 +19,7 @@ pub const PutConfigRuleInput = struct {
     };
 };
 
-pub const PutConfigRuleOutput = struct {};
+const PutConfigRuleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

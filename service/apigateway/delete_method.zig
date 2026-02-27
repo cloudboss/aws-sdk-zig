@@ -21,7 +21,7 @@ pub const DeleteMethodInput = struct {
     };
 };
 
-pub const DeleteMethodOutput = struct {};
+const DeleteMethodOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

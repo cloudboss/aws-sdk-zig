@@ -1,0 +1,18 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+pub const waiters = @import("waiters.zig");
+
+pub const create_cluster = @import("create_cluster.zig");
+pub const delete_cluster = @import("delete_cluster.zig");
+pub const delete_cluster_policy = @import("delete_cluster_policy.zig");
+pub const get_cluster = @import("get_cluster.zig");
+pub const get_cluster_policy = @import("get_cluster_policy.zig");
+pub const get_vpc_endpoint_service_name = @import("get_vpc_endpoint_service_name.zig");
+pub const list_clusters = @import("list_clusters.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const put_cluster_policy = @import("put_cluster_policy.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_cluster = @import("update_cluster.zig");

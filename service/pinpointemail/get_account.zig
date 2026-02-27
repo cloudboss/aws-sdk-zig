@@ -1,0 +1,218 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const SendQuota = @import("send_quota.zig").SendQuota;
+
+pub const GetAccountInput = struct {};
+
+pub const GetAccountOutput = struct {
+    /// Indicates whether or not the automatic warm-up feature is enabled for
+    /// dedicated IP
+    /// addresses that are associated with your account.
+    dedicated_ip_auto_warmup_enabled: bool = false,
+
+    /// The reputation status of your Amazon Pinpoint account. The status can be one
+    /// of the
+    /// following:
+    ///
+    /// * `HEALTHY` – There are no reputation-related issues that
+    /// currently impact your account.
+    ///
+    /// * `PROBATION` – We've identified some issues with your Amazon Pinpoint
+    /// account. We're placing your account under review while you work on
+    /// correcting
+    /// these issues.
+    ///
+    /// * `SHUTDOWN` – Your account's ability to send email is
+    /// currently paused because of an issue with the email sent from your account.
+    /// When
+    /// you correct the issue, you can contact us and request that your account's
+    /// ability to send email is resumed.
+    enforcement_status: ?[]const u8 = null,
+
+    /// Indicates whether or not your account has production access in the current
+    /// AWS
+    /// Region.
+    ///
+    /// If the value is `false`, then your account is in the
+    /// *sandbox*. When your account is in the sandbox, you can only send
+    /// email to verified identities. Additionally, the maximum number of emails you
+    /// can send in
+    /// a 24-hour period (your sending quota) is 200, and the maximum number of
+    /// emails you can
+    /// send per second (your maximum sending rate) is 1.
+    ///
+    /// If the value is `true`, then your account has production access. When your
+    /// account has production access, you can send email to any address. The
+    /// sending quota and
+    /// maximum sending rate for your account vary based on your specific use case.
+    production_access_enabled: bool = false,
+
+    /// Indicates whether or not email sending is enabled for your Amazon Pinpoint
+    /// account in the
+    /// current AWS Region.
+    sending_enabled: bool = false,
+
+    /// An object that contains information about the per-day and per-second sending
+    /// limits
+    /// for your Amazon Pinpoint account in the current AWS Region.
+    send_quota: ?SendQuota = null,
+
+    pub const json_field_names = .{
+        .dedicated_ip_auto_warmup_enabled = "DedicatedIpAutoWarmupEnabled",
+        .enforcement_status = "EnforcementStatus",
+        .production_access_enabled = "ProductionAccessEnabled",
+        .sending_enabled = "SendingEnabled",
+        .send_quota = "SendQuota",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccountInput, options: Options) !GetAccountOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "pinpointemail");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetAccountInput, config: *aws.Config) !aws.http.Request {
+    _ = input;
+    const endpoint = try config.getEndpointForService("pinpointemail", "Pinpoint Email", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const path = "/v1/email/account";
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAccountOutput {
+    var result: GetAccountOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetAccountOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccountSuspendedException")) {
+        return .{ .arena = arena, .kind = .{ .account_suspended_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "AlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BadRequestException")) {
+        return .{ .arena = arena, .kind = .{ .bad_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MailFromDomainNotVerifiedException")) {
+        return .{ .arena = arena, .kind = .{ .mail_from_domain_not_verified_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MessageRejected")) {
+        return .{ .arena = arena, .kind = .{ .message_rejected = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SendingPausedException")) {
+        return .{ .arena = arena, .kind = .{ .sending_paused_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyRequestsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_requests_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

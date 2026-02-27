@@ -1,0 +1,23 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_connector = @import("create_connector.zig");
+pub const create_custom_plugin = @import("create_custom_plugin.zig");
+pub const create_worker_configuration = @import("create_worker_configuration.zig");
+pub const delete_connector = @import("delete_connector.zig");
+pub const delete_custom_plugin = @import("delete_custom_plugin.zig");
+pub const delete_worker_configuration = @import("delete_worker_configuration.zig");
+pub const describe_connector = @import("describe_connector.zig");
+pub const describe_connector_operation = @import("describe_connector_operation.zig");
+pub const describe_custom_plugin = @import("describe_custom_plugin.zig");
+pub const describe_worker_configuration = @import("describe_worker_configuration.zig");
+pub const list_connector_operations = @import("list_connector_operations.zig");
+pub const list_connectors = @import("list_connectors.zig");
+pub const list_custom_plugins = @import("list_custom_plugins.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_worker_configurations = @import("list_worker_configurations.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_connector = @import("update_connector.zig");

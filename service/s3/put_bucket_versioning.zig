@@ -54,7 +54,7 @@ pub const PutBucketVersioningInput = struct {
     versioning_configuration: VersioningConfiguration,
 };
 
-pub const PutBucketVersioningOutput = struct {};
+const PutBucketVersioningOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -25,7 +25,7 @@ pub const DeleteProvisionedConcurrencyConfigInput = struct {
     };
 };
 
-pub const DeleteProvisionedConcurrencyConfigOutput = struct {};
+const DeleteProvisionedConcurrencyConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -6,15 +6,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tags = @import("tags.zig").Tags;
 const serde = @import("serde.zig");
 
-pub const TagResourceInput = struct {
-    /// An ARN of a CloudFront resource.
-    resource: []const u8,
+const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
 
-    /// A complex type that contains zero or more `Tag` elements.
-    tags: Tags,
-};
-
-pub const TagResourceOutput = struct {};
+const TagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

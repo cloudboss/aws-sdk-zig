@@ -16,7 +16,7 @@ pub const GetUsagePlanInput = struct {
     };
 };
 
-const GetUsagePlanOutput = @import("usage_plan.zig").GetUsagePlanOutput;
+const GetUsagePlanOutput = @import("usage_plan.zig").UsagePlan;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

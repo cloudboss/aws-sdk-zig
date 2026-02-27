@@ -1,0 +1,54 @@
+const aws = @import("aws");
+
+const LifecyclePolicyResourceType = @import("lifecycle_policy_resource_type.zig").LifecyclePolicyResourceType;
+const LifecyclePolicyStatus = @import("lifecycle_policy_status.zig").LifecyclePolicyStatus;
+
+/// Contains a summary of lifecycle policy resources.
+pub const LifecyclePolicySummary = struct {
+    /// The Amazon Resource Name (ARN) of the lifecycle policy summary resource.
+    arn: ?[]const u8,
+
+    /// The timestamp when Image Builder created the lifecycle policy resource.
+    date_created: ?i64,
+
+    /// The timestamp for the last time Image Builder ran the lifecycle policy.
+    date_last_run: ?i64,
+
+    /// The timestamp when Image Builder updated the lifecycle policy resource.
+    date_updated: ?i64,
+
+    /// Optional description for the lifecycle policy.
+    description: ?[]const u8,
+
+    /// The name or Amazon Resource Name (ARN) of the IAM role that Image Builder
+    /// uses to run the lifecycle policy.
+    execution_role: ?[]const u8,
+
+    /// The name of the lifecycle policy.
+    name: ?[]const u8,
+
+    /// The type of resources the lifecycle policy targets.
+    resource_type: ?LifecyclePolicyResourceType,
+
+    /// The lifecycle policy resource status.
+    status: ?LifecyclePolicyStatus,
+
+    /// To help manage your lifecycle policy resources, you can assign your own
+    /// metadata to each resource in the form of tags. Each tag consists of a key
+    /// and
+    /// an optional value, both of which you define.
+    tags: ?[]const aws.map.StringMapEntry,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+        .date_created = "dateCreated",
+        .date_last_run = "dateLastRun",
+        .date_updated = "dateUpdated",
+        .description = "description",
+        .execution_role = "executionRole",
+        .name = "name",
+        .resource_type = "resourceType",
+        .status = "status",
+        .tags = "tags",
+    };
+};

@@ -1,0 +1,22 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const copy_blueprint_stage = @import("copy_blueprint_stage.zig");
+pub const create_blueprint = @import("create_blueprint.zig");
+pub const create_blueprint_version = @import("create_blueprint_version.zig");
+pub const create_data_automation_project = @import("create_data_automation_project.zig");
+pub const delete_blueprint = @import("delete_blueprint.zig");
+pub const delete_data_automation_project = @import("delete_data_automation_project.zig");
+pub const get_blueprint = @import("get_blueprint.zig");
+pub const get_blueprint_optimization_status = @import("get_blueprint_optimization_status.zig");
+pub const get_data_automation_project = @import("get_data_automation_project.zig");
+pub const invoke_blueprint_optimization_async = @import("invoke_blueprint_optimization_async.zig");
+pub const list_blueprints = @import("list_blueprints.zig");
+pub const list_data_automation_projects = @import("list_data_automation_projects.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_blueprint = @import("update_blueprint.zig");
+pub const update_data_automation_project = @import("update_data_automation_project.zig");

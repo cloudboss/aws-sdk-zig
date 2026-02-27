@@ -21,7 +21,7 @@ pub const AttachRolePolicyInput = struct {
     role_name: []const u8,
 };
 
-pub const AttachRolePolicyOutput = struct {};
+const AttachRolePolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

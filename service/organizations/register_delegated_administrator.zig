@@ -21,7 +21,7 @@ pub const RegisterDelegatedAdministratorInput = struct {
     };
 };
 
-pub const RegisterDelegatedAdministratorOutput = struct {};
+const RegisterDelegatedAdministratorOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

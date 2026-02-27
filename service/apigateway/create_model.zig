@@ -30,7 +30,7 @@ pub const CreateModelInput = struct {
     };
 };
 
-const CreateModelOutput = @import("model.zig").CreateModelOutput;
+const CreateModelOutput = @import("model.zig").Model;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

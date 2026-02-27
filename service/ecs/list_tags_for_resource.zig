@@ -5,27 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = struct {
-    /// The Amazon Resource Name (ARN) that identifies the resource to list the tags
-    /// for.
-    /// Currently, the supported resources are Amazon ECS tasks, services, task
-    /// definitions,
-    /// clusters, and container instances.
-    resource_arn: []const u8,
+const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 
-    pub const json_field_names = .{
-        .resource_arn = "resourceArn",
-    };
-};
-
-pub const ListTagsForResourceOutput = struct {
-    /// The tags for the resource.
-    tags: ?[]const Tag = null,
-
-    pub const json_field_names = .{
-        .tags = "tags",
-    };
-};
+const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

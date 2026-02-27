@@ -1,0 +1,31 @@
+pub const RecommendationSource = enum {
+    aws_config,
+    compute_optimizer,
+    cost_explorer,
+    lse,
+    manual,
+    pse,
+    rds,
+    resilience,
+    resilience_hub,
+    security_hub,
+    stir,
+    ta_check,
+    well_architected,
+
+    pub const json_field_names = .{
+        .aws_config = "AWS_CONFIG",
+        .compute_optimizer = "COMPUTE_OPTIMIZER",
+        .cost_explorer = "COST_EXPLORER",
+        .lse = "LSE",
+        .manual = "MANUAL",
+        .pse = "PSE",
+        .rds = "RDS",
+        .resilience = "RESILIENCE",
+        .resilience_hub = "RESILIENCE_HUB",
+        .security_hub = "SECURITY_HUB",
+        .stir = "STIR",
+        .ta_check = "TA_CHECK",
+        .well_architected = "WELL_ARCHITECTED",
+    };
+};

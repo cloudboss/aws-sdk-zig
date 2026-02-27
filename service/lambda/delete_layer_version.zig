@@ -17,7 +17,7 @@ pub const DeleteLayerVersionInput = struct {
     };
 };
 
-pub const DeleteLayerVersionOutput = struct {};
+const DeleteLayerVersionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

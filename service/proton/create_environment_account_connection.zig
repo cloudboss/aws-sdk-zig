@@ -1,0 +1,202 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const Tag = @import("tag.zig").Tag;
+const EnvironmentAccountConnection = @import("environment_account_connection.zig").EnvironmentAccountConnection;
+
+pub const CreateEnvironmentAccountConnectionInput = struct {
+    /// When included, if two identical requests are made with the same client
+    /// token, Proton returns the environment account connection that the first
+    /// request created.
+    client_token: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of an IAM service role in the environment
+    /// account. Proton uses this role to provision infrastructure resources
+    /// using CodeBuild-based provisioning in the associated environment account.
+    codebuild_role_arn: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+    /// provisioning directly defined components in the associated
+    /// environment account. It determines the scope of infrastructure that a
+    /// component can provision in the account.
+    ///
+    /// You must specify `componentRoleArn` to allow directly defined components to
+    /// be associated with any environments running in this
+    /// account.
+    ///
+    /// For more information about components, see
+    /// [Proton
+    /// components](https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+    /// *Proton User Guide*.
+    component_role_arn: ?[]const u8 = null,
+
+    /// The name of the Proton environment that's created in the associated
+    /// management account.
+    environment_name: []const u8,
+
+    /// The ID of the management account that accepts or rejects the environment
+    /// account connection. You create and manage the Proton environment in this
+    /// account. If the management account accepts the environment account
+    /// connection, Proton can use the associated IAM role to provision environment
+    /// infrastructure resources in the associated environment account.
+    management_account_id: []const u8,
+
+    /// The Amazon Resource Name (ARN) of the IAM service role that's created in the
+    /// environment account. Proton uses this role to provision infrastructure
+    /// resources in the associated environment account.
+    role_arn: ?[]const u8 = null,
+
+    /// An optional list of metadata items that you can associate with the Proton
+    /// environment account connection. A tag is a key-value pair.
+    ///
+    /// For more information, see [Proton resources and
+    /// tagging](https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+    /// in the
+    /// *Proton User Guide*.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .client_token = "clientToken",
+        .codebuild_role_arn = "codebuildRoleArn",
+        .component_role_arn = "componentRoleArn",
+        .environment_name = "environmentName",
+        .management_account_id = "managementAccountId",
+        .role_arn = "roleArn",
+        .tags = "tags",
+    };
+};
+
+pub const CreateEnvironmentAccountConnectionOutput = struct {
+    /// The environment account connection detail data that's returned by Proton.
+    environment_account_connection: ?EnvironmentAccountConnection = null,
+
+    pub const json_field_names = .{
+        .environment_account_connection = "environmentAccountConnection",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEnvironmentAccountConnectionInput, options: Options) !CreateEnvironmentAccountConnectionOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "proton");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateEnvironmentAccountConnectionInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("proton", "Proton", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.0");
+    try request.headers.put(alloc, "X-Amz-Target", "AwsProton20200720.CreateEnvironmentAccountConnection");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateEnvironmentAccountConnectionOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreateEnvironmentAccountConnectionOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

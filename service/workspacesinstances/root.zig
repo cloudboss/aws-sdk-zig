@@ -1,0 +1,18 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const associate_volume = @import("associate_volume.zig");
+pub const create_volume = @import("create_volume.zig");
+pub const create_workspace_instance = @import("create_workspace_instance.zig");
+pub const delete_volume = @import("delete_volume.zig");
+pub const delete_workspace_instance = @import("delete_workspace_instance.zig");
+pub const disassociate_volume = @import("disassociate_volume.zig");
+pub const get_workspace_instance = @import("get_workspace_instance.zig");
+pub const list_instance_types = @import("list_instance_types.zig");
+pub const list_regions = @import("list_regions.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_workspace_instances = @import("list_workspace_instances.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");

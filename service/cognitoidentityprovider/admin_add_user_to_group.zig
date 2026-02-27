@@ -29,7 +29,7 @@ pub const AdminAddUserToGroupInput = struct {
     };
 };
 
-pub const AdminAddUserToGroupOutput = struct {};
+const AdminAddUserToGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

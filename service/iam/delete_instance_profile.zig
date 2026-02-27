@@ -15,7 +15,7 @@ pub const DeleteInstanceProfileInput = struct {
     instance_profile_name: []const u8,
 };
 
-pub const DeleteInstanceProfileOutput = struct {};
+const DeleteInstanceProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

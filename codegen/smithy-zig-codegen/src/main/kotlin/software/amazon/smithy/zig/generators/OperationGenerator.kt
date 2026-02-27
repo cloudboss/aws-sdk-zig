@@ -122,7 +122,10 @@ class OperationGenerator(
 
             writer.blankLine()
 
-            if (isSharedType(inputShape.id)) {
+            // smithy.api#Unit is a built-in with no generated file -- emit inline
+            if (inputShape.id.toString() == "smithy.api#Unit") {
+                writer.write("const \$L = struct {};", "${operationName}Input")
+            } else if (isSharedType(inputShape.id)) {
                 val inputFileName = NamingUtil.toZigFileName(inputShape.id.name)
                 writer.write(
                     "const \$L = @import(\"\$L\").\$L;",
@@ -132,7 +135,9 @@ class OperationGenerator(
                 writeInputStruct(writer, ctx)
             }
             writer.blankLine()
-            if (isSharedType(outputShape.id)) {
+            if (outputShape.id.toString() == "smithy.api#Unit") {
+                writer.write("const \$L = struct {};", "${operationName}Output")
+            } else if (isSharedType(outputShape.id)) {
                 val outputFileName = NamingUtil.toZigFileName(outputShape.id.name)
                 writer.write(
                     "const \$L = @import(\"\$L\").\$L;",
@@ -517,6 +522,8 @@ class OperationGenerator(
         // Also exclude names matching the generated input/output names to prevent collision
         result.remove("${operationName}Input")
         result.remove("${operationName}Output")
+        // Exclude "Options" -- every operation file defines a local Options struct
+        result.remove("Options")
 
         return result
     }

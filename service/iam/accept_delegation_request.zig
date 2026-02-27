@@ -9,7 +9,7 @@ pub const AcceptDelegationRequestInput = struct {
     delegation_request_id: []const u8,
 };
 
-pub const AcceptDelegationRequestOutput = struct {};
+const AcceptDelegationRequestOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

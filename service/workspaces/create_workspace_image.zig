@@ -1,0 +1,295 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const Tag = @import("tag.zig").Tag;
+const OperatingSystem = @import("operating_system.zig").OperatingSystem;
+const WorkspaceImageRequiredTenancy = @import("workspace_image_required_tenancy.zig").WorkspaceImageRequiredTenancy;
+const WorkspaceImageState = @import("workspace_image_state.zig").WorkspaceImageState;
+
+pub const CreateWorkspaceImageInput = struct {
+    /// The description of the new WorkSpace image.
+    description: []const u8,
+
+    /// The name of the new WorkSpace image.
+    name: []const u8,
+
+    /// The tags that you want to add to the new WorkSpace image.
+    /// To add tags when you're creating the image, you must create an IAM policy
+    /// that grants
+    /// your IAM user permission to use `workspaces:CreateTags`.
+    tags: ?[]const Tag = null,
+
+    /// The identifier of the source WorkSpace
+    workspace_id: []const u8,
+
+    pub const json_field_names = .{
+        .description = "Description",
+        .name = "Name",
+        .tags = "Tags",
+        .workspace_id = "WorkspaceId",
+    };
+};
+
+pub const CreateWorkspaceImageOutput = struct {
+    /// The date when the image was created.
+    created: ?i64 = null,
+
+    /// The description of the image.
+    description: ?[]const u8 = null,
+
+    /// The identifier of the new WorkSpace image.
+    image_id: ?[]const u8 = null,
+
+    /// The name of the image.
+    name: ?[]const u8 = null,
+
+    /// The operating system that the image is running.
+    operating_system: ?OperatingSystem = null,
+
+    /// The identifier of the Amazon Web Services account that owns the image.
+    owner_account_id: ?[]const u8 = null,
+
+    /// Specifies whether the image is running on dedicated hardware.
+    /// When Bring Your Own License (BYOL) is enabled, this value is set
+    /// to DEDICATED. For more information, see
+    /// [
+    /// Bring Your Own Windows Desktop
+    /// Images.](https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm).
+    required_tenancy: ?WorkspaceImageRequiredTenancy = null,
+
+    /// The availability status of the image.
+    state: ?WorkspaceImageState = null,
+
+    pub const json_field_names = .{
+        .created = "Created",
+        .description = "Description",
+        .image_id = "ImageId",
+        .name = "Name",
+        .operating_system = "OperatingSystem",
+        .owner_account_id = "OwnerAccountId",
+        .required_tenancy = "RequiredTenancy",
+        .state = "State",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWorkspaceImageInput, options: Options) !CreateWorkspaceImageOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "workspaces");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateWorkspaceImageInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("workspaces", "WorkSpaces", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "WorkspacesService.CreateWorkspaceImage");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateWorkspaceImageOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreateWorkspaceImageOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ApplicationNotSupportedException")) {
+        return .{ .arena = arena, .kind = .{ .application_not_supported_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ComputeNotCompatibleException")) {
+        return .{ .arena = arena, .kind = .{ .compute_not_compatible_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IncompatibleApplicationsException")) {
+        return .{ .arena = arena, .kind = .{ .incompatible_applications_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterCombinationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_combination_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterValuesException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_values_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidResourceStateException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_resource_state_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OperatingSystemNotCompatibleException")) {
+        return .{ .arena = arena, .kind = .{ .operating_system_not_compatible_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OperationInProgressException")) {
+        return .{ .arena = arena, .kind = .{ .operation_in_progress_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OperationNotSupportedException")) {
+        return .{ .arena = arena, .kind = .{ .operation_not_supported_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .resource_already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceAssociatedException")) {
+        return .{ .arena = arena, .kind = .{ .resource_associated_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceCreationFailedException")) {
+        return .{ .arena = arena, .kind = .{ .resource_creation_failed_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceInUseException")) {
+        return .{ .arena = arena, .kind = .{ .resource_in_use_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceLimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .resource_limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceUnavailableException")) {
+        return .{ .arena = arena, .kind = .{ .resource_unavailable_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedNetworkConfigurationException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_network_configuration_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedWorkspaceConfigurationException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_workspace_configuration_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WorkspacesDefaultRoleNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .workspaces_default_role_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

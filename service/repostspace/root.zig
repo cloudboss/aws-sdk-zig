@@ -1,0 +1,25 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+pub const waiters = @import("waiters.zig");
+
+pub const batch_add_channel_role_to_accessors = @import("batch_add_channel_role_to_accessors.zig");
+pub const batch_add_role = @import("batch_add_role.zig");
+pub const batch_remove_channel_role_from_accessors = @import("batch_remove_channel_role_from_accessors.zig");
+pub const batch_remove_role = @import("batch_remove_role.zig");
+pub const create_channel = @import("create_channel.zig");
+pub const create_space = @import("create_space.zig");
+pub const delete_space = @import("delete_space.zig");
+pub const deregister_admin = @import("deregister_admin.zig");
+pub const get_channel = @import("get_channel.zig");
+pub const get_space = @import("get_space.zig");
+pub const list_channels = @import("list_channels.zig");
+pub const list_spaces = @import("list_spaces.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const register_admin = @import("register_admin.zig");
+pub const send_invites = @import("send_invites.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_channel = @import("update_channel.zig");
+pub const update_space = @import("update_space.zig");

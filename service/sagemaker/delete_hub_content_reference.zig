@@ -23,7 +23,7 @@ pub const DeleteHubContentReferenceInput = struct {
     };
 };
 
-pub const DeleteHubContentReferenceOutput = struct {};
+const DeleteHubContentReferenceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

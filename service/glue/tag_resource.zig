@@ -4,22 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const TagResourceInput = struct {
-    /// The ARN of the Glue resource to which to add the tags. For more
-    /// information about Glue resource ARNs, see the [Glue ARN string
-    /// pattern](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id).
-    resource_arn: []const u8,
+const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
 
-    /// Tags to add to this resource.
-    tags_to_add: []const aws.map.StringMapEntry,
-
-    pub const json_field_names = .{
-        .resource_arn = "ResourceArn",
-        .tags_to_add = "TagsToAdd",
-    };
-};
-
-pub const TagResourceOutput = struct {};
+const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

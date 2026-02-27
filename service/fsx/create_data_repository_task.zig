@@ -1,0 +1,432 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ReleaseConfiguration = @import("release_configuration.zig").ReleaseConfiguration;
+const CompletionReport = @import("completion_report.zig").CompletionReport;
+const Tag = @import("tag.zig").Tag;
+const DataRepositoryTaskType = @import("data_repository_task_type.zig").DataRepositoryTaskType;
+const DataRepositoryTask = @import("data_repository_task.zig").DataRepositoryTask;
+
+pub const CreateDataRepositoryTaskInput = struct {
+    /// Specifies the amount of data to release, in GiB, by an Amazon File Cache
+    /// `AUTO_RELEASE_DATA` task that automatically releases files from the cache.
+    capacity_to_release: ?i64 = null,
+
+    client_request_token: ?[]const u8 = null,
+
+    file_system_id: []const u8,
+
+    /// A list of paths for the data repository task to use when the task is
+    /// processed.
+    /// If a path that you provide isn't valid, the task fails. If you don't provide
+    /// paths, the default behavior is to export all files to S3 (for export tasks),
+    /// import
+    /// all files from S3 (for import tasks), or release all exported files that
+    /// meet the
+    /// last accessed time criteria (for release tasks).
+    ///
+    /// * For export tasks, the list contains paths on the FSx for Lustre file
+    ///   system
+    /// from which the files are exported to the Amazon S3 bucket. The default path
+    /// is the
+    /// file system root directory. The paths you provide need to be relative to the
+    /// mount
+    /// point of the file system. If the mount point is `/mnt/fsx` and
+    /// `/mnt/fsx/path1` is a directory or file on the file system you want
+    /// to export, then the path to provide is `path1`.
+    ///
+    /// * For import tasks, the list contains paths in the Amazon S3 bucket
+    /// from which POSIX metadata changes are imported to the FSx for Lustre file
+    /// system.
+    /// The path can be an S3 bucket or prefix in the format
+    /// `s3://bucket-name/prefix` (where `prefix` is optional).
+    ///
+    /// * For release tasks, the list contains directory or file paths on the
+    /// FSx for Lustre file system from which to release exported files. If a
+    /// directory is
+    /// specified, files within the directory are released. If a file path is
+    /// specified,
+    /// only that file is released. To release all exported files in the file
+    /// system,
+    /// specify a forward slash (/) as the path.
+    ///
+    /// A file must also meet the last accessed time criteria
+    /// specified in for the
+    /// file to be released.
+    paths: ?[]const []const u8 = null,
+
+    /// The configuration that specifies the last accessed time criteria for files
+    /// that will be released from an Amazon FSx for Lustre file system.
+    release_configuration: ?ReleaseConfiguration = null,
+
+    /// Defines whether or not Amazon FSx provides a CompletionReport once the task
+    /// has completed.
+    /// A CompletionReport provides a detailed report on the files that Amazon FSx
+    /// processed that meet the criteria specified by the
+    /// `Scope` parameter. For more information, see
+    /// [Working with Task Completion
+    /// Reports](https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html).
+    report: CompletionReport,
+
+    tags: ?[]const Tag = null,
+
+    /// Specifies the type of data repository task to create.
+    ///
+    /// * `EXPORT_TO_REPOSITORY` tasks export from your
+    /// Amazon FSx for Lustre file system to a linked data repository.
+    ///
+    /// * `IMPORT_METADATA_FROM_REPOSITORY` tasks import metadata
+    /// changes from a linked S3 bucket to your Amazon FSx for Lustre file system.
+    ///
+    /// * `RELEASE_DATA_FROM_FILESYSTEM` tasks release files in
+    /// your Amazon FSx for Lustre file system that have been exported to a linked
+    /// S3 bucket and that meet your specified release criteria.
+    ///
+    /// * `AUTO_RELEASE_DATA` tasks automatically release files from
+    /// an Amazon File Cache resource.
+    type: DataRepositoryTaskType,
+
+    pub const json_field_names = .{
+        .capacity_to_release = "CapacityToRelease",
+        .client_request_token = "ClientRequestToken",
+        .file_system_id = "FileSystemId",
+        .paths = "Paths",
+        .release_configuration = "ReleaseConfiguration",
+        .report = "Report",
+        .tags = "Tags",
+        .type = "Type",
+    };
+};
+
+pub const CreateDataRepositoryTaskOutput = struct {
+    /// The description of the data repository task that you just created.
+    data_repository_task: ?DataRepositoryTask = null,
+
+    pub const json_field_names = .{
+        .data_repository_task = "DataRepositoryTask",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDataRepositoryTaskInput, options: Options) !CreateDataRepositoryTaskOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "fsx");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateDataRepositoryTaskInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("fsx", "FSx", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "AWSSimbaAPIService_v20180301.CreateDataRepositoryTask");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateDataRepositoryTaskOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreateDataRepositoryTaskOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessPointAlreadyOwnedByYou")) {
+        return .{ .arena = arena, .kind = .{ .access_point_already_owned_by_you = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ActiveDirectoryError")) {
+        return .{ .arena = arena, .kind = .{ .active_directory_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BackupBeingCopied")) {
+        return .{ .arena = arena, .kind = .{ .backup_being_copied = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BackupInProgress")) {
+        return .{ .arena = arena, .kind = .{ .backup_in_progress = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BackupNotFound")) {
+        return .{ .arena = arena, .kind = .{ .backup_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BackupRestoring")) {
+        return .{ .arena = arena, .kind = .{ .backup_restoring = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BadRequest")) {
+        return .{ .arena = arena, .kind = .{ .bad_request = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DataRepositoryAssociationNotFound")) {
+        return .{ .arena = arena, .kind = .{ .data_repository_association_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DataRepositoryTaskEnded")) {
+        return .{ .arena = arena, .kind = .{ .data_repository_task_ended = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DataRepositoryTaskExecuting")) {
+        return .{ .arena = arena, .kind = .{ .data_repository_task_executing = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DataRepositoryTaskNotFound")) {
+        return .{ .arena = arena, .kind = .{ .data_repository_task_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "FileCacheNotFound")) {
+        return .{ .arena = arena, .kind = .{ .file_cache_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "FileSystemNotFound")) {
+        return .{ .arena = arena, .kind = .{ .file_system_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IncompatibleParameterError")) {
+        return .{ .arena = arena, .kind = .{ .incompatible_parameter_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IncompatibleRegionForMultiAZ")) {
+        return .{ .arena = arena, .kind = .{ .incompatible_region_for_multi_az = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerError")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidAccessPoint")) {
+        return .{ .arena = arena, .kind = .{ .invalid_access_point = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDataRepositoryType")) {
+        return .{ .arena = arena, .kind = .{ .invalid_data_repository_type = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDestinationKmsKey")) {
+        return .{ .arena = arena, .kind = .{ .invalid_destination_kms_key = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidExportPath")) {
+        return .{ .arena = arena, .kind = .{ .invalid_export_path = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidImportPath")) {
+        return .{ .arena = arena, .kind = .{ .invalid_import_path = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidNetworkSettings")) {
+        return .{ .arena = arena, .kind = .{ .invalid_network_settings = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPerUnitStorageThroughput")) {
+        return .{ .arena = arena, .kind = .{ .invalid_per_unit_storage_throughput = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRegion")) {
+        return .{ .arena = arena, .kind = .{ .invalid_region = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRequest")) {
+        return .{ .arena = arena, .kind = .{ .invalid_request = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSourceKmsKey")) {
+        return .{ .arena = arena, .kind = .{ .invalid_source_kms_key = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MissingFileCacheConfiguration")) {
+        return .{ .arena = arena, .kind = .{ .missing_file_cache_configuration = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MissingFileSystemConfiguration")) {
+        return .{ .arena = arena, .kind = .{ .missing_file_system_configuration = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MissingVolumeConfiguration")) {
+        return .{ .arena = arena, .kind = .{ .missing_volume_configuration = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotServiceResourceError")) {
+        return .{ .arena = arena, .kind = .{ .not_service_resource_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceDoesNotSupportTagging")) {
+        return .{ .arena = arena, .kind = .{ .resource_does_not_support_tagging = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFound")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3AccessPointAttachmentNotFound")) {
+        return .{ .arena = arena, .kind = .{ .s3_access_point_attachment_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceLimitExceeded")) {
+        return .{ .arena = arena, .kind = .{ .service_limit_exceeded = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SnapshotNotFound")) {
+        return .{ .arena = arena, .kind = .{ .snapshot_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SourceBackupUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .source_backup_unavailable = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "StorageVirtualMachineNotFound")) {
+        return .{ .arena = arena, .kind = .{ .storage_virtual_machine_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyAccessPoints")) {
+        return .{ .arena = arena, .kind = .{ .too_many_access_points = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedOperation")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_operation = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "VolumeNotFound")) {
+        return .{ .arena = arena, .kind = .{ .volume_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

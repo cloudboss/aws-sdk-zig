@@ -17,7 +17,7 @@ pub const DeregisterDevicesInput = struct {
     };
 };
 
-pub const DeregisterDevicesOutput = struct {};
+const DeregisterDevicesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

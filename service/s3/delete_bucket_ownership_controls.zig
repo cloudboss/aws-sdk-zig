@@ -14,7 +14,7 @@ pub const DeleteBucketOwnershipControlsInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const DeleteBucketOwnershipControlsOutput = struct {};
+const DeleteBucketOwnershipControlsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

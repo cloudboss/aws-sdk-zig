@@ -9,7 +9,7 @@ pub const DeleteUsageLimitInput = struct {
     usage_limit_id: []const u8,
 };
 
-pub const DeleteUsageLimitOutput = struct {};
+const DeleteUsageLimitOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

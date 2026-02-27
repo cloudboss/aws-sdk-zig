@@ -1,0 +1,11 @@
+pub const ActionSeverity = enum {
+    high,
+    medium,
+    low,
+
+    pub const json_field_names = .{
+        .high = "HIGH",
+        .medium = "MEDIUM",
+        .low = "LOW",
+    };
+};

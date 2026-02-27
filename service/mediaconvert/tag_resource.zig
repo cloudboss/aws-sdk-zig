@@ -4,22 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const TagResourceInput = struct {
-    /// The Amazon Resource Name (ARN) of the resource that you want to tag. To get
-    /// the ARN, send a GET request with the resource name.
-    arn: []const u8,
+const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
 
-    /// The tags that you want to add to the resource. You can tag resources with a
-    /// key-value pair or with only a key.
-    tags: []const aws.map.StringMapEntry,
-
-    pub const json_field_names = .{
-        .arn = "Arn",
-        .tags = "Tags",
-    };
-};
-
-pub const TagResourceOutput = struct {};
+const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

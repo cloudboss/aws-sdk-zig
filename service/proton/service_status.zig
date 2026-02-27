@@ -1,0 +1,33 @@
+pub const ServiceStatus = enum {
+    create_in_progress,
+    create_failed_cleanup_in_progress,
+    create_failed_cleanup_complete,
+    create_failed_cleanup_failed,
+    create_failed,
+    active,
+    delete_in_progress,
+    delete_failed,
+    update_in_progress,
+    update_failed_cleanup_in_progress,
+    update_failed_cleanup_complete,
+    update_failed_cleanup_failed,
+    update_failed,
+    update_complete_cleanup_failed,
+
+    pub const json_field_names = .{
+        .create_in_progress = "CREATE_IN_PROGRESS",
+        .create_failed_cleanup_in_progress = "CREATE_FAILED_CLEANUP_IN_PROGRESS",
+        .create_failed_cleanup_complete = "CREATE_FAILED_CLEANUP_COMPLETE",
+        .create_failed_cleanup_failed = "CREATE_FAILED_CLEANUP_FAILED",
+        .create_failed = "CREATE_FAILED",
+        .active = "ACTIVE",
+        .delete_in_progress = "DELETE_IN_PROGRESS",
+        .delete_failed = "DELETE_FAILED",
+        .update_in_progress = "UPDATE_IN_PROGRESS",
+        .update_failed_cleanup_in_progress = "UPDATE_FAILED_CLEANUP_IN_PROGRESS",
+        .update_failed_cleanup_complete = "UPDATE_FAILED_CLEANUP_COMPLETE",
+        .update_failed_cleanup_failed = "UPDATE_FAILED_CLEANUP_FAILED",
+        .update_failed = "UPDATE_FAILED",
+        .update_complete_cleanup_failed = "UPDATE_COMPLETE_CLEANUP_FAILED",
+    };
+};

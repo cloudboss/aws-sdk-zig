@@ -10,7 +10,7 @@ pub const DeleteResourcePolicyInput = struct {
     resource_arn: []const u8,
 };
 
-pub const DeleteResourcePolicyOutput = struct {};
+const DeleteResourcePolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

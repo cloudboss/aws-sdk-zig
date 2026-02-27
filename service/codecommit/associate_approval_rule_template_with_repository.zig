@@ -17,7 +17,7 @@ pub const AssociateApprovalRuleTemplateWithRepositoryInput = struct {
     };
 };
 
-pub const AssociateApprovalRuleTemplateWithRepositoryOutput = struct {};
+const AssociateApprovalRuleTemplateWithRepositoryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

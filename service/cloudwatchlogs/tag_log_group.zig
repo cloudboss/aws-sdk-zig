@@ -17,7 +17,7 @@ pub const TagLogGroupInput = struct {
     };
 };
 
-pub const TagLogGroupOutput = struct {};
+const TagLogGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

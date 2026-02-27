@@ -13,7 +13,7 @@ pub const DeleteRetentionConfigurationInput = struct {
     };
 };
 
-pub const DeleteRetentionConfigurationOutput = struct {};
+const DeleteRetentionConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

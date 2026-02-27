@@ -16,7 +16,7 @@ pub const DeleteVpcInput = struct {
     vpc_id: []const u8,
 };
 
-pub const DeleteVpcOutput = struct {};
+const DeleteVpcOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

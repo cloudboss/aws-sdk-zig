@@ -1,0 +1,33 @@
+pub const KmsGrantOperation = enum {
+    create_grant,
+    decrypt,
+    describe_key,
+    encrypt,
+    generate_data_key,
+    generate_data_key_pair,
+    generate_data_key_pair_without_plaintext,
+    generate_data_key_without_plaintext,
+    get_public_key,
+    reencrypt_from,
+    reencrypt_to,
+    retire_grant,
+    sign,
+    verify,
+
+    pub const json_field_names = .{
+        .create_grant = "CREATE_GRANT",
+        .decrypt = "DECRYPT",
+        .describe_key = "DESCRIBE_KEY",
+        .encrypt = "ENCRYPT",
+        .generate_data_key = "GENERATE_DATA_KEY",
+        .generate_data_key_pair = "GENERATE_DATA_KEY_PAIR",
+        .generate_data_key_pair_without_plaintext = "GENERATE_DATA_KEY_PAIR_WITHOUT_PLAINTEXT",
+        .generate_data_key_without_plaintext = "GENERATE_DATA_KEY_WITHOUT_PLAINTEXT",
+        .get_public_key = "GET_PUBLIC_KEY",
+        .reencrypt_from = "REENCRYPT_FROM",
+        .reencrypt_to = "REENCRYPT_TO",
+        .retire_grant = "RETIRE_GRANT",
+        .sign = "SIGN",
+        .verify = "VERIFY",
+    };
+};

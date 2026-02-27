@@ -1,0 +1,9 @@
+pub const SuggestIntendedUse = enum {
+    /// Indicates that results of the operation are for single use, e.g., displaying
+    /// results on a map or presenting options to users.
+    single_use,
+
+    pub const json_field_names = .{
+        .single_use = "SINGLE_USE",
+    };
+};

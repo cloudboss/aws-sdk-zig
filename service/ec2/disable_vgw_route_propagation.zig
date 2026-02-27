@@ -19,7 +19,7 @@ pub const DisableVgwRoutePropagationInput = struct {
     route_table_id: []const u8,
 };
 
-pub const DisableVgwRoutePropagationOutput = struct {};
+const DisableVgwRoutePropagationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

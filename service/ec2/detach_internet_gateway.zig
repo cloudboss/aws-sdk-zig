@@ -19,7 +19,7 @@ pub const DetachInternetGatewayInput = struct {
     vpc_id: []const u8,
 };
 
-pub const DetachInternetGatewayOutput = struct {};
+const DetachInternetGatewayOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

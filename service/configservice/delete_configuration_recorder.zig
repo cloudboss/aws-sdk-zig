@@ -16,7 +16,7 @@ pub const DeleteConfigurationRecorderInput = struct {
     };
 };
 
-pub const DeleteConfigurationRecorderOutput = struct {};
+const DeleteConfigurationRecorderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

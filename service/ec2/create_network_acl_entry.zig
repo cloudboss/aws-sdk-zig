@@ -66,7 +66,7 @@ pub const CreateNetworkAclEntryInput = struct {
     rule_number: i32,
 };
 
-pub const CreateNetworkAclEntryOutput = struct {};
+const CreateNetworkAclEntryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

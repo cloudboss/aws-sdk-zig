@@ -4,23 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const TagResourceInput = struct {
-    /// The Amazon Resource Name (ARN) of the resource to add tags to.
-    resource_arn: []const u8,
+const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
 
-    /// Metadata that assists with categorization and organization.
-    /// Each tag consists of a key and an optional value. You define both. Tags
-    /// don't
-    /// propagate to any other cluster or Amazon Web Services resources.
-    tags: []const aws.map.StringMapEntry,
-
-    pub const json_field_names = .{
-        .resource_arn = "resourceArn",
-        .tags = "tags",
-    };
-};
-
-pub const TagResourceOutput = struct {};
+const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

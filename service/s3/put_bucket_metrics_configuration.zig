@@ -24,7 +24,7 @@ pub const PutBucketMetricsConfigurationInput = struct {
     metrics_configuration: MetricsConfiguration,
 };
 
-pub const PutBucketMetricsConfigurationOutput = struct {};
+const PutBucketMetricsConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,137 @@
+const Mpeg2AdaptiveQuantization = @import("mpeg_2_adaptive_quantization.zig").Mpeg2AdaptiveQuantization;
+const AfdSignaling = @import("afd_signaling.zig").AfdSignaling;
+const Mpeg2ColorMetadata = @import("mpeg_2_color_metadata.zig").Mpeg2ColorMetadata;
+const Mpeg2ColorSpace = @import("mpeg_2_color_space.zig").Mpeg2ColorSpace;
+const Mpeg2DisplayRatio = @import("mpeg_2_display_ratio.zig").Mpeg2DisplayRatio;
+const Mpeg2FilterSettings = @import("mpeg_2_filter_settings.zig").Mpeg2FilterSettings;
+const FixedAfd = @import("fixed_afd.zig").FixedAfd;
+const Mpeg2GopSizeUnits = @import("mpeg_2_gop_size_units.zig").Mpeg2GopSizeUnits;
+const Mpeg2ScanType = @import("mpeg_2_scan_type.zig").Mpeg2ScanType;
+const Mpeg2SubGopLength = @import("mpeg_2_sub_gop_length.zig").Mpeg2SubGopLength;
+const TimecodeBurninSettings = @import("timecode_burnin_settings.zig").TimecodeBurninSettings;
+const Mpeg2TimecodeInsertionBehavior = @import("mpeg_2_timecode_insertion_behavior.zig").Mpeg2TimecodeInsertionBehavior;
+
+/// Mpeg2 Settings
+pub const Mpeg2Settings = struct {
+    /// Choose Off to disable adaptive quantization. Or choose another value to
+    /// enable the quantizer and set its strength. The strengths are: Auto, Off,
+    /// Low, Medium, High. When you enable this field, MediaLive allows intra-frame
+    /// quantizers to vary, which might improve visual quality.
+    adaptive_quantization: ?Mpeg2AdaptiveQuantization,
+
+    /// Indicates the AFD values that MediaLive will write into the video encode. If
+    /// you do not know what AFD signaling is, or if your downstream system has not
+    /// given you guidance, choose AUTO.
+    /// AUTO: MediaLive will try to preserve the input AFD value (in cases where
+    /// multiple AFD values are valid).
+    /// FIXED: MediaLive will use the value you specify in fixedAFD.
+    afd_signaling: ?AfdSignaling,
+
+    /// Specifies whether to include the color space metadata. The metadata
+    /// describes the color space that applies to the video (the colorSpace field).
+    /// We recommend that you insert the metadata.
+    color_metadata: ?Mpeg2ColorMetadata,
+
+    /// Choose the type of color space conversion to apply to the output. For
+    /// detailed information on setting up both the input and the output to obtain
+    /// the desired color space in the output, see the section on \"MediaLive
+    /// Features - Video - color space\" in the MediaLive User Guide.
+    /// PASSTHROUGH: Keep the color space of the input content - do not convert it.
+    /// AUTO:Convert all content that is SD to rec 601, and convert all content that
+    /// is HD to rec 709.
+    color_space: ?Mpeg2ColorSpace,
+
+    /// Sets the pixel aspect ratio for the encode.
+    display_aspect_ratio: ?Mpeg2DisplayRatio,
+
+    /// Optionally specify a noise reduction filter, which can improve quality of
+    /// compressed content. If you do not choose a filter, no filter will be
+    /// applied.
+    /// TEMPORAL: This filter is useful for both source content that is noisy (when
+    /// it has excessive digital artifacts) and source content that is clean.
+    /// When the content is noisy, the filter cleans up the source content before
+    /// the encoding phase, with these two effects: First, it improves the output
+    /// video quality because the content has been cleaned up. Secondly, it
+    /// decreases the bandwidth because MediaLive does not waste bits on encoding
+    /// noise.
+    /// When the content is reasonably clean, the filter tends to decrease the
+    /// bitrate.
+    filter_settings: ?Mpeg2FilterSettings,
+
+    /// Complete this field only when afdSignaling is set to FIXED. Enter the AFD
+    /// value (4 bits) to write on all frames of the video encode.
+    fixed_afd: ?FixedAfd,
+
+    /// description": "The framerate denominator. For example, 1001. The framerate
+    /// is the numerator divided by the denominator. For example, 24000 / 1001 =
+    /// 23.976 FPS.
+    framerate_denominator: i32,
+
+    /// The framerate numerator. For example, 24000. The framerate is the numerator
+    /// divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.
+    framerate_numerator: i32,
+
+    /// MPEG2: default is open GOP.
+    gop_closed_cadence: ?i32,
+
+    /// Relates to the GOP structure. The number of B-frames between reference
+    /// frames. If you do not know what a B-frame is, use the default.
+    gop_num_b_frames: ?i32,
+
+    /// Relates to the GOP structure. The GOP size (keyframe interval) in the units
+    /// specified in gopSizeUnits. If you do not know what GOP is, use the default.
+    /// If gopSizeUnits is frames, then the gopSize must be an integer and must be
+    /// greater than or equal to 1.
+    /// If gopSizeUnits is seconds, the gopSize must be greater than 0, but does not
+    /// need to be an integer.
+    gop_size: ?f64,
+
+    /// Relates to the GOP structure. Specifies whether the gopSize is specified in
+    /// frames or seconds. If you do not plan to change the default gopSize, leave
+    /// the default. If you specify SECONDS, MediaLive will internally convert the
+    /// gop size to a frame count.
+    gop_size_units: ?Mpeg2GopSizeUnits,
+
+    /// Set the scan type of the output to PROGRESSIVE or INTERLACED (top field
+    /// first).
+    scan_type: ?Mpeg2ScanType,
+
+    /// Relates to the GOP structure. If you do not know what GOP is, use the
+    /// default.
+    /// FIXED: Set the number of B-frames in each sub-GOP to the value in
+    /// gopNumBFrames.
+    /// DYNAMIC: Let MediaLive optimize the number of B-frames in each sub-GOP, to
+    /// improve visual quality.
+    subgop_length: ?Mpeg2SubGopLength,
+
+    /// Timecode burn-in settings
+    timecode_burnin_settings: ?TimecodeBurninSettings,
+
+    /// Determines how MediaLive inserts timecodes in the output video. For detailed
+    /// information about setting up the input and the output for a timecode, see
+    /// the section on \"MediaLive Features - Timecode configuration\" in the
+    /// MediaLive User Guide.
+    /// DISABLED: do not include timecodes.
+    /// GOP_TIMECODE: Include timecode metadata in the GOP header.
+    timecode_insertion: ?Mpeg2TimecodeInsertionBehavior,
+
+    pub const json_field_names = .{
+        .adaptive_quantization = "AdaptiveQuantization",
+        .afd_signaling = "AfdSignaling",
+        .color_metadata = "ColorMetadata",
+        .color_space = "ColorSpace",
+        .display_aspect_ratio = "DisplayAspectRatio",
+        .filter_settings = "FilterSettings",
+        .fixed_afd = "FixedAfd",
+        .framerate_denominator = "FramerateDenominator",
+        .framerate_numerator = "FramerateNumerator",
+        .gop_closed_cadence = "GopClosedCadence",
+        .gop_num_b_frames = "GopNumBFrames",
+        .gop_size = "GopSize",
+        .gop_size_units = "GopSizeUnits",
+        .scan_type = "ScanType",
+        .subgop_length = "SubgopLength",
+        .timecode_burnin_settings = "TimecodeBurninSettings",
+        .timecode_insertion = "TimecodeInsertion",
+    };
+};

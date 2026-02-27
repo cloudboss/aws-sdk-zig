@@ -71,7 +71,7 @@ pub const StartExportTaskInput = struct {
     source_arn: []const u8,
 };
 
-const StartExportTaskOutput = @import("export_task.zig").StartExportTaskOutput;
+const StartExportTaskOutput = @import("export_task.zig").ExportTask;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

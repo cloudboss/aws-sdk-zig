@@ -66,7 +66,7 @@ pub const CreateDBShardGroupInput = struct {
     tags: ?[]const Tag = null,
 };
 
-const CreateDBShardGroupOutput = @import("db_shard_group.zig").CreateDBShardGroupOutput;
+const CreateDBShardGroupOutput = @import("db_shard_group.zig").DBShardGroup;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

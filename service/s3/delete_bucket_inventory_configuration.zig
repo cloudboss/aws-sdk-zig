@@ -17,7 +17,7 @@ pub const DeleteBucketInventoryConfigurationInput = struct {
     id: []const u8,
 };
 
-pub const DeleteBucketInventoryConfigurationOutput = struct {};
+const DeleteBucketInventoryConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

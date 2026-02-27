@@ -8,49 +8,9 @@ const SpaceSettings = @import("space_settings.zig").SpaceSettings;
 const SpaceSharingSettings = @import("space_sharing_settings.zig").SpaceSharingSettings;
 const Tag = @import("tag.zig").Tag;
 
-pub const CreateSpaceInput = struct {
-    /// The ID of the associated domain.
-    domain_id: []const u8,
+const CreateSpaceInput = @import("create_space_request.zig").CreateSpaceRequest;
 
-    /// A collection of ownership settings.
-    ownership_settings: ?OwnershipSettings = null,
-
-    /// The name of the space that appears in the SageMaker Studio UI.
-    space_display_name: ?[]const u8 = null,
-
-    /// The name of the space.
-    space_name: []const u8,
-
-    /// A collection of space settings.
-    space_settings: ?SpaceSettings = null,
-
-    /// A collection of space sharing settings.
-    space_sharing_settings: ?SpaceSharingSettings = null,
-
-    /// Tags to associated with the space. Each tag consists of a key and an
-    /// optional value. Tag keys must be unique for each resource. Tags are
-    /// searchable using the `Search` API.
-    tags: ?[]const Tag = null,
-
-    pub const json_field_names = .{
-        .domain_id = "DomainId",
-        .ownership_settings = "OwnershipSettings",
-        .space_display_name = "SpaceDisplayName",
-        .space_name = "SpaceName",
-        .space_settings = "SpaceSettings",
-        .space_sharing_settings = "SpaceSharingSettings",
-        .tags = "Tags",
-    };
-};
-
-pub const CreateSpaceOutput = struct {
-    /// The space's Amazon Resource Name (ARN).
-    space_arn: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .space_arn = "SpaceArn",
-    };
-};
+const CreateSpaceOutput = @import("create_space_response.zig").CreateSpaceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

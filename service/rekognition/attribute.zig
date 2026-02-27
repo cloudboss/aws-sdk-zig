@@ -1,0 +1,33 @@
+pub const Attribute = enum {
+    default,
+    all,
+    age_range,
+    beard,
+    emotions,
+    eye_direction,
+    eyeglasses,
+    eyes_open,
+    gender,
+    mouth_open,
+    mustache,
+    face_occluded,
+    smile,
+    sunglasses,
+
+    pub const json_field_names = .{
+        .default = "DEFAULT",
+        .all = "ALL",
+        .age_range = "AGE_RANGE",
+        .beard = "BEARD",
+        .emotions = "EMOTIONS",
+        .eye_direction = "EYE_DIRECTION",
+        .eyeglasses = "EYEGLASSES",
+        .eyes_open = "EYES_OPEN",
+        .gender = "GENDER",
+        .mouth_open = "MOUTH_OPEN",
+        .mustache = "MUSTACHE",
+        .face_occluded = "FACE_OCCLUDED",
+        .smile = "SMILE",
+        .sunglasses = "SUNGLASSES",
+    };
+};

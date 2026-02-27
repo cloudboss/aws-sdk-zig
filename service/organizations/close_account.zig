@@ -14,7 +14,7 @@ pub const CloseAccountInput = struct {
     };
 };
 
-pub const CloseAccountOutput = struct {};
+const CloseAccountOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

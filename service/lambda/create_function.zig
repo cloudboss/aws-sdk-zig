@@ -226,7 +226,7 @@ pub const CreateFunctionInput = struct {
     };
 };
 
-const CreateFunctionOutput = @import("function_configuration.zig").CreateFunctionOutput;
+const CreateFunctionOutput = @import("function_configuration.zig").FunctionConfiguration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

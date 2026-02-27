@@ -4,13 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteResourcePolicyInput = struct {
-    /// The Amazon Resource Name (ARN) of the CloudFront resource for which the
-    /// resource policy should be deleted.
-    resource_arn: []const u8,
-};
+const DeleteResourcePolicyInput = @import("delete_resource_policy_request.zig").DeleteResourcePolicyRequest;
 
-pub const DeleteResourcePolicyOutput = struct {};
+const DeleteResourcePolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -23,7 +23,7 @@ pub const DeleteOrganizationalUnitInput = struct {
     };
 };
 
-pub const DeleteOrganizationalUnitOutput = struct {};
+const DeleteOrganizationalUnitOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

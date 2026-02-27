@@ -33,7 +33,7 @@ pub const DetachNetworkInterfaceInput = struct {
     force: ?bool = null,
 };
 
-pub const DetachNetworkInterfaceOutput = struct {};
+const DetachNetworkInterfaceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

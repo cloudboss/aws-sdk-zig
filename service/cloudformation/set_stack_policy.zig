@@ -28,7 +28,7 @@ pub const SetStackPolicyInput = struct {
     stack_policy_url: ?[]const u8 = null,
 };
 
-pub const SetStackPolicyOutput = struct {};
+const SetStackPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

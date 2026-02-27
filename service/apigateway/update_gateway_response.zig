@@ -24,7 +24,7 @@ pub const UpdateGatewayResponseInput = struct {
     };
 };
 
-const UpdateGatewayResponseOutput = @import("gateway_response.zig").UpdateGatewayResponseOutput;
+const UpdateGatewayResponseOutput = @import("gateway_response.zig").GatewayResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

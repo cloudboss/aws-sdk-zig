@@ -23,7 +23,7 @@ pub const PutBucketIntelligentTieringConfigurationInput = struct {
     intelligent_tiering_configuration: IntelligentTieringConfiguration,
 };
 
-pub const PutBucketIntelligentTieringConfigurationOutput = struct {};
+const PutBucketIntelligentTieringConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

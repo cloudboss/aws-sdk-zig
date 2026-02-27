@@ -1,0 +1,21 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const batch_delete_tax_registration = @import("batch_delete_tax_registration.zig");
+pub const batch_get_tax_exemptions = @import("batch_get_tax_exemptions.zig");
+pub const batch_put_tax_registration = @import("batch_put_tax_registration.zig");
+pub const delete_supplemental_tax_registration = @import("delete_supplemental_tax_registration.zig");
+pub const delete_tax_registration = @import("delete_tax_registration.zig");
+pub const get_tax_exemption_types = @import("get_tax_exemption_types.zig");
+pub const get_tax_inheritance = @import("get_tax_inheritance.zig");
+pub const get_tax_registration = @import("get_tax_registration.zig");
+pub const get_tax_registration_document = @import("get_tax_registration_document.zig");
+pub const list_supplemental_tax_registrations = @import("list_supplemental_tax_registrations.zig");
+pub const list_tax_exemptions = @import("list_tax_exemptions.zig");
+pub const list_tax_registrations = @import("list_tax_registrations.zig");
+pub const put_supplemental_tax_registration = @import("put_supplemental_tax_registration.zig");
+pub const put_tax_exemption = @import("put_tax_exemption.zig");
+pub const put_tax_inheritance = @import("put_tax_inheritance.zig");
+pub const put_tax_registration = @import("put_tax_registration.zig");

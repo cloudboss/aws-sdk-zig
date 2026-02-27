@@ -58,7 +58,7 @@ pub const ReportInstanceStatusInput = struct {
     status: ReportStatusType,
 };
 
-pub const ReportInstanceStatusOutput = struct {};
+const ReportInstanceStatusOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

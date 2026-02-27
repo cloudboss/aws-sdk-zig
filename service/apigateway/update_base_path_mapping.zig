@@ -30,7 +30,7 @@ pub const UpdateBasePathMappingInput = struct {
     };
 };
 
-const UpdateBasePathMappingOutput = @import("base_path_mapping.zig").UpdateBasePathMappingOutput;
+const UpdateBasePathMappingOutput = @import("base_path_mapping.zig").BasePathMapping;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

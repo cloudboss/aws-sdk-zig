@@ -17,7 +17,7 @@ pub const DeleteApiMappingInput = struct {
     };
 };
 
-pub const DeleteApiMappingOutput = struct {};
+const DeleteApiMappingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

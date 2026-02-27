@@ -24,7 +24,7 @@ pub const AddTagsToCertificateInput = struct {
     };
 };
 
-pub const AddTagsToCertificateOutput = struct {};
+const AddTagsToCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

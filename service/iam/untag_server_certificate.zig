@@ -21,7 +21,7 @@ pub const UntagServerCertificateInput = struct {
     tag_keys: []const []const u8,
 };
 
-pub const UntagServerCertificateOutput = struct {};
+const UntagServerCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

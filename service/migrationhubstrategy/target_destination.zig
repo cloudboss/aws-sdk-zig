@@ -1,0 +1,33 @@
+pub const TargetDestination = enum {
+    none_specified,
+    aws_elastic_beanstalk,
+    aws_fargate,
+    amazon_elastic_cloud_compute,
+    amazon_elastic_container_service,
+    amazon_elastic_kubernetes_service,
+    aurora_mysql,
+    aurora_postgresql,
+    amazon_rds_mysql,
+    amazon_rds_postgresql,
+    amazon_documentdb,
+    amazon_dynamodb,
+    amazon_rds,
+    babelfish_aurora_postgresql,
+
+    pub const json_field_names = .{
+        .none_specified = "NONE_SPECIFIED",
+        .aws_elastic_beanstalk = "AWS_ELASTIC_BEANSTALK",
+        .aws_fargate = "AWS_FARGATE",
+        .amazon_elastic_cloud_compute = "AMAZON_ELASTIC_CLOUD_COMPUTE",
+        .amazon_elastic_container_service = "AMAZON_ELASTIC_CONTAINER_SERVICE",
+        .amazon_elastic_kubernetes_service = "AMAZON_ELASTIC_KUBERNETES_SERVICE",
+        .aurora_mysql = "AURORA_MYSQL",
+        .aurora_postgresql = "AURORA_POSTGRESQL",
+        .amazon_rds_mysql = "AMAZON_RDS_MYSQL",
+        .amazon_rds_postgresql = "AMAZON_RDS_POSTGRESQL",
+        .amazon_documentdb = "AMAZON_DOCUMENTDB",
+        .amazon_dynamodb = "AMAZON_DYNAMODB",
+        .amazon_rds = "AMAZON_RDS",
+        .babelfish_aurora_postgresql = "BABELFISH_AURORA_POSTGRESQL",
+    };
+};

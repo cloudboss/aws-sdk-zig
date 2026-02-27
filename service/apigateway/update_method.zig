@@ -29,7 +29,7 @@ pub const UpdateMethodInput = struct {
     };
 };
 
-const UpdateMethodOutput = @import("method.zig").UpdateMethodOutput;
+const UpdateMethodOutput = @import("method.zig").Method;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

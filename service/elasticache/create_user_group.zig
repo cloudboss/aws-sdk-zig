@@ -24,7 +24,7 @@ pub const CreateUserGroupInput = struct {
     user_ids: ?[]const []const u8 = null,
 };
 
-const CreateUserGroupOutput = @import("user_group.zig").CreateUserGroupOutput;
+const CreateUserGroupOutput = @import("user_group.zig").UserGroup;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

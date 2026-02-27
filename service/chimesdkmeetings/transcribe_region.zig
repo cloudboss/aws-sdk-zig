@@ -1,0 +1,31 @@
+pub const TranscribeRegion = enum {
+    us_east_2,
+    us_east_1,
+    us_west_2,
+    ap_northeast_2,
+    ap_southeast_2,
+    ap_northeast_1,
+    ca_central_1,
+    eu_central_1,
+    eu_west_1,
+    eu_west_2,
+    sa_east_1,
+    auto,
+    us_gov_west_1,
+
+    pub const json_field_names = .{
+        .us_east_2 = "US_EAST_2",
+        .us_east_1 = "US_EAST_1",
+        .us_west_2 = "US_WEST_2",
+        .ap_northeast_2 = "AP_NORTHEAST_2",
+        .ap_southeast_2 = "AP_SOUTHEAST_2",
+        .ap_northeast_1 = "AP_NORTHEAST_1",
+        .ca_central_1 = "CA_CENTRAL_1",
+        .eu_central_1 = "EU_CENTRAL_1",
+        .eu_west_1 = "EU_WEST_1",
+        .eu_west_2 = "EU_WEST_2",
+        .sa_east_1 = "SA_EAST_1",
+        .auto = "AUTO",
+        .us_gov_west_1 = "US_GOV_WEST_1",
+    };
+};

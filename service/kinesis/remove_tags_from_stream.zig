@@ -25,7 +25,7 @@ pub const RemoveTagsFromStreamInput = struct {
     };
 };
 
-pub const RemoveTagsFromStreamOutput = struct {};
+const RemoveTagsFromStreamOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

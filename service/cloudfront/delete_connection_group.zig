@@ -13,7 +13,7 @@ pub const DeleteConnectionGroupInput = struct {
     if_match: []const u8,
 };
 
-pub const DeleteConnectionGroupOutput = struct {};
+const DeleteConnectionGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

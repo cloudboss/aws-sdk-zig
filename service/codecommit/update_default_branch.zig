@@ -18,7 +18,7 @@ pub const UpdateDefaultBranchInput = struct {
     };
 };
 
-pub const UpdateDefaultBranchOutput = struct {};
+const UpdateDefaultBranchOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

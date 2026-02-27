@@ -16,7 +16,7 @@ pub const PutRetentionPolicyInput = struct {
     };
 };
 
-pub const PutRetentionPolicyOutput = struct {};
+const PutRetentionPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

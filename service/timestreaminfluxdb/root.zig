@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_db_cluster = @import("create_db_cluster.zig");
+pub const create_db_instance = @import("create_db_instance.zig");
+pub const create_db_parameter_group = @import("create_db_parameter_group.zig");
+pub const delete_db_cluster = @import("delete_db_cluster.zig");
+pub const delete_db_instance = @import("delete_db_instance.zig");
+pub const get_db_cluster = @import("get_db_cluster.zig");
+pub const get_db_instance = @import("get_db_instance.zig");
+pub const get_db_parameter_group = @import("get_db_parameter_group.zig");
+pub const list_db_clusters = @import("list_db_clusters.zig");
+pub const list_db_instances = @import("list_db_instances.zig");
+pub const list_db_instances_for_cluster = @import("list_db_instances_for_cluster.zig");
+pub const list_db_parameter_groups = @import("list_db_parameter_groups.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const reboot_db_cluster = @import("reboot_db_cluster.zig");
+pub const reboot_db_instance = @import("reboot_db_instance.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_db_cluster = @import("update_db_cluster.zig");
+pub const update_db_instance = @import("update_db_instance.zig");

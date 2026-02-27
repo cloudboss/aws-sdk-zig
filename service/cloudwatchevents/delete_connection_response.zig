@@ -1,0 +1,30 @@
+const ConnectionState = @import("connection_state.zig").ConnectionState;
+
+pub const DeleteConnectionResponse = struct {
+    /// The ARN of the connection that was deleted.
+    connection_arn: ?[]const u8,
+
+    /// The state of the connection before it was deleted.
+    connection_state: ?ConnectionState,
+
+    /// A time stamp for the time that the connection was created.
+    creation_time: ?i64,
+
+    /// A time stamp for the time that the connection was last authorized before it
+    /// wa
+    /// deleted.
+    last_authorized_time: ?i64,
+
+    /// A time stamp for the time that the connection was last modified before it
+    /// was
+    /// deleted.
+    last_modified_time: ?i64,
+
+    pub const json_field_names = .{
+        .connection_arn = "ConnectionArn",
+        .connection_state = "ConnectionState",
+        .creation_time = "CreationTime",
+        .last_authorized_time = "LastAuthorizedTime",
+        .last_modified_time = "LastModifiedTime",
+    };
+};

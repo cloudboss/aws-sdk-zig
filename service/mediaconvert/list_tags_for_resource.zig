@@ -5,25 +5,9 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceTags = @import("resource_tags.zig").ResourceTags;
 
-pub const ListTagsForResourceInput = struct {
-    /// The Amazon Resource Name (ARN) of the resource that you want to list tags
-    /// for. To get the ARN, send a GET request with the resource name.
-    arn: []const u8,
+const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 
-    pub const json_field_names = .{
-        .arn = "Arn",
-    };
-};
-
-pub const ListTagsForResourceOutput = struct {
-    /// The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
-    /// resource.
-    resource_tags: ?ResourceTags = null,
-
-    pub const json_field_names = .{
-        .resource_tags = "ResourceTags",
-    };
-};
+const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

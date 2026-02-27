@@ -9,7 +9,7 @@ pub const DeleteHsmClientCertificateInput = struct {
     hsm_client_certificate_identifier: []const u8,
 };
 
-pub const DeleteHsmClientCertificateOutput = struct {};
+const DeleteHsmClientCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

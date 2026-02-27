@@ -21,7 +21,7 @@ pub const PutConfigurationRecorderInput = struct {
     };
 };
 
-pub const PutConfigurationRecorderOutput = struct {};
+const PutConfigurationRecorderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

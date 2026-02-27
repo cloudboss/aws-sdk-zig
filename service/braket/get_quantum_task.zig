@@ -1,0 +1,257 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const QuantumTaskAdditionalAttributeName = @import("quantum_task_additional_attribute_name.zig").QuantumTaskAdditionalAttributeName;
+const ActionMetadata = @import("action_metadata.zig").ActionMetadata;
+const Association = @import("association.zig").Association;
+const ExperimentalCapabilities = @import("experimental_capabilities.zig").ExperimentalCapabilities;
+const QuantumTaskQueueInfo = @import("quantum_task_queue_info.zig").QuantumTaskQueueInfo;
+const QuantumTaskStatus = @import("quantum_task_status.zig").QuantumTaskStatus;
+
+pub const GetQuantumTaskInput = struct {
+    /// A list of attributes to return additional information for. Only the
+    /// QueueInfo additional attribute name is currently supported.
+    additional_attribute_names: ?[]const QuantumTaskAdditionalAttributeName = null,
+
+    /// The ARN of the quantum task to retrieve.
+    quantum_task_arn: []const u8,
+
+    pub const json_field_names = .{
+        .additional_attribute_names = "additionalAttributeNames",
+        .quantum_task_arn = "quantumTaskArn",
+    };
+};
+
+pub const GetQuantumTaskOutput = struct {
+    /// Metadata about the action performed by the quantum task, including
+    /// information about the type of action and program counts.
+    action_metadata: ?ActionMetadata = null,
+
+    /// The list of Amazon Braket resources associated with the quantum task.
+    associations: ?[]const Association = null,
+
+    /// The time at which the quantum task was created.
+    created_at: i64,
+
+    /// The ARN of the device the quantum task was run on.
+    device_arn: []const u8,
+
+    /// The parameters for the device on which the quantum task ran.
+    device_parameters: []const u8,
+
+    /// The time at which the quantum task ended.
+    ended_at: ?i64 = null,
+
+    /// Enabled experimental capabilities for the quantum task, if any.
+    experimental_capabilities: ?ExperimentalCapabilities = null,
+
+    /// The reason that a quantum task failed.
+    failure_reason: ?[]const u8 = null,
+
+    /// The ARN of the Amazon Braket job associated with the quantum task.
+    job_arn: ?[]const u8 = null,
+
+    /// The number of successful shots for the quantum task. This is available after
+    /// a successfully completed quantum task.
+    num_successful_shots: ?i64 = null,
+
+    /// The S3 bucket where quantum task results are stored.
+    output_s3_bucket: []const u8,
+
+    /// The folder in the S3 bucket where quantum task results are stored.
+    output_s3_directory: []const u8,
+
+    /// The ARN of the quantum task.
+    quantum_task_arn: []const u8,
+
+    /// Queue information for the requested quantum task. Only returned if
+    /// `QueueInfo` is specified in the `additionalAttributeNames"` field in the
+    /// `GetQuantumTask` API request.
+    queue_info: ?QuantumTaskQueueInfo = null,
+
+    /// The number of shots used in the quantum task.
+    shots: i64,
+
+    /// The status of the quantum task.
+    status: QuantumTaskStatus,
+
+    /// The tags that belong to this quantum task.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .action_metadata = "actionMetadata",
+        .associations = "associations",
+        .created_at = "createdAt",
+        .device_arn = "deviceArn",
+        .device_parameters = "deviceParameters",
+        .ended_at = "endedAt",
+        .experimental_capabilities = "experimentalCapabilities",
+        .failure_reason = "failureReason",
+        .job_arn = "jobArn",
+        .num_successful_shots = "numSuccessfulShots",
+        .output_s3_bucket = "outputS3Bucket",
+        .output_s3_directory = "outputS3Directory",
+        .quantum_task_arn = "quantumTaskArn",
+        .queue_info = "queueInfo",
+        .shots = "shots",
+        .status = "status",
+        .tags = "tags",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQuantumTaskInput, options: Options) !GetQuantumTaskOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "braket");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetQuantumTaskInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("braket", "Braket", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/quantum-task/");
+    try path_buf.appendSlice(alloc, input.quantum_task_arn);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    if (input.additional_attribute_names) |v| {
+        if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+        try query_buf.appendSlice(alloc, "additionalAttributeNames=");
+        try aws.url.appendUrlEncoded(alloc, &query_buf, v);
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetQuantumTaskOutput {
+    var result: GetQuantumTaskOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetQuantumTaskOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DeviceOfflineException")) {
+        return .{ .arena = arena, .kind = .{ .device_offline_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DeviceRetiredException")) {
+        return .{ .arena = arena, .kind = .{ .device_retired_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServiceException")) {
+        return .{ .arena = arena, .kind = .{ .internal_service_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

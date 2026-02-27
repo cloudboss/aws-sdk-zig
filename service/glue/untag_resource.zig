@@ -4,21 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const UntagResourceInput = struct {
-    /// The Amazon Resource Name (ARN) of the resource from which to remove the
-    /// tags.
-    resource_arn: []const u8,
+const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
 
-    /// Tags to remove from this resource.
-    tags_to_remove: []const []const u8,
-
-    pub const json_field_names = .{
-        .resource_arn = "ResourceArn",
-        .tags_to_remove = "TagsToRemove",
-    };
-};
-
-pub const UntagResourceOutput = struct {};
+const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

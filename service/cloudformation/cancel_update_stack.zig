@@ -31,7 +31,7 @@ pub const CancelUpdateStackInput = struct {
     stack_name: []const u8,
 };
 
-pub const CancelUpdateStackOutput = struct {};
+const CancelUpdateStackOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

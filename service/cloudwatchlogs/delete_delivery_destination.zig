@@ -16,7 +16,7 @@ pub const DeleteDeliveryDestinationInput = struct {
     };
 };
 
-pub const DeleteDeliveryDestinationOutput = struct {};
+const DeleteDeliveryDestinationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

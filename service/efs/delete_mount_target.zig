@@ -13,7 +13,7 @@ pub const DeleteMountTargetInput = struct {
     };
 };
 
-pub const DeleteMountTargetOutput = struct {};
+const DeleteMountTargetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

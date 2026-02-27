@@ -1,0 +1,31 @@
+pub const RouteVehicleTravelStepType = enum {
+    arrive,
+    @"continue",
+    continue_highway,
+    depart,
+    enter_highway,
+    exit,
+    keep,
+    ramp,
+    roundabout_enter,
+    roundabout_exit,
+    roundabout_pass,
+    turn,
+    u_turn,
+
+    pub const json_field_names = .{
+        .arrive = "ARRIVE",
+        .@"continue" = "CONTINUE",
+        .continue_highway = "CONTINUE_HIGHWAY",
+        .depart = "DEPART",
+        .enter_highway = "ENTER_HIGHWAY",
+        .exit = "EXIT",
+        .keep = "KEEP",
+        .ramp = "RAMP",
+        .roundabout_enter = "ROUNDABOUT_ENTER",
+        .roundabout_exit = "ROUNDABOUT_EXIT",
+        .roundabout_pass = "ROUNDABOUT_PASS",
+        .turn = "TURN",
+        .u_turn = "U_TURN",
+    };
+};

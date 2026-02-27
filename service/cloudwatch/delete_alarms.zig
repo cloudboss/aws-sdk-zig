@@ -14,7 +14,7 @@ pub const DeleteAlarmsInput = struct {
     };
 };
 
-pub const DeleteAlarmsOutput = struct {};
+const DeleteAlarmsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

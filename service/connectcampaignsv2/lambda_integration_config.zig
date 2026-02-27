@@ -1,0 +1,8 @@
+/// Lambda integration config
+pub const LambdaIntegrationConfig = struct {
+    function_arn: []const u8,
+
+    pub const json_field_names = .{
+        .function_arn = "functionArn",
+    };
+};

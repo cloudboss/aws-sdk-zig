@@ -1,0 +1,232 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ContactStatus = @import("contact_status.zig").ContactStatus;
+const DataflowDetail = @import("dataflow_detail.zig").DataflowDetail;
+const EphemerisResponseData = @import("ephemeris_response_data.zig").EphemerisResponseData;
+const Elevation = @import("elevation.zig").Elevation;
+const TrackingOverrides = @import("tracking_overrides.zig").TrackingOverrides;
+
+pub const DescribeContactInput = struct {
+    /// UUID of a contact.
+    contact_id: []const u8,
+
+    pub const json_field_names = .{
+        .contact_id = "contactId",
+    };
+};
+
+pub const DescribeContactOutput = struct {
+    /// UUID of a contact.
+    contact_id: ?[]const u8 = null,
+
+    /// Status of a contact.
+    contact_status: ?ContactStatus = null,
+
+    /// List describing source and destination details for each dataflow edge.
+    dataflow_list: ?[]const DataflowDetail = null,
+
+    /// End time of a contact in UTC.
+    end_time: ?i64 = null,
+
+    /// The ephemeris that determines antenna pointing directions for the contact.
+    ephemeris: ?EphemerisResponseData = null,
+
+    /// Error message for a contact.
+    error_message: ?[]const u8 = null,
+
+    /// Ground station for a contact.
+    ground_station: ?[]const u8 = null,
+
+    /// Maximum elevation angle of a contact.
+    maximum_elevation: ?Elevation = null,
+
+    /// ARN of a mission profile.
+    mission_profile_arn: ?[]const u8 = null,
+
+    /// Amount of time after a contact ends that you’d like to receive a CloudWatch
+    /// event indicating the pass has finished.
+    post_pass_end_time: ?i64 = null,
+
+    /// Amount of time prior to contact start you’d like to receive a CloudWatch
+    /// event indicating an upcoming pass.
+    pre_pass_start_time: ?i64 = null,
+
+    /// Region of a contact.
+    region: ?[]const u8 = null,
+
+    /// ARN of a satellite.
+    satellite_arn: ?[]const u8 = null,
+
+    /// Start time of a contact in UTC.
+    start_time: ?i64 = null,
+
+    /// Tags assigned to a contact.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// Tracking configuration overrides specified when the contact was reserved.
+    tracking_overrides: ?TrackingOverrides = null,
+
+    /// Projected time in UTC your satellite will set below the [receive
+    /// mask](https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html).
+    /// This time is based on the satellite's current active ephemeris for future
+    /// contacts and the ephemeris that was active during contact execution for
+    /// completed contacts.
+    visibility_end_time: ?i64 = null,
+
+    /// Projected time in UTC your satellite will rise above the [receive
+    /// mask](https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html).
+    /// This time is based on the satellite's current active ephemeris for future
+    /// contacts and the ephemeris that was active during contact execution for
+    /// completed contacts.
+    visibility_start_time: ?i64 = null,
+
+    pub const json_field_names = .{
+        .contact_id = "contactId",
+        .contact_status = "contactStatus",
+        .dataflow_list = "dataflowList",
+        .end_time = "endTime",
+        .ephemeris = "ephemeris",
+        .error_message = "errorMessage",
+        .ground_station = "groundStation",
+        .maximum_elevation = "maximumElevation",
+        .mission_profile_arn = "missionProfileArn",
+        .post_pass_end_time = "postPassEndTime",
+        .pre_pass_start_time = "prePassStartTime",
+        .region = "region",
+        .satellite_arn = "satelliteArn",
+        .start_time = "startTime",
+        .tags = "tags",
+        .tracking_overrides = "trackingOverrides",
+        .visibility_end_time = "visibilityEndTime",
+        .visibility_start_time = "visibilityStartTime",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeContactInput, options: Options) !DescribeContactOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "groundstation");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: DescribeContactInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("groundstation", "GroundStation", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/contact/");
+    try path_buf.appendSlice(alloc, input.contact_id);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeContactOutput {
+    var result: DescribeContactOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(DescribeContactOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "DependencyException")) {
+        return .{ .arena = arena, .kind = .{ .dependency_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceInUseException")) {
+        return .{ .arena = arena, .kind = .{ .resource_in_use_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceLimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .resource_limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

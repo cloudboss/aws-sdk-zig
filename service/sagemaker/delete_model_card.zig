@@ -13,7 +13,7 @@ pub const DeleteModelCardInput = struct {
     };
 };
 
-pub const DeleteModelCardOutput = struct {};
+const DeleteModelCardOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

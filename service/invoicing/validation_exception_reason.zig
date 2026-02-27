@@ -1,0 +1,33 @@
+pub const ValidationExceptionReason = enum {
+    non_members_present,
+    max_accounts_exceeded,
+    max_invoice_units_exceeded,
+    duplicate_invoice_unit,
+    mutual_exclusion_error,
+    account_membership_error,
+    tax_settings_error,
+    expired_next_token,
+    invalid_next_token,
+    invalid_input,
+    field_validation_failed,
+    cannot_parse,
+    unknown_operation,
+    other,
+
+    pub const json_field_names = .{
+        .non_members_present = "NON_MEMBERS_PRESENT",
+        .max_accounts_exceeded = "MAX_ACCOUNTS_EXCEEDED",
+        .max_invoice_units_exceeded = "MAX_INVOICE_UNITS_EXCEEDED",
+        .duplicate_invoice_unit = "DUPLICATE_INVOICE_UNIT",
+        .mutual_exclusion_error = "MUTUAL_EXCLUSION_ERROR",
+        .account_membership_error = "ACCOUNT_MEMBERSHIP_ERROR",
+        .tax_settings_error = "TAX_SETTINGS_ERROR",
+        .expired_next_token = "EXPIRED_NEXT_TOKEN",
+        .invalid_next_token = "INVALID_NEXT_TOKEN",
+        .invalid_input = "INVALID_INPUT",
+        .field_validation_failed = "FIELD_VALIDATION_FAILED",
+        .cannot_parse = "CANNOT_PARSE",
+        .unknown_operation = "UNKNOWN_OPERATION",
+        .other = "OTHER",
+    };
+};

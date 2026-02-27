@@ -4,9 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const LeaveOrganizationInput = struct {};
+const LeaveOrganizationInput = struct {};
 
-pub const LeaveOrganizationOutput = struct {};
+const LeaveOrganizationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

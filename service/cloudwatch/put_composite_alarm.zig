@@ -226,7 +226,7 @@ pub const PutCompositeAlarmInput = struct {
     };
 };
 
-pub const PutCompositeAlarmOutput = struct {};
+const PutCompositeAlarmOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

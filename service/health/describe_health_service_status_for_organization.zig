@@ -4,7 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeHealthServiceStatusForOrganizationInput = struct {};
+const DescribeHealthServiceStatusForOrganizationInput = struct {};
 
 pub const DescribeHealthServiceStatusForOrganizationOutput = struct {
     /// Information about the status of enabling or disabling the Health

@@ -22,7 +22,7 @@ pub const ModifyDBClusterEndpointInput = struct {
     static_members: ?[]const []const u8 = null,
 };
 
-const ModifyDBClusterEndpointOutput = @import("db_cluster_endpoint.zig").ModifyDBClusterEndpointOutput;
+const ModifyDBClusterEndpointOutput = @import("db_cluster_endpoint.zig").DBClusterEndpoint;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,7 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetOutboundWebIdentityFederationInfoInput = struct {};
+const GetOutboundWebIdentityFederationInfoInput = struct {};
 
 pub const GetOutboundWebIdentityFederationInfoOutput = struct {
     /// A unique issuer URL for your Amazon Web Services account that hosts the

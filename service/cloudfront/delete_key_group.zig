@@ -15,7 +15,7 @@ pub const DeleteKeyGroupInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeleteKeyGroupOutput = struct {};
+const DeleteKeyGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

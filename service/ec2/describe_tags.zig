@@ -7,53 +7,9 @@ const Filter = @import("filter.zig").Filter;
 const TagDescription = @import("tag_description.zig").TagDescription;
 const serde = @import("serde.zig");
 
-pub const DescribeTagsInput = struct {
-    /// Checks whether you have the required permissions for the action, without
-    /// actually making the request,
-    /// and provides an error response. If you have the required permissions, the
-    /// error response is `DryRunOperation`.
-    /// Otherwise, it is `UnauthorizedOperation`.
-    dry_run: ?bool = null,
+const DescribeTagsInput = @import("describe_tags_request.zig").DescribeTagsRequest;
 
-    /// The filters.
-    ///
-    /// * `key` - The tag key.
-    ///
-    /// * `resource-id` - The ID of the resource.
-    ///
-    /// * `resource-type` - The resource type. For a list of possible values, see
-    /// [TagSpecification](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TagSpecification.html).
-    ///
-    /// * `tag`: - The key/value combination of the tag. For example,
-    /// specify "tag:Owner" for the filter name and "TeamA" for the filter value to
-    /// find
-    /// resources with the tag "Owner=TeamA".
-    ///
-    /// * `value` - The tag value.
-    filters: ?[]const Filter = null,
-
-    /// The maximum number of items to return for this request. This value can be
-    /// between 5 and 1000.
-    /// To get the next page of items, make another request with the token returned
-    /// in the output.
-    /// For more information, see
-    /// [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    max_results: ?i32 = null,
-
-    /// The token returned from a previous paginated request.
-    /// Pagination continues from the end of the items returned by the previous
-    /// request.
-    next_token: ?[]const u8 = null,
-};
-
-pub const DescribeTagsOutput = struct {
-    /// The token to include in another request to get the next page of items.
-    /// This value is `null` when there are no more items to return.
-    next_token: ?[]const u8 = null,
-
-    /// The tags.
-    tags: ?[]const TagDescription = null,
-};
+const DescribeTagsOutput = @import("describe_tags_result.zig").DescribeTagsResult;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

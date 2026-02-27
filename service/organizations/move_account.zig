@@ -54,7 +54,7 @@ pub const MoveAccountInput = struct {
     };
 };
 
-pub const MoveAccountOutput = struct {};
+const MoveAccountOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

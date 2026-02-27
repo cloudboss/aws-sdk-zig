@@ -6,27 +6,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ResourceTypeForTagging = @import("resource_type_for_tagging.zig").ResourceTypeForTagging;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = struct {
-    /// The resource ID for which you want to see a list of tags.
-    resource_id: []const u8,
+const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 
-    /// Returns a list of tags for a specific resource type.
-    resource_type: ResourceTypeForTagging,
-
-    pub const json_field_names = .{
-        .resource_id = "ResourceId",
-        .resource_type = "ResourceType",
-    };
-};
-
-pub const ListTagsForResourceOutput = struct {
-    /// A list of tags.
-    tag_list: ?[]const Tag = null,
-
-    pub const json_field_names = .{
-        .tag_list = "TagList",
-    };
-};
+const ListTagsForResourceOutput = @import("list_tags_for_resource_result.zig").ListTagsForResourceResult;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

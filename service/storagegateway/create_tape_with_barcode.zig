@@ -1,0 +1,187 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const Tag = @import("tag.zig").Tag;
+
+pub const CreateTapeWithBarcodeInput = struct {
+    /// The unique Amazon Resource Name (ARN) that represents the gateway to
+    /// associate the
+    /// virtual tape with. Use the ListGateways operation to return a list of
+    /// gateways for your account and Amazon Web Services Region.
+    gateway_arn: []const u8,
+
+    /// Set to `true` to use Amazon S3 server-side encryption with your own
+    /// KMS key, or `false` to use a key managed by Amazon S3.
+    /// Optional.
+    ///
+    /// Valid Values: `true` | `false`
+    kms_encrypted: ?bool = null,
+
+    /// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+    /// for Amazon S3 server-side encryption. Storage Gateway does not support
+    /// asymmetric CMKs. This
+    /// value can only be set when `KMSEncrypted` is `true`. Optional.
+    kms_key: ?[]const u8 = null,
+
+    /// The ID of the pool that you want to add your tape to for archiving. The tape
+    /// in this
+    /// pool is archived in the S3 storage class that is associated with the pool.
+    /// When you use
+    /// your backup application to eject the tape, the tape is archived directly
+    /// into the storage
+    /// class (S3 Glacier or S3 Deep Archive) that corresponds to the pool.
+    pool_id: ?[]const u8 = null,
+
+    /// A list of up to 50 tags that can be assigned to a virtual tape that has a
+    /// barcode. Each
+    /// tag is a key-value pair.
+    ///
+    /// Valid characters for key and value are letters, spaces, and numbers
+    /// representable in
+    /// UTF-8 format, and the following special characters: + - = . _ : / @. The
+    /// maximum length
+    /// of a tag's key is 128 characters, and the maximum length for a tag's value
+    /// is
+    /// 256.
+    tags: ?[]const Tag = null,
+
+    /// The barcode that you want to assign to the tape.
+    ///
+    /// Barcodes cannot be reused. This includes barcodes used for tapes that have
+    /// been
+    /// deleted.
+    tape_barcode: []const u8,
+
+    /// The size, in bytes, of the virtual tape that you want to create.
+    ///
+    /// The size must be aligned by gigabyte (1024*1024*1024 bytes).
+    tape_size_in_bytes: i64,
+
+    /// Set to `TRUE` if the tape you are creating is to be configured as a
+    /// write-once-read-many (WORM) tape.
+    worm: bool = false,
+
+    pub const json_field_names = .{
+        .gateway_arn = "GatewayARN",
+        .kms_encrypted = "KMSEncrypted",
+        .kms_key = "KMSKey",
+        .pool_id = "PoolId",
+        .tags = "Tags",
+        .tape_barcode = "TapeBarcode",
+        .tape_size_in_bytes = "TapeSizeInBytes",
+        .worm = "Worm",
+    };
+};
+
+pub const CreateTapeWithBarcodeOutput = struct {
+    /// A unique Amazon Resource Name (ARN) that represents the virtual tape that
+    /// was
+    /// created.
+    tape_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .tape_arn = "TapeARN",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTapeWithBarcodeInput, options: Options) !CreateTapeWithBarcodeOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "storagegateway");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateTapeWithBarcodeInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("storagegateway", "Storage Gateway", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "StorageGateway_20130630.CreateTapeWithBarcode");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateTapeWithBarcodeOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(CreateTapeWithBarcodeOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "InternalServerError")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidGatewayRequestException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_gateway_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableError")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

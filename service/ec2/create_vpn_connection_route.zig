@@ -12,7 +12,7 @@ pub const CreateVpnConnectionRouteInput = struct {
     vpn_connection_id: []const u8,
 };
 
-pub const CreateVpnConnectionRouteOutput = struct {};
+const CreateVpnConnectionRouteOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

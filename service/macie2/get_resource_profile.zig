@@ -1,0 +1,191 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const ResourceStatistics = @import("resource_statistics.zig").ResourceStatistics;
+
+pub const GetResourceProfileInput = struct {
+    /// The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "resourceArn",
+    };
+};
+
+pub const GetResourceProfileOutput = struct {
+    /// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie
+    /// most recently recalculated sensitive data discovery statistics and details
+    /// for the bucket. If the bucket's sensitivity score is calculated
+    /// automatically, this includes the score.
+    profile_updated_at: ?i64 = null,
+
+    /// The current sensitivity score for the bucket, ranging from -1
+    /// (classification error) to 100 (sensitive). By default, this score is
+    /// calculated automatically based on the amount of data that Amazon Macie has
+    /// analyzed in the bucket and the amount of sensitive data that Macie has found
+    /// in the bucket.
+    sensitivity_score: ?i32 = null,
+
+    /// Specifies whether the bucket's current sensitivity score was set manually.
+    /// If this value is true, the score was manually changed to 100. If this value
+    /// is false, the score was calculated automatically by Amazon Macie.
+    sensitivity_score_overridden: ?bool = null,
+
+    /// The sensitive data discovery statistics for the bucket. The statistics
+    /// capture the results of automated sensitive data discovery activities that
+    /// Amazon Macie has performed for the bucket.
+    statistics: ?ResourceStatistics = null,
+
+    pub const json_field_names = .{
+        .profile_updated_at = "profileUpdatedAt",
+        .sensitivity_score = "sensitivityScore",
+        .sensitivity_score_overridden = "sensitivityScoreOverridden",
+        .statistics = "statistics",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceProfileInput, options: Options) !GetResourceProfileOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "macie2");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetResourceProfileInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("macie2", "Macie2", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const path = "/resource-profiles";
+
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    if (query_has_prev) try query_buf.appendSlice(alloc, "&");
+    try query_buf.appendSlice(alloc, "resourceArn=");
+    try aws.url.appendUrlEncoded(alloc, &query_buf, input.resource_arn);
+    query_has_prev = true;
+    const query = try query_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetResourceProfileOutput {
+    var result: GetResourceProfileOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetResourceProfileOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnprocessableEntityException")) {
+        return .{ .arena = arena, .kind = .{ .unprocessable_entity_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

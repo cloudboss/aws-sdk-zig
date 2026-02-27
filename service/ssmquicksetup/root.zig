@@ -1,0 +1,19 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_configuration_manager = @import("create_configuration_manager.zig");
+pub const delete_configuration_manager = @import("delete_configuration_manager.zig");
+pub const get_configuration = @import("get_configuration.zig");
+pub const get_configuration_manager = @import("get_configuration_manager.zig");
+pub const get_service_settings = @import("get_service_settings.zig");
+pub const list_configuration_managers = @import("list_configuration_managers.zig");
+pub const list_configurations = @import("list_configurations.zig");
+pub const list_quick_setup_types = @import("list_quick_setup_types.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_configuration_definition = @import("update_configuration_definition.zig");
+pub const update_configuration_manager = @import("update_configuration_manager.zig");
+pub const update_service_settings = @import("update_service_settings.zig");

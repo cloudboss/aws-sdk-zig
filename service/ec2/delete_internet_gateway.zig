@@ -16,7 +16,7 @@ pub const DeleteInternetGatewayInput = struct {
     internet_gateway_id: []const u8,
 };
 
-pub const DeleteInternetGatewayOutput = struct {};
+const DeleteInternetGatewayOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

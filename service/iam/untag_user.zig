@@ -21,7 +21,7 @@ pub const UntagUserInput = struct {
     user_name: []const u8,
 };
 
-pub const UntagUserOutput = struct {};
+const UntagUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

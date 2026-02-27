@@ -26,7 +26,7 @@ pub const CreateBucketMetadataTableConfigurationInput = struct {
     metadata_table_configuration: MetadataTableConfiguration,
 };
 
-pub const CreateBucketMetadataTableConfigurationOutput = struct {};
+const CreateBucketMetadataTableConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

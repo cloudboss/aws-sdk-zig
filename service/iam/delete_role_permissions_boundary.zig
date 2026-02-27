@@ -11,7 +11,7 @@ pub const DeleteRolePermissionsBoundaryInput = struct {
     role_name: []const u8,
 };
 
-pub const DeleteRolePermissionsBoundaryOutput = struct {};
+const DeleteRolePermissionsBoundaryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

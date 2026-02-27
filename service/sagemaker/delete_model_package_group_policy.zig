@@ -13,7 +13,7 @@ pub const DeleteModelPackageGroupPolicyInput = struct {
     };
 };
 
-pub const DeleteModelPackageGroupPolicyOutput = struct {};
+const DeleteModelPackageGroupPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

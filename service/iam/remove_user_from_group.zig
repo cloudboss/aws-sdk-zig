@@ -24,7 +24,7 @@ pub const RemoveUserFromGroupInput = struct {
     user_name: []const u8,
 };
 
-pub const RemoveUserFromGroupOutput = struct {};
+const RemoveUserFromGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -46,7 +46,7 @@ pub const CreateEdgePackagingJobInput = struct {
     };
 };
 
-pub const CreateEdgePackagingJobOutput = struct {};
+const CreateEdgePackagingJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

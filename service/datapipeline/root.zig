@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const activate_pipeline = @import("activate_pipeline.zig");
+pub const add_tags = @import("add_tags.zig");
+pub const create_pipeline = @import("create_pipeline.zig");
+pub const deactivate_pipeline = @import("deactivate_pipeline.zig");
+pub const delete_pipeline = @import("delete_pipeline.zig");
+pub const describe_objects = @import("describe_objects.zig");
+pub const describe_pipelines = @import("describe_pipelines.zig");
+pub const evaluate_expression = @import("evaluate_expression.zig");
+pub const get_pipeline_definition = @import("get_pipeline_definition.zig");
+pub const list_pipelines = @import("list_pipelines.zig");
+pub const poll_for_task = @import("poll_for_task.zig");
+pub const put_pipeline_definition = @import("put_pipeline_definition.zig");
+pub const query_objects = @import("query_objects.zig");
+pub const remove_tags = @import("remove_tags.zig");
+pub const report_task_progress = @import("report_task_progress.zig");
+pub const report_task_runner_heartbeat = @import("report_task_runner_heartbeat.zig");
+pub const set_status = @import("set_status.zig");
+pub const set_task_status = @import("set_task_status.zig");
+pub const validate_pipeline_definition = @import("validate_pipeline_definition.zig");

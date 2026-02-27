@@ -22,7 +22,7 @@ pub const DeleteNetworkAclEntryInput = struct {
     rule_number: i32,
 };
 
-pub const DeleteNetworkAclEntryOutput = struct {};
+const DeleteNetworkAclEntryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

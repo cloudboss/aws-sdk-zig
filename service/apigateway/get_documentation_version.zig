@@ -17,7 +17,7 @@ pub const GetDocumentationVersionInput = struct {
     };
 };
 
-const GetDocumentationVersionOutput = @import("documentation_version.zig").GetDocumentationVersionOutput;
+const GetDocumentationVersionOutput = @import("documentation_version.zig").DocumentationVersion;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

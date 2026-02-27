@@ -17,7 +17,7 @@ pub const CreateLogStreamInput = struct {
     };
 };
 
-pub const CreateLogStreamOutput = struct {};
+const CreateLogStreamOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,7 @@ pub const DeleteNotebookInstanceInput = struct {
     };
 };
 
-pub const DeleteNotebookInstanceOutput = struct {};
+const DeleteNotebookInstanceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

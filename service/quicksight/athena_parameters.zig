@@ -1,0 +1,28 @@
+const IdentityCenterConfiguration = @import("identity_center_configuration.zig").IdentityCenterConfiguration;
+
+/// Parameters for Amazon Athena.
+pub const AthenaParameters = struct {
+    /// An optional parameter that configures IAM Identity Center authentication to
+    /// grant Quick Sight access to your workgroup.
+    ///
+    /// This parameter can only be specified if your Quick Sight account is
+    /// configured with IAM Identity Center.
+    identity_center_configuration: ?IdentityCenterConfiguration,
+
+    /// Use the `RoleArn` structure to override an account-wide role for a specific
+    /// Athena data source. For example, say an account administrator has turned off
+    /// all Athena access with an account-wide role. The administrator can then use
+    /// `RoleArn` to bypass the account-wide role and allow Athena access for the
+    /// single Athena data source that is specified in the structure, even if the
+    /// account-wide role forbidding Athena access is still active.
+    role_arn: ?[]const u8,
+
+    /// The workgroup that Amazon Athena uses.
+    work_group: ?[]const u8,
+
+    pub const json_field_names = .{
+        .identity_center_configuration = "IdentityCenterConfiguration",
+        .role_arn = "RoleArn",
+        .work_group = "WorkGroup",
+    };
+};

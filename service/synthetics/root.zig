@@ -1,0 +1,27 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const associate_resource = @import("associate_resource.zig");
+pub const create_canary = @import("create_canary.zig");
+pub const create_group = @import("create_group.zig");
+pub const delete_canary = @import("delete_canary.zig");
+pub const delete_group = @import("delete_group.zig");
+pub const describe_canaries = @import("describe_canaries.zig");
+pub const describe_canaries_last_run = @import("describe_canaries_last_run.zig");
+pub const describe_runtime_versions = @import("describe_runtime_versions.zig");
+pub const disassociate_resource = @import("disassociate_resource.zig");
+pub const get_canary = @import("get_canary.zig");
+pub const get_canary_runs = @import("get_canary_runs.zig");
+pub const get_group = @import("get_group.zig");
+pub const list_associated_groups = @import("list_associated_groups.zig");
+pub const list_group_resources = @import("list_group_resources.zig");
+pub const list_groups = @import("list_groups.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const start_canary = @import("start_canary.zig");
+pub const start_canary_dry_run = @import("start_canary_dry_run.zig");
+pub const stop_canary = @import("stop_canary.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_canary = @import("update_canary.zig");

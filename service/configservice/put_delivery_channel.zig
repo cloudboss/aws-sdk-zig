@@ -15,7 +15,7 @@ pub const PutDeliveryChannelInput = struct {
     };
 };
 
-pub const PutDeliveryChannelOutput = struct {};
+const PutDeliveryChannelOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

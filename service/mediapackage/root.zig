@@ -1,0 +1,24 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const configure_logs = @import("configure_logs.zig");
+pub const create_channel = @import("create_channel.zig");
+pub const create_harvest_job = @import("create_harvest_job.zig");
+pub const create_origin_endpoint = @import("create_origin_endpoint.zig");
+pub const delete_channel = @import("delete_channel.zig");
+pub const delete_origin_endpoint = @import("delete_origin_endpoint.zig");
+pub const describe_channel = @import("describe_channel.zig");
+pub const describe_harvest_job = @import("describe_harvest_job.zig");
+pub const describe_origin_endpoint = @import("describe_origin_endpoint.zig");
+pub const list_channels = @import("list_channels.zig");
+pub const list_harvest_jobs = @import("list_harvest_jobs.zig");
+pub const list_origin_endpoints = @import("list_origin_endpoints.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const rotate_channel_credentials = @import("rotate_channel_credentials.zig");
+pub const rotate_ingest_endpoint_credentials = @import("rotate_ingest_endpoint_credentials.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_channel = @import("update_channel.zig");
+pub const update_origin_endpoint = @import("update_origin_endpoint.zig");

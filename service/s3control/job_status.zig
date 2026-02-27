@@ -1,0 +1,15 @@
+pub const JobStatus = enum {
+    active,
+    cancelled,
+    cancelling,
+    complete,
+    completing,
+    failed,
+    failing,
+    new,
+    paused,
+    pausing,
+    preparing,
+    ready,
+    suspended,
+};

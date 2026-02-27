@@ -24,7 +24,7 @@ pub const UpdateAuthorizerInput = struct {
     };
 };
 
-const UpdateAuthorizerOutput = @import("authorizer.zig").UpdateAuthorizerOutput;
+const UpdateAuthorizerOutput = @import("authorizer.zig").Authorizer;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

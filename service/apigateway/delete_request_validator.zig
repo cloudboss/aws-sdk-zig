@@ -17,7 +17,7 @@ pub const DeleteRequestValidatorInput = struct {
     };
 };
 
-pub const DeleteRequestValidatorOutput = struct {};
+const DeleteRequestValidatorOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

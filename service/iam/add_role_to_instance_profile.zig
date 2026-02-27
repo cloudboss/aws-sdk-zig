@@ -24,7 +24,7 @@ pub const AddRoleToInstanceProfileInput = struct {
     role_name: []const u8,
 };
 
-pub const AddRoleToInstanceProfileOutput = struct {};
+const AddRoleToInstanceProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,7 @@ pub const DeletePublicKeyInput = struct {
     if_match: ?[]const u8 = null,
 };
 
-pub const DeletePublicKeyOutput = struct {};
+const DeletePublicKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

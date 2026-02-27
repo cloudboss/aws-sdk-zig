@@ -40,7 +40,7 @@ pub const SplitShardInput = struct {
     };
 };
 
-pub const SplitShardOutput = struct {};
+const SplitShardOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

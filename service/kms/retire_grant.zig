@@ -44,7 +44,7 @@ pub const RetireGrantInput = struct {
     };
 };
 
-pub const RetireGrantOutput = struct {};
+const RetireGrantOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

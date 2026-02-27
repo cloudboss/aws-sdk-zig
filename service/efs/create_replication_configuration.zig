@@ -22,7 +22,7 @@ pub const CreateReplicationConfigurationInput = struct {
     };
 };
 
-const CreateReplicationConfigurationOutput = @import("replication_configuration_description.zig").CreateReplicationConfigurationOutput;
+const CreateReplicationConfigurationOutput = @import("replication_configuration_description.zig").ReplicationConfigurationDescription;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

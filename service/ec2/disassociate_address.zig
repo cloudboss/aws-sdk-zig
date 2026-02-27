@@ -19,7 +19,7 @@ pub const DisassociateAddressInput = struct {
     public_ip: ?[]const u8 = null,
 };
 
-pub const DisassociateAddressOutput = struct {};
+const DisassociateAddressOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

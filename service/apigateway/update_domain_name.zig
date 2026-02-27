@@ -30,7 +30,7 @@ pub const UpdateDomainNameInput = struct {
     };
 };
 
-const UpdateDomainNameOutput = @import("domain_name.zig").UpdateDomainNameOutput;
+const UpdateDomainNameOutput = @import("domain_name.zig").DomainName;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

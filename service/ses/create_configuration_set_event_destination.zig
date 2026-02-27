@@ -1,0 +1,356 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const EventDestination = @import("event_destination.zig").EventDestination;
+const serde = @import("serde.zig");
+
+pub const CreateConfigurationSetEventDestinationInput = struct {
+    /// The name of the configuration set that the event destination should be
+    /// associated
+    /// with.
+    configuration_set_name: []const u8,
+
+    /// An object that describes the Amazon Web Services service that email sending
+    /// event where information
+    /// is published.
+    event_destination: EventDestination,
+};
+
+pub const CreateConfigurationSetEventDestinationOutput = struct {};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConfigurationSetEventDestinationInput, options: Options) !CreateConfigurationSetEventDestinationOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ses");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationSetEventDestinationInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("ses", "SES", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var body_buf: std.ArrayList(u8) = .{};
+
+    try body_buf.appendSlice(alloc, "Action=CreateConfigurationSetEventDestination&Version=2010-12-01");
+    try body_buf.appendSlice(alloc, "&ConfigurationSetName=");
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.configuration_set_name);
+    if (input.event_destination.cloud_watch_destination) |sv| {
+        for (sv.dimension_configurations, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.CloudWatchDestination.DimensionConfigurations.member.{d}.DefaultDimensionValue=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, item.default_dimension_value);
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.CloudWatchDestination.DimensionConfigurations.member.{d}.DimensionName=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, item.dimension_name);
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.CloudWatchDestination.DimensionConfigurations.member.{d}.DimensionValueSource=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item.dimension_value_source));
+            }
+        }
+    }
+    if (input.event_destination.enabled) |sv| {
+        try body_buf.appendSlice(alloc, "&EventDestination.Enabled=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, if (sv) "true" else "false");
+    }
+    if (input.event_destination.kinesis_firehose_destination) |sv| {
+        try body_buf.appendSlice(alloc, "&EventDestination.KinesisFirehoseDestination.DeliveryStreamARN=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, sv.delivery_stream_arn);
+        try body_buf.appendSlice(alloc, "&EventDestination.KinesisFirehoseDestination.IAMRoleARN=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, sv.iam_role_arn);
+    }
+    for (input.event_destination.matching_event_types, 0..) |item, idx| {
+        const n = idx + 1;
+        var prefix_buf: [256]u8 = undefined;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EventDestination.MatchingEventTypes.member.{d}=", .{n}) catch continue;
+        try body_buf.appendSlice(alloc, field_prefix);
+        try aws.url.appendUrlEncoded(alloc, &body_buf, item);
+    }
+    try body_buf.appendSlice(alloc, "&EventDestination.Name=");
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.event_destination.name);
+    if (input.event_destination.sns_destination) |sv| {
+        try body_buf.appendSlice(alloc, "&EventDestination.SNSDestination.TopicARN=");
+        try aws.url.appendUrlEncoded(alloc, &body_buf, sv.topic_arn);
+    }
+
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateConfigurationSetEventDestinationOutput {
+    _ = status;
+    _ = headers;
+    _ = body;
+    _ = alloc;
+    const result: CreateConfigurationSetEventDestinationOutput = .{};
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestId") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, request_id);
+
+    if (std.mem.eql(u8, error_code, "AccountSendingPausedException")) {
+        return .{ .arena = arena, .kind = .{ .account_sending_paused_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "AlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CannotDeleteException")) {
+        return .{ .arena = arena, .kind = .{ .cannot_delete_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConfigurationSetAlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .configuration_set_already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConfigurationSetDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .configuration_set_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConfigurationSetSendingPausedException")) {
+        return .{ .arena = arena, .kind = .{ .configuration_set_sending_paused_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CustomVerificationEmailInvalidContentException")) {
+        return .{ .arena = arena, .kind = .{ .custom_verification_email_invalid_content_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CustomVerificationEmailTemplateAlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .custom_verification_email_template_already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CustomVerificationEmailTemplateDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .custom_verification_email_template_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "EventDestinationAlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .event_destination_already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "EventDestinationDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .event_destination_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "FromEmailAddressNotVerifiedException")) {
+        return .{ .arena = arena, .kind = .{ .from_email_address_not_verified_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidCloudWatchDestinationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_cloud_watch_destination_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidConfigurationSetException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_configuration_set_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDeliveryOptionsException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_delivery_options_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidFirehoseDestinationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_firehose_destination_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidLambdaFunctionException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_lambda_function_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPolicyException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_policy_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRenderingParameterException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_rendering_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidS3ConfigurationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_s3_configuration_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSNSDestinationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_sns_destination_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSnsTopicException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_sns_topic_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidTemplateException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_template_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidTrackingOptionsException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_tracking_options_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MailFromDomainNotVerifiedException")) {
+        return .{ .arena = arena, .kind = .{ .mail_from_domain_not_verified_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MessageRejected")) {
+        return .{ .arena = arena, .kind = .{ .message_rejected = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MissingRenderingAttributeException")) {
+        return .{ .arena = arena, .kind = .{ .missing_rendering_attribute_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ProductionAccessNotGrantedException")) {
+        return .{ .arena = arena, .kind = .{ .production_access_not_granted_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "RuleDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .rule_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "RuleSetDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .rule_set_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TemplateDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .template_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TrackingOptionsAlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .tracking_options_already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TrackingOptionsDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .tracking_options_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

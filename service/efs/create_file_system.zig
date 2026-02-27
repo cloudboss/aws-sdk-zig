@@ -144,7 +144,7 @@ pub const CreateFileSystemInput = struct {
     };
 };
 
-const CreateFileSystemOutput = @import("file_system_description.zig").CreateFileSystemOutput;
+const CreateFileSystemOutput = @import("file_system_description.zig").FileSystemDescription;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

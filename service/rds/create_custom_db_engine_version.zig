@@ -127,7 +127,7 @@ pub const CreateCustomDBEngineVersionInput = struct {
     use_aws_provided_latest_image: ?bool = null,
 };
 
-const CreateCustomDBEngineVersionOutput = @import("db_engine_version.zig").CreateCustomDBEngineVersionOutput;
+const CreateCustomDBEngineVersionOutput = @import("db_engine_version.zig").DBEngineVersion;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

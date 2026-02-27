@@ -13,7 +13,7 @@ pub const DeletePortalProductInput = struct {
     };
 };
 
-pub const DeletePortalProductOutput = struct {};
+const DeletePortalProductOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

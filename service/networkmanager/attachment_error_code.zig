@@ -1,0 +1,31 @@
+pub const AttachmentErrorCode = enum {
+    vpc_not_found,
+    subnet_not_found,
+    subnet_duplicated_in_availability_zone,
+    subnet_no_free_addresses,
+    subnet_unsupported_availability_zone,
+    subnet_no_ipv6_cidrs,
+    vpn_connection_not_found,
+    maximum_no_encap_limit_exceeded,
+    direct_connect_gateway_not_found,
+    direct_connect_gateway_existing_attachments,
+    direct_connect_gateway_no_private_vif,
+    vpn_existing_associations,
+    vpc_unsupported_features,
+
+    pub const json_field_names = .{
+        .vpc_not_found = "VPC_NOT_FOUND",
+        .subnet_not_found = "SUBNET_NOT_FOUND",
+        .subnet_duplicated_in_availability_zone = "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE",
+        .subnet_no_free_addresses = "SUBNET_NO_FREE_ADDRESSES",
+        .subnet_unsupported_availability_zone = "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE",
+        .subnet_no_ipv6_cidrs = "SUBNET_NO_IPV6_CIDRS",
+        .vpn_connection_not_found = "VPN_CONNECTION_NOT_FOUND",
+        .maximum_no_encap_limit_exceeded = "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED",
+        .direct_connect_gateway_not_found = "DIRECT_CONNECT_GATEWAY_NOT_FOUND",
+        .direct_connect_gateway_existing_attachments = "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS",
+        .direct_connect_gateway_no_private_vif = "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF",
+        .vpn_existing_associations = "VPN_EXISTING_ASSOCIATIONS",
+        .vpc_unsupported_features = "VPC_UNSUPPORTED_FEATURES",
+    };
+};

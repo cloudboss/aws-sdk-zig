@@ -18,7 +18,7 @@ pub const RemoveRoleFromDBInstanceInput = struct {
     role_arn: []const u8,
 };
 
-pub const RemoveRoleFromDBInstanceOutput = struct {};
+const RemoveRoleFromDBInstanceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

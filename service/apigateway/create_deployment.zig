@@ -55,7 +55,7 @@ pub const CreateDeploymentInput = struct {
     };
 };
 
-const CreateDeploymentOutput = @import("deployment.zig").CreateDeploymentOutput;
+const CreateDeploymentOutput = @import("deployment.zig").Deployment;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

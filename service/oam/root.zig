@@ -1,0 +1,20 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const create_link = @import("create_link.zig");
+pub const create_sink = @import("create_sink.zig");
+pub const delete_link = @import("delete_link.zig");
+pub const delete_sink = @import("delete_sink.zig");
+pub const get_link = @import("get_link.zig");
+pub const get_sink = @import("get_sink.zig");
+pub const get_sink_policy = @import("get_sink_policy.zig");
+pub const list_attached_links = @import("list_attached_links.zig");
+pub const list_links = @import("list_links.zig");
+pub const list_sinks = @import("list_sinks.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const put_sink_policy = @import("put_sink_policy.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_link = @import("update_link.zig");

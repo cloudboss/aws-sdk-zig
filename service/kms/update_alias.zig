@@ -46,7 +46,7 @@ pub const UpdateAliasInput = struct {
     };
 };
 
-pub const UpdateAliasOutput = struct {};
+const UpdateAliasOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

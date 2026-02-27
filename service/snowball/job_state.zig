@@ -1,0 +1,31 @@
+pub const JobState = enum {
+    new,
+    preparing_appliance,
+    preparing_shipment,
+    in_transit_to_customer,
+    with_customer,
+    in_transit_to_aws,
+    with_aws_sorting_facility,
+    with_aws,
+    in_progress,
+    complete,
+    cancelled,
+    listing,
+    pending,
+
+    pub const json_field_names = .{
+        .new = "NEW",
+        .preparing_appliance = "PREPARING_APPLIANCE",
+        .preparing_shipment = "PREPARING_SHIPMENT",
+        .in_transit_to_customer = "IN_TRANSIT_TO_CUSTOMER",
+        .with_customer = "WITH_CUSTOMER",
+        .in_transit_to_aws = "IN_TRANSIT_TO_AWS",
+        .with_aws_sorting_facility = "WITH_AWS_SORTING_FACILITY",
+        .with_aws = "WITH_AWS",
+        .in_progress = "IN_PROGRESS",
+        .complete = "COMPLETE",
+        .cancelled = "CANCELLED",
+        .listing = "LISTING",
+        .pending = "PENDING",
+    };
+};

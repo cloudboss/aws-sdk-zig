@@ -17,7 +17,7 @@ pub const DeleteEdgeDeploymentStageInput = struct {
     };
 };
 
-pub const DeleteEdgeDeploymentStageOutput = struct {};
+const DeleteEdgeDeploymentStageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

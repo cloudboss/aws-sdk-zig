@@ -22,7 +22,7 @@ pub const DeleteLoginProfileInput = struct {
     user_name: ?[]const u8 = null,
 };
 
-pub const DeleteLoginProfileOutput = struct {};
+const DeleteLoginProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

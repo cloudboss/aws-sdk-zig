@@ -4,22 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const RemoveTagsInput = struct {
-    /// Specifies the `ARN` for the Elasticsearch domain from which you want to
-    /// delete the specified tags.
-    arn: []const u8,
+const RemoveTagsInput = @import("remove_tags_request.zig").RemoveTagsRequest;
 
-    /// Specifies the `TagKey` list which you want to remove from the Elasticsearch
-    /// domain.
-    tag_keys: []const []const u8,
-
-    pub const json_field_names = .{
-        .arn = "ARN",
-        .tag_keys = "TagKeys",
-    };
-};
-
-pub const RemoveTagsOutput = struct {};
+const RemoveTagsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

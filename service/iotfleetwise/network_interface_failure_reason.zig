@@ -1,0 +1,21 @@
+pub const NetworkInterfaceFailureReason = enum {
+    duplicate_interface,
+    conflicting_network_interface,
+    network_interface_to_add_already_exists,
+    can_network_interface_info_is_null,
+    obd_network_interface_info_is_null,
+    network_interface_to_remove_associated_with_signals,
+    vehicle_middleware_network_interface_info_is_null,
+    custom_decoding_signal_network_interface_info_is_null,
+
+    pub const json_field_names = .{
+        .duplicate_interface = "DUPLICATE_INTERFACE",
+        .conflicting_network_interface = "CONFLICTING_NETWORK_INTERFACE",
+        .network_interface_to_add_already_exists = "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS",
+        .can_network_interface_info_is_null = "CAN_NETWORK_INTERFACE_INFO_IS_NULL",
+        .obd_network_interface_info_is_null = "OBD_NETWORK_INTERFACE_INFO_IS_NULL",
+        .network_interface_to_remove_associated_with_signals = "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS",
+        .vehicle_middleware_network_interface_info_is_null = "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL",
+        .custom_decoding_signal_network_interface_info_is_null = "CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL",
+    };
+};

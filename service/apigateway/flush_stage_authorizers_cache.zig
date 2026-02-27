@@ -17,7 +17,7 @@ pub const FlushStageAuthorizersCacheInput = struct {
     };
 };
 
-pub const FlushStageAuthorizersCacheOutput = struct {};
+const FlushStageAuthorizersCacheOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

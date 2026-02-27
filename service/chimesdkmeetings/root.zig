@@ -1,0 +1,21 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const batch_create_attendee = @import("batch_create_attendee.zig");
+pub const batch_update_attendee_capabilities_except = @import("batch_update_attendee_capabilities_except.zig");
+pub const create_attendee = @import("create_attendee.zig");
+pub const create_meeting = @import("create_meeting.zig");
+pub const create_meeting_with_attendees = @import("create_meeting_with_attendees.zig");
+pub const delete_attendee = @import("delete_attendee.zig");
+pub const delete_meeting = @import("delete_meeting.zig");
+pub const get_attendee = @import("get_attendee.zig");
+pub const get_meeting = @import("get_meeting.zig");
+pub const list_attendees = @import("list_attendees.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const start_meeting_transcription = @import("start_meeting_transcription.zig");
+pub const stop_meeting_transcription = @import("stop_meeting_transcription.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");
+pub const update_attendee_capabilities = @import("update_attendee_capabilities.zig");

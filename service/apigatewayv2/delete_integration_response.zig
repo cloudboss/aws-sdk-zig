@@ -21,7 +21,7 @@ pub const DeleteIntegrationResponseInput = struct {
     };
 };
 
-pub const DeleteIntegrationResponseOutput = struct {};
+const DeleteIntegrationResponseOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

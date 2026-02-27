@@ -15,7 +15,7 @@ pub const DeleteServerCertificateInput = struct {
     server_certificate_name: []const u8,
 };
 
-pub const DeleteServerCertificateOutput = struct {};
+const DeleteServerCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

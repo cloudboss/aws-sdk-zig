@@ -13,7 +13,7 @@ pub const StopProcessingJobInput = struct {
     };
 };
 
-pub const StopProcessingJobOutput = struct {};
+const StopProcessingJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

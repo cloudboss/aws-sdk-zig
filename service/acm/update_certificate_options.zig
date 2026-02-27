@@ -24,7 +24,7 @@ pub const UpdateCertificateOptionsInput = struct {
     };
 };
 
-pub const UpdateCertificateOptionsOutput = struct {};
+const UpdateCertificateOptionsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

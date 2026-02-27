@@ -37,7 +37,7 @@ pub const UpdateGroupInput = struct {
     new_path: ?[]const u8 = null,
 };
 
-pub const UpdateGroupOutput = struct {};
+const UpdateGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

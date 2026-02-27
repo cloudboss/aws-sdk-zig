@@ -9,7 +9,7 @@ pub const DeleteGeneratedTemplateInput = struct {
     generated_template_name: []const u8,
 };
 
-pub const DeleteGeneratedTemplateOutput = struct {};
+const DeleteGeneratedTemplateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1,0 +1,18 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const cancel_task = @import("cancel_task.zig");
+pub const create_task = @import("create_task.zig");
+pub const describe_device = @import("describe_device.zig");
+pub const describe_device_ec_2_instances = @import("describe_device_ec_2_instances.zig");
+pub const describe_execution = @import("describe_execution.zig");
+pub const describe_task = @import("describe_task.zig");
+pub const list_device_resources = @import("list_device_resources.zig");
+pub const list_devices = @import("list_devices.zig");
+pub const list_executions = @import("list_executions.zig");
+pub const list_tags_for_resource = @import("list_tags_for_resource.zig");
+pub const list_tasks = @import("list_tasks.zig");
+pub const tag_resource = @import("tag_resource.zig");
+pub const untag_resource = @import("untag_resource.zig");

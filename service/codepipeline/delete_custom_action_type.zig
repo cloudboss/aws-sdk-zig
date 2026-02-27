@@ -24,7 +24,7 @@ pub const DeleteCustomActionTypeInput = struct {
     };
 };
 
-pub const DeleteCustomActionTypeOutput = struct {};
+const DeleteCustomActionTypeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

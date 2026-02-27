@@ -30,7 +30,7 @@ pub const GetBucketNotificationConfigurationInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-const GetBucketNotificationConfigurationOutput = @import("notification_configuration.zig").GetBucketNotificationConfigurationOutput;
+const GetBucketNotificationConfigurationOutput = @import("notification_configuration.zig").NotificationConfiguration;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

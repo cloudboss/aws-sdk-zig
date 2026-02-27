@@ -19,7 +19,7 @@ pub const CancelConversionTaskInput = struct {
     reason_message: ?[]const u8 = null,
 };
 
-pub const CancelConversionTaskOutput = struct {};
+const CancelConversionTaskOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
