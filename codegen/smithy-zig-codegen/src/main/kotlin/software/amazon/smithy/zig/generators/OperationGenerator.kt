@@ -15,6 +15,7 @@ import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.HttpPayloadTrait
 import software.amazon.smithy.model.traits.StreamingTrait
+import software.amazon.smithy.zig.DefaultValueUtil
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
@@ -66,6 +67,20 @@ class OperationGenerator(
         return false
     }
 
+    /**
+     * Check if this operation has an event stream output:
+     * an output member targeting a @streaming union.
+     */
+    private fun hasEventStreamOutput(): Boolean {
+        for ((_, memberShape) in outputShape.allMembers) {
+            val target = model.expectShape(memberShape.target)
+            if (target is UnionShape && target.hasTrait(StreamingTrait::class.java)) {
+                return true
+            }
+        }
+        return false
+    }
+
     private fun buildOperationContext(): OperationContext {
         return OperationContext(
             operation = operation,
@@ -83,6 +98,7 @@ class OperationGenerator(
     fun run() {
         val ctx = buildOperationContext()
         val isStreaming = hasStreamingOutputPayload()
+        val isEventStream = hasEventStreamOutput()
 
         context.writerDelegator().useFileWriter(fileName) { writer ->
             writer.importContainer.addImport("std", "std")
@@ -112,27 +128,34 @@ class OperationGenerator(
             writer.blankLine()
             writeOptionsStruct(writer)
             writer.blankLine()
-            if (isStreaming) {
+
+            if (isEventStream) {
+                // Event stream operations get a stub until full support is implemented
+                writeEventStreamStubExecuteFunction(writer)
+            } else if (isStreaming) {
                 writeStreamingExecuteFunction(writer)
             } else {
                 writeExecuteFunction(writer)
             }
-            // Presign function for allowlisted operations
-            if (operation.id.toString() in PRESIGNABLE_OPERATIONS) {
-                writer.blankLine()
-                writePresignFunction(writer)
-            }
 
-            writer.blankLine()
-            protocol.writeSerializeRequest(writer, ctx)
-            writer.blankLine()
-            if (isStreaming) {
-                protocol.writeDeserializeStreamingResponse(writer, ctx)
-            } else {
-                protocol.writeDeserializeResponse(writer, ctx)
+            if (!isEventStream) {
+                // Presign function for allowlisted operations
+                if (operation.id.toString() in PRESIGNABLE_OPERATIONS) {
+                    writer.blankLine()
+                    writePresignFunction(writer)
+                }
+
+                writer.blankLine()
+                protocol.writeSerializeRequest(writer, ctx)
+                writer.blankLine()
+                if (isStreaming) {
+                    protocol.writeDeserializeStreamingResponse(writer, ctx)
+                } else {
+                    protocol.writeDeserializeResponse(writer, ctx)
+                }
+                writer.blankLine()
+                protocol.writeParseErrorResponse(writer, ctx)
             }
-            writer.blankLine()
-            protocol.writeParseErrorResponse(writer, ctx)
         }
     }
 
@@ -162,8 +185,11 @@ class OperationGenerator(
                 writer.writeDocs(memberDocs)
             }
 
-            val defaultValue = if (!memberShape.isRequired) " = null" else ""
-            writer.write("\$L: \$L\$L,", fieldName, zigType, defaultValue)
+            val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, context.symbolProvider())
+            val defaultSuffix = defaultValue?.let { " = ${it.literal}" }
+                ?: if (!memberShape.isRequired) " = null" else ""
+            val outputType = defaultValue?.typeName ?: zigType
+            writer.write("\$L: \$L\$L,", fieldName, outputType, defaultSuffix)
             firstField = false
         }
 
@@ -190,8 +216,16 @@ class OperationGenerator(
             // They use `= undefined` default since deserializeStreamingResponse sets them immediately
             val isOptional = if (isStreamingBlobField) false
                 else !memberShape.isRequired || !isScalar
-            val zigType = if (isOptional) "?$baseType" else baseType
-            val defaultValue = when {
+            val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, context.symbolProvider())
+            val zigType = if (defaultValue != null) {
+                defaultValue.typeName
+            } else if (isOptional) {
+                "?$baseType"
+            } else {
+                baseType
+            }
+            val defaultSuffix = when {
+                defaultValue != null -> " = ${defaultValue.literal}"
                 isStreamingBlobField -> " = undefined"
                 isOptional -> " = null"
                 else -> ""
@@ -208,7 +242,7 @@ class OperationGenerator(
                 writer.writeDocs(memberDocs)
             }
 
-            writer.write("\$L: \$L\$L,", fieldName, zigType, defaultValue)
+            writer.write("\$L: \$L\$L,", fieldName, zigType, defaultSuffix)
             firstField = false
         }
 
@@ -237,6 +271,24 @@ class OperationGenerator(
         writer.openBlock("pub const Options = struct {")
         writer.write("diagnostic: ?*ServiceError = null,")
         writer.closeBlock("};")
+    }
+
+    private fun writeEventStreamStubExecuteFunction(writer: ZigWriter) {
+        val inputName = "${operationName}Input"
+        val outputName = "${operationName}Output"
+
+        writer.openBlock(
+            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: Options) !\$L {",
+            inputName, outputName,
+        )
+
+        writer.write("_ = client;")
+        writer.write("_ = allocator;")
+        writer.write("_ = input;")
+        writer.write("_ = options;")
+        writer.write("return error.EventStreamNotSupported;")
+
+        writer.closeBlock("}")
     }
 
     private fun writeExecuteFunction(writer: ZigWriter) {
