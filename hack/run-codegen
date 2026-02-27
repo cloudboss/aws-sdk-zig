@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+"""Run Gradle codegen in batches to avoid loading all models into JVM at once."""
+
+import json
+import os
+import shutil
+import subprocess
+import sys
+
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "50"))
+SERVICES_FILTER = os.environ.get("SERVICES_FILTER", "")
+DIR_OUT = os.environ.get("DIR_OUT", "_output")
+AWS_MODELS_COMMIT = os.environ.get("AWS_MODELS_COMMIT", "")
+CTR_IMAGE = os.environ.get("CTR_IMAGE", "")
+DIR_ROOT = os.environ.get("DIR_ROOT", os.getcwd())
+
+if not AWS_MODELS_COMMIT:
+    print("Error: AWS_MODELS_COMMIT not set", file=sys.stderr)
+    sys.exit(1)
+if not CTR_IMAGE:
+    print("Error: CTR_IMAGE not set", file=sys.stderr)
+    sys.exit(1)
+
+MODELS_SRC = os.path.join(DIR_OUT, f"api-models-aws-{AWS_MODELS_COMMIT}")
+SMITHY_BUILD = os.path.join("codegen", "sdk-codegen", "smithy-build.json")
+MODEL_DIR = os.path.join("codegen", "sdk-codegen", "model")
+PROJECTIONS_DIR = os.path.join(
+    DIR_OUT, "codegen", "sdk-codegen", "smithyprojections", "sdk-codegen"
+)
+
+GRADLE_CMD = (
+    "cd codegen && gradle build"
+    f" --gradle-user-home /code/{DIR_OUT}/gradle-home"
+    f" --project-cache-dir /code/{DIR_OUT}/codegen/.gradle"
+)
+
+
+def load_services():
+    services = []
+    with open("hack/services.txt") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            parts = line.split()
+            pkg, model_path = parts[0], parts[1]
+            services.append((pkg, model_path))
+    return services
+
+
+def filter_services(services):
+    if not SERVICES_FILTER:
+        return services
+    wanted = set(SERVICES_FILTER.replace(",", " ").split())
+    return [(pkg, path) for pkg, path in services if pkg in wanted]
+
+
+def write_batch_smithy_build(batch):
+    with open("hack/services.txt") as f:
+        all_lines = [l.strip().split() for l in f if l.strip()]
+
+    # Build full projection map from services.txt (pkg -> shape_id is in column 3)
+    shape_map = {parts[0]: parts[2] for parts in all_lines if len(parts) >= 3}
+
+    projections = {}
+    for pkg, _ in batch:
+        shape_id = shape_map.get(pkg, "")
+        projections[pkg] = {
+            "plugins": {
+                "zig-codegen": {
+                    "service": shape_id,
+                    "package": pkg,
+                }
+            }
+        }
+
+    smithy_build = {
+        "version": "1.0",
+        "sources": ["model"],
+        "projections": projections,
+    }
+    with open(SMITHY_BUILD, "w") as f:
+        json.dump(smithy_build, f, indent=4)
+        f.write("\n")
+
+
+def populate_model_dir(batch):
+    if os.path.isdir(MODEL_DIR):
+        shutil.rmtree(MODEL_DIR)
+    os.makedirs(MODEL_DIR)
+    for pkg, model_path in batch:
+        src = os.path.join(MODELS_SRC, model_path)
+        dst = os.path.join(MODEL_DIR, f"{pkg}.json")
+        shutil.copy2(src, dst)
+
+
+def run_gradle():
+    result = subprocess.run(
+        [
+            "docker", "run", "--rm",
+            "-v", f"{DIR_ROOT}:/code",
+            "-w", "/code",
+            CTR_IMAGE,
+            "/bin/sh", "-c", GRADLE_CMD,
+        ],
+        capture_output=False,
+    )
+    return result.returncode
+
+
+def copy_outputs(batch):
+    for pkg, _ in batch:
+        src_dir = os.path.join(PROJECTIONS_DIR, pkg, "zig-codegen")
+        if not os.path.isdir(src_dir):
+            continue
+        dst_dir = os.path.join("service", pkg)
+        if os.path.isdir(dst_dir):
+            shutil.rmtree(dst_dir)
+        os.makedirs(dst_dir)
+        for fname in os.listdir(src_dir):
+            if fname.endswith(".zig"):
+                shutil.copy2(os.path.join(src_dir, fname), os.path.join(dst_dir, fname))
+
+
+def main():
+    services = load_services()
+    services = filter_services(services)
+
+    if not services:
+        print("No services to generate.")
+        return
+
+    batches = [services[i:i + BATCH_SIZE] for i in range(0, len(services), BATCH_SIZE)]
+    print(
+        f"Generating {len(services)} service(s) in {len(batches)} batch(es)"
+        f" of up to {BATCH_SIZE}."
+    )
+
+    failed_batches = []
+    for i, batch in enumerate(batches, 1):
+        pkgs = [pkg for pkg, _ in batch]
+        print(f"\nBatch {i}/{len(batches)}: {pkgs[0]} .. {pkgs[-1]} ({len(batch)} services)")
+
+        populate_model_dir(batch)
+        write_batch_smithy_build(batch)
+
+        rc = run_gradle()
+        if rc != 0:
+            print(f"  Gradle failed (exit {rc}) for batch {i}; continuing.", file=sys.stderr)
+            failed_batches.append(i)
+
+        copy_outputs(batch)
+
+    if failed_batches:
+        print(f"\nFailed batches: {failed_batches}", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"\nDone. Generated {len(services)} service(s).")
+
+
+if __name__ == "__main__":
+    main()

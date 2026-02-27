@@ -79,44 +79,22 @@ test-integration: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh"
 
-SERVICES = sts dynamodb lambda s3 ec2 iam secretsmanager ssm sqs sns
+# Set SERVICES_FILTER to a comma-separated list to generate only a subset,
+# e.g.: SERVICES_FILTER=sts,s3 make codegen
+SERVICES_FILTER ?=
 
 fetch-models: | $(DIR_OUT)
 	@curl -sL -o $(DIR_OUT)/api-models-aws.zip \
 		"https://codeload.github.com/aws/api-models-aws/zip/$(AWS_MODELS_COMMIT)"
 	@unzip -qo $(DIR_OUT)/api-models-aws.zip -d $(DIR_OUT)
-	@mkdir -p codegen/sdk-codegen/model
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/sts/service/2011-06-15/sts-2011-06-15.json \
-		codegen/sdk-codegen/model/sts.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/dynamodb/service/2012-08-10/dynamodb-2012-08-10.json \
-		codegen/sdk-codegen/model/dynamodb.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/lambda/service/2015-03-31/lambda-2015-03-31.json \
-		codegen/sdk-codegen/model/lambda.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/s3/service/2006-03-01/s3-2006-03-01.json \
-		codegen/sdk-codegen/model/s3.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/ec2/service/2016-11-15/ec2-2016-11-15.json \
-		codegen/sdk-codegen/model/ec2.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/iam/service/2010-05-08/iam-2010-05-08.json \
-		codegen/sdk-codegen/model/iam.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/secrets-manager/service/2017-10-17/secrets-manager-2017-10-17.json \
-		codegen/sdk-codegen/model/secretsmanager.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/ssm/service/2014-11-06/ssm-2014-11-06.json \
-		codegen/sdk-codegen/model/ssm.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/sqs/service/2012-11-05/sqs-2012-11-05.json \
-		codegen/sdk-codegen/model/sqs.json
-	@cp $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/models/sns/service/2010-03-31/sns-2010-03-31.json \
-		codegen/sdk-codegen/model/sns.json
 
 codegen: $(HAS_IMAGE_LOCAL) fetch-models
-	@docker run --rm \
-		-v $(DIR_ROOT):/code \
-		-w /code \
-		$(CTR_IMAGE_LOCAL) /bin/sh -c "cd codegen && gradle build --gradle-user-home /code/$(DIR_OUT)/gradle-home --project-cache-dir /code/$(DIR_OUT)/codegen/.gradle"
-	@for svc in $(SERVICES); do \
-		rm -rf service/$${svc}; \
-		mkdir -p service/$${svc}; \
-		cp $(DIR_OUT)/codegen/sdk-codegen/smithyprojections/sdk-codegen/$${svc}/zig-codegen/*.zig service/$${svc}/; \
-	done
+	@SERVICES_FILTER="$(SERVICES_FILTER)" \
+		DIR_OUT="$(DIR_OUT)" \
+		AWS_MODELS_COMMIT="$(AWS_MODELS_COMMIT)" \
+		CTR_IMAGE="$(CTR_IMAGE_LOCAL)" \
+		DIR_ROOT="$(DIR_ROOT)" \
+		python3 hack/run-codegen
 
 certs:
 	@bash tests/integration/certs/generate.sh

@@ -125,11 +125,11 @@ def write_smithy_build(services, output_path):
 
 
 def write_services_txt(services, output_path):
-    """Write services.txt with one line per service (tab-separated)."""
+    """Write services.txt with one line per service (space-separated)."""
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w") as f:
         for package_name, _, rel_model_path, shape_id in services:
-            f.write(f"{package_name}\t{rel_model_path}\t{shape_id}\n")
+            f.write(f"{package_name} {rel_model_path} {shape_id}\n")
 
 
 def main():
