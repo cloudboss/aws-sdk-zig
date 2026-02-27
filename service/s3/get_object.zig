@@ -265,7 +265,7 @@ pub const GetObjectOutput = struct {
     accept_ranges: ?[]const u8 = null,
 
     /// Object data.
-    body: aws.http.StreamingBody = undefined,
+    body: aws.http.StreamingBody = "",
 
     /// Indicates whether the object uses an S3 Bucket Key for server-side
     /// encryption with Key Management Service (KMS)

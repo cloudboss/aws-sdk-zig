@@ -50,7 +50,7 @@ pub const UpdateAssociationInput = struct {
     /// command line. This parameter forces the association to run immediately after
     /// updating it and
     /// according to the interval specified.
-    apply_only_at_cron_interval: ?bool = null,
+    apply_only_at_cron_interval: bool = false,
 
     /// The ID of the association you want to update.
     association_id: []const u8,

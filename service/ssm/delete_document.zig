@@ -16,7 +16,7 @@ pub const DeleteDocumentInput = struct {
     /// a document
     /// of type `ApplicationConfigurationSchema`. You can restrict access to the
     /// `Force` flag in an Identity and Access Management (IAM) policy.
-    force: ?bool = null,
+    force: bool = false,
 
     /// The name of the document.
     name: []const u8,

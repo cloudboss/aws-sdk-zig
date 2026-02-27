@@ -5,7 +5,7 @@ const SeveritySummary = @import("severity_summary.zig").SeveritySummary;
 /// type.
 pub const NonCompliantSummary = struct {
     /// The total number of compliance items that aren't compliant.
-    non_compliant_count: ?i32,
+    non_compliant_count: i32 = 0,
 
     /// A summary of the non-compliance severity by compliance type
     severity_summary: ?SeveritySummary,

@@ -29,7 +29,7 @@ pub const BaselineOverride = struct {
     /// applied to the managed nodes. The default value is `false`. Applies to Linux
     /// managed
     /// nodes only.
-    approved_patches_enable_non_security: ?bool,
+    approved_patches_enable_non_security: bool = false,
 
     /// Indicates whether managed nodes for which there are available
     /// security-related patches that

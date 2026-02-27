@@ -21,7 +21,7 @@ pub const AssociationDescription = struct {
     /// an association to run immediately after you create it. This parameter isn't
     /// supported for rate
     /// expressions.
-    apply_only_at_cron_interval: ?bool,
+    apply_only_at_cron_interval: bool = false,
 
     /// The association ID.
     association_id: ?[]const u8,

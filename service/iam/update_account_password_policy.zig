@@ -16,7 +16,7 @@ pub const UpdateAccountPasswordPolicyInput = struct {
     /// the default
     /// value of `false`. The result is that IAM users in the account do not
     /// automatically have permissions to change their own password.
-    allow_users_to_change_password: ?bool = null,
+    allow_users_to_change_password: bool = false,
 
     /// Prevents IAM users who are accessing the account via the Amazon Web Services
     /// Management Console from setting a
@@ -71,7 +71,7 @@ pub const UpdateAccountPasswordPolicyInput = struct {
     /// the default
     /// value of `false`. The result is that passwords do not require at least one
     /// lowercase character.
-    require_lowercase_characters: ?bool = null,
+    require_lowercase_characters: bool = false,
 
     /// Specifies whether IAM user passwords must contain at least one numeric
     /// character (0
@@ -81,7 +81,7 @@ pub const UpdateAccountPasswordPolicyInput = struct {
     /// the default
     /// value of `false`. The result is that passwords do not require at least one
     /// numeric character.
-    require_numbers: ?bool = null,
+    require_numbers: bool = false,
 
     /// Specifies whether IAM user passwords must contain at least one of the
     /// following
@@ -93,7 +93,7 @@ pub const UpdateAccountPasswordPolicyInput = struct {
     /// the default
     /// value of `false`. The result is that passwords do not require at least one
     /// symbol character.
-    require_symbols: ?bool = null,
+    require_symbols: bool = false,
 
     /// Specifies whether IAM user passwords must contain at least one uppercase
     /// character
@@ -103,7 +103,7 @@ pub const UpdateAccountPasswordPolicyInput = struct {
     /// the default
     /// value of `false`. The result is that passwords do not require at least one
     /// uppercase character.
-    require_uppercase_characters: ?bool = null,
+    require_uppercase_characters: bool = false,
 };
 
 pub const UpdateAccountPasswordPolicyOutput = struct {

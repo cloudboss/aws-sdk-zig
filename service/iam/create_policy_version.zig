@@ -57,7 +57,7 @@ pub const CreatePolicyVersionInput = struct {
     /// For more information about managed policy versions, see [Versioning for
     /// managed
     /// policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html) in the *IAM User Guide*.
-    set_as_default: ?bool = null,
+    set_as_default: bool = false,
 };
 
 pub const CreatePolicyVersionOutput = struct {

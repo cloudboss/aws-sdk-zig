@@ -6,7 +6,7 @@ pub const ResolvedTargets = struct {
     parameter_values: ?[]const []const u8,
 
     /// A boolean value indicating whether the resolved target list is truncated.
-    truncated: ?bool,
+    truncated: bool = false,
 
     pub const json_field_names = .{
         .parameter_values = "ParameterValues",

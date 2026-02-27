@@ -29,7 +29,7 @@ pub const CreateAssociationInput = struct {
     /// *Amazon Web Services Systems Manager User Guide*.
     ///
     /// This parameter isn't supported for rate expressions.
-    apply_only_at_cron_interval: ?bool = null,
+    apply_only_at_cron_interval: bool = false,
 
     /// Specify a descriptive name for the association.
     association_name: ?[]const u8 = null,

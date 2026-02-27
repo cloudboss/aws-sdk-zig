@@ -31,16 +31,16 @@ pub const InstancePatchState = struct {
     /// The number of patches from the patch baseline that were attempted to be
     /// installed during the
     /// last patching operation, but failed to install.
-    failed_count: ?i32,
+    failed_count: i32 = 0,
 
     /// The number of patches from the patch baseline that are installed on the
     /// managed node.
-    installed_count: ?i32,
+    installed_count: i32 = 0,
 
     /// The number of patches not specified in the patch baseline that are installed
     /// on the managed
     /// node.
-    installed_other_count: ?i32,
+    installed_other_count: i32 = 0,
 
     /// The number of patches installed by Patch Manager since the last time the
     /// managed node was
@@ -84,7 +84,7 @@ pub const InstancePatchState = struct {
     /// The number of patches from the patch baseline that are applicable for the
     /// managed node but
     /// aren't currently installed.
-    missing_count: ?i32,
+    missing_count: i32 = 0,
 
     /// The number of patches from the patch baseline that aren't applicable for the
     /// managed node
@@ -92,7 +92,7 @@ pub const InstancePatchState = struct {
     /// the list of patch
     /// names is very large. The number of patches beyond this limit are reported in
     /// `UnreportedNotApplicableCount`.
-    not_applicable_count: ?i32,
+    not_applicable_count: i32 = 0,
 
     /// The type of patching operation that was performed: or
     ///

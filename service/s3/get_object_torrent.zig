@@ -24,7 +24,7 @@ pub const GetObjectTorrentInput = struct {
 
 pub const GetObjectTorrentOutput = struct {
     /// A Bencoded dictionary as defined by the BitTorrent specification
-    body: aws.http.StreamingBody = undefined,
+    body: aws.http.StreamingBody = "",
 
     request_charged: ?RequestCharged = null,
 

@@ -33,7 +33,7 @@ pub const DelegationRequest = struct {
     /// [SendDelegationToken](https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html)
     /// must be called by the owner of this delegation request. This is set by the
     /// requesting partner.
-    only_send_by_owner: ?bool,
+    only_send_by_owner: bool = false,
 
     /// Amazon Web Services account ID of the owner of the delegation request.
     owner_account_id: ?[]const u8,

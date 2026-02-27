@@ -50,7 +50,7 @@ pub const ListUserPoliciesOutput = struct {
     /// that you check `IsTruncated` after every call to ensure that you receive all
     /// your
     /// results.
-    is_truncated: ?bool = null,
+    is_truncated: bool = false,
 
     /// When `IsTruncated` is `true`, this element
     /// is present and contains the value to use for the `Marker` parameter in a

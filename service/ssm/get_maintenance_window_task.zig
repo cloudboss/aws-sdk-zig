@@ -83,7 +83,7 @@ pub const GetMaintenanceWindowTaskOutput = struct {
     /// The priority of the task when it runs. The lower the number, the higher the
     /// priority. Tasks
     /// that have the same priority are scheduled in parallel.
-    priority: ?i32 = null,
+    priority: i32 = 0,
 
     /// The Amazon Resource Name (ARN) of the IAM service role for
     /// Amazon Web Services Systems Manager to assume when running a maintenance

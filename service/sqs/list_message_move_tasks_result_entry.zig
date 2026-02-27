@@ -1,7 +1,7 @@
 /// Contains the details of a message movement task.
 pub const ListMessageMoveTasksResultEntry = struct {
     /// The approximate number of messages already moved to the destination queue.
-    approximate_number_of_messages_moved: ?i64,
+    approximate_number_of_messages_moved: i64 = 0,
 
     /// The number of messages to be moved from the source queue. This number is
     /// obtained at
@@ -31,7 +31,7 @@ pub const ListMessageMoveTasksResultEntry = struct {
     source_arn: ?[]const u8,
 
     /// The timestamp of starting the message movement task.
-    started_timestamp: ?i64,
+    started_timestamp: i64 = 0,
 
     /// The status of the message movement task. Possible values are: RUNNING,
     /// COMPLETED,

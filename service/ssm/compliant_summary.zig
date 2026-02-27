@@ -5,7 +5,7 @@ const SeveritySummary = @import("severity_summary.zig").SeveritySummary;
 /// resource count for each compliance type.
 pub const CompliantSummary = struct {
     /// The total number of resources that are compliant.
-    compliant_count: ?i32,
+    compliant_count: i32 = 0,
 
     /// A summary of the compliance severity by compliance type.
     severity_summary: ?SeveritySummary,

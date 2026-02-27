@@ -138,7 +138,7 @@ pub const CreateFunctionInput = struct {
     package_type: ?PackageType = null,
 
     /// Set to true to publish the first version of the function during creation.
-    publish: ?bool = null,
+    publish: bool = false,
 
     /// Specifies where to publish the function version or configuration.
     publish_to: ?FunctionVersionLatestPublished = null,
@@ -240,7 +240,7 @@ pub const CreateFunctionOutput = struct {
     code_sha_256: ?[]const u8 = null,
 
     /// The size of the function's deployment package, in bytes.
-    code_size: ?i64 = null,
+    code_size: i64 = 0,
 
     /// The SHA256 hash of the function configuration.
     config_sha_256: ?[]const u8 = null,

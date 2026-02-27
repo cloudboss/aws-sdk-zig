@@ -19,7 +19,7 @@ pub const GetOutboundWebIdentityFederationInfoOutput = struct {
     /// Amazon Web Services account. When true, IAM principals in the account can
     /// call the `GetWebIdentityToken` API to obtain JSON Web Tokens (JWTs) for
     /// authentication with external services.
-    jwt_vending_enabled: ?bool = null,
+    jwt_vending_enabled: bool = false,
 };
 
 pub const Options = struct {

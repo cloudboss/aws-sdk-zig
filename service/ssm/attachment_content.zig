@@ -12,7 +12,7 @@ pub const AttachmentContent = struct {
     name: ?[]const u8,
 
     /// The size of an attachment in bytes.
-    size: ?i64,
+    size: i64 = 0,
 
     /// The URL location of the attachment content.
     url: ?[]const u8,

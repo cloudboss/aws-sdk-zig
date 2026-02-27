@@ -28,7 +28,7 @@ pub const CreateLoginProfileInput = struct {
 
     /// Specifies whether the user is required to set a new password on next
     /// sign-in.
-    password_reset_required: ?bool = null,
+    password_reset_required: bool = false,
 
     /// The name of the IAM user to create a password for. The user must already
     /// exist.

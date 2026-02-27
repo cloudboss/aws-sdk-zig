@@ -41,7 +41,7 @@ pub const GetMaintenanceWindowExecutionTaskOutput = struct {
     max_errors: ?[]const u8 = null,
 
     /// The priority of the task.
-    priority: ?i32 = null,
+    priority: i32 = 0,
 
     /// The role that was assumed when running the task.
     service_role: ?[]const u8 = null,

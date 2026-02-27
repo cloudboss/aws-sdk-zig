@@ -100,7 +100,7 @@ pub const GetCommandInvocationOutput = struct {
     /// `-1`, then the command hasn't started running on the managed node, or it
     /// wasn't
     /// received by the node.
-    response_code: ?i32 = null,
+    response_code: i32 = 0,
 
     /// The first 8,000 characters written by the plugin to `stderr`. If the command
     /// hasn't finished running, then this string is empty.

@@ -7,7 +7,7 @@ const ContributorInsightsSummary = @import("contributor_insights_summary.zig").C
 
 pub const ListContributorInsightsInput = struct {
     /// Maximum number of results to return per page.
-    max_results: ?i32 = null,
+    max_results: i32 = 0,
 
     /// A token to for the desired page, if there is one.
     next_token: ?[]const u8 = null,

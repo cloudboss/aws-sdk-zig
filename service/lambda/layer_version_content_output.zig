@@ -5,7 +5,7 @@ pub const LayerVersionContentOutput = struct {
     code_sha_256: ?[]const u8,
 
     /// The size of the layer archive in bytes.
-    code_size: ?i64,
+    code_size: i64 = 0,
 
     /// A link to the layer archive in Amazon S3 that is valid for 10 minutes.
     location: ?[]const u8,

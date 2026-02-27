@@ -30,10 +30,10 @@ pub const Command = struct {
     /// states include the following: Success, Failed, Execution Timed Out, Delivery
     /// Timed Out,
     /// Cancelled, Terminated, or Undeliverable.
-    completed_count: ?i32,
+    completed_count: i32 = 0,
 
     /// The number of targets for which the status is Delivery Timed Out.
-    delivery_timed_out_count: ?i32,
+    delivery_timed_out_count: i32 = 0,
 
     /// The name of the document requested for execution.
     document_name: ?[]const u8,
@@ -42,7 +42,7 @@ pub const Command = struct {
     document_version: ?[]const u8,
 
     /// The number of targets for which the status is Failed or Execution Timed Out.
-    error_count: ?i32,
+    error_count: i32 = 0,
 
     /// If a command expires, it changes status to `DeliveryTimedOut` for all
     /// invocations
@@ -165,7 +165,7 @@ pub const Command = struct {
     status_details: ?[]const u8,
 
     /// The number of targets for the command.
-    target_count: ?i32,
+    target_count: i32 = 0,
 
     /// An array of search criteria that targets managed nodes using a Key,Value
     /// combination that

@@ -15,7 +15,7 @@ pub const CancelMessageMoveTaskInput = struct {
 
 pub const CancelMessageMoveTaskOutput = struct {
     /// The approximate number of messages already moved to the destination queue.
-    approximate_number_of_messages_moved: ?i64 = null,
+    approximate_number_of_messages_moved: i64 = 0,
 
     pub const json_field_names = .{
         .approximate_number_of_messages_moved = "ApproximateNumberOfMessagesMoved",

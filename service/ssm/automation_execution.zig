@@ -113,7 +113,7 @@ pub const AutomationExecution = struct {
     /// executions. If true, use the DescribeAutomationStepExecutions API operation
     /// to get the full list
     /// of step executions.
-    step_executions_truncated: ?bool,
+    step_executions_truncated: bool = false,
 
     /// The target of the execution.
     target: ?[]const u8,

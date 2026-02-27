@@ -24,7 +24,7 @@ pub const Activation = struct {
     expiration_date: ?i64,
 
     /// Whether or not the activation is expired.
-    expired: ?bool,
+    expired: bool = false,
 
     /// The Identity and Access Management (IAM) role to assign to the managed node.
     iam_role: ?[]const u8,

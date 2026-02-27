@@ -24,7 +24,7 @@ pub const ServiceSpecificCredentialMetadata = struct {
     service_specific_credential_id: []const u8,
 
     /// The generated user name for the service-specific credential.
-    service_user_name: ?[]const u8,
+    service_user_name: []const u8 = "",
 
     /// The status of the service-specific credential. `Active` means that the key
     /// is

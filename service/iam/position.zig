@@ -6,8 +6,8 @@
 /// ` type.
 pub const Position = struct {
     /// The column in the line containing the specified position in the document.
-    column: ?i32,
+    column: i32 = 0,
 
     /// The line containing the specified position in the document.
-    line: ?i32,
+    line: i32 = 0,
 };

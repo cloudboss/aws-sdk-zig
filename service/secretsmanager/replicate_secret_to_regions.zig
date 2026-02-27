@@ -13,7 +13,7 @@ pub const ReplicateSecretToRegionsInput = struct {
     /// Specifies whether to overwrite a secret with the same name in the
     /// destination Region.
     /// By default, secrets aren't overwritten.
-    force_overwrite_replica_secret: ?bool = null,
+    force_overwrite_replica_secret: bool = false,
 
     /// The ARN or name of the secret to replicate.
     secret_id: []const u8,

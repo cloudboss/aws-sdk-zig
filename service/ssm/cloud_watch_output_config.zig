@@ -11,7 +11,7 @@ pub const CloudWatchOutputConfig = struct {
     cloud_watch_log_group_name: ?[]const u8,
 
     /// Enables Systems Manager to send command output to CloudWatch Logs.
-    cloud_watch_output_enabled: ?bool,
+    cloud_watch_output_enabled: bool = false,
 
     pub const json_field_names = .{
         .cloud_watch_log_group_name = "CloudWatchLogGroupName",

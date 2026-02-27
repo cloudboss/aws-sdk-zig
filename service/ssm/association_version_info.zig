@@ -15,7 +15,7 @@ pub const AssociationVersionInfo = struct {
     /// an association to run immediately after you create it. This parameter isn't
     /// supported for rate
     /// expressions.
-    apply_only_at_cron_interval: ?bool,
+    apply_only_at_cron_interval: bool = false,
 
     /// The ID created by the system when the association was created.
     association_id: ?[]const u8,

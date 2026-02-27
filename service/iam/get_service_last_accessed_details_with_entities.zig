@@ -73,7 +73,7 @@ pub const GetServiceLastAccessedDetailsWithEntitiesOutput = struct {
     /// that you check `IsTruncated` after every call to ensure that you receive all
     /// your
     /// results.
-    is_truncated: ?bool = null,
+    is_truncated: bool = false,
 
     /// The date and time, in [ISO 8601 date-time
     /// format](http://www.iso.org/iso/iso8601), when the generated report job was

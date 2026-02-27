@@ -19,7 +19,7 @@ pub const DocumentVersionInfo = struct {
     document_version: ?[]const u8,
 
     /// An identifier for the default version of the document.
-    is_default_version: ?bool,
+    is_default_version: bool = false,
 
     /// The document name.
     name: ?[]const u8,

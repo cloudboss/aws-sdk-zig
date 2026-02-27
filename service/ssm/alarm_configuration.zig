@@ -12,7 +12,7 @@ pub const AlarmConfiguration = struct {
     /// where we successfully retrieve an alarm status of OK or INSUFFICIENT_DATA,
     /// the automation or
     /// command continues to run, regardless of this value. Default is *false*.
-    ignore_poll_alarm_failure: ?bool,
+    ignore_poll_alarm_failure: bool = false,
 
     pub const json_field_names = .{
         .alarms = "Alarms",

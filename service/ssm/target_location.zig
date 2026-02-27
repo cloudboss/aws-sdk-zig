@@ -23,7 +23,7 @@ pub const TargetLocation = struct {
     /// targeted OUs. The default is `false`.
     ///
     /// This parameter is not supported by State Manager.
-    include_child_organization_units: ?bool,
+    include_child_organization_units: bool = false,
 
     /// The Amazon Web Services Regions targeted by the current Automation
     /// execution.

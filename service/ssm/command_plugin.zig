@@ -50,7 +50,7 @@ pub const CommandPlugin = struct {
     output_s3_region: ?[]const u8,
 
     /// A numeric response code generated after running the plugin.
-    response_code: ?i32,
+    response_code: i32 = 0,
 
     /// The time the plugin stopped running. Could stop prematurely if, for example,
     /// a cancel

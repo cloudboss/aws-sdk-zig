@@ -2,10 +2,10 @@
 /// summary.
 pub const InventoryDeletionSummaryItem = struct {
     /// A count of the number of deleted items.
-    count: ?i32,
+    count: i32 = 0,
 
     /// The remaining number of items to delete.
-    remaining_count: ?i32,
+    remaining_count: i32 = 0,
 
     /// The inventory type version.
     version: ?[]const u8,

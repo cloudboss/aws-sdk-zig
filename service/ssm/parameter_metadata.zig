@@ -47,7 +47,7 @@ pub const ParameterMetadata = struct {
     @"type": ?ParameterType,
 
     /// The parameter version.
-    version: ?i64,
+    version: i64 = 0,
 
     pub const json_field_names = .{
         .allowed_pattern = "AllowedPattern",

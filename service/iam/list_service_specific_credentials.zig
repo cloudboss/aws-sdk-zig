@@ -54,7 +54,7 @@ pub const ListServiceSpecificCredentialsOutput = struct {
     /// truncated, you can make a subsequent pagination request using the Marker
     /// request
     /// parameter to retrieve more items.
-    is_truncated: ?bool = null,
+    is_truncated: bool = false,
 
     /// When IsTruncated is true, this element is present and contains the value to
     /// use for

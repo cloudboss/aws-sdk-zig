@@ -15,7 +15,7 @@ pub const DescribePatchGroupStateInput = struct {
 
 pub const DescribePatchGroupStateOutput = struct {
     /// The number of managed nodes in the patch group.
-    instances: ?i32 = null,
+    instances: i32 = 0,
 
     /// The number of managed nodes for which security-related patches are available
     /// but not
@@ -40,15 +40,15 @@ pub const DescribePatchGroupStateOutput = struct {
     /// The number of managed nodes with patches from the patch baseline that failed
     /// to
     /// install.
-    instances_with_failed_patches: ?i32 = null,
+    instances_with_failed_patches: i32 = 0,
 
     /// The number of managed nodes with patches installed that aren't defined in
     /// the patch
     /// baseline.
-    instances_with_installed_other_patches: ?i32 = null,
+    instances_with_installed_other_patches: i32 = 0,
 
     /// The number of managed nodes with installed patches.
-    instances_with_installed_patches: ?i32 = null,
+    instances_with_installed_patches: i32 = 0,
 
     /// The number of managed nodes with patches installed by Patch Manager that
     /// haven't been
@@ -66,10 +66,10 @@ pub const DescribePatchGroupStateOutput = struct {
     instances_with_installed_rejected_patches: ?i32 = null,
 
     /// The number of managed nodes with missing patches from the patch baseline.
-    instances_with_missing_patches: ?i32 = null,
+    instances_with_missing_patches: i32 = 0,
 
     /// The number of managed nodes with patches that aren't applicable.
-    instances_with_not_applicable_patches: ?i32 = null,
+    instances_with_not_applicable_patches: i32 = 0,
 
     /// The number of managed nodes with patches installed that are specified as
     /// other than

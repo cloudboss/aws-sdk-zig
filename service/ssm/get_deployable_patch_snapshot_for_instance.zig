@@ -23,7 +23,7 @@ pub const GetDeployablePatchSnapshotForInstanceInput = struct {
     /// connectivity. Set
     /// to `false` to use standard IPv4-only endpoints. Default is `false`. This
     /// parameter is required for managed nodes in IPv6-only environments.
-    use_s3_dual_stack_endpoint: ?bool = null,
+    use_s3_dual_stack_endpoint: bool = false,
 
     pub const json_field_names = .{
         .baseline_override = "BaselineOverride",

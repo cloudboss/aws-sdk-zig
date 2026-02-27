@@ -3,7 +3,7 @@ pub const MaintenanceWindowIdentity = struct {
     /// The number of hours before the end of the maintenance window that Amazon Web
     /// Services Systems Manager stops scheduling
     /// new tasks for execution.
-    cutoff: ?i32,
+    cutoff: i32 = 0,
 
     /// A description of the maintenance window.
     description: ?[]const u8,
@@ -12,7 +12,7 @@ pub const MaintenanceWindowIdentity = struct {
     duration: ?i32,
 
     /// Indicates whether the maintenance window is enabled.
-    enabled: ?bool,
+    enabled: bool = false,
 
     /// The date and time, in ISO-8601 Extended format, for when the maintenance
     /// window is scheduled

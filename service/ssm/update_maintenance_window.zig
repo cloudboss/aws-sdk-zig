@@ -101,12 +101,12 @@ pub const UpdateMaintenanceWindowOutput = struct {
     /// Whether targets must be registered with the maintenance window before tasks
     /// can be defined
     /// for those targets.
-    allow_unassociated_targets: ?bool = null,
+    allow_unassociated_targets: bool = false,
 
     /// The number of hours before the end of the maintenance window that Amazon Web
     /// Services Systems Manager stops scheduling
     /// new tasks for execution.
-    cutoff: ?i32 = null,
+    cutoff: i32 = 0,
 
     /// An optional description of the update.
     description: ?[]const u8 = null,
@@ -115,7 +115,7 @@ pub const UpdateMaintenanceWindowOutput = struct {
     duration: ?i32 = null,
 
     /// Whether the maintenance window is enabled.
-    enabled: ?bool = null,
+    enabled: bool = false,
 
     /// The date and time, in ISO-8601 Extended format, for when the maintenance
     /// window is scheduled

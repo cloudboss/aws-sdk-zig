@@ -230,7 +230,7 @@ pub const UpdateMaintenanceWindowTaskOutput = struct {
     name: ?[]const u8 = null,
 
     /// The updated priority value.
-    priority: ?i32 = null,
+    priority: i32 = 0,
 
     /// The Amazon Resource Name (ARN) of the IAM service role for
     /// Amazon Web Services Systems Manager to assume when running a maintenance

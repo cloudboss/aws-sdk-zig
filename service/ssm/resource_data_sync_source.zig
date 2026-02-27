@@ -16,12 +16,12 @@ pub const ResourceDataSyncSource = struct {
     /// multiple accounts and
     /// Regions](https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html) in
     /// the *Amazon Web Services Systems Manager User Guide*.
-    enable_all_ops_data_sources: ?bool,
+    enable_all_ops_data_sources: bool = false,
 
     /// Whether to automatically synchronize and aggregate data from new Amazon Web
     /// Services Regions when those
     /// Regions come online.
-    include_future_regions: ?bool,
+    include_future_regions: bool = false,
 
     /// The `SyncSource` Amazon Web Services Regions included in the resource data
     /// sync.

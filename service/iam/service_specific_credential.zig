@@ -28,7 +28,7 @@ pub const ServiceSpecificCredential = struct {
     service_name: []const u8,
 
     /// The generated password for the service-specific credential.
-    service_password: ?[]const u8,
+    service_password: []const u8 = "",
 
     /// The unique identifier for the service-specific credential.
     service_specific_credential_id: []const u8,
@@ -39,7 +39,7 @@ pub const ServiceSpecificCredential = struct {
     /// Services account, as in
     /// `jane-at-123456789012`, for example. This value cannot be configured by the
     /// user.
-    service_user_name: ?[]const u8,
+    service_user_name: []const u8 = "",
 
     /// The status of the service-specific credential. `Active` means that the key
     /// is

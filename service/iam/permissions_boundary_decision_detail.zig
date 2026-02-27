@@ -14,5 +14,5 @@ pub const PermissionsBoundaryDecisionDetail = struct {
     /// In both of
     /// these cases, the action is not allowed, regardless of the identity-based
     /// policy.
-    allowed_by_permissions_boundary: ?bool,
+    allowed_by_permissions_boundary: bool = false,
 };

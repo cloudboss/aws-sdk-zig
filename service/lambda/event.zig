@@ -57,7 +57,7 @@ pub const Event = struct {
     context_succeeded_details: ?ContextSucceededDetails,
 
     /// The unique identifier for this event. Event IDs increment sequentially.
-    event_id: ?i32,
+    event_id: i32 = 1,
 
     /// The date and time when this event occurred, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).

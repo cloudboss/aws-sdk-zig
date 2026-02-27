@@ -10,12 +10,12 @@ pub const PasswordPolicy = struct {
     /// permissions policy to each user, rather the permissions are applied at the
     /// account-level
     /// for all users by IAM.
-    allow_users_to_change_password: ?bool,
+    allow_users_to_change_password: bool = false,
 
     /// Indicates whether passwords in the account expire. Returns true if
     /// `MaxPasswordAge` contains a value greater than 0. Returns false if
     /// MaxPasswordAge is 0 or not present.
-    expire_passwords: ?bool,
+    expire_passwords: bool = false,
 
     /// Specifies whether IAM users are prevented from setting a new password via
     /// the
@@ -40,22 +40,22 @@ pub const PasswordPolicy = struct {
     /// Specifies whether IAM user passwords must contain at least one lowercase
     /// character (a
     /// to z).
-    require_lowercase_characters: ?bool,
+    require_lowercase_characters: bool = false,
 
     /// Specifies whether IAM user passwords must contain at least one numeric
     /// character (0 to
     /// 9).
-    require_numbers: ?bool,
+    require_numbers: bool = false,
 
     /// Specifies whether IAM user passwords must contain at least one of the
     /// following
     /// symbols:
     ///
     /// ! @ # $ % ^ & * ( ) _ + - = [ ] { } | '
-    require_symbols: ?bool,
+    require_symbols: bool = false,
 
     /// Specifies whether IAM user passwords must contain at least one uppercase
     /// character (A
     /// to Z).
-    require_uppercase_characters: ?bool,
+    require_uppercase_characters: bool = false,
 };

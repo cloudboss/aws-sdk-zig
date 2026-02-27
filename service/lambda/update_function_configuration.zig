@@ -203,7 +203,7 @@ pub const UpdateFunctionConfigurationOutput = struct {
     code_sha_256: ?[]const u8 = null,
 
     /// The size of the function's deployment package, in bytes.
-    code_size: ?i64 = null,
+    code_size: i64 = 0,
 
     /// The SHA256 hash of the function configuration.
     config_sha_256: ?[]const u8 = null,

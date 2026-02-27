@@ -3,7 +3,7 @@ const ErrorObject = @import("error_object.zig").ErrorObject;
 /// Details about a step operation.
 pub const StepDetails = struct {
     /// The current attempt number for this step.
-    attempt: ?i32,
+    attempt: i32 = 0,
 
     /// Details about the step failure.
     @"error": ?ErrorObject,

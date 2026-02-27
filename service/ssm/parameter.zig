@@ -44,7 +44,7 @@ pub const Parameter = struct {
     value: ?[]const u8,
 
     /// The parameter version.
-    version: ?i64,
+    version: i64 = 0,
 
     pub const json_field_names = .{
         .arn = "ARN",

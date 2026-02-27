@@ -23,7 +23,7 @@ pub const ImportTableDescription = struct {
 
     /// The number of errors occurred on importing the source file into the target
     /// table.
-    error_count: ?i64,
+    error_count: i64 = 0,
 
     /// The error code corresponding to the failure that the import job ran into
     /// during
@@ -39,7 +39,7 @@ pub const ImportTableDescription = struct {
     import_arn: ?[]const u8,
 
     /// The number of items successfully imported into the new table.
-    imported_item_count: ?i64,
+    imported_item_count: i64 = 0,
 
     /// The status of the import.
     import_status: ?ImportStatus,
@@ -58,7 +58,7 @@ pub const ImportTableDescription = struct {
     input_format_options: ?InputFormatOptions,
 
     /// The total number of items processed from the source file.
-    processed_item_count: ?i64,
+    processed_item_count: i64 = 0,
 
     /// The total size of data processed from the source file, in Bytes.
     processed_size_bytes: ?i64,

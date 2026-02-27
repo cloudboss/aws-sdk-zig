@@ -4,7 +4,7 @@ pub const Endpoint = struct {
     address: []const u8,
 
     /// Endpoint cache time to live (TTL) value.
-    cache_period_in_minutes: i64,
+    cache_period_in_minutes: i64 = 0,
 
     pub const json_field_names = .{
         .address = "Address",

@@ -34,7 +34,7 @@ pub const PolicyVersion = struct {
     document: ?[]const u8,
 
     /// Specifies whether the policy version is set as the policy's default version.
-    is_default_version: ?bool,
+    is_default_version: bool = false,
 
     /// The identifier for the policy version.
     ///

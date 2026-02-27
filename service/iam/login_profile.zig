@@ -9,7 +9,7 @@ pub const LoginProfile = struct {
 
     /// Specifies whether the user is required to set a new password on next
     /// sign-in.
-    password_reset_required: ?bool,
+    password_reset_required: bool = false,
 
     /// The name of the user, which can be used for signing in to the Amazon Web
     /// Services Management Console.

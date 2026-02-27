@@ -3,7 +3,7 @@ const InventoryDeletionSummaryItem = @import("inventory_deletion_summary_item.zi
 /// Information about the delete operation.
 pub const InventoryDeletionSummary = struct {
     /// Remaining number of items to delete.
-    remaining_count: ?i32,
+    remaining_count: i32 = 0,
 
     /// A list of counts and versions for deleted items.
     summary_items: ?[]const InventoryDeletionSummaryItem,
@@ -11,7 +11,7 @@ pub const InventoryDeletionSummary = struct {
     /// The total number of items to delete. This count doesn't change during the
     /// delete
     /// operation.
-    total_count: ?i32,
+    total_count: i32 = 0,
 
     pub const json_field_names = .{
         .remaining_count = "RemainingCount",

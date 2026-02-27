@@ -153,7 +153,7 @@ pub const SubscribeInput = struct {
     /// `ConfirmSubscription` action with a confirmation token.
     ///
     /// The default value is `false`.
-    return_subscription_arn: ?bool = null,
+    return_subscription_arn: bool = false,
 
     /// The ARN of the topic you want to subscribe to.
     topic_arn: []const u8,

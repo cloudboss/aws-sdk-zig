@@ -27,7 +27,7 @@ pub const InvokeAsyncInput = struct {
 
 pub const InvokeAsyncOutput = struct {
     /// The status code.
-    status: ?i32 = null,
+    status: i32 = 0,
 
     pub const json_field_names = .{
         .status = "Status",

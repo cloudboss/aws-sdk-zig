@@ -32,7 +32,7 @@ pub const LayerVersionsListItem = struct {
     license_info: ?[]const u8,
 
     /// The version number.
-    version: ?i64,
+    version: i64 = 0,
 
     pub const json_field_names = .{
         .compatible_architectures = "CompatibleArchitectures",

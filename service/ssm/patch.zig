@@ -30,7 +30,7 @@ pub const Patch = struct {
     /// The epoch of the patch. For example in
     /// `pkg-example-EE-20180914-2.2.amzn1.noarch`, the epoch value is
     /// `20180914-2`. Applies to Linux-based managed nodes only.
-    epoch: ?i32,
+    epoch: i32 = 0,
 
     /// The ID of the patch. Applies to Windows patches only.
     ///

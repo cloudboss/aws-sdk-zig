@@ -22,7 +22,7 @@ pub const GetDurableExecutionStateInput = struct {
     /// The maximum number of operations to return per call. You can use `Marker` to
     /// retrieve additional pages of results. The default is 100 and the maximum
     /// allowed is 1000. A value of 0 uses the default.
-    max_items: ?i32 = null,
+    max_items: i32 = 0,
 
     pub const json_field_names = .{
         .checkpoint_token = "CheckpointToken",

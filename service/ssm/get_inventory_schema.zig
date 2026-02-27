@@ -11,7 +11,7 @@ pub const GetInventorySchemaInput = struct {
     /// `AWS:InstanceInformation` type, because it supports aggregation based on the
     /// `PlatformName`, `PlatformType`, and `PlatformVersion`
     /// attributes.
-    aggregator: ?bool = null,
+    aggregator: bool = false,
 
     /// The maximum number of items to return for this call. The call also returns a
     /// token that you

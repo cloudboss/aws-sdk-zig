@@ -35,7 +35,7 @@ pub const LabelParameterVersionOutput = struct {
     invalid_labels: ?[]const []const u8 = null,
 
     /// The version of the parameter that has been labeled.
-    parameter_version: ?i64 = null,
+    parameter_version: i64 = 0,
 
     pub const json_field_names = .{
         .invalid_labels = "InvalidLabels",

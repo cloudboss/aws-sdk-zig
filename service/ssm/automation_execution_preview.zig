@@ -37,7 +37,7 @@ pub const AutomationExecutionPreview = struct {
     /// Information about the Amazon Web Services accounts that were included in the
     /// execution
     /// preview.
-    total_accounts: ?i32,
+    total_accounts: i32 = 0,
 
     pub const json_field_names = .{
         .regions = "Regions",

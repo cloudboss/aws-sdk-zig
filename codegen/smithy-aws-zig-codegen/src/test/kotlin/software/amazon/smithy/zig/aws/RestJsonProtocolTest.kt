@@ -7,6 +7,7 @@ import org.junit.jupiter.api.io.TempDir
 import software.amazon.smithy.build.FileManifest
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
+import software.amazon.smithy.model.node.Node
 import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.MemberShape
@@ -22,6 +23,7 @@ import software.amazon.smithy.model.traits.HttpQueryTrait
 import software.amazon.smithy.model.traits.HttpResponseCodeTrait
 import software.amazon.smithy.model.traits.HttpTrait
 import software.amazon.smithy.model.traits.RequiredTrait
+import software.amazon.smithy.model.traits.DefaultTrait
 import software.amazon.smithy.model.pattern.UriPattern
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
@@ -176,6 +178,7 @@ class RestJsonProtocolTest {
                         MemberShape.builder()
                             .id("test#ListFunctionsInput\$MaxItems")
                             .target("smithy.api#String")
+                            .addTrait(DefaultTrait(Node.from("")))
                             .addTrait(HttpQueryTrait("MaxItems"))
                             .build()
                     )
@@ -589,6 +592,17 @@ class RestJsonProtocolTest {
         assertTrue(
             op.contains("null") || !op.contains("body_buf"),
             "Should not build JSON body when there are no body members",
+        )
+    }
+
+    @Test
+    fun listFunctionsInputUsesDefaultForQueryParam() {
+        val files = generateFiles()
+        val op = files["list_functions.zig"]!!
+
+        assertTrue(
+            op.contains("max_items: []const u8 = \"\""),
+            "ListFunctionsInput should use default value for MaxItems",
         )
     }
 

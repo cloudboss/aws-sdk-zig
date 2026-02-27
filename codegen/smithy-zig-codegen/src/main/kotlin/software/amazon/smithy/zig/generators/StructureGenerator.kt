@@ -12,6 +12,7 @@ import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.codegen.core.directed.GenerateStructureDirective
+import software.amazon.smithy.zig.DefaultValueUtil
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
@@ -76,7 +77,17 @@ class StructureGenerator(
                     .map { it.value }
                     .orElse(null)
 
-                writer.writeField(fieldName, memberSymbol.name, memberDocs, blankBefore = !firstField)
+                val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, symbolProvider)
+                val zigType = defaultValue?.typeName ?: memberSymbol.name
+                val defaultSuffix = defaultValue?.let { " = ${it.literal}" } ?: ""
+
+                if (!firstField) {
+                    writer.blankLine()
+                }
+                if (memberDocs != null) {
+                    writer.writeDocs(memberDocs)
+                }
+                writer.write("\$L: \$L\$L,", fieldName, zigType, defaultSuffix)
                 firstField = false
             }
 

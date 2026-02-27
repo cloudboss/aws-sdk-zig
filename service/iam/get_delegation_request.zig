@@ -19,7 +19,7 @@ pub const GetDelegationRequestInput = struct {
     /// Setting this parameter to true does not guarantee an answer in the response.
     /// See the `PermissionCheckStatus`
     /// and the `PermissionCheckResult` response attributes for further details.
-    delegation_permission_check: ?bool = null,
+    delegation_permission_check: bool = false,
 
     /// The unique identifier of the delegation request to retrieve.
     delegation_request_id: []const u8,

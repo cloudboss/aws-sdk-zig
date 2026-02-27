@@ -22,7 +22,7 @@ pub const GetDurableExecutionHistoryInput = struct {
     /// The maximum number of history events to return per call. You can use
     /// `Marker` to retrieve additional pages of results. The default is 100 and the
     /// maximum allowed is 1000. A value of 0 uses the default.
-    max_items: ?i32 = null,
+    max_items: i32 = 0,
 
     /// When set to `true`, returns the history events in reverse chronological
     /// order (newest first). By default, events are returned in chronological order

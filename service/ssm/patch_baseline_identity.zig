@@ -16,7 +16,7 @@ pub const PatchBaselineIdentity = struct {
     /// patch baselines. For example, you can create a default patch baseline for
     /// each operating
     /// system.
-    default_baseline: ?bool,
+    default_baseline: bool = false,
 
     /// Defines the operating system the patch baseline applies to. The default
     /// value is

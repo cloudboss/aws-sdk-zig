@@ -34,7 +34,7 @@ pub const Policy = struct {
     description: ?[]const u8,
 
     /// Specifies whether the policy can be attached to an IAM user, group, or role.
-    is_attachable: ?bool,
+    is_attachable: bool = false,
 
     /// The path to the policy.
     ///

@@ -11,5 +11,5 @@ pub const BatchResultErrorEntry = struct {
 
     /// Specifies whether the error happened due to the caller of the batch API
     /// action.
-    sender_fault: bool,
+    sender_fault: bool = false,
 };
