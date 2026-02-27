@@ -7,6 +7,9 @@ import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.IntEnumShape
 import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.MapShape
+import software.amazon.smithy.model.shapes.MemberShape
+import software.amazon.smithy.model.shapes.Shape
+import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
@@ -78,8 +81,17 @@ class StructureGenerator(
                     .orElse(null)
 
                 val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, symbolProvider)
-                val zigType = defaultValue?.typeName ?: memberSymbol.name
-                val defaultSuffix = defaultValue?.let { " = ${it.literal}" } ?: ""
+                val baseZigType = memberSymbol.name
+                val zigType = if (defaultValue != null) {
+                    defaultValue.typeName
+                } else if (isRecursiveStructMember(memberShape)) {
+                    // Recursive struct members need pointer indirection so Zig can compute the struct size.
+                    // ?TypeName -> ?*TypeName (only for direct struct embedding, not slices).
+                    "?*${model.expectShape(memberShape.target).id.name}"
+                } else {
+                    baseZigType
+                }
+                val defaultSuffix = if (defaultValue != null) " = ${defaultValue.literal}" else if (zigType.startsWith("?*")) " = null" else ""
 
                 if (!firstField) {
                     writer.blankLine()
@@ -152,5 +164,30 @@ class StructureGenerator(
         result.remove(shape.id.name)
 
         return result
+    }
+
+    /**
+     * Returns true if the given member directly targets a StructureShape that
+     * transitively contains the current shape, creating a recursive cycle.
+     * Only direct struct embedding is checked -- slices ([]T) are already pointers.
+     */
+    private fun isRecursiveStructMember(memberShape: MemberShape): Boolean {
+        val target = model.expectShape(memberShape.target)
+        if (target !is StructureShape) return false
+        val visited = mutableSetOf<ShapeId>()
+        return containsShape(target, shape.id, visited)
+    }
+
+    private fun containsShape(target: Shape, searchId: ShapeId, visited: MutableSet<ShapeId>): Boolean {
+        if (target.id == searchId) return true
+        if (!visited.add(target.id)) return false
+        return when (target) {
+            is StructureShape -> target.allMembers.values.any { m ->
+                containsShape(model.expectShape(m.target), searchId, visited)
+            }
+            is ListShape -> containsShape(model.expectShape(target.member.target), searchId, visited)
+            is MapShape -> containsShape(model.expectShape(target.value.target), searchId, visited)
+            else -> false
+        }
     }
 }
