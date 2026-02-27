@@ -500,6 +500,23 @@ test "event stream invalid message crc" {
     );
 }
 
+test "event stream invalid prelude crc" {
+    const msg = Message{ .headers = &.{}, .payload = "data" };
+    const encoded = try encodeMessage(testing.allocator, msg);
+    defer testing.allocator.free(encoded);
+
+    const corrupted = try testing.allocator.dupe(u8, encoded);
+    defer testing.allocator.free(corrupted);
+
+    const mutable = @constCast(corrupted);
+    mutable[7] ^= 0x01;
+
+    try testing.expectError(
+        error.InvalidPreludeCrc,
+        decodeMessage(testing.allocator, corrupted),
+    );
+}
+
 test "event stream empty message" {
     const msg = Message{ .headers = &.{}, .payload = "" };
     const encoded = try encodeMessage(testing.allocator, msg);
