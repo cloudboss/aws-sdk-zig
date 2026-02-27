@@ -35,23 +35,7 @@ pub const CreateBasePathMappingInput = struct {
     };
 };
 
-pub const CreateBasePathMappingOutput = struct {
-    /// The base path name that callers of the API must provide as part of the URL
-    /// after the domain name.
-    base_path: ?[]const u8 = null,
-
-    /// The string identifier of the associated RestApi.
-    rest_api_id: ?[]const u8 = null,
-
-    /// The name of the associated stage.
-    stage: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .base_path = "basePath",
-        .rest_api_id = "restApiId",
-        .stage = "stage",
-    };
-};
+const CreateBasePathMappingOutput = @import("base_path_mapping.zig").CreateBasePathMappingOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

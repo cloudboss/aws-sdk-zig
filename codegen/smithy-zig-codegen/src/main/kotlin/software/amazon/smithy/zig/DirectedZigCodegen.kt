@@ -127,11 +127,32 @@ class DirectedZigCodegen :
                     if (targetShape is software.amazon.smithy.model.shapes.ListShape) {
                         referencedAsMembers.add(targetShape.member.target)
                     }
+                    if (targetShape is software.amazon.smithy.model.shapes.MapShape) {
+                        referencedAsMembers.add(targetShape.value.target)
+                    }
                 }
             }
         }
 
-        // Only skip shapes that are I/O AND not referenced as member types
-        return ioShapeIds.filter { it !in referencedAsMembers }.toSet()
+        // Find I/O shapes whose generated name collides with another shape name.
+        // These must be generated as standalone files, not inline.
+        val allShapeNames = context.model().toSet().map { it.id.name }.toSet()
+        val nameCollisionIds = mutableSetOf<ShapeId>()
+        for (opShape in topDownIndex.getContainedOperations(context.service)) {
+            val opName = opShape.id.name
+            val inputId = opShape.inputShape
+            val outputId = opShape.outputShape
+            val inputName = context.model().expectShape(inputId).id.name
+            val outputName = context.model().expectShape(outputId).id.name
+            if ("${opName}Input" != inputName && "${opName}Input" in allShapeNames) {
+                nameCollisionIds.add(inputId)
+            }
+            if ("${opName}Output" != outputName && "${opName}Output" in allShapeNames) {
+                nameCollisionIds.add(outputId)
+            }
+        }
+
+        // Only skip shapes that are I/O AND not referenced as member types AND no name collision
+        return ioShapeIds.filter { it !in referencedAsMembers && it !in nameCollisionIds }.toSet()
     }
 }

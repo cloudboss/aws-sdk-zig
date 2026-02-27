@@ -82,7 +82,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAnycastIpListInput, c
 
     var body_buf: std.ArrayList(u8) = .{};
     try body_buf.appendSlice(alloc, "<CreateAnycastIpListRequest>");
-    if (input.ip_address_type) |v| {}
+    if (input.ip_address_type) |v| {
+        try body_buf.appendSlice(alloc, "<IpAddressType>");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "</IpAddressType>");
+    }
     if (input.ipam_cidr_configs) |v| {
         try body_buf.appendSlice(alloc, "<IpamCidrConfigs>");
         try serde.serializeIpamCidrConfigList(alloc, &body_buf, v, "IpamCidrConfig");

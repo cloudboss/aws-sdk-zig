@@ -28,30 +28,7 @@ pub const GetResourceInput = struct {
     };
 };
 
-pub const GetResourceOutput = struct {
-    /// The resource's identifier.
-    id: ?[]const u8 = null,
-
-    /// The parent resource's identifier.
-    parent_id: ?[]const u8 = null,
-
-    /// The full path for this resource.
-    path: ?[]const u8 = null,
-
-    /// The last path segment for this resource.
-    path_part: ?[]const u8 = null,
-
-    /// Gets an API resource's method of a given HTTP verb.
-    resource_methods: ?[]const aws.map.MapEntry(Method) = null,
-
-    pub const json_field_names = .{
-        .id = "id",
-        .parent_id = "parentId",
-        .path = "path",
-        .path_part = "pathPart",
-        .resource_methods = "resourceMethods",
-    };
-};
+const GetResourceOutput = @import("resource.zig").GetResourceOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

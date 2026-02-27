@@ -1,12 +1,12 @@
-const InternalFailureException = @import("internal_failure_exception.zig").InternalFailureException;
-const KMSAccessDeniedException = @import("kms_access_denied_exception.zig").KMSAccessDeniedException;
-const KMSDisabledException = @import("kms_disabled_exception.zig").KMSDisabledException;
-const KMSInvalidStateException = @import("kms_invalid_state_exception.zig").KMSInvalidStateException;
-const KMSNotFoundException = @import("kms_not_found_exception.zig").KMSNotFoundException;
-const KMSOptInRequired = @import("kms_opt_in_required.zig").KMSOptInRequired;
-const KMSThrottlingException = @import("kms_throttling_exception.zig").KMSThrottlingException;
-const ResourceInUseException = @import("resource_in_use_exception.zig").ResourceInUseException;
-const ResourceNotFoundException = @import("resource_not_found_exception.zig").ResourceNotFoundException;
+const InternalFailureException = @import("errors.zig").InternalFailureException;
+const KMSAccessDeniedException = @import("errors.zig").KMSAccessDeniedException;
+const KMSDisabledException = @import("errors.zig").KMSDisabledException;
+const KMSInvalidStateException = @import("errors.zig").KMSInvalidStateException;
+const KMSNotFoundException = @import("errors.zig").KMSNotFoundException;
+const KMSOptInRequired = @import("errors.zig").KMSOptInRequired;
+const KMSThrottlingException = @import("errors.zig").KMSThrottlingException;
+const ResourceInUseException = @import("errors.zig").ResourceInUseException;
+const ResourceNotFoundException = @import("errors.zig").ResourceNotFoundException;
 const SubscribeToShardEvent = @import("subscribe_to_shard_event.zig").SubscribeToShardEvent;
 
 /// This is a tagged union for all of the types of events an enhanced fan-out

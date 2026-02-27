@@ -379,24 +379,7 @@ pub const RunInstancesInput = struct {
     user_data: ?[]const u8 = null,
 };
 
-pub const RunInstancesOutput = struct {
-    /// Not supported.
-    groups: ?[]const GroupIdentifier = null,
-
-    /// The instances.
-    instances: ?[]const Instance = null,
-
-    /// The ID of the Amazon Web Services account that owns the reservation.
-    owner_id: ?[]const u8 = null,
-
-    /// The ID of the requester that launched the instances on your behalf (for
-    /// example,
-    /// Amazon Web Services Management Console or Auto Scaling).
-    requester_id: ?[]const u8 = null,
-
-    /// The ID of the reservation.
-    reservation_id: ?[]const u8 = null,
-};
+const RunInstancesOutput = @import("reservation.zig").RunInstancesOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

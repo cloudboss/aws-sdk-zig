@@ -78,7 +78,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: TestFunctionInput, config: 
     try body_buf.appendSlice(alloc, "<EventObject>");
     try aws.xml.appendXmlEscaped(alloc, &body_buf, input.event_object);
     try body_buf.appendSlice(alloc, "</EventObject>");
-    if (input.stage) |v| {}
+    if (input.stage) |v| {
+        try body_buf.appendSlice(alloc, "<Stage>");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "</Stage>");
+    }
     try body_buf.appendSlice(alloc, "</TestFunctionRequest>");
     const body = try body_buf.toOwnedSlice(alloc);
 

@@ -93,6 +93,7 @@ const ScheduledActionFilterName = @import("scheduled_action_filter_name.zig").Sc
 const ScheduledActionState = @import("scheduled_action_state.zig").ScheduledActionState;
 const ScheduledActionType = @import("scheduled_action_type.zig").ScheduledActionType;
 const SecondaryClusterInfo = @import("secondary_cluster_info.zig").SecondaryClusterInfo;
+const ServiceIntegrationsUnion = @import("service_integrations_union.zig").ServiceIntegrationsUnion;
 const Snapshot = @import("snapshot.zig").Snapshot;
 const SnapshotAttributeToSortBy = @import("snapshot_attribute_to_sort_by.zig").SnapshotAttributeToSortBy;
 const SnapshotCopyGrant = @import("snapshot_copy_grant.zig").SnapshotCopyGrant;
@@ -1295,6 +1296,24 @@ pub fn deserializeScheduledSnapshotTimeList(reader: *aws.xml.Reader, alloc: std.
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     if (aws.date.parseIso8601(try reader.readElementText()) catch null) |v| try list.append(alloc, v);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(alloc);
+}
+
+pub fn deserializeServiceIntegrationList(reader: *aws.xml.Reader, alloc: std.mem.Allocator, comptime item_tag: []const u8) ![]const ServiceIntegrationsUnion {
+    var list: std.ArrayList(ServiceIntegrationsUnion) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(alloc, try alloc.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -4595,6 +4614,18 @@ pub fn serializeScheduledActionFilterList(alloc: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");
         try serializeScheduledActionFilter(alloc, buf, item);
+        try buf.appendSlice(alloc, "</");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+    }
+}
+
+pub fn serializeServiceIntegrationList(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ServiceIntegrationsUnion, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(alloc, "<");
+        try buf.appendSlice(alloc, item_tag);
+        try buf.appendSlice(alloc, ">");
+        try aws.xml.appendXmlEscaped(alloc, buf, item);
         try buf.appendSlice(alloc, "</");
         try buf.appendSlice(alloc, item_tag);
         try buf.appendSlice(alloc, ">");

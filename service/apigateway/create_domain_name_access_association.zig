@@ -29,32 +29,7 @@ pub const CreateDomainNameAccessAssociationInput = struct {
     };
 };
 
-pub const CreateDomainNameAccessAssociationOutput = struct {
-    /// The ARN of the domain name access association source. For a VPCE, the ARN
-    /// must be a VPC endpoint.
-    access_association_source: ?[]const u8 = null,
-
-    /// The type of the domain name access association source.
-    access_association_source_type: ?AccessAssociationSourceType = null,
-
-    /// The ARN of the domain name access association resource.
-    domain_name_access_association_arn: ?[]const u8 = null,
-
-    /// The ARN of the domain name.
-    domain_name_arn: ?[]const u8 = null,
-
-    /// The collection of tags. Each tag element is associated with a given
-    /// resource.
-    tags: ?[]const aws.map.StringMapEntry = null,
-
-    pub const json_field_names = .{
-        .access_association_source = "accessAssociationSource",
-        .access_association_source_type = "accessAssociationSourceType",
-        .domain_name_access_association_arn = "domainNameAccessAssociationArn",
-        .domain_name_arn = "domainNameArn",
-        .tags = "tags",
-    };
-};
+const CreateDomainNameAccessAssociationOutput = @import("domain_name_access_association.zig").CreateDomainNameAccessAssociationOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

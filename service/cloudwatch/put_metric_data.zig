@@ -131,7 +131,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
     if (input.entity_metric_data) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;
-            if (item.entity) |sv_1| {}
             if (item.metric_data) |lst_1| {
                 for (lst_1, 0..) |item_1, idx_1| {
                     const n_1 = idx_1 + 1;

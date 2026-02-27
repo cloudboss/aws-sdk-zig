@@ -22,28 +22,7 @@ pub const AuthorizeDataShareInput = struct {
     data_share_arn: []const u8,
 };
 
-pub const AuthorizeDataShareOutput = struct {
-    /// A value that specifies whether the datashare can be shared to a publicly
-    /// accessible cluster.
-    allow_publicly_accessible_consumers: ?bool = null,
-
-    /// The Amazon Resource Name (ARN) of the datashare that the consumer is to use.
-    data_share_arn: ?[]const u8 = null,
-
-    /// A value that specifies when the datashare has an association between
-    /// producer and data
-    /// consumers.
-    data_share_associations: ?[]const DataShareAssociation = null,
-
-    /// The type of the datashare created by RegisterNamespace.
-    data_share_type: ?DataShareType = null,
-
-    /// The identifier of a datashare to show its managing entity.
-    managed_by: ?[]const u8 = null,
-
-    /// The Amazon Resource Name (ARN) of the producer namespace.
-    producer_arn: ?[]const u8 = null,
-};
+const AuthorizeDataShareOutput = @import("data_share.zig").DataShare;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

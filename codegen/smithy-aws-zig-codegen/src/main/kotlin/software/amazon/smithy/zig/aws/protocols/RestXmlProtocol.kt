@@ -543,7 +543,12 @@ class RestXmlProtocol : ProtocolGenerator {
                 writer.closeBlock("}")
                 writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
             }
-            else -> {}
+            else -> {
+                // Enum types and other named types -- serialize as their tag name
+                writer.write("try body_buf.appendSlice(alloc, \"<\$L>\");", xmlName)
+                writer.write("try body_buf.appendSlice(alloc, @tagName(\$L));", accessor)
+                writer.write("try body_buf.appendSlice(alloc, \"</\$L>\");", xmlName)
+            }
         }
     }
 

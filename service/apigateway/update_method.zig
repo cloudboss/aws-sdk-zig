@@ -29,78 +29,7 @@ pub const UpdateMethodInput = struct {
     };
 };
 
-pub const UpdateMethodOutput = struct {
-    /// A boolean flag specifying whether a valid ApiKey is required to invoke this
-    /// method.
-    api_key_required: ?bool = null,
-
-    /// A list of authorization scopes configured on the method. The scopes are used
-    /// with a `COGNITO_USER_POOLS` authorizer to authorize the method invocation.
-    /// The authorization works by matching the method scopes against the scopes
-    /// parsed from the access token in the incoming request. The method invocation
-    /// is authorized if any method scopes matches a claimed scope in the access
-    /// token. Otherwise, the invocation is not authorized. When the method scope is
-    /// configured, the client must provide an access token instead of an identity
-    /// token for authorization purposes.
-    authorization_scopes: ?[]const []const u8 = null,
-
-    /// The method's authorization type. Valid values are `NONE` for open access,
-    /// `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using a custom
-    /// authorizer, or `COGNITO_USER_POOLS` for using a Cognito user pool.
-    authorization_type: ?[]const u8 = null,
-
-    /// The identifier of an Authorizer to use on this method. The
-    /// `authorizationType` must be `CUSTOM`.
-    authorizer_id: ?[]const u8 = null,
-
-    /// The method's HTTP verb.
-    http_method: ?[]const u8 = null,
-
-    /// Gets the method's integration responsible for passing the client-submitted
-    /// request to the back end and performing necessary transformations to make the
-    /// request compliant with the back end.
-    method_integration: ?Integration = null,
-
-    /// Gets a method response associated with a given HTTP status code.
-    method_responses: ?[]const aws.map.MapEntry(MethodResponse) = null,
-
-    /// A human-friendly operation identifier for the method. For example, you can
-    /// assign the `operationName` of `ListPets` for the `GET /pets` method in the
-    /// `PetStore` example.
-    operation_name: ?[]const u8 = null,
-
-    /// A key-value map specifying data schemas, represented by Model resources, (as
-    /// the mapped value) of the request payloads of given content types (as the
-    /// mapping key).
-    request_models: ?[]const aws.map.StringMapEntry = null,
-
-    /// A key-value map defining required or optional method request parameters that
-    /// can be accepted by API Gateway. A key is a method request parameter name
-    /// matching the pattern of `method.request.{location}.{name}`, where `location`
-    /// is `querystring`, `path`, or `header` and `name` is a valid and unique
-    /// parameter name. The value associated with the key is a Boolean flag
-    /// indicating whether the parameter is required (`true`) or optional (`false`).
-    /// The method request parameter names defined here are available in Integration
-    /// to be mapped to integration request parameters or templates.
-    request_parameters: ?[]const aws.map.MapEntry(bool) = null,
-
-    /// The identifier of a RequestValidator for request validation.
-    request_validator_id: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .api_key_required = "apiKeyRequired",
-        .authorization_scopes = "authorizationScopes",
-        .authorization_type = "authorizationType",
-        .authorizer_id = "authorizerId",
-        .http_method = "httpMethod",
-        .method_integration = "methodIntegration",
-        .method_responses = "methodResponses",
-        .operation_name = "operationName",
-        .request_models = "requestModels",
-        .request_parameters = "requestParameters",
-        .request_validator_id = "requestValidatorId",
-    };
-};
+const UpdateMethodOutput = @import("method.zig").UpdateMethodOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

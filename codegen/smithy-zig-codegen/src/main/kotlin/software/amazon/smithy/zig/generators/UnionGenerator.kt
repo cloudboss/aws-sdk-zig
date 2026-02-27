@@ -9,6 +9,7 @@ import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.EnumTrait
+import software.amazon.smithy.model.traits.ErrorTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
@@ -42,18 +43,18 @@ class UnionGenerator(
 
             // Import referenced named types (enums, structs, unions)
             // Recurses through list elements and map values to find nested named types.
-            val referencedTypes = mutableSetOf<String>()
+            val referencedTypes = mutableSetOf<software.amazon.smithy.model.shapes.Shape>()
             fun collectFromShape(targetShape: software.amazon.smithy.model.shapes.Shape) {
                 when (targetShape) {
-                    is StructureShape -> referencedTypes.add(targetShape.id.name)
-                    is EnumShape -> referencedTypes.add(targetShape.id.name)
-                    is IntEnumShape -> referencedTypes.add(targetShape.id.name)
-                    is UnionShape -> referencedTypes.add(targetShape.id.name)
+                    is StructureShape -> referencedTypes.add(targetShape)
+                    is EnumShape -> referencedTypes.add(targetShape)
+                    is IntEnumShape -> referencedTypes.add(targetShape)
+                    is UnionShape -> referencedTypes.add(targetShape)
                     is ListShape -> collectFromShape(model.expectShape(targetShape.member.target))
                     is MapShape -> collectFromShape(model.expectShape(targetShape.value.target))
                     is software.amazon.smithy.model.shapes.StringShape -> {
                         if (targetShape.hasTrait(EnumTrait::class.java)) {
-                            referencedTypes.add(targetShape.id.name)
+                            referencedTypes.add(targetShape)
                         }
                     }
                 }
@@ -61,11 +62,16 @@ class UnionGenerator(
             for (member in shape.members()) {
                 collectFromShape(model.expectShape(member.target))
             }
-            referencedTypes.remove(shape.id.name)
+            referencedTypes.removeIf { it.id == shape.id }
 
-            for (typeName in referencedTypes) {
-                val fileName = NamingUtil.toZigFileName(typeName)
-                writer.write("const \$L = @import(\"\$L\").\$L;", typeName, fileName, typeName)
+            for (typeShape in referencedTypes) {
+                val typeName = typeShape.id.name
+                if (typeShape.hasTrait(ErrorTrait::class.java)) {
+                    writer.write("const \$L = @import(\"errors.zig\").\$L;", typeName, typeName)
+                } else {
+                    val fileName = NamingUtil.toZigFileName(typeName)
+                    writer.write("const \$L = @import(\"\$L\").\$L;", typeName, fileName, typeName)
+                }
             }
             if (referencedTypes.isNotEmpty()) {
                 writer.blankLine()

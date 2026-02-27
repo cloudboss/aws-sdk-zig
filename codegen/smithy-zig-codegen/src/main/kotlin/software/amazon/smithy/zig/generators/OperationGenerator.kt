@@ -122,9 +122,25 @@ class OperationGenerator(
 
             writer.blankLine()
 
-            writeInputStruct(writer, ctx)
+            if (isSharedType(inputShape.id)) {
+                val inputFileName = NamingUtil.toZigFileName(inputShape.id.name)
+                writer.write(
+                    "const \$L = @import(\"\$L\").\$L;",
+                    "${operationName}Input", inputFileName, inputShape.id.name
+                )
+            } else {
+                writeInputStruct(writer, ctx)
+            }
             writer.blankLine()
-            writeOutputStruct(writer, ctx, isStreaming)
+            if (isSharedType(outputShape.id)) {
+                val outputFileName = NamingUtil.toZigFileName(outputShape.id.name)
+                writer.write(
+                    "const \$L = @import(\"\$L\").\$L;",
+                    "${operationName}Output", outputFileName, outputShape.id.name
+                )
+            } else {
+                writeOutputStruct(writer, ctx, isStreaming)
+            }
             writer.blankLine()
             writeOptionsStruct(writer)
             writer.blankLine()
@@ -498,7 +514,37 @@ class OperationGenerator(
         // Don't import input/output shapes themselves
         result.remove(inputShape.id.name)
         result.remove(outputShape.id.name)
+        // Also exclude names matching the generated input/output names to prevent collision
+        result.remove("${operationName}Input")
+        result.remove("${operationName}Output")
 
         return result
+    }
+
+    private fun isSharedType(
+        shapeId: software.amazon.smithy.model.shapes.ShapeId
+    ): Boolean {
+        // Check 1: Is this shape directly referenced as a member type?
+        for (shape in model.toSet()) {
+            if (shape !is StructureShape || shape.id == shapeId) continue
+            for ((_, memberShape) in shape.allMembers) {
+                if (memberShape.target == shapeId) return true
+                val target = model.getShape(memberShape.target).orElse(null)
+                if (target is ListShape && target.member.target == shapeId)
+                    return true
+                if (target is MapShape && target.value.target == shapeId)
+                    return true
+            }
+        }
+
+        // Check 2: Does the generated name collide with another shape in the model?
+        val generatedName = if (shapeId == inputShape.id) "${operationName}Input" else "${operationName}Output"
+        if (generatedName != shapeId.name) {
+            for (shape in model.toSet()) {
+                if (shape.id.name == generatedName && shape.id != shapeId) return true
+            }
+        }
+
+        return false
     }
 }

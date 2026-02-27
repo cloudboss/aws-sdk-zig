@@ -14,26 +14,7 @@ pub const GetSdkTypeInput = struct {
     };
 };
 
-pub const GetSdkTypeOutput = struct {
-    /// A list of configuration properties of an SdkType.
-    configuration_properties: ?[]const SdkConfigurationProperty = null,
-
-    /// The description of an SdkType.
-    description: ?[]const u8 = null,
-
-    /// The user-friendly name of an SdkType instance.
-    friendly_name: ?[]const u8 = null,
-
-    /// The identifier of an SdkType instance.
-    id: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .configuration_properties = "configurationProperties",
-        .description = "description",
-        .friendly_name = "friendlyName",
-        .id = "id",
-    };
-};
+const GetSdkTypeOutput = @import("sdk_type.zig").GetSdkTypeOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

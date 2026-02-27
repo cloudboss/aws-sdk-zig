@@ -55,27 +55,7 @@ pub const CreateDeploymentInput = struct {
     };
 };
 
-pub const CreateDeploymentOutput = struct {
-    /// A summary of the RestApi at the date and time that the deployment resource
-    /// was created.
-    api_summary: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(MethodSnapshot)) = null,
-
-    /// The date and time that the deployment resource was created.
-    created_date: ?i64 = null,
-
-    /// The description for the deployment resource.
-    description: ?[]const u8 = null,
-
-    /// The identifier for the deployment resource.
-    id: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .api_summary = "apiSummary",
-        .created_date = "createdDate",
-        .description = "description",
-        .id = "id",
-    };
-};
+const CreateDeploymentOutput = @import("deployment.zig").CreateDeploymentOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

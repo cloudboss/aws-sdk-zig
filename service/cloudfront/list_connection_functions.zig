@@ -84,7 +84,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListConnectionFunctionsInpu
         }
         try body_buf.appendSlice(alloc, "</MaxItems>");
     }
-    if (input.stage) |v| {}
+    if (input.stage) |v| {
+        try body_buf.appendSlice(alloc, "<Stage>");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "</Stage>");
+    }
     try body_buf.appendSlice(alloc, "</ListConnectionFunctionsRequest>");
     const body = try body_buf.toOwnedSlice(alloc);
 

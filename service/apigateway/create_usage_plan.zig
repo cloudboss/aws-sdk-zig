@@ -38,46 +38,7 @@ pub const CreateUsagePlanInput = struct {
     };
 };
 
-pub const CreateUsagePlanOutput = struct {
-    /// The associated API stages of a usage plan.
-    api_stages: ?[]const ApiStage = null,
-
-    /// The description of a usage plan.
-    description: ?[]const u8 = null,
-
-    /// The identifier of a UsagePlan resource.
-    id: ?[]const u8 = null,
-
-    /// The name of a usage plan.
-    name: ?[]const u8 = null,
-
-    /// The Amazon Web Services Marketplace product identifier to associate with the
-    /// usage plan as a SaaS product on the Amazon Web Services Marketplace.
-    product_code: ?[]const u8 = null,
-
-    /// The target maximum number of permitted requests per a given unit time
-    /// interval.
-    quota: ?QuotaSettings = null,
-
-    /// The collection of tags. Each tag element is associated with a given
-    /// resource.
-    tags: ?[]const aws.map.StringMapEntry = null,
-
-    /// A map containing method level throttling information for API stage in a
-    /// usage plan.
-    throttle: ?ThrottleSettings = null,
-
-    pub const json_field_names = .{
-        .api_stages = "apiStages",
-        .description = "description",
-        .id = "id",
-        .name = "name",
-        .product_code = "productCode",
-        .quota = "quota",
-        .tags = "tags",
-        .throttle = "throttle",
-    };
-};
+const CreateUsagePlanOutput = @import("usage_plan.zig").CreateUsagePlanOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

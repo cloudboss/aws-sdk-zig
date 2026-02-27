@@ -50,40 +50,7 @@ pub const UpdateFunctionEventInvokeConfigInput = struct {
     };
 };
 
-pub const UpdateFunctionEventInvokeConfigOutput = struct {
-    /// A destination for events after they have been sent to a function for
-    /// processing. **Destinations**
-    ///
-    /// * **Function** - The Amazon Resource Name (ARN) of a Lambda function.
-    /// * **Queue** - The ARN of a standard SQS queue.
-    /// * **Bucket** - The ARN of an Amazon S3 bucket.
-    /// * **Topic** - The ARN of a standard SNS topic.
-    /// * **Event Bus** - The ARN of an Amazon EventBridge event bus.
-    ///
-    /// S3 buckets are supported only for on-failure destinations. To retain records
-    /// of successful invocations, use another destination type.
-    destination_config: ?DestinationConfig = null,
-
-    /// The Amazon Resource Name (ARN) of the function.
-    function_arn: ?[]const u8 = null,
-
-    /// The date and time that the configuration was last updated.
-    last_modified: ?i64 = null,
-
-    /// The maximum age of a request that Lambda sends to a function for processing.
-    maximum_event_age_in_seconds: ?i32 = null,
-
-    /// The maximum number of times to retry when the function returns an error.
-    maximum_retry_attempts: ?i32 = null,
-
-    pub const json_field_names = .{
-        .destination_config = "DestinationConfig",
-        .function_arn = "FunctionArn",
-        .last_modified = "LastModified",
-        .maximum_event_age_in_seconds = "MaximumEventAgeInSeconds",
-        .maximum_retry_attempts = "MaximumRetryAttempts",
-    };
-};
+const UpdateFunctionEventInvokeConfigOutput = @import("function_event_invoke_config.zig").UpdateFunctionEventInvokeConfigOutput;
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

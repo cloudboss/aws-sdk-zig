@@ -20,6 +20,7 @@ import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.ShortShape
 import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.shapes.StructureShape
+import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.shapes.TimestampShape
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.XmlFlattenedTrait
@@ -228,7 +229,8 @@ class SerdeGenerator(
                 visited.add(target.id)
                 val elementShape = model.expectShape(target.member.target)
                 // Generate list helpers for all deserializable element types
-                if (elementShape is StructureShape || elementShape is StringShape ||
+                if (elementShape is StructureShape || elementShape is UnionShape ||
+                    elementShape is StringShape ||
                     elementShape is EnumShape || elementShape is IntEnumShape ||
                     elementShape is IntegerShape || elementShape is LongShape ||
                     elementShape is ShortShape || elementShape is FloatShape ||
@@ -356,10 +358,31 @@ class SerdeGenerator(
                         referencedAsMembers.add(elemId)
                     }
                 }
+                if (target is MapShape) {
+                    val valueId = target.value.target
+                    if (valueId in allIoIds) {
+                        referencedAsMembers.add(valueId)
+                    }
+                }
             }
         }
 
-        return allIoIds - referencedAsMembers
+        // Also exclude I/O shapes whose generated name collides with another shape
+        val allShapeNames = model.toSet().map { it.id.name }.toSet()
+        val nameCollisionIds = mutableSetOf<ShapeId>()
+        for (op in topDownIndex.getContainedOperations(service)) {
+            val opName = op.id.name
+            val inputName = model.expectShape(op.inputShape).id.name
+            val outputName = model.expectShape(op.outputShape).id.name
+            if ("${opName}Input" != inputName && "${opName}Input" in allShapeNames) {
+                nameCollisionIds.add(op.inputShape)
+            }
+            if ("${opName}Output" != outputName && "${opName}Output" in allShapeNames) {
+                nameCollisionIds.add(op.outputShape)
+            }
+        }
+
+        return allIoIds - referencedAsMembers - nameCollisionIds
     }
 
     // ---- Import collection ----
@@ -406,6 +429,8 @@ class SerdeGenerator(
         for (l in lists) {
             val elem = model.expectShape(l.member.target)
             if (elem is StructureShape) {
+                types.add(elem.id.name)
+            } else if (elem is UnionShape) {
                 types.add(elem.id.name)
             } else if (isEnumType(elem)) {
                 types.add(elem.id.name)

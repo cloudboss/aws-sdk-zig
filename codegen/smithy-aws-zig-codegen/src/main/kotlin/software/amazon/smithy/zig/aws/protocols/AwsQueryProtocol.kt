@@ -103,7 +103,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         return when (shape) {
             is StructureShape -> shape.allMembers.values.any { ms ->
                 val ts = ctx.model.expectShape(ms.target)
-                ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape || ts is MapShape
+                ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape
             }
             is ListShape -> {
                 val elementShape = ctx.model.expectShape(shape.member.target)

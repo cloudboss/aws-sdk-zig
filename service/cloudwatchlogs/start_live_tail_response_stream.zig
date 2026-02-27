@@ -1,6 +1,6 @@
 const LiveTailSessionStart = @import("live_tail_session_start.zig").LiveTailSessionStart;
-const SessionStreamingException = @import("session_streaming_exception.zig").SessionStreamingException;
-const SessionTimeoutException = @import("session_timeout_exception.zig").SessionTimeoutException;
+const SessionStreamingException = @import("errors.zig").SessionStreamingException;
+const SessionTimeoutException = @import("errors.zig").SessionTimeoutException;
 const LiveTailSessionUpdate = @import("live_tail_session_update.zig").LiveTailSessionUpdate;
 
 /// This object includes the stream returned by your

@@ -6,23 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Snapshot = @import("snapshot.zig").Snapshot;
 const serde = @import("serde.zig");
 
-pub const DeleteClusterSnapshotInput = struct {
-    /// The unique identifier of the cluster the snapshot was created from. This
-    /// parameter
-    /// is required if your IAM user has a policy containing a snapshot resource
-    /// element that
-    /// specifies anything other than * for the cluster name.
-    ///
-    /// Constraints: Must be the name of valid cluster.
-    snapshot_cluster_identifier: ?[]const u8 = null,
-
-    /// The unique identifier of the manual snapshot to be deleted.
-    ///
-    /// Constraints: Must be the name of an existing snapshot that is in the
-    /// `available`, `failed`, or `cancelled`
-    /// state.
-    snapshot_identifier: []const u8,
-};
+const DeleteClusterSnapshotInput = @import("delete_cluster_snapshot_message.zig").DeleteClusterSnapshotMessage;
 
 pub const DeleteClusterSnapshotOutput = struct {
     snapshot: ?Snapshot = null,

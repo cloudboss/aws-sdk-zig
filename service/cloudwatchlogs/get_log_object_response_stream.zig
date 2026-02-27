@@ -1,5 +1,5 @@
 const FieldsData = @import("fields_data.zig").FieldsData;
-const InternalStreamingException = @import("internal_streaming_exception.zig").InternalStreamingException;
+const InternalStreamingException = @import("errors.zig").InternalStreamingException;
 
 /// A stream of structured log data returned by the GetLogObject operation. This
 /// stream

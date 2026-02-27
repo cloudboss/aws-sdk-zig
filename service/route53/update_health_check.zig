@@ -463,7 +463,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateHealthCheckInput, con
         }
         try body_buf.appendSlice(alloc, "</HealthThreshold>");
     }
-    if (input.insufficient_data_health_status) |v| {}
+    if (input.insufficient_data_health_status) |v| {
+        try body_buf.appendSlice(alloc, "<InsufficientDataHealthStatus>");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "</InsufficientDataHealthStatus>");
+    }
     if (input.inverted) |v| {
         try body_buf.appendSlice(alloc, "<Inverted>");
         try body_buf.appendSlice(alloc, if (v) "true" else "false");

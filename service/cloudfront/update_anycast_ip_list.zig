@@ -74,7 +74,11 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateAnycastIpListInput, c
 
     var body_buf: std.ArrayList(u8) = .{};
     try body_buf.appendSlice(alloc, "<UpdateAnycastIpListRequest>");
-    if (input.ip_address_type) |v| {}
+    if (input.ip_address_type) |v| {
+        try body_buf.appendSlice(alloc, "<IpAddressType>");
+        try body_buf.appendSlice(alloc, @tagName(v));
+        try body_buf.appendSlice(alloc, "</IpAddressType>");
+    }
     try body_buf.appendSlice(alloc, "</UpdateAnycastIpListRequest>");
     const body = try body_buf.toOwnedSlice(alloc);
 

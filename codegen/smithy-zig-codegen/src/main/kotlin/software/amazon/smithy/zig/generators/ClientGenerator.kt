@@ -37,7 +37,6 @@ class ClientGenerator(
             writer.importContainer.addImport("aws", "aws")
 
             // Import each operation module
-            writer.blankLine()
             for (op in operations) {
                 writer.write(
                     "const \$L = @import(\"\$L\");",

@@ -6,10 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Cluster = @import("cluster.zig").Cluster;
 const serde = @import("serde.zig");
 
-pub const PauseClusterInput = struct {
-    /// The identifier of the cluster to be paused.
-    cluster_identifier: []const u8,
-};
+const PauseClusterInput = @import("pause_cluster_message.zig").PauseClusterMessage;
 
 pub const PauseClusterOutput = struct {
     cluster: ?Cluster = null,

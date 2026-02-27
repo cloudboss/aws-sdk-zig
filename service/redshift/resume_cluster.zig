@@ -6,10 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Cluster = @import("cluster.zig").Cluster;
 const serde = @import("serde.zig");
 
-pub const ResumeClusterInput = struct {
-    /// The identifier of the cluster to be resumed.
-    cluster_identifier: []const u8,
-};
+const ResumeClusterInput = @import("resume_cluster_message.zig").ResumeClusterMessage;
 
 pub const ResumeClusterOutput = struct {
     cluster: ?Cluster = null,
