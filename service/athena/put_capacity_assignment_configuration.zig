@@ -20,7 +20,8 @@ pub const PutCapacityAssignmentConfigurationInput = struct {
     };
 };
 
-pub const PutCapacityAssignmentConfigurationOutput = struct {};
+pub const PutCapacityAssignmentConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

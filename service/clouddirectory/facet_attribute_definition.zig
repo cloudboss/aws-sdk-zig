@@ -17,12 +17,12 @@ pub const FacetAttributeDefinition = struct {
     rules: ?[]const aws.map.MapEntry(Rule),
 
     /// The type of the attribute.
-    type: FacetAttributeType,
+    @"type": FacetAttributeType,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",
         .is_immutable = "IsImmutable",
         .rules = "Rules",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

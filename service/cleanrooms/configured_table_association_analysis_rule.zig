@@ -23,7 +23,7 @@ pub const ConfiguredTableAssociationAnalysisRule = struct {
     policy: ConfiguredTableAssociationAnalysisRulePolicy,
 
     /// The type of the configured table association analysis rule.
-    type: ConfiguredTableAssociationAnalysisRuleType,
+    @"type": ConfiguredTableAssociationAnalysisRuleType,
 
     /// The update time of the configured table association analysis rule.
     update_time: i64,
@@ -34,7 +34,7 @@ pub const ConfiguredTableAssociationAnalysisRule = struct {
         .create_time = "createTime",
         .membership_identifier = "membershipIdentifier",
         .policy = "policy",
-        .type = "type",
+        .@"type" = "type",
         .update_time = "updateTime",
     };
 };

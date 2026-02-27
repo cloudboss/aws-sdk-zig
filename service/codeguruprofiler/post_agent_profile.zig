@@ -39,7 +39,8 @@ pub const PostAgentProfileInput = struct {
     };
 };
 
-pub const PostAgentProfileOutput = struct {};
+pub const PostAgentProfileOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

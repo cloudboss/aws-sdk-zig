@@ -18,7 +18,7 @@ pub const AgentStatusSummary = struct {
     name: ?[]const u8,
 
     /// The type of the agent status.
-    type: ?AgentStatusType,
+    @"type": ?AgentStatusType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -26,6 +26,6 @@ pub const AgentStatusSummary = struct {
         .last_modified_region = "LastModifiedRegion",
         .last_modified_time = "LastModifiedTime",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

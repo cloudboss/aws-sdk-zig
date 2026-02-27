@@ -53,7 +53,8 @@ pub const UpdateTestCaseInput = struct {
     };
 };
 
-pub const UpdateTestCaseOutput = struct {};
+pub const UpdateTestCaseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

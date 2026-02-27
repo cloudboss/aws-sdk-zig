@@ -151,7 +151,7 @@ pub const ProjectArtifacts = struct {
     /// output.
     ///
     /// * `S3`: The build project stores build output in Amazon S3.
-    type: ArtifactsType,
+    @"type": ArtifactsType,
 
     pub const json_field_names = .{
         .artifact_identifier = "artifactIdentifier",
@@ -163,6 +163,6 @@ pub const ProjectArtifacts = struct {
         .override_artifact_name = "overrideArtifactName",
         .packaging = "packaging",
         .path = "path",
-        .type = "type",
+        .@"type" = "type",
     };
 };

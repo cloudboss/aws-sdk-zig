@@ -8,10 +8,10 @@ pub const SchemaAnalysisRuleRequest = struct {
     name: []const u8,
 
     /// The type of analysis rule schema that you are requesting.
-    type: AnalysisRuleType,
+    @"type": AnalysisRuleType,
 
     pub const json_field_names = .{
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

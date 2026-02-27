@@ -5,9 +5,9 @@ const AutomatedReasoningPolicyDefinitionType = @import("automated_reasoning_poli
 pub const AutomatedReasoningPolicyAddTypeMutation = struct {
     /// The type definition that specifies the name, description, and possible
     /// values for the new custom type being added to the policy.
-    type: AutomatedReasoningPolicyDefinitionType,
+    @"type": AutomatedReasoningPolicyDefinitionType,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
     };
 };

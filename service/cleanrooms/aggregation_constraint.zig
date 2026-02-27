@@ -14,11 +14,11 @@ pub const AggregationConstraint = struct {
 
     /// The type of aggregation the constraint allows. The only valid value is
     /// currently `COUNT_DISTINCT`.
-    type: AggregationType,
+    @"type": AggregationType,
 
     pub const json_field_names = .{
         .column_name = "columnName",
         .minimum = "minimum",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -5,13 +5,13 @@ const EvaluationReviewNotificationRecipientValue = @import("evaluation_review_no
 /// review is requested.
 pub const EvaluationReviewNotificationRecipient = struct {
     /// The type of notification recipient.
-    type: EvaluationReviewNotificationRecipientType,
+    @"type": EvaluationReviewNotificationRecipientType,
 
     /// The value associated with the notification recipient type.
     value: EvaluationReviewNotificationRecipientValue,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

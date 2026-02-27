@@ -80,7 +80,8 @@ pub const AdminLinkProviderForUserInput = struct {
     };
 };
 
-pub const AdminLinkProviderForUserOutput = struct {};
+pub const AdminLinkProviderForUserOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

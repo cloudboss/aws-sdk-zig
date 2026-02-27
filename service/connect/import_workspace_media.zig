@@ -29,7 +29,8 @@ pub const ImportWorkspaceMediaInput = struct {
     };
 };
 
-pub const ImportWorkspaceMediaOutput = struct {};
+pub const ImportWorkspaceMediaOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,8 @@ pub const DisassociateAgentCollaboratorInput = struct {
     };
 };
 
-pub const DisassociateAgentCollaboratorOutput = struct {};
+pub const DisassociateAgentCollaboratorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

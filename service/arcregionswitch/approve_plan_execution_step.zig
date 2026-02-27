@@ -30,7 +30,8 @@ pub const ApprovePlanExecutionStepInput = struct {
     };
 };
 
-pub const ApprovePlanExecutionStepOutput = struct {};
+pub const ApprovePlanExecutionStepOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

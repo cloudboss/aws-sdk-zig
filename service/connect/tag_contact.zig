@@ -26,7 +26,8 @@ pub const TagContactInput = struct {
     };
 };
 
-pub const TagContactOutput = struct {};
+pub const TagContactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

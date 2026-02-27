@@ -17,7 +17,8 @@ pub const AssociateFleetInput = struct {
     };
 };
 
-pub const AssociateFleetOutput = struct {};
+pub const AssociateFleetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeRegionSettingsInput = struct {};
+pub const DescribeRegionSettingsInput = struct {
+};
 
 pub const DescribeRegionSettingsOutput = struct {
     /// Returns whether Backup fully manages the backups for a resource type.

@@ -17,13 +17,13 @@ pub const FlowConnection = struct {
 
     /// Whether the source node that the connection begins from is a condition node
     /// (`Conditional`) or not (`Data`).
-    type: FlowConnectionType,
+    @"type": FlowConnectionType,
 
     pub const json_field_names = .{
         .configuration = "configuration",
         .name = "name",
         .source = "source",
         .target = "target",
-        .type = "type",
+        .@"type" = "type",
     };
 };

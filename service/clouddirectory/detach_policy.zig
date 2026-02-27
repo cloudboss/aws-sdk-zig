@@ -23,7 +23,8 @@ pub const DetachPolicyInput = struct {
     };
 };
 
-pub const DetachPolicyOutput = struct {};
+pub const DetachPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

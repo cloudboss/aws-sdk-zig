@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataSource = @import("data_source.zig").DataSource;
 
-pub const StartContinuousExportInput = struct {};
+pub const StartContinuousExportInput = struct {
+};
 
 pub const StartContinuousExportOutput = struct {
     /// The type of data collector used to gather this data (currently only offered

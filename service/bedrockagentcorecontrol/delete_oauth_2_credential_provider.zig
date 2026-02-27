@@ -13,7 +13,8 @@ pub const DeleteOauth2CredentialProviderInput = struct {
     };
 };
 
-pub const DeleteOauth2CredentialProviderOutput = struct {};
+pub const DeleteOauth2CredentialProviderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

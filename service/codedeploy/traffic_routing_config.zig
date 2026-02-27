@@ -23,11 +23,11 @@ pub const TrafficRoutingConfig = struct {
 
     /// The type of traffic shifting (`TimeBasedCanary` or
     /// `TimeBasedLinear`) used by a deployment configuration.
-    type: ?TrafficRoutingType,
+    @"type": ?TrafficRoutingType,
 
     pub const json_field_names = .{
         .time_based_canary = "timeBasedCanary",
         .time_based_linear = "timeBasedLinear",
-        .type = "type",
+        .@"type" = "type",
     };
 };

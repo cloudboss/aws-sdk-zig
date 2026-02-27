@@ -13,7 +13,8 @@ pub const PreviewPortalInput = struct {
     };
 };
 
-pub const PreviewPortalOutput = struct {};
+pub const PreviewPortalOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

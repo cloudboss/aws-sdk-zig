@@ -118,7 +118,7 @@ pub const CreateComputeEnvironmentInput = struct {
     /// The type of the compute environment: `MANAGED` or `UNMANAGED`. For
     /// more information, see [Compute
     /// Environments](https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html) in the *Batch User Guide*.
-    type: CEType,
+    @"type": CEType,
 
     /// The maximum number of vCPUs for an unmanaged compute environment. This
     /// parameter is only
@@ -139,7 +139,7 @@ pub const CreateComputeEnvironmentInput = struct {
         .service_role = "serviceRole",
         .state = "state",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .unmanagedv_cpus = "unmanagedvCpus",
     };
 };
@@ -243,7 +243,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateComputeEnvironmentInp
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
     if (input.unmanagedv_cpus) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");

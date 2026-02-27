@@ -21,7 +21,8 @@ pub const UnregisterConnectorInput = struct {
     };
 };
 
-pub const UnregisterConnectorOutput = struct {};
+pub const UnregisterConnectorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

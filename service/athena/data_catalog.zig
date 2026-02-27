@@ -135,7 +135,7 @@ pub const DataCatalog = struct {
     /// external Apache Hive metastore. `FEDERATED` is a federated catalog for which
     /// Athena creates the connection and the Lambda function for
     /// you based on the parameters that you pass.
-    type: DataCatalogType,
+    @"type": DataCatalogType,
 
     pub const json_field_names = .{
         .connection_type = "ConnectionType",
@@ -144,6 +144,6 @@ pub const DataCatalog = struct {
         .name = "Name",
         .parameters = "Parameters",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

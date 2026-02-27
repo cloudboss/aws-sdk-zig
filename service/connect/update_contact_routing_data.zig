@@ -40,7 +40,8 @@ pub const UpdateContactRoutingDataInput = struct {
     };
 };
 
-pub const UpdateContactRoutingDataOutput = struct {};
+pub const UpdateContactRoutingDataOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -30,7 +30,8 @@ pub const AdminSetUserSettingsInput = struct {
     };
 };
 
-pub const AdminSetUserSettingsOutput = struct {};
+pub const AdminSetUserSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

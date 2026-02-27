@@ -13,7 +13,8 @@ pub const DeleteTieringConfigurationInput = struct {
     };
 };
 
-pub const DeleteTieringConfigurationOutput = struct {};
+pub const DeleteTieringConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

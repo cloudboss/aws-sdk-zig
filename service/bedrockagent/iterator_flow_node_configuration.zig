@@ -5,4 +5,5 @@
 /// The output flow node at the end of the flow iteration will return a response
 /// for each member of the array. To return only one response, you can include a
 /// collector node downstream from the iterator node.
-pub const IteratorFlowNodeConfiguration = struct {};
+pub const IteratorFlowNodeConfiguration = struct {
+};

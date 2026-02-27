@@ -43,7 +43,8 @@ pub const SetUserMFAPreferenceInput = struct {
     };
 };
 
-pub const SetUserMFAPreferenceOutput = struct {};
+pub const SetUserMFAPreferenceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -94,7 +94,7 @@ pub const PutIntegrationInput = struct {
     tls_config: ?TlsConfig = null,
 
     /// Specifies a put integration input's type.
-    type: IntegrationType,
+    @"type": IntegrationType,
 
     /// Specifies Uniform Resource Identifier (URI) of the integration endpoint. For
     /// HTTP or
@@ -146,7 +146,7 @@ pub const PutIntegrationInput = struct {
         .rest_api_id = "restApiId",
         .timeout_in_millis = "timeoutInMillis",
         .tls_config = "tlsConfig",
-        .type = "type",
+        .@"type" = "type",
         .uri = "uri",
     };
 };
@@ -289,7 +289,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutIntegrationInput, config
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
     if (input.uri) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");

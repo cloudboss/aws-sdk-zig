@@ -44,13 +44,13 @@ pub const Validity = struct {
     /// The minimum validity duration for a certificate using relative time (`DAYS`)
     /// is one day. The minimum validity for a certificate using absolute time
     /// (`ABSOLUTE` or `END_DATE`) is one second.
-    type: ValidityPeriodType,
+    @"type": ValidityPeriodType,
 
     /// A long integer interpreted according to the value of `Type`, below.
     value: i64,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

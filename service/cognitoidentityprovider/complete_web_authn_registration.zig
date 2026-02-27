@@ -21,7 +21,8 @@ pub const CompleteWebAuthnRegistrationInput = struct {
     };
 };
 
-pub const CompleteWebAuthnRegistrationOutput = struct {};
+pub const CompleteWebAuthnRegistrationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

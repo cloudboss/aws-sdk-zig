@@ -21,7 +21,8 @@ pub const StartIngestionInput = struct {
     };
 };
 
-pub const StartIngestionOutput = struct {};
+pub const StartIngestionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

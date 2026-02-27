@@ -18,7 +18,8 @@ pub const DeleteImagePermissionsInput = struct {
     };
 };
 
-pub const DeleteImagePermissionsOutput = struct {};
+pub const DeleteImagePermissionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

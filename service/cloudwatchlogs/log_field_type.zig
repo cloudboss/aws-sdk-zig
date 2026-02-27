@@ -11,11 +11,11 @@ pub const LogFieldType = struct {
     fields: ?[]const LogFieldsListItem,
 
     /// The data type of the log field.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .element = "element",
         .fields = "fields",
-        .type = "type",
+        .@"type" = "type",
     };
 };

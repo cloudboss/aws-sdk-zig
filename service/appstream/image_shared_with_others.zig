@@ -1,9 +1,9 @@
 pub const ImageSharedWithOthers = enum {
-    true,
-    false,
+    @"true",
+    @"false",
 
     pub const json_field_names = .{
-        .true = "TRUE",
-        .false = "FALSE",
+        .@"true" = "TRUE",
+        .@"false" = "FALSE",
     };
 };

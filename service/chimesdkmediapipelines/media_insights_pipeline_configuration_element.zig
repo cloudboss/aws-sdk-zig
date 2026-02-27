@@ -41,7 +41,7 @@ pub const MediaInsightsPipelineConfigurationElement = struct {
     sqs_queue_sink_configuration: ?SqsQueueSinkConfiguration,
 
     /// The element type.
-    type: MediaInsightsPipelineConfigurationElementType,
+    @"type": MediaInsightsPipelineConfigurationElementType,
 
     /// The voice analytics configuration settings in a media insights pipeline
     /// configuration element.
@@ -59,7 +59,7 @@ pub const MediaInsightsPipelineConfigurationElement = struct {
         .s3_recording_sink_configuration = "S3RecordingSinkConfiguration",
         .sns_topic_sink_configuration = "SnsTopicSinkConfiguration",
         .sqs_queue_sink_configuration = "SqsQueueSinkConfiguration",
-        .type = "Type",
+        .@"type" = "Type",
         .voice_analytics_processor_configuration = "VoiceAnalyticsProcessorConfiguration",
         .voice_enhancement_sink_configuration = "VoiceEnhancementSinkConfiguration",
     };

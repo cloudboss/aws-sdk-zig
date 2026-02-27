@@ -15,11 +15,11 @@ pub const ComponentBindingPropertiesValue = struct {
     default_value: ?[]const u8,
 
     /// The property type.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .binding_properties = "bindingProperties",
         .default_value = "defaultValue",
-        .type = "type",
+        .@"type" = "type",
     };
 };

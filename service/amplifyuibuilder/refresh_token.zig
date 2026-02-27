@@ -74,7 +74,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RefreshTokenInput, config: 
     try path_buf.appendSlice(alloc, "/refresh");
     const path = try path_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body = try aws.json.jsonStringify(input.refresh_token_body, alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

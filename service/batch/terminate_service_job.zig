@@ -19,7 +19,8 @@ pub const TerminateServiceJobInput = struct {
     };
 };
 
-pub const TerminateServiceJobOutput = struct {};
+pub const TerminateServiceJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

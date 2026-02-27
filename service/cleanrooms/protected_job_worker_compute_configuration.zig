@@ -6,10 +6,10 @@ pub const ProtectedJobWorkerComputeConfiguration = struct {
     number: i32,
 
     /// The worker compute configuration type.
-    type: ProtectedJobWorkerComputeType,
+    @"type": ProtectedJobWorkerComputeType,
 
     pub const json_field_names = .{
         .number = "number",
-        .type = "type",
+        .@"type" = "type",
     };
 };

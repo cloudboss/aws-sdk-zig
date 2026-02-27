@@ -13,7 +13,8 @@ pub const DeleteDataIntegrationInput = struct {
     };
 };
 
-pub const DeleteDataIntegrationOutput = struct {};
+pub const DeleteDataIntegrationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

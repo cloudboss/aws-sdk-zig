@@ -40,7 +40,7 @@ pub const CommandExecution = struct {
     submit_time: ?i64,
 
     /// The command type.
-    type: ?CommandType,
+    @"type": ?CommandType,
 
     pub const json_field_names = .{
         .command = "command",
@@ -55,6 +55,6 @@ pub const CommandExecution = struct {
         .start_time = "startTime",
         .status = "status",
         .submit_time = "submitTime",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -9,14 +9,14 @@ pub const ApiParameter = struct {
     name: ?[]const u8,
 
     /// The data type for the parameter.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The value of the parameter.
     value: ?[]const u8,
 
     pub const json_field_names = .{
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

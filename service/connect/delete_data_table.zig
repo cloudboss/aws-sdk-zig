@@ -19,7 +19,8 @@ pub const DeleteDataTableInput = struct {
     };
 };
 
-pub const DeleteDataTableOutput = struct {};
+pub const DeleteDataTableOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

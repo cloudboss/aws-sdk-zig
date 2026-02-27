@@ -31,7 +31,8 @@ pub const AdminDeleteUserAttributesInput = struct {
     };
 };
 
-pub const AdminDeleteUserAttributesOutput = struct {};
+pub const AdminDeleteUserAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,12 +21,12 @@ pub const FlowValidation = struct {
     severity: FlowValidationSeverity,
 
     /// The type of validation issue encountered in the flow.
-    type: ?FlowValidationType,
+    @"type": ?FlowValidationType,
 
     pub const json_field_names = .{
         .details = "details",
         .message = "message",
         .severity = "severity",
-        .type = "type",
+        .@"type" = "type",
     };
 };

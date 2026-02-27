@@ -12,10 +12,10 @@ pub const Destination = struct {
     /// used for a CloudTrail Lake integration, the value is `EVENT_DATA_STORE`. For
     /// service-linked channels,
     /// the value is `AWS_SERVICE`.
-    type: DestinationType,
+    @"type": DestinationType,
 
     pub const json_field_names = .{
         .location = "Location",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

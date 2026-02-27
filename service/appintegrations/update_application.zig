@@ -64,7 +64,8 @@ pub const UpdateApplicationInput = struct {
     };
 };
 
-pub const UpdateApplicationOutput = struct {};
+pub const UpdateApplicationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

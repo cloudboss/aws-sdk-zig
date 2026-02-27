@@ -30,7 +30,8 @@ pub const CreateNotificationInput = struct {
     };
 };
 
-pub const CreateNotificationOutput = struct {};
+pub const CreateNotificationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

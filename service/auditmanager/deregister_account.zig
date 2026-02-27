@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountStatus = @import("account_status.zig").AccountStatus;
 
-pub const DeregisterAccountInput = struct {};
+pub const DeregisterAccountInput = struct {
+};
 
 pub const DeregisterAccountOutput = struct {
     /// The registration status of the account.

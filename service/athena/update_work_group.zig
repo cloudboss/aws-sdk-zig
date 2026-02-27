@@ -27,7 +27,8 @@ pub const UpdateWorkGroupInput = struct {
     };
 };
 
-pub const UpdateWorkGroupOutput = struct {};
+pub const UpdateWorkGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

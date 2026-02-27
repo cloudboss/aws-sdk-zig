@@ -139,7 +139,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                             const n_2 = idx_2 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Counts.member.{d}=", .{ n, n_1, n_2 }) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Counts.member.{d}=", .{n, n_1, n_2}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                             }
@@ -150,13 +150,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                             const n_2 = idx_2 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Dimensions.member.{d}.Name=", .{ n, n_1, n_2 }) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Dimensions.member.{d}.Name=", .{n, n_1, n_2}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.name);
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Dimensions.member.{d}.Value=", .{ n, n_1, n_2 }) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Dimensions.member.{d}.Value=", .{n, n_1, n_2}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.value);
                             }
@@ -164,39 +164,39 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.MetricName=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.MetricName=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1.metric_name);
                     }
                     if (item_1.statistic_values) |sv_2| {
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Maximum=", .{ n, n_1 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Maximum=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, sv_2.maximum);
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Minimum=", .{ n, n_1 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Minimum=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, sv_2.minimum);
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.SampleCount=", .{ n, n_1 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.SampleCount=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, sv_2.sample_count);
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Sum=", .{ n, n_1 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Sum=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, sv_2.sum);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StorageResolution=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StorageResolution=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.storage_resolution) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
@@ -204,7 +204,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Timestamp=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Timestamp=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.timestamp) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
@@ -212,7 +212,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Unit=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Unit=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.unit) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_2));
@@ -220,7 +220,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Value=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -231,7 +231,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                             const n_2 = idx_2 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Values.member.{d}=", .{ n, n_1, n_2 }) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Values.member.{d}=", .{n, n_1, n_2}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                             }
@@ -249,7 +249,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Counts.member.{d}=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Counts.member.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
@@ -260,13 +260,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Dimensions.member.{d}.Name=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Dimensions.member.{d}.Name=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1.name);
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Dimensions.member.{d}.Value=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Dimensions.member.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1.value);
                     }
@@ -341,7 +341,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetricDataInput, config:
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Values.member.{d}=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Values.member.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }

@@ -14,7 +14,8 @@ pub const DeleteInferenceProfileInput = struct {
     };
 };
 
-pub const DeleteInferenceProfileOutput = struct {};
+pub const DeleteInferenceProfileOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

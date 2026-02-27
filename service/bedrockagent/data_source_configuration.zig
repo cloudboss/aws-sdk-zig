@@ -29,7 +29,7 @@ pub const DataSourceConfiguration = struct {
     share_point_configuration: ?SharePointDataSourceConfiguration,
 
     /// The type of data source.
-    type: DataSourceType,
+    @"type": DataSourceType,
 
     /// The configuration of web URLs to crawl for your data source. You should be
     /// authorized to crawl the URLs.
@@ -43,7 +43,7 @@ pub const DataSourceConfiguration = struct {
         .s_3_configuration = "s3Configuration",
         .salesforce_configuration = "salesforceConfiguration",
         .share_point_configuration = "sharePointConfiguration",
-        .type = "type",
+        .@"type" = "type",
         .web_configuration = "webConfiguration",
     };
 };

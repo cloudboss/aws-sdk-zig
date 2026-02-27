@@ -214,7 +214,8 @@ pub const UpdateUserPoolInput = struct {
     };
 };
 
-pub const UpdateUserPoolOutput = struct {};
+pub const UpdateUserPoolOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

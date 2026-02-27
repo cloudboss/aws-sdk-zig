@@ -1,2 +1,3 @@
 /// The connector metadata specific to ServiceNow.
-pub const ServiceNowMetadata = struct {};
+pub const ServiceNowMetadata = struct {
+};

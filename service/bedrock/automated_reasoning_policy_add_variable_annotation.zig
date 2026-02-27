@@ -11,11 +11,11 @@ pub const AutomatedReasoningPolicyAddVariableAnnotation = struct {
 
     /// The type of the variable, which can be a built-in type (like string or
     /// number) or a custom type defined in the policy.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .description = "description",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

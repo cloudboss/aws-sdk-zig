@@ -25,12 +25,12 @@ pub const FlowNodeInput = struct {
 
     /// Specifies the data type of the input. If the input doesn't match this type
     /// at runtime, a validation error will be thrown.
-    type: FlowNodeIODataType,
+    @"type": FlowNodeIODataType,
 
     pub const json_field_names = .{
         .category = "category",
         .expression = "expression",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

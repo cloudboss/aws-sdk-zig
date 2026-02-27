@@ -45,13 +45,13 @@ pub const ProjectFileSystemLocation = struct {
     mount_point: ?[]const u8,
 
     /// The type of the file system. The one supported type is `EFS`.
-    type: ?FileSystemType,
+    @"type": ?FileSystemType,
 
     pub const json_field_names = .{
         .identifier = "identifier",
         .location = "location",
         .mount_options = "mountOptions",
         .mount_point = "mountPoint",
-        .type = "type",
+        .@"type" = "type",
     };
 };

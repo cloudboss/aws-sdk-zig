@@ -90,7 +90,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartAutomatedReasoningPoli
     try path_buf.appendSlice(alloc, "/start");
     const path = try path_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body = try aws.json.jsonStringify(input.source_content, alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

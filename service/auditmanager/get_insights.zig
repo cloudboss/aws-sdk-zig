@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Insights = @import("insights.zig").Insights;
 
-pub const GetInsightsInput = struct {};
+pub const GetInsightsInput = struct {
+};
 
 pub const GetInsightsOutput = struct {
     /// The analytics data that the `GetInsights` API returned.

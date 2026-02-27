@@ -42,7 +42,8 @@ pub const AdminUpdateAuthEventFeedbackInput = struct {
     };
 };
 
-pub const AdminUpdateAuthEventFeedbackOutput = struct {};
+pub const AdminUpdateAuthEventFeedbackOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

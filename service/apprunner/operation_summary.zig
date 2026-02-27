@@ -22,7 +22,7 @@ pub const OperationSummary = struct {
     target_arn: ?[]const u8,
 
     /// The type of operation. It indicates a specific action that occured.
-    type: ?OperationType,
+    @"type": ?OperationType,
 
     /// The time when the operation was last updated. It's in the Unix time stamp
     /// format.
@@ -34,7 +34,7 @@ pub const OperationSummary = struct {
         .started_at = "StartedAt",
         .status = "Status",
         .target_arn = "TargetArn",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_at = "UpdatedAt",
     };
 };

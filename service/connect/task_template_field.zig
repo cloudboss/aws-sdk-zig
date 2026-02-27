@@ -13,12 +13,12 @@ pub const TaskTemplateField = struct {
     single_select_options: ?[]const []const u8,
 
     /// Indicates the type of field.
-    type: ?TaskTemplateFieldType,
+    @"type": ?TaskTemplateFieldType,
 
     pub const json_field_names = .{
         .description = "Description",
         .id = "Id",
         .single_select_options = "SingleSelectOptions",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

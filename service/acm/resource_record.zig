@@ -8,7 +8,7 @@ pub const ResourceRecord = struct {
     name: []const u8,
 
     /// The type of DNS record. Currently this can be `CNAME`.
-    type: RecordType,
+    @"type": RecordType,
 
     /// The value of the CNAME record to add to your DNS database. This is supplied
     /// by ACM.
@@ -16,7 +16,7 @@ pub const ResourceRecord = struct {
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

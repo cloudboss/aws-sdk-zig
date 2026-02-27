@@ -73,12 +73,12 @@ pub const ProjectCache = struct {
     ///
     /// * `LOCAL`: The build project stores a cache locally on a build host
     /// that is only available to that build host.
-    type: CacheType,
+    @"type": CacheType,
 
     pub const json_field_names = .{
         .cache_namespace = "cacheNamespace",
         .location = "location",
         .modes = "modes",
-        .type = "type",
+        .@"type" = "type",
     };
 };

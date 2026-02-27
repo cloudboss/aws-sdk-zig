@@ -59,7 +59,7 @@ pub const RxNormEntity = struct {
     /// Describes the specific type of entity. For InferRxNorm, the recognized
     /// entity type is
     /// `MEDICATION`.
-    type: ?RxNormEntityType,
+    @"type": ?RxNormEntityType,
 
     pub const json_field_names = .{
         .attributes = "Attributes",
@@ -71,6 +71,6 @@ pub const RxNormEntity = struct {
         .score = "Score",
         .text = "Text",
         .traits = "Traits",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

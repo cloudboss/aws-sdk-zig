@@ -18,7 +18,8 @@ pub const UpdateAccountSettingsInput = struct {
     };
 };
 
-pub const UpdateAccountSettingsOutput = struct {};
+pub const UpdateAccountSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

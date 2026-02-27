@@ -28,7 +28,7 @@ pub const CodegenGenericDataRelationshipType = struct {
     related_model_name: []const u8,
 
     /// The data relationship type.
-    type: GenericDataRelationshipType,
+    @"type": GenericDataRelationshipType,
 
     pub const json_field_names = .{
         .associated_fields = "associatedFields",
@@ -39,6 +39,6 @@ pub const CodegenGenericDataRelationshipType = struct {
         .related_join_table_name = "relatedJoinTableName",
         .related_model_fields = "relatedModelFields",
         .related_model_name = "relatedModelName",
-        .type = "type",
+        .@"type" = "type",
     };
 };

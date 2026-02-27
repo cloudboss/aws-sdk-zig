@@ -61,7 +61,8 @@ pub const AdminConfirmSignUpInput = struct {
     };
 };
 
-pub const AdminConfirmSignUpOutput = struct {};
+pub const AdminConfirmSignUpOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

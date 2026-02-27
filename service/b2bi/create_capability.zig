@@ -29,7 +29,7 @@ pub const CreateCapabilityInput = struct {
     tags: ?[]const Tag = null,
 
     /// Specifies the type of the capability. Currently, only `edi` is supported.
-    type: CapabilityType,
+    @"type": CapabilityType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -37,7 +37,7 @@ pub const CreateCapabilityInput = struct {
         .instructions_documents = "instructionsDocuments",
         .name = "name",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -64,7 +64,7 @@ pub const CreateCapabilityOutput = struct {
     name: []const u8,
 
     /// Returns the type of the capability. Currently, only `edi` is supported.
-    type: CapabilityType,
+    @"type": CapabilityType,
 
     pub const json_field_names = .{
         .capability_arn = "capabilityArn",
@@ -73,7 +73,7 @@ pub const CreateCapabilityOutput = struct {
         .created_at = "createdAt",
         .instructions_documents = "instructionsDocuments",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

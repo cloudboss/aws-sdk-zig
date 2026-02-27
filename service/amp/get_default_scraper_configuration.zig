@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetDefaultScraperConfigurationInput = struct {};
+pub const GetDefaultScraperConfigurationInput = struct {
+};
 
 pub const GetDefaultScraperConfigurationOutput = struct {
     /// The configuration file. Base 64 encoded. For more information, see [Scraper

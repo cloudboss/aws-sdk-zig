@@ -13,7 +13,8 @@ pub const DeleteComputeEnvironmentInput = struct {
     };
 };
 
-pub const DeleteComputeEnvironmentOutput = struct {};
+pub const DeleteComputeEnvironmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

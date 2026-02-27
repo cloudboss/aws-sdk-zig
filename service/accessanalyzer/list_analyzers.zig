@@ -14,12 +14,12 @@ pub const ListAnalyzersInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of analyzer.
-    type: ?Type = null,
+    @"type": ?Type = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -91,7 +91,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListAnalyzersInput, config:
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

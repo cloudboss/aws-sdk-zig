@@ -26,7 +26,8 @@ pub const UpdateDeviceStatusInput = struct {
     };
 };
 
-pub const UpdateDeviceStatusOutput = struct {};
+pub const UpdateDeviceStatusOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

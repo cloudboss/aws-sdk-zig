@@ -40,7 +40,8 @@ pub const AdminSetUserPasswordInput = struct {
     };
 };
 
-pub const AdminSetUserPasswordOutput = struct {};
+pub const AdminSetUserPasswordOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

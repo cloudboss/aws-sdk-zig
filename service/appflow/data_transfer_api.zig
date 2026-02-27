@@ -26,10 +26,10 @@ pub const DataTransferApi = struct {
     /// **ASYNC**
     ///
     /// An asynchronous API. This type of API optimizes a flow for large datasets.
-    type: ?DataTransferApiType,
+    @"type": ?DataTransferApiType,
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -12,7 +12,8 @@ pub const DeleteLifecycleHookInput = struct {
     lifecycle_hook_name: []const u8,
 };
 
-pub const DeleteLifecycleHookOutput = struct {};
+pub const DeleteLifecycleHookOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

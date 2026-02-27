@@ -71,7 +71,8 @@ pub const PutLifecycleHookInput = struct {
     role_arn: ?[]const u8 = null,
 };
 
-pub const PutLifecycleHookOutput = struct {};
+pub const PutLifecycleHookOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

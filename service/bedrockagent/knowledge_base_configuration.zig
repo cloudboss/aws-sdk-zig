@@ -14,7 +14,7 @@ pub const KnowledgeBaseConfiguration = struct {
 
     /// The type of data that the data source is converted into for the knowledge
     /// base.
-    type: KnowledgeBaseType,
+    @"type": KnowledgeBaseType,
 
     /// Contains details about the model that's used to convert the data source into
     /// vector embeddings.
@@ -23,7 +23,7 @@ pub const KnowledgeBaseConfiguration = struct {
     pub const json_field_names = .{
         .kendra_knowledge_base_configuration = "kendraKnowledgeBaseConfiguration",
         .sql_knowledge_base_configuration = "sqlKnowledgeBaseConfiguration",
-        .type = "type",
+        .@"type" = "type",
         .vector_knowledge_base_configuration = "vectorKnowledgeBaseConfiguration",
     };
 };

@@ -116,11 +116,11 @@ pub const WebhookFilter = struct {
     ///
     /// For CodeBuild-hosted Buildkite runner builds, WORKFLOW_NAME
     /// filters will filter by pipeline name.
-    type: WebhookFilterType,
+    @"type": WebhookFilterType,
 
     pub const json_field_names = .{
         .exclude_matched_pattern = "excludeMatchedPattern",
         .pattern = "pattern",
-        .type = "type",
+        .@"type" = "type",
     };
 };

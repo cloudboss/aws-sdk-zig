@@ -127,7 +127,7 @@ pub const Integration = struct {
     /// integration with a `connectionType` of `VPC_LINK` is referred to as a
     /// private integration and uses a VpcLink to connect API Gateway to a network
     /// load balancer of a VPC.
-    type: ?IntegrationType,
+    @"type": ?IntegrationType,
 
     /// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
     ///
@@ -176,7 +176,7 @@ pub const Integration = struct {
         .response_transfer_mode = "responseTransferMode",
         .timeout_in_millis = "timeoutInMillis",
         .tls_config = "tlsConfig",
-        .type = "type",
+        .@"type" = "type",
         .uri = "uri",
     };
 };

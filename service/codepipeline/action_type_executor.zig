@@ -33,12 +33,12 @@ pub const ActionTypeExecutor = struct {
 
     /// The integration model used to create and update the action type, `Lambda`
     /// or `JobWorker`.
-    type: ExecutorType,
+    @"type": ExecutorType,
 
     pub const json_field_names = .{
         .configuration = "configuration",
         .job_timeout = "jobTimeout",
         .policy_statements_template = "policyStatementsTemplate",
-        .type = "type",
+        .@"type" = "type",
     };
 };

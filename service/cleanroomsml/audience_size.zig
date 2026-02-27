@@ -7,13 +7,13 @@ pub const AudienceSize = struct {
     /// You can use the `ABSOLUTE` AudienceSize to configure out audience sizes
     /// using the count of identifiers in the output. You can use the `Percentage`
     /// AudienceSize to configure sizes in the range 1-100 percent.
-    type: AudienceSizeType,
+    @"type": AudienceSizeType,
 
     /// Specify an audience size value.
     value: i32,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

@@ -91,7 +91,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateComponentInput, confi
     }
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body = try aws.json.jsonStringify(input.component_to_create, alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

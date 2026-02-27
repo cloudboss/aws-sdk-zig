@@ -13,7 +13,8 @@ pub const StopFleetInput = struct {
     };
 };
 
-pub const StopFleetOutput = struct {};
+pub const StopFleetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

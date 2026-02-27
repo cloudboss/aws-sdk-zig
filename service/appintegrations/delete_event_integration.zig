@@ -13,7 +13,8 @@ pub const DeleteEventIntegrationInput = struct {
     };
 };
 
-pub const DeleteEventIntegrationOutput = struct {};
+pub const DeleteEventIntegrationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

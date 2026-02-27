@@ -19,7 +19,8 @@ pub const DeletePrivacyBudgetTemplateInput = struct {
     };
 };
 
-pub const DeletePrivacyBudgetTemplateOutput = struct {};
+pub const DeletePrivacyBudgetTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

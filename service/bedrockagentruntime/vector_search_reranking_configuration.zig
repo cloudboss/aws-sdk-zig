@@ -7,10 +7,10 @@ pub const VectorSearchRerankingConfiguration = struct {
     bedrock_reranking_configuration: ?VectorSearchBedrockRerankingConfiguration,
 
     /// The type of reranker model.
-    type: VectorSearchRerankingConfigurationType,
+    @"type": VectorSearchRerankingConfigurationType,
 
     pub const json_field_names = .{
         .bedrock_reranking_configuration = "bedrockRerankingConfiguration",
-        .type = "type",
+        .@"type" = "type",
     };
 };

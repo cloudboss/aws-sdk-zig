@@ -63,7 +63,7 @@ pub const Schema = struct {
     selected_analysis_methods: ?[]const SelectedAnalysisMethod,
 
     /// The type of schema.
-    type: SchemaType,
+    @"type": SchemaType,
 
     /// The most recent time at which the schema was updated.
     update_time: i64,
@@ -83,7 +83,7 @@ pub const Schema = struct {
         .schema_status_details = "schemaStatusDetails",
         .schema_type_properties = "schemaTypeProperties",
         .selected_analysis_methods = "selectedAnalysisMethods",
-        .type = "type",
+        .@"type" = "type",
         .update_time = "updateTime",
     };
 };

@@ -13,7 +13,8 @@ pub const DeleteMembershipInput = struct {
     };
 };
 
-pub const DeleteMembershipOutput = struct {};
+pub const DeleteMembershipOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,8 @@ pub const DisassociateApplicationFromEntitlementInput = struct {
     };
 };
 
-pub const DisassociateApplicationFromEntitlementOutput = struct {};
+pub const DisassociateApplicationFromEntitlementOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

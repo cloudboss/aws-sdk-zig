@@ -27,7 +27,8 @@ pub const UnsubscribeFromDatasetInput = struct {
     };
 };
 
-pub const UnsubscribeFromDatasetOutput = struct {};
+pub const UnsubscribeFromDatasetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

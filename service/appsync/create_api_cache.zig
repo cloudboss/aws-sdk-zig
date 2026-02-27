@@ -97,7 +97,7 @@ pub const CreateApiCacheInput = struct {
     /// * **R4_4XLARGE**: A r4.4xlarge instance type.
     ///
     /// * **R4_8XLARGE**: A r4.8xlarge instance type.
-    type: ApiCacheType,
+    @"type": ApiCacheType,
 
     pub const json_field_names = .{
         .api_caching_behavior = "apiCachingBehavior",
@@ -106,7 +106,7 @@ pub const CreateApiCacheInput = struct {
         .health_metrics_config = "healthMetricsConfig",
         .transit_encryption_enabled = "transitEncryptionEnabled",
         .ttl = "ttl",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -193,7 +193,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateApiCacheInput, config
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

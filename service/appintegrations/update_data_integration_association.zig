@@ -22,7 +22,8 @@ pub const UpdateDataIntegrationAssociationInput = struct {
     };
 };
 
-pub const UpdateDataIntegrationAssociationOutput = struct {};
+pub const UpdateDataIntegrationAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

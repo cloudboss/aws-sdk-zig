@@ -22,7 +22,7 @@ pub const CreateBlueprintInput = struct {
 
     tags: ?[]const Tag = null,
 
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .blueprint_name = "blueprintName",
@@ -31,7 +31,7 @@ pub const CreateBlueprintInput = struct {
         .encryption_configuration = "encryptionConfiguration",
         .schema = "schema",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -119,7 +119,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateBlueprintInput, confi
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

@@ -35,7 +35,8 @@ pub const DisassociateEmailAddressAliasInput = struct {
     };
 };
 
-pub const DisassociateEmailAddressAliasOutput = struct {};
+pub const DisassociateEmailAddressAliasOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

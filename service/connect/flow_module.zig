@@ -6,10 +6,10 @@ pub const FlowModule = struct {
     flow_module_id: ?[]const u8,
 
     /// Only Type we support is MCP.
-    type: ?FlowModuleType,
+    @"type": ?FlowModuleType,
 
     pub const json_field_names = .{
         .flow_module_id = "FlowModuleId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

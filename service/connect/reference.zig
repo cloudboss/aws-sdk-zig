@@ -15,7 +15,7 @@ pub const Reference = struct {
     status_reason: ?[]const u8,
 
     /// The type of the reference. `DATE` must be of type Epoch timestamp.
-    type: ReferenceType,
+    @"type": ReferenceType,
 
     /// A valid value for the reference. For example, for a URL reference, a
     /// formatted URL that is displayed to an agent
@@ -26,7 +26,7 @@ pub const Reference = struct {
         .arn = "Arn",
         .status = "Status",
         .status_reason = "StatusReason",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

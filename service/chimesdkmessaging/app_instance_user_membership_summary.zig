@@ -9,11 +9,11 @@ pub const AppInstanceUserMembershipSummary = struct {
     sub_channel_id: ?[]const u8,
 
     /// The type of `ChannelMembership`.
-    type: ?ChannelMembershipType,
+    @"type": ?ChannelMembershipType,
 
     pub const json_field_names = .{
         .read_marker_timestamp = "ReadMarkerTimestamp",
         .sub_channel_id = "SubChannelId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

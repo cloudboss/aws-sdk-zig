@@ -8,5 +8,5 @@ pub const CachePolicySummary = struct {
 
     /// The type of cache policy, either `managed` (created by Amazon Web Services)
     /// or `custom` (created in this Amazon Web Services account).
-    type: CachePolicyType,
+    @"type": CachePolicyType,
 };

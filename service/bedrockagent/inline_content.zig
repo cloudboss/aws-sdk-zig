@@ -12,11 +12,11 @@ pub const InlineContent = struct {
     text_content: ?TextContentDoc,
 
     /// The type of inline content to define.
-    type: InlineContentType,
+    @"type": InlineContentType,
 
     pub const json_field_names = .{
         .byte_content = "byteContent",
         .text_content = "textContent",
-        .type = "type",
+        .@"type" = "type",
     };
 };

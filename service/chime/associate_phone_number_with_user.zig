@@ -21,7 +21,8 @@ pub const AssociatePhoneNumberWithUserInput = struct {
     };
 };
 
-pub const AssociatePhoneNumberWithUserOutput = struct {};
+pub const AssociatePhoneNumberWithUserOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

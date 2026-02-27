@@ -86,7 +86,8 @@ pub const ResetConnectorMetadataCacheInput = struct {
     };
 };
 
-pub const ResetConnectorMetadataCacheOutput = struct {};
+pub const ResetConnectorMetadataCacheOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

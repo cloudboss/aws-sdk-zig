@@ -16,7 +16,8 @@ pub const CancelPolicyGenerationInput = struct {
     };
 };
 
-pub const CancelPolicyGenerationOutput = struct {};
+pub const CancelPolicyGenerationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

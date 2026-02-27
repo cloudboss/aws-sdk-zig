@@ -13,7 +13,8 @@ pub const DeleteArchiveInput = struct {
     };
 };
 
-pub const DeleteArchiveOutput = struct {};
+pub const DeleteArchiveOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -12,11 +12,11 @@ pub const AnalysisParameter = struct {
     name: []const u8,
 
     /// The type of parameter.
-    type: ParameterType,
+    @"type": ParameterType,
 
     pub const json_field_names = .{
         .default_value = "defaultValue",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

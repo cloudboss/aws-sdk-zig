@@ -4,9 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteModelInvocationLoggingConfigurationInput = struct {};
+pub const DeleteModelInvocationLoggingConfigurationInput = struct {
+};
 
-pub const DeleteModelInvocationLoggingConfigurationOutput = struct {};
+pub const DeleteModelInvocationLoggingConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

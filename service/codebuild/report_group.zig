@@ -55,7 +55,7 @@ pub const ReportGroup = struct {
     /// **TEST**
     ///
     /// The report group contains test reports.
-    type: ?ReportType,
+    @"type": ?ReportType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -65,6 +65,6 @@ pub const ReportGroup = struct {
         .name = "name",
         .status = "status",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

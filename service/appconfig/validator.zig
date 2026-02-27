@@ -18,10 +18,10 @@ pub const Validator = struct {
 
     /// AppConfig supports validators of type `JSON_SCHEMA` and
     /// `LAMBDA`
-    type: ValidatorType,
+    @"type": ValidatorType,
 
     pub const json_field_names = .{
         .content = "Content",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

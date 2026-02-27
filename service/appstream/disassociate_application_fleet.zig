@@ -17,7 +17,8 @@ pub const DisassociateApplicationFleetInput = struct {
     };
 };
 
-pub const DisassociateApplicationFleetOutput = struct {};
+pub const DisassociateApplicationFleetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -12,11 +12,11 @@ pub const DifferentialPrivacyPrivacyBudgetAggregation = struct {
     remaining_count: i32,
 
     /// The different types of aggregation functions that you can perform.
-    type: DifferentialPrivacyAggregationType,
+    @"type": DifferentialPrivacyAggregationType,
 
     pub const json_field_names = .{
         .max_count = "maxCount",
         .remaining_count = "remainingCount",
-        .type = "type",
+        .@"type" = "type",
     };
 };

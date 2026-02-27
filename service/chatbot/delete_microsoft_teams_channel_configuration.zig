@@ -14,7 +14,8 @@ pub const DeleteMicrosoftTeamsChannelConfigurationInput = struct {
     };
 };
 
-pub const DeleteMicrosoftTeamsChannelConfigurationOutput = struct {};
+pub const DeleteMicrosoftTeamsChannelConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

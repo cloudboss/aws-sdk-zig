@@ -21,13 +21,13 @@ pub const EdiConfiguration = struct {
     transformer_id: []const u8,
 
     /// Returns the type of the capability. Currently, only `edi` is supported.
-    type: EdiType,
+    @"type": EdiType,
 
     pub const json_field_names = .{
         .capability_direction = "capabilityDirection",
         .input_location = "inputLocation",
         .output_location = "outputLocation",
         .transformer_id = "transformerId",
-        .type = "type",
+        .@"type" = "type",
     };
 };

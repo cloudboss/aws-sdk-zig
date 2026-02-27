@@ -54,7 +54,7 @@ pub const CreatePricingRuleInput = struct {
     tiering: ?CreateTieringInput = null,
 
     /// The type of pricing rule.
-    type: PricingRuleType,
+    @"type": PricingRuleType,
 
     /// Usage type is the unit that each service uses to measure the usage of a
     /// specific type of resource.
@@ -76,7 +76,7 @@ pub const CreatePricingRuleInput = struct {
         .service = "Service",
         .tags = "Tags",
         .tiering = "Tiering",
-        .type = "Type",
+        .@"type" = "Type",
         .usage_type = "UsageType",
     };
 };
@@ -184,7 +184,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePricingRuleInput, con
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
     if (input.usage_type) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");

@@ -33,7 +33,7 @@ pub const RuleConfigurationProperty = struct {
     secret: bool = false,
 
     /// The type of the configuration property.
-    type: ?RuleConfigurationPropertyType,
+    @"type": ?RuleConfigurationPropertyType,
 
     pub const json_field_names = .{
         .description = "description",
@@ -42,6 +42,6 @@ pub const RuleConfigurationProperty = struct {
         .queryable = "queryable",
         .required = "required",
         .secret = "secret",
-        .type = "type",
+        .@"type" = "type",
     };
 };

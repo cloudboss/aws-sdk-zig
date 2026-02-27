@@ -25,7 +25,8 @@ pub const DeleteAgentMemoryInput = struct {
     };
 };
 
-pub const DeleteAgentMemoryOutput = struct {};
+pub const DeleteAgentMemoryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteChimeWebhookConfigurationInput = struct {
     };
 };
 
-pub const DeleteChimeWebhookConfigurationOutput = struct {};
+pub const DeleteChimeWebhookConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

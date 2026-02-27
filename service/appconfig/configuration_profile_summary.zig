@@ -25,7 +25,7 @@ pub const ConfigurationProfileSummary = struct {
     /// `AWS.AppConfig.FeatureFlags`
     ///
     /// `AWS.Freeform`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The types of validators in the configuration profile.
     validator_types: ?[]const ValidatorType,
@@ -35,7 +35,7 @@ pub const ConfigurationProfileSummary = struct {
         .id = "Id",
         .location_uri = "LocationUri",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
         .validator_types = "ValidatorTypes",
     };
 };

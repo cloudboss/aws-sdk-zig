@@ -26,7 +26,8 @@ pub const CompleteLifecycleActionInput = struct {
     lifecycle_hook_name: []const u8,
 };
 
-pub const CompleteLifecycleActionOutput = struct {};
+pub const CompleteLifecycleActionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteProvisionedModelThroughputInput = struct {
     };
 };
 
-pub const DeleteProvisionedModelThroughputOutput = struct {};
+pub const DeleteProvisionedModelThroughputOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

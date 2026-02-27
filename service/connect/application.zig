@@ -15,11 +15,11 @@ pub const Application = struct {
     namespace: ?[]const u8,
 
     /// Type of Application.
-    type: ?ApplicationType,
+    @"type": ?ApplicationType,
 
     pub const json_field_names = .{
         .application_permissions = "ApplicationPermissions",
         .namespace = "Namespace",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

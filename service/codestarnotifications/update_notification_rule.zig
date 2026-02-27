@@ -49,7 +49,8 @@ pub const UpdateNotificationRuleInput = struct {
     };
 };
 
-pub const UpdateNotificationRuleOutput = struct {};
+pub const UpdateNotificationRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

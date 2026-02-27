@@ -35,7 +35,7 @@ pub const AssessmentFrameworkMetadata = struct {
     name: ?[]const u8,
 
     /// The framework type, such as a standard framework or a custom framework.
-    type: ?FrameworkType,
+    @"type": ?FrameworkType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -48,6 +48,6 @@ pub const AssessmentFrameworkMetadata = struct {
         .last_updated_at = "lastUpdatedAt",
         .logo = "logo",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

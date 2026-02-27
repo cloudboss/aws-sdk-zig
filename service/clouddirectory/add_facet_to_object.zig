@@ -30,7 +30,8 @@ pub const AddFacetToObjectInput = struct {
     };
 };
 
-pub const AddFacetToObjectOutput = struct {};
+pub const AddFacetToObjectOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

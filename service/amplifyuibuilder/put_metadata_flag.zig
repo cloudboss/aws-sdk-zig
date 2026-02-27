@@ -73,7 +73,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutMetadataFlagInput, confi
     try path_buf.appendSlice(alloc, input.feature_name);
     const path = try path_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body = try aws.json.jsonStringify(input.body, alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

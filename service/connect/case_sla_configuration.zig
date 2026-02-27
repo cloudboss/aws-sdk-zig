@@ -19,13 +19,13 @@ pub const CaseSlaConfiguration = struct {
     target_sla_minutes: i64,
 
     /// Type of SLA for Case SlaAssignmentType.
-    type: SlaType,
+    @"type": SlaType,
 
     pub const json_field_names = .{
         .field_id = "FieldId",
         .name = "Name",
         .target_field_values = "TargetFieldValues",
         .target_sla_minutes = "TargetSlaMinutes",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

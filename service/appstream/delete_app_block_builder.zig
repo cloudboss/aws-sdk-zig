@@ -13,7 +13,8 @@ pub const DeleteAppBlockBuilderInput = struct {
     };
 };
 
-pub const DeleteAppBlockBuilderOutput = struct {};
+pub const DeleteAppBlockBuilderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

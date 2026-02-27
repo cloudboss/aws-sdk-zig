@@ -78,7 +78,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ExchangeCodeForTokenInput, 
     try path_buf.appendSlice(alloc, input.provider);
     const path = try path_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body = try aws.json.jsonStringify(input.request, alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

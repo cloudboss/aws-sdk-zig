@@ -1,7 +1,7 @@
 pub const InvocationType = enum {
-    async,
+    @"async",
 
     pub const json_field_names = .{
-        .async = "ASYNC",
+        .@"async" = "ASYNC",
     };
 };

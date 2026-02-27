@@ -18,13 +18,13 @@ pub const BatchChannelMemberships = struct {
     sub_channel_id: ?[]const u8,
 
     /// The membership types set for the channel members.
-    type: ?ChannelMembershipType,
+    @"type": ?ChannelMembershipType,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",
         .invited_by = "InvitedBy",
         .members = "Members",
         .sub_channel_id = "SubChannelId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

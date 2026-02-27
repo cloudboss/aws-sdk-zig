@@ -28,7 +28,7 @@ pub const RecommendedAction = struct {
     severity: ?Severity,
 
     /// The type of action you can take by adopting the recommended action.
-    type: ?ActionType,
+    @"type": ?ActionType,
 
     pub const json_field_names = .{
         .account_id = "accountId",
@@ -38,6 +38,6 @@ pub const RecommendedAction = struct {
         .last_updated_time_stamp = "lastUpdatedTimeStamp",
         .next_steps = "nextSteps",
         .severity = "severity",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -48,7 +48,7 @@ pub const PhoneNumber = struct {
     status: ?PhoneNumberStatus,
 
     /// The phone number's type.
-    type: ?PhoneNumberType,
+    @"type": ?PhoneNumberType,
 
     /// The updated phone number timestamp, in ISO 8601 format.
     updated_timestamp: ?i64,
@@ -67,7 +67,7 @@ pub const PhoneNumber = struct {
         .phone_number_id = "PhoneNumberId",
         .product_type = "ProductType",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_timestamp = "UpdatedTimestamp",
     };
 };

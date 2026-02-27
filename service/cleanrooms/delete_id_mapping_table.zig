@@ -18,7 +18,8 @@ pub const DeleteIdMappingTableInput = struct {
     };
 };
 
-pub const DeleteIdMappingTableOutput = struct {};
+pub const DeleteIdMappingTableOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

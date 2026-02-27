@@ -1,2 +1,3 @@
 /// The none option.
-pub const None = struct {};
+pub const None = struct {
+};

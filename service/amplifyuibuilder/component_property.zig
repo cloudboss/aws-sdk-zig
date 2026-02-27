@@ -52,7 +52,7 @@ pub const ComponentProperty = struct {
     property: ?[]const u8,
 
     /// The component type.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// An authenticated user attribute to use to assign a value to the component
     /// property.
@@ -74,7 +74,7 @@ pub const ComponentProperty = struct {
         .imported_value = "importedValue",
         .model = "model",
         .property = "property",
-        .type = "type",
+        .@"type" = "type",
         .user_attribute = "userAttribute",
         .value = "value",
     };

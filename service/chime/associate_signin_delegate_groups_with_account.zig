@@ -18,7 +18,8 @@ pub const AssociateSigninDelegateGroupsWithAccountInput = struct {
     };
 };
 
-pub const AssociateSigninDelegateGroupsWithAccountOutput = struct {};
+pub const AssociateSigninDelegateGroupsWithAccountOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

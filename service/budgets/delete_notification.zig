@@ -23,7 +23,8 @@ pub const DeleteNotificationInput = struct {
     };
 };
 
-pub const DeleteNotificationOutput = struct {};
+pub const DeleteNotificationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

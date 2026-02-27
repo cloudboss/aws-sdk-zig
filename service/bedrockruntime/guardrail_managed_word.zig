@@ -14,12 +14,12 @@ pub const GuardrailManagedWord = struct {
     match: []const u8,
 
     /// The type for the managed word.
-    type: GuardrailManagedWordType,
+    @"type": GuardrailManagedWordType,
 
     pub const json_field_names = .{
         .action = "action",
         .detected = "detected",
         .match = "match",
-        .type = "type",
+        .@"type" = "type",
     };
 };

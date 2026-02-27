@@ -15,7 +15,8 @@ pub const GlobalSignOutInput = struct {
     };
 };
 
-pub const GlobalSignOutOutput = struct {};
+pub const GlobalSignOutOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

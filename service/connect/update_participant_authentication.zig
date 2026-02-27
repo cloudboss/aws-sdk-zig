@@ -35,7 +35,8 @@ pub const UpdateParticipantAuthenticationInput = struct {
     };
 };
 
-pub const UpdateParticipantAuthenticationOutput = struct {};
+pub const UpdateParticipantAuthenticationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

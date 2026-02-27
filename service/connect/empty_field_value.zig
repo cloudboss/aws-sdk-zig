@@ -1,2 +1,3 @@
 /// An empty value.
-pub const EmptyFieldValue = struct {};
+pub const EmptyFieldValue = struct {
+};

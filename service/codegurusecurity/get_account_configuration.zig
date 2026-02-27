@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
 
-pub const GetAccountConfigurationInput = struct {};
+pub const GetAccountConfigurationInput = struct {
+};
 
 pub const GetAccountConfigurationOutput = struct {
     /// An `EncryptionConfig` object that contains the KMS key ARN that is used for

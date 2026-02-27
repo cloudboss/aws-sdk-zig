@@ -8,10 +8,10 @@ pub const TypeConverterEntry = struct {
 
     /// The type to convert the field value to. Valid values are `integer`,
     /// `double`, `string` and `boolean`.
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .key = "key",
-        .type = "type",
+        .@"type" = "type",
     };
 };

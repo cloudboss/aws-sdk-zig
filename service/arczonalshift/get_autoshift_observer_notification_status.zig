@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutoshiftObserverNotificationStatus = @import("autoshift_observer_notification_status.zig").AutoshiftObserverNotificationStatus;
 
-pub const GetAutoshiftObserverNotificationStatusInput = struct {};
+pub const GetAutoshiftObserverNotificationStatusInput = struct {
+};
 
 pub const GetAutoshiftObserverNotificationStatusOutput = struct {
     /// The status of autoshift observer notification. If the status is `ENABLED`,

@@ -13,7 +13,8 @@ pub const DeleteWorkloadIdentityInput = struct {
     };
 };
 
-pub const DeleteWorkloadIdentityOutput = struct {};
+pub const DeleteWorkloadIdentityOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

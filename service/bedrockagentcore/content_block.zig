@@ -25,7 +25,7 @@ pub const ContentBlock = struct {
     text: ?[]const u8,
 
     /// The type of content in the block.
-    type: ContentBlockType,
+    @"type": ContentBlockType,
 
     /// The URI of the content.
     uri: ?[]const u8,
@@ -38,7 +38,7 @@ pub const ContentBlock = struct {
         .resource = "resource",
         .size = "size",
         .text = "text",
-        .type = "type",
+        .@"type" = "type",
         .uri = "uri",
     };
 };

@@ -22,7 +22,8 @@ pub const DisassociateAgentKnowledgeBaseInput = struct {
     };
 };
 
-pub const DisassociateAgentKnowledgeBaseOutput = struct {};
+pub const DisassociateAgentKnowledgeBaseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,8 @@ pub const CreateComponentInput = struct {
     };
 };
 
-pub const CreateComponentOutput = struct {};
+pub const CreateComponentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

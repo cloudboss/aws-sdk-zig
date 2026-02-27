@@ -11,12 +11,12 @@ pub const ServiceEntity = struct {
     name: ?[]const u8,
 
     /// The type of the service entity.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",
         .environment = "Environment",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

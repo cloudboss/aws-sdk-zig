@@ -24,7 +24,8 @@ pub const DeleteAutomatedReasoningPolicyBuildWorkflowInput = struct {
     };
 };
 
-pub const DeleteAutomatedReasoningPolicyBuildWorkflowOutput = struct {};
+pub const DeleteAutomatedReasoningPolicyBuildWorkflowOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

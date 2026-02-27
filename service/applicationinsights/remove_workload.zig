@@ -21,7 +21,8 @@ pub const RemoveWorkloadInput = struct {
     };
 };
 
-pub const RemoveWorkloadOutput = struct {};
+pub const RemoveWorkloadOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

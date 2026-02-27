@@ -25,11 +25,11 @@ pub const RoleMapping = struct {
     /// map groups to roles. Rules will attempt to match claims from the token to
     /// map to a
     /// role.
-    type: RoleMappingType,
+    @"type": RoleMappingType,
 
     pub const json_field_names = .{
         .ambiguous_role_resolution = "AmbiguousRoleResolution",
         .rules_configuration = "RulesConfiguration",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

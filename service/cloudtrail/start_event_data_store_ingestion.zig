@@ -14,7 +14,8 @@ pub const StartEventDataStoreIngestionInput = struct {
     };
 };
 
-pub const StartEventDataStoreIngestionOutput = struct {};
+pub const StartEventDataStoreIngestionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

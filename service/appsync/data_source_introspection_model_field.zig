@@ -9,11 +9,11 @@ pub const DataSourceIntrospectionModelField = struct {
     name: ?[]const u8,
 
     /// The `DataSourceIntrospectionModelFieldType` object data.
-    type: ?DataSourceIntrospectionModelFieldType,
+    @"type": ?DataSourceIntrospectionModelFieldType,
 
     pub const json_field_names = .{
         .length = "length",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

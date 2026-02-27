@@ -19,7 +19,8 @@ pub const DeleteConfiguredTableAssociationInput = struct {
     };
 };
 
-pub const DeleteConfiguredTableAssociationOutput = struct {};
+pub const DeleteConfiguredTableAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

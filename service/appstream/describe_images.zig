@@ -21,14 +21,14 @@ pub const DescribeImagesInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of image (public, private, or shared) to describe.
-    type: ?VisibilityType = null,
+    @"type": ?VisibilityType = null,
 
     pub const json_field_names = .{
         .arns = "Arns",
         .max_results = "MaxResults",
         .names = "Names",
         .next_token = "NextToken",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

@@ -13,7 +13,8 @@ pub const DeleteNamedQueryInput = struct {
     };
 };
 
-pub const DeleteNamedQueryOutput = struct {};
+pub const DeleteNamedQueryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

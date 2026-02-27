@@ -29,7 +29,8 @@ pub const StartContactMediaProcessingInput = struct {
     };
 };
 
-pub const StartContactMediaProcessingOutput = struct {};
+pub const StartContactMediaProcessingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

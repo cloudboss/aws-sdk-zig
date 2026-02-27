@@ -25,7 +25,8 @@ pub const VerifyUserAttributeInput = struct {
     };
 };
 
-pub const VerifyUserAttributeOutput = struct {};
+pub const VerifyUserAttributeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

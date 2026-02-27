@@ -11,11 +11,11 @@ pub const RerankDocument = struct {
     text_document: ?RerankTextDocument,
 
     /// The type of document to rerank.
-    type: RerankDocumentType,
+    @"type": RerankDocumentType,
 
     pub const json_field_names = .{
         .json_document = "jsonDocument",
         .text_document = "textDocument",
-        .type = "type",
+        .@"type" = "type",
     };
 };

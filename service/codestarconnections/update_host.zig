@@ -25,7 +25,8 @@ pub const UpdateHostInput = struct {
     };
 };
 
-pub const UpdateHostOutput = struct {};
+pub const UpdateHostOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

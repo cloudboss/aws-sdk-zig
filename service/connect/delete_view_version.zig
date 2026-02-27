@@ -23,7 +23,8 @@ pub const DeleteViewVersionInput = struct {
     };
 };
 
-pub const DeleteViewVersionOutput = struct {};
+pub const DeleteViewVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

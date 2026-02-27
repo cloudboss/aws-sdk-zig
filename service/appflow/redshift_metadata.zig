@@ -1,2 +1,3 @@
 /// The connector metadata specific to Amazon Redshift.
-pub const RedshiftMetadata = struct {};
+pub const RedshiftMetadata = struct {
+};

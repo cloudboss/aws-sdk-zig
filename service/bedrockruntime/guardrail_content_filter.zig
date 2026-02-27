@@ -19,13 +19,13 @@ pub const GuardrailContentFilter = struct {
     filter_strength: ?GuardrailContentFilterStrength,
 
     /// The guardrail type.
-    type: GuardrailContentFilterType,
+    @"type": GuardrailContentFilterType,
 
     pub const json_field_names = .{
         .action = "action",
         .confidence = "confidence",
         .detected = "detected",
         .filter_strength = "filterStrength",
-        .type = "type",
+        .@"type" = "type",
     };
 };

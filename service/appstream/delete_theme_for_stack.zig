@@ -13,7 +13,8 @@ pub const DeleteThemeForStackInput = struct {
     };
 };
 
-pub const DeleteThemeForStackOutput = struct {};
+pub const DeleteThemeForStackOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

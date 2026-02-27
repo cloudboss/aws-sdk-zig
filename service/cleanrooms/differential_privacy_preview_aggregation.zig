@@ -8,10 +8,10 @@ pub const DifferentialPrivacyPreviewAggregation = struct {
     max_count: i32,
 
     /// The type of aggregation function.
-    type: DifferentialPrivacyAggregationType,
+    @"type": DifferentialPrivacyAggregationType,
 
     pub const json_field_names = .{
         .max_count = "maxCount",
-        .type = "type",
+        .@"type" = "type",
     };
 };

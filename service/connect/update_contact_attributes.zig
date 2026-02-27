@@ -45,7 +45,8 @@ pub const UpdateContactAttributesInput = struct {
     };
 };
 
-pub const UpdateContactAttributesOutput = struct {};
+pub const UpdateContactAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -9,10 +9,10 @@ pub const SourceAuth = struct {
 
     /// The authorization type to use. Valid options are OAUTH, CODECONNECTIONS, or
     /// SECRETS_MANAGER.
-    type: SourceAuthType,
+    @"type": SourceAuthType,
 
     pub const json_field_names = .{
         .resource = "resource",
-        .type = "type",
+        .@"type" = "type",
     };
 };

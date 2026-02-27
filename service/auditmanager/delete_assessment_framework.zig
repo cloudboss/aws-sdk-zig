@@ -13,7 +13,8 @@ pub const DeleteAssessmentFrameworkInput = struct {
     };
 };
 
-pub const DeleteAssessmentFrameworkOutput = struct {};
+pub const DeleteAssessmentFrameworkOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

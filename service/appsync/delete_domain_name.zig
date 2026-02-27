@@ -13,7 +13,8 @@ pub const DeleteDomainNameInput = struct {
     };
 };
 
-pub const DeleteDomainNameOutput = struct {};
+pub const DeleteDomainNameOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

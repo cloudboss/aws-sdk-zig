@@ -27,7 +27,8 @@ pub const SubscribeToDatasetInput = struct {
     };
 };
 
-pub const SubscribeToDatasetOutput = struct {};
+pub const SubscribeToDatasetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
