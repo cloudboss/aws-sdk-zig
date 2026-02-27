@@ -1,12 +1,1038 @@
 {
     "version": "1.0",
-    "sources": ["model"],
+    "sources": [
+        "model"
+    ],
     "projections": {
-        "sts": {
+        "accessanalyzer": {
             "plugins": {
                 "zig-codegen": {
-                    "service": "com.amazonaws.sts#AWSSecurityTokenServiceV20110615",
-                    "package": "sts"
+                    "service": "com.amazonaws.accessanalyzer#AccessAnalyzer",
+                    "package": "accessanalyzer"
+                }
+            }
+        },
+        "account": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.account#Account",
+                    "package": "account"
+                }
+            }
+        },
+        "acm": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.acm#CertificateManager",
+                    "package": "acm"
+                }
+            }
+        },
+        "acmpca": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.acmpca#ACMPrivateCA",
+                    "package": "acmpca"
+                }
+            }
+        },
+        "aiops": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.aiops#AIOps",
+                    "package": "aiops"
+                }
+            }
+        },
+        "amp": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.amp#AmazonPrometheusService",
+                    "package": "amp"
+                }
+            }
+        },
+        "amplify": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.amplify#Amplify",
+                    "package": "amplify"
+                }
+            }
+        },
+        "amplifybackend": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.amplifybackend#AmplifyBackend",
+                    "package": "amplifybackend"
+                }
+            }
+        },
+        "amplifyuibuilder": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.amplifyuibuilder#AmplifyUIBuilder",
+                    "package": "amplifyuibuilder"
+                }
+            }
+        },
+        "apigateway": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.apigateway#BackplaneControlService",
+                    "package": "apigateway"
+                }
+            }
+        },
+        "apigatewaymanagementapi": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.apigatewaymanagementapi#ApiGatewayManagementApi",
+                    "package": "apigatewaymanagementapi"
+                }
+            }
+        },
+        "apigatewayv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.apigatewayv2#ApiGatewayV2",
+                    "package": "apigatewayv2"
+                }
+            }
+        },
+        "appconfig": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.appconfig#AmazonAppConfig",
+                    "package": "appconfig"
+                }
+            }
+        },
+        "appconfigdata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.appconfigdata#AppConfigData",
+                    "package": "appconfigdata"
+                }
+            }
+        },
+        "appfabric": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.appfabric#FabricFrontEndService",
+                    "package": "appfabric"
+                }
+            }
+        },
+        "appflow": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.appflow#SandstoneConfigurationServiceLambda",
+                    "package": "appflow"
+                }
+            }
+        },
+        "appintegrations": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.appintegrations#AmazonAppIntegrationService",
+                    "package": "appintegrations"
+                }
+            }
+        },
+        "applicationautoscaling": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.applicationautoscaling#AnyScaleFrontendService",
+                    "package": "applicationautoscaling"
+                }
+            }
+        },
+        "applicationcostprofiler": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.applicationcostprofiler#AWSApplicationCostProfiler",
+                    "package": "applicationcostprofiler"
+                }
+            }
+        },
+        "applicationdiscoveryservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.applicationdiscoveryservice#AWSPoseidonService_V2015_11_01",
+                    "package": "applicationdiscoveryservice"
+                }
+            }
+        },
+        "applicationinsights": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.applicationinsights#EC2WindowsBarleyService",
+                    "package": "applicationinsights"
+                }
+            }
+        },
+        "applicationsignals": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.applicationsignals#ApplicationSignals",
+                    "package": "applicationsignals"
+                }
+            }
+        },
+        "appmesh": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.appmesh#AppMesh",
+                    "package": "appmesh"
+                }
+            }
+        },
+        "apprunner": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.apprunner#AppRunner",
+                    "package": "apprunner"
+                }
+            }
+        },
+        "appstream": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.appstream#PhotonAdminProxyService",
+                    "package": "appstream"
+                }
+            }
+        },
+        "appsync": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.appsync#AWSDeepdishControlPlaneService",
+                    "package": "appsync"
+                }
+            }
+        },
+        "arcregionswitch": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.arcregionswitch#ArcRegionSwitch",
+                    "package": "arcregionswitch"
+                }
+            }
+        },
+        "arczonalshift": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.arczonalshift#PercDataPlane",
+                    "package": "arczonalshift"
+                }
+            }
+        },
+        "artifact": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.artifact#Artifact",
+                    "package": "artifact"
+                }
+            }
+        },
+        "athena": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.athena#AmazonAthena",
+                    "package": "athena"
+                }
+            }
+        },
+        "auditmanager": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.auditmanager#BedrockAssessmentManagerLambda",
+                    "package": "auditmanager"
+                }
+            }
+        },
+        "autoscaling": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.autoscaling#AutoScaling_2011_01_01",
+                    "package": "autoscaling"
+                }
+            }
+        },
+        "autoscalingplans": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.autoscalingplans#AnyScaleScalingPlannerFrontendService",
+                    "package": "autoscalingplans"
+                }
+            }
+        },
+        "b2bi": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.b2bi#B2BI",
+                    "package": "b2bi"
+                }
+            }
+        },
+        "backup": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.backup#CryoControllerUserManager",
+                    "package": "backup"
+                }
+            }
+        },
+        "backupgateway": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.backupgateway#BackupOnPremises_v20210101",
+                    "package": "backupgateway"
+                }
+            }
+        },
+        "backupsearch": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.backupsearch#CryoBackupSearchService",
+                    "package": "backupsearch"
+                }
+            }
+        },
+        "batch": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.batch#AWSBatchV20160810",
+                    "package": "batch"
+                }
+            }
+        },
+        "bcmdashboards": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bcmdashboards#AWSBCMDashboardsService",
+                    "package": "bcmdashboards"
+                }
+            }
+        },
+        "bcmdataexports": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bcmdataexports#AWSBillingAndCostManagementDataExports",
+                    "package": "bcmdataexports"
+                }
+            }
+        },
+        "bcmpricingcalculator": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bcmpricingcalculator#AWSBCMPricingCalculator",
+                    "package": "bcmpricingcalculator"
+                }
+            }
+        },
+        "bcmrecommendedactions": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bcmrecommendedactions#AWSBillingAndCostManagementRecommendedActions",
+                    "package": "bcmrecommendedactions"
+                }
+            }
+        },
+        "bedrock": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bedrock#AmazonBedrockControlPlaneService",
+                    "package": "bedrock"
+                }
+            }
+        },
+        "bedrockagent": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bedrockagent#AmazonBedrockAgentBuildTimeLambda",
+                    "package": "bedrockagent"
+                }
+            }
+        },
+        "bedrockagentcore": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bedrockagentcore#AmazonBedrockAgentCore",
+                    "package": "bedrockagentcore"
+                }
+            }
+        },
+        "bedrockagentcorecontrol": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bedrockagentcorecontrol#AmazonBedrockAgentCoreControl",
+                    "package": "bedrockagentcorecontrol"
+                }
+            }
+        },
+        "bedrockagentruntime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bedrockagentruntime#AmazonBedrockAgentRunTimeService",
+                    "package": "bedrockagentruntime"
+                }
+            }
+        },
+        "bedrockdataautomation": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bedrockdataautomation#AmazonBedrockKeystoneBuildTimeService",
+                    "package": "bedrockdataautomation"
+                }
+            }
+        },
+        "bedrockdataautomationruntime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bedrockdataautomationruntime#AmazonBedrockKeystoneRuntimeService",
+                    "package": "bedrockdataautomationruntime"
+                }
+            }
+        },
+        "bedrockruntime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.bedrockruntime#AmazonBedrockFrontendService",
+                    "package": "bedrockruntime"
+                }
+            }
+        },
+        "billing": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.billing#AWSBilling",
+                    "package": "billing"
+                }
+            }
+        },
+        "billingconductor": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.billingconductor#AWSBillingConductor",
+                    "package": "billingconductor"
+                }
+            }
+        },
+        "braket": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.braket#Braket",
+                    "package": "braket"
+                }
+            }
+        },
+        "budgets": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.budgets#AWSBudgetServiceGateway",
+                    "package": "budgets"
+                }
+            }
+        },
+        "chatbot": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.chatbot#WheatleyOrchestration_20171011",
+                    "package": "chatbot"
+                }
+            }
+        },
+        "chime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.chime#UCBuzzConsoleService",
+                    "package": "chime"
+                }
+            }
+        },
+        "chimesdkidentity": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.chimesdkidentity#ChimeIdentityService",
+                    "package": "chimesdkidentity"
+                }
+            }
+        },
+        "chimesdkmediapipelines": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.chimesdkmediapipelines#ChimeSDKMediaPipelinesService",
+                    "package": "chimesdkmediapipelines"
+                }
+            }
+        },
+        "chimesdkmeetings": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.chimesdkmeetings#ChimeMeetingsSDKService",
+                    "package": "chimesdkmeetings"
+                }
+            }
+        },
+        "chimesdkmessaging": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.chimesdkmessaging#ChimeMessagingService",
+                    "package": "chimesdkmessaging"
+                }
+            }
+        },
+        "chimesdkvoice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.chimesdkvoice#ChimeSDKTelephonyService",
+                    "package": "chimesdkvoice"
+                }
+            }
+        },
+        "cleanrooms": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cleanrooms#AWSBastionControlPlaneServiceLambda",
+                    "package": "cleanrooms"
+                }
+            }
+        },
+        "cleanroomsml": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cleanroomsml#AWSStarkControlService",
+                    "package": "cleanroomsml"
+                }
+            }
+        },
+        "cloud9": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloud9#AWSCloud9WorkspaceManagementService",
+                    "package": "cloud9"
+                }
+            }
+        },
+        "cloudcontrol": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudcontrol#CloudApiService",
+                    "package": "cloudcontrol"
+                }
+            }
+        },
+        "clouddirectory": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.clouddirectory#AmazonCloudDirectory_20170111",
+                    "package": "clouddirectory"
+                }
+            }
+        },
+        "cloudformation": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudformation#CloudFormation",
+                    "package": "cloudformation"
+                }
+            }
+        },
+        "cloudfront": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudfront#Cloudfront2020_05_31",
+                    "package": "cloudfront"
+                }
+            }
+        },
+        "cloudfrontkeyvaluestore": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudfrontkeyvaluestore#CloudFrontKeyValueStore",
+                    "package": "cloudfrontkeyvaluestore"
+                }
+            }
+        },
+        "cloudhsm": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudhsm#CloudHsmFrontendService",
+                    "package": "cloudhsm"
+                }
+            }
+        },
+        "cloudhsmv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudhsmv2#BaldrApiService",
+                    "package": "cloudhsmv2"
+                }
+            }
+        },
+        "cloudsearch": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudsearch#A9SearchCloudConfigService2013",
+                    "package": "cloudsearch"
+                }
+            }
+        },
+        "cloudsearchdomain": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudsearchdomain#AmazonCloudSearch2013",
+                    "package": "cloudsearchdomain"
+                }
+            }
+        },
+        "cloudtrail": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudtrail#CloudTrail_20131101",
+                    "package": "cloudtrail"
+                }
+            }
+        },
+        "cloudtraildata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudtraildata#CloudTrailDataService",
+                    "package": "cloudtraildata"
+                }
+            }
+        },
+        "cloudwatch": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudwatch#GraniteServiceVersion20100801",
+                    "package": "cloudwatch"
+                }
+            }
+        },
+        "cloudwatchevents": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudwatchevents#AWSEvents",
+                    "package": "cloudwatchevents"
+                }
+            }
+        },
+        "cloudwatchlogs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cloudwatchlogs#Logs_20140328",
+                    "package": "cloudwatchlogs"
+                }
+            }
+        },
+        "codeartifact": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codeartifact#CodeArtifactControlPlaneService",
+                    "package": "codeartifact"
+                }
+            }
+        },
+        "codebuild": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codebuild#CodeBuild_20161006",
+                    "package": "codebuild"
+                }
+            }
+        },
+        "codecatalyst": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codecatalyst#CodeCatalyst",
+                    "package": "codecatalyst"
+                }
+            }
+        },
+        "codecommit": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codecommit#CodeCommit_20150413",
+                    "package": "codecommit"
+                }
+            }
+        },
+        "codeconnections": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codeconnections#CodeConnections_20231201",
+                    "package": "codeconnections"
+                }
+            }
+        },
+        "codedeploy": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codedeploy#CodeDeploy_20141006",
+                    "package": "codedeploy"
+                }
+            }
+        },
+        "codeguruprofiler": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codeguruprofiler#CodeGuruProfiler",
+                    "package": "codeguruprofiler"
+                }
+            }
+        },
+        "codegurureviewer": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codegurureviewer#AWSGuruFrontendService",
+                    "package": "codegurureviewer"
+                }
+            }
+        },
+        "codegurusecurity": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codegurusecurity#AwsCodeGuruSecurity",
+                    "package": "codegurusecurity"
+                }
+            }
+        },
+        "codepipeline": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codepipeline#CodePipeline_20150709",
+                    "package": "codepipeline"
+                }
+            }
+        },
+        "codestarconnections": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codestarconnections#CodeStar_connections_20191201",
+                    "package": "codestarconnections"
+                }
+            }
+        },
+        "codestarnotifications": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.codestarnotifications#CodeStarNotifications_20191015",
+                    "package": "codestarnotifications"
+                }
+            }
+        },
+        "cognitoidentity": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cognitoidentity#AWSCognitoIdentityService",
+                    "package": "cognitoidentity"
+                }
+            }
+        },
+        "cognitoidentityprovider": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cognitoidentityprovider#AWSCognitoIdentityProviderService",
+                    "package": "cognitoidentityprovider"
+                }
+            }
+        },
+        "cognitosync": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.cognitosync#AWSCognitoSyncService",
+                    "package": "cognitosync"
+                }
+            }
+        },
+        "comprehend": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.comprehend#Comprehend_20171127",
+                    "package": "comprehend"
+                }
+            }
+        },
+        "comprehendmedical": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.comprehendmedical#ComprehendMedical_20181030",
+                    "package": "comprehendmedical"
+                }
+            }
+        },
+        "computeoptimizer": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.computeoptimizer#ComputeOptimizerService",
+                    "package": "computeoptimizer"
+                }
+            }
+        },
+        "computeoptimizerautomation": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.computeoptimizerautomation#ComputeOptimizerAutomationService",
+                    "package": "computeoptimizerautomation"
+                }
+            }
+        },
+        "configservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.configservice#StarlingDoveService",
+                    "package": "configservice"
+                }
+            }
+        },
+        "connect": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.connect#AmazonConnectService",
+                    "package": "connect"
+                }
+            }
+        },
+        "connectcampaigns": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.connectcampaigns#AmazonConnectCampaignService",
+                    "package": "connectcampaigns"
+                }
+            }
+        },
+        "connectcampaignsv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.connectcampaignsv2#AmazonConnectCampaignServiceV2",
+                    "package": "connectcampaignsv2"
+                }
+            }
+        },
+        "connectcases": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.connectcases#AmazonConnectCases",
+                    "package": "connectcases"
+                }
+            }
+        },
+        "connectcontactlens": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.connectcontactlens#AmazonConnectContactLens",
+                    "package": "connectcontactlens"
+                }
+            }
+        },
+        "connectparticipant": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.connectparticipant#AmazonConnectParticipantServiceLambda",
+                    "package": "connectparticipant"
+                }
+            }
+        },
+        "controlcatalog": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.controlcatalog#ControlCatalog",
+                    "package": "controlcatalog"
+                }
+            }
+        },
+        "controltower": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.controltower#AWSControlTowerApis",
+                    "package": "controltower"
+                }
+            }
+        },
+        "costandusagereportservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.costandusagereportservice#AWSOrigamiServiceGatewayService",
+                    "package": "costandusagereportservice"
+                }
+            }
+        },
+        "costexplorer": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.costexplorer#AWSInsightsIndexService",
+                    "package": "costexplorer"
+                }
+            }
+        },
+        "costoptimizationhub": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.costoptimizationhub#CostOptimizationHubService",
+                    "package": "costoptimizationhub"
+                }
+            }
+        },
+        "customerprofiles": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.customerprofiles#CustomerProfiles_20200815",
+                    "package": "customerprofiles"
+                }
+            }
+        },
+        "databasemigrationservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.databasemigrationservice#AmazonDMSv20160101",
+                    "package": "databasemigrationservice"
+                }
+            }
+        },
+        "databrew": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.databrew#AWSGlueDataBrew",
+                    "package": "databrew"
+                }
+            }
+        },
+        "dataexchange": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.dataexchange#DataExchange",
+                    "package": "dataexchange"
+                }
+            }
+        },
+        "datapipeline": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.datapipeline#DataPipeline",
+                    "package": "datapipeline"
+                }
+            }
+        },
+        "datasync": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.datasync#FmrsService",
+                    "package": "datasync"
+                }
+            }
+        },
+        "datazone": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.datazone#DataZone",
+                    "package": "datazone"
+                }
+            }
+        },
+        "dax": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.dax#AmazonDAXV3",
+                    "package": "dax"
+                }
+            }
+        },
+        "deadline": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.deadline#Deadline",
+                    "package": "deadline"
+                }
+            }
+        },
+        "detective": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.detective#AmazonDetective",
+                    "package": "detective"
+                }
+            }
+        },
+        "devicefarm": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.devicefarm#DeviceFarm_20150623",
+                    "package": "devicefarm"
+                }
+            }
+        },
+        "devopsguru": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.devopsguru#CapstoneControlPlaneService",
+                    "package": "devopsguru"
+                }
+            }
+        },
+        "directconnect": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.directconnect#OvertureService",
+                    "package": "directconnect"
+                }
+            }
+        },
+        "directoryservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.directoryservice#DirectoryService_20150416",
+                    "package": "directoryservice"
+                }
+            }
+        },
+        "directoryservicedata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.directoryservicedata#DirectoryServiceData",
+                    "package": "directoryservicedata"
+                }
+            }
+        },
+        "dlm": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.dlm#dlm_20180112",
+                    "package": "dlm"
+                }
+            }
+        },
+        "docdb": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.docdb#AmazonRDSv19",
+                    "package": "docdb"
+                }
+            }
+        },
+        "docdbelastic": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.docdbelastic#ChimeraDbLionfishServiceLambda",
+                    "package": "docdbelastic"
+                }
+            }
+        },
+        "drs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.drs#ElasticDisasterRecoveryService",
+                    "package": "drs"
+                }
+            }
+        },
+        "dsql": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.dsql#DSQL",
+                    "package": "dsql"
                 }
             }
         },
@@ -18,19 +1044,19 @@
                 }
             }
         },
-        "lambda": {
+        "dynamodbstreams": {
             "plugins": {
                 "zig-codegen": {
-                    "service": "com.amazonaws.lambda#AWSGirApiService",
-                    "package": "lambda"
+                    "service": "com.amazonaws.dynamodbstreams#DynamoDBStreams_20120810",
+                    "package": "dynamodbstreams"
                 }
             }
         },
-        "s3": {
+        "ebs": {
             "plugins": {
                 "zig-codegen": {
-                    "service": "com.amazonaws.s3#AmazonS3",
-                    "package": "s3"
+                    "service": "com.amazonaws.ebs#Ebs",
+                    "package": "ebs"
                 }
             }
         },
@@ -42,11 +1068,1739 @@
                 }
             }
         },
+        "ec2instanceconnect": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ec2instanceconnect#AWSEC2InstanceConnectService",
+                    "package": "ec2instanceconnect"
+                }
+            }
+        },
+        "ecr": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ecr#AmazonEC2ContainerRegistry_V20150921",
+                    "package": "ecr"
+                }
+            }
+        },
+        "ecrpublic": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ecrpublic#SpencerFrontendService",
+                    "package": "ecrpublic"
+                }
+            }
+        },
+        "ecs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ecs#AmazonEC2ContainerServiceV20141113",
+                    "package": "ecs"
+                }
+            }
+        },
+        "efs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.efs#MagnolioAPIService_v20150201",
+                    "package": "efs"
+                }
+            }
+        },
+        "eks": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.eks#AWSWesleyFrontend",
+                    "package": "eks"
+                }
+            }
+        },
+        "eksauth": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.eksauth#EKSAuthFrontend",
+                    "package": "eksauth"
+                }
+            }
+        },
+        "elasticache": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.elasticache#AmazonElastiCacheV9",
+                    "package": "elasticache"
+                }
+            }
+        },
+        "elasticbeanstalk": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.elasticbeanstalk#AWSElasticBeanstalkService",
+                    "package": "elasticbeanstalk"
+                }
+            }
+        },
+        "elasticloadbalancing": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.elasticloadbalancing#ElasticLoadBalancing_v7",
+                    "package": "elasticloadbalancing"
+                }
+            }
+        },
+        "elasticloadbalancingv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.elasticloadbalancingv2#ElasticLoadBalancing_v10",
+                    "package": "elasticloadbalancingv2"
+                }
+            }
+        },
+        "elasticsearchservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.elasticsearchservice#AmazonElasticsearchService2015",
+                    "package": "elasticsearchservice"
+                }
+            }
+        },
+        "emr": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.emr#ElasticMapReduce",
+                    "package": "emr"
+                }
+            }
+        },
+        "emrcontainers": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.emrcontainers#AwsChicagoWebService",
+                    "package": "emrcontainers"
+                }
+            }
+        },
+        "emrserverless": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.emrserverless#AwsToledoWebService",
+                    "package": "emrserverless"
+                }
+            }
+        },
+        "entityresolution": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.entityresolution#AWSVeniceService",
+                    "package": "entityresolution"
+                }
+            }
+        },
+        "eventbridge": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.eventbridge#AWSEvents",
+                    "package": "eventbridge"
+                }
+            }
+        },
+        "evidently": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.evidently#Evidently",
+                    "package": "evidently"
+                }
+            }
+        },
+        "evs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.evs#AmazonElasticVMwareService",
+                    "package": "evs"
+                }
+            }
+        },
+        "finspace": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.finspace#AWSHabaneroManagementService",
+                    "package": "finspace"
+                }
+            }
+        },
+        "finspacedata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.finspacedata#AWSHabaneroPublicAPI",
+                    "package": "finspacedata"
+                }
+            }
+        },
+        "firehose": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.firehose#Firehose_20150804",
+                    "package": "firehose"
+                }
+            }
+        },
+        "fis": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.fis#FaultInjectionSimulator",
+                    "package": "fis"
+                }
+            }
+        },
+        "fms": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.fms#AWSFMS_20180101",
+                    "package": "fms"
+                }
+            }
+        },
+        "forecast": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.forecast#AmazonForecast",
+                    "package": "forecast"
+                }
+            }
+        },
+        "forecastquery": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.forecastquery#AmazonForecastRuntime",
+                    "package": "forecastquery"
+                }
+            }
+        },
+        "frauddetector": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.frauddetector#AWSHawksNestServiceFacade",
+                    "package": "frauddetector"
+                }
+            }
+        },
+        "freetier": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.freetier#AWSFreeTierService",
+                    "package": "freetier"
+                }
+            }
+        },
+        "fsx": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.fsx#AWSSimbaAPIService_v20180301",
+                    "package": "fsx"
+                }
+            }
+        },
+        "gamelift": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.gamelift#GameLift",
+                    "package": "gamelift"
+                }
+            }
+        },
+        "gameliftstreams": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.gameliftstreams#GameLiftStreams",
+                    "package": "gameliftstreams"
+                }
+            }
+        },
+        "geomaps": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.geomaps#MapsService",
+                    "package": "geomaps"
+                }
+            }
+        },
+        "geoplaces": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.geoplaces#PlacesService",
+                    "package": "geoplaces"
+                }
+            }
+        },
+        "georoutes": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.georoutes#RoutesService",
+                    "package": "georoutes"
+                }
+            }
+        },
+        "glacier": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.glacier#Glacier",
+                    "package": "glacier"
+                }
+            }
+        },
+        "globalaccelerator": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.globalaccelerator#GlobalAccelerator_V20180706",
+                    "package": "globalaccelerator"
+                }
+            }
+        },
+        "glue": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.glue#AWSGlue",
+                    "package": "glue"
+                }
+            }
+        },
+        "grafana": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.grafana#AWSGrafanaControlPlane",
+                    "package": "grafana"
+                }
+            }
+        },
+        "greengrass": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.greengrass#Greengrass",
+                    "package": "greengrass"
+                }
+            }
+        },
+        "greengrassv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.greengrassv2#GreengrassV2",
+                    "package": "greengrassv2"
+                }
+            }
+        },
+        "groundstation": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.groundstation#GroundStation",
+                    "package": "groundstation"
+                }
+            }
+        },
+        "guardduty": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.guardduty#GuardDutyAPIService",
+                    "package": "guardduty"
+                }
+            }
+        },
+        "health": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.health#AWSHealth_20160804",
+                    "package": "health"
+                }
+            }
+        },
+        "healthlake": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.healthlake#HealthLake",
+                    "package": "healthlake"
+                }
+            }
+        },
         "iam": {
             "plugins": {
                 "zig-codegen": {
                     "service": "com.amazonaws.iam#AWSIdentityManagementV20100508",
                     "package": "iam"
+                }
+            }
+        },
+        "identitystore": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.identitystore#AWSIdentityStore",
+                    "package": "identitystore"
+                }
+            }
+        },
+        "imagebuilder": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.imagebuilder#imagebuilder",
+                    "package": "imagebuilder"
+                }
+            }
+        },
+        "inspector": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.inspector#InspectorService",
+                    "package": "inspector"
+                }
+            }
+        },
+        "inspector2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.inspector2#Inspector2",
+                    "package": "inspector2"
+                }
+            }
+        },
+        "inspectorscan": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.inspectorscan#InspectorScan",
+                    "package": "inspectorscan"
+                }
+            }
+        },
+        "internetmonitor": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.internetmonitor#InternetMonitor20210603",
+                    "package": "internetmonitor"
+                }
+            }
+        },
+        "invoicing": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.invoicing#Invoicing",
+                    "package": "invoicing"
+                }
+            }
+        },
+        "iot": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iot#AWSIotService",
+                    "package": "iot"
+                }
+            }
+        },
+        "iotanalytics": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotanalytics#AWSIoTAnalytics",
+                    "package": "iotanalytics"
+                }
+            }
+        },
+        "iotdataplane": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotdataplane#IotMoonrakerService",
+                    "package": "iotdataplane"
+                }
+            }
+        },
+        "iotdeviceadvisor": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotdeviceadvisor#IotSenateService",
+                    "package": "iotdeviceadvisor"
+                }
+            }
+        },
+        "iotevents": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotevents#IotColumboService",
+                    "package": "iotevents"
+                }
+            }
+        },
+        "ioteventsdata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ioteventsdata#IotColumboDataService",
+                    "package": "ioteventsdata"
+                }
+            }
+        },
+        "iotfleetwise": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotfleetwise#IoTAutobahnControlPlane",
+                    "package": "iotfleetwise"
+                }
+            }
+        },
+        "iotjobsdataplane": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotjobsdataplane#IotLaserThingJobManagerExternalService",
+                    "package": "iotjobsdataplane"
+                }
+            }
+        },
+        "iotmanagedintegrations": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotmanagedintegrations#IotManagedIntegrations",
+                    "package": "iotmanagedintegrations"
+                }
+            }
+        },
+        "iotsecuretunneling": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotsecuretunneling#IoTSecuredTunneling",
+                    "package": "iotsecuretunneling"
+                }
+            }
+        },
+        "iotsitewise": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotsitewise#AWSIoTSiteWise",
+                    "package": "iotsitewise"
+                }
+            }
+        },
+        "iotthingsgraph": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotthingsgraph#IotThingsGraphFrontEndService",
+                    "package": "iotthingsgraph"
+                }
+            }
+        },
+        "iottwinmaker": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iottwinmaker#AWSIoTTwinMaker",
+                    "package": "iottwinmaker"
+                }
+            }
+        },
+        "iotwireless": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.iotwireless#iotwireless",
+                    "package": "iotwireless"
+                }
+            }
+        },
+        "ivs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ivs#AmazonInteractiveVideoService",
+                    "package": "ivs"
+                }
+            }
+        },
+        "ivschat": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ivschat#AmazonInteractiveVideoServiceChat",
+                    "package": "ivschat"
+                }
+            }
+        },
+        "ivsrealtime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ivsrealtime#AmazonInteractiveVideoServiceRealTime",
+                    "package": "ivsrealtime"
+                }
+            }
+        },
+        "kafka": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kafka#Kafka",
+                    "package": "kafka"
+                }
+            }
+        },
+        "kafkaconnect": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kafkaconnect#KafkaConnect",
+                    "package": "kafkaconnect"
+                }
+            }
+        },
+        "kendra": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kendra#AWSKendraFrontendService",
+                    "package": "kendra"
+                }
+            }
+        },
+        "kendraranking": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kendraranking#AWSKendraRerankingFrontendService",
+                    "package": "kendraranking"
+                }
+            }
+        },
+        "keyspaces": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.keyspaces#KeyspacesService",
+                    "package": "keyspaces"
+                }
+            }
+        },
+        "keyspacesstreams": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.keyspacesstreams#KeyspacesStreams",
+                    "package": "keyspacesstreams"
+                }
+            }
+        },
+        "kinesis": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kinesis#Kinesis_20131202",
+                    "package": "kinesis"
+                }
+            }
+        },
+        "kinesisanalytics": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kinesisanalytics#KinesisAnalytics_20150814",
+                    "package": "kinesisanalytics"
+                }
+            }
+        },
+        "kinesisanalyticsv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kinesisanalyticsv2#KinesisAnalytics_20180523",
+                    "package": "kinesisanalyticsv2"
+                }
+            }
+        },
+        "kinesisvideo": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kinesisvideo#KinesisVideo_20170930",
+                    "package": "kinesisvideo"
+                }
+            }
+        },
+        "kinesisvideoarchivedmedia": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kinesisvideoarchivedmedia#AWSAcuityReader",
+                    "package": "kinesisvideoarchivedmedia"
+                }
+            }
+        },
+        "kinesisvideomedia": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kinesisvideomedia#AWSAcuityInletService",
+                    "package": "kinesisvideomedia"
+                }
+            }
+        },
+        "kinesisvideosignaling": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kinesisvideosignaling#AWSAcuitySignalingService",
+                    "package": "kinesisvideosignaling"
+                }
+            }
+        },
+        "kinesisvideowebrtcstorage": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kinesisvideowebrtcstorage#AWSAcuityRoutingServiceLambda",
+                    "package": "kinesisvideowebrtcstorage"
+                }
+            }
+        },
+        "kms": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.kms#TrentService",
+                    "package": "kms"
+                }
+            }
+        },
+        "lakeformation": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lakeformation#AWSLakeFormation",
+                    "package": "lakeformation"
+                }
+            }
+        },
+        "lambda": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lambda#AWSGirApiService",
+                    "package": "lambda"
+                }
+            }
+        },
+        "launchwizard": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.launchwizard#LaunchWizard",
+                    "package": "launchwizard"
+                }
+            }
+        },
+        "lexmodelbuildingservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lexmodelbuildingservice#AWSDeepSenseModelBuildingService",
+                    "package": "lexmodelbuildingservice"
+                }
+            }
+        },
+        "lexmodelsv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lexmodelsv2#LexModelBuildingServiceV2",
+                    "package": "lexmodelsv2"
+                }
+            }
+        },
+        "lexruntimeservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lexruntimeservice#AWSDeepSenseRunTimeService",
+                    "package": "lexruntimeservice"
+                }
+            }
+        },
+        "lexruntimev2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lexruntimev2#AWSDeepSenseRunTimeServiceApi2_0",
+                    "package": "lexruntimev2"
+                }
+            }
+        },
+        "licensemanager": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.licensemanager#AWSLicenseManager",
+                    "package": "licensemanager"
+                }
+            }
+        },
+        "licensemanagerlinuxsubscriptions": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.licensemanagerlinuxsubscriptions#LicenseManagerLinuxSubscriptions",
+                    "package": "licensemanagerlinuxsubscriptions"
+                }
+            }
+        },
+        "licensemanagerusersubscriptions": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.licensemanagerusersubscriptions#LicenseManagerUserSubscriptions",
+                    "package": "licensemanagerusersubscriptions"
+                }
+            }
+        },
+        "lightsail": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lightsail#Lightsail_20161128",
+                    "package": "lightsail"
+                }
+            }
+        },
+        "location": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.location#LocationService",
+                    "package": "location"
+                }
+            }
+        },
+        "lookoutequipment": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.lookoutequipment#AWSLookoutEquipmentFrontendService",
+                    "package": "lookoutequipment"
+                }
+            }
+        },
+        "m2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.m2#AwsSupernovaControlPlaneService",
+                    "package": "m2"
+                }
+            }
+        },
+        "machinelearning": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.machinelearning#AmazonML_20141212",
+                    "package": "machinelearning"
+                }
+            }
+        },
+        "macie2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.macie2#Macie2",
+                    "package": "macie2"
+                }
+            }
+        },
+        "mailmanager": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mailmanager#MailManagerSvc",
+                    "package": "mailmanager"
+                }
+            }
+        },
+        "managedblockchain": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.managedblockchain#TaigaWebService",
+                    "package": "managedblockchain"
+                }
+            }
+        },
+        "managedblockchainquery": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.managedblockchainquery#TietonChainQueryService",
+                    "package": "managedblockchainquery"
+                }
+            }
+        },
+        "marketplaceagreement": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.marketplaceagreement#AWSMPCommerceService_v20200301",
+                    "package": "marketplaceagreement"
+                }
+            }
+        },
+        "marketplacecatalog": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.marketplacecatalog#AWSMPSeymour",
+                    "package": "marketplacecatalog"
+                }
+            }
+        },
+        "marketplacecommerceanalytics": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.marketplacecommerceanalytics#MarketplaceCommerceAnalytics20150701",
+                    "package": "marketplacecommerceanalytics"
+                }
+            }
+        },
+        "marketplacedeployment": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.marketplacedeployment#AWSMPDeploymentParametersService",
+                    "package": "marketplacedeployment"
+                }
+            }
+        },
+        "marketplaceentitlementservice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.marketplaceentitlementservice#AWSMPEntitlementService",
+                    "package": "marketplaceentitlementservice"
+                }
+            }
+        },
+        "marketplacemetering": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.marketplacemetering#AWSMPMeteringService",
+                    "package": "marketplacemetering"
+                }
+            }
+        },
+        "marketplacereporting": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.marketplacereporting#AWSMarketplaceReporting",
+                    "package": "marketplacereporting"
+                }
+            }
+        },
+        "mediaconnect": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mediaconnect#MediaConnect",
+                    "package": "mediaconnect"
+                }
+            }
+        },
+        "mediaconvert": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mediaconvert#MediaConvert",
+                    "package": "mediaconvert"
+                }
+            }
+        },
+        "medialive": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.medialive#MediaLive",
+                    "package": "medialive"
+                }
+            }
+        },
+        "mediapackage": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mediapackage#MediaPackage",
+                    "package": "mediapackage"
+                }
+            }
+        },
+        "mediapackagev2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mediapackagev2#mediapackagev2",
+                    "package": "mediapackagev2"
+                }
+            }
+        },
+        "mediapackagevod": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mediapackagevod#MediaPackageVod",
+                    "package": "mediapackagevod"
+                }
+            }
+        },
+        "mediastore": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mediastore#MediaStore_20170901",
+                    "package": "mediastore"
+                }
+            }
+        },
+        "mediastoredata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mediastoredata#MediaStoreObject_20170901",
+                    "package": "mediastoredata"
+                }
+            }
+        },
+        "mediatailor": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mediatailor#MediaTailor",
+                    "package": "mediatailor"
+                }
+            }
+        },
+        "medicalimaging": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.medicalimaging#AHIGatewayService",
+                    "package": "medicalimaging"
+                }
+            }
+        },
+        "memorydb": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.memorydb#AmazonMemoryDB",
+                    "package": "memorydb"
+                }
+            }
+        },
+        "mgn": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mgn#ApplicationMigrationService",
+                    "package": "mgn"
+                }
+            }
+        },
+        "migrationhub": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.migrationhub#AWSMigrationHub",
+                    "package": "migrationhub"
+                }
+            }
+        },
+        "migrationhubconfig": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.migrationhubconfig#AWSMigrationHubMultiAccountService",
+                    "package": "migrationhubconfig"
+                }
+            }
+        },
+        "migrationhuborchestrator": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.migrationhuborchestrator#AWSMigrationHubOrchestrator",
+                    "package": "migrationhuborchestrator"
+                }
+            }
+        },
+        "migrationhubrefactorspaces": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.migrationhubrefactorspaces#RefactorSpaces",
+                    "package": "migrationhubrefactorspaces"
+                }
+            }
+        },
+        "migrationhubstrategy": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.migrationhubstrategy#AWSMigrationHubStrategyRecommendation",
+                    "package": "migrationhubstrategy"
+                }
+            }
+        },
+        "mpa": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mpa#AWSFluffyCoreService",
+                    "package": "mpa"
+                }
+            }
+        },
+        "mq": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mq#mq",
+                    "package": "mq"
+                }
+            }
+        },
+        "mturk": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mturk#MTurkRequesterServiceV20170117",
+                    "package": "mturk"
+                }
+            }
+        },
+        "mwaa": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mwaa#AmazonMWAA",
+                    "package": "mwaa"
+                }
+            }
+        },
+        "mwaaserverless": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.mwaaserverless#AmazonMWAAServerless",
+                    "package": "mwaaserverless"
+                }
+            }
+        },
+        "neptune": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.neptune#AmazonRDSv19",
+                    "package": "neptune"
+                }
+            }
+        },
+        "neptunedata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.neptunedata#AmazonNeptuneDataplane",
+                    "package": "neptunedata"
+                }
+            }
+        },
+        "neptunegraph": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.neptunegraph#AmazonNeptuneGraph",
+                    "package": "neptunegraph"
+                }
+            }
+        },
+        "networkfirewall": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.networkfirewall#NetworkFirewall_20201112",
+                    "package": "networkfirewall"
+                }
+            }
+        },
+        "networkflowmonitor": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.networkflowmonitor#NetworkFlowMonitor",
+                    "package": "networkflowmonitor"
+                }
+            }
+        },
+        "networkmanager": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.networkmanager#NetworkManager",
+                    "package": "networkmanager"
+                }
+            }
+        },
+        "networkmonitor": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.networkmonitor#NetworkMonitor",
+                    "package": "networkmonitor"
+                }
+            }
+        },
+        "notifications": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.notifications#Notifications",
+                    "package": "notifications"
+                }
+            }
+        },
+        "notificationscontacts": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.notificationscontacts#NotificationsContacts",
+                    "package": "notificationscontacts"
+                }
+            }
+        },
+        "novaact": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.novaact#AmazonNovaAgentsDataPlane",
+                    "package": "novaact"
+                }
+            }
+        },
+        "oam": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.oam#oamservice",
+                    "package": "oam"
+                }
+            }
+        },
+        "observabilityadmin": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.observabilityadmin#ObservabilityAdmin",
+                    "package": "observabilityadmin"
+                }
+            }
+        },
+        "odb": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.odb#Odb",
+                    "package": "odb"
+                }
+            }
+        },
+        "omics": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.omics#Omics",
+                    "package": "omics"
+                }
+            }
+        },
+        "opensearch": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.opensearch#AmazonOpenSearchService",
+                    "package": "opensearch"
+                }
+            }
+        },
+        "opensearchserverless": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.opensearchserverless#OpenSearchServerless",
+                    "package": "opensearchserverless"
+                }
+            }
+        },
+        "organizations": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.organizations#AWSOrganizationsV20161128",
+                    "package": "organizations"
+                }
+            }
+        },
+        "osis": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.osis#AmazonOpenSearchIngestionService",
+                    "package": "osis"
+                }
+            }
+        },
+        "outposts": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.outposts#OutpostsOlafService",
+                    "package": "outposts"
+                }
+            }
+        },
+        "panorama": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.panorama#OmniCloudServiceLambda",
+                    "package": "panorama"
+                }
+            }
+        },
+        "partnercentralaccount": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.partnercentralaccount#PartnerCentralAccount",
+                    "package": "partnercentralaccount"
+                }
+            }
+        },
+        "partnercentralbenefits": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.partnercentralbenefits#PartnerCentralBenefitsService",
+                    "package": "partnercentralbenefits"
+                }
+            }
+        },
+        "partnercentralchannel": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.partnercentralchannel#PartnerCentralChannel",
+                    "package": "partnercentralchannel"
+                }
+            }
+        },
+        "partnercentralselling": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.partnercentralselling#AWSPartnerCentralSelling",
+                    "package": "partnercentralselling"
+                }
+            }
+        },
+        "paymentcryptography": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.paymentcryptography#PaymentCryptographyControlPlane",
+                    "package": "paymentcryptography"
+                }
+            }
+        },
+        "paymentcryptographydata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.paymentcryptographydata#PaymentCryptographyDataPlane",
+                    "package": "paymentcryptographydata"
+                }
+            }
+        },
+        "pcaconnectorad": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pcaconnectorad#PcaConnectorAd",
+                    "package": "pcaconnectorad"
+                }
+            }
+        },
+        "pcaconnectorscep": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pcaconnectorscep#PcaConnectorScep",
+                    "package": "pcaconnectorscep"
+                }
+            }
+        },
+        "pcs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pcs#AWSParallelComputingService",
+                    "package": "pcs"
+                }
+            }
+        },
+        "personalize": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.personalize#AmazonPersonalize",
+                    "package": "personalize"
+                }
+            }
+        },
+        "personalizeevents": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.personalizeevents#AmazonPersonalizeEvents",
+                    "package": "personalizeevents"
+                }
+            }
+        },
+        "personalizeruntime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.personalizeruntime#AmazonPersonalizeRuntime",
+                    "package": "personalizeruntime"
+                }
+            }
+        },
+        "pi": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pi#PerformanceInsightsv20180227",
+                    "package": "pi"
+                }
+            }
+        },
+        "pinpoint": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pinpoint#Pinpoint",
+                    "package": "pinpoint"
+                }
+            }
+        },
+        "pinpointemail": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pinpointemail#AmazonPinpointEmailService",
+                    "package": "pinpointemail"
+                }
+            }
+        },
+        "pinpointsmsvoice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pinpointsmsvoice#PinpointSMSVoice",
+                    "package": "pinpointsmsvoice"
+                }
+            }
+        },
+        "pinpointsmsvoicev2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pinpointsmsvoicev2#PinpointSMSVoiceV2",
+                    "package": "pinpointsmsvoicev2"
+                }
+            }
+        },
+        "pipes": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pipes#Pipes",
+                    "package": "pipes"
+                }
+            }
+        },
+        "polly": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.polly#Parrot_v1",
+                    "package": "polly"
+                }
+            }
+        },
+        "pricing": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.pricing#AWSPriceListService",
+                    "package": "pricing"
+                }
+            }
+        },
+        "proton": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.proton#AwsProton20200720",
+                    "package": "proton"
+                }
+            }
+        },
+        "qapps": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.qapps#QAppsService",
+                    "package": "qapps"
+                }
+            }
+        },
+        "qbusiness": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.qbusiness#ExpertQ",
+                    "package": "qbusiness"
+                }
+            }
+        },
+        "qconnect": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.qconnect#WisdomService",
+                    "package": "qconnect"
+                }
+            }
+        },
+        "quicksight": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.quicksight#QuickSight_20180401",
+                    "package": "quicksight"
+                }
+            }
+        },
+        "ram": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ram#AmazonResourceSharing",
+                    "package": "ram"
+                }
+            }
+        },
+        "rbin": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.rbin#AmazonRecycleBin",
+                    "package": "rbin"
+                }
+            }
+        },
+        "rds": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.rds#AmazonRDSv19",
+                    "package": "rds"
+                }
+            }
+        },
+        "rdsdata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.rdsdata#RdsDataService",
+                    "package": "rdsdata"
+                }
+            }
+        },
+        "redshift": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.redshift#RedshiftServiceVersion20121201",
+                    "package": "redshift"
+                }
+            }
+        },
+        "redshiftdata": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.redshiftdata#RedshiftData",
+                    "package": "redshiftdata"
+                }
+            }
+        },
+        "redshiftserverless": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.redshiftserverless#RedshiftServerless",
+                    "package": "redshiftserverless"
+                }
+            }
+        },
+        "rekognition": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.rekognition#RekognitionService",
+                    "package": "rekognition"
+                }
+            }
+        },
+        "repostspace": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.repostspace#RepostSpace",
+                    "package": "repostspace"
+                }
+            }
+        },
+        "resiliencehub": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.resiliencehub#AwsResilienceHub",
+                    "package": "resiliencehub"
+                }
+            }
+        },
+        "resourceexplorer2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.resourceexplorer2#ResourceExplorer",
+                    "package": "resourceexplorer2"
+                }
+            }
+        },
+        "resourcegroups": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.resourcegroups#Ardi",
+                    "package": "resourcegroups"
+                }
+            }
+        },
+        "resourcegroupstaggingapi": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.resourcegroupstaggingapi#ResourceGroupsTaggingAPI_20170126",
+                    "package": "resourcegroupstaggingapi"
+                }
+            }
+        },
+        "rolesanywhere": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.rolesanywhere#RolesAnywhere",
+                    "package": "rolesanywhere"
+                }
+            }
+        },
+        "route53": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.route53#AWSDnsV20130401",
+                    "package": "route53"
+                }
+            }
+        },
+        "route53domains": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.route53domains#Route53Domains_v20140515",
+                    "package": "route53domains"
+                }
+            }
+        },
+        "route53globalresolver": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.route53globalresolver#EC2DNSGlobalResolverCustomerAPI",
+                    "package": "route53globalresolver"
+                }
+            }
+        },
+        "route53profiles": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.route53profiles#Route53Profiles",
+                    "package": "route53profiles"
+                }
+            }
+        },
+        "route53recoverycluster": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.route53recoverycluster#ToggleCustomerAPI",
+                    "package": "route53recoverycluster"
+                }
+            }
+        },
+        "route53recoverycontrolconfig": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.route53recoverycontrolconfig#Route53RecoveryControlConfig",
+                    "package": "route53recoverycontrolconfig"
+                }
+            }
+        },
+        "route53recoveryreadiness": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.route53recoveryreadiness#Route53RecoveryReadiness",
+                    "package": "route53recoveryreadiness"
+                }
+            }
+        },
+        "route53resolver": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.route53resolver#Route53Resolver",
+                    "package": "route53resolver"
+                }
+            }
+        },
+        "rtbfabric": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.rtbfabric#RTBFabric",
+                    "package": "rtbfabric"
+                }
+            }
+        },
+        "rum": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.rum#RUM",
+                    "package": "rum"
+                }
+            }
+        },
+        "s3": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.s3#AmazonS3",
+                    "package": "s3"
+                }
+            }
+        },
+        "s3control": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.s3control#AWSS3ControlServiceV20180820",
+                    "package": "s3control"
+                }
+            }
+        },
+        "s3outposts": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.s3outposts#S3Outposts",
+                    "package": "s3outposts"
+                }
+            }
+        },
+        "s3tables": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.s3tables#S3TableBuckets",
+                    "package": "s3tables"
+                }
+            }
+        },
+        "s3vectors": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.s3vectors#S3Vectors",
+                    "package": "s3vectors"
+                }
+            }
+        },
+        "sagemaker": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sagemaker#SageMaker",
+                    "package": "sagemaker"
+                }
+            }
+        },
+        "sagemakera2iruntime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sagemakera2iruntime#AmazonSageMakerA2IRuntime",
+                    "package": "sagemakera2iruntime"
+                }
+            }
+        },
+        "sagemakeredge": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sagemakeredge#AmazonSageMakerEdge",
+                    "package": "sagemakeredge"
+                }
+            }
+        },
+        "sagemakerfeaturestoreruntime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sagemakerfeaturestoreruntime#AmazonSageMakerFeatureStoreRuntime",
+                    "package": "sagemakerfeaturestoreruntime"
+                }
+            }
+        },
+        "sagemakergeospatial": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sagemakergeospatial#SageMakerGeospatial",
+                    "package": "sagemakergeospatial"
+                }
+            }
+        },
+        "sagemakermetrics": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sagemakermetrics#SageMakerMetricsService",
+                    "package": "sagemakermetrics"
+                }
+            }
+        },
+        "sagemakerruntime": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sagemakerruntime#AmazonSageMakerRuntime",
+                    "package": "sagemakerruntime"
+                }
+            }
+        },
+        "sagemakerruntimehttp2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sagemakerruntimehttp2#AmazonSageMakerRuntimeHttp2",
+                    "package": "sagemakerruntimehttp2"
+                }
+            }
+        },
+        "savingsplans": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.savingsplans#AWSSavingsPlan",
+                    "package": "savingsplans"
+                }
+            }
+        },
+        "scheduler": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.scheduler#AWSChronosService",
+                    "package": "scheduler"
+                }
+            }
+        },
+        "schemas": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.schemas#schemas",
+                    "package": "schemas"
                 }
             }
         },
@@ -58,11 +2812,155 @@
                 }
             }
         },
-        "ssm": {
+        "securityhub": {
             "plugins": {
                 "zig-codegen": {
-                    "service": "com.amazonaws.ssm#AmazonSSM",
-                    "package": "ssm"
+                    "service": "com.amazonaws.securityhub#SecurityHubAPIService",
+                    "package": "securityhub"
+                }
+            }
+        },
+        "securityir": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.securityir#SecurityIncidentResponse",
+                    "package": "securityir"
+                }
+            }
+        },
+        "securitylake": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.securitylake#SecurityLake",
+                    "package": "securitylake"
+                }
+            }
+        },
+        "serverlessapplicationrepository": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.serverlessapplicationrepository#ServerlessApplicationRepository",
+                    "package": "serverlessapplicationrepository"
+                }
+            }
+        },
+        "servicecatalog": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.servicecatalog#AWS242ServiceCatalogService",
+                    "package": "servicecatalog"
+                }
+            }
+        },
+        "servicecatalogappregistry": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.servicecatalogappregistry#AWS242AppRegistry",
+                    "package": "servicecatalogappregistry"
+                }
+            }
+        },
+        "servicediscovery": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.servicediscovery#Route53AutoNaming_v20170314",
+                    "package": "servicediscovery"
+                }
+            }
+        },
+        "servicequotas": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.servicequotas#ServiceQuotasV20190624",
+                    "package": "servicequotas"
+                }
+            }
+        },
+        "ses": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ses#SimpleEmailService",
+                    "package": "ses"
+                }
+            }
+        },
+        "sesv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sesv2#SimpleEmailService_v2",
+                    "package": "sesv2"
+                }
+            }
+        },
+        "sfn": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sfn#AWSStepFunctions",
+                    "package": "sfn"
+                }
+            }
+        },
+        "shield": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.shield#AWSShield_20160616",
+                    "package": "shield"
+                }
+            }
+        },
+        "signer": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.signer#WallabyService",
+                    "package": "signer"
+                }
+            }
+        },
+        "signin": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.signin#Signin",
+                    "package": "signin"
+                }
+            }
+        },
+        "simspaceweaver": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.simspaceweaver#SimSpaceWeaver",
+                    "package": "simspaceweaver"
+                }
+            }
+        },
+        "snowball": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.snowball#AWSIESnowballJobManagementService",
+                    "package": "snowball"
+                }
+            }
+        },
+        "snowdevicemanagement": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.snowdevicemanagement#SnowDeviceManagement",
+                    "package": "snowdevicemanagement"
+                }
+            }
+        },
+        "sns": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sns#AmazonSimpleNotificationService",
+                    "package": "sns"
+                }
+            }
+        },
+        "socialmessaging": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.socialmessaging#SocialMessaging",
+                    "package": "socialmessaging"
                 }
             }
         },
@@ -74,11 +2972,355 @@
                 }
             }
         },
-        "sns": {
+        "ssm": {
             "plugins": {
                 "zig-codegen": {
-                    "service": "com.amazonaws.sns#AmazonSimpleNotificationService",
-                    "package": "sns"
+                    "service": "com.amazonaws.ssm#AmazonSSM",
+                    "package": "ssm"
+                }
+            }
+        },
+        "ssmcontacts": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ssmcontacts#SSMContacts",
+                    "package": "ssmcontacts"
+                }
+            }
+        },
+        "ssmguiconnect": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ssmguiconnect#SSMGuiConnect",
+                    "package": "ssmguiconnect"
+                }
+            }
+        },
+        "ssmincidents": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ssmincidents#SSMIncidents",
+                    "package": "ssmincidents"
+                }
+            }
+        },
+        "ssmquicksetup": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ssmquicksetup#QuickSetup",
+                    "package": "ssmquicksetup"
+                }
+            }
+        },
+        "ssmsap": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ssmsap#SsmSap",
+                    "package": "ssmsap"
+                }
+            }
+        },
+        "sso": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sso#SWBPortalService",
+                    "package": "sso"
+                }
+            }
+        },
+        "ssoadmin": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ssoadmin#SWBExternalService",
+                    "package": "ssoadmin"
+                }
+            }
+        },
+        "ssooidc": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.ssooidc#AWSSSOOIDCService",
+                    "package": "ssooidc"
+                }
+            }
+        },
+        "storagegateway": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.storagegateway#StorageGateway_20130630",
+                    "package": "storagegateway"
+                }
+            }
+        },
+        "sts": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.sts#AWSSecurityTokenServiceV20110615",
+                    "package": "sts"
+                }
+            }
+        },
+        "supplychain": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.supplychain#GalaxyPublicAPIGateway",
+                    "package": "supplychain"
+                }
+            }
+        },
+        "support": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.support#AWSSupport_20130415",
+                    "package": "support"
+                }
+            }
+        },
+        "supportapp": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.supportapp#SupportApp",
+                    "package": "supportapp"
+                }
+            }
+        },
+        "swf": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.swf#SimpleWorkflowService",
+                    "package": "swf"
+                }
+            }
+        },
+        "synthetics": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.synthetics#Synthetics",
+                    "package": "synthetics"
+                }
+            }
+        },
+        "taxsettings": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.taxsettings#TaxSettings",
+                    "package": "taxsettings"
+                }
+            }
+        },
+        "textract": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.textract#Textract",
+                    "package": "textract"
+                }
+            }
+        },
+        "timestreaminfluxdb": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.timestreaminfluxdb#AmazonTimestreamInfluxDB",
+                    "package": "timestreaminfluxdb"
+                }
+            }
+        },
+        "timestreamquery": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.timestreamquery#Timestream_20181101",
+                    "package": "timestreamquery"
+                }
+            }
+        },
+        "timestreamwrite": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.timestreamwrite#Timestream_20181101",
+                    "package": "timestreamwrite"
+                }
+            }
+        },
+        "tnb": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.tnb#TNB",
+                    "package": "tnb"
+                }
+            }
+        },
+        "transcribe": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.transcribe#Transcribe",
+                    "package": "transcribe"
+                }
+            }
+        },
+        "transcribestreaming": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.transcribestreaming#Transcribe",
+                    "package": "transcribestreaming"
+                }
+            }
+        },
+        "transfer": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.transfer#TransferService",
+                    "package": "transfer"
+                }
+            }
+        },
+        "translate": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.translate#AWSShineFrontendService_20170701",
+                    "package": "translate"
+                }
+            }
+        },
+        "trustedadvisor": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.trustedadvisor#TrustedAdvisor",
+                    "package": "trustedadvisor"
+                }
+            }
+        },
+        "verifiedpermissions": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.verifiedpermissions#VerifiedPermissions",
+                    "package": "verifiedpermissions"
+                }
+            }
+        },
+        "voiceid": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.voiceid#VoiceID",
+                    "package": "voiceid"
+                }
+            }
+        },
+        "vpclattice": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.vpclattice#MercuryControlPlane",
+                    "package": "vpclattice"
+                }
+            }
+        },
+        "waf": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.waf#AWSWAF_20150824",
+                    "package": "waf"
+                }
+            }
+        },
+        "wafregional": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.wafregional#AWSWAF_Regional_20161128",
+                    "package": "wafregional"
+                }
+            }
+        },
+        "wafv2": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.wafv2#AWSWAF_20190729",
+                    "package": "wafv2"
+                }
+            }
+        },
+        "wellarchitected": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.wellarchitected#WellArchitectedApiServiceLambda",
+                    "package": "wellarchitected"
+                }
+            }
+        },
+        "wickr": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.wickr#WickrAdminApi",
+                    "package": "wickr"
+                }
+            }
+        },
+        "wisdom": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.wisdom#WisdomService",
+                    "package": "wisdom"
+                }
+            }
+        },
+        "workdocs": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.workdocs#AWSGorillaBoyService",
+                    "package": "workdocs"
+                }
+            }
+        },
+        "workmail": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.workmail#WorkMailService",
+                    "package": "workmail"
+                }
+            }
+        },
+        "workmailmessageflow": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.workmailmessageflow#GiraffeMessageInTransitService",
+                    "package": "workmailmessageflow"
+                }
+            }
+        },
+        "workspaces": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.workspaces#WorkspacesService",
+                    "package": "workspaces"
+                }
+            }
+        },
+        "workspacesinstances": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.workspacesinstances#EUCMIFrontendAPIService",
+                    "package": "workspacesinstances"
+                }
+            }
+        },
+        "workspacesthinclient": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.workspacesthinclient#ThinClient",
+                    "package": "workspacesthinclient"
+                }
+            }
+        },
+        "workspacesweb": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.workspacesweb#AWSErmineControlPlaneService",
+                    "package": "workspacesweb"
+                }
+            }
+        },
+        "xray": {
+            "plugins": {
+                "zig-codegen": {
+                    "service": "com.amazonaws.xray#AWSXRay",
+                    "package": "xray"
                 }
             }
         }
