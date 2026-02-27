@@ -13,8 +13,7 @@ pub const UntagResourceInput = struct {
     tag_keys: []const []const u8,
 };
 
-pub const UntagResourceOutput = struct {
-};
+pub const UntagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

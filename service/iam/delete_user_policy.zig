@@ -26,8 +26,7 @@ pub const DeleteUserPolicyInput = struct {
     user_name: []const u8,
 };
 
-pub const DeleteUserPolicyOutput = struct {
-};
+pub const DeleteUserPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

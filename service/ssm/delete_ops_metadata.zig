@@ -13,8 +13,7 @@ pub const DeleteOpsMetadataInput = struct {
     };
 };
 
-pub const DeleteOpsMetadataOutput = struct {
-};
+pub const DeleteOpsMetadataOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

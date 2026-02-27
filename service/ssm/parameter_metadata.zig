@@ -44,7 +44,7 @@ pub const ParameterMetadata = struct {
     /// The type of parameter. Valid parameter types include the following:
     /// `String`,
     /// `StringList`, and `SecureString`.
-    @"type": ?ParameterType,
+    type: ?ParameterType,
 
     /// The parameter version.
     version: i64 = 0,
@@ -60,7 +60,7 @@ pub const ParameterMetadata = struct {
         .name = "Name",
         .policies = "Policies",
         .tier = "Tier",
-        .@"type" = "Type",
+        .type = "Type",
         .version = "Version",
     };
 };

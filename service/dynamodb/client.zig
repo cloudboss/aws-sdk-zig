@@ -1,7 +1,6 @@
 const aws = @import("aws");
 const std = @import("std");
 
-
 const batch_execute_statement = @import("batch_execute_statement.zig");
 const batch_get_item = @import("batch_get_item.zig");
 const batch_write_item = @import("batch_write_item.zig");

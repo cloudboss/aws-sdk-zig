@@ -6,8 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AccountLimit = @import("account_limit.zig").AccountLimit;
 const AccountUsage = @import("account_usage.zig").AccountUsage;
 
-pub const GetAccountSettingsInput = struct {
-};
+pub const GetAccountSettingsInput = struct {};
 
 pub const GetAccountSettingsOutput = struct {
     /// Limits that are related to concurrency and code storage.

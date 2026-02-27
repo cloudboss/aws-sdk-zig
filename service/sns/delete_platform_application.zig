@@ -9,8 +9,7 @@ pub const DeletePlatformApplicationInput = struct {
     platform_application_arn: []const u8,
 };
 
-pub const DeletePlatformApplicationOutput = struct {
-};
+pub const DeletePlatformApplicationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

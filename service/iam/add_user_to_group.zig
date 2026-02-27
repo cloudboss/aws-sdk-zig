@@ -24,8 +24,7 @@ pub const AddUserToGroupInput = struct {
     user_name: []const u8,
 };
 
-pub const AddUserToGroupOutput = struct {
-};
+pub const AddUserToGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

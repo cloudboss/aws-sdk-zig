@@ -6,8 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const FeatureType = @import("feature_type.zig").FeatureType;
 const serde = @import("serde.zig");
 
-pub const EnableOrganizationsRootCredentialsManagementInput = struct {
-};
+pub const EnableOrganizationsRootCredentialsManagementInput = struct {};
 
 pub const EnableOrganizationsRootCredentialsManagementOutput = struct {
     /// The features you have enabled for centralized root access.

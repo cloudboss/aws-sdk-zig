@@ -102,7 +102,7 @@ pub const UpdateSecretInput = struct {
     /// external
     /// secret. For more information, see [Managed external secret
     /// partners](https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html).
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_request_token = "ClientRequestToken",
@@ -111,7 +111,7 @@ pub const UpdateSecretInput = struct {
         .secret_binary = "SecretBinary",
         .secret_id = "SecretId",
         .secret_string = "SecretString",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

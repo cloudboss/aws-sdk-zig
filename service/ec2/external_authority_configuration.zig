@@ -13,5 +13,5 @@ pub const ExternalAuthorityConfiguration = struct {
     external_resource_identifier: ?[]const u8,
 
     /// The type of external authority.
-    @"type": ?IpamScopeExternalAuthorityType,
+    type: ?IpamScopeExternalAuthorityType,
 };

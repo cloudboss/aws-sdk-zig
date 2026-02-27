@@ -29,8 +29,7 @@ pub const UpdateSigningCertificateInput = struct {
     user_name: ?[]const u8 = null,
 };
 
-pub const UpdateSigningCertificateOutput = struct {
-};
+pub const UpdateSigningCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

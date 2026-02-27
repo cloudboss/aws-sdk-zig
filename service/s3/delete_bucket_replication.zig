@@ -14,8 +14,7 @@ pub const DeleteBucketReplicationInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const DeleteBucketReplicationOutput = struct {
-};
+pub const DeleteBucketReplicationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1705,7 +1705,7 @@ pub fn deserializeGrantee(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Gr
                 } else if (std.mem.eql(u8, e.local, "ID")) {
                     result.id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "xsi:type")) {
-                    result.@"type" = std.meta.stringToEnum(Type, try reader.readElementText());
+                    result.type = std.meta.stringToEnum(Type, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "URI")) {
                     result.uri = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -3934,7 +3934,7 @@ pub fn serializeBucketInfo(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), va
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</DataRedundancy>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(alloc, "<Type>");
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</Type>");
@@ -4298,7 +4298,7 @@ pub fn serializeGrantee(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value
         try buf.appendSlice(alloc, "</ID>");
     }
     try buf.appendSlice(alloc, "<xsi:type>");
-    try buf.appendSlice(alloc, @tagName(value.@"type"));
+    try buf.appendSlice(alloc, @tagName(value.type));
     try buf.appendSlice(alloc, "</xsi:type>");
     if (value.uri) |v| {
         try buf.appendSlice(alloc, "<URI>");
@@ -4486,7 +4486,7 @@ pub fn serializeInventoryTableConfigurationUpdates(alloc: std.mem.Allocator, buf
 }
 
 pub fn serializeJSONInput(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: JSONInput) !void {
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(alloc, "<Type>");
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</Type>");
@@ -4668,7 +4668,7 @@ pub fn serializeLocationInfo(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), 
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Name>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(alloc, "<Type>");
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</Type>");
@@ -5205,7 +5205,7 @@ pub fn serializeRestoreRequest(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</Tier>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(alloc, "<Type>");
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</Type>");
@@ -5527,4 +5527,3 @@ pub fn serializeWebsiteConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(alloc, "</RoutingRules>");
     }
 }
-

@@ -22,8 +22,7 @@ pub const DetachGroupPolicyInput = struct {
     policy_arn: []const u8,
 };
 
-pub const DetachGroupPolicyOutput = struct {
-};
+pub const DetachGroupPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,8 +22,7 @@ pub const PutBucketInventoryConfigurationInput = struct {
     inventory_configuration: InventoryConfiguration,
 };
 
-pub const PutBucketInventoryConfigurationOutput = struct {
-};
+pub const PutBucketInventoryConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

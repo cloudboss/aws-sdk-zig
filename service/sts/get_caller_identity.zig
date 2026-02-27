@@ -4,8 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetCallerIdentityInput = struct {
-};
+pub const GetCallerIdentityInput = struct {};
 
 pub const GetCallerIdentityOutput = struct {
     /// The Amazon Web Services account ID number of the account that owns or

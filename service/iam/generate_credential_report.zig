@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReportStateType = @import("report_state_type.zig").ReportStateType;
 
-pub const GenerateCredentialReportInput = struct {
-};
+pub const GenerateCredentialReportInput = struct {};
 
 pub const GenerateCredentialReportOutput = struct {
     /// Information about the credential report.

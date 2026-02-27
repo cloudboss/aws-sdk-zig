@@ -58,8 +58,7 @@ pub const EnableMFADeviceInput = struct {
     user_name: []const u8,
 };
 
-pub const EnableMFADeviceOutput = struct {
-};
+pub const EnableMFADeviceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

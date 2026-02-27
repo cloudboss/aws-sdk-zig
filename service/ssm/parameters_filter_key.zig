@@ -1,11 +1,11 @@
 pub const ParametersFilterKey = enum {
     name,
-    @"type",
+    type,
     key_id,
 
     pub const json_field_names = .{
         .name = "NAME",
-        .@"type" = "TYPE",
+        .type = "TYPE",
         .key_id = "KEY_ID",
     };
 };

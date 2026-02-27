@@ -16,8 +16,7 @@ pub const TagResourceInput = struct {
     tags: []const Tag,
 };
 
-pub const TagResourceOutput = struct {
-};
+pub const TagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -9,8 +9,7 @@ pub const OptInPhoneNumberInput = struct {
     phone_number: []const u8,
 };
 
-pub const OptInPhoneNumberOutput = struct {
-};
+pub const OptInPhoneNumberOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

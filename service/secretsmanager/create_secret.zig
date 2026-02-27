@@ -161,7 +161,7 @@ pub const CreateSecretInput = struct {
     /// For more
     /// information, see [Using Secrets Manager managed external
     /// secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html).
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .add_replica_regions = "AddReplicaRegions",
@@ -173,7 +173,7 @@ pub const CreateSecretInput = struct {
         .secret_binary = "SecretBinary",
         .secret_string = "SecretString",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

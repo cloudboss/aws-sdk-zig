@@ -87,8 +87,7 @@ pub const SetPlatformApplicationAttributesInput = struct {
     platform_application_arn: []const u8,
 };
 
-pub const SetPlatformApplicationAttributesOutput = struct {
-};
+pub const SetPlatformApplicationAttributesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

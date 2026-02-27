@@ -1,0 +1,16 @@
+const Cipher = @import("cipher.zig").Cipher;
+
+/// Information about a policy used for SSL negotiation.
+pub const SslPolicy = struct {
+    /// The ciphers.
+    ciphers: ?[]const Cipher,
+
+    /// The name of the policy.
+    name: ?[]const u8,
+
+    /// The protocols.
+    ssl_protocols: ?[]const []const u8,
+
+    /// The supported load balancers.
+    supported_load_balancer_types: ?[]const []const u8,
+};

@@ -29,8 +29,7 @@ pub const UpdateBucketMetadataJournalTableConfigurationInput = struct {
     journal_table_configuration: JournalTableConfigurationUpdates,
 };
 
-pub const UpdateBucketMetadataJournalTableConfigurationOutput = struct {
-};
+pub const UpdateBucketMetadataJournalTableConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

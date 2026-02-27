@@ -4,11 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteAccountPasswordPolicyInput = struct {
-};
+pub const DeleteAccountPasswordPolicyInput = struct {};
 
-pub const DeleteAccountPasswordPolicyOutput = struct {
-};
+pub const DeleteAccountPasswordPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

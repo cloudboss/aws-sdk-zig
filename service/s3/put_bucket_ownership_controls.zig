@@ -45,8 +45,7 @@ pub const PutBucketOwnershipControlsInput = struct {
     ownership_controls: OwnershipControls,
 };
 
-pub const PutBucketOwnershipControlsOutput = struct {
-};
+pub const PutBucketOwnershipControlsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

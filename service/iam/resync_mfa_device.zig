@@ -34,8 +34,7 @@ pub const ResyncMFADeviceInput = struct {
     user_name: []const u8,
 };
 
-pub const ResyncMFADeviceOutput = struct {
-};
+pub const ResyncMFADeviceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

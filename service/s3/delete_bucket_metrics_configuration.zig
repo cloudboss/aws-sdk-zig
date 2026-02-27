@@ -19,8 +19,7 @@ pub const DeleteBucketMetricsConfigurationInput = struct {
     id: []const u8,
 };
 
-pub const DeleteBucketMetricsConfigurationOutput = struct {
-};
+pub const DeleteBucketMetricsConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

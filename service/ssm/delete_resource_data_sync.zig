@@ -17,8 +17,7 @@ pub const DeleteResourceDataSyncInput = struct {
     };
 };
 
-pub const DeleteResourceDataSyncOutput = struct {
-};
+pub const DeleteResourceDataSyncOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

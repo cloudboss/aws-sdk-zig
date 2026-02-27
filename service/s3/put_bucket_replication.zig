@@ -47,8 +47,7 @@ pub const PutBucketReplicationInput = struct {
     token: ?[]const u8 = null,
 };
 
-pub const PutBucketReplicationOutput = struct {
-};
+pub const PutBucketReplicationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

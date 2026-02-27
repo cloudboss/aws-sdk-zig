@@ -1,7 +1,6 @@
 const aws = @import("aws");
 const std = @import("std");
 
-
 const add_permission = @import("add_permission.zig");
 const check_if_phone_number_is_opted_out = @import("check_if_phone_number_is_opted_out.zig");
 const confirm_subscription = @import("confirm_subscription.zig");

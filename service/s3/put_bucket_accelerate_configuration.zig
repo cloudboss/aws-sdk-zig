@@ -35,8 +35,7 @@ pub const PutBucketAccelerateConfigurationInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const PutBucketAccelerateConfigurationOutput = struct {
-};
+pub const PutBucketAccelerateConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

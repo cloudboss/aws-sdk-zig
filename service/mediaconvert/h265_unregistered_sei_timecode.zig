@@ -1,0 +1,10 @@
+/// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
+pub const H265UnregisteredSeiTimecode = enum {
+    disabled,
+    enabled,
+
+    pub const json_field_names = .{
+        .disabled = "DISABLED",
+        .enabled = "ENABLED",
+    };
+};

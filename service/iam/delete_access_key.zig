@@ -23,8 +23,7 @@ pub const DeleteAccessKeyInput = struct {
     user_name: ?[]const u8 = null,
 };
 
-pub const DeleteAccessKeyOutput = struct {
-};
+pub const DeleteAccessKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

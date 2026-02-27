@@ -41,8 +41,7 @@ pub const UpdateUserInput = struct {
     user_name: []const u8,
 };
 
-pub const UpdateUserOutput = struct {
-};
+pub const UpdateUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

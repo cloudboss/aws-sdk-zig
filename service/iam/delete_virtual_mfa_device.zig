@@ -17,8 +17,7 @@ pub const DeleteVirtualMFADeviceInput = struct {
     serial_number: []const u8,
 };
 
-pub const DeleteVirtualMFADeviceOutput = struct {
-};
+pub const DeleteVirtualMFADeviceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

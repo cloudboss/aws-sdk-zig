@@ -25,8 +25,7 @@ pub const AddPermissionInput = struct {
     topic_arn: []const u8,
 };
 
-pub const AddPermissionOutput = struct {
-};
+pub const AddPermissionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

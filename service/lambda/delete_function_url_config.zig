@@ -25,8 +25,7 @@ pub const DeleteFunctionUrlConfigInput = struct {
     };
 };
 
-pub const DeleteFunctionUrlConfigOutput = struct {
-};
+pub const DeleteFunctionUrlConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

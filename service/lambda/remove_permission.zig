@@ -38,8 +38,7 @@ pub const RemovePermissionInput = struct {
     };
 };
 
-pub const RemovePermissionOutput = struct {
-};
+pub const RemovePermissionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

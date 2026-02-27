@@ -221,8 +221,7 @@ pub const SetQueueAttributesInput = struct {
     };
 };
 
-pub const SetQueueAttributesOutput = struct {
-};
+pub const SetQueueAttributesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

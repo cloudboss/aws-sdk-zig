@@ -44,8 +44,7 @@ pub const ModifyDocumentPermissionInput = struct {
     };
 };
 
-pub const ModifyDocumentPermissionOutput = struct {
-};
+pub const ModifyDocumentPermissionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

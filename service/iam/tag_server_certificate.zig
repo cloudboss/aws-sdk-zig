@@ -21,8 +21,7 @@ pub const TagServerCertificateInput = struct {
     tags: []const Tag,
 };
 
-pub const TagServerCertificateOutput = struct {
-};
+pub const TagServerCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

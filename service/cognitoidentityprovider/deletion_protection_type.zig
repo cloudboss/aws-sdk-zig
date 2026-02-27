@@ -1,0 +1,9 @@
+pub const DeletionProtectionType = enum {
+    active,
+    inactive,
+
+    pub const json_field_names = .{
+        .active = "ACTIVE",
+        .inactive = "INACTIVE",
+    };
+};

@@ -26,8 +26,7 @@ pub const RemoveLayerVersionPermissionInput = struct {
     };
 };
 
-pub const RemoveLayerVersionPermissionOutput = struct {
-};
+pub const RemoveLayerVersionPermissionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

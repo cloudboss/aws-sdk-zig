@@ -21,8 +21,7 @@ pub const TagRoleInput = struct {
     tags: []const Tag,
 };
 
-pub const TagRoleOutput = struct {
-};
+pub const TagRoleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

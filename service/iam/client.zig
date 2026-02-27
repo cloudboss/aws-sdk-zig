@@ -1,7 +1,6 @@
 const aws = @import("aws");
 const std = @import("std");
 
-
 const accept_delegation_request = @import("accept_delegation_request.zig");
 const add_client_id_to_open_id_connect_provider = @import("add_client_id_to_open_id_connect_provider.zig");
 const add_role_to_instance_profile = @import("add_role_to_instance_profile.zig");

@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReportFormatType = @import("report_format_type.zig").ReportFormatType;
 
-pub const GetCredentialReportInput = struct {
-};
+pub const GetCredentialReportInput = struct {};
 
 pub const GetCredentialReportOutput = struct {
     /// Contains the credential report. The report is Base64-encoded.

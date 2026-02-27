@@ -9,8 +9,7 @@ pub const DeleteSAMLProviderInput = struct {
     saml_provider_arn: []const u8,
 };
 
-pub const DeleteSAMLProviderOutput = struct {
-};
+pub const DeleteSAMLProviderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

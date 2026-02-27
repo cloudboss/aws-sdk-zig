@@ -1,0 +1,21 @@
+/// Options to configure how your data quality evaluation results are published.
+pub const DQResultsPublishingOptions = struct {
+    /// Enable metrics for your data quality results.
+    cloud_watch_metrics_enabled: ?bool,
+
+    /// The context of the evaluation.
+    evaluation_context: ?[]const u8,
+
+    /// Enable publishing for your data quality results.
+    results_publishing_enabled: ?bool,
+
+    /// The Amazon S3 prefix prepended to the results.
+    results_s3_prefix: ?[]const u8,
+
+    pub const json_field_names = .{
+        .cloud_watch_metrics_enabled = "CloudWatchMetricsEnabled",
+        .evaluation_context = "EvaluationContext",
+        .results_publishing_enabled = "ResultsPublishingEnabled",
+        .results_s3_prefix = "ResultsS3Prefix",
+    };
+};

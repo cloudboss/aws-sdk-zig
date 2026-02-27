@@ -21,8 +21,7 @@ pub const DeleteFunctionConcurrencyInput = struct {
     };
 };
 
-pub const DeleteFunctionConcurrencyOutput = struct {
-};
+pub const DeleteFunctionConcurrencyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

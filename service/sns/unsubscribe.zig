@@ -9,8 +9,7 @@ pub const UnsubscribeInput = struct {
     subscription_arn: []const u8,
 };
 
-pub const UnsubscribeOutput = struct {
-};
+pub const UnsubscribeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

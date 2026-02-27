@@ -1,0 +1,13 @@
+/// Ignore this setting unless you have SCTE-35 markers in your input video
+/// file. Choose Passthrough if you want SCTE-35 markers that appear in your
+/// input to also appear in this output. Choose None if you don't want those
+/// SCTE-35 markers in this output.
+pub const CmfcScte35Source = enum {
+    passthrough,
+    none,
+
+    pub const json_field_names = .{
+        .passthrough = "PASSTHROUGH",
+        .none = "NONE",
+    };
+};

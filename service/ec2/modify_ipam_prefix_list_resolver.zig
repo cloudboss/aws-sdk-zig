@@ -88,7 +88,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.Cidr=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.Cidr=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.cidr) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -96,7 +96,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.IpamPoolId=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.IpamPoolId=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.ipam_pool_id) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -104,13 +104,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.Operation=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.Operation=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item_1.operation));
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceId=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceId=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.resource_id) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -118,7 +118,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceOwner=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceOwner=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.resource_owner) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -126,7 +126,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceRegion=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceRegion=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.resource_region) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -135,7 +135,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
                     if (item_1.resource_tag) |sv_2| {
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceTag.Key=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceTag.Key=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (sv_2.key) |fv_3| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_3);
@@ -143,7 +143,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamPrefixListResolve
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceTag.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Rule.{d}.Conditions.Condition.{d}.ResourceTag.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (sv_2.value) |fv_3| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_3);
@@ -237,7 +237,6 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
-
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

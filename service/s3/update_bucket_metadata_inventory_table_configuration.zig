@@ -28,8 +28,7 @@ pub const UpdateBucketMetadataInventoryTableConfigurationInput = struct {
     inventory_table_configuration: InventoryTableConfigurationUpdates,
 };
 
-pub const UpdateBucketMetadataInventoryTableConfigurationOutput = struct {
-};
+pub const UpdateBucketMetadataInventoryTableConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

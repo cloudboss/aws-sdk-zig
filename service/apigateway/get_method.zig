@@ -1,0 +1,233 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const Integration = @import("integration.zig").Integration;
+const MethodResponse = @import("method_response.zig").MethodResponse;
+
+pub const GetMethodInput = struct {
+    /// Specifies the method request's HTTP method type.
+    http_method: []const u8,
+
+    /// The Resource identifier for the Method resource.
+    resource_id: []const u8,
+
+    /// The string identifier of the associated RestApi.
+    rest_api_id: []const u8,
+
+    pub const json_field_names = .{
+        .http_method = "httpMethod",
+        .resource_id = "resourceId",
+        .rest_api_id = "restApiId",
+    };
+};
+
+pub const GetMethodOutput = struct {
+    /// A boolean flag specifying whether a valid ApiKey is required to invoke this
+    /// method.
+    api_key_required: ?bool = null,
+
+    /// A list of authorization scopes configured on the method. The scopes are used
+    /// with a `COGNITO_USER_POOLS` authorizer to authorize the method invocation.
+    /// The authorization works by matching the method scopes against the scopes
+    /// parsed from the access token in the incoming request. The method invocation
+    /// is authorized if any method scopes matches a claimed scope in the access
+    /// token. Otherwise, the invocation is not authorized. When the method scope is
+    /// configured, the client must provide an access token instead of an identity
+    /// token for authorization purposes.
+    authorization_scopes: ?[]const []const u8 = null,
+
+    /// The method's authorization type. Valid values are `NONE` for open access,
+    /// `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using a custom
+    /// authorizer, or `COGNITO_USER_POOLS` for using a Cognito user pool.
+    authorization_type: ?[]const u8 = null,
+
+    /// The identifier of an Authorizer to use on this method. The
+    /// `authorizationType` must be `CUSTOM`.
+    authorizer_id: ?[]const u8 = null,
+
+    /// The method's HTTP verb.
+    http_method: ?[]const u8 = null,
+
+    /// Gets the method's integration responsible for passing the client-submitted
+    /// request to the back end and performing necessary transformations to make the
+    /// request compliant with the back end.
+    method_integration: ?Integration = null,
+
+    /// Gets a method response associated with a given HTTP status code.
+    method_responses: ?[]const aws.map.MapEntry(MethodResponse) = null,
+
+    /// A human-friendly operation identifier for the method. For example, you can
+    /// assign the `operationName` of `ListPets` for the `GET /pets` method in the
+    /// `PetStore` example.
+    operation_name: ?[]const u8 = null,
+
+    /// A key-value map specifying data schemas, represented by Model resources, (as
+    /// the mapped value) of the request payloads of given content types (as the
+    /// mapping key).
+    request_models: ?[]const aws.map.StringMapEntry = null,
+
+    /// A key-value map defining required or optional method request parameters that
+    /// can be accepted by API Gateway. A key is a method request parameter name
+    /// matching the pattern of `method.request.{location}.{name}`, where `location`
+    /// is `querystring`, `path`, or `header` and `name` is a valid and unique
+    /// parameter name. The value associated with the key is a Boolean flag
+    /// indicating whether the parameter is required (`true`) or optional (`false`).
+    /// The method request parameter names defined here are available in Integration
+    /// to be mapped to integration request parameters or templates.
+    request_parameters: ?[]const aws.map.MapEntry(bool) = null,
+
+    /// The identifier of a RequestValidator for request validation.
+    request_validator_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .api_key_required = "apiKeyRequired",
+        .authorization_scopes = "authorizationScopes",
+        .authorization_type = "authorizationType",
+        .authorizer_id = "authorizerId",
+        .http_method = "httpMethod",
+        .method_integration = "methodIntegration",
+        .method_responses = "methodResponses",
+        .operation_name = "operationName",
+        .request_models = "requestModels",
+        .request_parameters = "requestParameters",
+        .request_validator_id = "requestValidatorId",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMethodInput, options: Options) !GetMethodOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "apigateway");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetMethodInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("apigateway", "API Gateway", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/restapis/");
+    try path_buf.appendSlice(alloc, input.rest_api_id);
+    try path_buf.appendSlice(alloc, "/resources/");
+    try path_buf.appendSlice(alloc, input.resource_id);
+    try path_buf.appendSlice(alloc, "/methods/");
+    try path_buf.appendSlice(alloc, input.http_method);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetMethodOutput {
+    var result: GetMethodOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetMethodOutput, body, alloc);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "BadRequestException")) {
+        return .{ .arena = arena, .kind = .{ .bad_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableException")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyRequestsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_requests_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
+        return .{ .arena = arena, .kind = .{ .unauthorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

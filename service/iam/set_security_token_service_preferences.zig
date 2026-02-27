@@ -22,8 +22,7 @@ pub const SetSecurityTokenServicePreferencesInput = struct {
     global_endpoint_token_version: globalEndpointTokenVersion,
 };
 
-pub const SetSecurityTokenServicePreferencesOutput = struct {
-};
+pub const SetSecurityTokenServicePreferencesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

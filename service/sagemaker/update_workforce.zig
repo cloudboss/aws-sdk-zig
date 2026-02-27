@@ -1,0 +1,162 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const WorkforceIpAddressType = @import("workforce_ip_address_type.zig").WorkforceIpAddressType;
+const OidcConfig = @import("oidc_config.zig").OidcConfig;
+const SourceIpConfig = @import("source_ip_config.zig").SourceIpConfig;
+const WorkforceVpcConfigRequest = @import("workforce_vpc_config_request.zig").WorkforceVpcConfigRequest;
+const Workforce = @import("workforce.zig").Workforce;
+
+pub const UpdateWorkforceInput = struct {
+    /// Use this parameter to specify whether you want `IPv4` only or `dualstack`
+    /// (`IPv4` and `IPv6`) to support your labeling workforce.
+    ip_address_type: ?WorkforceIpAddressType = null,
+
+    /// Use this parameter to update your OIDC Identity Provider (IdP) configuration
+    /// for a workforce made using your own IdP.
+    oidc_config: ?OidcConfig = null,
+
+    /// A list of one to ten worker IP address ranges
+    /// ([CIDRs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html))
+    /// that can be used to access tasks assigned to this workforce.
+    ///
+    /// Maximum: Ten CIDR values
+    source_ip_config: ?SourceIpConfig = null,
+
+    /// The name of the private workforce that you want to update. You can find your
+    /// workforce name by using the
+    /// [ListWorkforces](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListWorkforces.html) operation.
+    workforce_name: []const u8,
+
+    /// Use this parameter to update your VPC configuration for a workforce.
+    workforce_vpc_config: ?WorkforceVpcConfigRequest = null,
+
+    pub const json_field_names = .{
+        .ip_address_type = "IpAddressType",
+        .oidc_config = "OidcConfig",
+        .source_ip_config = "SourceIpConfig",
+        .workforce_name = "WorkforceName",
+        .workforce_vpc_config = "WorkforceVpcConfig",
+    };
+};
+
+pub const UpdateWorkforceOutput = struct {
+    /// A single private workforce. You can create one private work force in each
+    /// Amazon Web Services Region. By default, any workforce-related API operation
+    /// used in a specific region will apply to the workforce created in that
+    /// region. To learn how to create a private workforce, see [Create a Private
+    /// Workforce](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
+    workforce: ?Workforce = null,
+
+    pub const json_field_names = .{
+        .workforce = "Workforce",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkforceInput, options: Options) !UpdateWorkforceOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sagemaker");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: UpdateWorkforceInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("sagemaker", "SageMaker", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "SageMaker.UpdateWorkforce");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateWorkforceOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(UpdateWorkforceOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceInUse")) {
+        return .{ .arena = arena, .kind = .{ .resource_in_use = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceLimitExceeded")) {
+        return .{ .arena = arena, .kind = .{ .resource_limit_exceeded = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFound")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

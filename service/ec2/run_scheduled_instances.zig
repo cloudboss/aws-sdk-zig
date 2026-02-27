@@ -243,7 +243,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RunScheduledInstancesInput,
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.Groups.SecurityGroupId.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.Groups.SecurityGroupId.{d}=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
@@ -262,7 +262,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RunScheduledInstancesInput,
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.Ipv6Addresses.Ipv6Address.{d}.Ipv6Address=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.Ipv6Addresses.Ipv6Address.{d}.Ipv6Address=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.ipv_6_address) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -291,7 +291,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RunScheduledInstancesInput,
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.PrivateIpAddressConfigs.PrivateIpAddressConfigSet.{d}.Primary=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.PrivateIpAddressConfigs.PrivateIpAddressConfigSet.{d}.Primary=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.primary) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, if (fv_2) "true" else "false");
@@ -299,7 +299,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RunScheduledInstancesInput,
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.PrivateIpAddressConfigs.PrivateIpAddressConfigSet.{d}.PrivateIpAddress=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterfaces.NetworkInterface.{d}.PrivateIpAddressConfigs.PrivateIpAddressConfigSet.{d}.PrivateIpAddress=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.private_ip_address) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -411,7 +411,6 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
-
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

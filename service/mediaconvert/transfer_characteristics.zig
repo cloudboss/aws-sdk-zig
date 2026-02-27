@@ -1,0 +1,46 @@
+/// The color space transfer characteristics of the video track, defining the
+/// relationship between linear light values and the encoded signal values. This
+/// affects brightness and contrast reproduction.
+pub const TransferCharacteristics = enum {
+    itu_709,
+    unspecified,
+    reserved,
+    itu_470_m,
+    itu_470_bg,
+    smpte_170_m,
+    smpte_240_m,
+    linear,
+    log10_2,
+    loc10_2_5,
+    iec_61966_2_4,
+    itu_1361,
+    iec_61966_2_1,
+    itu_2020_10_bit,
+    itu_2020_12_bit,
+    smpte_2084,
+    smpte_428_1,
+    arib_b67,
+    last,
+
+    pub const json_field_names = .{
+        .itu_709 = "ITU_709",
+        .unspecified = "UNSPECIFIED",
+        .reserved = "RESERVED",
+        .itu_470_m = "ITU_470M",
+        .itu_470_bg = "ITU_470BG",
+        .smpte_170_m = "SMPTE_170M",
+        .smpte_240_m = "SMPTE_240M",
+        .linear = "LINEAR",
+        .log10_2 = "LOG10_2",
+        .loc10_2_5 = "LOC10_2_5",
+        .iec_61966_2_4 = "IEC_61966_2_4",
+        .itu_1361 = "ITU_1361",
+        .iec_61966_2_1 = "IEC_61966_2_1",
+        .itu_2020_10_bit = "ITU_2020_10bit",
+        .itu_2020_12_bit = "ITU_2020_12bit",
+        .smpte_2084 = "SMPTE_2084",
+        .smpte_428_1 = "SMPTE_428_1",
+        .arib_b67 = "ARIB_B67",
+        .last = "LAST",
+    };
+};

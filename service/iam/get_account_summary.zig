@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-pub const GetAccountSummaryInput = struct {
-};
+pub const GetAccountSummaryInput = struct {};
 
 pub const GetAccountSummaryOutput = struct {
     /// A set of key–value pairs containing information about IAM entity usage and

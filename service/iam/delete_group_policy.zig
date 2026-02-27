@@ -26,8 +26,7 @@ pub const DeleteGroupPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const DeleteGroupPolicyOutput = struct {
-};
+pub const DeleteGroupPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

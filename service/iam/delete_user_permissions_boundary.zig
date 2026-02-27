@@ -11,8 +11,7 @@ pub const DeleteUserPermissionsBoundaryInput = struct {
     user_name: []const u8,
 };
 
-pub const DeleteUserPermissionsBoundaryOutput = struct {
-};
+pub const DeleteUserPermissionsBoundaryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

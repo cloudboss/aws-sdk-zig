@@ -21,8 +21,7 @@ pub const DetachUserPolicyInput = struct {
     user_name: []const u8,
 };
 
-pub const DetachUserPolicyOutput = struct {
-};
+pub const DetachUserPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

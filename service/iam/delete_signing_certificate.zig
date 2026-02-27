@@ -22,8 +22,7 @@ pub const DeleteSigningCertificateInput = struct {
     user_name: ?[]const u8 = null,
 };
 
-pub const DeleteSigningCertificateOutput = struct {
-};
+pub const DeleteSigningCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

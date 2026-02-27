@@ -13,8 +13,7 @@ pub const VerifySMSSandboxPhoneNumberInput = struct {
     phone_number: []const u8,
 };
 
-pub const VerifySMSSandboxPhoneNumberOutput = struct {
-};
+pub const VerifySMSSandboxPhoneNumberOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

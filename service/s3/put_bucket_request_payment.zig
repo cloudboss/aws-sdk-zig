@@ -45,8 +45,7 @@ pub const PutBucketRequestPaymentInput = struct {
     request_payment_configuration: RequestPaymentConfiguration,
 };
 
-pub const PutBucketRequestPaymentOutput = struct {
-};
+pub const PutBucketRequestPaymentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -7,7 +7,7 @@ pub const NodeFilter = struct {
     key: NodeFilterKey,
 
     /// The type of filter operator.
-    @"type": ?NodeFilterOperatorType,
+    type: ?NodeFilterOperatorType,
 
     /// A filter value supported by the specified key. For example, for the key
     /// `PlatformType`, supported values include `Linux` and
@@ -16,7 +16,7 @@ pub const NodeFilter = struct {
 
     pub const json_field_names = .{
         .key = "Key",
-        .@"type" = "Type",
+        .type = "Type",
         .values = "Values",
     };
 };

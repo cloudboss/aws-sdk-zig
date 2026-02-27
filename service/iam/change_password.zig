@@ -27,8 +27,7 @@ pub const ChangePasswordInput = struct {
     old_password: []const u8,
 };
 
-pub const ChangePasswordOutput = struct {
-};
+pub const ChangePasswordOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

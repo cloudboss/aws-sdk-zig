@@ -106,8 +106,7 @@ pub const UpdateAccountPasswordPolicyInput = struct {
     require_uppercase_characters: bool = false,
 };
 
-pub const UpdateAccountPasswordPolicyOutput = struct {
-};
+pub const UpdateAccountPasswordPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

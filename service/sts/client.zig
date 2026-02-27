@@ -1,7 +1,6 @@
 const aws = @import("aws");
 const std = @import("std");
 
-
 const assume_role = @import("assume_role.zig");
 const assume_role_with_saml = @import("assume_role_with_saml.zig");
 const assume_role_with_web_identity = @import("assume_role_with_web_identity.zig");

@@ -35,8 +35,7 @@ pub const UpdateRoleInput = struct {
     role_name: []const u8,
 };
 
-pub const UpdateRoleOutput = struct {
-};
+pub const UpdateRoleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

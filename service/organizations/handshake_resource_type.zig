@@ -1,0 +1,33 @@
+pub const HandshakeResourceType = enum {
+    account,
+    organization,
+    organization_feature_set,
+    email,
+    master_email,
+    master_name,
+    notes,
+    parent_handshake,
+    responsibility_transfer,
+    transfer_start_timestamp,
+    transfer_type,
+    management_account,
+    management_email,
+    management_name,
+
+    pub const json_field_names = .{
+        .account = "ACCOUNT",
+        .organization = "ORGANIZATION",
+        .organization_feature_set = "ORGANIZATION_FEATURE_SET",
+        .email = "EMAIL",
+        .master_email = "MASTER_EMAIL",
+        .master_name = "MASTER_NAME",
+        .notes = "NOTES",
+        .parent_handshake = "PARENT_HANDSHAKE",
+        .responsibility_transfer = "RESPONSIBILITY_TRANSFER",
+        .transfer_start_timestamp = "TRANSFER_START_TIMESTAMP",
+        .transfer_type = "TRANSFER_TYPE",
+        .management_account = "MANAGEMENT_ACCOUNT",
+        .management_email = "MANAGEMENT_EMAIL",
+        .management_name = "MANAGEMENT_NAME",
+    };
+};

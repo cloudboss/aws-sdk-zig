@@ -15,8 +15,7 @@ pub const DeleteUserInput = struct {
     user_name: []const u8,
 };
 
-pub const DeleteUserOutput = struct {
-};
+pub const DeleteUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,8 +21,7 @@ pub const AttachGroupPolicyInput = struct {
     policy_arn: []const u8,
 };
 
-pub const AttachGroupPolicyOutput = struct {
-};
+pub const AttachGroupPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

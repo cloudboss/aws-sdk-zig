@@ -1,0 +1,22 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+pub const waiters = @import("waiters.zig");
+
+pub const add_tags_to_certificate = @import("add_tags_to_certificate.zig");
+pub const delete_certificate = @import("delete_certificate.zig");
+pub const describe_certificate = @import("describe_certificate.zig");
+pub const export_certificate = @import("export_certificate.zig");
+pub const get_account_configuration = @import("get_account_configuration.zig");
+pub const get_certificate = @import("get_certificate.zig");
+pub const import_certificate = @import("import_certificate.zig");
+pub const list_certificates = @import("list_certificates.zig");
+pub const list_tags_for_certificate = @import("list_tags_for_certificate.zig");
+pub const put_account_configuration = @import("put_account_configuration.zig");
+pub const remove_tags_from_certificate = @import("remove_tags_from_certificate.zig");
+pub const renew_certificate = @import("renew_certificate.zig");
+pub const request_certificate = @import("request_certificate.zig");
+pub const resend_validation_email = @import("resend_validation_email.zig");
+pub const revoke_certificate = @import("revoke_certificate.zig");
+pub const update_certificate_options = @import("update_certificate_options.zig");

@@ -1,0 +1,19 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const describe_affected_accounts_for_organization = @import("describe_affected_accounts_for_organization.zig");
+pub const describe_affected_entities = @import("describe_affected_entities.zig");
+pub const describe_affected_entities_for_organization = @import("describe_affected_entities_for_organization.zig");
+pub const describe_entity_aggregates = @import("describe_entity_aggregates.zig");
+pub const describe_entity_aggregates_for_organization = @import("describe_entity_aggregates_for_organization.zig");
+pub const describe_event_aggregates = @import("describe_event_aggregates.zig");
+pub const describe_event_details = @import("describe_event_details.zig");
+pub const describe_event_details_for_organization = @import("describe_event_details_for_organization.zig");
+pub const describe_event_types = @import("describe_event_types.zig");
+pub const describe_events = @import("describe_events.zig");
+pub const describe_events_for_organization = @import("describe_events_for_organization.zig");
+pub const describe_health_service_status_for_organization = @import("describe_health_service_status_for_organization.zig");
+pub const disable_health_service_access_for_organization = @import("disable_health_service_access_for_organization.zig");
+pub const enable_health_service_access_for_organization = @import("enable_health_service_access_for_organization.zig");

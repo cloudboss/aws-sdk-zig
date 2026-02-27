@@ -13,8 +13,7 @@ pub const DeleteOpenIDConnectProviderInput = struct {
     open_id_connect_provider_arn: []const u8,
 };
 
-pub const DeleteOpenIDConnectProviderOutput = struct {
-};
+pub const DeleteOpenIDConnectProviderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

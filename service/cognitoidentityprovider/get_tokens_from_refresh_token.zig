@@ -1,0 +1,497 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const AuthenticationResultType = @import("authentication_result_type.zig").AuthenticationResultType;
+
+pub const GetTokensFromRefreshTokenInput = struct {
+    /// The app client that issued the refresh token to the user who wants to
+    /// request new
+    /// tokens.
+    client_id: []const u8,
+
+    /// A map of custom key-value pairs that you can provide as input for certain
+    /// custom
+    /// workflows that this action triggers.
+    ///
+    /// You create custom workflows by assigning Lambda functions to user pool
+    /// triggers.
+    /// When you use the `GetTokensFromRefreshToken` API action, Amazon Cognito
+    /// invokes the
+    /// Lambda function the pre token generation trigger.
+    ///
+    /// For more information, see [
+    /// Using Lambda
+    /// triggers](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html) in the *Amazon Cognito Developer Guide*.
+    ///
+    /// When you use the `ClientMetadata` parameter, note that Amazon Cognito won't
+    /// do the
+    /// following:
+    ///
+    /// * Store the `ClientMetadata` value. This data is available only
+    /// to Lambda triggers that are assigned to a user pool to support custom
+    /// workflows. If your user pool configuration doesn't include triggers, the
+    /// `ClientMetadata` parameter serves no purpose.
+    ///
+    /// * Validate the `ClientMetadata` value.
+    ///
+    /// * Encrypt the `ClientMetadata` value. Don't send sensitive
+    /// information in this parameter.
+    client_metadata: ?[]const aws.map.StringMapEntry = null,
+
+    /// The client secret of the requested app client, if the client has a secret.
+    client_secret: ?[]const u8 = null,
+
+    /// When you enable device remembering, Amazon Cognito issues a device key that
+    /// you can use for
+    /// device authentication that bypasses multi-factor authentication (MFA). To
+    /// implement
+    /// `GetTokensFromRefreshToken` in a user pool with device remembering, you
+    /// must capture the device key from the initial authentication request. If your
+    /// application
+    /// doesn't provide the key of a registered device, Amazon Cognito issues a new
+    /// one. You must
+    /// provide the confirmed device key in this request if device remembering is
+    /// enabled in
+    /// your user pool.
+    ///
+    /// For more information about device remembering, see [Working with
+    /// devices](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html).
+    device_key: ?[]const u8 = null,
+
+    /// A valid refresh token that can authorize the request for new tokens. When
+    /// refresh
+    /// token rotation is active in the requested app client, this token is
+    /// invalidated after
+    /// the request is complete and after an optional grace period.
+    refresh_token: []const u8,
+
+    pub const json_field_names = .{
+        .client_id = "ClientId",
+        .client_metadata = "ClientMetadata",
+        .client_secret = "ClientSecret",
+        .device_key = "DeviceKey",
+        .refresh_token = "RefreshToken",
+    };
+};
+
+pub const GetTokensFromRefreshTokenOutput = struct {
+    authentication_result: ?AuthenticationResultType = null,
+
+    pub const json_field_names = .{
+        .authentication_result = "AuthenticationResult",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTokensFromRefreshTokenInput, options: Options) !GetTokensFromRefreshTokenOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cognitoidentityprovider");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: GetTokensFromRefreshTokenInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cognitoidentityprovider", "Cognito Identity Provider", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "AWSCognitoIdentityProviderService.GetTokensFromRefreshToken");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetTokensFromRefreshTokenOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(GetTokensFromRefreshTokenOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AliasExistsException")) {
+        return .{ .arena = arena, .kind = .{ .alias_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CodeDeliveryFailureException")) {
+        return .{ .arena = arena, .kind = .{ .code_delivery_failure_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CodeMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .code_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DeviceKeyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .device_key_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DuplicateProviderException")) {
+        return .{ .arena = arena, .kind = .{ .duplicate_provider_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "EnableSoftwareTokenMFAException")) {
+        return .{ .arena = arena, .kind = .{ .enable_software_token_mfa_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ExpiredCodeException")) {
+        return .{ .arena = arena, .kind = .{ .expired_code_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "FeatureUnavailableInTierException")) {
+        return .{ .arena = arena, .kind = .{ .feature_unavailable_in_tier_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ForbiddenException")) {
+        return .{ .arena = arena, .kind = .{ .forbidden_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "GroupExistsException")) {
+        return .{ .arena = arena, .kind = .{ .group_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalErrorException")) {
+        return .{ .arena = arena, .kind = .{ .internal_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidEmailRoleAccessPolicyException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_email_role_access_policy_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidLambdaResponseException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_lambda_response_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOAuthFlowException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_o_auth_flow_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPasswordException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_password_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSmsRoleAccessPolicyException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_sms_role_access_policy_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSmsRoleTrustRelationshipException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_sms_role_trust_relationship_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidUserPoolConfigurationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_user_pool_configuration_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ManagedLoginBrandingExistsException")) {
+        return .{ .arena = arena, .kind = .{ .managed_login_branding_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MFAMethodNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .mfa_method_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotAuthorizedException")) {
+        return .{ .arena = arena, .kind = .{ .not_authorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PasswordHistoryPolicyViolationException")) {
+        return .{ .arena = arena, .kind = .{ .password_history_policy_violation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PasswordResetRequiredException")) {
+        return .{ .arena = arena, .kind = .{ .password_reset_required_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PreconditionNotMetException")) {
+        return .{ .arena = arena, .kind = .{ .precondition_not_met_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "RefreshTokenReuseException")) {
+        return .{ .arena = arena, .kind = .{ .refresh_token_reuse_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ScopeDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .scope_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SoftwareTokenMFANotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .software_token_mfa_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TermsExistsException")) {
+        return .{ .arena = arena, .kind = .{ .terms_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TierChangeNotAllowedException")) {
+        return .{ .arena = arena, .kind = .{ .tier_change_not_allowed_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyFailedAttemptsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_failed_attempts_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyRequestsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_requests_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
+        return .{ .arena = arena, .kind = .{ .unauthorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnexpectedLambdaException")) {
+        return .{ .arena = arena, .kind = .{ .unexpected_lambda_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedIdentityProviderException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_identity_provider_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedOperationException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_operation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedTokenTypeException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_token_type_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedUserStateException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_user_state_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserImportInProgressException")) {
+        return .{ .arena = arena, .kind = .{ .user_import_in_progress_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserLambdaValidationException")) {
+        return .{ .arena = arena, .kind = .{ .user_lambda_validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserNotConfirmedException")) {
+        return .{ .arena = arena, .kind = .{ .user_not_confirmed_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .user_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserPoolAddOnNotEnabledException")) {
+        return .{ .arena = arena, .kind = .{ .user_pool_add_on_not_enabled_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserPoolTaggingException")) {
+        return .{ .arena = arena, .kind = .{ .user_pool_tagging_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UsernameExistsException")) {
+        return .{ .arena = arena, .kind = .{ .username_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnChallengeNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_challenge_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnClientMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_client_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnConfigurationMissingException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_configuration_missing_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnCredentialNotSupportedException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_credential_not_supported_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnNotEnabledException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_not_enabled_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnOriginNotAllowedException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_origin_not_allowed_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnRelyingPartyMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_relying_party_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

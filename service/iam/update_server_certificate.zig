@@ -40,8 +40,7 @@ pub const UpdateServerCertificateInput = struct {
     server_certificate_name: []const u8,
 };
 
-pub const UpdateServerCertificateOutput = struct {
-};
+pub const UpdateServerCertificateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

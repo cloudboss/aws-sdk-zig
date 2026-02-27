@@ -33,14 +33,14 @@ pub const SourceAccessConfiguration = struct {
     /// * `SERVER_ROOT_CA_CERTIFICATE` – (Self-managed Apache Kafka) The Secrets
     ///   Manager ARN of your secret key containing the root CA certificate (X.509
     ///   PEM) used for TLS encryption of your Apache Kafka brokers.
-    @"type": ?SourceAccessType,
+    type: ?SourceAccessType,
 
     /// The value for your chosen configuration in `Type`. For example: `"URI":
     /// "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"`.
     uri: ?[]const u8,
 
     pub const json_field_names = .{
-        .@"type" = "Type",
+        .type = "Type",
         .uri = "URI",
     };
 };

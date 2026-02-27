@@ -14,8 +14,7 @@ pub const DeleteBucketTaggingInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const DeleteBucketTaggingOutput = struct {
-};
+pub const DeleteBucketTaggingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

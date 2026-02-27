@@ -43,7 +43,7 @@ pub const ParameterHistory = struct {
     tier: ?ParameterTier,
 
     /// The type of parameter used.
-    @"type": ?ParameterType,
+    type: ?ParameterType,
 
     /// The parameter value.
     value: ?[]const u8,
@@ -62,7 +62,7 @@ pub const ParameterHistory = struct {
         .name = "Name",
         .policies = "Policies",
         .tier = "Tier",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
         .version = "Version",
     };

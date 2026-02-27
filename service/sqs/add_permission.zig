@@ -48,8 +48,7 @@ pub const AddPermissionInput = struct {
     };
 };
 
-pub const AddPermissionOutput = struct {
-};
+pub const AddPermissionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

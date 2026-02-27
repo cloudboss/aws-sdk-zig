@@ -9,8 +9,7 @@ pub const DeleteTopicInput = struct {
     topic_arn: []const u8,
 };
 
-pub const DeleteTopicOutput = struct {
-};
+pub const DeleteTopicOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

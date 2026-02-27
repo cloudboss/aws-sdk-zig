@@ -15,8 +15,7 @@ pub const DeleteRoleInput = struct {
     role_name: []const u8,
 };
 
-pub const DeleteRoleOutput = struct {
-};
+pub const DeleteRoleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

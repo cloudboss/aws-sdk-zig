@@ -22,8 +22,7 @@ pub const PutBucketAnalyticsConfigurationInput = struct {
     id: []const u8,
 };
 
-pub const PutBucketAnalyticsConfigurationOutput = struct {
-};
+pub const PutBucketAnalyticsConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

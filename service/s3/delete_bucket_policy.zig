@@ -29,8 +29,7 @@ pub const DeleteBucketPolicyInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const DeleteBucketPolicyOutput = struct {
-};
+pub const DeleteBucketPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

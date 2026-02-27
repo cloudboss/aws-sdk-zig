@@ -29,8 +29,7 @@ pub const UpdateAccessKeyInput = struct {
     user_name: ?[]const u8 = null,
 };
 
-pub const UpdateAccessKeyOutput = struct {
-};
+pub const UpdateAccessKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

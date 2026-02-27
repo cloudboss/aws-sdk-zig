@@ -25,8 +25,7 @@ pub const DeleteAliasInput = struct {
     };
 };
 
-pub const DeleteAliasOutput = struct {
-};
+pub const DeleteAliasOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

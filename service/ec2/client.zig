@@ -1,7 +1,6 @@
 const aws = @import("aws");
 const std = @import("std");
 
-
 const accept_address_transfer = @import("accept_address_transfer.zig");
 const accept_capacity_reservation_billing_ownership = @import("accept_capacity_reservation_billing_ownership.zig");
 const accept_reserved_instances_exchange_quote = @import("accept_reserved_instances_exchange_quote.zig");

@@ -21,8 +21,7 @@ pub const TagInstanceProfileInput = struct {
     tags: []const Tag,
 };
 
-pub const TagInstanceProfileOutput = struct {
-};
+pub const TagInstanceProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

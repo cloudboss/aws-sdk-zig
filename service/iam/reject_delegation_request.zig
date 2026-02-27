@@ -12,8 +12,7 @@ pub const RejectDelegationRequestInput = struct {
     notes: ?[]const u8 = null,
 };
 
-pub const RejectDelegationRequestOutput = struct {
-};
+pub const RejectDelegationRequestOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

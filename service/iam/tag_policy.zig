@@ -21,8 +21,7 @@ pub const TagPolicyInput = struct {
     tags: []const Tag,
 };
 
-pub const TagPolicyOutput = struct {
-};
+pub const TagPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

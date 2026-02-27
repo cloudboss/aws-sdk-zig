@@ -23,8 +23,7 @@ pub const TagMFADeviceInput = struct {
     tags: []const Tag,
 };
 
-pub const TagMFADeviceOutput = struct {
-};
+pub const TagMFADeviceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

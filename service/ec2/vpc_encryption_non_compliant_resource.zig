@@ -13,5 +13,5 @@ pub const VpcEncryptionNonCompliantResource = struct {
     is_excludable: ?bool,
 
     /// The type of the non-compliant resource.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 };

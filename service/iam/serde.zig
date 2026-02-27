@@ -981,7 +981,9 @@ pub fn deserializeEvalDecisionDetailsType(reader: *aws.xml.Reader, alloc: std.me
                                 if (std.mem.eql(u8, ie.local, "key")) {
                                     entry_key = try alloc.dupe(u8, try reader.readElementText());
                                 } else if (std.mem.eql(u8, ie.local, "value")) {
-                                    if (std.meta.stringToEnum(PolicyEvaluationDecisionType, try reader.readElementText())) |v| { entry_value = v; }
+                                    if (std.meta.stringToEnum(PolicyEvaluationDecisionType, try reader.readElementText())) |v| {
+                                        entry_value = v;
+                                    }
                                 } else {
                                     try reader.skipElement();
                                 }
@@ -1347,7 +1349,7 @@ pub fn deserializeEntityInfo(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
                 } else if (std.mem.eql(u8, e.local, "Path")) {
                     result.path = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(policyOwnerEntityType, try reader.readElementText());
+                    result.type = std.meta.stringToEnum(policyOwnerEntityType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1867,7 +1869,7 @@ pub fn deserializePolicyGroup(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
 pub fn deserializePolicyParameter(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyParameter {
     var result: PolicyParameter = undefined;
     result.name = null;
-    result.@"type" = null;
+    result.type = null;
     result.values = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1875,7 +1877,7 @@ pub fn deserializePolicyParameter(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = std.meta.stringToEnum(PolicyParameterTypeEnum, try reader.readElementText());
+                    result.type = std.meta.stringToEnum(PolicyParameterTypeEnum, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Values")) {
                     result.values = try deserializepolicyParameterValuesListType(reader, alloc, "member");
                 } else {
@@ -2833,7 +2835,7 @@ pub fn serializePolicyParameter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Name>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(alloc, "<Type>");
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</Type>");
@@ -2853,4 +2855,3 @@ pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ta
     try aws.xml.appendXmlEscaped(alloc, buf, value.value);
     try buf.appendSlice(alloc, "</Value>");
 }
-

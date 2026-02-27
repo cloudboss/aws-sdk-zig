@@ -17,8 +17,7 @@ pub const DeleteBucketAnalyticsConfigurationInput = struct {
     id: []const u8,
 };
 
-pub const DeleteBucketAnalyticsConfigurationOutput = struct {
-};
+pub const DeleteBucketAnalyticsConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

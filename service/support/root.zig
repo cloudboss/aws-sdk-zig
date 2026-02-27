@@ -1,0 +1,21 @@
+pub const Client = @import("client.zig").Client;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+
+pub const add_attachments_to_set = @import("add_attachments_to_set.zig");
+pub const add_communication_to_case = @import("add_communication_to_case.zig");
+pub const create_case = @import("create_case.zig");
+pub const describe_attachment = @import("describe_attachment.zig");
+pub const describe_cases = @import("describe_cases.zig");
+pub const describe_communications = @import("describe_communications.zig");
+pub const describe_create_case_options = @import("describe_create_case_options.zig");
+pub const describe_services = @import("describe_services.zig");
+pub const describe_severity_levels = @import("describe_severity_levels.zig");
+pub const describe_supported_languages = @import("describe_supported_languages.zig");
+pub const describe_trusted_advisor_check_refresh_statuses = @import("describe_trusted_advisor_check_refresh_statuses.zig");
+pub const describe_trusted_advisor_check_result = @import("describe_trusted_advisor_check_result.zig");
+pub const describe_trusted_advisor_check_summaries = @import("describe_trusted_advisor_check_summaries.zig");
+pub const describe_trusted_advisor_checks = @import("describe_trusted_advisor_checks.zig");
+pub const refresh_trusted_advisor_check = @import("refresh_trusted_advisor_check.zig");
+pub const resolve_case = @import("resolve_case.zig");

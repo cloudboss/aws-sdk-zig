@@ -23,8 +23,7 @@ pub const UpdateOpenIDConnectProviderThumbprintInput = struct {
     thumbprint_list: []const []const u8,
 };
 
-pub const UpdateOpenIDConnectProviderThumbprintOutput = struct {
-};
+pub const UpdateOpenIDConnectProviderThumbprintOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

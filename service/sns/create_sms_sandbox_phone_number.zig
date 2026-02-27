@@ -16,8 +16,7 @@ pub const CreateSMSSandboxPhoneNumberInput = struct {
     phone_number: []const u8,
 };
 
-pub const CreateSMSSandboxPhoneNumberOutput = struct {
-};
+pub const CreateSMSSandboxPhoneNumberOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

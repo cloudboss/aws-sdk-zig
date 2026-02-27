@@ -67,8 +67,7 @@ pub const PutComplianceItemsInput = struct {
     };
 };
 
-pub const PutComplianceItemsOutput = struct {
-};
+pub const PutComplianceItemsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -84,7 +84,7 @@ pub const GetMaintenanceWindowExecutionTaskOutput = struct {
     triggered_alarms: ?[]const AlarmStateInformation = null,
 
     /// The type of task that was run.
-    @"type": ?MaintenanceWindowTaskType = null,
+    type: ?MaintenanceWindowTaskType = null,
 
     /// The ID of the maintenance window execution that includes the task.
     window_execution_id: ?[]const u8 = null,
@@ -103,7 +103,7 @@ pub const GetMaintenanceWindowExecutionTaskOutput = struct {
         .task_execution_id = "TaskExecutionId",
         .task_parameters = "TaskParameters",
         .triggered_alarms = "TriggeredAlarms",
-        .@"type" = "Type",
+        .type = "Type",
         .window_execution_id = "WindowExecutionId",
     };
 };

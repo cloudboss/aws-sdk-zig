@@ -89,8 +89,7 @@ pub const PutBucketPolicyInput = struct {
     policy: []const u8,
 };
 
-pub const PutBucketPolicyOutput = struct {
-};
+pub const PutBucketPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

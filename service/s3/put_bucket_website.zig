@@ -45,8 +45,7 @@ pub const PutBucketWebsiteInput = struct {
     website_configuration: WebsiteConfiguration,
 };
 
-pub const PutBucketWebsiteOutput = struct {
-};
+pub const PutBucketWebsiteOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -94,8 +94,7 @@ pub const RenameObjectInput = struct {
     source_if_unmodified_since: ?i64 = null,
 };
 
-pub const RenameObjectOutput = struct {
-};
+pub const RenameObjectOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

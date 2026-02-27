@@ -1,0 +1,263 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const DeliveryDestinationConfiguration = @import("delivery_destination_configuration.zig").DeliveryDestinationConfiguration;
+const DeliveryDestinationType = @import("delivery_destination_type.zig").DeliveryDestinationType;
+const OutputFormat = @import("output_format.zig").OutputFormat;
+const DeliveryDestination = @import("delivery_destination.zig").DeliveryDestination;
+
+pub const PutDeliveryDestinationInput = struct {
+    /// A structure that contains the ARN of the Amazon Web Services resource that
+    /// will receive the
+    /// logs.
+    ///
+    /// `deliveryDestinationConfiguration` is required for CloudWatch Logs,
+    /// Amazon S3, Firehose log delivery destinations and not required for
+    /// X-Ray trace delivery destinations. `deliveryDestinationType` is
+    /// needed for X-Ray trace delivery destinations but not required for other logs
+    /// delivery destinations.
+    delivery_destination_configuration: ?DeliveryDestinationConfiguration = null,
+
+    /// The type of delivery destination. This parameter specifies the target
+    /// service where log
+    /// data will be delivered. Valid values include:
+    ///
+    /// * `S3` - Amazon S3 for long-term storage and analytics
+    ///
+    /// * `CWL` - CloudWatch Logs for centralized log management
+    ///
+    /// * `FH` - Amazon Kinesis Data Firehose for real-time data streaming
+    ///
+    /// * `XRAY` - Amazon Web Services
+    /// X-Ray for distributed tracing and application monitoring
+    ///
+    /// The delivery destination type determines the format and configuration
+    /// options available
+    /// for log delivery.
+    delivery_destination_type: ?DeliveryDestinationType = null,
+
+    /// A name for this delivery destination. This name must be unique for all
+    /// delivery
+    /// destinations in your account.
+    name: []const u8,
+
+    /// The format for the logs that this delivery destination will receive.
+    output_format: ?OutputFormat = null,
+
+    /// An optional list of key-value pairs to associate with the resource.
+    ///
+    /// For more information about tagging, see [Tagging Amazon Web Services
+    /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .delivery_destination_configuration = "deliveryDestinationConfiguration",
+        .delivery_destination_type = "deliveryDestinationType",
+        .name = "name",
+        .output_format = "outputFormat",
+        .tags = "tags",
+    };
+};
+
+pub const PutDeliveryDestinationOutput = struct {
+    /// A structure containing information about the delivery destination that you
+    /// just created or
+    /// updated.
+    delivery_destination: ?DeliveryDestination = null,
+
+    pub const json_field_names = .{
+        .delivery_destination = "deliveryDestination",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDeliveryDestinationInput, options: Options) !PutDeliveryDestinationOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudwatchlogs");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: PutDeliveryDestinationInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cloudwatchlogs", "CloudWatch Logs", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "Logs_20140328.PutDeliveryDestination");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PutDeliveryDestinationOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(PutDeliveryDestinationOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DataAlreadyAcceptedException")) {
+        return .{ .arena = arena, .kind = .{ .data_already_accepted_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOperationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_operation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSequenceTokenException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_sequence_token_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MalformedQueryException")) {
+        return .{ .arena = arena, .kind = .{ .malformed_query_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OperationAbortedException")) {
+        return .{ .arena = arena, .kind = .{ .operation_aborted_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .resource_already_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableException")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_tags_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnrecognizedClientException")) {
+        return .{ .arena = arena, .kind = .{ .unrecognized_client_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

@@ -10,5 +10,5 @@ pub const ElasticInferenceAccelerator = struct {
     /// The type of elastic inference accelerator. The possible values are
     /// `eia1.medium`, `eia1.large`, `eia1.xlarge`, `eia2.medium`, `eia2.large`, and
     /// `eia2.xlarge`.
-    @"type": []const u8,
+    type: []const u8,
 };

@@ -22,8 +22,7 @@ pub const TagOpenIDConnectProviderInput = struct {
     tags: []const Tag,
 };
 
-pub const TagOpenIDConnectProviderOutput = struct {
-};
+pub const TagOpenIDConnectProviderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

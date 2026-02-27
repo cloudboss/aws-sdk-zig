@@ -33,8 +33,7 @@ pub const DeactivateMFADeviceInput = struct {
     user_name: ?[]const u8 = null,
 };
 
-pub const DeactivateMFADeviceOutput = struct {
-};
+pub const DeactivateMFADeviceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

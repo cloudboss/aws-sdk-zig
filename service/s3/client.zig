@@ -1,7 +1,6 @@
 const aws = @import("aws");
 const std = @import("std");
 
-
 const abort_multipart_upload = @import("abort_multipart_upload.zig");
 const complete_multipart_upload = @import("complete_multipart_upload.zig");
 const copy_object = @import("copy_object.zig");

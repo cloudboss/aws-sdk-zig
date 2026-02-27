@@ -35,8 +35,7 @@ pub const PutBucketAbacInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-pub const PutBucketAbacOutput = struct {
-};
+pub const PutBucketAbacOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

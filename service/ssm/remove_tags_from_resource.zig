@@ -54,8 +54,7 @@ pub const RemoveTagsFromResourceInput = struct {
     };
 };
 
-pub const RemoveTagsFromResourceOutput = struct {
-};
+pub const RemoveTagsFromResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -44,8 +44,7 @@ pub const UpdateLoginProfileInput = struct {
     user_name: []const u8,
 };
 
-pub const UpdateLoginProfileOutput = struct {
-};
+pub const UpdateLoginProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

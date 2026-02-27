@@ -48,8 +48,7 @@ pub const PutGroupPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const PutGroupPolicyOutput = struct {
-};
+pub const PutGroupPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

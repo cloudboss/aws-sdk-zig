@@ -17,8 +17,7 @@ pub const TagQueueInput = struct {
     };
 };
 
-pub const TagQueueOutput = struct {
-};
+pub const TagQueueOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

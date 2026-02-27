@@ -6,8 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PasswordPolicy = @import("password_policy.zig").PasswordPolicy;
 const serde = @import("serde.zig");
 
-pub const GetAccountPasswordPolicyInput = struct {
-};
+pub const GetAccountPasswordPolicyInput = struct {};
 
 pub const GetAccountPasswordPolicyOutput = struct {
     /// A structure that contains details about the account's password policy.

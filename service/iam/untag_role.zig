@@ -21,8 +21,7 @@ pub const UntagRoleInput = struct {
     tag_keys: []const []const u8,
 };
 
-pub const UntagRoleOutput = struct {
-};
+pub const UntagRoleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

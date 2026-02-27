@@ -142,7 +142,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeImageReferencesInpu
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceTypeOptions.member.{d}.OptionName=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceTypeOptions.member.{d}.OptionName=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.option_name) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_2));
@@ -153,7 +153,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeImageReferencesInpu
                             const n_2 = idx_2 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceTypeOptions.member.{d}.OptionValues.member.{d}=", .{n, n_1, n_2}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceType.member.{d}.ResourceTypeOptions.member.{d}.OptionValues.member.{d}=", .{ n, n_1, n_2 }) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                             }
@@ -218,7 +218,6 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
-
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

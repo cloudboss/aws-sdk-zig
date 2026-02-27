@@ -1,0 +1,627 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const ServiceError = @import("errors.zig").ServiceError;
+const DeliveryMediumType = @import("delivery_medium_type.zig").DeliveryMediumType;
+const MessageActionType = @import("message_action_type.zig").MessageActionType;
+const AttributeType = @import("attribute_type.zig").AttributeType;
+const UserType = @import("user_type.zig").UserType;
+
+pub const AdminCreateUserInput = struct {
+    /// A map of custom key-value pairs that you can provide as input for any custom
+    /// workflows
+    /// that this action triggers.
+    ///
+    /// You create custom workflows by assigning Lambda functions to user pool
+    /// triggers.
+    /// When you use the AdminCreateUser API action, Amazon Cognito invokes the
+    /// function that is assigned
+    /// to the *pre sign-up* trigger. When Amazon Cognito invokes this function, it
+    /// passes a JSON payload, which the function receives as input. This payload
+    /// contains a
+    /// `ClientMetadata` attribute, which provides the data that you assigned to
+    /// the ClientMetadata parameter in your AdminCreateUser request. In your
+    /// function code in
+    /// Lambda, you can process the `clientMetadata` value to enhance your
+    /// workflow for your specific needs.
+    ///
+    /// For more information, see [
+    /// Using Lambda
+    /// triggers](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html) in the *Amazon Cognito Developer Guide*.
+    ///
+    /// When you use the `ClientMetadata` parameter, note that Amazon Cognito won't
+    /// do the
+    /// following:
+    ///
+    /// * Store the `ClientMetadata` value. This data is available only
+    /// to Lambda triggers that are assigned to a user pool to support custom
+    /// workflows. If your user pool configuration doesn't include triggers, the
+    /// `ClientMetadata` parameter serves no purpose.
+    ///
+    /// * Validate the `ClientMetadata` value.
+    ///
+    /// * Encrypt the `ClientMetadata` value. Don't send sensitive
+    /// information in this parameter.
+    client_metadata: ?[]const aws.map.StringMapEntry = null,
+
+    /// Specify `EMAIL` if email will be used to send the welcome message. Specify
+    /// `SMS` if the phone number will be used. The default value is
+    /// `SMS`. You can specify more than one value.
+    desired_delivery_mediums: ?[]const DeliveryMediumType = null,
+
+    /// This parameter is used only if the `phone_number_verified` or
+    /// `email_verified` attribute is set to `True`. Otherwise, it is
+    /// ignored.
+    ///
+    /// If this parameter is set to `True` and the phone number or email address
+    /// specified in the `UserAttributes` parameter already exists as an alias with
+    /// a
+    /// different user, this request migrates the alias from the previous user to
+    /// the
+    /// newly-created user. The previous user will no longer be able to log in using
+    /// that
+    /// alias.
+    ///
+    /// If this parameter is set to `False`, the API throws an
+    /// `AliasExistsException` error if the alias already exists. The default
+    /// value is `False`.
+    force_alias_creation: bool = false,
+
+    /// Set to `RESEND` to resend the invitation message to a user that already
+    /// exists, and to reset the temporary-password duration with a new temporary
+    /// password. Set
+    /// to `SUPPRESS` to suppress sending the message. You can specify only one
+    /// value.
+    message_action: ?MessageActionType = null,
+
+    /// The user's temporary password. This password must conform to the password
+    /// policy that
+    /// you specified when you created the user pool.
+    ///
+    /// The exception to the requirement for a password is when your user pool
+    /// supports
+    /// passwordless sign-in with email or SMS OTPs. To create a user with no
+    /// password, omit
+    /// this parameter or submit a blank value. You can only create a passwordless
+    /// user when
+    /// passwordless sign-in is available.
+    ///
+    /// The temporary password is valid only once. To complete the Admin Create User
+    /// flow, the
+    /// user must enter the temporary password in the sign-in page, along with a new
+    /// password to
+    /// be used in all future sign-ins.
+    ///
+    /// If you don't specify a value, Amazon Cognito generates one for you unless
+    /// you have passwordless
+    /// options active for your user pool.
+    ///
+    /// The temporary password can only be used until the user account expiration
+    /// limit that
+    /// you set for your user pool. To reset the account after that time limit, you
+    /// must call
+    /// `AdminCreateUser` again and specify `RESEND` for the
+    /// `MessageAction` parameter.
+    temporary_password: ?[]const u8 = null,
+
+    /// An array of name-value pairs that contain user attributes and attribute
+    /// values to be
+    /// set for the user to be created. You can create a user without specifying any
+    /// attributes
+    /// other than `Username`. However, any attributes that you specify as required
+    /// (when creating a user pool or in the **Attributes** tab of
+    /// the console) either you should supply (in your call to `AdminCreateUser`) or
+    /// the user should supply (when they sign up in response to your welcome
+    /// message).
+    ///
+    /// For custom attributes, you must prepend the `custom:` prefix to the
+    /// attribute name.
+    ///
+    /// To send a message inviting the user to sign up, you must specify the user's
+    /// email
+    /// address or phone number. You can do this in your call to AdminCreateUser or
+    /// in the
+    /// **Users** tab of the Amazon Cognito console for managing your
+    /// user pools.
+    ///
+    /// You must also provide an email address or phone number when you expect the
+    /// user to do
+    /// passwordless sign-in with an email or SMS OTP. These attributes must be
+    /// provided when
+    /// passwordless options are the only available, or when you don't submit a
+    /// `TemporaryPassword`.
+    ///
+    /// In your `AdminCreateUser` request, you can set the
+    /// `email_verified` and `phone_number_verified` attributes to
+    /// `true`. The following conditions apply:
+    ///
+    /// **email**
+    ///
+    /// The email address where you want the user to receive their confirmation
+    /// code and username. You must provide a value for `email` when you
+    /// want to set `email_verified` to `true`, or if you set
+    /// `EMAIL` in the `DesiredDeliveryMediums`
+    /// parameter.
+    ///
+    /// **phone_number**
+    ///
+    /// The phone number where you want the user to receive their confirmation
+    /// code and username. You must provide a value for `phone_number`
+    /// when you want to set `phone_number_verified` to
+    /// `true`, or if you set `SMS` in the
+    /// `DesiredDeliveryMediums` parameter.
+    user_attributes: ?[]const AttributeType = null,
+
+    /// The value that you want to set as the username sign-in attribute. The
+    /// following
+    /// conditions apply to the username parameter.
+    ///
+    /// * The username can't be a duplicate of another username in the same user
+    /// pool.
+    ///
+    /// * You can't change the value of a username after you create it.
+    ///
+    /// * You can only provide a value if usernames are a valid sign-in attribute
+    ///   for
+    /// your user pool. If your user pool only supports phone numbers or email
+    /// addresses
+    /// as sign-in attributes, Amazon Cognito automatically generates a username
+    /// value. For more
+    /// information, see [Customizing sign-in
+    /// attributes](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases).
+    username: []const u8,
+
+    /// The ID of the user pool where you want to create a user.
+    user_pool_id: []const u8,
+
+    /// Temporary user attributes that contribute to the outcomes of your pre
+    /// sign-up Lambda
+    /// trigger. This set of key-value pairs are for custom validation of
+    /// information that you
+    /// collect from your users but don't need to retain.
+    ///
+    /// Your Lambda function can analyze this additional data and act on it. Your
+    /// function
+    /// can automatically confirm and verify select users or perform external API
+    /// operations
+    /// like logging user attributes and validation data to Amazon CloudWatch Logs.
+    ///
+    /// For more information about the pre sign-up Lambda trigger, see [Pre sign-up
+    /// Lambda
+    /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-sign-up.html).
+    validation_data: ?[]const AttributeType = null,
+
+    pub const json_field_names = .{
+        .client_metadata = "ClientMetadata",
+        .desired_delivery_mediums = "DesiredDeliveryMediums",
+        .force_alias_creation = "ForceAliasCreation",
+        .message_action = "MessageAction",
+        .temporary_password = "TemporaryPassword",
+        .user_attributes = "UserAttributes",
+        .username = "Username",
+        .user_pool_id = "UserPoolId",
+        .validation_data = "ValidationData",
+    };
+};
+
+pub const AdminCreateUserOutput = struct {
+    /// The new user's profile details.
+    user: ?UserType = null,
+
+    pub const json_field_names = .{
+        .user = "User",
+    };
+};
+
+pub const Options = struct {
+    diagnostic: ?*ServiceError = null,
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminCreateUserInput, options: Options) !AdminCreateUserOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cognitoidentityprovider");
+
+    var response = try client.http_client.sendRequest(&request);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(response.body, response.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(response.body, response.status, response.headers, allocator);
+    return result;
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: AdminCreateUserInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("cognitoidentityprovider", "Cognito Identity Provider", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    const body = try aws.json.jsonStringify(input, alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = "/";
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/x-amz-json-1.1");
+    try request.headers.put(alloc, "X-Amz-Target", "AWSCognitoIdentityProviderService.AdminCreateUser");
+
+    return request;
+}
+
+fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !AdminCreateUserOutput {
+    _ = status;
+    _ = headers;
+    if (body.len == 0) return .{};
+    return aws.json.parseJsonObject(AdminCreateUserOutput, body, alloc);
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AliasExistsException")) {
+        return .{ .arena = arena, .kind = .{ .alias_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CodeDeliveryFailureException")) {
+        return .{ .arena = arena, .kind = .{ .code_delivery_failure_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CodeMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .code_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DeviceKeyExistsException")) {
+        return .{ .arena = arena, .kind = .{ .device_key_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DuplicateProviderException")) {
+        return .{ .arena = arena, .kind = .{ .duplicate_provider_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "EnableSoftwareTokenMFAException")) {
+        return .{ .arena = arena, .kind = .{ .enable_software_token_mfa_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ExpiredCodeException")) {
+        return .{ .arena = arena, .kind = .{ .expired_code_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "FeatureUnavailableInTierException")) {
+        return .{ .arena = arena, .kind = .{ .feature_unavailable_in_tier_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ForbiddenException")) {
+        return .{ .arena = arena, .kind = .{ .forbidden_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "GroupExistsException")) {
+        return .{ .arena = arena, .kind = .{ .group_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalErrorException")) {
+        return .{ .arena = arena, .kind = .{ .internal_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidEmailRoleAccessPolicyException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_email_role_access_policy_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidLambdaResponseException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_lambda_response_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOAuthFlowException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_o_auth_flow_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPasswordException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_password_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSmsRoleAccessPolicyException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_sms_role_access_policy_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSmsRoleTrustRelationshipException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_sms_role_trust_relationship_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidUserPoolConfigurationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_user_pool_configuration_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ManagedLoginBrandingExistsException")) {
+        return .{ .arena = arena, .kind = .{ .managed_login_branding_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MFAMethodNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .mfa_method_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotAuthorizedException")) {
+        return .{ .arena = arena, .kind = .{ .not_authorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PasswordHistoryPolicyViolationException")) {
+        return .{ .arena = arena, .kind = .{ .password_history_policy_violation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PasswordResetRequiredException")) {
+        return .{ .arena = arena, .kind = .{ .password_reset_required_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PreconditionNotMetException")) {
+        return .{ .arena = arena, .kind = .{ .precondition_not_met_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "RefreshTokenReuseException")) {
+        return .{ .arena = arena, .kind = .{ .refresh_token_reuse_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ScopeDoesNotExistException")) {
+        return .{ .arena = arena, .kind = .{ .scope_does_not_exist_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SoftwareTokenMFANotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .software_token_mfa_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TermsExistsException")) {
+        return .{ .arena = arena, .kind = .{ .terms_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TierChangeNotAllowedException")) {
+        return .{ .arena = arena, .kind = .{ .tier_change_not_allowed_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyFailedAttemptsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_failed_attempts_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyRequestsException")) {
+        return .{ .arena = arena, .kind = .{ .too_many_requests_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
+        return .{ .arena = arena, .kind = .{ .unauthorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnexpectedLambdaException")) {
+        return .{ .arena = arena, .kind = .{ .unexpected_lambda_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedIdentityProviderException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_identity_provider_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedOperationException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_operation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedTokenTypeException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_token_type_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedUserStateException")) {
+        return .{ .arena = arena, .kind = .{ .unsupported_user_state_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserImportInProgressException")) {
+        return .{ .arena = arena, .kind = .{ .user_import_in_progress_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserLambdaValidationException")) {
+        return .{ .arena = arena, .kind = .{ .user_lambda_validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserNotConfirmedException")) {
+        return .{ .arena = arena, .kind = .{ .user_not_confirmed_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .user_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserPoolAddOnNotEnabledException")) {
+        return .{ .arena = arena, .kind = .{ .user_pool_add_on_not_enabled_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UserPoolTaggingException")) {
+        return .{ .arena = arena, .kind = .{ .user_pool_tagging_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UsernameExistsException")) {
+        return .{ .arena = arena, .kind = .{ .username_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnChallengeNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_challenge_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnClientMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_client_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnConfigurationMissingException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_configuration_missing_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnCredentialNotSupportedException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_credential_not_supported_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnNotEnabledException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_not_enabled_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnOriginNotAllowedException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_origin_not_allowed_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "WebAuthnRelyingPartyMismatchException")) {
+        return .{ .arena = arena, .kind = .{ .web_authn_relying_party_mismatch_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

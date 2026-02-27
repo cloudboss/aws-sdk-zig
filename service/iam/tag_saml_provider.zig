@@ -22,8 +22,7 @@ pub const TagSAMLProviderInput = struct {
     tags: []const Tag,
 };
 
-pub const TagSAMLProviderOutput = struct {
-};
+pub const TagSAMLProviderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

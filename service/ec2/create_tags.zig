@@ -27,8 +27,7 @@ pub const CreateTagsInput = struct {
     tags: []const Tag,
 };
 
-pub const CreateTagsOutput = struct {
-};
+pub const CreateTagsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
@@ -132,7 +131,6 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
-
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

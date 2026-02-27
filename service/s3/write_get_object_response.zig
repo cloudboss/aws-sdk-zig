@@ -286,8 +286,7 @@ pub const WriteGetObjectResponseInput = struct {
     version_id: ?[]const u8 = null,
 };
 
-pub const WriteGetObjectResponseOutput = struct {
-};
+pub const WriteGetObjectResponseOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

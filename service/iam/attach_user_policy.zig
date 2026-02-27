@@ -21,8 +21,7 @@ pub const AttachUserPolicyInput = struct {
     user_name: []const u8,
 };
 
-pub const AttachUserPolicyOutput = struct {
-};
+pub const AttachUserPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

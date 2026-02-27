@@ -30,8 +30,7 @@ pub const ChangeMessageVisibilityInput = struct {
     };
 };
 
-pub const ChangeMessageVisibilityOutput = struct {
-};
+pub const ChangeMessageVisibilityOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
