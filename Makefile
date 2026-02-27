@@ -96,6 +96,14 @@ codegen: $(HAS_IMAGE_LOCAL) fetch-models
 		DIR_ROOT="$(DIR_ROOT)" \
 		python3 hack/run-codegen
 
+codegen-%: $(HAS_IMAGE_LOCAL) fetch-models
+	@SERVICES_FILTER="$*" \
+		DIR_OUT="$(DIR_OUT)" \
+		AWS_MODELS_COMMIT="$(AWS_MODELS_COMMIT)" \
+		CTR_IMAGE="$(CTR_IMAGE_LOCAL)" \
+		DIR_ROOT="$(DIR_ROOT)" \
+		python3 hack/run-codegen
+
 certs:
 	@bash tests/integration/certs/generate.sh
 
