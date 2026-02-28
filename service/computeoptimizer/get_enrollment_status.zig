@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Status = @import("status.zig").Status;
 
-pub const GetEnrollmentStatusInput = struct {
-};
+pub const GetEnrollmentStatusInput = struct {};
 
 pub const GetEnrollmentStatusOutput = struct {
     /// The Unix epoch timestamp, in seconds, of when the account enrollment status

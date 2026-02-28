@@ -103,7 +103,7 @@ pub const Test = struct {
     /// * XCTEST
     ///
     /// * XCTEST_UI
-    @"type": ?TestType,
+    type: ?TestType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -116,6 +116,6 @@ pub const Test = struct {
         .started = "started",
         .status = "status",
         .stopped = "stopped",
-        .@"type" = "type",
+        .type = "type",
     };
 };

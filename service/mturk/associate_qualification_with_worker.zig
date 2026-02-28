@@ -29,7 +29,8 @@ pub const AssociateQualificationWithWorkerInput = struct {
     };
 };
 
-pub const AssociateQualificationWithWorkerOutput = struct {};
+pub const AssociateQualificationWithWorkerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

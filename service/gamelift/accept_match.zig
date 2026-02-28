@@ -26,7 +26,8 @@ pub const AcceptMatchInput = struct {
     };
 };
 
-pub const AcceptMatchOutput = struct {};
+pub const AcceptMatchOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

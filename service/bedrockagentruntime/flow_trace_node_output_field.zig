@@ -17,12 +17,12 @@ pub const FlowTraceNodeOutputField = struct {
     node_output_name: []const u8,
 
     /// The data type of the output field for compatibility validation.
-    @"type": ?FlowNodeIODataType,
+    type: ?FlowNodeIODataType,
 
     pub const json_field_names = .{
         .content = "content",
         .next = "next",
         .node_output_name = "nodeOutputName",
-        .@"type" = "type",
+        .type = "type",
     };
 };

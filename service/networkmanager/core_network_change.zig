@@ -22,7 +22,7 @@ pub const CoreNetworkChange = struct {
     previous_values: ?CoreNetworkChangeValues,
 
     /// The type of change.
-    type: ?ChangeType,
+    @"type": ?ChangeType,
 
     pub const json_field_names = .{
         .action = "Action",
@@ -30,6 +30,6 @@ pub const CoreNetworkChange = struct {
         .identifier_path = "IdentifierPath",
         .new_values = "NewValues",
         .previous_values = "PreviousValues",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

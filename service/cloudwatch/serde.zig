@@ -2360,4 +2360,3 @@ pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ta
     try aws.xml.appendXmlEscaped(alloc, buf, value.value);
     try buf.appendSlice(alloc, "</Value>");
 }
-

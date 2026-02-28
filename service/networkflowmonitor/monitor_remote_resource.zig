@@ -26,10 +26,10 @@ pub const MonitorRemoteResource = struct {
     /// The type of the remote resource. Valid values are `AWS::EC2::VPC`
     /// `AWS::AvailabilityZone`, `AWS::EC2::Subnet`, `AWS::AWSService`, or
     /// `AWS::Region`.
-    type: MonitorRemoteResourceType,
+    @"type": MonitorRemoteResourceType,
 
     pub const json_field_names = .{
         .identifier = "identifier",
-        .type = "type",
+        .@"type" = "type",
     };
 };

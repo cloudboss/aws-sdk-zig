@@ -59,8 +59,7 @@ pub const AdminResetUserPasswordInput = struct {
     };
 };
 
-pub const AdminResetUserPasswordOutput = struct {
-};
+pub const AdminResetUserPasswordOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,8 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetRegistryPolicyInput = struct {
-};
+pub const GetRegistryPolicyInput = struct {};
 
 pub const GetRegistryPolicyOutput = struct {
     /// The JSON text of the permissions policy for a registry.

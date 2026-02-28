@@ -24,8 +24,7 @@ pub const DeleteConfiguredTableAssociationAnalysisRuleInput = struct {
     };
 };
 
-pub const DeleteConfiguredTableAssociationAnalysisRuleOutput = struct {
-};
+pub const DeleteConfiguredTableAssociationAnalysisRuleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

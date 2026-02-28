@@ -4,5 +4,5 @@ pub const IcmpTypeCode = struct {
     code: ?i32,
 
     /// The ICMP type. A value of -1 means all types.
-    @"type": ?i32,
+    type: ?i32,
 };

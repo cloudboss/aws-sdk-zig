@@ -34,5 +34,5 @@ pub const LocalGatewayRoute = struct {
     subnet_id: ?[]const u8,
 
     /// The route type.
-    @"type": ?LocalGatewayRouteType,
+    type: ?LocalGatewayRouteType,
 };

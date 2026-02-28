@@ -15,8 +15,7 @@ pub const DeregisterJobDefinitionInput = struct {
     };
 };
 
-pub const DeregisterJobDefinitionOutput = struct {
-};
+pub const DeregisterJobDefinitionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

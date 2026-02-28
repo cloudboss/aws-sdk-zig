@@ -17,8 +17,7 @@ pub const UpdateCapacityReservationInput = struct {
     };
 };
 
-pub const UpdateCapacityReservationOutput = struct {
-};
+pub const UpdateCapacityReservationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

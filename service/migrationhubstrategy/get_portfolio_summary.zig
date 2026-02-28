@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssessmentSummary = @import("assessment_summary.zig").AssessmentSummary;
 
-pub const GetPortfolioSummaryInput = struct {};
+pub const GetPortfolioSummaryInput = struct {
+};
 
 pub const GetPortfolioSummaryOutput = struct {
     /// An assessment summary for the portfolio including the number of servers to

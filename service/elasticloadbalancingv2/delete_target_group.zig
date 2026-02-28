@@ -9,8 +9,7 @@ pub const DeleteTargetGroupInput = struct {
     target_group_arn: []const u8,
 };
 
-pub const DeleteTargetGroupOutput = struct {
-};
+pub const DeleteTargetGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

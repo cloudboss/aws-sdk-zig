@@ -19,7 +19,8 @@ pub const RejectAssignmentInput = struct {
     };
 };
 
-pub const RejectAssignmentOutput = struct {};
+pub const RejectAssignmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

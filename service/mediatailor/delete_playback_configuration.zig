@@ -13,7 +13,8 @@ pub const DeletePlaybackConfigurationInput = struct {
     };
 };
 
-pub const DeletePlaybackConfigurationOutput = struct {};
+pub const DeletePlaybackConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

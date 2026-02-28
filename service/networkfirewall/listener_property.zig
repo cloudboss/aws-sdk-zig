@@ -6,10 +6,10 @@ pub const ListenerProperty = struct {
     port: ?i32,
 
     /// Selection of HTTP or HTTPS traffic.
-    type: ?ListenerPropertyType,
+    @"type": ?ListenerPropertyType,
 
     pub const json_field_names = .{
         .port = "Port",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

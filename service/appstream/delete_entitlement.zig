@@ -17,8 +17,7 @@ pub const DeleteEntitlementInput = struct {
     };
 };
 
-pub const DeleteEntitlementOutput = struct {
-};
+pub const DeleteEntitlementOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

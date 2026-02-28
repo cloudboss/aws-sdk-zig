@@ -17,8 +17,7 @@ pub const DeleteRecommenderInput = struct {
     };
 };
 
-pub const DeleteRecommenderOutput = struct {
-};
+pub const DeleteRecommenderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const ListCrossAccountResourceAccountsInput = struct {};
+pub const ListCrossAccountResourceAccountsInput = struct {
+};
 
 pub const ListCrossAccountResourceAccountsOutput = struct {
     /// The account IDs of principals (resource owners) in a cross-account

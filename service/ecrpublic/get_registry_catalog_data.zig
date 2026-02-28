@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegistryCatalogData = @import("registry_catalog_data.zig").RegistryCatalogData;
 
-pub const GetRegistryCatalogDataInput = struct {
-};
+pub const GetRegistryCatalogDataInput = struct {};
 
 pub const GetRegistryCatalogDataOutput = struct {
     /// The catalog metadata for the public registry.

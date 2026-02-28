@@ -58,7 +58,7 @@ pub const EnhancedImageScanFinding = struct {
     title: ?[]const u8,
 
     /// The type of the finding.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     /// The date and time the finding was last updated at.
     updated_at: ?i64,
@@ -79,7 +79,7 @@ pub const EnhancedImageScanFinding = struct {
         .severity = "severity",
         .status = "status",
         .title = "title",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

@@ -12,14 +12,14 @@ pub const TagFilter = struct {
     /// * VALUE_ONLY: Value only.
     ///
     /// * KEY_AND_VALUE: Key and value.
-    @"type": ?TagFilterType,
+    type: ?TagFilterType,
 
     /// The on-premises instance tag filter value.
     value: ?[]const u8,
 
     pub const json_field_names = .{
         .key = "Key",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

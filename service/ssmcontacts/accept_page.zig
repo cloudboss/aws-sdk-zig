@@ -46,7 +46,8 @@ pub const AcceptPageInput = struct {
     };
 };
 
-pub const AcceptPageOutput = struct {};
+pub const AcceptPageOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

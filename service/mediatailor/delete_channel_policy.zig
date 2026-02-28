@@ -13,7 +13,8 @@ pub const DeleteChannelPolicyInput = struct {
     };
 };
 
-pub const DeleteChannelPolicyOutput = struct {};
+pub const DeleteChannelPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,8 +13,7 @@ pub const DisassociateApiInput = struct {
     };
 };
 
-pub const DisassociateApiOutput = struct {
-};
+pub const DisassociateApiOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

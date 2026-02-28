@@ -14,7 +14,8 @@ pub const DeleteLexiconInput = struct {
     };
 };
 
-pub const DeleteLexiconOutput = struct {};
+pub const DeleteLexiconOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

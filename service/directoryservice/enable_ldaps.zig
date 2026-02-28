@@ -11,16 +11,15 @@ pub const EnableLDAPSInput = struct {
 
     /// The type of LDAP security to enable. Currently only the value `Client` is
     /// supported.
-    @"type": LDAPSType,
+    type: LDAPSType,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const EnableLDAPSOutput = struct {
-};
+pub const EnableLDAPSOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

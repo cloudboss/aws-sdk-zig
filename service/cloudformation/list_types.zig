@@ -70,7 +70,7 @@ pub const ListTypesInput = struct {
     provisioning_type: ?ProvisioningType = null,
 
     /// The type of extension.
-    @"type": ?RegistryType = null,
+    type: ?RegistryType = null,
 
     /// The scope at which the extensions are visible and usable in CloudFormation
     /// operations.
@@ -178,7 +178,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTypesInput, config: *aw
         try body_buf.appendSlice(alloc, "&ProvisioningType=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(alloc, "&Type=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }

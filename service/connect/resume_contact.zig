@@ -23,8 +23,7 @@ pub const ResumeContactInput = struct {
     };
 };
 
-pub const ResumeContactOutput = struct {
-};
+pub const ResumeContactOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

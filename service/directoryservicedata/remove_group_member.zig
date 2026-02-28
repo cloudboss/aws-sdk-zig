@@ -51,8 +51,7 @@ pub const RemoveGroupMemberInput = struct {
     };
 };
 
-pub const RemoveGroupMemberOutput = struct {
-};
+pub const RemoveGroupMemberOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

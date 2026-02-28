@@ -13,7 +13,8 @@ pub const DeleteQueuedSavingsPlanInput = struct {
     };
 };
 
-pub const DeleteQueuedSavingsPlanOutput = struct {};
+pub const DeleteQueuedSavingsPlanOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

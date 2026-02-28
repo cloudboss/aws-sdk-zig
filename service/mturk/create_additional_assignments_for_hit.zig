@@ -30,7 +30,8 @@ pub const CreateAdditionalAssignmentsForHITInput = struct {
     };
 };
 
-pub const CreateAdditionalAssignmentsForHITOutput = struct {};
+pub const CreateAdditionalAssignmentsForHITOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

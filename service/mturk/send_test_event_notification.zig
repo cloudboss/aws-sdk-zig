@@ -26,7 +26,8 @@ pub const SendTestEventNotificationInput = struct {
     };
 };
 
-pub const SendTestEventNotificationOutput = struct {};
+pub const SendTestEventNotificationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

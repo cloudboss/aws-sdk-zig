@@ -20,10 +20,10 @@ pub const IncompatibilityMessage = struct {
     /// * REMOTE_ACCESS_ENABLED
     ///
     /// * APPIUM_VERSION
-    @"type": ?DeviceAttribute,
+    type: ?DeviceAttribute,
 
     pub const json_field_names = .{
         .message = "message",
-        .@"type" = "type",
+        .type = "type",
     };
 };

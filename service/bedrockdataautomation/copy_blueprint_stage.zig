@@ -26,8 +26,7 @@ pub const CopyBlueprintStageInput = struct {
     };
 };
 
-pub const CopyBlueprintStageOutput = struct {
-};
+pub const CopyBlueprintStageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

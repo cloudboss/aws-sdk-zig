@@ -51,7 +51,7 @@ pub const Item = struct {
     related_contact_id: ?[]const u8,
 
     /// Type of the item: message or event.
-    @"type": ?ChatItemType,
+    type: ?ChatItemType,
 
     pub const json_field_names = .{
         .absolute_time = "AbsoluteTime",
@@ -65,6 +65,6 @@ pub const Item = struct {
         .participant_id = "ParticipantId",
         .participant_role = "ParticipantRole",
         .related_contact_id = "RelatedContactId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

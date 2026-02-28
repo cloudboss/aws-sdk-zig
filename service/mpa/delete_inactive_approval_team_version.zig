@@ -17,7 +17,8 @@ pub const DeleteInactiveApprovalTeamVersionInput = struct {
     };
 };
 
-pub const DeleteInactiveApprovalTeamVersionOutput = struct {};
+pub const DeleteInactiveApprovalTeamVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

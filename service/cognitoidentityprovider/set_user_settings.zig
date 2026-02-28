@@ -22,8 +22,7 @@ pub const SetUserSettingsInput = struct {
     };
 };
 
-pub const SetUserSettingsOutput = struct {
-};
+pub const SetUserSettingsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

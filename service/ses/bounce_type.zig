@@ -3,6 +3,6 @@ pub const BounceType = enum {
     message_too_large,
     exceeded_quota,
     content_rejected,
-    undefined,
+    @"undefined",
     temporary_failure,
 };

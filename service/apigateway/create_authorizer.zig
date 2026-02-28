@@ -82,7 +82,7 @@ pub const CreateAuthorizerInput = struct {
     /// single authorization token submitted in a custom header, `REQUEST` for a
     /// Lambda function using incoming request parameters, and `COGNITO_USER_POOLS`
     /// for using an Amazon Cognito user pool.
-    @"type": AuthorizerType,
+    type: AuthorizerType,
 
     pub const json_field_names = .{
         .authorizer_credentials = "authorizerCredentials",
@@ -94,7 +94,7 @@ pub const CreateAuthorizerInput = struct {
         .name = "name",
         .provider_ar_ns = "providerARNs",
         .rest_api_id = "restApiId",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -194,7 +194,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAuthorizerInput, conf
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

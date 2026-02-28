@@ -18,8 +18,7 @@ pub const SetInstanceProtectionInput = struct {
     protected_from_scale_in: bool,
 };
 
-pub const SetInstanceProtectionOutput = struct {
-};
+pub const SetInstanceProtectionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

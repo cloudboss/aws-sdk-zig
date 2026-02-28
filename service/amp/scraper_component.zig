@@ -8,10 +8,10 @@ pub const ScraperComponent = struct {
     config: ?ComponentConfig,
 
     /// The type of the scraper component.
-    @"type": ScraperComponentType,
+    type: ScraperComponentType,
 
     pub const json_field_names = .{
         .config = "config",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -182,7 +182,7 @@ pub const ProjectEnvironment = struct {
     /// For more information, see [Build environment compute
     /// types](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html) in the *CodeBuild
     /// user guide*.
-    @"type": EnvironmentType,
+    type: EnvironmentType,
 
     pub const json_field_names = .{
         .certificate = "certificate",
@@ -195,6 +195,6 @@ pub const ProjectEnvironment = struct {
         .image_pull_credentials_type = "imagePullCredentialsType",
         .privileged_mode = "privilegedMode",
         .registry_credential = "registryCredential",
-        .@"type" = "type",
+        .type = "type",
     };
 };

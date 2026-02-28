@@ -4,8 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeGlobalSettingsInput = struct {
-};
+pub const DescribeGlobalSettingsInput = struct {};
 
 pub const DescribeGlobalSettingsOutput = struct {
     /// The status of the flags `isCrossAccountBackupEnabled`,

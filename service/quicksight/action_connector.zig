@@ -37,7 +37,7 @@ pub const ActionConnector = struct {
     status: ?ResourceStatus,
 
     /// The type of action connector.
-    type: ActionConnectorType,
+    @"type": ActionConnectorType,
 
     /// The ARN of the VPC connection used for secure connectivity to the external
     /// service.
@@ -54,7 +54,7 @@ pub const ActionConnector = struct {
         .last_updated_time = "LastUpdatedTime",
         .name = "Name",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
         .vpc_connection_arn = "VpcConnectionArn",
     };
 };

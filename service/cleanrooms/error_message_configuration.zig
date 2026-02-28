@@ -11,9 +11,9 @@ pub const ErrorMessageConfiguration = struct {
     ///
     /// Because this setting may expose sensitive data, it is recommended for
     /// development and testing environments.
-    @"type": ErrorMessageType,
+    type: ErrorMessageType,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
     };
 };

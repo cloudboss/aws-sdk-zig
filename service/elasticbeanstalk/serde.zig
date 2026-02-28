@@ -1343,7 +1343,7 @@ pub fn deserializeEnvironmentResourcesDescription(reader: *aws.xml.Reader, alloc
 pub fn deserializeEnvironmentTier(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EnvironmentTier {
     var result: EnvironmentTier = undefined;
     result.name = null;
-    result.@"type" = null;
+    result.type = null;
     result.version = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1351,7 +1351,7 @@ pub fn deserializeEnvironmentTier(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
+                    result.type = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
                     result.version = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -2541,7 +2541,7 @@ pub fn serializeEnvironmentTier(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Name>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(alloc, "<Type>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Type>");
@@ -2615,7 +2615,7 @@ pub fn serializePlatformFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Operator>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(alloc, "<Type>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Type>");
@@ -2695,4 +2695,3 @@ pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ta
         try buf.appendSlice(alloc, "</Value>");
     }
 }
-

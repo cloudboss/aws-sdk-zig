@@ -14,8 +14,7 @@ pub const DeleteAppBundleInput = struct {
     };
 };
 
-pub const DeleteAppBundleOutput = struct {
-};
+pub const DeleteAppBundleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

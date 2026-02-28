@@ -13,8 +13,7 @@ pub const DeleteDataExportConfigurationInput = struct {
     };
 };
 
-pub const DeleteDataExportConfigurationOutput = struct {
-};
+pub const DeleteDataExportConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

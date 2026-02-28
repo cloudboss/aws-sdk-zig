@@ -18,7 +18,8 @@ pub const CancelCapacityTaskInput = struct {
     };
 };
 
-pub const CancelCapacityTaskOutput = struct {};
+pub const CancelCapacityTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

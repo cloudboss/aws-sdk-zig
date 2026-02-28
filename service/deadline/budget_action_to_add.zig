@@ -13,11 +13,11 @@ pub const BudgetActionToAdd = struct {
     threshold_percentage: f32,
 
     /// The type of budget action to add.
-    @"type": BudgetActionType,
+    type: BudgetActionType,
 
     pub const json_field_names = .{
         .description = "description",
         .threshold_percentage = "thresholdPercentage",
-        .@"type" = "type",
+        .type = "type",
     };
 };

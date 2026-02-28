@@ -18,8 +18,7 @@ pub const DeleteTypedLinkFacetInput = struct {
     };
 };
 
-pub const DeleteTypedLinkFacetOutput = struct {
-};
+pub const DeleteTypedLinkFacetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

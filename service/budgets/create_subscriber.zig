@@ -29,8 +29,7 @@ pub const CreateSubscriberInput = struct {
     };
 };
 
-pub const CreateSubscriberOutput = struct {
-};
+pub const CreateSubscriberOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

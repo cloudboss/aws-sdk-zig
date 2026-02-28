@@ -8,10 +8,10 @@ pub const ShardFilter = struct {
 
     /// The type of shard filter to use, which determines how the shardId parameter
     /// is interpreted.
-    type: ?ShardFilterType,
+    @"type": ?ShardFilterType,
 
     pub const json_field_names = .{
         .shard_id = "shardId",
-        .type = "type",
+        .@"type" = "type",
     };
 };

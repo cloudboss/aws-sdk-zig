@@ -25,7 +25,8 @@ pub const DeleteScheduleInput = struct {
     };
 };
 
-pub const DeleteScheduleOutput = struct {};
+pub const DeleteScheduleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

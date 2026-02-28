@@ -251,8 +251,7 @@ pub const PutScheduledActionInput = struct {
     };
 };
 
-pub const PutScheduledActionOutput = struct {
-};
+pub const PutScheduledActionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

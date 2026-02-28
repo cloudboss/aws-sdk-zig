@@ -30,7 +30,8 @@ pub const DeletePerformanceAnalysisReportInput = struct {
     };
 };
 
-pub const DeletePerformanceAnalysisReportOutput = struct {};
+pub const DeletePerformanceAnalysisReportOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

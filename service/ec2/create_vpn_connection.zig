@@ -36,7 +36,7 @@ pub const CreateVpnConnectionInput = struct {
     transit_gateway_id: ?[]const u8 = null,
 
     /// The type of VPN connection (`ipsec.1`).
-    @"type": []const u8,
+    type: []const u8,
 
     /// The ID of the VPN concentrator to associate with the VPN connection.
     vpn_concentrator_id: ?[]const u8 = null,
@@ -170,7 +170,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.IKEVersions.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.IKEVersions.item.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -235,7 +235,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1DHGroupNumbers.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1DHGroupNumbers.item.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
@@ -248,7 +248,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1EncryptionAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1EncryptionAlgorithms.item.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -261,7 +261,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1IntegrityAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1IntegrityAlgorithms.item.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -282,7 +282,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2DHGroupNumbers.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2DHGroupNumbers.item.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_2}) catch "");
@@ -295,7 +295,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2EncryptionAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2EncryptionAlgorithms.item.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -308,7 +308,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2IntegrityAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2IntegrityAlgorithms.item.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -403,7 +403,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -411,7 +411,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -426,7 +426,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateVpnConnectionInput, c
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
     try body_buf.appendSlice(alloc, "&Type=");
-    try aws.url.appendUrlEncoded(alloc, &body_buf, input.@"type");
+    try aws.url.appendUrlEncoded(alloc, &body_buf, input.type);
     if (input.vpn_concentrator_id) |v| {
         try body_buf.appendSlice(alloc, "&VpnConcentratorId=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
@@ -488,7 +488,6 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
-
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

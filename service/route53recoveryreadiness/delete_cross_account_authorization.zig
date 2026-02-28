@@ -13,7 +13,8 @@ pub const DeleteCrossAccountAuthorizationInput = struct {
     };
 };
 
-pub const DeleteCrossAccountAuthorizationOutput = struct {};
+pub const DeleteCrossAccountAuthorizationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

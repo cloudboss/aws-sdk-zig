@@ -6,13 +6,13 @@ const RedshiftServerlessAuthType = @import("redshift_serverless_auth_type.zig").
 /// to include another field.
 pub const RedshiftServerlessAuthConfiguration = struct {
     /// The type of authentication to use.
-    @"type": RedshiftServerlessAuthType,
+    type: RedshiftServerlessAuthType,
 
     /// The ARN of an Secrets Manager secret for authentication.
     username_password_secret_arn: ?[]const u8,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
         .username_password_secret_arn = "usernamePasswordSecretArn",
     };
 };

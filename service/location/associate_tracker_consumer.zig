@@ -23,7 +23,8 @@ pub const AssociateTrackerConsumerInput = struct {
     };
 };
 
-pub const AssociateTrackerConsumerOutput = struct {};
+pub const AssociateTrackerConsumerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

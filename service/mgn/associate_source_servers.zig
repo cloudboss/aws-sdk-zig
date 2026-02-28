@@ -21,7 +21,8 @@ pub const AssociateSourceServersInput = struct {
     };
 };
 
-pub const AssociateSourceServersOutput = struct {};
+pub const AssociateSourceServersOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

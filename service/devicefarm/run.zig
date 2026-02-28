@@ -210,7 +210,7 @@ pub const Run = struct {
     /// * XCTEST
     ///
     /// * XCTEST_UI
-    @"type": ?TestType,
+    type: ?TestType,
 
     /// The VPC security groups and subnets that are attached to a project.
     vpc_config: ?VpcConfig,
@@ -251,7 +251,7 @@ pub const Run = struct {
         .stopped = "stopped",
         .test_spec_arn = "testSpecArn",
         .total_jobs = "totalJobs",
-        .@"type" = "type",
+        .type = "type",
         .vpc_config = "vpcConfig",
         .web_url = "webUrl",
     };

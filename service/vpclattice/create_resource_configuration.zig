@@ -78,7 +78,7 @@ pub const CreateResourceConfigurationInput = struct {
     /// * **CHILD** - A single resource that is part of a group resource
     ///   configuration.
     /// * **ARN** - An Amazon Web Services resource.
-    type: ResourceConfigurationType,
+    @"type": ResourceConfigurationType,
 
     pub const json_field_names = .{
         .allow_association_to_shareable_service_network = "allowAssociationToShareableServiceNetwork",
@@ -93,7 +93,7 @@ pub const CreateResourceConfigurationInput = struct {
         .resource_configuration_group_identifier = "resourceConfigurationGroupIdentifier",
         .resource_gateway_identifier = "resourceGatewayIdentifier",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -166,7 +166,7 @@ pub const CreateResourceConfigurationOutput = struct {
     /// * **CHILD** - A single resource that is part of a group resource
     ///   configuration.
     /// * **ARN** - An Amazon Web Services resource.
-    type: ?ResourceConfigurationType = null,
+    @"type": ?ResourceConfigurationType = null,
 
     pub const json_field_names = .{
         .allow_association_to_shareable_service_network = "allowAssociationToShareableServiceNetwork",
@@ -185,7 +185,7 @@ pub const CreateResourceConfigurationOutput = struct {
         .resource_configuration_group_id = "resourceConfigurationGroupId",
         .resource_gateway_id = "resourceGatewayId",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -303,7 +303,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateResourceConfiguration
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

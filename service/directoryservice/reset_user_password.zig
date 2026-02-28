@@ -22,8 +22,7 @@ pub const ResetUserPasswordInput = struct {
     };
 };
 
-pub const ResetUserPasswordOutput = struct {
-};
+pub const ResetUserPasswordOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

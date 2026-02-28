@@ -13,7 +13,8 @@ pub const AssociateDRTLogBucketInput = struct {
     };
 };
 
-pub const AssociateDRTLogBucketOutput = struct {};
+pub const AssociateDRTLogBucketOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

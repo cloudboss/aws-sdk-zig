@@ -13,7 +13,8 @@ pub const StopChannelInput = struct {
     };
 };
 
-pub const StopChannelOutput = struct {};
+pub const StopChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

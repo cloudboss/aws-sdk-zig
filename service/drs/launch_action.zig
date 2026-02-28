@@ -30,7 +30,7 @@ pub const LaunchAction = struct {
     parameters: ?[]const aws.map.MapEntry(LaunchActionParameter),
 
     /// Launch action type.
-    @"type": ?LaunchActionType,
+    type: ?LaunchActionType,
 
     pub const json_field_names = .{
         .action_code = "actionCode",
@@ -43,6 +43,6 @@ pub const LaunchAction = struct {
         .optional = "optional",
         .order = "order",
         .parameters = "parameters",
-        .@"type" = "type",
+        .type = "type",
     };
 };

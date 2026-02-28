@@ -22,8 +22,7 @@ pub const RecordLifecycleActionHeartbeatInput = struct {
     lifecycle_hook_name: []const u8,
 };
 
-pub const RecordLifecycleActionHeartbeatOutput = struct {
-};
+pub const RecordLifecycleActionHeartbeatOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

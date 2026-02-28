@@ -15,7 +15,8 @@ pub const DeleteScopeInput = struct {
     };
 };
 
-pub const DeleteScopeOutput = struct {};
+pub const DeleteScopeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

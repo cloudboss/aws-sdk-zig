@@ -17,8 +17,7 @@ pub const DeleteTestCaseInput = struct {
     };
 };
 
-pub const DeleteTestCaseOutput = struct {
-};
+pub const DeleteTestCaseOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

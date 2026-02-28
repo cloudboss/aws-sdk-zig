@@ -12,11 +12,11 @@ pub const ApplicationConfig = struct {
     /// Application type, which can be specified to obtain real-time position
     /// information of
     /// your LoRaWAN device.
-    type: ?ApplicationConfigType,
+    @"type": ?ApplicationConfigType,
 
     pub const json_field_names = .{
         .destination_name = "DestinationName",
         .f_port = "FPort",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

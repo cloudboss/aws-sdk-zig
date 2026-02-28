@@ -57,7 +57,7 @@ pub const CodeReviewSummary = struct {
     state: ?JobState,
 
     /// The type of the code review.
-    @"type": ?Type,
+    type: ?Type,
 
     pub const json_field_names = .{
         .code_review_arn = "CodeReviewArn",
@@ -71,6 +71,6 @@ pub const CodeReviewSummary = struct {
         .repository_name = "RepositoryName",
         .source_code_type = "SourceCodeType",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

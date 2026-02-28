@@ -17,7 +17,8 @@ pub const DeleteVodSourceInput = struct {
     };
 };
 
-pub const DeleteVodSourceOutput = struct {};
+pub const DeleteVodSourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

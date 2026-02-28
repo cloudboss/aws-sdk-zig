@@ -21,7 +21,7 @@ pub const CoreNetworkChangeEvent = struct {
     status: ?ChangeStatus,
 
     /// Describes the type of change event.
-    type: ?ChangeType,
+    @"type": ?ChangeType,
 
     /// Details of the change event.
     values: ?CoreNetworkChangeEventValues,
@@ -31,7 +31,7 @@ pub const CoreNetworkChangeEvent = struct {
         .event_time = "EventTime",
         .identifier_path = "IdentifierPath",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
         .values = "Values",
     };
 };

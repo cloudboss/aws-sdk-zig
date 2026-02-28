@@ -44,8 +44,7 @@ pub const UpdateStorageProfileInput = struct {
     };
 };
 
-pub const UpdateStorageProfileOutput = struct {
-};
+pub const UpdateStorageProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

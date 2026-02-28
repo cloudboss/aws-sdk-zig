@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const EnvironmentPlatform = @import("environment_platform.zig").EnvironmentPlatform;
 
-pub const ListCuratedEnvironmentImagesInput = struct {
-};
+pub const ListCuratedEnvironmentImagesInput = struct {};
 
 pub const ListCuratedEnvironmentImagesOutput = struct {
     /// Information about supported platforms for Docker images that are managed by

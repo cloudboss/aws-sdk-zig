@@ -29,8 +29,7 @@ pub const UpdateFarmInput = struct {
     };
 };
 
-pub const UpdateFarmOutput = struct {
-};
+pub const UpdateFarmOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

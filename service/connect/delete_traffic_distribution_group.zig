@@ -14,8 +14,7 @@ pub const DeleteTrafficDistributionGroupInput = struct {
     };
 };
 
-pub const DeleteTrafficDistributionGroupOutput = struct {
-};
+pub const DeleteTrafficDistributionGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

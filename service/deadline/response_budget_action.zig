@@ -13,11 +13,11 @@ pub const ResponseBudgetAction = struct {
     threshold_percentage: f32,
 
     /// The action taken on the budget once scheduling stops.
-    @"type": BudgetActionType,
+    type: BudgetActionType,
 
     pub const json_field_names = .{
         .description = "description",
         .threshold_percentage = "thresholdPercentage",
-        .@"type" = "type",
+        .type = "type",
     };
 };

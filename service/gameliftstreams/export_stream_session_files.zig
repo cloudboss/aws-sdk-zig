@@ -41,7 +41,8 @@ pub const ExportStreamSessionFilesInput = struct {
     };
 };
 
-pub const ExportStreamSessionFilesOutput = struct {};
+pub const ExportStreamSessionFilesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,7 @@ pub const ConnectorItem = struct {
     name: []const u8,
 
     /// The type of cloud connector created.
-    type: ?CloudConnectorType,
+    @"type": ?CloudConnectorType,
 
     pub const json_field_names = .{
         .description = "Description",
@@ -29,6 +29,6 @@ pub const ConnectorItem = struct {
         .endpoint_type = "EndpointType",
         .id = "Id",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

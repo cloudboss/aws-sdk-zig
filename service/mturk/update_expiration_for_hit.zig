@@ -17,7 +17,8 @@ pub const UpdateExpirationForHITInput = struct {
     };
 };
 
-pub const UpdateExpirationForHITOutput = struct {};
+pub const UpdateExpirationForHITOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetAccountBalanceInput = struct {};
+pub const GetAccountBalanceInput = struct {
+};
 
 pub const GetAccountBalanceOutput = struct {
     available_balance: ?[]const u8 = null,

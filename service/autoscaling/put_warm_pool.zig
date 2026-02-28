@@ -59,8 +59,7 @@ pub const PutWarmPoolInput = struct {
     pool_state: ?WarmPoolState = null,
 };
 
-pub const PutWarmPoolOutput = struct {
-};
+pub const PutWarmPoolOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,8 +17,7 @@ pub const UntagResourceInput = struct {
     };
 };
 
-pub const UntagResourceOutput = struct {
-};
+pub const UntagResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

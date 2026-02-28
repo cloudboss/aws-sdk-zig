@@ -22,7 +22,8 @@ pub const CreateSnapshotInput = struct {
     };
 };
 
-pub const CreateSnapshotOutput = struct {};
+pub const CreateSnapshotOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

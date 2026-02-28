@@ -13,7 +13,8 @@ pub const DeleteJobTaggingInput = struct {
     job_id: []const u8,
 };
 
-pub const DeleteJobTaggingOutput = struct {};
+pub const DeleteJobTaggingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -420,7 +420,7 @@ pub const ComputeResourceUpdate = struct {
     /// infrastructure update of the compute environment. For more information, see
     /// [Updating compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html) in the *Batch User Guide*.
-    @"type": ?CRType,
+    type: ?CRType,
 
     /// Specifies whether the AMI ID is updated to the latest one that's supported
     /// by Batch when
@@ -460,7 +460,7 @@ pub const ComputeResourceUpdate = struct {
         .security_group_ids = "securityGroupIds",
         .subnets = "subnets",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .update_to_latest_image_version = "updateToLatestImageVersion",
     };
 };

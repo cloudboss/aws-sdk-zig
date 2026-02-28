@@ -10,14 +10,14 @@ pub const EnvironmentVariable = struct {
     /// `PLAINTEXT` or `SECRETS_MANAGER`. If the value is `SECRETS_MANAGER`, provide
     /// the Secrets
     /// reference in the EnvironmentVariable value.
-    @"type": ?EnvironmentVariableType,
+    type: ?EnvironmentVariableType,
 
     /// The environment variable value in the key-value pair.
     value: []const u8,
 
     pub const json_field_names = .{
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

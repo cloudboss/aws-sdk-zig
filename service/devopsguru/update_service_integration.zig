@@ -16,8 +16,7 @@ pub const UpdateServiceIntegrationInput = struct {
     };
 };
 
-pub const UpdateServiceIntegrationOutput = struct {
-};
+pub const UpdateServiceIntegrationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -61,12 +61,12 @@ pub const AnalysisResult = struct {
     ///
     /// For more information, see [Running detector model
     /// analyses](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html) in the *AWS IoT Events Developer Guide*.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .level = "level",
         .locations = "locations",
         .message = "message",
-        .type = "type",
+        .@"type" = "type",
     };
 };

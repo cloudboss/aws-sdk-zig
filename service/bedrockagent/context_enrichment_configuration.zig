@@ -10,10 +10,10 @@ pub const ContextEnrichmentConfiguration = struct {
 
     /// The method used for context enrichment. It must be Amazon Bedrock foundation
     /// models.
-    @"type": ContextEnrichmentType,
+    type: ContextEnrichmentType,
 
     pub const json_field_names = .{
         .bedrock_foundation_model_configuration = "bedrockFoundationModelConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

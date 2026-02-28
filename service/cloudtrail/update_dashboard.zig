@@ -56,7 +56,7 @@ pub const UpdateDashboardOutput = struct {
     termination_protection_enabled: ?bool = null,
 
     /// The type of dashboard.
-    @"type": ?DashboardType = null,
+    type: ?DashboardType = null,
 
     /// The timestamp that shows when the dashboard was updated.
     updated_timestamp: ?i64 = null,
@@ -70,7 +70,7 @@ pub const UpdateDashboardOutput = struct {
         .name = "Name",
         .refresh_schedule = "RefreshSchedule",
         .termination_protection_enabled = "TerminationProtectionEnabled",
-        .@"type" = "Type",
+        .type = "Type",
         .updated_timestamp = "UpdatedTimestamp",
         .widgets = "Widgets",
     };

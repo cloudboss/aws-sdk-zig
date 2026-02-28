@@ -38,7 +38,8 @@ pub const AcceptPortfolioShareInput = struct {
     };
 };
 
-pub const AcceptPortfolioShareOutput = struct {};
+pub const AcceptPortfolioShareOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,7 +14,8 @@ pub const AcceptMarketplaceRegistrationInput = struct {
     };
 };
 
-pub const AcceptMarketplaceRegistrationOutput = struct {};
+pub const AcceptMarketplaceRegistrationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

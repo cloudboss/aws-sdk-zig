@@ -6,8 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 const DeleteGroupingConfigurationInput = struct {};
 
-pub const DeleteGroupingConfigurationOutput = struct {
-};
+pub const DeleteGroupingConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

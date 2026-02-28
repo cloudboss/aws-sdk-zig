@@ -14,7 +14,8 @@ pub const AssociateCertificateInput = struct {
     };
 };
 
-pub const AssociateCertificateOutput = struct {};
+pub const AssociateCertificateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

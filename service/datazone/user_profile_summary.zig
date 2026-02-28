@@ -17,13 +17,13 @@ pub const UserProfileSummary = struct {
     status: ?UserProfileStatus,
 
     /// The type of the user profile.
-    @"type": ?UserProfileType,
+    type: ?UserProfileType,
 
     pub const json_field_names = .{
         .details = "details",
         .domain_id = "domainId",
         .id = "id",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

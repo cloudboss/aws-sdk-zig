@@ -93,7 +93,7 @@ pub const CreateDataSourceInput = struct {
     tags: ?[]const Tag = null,
 
     /// The type of data source repository. For example, `SHAREPOINT`.
-    type: DataSourceType,
+    @"type": DataSourceType,
 
     /// Configuration information for an Amazon Virtual Private Cloud to connect to
     /// your data source.
@@ -112,7 +112,7 @@ pub const CreateDataSourceInput = struct {
         .role_arn = "RoleArn",
         .schedule = "Schedule",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .vpc_configuration = "VpcConfiguration",
     };
 };

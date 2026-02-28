@@ -17,10 +17,10 @@ pub const MonitorLocalResource = struct {
     /// The type of the local resource. Valid values are `AWS::EC2::VPC`
     /// `AWS::AvailabilityZone`, `AWS::EC2::Subnet`, `AWS::EKS::Cluster`, or
     /// `AWS::Region`.
-    type: MonitorLocalResourceType,
+    @"type": MonitorLocalResourceType,
 
     pub const json_field_names = .{
         .identifier = "identifier",
-        .type = "type",
+        .@"type" = "type",
     };
 };

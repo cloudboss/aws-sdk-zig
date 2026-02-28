@@ -17,8 +17,7 @@ pub const DisassociateSigninDelegateGroupsFromAccountInput = struct {
     };
 };
 
-pub const DisassociateSigninDelegateGroupsFromAccountOutput = struct {
-};
+pub const DisassociateSigninDelegateGroupsFromAccountOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

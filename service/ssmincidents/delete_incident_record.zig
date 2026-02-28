@@ -13,7 +13,8 @@ pub const DeleteIncidentRecordInput = struct {
     };
 };
 
-pub const DeleteIncidentRecordOutput = struct {};
+pub const DeleteIncidentRecordOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

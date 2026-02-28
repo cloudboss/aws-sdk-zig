@@ -35,8 +35,7 @@ pub const StopStackSetOperationInput = struct {
     stack_set_name: []const u8,
 };
 
-pub const StopStackSetOperationOutput = struct {
-};
+pub const StopStackSetOperationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

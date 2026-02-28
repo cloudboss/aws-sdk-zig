@@ -20,7 +20,8 @@ pub const AssociateManagedNotificationAccountContactInput = struct {
     };
 };
 
-pub const AssociateManagedNotificationAccountContactOutput = struct {};
+pub const AssociateManagedNotificationAccountContactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

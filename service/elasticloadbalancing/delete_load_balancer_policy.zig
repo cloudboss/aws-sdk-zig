@@ -12,8 +12,7 @@ pub const DeleteLoadBalancerPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const DeleteLoadBalancerPolicyOutput = struct {
-};
+pub const DeleteLoadBalancerPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

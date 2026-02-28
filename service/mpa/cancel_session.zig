@@ -13,7 +13,8 @@ pub const CancelSessionInput = struct {
     };
 };
 
-pub const CancelSessionOutput = struct {};
+pub const CancelSessionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

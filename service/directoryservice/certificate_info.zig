@@ -18,13 +18,13 @@ pub const CertificateInfo = struct {
     /// The function that the registered certificate performs. Valid values include
     /// `ClientLDAPS` or `ClientCertAuth`. The default value is
     /// `ClientLDAPS`.
-    @"type": ?CertificateType,
+    type: ?CertificateType,
 
     pub const json_field_names = .{
         .certificate_id = "CertificateId",
         .common_name = "CommonName",
         .expiry_date_time = "ExpiryDateTime",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

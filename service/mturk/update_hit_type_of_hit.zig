@@ -17,7 +17,8 @@ pub const UpdateHITTypeOfHITInput = struct {
     };
 };
 
-pub const UpdateHITTypeOfHITOutput = struct {};
+pub const UpdateHITTypeOfHITOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteAccountDefaultProtectConfigurationInput = struct {};
+pub const DeleteAccountDefaultProtectConfigurationInput = struct {
+};
 
 pub const DeleteAccountDefaultProtectConfigurationOutput = struct {
     /// The Amazon Resource Name (ARN) of the account default protect configuration.

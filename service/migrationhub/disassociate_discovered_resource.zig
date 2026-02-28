@@ -30,7 +30,8 @@ pub const DisassociateDiscoveredResourceInput = struct {
     };
 };
 
-pub const DisassociateDiscoveredResourceOutput = struct {};
+pub const DisassociateDiscoveredResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

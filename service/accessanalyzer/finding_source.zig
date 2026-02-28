@@ -9,10 +9,10 @@ pub const FindingSource = struct {
     detail: ?FindingSourceDetail,
 
     /// Indicates the type of access that generated the finding.
-    @"type": FindingSourceType,
+    type: FindingSourceType,
 
     pub const json_field_names = .{
         .detail = "detail",
-        .@"type" = "type",
+        .type = "type",
     };
 };

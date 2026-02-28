@@ -13,7 +13,8 @@ pub const StartChannelInput = struct {
     };
 };
 
-pub const StartChannelOutput = struct {};
+pub const StartChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

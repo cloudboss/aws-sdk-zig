@@ -25,7 +25,7 @@ pub const AwsEc2InstanceDetails = struct {
     subnet_id: ?[]const u8,
 
     /// The type of the Amazon EC2 instance.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The VPC ID of the Amazon EC2 instance.
     vpc_id: ?[]const u8,
@@ -39,7 +39,7 @@ pub const AwsEc2InstanceDetails = struct {
         .launched_at = "launchedAt",
         .platform = "platform",
         .subnet_id = "subnetId",
-        .type = "type",
+        .@"type" = "type",
         .vpc_id = "vpcId",
     };
 };

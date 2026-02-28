@@ -15,8 +15,7 @@ pub const StopTrainingDocumentClassifierInput = struct {
     };
 };
 
-pub const StopTrainingDocumentClassifierOutput = struct {
-};
+pub const StopTrainingDocumentClassifierOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

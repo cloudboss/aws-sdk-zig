@@ -19,7 +19,8 @@ pub const UpdateServerConfigInput = struct {
     };
 };
 
-pub const UpdateServerConfigOutput = struct {};
+pub const UpdateServerConfigOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

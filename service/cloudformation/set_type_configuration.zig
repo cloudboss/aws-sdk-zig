@@ -25,7 +25,7 @@ pub const SetTypeConfigurationInput = struct {
     ///
     /// Conditional: You must specify `ConfigurationArn`, or `Type` and
     /// `TypeName`.
-    @"type": ?ThirdPartyType = null,
+    type: ?ThirdPartyType = null,
 
     /// The Amazon Resource Name (ARN) for the extension in this account and Region.
     ///
@@ -102,7 +102,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SetTypeConfigurationInput, 
         try body_buf.appendSlice(alloc, "&ConfigurationAlias=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(alloc, "&Type=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }

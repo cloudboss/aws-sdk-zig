@@ -13,8 +13,7 @@ pub const DeleteLocationInput = struct {
     };
 };
 
-pub const DeleteLocationOutput = struct {
-};
+pub const DeleteLocationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

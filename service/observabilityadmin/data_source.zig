@@ -12,10 +12,10 @@ pub const DataSource = struct {
     /// The type of the data source. For CloudWatch Logs sources, this corresponds
     /// to the `data_source_type` from the log event metadata. For third-party
     /// sources, this field is empty.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

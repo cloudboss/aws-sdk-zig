@@ -14,11 +14,11 @@ pub const EntityRecognizerMetadataEntityTypesListItem = struct {
 
     /// Type of entity from the list of entity types in the metadata of an entity
     /// recognizer.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .evaluation_metrics = "EvaluationMetrics",
         .number_of_train_mentions = "NumberOfTrainMentions",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

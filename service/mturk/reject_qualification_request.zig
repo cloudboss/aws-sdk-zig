@@ -20,7 +20,8 @@ pub const RejectQualificationRequestInput = struct {
     };
 };
 
-pub const RejectQualificationRequestOutput = struct {};
+pub const RejectQualificationRequestOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

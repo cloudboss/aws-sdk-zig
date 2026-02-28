@@ -21,8 +21,7 @@ pub const DeleteConfiguredTableAnalysisRuleInput = struct {
     };
 };
 
-pub const DeleteConfiguredTableAnalysisRuleOutput = struct {
-};
+pub const DeleteConfiguredTableAnalysisRuleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

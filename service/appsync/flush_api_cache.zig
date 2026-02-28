@@ -13,8 +13,7 @@ pub const FlushApiCacheInput = struct {
     };
 };
 
-pub const FlushApiCacheOutput = struct {
-};
+pub const FlushApiCacheOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

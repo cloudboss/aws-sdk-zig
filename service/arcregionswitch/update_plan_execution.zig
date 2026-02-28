@@ -27,8 +27,7 @@ pub const UpdatePlanExecutionInput = struct {
     };
 };
 
-pub const UpdatePlanExecutionOutput = struct {
-};
+pub const UpdatePlanExecutionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

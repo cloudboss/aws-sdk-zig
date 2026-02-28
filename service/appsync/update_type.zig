@@ -29,10 +29,10 @@ pub const UpdateTypeInput = struct {
 
 pub const UpdateTypeOutput = struct {
     /// The updated `Type` object.
-    @"type": ?Type = null,
+    type: ?Type = null,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

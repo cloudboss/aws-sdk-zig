@@ -24,8 +24,7 @@ pub const AssociateTrafficDistributionGroupUserInput = struct {
     };
 };
 
-pub const AssociateTrafficDistributionGroupUserOutput = struct {
-};
+pub const AssociateTrafficDistributionGroupUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

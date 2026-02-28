@@ -7,10 +7,10 @@ pub const ArtifactLocation = struct {
     s_3_location: ?S3ArtifactLocation,
 
     /// The type of artifact in the location.
-    @"type": ?ArtifactLocationType,
+    type: ?ArtifactLocationType,
 
     pub const json_field_names = .{
         .s_3_location = "s3Location",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteNotificationChannelInput = struct {};
+pub const DeleteNotificationChannelInput = struct {
+};
 
 const DeleteNotificationChannelOutput = struct {};
 

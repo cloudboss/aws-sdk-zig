@@ -88,7 +88,7 @@ pub const ParameterDefinition = struct {
     ///
     /// For example, users might specify "test,dev,prod", and then Ref results in
     /// ["test","dev","prod"].
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .allowed_pattern = "AllowedPattern",
@@ -103,6 +103,6 @@ pub const ParameterDefinition = struct {
         .name = "Name",
         .no_echo = "NoEcho",
         .referenced_by_resources = "ReferencedByResources",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

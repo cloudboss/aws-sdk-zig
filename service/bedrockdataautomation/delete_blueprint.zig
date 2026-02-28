@@ -17,8 +17,7 @@ pub const DeleteBlueprintInput = struct {
     };
 };
 
-pub const DeleteBlueprintOutput = struct {
-};
+pub const DeleteBlueprintOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

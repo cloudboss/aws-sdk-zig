@@ -1,10 +1,10 @@
 /// Type of the DataAutomationProject
 pub const DataAutomationProjectType = enum {
-    @"async",
+    async,
     sync,
 
     pub const json_field_names = .{
-        .@"async" = "ASYNC",
+        .async = "ASYNC",
         .sync = "SYNC",
     };
 };

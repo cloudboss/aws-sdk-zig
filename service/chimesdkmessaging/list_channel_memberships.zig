@@ -33,7 +33,7 @@ pub const ListChannelMembershipsInput = struct {
     /// specified. Hidden members
     /// are only returned if the type filter in `ListChannelMemberships` equals
     /// `HIDDEN`.
-    @"type": ?ChannelMembershipType = null,
+    type: ?ChannelMembershipType = null,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",
@@ -41,7 +41,7 @@ pub const ListChannelMembershipsInput = struct {
         .max_results = "MaxResults",
         .next_token = "NextToken",
         .sub_channel_id = "SubChannelId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -129,7 +129,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListChannelMembershipsInput
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

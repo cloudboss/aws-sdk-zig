@@ -13,8 +13,7 @@ pub const DeleteSpendingLimitInput = struct {
     };
 };
 
-pub const DeleteSpendingLimitOutput = struct {
-};
+pub const DeleteSpendingLimitOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

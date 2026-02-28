@@ -11,10 +11,10 @@ pub const FormInputBindingPropertiesValue = struct {
     binding_properties: ?FormInputBindingPropertiesValueProperties,
 
     /// The property type.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .binding_properties = "bindingProperties",
-        .@"type" = "type",
+        .type = "type",
     };
 };

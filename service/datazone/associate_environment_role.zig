@@ -22,8 +22,7 @@ pub const AssociateEnvironmentRoleInput = struct {
     };
 };
 
-pub const AssociateEnvironmentRoleOutput = struct {
-};
+pub const AssociateEnvironmentRoleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

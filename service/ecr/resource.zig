@@ -14,12 +14,12 @@ pub const Resource = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of resource.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .details = "details",
         .id = "id",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -18,7 +18,8 @@ pub const DeleteIdentitySourceInput = struct {
     };
 };
 
-pub const DeleteIdentitySourceOutput = struct {};
+pub const DeleteIdentitySourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

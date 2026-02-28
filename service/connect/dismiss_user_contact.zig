@@ -22,8 +22,7 @@ pub const DismissUserContactInput = struct {
     };
 };
 
-pub const DismissUserContactOutput = struct {
-};
+pub const DismissUserContactOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

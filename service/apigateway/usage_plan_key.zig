@@ -7,7 +7,7 @@ pub const UsagePlanKey = struct {
     name: ?[]const u8,
 
     /// The type of a usage plan key. Currently, the valid key type is `API_KEY`.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     /// The value of a usage plan key.
     value: ?[]const u8,
@@ -15,7 +15,7 @@ pub const UsagePlanKey = struct {
     pub const json_field_names = .{
         .id = "id",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const CreateUploadUrlInput = struct {};
+pub const CreateUploadUrlInput = struct {
+};
 
 pub const CreateUploadUrlOutput = struct {
     /// An identifier for a unique import job. Use it when you call the

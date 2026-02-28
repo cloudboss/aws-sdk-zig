@@ -15,7 +15,8 @@ pub const DeleteCallAnalyticsCategoryInput = struct {
     };
 };
 
-pub const DeleteCallAnalyticsCategoryOutput = struct {};
+pub const DeleteCallAnalyticsCategoryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

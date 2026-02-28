@@ -33,7 +33,7 @@ pub const ActionReviewPayloadField = struct {
     required: ?bool,
 
     /// The type of field.
-    type: ?ActionPayloadFieldType,
+    @"type": ?ActionPayloadFieldType,
 
     /// The field value.
     value: ?[]const u8,
@@ -46,7 +46,7 @@ pub const ActionReviewPayloadField = struct {
         .display_name = "displayName",
         .display_order = "displayOrder",
         .required = "required",
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

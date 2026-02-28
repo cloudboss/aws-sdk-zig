@@ -50,7 +50,7 @@ pub const BotChannelAssociation = struct {
     /// Specifies the type of association by indicating the type of channel
     /// being established between the Amazon Lex bot and the external messaging
     /// platform.
-    type: ?ChannelType,
+    @"type": ?ChannelType,
 
     pub const json_field_names = .{
         .bot_alias = "botAlias",
@@ -61,6 +61,6 @@ pub const BotChannelAssociation = struct {
         .failure_reason = "failureReason",
         .name = "name",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };

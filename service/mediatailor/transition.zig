@@ -34,13 +34,13 @@ pub const Transition = struct {
     ///
     /// `RELATIVE` - The program is inserted into the schedule either before or
     /// after a program that you specify via `RelativePosition`.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .duration_millis = "DurationMillis",
         .relative_position = "RelativePosition",
         .relative_program = "RelativeProgram",
         .scheduled_start_time_millis = "ScheduledStartTimeMillis",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

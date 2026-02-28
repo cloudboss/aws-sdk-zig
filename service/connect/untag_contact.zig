@@ -23,8 +23,7 @@ pub const UntagContactInput = struct {
     };
 };
 
-pub const UntagContactOutput = struct {
-};
+pub const UntagContactOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -10,11 +10,11 @@ pub const HPOObjective = struct {
     metric_regex: ?[]const u8,
 
     /// The type of the metric. Valid values are `Maximize` and `Minimize`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .metric_name = "metricName",
         .metric_regex = "metricRegex",
-        .type = "type",
+        .@"type" = "type",
     };
 };

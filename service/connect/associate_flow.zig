@@ -33,8 +33,7 @@ pub const AssociateFlowInput = struct {
     };
 };
 
-pub const AssociateFlowOutput = struct {
-};
+pub const AssociateFlowOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

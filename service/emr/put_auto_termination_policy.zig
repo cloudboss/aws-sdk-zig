@@ -20,8 +20,7 @@ pub const PutAutoTerminationPolicyInput = struct {
     };
 };
 
-pub const PutAutoTerminationPolicyOutput = struct {
-};
+pub const PutAutoTerminationPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

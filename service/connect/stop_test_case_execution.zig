@@ -30,8 +30,7 @@ pub const StopTestCaseExecutionInput = struct {
     };
 };
 
-pub const StopTestCaseExecutionOutput = struct {
-};
+pub const StopTestCaseExecutionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

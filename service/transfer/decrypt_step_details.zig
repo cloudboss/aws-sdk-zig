@@ -45,13 +45,13 @@ pub const DecryptStepDetails = struct {
     source_file_location: ?[]const u8,
 
     /// The type of encryption used. Currently, this value must be `PGP`.
-    type: EncryptionType,
+    @"type": EncryptionType,
 
     pub const json_field_names = .{
         .destination_file_location = "DestinationFileLocation",
         .name = "Name",
         .overwrite_existing = "OverwriteExisting",
         .source_file_location = "SourceFileLocation",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

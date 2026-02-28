@@ -22,10 +22,10 @@ pub const FirelensConfiguration = struct {
     options: ?[]const aws.map.StringMapEntry,
 
     /// The log router to use. The valid values are `fluentd` or `fluentbit`.
-    @"type": FirelensConfigurationType,
+    type: FirelensConfigurationType,
 
     pub const json_field_names = .{
         .options = "options",
-        .@"type" = "type",
+        .type = "type",
     };
 };

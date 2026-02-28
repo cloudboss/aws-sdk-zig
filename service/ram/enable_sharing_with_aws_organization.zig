@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const EnableSharingWithAwsOrganizationInput = struct {};
+pub const EnableSharingWithAwsOrganizationInput = struct {
+};
 
 pub const EnableSharingWithAwsOrganizationOutput = struct {
     /// A return value of `true` indicates that the request succeeded.

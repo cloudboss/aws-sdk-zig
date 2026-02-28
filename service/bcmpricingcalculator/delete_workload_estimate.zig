@@ -13,8 +13,7 @@ pub const DeleteWorkloadEstimateInput = struct {
     };
 };
 
-pub const DeleteWorkloadEstimateOutput = struct {
-};
+pub const DeleteWorkloadEstimateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

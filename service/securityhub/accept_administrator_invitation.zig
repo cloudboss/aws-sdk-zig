@@ -19,7 +19,8 @@ pub const AcceptAdministratorInvitationInput = struct {
     };
 };
 
-pub const AcceptAdministratorInvitationOutput = struct {};
+pub const AcceptAdministratorInvitationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

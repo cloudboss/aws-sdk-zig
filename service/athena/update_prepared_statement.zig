@@ -25,8 +25,7 @@ pub const UpdatePreparedStatementInput = struct {
     };
 };
 
-pub const UpdatePreparedStatementOutput = struct {
-};
+pub const UpdatePreparedStatementOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

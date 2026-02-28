@@ -17,8 +17,7 @@ pub const UpdateAgentInput = struct {
     };
 };
 
-pub const UpdateAgentOutput = struct {
-};
+pub const UpdateAgentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

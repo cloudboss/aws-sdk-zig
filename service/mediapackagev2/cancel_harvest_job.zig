@@ -33,7 +33,8 @@ pub const CancelHarvestJobInput = struct {
     };
 };
 
-pub const CancelHarvestJobOutput = struct {};
+pub const CancelHarvestJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

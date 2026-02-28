@@ -9,11 +9,11 @@ pub const FileSystemLocation = struct {
     path: []const u8,
 
     /// The type of file.
-    @"type": FileSystemLocationType,
+    type: FileSystemLocationType,
 
     pub const json_field_names = .{
         .name = "name",
         .path = "path",
-        .@"type" = "type",
+        .type = "type",
     };
 };

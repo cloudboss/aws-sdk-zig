@@ -25,7 +25,7 @@ pub const ServiceResourceCost = struct {
     state: ?CostEstimationServiceResourceState,
 
     /// The type of the Amazon Web Services resource.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     /// The price per hour to analyze the resources in the service.
     /// For more information,
@@ -39,7 +39,7 @@ pub const ServiceResourceCost = struct {
         .cost = "Cost",
         .count = "Count",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
         .unit_cost = "UnitCost",
     };
 };

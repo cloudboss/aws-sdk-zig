@@ -24,12 +24,12 @@ pub const DescribeRuleGroupSummaryInput = struct {
     ///
     /// Note that `STATELESS` exists but is not currently supported. If you provide
     /// `STATELESS`, an exception is returned.
-    type: ?RuleGroupType = null,
+    @"type": ?RuleGroupType = null,
 
     pub const json_field_names = .{
         .rule_group_arn = "RuleGroupArn",
         .rule_group_name = "RuleGroupName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

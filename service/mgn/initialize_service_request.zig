@@ -1,1 +1,2 @@
-pub const InitializeServiceRequest = struct {};
+pub const InitializeServiceRequest = struct {
+};

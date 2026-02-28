@@ -22,8 +22,7 @@ pub const TerminateJobInput = struct {
     };
 };
 
-pub const TerminateJobOutput = struct {
-};
+pub const TerminateJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

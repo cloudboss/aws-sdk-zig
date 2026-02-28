@@ -13,8 +13,7 @@ pub const RemoveNotificationChannelInput = struct {
     };
 };
 
-pub const RemoveNotificationChannelOutput = struct {
-};
+pub const RemoveNotificationChannelOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

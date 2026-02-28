@@ -23,8 +23,7 @@ pub const DisassociateTrafficDistributionGroupUserInput = struct {
     };
 };
 
-pub const DisassociateTrafficDistributionGroupUserOutput = struct {
-};
+pub const DisassociateTrafficDistributionGroupUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

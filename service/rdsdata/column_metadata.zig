@@ -37,7 +37,7 @@ pub const ColumnMetadata = struct {
     table_name: ?[]const u8,
 
     /// The type of the column.
-    type: i32 = 0,
+    @"type": i32 = 0,
 
     /// The database-specific data type of the column.
     type_name: ?[]const u8,
@@ -55,7 +55,7 @@ pub const ColumnMetadata = struct {
         .scale = "scale",
         .schema_name = "schemaName",
         .table_name = "tableName",
-        .type = "type",
+        .@"type" = "type",
         .type_name = "typeName",
     };
 };

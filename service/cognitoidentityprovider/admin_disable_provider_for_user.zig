@@ -19,8 +19,7 @@ pub const AdminDisableProviderForUserInput = struct {
     };
 };
 
-pub const AdminDisableProviderForUserOutput = struct {
-};
+pub const AdminDisableProviderForUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

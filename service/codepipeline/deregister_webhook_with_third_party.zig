@@ -13,8 +13,7 @@ pub const DeregisterWebhookWithThirdPartyInput = struct {
     };
 };
 
-pub const DeregisterWebhookWithThirdPartyOutput = struct {
-};
+pub const DeregisterWebhookWithThirdPartyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

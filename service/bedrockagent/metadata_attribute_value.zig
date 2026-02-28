@@ -16,13 +16,13 @@ pub const MetadataAttributeValue = struct {
     string_value: ?[]const u8,
 
     /// The type of the metadata attribute.
-    @"type": MetadataValueType,
+    type: MetadataValueType,
 
     pub const json_field_names = .{
         .boolean_value = "booleanValue",
         .number_value = "numberValue",
         .string_list_value = "stringListValue",
         .string_value = "stringValue",
-        .@"type" = "type",
+        .type = "type",
     };
 };

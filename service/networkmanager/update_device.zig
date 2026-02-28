@@ -39,7 +39,7 @@ pub const UpdateDeviceInput = struct {
     site_id: ?[]const u8 = null,
 
     /// The type of the device.
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     /// The vendor of the device.
     ///
@@ -55,7 +55,7 @@ pub const UpdateDeviceInput = struct {
         .model = "Model",
         .serial_number = "SerialNumber",
         .site_id = "SiteId",
-        .type = "Type",
+        .@"type" = "Type",
         .vendor = "Vendor",
     };
 };
@@ -152,7 +152,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateDeviceInput, config: 
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

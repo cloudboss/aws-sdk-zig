@@ -4,8 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetUseCaseForModelAccessInput = struct {
-};
+pub const GetUseCaseForModelAccessInput = struct {};
 
 pub const GetUseCaseForModelAccessOutput = struct {
     /// Get customer profile Response.

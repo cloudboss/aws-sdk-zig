@@ -18,8 +18,7 @@ pub const DeleteFormTypeInput = struct {
     };
 };
 
-pub const DeleteFormTypeOutput = struct {
-};
+pub const DeleteFormTypeOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,8 +18,7 @@ pub const StopLoggingInput = struct {
     };
 };
 
-pub const StopLoggingOutput = struct {
-};
+pub const StopLoggingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

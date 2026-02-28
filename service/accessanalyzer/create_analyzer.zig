@@ -37,7 +37,7 @@ pub const CreateAnalyzerInput = struct {
 
     /// The type of analyzer to create. You can create only one analyzer per account
     /// per Region. You can create up to 5 analyzers per organization per Region.
-    @"type": Type,
+    type: Type,
 
     pub const json_field_names = .{
         .analyzer_name = "analyzerName",
@@ -45,7 +45,7 @@ pub const CreateAnalyzerInput = struct {
         .client_token = "clientToken",
         .configuration = "configuration",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -130,7 +130,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAnalyzerInput, config
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

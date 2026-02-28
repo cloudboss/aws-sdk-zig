@@ -19,8 +19,7 @@ pub const DeleteConfiguredAudienceModelAssociationInput = struct {
     };
 };
 
-pub const DeleteConfiguredAudienceModelAssociationOutput = struct {
-};
+pub const DeleteConfiguredAudienceModelAssociationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

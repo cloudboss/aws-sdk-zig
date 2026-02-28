@@ -21,7 +21,8 @@ pub const RemoveSourceServerActionInput = struct {
     };
 };
 
-pub const RemoveSourceServerActionOutput = struct {};
+pub const RemoveSourceServerActionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

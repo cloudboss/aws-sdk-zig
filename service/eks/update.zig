@@ -21,7 +21,7 @@ pub const Update = struct {
     status: ?UpdateStatus,
 
     /// The type of the update.
-    @"type": ?UpdateType,
+    type: ?UpdateType,
 
     pub const json_field_names = .{
         .created_at = "createdAt",
@@ -29,6 +29,6 @@ pub const Update = struct {
         .id = "id",
         .params = "params",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

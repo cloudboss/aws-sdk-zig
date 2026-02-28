@@ -20,7 +20,8 @@ pub const DeleteProgressUpdateStreamInput = struct {
     };
 };
 
-pub const DeleteProgressUpdateStreamOutput = struct {};
+pub const DeleteProgressUpdateStreamOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

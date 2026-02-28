@@ -37,7 +37,7 @@ pub const DevicePool = struct {
     ///
     /// * PRIVATE: A device pool that is created and managed by the device pool
     /// developer.
-    @"type": ?DevicePoolType,
+    type: ?DevicePoolType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -45,6 +45,6 @@ pub const DevicePool = struct {
         .max_devices = "maxDevices",
         .name = "name",
         .rules = "rules",
-        .@"type" = "type",
+        .type = "type",
     };
 };

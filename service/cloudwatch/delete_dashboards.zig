@@ -14,8 +14,7 @@ pub const DeleteDashboardsInput = struct {
     };
 };
 
-pub const DeleteDashboardsOutput = struct {
-};
+pub const DeleteDashboardsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

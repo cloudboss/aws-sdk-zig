@@ -75,7 +75,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchDescribeTypeConfigurat
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.Type=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            if (item.@"type") |fv_1| {
+            if (item.type) |fv_1| {
                 try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(fv_1));
             }
         }

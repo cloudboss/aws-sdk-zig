@@ -18,7 +18,8 @@ pub const CloseTunnelInput = struct {
     };
 };
 
-pub const CloseTunnelOutput = struct {};
+pub const CloseTunnelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

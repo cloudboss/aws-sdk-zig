@@ -24,8 +24,7 @@ pub const StopContactStreamingInput = struct {
     };
 };
 
-pub const StopContactStreamingOutput = struct {
-};
+pub const StopContactStreamingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

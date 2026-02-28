@@ -29,8 +29,7 @@ pub const UpdateQueueLimitAssociationInput = struct {
     };
 };
 
-pub const UpdateQueueLimitAssociationOutput = struct {
-};
+pub const UpdateQueueLimitAssociationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const AbortMultipartReadSetUploadInput = struct {
     };
 };
 
-pub const AbortMultipartReadSetUploadOutput = struct {};
+pub const AbortMultipartReadSetUploadOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

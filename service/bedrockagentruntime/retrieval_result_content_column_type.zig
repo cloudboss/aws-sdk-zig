@@ -2,7 +2,7 @@ pub const RetrievalResultContentColumnType = enum {
     blob,
     boolean,
     double,
-    @"null",
+    null,
     long,
     string,
 
@@ -10,7 +10,7 @@ pub const RetrievalResultContentColumnType = enum {
         .blob = "BLOB",
         .boolean = "BOOLEAN",
         .double = "DOUBLE",
-        .@"null" = "NULL",
+        .null = "NULL",
         .long = "LONG",
         .string = "STRING",
     };

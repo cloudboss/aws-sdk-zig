@@ -87,8 +87,7 @@ pub const AdminUpdateUserAttributesInput = struct {
     };
 };
 
-pub const AdminUpdateUserAttributesOutput = struct {
-};
+pub const AdminUpdateUserAttributesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

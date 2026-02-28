@@ -25,8 +25,7 @@ pub const DeleteAttachedFileInput = struct {
     };
 };
 
-pub const DeleteAttachedFileOutput = struct {
-};
+pub const DeleteAttachedFileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

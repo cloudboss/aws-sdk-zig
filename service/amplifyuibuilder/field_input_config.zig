@@ -46,7 +46,7 @@ pub const FieldInputConfig = struct {
     step: ?f32,
 
     /// The input type for the field.
-    @"type": []const u8,
+    type: []const u8,
 
     /// The value for the field.
     value: ?[]const u8,
@@ -68,7 +68,7 @@ pub const FieldInputConfig = struct {
         .read_only = "readOnly",
         .required = "required",
         .step = "step",
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
         .value_mappings = "valueMappings",
     };

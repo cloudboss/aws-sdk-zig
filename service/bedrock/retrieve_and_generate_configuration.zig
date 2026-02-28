@@ -18,11 +18,11 @@ pub const RetrieveAndGenerateConfiguration = struct {
     ///
     /// If you choose to use `EXTERNAL_SOURCES`, then currently only Claude 3 Sonnet
     /// models for knowledge bases are supported.
-    @"type": RetrieveAndGenerateType,
+    type: RetrieveAndGenerateType,
 
     pub const json_field_names = .{
         .external_sources_configuration = "externalSourcesConfiguration",
         .knowledge_base_configuration = "knowledgeBaseConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

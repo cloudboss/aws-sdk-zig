@@ -15,12 +15,12 @@ pub const RealTimeAlertRule = struct {
     sentiment_configuration: ?SentimentConfiguration,
 
     /// The type of alert rule.
-    @"type": RealTimeAlertRuleType,
+    type: RealTimeAlertRuleType,
 
     pub const json_field_names = .{
         .issue_detection_configuration = "IssueDetectionConfiguration",
         .keyword_match_configuration = "KeywordMatchConfiguration",
         .sentiment_configuration = "SentimentConfiguration",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

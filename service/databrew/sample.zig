@@ -8,10 +8,10 @@ pub const Sample = struct {
     size: ?i32,
 
     /// The way in which DataBrew obtains rows from a dataset.
-    @"type": SampleType,
+    type: SampleType,
 
     pub const json_field_names = .{
         .size = "Size",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

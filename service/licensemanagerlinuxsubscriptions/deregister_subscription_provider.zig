@@ -14,7 +14,8 @@ pub const DeregisterSubscriptionProviderInput = struct {
     };
 };
 
-pub const DeregisterSubscriptionProviderOutput = struct {};
+pub const DeregisterSubscriptionProviderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

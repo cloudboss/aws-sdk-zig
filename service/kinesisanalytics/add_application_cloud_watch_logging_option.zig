@@ -26,7 +26,8 @@ pub const AddApplicationCloudWatchLoggingOptionInput = struct {
     };
 };
 
-pub const AddApplicationCloudWatchLoggingOptionOutput = struct {};
+pub const AddApplicationCloudWatchLoggingOptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

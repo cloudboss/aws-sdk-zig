@@ -13,7 +13,8 @@ pub const DeleteEncoderConfigurationInput = struct {
     };
 };
 
-pub const DeleteEncoderConfigurationOutput = struct {};
+pub const DeleteEncoderConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

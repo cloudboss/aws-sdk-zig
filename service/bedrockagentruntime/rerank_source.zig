@@ -7,10 +7,10 @@ pub const RerankSource = struct {
     inline_document_source: RerankDocument,
 
     /// The type of the source.
-    @"type": RerankSourceType,
+    type: RerankSourceType,
 
     pub const json_field_names = .{
         .inline_document_source = "inlineDocumentSource",
-        .@"type" = "type",
+        .type = "type",
     };
 };

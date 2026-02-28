@@ -7,10 +7,10 @@ pub const EncryptionKey = struct {
     id: []const u8,
 
     /// The type of encryption key used by Amazon Translate to encrypt this object.
-    type: EncryptionKeyType,
+    @"type": EncryptionKeyType,
 
     pub const json_field_names = .{
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

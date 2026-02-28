@@ -18,8 +18,7 @@ pub const PublishPortalInput = struct {
     };
 };
 
-pub const PublishPortalOutput = struct {
-};
+pub const PublishPortalOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

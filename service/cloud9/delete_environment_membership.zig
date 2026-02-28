@@ -18,8 +18,7 @@ pub const DeleteEnvironmentMembershipInput = struct {
     };
 };
 
-pub const DeleteEnvironmentMembershipOutput = struct {
-};
+pub const DeleteEnvironmentMembershipOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

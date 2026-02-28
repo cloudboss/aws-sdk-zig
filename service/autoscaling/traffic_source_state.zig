@@ -47,5 +47,5 @@ pub const TrafficSourceState = struct {
     /// target group.
     ///
     /// Required if the identifier is the name of a Classic Load Balancer.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 };

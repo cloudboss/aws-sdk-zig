@@ -21,7 +21,8 @@ pub const DeleteProgramManagementAccountInput = struct {
     };
 };
 
-pub const DeleteProgramManagementAccountOutput = struct {};
+pub const DeleteProgramManagementAccountOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

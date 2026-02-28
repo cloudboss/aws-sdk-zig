@@ -15,11 +15,11 @@ pub const RedshiftQueryEngineStorageConfiguration = struct {
     redshift_configuration: ?RedshiftQueryEngineRedshiftStorageConfiguration,
 
     /// The data storage service to use.
-    @"type": RedshiftQueryEngineStorageType,
+    type: RedshiftQueryEngineStorageType,
 
     pub const json_field_names = .{
         .aws_data_catalog_configuration = "awsDataCatalogConfiguration",
         .redshift_configuration = "redshiftConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

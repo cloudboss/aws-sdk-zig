@@ -50,8 +50,7 @@ pub const ExecuteChangeSetInput = struct {
     stack_name: ?[]const u8 = null,
 };
 
-pub const ExecuteChangeSetOutput = struct {
-};
+pub const ExecuteChangeSetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

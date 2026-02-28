@@ -21,7 +21,8 @@ pub const DisassociateSourceServersInput = struct {
     };
 };
 
-pub const DisassociateSourceServersOutput = struct {};
+pub const DisassociateSourceServersOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

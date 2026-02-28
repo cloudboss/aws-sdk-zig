@@ -11,10 +11,10 @@ pub const UnmappedAttribute = struct {
     /// "MEDICATION",
     /// "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or
     /// "PROTECTED_HEALTH_INFORMATION".
-    @"type": ?EntityType,
+    type: ?EntityType,
 
     pub const json_field_names = .{
         .attribute = "Attribute",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

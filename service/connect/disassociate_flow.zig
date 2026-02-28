@@ -29,8 +29,7 @@ pub const DisassociateFlowInput = struct {
     };
 };
 
-pub const DisassociateFlowOutput = struct {
-};
+pub const DisassociateFlowOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

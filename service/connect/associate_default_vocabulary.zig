@@ -27,8 +27,7 @@ pub const AssociateDefaultVocabularyInput = struct {
     };
 };
 
-pub const AssociateDefaultVocabularyOutput = struct {
-};
+pub const AssociateDefaultVocabularyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

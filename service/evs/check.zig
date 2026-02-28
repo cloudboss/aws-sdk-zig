@@ -27,11 +27,11 @@ pub const Check = struct {
     /// If this check fails, you will need to add hosts so that your environment
     /// meets this minimum requirement. Amazon EVS only supports environments with
     /// 4-16 hosts.
-    type: ?CheckType,
+    @"type": ?CheckType,
 
     pub const json_field_names = .{
         .impaired_since = "impairedSince",
         .result = "result",
-        .type = "type",
+        .@"type" = "type",
     };
 };

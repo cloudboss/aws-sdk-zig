@@ -26,8 +26,7 @@ pub const UpdateContactFlowContentInput = struct {
     };
 };
 
-pub const UpdateContactFlowContentOutput = struct {
-};
+pub const UpdateContactFlowContentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

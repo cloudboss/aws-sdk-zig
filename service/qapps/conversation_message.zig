@@ -7,10 +7,10 @@ pub const ConversationMessage = struct {
     body: []const u8,
 
     /// The type of the conversation message.
-    type: Sender,
+    @"type": Sender,
 
     pub const json_field_names = .{
         .body = "body",
-        .type = "type",
+        .@"type" = "type",
     };
 };

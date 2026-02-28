@@ -22,7 +22,8 @@ pub const AssociateManagedNotificationAdditionalChannelInput = struct {
     };
 };
 
-pub const AssociateManagedNotificationAdditionalChannelOutput = struct {};
+pub const AssociateManagedNotificationAdditionalChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

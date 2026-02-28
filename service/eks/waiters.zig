@@ -47,7 +47,7 @@ pub const AddonActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeAddon(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeAddon(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -176,7 +176,7 @@ pub const ClusterActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeCluster(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeCluster(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -319,7 +319,7 @@ pub const FargateProfileActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeFargateProfile(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeFargateProfile(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -441,7 +441,7 @@ pub const NodegroupActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeNodegroup(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeNodegroup(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

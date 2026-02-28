@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountStatus = @import("account_status.zig").AccountStatus;
 
-pub const GetAccountStatusInput = struct {
-};
+pub const GetAccountStatusInput = struct {};
 
 pub const GetAccountStatusOutput = struct {
     /// The status of the Amazon Web Services account.

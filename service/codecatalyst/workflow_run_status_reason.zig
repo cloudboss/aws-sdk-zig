@@ -1,3 +1,2 @@
 /// Information about the status of a workflow run.
-pub const WorkflowRunStatusReason = struct {
-};
+pub const WorkflowRunStatusReason = struct {};

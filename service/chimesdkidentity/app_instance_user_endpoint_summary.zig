@@ -22,7 +22,7 @@ pub const AppInstanceUserEndpointSummary = struct {
     name: ?[]const u8,
 
     /// The type of the `AppInstanceUserEndpoint`.
-    @"type": ?AppInstanceUserEndpointType,
+    type: ?AppInstanceUserEndpointType,
 
     pub const json_field_names = .{
         .allow_messages = "AllowMessages",
@@ -30,6 +30,6 @@ pub const AppInstanceUserEndpointSummary = struct {
         .endpoint_id = "EndpointId",
         .endpoint_state = "EndpointState",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

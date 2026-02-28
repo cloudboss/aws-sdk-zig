@@ -25,8 +25,7 @@ pub const DeleteWorkspaceMediaInput = struct {
     };
 };
 
-pub const DeleteWorkspaceMediaOutput = struct {
-};
+pub const DeleteWorkspaceMediaOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

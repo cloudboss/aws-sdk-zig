@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetLatestAssessmentIdInput = struct {};
+pub const GetLatestAssessmentIdInput = struct {
+};
 
 pub const GetLatestAssessmentIdOutput = struct {
     /// The latest ID for the specific assessment task.

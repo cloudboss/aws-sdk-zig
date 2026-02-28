@@ -19,7 +19,8 @@ pub const AcceptQualificationRequestInput = struct {
     };
 };
 
-pub const AcceptQualificationRequestOutput = struct {};
+pub const AcceptQualificationRequestOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

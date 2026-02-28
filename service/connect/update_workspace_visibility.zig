@@ -28,8 +28,7 @@ pub const UpdateWorkspaceVisibilityInput = struct {
     };
 };
 
-pub const UpdateWorkspaceVisibilityOutput = struct {
-};
+pub const UpdateWorkspaceVisibilityOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

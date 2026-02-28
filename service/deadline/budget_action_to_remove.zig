@@ -6,10 +6,10 @@ pub const BudgetActionToRemove = struct {
     threshold_percentage: f32,
 
     /// The type of budget action to remove.
-    @"type": BudgetActionType,
+    type: BudgetActionType,
 
     pub const json_field_names = .{
         .threshold_percentage = "thresholdPercentage",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountSettings = @import("account_settings.zig").AccountSettings;
 
-pub const GetAccountSettingsInput = struct {
-};
+pub const GetAccountSettingsInput = struct {};
 
 pub const GetAccountSettingsOutput = struct {
     /// The account settings.

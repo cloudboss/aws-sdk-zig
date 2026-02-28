@@ -30,7 +30,8 @@ pub const NotifyApplicationStateInput = struct {
     };
 };
 
-pub const NotifyApplicationStateOutput = struct {};
+pub const NotifyApplicationStateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

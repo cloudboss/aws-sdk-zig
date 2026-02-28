@@ -79,7 +79,7 @@ pub const DatabaseSourceConfiguration = struct {
     /// * PostgreSQL
     ///
     /// Amazon Data Firehose is in preview release and is subject to change.
-    type: DatabaseType,
+    @"type": DatabaseType,
 
     pub const json_field_names = .{
         .columns = "Columns",
@@ -92,6 +92,6 @@ pub const DatabaseSourceConfiguration = struct {
         .ssl_mode = "SSLMode",
         .surrogate_keys = "SurrogateKeys",
         .tables = "Tables",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

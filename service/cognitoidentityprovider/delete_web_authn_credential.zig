@@ -19,8 +19,7 @@ pub const DeleteWebAuthnCredentialInput = struct {
     };
 };
 
-pub const DeleteWebAuthnCredentialOutput = struct {
-};
+pub const DeleteWebAuthnCredentialOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

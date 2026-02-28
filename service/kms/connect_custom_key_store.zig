@@ -15,7 +15,8 @@ pub const ConnectCustomKeyStoreInput = struct {
     };
 };
 
-pub const ConnectCustomKeyStoreOutput = struct {};
+pub const ConnectCustomKeyStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

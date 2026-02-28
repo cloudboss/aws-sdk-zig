@@ -12,10 +12,10 @@ pub const FlowAliasConcurrencyConfiguration = struct {
     /// * `Automatic` - Amazon Bedrock determines which nodes can be executed in
     ///   parallel based on the flow definition and its dependencies.
     /// * `Manual` - You specify which nodes can be executed in parallel.
-    @"type": ConcurrencyType,
+    type: ConcurrencyType,
 
     pub const json_field_names = .{
         .max_concurrency = "maxConcurrency",
-        .@"type" = "type",
+        .type = "type",
     };
 };

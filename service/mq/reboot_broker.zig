@@ -13,7 +13,8 @@ pub const RebootBrokerInput = struct {
     };
 };
 
-pub const RebootBrokerOutput = struct {};
+pub const RebootBrokerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

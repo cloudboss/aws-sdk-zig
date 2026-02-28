@@ -34,8 +34,7 @@ pub const DeleteStackSetInput = struct {
     stack_set_name: []const u8,
 };
 
-pub const DeleteStackSetOutput = struct {
-};
+pub const DeleteStackSetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

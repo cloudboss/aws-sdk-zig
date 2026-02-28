@@ -25,13 +25,13 @@ pub const DescribeClientAuthenticationSettingsInput = struct {
     /// specified, a list of all client authentication types that are supported for
     /// the specified
     /// directory is retrieved.
-    @"type": ?ClientAuthenticationType = null,
+    type: ?ClientAuthenticationType = null,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
         .limit = "Limit",
         .next_token = "NextToken",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

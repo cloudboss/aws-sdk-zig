@@ -11,12 +11,12 @@ pub const ListDashboardsRequest = struct {
     next_token: ?[]const u8,
 
     /// Specify a dashboard type to filter on: `CUSTOM` or `MANAGED`.
-    @"type": ?DashboardType,
+    type: ?DashboardType,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",
         .name_prefix = "NamePrefix",
         .next_token = "NextToken",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

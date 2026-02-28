@@ -14,8 +14,7 @@ pub const DeleteSessionInput = struct {
     };
 };
 
-pub const DeleteSessionOutput = struct {
-};
+pub const DeleteSessionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

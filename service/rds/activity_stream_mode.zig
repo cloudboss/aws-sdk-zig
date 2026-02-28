@@ -1,4 +1,4 @@
 pub const ActivityStreamMode = enum {
     sync,
-    async,
+    @"async",
 };

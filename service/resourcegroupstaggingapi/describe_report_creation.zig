@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeReportCreationInput = struct {};
+pub const DescribeReportCreationInput = struct {
+};
 
 pub const DescribeReportCreationOutput = struct {
     /// Details of the common errors that all operations return.

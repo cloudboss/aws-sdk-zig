@@ -61,7 +61,7 @@ pub const Address = struct {
 
     /// Differentiates between delivery address and pickup address in the customer
     /// account. Provided at job creation.
-    type: ?AddressType,
+    @"type": ?AddressType,
 
     pub const json_field_names = .{
         .address_id = "AddressId",
@@ -78,6 +78,6 @@ pub const Address = struct {
         .street_1 = "Street1",
         .street_2 = "Street2",
         .street_3 = "Street3",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

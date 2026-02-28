@@ -17,8 +17,7 @@ pub const DisassociateConfigurationItemsFromApplicationInput = struct {
     };
 };
 
-pub const DisassociateConfigurationItemsFromApplicationOutput = struct {
-};
+pub const DisassociateConfigurationItemsFromApplicationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

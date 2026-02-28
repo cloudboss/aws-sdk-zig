@@ -29,11 +29,11 @@ pub const Certificate = struct {
     /// Certificate
     /// Manager](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in the *ACM User
     /// guide*.
-    @"type": CertificateType,
+    type: CertificateType,
 
     pub const json_field_names = .{
         .certificate_verification_dns_record = "certificateVerificationDNSRecord",
         .custom_certificate_arn = "customCertificateArn",
-        .@"type" = "type",
+        .type = "type",
     };
 };

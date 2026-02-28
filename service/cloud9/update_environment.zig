@@ -38,8 +38,7 @@ pub const UpdateEnvironmentInput = struct {
     };
 };
 
-pub const UpdateEnvironmentOutput = struct {
-};
+pub const UpdateEnvironmentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

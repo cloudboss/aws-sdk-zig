@@ -13,8 +13,7 @@ pub const DeleteBillScenarioInput = struct {
     };
 };
 
-pub const DeleteBillScenarioOutput = struct {
-};
+pub const DeleteBillScenarioOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

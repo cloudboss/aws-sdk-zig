@@ -8,10 +8,10 @@ pub const RouteEmissionType = struct {
     /// Type of the emission.
     ///
     /// **Valid values**: `Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev`
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .co_2_emission_class = "Co2EmissionClass",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

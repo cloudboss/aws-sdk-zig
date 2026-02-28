@@ -23,7 +23,7 @@ pub const UpdateLinkRequest = struct {
     /// The type of the link.
     ///
     /// Constraints: Maximum length of 128 characters.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .bandwidth = "Bandwidth",
@@ -31,6 +31,6 @@ pub const UpdateLinkRequest = struct {
         .global_network_id = "GlobalNetworkId",
         .link_id = "LinkId",
         .provider = "Provider",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

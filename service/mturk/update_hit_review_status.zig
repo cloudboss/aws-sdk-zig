@@ -23,7 +23,8 @@ pub const UpdateHITReviewStatusInput = struct {
     };
 };
 
-pub const UpdateHITReviewStatusOutput = struct {};
+pub const UpdateHITReviewStatusOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

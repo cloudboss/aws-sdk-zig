@@ -22,8 +22,7 @@ pub const AssociateContactWithUserInput = struct {
     };
 };
 
-pub const AssociateContactWithUserOutput = struct {
-};
+pub const AssociateContactWithUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,8 +14,7 @@ pub const RemoveAutoTerminationPolicyInput = struct {
     };
 };
 
-pub const RemoveAutoTerminationPolicyOutput = struct {
-};
+pub const RemoveAutoTerminationPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

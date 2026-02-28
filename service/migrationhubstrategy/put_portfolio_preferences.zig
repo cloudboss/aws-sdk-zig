@@ -29,7 +29,8 @@ pub const PutPortfolioPreferencesInput = struct {
     };
 };
 
-pub const PutPortfolioPreferencesOutput = struct {};
+pub const PutPortfolioPreferencesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

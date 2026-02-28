@@ -30,13 +30,13 @@ pub const GuardrailManagedWordsConfig = struct {
     output_enabled: ?bool,
 
     /// The managed word type to configure for the guardrail.
-    @"type": GuardrailManagedWordsType,
+    type: GuardrailManagedWordsType,
 
     pub const json_field_names = .{
         .input_action = "inputAction",
         .input_enabled = "inputEnabled",
         .output_action = "outputAction",
         .output_enabled = "outputEnabled",
-        .@"type" = "type",
+        .type = "type",
     };
 };

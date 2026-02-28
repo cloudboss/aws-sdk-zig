@@ -314,7 +314,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateListenerInput, config
                     const n_2 = idx_2 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.ForwardConfig.TargetGroups.member.{d}.TargetGroupArn=", .{n, n_2}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.ForwardConfig.TargetGroups.member.{d}.TargetGroupArn=", .{ n, n_2 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_2.target_group_arn) |fv_3| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_3);
@@ -322,7 +322,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateListenerInput, config
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.ForwardConfig.TargetGroups.member.{d}.Weight=", .{n, n_2}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.ForwardConfig.TargetGroups.member.{d}.Weight=", .{ n, n_2 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_2.weight) |fv_3| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_3}) catch "");
@@ -355,13 +355,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateListenerInput, config
                     const n_2 = idx_2 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Format=", .{n, n_2}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Format=", .{ n, n_2 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item_2.format));
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Name=", .{n, n_2}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Name=", .{ n, n_2 }) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.name);
                     }
@@ -369,7 +369,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateListenerInput, config
                         const n_3 = idx_3 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Values.member.{d}=", .{n, n_2, n_3}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Values.member.{d}=", .{ n, n_2, n_3 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                         }
@@ -457,7 +457,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateListenerInput, config
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DefaultActions.member.{d}.Type=", .{n}) catch continue;
             try body_buf.appendSlice(alloc, field_prefix);
-            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item.@"type"));
+            try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item.type));
         }
     }
     try body_buf.appendSlice(alloc, "&LoadBalancerArn=");

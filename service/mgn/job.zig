@@ -32,7 +32,7 @@ pub const Job = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// Job type.
-    type: ?JobType,
+    @"type": ?JobType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -43,6 +43,6 @@ pub const Job = struct {
         .participating_servers = "participatingServers",
         .status = "status",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -25,12 +25,12 @@ pub const DescribeRuleGroupMetadataInput = struct {
     ///
     /// This setting is required for requests that do not include the
     /// `RuleGroupARN`.
-    type: ?RuleGroupType = null,
+    @"type": ?RuleGroupType = null,
 
     pub const json_field_names = .{
         .rule_group_arn = "RuleGroupArn",
         .rule_group_name = "RuleGroupName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -80,7 +80,7 @@ pub const DescribeRuleGroupMetadataOutput = struct {
     ///
     /// This setting is required for requests that do not include the
     /// `RuleGroupARN`.
-    type: ?RuleGroupType = null,
+    @"type": ?RuleGroupType = null,
 
     /// The name of the Amazon Web Services Marketplace vendor that provides this
     /// rule group.
@@ -95,7 +95,7 @@ pub const DescribeRuleGroupMetadataOutput = struct {
         .rule_group_arn = "RuleGroupArn",
         .rule_group_name = "RuleGroupName",
         .stateful_rule_options = "StatefulRuleOptions",
-        .type = "Type",
+        .@"type" = "Type",
         .vendor_name = "VendorName",
     };
 };

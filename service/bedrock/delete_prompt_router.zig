@@ -13,8 +13,7 @@ pub const DeletePromptRouterInput = struct {
     };
 };
 
-pub const DeletePromptRouterOutput = struct {
-};
+pub const DeletePromptRouterOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -30,7 +30,7 @@ pub const GetDashboardOutput = struct {
     name: []const u8,
 
     /// Indicates the dashboard type.
-    @"type": DashboardType,
+    type: DashboardType,
 
     /// The timestamp when the dashboard was last modified.
     updated_at: i64,
@@ -43,7 +43,7 @@ pub const GetDashboardOutput = struct {
         .created_at = "createdAt",
         .description = "description",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
         .widgets = "widgets",
     };

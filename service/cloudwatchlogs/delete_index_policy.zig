@@ -15,8 +15,7 @@ pub const DeleteIndexPolicyInput = struct {
     };
 };
 
-pub const DeleteIndexPolicyOutput = struct {
-};
+pub const DeleteIndexPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

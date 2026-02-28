@@ -10,10 +10,10 @@ pub const AdditionalResources = struct {
     content: ?[]const ChoiceContent,
 
     /// Type of additional resource for a custom lens.
-    type: ?AdditionalResourceType,
+    @"type": ?AdditionalResourceType,
 
     pub const json_field_names = .{
         .content = "Content",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

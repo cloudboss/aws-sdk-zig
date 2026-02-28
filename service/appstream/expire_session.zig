@@ -13,8 +13,7 @@ pub const ExpireSessionInput = struct {
     };
 };
 
-pub const ExpireSessionOutput = struct {
-};
+pub const ExpireSessionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

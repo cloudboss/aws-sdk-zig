@@ -18,8 +18,7 @@ pub const PutExternalEvaluationInput = struct {
     };
 };
 
-pub const PutExternalEvaluationOutput = struct {
-};
+pub const PutExternalEvaluationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

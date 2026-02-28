@@ -17,7 +17,8 @@ pub const DeleteLiveSourceInput = struct {
     };
 };
 
-pub const DeleteLiveSourceOutput = struct {};
+pub const DeleteLiveSourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

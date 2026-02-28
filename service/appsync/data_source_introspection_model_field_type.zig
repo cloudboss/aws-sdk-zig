@@ -32,7 +32,7 @@ pub const DataSourceIntrospectionModelFieldType = struct {
     /// `kind` value of `Scalar` with a `name` value of
     /// `String`. The values `Scalar` and `String` will be
     /// collectively stored in the `values` field.
-    @"type": ?*DataSourceIntrospectionModelFieldType = null,
+    type: ?*DataSourceIntrospectionModelFieldType = null,
 
     /// The values of the `type` field. This field represents the AppSync data type
     /// equivalent of the introspected field.
@@ -41,7 +41,7 @@ pub const DataSourceIntrospectionModelFieldType = struct {
     pub const json_field_names = .{
         .kind = "kind",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
         .values = "values",
     };
 };

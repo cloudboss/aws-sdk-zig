@@ -39,7 +39,7 @@ pub const UpdateNetworkProfileInput = struct {
 
     /// The type of network profile to return information about. Valid values are
     /// listed here.
-    @"type": ?NetworkProfileType = null,
+    type: ?NetworkProfileType = null,
 
     /// The data throughput rate in bits per second, as an integer from 0 to
     /// 104857600.
@@ -67,7 +67,7 @@ pub const UpdateNetworkProfileInput = struct {
         .downlink_jitter_ms = "downlinkJitterMs",
         .downlink_loss_percent = "downlinkLossPercent",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
         .uplink_bandwidth_bits = "uplinkBandwidthBits",
         .uplink_delay_ms = "uplinkDelayMs",
         .uplink_jitter_ms = "uplinkJitterMs",

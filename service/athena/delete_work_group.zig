@@ -19,8 +19,7 @@ pub const DeleteWorkGroupInput = struct {
     };
 };
 
-pub const DeleteWorkGroupOutput = struct {
-};
+pub const DeleteWorkGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

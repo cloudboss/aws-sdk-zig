@@ -51,8 +51,7 @@ pub const AdminSetUserMFAPreferenceInput = struct {
     };
 };
 
-pub const AdminSetUserMFAPreferenceOutput = struct {
-};
+pub const AdminSetUserMFAPreferenceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

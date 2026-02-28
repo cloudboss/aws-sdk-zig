@@ -18,7 +18,8 @@ pub const CancelPipelineReprocessingInput = struct {
     };
 };
 
-pub const CancelPipelineReprocessingOutput = struct {};
+pub const CancelPipelineReprocessingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

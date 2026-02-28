@@ -37,7 +37,7 @@ pub const GetJobOutput = struct {
     state: ?State = null,
 
     /// The job type.
-    @"type": ?Type = null,
+    type: ?Type = null,
 
     /// The date and time that the job was last updated, in ISO 8601 format.
     updated_at: ?i64 = null,
@@ -49,7 +49,7 @@ pub const GetJobOutput = struct {
         .errors = "Errors",
         .id = "Id",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
         .updated_at = "UpdatedAt",
     };
 };

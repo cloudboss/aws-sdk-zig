@@ -34,7 +34,7 @@ pub const AlarmRecommendation = struct {
     reference_id: []const u8,
 
     /// Type of alarm recommendation.
-    type: AlarmType,
+    @"type": AlarmType,
 
     pub const json_field_names = .{
         .app_component_name = "appComponentName",
@@ -46,6 +46,6 @@ pub const AlarmRecommendation = struct {
         .recommendation_id = "recommendationId",
         .recommendation_status = "recommendationStatus",
         .reference_id = "referenceId",
-        .type = "type",
+        .@"type" = "type",
     };
 };

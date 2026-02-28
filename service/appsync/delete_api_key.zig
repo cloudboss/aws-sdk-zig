@@ -17,8 +17,7 @@ pub const DeleteApiKeyInput = struct {
     };
 };
 
-pub const DeleteApiKeyOutput = struct {
-};
+pub const DeleteApiKeyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

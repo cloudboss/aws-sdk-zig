@@ -16,8 +16,7 @@ pub const RemoveListenerCertificatesInput = struct {
     listener_arn: []const u8,
 };
 
-pub const RemoveListenerCertificatesOutput = struct {
-};
+pub const RemoveListenerCertificatesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

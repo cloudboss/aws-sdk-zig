@@ -12,11 +12,11 @@ pub const GuardrailContentFilter = struct {
     confidence: ?GuardrailContentFilterConfidence,
 
     /// The type of content detected in the filter by the Guardrail.
-    @"type": ?GuardrailContentFilterType,
+    type: ?GuardrailContentFilterType,
 
     pub const json_field_names = .{
         .action = "action",
         .confidence = "confidence",
-        .@"type" = "type",
+        .type = "type",
     };
 };

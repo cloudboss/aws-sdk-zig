@@ -45,7 +45,7 @@ pub const AIAgentData = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of the AI Agent.
-    type: AIAgentType,
+    @"type": AIAgentType,
 
     /// The visibility status of the AI Agent.
     visibility_status: VisibilityStatus,
@@ -62,7 +62,7 @@ pub const AIAgentData = struct {
         .origin = "origin",
         .status = "status",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .visibility_status = "visibilityStatus",
     };
 };

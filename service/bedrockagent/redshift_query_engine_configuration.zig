@@ -14,11 +14,11 @@ pub const RedshiftQueryEngineConfiguration = struct {
     serverless_configuration: ?RedshiftServerlessConfiguration,
 
     /// The type of query engine.
-    @"type": RedshiftQueryEngineType,
+    type: RedshiftQueryEngineType,
 
     pub const json_field_names = .{
         .provisioned_configuration = "provisionedConfiguration",
         .serverless_configuration = "serverlessConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

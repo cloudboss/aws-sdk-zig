@@ -10,14 +10,14 @@ pub const RedshiftProvisionedAuthConfiguration = struct {
     database_user: ?[]const u8,
 
     /// The type of authentication to use.
-    @"type": RedshiftProvisionedAuthType,
+    type: RedshiftProvisionedAuthType,
 
     /// The ARN of an Secrets Manager secret for authentication.
     username_password_secret_arn: ?[]const u8,
 
     pub const json_field_names = .{
         .database_user = "databaseUser",
-        .@"type" = "type",
+        .type = "type",
         .username_password_secret_arn = "usernamePasswordSecretArn",
     };
 };

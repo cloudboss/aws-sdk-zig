@@ -51,7 +51,7 @@ pub const Blueprint = struct {
     product_url: ?[]const u8,
 
     /// The type of the blueprint (`os` or `app`).
-    type: ?BlueprintType,
+    @"type": ?BlueprintType,
 
     /// The version number of the operating system, application, or stack (
     /// `2016.03.0`).
@@ -71,7 +71,7 @@ pub const Blueprint = struct {
         .name = "name",
         .platform = "platform",
         .product_url = "productUrl",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
         .version_code = "versionCode",
     };

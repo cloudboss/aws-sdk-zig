@@ -12,10 +12,10 @@ pub const RecommendationRelatedAnomalyResource = struct {
     /// resource and property types
     /// reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) in the *Amazon Web Services CloudFormation User
     /// Guide*.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

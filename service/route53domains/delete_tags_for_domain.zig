@@ -17,7 +17,8 @@ pub const DeleteTagsForDomainInput = struct {
     };
 };
 
-pub const DeleteTagsForDomainOutput = struct {};
+pub const DeleteTagsForDomainOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

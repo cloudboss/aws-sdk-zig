@@ -18,7 +18,8 @@ pub const PutRawMessageContentInput = struct {
     };
 };
 
-pub const PutRawMessageContentOutput = struct {};
+pub const PutRawMessageContentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

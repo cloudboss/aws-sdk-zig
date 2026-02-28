@@ -60,7 +60,7 @@ pub const Control = struct {
     testing_information: ?[]const u8,
 
     /// Specifies whether the control is a standard control or a custom control.
-    @"type": ?ControlType,
+    type: ?ControlType,
 
     pub const json_field_names = .{
         .action_plan_instructions = "actionPlanInstructions",
@@ -78,6 +78,6 @@ pub const Control = struct {
         .state = "state",
         .tags = "tags",
         .testing_information = "testingInformation",
-        .@"type" = "type",
+        .type = "type",
     };
 };

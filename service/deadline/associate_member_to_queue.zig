@@ -35,8 +35,7 @@ pub const AssociateMemberToQueueInput = struct {
     };
 };
 
-pub const AssociateMemberToQueueOutput = struct {
-};
+pub const AssociateMemberToQueueOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -7,14 +7,14 @@ pub const AssociationExecutionFilter = struct {
     key: AssociationExecutionFilterKey,
 
     /// The filter type specified in the request.
-    type: AssociationFilterOperatorType,
+    @"type": AssociationFilterOperatorType,
 
     /// The value specified for the key.
     value: []const u8,
 
     pub const json_field_names = .{
         .key = "Key",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

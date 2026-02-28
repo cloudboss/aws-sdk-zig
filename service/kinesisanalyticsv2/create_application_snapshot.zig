@@ -17,7 +17,8 @@ pub const CreateApplicationSnapshotInput = struct {
     };
 };
 
-pub const CreateApplicationSnapshotOutput = struct {};
+pub const CreateApplicationSnapshotOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

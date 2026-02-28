@@ -32,7 +32,7 @@ pub const ColumnInfo = struct {
     table_name: ?[]const u8,
 
     /// The data type of the column.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .case_sensitive = "CaseSensitive",
@@ -44,6 +44,6 @@ pub const ColumnInfo = struct {
         .scale = "Scale",
         .schema_name = "SchemaName",
         .table_name = "TableName",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

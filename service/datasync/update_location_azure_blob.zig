@@ -89,8 +89,7 @@ pub const UpdateLocationAzureBlobInput = struct {
     };
 };
 
-pub const UpdateLocationAzureBlobOutput = struct {
-};
+pub const UpdateLocationAzureBlobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

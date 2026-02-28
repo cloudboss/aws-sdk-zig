@@ -23,7 +23,8 @@ pub const DisconnectUserInput = struct {
     };
 };
 
-pub const DisconnectUserOutput = struct {};
+pub const DisconnectUserOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,8 +18,7 @@ pub const CancelMetadataGenerationRunInput = struct {
     };
 };
 
-pub const CancelMetadataGenerationRunOutput = struct {
-};
+pub const CancelMetadataGenerationRunOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

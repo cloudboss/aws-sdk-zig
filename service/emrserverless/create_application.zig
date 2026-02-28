@@ -89,7 +89,7 @@ pub const CreateApplicationInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of application you want to start, such as Spark or Hive.
-    @"type": []const u8,
+    type: []const u8,
 
     /// The key-value pairs that specify worker type to
     /// `WorkerTypeSpecificationInput`. This parameter must contain all valid worker
@@ -118,7 +118,7 @@ pub const CreateApplicationInput = struct {
         .runtime_configuration = "runtimeConfiguration",
         .scheduler_configuration = "schedulerConfiguration",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .worker_type_specifications = "workerTypeSpecifications",
     };
 };
@@ -288,7 +288,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateApplicationInput, con
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
     has_prev = true;
     if (input.worker_type_specifications) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");

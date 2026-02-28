@@ -12,7 +12,7 @@ pub const ResourceContent = struct {
     text: ?[]const u8,
 
     /// The type of resource content.
-    @"type": ResourceContentType,
+    type: ResourceContentType,
 
     /// The URI of the resource content.
     uri: ?[]const u8,
@@ -21,7 +21,7 @@ pub const ResourceContent = struct {
         .blob = "blob",
         .mime_type = "mimeType",
         .text = "text",
-        .@"type" = "type",
+        .type = "type",
         .uri = "uri",
     };
 };

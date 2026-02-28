@@ -18,7 +18,8 @@ pub const AssociateOrganizationalUnitInput = struct {
     };
 };
 
-pub const AssociateOrganizationalUnitOutput = struct {};
+pub const AssociateOrganizationalUnitOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

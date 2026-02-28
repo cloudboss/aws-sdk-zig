@@ -13,8 +13,7 @@ pub const DeleteConfiguredTableInput = struct {
     };
 };
 
-pub const DeleteConfiguredTableOutput = struct {
-};
+pub const DeleteConfiguredTableOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

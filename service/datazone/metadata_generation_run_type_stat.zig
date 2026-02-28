@@ -10,11 +10,11 @@ pub const MetadataGenerationRunTypeStat = struct {
     status: MetadataGenerationRunStatus,
 
     /// The type of the metadata generation run type statistics.
-    @"type": MetadataGenerationRunType,
+    type: MetadataGenerationRunType,
 
     pub const json_field_names = .{
         .error_message = "errorMessage",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -13,7 +13,8 @@ pub const DeleteQualificationTypeInput = struct {
     };
 };
 
-pub const DeleteQualificationTypeOutput = struct {};
+pub const DeleteQualificationTypeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

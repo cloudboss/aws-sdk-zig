@@ -17,8 +17,7 @@ pub const UpdateTaskExecutionInput = struct {
     };
 };
 
-pub const UpdateTaskExecutionOutput = struct {
-};
+pub const UpdateTaskExecutionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

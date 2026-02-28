@@ -13,7 +13,8 @@ pub const DeleteLaunchConfigurationTemplateInput = struct {
     };
 };
 
-pub const DeleteLaunchConfigurationTemplateOutput = struct {};
+pub const DeleteLaunchConfigurationTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

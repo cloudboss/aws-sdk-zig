@@ -77,12 +77,12 @@ pub const ListUploadsInput = struct {
     /// * INSTRUMENTATION_TEST_SPEC
     ///
     /// * XCTEST_UI_TEST_SPEC
-    @"type": ?UploadType = null,
+    type: ?UploadType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
         .next_token = "nextToken",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

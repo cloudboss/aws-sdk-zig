@@ -22,7 +22,8 @@ pub const CancelBatchJobExecutionInput = struct {
     };
 };
 
-pub const CancelBatchJobExecutionOutput = struct {};
+pub const CancelBatchJobExecutionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

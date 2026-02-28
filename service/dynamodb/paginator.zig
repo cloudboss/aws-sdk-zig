@@ -207,7 +207,6 @@ pub const QueryPaginator = struct {
 
         return output;
     }
-
 };
 
 pub const ScanPaginator = struct {
@@ -242,5 +241,4 @@ pub const ScanPaginator = struct {
 
         return output;
     }
-
 };

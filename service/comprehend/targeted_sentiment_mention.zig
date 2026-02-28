@@ -30,7 +30,7 @@ pub const TargetedSentimentMention = struct {
 
     /// The type of the entity. Amazon Comprehend supports a variety of [entity
     /// types](https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-entities).
-    @"type": ?TargetedSentimentEntityType,
+    type: ?TargetedSentimentEntityType,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",
@@ -39,6 +39,6 @@ pub const TargetedSentimentMention = struct {
         .mention_sentiment = "MentionSentiment",
         .score = "Score",
         .text = "Text",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

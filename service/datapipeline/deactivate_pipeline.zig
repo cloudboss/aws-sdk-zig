@@ -20,8 +20,7 @@ pub const DeactivatePipelineInput = struct {
     };
 };
 
-pub const DeactivatePipelineOutput = struct {
-};
+pub const DeactivatePipelineOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

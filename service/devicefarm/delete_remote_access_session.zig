@@ -15,8 +15,7 @@ pub const DeleteRemoteAccessSessionInput = struct {
     };
 };
 
-pub const DeleteRemoteAccessSessionOutput = struct {
-};
+pub const DeleteRemoteAccessSessionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

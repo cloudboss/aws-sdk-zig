@@ -17,5 +17,5 @@ pub const Change = struct {
     /// The type of entity that CloudFormation changes.
     ///
     /// * `Resource` This change is for a resource.
-    @"type": ?ChangeType,
+    type: ?ChangeType,
 };

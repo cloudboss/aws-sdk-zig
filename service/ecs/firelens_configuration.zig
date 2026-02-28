@@ -27,10 +27,10 @@ pub const FirelensConfiguration = struct {
 
     /// The log router to use. The valid values are `fluentd` or
     /// `fluentbit`.
-    @"type": FirelensConfigurationType,
+    type: FirelensConfigurationType,
 
     pub const json_field_names = .{
         .options = "options",
-        .@"type" = "type",
+        .type = "type",
     };
 };

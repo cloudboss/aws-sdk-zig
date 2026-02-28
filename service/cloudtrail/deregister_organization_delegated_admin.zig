@@ -15,8 +15,7 @@ pub const DeregisterOrganizationDelegatedAdminInput = struct {
     };
 };
 
-pub const DeregisterOrganizationDelegatedAdminOutput = struct {
-};
+pub const DeregisterOrganizationDelegatedAdminOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

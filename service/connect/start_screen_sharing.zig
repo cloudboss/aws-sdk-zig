@@ -27,8 +27,7 @@ pub const StartScreenSharingInput = struct {
     };
 };
 
-pub const StartScreenSharingOutput = struct {
-};
+pub const StartScreenSharingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -87,7 +87,7 @@ pub const UpdateRuleGroupInput = struct {
     ///
     /// This setting is required for requests that do not include the
     /// `RuleGroupARN`.
-    type: ?RuleGroupType = null,
+    @"type": ?RuleGroupType = null,
 
     /// A token used for optimistic locking. Network Firewall returns a token to
     /// your requests that access the rule group. The token marks the state of the
@@ -112,7 +112,7 @@ pub const UpdateRuleGroupInput = struct {
         .rules = "Rules",
         .source_metadata = "SourceMetadata",
         .summary_configuration = "SummaryConfiguration",
-        .type = "Type",
+        .@"type" = "Type",
         .update_token = "UpdateToken",
     };
 };

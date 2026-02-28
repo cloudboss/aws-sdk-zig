@@ -24,7 +24,8 @@ pub const ImportMigrationTaskInput = struct {
     };
 };
 
-pub const ImportMigrationTaskOutput = struct {};
+pub const ImportMigrationTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

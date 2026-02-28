@@ -13,8 +13,7 @@ pub const DeleteInsightInput = struct {
     };
 };
 
-pub const DeleteInsightOutput = struct {
-};
+pub const DeleteInsightOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

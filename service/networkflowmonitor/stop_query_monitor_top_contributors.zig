@@ -18,7 +18,8 @@ pub const StopQueryMonitorTopContributorsInput = struct {
     };
 };
 
-pub const StopQueryMonitorTopContributorsOutput = struct {};
+pub const StopQueryMonitorTopContributorsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

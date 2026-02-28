@@ -16,8 +16,7 @@ pub const DeregisterTargetsInput = struct {
     targets: []const TargetDescription,
 };
 
-pub const DeregisterTargetsOutput = struct {
-};
+pub const DeregisterTargetsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

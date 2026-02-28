@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountQuota = @import("account_quota.zig").AccountQuota;
 
-pub const DescribeAccountAttributesInput = struct {
-};
+pub const DescribeAccountAttributesInput = struct {};
 
 pub const DescribeAccountAttributesOutput = struct {
     /// Account quota information.

@@ -128,7 +128,7 @@ pub const ActivatedRule = struct {
     /// a RATE_BASED rule to a web ACL without setting the type, the UpdateWebACL
     /// request will fail because the request tries to add a REGULAR rule with the
     /// specified ID, which does not exist.
-    type: ?WafRuleType,
+    @"type": ?WafRuleType,
 
     pub const json_field_names = .{
         .action = "Action",
@@ -136,6 +136,6 @@ pub const ActivatedRule = struct {
         .override_action = "OverrideAction",
         .priority = "Priority",
         .rule_id = "RuleId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -17,8 +17,7 @@ pub const DeleteDataSourceInput = struct {
     };
 };
 
-pub const DeleteDataSourceOutput = struct {
-};
+pub const DeleteDataSourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

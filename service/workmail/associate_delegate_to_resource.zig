@@ -40,7 +40,8 @@ pub const AssociateDelegateToResourceInput = struct {
     };
 };
 
-pub const AssociateDelegateToResourceOutput = struct {};
+pub const AssociateDelegateToResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

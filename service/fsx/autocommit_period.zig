@@ -13,7 +13,7 @@ pub const AutocommitPeriod = struct {
     /// ONTAP SnapLock volume.
     /// Setting this value to `NONE` disables autocommit. The default value is
     /// `NONE`.
-    type: AutocommitPeriodType,
+    @"type": AutocommitPeriodType,
 
     /// Defines the amount of time for the autocommit period of a file in an FSx for
     /// ONTAP SnapLock volume.
@@ -31,7 +31,7 @@ pub const AutocommitPeriod = struct {
     value: ?i32,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

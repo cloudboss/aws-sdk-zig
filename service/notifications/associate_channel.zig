@@ -21,7 +21,8 @@ pub const AssociateChannelInput = struct {
     };
 };
 
-pub const AssociateChannelOutput = struct {};
+pub const AssociateChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

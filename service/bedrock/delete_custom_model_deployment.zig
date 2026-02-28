@@ -14,8 +14,7 @@ pub const DeleteCustomModelDeploymentInput = struct {
     };
 };
 
-pub const DeleteCustomModelDeploymentOutput = struct {
-};
+pub const DeleteCustomModelDeploymentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

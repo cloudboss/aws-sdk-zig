@@ -41,7 +41,7 @@ pub const Observation = struct {
     ///   follow-up.
     /// * `ASK_USER` – The agent asks the user a question.
     /// * `REPROMPT` – The agent prompts the user again for the same information.
-    @"type": ?Type,
+    type: ?Type,
 
     pub const json_field_names = .{
         .action_group_invocation_output = "actionGroupInvocationOutput",
@@ -51,6 +51,6 @@ pub const Observation = struct {
         .knowledge_base_lookup_output = "knowledgeBaseLookupOutput",
         .reprompt_response = "repromptResponse",
         .trace_id = "traceId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

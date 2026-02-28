@@ -17,8 +17,7 @@ pub const DeleteAnalysisTemplateInput = struct {
     };
 };
 
-pub const DeleteAnalysisTemplateOutput = struct {
-};
+pub const DeleteAnalysisTemplateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

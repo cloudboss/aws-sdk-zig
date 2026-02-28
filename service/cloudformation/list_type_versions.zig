@@ -57,7 +57,7 @@ pub const ListTypeVersionsInput = struct {
     ///
     /// Conditional: You must specify either `TypeName` and `Type`, or
     /// `Arn`.
-    @"type": ?RegistryType = null,
+    type: ?RegistryType = null,
 
     /// The name of the extension for which you want version summary information.
     ///
@@ -140,7 +140,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTypeVersionsInput, conf
         try body_buf.appendSlice(alloc, "&PublisherId=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(alloc, "&Type=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }

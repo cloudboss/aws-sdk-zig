@@ -17,8 +17,7 @@ pub const StopRecommenderInput = struct {
     };
 };
 
-pub const StopRecommenderOutput = struct {
-};
+pub const StopRecommenderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

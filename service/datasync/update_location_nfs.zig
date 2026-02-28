@@ -40,8 +40,7 @@ pub const UpdateLocationNfsInput = struct {
     };
 };
 
-pub const UpdateLocationNfsOutput = struct {
-};
+pub const UpdateLocationNfsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

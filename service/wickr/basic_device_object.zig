@@ -20,7 +20,7 @@ pub const BasicDeviceObject = struct {
 
     /// The operating system of the device (e.g., 'MacOSX', 'Windows', 'iOS',
     /// 'Android').
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .app_id = "appId",
@@ -28,6 +28,6 @@ pub const BasicDeviceObject = struct {
         .last_login = "lastLogin",
         .status_text = "statusText",
         .@"suspend" = "suspend",
-        .type = "type",
+        .@"type" = "type",
     };
 };

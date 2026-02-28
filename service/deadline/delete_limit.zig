@@ -17,8 +17,7 @@ pub const DeleteLimitInput = struct {
     };
 };
 
-pub const DeleteLimitOutput = struct {
-};
+pub const DeleteLimitOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

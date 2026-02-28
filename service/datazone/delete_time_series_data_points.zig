@@ -32,8 +32,7 @@ pub const DeleteTimeSeriesDataPointsInput = struct {
     };
 };
 
-pub const DeleteTimeSeriesDataPointsOutput = struct {
-};
+pub const DeleteTimeSeriesDataPointsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

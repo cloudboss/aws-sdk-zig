@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const MinimumThroughputBillingCommitmentOutput = @import("minimum_throughput_billing_commitment_output.zig").MinimumThroughputBillingCommitmentOutput;
 
-pub const DescribeAccountSettingsInput = struct {};
+pub const DescribeAccountSettingsInput = struct {
+};
 
 pub const DescribeAccountSettingsOutput = struct {
     /// The current configuration of the minimum throughput billing commitment for

@@ -31,11 +31,11 @@ pub const CommunicationTypeOptions = struct {
 
     /// A string value indicating the communication type. At the moment the type
     /// value can assume one of 3 values at the moment chat, web and call.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .dates_without_support = "datesWithoutSupport",
         .supported_hours = "supportedHours",
-        .type = "type",
+        .@"type" = "type",
     };
 };

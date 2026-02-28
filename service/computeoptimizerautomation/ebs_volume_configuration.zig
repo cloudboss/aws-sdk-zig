@@ -11,12 +11,12 @@ pub const EbsVolumeConfiguration = struct {
     throughput: ?i32,
 
     /// The EBS volume type, such as gp2, gp3, io1, io2, st1, or sc1.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .iops = "iops",
         .size_in_gib = "sizeInGib",
         .throughput = "throughput",
-        .@"type" = "type",
+        .type = "type",
     };
 };

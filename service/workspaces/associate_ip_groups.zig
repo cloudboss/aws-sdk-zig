@@ -17,7 +17,8 @@ pub const AssociateIpGroupsInput = struct {
     };
 };
 
-pub const AssociateIpGroupsOutput = struct {};
+pub const AssociateIpGroupsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

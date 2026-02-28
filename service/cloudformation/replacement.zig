@@ -1,5 +1,5 @@
 pub const Replacement = enum {
-    @"true",
-    @"false",
+    true,
+    false,
     conditional,
 };

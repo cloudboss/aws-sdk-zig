@@ -36,8 +36,7 @@ pub const PutBlockPublicAccessConfigurationInput = struct {
     };
 };
 
-pub const PutBlockPublicAccessConfigurationOutput = struct {
-};
+pub const PutBlockPublicAccessConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -12,10 +12,10 @@ pub const AcceleratorPartitionConfig = struct {
     /// configuration. The profile specifies the compute and memory allocation for
     /// each partition instance. The available profile types depend on the instance
     /// type specified in the compute quota configuration.
-    type: MIGProfileType,
+    @"type": MIGProfileType,
 
     pub const json_field_names = .{
         .count = "Count",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

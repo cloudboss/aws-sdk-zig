@@ -71,7 +71,8 @@ pub const CreateSlackChannelConfigurationInput = struct {
     };
 };
 
-pub const CreateSlackChannelConfigurationOutput = struct {};
+pub const CreateSlackChannelConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

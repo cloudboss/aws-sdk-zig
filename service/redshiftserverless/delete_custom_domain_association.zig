@@ -17,7 +17,8 @@ pub const DeleteCustomDomainAssociationInput = struct {
     };
 };
 
-pub const DeleteCustomDomainAssociationOutput = struct {};
+pub const DeleteCustomDomainAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

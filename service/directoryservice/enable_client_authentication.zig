@@ -14,16 +14,15 @@ pub const EnableClientAuthenticationInput = struct {
     /// that you enable Kerberos Constrained Delegation for the Service User to the
     /// LDAP service in
     /// your self-managed AD.
-    @"type": ClientAuthenticationType,
+    type: ClientAuthenticationType,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const EnableClientAuthenticationOutput = struct {
-};
+pub const EnableClientAuthenticationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

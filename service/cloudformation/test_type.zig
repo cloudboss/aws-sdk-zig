@@ -35,7 +35,7 @@ pub const TestTypeInput = struct {
     ///
     /// Conditional: You must specify `Arn`, or `TypeName` and
     /// `Type`.
-    @"type": ?ThirdPartyType = null,
+    type: ?ThirdPartyType = null,
 
     /// The name of the extension to test.
     ///
@@ -106,7 +106,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: TestTypeInput, config: *aws
         try body_buf.appendSlice(alloc, "&LogDeliveryBucket=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(alloc, "&Type=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }

@@ -22,8 +22,7 @@ pub const RemoveIpRoutesInput = struct {
     };
 };
 
-pub const RemoveIpRoutesOutput = struct {
-};
+pub const RemoveIpRoutesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

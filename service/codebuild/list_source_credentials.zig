@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SourceCredentialsInfo = @import("source_credentials_info.zig").SourceCredentialsInfo;
 
-pub const ListSourceCredentialsInput = struct {
-};
+pub const ListSourceCredentialsInput = struct {};
 
 pub const ListSourceCredentialsOutput = struct {
     /// A list of `SourceCredentialsInfo` objects. Each

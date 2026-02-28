@@ -13,8 +13,7 @@ pub const DeleteFlywheelInput = struct {
     };
 };
 
-pub const DeleteFlywheelOutput = struct {
-};
+pub const DeleteFlywheelOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

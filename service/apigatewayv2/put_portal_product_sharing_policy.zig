@@ -17,8 +17,7 @@ pub const PutPortalProductSharingPolicyInput = struct {
     };
 };
 
-pub const PutPortalProductSharingPolicyOutput = struct {
-};
+pub const PutPortalProductSharingPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

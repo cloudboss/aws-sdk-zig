@@ -15,8 +15,7 @@ pub const DeleteTrailInput = struct {
     };
 };
 
-pub const DeleteTrailOutput = struct {
-};
+pub const DeleteTrailOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

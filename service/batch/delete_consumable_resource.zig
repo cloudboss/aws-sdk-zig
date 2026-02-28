@@ -13,8 +13,7 @@ pub const DeleteConsumableResourceInput = struct {
     };
 };
 
-pub const DeleteConsumableResourceOutput = struct {
-};
+pub const DeleteConsumableResourceOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

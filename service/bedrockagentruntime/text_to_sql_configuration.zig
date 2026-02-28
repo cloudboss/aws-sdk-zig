@@ -7,10 +7,10 @@ pub const TextToSqlConfiguration = struct {
     knowledge_base_configuration: ?TextToSqlKnowledgeBaseConfiguration,
 
     /// The type of resource to use in transformation.
-    @"type": TextToSqlConfigurationType,
+    type: TextToSqlConfigurationType,
 
     pub const json_field_names = .{
         .knowledge_base_configuration = "knowledgeBaseConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

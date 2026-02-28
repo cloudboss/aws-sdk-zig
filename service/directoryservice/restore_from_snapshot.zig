@@ -13,8 +13,7 @@ pub const RestoreFromSnapshotInput = struct {
     };
 };
 
-pub const RestoreFromSnapshotOutput = struct {
-};
+pub const RestoreFromSnapshotOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

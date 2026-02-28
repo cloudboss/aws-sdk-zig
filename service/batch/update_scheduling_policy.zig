@@ -18,8 +18,7 @@ pub const UpdateSchedulingPolicyInput = struct {
     };
 };
 
-pub const UpdateSchedulingPolicyOutput = struct {
-};
+pub const UpdateSchedulingPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

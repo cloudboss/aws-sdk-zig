@@ -26,7 +26,8 @@ pub const AssociateEntityToThingInput = struct {
     };
 };
 
-pub const AssociateEntityToThingOutput = struct {};
+pub const AssociateEntityToThingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

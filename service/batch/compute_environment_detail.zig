@@ -96,7 +96,7 @@ pub const ComputeEnvironmentDetail = struct {
     /// The type of the compute environment: `MANAGED` or `UNMANAGED`. For
     /// more information, see [Compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html) in the *Batch User Guide*.
-    @"type": ?CEType,
+    type: ?CEType,
 
     /// The maximum number of VCPUs expected to be used for an unmanaged compute
     /// environment.
@@ -125,7 +125,7 @@ pub const ComputeEnvironmentDetail = struct {
         .status = "status",
         .status_reason = "statusReason",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .unmanagedv_cpus = "unmanagedvCpus",
         .update_policy = "updatePolicy",
         .uuid = "uuid",

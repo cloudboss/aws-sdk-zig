@@ -72,8 +72,7 @@ pub const UpdateInvestigationGroupInput = struct {
     };
 };
 
-pub const UpdateInvestigationGroupOutput = struct {
-};
+pub const UpdateInvestigationGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

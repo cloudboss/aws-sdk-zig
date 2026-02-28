@@ -11,12 +11,12 @@ pub const ProxyConfigRuleGroup = struct {
     proxy_rule_group_name: ?[]const u8,
 
     /// Proxy rule group type.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .priority = "Priority",
         .proxy_rule_group_arn = "ProxyRuleGroupArn",
         .proxy_rule_group_name = "ProxyRuleGroupName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -33,14 +33,14 @@ pub const CreateEngagementContextInput = struct {
     /// include `CustomerProject` for customer project-related contexts. The type
     /// field ensures that the context is properly categorized and processed
     /// according to its intended purpose.
-    type: EngagementContextType,
+    @"type": EngagementContextType,
 
     pub const json_field_names = .{
         .catalog = "Catalog",
         .client_token = "ClientToken",
         .engagement_identifier = "EngagementIdentifier",
         .payload = "Payload",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

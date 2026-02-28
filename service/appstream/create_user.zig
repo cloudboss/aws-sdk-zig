@@ -43,8 +43,7 @@ pub const CreateUserInput = struct {
     };
 };
 
-pub const CreateUserOutput = struct {
-};
+pub const CreateUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

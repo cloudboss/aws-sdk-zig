@@ -32,14 +32,14 @@ pub const ListCostAllocationTagsInput = struct {
     /// support Amazon Web Services resources for cost allocation purposes. The
     /// `UserDefined` type tags are tags that you define, create, and apply to
     /// resources.
-    @"type": ?CostAllocationTagType = null,
+    type: ?CostAllocationTagType = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",
         .next_token = "NextToken",
         .status = "Status",
         .tag_keys = "TagKeys",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

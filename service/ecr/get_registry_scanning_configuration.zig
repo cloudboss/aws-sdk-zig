@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegistryScanningConfiguration = @import("registry_scanning_configuration.zig").RegistryScanningConfiguration;
 
-pub const GetRegistryScanningConfigurationInput = struct {
-};
+pub const GetRegistryScanningConfigurationInput = struct {};
 
 pub const GetRegistryScanningConfigurationOutput = struct {
     /// The registry ID associated with the request.

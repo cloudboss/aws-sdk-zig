@@ -60,13 +60,13 @@ pub const DataCatalogSummary = struct {
     status: ?DataCatalogStatus,
 
     /// The data catalog type.
-    @"type": ?DataCatalogType,
+    type: ?DataCatalogType,
 
     pub const json_field_names = .{
         .catalog_name = "CatalogName",
         .connection_type = "ConnectionType",
         .@"error" = "Error",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

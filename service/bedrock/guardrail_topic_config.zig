@@ -40,7 +40,7 @@ pub const GuardrailTopicConfig = struct {
     output_enabled: ?bool,
 
     /// Specifies to deny the topic.
-    @"type": GuardrailTopicType,
+    type: GuardrailTopicType,
 
     pub const json_field_names = .{
         .definition = "definition",
@@ -50,6 +50,6 @@ pub const GuardrailTopicConfig = struct {
         .name = "name",
         .output_action = "outputAction",
         .output_enabled = "outputEnabled",
-        .@"type" = "type",
+        .type = "type",
     };
 };

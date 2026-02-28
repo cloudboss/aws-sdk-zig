@@ -23,7 +23,7 @@ pub const Address = struct {
     street_address: ?[]const u8,
 
     /// A string representing the type of address. For example, "Home."
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .country = "Country",
@@ -33,6 +33,6 @@ pub const Address = struct {
         .primary = "Primary",
         .region = "Region",
         .street_address = "StreetAddress",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

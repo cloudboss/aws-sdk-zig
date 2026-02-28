@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReplicationConfiguration = @import("replication_configuration.zig").ReplicationConfiguration;
 
-pub const DescribeRegistryInput = struct {
-};
+pub const DescribeRegistryInput = struct {};
 
 pub const DescribeRegistryOutput = struct {
     /// The registry ID associated with the request.

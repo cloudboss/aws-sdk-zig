@@ -116,7 +116,7 @@ pub const DescribeJobOutput = struct {
     ///
     /// * `RECIPE` - The job applies one or more transformations to a
     /// dataset.
-    @"type": ?JobType = null,
+    type: ?JobType = null,
 
     /// List of validation configurations that are applied to the profile job.
     validation_configurations: ?[]const ValidationConfiguration = null,
@@ -144,7 +144,7 @@ pub const DescribeJobOutput = struct {
         .role_arn = "RoleArn",
         .tags = "Tags",
         .timeout = "Timeout",
-        .@"type" = "Type",
+        .type = "Type",
         .validation_configurations = "ValidationConfigurations",
     };
 };

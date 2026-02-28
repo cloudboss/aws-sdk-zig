@@ -18,7 +18,8 @@ pub const DeletePrefetchScheduleInput = struct {
     };
 };
 
-pub const DeletePrefetchScheduleOutput = struct {};
+pub const DeletePrefetchScheduleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

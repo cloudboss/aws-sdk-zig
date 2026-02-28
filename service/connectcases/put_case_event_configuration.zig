@@ -19,8 +19,7 @@ pub const PutCaseEventConfigurationInput = struct {
     };
 };
 
-pub const PutCaseEventConfigurationOutput = struct {
-};
+pub const PutCaseEventConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

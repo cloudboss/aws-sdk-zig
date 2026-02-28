@@ -62,7 +62,7 @@ pub const ICD10CMEntity = struct {
     /// Describes the specific type of entity with category of entities.
     /// InferICD10CM detects
     /// entities of the type `DX_NAME` and `TIME_EXPRESSION`.
-    @"type": ?ICD10CMEntityType,
+    type: ?ICD10CMEntityType,
 
     pub const json_field_names = .{
         .attributes = "Attributes",
@@ -74,6 +74,6 @@ pub const ICD10CMEntity = struct {
         .score = "Score",
         .text = "Text",
         .traits = "Traits",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -54,8 +54,7 @@ pub const SendOutboundEmailInput = struct {
     };
 };
 
-pub const SendOutboundEmailOutput = struct {
-};
+pub const SendOutboundEmailOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

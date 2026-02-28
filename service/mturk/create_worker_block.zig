@@ -19,7 +19,8 @@ pub const CreateWorkerBlockInput = struct {
     };
 };
 
-pub const CreateWorkerBlockOutput = struct {};
+pub const CreateWorkerBlockOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

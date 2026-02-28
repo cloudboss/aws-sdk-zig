@@ -13,8 +13,7 @@ pub const DeleteCollaborationInput = struct {
     };
 };
 
-pub const DeleteCollaborationOutput = struct {
-};
+pub const DeleteCollaborationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

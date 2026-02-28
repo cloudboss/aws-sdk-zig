@@ -21,8 +21,7 @@ pub const DisassociateMemberFromFleetInput = struct {
     };
 };
 
-pub const DisassociateMemberFromFleetOutput = struct {
-};
+pub const DisassociateMemberFromFleetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

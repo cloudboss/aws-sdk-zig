@@ -19,8 +19,7 @@ pub const RegisterEventTopicInput = struct {
     };
 };
 
-pub const RegisterEventTopicOutput = struct {
-};
+pub const RegisterEventTopicOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

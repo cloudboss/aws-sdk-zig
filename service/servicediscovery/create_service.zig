@@ -105,7 +105,7 @@ pub const CreateServiceInput = struct {
     /// `DiscoverInstances` API operation. No DNS records is registered for the
     /// service
     /// instances. The only valid value is `HTTP`.
-    type: ?ServiceTypeOption = null,
+    @"type": ?ServiceTypeOption = null,
 
     pub const json_field_names = .{
         .creator_request_id = "CreatorRequestId",
@@ -116,7 +116,7 @@ pub const CreateServiceInput = struct {
         .name = "Name",
         .namespace_id = "NamespaceId",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

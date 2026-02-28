@@ -8,7 +8,8 @@ const ApplicationPreferences = @import("application_preferences.zig").Applicatio
 const DatabasePreferences = @import("database_preferences.zig").DatabasePreferences;
 const PrioritizeBusinessGoals = @import("prioritize_business_goals.zig").PrioritizeBusinessGoals;
 
-pub const GetPortfolioPreferencesInput = struct {};
+pub const GetPortfolioPreferencesInput = struct {
+};
 
 pub const GetPortfolioPreferencesOutput = struct {
     /// The classification for application component types.

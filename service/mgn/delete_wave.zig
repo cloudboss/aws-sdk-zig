@@ -17,7 +17,8 @@ pub const DeleteWaveInput = struct {
     };
 };
 
-pub const DeleteWaveOutput = struct {};
+pub const DeleteWaveOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,8 +13,7 @@ pub const StopModelCustomizationJobInput = struct {
     };
 };
 
-pub const StopModelCustomizationJobOutput = struct {
-};
+pub const StopModelCustomizationJobOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

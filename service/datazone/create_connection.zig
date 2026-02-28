@@ -84,7 +84,7 @@ pub const CreateConnectionOutput = struct {
     scope: ?ConnectionScope = null,
 
     /// The connection type.
-    @"type": ConnectionType,
+    type: ConnectionType,
 
     pub const json_field_names = .{
         .connection_id = "connectionId",
@@ -97,7 +97,7 @@ pub const CreateConnectionOutput = struct {
         .project_id = "projectId",
         .props = "props",
         .scope = "scope",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

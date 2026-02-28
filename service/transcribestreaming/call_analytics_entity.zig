@@ -30,7 +30,7 @@ pub const CallAnalyticsEntity = struct {
 
     /// The type of PII identified. For example, `NAME` or
     /// `CREDIT_DEBIT_NUMBER`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .begin_offset_millis = "BeginOffsetMillis",
@@ -38,6 +38,6 @@ pub const CallAnalyticsEntity = struct {
         .confidence = "Confidence",
         .content = "Content",
         .end_offset_millis = "EndOffsetMillis",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

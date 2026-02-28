@@ -24,13 +24,13 @@ pub const CreateReportGroupInput = struct {
     tags: ?[]const Tag = null,
 
     /// The type of report group.
-    @"type": ReportType,
+    type: ReportType,
 
     pub const json_field_names = .{
         .export_config = "exportConfig",
         .name = "name",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

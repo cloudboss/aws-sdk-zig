@@ -13,7 +13,8 @@ pub const CreateConfigurationSetInput = struct {
     };
 };
 
-pub const CreateConfigurationSetOutput = struct {};
+pub const CreateConfigurationSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

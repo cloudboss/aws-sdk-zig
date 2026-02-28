@@ -31,7 +31,8 @@ pub const AssociateAwsTrainingCertificationEmailDomainInput = struct {
     };
 };
 
-pub const AssociateAwsTrainingCertificationEmailDomainOutput = struct {};
+pub const AssociateAwsTrainingCertificationEmailDomainOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

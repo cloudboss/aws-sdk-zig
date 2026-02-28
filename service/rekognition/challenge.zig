@@ -4,13 +4,13 @@ const ChallengeType = @import("challenge_type.zig").ChallengeType;
 /// Liveness session.
 pub const Challenge = struct {
     /// The type of the challenge being used for the Face Liveness session.
-    type: ChallengeType,
+    @"type": ChallengeType,
 
     /// The version of the challenge being used for the Face Liveness session.
     version: []const u8,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .version = "Version",
     };
 };

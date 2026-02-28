@@ -26,7 +26,7 @@ pub const MemoryStrategy = struct {
     strategy_id: []const u8,
 
     /// The type of the memory strategy.
-    @"type": MemoryStrategyType,
+    type: MemoryStrategyType,
 
     /// The timestamp when the memory strategy was last updated.
     updated_at: ?i64,
@@ -39,7 +39,7 @@ pub const MemoryStrategy = struct {
         .namespaces = "namespaces",
         .status = "status",
         .strategy_id = "strategyId",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

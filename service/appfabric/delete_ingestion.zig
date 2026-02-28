@@ -21,8 +21,7 @@ pub const DeleteIngestionInput = struct {
     };
 };
 
-pub const DeleteIngestionOutput = struct {
-};
+pub const DeleteIngestionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

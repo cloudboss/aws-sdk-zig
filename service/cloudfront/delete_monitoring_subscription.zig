@@ -9,8 +9,7 @@ pub const DeleteMonitoringSubscriptionInput = struct {
     distribution_id: []const u8,
 };
 
-pub const DeleteMonitoringSubscriptionOutput = struct {
-};
+pub const DeleteMonitoringSubscriptionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

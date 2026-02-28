@@ -18,8 +18,7 @@ pub const DeleteContactFlowModuleInput = struct {
     };
 };
 
-pub const DeleteContactFlowModuleOutput = struct {
-};
+pub const DeleteContactFlowModuleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,8 +21,7 @@ pub const DeleteRelatedItemInput = struct {
     };
 };
 
-pub const DeleteRelatedItemOutput = struct {
-};
+pub const DeleteRelatedItemOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

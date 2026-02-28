@@ -10,10 +10,10 @@ pub const VectorSearchRerankingConfiguration = struct {
 
     /// Specifies the type of reranking model to use. Currently, the only supported
     /// value is `BEDROCK_RERANKING_MODEL`.
-    @"type": VectorSearchRerankingConfigurationType,
+    type: VectorSearchRerankingConfigurationType,
 
     pub const json_field_names = .{
         .bedrock_reranking_configuration = "bedrockRerankingConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

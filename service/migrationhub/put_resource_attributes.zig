@@ -53,7 +53,8 @@ pub const PutResourceAttributesInput = struct {
     };
 };
 
-pub const PutResourceAttributesOutput = struct {};
+pub const PutResourceAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

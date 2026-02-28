@@ -7,10 +7,10 @@ pub const BatchJobDependency = struct {
     job_id: ?[]const u8,
 
     /// The type of the job dependency.
-    type: ?BatchJobDependencyType,
+    @"type": ?BatchJobDependencyType,
 
     pub const json_field_names = .{
         .job_id = "JobId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

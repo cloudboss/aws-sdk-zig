@@ -93,7 +93,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: IncreaseNodeGroupsInGlobalR
                 const n_1 = idx_1 + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RegionalConfigurations.RegionalConfiguration.{d}.ReshardingConfiguration.ReshardingConfiguration.{d}.NodeGroupId=", .{n, n_1}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RegionalConfigurations.RegionalConfiguration.{d}.ReshardingConfiguration.ReshardingConfiguration.{d}.NodeGroupId=", .{ n, n_1 }) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
                     if (item_1.node_group_id) |fv_2| {
                         try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -104,7 +104,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: IncreaseNodeGroupsInGlobalR
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RegionalConfigurations.RegionalConfiguration.{d}.ReshardingConfiguration.ReshardingConfiguration.{d}.PreferredAvailabilityZones.AvailabilityZone.{d}=", .{n, n_1, n_2}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RegionalConfigurations.RegionalConfiguration.{d}.ReshardingConfiguration.ReshardingConfiguration.{d}.PreferredAvailabilityZones.AvailabilityZone.{d}=", .{ n, n_1, n_2 }) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }

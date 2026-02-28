@@ -21,8 +21,7 @@ pub const DeleteResolverInput = struct {
     };
 };
 
-pub const DeleteResolverOutput = struct {
-};
+pub const DeleteResolverOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

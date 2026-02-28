@@ -190,8 +190,7 @@ pub const DeleteScheduledActionInput = struct {
     };
 };
 
-pub const DeleteScheduledActionOutput = struct {
-};
+pub const DeleteScheduledActionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

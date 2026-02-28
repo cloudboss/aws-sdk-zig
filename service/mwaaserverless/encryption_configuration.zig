@@ -16,10 +16,10 @@ pub const EncryptionConfiguration = struct {
     /// The type of encryption to use. Values are `AWS_MANAGED_KEY` (Amazon Web
     /// Services manages the encryption key) or `CUSTOMER_MANAGED_KEY` (you provide
     /// a KMS key).
-    type: EncryptionType,
+    @"type": EncryptionType,
 
     pub const json_field_names = .{
         .kms_key_id = "KmsKeyId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

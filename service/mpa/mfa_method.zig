@@ -7,10 +7,10 @@ pub const MfaMethod = struct {
     sync_status: MfaSyncStatus,
 
     /// The type of MFA configuration used by the approver
-    type: MfaType,
+    @"type": MfaType,
 
     pub const json_field_names = .{
         .sync_status = "SyncStatus",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

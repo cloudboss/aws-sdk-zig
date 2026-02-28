@@ -25,7 +25,7 @@ pub const Node = struct {
 
     /// The type of entity represented by this node, such as `Service` or
     /// `Resource`.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .duration = "Duration",
@@ -34,6 +34,6 @@ pub const Node = struct {
         .node_id = "NodeId",
         .operation = "Operation",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

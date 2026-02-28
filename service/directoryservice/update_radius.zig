@@ -20,8 +20,7 @@ pub const UpdateRadiusInput = struct {
     };
 };
 
-pub const UpdateRadiusOutput = struct {
-};
+pub const UpdateRadiusOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

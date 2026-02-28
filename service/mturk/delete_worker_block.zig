@@ -18,7 +18,8 @@ pub const DeleteWorkerBlockInput = struct {
     };
 };
 
-pub const DeleteWorkerBlockOutput = struct {};
+pub const DeleteWorkerBlockOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,8 +14,7 @@ pub const StartConfigRulesEvaluationInput = struct {
     };
 };
 
-pub const StartConfigRulesEvaluationOutput = struct {
-};
+pub const StartConfigRulesEvaluationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

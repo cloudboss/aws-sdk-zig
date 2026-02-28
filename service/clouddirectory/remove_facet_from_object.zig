@@ -23,8 +23,7 @@ pub const RemoveFacetFromObjectInput = struct {
     };
 };
 
-pub const RemoveFacetFromObjectOutput = struct {
-};
+pub const RemoveFacetFromObjectOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -27,8 +27,7 @@ pub const PutRecommendationFeedbackInput = struct {
     };
 };
 
-pub const PutRecommendationFeedbackOutput = struct {
-};
+pub const PutRecommendationFeedbackOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

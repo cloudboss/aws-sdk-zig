@@ -33,8 +33,7 @@ pub const UpdateConditionalForwarderInput = struct {
     };
 };
 
-pub const UpdateConditionalForwarderOutput = struct {
-};
+pub const UpdateConditionalForwarderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

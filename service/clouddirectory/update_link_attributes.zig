@@ -25,8 +25,7 @@ pub const UpdateLinkAttributesInput = struct {
     };
 };
 
-pub const UpdateLinkAttributesOutput = struct {
-};
+pub const UpdateLinkAttributesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

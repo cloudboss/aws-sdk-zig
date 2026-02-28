@@ -17,8 +17,7 @@ pub const DeleteWarmPoolInput = struct {
     force_delete: ?bool = null,
 };
 
-pub const DeleteWarmPoolOutput = struct {
-};
+pub const DeleteWarmPoolOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

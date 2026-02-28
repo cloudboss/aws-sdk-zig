@@ -39,7 +39,8 @@ pub const SendBonusInput = struct {
     };
 };
 
-pub const SendBonusOutput = struct {};
+pub const SendBonusOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

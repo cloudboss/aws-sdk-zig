@@ -13,10 +13,10 @@ pub const ExportServerSideEncryption = struct {
 
     /// The type of server side encryption used for encrypting the objects in Amazon
     /// S3.
-    @"type": ServerSideEncryptionTypes,
+    type: ServerSideEncryptionTypes,
 
     pub const json_field_names = .{
         .kms_key_arn = "KmsKeyArn",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

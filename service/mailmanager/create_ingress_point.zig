@@ -38,7 +38,7 @@ pub const CreateIngressPointInput = struct {
     traffic_policy_id: []const u8,
 
     /// The type of the ingress endpoint to create.
-    type: IngressPointType,
+    @"type": IngressPointType,
 
     pub const json_field_names = .{
         .client_token = "ClientToken",
@@ -48,7 +48,7 @@ pub const CreateIngressPointInput = struct {
         .rule_set_id = "RuleSetId",
         .tags = "Tags",
         .traffic_policy_id = "TrafficPolicyId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

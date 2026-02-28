@@ -9,10 +9,10 @@ pub const CachePointBlock = struct {
     ttl: ?CacheTTL,
 
     /// Specifies the type of cache point within the CachePointBlock.
-    @"type": CachePointType,
+    type: CachePointType,
 
     pub const json_field_names = .{
         .ttl = "ttl",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -17,8 +17,7 @@ pub const StartSoftwareDeploymentToImageBuilderInput = struct {
     };
 };
 
-pub const StartSoftwareDeploymentToImageBuilderOutput = struct {
-};
+pub const StartSoftwareDeploymentToImageBuilderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

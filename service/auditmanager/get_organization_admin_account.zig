@@ -4,8 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetOrganizationAdminAccountInput = struct {
-};
+pub const GetOrganizationAdminAccountInput = struct {};
 
 pub const GetOrganizationAdminAccountOutput = struct {
     /// The identifier for the administrator account.

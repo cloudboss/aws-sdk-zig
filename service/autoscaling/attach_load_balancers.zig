@@ -13,8 +13,7 @@ pub const AttachLoadBalancersInput = struct {
     load_balancer_names: []const []const u8,
 };
 
-pub const AttachLoadBalancersOutput = struct {
-};
+pub const AttachLoadBalancersOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

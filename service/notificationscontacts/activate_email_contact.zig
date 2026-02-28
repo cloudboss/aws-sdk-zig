@@ -21,7 +21,8 @@ pub const ActivateEmailContactInput = struct {
     };
 };
 
-pub const ActivateEmailContactOutput = struct {};
+pub const ActivateEmailContactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

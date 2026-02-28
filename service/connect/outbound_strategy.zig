@@ -7,10 +7,10 @@ pub const OutboundStrategy = struct {
     config: ?OutboundStrategyConfig,
 
     /// Type of the outbound strategy.
-    @"type": OutboundStrategyType,
+    type: OutboundStrategyType,
 
     pub const json_field_names = .{
         .config = "Config",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

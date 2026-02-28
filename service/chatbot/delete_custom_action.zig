@@ -13,8 +13,7 @@ pub const DeleteCustomActionInput = struct {
     };
 };
 
-pub const DeleteCustomActionOutput = struct {
-};
+pub const DeleteCustomActionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

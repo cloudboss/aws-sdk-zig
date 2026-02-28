@@ -49,7 +49,8 @@ pub const UpdateApplicationComponentConfigInput = struct {
     };
 };
 
-pub const UpdateApplicationComponentConfigOutput = struct {};
+pub const UpdateApplicationComponentConfigOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

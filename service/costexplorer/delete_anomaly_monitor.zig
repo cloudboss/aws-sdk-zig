@@ -13,8 +13,7 @@ pub const DeleteAnomalyMonitorInput = struct {
     };
 };
 
-pub const DeleteAnomalyMonitorOutput = struct {
-};
+pub const DeleteAnomalyMonitorOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

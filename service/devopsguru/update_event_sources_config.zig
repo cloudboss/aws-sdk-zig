@@ -16,8 +16,7 @@ pub const UpdateEventSourcesConfigInput = struct {
     };
 };
 
-pub const UpdateEventSourcesConfigOutput = struct {
-};
+pub const UpdateEventSourcesConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

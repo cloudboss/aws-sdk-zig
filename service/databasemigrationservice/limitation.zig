@@ -40,7 +40,7 @@ pub const Limitation = struct {
     /// The type of the limitation, such as action required, upgrade required, and
     /// limited
     /// feature.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .database_id = "DatabaseId",
@@ -48,6 +48,6 @@ pub const Limitation = struct {
         .engine_name = "EngineName",
         .impact = "Impact",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

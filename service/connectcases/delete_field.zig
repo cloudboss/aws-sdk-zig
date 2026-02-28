@@ -17,8 +17,7 @@ pub const DeleteFieldInput = struct {
     };
 };
 
-pub const DeleteFieldOutput = struct {
-};
+pub const DeleteFieldOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

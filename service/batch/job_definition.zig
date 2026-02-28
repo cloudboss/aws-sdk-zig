@@ -119,7 +119,7 @@ pub const JobDefinition = struct {
     /// parallel job
     /// definition](https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html) in
     /// the *Batch User Guide*.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .consumable_resource_properties = "consumableResourceProperties",
@@ -139,6 +139,6 @@ pub const JobDefinition = struct {
         .status = "status",
         .tags = "tags",
         .timeout = "timeout",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetHomeRegionInput = struct {};
+pub const GetHomeRegionInput = struct {
+};
 
 pub const GetHomeRegionOutput = struct {
     /// The name of the home region of the calling account.

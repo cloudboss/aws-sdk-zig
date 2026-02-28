@@ -20,13 +20,13 @@ pub const RegisterCertificateInput = struct {
     /// The function that the registered certificate performs. Valid values include
     /// `ClientLDAPS` or `ClientCertAuth`. The default value is
     /// `ClientLDAPS`.
-    @"type": ?CertificateType = null,
+    type: ?CertificateType = null,
 
     pub const json_field_names = .{
         .certificate_data = "CertificateData",
         .client_cert_auth_settings = "ClientCertAuthSettings",
         .directory_id = "DirectoryId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

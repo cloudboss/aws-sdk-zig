@@ -13,10 +13,10 @@ pub const PlatformDevice = struct {
     /// The type of device that's available on the container instance. The only
     /// supported
     /// value is `GPU`.
-    @"type": PlatformDeviceType,
+    type: PlatformDeviceType,
 
     pub const json_field_names = .{
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -8,10 +8,10 @@ pub const ConcatenationSource = struct {
     media_capture_pipeline_source_configuration: MediaCapturePipelineSourceConfiguration,
 
     /// The type of concatenation source in a configuration object.
-    @"type": ConcatenationSourceType,
+    type: ConcatenationSourceType,
 
     pub const json_field_names = .{
         .media_capture_pipeline_source_configuration = "MediaCapturePipelineSourceConfiguration",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

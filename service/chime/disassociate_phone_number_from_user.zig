@@ -17,8 +17,7 @@ pub const DisassociatePhoneNumberFromUserInput = struct {
     };
 };
 
-pub const DisassociatePhoneNumberFromUserOutput = struct {
-};
+pub const DisassociatePhoneNumberFromUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

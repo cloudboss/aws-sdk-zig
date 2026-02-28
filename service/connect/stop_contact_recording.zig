@@ -29,8 +29,7 @@ pub const StopContactRecordingInput = struct {
     };
 };
 
-pub const StopContactRecordingOutput = struct {
-};
+pub const StopContactRecordingOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

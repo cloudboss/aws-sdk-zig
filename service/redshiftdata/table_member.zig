@@ -8,11 +8,11 @@ pub const TableMember = struct {
 
     /// The type of the table. Possible values include TABLE, VIEW, SYSTEM TABLE,
     /// GLOBAL TEMPORARY, LOCAL TEMPORARY, ALIAS, and SYNONYM.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .name = "name",
         .schema = "schema",
-        .type = "type",
+        .@"type" = "type",
     };
 };

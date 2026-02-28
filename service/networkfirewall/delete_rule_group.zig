@@ -24,12 +24,12 @@ pub const DeleteRuleGroupInput = struct {
     ///
     /// This setting is required for requests that do not include the
     /// `RuleGroupARN`.
-    type: ?RuleGroupType = null,
+    @"type": ?RuleGroupType = null,
 
     pub const json_field_names = .{
         .rule_group_arn = "RuleGroupArn",
         .rule_group_name = "RuleGroupName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

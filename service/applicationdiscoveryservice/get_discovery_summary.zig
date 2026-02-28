@@ -8,8 +8,7 @@ const CustomerAgentInfo = @import("customer_agent_info.zig").CustomerAgentInfo;
 const CustomerConnectorInfo = @import("customer_connector_info.zig").CustomerConnectorInfo;
 const CustomerMeCollectorInfo = @import("customer_me_collector_info.zig").CustomerMeCollectorInfo;
 
-pub const GetDiscoverySummaryInput = struct {
-};
+pub const GetDiscoverySummaryInput = struct {};
 
 pub const GetDiscoverySummaryOutput = struct {
     /// Details about Agentless Collector collectors, including status.

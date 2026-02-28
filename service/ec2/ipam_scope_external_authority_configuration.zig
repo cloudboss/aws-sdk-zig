@@ -17,5 +17,5 @@ pub const IpamScopeExternalAuthorityConfiguration = struct {
 
     /// The type of external authority managing this scope. Currently supports
     /// `Infoblox` for integration with Infoblox Universal DDI.
-    @"type": ?IpamScopeExternalAuthorityType,
+    type: ?IpamScopeExternalAuthorityType,
 };

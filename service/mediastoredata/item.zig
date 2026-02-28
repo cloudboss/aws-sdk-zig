@@ -18,7 +18,7 @@ pub const Item = struct {
     name: ?[]const u8,
 
     /// The item type (folder or object).
-    type: ?ItemType,
+    @"type": ?ItemType,
 
     pub const json_field_names = .{
         .content_length = "ContentLength",
@@ -26,6 +26,6 @@ pub const Item = struct {
         .e_tag = "ETag",
         .last_modified = "LastModified",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

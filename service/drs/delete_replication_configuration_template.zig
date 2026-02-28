@@ -13,8 +13,7 @@ pub const DeleteReplicationConfigurationTemplateInput = struct {
     };
 };
 
-pub const DeleteReplicationConfigurationTemplateOutput = struct {
-};
+pub const DeleteReplicationConfigurationTemplateOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

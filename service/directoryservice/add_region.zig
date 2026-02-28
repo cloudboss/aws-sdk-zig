@@ -23,8 +23,7 @@ pub const AddRegionInput = struct {
     };
 };
 
-pub const AddRegionOutput = struct {
-};
+pub const AddRegionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

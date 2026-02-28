@@ -27,8 +27,7 @@ pub const UpdateLayoutInput = struct {
     };
 };
 
-pub const UpdateLayoutOutput = struct {
-};
+pub const UpdateLayoutOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

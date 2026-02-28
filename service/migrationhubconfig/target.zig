@@ -10,10 +10,10 @@ pub const Target = struct {
     id: ?[]const u8,
 
     /// The target type is always an `ACCOUNT`.
-    type: TargetType,
+    @"type": TargetType,
 
     pub const json_field_names = .{
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

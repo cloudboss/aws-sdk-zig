@@ -8,10 +8,10 @@ pub const SupplementalDataStorageLocation = struct {
     s_3_location: ?S3Location,
 
     /// Specifies the storage service used for this location.
-    @"type": SupplementalDataStorageLocationType,
+    type: SupplementalDataStorageLocationType,
 
     pub const json_field_names = .{
         .s_3_location = "s3Location",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -29,7 +29,7 @@ pub const CreateLinkRequest = struct {
     ///
     /// Constraints: Maximum length of 128 characters. Cannot include the following
     /// characters: | \ ^
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .bandwidth = "Bandwidth",
@@ -38,6 +38,6 @@ pub const CreateLinkRequest = struct {
         .provider = "Provider",
         .site_id = "SiteId",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -17,8 +17,7 @@ pub const UpdateEventIntegrationInput = struct {
     };
 };
 
-pub const UpdateEventIntegrationOutput = struct {
-};
+pub const UpdateEventIntegrationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

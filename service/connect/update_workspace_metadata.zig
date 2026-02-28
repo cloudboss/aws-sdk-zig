@@ -31,8 +31,7 @@ pub const UpdateWorkspaceMetadataInput = struct {
     };
 };
 
-pub const UpdateWorkspaceMetadataOutput = struct {
-};
+pub const UpdateWorkspaceMetadataOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

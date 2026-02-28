@@ -42,7 +42,7 @@ pub const GetCapabilityOutput = struct {
     name: []const u8,
 
     /// Returns the type of the capability. Currently, only `edi` is supported.
-    @"type": CapabilityType,
+    type: CapabilityType,
 
     pub const json_field_names = .{
         .capability_arn = "capabilityArn",
@@ -52,7 +52,7 @@ pub const GetCapabilityOutput = struct {
         .instructions_documents = "instructionsDocuments",
         .modified_at = "modifiedAt",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

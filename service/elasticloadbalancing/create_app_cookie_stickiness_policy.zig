@@ -17,8 +17,7 @@ pub const CreateAppCookieStickinessPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const CreateAppCookieStickinessPolicyOutput = struct {
-};
+pub const CreateAppCookieStickinessPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,8 +17,7 @@ pub const CancelSchemaExtensionInput = struct {
     };
 };
 
-pub const CancelSchemaExtensionOutput = struct {
-};
+pub const CancelSchemaExtensionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

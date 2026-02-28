@@ -21,8 +21,7 @@ pub const RedactConversationMessageInput = struct {
     };
 };
 
-pub const RedactConversationMessageOutput = struct {
-};
+pub const RedactConversationMessageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

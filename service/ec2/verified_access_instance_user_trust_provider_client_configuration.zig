@@ -27,7 +27,7 @@ pub const VerifiedAccessInstanceUserTrustProviderClientConfiguration = struct {
     token_endpoint: ?[]const u8,
 
     /// The trust provider type.
-    @"type": ?UserTrustProviderType,
+    type: ?UserTrustProviderType,
 
     /// The user info endpoint of the IdP.
     user_info_endpoint: ?[]const u8,

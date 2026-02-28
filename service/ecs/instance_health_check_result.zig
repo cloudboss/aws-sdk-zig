@@ -16,12 +16,12 @@ pub const InstanceHealthCheckResult = struct {
     status: ?InstanceHealthCheckState,
 
     /// The type of container instance health status that was verified.
-    @"type": ?InstanceHealthCheckType,
+    type: ?InstanceHealthCheckType,
 
     pub const json_field_names = .{
         .last_status_change = "lastStatusChange",
         .last_updated = "lastUpdated",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

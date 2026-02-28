@@ -44,12 +44,12 @@ pub const DialogAction = struct {
     ///
     /// * `ElicitSlot` – The next action is to elicit a slot
     /// value from the user.
-    type: DialogActionType,
+    @"type": DialogActionType,
 
     pub const json_field_names = .{
         .slot_elicitation_style = "slotElicitationStyle",
         .slot_to_elicit = "slotToElicit",
         .sub_slot_to_elicit = "subSlotToElicit",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -38,7 +38,7 @@ pub const Accessor = struct {
     /// The type of the accessor.
     ///
     /// Currently, accessor type is restricted to `BILLING_TOKEN`.
-    type: ?AccessorType,
+    @"type": ?AccessorType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -48,6 +48,6 @@ pub const Accessor = struct {
         .network_type = "NetworkType",
         .status = "Status",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

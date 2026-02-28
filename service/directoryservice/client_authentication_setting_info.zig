@@ -16,11 +16,11 @@ pub const ClientAuthenticationSettingInfo = struct {
     /// specified, a
     /// list of all client authentication types that are supported for the directory
     /// is retrieved.
-    @"type": ?ClientAuthenticationType,
+    type: ?ClientAuthenticationType,
 
     pub const json_field_names = .{
         .last_updated_date_time = "LastUpdatedDateTime",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

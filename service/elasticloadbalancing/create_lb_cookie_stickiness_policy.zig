@@ -20,8 +20,7 @@ pub const CreateLBCookieStickinessPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const CreateLBCookieStickinessPolicyOutput = struct {
-};
+pub const CreateLBCookieStickinessPolicyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

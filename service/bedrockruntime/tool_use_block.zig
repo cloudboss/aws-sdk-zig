@@ -16,12 +16,12 @@ pub const ToolUseBlock = struct {
     tool_use_id: []const u8,
 
     /// The type for the tool request.
-    @"type": ?ToolUseType,
+    type: ?ToolUseType,
 
     pub const json_field_names = .{
         .input = "input",
         .name = "name",
         .tool_use_id = "toolUseId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

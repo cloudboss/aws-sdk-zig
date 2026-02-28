@@ -8,10 +8,10 @@ pub const AuthenticationMode = struct {
 
     /// Indicates whether the user requires a password to authenticate. All
     /// newly-created users require a password.
-    type: ?InputAuthenticationType,
+    @"type": ?InputAuthenticationType,
 
     pub const json_field_names = .{
         .passwords = "Passwords",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

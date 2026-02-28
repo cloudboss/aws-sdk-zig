@@ -31,7 +31,8 @@ pub const AssociateCreatedArtifactInput = struct {
     };
 };
 
-pub const AssociateCreatedArtifactOutput = struct {};
+pub const AssociateCreatedArtifactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

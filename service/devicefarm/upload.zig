@@ -108,7 +108,7 @@ pub const Upload = struct {
     /// * INSTRUMENTATION_TEST_SPEC
     ///
     /// * XCTEST_UI_TEST_SPEC
-    @"type": ?UploadType,
+    type: ?UploadType,
 
     /// The presigned Amazon S3 URL that was used to store a file using a PUT
     /// request.
@@ -123,7 +123,7 @@ pub const Upload = struct {
         .metadata = "metadata",
         .name = "name",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .url = "url",
     };
 };

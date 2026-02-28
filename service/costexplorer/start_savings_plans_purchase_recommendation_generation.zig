@@ -4,8 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const StartSavingsPlansPurchaseRecommendationGenerationInput = struct {
-};
+pub const StartSavingsPlansPurchaseRecommendationGenerationInput = struct {};
 
 pub const StartSavingsPlansPurchaseRecommendationGenerationOutput = struct {
     /// The estimated time for when the recommendation generation will complete.

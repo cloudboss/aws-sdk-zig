@@ -17,8 +17,7 @@ pub const DeleteEventStreamInput = struct {
     };
 };
 
-pub const DeleteEventStreamOutput = struct {
-};
+pub const DeleteEventStreamOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

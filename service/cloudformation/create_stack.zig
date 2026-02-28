@@ -446,7 +446,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateStackInput, config: *
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RollbackConfiguration.RollbackTriggers.member.{d}.Type=", .{n}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
-                    try aws.url.appendUrlEncoded(alloc, &body_buf, item.@"type");
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, item.type);
                 }
             }
         }

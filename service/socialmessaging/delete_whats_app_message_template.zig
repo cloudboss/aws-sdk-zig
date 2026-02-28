@@ -25,7 +25,8 @@ pub const DeleteWhatsAppMessageTemplateInput = struct {
     };
 };
 
-pub const DeleteWhatsAppMessageTemplateOutput = struct {};
+pub const DeleteWhatsAppMessageTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

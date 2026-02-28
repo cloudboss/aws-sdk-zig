@@ -13,8 +13,7 @@ pub const DeleteRunInput = struct {
     };
 };
 
-pub const DeleteRunOutput = struct {
-};
+pub const DeleteRunOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

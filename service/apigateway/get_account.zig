@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ThrottleSettings = @import("throttle_settings.zig").ThrottleSettings;
 
-pub const GetAccountInput = struct {
-};
+pub const GetAccountInput = struct {};
 
 pub const GetAccountOutput = struct {
     /// The version of the API keys used for the account.

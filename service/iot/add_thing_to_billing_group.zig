@@ -28,7 +28,8 @@ pub const AddThingToBillingGroupInput = struct {
     };
 };
 
-pub const AddThingToBillingGroupOutput = struct {};
+pub const AddThingToBillingGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

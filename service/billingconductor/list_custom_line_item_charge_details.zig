@@ -18,12 +18,12 @@ pub const ListCustomLineItemChargeDetails = struct {
 
     /// The type of the custom line item that indicates whether the charge is a
     /// `fee` or `credit`.
-    @"type": CustomLineItemType,
+    type: CustomLineItemType,
 
     pub const json_field_names = .{
         .flat = "Flat",
         .line_item_filters = "LineItemFilters",
         .percentage = "Percentage",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

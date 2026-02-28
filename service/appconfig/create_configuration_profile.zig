@@ -79,7 +79,7 @@ pub const CreateConfigurationProfileInput = struct {
     /// `AWS.AppConfig.FeatureFlags`
     ///
     /// `AWS.Freeform`
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// A list of methods for validating the configuration.
     validators: ?[]const Validator = null,
@@ -92,7 +92,7 @@ pub const CreateConfigurationProfileInput = struct {
         .name = "Name",
         .retrieval_role_arn = "RetrievalRoleArn",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .validators = "Validators",
     };
 };
@@ -143,7 +143,7 @@ pub const CreateConfigurationProfileOutput = struct {
     /// `AWS.AppConfig.FeatureFlags`
     ///
     /// `AWS.Freeform`
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// A list of methods for validating the configuration.
     validators: ?[]const Validator = null,
@@ -157,7 +157,7 @@ pub const CreateConfigurationProfileOutput = struct {
         .location_uri = "LocationUri",
         .name = "Name",
         .retrieval_role_arn = "RetrievalRoleArn",
-        .@"type" = "Type",
+        .type = "Type",
         .validators = "Validators",
     };
 };
@@ -240,7 +240,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateConfigurationProfileI
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

@@ -16,7 +16,8 @@ pub const CancelBatchImportJobInput = struct {
     };
 };
 
-pub const CancelBatchImportJobOutput = struct {};
+pub const CancelBatchImportJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

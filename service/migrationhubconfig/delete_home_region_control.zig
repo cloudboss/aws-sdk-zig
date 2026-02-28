@@ -15,7 +15,8 @@ pub const DeleteHomeRegionControlInput = struct {
     };
 };
 
-pub const DeleteHomeRegionControlOutput = struct {};
+pub const DeleteHomeRegionControlOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

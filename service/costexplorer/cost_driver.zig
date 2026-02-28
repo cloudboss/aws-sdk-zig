@@ -24,11 +24,11 @@ pub const CostDriver = struct {
     /// SAVINGS_PLAN_RECURRING_FEE, SUPPORT_FEE, TAX, UPFRONT_RESERVATION_FEE,
     /// USAGE_CHANGE,
     /// COMMITMENT
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .metrics = "Metrics",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

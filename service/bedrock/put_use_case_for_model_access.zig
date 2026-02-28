@@ -13,8 +13,7 @@ pub const PutUseCaseForModelAccessInput = struct {
     };
 };
 
-pub const PutUseCaseForModelAccessOutput = struct {
-};
+pub const PutUseCaseForModelAccessOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

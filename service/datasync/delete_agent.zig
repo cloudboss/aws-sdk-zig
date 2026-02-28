@@ -15,8 +15,7 @@ pub const DeleteAgentInput = struct {
     };
 };
 
-pub const DeleteAgentOutput = struct {
-};
+pub const DeleteAgentOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,8 +21,7 @@ pub const CreateLogSubscriptionInput = struct {
     };
 };
 
-pub const CreateLogSubscriptionOutput = struct {
-};
+pub const CreateLogSubscriptionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

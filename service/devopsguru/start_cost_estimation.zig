@@ -19,8 +19,7 @@ pub const StartCostEstimationInput = struct {
     };
 };
 
-pub const StartCostEstimationOutput = struct {
-};
+pub const StartCostEstimationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -12,11 +12,11 @@ pub const HttpPackageConfiguration = struct {
 
     /// The streaming protocol for this package configuration. Supported values are
     /// `HLS` and `DASH`.
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .path = "Path",
         .source_group = "SourceGroup",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -26,8 +26,7 @@ pub const CompleteAttachmentUploadInput = struct {
     };
 };
 
-pub const CompleteAttachmentUploadOutput = struct {
-};
+pub const CompleteAttachmentUploadOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

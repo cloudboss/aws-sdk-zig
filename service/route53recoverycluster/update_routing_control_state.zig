@@ -31,7 +31,8 @@ pub const UpdateRoutingControlStateInput = struct {
     };
 };
 
-pub const UpdateRoutingControlStateOutput = struct {};
+pub const UpdateRoutingControlStateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

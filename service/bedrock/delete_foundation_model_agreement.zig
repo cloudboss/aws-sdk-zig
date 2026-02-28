@@ -13,8 +13,7 @@ pub const DeleteFoundationModelAgreementInput = struct {
     };
 };
 
-pub const DeleteFoundationModelAgreementOutput = struct {
-};
+pub const DeleteFoundationModelAgreementOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

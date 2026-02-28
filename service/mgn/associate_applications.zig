@@ -21,7 +21,8 @@ pub const AssociateApplicationsInput = struct {
     };
 };
 
-pub const AssociateApplicationsOutput = struct {};
+pub const AssociateApplicationsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

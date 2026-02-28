@@ -15,8 +15,7 @@ pub const DeleteChangeSetInput = struct {
     stack_name: ?[]const u8 = null,
 };
 
-pub const DeleteChangeSetOutput = struct {
-};
+pub const DeleteChangeSetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

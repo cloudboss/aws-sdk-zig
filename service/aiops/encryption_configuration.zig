@@ -9,10 +9,10 @@ pub const EncryptionConfiguration = struct {
 
     /// Displays whether investigation data is encrypted by a customer managed key
     /// or an Amazon Web Services owned key.
-    @"type": ?EncryptionConfigurationType,
+    type: ?EncryptionConfigurationType,
 
     pub const json_field_names = .{
         .kms_key_id = "kmsKeyId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

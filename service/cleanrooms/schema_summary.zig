@@ -41,7 +41,7 @@ pub const SchemaSummary = struct {
     selected_analysis_methods: ?[]const SelectedAnalysisMethod,
 
     /// The type of schema object.
-    @"type": SchemaType,
+    type: SchemaType,
 
     /// The time the schema object was last updated.
     update_time: i64,
@@ -56,7 +56,7 @@ pub const SchemaSummary = struct {
         .name = "name",
         .resource_arn = "resourceArn",
         .selected_analysis_methods = "selectedAnalysisMethods",
-        .@"type" = "type",
+        .type = "type",
         .update_time = "updateTime",
     };
 };

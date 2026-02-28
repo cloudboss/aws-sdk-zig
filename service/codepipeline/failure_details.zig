@@ -9,11 +9,11 @@ pub const FailureDetails = struct {
     message: []const u8,
 
     /// The type of the failure.
-    @"type": FailureType,
+    type: FailureType,
 
     pub const json_field_names = .{
         .external_execution_id = "externalExecutionId",
         .message = "message",
-        .@"type" = "type",
+        .type = "type",
     };
 };

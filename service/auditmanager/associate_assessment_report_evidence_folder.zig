@@ -17,8 +17,7 @@ pub const AssociateAssessmentReportEvidenceFolderInput = struct {
     };
 };
 
-pub const AssociateAssessmentReportEvidenceFolderOutput = struct {
-};
+pub const AssociateAssessmentReportEvidenceFolderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -11,5 +11,5 @@ pub const TrafficConfig = struct {
     single_weight_config: ?ContinuousDeploymentSingleWeightConfig,
 
     /// The type of traffic configuration.
-    @"type": ContinuousDeploymentPolicyType,
+    type: ContinuousDeploymentPolicyType,
 };

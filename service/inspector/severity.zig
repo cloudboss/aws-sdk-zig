@@ -3,13 +3,13 @@ pub const Severity = enum {
     medium,
     high,
     informational,
-    undefined,
+    @"undefined",
 
     pub const json_field_names = .{
         .low = "LOW",
         .medium = "MEDIUM",
         .high = "HIGH",
         .informational = "INFORMATIONAL",
-        .undefined = "UNDEFINED",
+        .@"undefined" = "UNDEFINED",
     };
 };

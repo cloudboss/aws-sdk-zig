@@ -13,7 +13,8 @@ pub const DeleteLinkInput = struct {
     };
 };
 
-pub const DeleteLinkOutput = struct {};
+pub const DeleteLinkOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

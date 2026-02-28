@@ -13,8 +13,7 @@ pub const DeleteHostInput = struct {
     };
 };
 
-pub const DeleteHostOutput = struct {
-};
+pub const DeleteHostOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,11 +21,11 @@ pub const AnalysisTemplateValidationStatusDetail = struct {
     status: AnalysisTemplateValidationStatus,
 
     /// The type of validation that was performed.
-    @"type": AnalysisTemplateValidationType,
+    type: AnalysisTemplateValidationType,
 
     pub const json_field_names = .{
         .reasons = "reasons",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

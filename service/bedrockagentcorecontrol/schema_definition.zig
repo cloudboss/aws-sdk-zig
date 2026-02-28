@@ -23,13 +23,13 @@ pub const SchemaDefinition = struct {
 
     /// The type of the schema definition. This field specifies the data type of the
     /// schema.
-    @"type": SchemaType,
+    type: SchemaType,
 
     pub const json_field_names = .{
         .description = "description",
         .items = "items",
         .properties = "properties",
         .required = "required",
-        .@"type" = "type",
+        .type = "type",
     };
 };

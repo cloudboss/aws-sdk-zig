@@ -17,8 +17,7 @@ pub const DeleteStorageProfileInput = struct {
     };
 };
 
-pub const DeleteStorageProfileOutput = struct {
-};
+pub const DeleteStorageProfileOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

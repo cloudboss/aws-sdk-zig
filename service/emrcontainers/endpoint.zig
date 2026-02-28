@@ -62,7 +62,7 @@ pub const Endpoint = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of the endpoint.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     /// The ID of the endpoint's virtual cluster.
     virtual_cluster_id: ?[]const u8,
@@ -84,7 +84,7 @@ pub const Endpoint = struct {
         .state_details = "stateDetails",
         .subnet_ids = "subnetIds",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .virtual_cluster_id = "virtualClusterId",
     };
 };

@@ -27,8 +27,7 @@ pub const UpdateNotificationInput = struct {
     };
 };
 
-pub const UpdateNotificationOutput = struct {
-};
+pub const UpdateNotificationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

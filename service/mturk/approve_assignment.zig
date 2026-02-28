@@ -24,7 +24,8 @@ pub const ApproveAssignmentInput = struct {
     };
 };
 
-pub const ApproveAssignmentOutput = struct {};
+pub const ApproveAssignmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

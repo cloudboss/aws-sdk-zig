@@ -3,7 +3,7 @@ const ThirdPartyType = @import("third_party_type.zig").ThirdPartyType;
 /// Identifying information for the configuration of a CloudFormation extension.
 pub const TypeConfigurationIdentifier = struct {
     /// The type of extension.
-    @"type": ?ThirdPartyType,
+    type: ?ThirdPartyType,
 
     /// The ARN for the extension, in this account and Region.
     ///

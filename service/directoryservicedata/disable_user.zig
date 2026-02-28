@@ -38,8 +38,7 @@ pub const DisableUserInput = struct {
     };
 };
 
-pub const DisableUserOutput = struct {
-};
+pub const DisableUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

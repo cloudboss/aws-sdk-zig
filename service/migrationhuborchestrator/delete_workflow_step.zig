@@ -21,7 +21,8 @@ pub const DeleteWorkflowStepInput = struct {
     };
 };
 
-pub const DeleteWorkflowStepOutput = struct {};
+pub const DeleteWorkflowStepOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -26,13 +26,13 @@ const ResourceAttributeType = @import("resource_attribute_type.zig").ResourceAtt
 /// `^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$`
 pub const ResourceAttribute = struct {
     /// Type of resource.
-    type: ResourceAttributeType,
+    @"type": ResourceAttributeType,
 
     /// Value of the resource type.
     value: []const u8,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

@@ -13,8 +13,7 @@ pub const DeleteCapacityReservationInput = struct {
     };
 };
 
-pub const DeleteCapacityReservationOutput = struct {
-};
+pub const DeleteCapacityReservationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

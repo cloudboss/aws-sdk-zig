@@ -43,5 +43,5 @@ pub const CustomerGateway = struct {
 
     /// The type of VPN connection the customer gateway supports
     /// (`ipsec.1`).
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 };

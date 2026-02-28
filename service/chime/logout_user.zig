@@ -17,8 +17,7 @@ pub const LogoutUserInput = struct {
     };
 };
 
-pub const LogoutUserOutput = struct {
-};
+pub const LogoutUserOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

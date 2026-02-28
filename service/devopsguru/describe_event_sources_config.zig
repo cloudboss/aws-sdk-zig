@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const EventSourcesConfig = @import("event_sources_config.zig").EventSourcesConfig;
 
-pub const DescribeEventSourcesConfigInput = struct {
-};
+pub const DescribeEventSourcesConfigInput = struct {};
 
 pub const DescribeEventSourcesConfigOutput = struct {
     /// Lists the event sources in the configuration.

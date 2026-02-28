@@ -13,8 +13,7 @@ pub const DeleteSlackWorkspaceAuthorizationInput = struct {
     };
 };
 
-pub const DeleteSlackWorkspaceAuthorizationOutput = struct {
-};
+pub const DeleteSlackWorkspaceAuthorizationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

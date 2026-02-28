@@ -3,5 +3,4 @@
 /// information, see [Node types in a
 /// flow](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html)
 /// in the Amazon Bedrock User Guide.
-pub const CollectorFlowNodeConfiguration = struct {
-};
+pub const CollectorFlowNodeConfiguration = struct {};

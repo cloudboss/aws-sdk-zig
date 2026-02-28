@@ -13,7 +13,8 @@ pub const CancelExportJobInput = struct {
     };
 };
 
-pub const CancelExportJobOutput = struct {};
+pub const CancelExportJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

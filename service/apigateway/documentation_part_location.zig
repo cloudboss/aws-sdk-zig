@@ -40,13 +40,13 @@ pub const DocumentationPartLocation = struct {
     /// `RESPONSE`, `RESPONSE_HEADER`, and `RESPONSE_BODY`. Content inheritance does
     /// not apply to any entity of the `API`, `AUTHORIZER`, `METHOD`, `MODEL`,
     /// `REQUEST_BODY`, or `RESOURCE` type.
-    @"type": DocumentationPartType,
+    type: DocumentationPartType,
 
     pub const json_field_names = .{
         .method = "method",
         .name = "name",
         .path = "path",
         .status_code = "statusCode",
-        .@"type" = "type",
+        .type = "type",
     };
 };

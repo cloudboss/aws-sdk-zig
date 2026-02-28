@@ -74,7 +74,7 @@ pub const CreateStateMachineInput = struct {
     /// default is
     /// `STANDARD`. You cannot update the `type` of a state machine once it
     /// has been created.
-    type: ?StateMachineType = null,
+    @"type": ?StateMachineType = null,
 
     /// Sets description about the state machine version. You can only set the
     /// description if the `publish` parameter is set to `true`. Otherwise, if you
@@ -91,7 +91,7 @@ pub const CreateStateMachineInput = struct {
         .role_arn = "roleArn",
         .tags = "tags",
         .tracing_configuration = "tracingConfiguration",
-        .type = "type",
+        .@"type" = "type",
         .version_description = "versionDescription",
     };
 };

@@ -17,8 +17,7 @@ pub const DisassociateMemberFromFarmInput = struct {
     };
 };
 
-pub const DisassociateMemberFromFarmOutput = struct {
-};
+pub const DisassociateMemberFromFarmOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

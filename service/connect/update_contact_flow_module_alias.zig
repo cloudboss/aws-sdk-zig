@@ -34,8 +34,7 @@ pub const UpdateContactFlowModuleAliasInput = struct {
     };
 };
 
-pub const UpdateContactFlowModuleAliasOutput = struct {
-};
+pub const UpdateContactFlowModuleAliasOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

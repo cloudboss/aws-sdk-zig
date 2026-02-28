@@ -18,7 +18,8 @@ pub const RemoveTemplateActionInput = struct {
     };
 };
 
-pub const RemoveTemplateActionOutput = struct {};
+pub const RemoveTemplateActionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

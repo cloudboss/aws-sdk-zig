@@ -13,7 +13,8 @@ pub const DeleteMonitorInput = struct {
     };
 };
 
-pub const DeleteMonitorOutput = struct {};
+pub const DeleteMonitorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

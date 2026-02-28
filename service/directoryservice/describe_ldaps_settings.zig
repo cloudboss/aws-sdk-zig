@@ -18,13 +18,13 @@ pub const DescribeLDAPSSettingsInput = struct {
 
     /// The type of LDAP security to enable. Currently only the value `Client` is
     /// supported.
-    @"type": ?LDAPSType = null,
+    type: ?LDAPSType = null,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
         .limit = "Limit",
         .next_token = "NextToken",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

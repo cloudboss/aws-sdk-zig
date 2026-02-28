@@ -12,11 +12,11 @@ pub const ToolResultBlockStart = struct {
     tool_use_id: []const u8,
 
     /// The type for the tool that was used to generate this tool result block.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .status = "status",
         .tool_use_id = "toolUseId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

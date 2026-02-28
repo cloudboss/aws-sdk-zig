@@ -25,7 +25,7 @@ pub const AccountLimit = struct {
     /// current
     /// account. (Traffic policy instances are referred to as traffic flow policy
     /// records in the Amazon Route 53 console.)
-    type: AccountLimitType,
+    @"type": AccountLimitType,
 
     /// The current value for the limit that is specified by
     /// [Type](https://docs.aws.amazon.com/Route53/latest/APIReference/API_AccountLimit.html#Route53-Type-AccountLimit-Type).

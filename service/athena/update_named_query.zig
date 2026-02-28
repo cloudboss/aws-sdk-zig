@@ -25,8 +25,7 @@ pub const UpdateNamedQueryInput = struct {
     };
 };
 
-pub const UpdateNamedQueryOutput = struct {
-};
+pub const UpdateNamedQueryOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

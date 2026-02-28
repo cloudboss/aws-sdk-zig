@@ -13,8 +13,7 @@ pub const DeleteWebhookInput = struct {
     };
 };
 
-pub const DeleteWebhookOutput = struct {
-};
+pub const DeleteWebhookOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

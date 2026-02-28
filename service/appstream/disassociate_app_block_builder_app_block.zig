@@ -17,8 +17,7 @@ pub const DisassociateAppBlockBuilderAppBlockInput = struct {
     };
 };
 
-pub const DisassociateAppBlockBuilderAppBlockOutput = struct {
-};
+pub const DisassociateAppBlockBuilderAppBlockOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

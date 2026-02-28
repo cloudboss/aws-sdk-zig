@@ -22,8 +22,7 @@ pub const DeleteQueueLimitAssociationInput = struct {
     };
 };
 
-pub const DeleteQueueLimitAssociationOutput = struct {
-};
+pub const DeleteQueueLimitAssociationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

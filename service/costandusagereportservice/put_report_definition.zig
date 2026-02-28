@@ -21,8 +21,7 @@ pub const PutReportDefinitionInput = struct {
     };
 };
 
-pub const PutReportDefinitionOutput = struct {
-};
+pub const PutReportDefinitionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

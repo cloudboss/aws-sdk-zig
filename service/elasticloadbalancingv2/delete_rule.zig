@@ -9,8 +9,7 @@ pub const DeleteRuleInput = struct {
     rule_arn: []const u8,
 };
 
-pub const DeleteRuleOutput = struct {
-};
+pub const DeleteRuleOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

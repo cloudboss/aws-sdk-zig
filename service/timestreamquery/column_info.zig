@@ -14,10 +14,10 @@ pub const ColumnInfo = struct {
     /// Scalar data types are integers, strings, doubles, Booleans, and others.
     /// Complex data
     /// types are types such as arrays, rows, and others.
-    type: ?*Type = null,
+    @"type": ?*Type = null,
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

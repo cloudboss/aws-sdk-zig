@@ -1,3 +1,2 @@
 /// The connector metadata specific to Trend Micro.
-pub const TrendmicroMetadata = struct {
-};
+pub const TrendmicroMetadata = struct {};

@@ -31,7 +31,8 @@ pub const DisassociateCreatedArtifactInput = struct {
     };
 };
 
-pub const DisassociateCreatedArtifactOutput = struct {};
+pub const DisassociateCreatedArtifactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

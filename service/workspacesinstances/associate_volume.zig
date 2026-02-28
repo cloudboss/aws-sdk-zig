@@ -21,7 +21,8 @@ pub const AssociateVolumeInput = struct {
     };
 };
 
-pub const AssociateVolumeOutput = struct {};
+pub const AssociateVolumeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

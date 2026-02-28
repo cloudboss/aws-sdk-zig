@@ -23,7 +23,7 @@ pub const PropertygraphData = struct {
     ///   relationship type for openCypher.
     /// * ** `ep` **   -   Edge properties for Gremlin, or relationship properties
     ///   for openCypher.
-    type: []const u8,
+    @"type": []const u8,
 
     /// This is a JSON object that contains a value field for the value itself, and
     /// a datatype field for the JSON data type of that value:
@@ -34,7 +34,7 @@ pub const PropertygraphData = struct {
         .id = "id",
         .key = "key",
         .to = "to",
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

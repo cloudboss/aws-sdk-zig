@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DirectoryLimits = @import("directory_limits.zig").DirectoryLimits;
 
-pub const GetDirectoryLimitsInput = struct {
-};
+pub const GetDirectoryLimitsInput = struct {};
 
 pub const GetDirectoryLimitsOutput = struct {
     /// A DirectoryLimits object that contains the directory limits for the

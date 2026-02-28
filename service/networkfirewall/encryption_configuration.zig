@@ -19,10 +19,10 @@ pub const EncryptionConfiguration = struct {
 
     /// The type of Amazon Web Services KMS key to use for encryption of your
     /// Network Firewall resources.
-    type: EncryptionType,
+    @"type": EncryptionType,
 
     pub const json_field_names = .{
         .key_id = "KeyId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

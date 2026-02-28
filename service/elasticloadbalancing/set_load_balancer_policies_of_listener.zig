@@ -18,8 +18,7 @@ pub const SetLoadBalancerPoliciesOfListenerInput = struct {
     policy_names: []const []const u8,
 };
 
-pub const SetLoadBalancerPoliciesOfListenerOutput = struct {
-};
+pub const SetLoadBalancerPoliciesOfListenerOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

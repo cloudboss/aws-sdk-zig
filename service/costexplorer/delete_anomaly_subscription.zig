@@ -14,8 +14,7 @@ pub const DeleteAnomalySubscriptionInput = struct {
     };
 };
 
-pub const DeleteAnomalySubscriptionOutput = struct {
-};
+pub const DeleteAnomalySubscriptionOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

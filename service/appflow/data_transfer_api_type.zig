@@ -1,11 +1,11 @@
 pub const DataTransferApiType = enum {
     sync,
-    @"async",
+    async,
     automatic,
 
     pub const json_field_names = .{
         .sync = "SYNC",
-        .@"async" = "ASYNC",
+        .async = "ASYNC",
         .automatic = "AUTOMATIC",
     };
 };

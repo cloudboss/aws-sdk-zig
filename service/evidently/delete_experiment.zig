@@ -17,7 +17,8 @@ pub const DeleteExperimentInput = struct {
     };
 };
 
-pub const DeleteExperimentOutput = struct {};
+pub const DeleteExperimentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

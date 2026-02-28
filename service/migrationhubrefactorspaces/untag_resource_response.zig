@@ -1,1 +1,2 @@
-pub const UntagResourceResponse = struct {};
+pub const UntagResourceResponse = struct {
+};

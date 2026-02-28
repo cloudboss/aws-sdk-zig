@@ -22,13 +22,13 @@ pub const ListViewsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of the view.
-    @"type": ?ViewType = null,
+    type: ?ViewType = null,
 
     pub const json_field_names = .{
         .instance_id = "InstanceId",
         .max_results = "MaxResults",
         .next_token = "NextToken",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -105,7 +105,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListViewsInput, config: *aw
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

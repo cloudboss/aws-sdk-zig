@@ -23,8 +23,7 @@ pub const DeleteAutomatedReasoningPolicyTestCaseInput = struct {
     };
 };
 
-pub const DeleteAutomatedReasoningPolicyTestCaseOutput = struct {
-};
+pub const DeleteAutomatedReasoningPolicyTestCaseOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

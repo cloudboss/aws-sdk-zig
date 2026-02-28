@@ -14,8 +14,7 @@ pub const DeleteTaskInput = struct {
     };
 };
 
-pub const DeleteTaskOutput = struct {
-};
+pub const DeleteTaskOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

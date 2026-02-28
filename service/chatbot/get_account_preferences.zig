@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountPreferences = @import("account_preferences.zig").AccountPreferences;
 
-pub const GetAccountPreferencesInput = struct {
-};
+pub const GetAccountPreferencesInput = struct {};
 
 pub const GetAccountPreferencesOutput = struct {
     /// The preferences related to AWS Chatbot usage in the calling AWS account.

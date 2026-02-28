@@ -86,7 +86,7 @@ pub const DataSource = struct {
     ///
     /// * **RELATIONAL_DATABASE**: The data source is a
     /// relational database.
-    @"type": ?DataSourceType,
+    type: ?DataSourceType,
 
     pub const json_field_names = .{
         .data_source_arn = "dataSourceArn",
@@ -101,6 +101,6 @@ pub const DataSource = struct {
         .open_search_service_config = "openSearchServiceConfig",
         .relational_database_config = "relationalDatabaseConfig",
         .service_role_arn = "serviceRoleArn",
-        .@"type" = "type",
+        .type = "type",
     };
 };

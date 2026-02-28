@@ -7,10 +7,10 @@ pub const FlowNodeOutput = struct {
 
     /// The data type of the output. If the output doesn't match this type at
     /// runtime, a validation error will be thrown.
-    @"type": FlowNodeIODataType,
+    type: FlowNodeIODataType,
 
     pub const json_field_names = .{
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

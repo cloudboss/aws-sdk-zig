@@ -51,7 +51,7 @@ pub const SNOMEDCTAttribute = struct {
     /// The type of attribute. Possible types include DX_NAME, ACUITY, DIRECTION,
     /// SYSTEM_ORGAN_SITE,TEST_NAME, TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, and
     /// TREATMENT_NAME.
-    @"type": ?SNOMEDCTAttributeType,
+    type: ?SNOMEDCTAttributeType,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",
@@ -64,6 +64,6 @@ pub const SNOMEDCTAttribute = struct {
         .snomedct_concepts = "SNOMEDCTConcepts",
         .text = "Text",
         .traits = "Traits",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

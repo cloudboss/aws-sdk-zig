@@ -21,8 +21,7 @@ pub const RevokeTokenInput = struct {
     };
 };
 
-pub const RevokeTokenOutput = struct {
-};
+pub const RevokeTokenOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

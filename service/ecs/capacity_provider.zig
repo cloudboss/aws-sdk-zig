@@ -75,7 +75,7 @@ pub const CapacityProvider = struct {
     /// is
     /// `MANAGED_INSTANCES`, indicating that Amazon ECS manages the underlying
     /// Amazon EC2 instances on your behalf.
-    @"type": ?CapacityProviderType,
+    type: ?CapacityProviderType,
 
     /// The update status of the capacity provider. The following are the possible
     /// states that
@@ -109,7 +109,7 @@ pub const CapacityProvider = struct {
         .name = "name",
         .status = "status",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .update_status = "updateStatus",
         .update_status_reason = "updateStatusReason",
     };

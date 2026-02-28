@@ -53,7 +53,7 @@ pub const ExportJobResponse = struct {
     total_processed: ?i32,
 
     /// The job type. This value is EXPORT for export jobs.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",
@@ -68,6 +68,6 @@ pub const ExportJobResponse = struct {
         .total_failures = "TotalFailures",
         .total_pieces = "TotalPieces",
         .total_processed = "TotalProcessed",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

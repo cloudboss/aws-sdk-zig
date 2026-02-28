@@ -20,8 +20,7 @@ pub const StartMetricStreamsInput = struct {
     };
 };
 
-pub const StartMetricStreamsOutput = struct {
-};
+pub const StartMetricStreamsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

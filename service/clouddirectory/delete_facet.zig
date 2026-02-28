@@ -18,8 +18,7 @@ pub const DeleteFacetInput = struct {
     };
 };
 
-pub const DeleteFacetOutput = struct {
-};
+pub const DeleteFacetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

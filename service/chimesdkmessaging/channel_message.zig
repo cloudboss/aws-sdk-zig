@@ -75,7 +75,7 @@ pub const ChannelMessage = struct {
     target: ?[]const Target,
 
     /// The message type.
-    @"type": ?ChannelMessageType,
+    type: ?ChannelMessageType,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",
@@ -93,6 +93,6 @@ pub const ChannelMessage = struct {
         .status = "Status",
         .sub_channel_id = "SubChannelId",
         .target = "Target",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

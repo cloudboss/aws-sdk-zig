@@ -39,7 +39,7 @@ pub const ListNotificationsInput = struct {
     task_status: ?TaskStatus = null,
 
     /// The type of notifications.
-    @"type": NotificationType,
+    type: NotificationType,
 
     pub const json_field_names = .{
         .after_timestamp = "afterTimestamp",
@@ -49,7 +49,7 @@ pub const ListNotificationsInput = struct {
         .next_token = "nextToken",
         .subjects = "subjects",
         .task_status = "taskStatus",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -162,7 +162,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListNotificationsInput, con
     }
     if (query_has_prev) try query_buf.appendSlice(alloc, "&");
     try query_buf.appendSlice(alloc, "type=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(input.@"type"));
+    try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(input.type));
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 

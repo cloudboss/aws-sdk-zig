@@ -18,8 +18,7 @@ pub const DeleteMicrosoftTeamsUserIdentityInput = struct {
     };
 };
 
-pub const DeleteMicrosoftTeamsUserIdentityOutput = struct {
-};
+pub const DeleteMicrosoftTeamsUserIdentityOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

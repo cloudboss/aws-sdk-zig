@@ -22,7 +22,8 @@ pub const DisassociateQualificationFromWorkerInput = struct {
     };
 };
 
-pub const DisassociateQualificationFromWorkerOutput = struct {};
+pub const DisassociateQualificationFromWorkerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const ExecuteCoreNetworkChangeSetInput = struct {
     };
 };
 
-pub const ExecuteCoreNetworkChangeSetOutput = struct {};
+pub const ExecuteCoreNetworkChangeSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

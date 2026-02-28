@@ -23,7 +23,8 @@ pub const CreateDataLakeExceptionSubscriptionInput = struct {
     };
 };
 
-pub const CreateDataLakeExceptionSubscriptionOutput = struct {};
+pub const CreateDataLakeExceptionSubscriptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -20,7 +20,8 @@ pub const StopQueryWorkloadInsightsTopContributorsDataInput = struct {
     };
 };
 
-pub const StopQueryWorkloadInsightsTopContributorsDataOutput = struct {};
+pub const StopQueryWorkloadInsightsTopContributorsDataOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

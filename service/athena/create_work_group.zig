@@ -39,8 +39,7 @@ pub const CreateWorkGroupInput = struct {
     };
 };
 
-pub const CreateWorkGroupOutput = struct {
-};
+pub const CreateWorkGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

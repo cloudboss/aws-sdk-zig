@@ -30,8 +30,7 @@ pub const CreateConditionalForwarderInput = struct {
     };
 };
 
-pub const CreateConditionalForwarderOutput = struct {
-};
+pub const CreateConditionalForwarderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

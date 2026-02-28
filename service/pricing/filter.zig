@@ -33,7 +33,7 @@ pub const Filter = struct {
     ///
     /// * `NONE_OF`: Returns products where the field value is not any of the
     ///   provided values.
-    type: FilterType,
+    @"type": FilterType,
 
     /// The service code or attribute value that you want to filter by. If you're
     /// filtering
@@ -50,7 +50,7 @@ pub const Filter = struct {
 
     pub const json_field_names = .{
         .field = "Field",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

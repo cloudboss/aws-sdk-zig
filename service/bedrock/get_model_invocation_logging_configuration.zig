@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const LoggingConfig = @import("logging_config.zig").LoggingConfig;
 
-pub const GetModelInvocationLoggingConfigurationInput = struct {
-};
+pub const GetModelInvocationLoggingConfigurationInput = struct {};
 
 pub const GetModelInvocationLoggingConfigurationOutput = struct {
     /// The current configuration values.

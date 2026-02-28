@@ -33,7 +33,7 @@ pub const Application = struct {
     status_message: ?[]const u8,
 
     /// The type of the application.
-    type: ?ApplicationType,
+    @"type": ?ApplicationType,
 
     pub const json_field_names = .{
         .app_registry_arn = "AppRegistryArn",
@@ -45,6 +45,6 @@ pub const Application = struct {
         .last_updated = "LastUpdated",
         .status = "Status",
         .status_message = "StatusMessage",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

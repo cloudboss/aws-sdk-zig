@@ -14,8 +14,7 @@ pub const RegisterWebhookWithThirdPartyInput = struct {
     };
 };
 
-pub const RegisterWebhookWithThirdPartyOutput = struct {
-};
+pub const RegisterWebhookWithThirdPartyOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

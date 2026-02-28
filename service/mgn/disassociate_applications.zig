@@ -21,7 +21,8 @@ pub const DisassociateApplicationsInput = struct {
     };
 };
 
-pub const DisassociateApplicationsOutput = struct {};
+pub const DisassociateApplicationsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

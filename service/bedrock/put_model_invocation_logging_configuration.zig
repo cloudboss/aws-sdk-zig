@@ -14,8 +14,7 @@ pub const PutModelInvocationLoggingConfigurationInput = struct {
     };
 };
 
-pub const PutModelInvocationLoggingConfigurationOutput = struct {
-};
+pub const PutModelInvocationLoggingConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

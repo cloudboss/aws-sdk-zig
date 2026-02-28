@@ -29,8 +29,7 @@ pub const UpdateSpendingLimitInput = struct {
     };
 };
 
-pub const UpdateSpendingLimitOutput = struct {
-};
+pub const UpdateSpendingLimitOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

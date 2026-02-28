@@ -7,10 +7,10 @@ pub const MediaInsightsPipelineElementStatus = struct {
     status: ?MediaPipelineElementStatus,
 
     /// The type of status.
-    @"type": ?MediaInsightsPipelineConfigurationElementType,
+    type: ?MediaInsightsPipelineConfigurationElementType,
 
     pub const json_field_names = .{
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -15,7 +15,7 @@ pub const ViewVersionSummary = struct {
     name: ?[]const u8,
 
     /// The type of the view version.
-    @"type": ?ViewType,
+    type: ?ViewType,
 
     /// The sequentially incremented version of the view version.
     version: i32 = 0,
@@ -28,7 +28,7 @@ pub const ViewVersionSummary = struct {
         .description = "Description",
         .id = "Id",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
         .version = "Version",
         .version_description = "VersionDescription",
     };

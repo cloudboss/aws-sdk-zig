@@ -38,7 +38,8 @@ pub const AmendBenefitApplicationInput = struct {
     };
 };
 
-pub const AmendBenefitApplicationOutput = struct {};
+pub const AmendBenefitApplicationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

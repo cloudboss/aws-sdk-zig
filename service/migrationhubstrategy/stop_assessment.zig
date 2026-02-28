@@ -13,7 +13,8 @@ pub const StopAssessmentInput = struct {
     };
 };
 
-pub const StopAssessmentOutput = struct {};
+pub const StopAssessmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

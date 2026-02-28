@@ -40,7 +40,8 @@ pub const DisassociateSourceResourceInput = struct {
     };
 };
 
-pub const DisassociateSourceResourceOutput = struct {};
+pub const DisassociateSourceResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

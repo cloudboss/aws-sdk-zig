@@ -20,8 +20,7 @@ pub const DeregisterEventTopicInput = struct {
     };
 };
 
-pub const DeregisterEventTopicOutput = struct {
-};
+pub const DeregisterEventTopicOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

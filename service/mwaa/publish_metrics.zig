@@ -21,7 +21,8 @@ pub const PublishMetricsInput = struct {
     };
 };
 
-pub const PublishMetricsOutput = struct {};
+pub const PublishMetricsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

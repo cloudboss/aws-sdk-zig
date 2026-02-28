@@ -21,14 +21,14 @@ pub const CreateRelatedItemInput = struct {
     performed_by: ?UserUnion = null,
 
     /// The type of a related item.
-    @"type": RelatedItemType,
+    type: RelatedItemType,
 
     pub const json_field_names = .{
         .case_id = "caseId",
         .content = "content",
         .domain_id = "domainId",
         .performed_by = "performedBy",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -105,7 +105,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateRelatedItemInput, con
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

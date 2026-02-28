@@ -32,11 +32,11 @@ pub const ChatEvent = struct {
     content_type: ?[]const u8,
 
     /// Type of chat integration event.
-    @"type": ChatEventType,
+    type: ChatEventType,
 
     pub const json_field_names = .{
         .content = "Content",
         .content_type = "ContentType",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

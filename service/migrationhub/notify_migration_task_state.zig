@@ -41,7 +41,8 @@ pub const NotifyMigrationTaskStateInput = struct {
     };
 };
 
-pub const NotifyMigrationTaskStateOutput = struct {};
+pub const NotifyMigrationTaskStateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

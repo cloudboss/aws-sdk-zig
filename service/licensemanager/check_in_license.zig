@@ -17,7 +17,8 @@ pub const CheckInLicenseInput = struct {
     };
 };
 
-pub const CheckInLicenseOutput = struct {};
+pub const CheckInLicenseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

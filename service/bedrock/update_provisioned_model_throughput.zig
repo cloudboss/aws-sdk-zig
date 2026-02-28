@@ -31,8 +31,7 @@ pub const UpdateProvisionedModelThroughputInput = struct {
     };
 };
 
-pub const UpdateProvisionedModelThroughputOutput = struct {
-};
+pub const UpdateProvisionedModelThroughputOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -62,7 +62,7 @@ pub const Report = struct {
     /// **TEST**
     ///
     /// A test report.
-    @"type": ?ReportType,
+    type: ?ReportType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -76,6 +76,6 @@ pub const Report = struct {
         .status = "status",
         .test_summary = "testSummary",
         .truncated = "truncated",
-        .@"type" = "type",
+        .type = "type",
     };
 };

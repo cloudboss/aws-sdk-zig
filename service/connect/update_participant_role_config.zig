@@ -23,8 +23,7 @@ pub const UpdateParticipantRoleConfigInput = struct {
     };
 };
 
-pub const UpdateParticipantRoleConfigOutput = struct {
-};
+pub const UpdateParticipantRoleConfigOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteBrowserSettingsInput = struct {
     };
 };
 
-pub const DeleteBrowserSettingsOutput = struct {};
+pub const DeleteBrowserSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

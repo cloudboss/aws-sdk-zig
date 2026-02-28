@@ -14,7 +14,8 @@ pub const AcceptInputDeviceTransferInput = struct {
     };
 };
 
-pub const AcceptInputDeviceTransferOutput = struct {};
+pub const AcceptInputDeviceTransferOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

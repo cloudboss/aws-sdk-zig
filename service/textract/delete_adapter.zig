@@ -13,7 +13,8 @@ pub const DeleteAdapterInput = struct {
     };
 };
 
-pub const DeleteAdapterOutput = struct {};
+pub const DeleteAdapterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

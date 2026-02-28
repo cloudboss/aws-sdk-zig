@@ -107,8 +107,7 @@ pub const ConfirmForgotPasswordInput = struct {
     };
 };
 
-pub const ConfirmForgotPasswordOutput = struct {
-};
+pub const ConfirmForgotPasswordOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

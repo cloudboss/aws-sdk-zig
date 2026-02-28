@@ -28,8 +28,7 @@ pub const UpdateProblemInput = struct {
     };
 };
 
-pub const UpdateProblemOutput = struct {
-};
+pub const UpdateProblemOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

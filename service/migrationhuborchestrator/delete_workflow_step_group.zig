@@ -17,7 +17,8 @@ pub const DeleteWorkflowStepGroupInput = struct {
     };
 };
 
-pub const DeleteWorkflowStepGroupOutput = struct {};
+pub const DeleteWorkflowStepGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

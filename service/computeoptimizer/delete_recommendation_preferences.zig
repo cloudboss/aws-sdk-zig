@@ -40,8 +40,7 @@ pub const DeleteRecommendationPreferencesInput = struct {
     };
 };
 
-pub const DeleteRecommendationPreferencesOutput = struct {
-};
+pub const DeleteRecommendationPreferencesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

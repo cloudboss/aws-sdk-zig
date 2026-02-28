@@ -35,7 +35,7 @@ pub const CreateNetworkProfileInput = struct {
     project_arn: []const u8,
 
     /// The type of network profile to create. Valid values are listed here.
-    @"type": ?NetworkProfileType = null,
+    type: ?NetworkProfileType = null,
 
     /// The data throughput rate in bits per second, as an integer from 0 to
     /// 104857600.
@@ -63,7 +63,7 @@ pub const CreateNetworkProfileInput = struct {
         .downlink_loss_percent = "downlinkLossPercent",
         .name = "name",
         .project_arn = "projectArn",
-        .@"type" = "type",
+        .type = "type",
         .uplink_bandwidth_bits = "uplinkBandwidthBits",
         .uplink_delay_ms = "uplinkDelayMs",
         .uplink_jitter_ms = "uplinkJitterMs",

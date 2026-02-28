@@ -20,7 +20,8 @@ pub const CreateProgressUpdateStreamInput = struct {
     };
 };
 
-pub const CreateProgressUpdateStreamOutput = struct {};
+pub const CreateProgressUpdateStreamOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

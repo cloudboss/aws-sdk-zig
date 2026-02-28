@@ -19,8 +19,7 @@ pub const EnableRadiusInput = struct {
     };
 };
 
-pub const EnableRadiusOutput = struct {
-};
+pub const EnableRadiusOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

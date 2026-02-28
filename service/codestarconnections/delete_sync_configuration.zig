@@ -20,8 +20,7 @@ pub const DeleteSyncConfigurationInput = struct {
     };
 };
 
-pub const DeleteSyncConfigurationOutput = struct {
-};
+pub const DeleteSyncConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,10 +14,10 @@ pub const DataIntegrationFlowDedupeStrategy = struct {
     ///   have higher priority for evaluation. For each field, the sort order
     ///   determines whether to retain data record with larger or smaller field
     ///   value.
-    type: DataIntegrationFlowDedupeStrategyType,
+    @"type": DataIntegrationFlowDedupeStrategyType,
 
     pub const json_field_names = .{
         .field_priority = "fieldPriority",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -19,7 +19,8 @@ pub const DeleteEdgeConfigurationInput = struct {
     };
 };
 
-pub const DeleteEdgeConfigurationOutput = struct {};
+pub const DeleteEdgeConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

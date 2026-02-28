@@ -47,7 +47,7 @@ pub const MemoryCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getMemory(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getMemory(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -115,7 +115,7 @@ pub const PolicyActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getPolicy(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getPolicy(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -246,7 +246,7 @@ pub const PolicyEngineActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getPolicyEngine(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getPolicyEngine(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -377,7 +377,7 @@ pub const PolicyGenerationCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getPolicyGeneration(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getPolicyGeneration(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

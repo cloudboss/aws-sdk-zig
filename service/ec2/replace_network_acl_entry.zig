@@ -117,7 +117,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ReplaceNetworkAclEntryInput
             try body_buf.appendSlice(alloc, "&Icmp.Code=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
-        if (v.@"type") |sv| {
+        if (v.type) |sv| {
             try body_buf.appendSlice(alloc, "&Icmp.Type=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{sv}) catch "");
         }
@@ -177,7 +177,6 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
-
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

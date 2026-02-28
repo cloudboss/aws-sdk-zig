@@ -115,8 +115,7 @@ pub const UpdateLocationObjectStorageInput = struct {
     };
 };
 
-pub const UpdateLocationObjectStorageOutput = struct {
-};
+pub const UpdateLocationObjectStorageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

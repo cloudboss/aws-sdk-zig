@@ -6,10 +6,10 @@ pub const DocumentTypeListItem = struct {
     page: ?i32,
 
     /// Document type.
-    @"type": ?DocumentType,
+    type: ?DocumentType,
 
     pub const json_field_names = .{
         .page = "Page",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

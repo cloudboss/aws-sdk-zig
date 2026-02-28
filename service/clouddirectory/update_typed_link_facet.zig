@@ -39,8 +39,7 @@ pub const UpdateTypedLinkFacetInput = struct {
     };
 };
 
-pub const UpdateTypedLinkFacetOutput = struct {
-};
+pub const UpdateTypedLinkFacetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

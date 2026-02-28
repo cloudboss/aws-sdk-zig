@@ -23,8 +23,7 @@ pub const AdminUserGlobalSignOutInput = struct {
     };
 };
 
-pub const AdminUserGlobalSignOutOutput = struct {
-};
+pub const AdminUserGlobalSignOutOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

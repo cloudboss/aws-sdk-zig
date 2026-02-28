@@ -13,8 +13,7 @@ pub const DeleteImportedModelInput = struct {
     };
 };
 
-pub const DeleteImportedModelOutput = struct {
-};
+pub const DeleteImportedModelOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

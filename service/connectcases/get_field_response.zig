@@ -38,7 +38,7 @@ pub const GetFieldResponse = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// Type of the field.
-    @"type": FieldType,
+    type: FieldType,
 
     pub const json_field_names = .{
         .attributes = "attributes",
@@ -51,6 +51,6 @@ pub const GetFieldResponse = struct {
         .name = "name",
         .namespace = "namespace",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };

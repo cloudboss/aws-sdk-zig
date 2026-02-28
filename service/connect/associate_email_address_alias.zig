@@ -36,8 +36,7 @@ pub const AssociateEmailAddressAliasInput = struct {
     };
 };
 
-pub const AssociateEmailAddressAliasOutput = struct {
-};
+pub const AssociateEmailAddressAliasOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

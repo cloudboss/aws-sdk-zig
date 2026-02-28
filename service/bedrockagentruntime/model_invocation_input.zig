@@ -39,7 +39,7 @@ pub const ModelInvocationInput = struct {
     trace_id: ?[]const u8,
 
     /// The step in the agent sequence.
-    @"type": ?PromptType,
+    type: ?PromptType,
 
     pub const json_field_names = .{
         .foundation_model = "foundationModel",
@@ -49,6 +49,6 @@ pub const ModelInvocationInput = struct {
         .prompt_creation_mode = "promptCreationMode",
         .text = "text",
         .trace_id = "traceId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

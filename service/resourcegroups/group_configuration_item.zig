@@ -20,10 +20,10 @@ pub const GroupConfigurationItem = struct {
     /// `type`. For the list of types that you can specify for a configuration
     /// item, see [Supported resource types and
     /// parameters](https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .parameters = "Parameters",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

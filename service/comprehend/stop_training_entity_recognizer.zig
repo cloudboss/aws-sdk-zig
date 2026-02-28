@@ -15,8 +15,7 @@ pub const StopTrainingEntityRecognizerInput = struct {
     };
 };
 
-pub const StopTrainingEntityRecognizerOutput = struct {
-};
+pub const StopTrainingEntityRecognizerOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

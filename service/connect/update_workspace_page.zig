@@ -39,8 +39,7 @@ pub const UpdateWorkspacePageInput = struct {
     };
 };
 
-pub const UpdateWorkspacePageOutput = struct {
-};
+pub const UpdateWorkspacePageOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

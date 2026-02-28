@@ -19,8 +19,7 @@ pub const DeleteConditionalForwarderInput = struct {
     };
 };
 
-pub const DeleteConditionalForwarderOutput = struct {
-};
+pub const DeleteConditionalForwarderOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

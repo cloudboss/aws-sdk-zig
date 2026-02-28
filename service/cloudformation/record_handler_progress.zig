@@ -36,8 +36,7 @@ pub const RecordHandlerProgressInput = struct {
     status_message: ?[]const u8 = null,
 };
 
-pub const RecordHandlerProgressOutput = struct {
-};
+pub const RecordHandlerProgressOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

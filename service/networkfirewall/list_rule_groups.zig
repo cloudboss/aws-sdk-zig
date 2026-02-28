@@ -41,7 +41,7 @@ pub const ListRuleGroupsInput = struct {
     /// Indicates whether the rule group is stateless or stateful. If the rule group
     /// is stateless, it contains stateless rules. If it is stateful, it contains
     /// stateful rules.
-    type: ?RuleGroupType = null,
+    @"type": ?RuleGroupType = null,
 
     pub const json_field_names = .{
         .managed_type = "ManagedType",
@@ -49,7 +49,7 @@ pub const ListRuleGroupsInput = struct {
         .next_token = "NextToken",
         .scope = "Scope",
         .subscription_status = "SubscriptionStatus",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

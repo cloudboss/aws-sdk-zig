@@ -32,7 +32,7 @@ pub const ImportNotebookInput = struct {
 
     /// The notebook content type. Currently, the only valid type is
     /// `IPYNB`.
-    @"type": NotebookType,
+    type: NotebookType,
 
     /// The name of the Spark enabled workgroup to import the notebook to.
     work_group: []const u8,
@@ -42,7 +42,7 @@ pub const ImportNotebookInput = struct {
         .name = "Name",
         .notebook_s3_location_uri = "NotebookS3LocationUri",
         .payload = "Payload",
-        .@"type" = "Type",
+        .type = "Type",
         .work_group = "WorkGroup",
     };
 };
