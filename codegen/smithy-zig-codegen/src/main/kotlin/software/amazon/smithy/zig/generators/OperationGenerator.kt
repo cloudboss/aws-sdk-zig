@@ -404,6 +404,11 @@ class OperationGenerator(
         writer.closeBlock("}")
         writer.blankLine()
 
+        // Clean up response headers (body ownership transfers to output struct)
+        writer.write("stream_resp.deinitHeaders();")
+        writer.write("errdefer stream_resp.body.deinit();")
+        writer.blankLine()
+
         // Initialize event stream reader from response body
         writer.write("const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());")
         writer.write("return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };")

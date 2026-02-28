@@ -123,6 +123,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SelectObjec
         return error.ServiceError;
     }
 
+    stream_resp.deinitHeaders();
+    errdefer stream_resp.body.deinit();
+
     const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());
     return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };
 }
