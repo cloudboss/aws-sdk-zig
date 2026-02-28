@@ -477,5 +477,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartStream
     _ = allocator;
     _ = input;
     _ = options;
+    // Requires HTTP/2 bidirectional streaming
     return error.EventStreamNotSupported;
 }

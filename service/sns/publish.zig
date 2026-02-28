@@ -248,6 +248,39 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PublishInput, config: *aws.
     try body_buf.appendSlice(alloc, "Action=Publish&Version=2010-03-31");
     try body_buf.appendSlice(alloc, "&Message=");
     try aws.url.appendUrlEncoded(alloc, &body_buf, input.message);
+    if (input.message_attributes) |entries| {
+        for (entries, 0..) |entry, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const key_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageAttributes.entry.{d}.key=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, key_prefix);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, entry.key);
+            }
+            if (entry.value.binary_value) |v| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageAttributes.entry.{d}.BinaryValue=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageAttributes.entry.{d}.DataType=", .{n}) catch continue;
+                try body_buf.appendSlice(alloc, field_prefix);
+                try aws.url.appendUrlEncoded(alloc, &body_buf, entry.value.data_type);
+            }
+            if (entry.value.string_value) |v| {
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MessageAttributes.entry.{d}.StringValue=", .{n}) catch continue;
+                    try body_buf.appendSlice(alloc, field_prefix);
+                    try aws.url.appendUrlEncoded(alloc, &body_buf, v);
+                }
+            }
+        }
+    }
     if (input.message_deduplication_id) |v| {
         try body_buf.appendSlice(alloc, "&MessageDeduplicationId=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);

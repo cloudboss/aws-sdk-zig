@@ -86,8 +86,14 @@ pub const SelectObjectContentInput = struct {
 };
 
 pub const SelectObjectContentOutput = struct {
-    /// The array of results.
-    payload: ?SelectObjectContentEventStream = null,
+
+    event_reader: aws.event_stream_reader.EventStreamReader = undefined,
+    _stream_body: aws.http.StreamingBody = undefined,
+
+    pub fn deinit(self: *SelectObjectContentOutput) void {
+        self.event_reader.deinit();
+        self._stream_body.deinit();
+    }
 };
 
 pub const Options = struct {
@@ -95,9 +101,209 @@ pub const Options = struct {
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SelectObjectContentInput, options: Options) !SelectObjectContentOutput {
-    _ = client;
-    _ = allocator;
-    _ = input;
-    _ = options;
-    return error.EventStreamNotSupported;
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+
+    var stream_resp = try client.http_client.sendStreamingRequest(&request);
+
+    arena.deinit();
+
+    if (!stream_resp.isSuccess()) {
+        defer stream_resp.deinit();
+        const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
+        defer client.allocator.free(error_body);
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());
+    return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: SelectObjectContentInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("s3", "S3", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/");
+    try path_buf.appendSlice(alloc, input.bucket);
+    try path_buf.appendSlice(alloc, "/");
+    try path_buf.appendSlice(alloc, input.key);
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    try query_buf.appendSlice(alloc, "select&select-type=2");
+    query_has_prev = true;
+    const query = try query_buf.toOwnedSlice(alloc);
+
+    var body_buf: std.ArrayList(u8) = .{};
+    try body_buf.appendSlice(alloc, "<SelectObjectContentRequest>");
+    try body_buf.appendSlice(alloc, "<Expression>");
+    try aws.xml.appendXmlEscaped(alloc, &body_buf, input.expression);
+    try body_buf.appendSlice(alloc, "</Expression>");
+    try body_buf.appendSlice(alloc, "<ExpressionType>");
+    try body_buf.appendSlice(alloc, @tagName(input.expression_type));
+    try body_buf.appendSlice(alloc, "</ExpressionType>");
+    try body_buf.appendSlice(alloc, "<InputSerialization>");
+    try serde.serializeInputSerialization(alloc, &body_buf, input.input_serialization);
+    try body_buf.appendSlice(alloc, "</InputSerialization>");
+    try body_buf.appendSlice(alloc, "<OutputSerialization>");
+    try serde.serializeOutputSerialization(alloc, &body_buf, input.output_serialization);
+    try body_buf.appendSlice(alloc, "</OutputSerialization>");
+    if (input.request_progress) |v| {
+        try body_buf.appendSlice(alloc, "<RequestProgress>");
+        try serde.serializeRequestProgress(alloc, &body_buf, v);
+        try body_buf.appendSlice(alloc, "</RequestProgress>");
+    }
+    if (input.scan_range) |v| {
+        try body_buf.appendSlice(alloc, "<ScanRange>");
+        try serde.serializeScanRange(alloc, &body_buf, v);
+        try body_buf.appendSlice(alloc, "</ScanRange>");
+    }
+    try body_buf.appendSlice(alloc, "</SelectObjectContentRequest>");
+    const body = try body_buf.toOwnedSlice(alloc);
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(alloc, "Content-Type", "application/xml");
+    if (input.expected_bucket_owner) |v| {
+        try request.headers.put(alloc, "x-amz-expected-bucket-owner", v);
+    }
+    if (input.sse_customer_algorithm) |v| {
+        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-algorithm", v);
+    }
+    if (input.sse_customer_key) |v| {
+        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key", v);
+    }
+    if (input.sse_customer_key_md5) |v| {
+        try request.headers.put(alloc, "x-amz-server-side-encryption-customer-key-MD5", v);
+    }
+
+    return request;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestId") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, request_id);
+
+    if (std.mem.eql(u8, error_code, "AccessDenied")) {
+        return .{ .arena = arena, .kind = .{ .access_denied = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BucketAlreadyExists")) {
+        return .{ .arena = arena, .kind = .{ .bucket_already_exists = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "BucketAlreadyOwnedByYou")) {
+        return .{ .arena = arena, .kind = .{ .bucket_already_owned_by_you = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "EncryptionTypeMismatch")) {
+        return .{ .arena = arena, .kind = .{ .encryption_type_mismatch = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IdempotencyParameterMismatch")) {
+        return .{ .arena = arena, .kind = .{ .idempotency_parameter_mismatch = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidObjectState")) {
+        return .{ .arena = arena, .kind = .{ .invalid_object_state = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRequest")) {
+        return .{ .arena = arena, .kind = .{ .invalid_request = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidWriteOffset")) {
+        return .{ .arena = arena, .kind = .{ .invalid_write_offset = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NoSuchBucket")) {
+        return .{ .arena = arena, .kind = .{ .no_such_bucket = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NoSuchKey")) {
+        return .{ .arena = arena, .kind = .{ .no_such_key = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NoSuchUpload")) {
+        return .{ .arena = arena, .kind = .{ .no_such_upload = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotFound")) {
+        return .{ .arena = arena, .kind = .{ .not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ObjectAlreadyInActiveTierError")) {
+        return .{ .arena = arena, .kind = .{ .object_already_in_active_tier_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ObjectNotInActiveTierError")) {
+        return .{ .arena = arena, .kind = .{ .object_not_in_active_tier_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TooManyParts")) {
+        return .{ .arena = arena, .kind = .{ .too_many_parts = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
 }

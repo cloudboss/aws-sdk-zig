@@ -502,7 +502,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         writer.openBlock("{")
                         writer.write("var prefix_buf: [256]u8 = undefined;")
                         writer.write(
-                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{}) catch continue;",
+                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{n}) catch continue;",
                             qualifiedName,
                         )
                         writer.write("try body_buf.appendSlice(alloc, field_prefix);")
@@ -514,7 +514,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         writer.openBlock("{")
                         writer.write("var prefix_buf: [256]u8 = undefined;")
                         writer.write(
-                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{}) catch continue;",
+                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{n}) catch continue;",
                             qualifiedName,
                         )
                         writer.write("try body_buf.appendSlice(alloc, field_prefix);")

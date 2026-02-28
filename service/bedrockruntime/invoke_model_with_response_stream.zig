@@ -87,12 +87,6 @@ pub const InvokeModelWithResponseStreamInput = struct {
 };
 
 pub const InvokeModelWithResponseStreamOutput = struct {
-    /// Inference response from the model in the format specified by the
-    /// `contentType` header. To see the format and content of this field for
-    /// different models, refer to [Inference
-    /// parameters](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
-    body: ?ResponseStream = null,
-
     /// The MIME type of the inference result.
     content_type: []const u8,
 
@@ -101,6 +95,14 @@ pub const InvokeModelWithResponseStreamOutput = struct {
 
     /// Specifies the processing tier type used for serving the request.
     service_tier: ?ServiceTierType = null,
+
+    event_reader: aws.event_stream_reader.EventStreamReader = undefined,
+    _stream_body: aws.http.StreamingBody = undefined,
+
+    pub fn deinit(self: *InvokeModelWithResponseStreamOutput) void {
+        self.event_reader.deinit();
+        self._stream_body.deinit();
+    }
 
     pub const json_field_names = .{
         .body = "body",
@@ -115,9 +117,172 @@ pub const Options = struct {
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeModelWithResponseStreamInput, options: Options) !InvokeModelWithResponseStreamOutput {
-    _ = client;
-    _ = allocator;
-    _ = input;
-    _ = options;
-    return error.EventStreamNotSupported;
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+
+    const creds = try client.config.credentials.getCredentials(alloc);
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrockruntime");
+
+    var stream_resp = try client.http_client.sendStreamingRequest(&request);
+
+    arena.deinit();
+
+    if (!stream_resp.isSuccess()) {
+        defer stream_resp.deinit();
+        const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;
+        defer client.allocator.free(error_body);
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());
+    return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };
+}
+
+fn serializeRequest(alloc: std.mem.Allocator, input: InvokeModelWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("bedrockruntime", "Bedrock Runtime", alloc);
+
+    const host = aws.url.parseHost(endpoint);
+    const tls = !std.mem.startsWith(u8, endpoint, "http://");
+    const port = aws.url.parsePort(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .{};
+    try path_buf.appendSlice(alloc, "/model/");
+    try path_buf.appendSlice(alloc, input.model_id);
+    try path_buf.appendSlice(alloc, "/invoke-with-response-stream");
+    const path = try path_buf.toOwnedSlice(alloc);
+
+    const body = input.body orelse "";
+
+    var request = aws.http.Request.init(host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = tls;
+    request.port = port;
+    request.body = body;
+    try request.headers.put(alloc, "Content-Type", "application/json");
+    if (input.accept) |v| {
+        try request.headers.put(alloc, "X-Amzn-Bedrock-Accept", v);
+    }
+    if (input.content_type) |v| {
+        try request.headers.put(alloc, "Content-Type", v);
+    }
+    if (input.guardrail_identifier) |v| {
+        try request.headers.put(alloc, "X-Amzn-Bedrock-GuardrailIdentifier", v);
+    }
+    if (input.guardrail_version) |v| {
+        try request.headers.put(alloc, "X-Amzn-Bedrock-GuardrailVersion", v);
+    }
+    if (input.performance_config_latency) |v| {
+        try request.headers.put(alloc, "X-Amzn-Bedrock-PerformanceConfig-Latency", @tagName(v));
+    }
+    if (input.service_tier) |v| {
+        try request.headers.put(alloc, "X-Amzn-Bedrock-Service-Tier", @tagName(v));
+    }
+    if (input.trace) |v| {
+        try request.headers.put(alloc, "X-Amzn-Bedrock-Trace", @tagName(v));
+    }
+
+    return request;
+}
+
+fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(alloc);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ModelErrorException")) {
+        return .{ .arena = arena, .kind = .{ .model_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ModelNotReadyException")) {
+        return .{ .arena = arena, .kind = .{ .model_not_ready_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ModelStreamErrorException")) {
+        return .{ .arena = arena, .kind = .{ .model_stream_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ModelTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .model_timeout_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableException")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
 }
