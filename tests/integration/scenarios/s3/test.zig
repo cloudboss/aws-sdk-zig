@@ -155,7 +155,8 @@ test "GetObject retrieves stored object with correct body" {
     );
     defer result.deinit();
 
-    const body = try result.body.readAll(allocator, 10 * 1024 * 1024);
+    var streaming_body = result.body orelse return error.MissingBody;
+    const body = try streaming_body.readAll(allocator, 10 * 1024 * 1024);
     defer allocator.free(body);
     try std.testing.expectEqualStrings("hello world", body);
 }
@@ -447,7 +448,8 @@ test "CopyObject duplicates object to new key" {
     );
     defer result.deinit();
 
-    const body = try result.body.readAll(allocator, 10 * 1024 * 1024);
+    var streaming_body = result.body orelse return error.MissingBody;
+    const body = try streaming_body.readAll(allocator, 10 * 1024 * 1024);
     defer allocator.free(body);
     try std.testing.expectEqualStrings("hello world", body);
 }
@@ -556,7 +558,8 @@ test "PutObject round-trips special characters in key" {
     );
     defer result.deinit();
 
-    const body = try result.body.readAll(allocator, 10 * 1024 * 1024);
+    var streaming_body = result.body orelse return error.MissingBody;
+    const body = try streaming_body.readAll(allocator, 10 * 1024 * 1024);
     defer allocator.free(body);
     try std.testing.expectEqualStrings(object_body, body);
 }

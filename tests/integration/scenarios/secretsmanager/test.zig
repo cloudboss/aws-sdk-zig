@@ -43,9 +43,6 @@ test "zest.afterAll" {
                 "afterAll: failed to delete shared secret: {s}",
                 .{@errorName(err)},
             );
-            if (shared_cfg) |*cfg| cfg.deinit();
-            _ = gpa.deinit();
-            return;
         };
     }
     if (shared_cfg) |*cfg| cfg.deinit();

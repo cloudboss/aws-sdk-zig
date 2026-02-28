@@ -352,6 +352,7 @@
 127.0.0.1 scheduler.us-east-1.amazonaws.com
 127.0.0.1 schemas.us-east-1.amazonaws.com
 127.0.0.1 secrets-manager.us-east-1.amazonaws.com
+127.0.0.1 secretsmanager.us-east-1.amazonaws.com
 127.0.0.1 security-ir.us-east-1.amazonaws.com
 127.0.0.1 securityhub.us-east-1.amazonaws.com
 127.0.0.1 securitylake.us-east-1.amazonaws.com
