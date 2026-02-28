@@ -82,6 +82,20 @@ class OperationGenerator(
         return false
     }
 
+    /**
+     * Check if this operation has an event stream input:
+     * an input member targeting a @streaming union.
+     */
+    private fun hasEventStreamInput(): Boolean {
+        for ((_, memberShape) in inputShape.allMembers) {
+            val target = model.expectShape(memberShape.target)
+            if (target is UnionShape && target.hasTrait(StreamingTrait::class.java)) {
+                return true
+            }
+        }
+        return false
+    }
+
     private fun buildOperationContext(): OperationContext {
         return OperationContext(
             operation = operation,
@@ -100,6 +114,8 @@ class OperationGenerator(
         val ctx = buildOperationContext()
         val isStreaming = hasStreamingOutputPayload()
         val isEventStream = hasEventStreamOutput()
+        val isServerPushEventStream = isEventStream && !hasEventStreamInput()
+        val isBidirectionalEventStream = isEventStream && hasEventStreamInput()
 
         context.writerDelegator().useFileWriter(fileName) { writer ->
             writer.importContainer.addImport("std", "std")
@@ -145,24 +161,25 @@ class OperationGenerator(
                     "${operationName}Output", outputFileName, outputShape.id.name
                 )
             } else {
-                writeOutputStruct(writer, ctx, isStreaming)
+                writeOutputStruct(writer, ctx, isStreaming, isServerPushEventStream)
             }
             writer.blankLine()
             writeOptionsStruct(writer)
             writer.blankLine()
 
-            if (isEventStream) {
-                // Event stream operations get a stub until full support is implemented
+            if (isBidirectionalEventStream) {
                 writeEventStreamStubExecuteFunction(writer)
+            } else if (isServerPushEventStream) {
+                writeServerPushEventStreamExecuteFunction(writer)
             } else if (isStreaming) {
                 writeStreamingExecuteFunction(writer)
             } else {
                 writeExecuteFunction(writer)
             }
 
-            if (!isEventStream) {
-                // Presign function for allowlisted operations
-                if (operation.id.toString() in PRESIGNABLE_OPERATIONS) {
+            if (!isBidirectionalEventStream) {
+                // Presign function for allowlisted operations (not for event streams)
+                if (!isServerPushEventStream && operation.id.toString() in PRESIGNABLE_OPERATIONS) {
                     writer.blankLine()
                     writePresignFunction(writer)
                 }
@@ -170,12 +187,14 @@ class OperationGenerator(
                 writer.blankLine()
                 protocol.writeSerializeRequest(writer, ctx)
                 writer.blankLine()
-                if (isStreaming) {
-                    protocol.writeDeserializeStreamingResponse(writer, ctx)
-                } else {
-                    protocol.writeDeserializeResponse(writer, ctx)
+                if (!isServerPushEventStream) {
+                    if (isStreaming) {
+                        protocol.writeDeserializeStreamingResponse(writer, ctx)
+                    } else {
+                        protocol.writeDeserializeResponse(writer, ctx)
+                    }
+                    writer.blankLine()
                 }
-                writer.blankLine()
                 protocol.writeParseErrorResponse(writer, ctx)
             }
         }
@@ -228,7 +247,7 @@ class OperationGenerator(
         writer.closeBlock("};")
     }
 
-    private fun writeOutputStruct(writer: ZigWriter, ctx: OperationContext, isStreaming: Boolean = false) {
+    private fun writeOutputStruct(writer: ZigWriter, ctx: OperationContext, isStreaming: Boolean = false, isServerPushEventStream: Boolean = false) {
         val outputName = "${operationName}Output"
         writer.openBlock("pub const \$L = struct {", outputName)
 
@@ -236,6 +255,8 @@ class OperationGenerator(
         for ((memberName, memberShape) in outputShape.allMembers) {
             val fieldName = NamingUtil.toFieldName(memberName)
             val targetShape = model.expectShape(memberShape.target)
+            // Skip streaming union members for server-push (replaced by event_reader field)
+            if (isServerPushEventStream && targetShape is UnionShape && targetShape.hasTrait(StreamingTrait::class.java)) continue
             val baseType = ctx.resolveBaseZigType(targetShape)
             val isScalar = ctx.isScalarType(targetShape)
             val isStreamingBlobField = ctx.isStreamingBlob(targetShape)
@@ -297,6 +318,18 @@ class OperationGenerator(
             writer.closeBlock("}")
         }
 
+        // Server-push event streams need event_reader and stream body fields
+        if (isServerPushEventStream) {
+            writer.blankLine()
+            writer.write("event_reader: aws.event_stream_reader.EventStreamReader = undefined,")
+            writer.write("_stream_body: aws.http.StreamingBody = undefined,")
+            writer.blankLine()
+            writer.openBlock("pub fn deinit(self: *\$L) void {", outputName)
+            writer.write("self.event_reader.deinit();")
+            writer.write("self._stream_body.deinit();")
+            writer.closeBlock("}")
+        }
+
         if (isJsonProtocol()) {
             writeJsonFieldNames(writer, outputShape)
         }
@@ -323,7 +356,57 @@ class OperationGenerator(
         writer.write("_ = allocator;")
         writer.write("_ = input;")
         writer.write("_ = options;")
+        writer.write("// Requires HTTP/2 bidirectional streaming")
         writer.write("return error.EventStreamNotSupported;")
+
+        writer.closeBlock("}")
+    }
+
+    private fun writeServerPushEventStreamExecuteFunction(writer: ZigWriter) {
+        val inputName = "${operationName}Input"
+        val outputName = "${operationName}Output"
+
+        writer.openBlock(
+            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: Options) !\$L {",
+            inputName, outputName,
+        )
+
+        writer.write("var arena = std.heap.ArenaAllocator.init(client.allocator);")
+        writer.write("const alloc = arena.allocator();")
+        writer.blankLine()
+
+        // Serialize request
+        writer.write("var request = try serializeRequest(alloc, input, client.config);")
+        writer.blankLine()
+
+        // Sign
+        writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
+        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.packageName)
+        writer.blankLine()
+
+        // Send streaming request
+        writer.write("var stream_resp = try client.http_client.sendStreamingRequest(&request);")
+        writer.blankLine()
+
+        // Free arena - request data already sent
+        writer.write("arena.deinit();")
+        writer.blankLine()
+
+        // Check for errors
+        writer.openBlock("if (!stream_resp.isSuccess()) {")
+        writer.write("defer stream_resp.deinit();")
+        writer.write("const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;")
+        writer.write("defer client.allocator.free(error_body);")
+        writer.openBlock("if (options.diagnostic) |d| {")
+        writer.write("d.* = parseErrorResponse(error_body, stream_resp.status, client.allocator) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };")
+        writer.closeBlock("}")
+        writer.write("return error.ServiceError;")
+        writer.closeBlock("}")
+        writer.blankLine()
+
+        // Initialize event stream reader from response body
+        writer.write("const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());")
+        writer.write("return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };")
 
         writer.closeBlock("}")
     }
