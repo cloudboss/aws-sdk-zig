@@ -10,6 +10,7 @@ tests/integration/certs/server.*
 
 # Fetched AWS service models
 codegen/sdk-codegen/model/
+codegen/sdk-codegen/smithy-build.json
 
 # Sisyphus orchestrator working directory
 .sisyphus/
