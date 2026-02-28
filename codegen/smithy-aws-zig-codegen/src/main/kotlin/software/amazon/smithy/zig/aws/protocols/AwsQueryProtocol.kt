@@ -154,7 +154,6 @@ open class AwsQueryProtocol : ProtocolGenerator {
             }
             targetShape is MapShape -> {
                 val mapValueShape = ctx.model.expectShape(targetShape.value.target)
-                // Handle struct/union-valued maps
                 if (mapValueShape is UnionShape) {
                     // TODO: union-valued map serialization requires discriminator logic
                     if (!memberShape.isRequired) {
@@ -165,15 +164,30 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     return
                 }
 
-                // Struct-valued maps: serialize with flattened field structure
+                if (mapValueShape is StructureShape) {
+                    // Struct-valued maps: serialize with flattened field structure
+                    if (memberShape.isRequired) {
+                        writeStructMapQuerySerializer(writer, ctx, smithyName, mapValueShape, "$accessor.$fieldName")
+                    } else {
+                        writer.openBlock("if (\$L.\$L) |entries| {", accessor, fieldName)
+                        writeStructMapQuerySerializer(writer, ctx, smithyName, mapValueShape, "entries")
+                        writer.closeBlock("}")
+                    }
+                    return
+                }
+
+                val keyTag = targetShape.key.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }.orElse("key")
+                val valueTag = targetShape.value.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }.orElse("value")
+
                 if (memberShape.isRequired) {
-                    writeStructMapQuerySerializer(writer, ctx, smithyName, mapValueShape as StructureShape, "$accessor.$fieldName")
+                    writeMapQuerySerializer(writer, ctx, smithyName, targetShape, keyTag, valueTag, "$accessor.$fieldName")
                 } else {
                     writer.openBlock("if (\$L.\$L) |entries| {", accessor, fieldName)
-                    writeStructMapQuerySerializer(writer, ctx, smithyName, mapValueShape as StructureShape, "entries")
+                    writeMapQuerySerializer(writer, ctx, smithyName, targetShape, keyTag, valueTag, "entries")
                     writer.closeBlock("}")
                 }
-                return
             }
             else -> {
                 // Scalar field
