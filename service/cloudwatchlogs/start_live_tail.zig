@@ -65,12 +65,10 @@ pub const StartLiveTailInput = struct {
 
 pub const StartLiveTailOutput = struct {
 
-    event_reader: aws.event_stream_reader.EventStreamReader = undefined,
-    _stream_body: aws.http.StreamingBody = undefined,
+    response_stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *StartLiveTailOutput) void {
-        self.event_reader.deinit();
-        self._stream_body.deinit();
+        self.response_stream.deinit();
     }
 
     pub const json_field_names = .{
@@ -108,8 +106,8 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartLiveTa
     stream_resp.deinitHeaders();
     errdefer stream_resp.body.deinit();
 
-    const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());
-    return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };
+    const response_stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
+    return .{ .response_stream = response_stream };
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: StartLiveTailInput, config: *aws.Config) !aws.http.Request {

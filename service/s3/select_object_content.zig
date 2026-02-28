@@ -87,12 +87,10 @@ pub const SelectObjectContentInput = struct {
 
 pub const SelectObjectContentOutput = struct {
 
-    event_reader: aws.event_stream_reader.EventStreamReader = undefined,
-    _stream_body: aws.http.StreamingBody = undefined,
+    payload: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *SelectObjectContentOutput) void {
-        self.event_reader.deinit();
-        self._stream_body.deinit();
+        self.payload.deinit();
     }
 };
 
@@ -126,8 +124,8 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SelectObjec
     stream_resp.deinitHeaders();
     errdefer stream_resp.body.deinit();
 
-    const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());
-    return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };
+    const payload = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
+    return .{ .payload = payload };
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: SelectObjectContentInput, config: *aws.Config) !aws.http.Request {

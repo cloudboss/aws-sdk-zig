@@ -1026,6 +1026,10 @@ pub const StreamingBody = struct {
         stall_state.last_check_bytes = total_read;
     }
 
+    pub fn reader(self: *StreamingBody) *std.Io.Reader {
+        return self._inner.body_reader;
+    }
+
     pub fn deinit(self: *StreamingBody) void {
         self._inner.http_request.deinit();
         self._inner.allocator.destroy(self._inner);

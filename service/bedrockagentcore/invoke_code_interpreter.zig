@@ -47,12 +47,10 @@ pub const InvokeCodeInterpreterOutput = struct {
     /// The identifier of the code interpreter session.
     session_id: ?[]const u8 = null,
 
-    event_reader: aws.event_stream_reader.EventStreamReader = undefined,
-    _stream_body: aws.http.StreamingBody = undefined,
+    stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *InvokeCodeInterpreterOutput) void {
-        self.event_reader.deinit();
-        self._stream_body.deinit();
+        self.stream.deinit();
     }
 
     pub const json_field_names = .{
@@ -91,8 +89,8 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeCodeI
     stream_resp.deinitHeaders();
     errdefer stream_resp.body.deinit();
 
-    const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());
-    return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };
+    const stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
+    return .{ .stream = stream };
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: InvokeCodeInterpreterInput, config: *aws.Config) !aws.http.Request {

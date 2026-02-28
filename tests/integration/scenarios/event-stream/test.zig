@@ -215,9 +215,9 @@ test "event stream reader iterates multiple events" {
         offset += buf.len;
     }
 
-    var fbs = std.io.fixedBufferStream(combined);
     const Reader = aws.event_stream_reader.EventStreamReader;
-    var reader = try Reader.init(alloc, fbs.reader().any());
+    var r = std.Io.Reader.fixed(combined);
+    var reader = try Reader.initReader(alloc, &r);
     defer reader.deinit();
 
     for (names) |name| {

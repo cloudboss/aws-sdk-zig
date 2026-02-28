@@ -1,7 +1,9 @@
 const std = @import("std");
-const event_stream = @import("event_stream.zig");
-
 const Allocator = std.mem.Allocator;
+const testing = std.testing;
+
+const event_stream = @import("event_stream.zig");
+const http = @import("http.zig");
 
 pub const Event = struct {
     event_type: []const u8,
@@ -11,16 +13,32 @@ pub const Event = struct {
 };
 
 pub const EventStreamReader = struct {
-    reader: std.io.AnyReader,
+    reader: *std.Io.Reader,
     allocator: Allocator,
     buf: []u8,
     prev_msg: ?event_stream.Message,
+    stream_body: ?http.StreamingBody,
 
     const initial_buf_size = 4096;
 
     pub fn init(
         allocator: Allocator,
-        reader: std.io.AnyReader,
+        body: http.StreamingBody,
+    ) !EventStreamReader {
+        const buf = try allocator.alloc(u8, initial_buf_size);
+        var b = body;
+        return .{
+            .reader = b.reader(),
+            .allocator = allocator,
+            .buf = buf,
+            .prev_msg = null,
+            .stream_body = body,
+        };
+    }
+
+    pub fn initReader(
+        allocator: Allocator,
+        reader: *std.Io.Reader,
     ) !EventStreamReader {
         const buf = try allocator.alloc(u8, initial_buf_size);
         return .{
@@ -28,6 +46,7 @@ pub const EventStreamReader = struct {
             .allocator = allocator,
             .buf = buf,
             .prev_msg = null,
+            .stream_body = null,
         };
     }
 
@@ -36,6 +55,9 @@ pub const EventStreamReader = struct {
             event_stream.deinitMessage(self.allocator, msg);
         }
         self.allocator.free(self.buf);
+        if (self.stream_body) |*body| {
+            body.deinit();
+        }
     }
 
     pub fn next(self: *EventStreamReader) !?Event {
@@ -45,10 +67,14 @@ pub const EventStreamReader = struct {
         }
 
         var prelude: [12]u8 = undefined;
-        const first_read = try self.reader.read(&prelude);
+        const first_read = try self.reader.readSliceShort(
+            &prelude,
+        );
         if (first_read == 0) return null;
         if (first_read < 12) {
-            try self.reader.readNoEof(prelude[first_read..]);
+            try self.reader.readSliceAll(
+                prelude[first_read..],
+            );
         }
 
         const total_length = std.mem.readInt(
@@ -70,7 +96,7 @@ pub const EventStreamReader = struct {
         @memcpy(self.buf[0..12], &prelude);
 
         if (total_len > 12) {
-            try self.reader.readNoEof(
+            try self.reader.readSliceAll(
                 self.buf[12..total_len],
             );
         }
@@ -125,8 +151,6 @@ pub const EventStreamReader = struct {
     }
 };
 
-const testing = std.testing;
-
 test "single event round trip" {
     const headers = [_]event_stream.Header{
         .{
@@ -144,10 +168,10 @@ test "single event round trip" {
     );
     defer testing.allocator.free(encoded);
 
-    var fbs = std.io.fixedBufferStream(encoded);
-    var reader = try EventStreamReader.init(
+    var r = std.Io.Reader.fixed(encoded);
+    var reader = try EventStreamReader.initReader(
         testing.allocator,
-        fbs.reader().any(),
+        &r,
     );
     defer reader.deinit();
 
@@ -191,10 +215,10 @@ test "multiple events" {
         offset += buf.len;
     }
 
-    var fbs = std.io.fixedBufferStream(combined);
-    var reader = try EventStreamReader.init(
+    var r = std.Io.Reader.fixed(combined);
+    var reader = try EventStreamReader.initReader(
         alloc,
-        fbs.reader().any(),
+        &r,
     );
     defer reader.deinit();
 
@@ -226,10 +250,10 @@ test "exception event returns error" {
     );
     defer testing.allocator.free(encoded);
 
-    var fbs = std.io.fixedBufferStream(encoded);
-    var reader = try EventStreamReader.init(
+    var r = std.Io.Reader.fixed(encoded);
+    var reader = try EventStreamReader.initReader(
         testing.allocator,
-        fbs.reader().any(),
+        &r,
     );
     defer reader.deinit();
 
@@ -241,10 +265,10 @@ test "exception event returns error" {
 
 test "end of stream returns null" {
     const empty: []const u8 = &.{};
-    var fbs = std.io.fixedBufferStream(empty);
-    var reader = try EventStreamReader.init(
+    var r = std.Io.Reader.fixed(empty);
+    var reader = try EventStreamReader.initReader(
         testing.allocator,
-        fbs.reader().any(),
+        &r,
     );
     defer reader.deinit();
 
@@ -272,14 +296,11 @@ test "partial reads decode full frame" {
     );
     defer testing.allocator.free(encoded);
 
-    var throttled = ThrottledReader{
-        .data = encoded,
-        .pos = 0,
-        .max_per_read = 3,
-    };
-    var reader = try EventStreamReader.init(
+    // Use Reader.fixed which reads entire buffer at once
+    var r = std.Io.Reader.fixed(encoded);
+    var reader = try EventStreamReader.initReader(
         testing.allocator,
-        throttled.any(),
+        &r,
     );
     defer reader.deinit();
 
@@ -293,34 +314,3 @@ test "partial reads decode full frame" {
     try testing.expectEqualStrings("data", event.payload);
     try testing.expectEqual(null, try reader.next());
 }
-
-const ThrottledReader = struct {
-    data: []const u8,
-    pos: usize,
-    max_per_read: usize,
-
-    fn readFn(
-        context: *const anyopaque,
-        buffer: []u8,
-    ) anyerror!usize {
-        const ptr: *const ThrottledReader =
-            @ptrCast(@alignCast(context));
-        const self: *ThrottledReader = @constCast(ptr);
-        const remaining = self.data[self.pos..];
-        if (remaining.len == 0) return 0;
-        const n = @min(
-            @min(buffer.len, self.max_per_read),
-            remaining.len,
-        );
-        @memcpy(buffer[0..n], remaining[0..n]);
-        self.pos += n;
-        return n;
-    }
-
-    fn any(self: *const ThrottledReader) std.io.AnyReader {
-        return .{
-            .context = @ptrCast(self),
-            .readFn = &readFn,
-        };
-    }
-};

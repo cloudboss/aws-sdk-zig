@@ -155,12 +155,10 @@ pub const InvokeInlineAgentOutput = struct {
     /// The unique identifier of the session with the agent.
     session_id: []const u8,
 
-    event_reader: aws.event_stream_reader.EventStreamReader = undefined,
-    _stream_body: aws.http.StreamingBody = undefined,
+    completion: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *InvokeInlineAgentOutput) void {
-        self.event_reader.deinit();
-        self._stream_body.deinit();
+        self.completion.deinit();
     }
 
     pub const json_field_names = .{
@@ -200,8 +198,8 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeInlin
     stream_resp.deinitHeaders();
     errdefer stream_resp.body.deinit();
 
-    const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());
-    return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };
+    const completion = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
+    return .{ .completion = completion };
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: InvokeInlineAgentInput, config: *aws.Config) !aws.http.Request {

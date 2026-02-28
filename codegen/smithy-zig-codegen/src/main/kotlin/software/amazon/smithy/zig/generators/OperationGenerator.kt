@@ -53,6 +53,20 @@ class OperationGenerator(
         model.expectShape(operation.outputShape, StructureShape::class.java)
 
     /**
+     * Get the Zig field name for the event stream output member
+     * (the member targeting a @streaming union).
+     */
+    private fun eventStreamOutputFieldName(): String? {
+        for ((memberName, memberShape) in outputShape.allMembers) {
+            val target = model.expectShape(memberShape.target)
+            if (target is UnionShape && target.hasTrait(StreamingTrait::class.java)) {
+                return NamingUtil.toFieldName(memberName)
+            }
+        }
+        return null
+    }
+
+    /**
      * Check if this operation has a streaming output payload:
      * an output member with @httpPayload targeting a @streaming blob.
      */
@@ -318,15 +332,14 @@ class OperationGenerator(
             writer.closeBlock("}")
         }
 
-        // Server-push event streams need event_reader and stream body fields
+        // Server-push event streams: field named after model member, owns body
         if (isServerPushEventStream) {
+            val fieldName = eventStreamOutputFieldName()!!
             writer.blankLine()
-            writer.write("event_reader: aws.event_stream_reader.EventStreamReader = undefined,")
-            writer.write("_stream_body: aws.http.StreamingBody = undefined,")
+            writer.write("\$L: aws.event_stream_reader.EventStreamReader = undefined,", fieldName)
             writer.blankLine()
             writer.openBlock("pub fn deinit(self: *\$L) void {", outputName)
-            writer.write("self.event_reader.deinit();")
-            writer.write("self._stream_body.deinit();")
+            writer.write("self.\$L.deinit();", fieldName)
             writer.closeBlock("}")
         }
 
@@ -409,9 +422,10 @@ class OperationGenerator(
         writer.write("errdefer stream_resp.body.deinit();")
         writer.blankLine()
 
-        // Initialize event stream reader from response body
-        writer.write("const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());")
-        writer.write("return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };")
+        // Initialize event stream reader -- takes ownership of body
+        val fieldName = eventStreamOutputFieldName()!!
+        writer.write("const \$L = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);", fieldName)
+        writer.write("return .{ .\$L = \$L };", fieldName, fieldName)
 
         writer.closeBlock("}")
     }

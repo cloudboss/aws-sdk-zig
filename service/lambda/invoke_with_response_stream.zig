@@ -73,12 +73,10 @@ pub const InvokeWithResponseStreamOutput = struct {
     /// invocation type, this status code is 204.
     status_code: ?i32 = null,
 
-    event_reader: aws.event_stream_reader.EventStreamReader = undefined,
-    _stream_body: aws.http.StreamingBody = undefined,
+    event_stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *InvokeWithResponseStreamOutput) void {
-        self.event_reader.deinit();
-        self._stream_body.deinit();
+        self.event_stream.deinit();
     }
 
     pub const json_field_names = .{
@@ -119,8 +117,8 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeWithR
     stream_resp.deinitHeaders();
     errdefer stream_resp.body.deinit();
 
-    const event_reader = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body.reader());
-    return .{ .event_reader = event_reader, ._stream_body = stream_resp.body };
+    const event_stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
+    return .{ .event_stream = event_stream };
 }
 
 fn serializeRequest(alloc: std.mem.Allocator, input: InvokeWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
