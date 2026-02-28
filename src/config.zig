@@ -9,9 +9,28 @@ const credentials_mod = @import("credentials.zig");
 const CredentialsProvider = credentials_mod.CredentialsProvider;
 const ChainProvider = credentials_mod.ChainProvider;
 const endpoint_mod = @import("endpoint.zig");
+const sts_common_mod = @import("sts_common.zig");
 
 /// Retry mode for transient failures
 pub const RetryMode = enum { standard, adaptive };
+
+pub const StsRegionalEndpoints = sts_common_mod.StsRegionalEndpoints;
+
+fn parseStsRegionalEndpoints(value: []const u8) ?StsRegionalEndpoints {
+    if (std.mem.eql(u8, value, "regional")) {
+        return .regional;
+    } else if (std.mem.eql(u8, value, "legacy")) {
+        return .legacy;
+    }
+    return null;
+}
+
+fn readEnvStsRegionalEndpoints() ?StsRegionalEndpoints {
+    if (std.posix.getenv("AWS_STS_REGIONAL_ENDPOINTS")) |value| {
+        return parseStsRegionalEndpoints(value);
+    }
+    return null;
+}
 
 /// Parse retry mode from string value
 pub fn parseRetryMode(value: []const u8) ?RetryMode {
@@ -79,6 +98,8 @@ pub const LoadOptions = struct {
     ca_bundle: ?[]const u8 = null,
     /// Request timeout in milliseconds
     timeout_ms: ?u32 = null,
+    /// STS regional endpoint mode
+    sts_regional_endpoints: ?StsRegionalEndpoints = null,
 };
 
 /// AWS SDK configuration shared across service clients
@@ -105,6 +126,8 @@ pub const Config = struct {
     config_file: ?ConfigFile = null,
     /// Profile name for config file lookups
     profile: []const u8 = "default",
+    /// STS regional endpoint mode
+    sts_regional_endpoints: StsRegionalEndpoints = .regional,
 
     allocator: Allocator,
 
@@ -159,6 +182,18 @@ pub const Config = struct {
                 null) orelse
             .standard;
 
+        const sts_regional_endpoints: StsRegionalEndpoints =
+            options.sts_regional_endpoints orelse
+            readEnvStsRegionalEndpoints() orelse
+            (if (profile) |p|
+                (if (p.sts_regional_endpoints) |s|
+                    parseStsRegionalEndpoints(s)
+                else
+                    null)
+            else
+                null) orelse
+            .regional;
+
         const ca_bundle: ?[]const u8 = options.ca_bundle orelse
             std.posix.getenv("AWS_CA_BUNDLE") orelse
             (if (profile) |p| p.ca_bundle else null);
@@ -174,6 +209,7 @@ pub const Config = struct {
             .use_dual_stack = use_dual_stack,
             .max_attempts = max_attempts,
             .retry_mode = retry_mode,
+            .sts_regional_endpoints = sts_regional_endpoints,
             .ca_bundle = ca_bundle,
             .timeout_ms = timeout_ms,
             .config_file = cf,
@@ -396,6 +432,7 @@ pub const Profile = struct {
     use_dualstack_endpoint: ?bool = null,
     max_attempts: ?u32 = null,
     retry_mode: ?[]const u8 = null,
+    sts_regional_endpoints: ?[]const u8 = null,
     ec2_metadata_service_endpoint: ?[]const u8 = null,
     ec2_metadata_service_endpoint_mode: ?[]const u8 = null,
     ca_bundle: ?[]const u8 = null,
@@ -669,6 +706,8 @@ fn setProfileField(p: *Profile, key: []const u8, value: []const u8) void {
         p.max_attempts = std.fmt.parseInt(u32, value, 10) catch null;
     } else if (std.mem.eql(u8, key, "retry_mode")) {
         p.retry_mode = value;
+    } else if (std.mem.eql(u8, key, "sts_regional_endpoints")) {
+        p.sts_regional_endpoints = value;
     } else if (std.mem.eql(u8, key, "ec2_metadata_service_endpoint")) {
         p.ec2_metadata_service_endpoint = value;
     } else if (std.mem.eql(u8, key, "ec2_metadata_service_endpoint_mode")) {

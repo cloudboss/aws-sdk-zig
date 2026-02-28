@@ -225,3 +225,17 @@ test "GetCallerIdentity returns consistent results across calls" {
     const account2 = result2.account orelse return error.MissingAccount;
     try std.testing.expectEqualStrings(account1, account2);
 }
+
+test "Config resolves sts_regional_endpoints from load options" {
+    const allocator = std.testing.allocator;
+
+    var cfg = try aws.Config.load(allocator, .{
+        .sts_regional_endpoints = .legacy,
+    });
+    defer cfg.deinit();
+
+    try std.testing.expectEqual(
+        aws.StsRegionalEndpoints.legacy,
+        cfg.sts_regional_endpoints,
+    );
+}

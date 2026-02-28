@@ -14,15 +14,31 @@ const url_mod = @import("url.zig");
 const xml = @import("xml.zig");
 const endpoint_mod = @import("endpoint.zig");
 
+pub const StsRegionalEndpoints = enum { regional, legacy };
 /// Build the STS endpoint URL for a region.
 /// If endpoint_url is provided (e.g. LocalStack), returns a dupe of that.
 /// Otherwise returns https://sts.{region}.{partition.dns_suffix}
-pub fn stsEndpoint(allocator: Allocator, region: []const u8, endpoint_url: ?[]const u8) ![]const u8 {
+pub fn stsEndpoint(
+    allocator: Allocator,
+    region: []const u8,
+    endpoint_url: ?[]const u8,
+    mode: StsRegionalEndpoints,
+) ![]const u8 {
     if (endpoint_url) |u| {
         return try allocator.dupe(u8, u);
     }
     const partition = endpoint_mod.partitionForRegion(region);
-    return std.fmt.allocPrint(allocator, "https://sts.{s}.{s}", .{ region, partition.dns_suffix });
+    if (mode == .legacy and
+        std.mem.eql(u8, region, "us-east-1") and
+        std.mem.eql(u8, partition.name, "aws"))
+    {
+        return try allocator.dupe(u8, "https://sts.amazonaws.com");
+    }
+    return std.fmt.allocPrint(
+        allocator,
+        "https://sts.{s}.{s}",
+        .{ region, partition.dns_suffix },
+    );
 }
 
 /// Build a URL-encoded STS POST body from action name and key-value params.
@@ -193,27 +209,56 @@ test "buildStsRequestBody url encodes special characters" {
     try std.testing.expect(std.mem.indexOf(u8, body, "Test+Role") != null);
 }
 
-test "stsEndpoint with region" {
+test "stsEndpoint regional mode with us-east-1" {
     const allocator = std.testing.allocator;
-    const ep = try stsEndpoint(allocator, "us-east-1", null);
+    const ep = try stsEndpoint(allocator, "us-east-1", null, .regional);
     defer allocator.free(ep);
+    try std.testing.expectEqualStrings(
+        "https://sts.us-east-1.amazonaws.com",
+        ep,
+    );
+}
 
-    try std.testing.expectEqualStrings("https://sts.us-east-1.amazonaws.com", ep);
+test "stsEndpoint legacy mode with us-east-1 returns global" {
+    const allocator = std.testing.allocator;
+    const ep = try stsEndpoint(allocator, "us-east-1", null, .legacy);
+    defer allocator.free(ep);
+    try std.testing.expectEqualStrings(
+        "https://sts.amazonaws.com",
+        ep,
+    );
+}
+
+test "stsEndpoint legacy mode with eu-west-1 returns regional" {
+    const allocator = std.testing.allocator;
+    const ep = try stsEndpoint(allocator, "eu-west-1", null, .legacy);
+    defer allocator.free(ep);
+    try std.testing.expectEqualStrings(
+        "https://sts.eu-west-1.amazonaws.com",
+        ep,
+    );
+}
+
+test "stsEndpoint legacy mode with cn-north-1 returns China regional" {
+    const allocator = std.testing.allocator;
+    const ep = try stsEndpoint(allocator, "cn-north-1", null, .legacy);
+    defer allocator.free(ep);
+    try std.testing.expectEqualStrings(
+        "https://sts.cn-north-1.amazonaws.com.cn",
+        ep,
+    );
 }
 
 test "stsEndpoint with custom endpoint" {
     const allocator = std.testing.allocator;
-    const ep = try stsEndpoint(allocator, "us-east-1", "http://localhost:4566");
+    const ep = try stsEndpoint(
+        allocator,
+        "us-east-1",
+        "http://localhost:4566",
+        .regional,
+    );
     defer allocator.free(ep);
-
     try std.testing.expectEqualStrings("http://localhost:4566", ep);
-}
-
-test "stsEndpoint with China region" {
-    const allocator = std.testing.allocator;
-    const ep = try stsEndpoint(allocator, "cn-north-1", null);
-    defer allocator.free(ep);
-    try std.testing.expectEqualStrings("https://sts.cn-north-1.amazonaws.com.cn", ep);
 }
 
 test "parseStsCredentials valid XML" {

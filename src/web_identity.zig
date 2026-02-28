@@ -16,6 +16,7 @@ pub const WebIdentityProvider = struct {
     session_name: []const u8,
     region: []const u8,
     endpoint_url: ?[]const u8 = null,
+    sts_regional_endpoints: sts_common.StsRegionalEndpoints = .regional,
     cached: ?Credentials = null,
 
     const Self = @This();
@@ -31,7 +32,12 @@ pub const WebIdentityProvider = struct {
         // Trim whitespace from token
         const trimmed_token = std.mem.trim(u8, token, " \t\r\n");
 
-        const endpoint = try sts_common.stsEndpoint(allocator, self.region, self.endpoint_url);
+        const endpoint = try sts_common.stsEndpoint(
+            allocator,
+            self.region,
+            self.endpoint_url,
+            self.sts_regional_endpoints,
+        );
         defer allocator.free(endpoint);
 
         const body = try sts_common.buildStsRequestBody(allocator, "AssumeRoleWithWebIdentity", &.{

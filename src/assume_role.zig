@@ -18,6 +18,7 @@ pub const AssumeRoleProvider = struct {
     region: []const u8,
     source_provider: *CredentialsProvider,
     endpoint_url: ?[]const u8 = null,
+    sts_regional_endpoints: sts_common.StsRegionalEndpoints = .regional,
     cached: ?Credentials = null,
 
     const Self = @This();
@@ -27,7 +28,12 @@ pub const AssumeRoleProvider = struct {
 
         const source_creds = try self.source_provider.getCredentials(allocator);
 
-        const endpoint = try sts_common.stsEndpoint(allocator, self.region, self.endpoint_url);
+        const endpoint = try sts_common.stsEndpoint(
+            allocator,
+            self.region,
+            self.endpoint_url,
+            self.sts_regional_endpoints,
+        );
         defer allocator.free(endpoint);
 
         var params: [3][2][]const u8 = undefined;

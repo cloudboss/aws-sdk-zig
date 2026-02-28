@@ -11,6 +11,7 @@ const process = @import("process.zig");
 const sso = @import("sso.zig");
 const assume_role = @import("assume_role.zig");
 const config_mod = @import("config.zig");
+const sts_common = @import("sts_common.zig");
 
 /// AWS credentials for request signing
 pub const Credentials = struct {
@@ -237,6 +238,8 @@ pub const ChainProvider = struct {
     region: ?[]const u8 = null,
     /// Endpoint URL override (for LocalStack, etc.)
     endpoint_url: ?[]const u8 = null,
+    /// STS regional endpoint mode
+    sts_regional_endpoints: sts_common.StsRegionalEndpoints = .regional,
     /// IMDS provider (reused across calls)
     imds_provider: ?ImdsProvider = null,
     /// ECS provider (reused across calls)
@@ -345,6 +348,7 @@ pub const ChainProvider = struct {
                     .region = region,
                     .source_provider = &source,
                     .endpoint_url = self.endpoint_url,
+                    .sts_regional_endpoints = self.sts_regional_endpoints,
                 };
                 break :blk ar.getCredentials(allocator);
             },
@@ -420,6 +424,7 @@ pub const ChainProvider = struct {
                         "aws-sdk-zig",
                     .region = region,
                     .endpoint_url = self.endpoint_url,
+                    .sts_regional_endpoints = self.sts_regional_endpoints,
                 };
                 break :blk wp.getCredentials(allocator);
             },
@@ -440,6 +445,7 @@ pub const ChainProvider = struct {
                             "aws-sdk-zig",
                         .region = region,
                         .endpoint_url = self.endpoint_url,
+                        .sts_regional_endpoints = self.sts_regional_endpoints,
                     };
                 }
                 break :blk self.web_identity_provider.?.getCredentials(allocator);
