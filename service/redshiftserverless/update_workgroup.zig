@@ -150,7 +150,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateWorkgroupInput, confi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateWorkgroupOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(UpdateWorkgroupOutput, body, alloc);
 }
 

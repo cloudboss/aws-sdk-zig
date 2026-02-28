@@ -118,7 +118,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateBudgetActionInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateBudgetActionOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(UpdateBudgetActionOutput, body, alloc);
 }
 

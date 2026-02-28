@@ -87,7 +87,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateModelPackageGroupInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateModelPackageGroupOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(CreateModelPackageGroupOutput, body, alloc);
 }
 

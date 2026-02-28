@@ -360,7 +360,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateServerInput, config: 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateServerOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(CreateServerOutput, body, alloc);
 }
 

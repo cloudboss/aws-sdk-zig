@@ -76,7 +76,10 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
             writer.write("_ = alloc;")
             writer.write("return .{};")
         } else {
-            writer.write("if (body.len == 0) return .{};")
+            val allOptional = ctx.outputShape.allMembers.values.all { !it.isRequired }
+            if (allOptional) {
+                writer.write("if (body.len == 0) return .{};")
+            }
             writer.write("return aws.json.parseJsonObject(\$L, body, alloc);", outputName)
         }
 

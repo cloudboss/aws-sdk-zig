@@ -102,7 +102,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: InferSNOMEDCTInput, config:
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !InferSNOMEDCTOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(InferSNOMEDCTOutput, body, alloc);
 }
 

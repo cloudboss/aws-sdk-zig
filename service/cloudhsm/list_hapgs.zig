@@ -81,7 +81,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListHapgsInput, config: *aw
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListHapgsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListHapgsOutput, body, alloc);
 }
 

@@ -2,17 +2,20 @@ package software.amazon.smithy.zig.aws
 
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import software.amazon.smithy.build.FileManifest
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
 import software.amazon.smithy.model.shapes.MapShape
+import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.traits.ErrorTrait
+import software.amazon.smithy.model.traits.RequiredTrait
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
 import software.amazon.smithy.zig.ZigSymbolVisitor
@@ -90,11 +93,38 @@ class AwsJsonProtocolTest {
                     .build()
             )
             .addShape(
+                StructureShape.builder()
+                    .id("test#GetItemInput")
+                    .addMember("TableName", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#GetItemOutput")
+                    .addMember(
+                        MemberShape.builder()
+                            .id("test#GetItemOutput\$SequenceNumber")
+                            .target("smithy.api#String")
+                            .addTrait(RequiredTrait())
+                            .build()
+                    )
+                    .addMember("ConsumedCapacity", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                OperationShape.builder()
+                    .id("test#GetItem")
+                    .input(ShapeId.from("test#GetItemInput"))
+                    .output(ShapeId.from("test#GetItemOutput"))
+                    .build()
+            )
+            .addShape(
                 ServiceShape.builder()
                     .id("test#DynamoDB_20120810")
                     .version("2012-08-10")
                     .addOperation(ShapeId.from("test#PutItem"))
                     .addOperation(ShapeId.from("test#ListTables"))
+                    .addOperation(ShapeId.from("test#GetItem"))
                     .build()
             )
             .assemble()
@@ -410,6 +440,35 @@ class AwsJsonProtocolTest {
         assertTrue(
             op.contains("const AttributeValue = @import(\"attribute_value.zig\").AttributeValue;"),
             "Operation with map member should import the map value type",
+        )
+    }
+
+    // ---- Empty body shortcut tests ----
+
+    @Test
+    fun emptyBodyShortcutForAllOptionalOutput() {
+        val files = generateFiles("1.0")
+        val op = files["put_item.zig"]!!
+
+        assertTrue(
+            op.contains("if (body.len == 0) return .{};"),
+            "All-optional output should have empty body shortcut",
+        )
+    }
+
+    @Test
+    fun noEmptyBodyShortcutForRequiredOutput() {
+        val files = generateFiles("1.0")
+        val op = files["get_item.zig"]!!
+
+        assertNotNull(op, "get_item.zig should be generated")
+        assertFalse(
+            op.contains("if (body.len == 0) return .{};"),
+            "Output with required fields should NOT have empty body shortcut",
+        )
+        assertTrue(
+            op.contains("aws.json.parseJsonObject(GetItemOutput, body, alloc)"),
+            "Should still use JSON parser",
         )
     }
 

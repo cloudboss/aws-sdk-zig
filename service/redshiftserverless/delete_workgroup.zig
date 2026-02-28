@@ -76,7 +76,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteWorkgroupInput, confi
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteWorkgroupOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(DeleteWorkgroupOutput, body, alloc);
 }
 

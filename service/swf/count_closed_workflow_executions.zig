@@ -144,7 +144,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CountClosedWorkflowExecutio
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CountClosedWorkflowExecutionsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(CountClosedWorkflowExecutionsOutput, body, alloc);
 }
 

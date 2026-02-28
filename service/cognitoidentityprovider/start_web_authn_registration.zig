@@ -79,7 +79,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartWebAuthnRegistrationIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StartWebAuthnRegistrationOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(StartWebAuthnRegistrationOutput, body, alloc);
 }
 

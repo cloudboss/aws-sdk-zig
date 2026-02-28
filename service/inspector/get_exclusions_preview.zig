@@ -120,7 +120,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetExclusionsPreviewInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetExclusionsPreviewOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(GetExclusionsPreviewOutput, body, alloc);
 }
 

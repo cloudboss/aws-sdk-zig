@@ -92,7 +92,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListRoutingControlsInput, c
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListRoutingControlsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListRoutingControlsOutput, body, alloc);
 }
 

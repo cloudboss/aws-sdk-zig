@@ -108,7 +108,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTermsInput, config: *aw
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListTermsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListTermsOutput, body, alloc);
 }
 

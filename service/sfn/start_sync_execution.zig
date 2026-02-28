@@ -182,7 +182,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: StartSyncExecutionInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !StartSyncExecutionOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(StartSyncExecutionOutput, body, alloc);
 }
 

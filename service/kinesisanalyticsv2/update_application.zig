@@ -133,7 +133,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateApplicationInput, con
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateApplicationOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(UpdateApplicationOutput, body, alloc);
 }
 

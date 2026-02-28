@@ -155,7 +155,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetWorkflowInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetWorkflowOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(GetWorkflowOutput, body, alloc);
 }
 

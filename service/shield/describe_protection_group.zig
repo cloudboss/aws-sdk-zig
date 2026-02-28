@@ -80,7 +80,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeProtectionGroupInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeProtectionGroupOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(DescribeProtectionGroupOutput, body, alloc);
 }
 

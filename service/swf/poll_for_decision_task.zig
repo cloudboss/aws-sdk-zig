@@ -173,7 +173,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PollForDecisionTaskInput, c
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !PollForDecisionTaskOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(PollForDecisionTaskOutput, body, alloc);
 }
 

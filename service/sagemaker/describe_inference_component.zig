@@ -126,7 +126,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeInferenceComponentI
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeInferenceComponentOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(DescribeInferenceComponentOutput, body, alloc);
 }
 

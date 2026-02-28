@@ -93,7 +93,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAddressListImportJobI
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateAddressListImportJobOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(CreateAddressListImportJobOutput, body, alloc);
 }
 

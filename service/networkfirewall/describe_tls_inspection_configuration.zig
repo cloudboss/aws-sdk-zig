@@ -126,7 +126,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeTLSInspectionConfig
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeTLSInspectionConfigurationOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(DescribeTLSInspectionConfigurationOutput, body, alloc);
 }
 

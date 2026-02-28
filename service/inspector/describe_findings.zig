@@ -90,7 +90,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeFindingsInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeFindingsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(DescribeFindingsOutput, body, alloc);
 }
 

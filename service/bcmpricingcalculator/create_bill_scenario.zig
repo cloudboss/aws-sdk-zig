@@ -130,7 +130,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateBillScenarioInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateBillScenarioOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(CreateBillScenarioOutput, body, alloc);
 }
 

@@ -99,7 +99,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetAnomalySubscriptionsInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetAnomalySubscriptionsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(GetAnomalySubscriptionsOutput, body, alloc);
 }
 

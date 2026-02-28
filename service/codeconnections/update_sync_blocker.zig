@@ -97,7 +97,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateSyncBlockerInput, con
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateSyncBlockerOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(UpdateSyncBlockerOutput, body, alloc);
 }
 

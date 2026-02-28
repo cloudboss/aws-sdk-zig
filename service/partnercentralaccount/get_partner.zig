@@ -107,7 +107,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetPartnerInput, config: *a
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetPartnerOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(GetPartnerOutput, body, alloc);
 }
 

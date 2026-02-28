@@ -159,7 +159,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: BatchDescribeMergeConflicts
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !BatchDescribeMergeConflictsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(BatchDescribeMergeConflictsOutput, body, alloc);
 }
 

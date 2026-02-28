@@ -110,7 +110,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateSyncConfigurationInpu
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !UpdateSyncConfigurationOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(UpdateSyncConfigurationOutput, body, alloc);
 }
 

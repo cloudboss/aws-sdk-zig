@@ -182,7 +182,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateFeatureGroupInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateFeatureGroupOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(CreateFeatureGroupOutput, body, alloc);
 }
 

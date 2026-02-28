@@ -76,7 +76,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RejectEnvironmentAccountCon
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !RejectEnvironmentAccountConnectionOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(RejectEnvironmentAccountConnectionOutput, body, alloc);
 }
 

@@ -99,7 +99,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteRegistrationAttachmen
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteRegistrationAttachmentOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(DeleteRegistrationAttachmentOutput, body, alloc);
 }
 

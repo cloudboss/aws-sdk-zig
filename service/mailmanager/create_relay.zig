@@ -100,7 +100,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateRelayInput, config: *
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CreateRelayOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(CreateRelayOutput, body, alloc);
 }
 

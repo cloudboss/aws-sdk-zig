@@ -142,7 +142,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListClusterNodesInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListClusterNodesOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListClusterNodesOutput, body, alloc);
 }
 

@@ -124,7 +124,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeleteRegistrationInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DeleteRegistrationOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(DeleteRegistrationOutput, body, alloc);
 }
 

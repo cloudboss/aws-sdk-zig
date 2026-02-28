@@ -103,7 +103,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListPolicyStoresInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListPolicyStoresOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListPolicyStoresOutput, body, alloc);
 }
 

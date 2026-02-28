@@ -95,7 +95,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SendMessageBatchInput, conf
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !SendMessageBatchOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(SendMessageBatchOutput, body, alloc);
 }
 

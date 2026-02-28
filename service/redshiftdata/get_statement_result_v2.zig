@@ -115,7 +115,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetStatementResultV2Input, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetStatementResultV2Output {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(GetStatementResultV2Output, body, alloc);
 }
 

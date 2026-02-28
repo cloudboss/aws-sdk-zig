@@ -76,7 +76,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CancelServicePipelineDeploy
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !CancelServicePipelineDeploymentOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(CancelServicePipelineDeploymentOutput, body, alloc);
 }
 

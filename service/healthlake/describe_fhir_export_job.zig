@@ -80,7 +80,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeFHIRExportJobInput,
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !DescribeFHIRExportJobOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(DescribeFHIRExportJobOutput, body, alloc);
 }
 

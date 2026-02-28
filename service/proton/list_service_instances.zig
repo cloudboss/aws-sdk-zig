@@ -117,7 +117,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListServiceInstancesInput, 
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListServiceInstancesOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListServiceInstancesOutput, body, alloc);
 }
 

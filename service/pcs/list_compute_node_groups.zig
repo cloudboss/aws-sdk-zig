@@ -101,7 +101,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListComputeNodeGroupsInput,
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListComputeNodeGroupsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListComputeNodeGroupsOutput, body, alloc);
 }
 

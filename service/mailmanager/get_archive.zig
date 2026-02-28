@@ -110,7 +110,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetArchiveInput, config: *a
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !GetArchiveOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(GetArchiveOutput, body, alloc);
 }
 

@@ -161,7 +161,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIntegrationInput, con
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ModifyIntegrationOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ModifyIntegrationOutput, body, alloc);
 }
 

@@ -102,7 +102,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListVpcIngressConnectionsIn
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListVpcIngressConnectionsOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListVpcIngressConnectionsOutput, body, alloc);
 }
 

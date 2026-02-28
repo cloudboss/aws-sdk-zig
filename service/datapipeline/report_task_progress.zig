@@ -83,7 +83,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ReportTaskProgressInput, co
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ReportTaskProgressOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ReportTaskProgressOutput, body, alloc);
 }
 

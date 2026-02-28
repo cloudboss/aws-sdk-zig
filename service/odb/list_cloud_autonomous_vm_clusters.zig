@@ -90,7 +90,6 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListCloudAutonomousVmCluste
 fn deserializeResponse(body: []const u8, status: u16, headers: anytype, alloc: std.mem.Allocator) !ListCloudAutonomousVmClustersOutput {
     _ = status;
     _ = headers;
-    if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListCloudAutonomousVmClustersOutput, body, alloc);
 }
 
