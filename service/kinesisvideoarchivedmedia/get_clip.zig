@@ -41,7 +41,7 @@ pub const GetClipOutput = struct {
     payload: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetClipOutput) void {
-        self.payload.deinit();
+        if (self.payload) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

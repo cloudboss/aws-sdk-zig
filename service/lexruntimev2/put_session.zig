@@ -88,7 +88,7 @@ pub const PutSessionOutput = struct {
     session_state: ?[]const u8 = null,
 
     pub fn deinit(self: *PutSessionOutput) void {
-        self.audio_stream.deinit();
+        if (self.audio_stream) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

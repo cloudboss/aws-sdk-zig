@@ -15,6 +15,7 @@ import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.HttpPayloadTrait
 import software.amazon.smithy.model.traits.StreamingTrait
+import software.amazon.smithy.model.traits.DefaultTrait
 import software.amazon.smithy.zig.DefaultValueUtil
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
@@ -285,7 +286,12 @@ class OperationGenerator(
                 val targetShape = model.expectShape(memberShape.target)
                 if (ctx.isStreamingBlob(targetShape)) {
                     val fieldName = NamingUtil.toFieldName(memberName)
-                    writer.write("self.\$L.deinit();", fieldName)
+                    val hasMemberDefault = memberShape.hasTrait(DefaultTrait::class.java)
+                    if (hasMemberDefault) {
+                        writer.write("if (self.\$L) |*b| b.deinit();", fieldName)
+                    } else {
+                        writer.write("self.\$L.deinit();", fieldName)
+                    }
                 }
             }
             writer.closeBlock("}")

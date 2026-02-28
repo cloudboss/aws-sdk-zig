@@ -120,7 +120,7 @@ pub const SynthesizeSpeechOutput = struct {
     request_characters: ?i32 = null,
 
     pub fn deinit(self: *SynthesizeSpeechOutput) void {
-        self.audio_stream.deinit();
+        if (self.audio_stream) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

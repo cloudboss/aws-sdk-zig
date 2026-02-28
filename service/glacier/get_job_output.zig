@@ -130,7 +130,7 @@ pub const GetJobOutputOutput = struct {
     status: ?i32 = null,
 
     pub fn deinit(self: *GetJobOutputOutput) void {
-        self.body.deinit();
+        if (self.body) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

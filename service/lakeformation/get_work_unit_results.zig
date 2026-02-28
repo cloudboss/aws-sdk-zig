@@ -30,7 +30,7 @@ pub const GetWorkUnitResultsOutput = struct {
     result_stream: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetWorkUnitResultsOutput) void {
-        self.result_stream.deinit();
+        if (self.result_stream) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

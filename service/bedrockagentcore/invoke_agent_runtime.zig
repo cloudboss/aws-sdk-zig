@@ -113,7 +113,7 @@ pub const InvokeAgentRuntimeOutput = struct {
     trace_state: ?[]const u8 = null,
 
     pub fn deinit(self: *InvokeAgentRuntimeOutput) void {
-        self.response.deinit();
+        if (self.response) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

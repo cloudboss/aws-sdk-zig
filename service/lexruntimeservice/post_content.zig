@@ -378,7 +378,7 @@ pub const PostContentOutput = struct {
     slot_to_elicit: ?[]const u8 = null,
 
     pub fn deinit(self: *PostContentOutput) void {
-        self.audio_stream.deinit();
+        if (self.audio_stream) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

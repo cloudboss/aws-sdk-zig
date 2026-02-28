@@ -85,7 +85,7 @@ pub const GetPackageVersionAssetOutput = struct {
     package_version_revision: ?[]const u8 = null,
 
     pub fn deinit(self: *GetPackageVersionAssetOutput) void {
-        self.asset.deinit();
+        if (self.asset) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

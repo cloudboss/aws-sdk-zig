@@ -65,7 +65,7 @@ pub const GetTileOutput = struct {
     binary_file: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetTileOutput) void {
-        self.binary_file.deinit();
+        if (self.binary_file) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

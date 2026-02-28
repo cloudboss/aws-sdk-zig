@@ -29,7 +29,7 @@ pub const GetObjectTorrentOutput = struct {
     request_charged: ?RequestCharged = null,
 
     pub fn deinit(self: *GetObjectTorrentOutput) void {
-        self.body.deinit();
+        if (self.body) |*b| b.deinit();
     }
 };
 

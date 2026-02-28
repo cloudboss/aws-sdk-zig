@@ -82,7 +82,7 @@ pub const GetObjectOutput = struct {
     status_code: ?i32 = null,
 
     pub fn deinit(self: *GetObjectOutput) void {
-        self.body.deinit();
+        if (self.body) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

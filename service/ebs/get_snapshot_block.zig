@@ -51,7 +51,7 @@ pub const GetSnapshotBlockOutput = struct {
     data_length: ?i32 = null,
 
     pub fn deinit(self: *GetSnapshotBlockOutput) void {
-        self.block_data.deinit();
+        if (self.block_data) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

@@ -503,7 +503,7 @@ pub const GetObjectOutput = struct {
     website_redirect_location: ?[]const u8 = null,
 
     pub fn deinit(self: *GetObjectOutput) void {
-        self.body.deinit();
+        if (self.body) |*b| b.deinit();
     }
 };
 

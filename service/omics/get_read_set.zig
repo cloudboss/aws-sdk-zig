@@ -31,7 +31,7 @@ pub const GetReadSetOutput = struct {
     payload: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetReadSetOutput) void {
-        self.payload.deinit();
+        if (self.payload) |*b| b.deinit();
     }
 
     pub const json_field_names = .{

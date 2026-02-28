@@ -37,7 +37,7 @@ pub const DescribeInputDeviceThumbnailOutput = struct {
     last_modified: ?i64 = null,
 
     pub fn deinit(self: *DescribeInputDeviceThumbnailOutput) void {
-        self.body.deinit();
+        if (self.body) |*b| b.deinit();
     }
 
     pub const json_field_names = .{
