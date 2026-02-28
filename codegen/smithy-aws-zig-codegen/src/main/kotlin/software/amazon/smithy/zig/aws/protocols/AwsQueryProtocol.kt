@@ -154,8 +154,9 @@ open class AwsQueryProtocol : ProtocolGenerator {
             }
             targetShape is MapShape -> {
                 val mapValueShape = ctx.model.expectShape(targetShape.value.target)
-                // Skip struct/union-valued maps -- flattened query serialization not yet supported
-                if (mapValueShape is StructureShape || mapValueShape is UnionShape) {
+                // Handle struct/union-valued maps
+                if (mapValueShape is UnionShape) {
+                    // TODO: union-valued map serialization requires discriminator logic
                     if (!memberShape.isRequired) {
                         // Optional: no code needed, field is null by default
                     } else {
@@ -164,18 +165,15 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     return
                 }
 
-                val keyTag = targetShape.key.getTrait(XmlNameTrait::class.java)
-                    .map { it.value }.orElse("key")
-                val valueTag = targetShape.value.getTrait(XmlNameTrait::class.java)
-                    .map { it.value }.orElse("value")
-
+                // Struct-valued maps: serialize with flattened field structure
                 if (memberShape.isRequired) {
-                    writeMapQuerySerializer(writer, ctx, smithyName, targetShape, keyTag, valueTag, "$accessor.$fieldName")
+                    writeStructMapQuerySerializer(writer, ctx, smithyName, mapValueShape as StructureShape, "$accessor.$fieldName")
                 } else {
                     writer.openBlock("if (\$L.\$L) |entries| {", accessor, fieldName)
-                    writeMapQuerySerializer(writer, ctx, smithyName, targetShape, keyTag, valueTag, "entries")
+                    writeStructMapQuerySerializer(writer, ctx, smithyName, mapValueShape as StructureShape, "entries")
                     writer.closeBlock("}")
                 }
+                return
             }
             else -> {
                 // Scalar field
@@ -440,6 +438,80 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
         writer.closeBlock("}")
         writer.closeBlock("}") // for
+    }
+
+    private fun writeStructMapQuerySerializer(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        prefix: String,
+        structShape: StructureShape,
+        accessor: String,
+    ) {
+        // Maps with struct values are serialized as:
+        // prefix.entry.1.key=K&prefix.entry.1.StructField1=V1&prefix.entry.1.StructField2=V2
+        writer.openBlock("for (\$L, 0..) |entry, idx| {", accessor)
+        writer.write("const n = idx + 1;")
+        
+        // Serialize the key
+        writer.openBlock("{")
+        writer.write("var prefix_buf: [256]u8 = undefined;")
+        writer.write(
+            "const key_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.entry.{d}.key=\", .{n}) catch continue;",
+            prefix,
+        )
+        writer.write("try body_buf.appendSlice(alloc, key_prefix);")
+        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, entry.key);")
+        writer.closeBlock("}")
+        
+        // Serialize struct fields within the map entry
+        val entryPrefix = "$prefix.entry.{d}"
+        writeStructMapEntryFields(writer, ctx, entryPrefix, structShape, "entry.value")
+        
+        writer.closeBlock("}") // for
+    }
+    
+    private fun writeStructMapEntryFields(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        prefixTemplate: String,
+        structShape: StructureShape,
+        accessor: String,
+    ) {
+        for ((memberName, memberShape) in structShape.allMembers) {
+            val targetShape = ctx.model.expectShape(memberShape.target)
+            val fieldName = NamingUtil.toFieldName(memberName)
+            val qualifiedName = "$prefixTemplate.$memberName"
+            
+            when {
+                ctx.isScalarType(targetShape) -> {
+                    if (memberShape.isRequired) {
+                        writer.openBlock("{")
+                        writer.write("var prefix_buf: [256]u8 = undefined;")
+                        writer.write(
+                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{}) catch continue;",
+                            qualifiedName,
+                        )
+                        writer.write("try body_buf.appendSlice(alloc, field_prefix);")
+                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                            ctx.scalarFormatExpr(targetShape, fieldName, accessor))
+                        writer.closeBlock("}")
+                    } else {
+                        writer.openBlock("if (\$L.\$L) |v| {", accessor, fieldName)
+                        writer.openBlock("{")
+                        writer.write("var prefix_buf: [256]u8 = undefined;")
+                        writer.write(
+                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{}) catch continue;",
+                            qualifiedName,
+                        )
+                        writer.write("try body_buf.appendSlice(alloc, field_prefix);")
+                        writer.write("try aws.url.appendUrlEncoded(alloc, &body_buf, \$L);",
+                            ctx.scalarFormatExprForOptional(targetShape, "v"))
+                        writer.closeBlock("}")
+                        writer.closeBlock("}")
+                    }
+                }
+            }
+        }
     }
 
     override fun writeDeserializeResponse(writer: ZigWriter, ctx: OperationContext) {
