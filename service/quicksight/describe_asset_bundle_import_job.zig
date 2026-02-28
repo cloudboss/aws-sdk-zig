@@ -103,7 +103,7 @@ pub const DescribeAssetBundleImportJobOutput = struct {
     rollback_errors: ?[]const AssetBundleImportJobError = null,
 
     /// The HTTP status of the response.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// An array of warning records that describe all permitted errors that are
     /// encountered

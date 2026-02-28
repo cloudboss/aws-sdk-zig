@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeAccountHealthInput = struct {};
+pub const DescribeAccountHealthInput = struct {
+};
 
 pub const DescribeAccountHealthOutput = struct {
     /// Number of resources that DevOps Guru is monitoring in your Amazon Web
@@ -14,16 +15,16 @@ pub const DescribeAccountHealthOutput = struct {
     /// An integer that specifies the number of metrics that have been analyzed in
     /// your Amazon Web Services
     /// account.
-    metrics_analyzed: i32 = 0,
+    metrics_analyzed: ?i32 = null,
 
     /// An integer that specifies the number of open proactive insights in your
     /// Amazon Web Services
     /// account.
-    open_proactive_insights: i32 = 0,
+    open_proactive_insights: ?i32 = null,
 
     /// An integer that specifies the number of open reactive insights in your
     /// Amazon Web Services account.
-    open_reactive_insights: i32 = 0,
+    open_reactive_insights: ?i32 = null,
 
     /// The number of Amazon DevOps Guru resource analysis hours billed to the
     /// current Amazon Web Services account in

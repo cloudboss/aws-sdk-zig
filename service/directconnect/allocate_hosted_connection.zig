@@ -32,7 +32,7 @@ pub const AllocateHostedConnectionInput = struct {
     tags: ?[]const Tag = null,
 
     /// The dedicated VLAN provisioned to the hosted connection.
-    vlan: i32 = 0,
+    vlan: ?i32 = null,
 
     pub const json_field_names = .{
         .bandwidth = "bandwidth",

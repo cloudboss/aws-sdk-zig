@@ -22,7 +22,7 @@ pub const StartChangeRequestExecutionInput = struct {
     /// for this change request to run. If they don't, the change won't be processed
     /// until the calendar
     /// state is again `OPEN`.
-    auto_approve: bool = false,
+    auto_approve: ?bool = null,
 
     /// User-provided details about the change. If no details are provided, content
     /// specified in the

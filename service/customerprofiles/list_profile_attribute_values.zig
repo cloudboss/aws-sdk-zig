@@ -29,7 +29,7 @@ pub const ListProfileAttributeValuesOutput = struct {
     items: ?[]const AttributeValueItem = null,
 
     /// The status code for the response.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub const json_field_names = .{
         .attribute_name = "AttributeName",

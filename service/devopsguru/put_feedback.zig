@@ -14,7 +14,8 @@ pub const PutFeedbackInput = struct {
     };
 };
 
-pub const PutFeedbackOutput = struct {};
+pub const PutFeedbackOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,7 +18,7 @@ pub const CreateFirewallInput = struct {
     /// protection using UpdateAvailabilityZoneChangeProtection.
     ///
     /// Default value: `FALSE`
-    availability_zone_change_protection: bool = false,
+    availability_zone_change_protection: ?bool = null,
 
     /// Required. The Availability Zones where you want to create firewall endpoints
     /// for a transit gateway-attached firewall. You must specify at least one
@@ -37,7 +37,7 @@ pub const CreateFirewallInput = struct {
     /// against
     /// accidentally deleting a firewall that is in use. When you create a firewall,
     /// the operation initializes this flag to `TRUE`.
-    delete_protection: bool = false,
+    delete_protection: ?bool = null,
 
     /// A description of the firewall.
     description: ?[]const u8 = null,
@@ -64,7 +64,7 @@ pub const CreateFirewallInput = struct {
     /// accidentally modifying the firewall policy for a firewall that is in use.
     /// When you create a firewall, the operation initializes this setting to
     /// `TRUE`.
-    firewall_policy_change_protection: bool = false,
+    firewall_policy_change_protection: ?bool = null,
 
     /// A setting indicating whether the firewall is protected against changes to
     /// the subnet associations.
@@ -72,7 +72,7 @@ pub const CreateFirewallInput = struct {
     /// accidentally modifying the subnet associations for a firewall that is in
     /// use. When you create a firewall, the operation initializes this setting to
     /// `TRUE`.
-    subnet_change_protection: bool = false,
+    subnet_change_protection: ?bool = null,
 
     /// The public subnets to use for your Network Firewall firewalls. Each subnet
     /// must belong to a

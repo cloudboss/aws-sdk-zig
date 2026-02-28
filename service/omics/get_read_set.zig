@@ -28,7 +28,7 @@ pub const GetReadSetInput = struct {
 
 pub const GetReadSetOutput = struct {
     /// The read set file payload.
-    payload: aws.http.StreamingBody = "",
+    payload: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetReadSetOutput) void {
         self.payload.deinit();

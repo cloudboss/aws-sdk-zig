@@ -28,7 +28,7 @@ pub const AdminGetUserInput = struct {
 
 pub const AdminGetUserOutput = struct {
     /// Indicates whether the user is activated for sign-in.
-    enabled: bool = false,
+    enabled: ?bool = null,
 
     /// *This response parameter is no longer supported.* It provides
     /// information only about SMS MFA configurations. It doesn't provide

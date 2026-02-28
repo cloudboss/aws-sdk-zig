@@ -72,10 +72,10 @@ pub const DescribeJobOutput = struct {
     /// The maximum number of compute nodes that DataBrew can consume when the job
     /// processes
     /// data.
-    max_capacity: i32 = 0,
+    max_capacity: ?i32 = null,
 
     /// The maximum number of times to retry the job after a job run fails.
-    max_retries: i32 = 0,
+    max_retries: ?i32 = null,
 
     /// The name of the job.
     name: []const u8,
@@ -107,7 +107,7 @@ pub const DescribeJobOutput = struct {
     /// The job's timeout in minutes. A job that attempts to run longer than this
     /// timeout
     /// period ends with a status of `TIMEOUT`.
-    timeout: i32 = 0,
+    timeout: ?i32 = null,
 
     /// The job type, which must be one of the following:
     ///
@@ -116,7 +116,7 @@ pub const DescribeJobOutput = struct {
     ///
     /// * `RECIPE` - The job applies one or more transformations to a
     /// dataset.
-    type: ?JobType = null,
+    @"type": ?JobType = null,
 
     /// List of validation configurations that are applied to the profile job.
     validation_configurations: ?[]const ValidationConfiguration = null,
@@ -144,7 +144,7 @@ pub const DescribeJobOutput = struct {
         .role_arn = "RoleArn",
         .tags = "Tags",
         .timeout = "Timeout",
-        .type = "Type",
+        .@"type" = "Type",
         .validation_configurations = "ValidationConfigurations",
     };
 };

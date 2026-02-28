@@ -12,7 +12,7 @@ const EvaluationFormTargetConfiguration = @import("evaluation_form_target_config
 
 pub const UpdateEvaluationFormInput = struct {
     /// A boolean flag indicating whether to update evaluation form to draft state.
-    as_draft: bool = false,
+    as_draft: ?bool = null,
 
     /// Whether automated evaluations are enabled.
     auto_evaluation_configuration: ?EvaluationFormAutoEvaluationConfiguration = null,
@@ -35,7 +35,7 @@ pub const UpdateEvaluationFormInput = struct {
     evaluation_form_id: []const u8,
 
     /// A version of the evaluation form to update.
-    evaluation_form_version: i32 = 0,
+    evaluation_form_version: ?i32 = null,
 
     /// The identifier of the Amazon Connect instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
@@ -87,7 +87,7 @@ pub const UpdateEvaluationFormOutput = struct {
     evaluation_form_id: []const u8,
 
     /// The version of the updated evaluation form resource.
-    evaluation_form_version: i32 = 0,
+    evaluation_form_version: ?i32 = null,
 
     pub const json_field_names = .{
         .evaluation_form_arn = "EvaluationFormArn",

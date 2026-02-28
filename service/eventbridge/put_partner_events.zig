@@ -30,7 +30,7 @@ pub const PutPartnerEventsOutput = struct {
     /// The number of events from this operation that could not be written to the
     /// partner event
     /// bus.
-    failed_entry_count: i32 = 0,
+    failed_entry_count: ?i32 = null,
 
     pub const json_field_names = .{
         .entries = "Entries",

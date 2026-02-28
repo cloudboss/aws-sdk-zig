@@ -15,7 +15,7 @@ pub const CreateMaintenanceWindowInput = struct {
     /// If you don't enable this option, then you must specify previously-registered
     /// targets when
     /// you register a task with the maintenance window.
-    allow_unassociated_targets: bool = false,
+    allow_unassociated_targets: ?bool = null,
 
     /// User-provided idempotency token.
     client_token: ?[]const u8 = null,
@@ -23,7 +23,7 @@ pub const CreateMaintenanceWindowInput = struct {
     /// The number of hours before the end of the maintenance window that Amazon Web
     /// Services Systems Manager stops scheduling
     /// new tasks for execution.
-    cutoff: i32 = 0,
+    cutoff: ?i32 = null,
 
     /// An optional description for the maintenance window. We recommend specifying
     /// a description to

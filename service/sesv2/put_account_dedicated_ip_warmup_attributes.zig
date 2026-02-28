@@ -11,7 +11,7 @@ pub const PutAccountDedicatedIpWarmupAttributesInput = struct {
     /// Region. Set to `true`
     /// to enable the automatic warm-up feature, or set to `false` to disable
     /// it.
-    auto_warmup_enabled: bool = false,
+    auto_warmup_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .auto_warmup_enabled = "AutoWarmupEnabled",

@@ -78,7 +78,7 @@ pub const VerifyMacOutput = struct {
     /// `KMSInvalidMacException` exception. This exception indicates that one or
     /// more of
     /// the inputs changed since the HMAC was computed.
-    mac_valid: bool = false,
+    mac_valid: ?bool = null,
 
     pub const json_field_names = .{
         .key_id = "KeyId",

@@ -10,7 +10,7 @@ pub const GetConformancePackComplianceSummaryInput = struct {
     conformance_pack_names: []const []const u8,
 
     /// The maximum number of conformance packs returned on each page.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The nextToken string returned on a previous page that you use to get the
     /// next page of results in a paginated response.

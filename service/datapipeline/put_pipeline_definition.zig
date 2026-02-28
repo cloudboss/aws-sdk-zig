@@ -36,7 +36,7 @@ pub const PutPipelineDefinitionOutput = struct {
     /// is stored but cannot be
     /// activated until you correct the pipeline and call `PutPipelineDefinition` to
     /// commit the corrected pipeline.
-    errored: bool = false,
+    errored: ?bool = null,
 
     /// The validation errors that are associated with the objects defined in
     /// `pipelineObjects`.

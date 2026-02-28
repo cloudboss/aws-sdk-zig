@@ -8,10 +8,10 @@ pub const ContextKeySelector = struct {
 
     /// Specifies the type of the event record field in ContextKeySelector. Valid
     /// values include RequestContext, TagContext.
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .equals = "Equals",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

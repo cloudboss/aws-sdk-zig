@@ -12,7 +12,7 @@ pub const DeleteDataCatalogInput = struct {
     /// Catalog. After deletion, you will have to manage the Glue Connection and
     /// Lambda
     /// function.
-    delete_catalog_only: bool = false,
+    delete_catalog_only: ?bool = null,
 
     /// The name of the data catalog to delete.
     name: []const u8,

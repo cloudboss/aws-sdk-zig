@@ -19,7 +19,7 @@ pub const ListAccessPointsForDirectoryBucketsInput = struct {
     /// associated with more than this number of access points, the results include
     /// the pagination token `NextToken`. Make another call using the `NextToken` to
     /// retrieve more results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// If `NextToken` is returned, there are more access points available than
     /// requested in the `maxResults` value. The value of `NextToken` is a

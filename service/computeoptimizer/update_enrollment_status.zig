@@ -9,7 +9,7 @@ pub const UpdateEnrollmentStatusInput = struct {
     /// Indicates whether to enroll member accounts of the organization if the
     /// account is the
     /// management account of an organization.
-    include_member_accounts: bool = false,
+    include_member_accounts: ?bool = null,
 
     /// The new enrollment status of the account.
     ///

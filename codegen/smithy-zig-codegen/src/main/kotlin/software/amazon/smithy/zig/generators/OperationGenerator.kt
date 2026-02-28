@@ -190,7 +190,7 @@ class OperationGenerator(
             val targetShape = model.expectShape(memberShape.target)
             // Override streaming blob input types to []const u8 (input streaming deferred)
             val hasMemberDefault = memberShape.hasTrait(software.amazon.smithy.model.traits.DefaultTrait::class.java)
-            val zigType = if (ctx.isStreamingBlob(targetShape) && !hasMemberDefault) {
+            val zigType = if (ctx.isStreamingBlob(targetShape)) {
                 if (memberShape.isRequired) "[]const u8" else "?[]const u8"
             } else {
                 ctx.resolveZigType(memberShape, targetShape)

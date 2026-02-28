@@ -72,7 +72,8 @@ pub const UpdateQueueInput = struct {
     };
 };
 
-pub const UpdateQueueOutput = struct {};
+pub const UpdateQueueOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

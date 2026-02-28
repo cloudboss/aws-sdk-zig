@@ -11,7 +11,7 @@ pub const ListAccountSettingsInput = struct {
     /// settings for the root user or the default setting for the `principalArn` are
     /// returned. If `false`, the account settings for the `principalArn`
     /// are returned if they're set. Otherwise, no account settings are returned.
-    effective_settings: bool = false,
+    effective_settings: ?bool = null,
 
     /// The maximum number of account setting results returned by
     /// `ListAccountSettings` in paginated output. When this parameter is used,
@@ -22,7 +22,7 @@ pub const ListAccountSettingsInput = struct {
     /// 10. If this parameter isn't used, then `ListAccountSettings` returns up to
     /// 10
     /// results and a `nextToken` value if applicable.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The name of the account setting you want to list the settings for.
     name: ?SettingName = null,

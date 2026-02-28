@@ -54,7 +54,8 @@ pub const UpdateTemplateInput = struct {
     };
 };
 
-pub const UpdateTemplateOutput = struct {};
+pub const UpdateTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,13 +17,13 @@ pub const Offering = struct {
     recurring_charges: ?[]const RecurringCharge,
 
     /// The type of offering (for example, `RECURRING`) for a device.
-    type: ?OfferingType,
+    @"type": ?OfferingType,
 
     pub const json_field_names = .{
         .description = "description",
         .id = "id",
         .platform = "platform",
         .recurring_charges = "recurringCharges",
-        .type = "type",
+        .@"type" = "type",
     };
 };

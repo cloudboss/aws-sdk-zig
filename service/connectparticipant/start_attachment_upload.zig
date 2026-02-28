@@ -10,7 +10,7 @@ pub const StartAttachmentUploadInput = struct {
     attachment_name: []const u8,
 
     /// The size of the attachment in bytes.
-    attachment_size_in_bytes: i64 = 0,
+    attachment_size_in_bytes: ?i64 = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the

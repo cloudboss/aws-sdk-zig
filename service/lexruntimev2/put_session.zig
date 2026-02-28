@@ -61,7 +61,7 @@ pub const PutSessionInput = struct {
 pub const PutSessionOutput = struct {
     /// If the requested content type was audio, the audio version of the
     /// message to convey to the user.
-    audio_stream: aws.http.StreamingBody = "",
+    audio_stream: ?aws.http.StreamingBody = null,
 
     /// The type of response. Same as the type specified in the
     /// `responseContentType` field in the request.

@@ -63,7 +63,7 @@ pub const ExportECSServiceRecommendationsInput = struct {
     /// If this parameter or the account ID parameter is omitted, recommendations
     /// for
     /// member accounts aren't included in the export.
-    include_member_accounts: bool = false,
+    include_member_accounts: ?bool = null,
 
     s_3_destination_config: S3DestinationConfig,
 

@@ -34,7 +34,7 @@ pub const ListAssetBundleImportJobsOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the response.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .asset_bundle_import_job_summary_list = "AssetBundleImportJobSummaryList",

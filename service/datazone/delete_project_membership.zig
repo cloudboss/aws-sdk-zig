@@ -22,7 +22,8 @@ pub const DeleteProjectMembershipInput = struct {
     };
 };
 
-pub const DeleteProjectMembershipOutput = struct {};
+pub const DeleteProjectMembershipOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

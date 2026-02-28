@@ -8,7 +8,7 @@ const MeteredProductSummary = @import("metered_product_summary.zig").MeteredProd
 pub const ListAvailableMeteredProductsInput = struct {
     /// The maximum number of results to return. Use this parameter with `NextToken`
     /// to get results as a set of sequential pages.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results, or `null` to start from the
     /// beginning.

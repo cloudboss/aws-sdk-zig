@@ -44,7 +44,7 @@ pub const ResourceRequestSuccessWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getResourceRequestStatus(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getResourceRequestStatus(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

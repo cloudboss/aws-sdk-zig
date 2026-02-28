@@ -30,7 +30,7 @@ pub const DescribeCasesInput = struct {
 
     /// Specifies whether to include resolved support cases in the `DescribeCases`
     /// response. By default, resolved cases aren't included.
-    include_resolved_cases: bool = false,
+    include_resolved_cases: ?bool = null,
 
     /// The language in which Amazon Web Services Support handles the case. Amazon
     /// Web Services Support

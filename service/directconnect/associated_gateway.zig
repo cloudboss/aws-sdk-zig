@@ -13,12 +13,12 @@ pub const AssociatedGateway = struct {
     region: ?[]const u8,
 
     /// The type of associated gateway.
-    type: ?GatewayType,
+    @"type": ?GatewayType,
 
     pub const json_field_names = .{
         .id = "id",
         .owner_account = "ownerAccount",
         .region = "region",
-        .type = "type",
+        .@"type" = "type",
     };
 };

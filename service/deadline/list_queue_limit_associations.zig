@@ -15,7 +15,7 @@ pub const ListQueueLimitAssociationsInput = struct {
     limit_id: ?[]const u8 = null,
 
     /// The maximum number of associations to return in each page of results.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results, or `null` to start from the
     /// beginning.

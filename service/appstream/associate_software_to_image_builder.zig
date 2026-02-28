@@ -68,7 +68,8 @@ pub const AssociateSoftwareToImageBuilderInput = struct {
     };
 };
 
-pub const AssociateSoftwareToImageBuilderOutput = struct {};
+pub const AssociateSoftwareToImageBuilderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

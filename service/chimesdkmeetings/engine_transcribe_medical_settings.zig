@@ -21,7 +21,7 @@ pub const EngineTranscribeMedicalSettings = struct {
     specialty: TranscribeMedicalSpecialty,
 
     /// The type of transcription.
-    type: TranscribeMedicalType,
+    @"type": TranscribeMedicalType,
 
     /// The name of the vocabulary passed to Amazon Transcribe Medical.
     vocabulary_name: ?[]const u8,
@@ -31,7 +31,7 @@ pub const EngineTranscribeMedicalSettings = struct {
         .language_code = "LanguageCode",
         .region = "Region",
         .specialty = "Specialty",
-        .type = "Type",
+        .@"type" = "Type",
         .vocabulary_name = "VocabularyName",
     };
 };

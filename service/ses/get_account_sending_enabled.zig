@@ -10,7 +10,7 @@ pub const GetAccountSendingEnabledOutput = struct {
     /// Describes whether email sending is enabled or disabled for your Amazon SES
     /// account in the
     /// current Amazon Web Services Region.
-    enabled: bool = false,
+    enabled: ?bool = null,
 };
 
 pub const Options = struct {

@@ -8,7 +8,7 @@ const ReplicateTo = @import("replicate_to.zig").ReplicateTo;
 
 pub const CreateDeploymentStrategyInput = struct {
     /// Total amount of time for a deployment to last.
-    deployment_duration_in_minutes: i32,
+    deployment_duration_in_minutes: ?i32 = null,
 
     /// A description of the deployment strategy.
     description: ?[]const u8 = null,
@@ -25,7 +25,7 @@ pub const CreateDeploymentStrategyInput = struct {
     /// rollback based on Amazon CloudWatch
     /// alarms](https://docs.aws.amazon.com/appconfig/latest/userguide/getting-started-with-appconfig-cloudwatch-alarms-permissions.html) in the
     /// *AppConfig User Guide*.
-    final_bake_time_in_minutes: i32 = 0,
+    final_bake_time_in_minutes: ?i32 = null,
 
     /// The percentage of targets to receive a deployed configuration during each
     /// interval.

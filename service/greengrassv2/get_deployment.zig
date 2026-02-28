@@ -55,7 +55,7 @@ pub const GetDeploymentOutput = struct {
     iot_job_id: ?[]const u8 = null,
 
     /// Whether or not the deployment is the latest revision for its target.
-    is_latest_for_target: bool = false,
+    is_latest_for_target: ?bool = null,
 
     /// The parent deployment's target
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) within a subdeployment.

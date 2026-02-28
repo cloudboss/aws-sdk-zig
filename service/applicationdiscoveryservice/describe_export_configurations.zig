@@ -12,7 +12,7 @@ pub const DescribeExportConfigurationsInput = struct {
     /// A number between 1 and 100 specifying the maximum number of continuous
     /// export
     /// descriptions returned.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The token from the previous call to describe-export-tasks.
     next_token: ?[]const u8 = null,

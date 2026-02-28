@@ -67,7 +67,7 @@ pub const GetLogEventsInput = struct {
     /// To use this operation with this parameter, you must be signed into an
     /// account with the
     /// `logs:Unmask` permission.
-    unmask: bool = false,
+    unmask: ?bool = null,
 
     pub const json_field_names = .{
         .end_time = "endTime",

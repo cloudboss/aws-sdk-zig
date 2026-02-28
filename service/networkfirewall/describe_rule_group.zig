@@ -11,7 +11,7 @@ pub const DescribeRuleGroupInput = struct {
     /// Indicates whether you want Network Firewall to analyze the stateless rules
     /// in the rule group for rule behavior such as asymmetric routing. If set to
     /// `TRUE`, Network Firewall runs the analysis.
-    analyze_rule_group: bool = false,
+    analyze_rule_group: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the rule group.
     ///

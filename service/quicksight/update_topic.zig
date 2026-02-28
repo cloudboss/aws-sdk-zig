@@ -41,7 +41,7 @@ pub const UpdateTopicOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The ID of the topic that you want to modify. This ID is unique per Amazon
     /// Web Services Region for each Amazon Web Services account.

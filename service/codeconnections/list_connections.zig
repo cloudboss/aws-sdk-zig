@@ -13,7 +13,7 @@ pub const ListConnectionsInput = struct {
     /// The maximum number of results to return in a single call. To retrieve the
     /// remaining
     /// results, make another call with the returned `nextToken` value.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The token that was returned from the previous `ListConnections` call, which
     /// can be used to return the next set of connections in the list.

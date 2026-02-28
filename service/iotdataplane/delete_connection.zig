@@ -9,7 +9,7 @@ pub const DeleteConnectionInput = struct {
     /// Set to `TRUE` to delete all session information, including subscriptions and
     /// queued messages. Set to `FALSE` to preserve the session state. By default,
     /// this is set to `FALSE` (preserves the session state).
-    clean_session: bool = false,
+    clean_session: ?bool = null,
 
     /// The unique identifier of the MQTT client to disconnect. The client ID can't
     /// start with a dollar sign ($).
@@ -19,7 +19,7 @@ pub const DeleteConnectionInput = struct {
     /// and Testament (LWT) message upon disconnection. Set to `TRUE` to prevent
     /// publishing the LWT message. Set to `FALSE` to allow publishing. By default,
     /// this is set to `FALSE` (allows publishing the LWT message).
-    prevent_will_message: bool = false,
+    prevent_will_message: ?bool = null,
 
     pub const json_field_names = .{
         .clean_session = "cleanSession",

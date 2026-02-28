@@ -10,7 +10,7 @@ pub const ListEnrollmentStatusesInput = struct {
     account_id: ?[]const u8 = null,
 
     /// Indicates whether to return the enrollment status for the organization.
-    include_organization_info: bool = false,
+    include_organization_info: ?bool = null,
 
     /// The maximum number of objects that are returned for the request.
     max_results: ?i32 = null,

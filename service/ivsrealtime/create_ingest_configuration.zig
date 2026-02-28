@@ -20,7 +20,7 @@ pub const CreateIngestConfigurationInput = struct {
 
     /// Whether the stage allows insecure RTMP ingest. This must be set to `true`,
     /// if `ingestProtocol` is set to `RTMP`. Default: `false`.
-    insecure_ingest: bool = false,
+    insecure_ingest: ?bool = null,
 
     /// Optional name that can be specified for the IngestConfiguration being
     /// created.

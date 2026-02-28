@@ -13,7 +13,7 @@ pub const ListCodegenJobsInput = struct {
     environment_name: []const u8,
 
     /// The maximum number of jobs to retrieve.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The token to request the next page of results.
     next_token: ?[]const u8 = null,

@@ -11,7 +11,7 @@ pub const StartOutpostDecommissionInput = struct {
     outpost_identifier: []const u8,
 
     /// Validates the request without starting the decommission process.
-    validate_only: bool = false,
+    validate_only: ?bool = null,
 
     pub const json_field_names = .{
         .outpost_identifier = "OutpostIdentifier",

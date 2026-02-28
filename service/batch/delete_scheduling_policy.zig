@@ -13,7 +13,8 @@ pub const DeleteSchedulingPolicyInput = struct {
     };
 };
 
-pub const DeleteSchedulingPolicyOutput = struct {};
+pub const DeleteSchedulingPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

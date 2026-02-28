@@ -12,7 +12,7 @@ pub const ListActivityTypesInput = struct {
 
     /// The maximum number of results that are returned per call.
     /// Use `nextPageToken` to obtain further pages of results.
-    maximum_page_size: i32 = 0,
+    maximum_page_size: ?i32 = null,
 
     /// If specified, only lists the activity types that have this name.
     name: ?[]const u8 = null,
@@ -37,7 +37,7 @@ pub const ListActivityTypesInput = struct {
     /// results are returned in ascending alphabetical order by `name` of the
     /// activity
     /// types.
-    reverse_order: bool = false,
+    reverse_order: ?bool = null,
 
     pub const json_field_names = .{
         .domain = "domain",

@@ -10,7 +10,7 @@ pub const ListKxDatabasesInput = struct {
     environment_id: []const u8,
 
     /// The maximum number of results to return in this request.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A token that indicates where a results page should begin.
     next_token: ?[]const u8 = null,

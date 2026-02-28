@@ -9,7 +9,7 @@ const SigningProfile = @import("signing_profile.zig").SigningProfile;
 pub const ListSigningProfilesInput = struct {
     /// Designates whether to include profiles with the status of
     /// `CANCELED`.
-    include_canceled: bool = false,
+    include_canceled: ?bool = null,
 
     /// The maximum number of profiles to be returned.
     max_results: ?i32 = null,

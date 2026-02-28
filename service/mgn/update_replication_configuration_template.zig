@@ -17,7 +17,7 @@ pub const UpdateReplicationConfigurationTemplateInput = struct {
     associate_default_security_group: ?bool = null,
 
     /// Update replication configuration template bandwidth throttling request.
-    bandwidth_throttling: i64 = 0,
+    bandwidth_throttling: ?i64 = null,
 
     /// Update replication configuration template create Public IP request.
     create_public_ip: ?bool = null,

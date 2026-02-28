@@ -56,7 +56,7 @@ pub const GetEnvironmentOutput = struct {
     environment_configuration_id: ?[]const u8 = null,
 
     /// The ID of the environment profile with which the environment is created.
-    environment_profile_id: []const u8 = "",
+    environment_profile_id: ?[]const u8 = null,
 
     /// The business glossary terms that can be used in this environment.
     glossary_terms: ?[]const []const u8 = null,

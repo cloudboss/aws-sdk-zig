@@ -17,7 +17,8 @@ pub const StartLoggingInput = struct {
     };
 };
 
-pub const StartLoggingOutput = struct {};
+pub const StartLoggingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

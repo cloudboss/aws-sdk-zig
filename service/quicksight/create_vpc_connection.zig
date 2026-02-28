@@ -65,7 +65,7 @@ pub const CreateVPCConnectionOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The ID for the VPC connection that
     /// you're creating. This ID is unique per Amazon Web Services Region for each

@@ -31,7 +31,7 @@ pub const Campaign = struct {
 
     tags: ?[]const aws.map.StringMapEntry,
 
-    type: ?ExternalCampaignType,
+    @"type": ?ExternalCampaignType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -45,6 +45,6 @@ pub const Campaign = struct {
         .schedule = "schedule",
         .source = "source",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -53,7 +53,7 @@ pub const VpnConnection = struct {
     transit_gateway_id: ?[]const u8,
 
     /// The type of VPN connection.
-    type: ?GatewayType,
+    @"type": ?GatewayType,
 
     /// Information about the VPN tunnel.
     vgw_telemetry: ?[]const VgwTelemetry,

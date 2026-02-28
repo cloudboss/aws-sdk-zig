@@ -18,7 +18,7 @@ pub const SearchJobsInput = struct {
     item_offset: i32,
 
     /// Specifies the number of results to return.
-    page_size: i32 = 100,
+    page_size: ?i32 = null,
 
     /// The queue ID to use in the job search.
     queue_ids: []const []const u8,

@@ -18,7 +18,7 @@ pub const GetCisScanResultDetailsInput = struct {
     /// The maximum number of CIS scan result details to be returned in a single
     /// page of
     /// results.
-    max_results: i32 = 300,
+    max_results: ?i32 = null,
 
     /// The pagination token from a previous request that's used to retrieve the
     /// next page of
@@ -29,7 +29,7 @@ pub const GetCisScanResultDetailsInput = struct {
     scan_arn: []const u8,
 
     /// The sort by order.
-    sort_by: CisScanResultDetailsSortBy = "CHECK_ID",
+    sort_by: ?CisScanResultDetailsSortBy = null,
 
     /// The sort order.
     sort_order: ?CisSortOrder = null,

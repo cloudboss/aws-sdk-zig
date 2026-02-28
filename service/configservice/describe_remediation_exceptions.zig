@@ -12,7 +12,7 @@ pub const DescribeRemediationExceptionsInput = struct {
 
     /// The maximum number of RemediationExceptionResourceKey returned on each page.
     /// The default is 25. If you specify 0, Config uses the default.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned in a previous request that you use to
     /// request the next page of results in a paginated response.

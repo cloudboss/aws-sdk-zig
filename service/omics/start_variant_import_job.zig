@@ -19,7 +19,7 @@ pub const StartVariantImportJobInput = struct {
     role_arn: []const u8,
 
     /// The job's left normalization setting.
-    run_left_normalization: bool = false,
+    run_left_normalization: ?bool = null,
 
     pub const json_field_names = .{
         .annotation_fields = "annotationFields",

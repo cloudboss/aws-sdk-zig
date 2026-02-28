@@ -7,7 +7,7 @@ const CertificateProviderSummary = @import("certificate_provider_summary.zig").C
 
 pub const ListCertificateProvidersInput = struct {
     /// Returns the list of certificate providers in ascending alphabetical order.
-    ascending_order: bool = false,
+    ascending_order: ?bool = null,
 
     /// The token for the next set of results, or `null` if there are no more
     /// results.

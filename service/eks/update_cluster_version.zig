@@ -12,7 +12,7 @@ pub const UpdateClusterVersionInput = struct {
 
     /// Set this value to `true` to override upgrade-blocking readiness checks when
     /// updating a cluster.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The name of the Amazon EKS cluster to update.
     name: []const u8,

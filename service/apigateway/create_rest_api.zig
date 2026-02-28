@@ -33,7 +33,7 @@ pub const CreateRestApiInput = struct {
     /// `https://{api_id}.execute-api.{region}.amazonaws.com` endpoint. To require
     /// that clients use a
     /// custom domain name to invoke your API, disable the default endpoint
-    disable_execute_api_endpoint: bool = false,
+    disable_execute_api_endpoint: ?bool = null,
 
     /// The endpoint access mode of the RestApi. Only available for RestApis that
     /// use security policies that start with `SecurityPolicy_`.

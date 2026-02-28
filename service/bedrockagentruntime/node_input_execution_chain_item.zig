@@ -9,11 +9,11 @@ pub const NodeInputExecutionChainItem = struct {
     node_name: []const u8,
 
     /// The type of execution chain item. Supported values are Iterator and Loop.
-    type: FlowControlNodeType,
+    @"type": FlowControlNodeType,
 
     pub const json_field_names = .{
         .index = "index",
         .node_name = "nodeName",
-        .type = "type",
+        .@"type" = "type",
     };
 };

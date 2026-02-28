@@ -29,7 +29,7 @@ pub const UpdateIdMappingWorkflowInput = struct {
 
     /// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes
     /// this role to access Amazon Web Services resources on your behalf.
-    role_arn: []const u8 = "",
+    role_arn: ?[]const u8 = null,
 
     /// The name of the workflow.
     workflow_name: []const u8,
@@ -66,7 +66,7 @@ pub const UpdateIdMappingWorkflowOutput = struct {
 
     /// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes
     /// this role to access Amazon Web Services resources on your behalf.
-    role_arn: []const u8 = "",
+    role_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the workflow role. Entity Resolution
     /// assumes this role to access Amazon Web Services resources on your behalf.

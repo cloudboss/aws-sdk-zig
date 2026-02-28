@@ -22,7 +22,7 @@ pub const PutEmailIdentityFeedbackAttributesInput = struct {
     /// another mechanism for receiving bounce or complaint notifications, Amazon
     /// Pinpoint sends an email
     /// notification when these events occur (even if this setting is disabled).
-    email_forwarding_enabled: bool = false,
+    email_forwarding_enabled: ?bool = null,
 
     /// The email identity that you want to configure bounce and complaint feedback
     /// forwarding

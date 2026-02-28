@@ -64,7 +64,7 @@ pub const GetCapacityTaskOutput = struct {
     creation_date: ?i64 = null,
 
     /// Performs a dry run to determine if you are above or below instance capacity.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// Reason why the capacity task failed.
     failed: ?CapacityTaskFailure = null,

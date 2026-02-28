@@ -40,7 +40,7 @@ pub const DescribeOrganizationOutput = struct {
     error_message: ?[]const u8 = null,
 
     /// Indicates if interoperability is enabled for this organization.
-    interoperability_enabled: bool = false,
+    interoperability_enabled: ?bool = null,
 
     /// The user ID of the migration admin if migration is enabled for the
     /// organization.

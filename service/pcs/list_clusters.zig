@@ -10,7 +10,7 @@ pub const ListClustersInput = struct {
     /// `nextToken` to obtain further pages of results. The default is 10 results,
     /// and the maximum allowed page size is 100 results. A value of 0 uses the
     /// default.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The value of `nextToken` is a unique pagination token for each page of
     /// results returned. If `nextToken` is returned, there are more results

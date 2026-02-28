@@ -17,7 +17,7 @@ pub const DescribeOrganizationConfigurationOutput = struct {
     /// Indicates whether to automatically enable new organization accounts as
     /// member accounts
     /// in the organization behavior graph.
-    auto_enable: bool = false,
+    auto_enable: ?bool = null,
 
     pub const json_field_names = .{
         .auto_enable = "AutoEnable",

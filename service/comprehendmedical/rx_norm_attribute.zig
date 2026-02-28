@@ -42,7 +42,7 @@ pub const RxNormAttribute = struct {
 
     /// The type of attribute. The types of attributes recognized by InferRxNorm are
     /// `BRAND_NAME` and `GENERIC_NAME`.
-    type: ?RxNormAttributeType,
+    @"type": ?RxNormAttributeType,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",
@@ -52,6 +52,6 @@ pub const RxNormAttribute = struct {
         .score = "Score",
         .text = "Text",
         .traits = "Traits",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -324,7 +324,7 @@ pub const ScanOutput = struct {
     ///
     /// If you did not use a filter in the request, then `Count` is the same as
     /// `ScannedCount`.
-    count: i32 = 0,
+    count: ?i32 = null,
 
     /// An array of item attributes that match the scan criteria. Each element in
     /// this array
@@ -355,7 +355,7 @@ pub const ScanOutput = struct {
     ///
     /// If you did not use a filter in the request, then `ScannedCount` is the same
     /// as `Count`.
-    scanned_count: i32 = 0,
+    scanned_count: ?i32 = null,
 
     pub const json_field_names = .{
         .consumed_capacity = "ConsumedCapacity",

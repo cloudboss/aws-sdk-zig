@@ -16,7 +16,7 @@ pub const SetIdentityFeedbackForwardingEnabledInput = struct {
     /// SNS topics
     /// are set for both `Bounce` and `Complaint` notification
     /// types.
-    forwarding_enabled: bool = false,
+    forwarding_enabled: ?bool = null,
 
     /// The identity for which to set bounce and complaint notification forwarding.
     /// Examples:

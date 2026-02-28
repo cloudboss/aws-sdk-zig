@@ -9,7 +9,7 @@ pub const ListCertificatesByCAInput = struct {
     /// Specifies the order for results. If True, the results are returned in
     /// ascending
     /// order, based on the creation date.
-    ascending_order: bool = false,
+    ascending_order: ?bool = null,
 
     /// The ID of the CA certificate. This operation will list all registered device
     /// certificate that were signed by this CA certificate.

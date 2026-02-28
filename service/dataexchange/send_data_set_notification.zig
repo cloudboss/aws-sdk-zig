@@ -36,7 +36,7 @@ pub const SendDataSetNotificationInput = struct {
     /// type of the notification. Describing the kind of event the notification is
     /// alerting you
     /// to.
-    type: NotificationType,
+    @"type": NotificationType,
 
     pub const json_field_names = .{
         .client_token = "ClientToken",
@@ -44,11 +44,12 @@ pub const SendDataSetNotificationInput = struct {
         .data_set_id = "DataSetId",
         .details = "Details",
         .scope = "Scope",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
-pub const SendDataSetNotificationOutput = struct {};
+pub const SendDataSetNotificationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
@@ -122,7 +123,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SendDataSetNotificationInpu
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

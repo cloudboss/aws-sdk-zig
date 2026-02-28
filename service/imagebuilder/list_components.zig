@@ -9,7 +9,7 @@ const ComponentVersion = @import("component_version.zig").ComponentVersion;
 
 pub const ListComponentsInput = struct {
     /// Returns the list of components for the specified name.
-    by_name: bool = false,
+    by_name: ?bool = null,
 
     /// Use the following filters to streamline results:
     ///

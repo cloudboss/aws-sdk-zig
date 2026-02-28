@@ -24,7 +24,7 @@ pub const CreateJobInput = struct {
     /// more information,
     /// see the [Glue pricing
     /// page](https://aws.amazon.com/glue/pricing/).
-    allocated_capacity: i32 = 0,
+    allocated_capacity: ?i32 = null,
 
     /// The representation of a directed acyclic graph on which both the Glue Studio
     /// visual component and Glue Studio code generation is based.
@@ -167,7 +167,7 @@ pub const CreateJobInput = struct {
     max_capacity: ?f64 = null,
 
     /// The maximum number of times to retry this job if it fails.
-    max_retries: i32 = 0,
+    max_retries: ?i32 = null,
 
     /// The name you assign to this job definition. It must be unique in your
     /// account.

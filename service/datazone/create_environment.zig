@@ -105,7 +105,7 @@ pub const CreateEnvironmentOutput = struct {
 
     /// The ID of the environment profile with which this Amazon DataZone
     /// environment was created.
-    environment_profile_id: []const u8 = "",
+    environment_profile_id: ?[]const u8 = null,
 
     /// The glossary terms that can be used in this Amazon DataZone environment.
     glossary_terms: ?[]const []const u8 = null,

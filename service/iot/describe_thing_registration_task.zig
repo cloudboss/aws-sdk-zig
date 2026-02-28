@@ -19,7 +19,7 @@ pub const DescribeThingRegistrationTaskOutput = struct {
     creation_date: ?i64 = null,
 
     /// The number of things that failed to be provisioned.
-    failure_count: i32 = 0,
+    failure_count: ?i32 = null,
 
     /// The S3 bucket that contains the input file.
     input_file_bucket: ?[]const u8 = null,
@@ -34,7 +34,7 @@ pub const DescribeThingRegistrationTaskOutput = struct {
     message: ?[]const u8 = null,
 
     /// The progress of the bulk provisioning task expressed as a percentage.
-    percentage_progress: i32 = 0,
+    percentage_progress: ?i32 = null,
 
     /// The role ARN that grants access to the input file bucket.
     role_arn: ?[]const u8 = null,
@@ -43,7 +43,7 @@ pub const DescribeThingRegistrationTaskOutput = struct {
     status: ?Status = null,
 
     /// The number of things successfully provisioned.
-    success_count: i32 = 0,
+    success_count: ?i32 = null,
 
     /// The task ID.
     task_id: ?[]const u8 = null,

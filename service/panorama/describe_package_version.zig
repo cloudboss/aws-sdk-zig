@@ -28,7 +28,7 @@ pub const DescribePackageVersionInput = struct {
 
 pub const DescribePackageVersionOutput = struct {
     /// Whether the version is the latest available.
-    is_latest_patch: bool = false,
+    is_latest_patch: ?bool = null,
 
     /// The account ID of the version's owner.
     owner_account: ?[]const u8 = null,

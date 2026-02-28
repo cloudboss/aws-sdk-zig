@@ -30,7 +30,8 @@ pub const UpdateCaseRuleInput = struct {
     };
 };
 
-pub const UpdateCaseRuleOutput = struct {};
+pub const UpdateCaseRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

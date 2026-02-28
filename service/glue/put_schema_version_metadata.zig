@@ -30,7 +30,7 @@ pub const PutSchemaVersionMetadataInput = struct {
 
 pub const PutSchemaVersionMetadataOutput = struct {
     /// The latest version of the schema.
-    latest_version: bool = false,
+    latest_version: ?bool = null,
 
     /// The metadata key.
     metadata_key: ?[]const u8 = null,

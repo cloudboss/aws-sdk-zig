@@ -179,7 +179,7 @@ pub const PostContentOutput = struct {
     /// example: Suppose that the Lambda function successfully fulfilled the
     /// intent, and sent a message to convey to the user. Then Amazon Lex sends that
     /// message in the response.
-    audio_stream: aws.http.StreamingBody = "",
+    audio_stream: ?aws.http.StreamingBody = null,
 
     /// The version of the bot that responded to the conversation. You can use
     /// this information to help determine if one version of a bot is performing

@@ -240,7 +240,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.ForwardConfig.TargetGroups.member.{d}.TargetGroupArn=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.ForwardConfig.TargetGroups.member.{d}.TargetGroupArn=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_2.target_group_arn) |fv_3| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_3);
@@ -248,7 +248,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.ForwardConfig.TargetGroups.member.{d}.Weight=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.ForwardConfig.TargetGroups.member.{d}.Weight=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_2.weight) |fv_3| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, std.fmt.allocPrint(alloc, "{d}", .{fv_3}) catch "");
@@ -281,13 +281,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Format=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Format=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item_2.format));
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Name=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Name=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.name);
                         }
@@ -295,7 +295,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Values.member.{d}=", .{ n, n_2, n_3 }) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.JwtValidationConfig.AdditionalClaims.member.{d}.Values.member.{d}=", .{n, n_2, n_3}) catch continue;
                                 try body_buf.appendSlice(alloc, field_prefix);
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, item_3);
                             }
@@ -383,7 +383,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Actions.member.{d}.Type=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item.type));
+                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item.@"type"));
             }
         }
     }
@@ -404,7 +404,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HostHeaderConfig.RegexValues.member.{d}=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HostHeaderConfig.RegexValues.member.{d}=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }
@@ -415,7 +415,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HostHeaderConfig.Values.member.{d}=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HostHeaderConfig.Values.member.{d}=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }
@@ -436,7 +436,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HttpHeaderConfig.RegexValues.member.{d}=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HttpHeaderConfig.RegexValues.member.{d}=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }
@@ -447,7 +447,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HttpHeaderConfig.Values.member.{d}=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HttpHeaderConfig.Values.member.{d}=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }
@@ -460,7 +460,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HttpRequestMethodConfig.Values.member.{d}=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.HttpRequestMethodConfig.Values.member.{d}=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }
@@ -473,7 +473,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.PathPatternConfig.RegexValues.member.{d}=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.PathPatternConfig.RegexValues.member.{d}=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }
@@ -484,7 +484,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.PathPatternConfig.Values.member.{d}=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.PathPatternConfig.Values.member.{d}=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }
@@ -497,7 +497,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.QueryStringConfig.Values.member.{d}.Key=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.QueryStringConfig.Values.member.{d}.Key=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_2.key) |fv_3| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_3);
@@ -505,7 +505,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.QueryStringConfig.Values.member.{d}.Value=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.QueryStringConfig.Values.member.{d}.Value=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             if (item_2.value) |fv_3| {
                                 try aws.url.appendUrlEncoded(alloc, &body_buf, fv_3);
@@ -519,7 +519,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.RegexValues.member.{d}=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.RegexValues.member.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
@@ -531,7 +531,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.SourceIpConfig.Values.member.{d}=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.SourceIpConfig.Values.member.{d}=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2);
                         }
@@ -543,7 +543,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.Values.member.{d}=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.Values.member.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
@@ -566,13 +566,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.HostHeaderRewriteConfig.Rewrites.member.{d}.Regex=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.HostHeaderRewriteConfig.Rewrites.member.{d}.Regex=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.regex);
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.HostHeaderRewriteConfig.Rewrites.member.{d}.Replace=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.HostHeaderRewriteConfig.Rewrites.member.{d}.Replace=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.replace);
                         }
@@ -583,7 +583,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.Type=", .{n}) catch continue;
                 try body_buf.appendSlice(alloc, field_prefix);
-                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item.type));
+                try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(item.@"type"));
             }
             if (item.url_rewrite_config) |sv_1| {
                 if (sv_1.rewrites) |lst_2| {
@@ -591,13 +591,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyRuleInput, config: *a
                         const n_2 = idx_2 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.UrlRewriteConfig.Rewrites.member.{d}.Regex=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.UrlRewriteConfig.Rewrites.member.{d}.Regex=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.regex);
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.UrlRewriteConfig.Rewrites.member.{d}.Replace=", .{ n, n_2 }) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Transforms.member.{d}.UrlRewriteConfig.Rewrites.member.{d}.Replace=", .{n, n_2}) catch continue;
                             try body_buf.appendSlice(alloc, field_prefix);
                             try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.replace);
                         }

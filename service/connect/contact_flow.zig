@@ -49,7 +49,7 @@ pub const ContactFlow = struct {
     /// flow
     /// type](https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types) in the
     /// *Amazon Connect Administrator Guide*.
-    type: ?ContactFlowType,
+    @"type": ?ContactFlowType,
 
     /// The identifier of the flow version.
     version: ?i64,
@@ -69,7 +69,7 @@ pub const ContactFlow = struct {
         .state = "State",
         .status = "Status",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .version = "Version",
         .version_description = "VersionDescription",
     };

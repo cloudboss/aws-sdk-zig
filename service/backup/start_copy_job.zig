@@ -61,7 +61,7 @@ pub const StartCopyJobOutput = struct {
 
     /// This is a returned boolean value indicating this is a parent (composite)
     /// copy job.
-    is_parent: bool = false,
+    is_parent: ?bool = null,
 
     pub const json_field_names = .{
         .copy_job_id = "CopyJobId",

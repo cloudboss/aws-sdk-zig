@@ -20,7 +20,7 @@ pub const ExecuteCommandInput = struct {
     container: ?[]const u8 = null,
 
     /// Use this flag to run your command in interactive mode.
-    interactive: bool = false,
+    interactive: ?bool = null,
 
     /// The Amazon Resource Name (ARN) or ID of the task the container is part of.
     task: []const u8,
@@ -49,7 +49,7 @@ pub const ExecuteCommandOutput = struct {
     /// ECS only supports initiating interactive sessions, so you must specify
     /// `true`
     /// for this value.
-    interactive: bool = false,
+    interactive: ?bool = null,
 
     /// The details of the SSM session that was created for this instance of
     /// execute-command.

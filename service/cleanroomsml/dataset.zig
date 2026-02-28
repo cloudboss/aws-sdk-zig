@@ -8,10 +8,10 @@ pub const Dataset = struct {
     input_config: DatasetInputConfig,
 
     /// What type of information is found in the dataset.
-    type: DatasetType,
+    @"type": DatasetType,
 
     pub const json_field_names = .{
         .input_config = "inputConfig",
-        .type = "type",
+        .@"type" = "type",
     };
 };

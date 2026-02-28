@@ -50,7 +50,7 @@ pub const GetSampledRequestsOutput = struct {
     /// If `PopulationSize` is less than `MaxItems`, the sample includes every
     /// request that your AWS resource
     /// received during the specified time range.
-    population_size: i64 = 0,
+    population_size: ?i64 = null,
 
     /// A complex type that contains detailed information about each of the requests
     /// in the sample.

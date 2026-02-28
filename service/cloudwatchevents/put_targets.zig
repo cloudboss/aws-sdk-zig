@@ -30,7 +30,7 @@ pub const PutTargetsOutput = struct {
     failed_entries: ?[]const PutTargetsResultEntry = null,
 
     /// The number of failed entries.
-    failed_entry_count: i32 = 0,
+    failed_entry_count: ?i32 = null,
 
     pub const json_field_names = .{
         .failed_entries = "FailedEntries",

@@ -18,7 +18,7 @@ pub const Condition = struct {
 
     /// Specifies the type of condition. Currently the only supported value is
     /// `StringEquals`.
-    type: []const u8,
+    @"type": []const u8,
 
     /// Specifies the value for the key. Currently, this must be the ID of the
     /// organization.
@@ -26,7 +26,7 @@ pub const Condition = struct {
 
     pub const json_field_names = .{
         .key = "Key",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

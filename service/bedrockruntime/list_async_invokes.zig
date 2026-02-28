@@ -17,10 +17,10 @@ pub const ListAsyncInvokesInput = struct {
     next_token: ?[]const u8 = null,
 
     /// How to sort the response.
-    sort_by: SortAsyncInvocationBy = "SubmissionTime",
+    sort_by: ?SortAsyncInvocationBy = null,
 
     /// The sorting order for the response.
-    sort_order: SortOrder = "Descending",
+    sort_order: ?SortOrder = null,
 
     /// Filter invocations by status.
     status_equals: ?AsyncInvokeStatus = null,

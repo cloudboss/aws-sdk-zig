@@ -54,7 +54,7 @@ pub const GetTimeSeriesServiceStatisticsOutput = struct {
     /// consistent, or if a returned
     /// aggregation might show statistics from an older version of the group's
     /// filter expression.
-    contains_old_group_versions: bool = false,
+    contains_old_group_versions: ?bool = null,
 
     /// Pagination token.
     next_token: ?[]const u8 = null,

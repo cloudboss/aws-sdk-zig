@@ -27,7 +27,7 @@ pub const GetLayoutOutput = struct {
     created_time: ?i64 = null,
 
     /// Denotes whether or not the resource has been deleted.
-    deleted: bool = false,
+    deleted: ?bool = null,
 
     /// Timestamp at which the resource was created or last modified.
     last_modified_time: ?i64 = null,

@@ -12,7 +12,7 @@ pub const GetAppMonitorDataInput = struct {
     filters: ?[]const QueryFilter = null,
 
     /// The maximum number of results to return in one operation.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The name of the app monitor that collected the data that you want to
     /// retrieve.

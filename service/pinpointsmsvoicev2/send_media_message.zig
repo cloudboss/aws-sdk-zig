@@ -18,7 +18,7 @@ pub const SendMediaMessageInput = struct {
 
     /// When set to true, the message is checked and validated, but isn't sent to
     /// the end recipient.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// The maximum amount that you want to spend, in US dollars, per each MMS
     /// message.

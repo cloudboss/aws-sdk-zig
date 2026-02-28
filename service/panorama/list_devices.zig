@@ -13,7 +13,7 @@ pub const ListDevicesInput = struct {
     device_aggregated_status_filter: ?DeviceAggregatedStatus = null,
 
     /// The maximum number of devices to return in one page of results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Filter based on device's name. Prefixes supported.
     name_filter: ?[]const u8 = null,

@@ -29,7 +29,7 @@ pub const GetHostedZoneLimitOutput = struct {
     /// example, if you specified `MAX_RRSETS_BY_ZONE` for the value of
     /// `Type` in the request, the value of `Count` is the current
     /// number of records that you have created in the specified hosted zone.
-    count: i64 = 0,
+    count: ?i64 = null,
 
     /// The current setting for the specified limit. For example, if you specified
     /// `MAX_RRSETS_BY_ZONE` for the value of `Type` in the request,

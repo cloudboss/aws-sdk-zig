@@ -140,7 +140,7 @@ pub const DescribeBackupVaultOutput = struct {
     /// `ListRecoveryPointsByBackupVault`
     /// ](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListRecoveryPointsByBackupVault.html) API to obtain the exact
     /// count.
-    number_of_recovery_points: i64 = 0,
+    number_of_recovery_points: ?i64 = null,
 
     /// The ARN of the source backup vault from which this restore access backup
     /// vault was created.

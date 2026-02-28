@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const RateType = @import("rate_type.zig").RateType;
 
-pub const GetPreferencesInput = struct {};
+pub const GetPreferencesInput = struct {
+};
 
 pub const GetPreferencesOutput = struct {
     /// The preferred rate types for the management account.

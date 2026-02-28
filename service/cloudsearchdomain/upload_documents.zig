@@ -26,10 +26,10 @@ pub const UploadDocumentsInput = struct {
 
 pub const UploadDocumentsOutput = struct {
     /// The number of documents that were added to the search domain.
-    adds: i64 = 0,
+    adds: ?i64 = null,
 
     /// The number of documents that were deleted from the search domain.
-    deletes: i64 = 0,
+    deletes: ?i64 = null,
 
     /// The status of an `UploadDocumentsRequest`.
     status: ?[]const u8 = null,

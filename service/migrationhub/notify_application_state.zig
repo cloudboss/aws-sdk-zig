@@ -14,7 +14,7 @@ pub const NotifyApplicationStateInput = struct {
     /// Optional boolean flag to indicate whether any effect should take place. Used
     /// to test if
     /// the caller has permission to make the call.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// Status of the application - Not Started, In-Progress, Complete.
     status: ApplicationStatus,

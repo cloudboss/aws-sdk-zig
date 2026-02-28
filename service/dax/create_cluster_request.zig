@@ -113,7 +113,7 @@ pub const CreateClusterRequest = struct {
     ///
     /// Amazon Web Services recommends that you have at least two read replicas per
     /// cluster.
-    replication_factor: i32 = 0,
+    replication_factor: ?i32 = null,
 
     /// A list of security group IDs to be assigned to each node in the DAX
     /// cluster. (Each of the security group ID is system-generated.)

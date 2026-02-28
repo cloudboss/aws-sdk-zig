@@ -10,7 +10,7 @@ const MarketplaceModelEndpoint = @import("marketplace_model_endpoint.zig").Marke
 pub const CreateMarketplaceModelEndpointInput = struct {
     /// Indicates whether you accept the end-user license agreement (EULA) for the
     /// model. Set to `true` to accept the EULA.
-    accept_eula: bool = false,
+    accept_eula: ?bool = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the request. This token is listed as not required because

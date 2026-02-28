@@ -10,7 +10,7 @@ pub const StopPipelineExecutionInput = struct {
     /// in-progress actions.
     ///
     /// This option can lead to failed or out-of-sequence tasks.
-    abandon: bool = false,
+    abandon: ?bool = null,
 
     /// The ID of the pipeline execution to be stopped in the current stage. Use the
     /// `GetPipelineState` action to retrieve the current

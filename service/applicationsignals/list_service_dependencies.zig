@@ -33,7 +33,7 @@ pub const ListServiceDependenciesInput = struct {
 
     /// The maximum number of results to return in one operation. If you omit this
     /// parameter, the default of 50 is used.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// Include this value, if it was returned by the previous operation, to get the
     /// next set of service dependencies.

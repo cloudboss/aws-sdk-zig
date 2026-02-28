@@ -190,7 +190,8 @@ pub const DeleteScalingPolicyInput = struct {
     };
 };
 
-pub const DeleteScalingPolicyOutput = struct {};
+pub const DeleteScalingPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -7,10 +7,10 @@ pub const RerankQuery = struct {
     text_query: RerankTextDocument,
 
     /// The type of the query.
-    type: RerankQueryContentType,
+    @"type": RerankQueryContentType,
 
     pub const json_field_names = .{
         .text_query = "textQuery",
-        .type = "type",
+        .@"type" = "type",
     };
 };

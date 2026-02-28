@@ -80,7 +80,7 @@ pub const CreateDbInstanceInput = struct {
     /// Default: 8086
     ///
     /// Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680
-    port: i32 = 8086,
+    port: ?i32 = null,
 
     /// Configures the DB instance with a public IP to facilitate access.
     publicly_accessible: ?bool = null,

@@ -51,7 +51,7 @@ pub const GetStatementResultV2Output = struct {
     /// The total number of rows in the result set returned from a query. You can
     /// use this number to estimate the number of calls to the
     /// `GetStatementResultV2` operation needed to page through the results.
-    total_num_rows: i64 = 0,
+    total_num_rows: ?i64 = null,
 
     pub const json_field_names = .{
         .column_metadata = "ColumnMetadata",

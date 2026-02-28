@@ -13,7 +13,8 @@ pub const DeleteApiCacheInput = struct {
     };
 };
 
-pub const DeleteApiCacheOutput = struct {};
+pub const DeleteApiCacheOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

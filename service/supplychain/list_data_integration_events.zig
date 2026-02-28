@@ -15,7 +15,7 @@ pub const ListDataIntegrationEventsInput = struct {
 
     /// Specify the maximum number of data integration events to fetch in one
     /// paginated request.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The pagination token to fetch the next page of the data integration events.
     next_token: ?[]const u8 = null,

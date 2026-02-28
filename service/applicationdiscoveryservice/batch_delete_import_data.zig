@@ -8,7 +8,7 @@ const BatchDeleteImportDataError = @import("batch_delete_import_data_error.zig")
 pub const BatchDeleteImportDataInput = struct {
     /// Set to `true` to remove the deleted import task from
     /// DescribeImportTasks.
-    delete_history: bool = false,
+    delete_history: ?bool = null,
 
     /// The IDs for the import tasks that you want to delete.
     import_task_ids: []const []const u8,

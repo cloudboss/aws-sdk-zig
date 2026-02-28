@@ -19,7 +19,7 @@ pub const ListDurableExecutionsByFunctionInput = struct {
     marker: ?[]const u8 = null,
 
     /// Maximum number of executions to return (1-1000). Default is 100.
-    max_items: i32 = 0,
+    max_items: ?i32 = null,
 
     /// The function version or alias. If not specified, lists executions for the
     /// $LATEST version.

@@ -39,7 +39,8 @@ pub const UpdateDirectorySetupInput = struct {
     };
 };
 
-pub const UpdateDirectorySetupOutput = struct {};
+pub const UpdateDirectorySetupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -8,10 +8,10 @@ pub const ListInsightsClosedStatusFilter = struct {
     end_time_range: EndTimeRange,
 
     /// Use to filter for either `REACTIVE` or `PROACTIVE` insights.
-    type: InsightType,
+    @"type": InsightType,
 
     pub const json_field_names = .{
         .end_time_range = "EndTimeRange",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

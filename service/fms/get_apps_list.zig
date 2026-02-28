@@ -8,7 +8,7 @@ const AppsListData = @import("apps_list_data.zig").AppsListData;
 pub const GetAppsListInput = struct {
     /// Specifies whether the list to retrieve is a default list owned by Firewall
     /// Manager.
-    default_list: bool = false,
+    default_list: ?bool = null,
 
     /// The ID of the Firewall Manager applications list that you want the details
     /// for.

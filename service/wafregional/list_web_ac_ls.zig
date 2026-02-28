@@ -12,7 +12,7 @@ pub const ListWebACLsInput = struct {
     /// includes a
     /// `NextMarker` value that you can use to get another batch of `WebACL`
     /// objects.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// If you specify a value for `Limit` and you have more `WebACL` objects than
     /// the number that you specify

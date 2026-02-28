@@ -12,7 +12,7 @@ pub const CreateDataViewInput = struct {
     as_of_timestamp: ?i64 = null,
 
     /// Flag to indicate Dataview should be updated automatically.
-    auto_update: bool = false,
+    auto_update: ?bool = null,
 
     /// A token that ensures idempotency. This token expires in 10 minutes.
     client_token: ?[]const u8 = null,

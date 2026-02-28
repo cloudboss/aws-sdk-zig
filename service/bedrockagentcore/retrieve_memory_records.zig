@@ -9,7 +9,7 @@ const MemoryRecordSummary = @import("memory_record_summary.zig").MemoryRecordSum
 pub const RetrieveMemoryRecordsInput = struct {
     /// The maximum number of results to return in a single call. The default value
     /// is 20.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The identifier of the AgentCore Memory resource from which to retrieve
     /// memory records.

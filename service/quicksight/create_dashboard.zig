@@ -173,7 +173,7 @@ pub const CreateDashboardOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The ARN of the dashboard, including the version number of the first version
     /// that is

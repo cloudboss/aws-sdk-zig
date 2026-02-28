@@ -42,7 +42,7 @@ pub const GetEmailIdentityOutput = struct {
     /// another mechanism for receiving bounce or complaint notifications, Amazon
     /// Pinpoint sends an email
     /// notification when these events occur (even if this setting is disabled).
-    feedback_forwarding_status: bool = false,
+    feedback_forwarding_status: ?bool = null,
 
     /// The email identity type.
     identity_type: ?IdentityType = null,
@@ -63,7 +63,7 @@ pub const GetEmailIdentityOutput = struct {
     /// verifying
     /// identities, see the [Amazon Pinpoint User
     /// Guide](https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
-    verified_for_sending_status: bool = false,
+    verified_for_sending_status: ?bool = null,
 
     pub const json_field_names = .{
         .dkim_attributes = "DkimAttributes",

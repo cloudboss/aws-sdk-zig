@@ -3,9 +3,9 @@ const QueryTransformationType = @import("query_transformation_type.zig").QueryTr
 /// The configuration details for transforming the prompt.
 pub const QueryTransformationConfiguration = struct {
     /// The type of transformation to apply to the prompt.
-    type: QueryTransformationType,
+    @"type": QueryTransformationType,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
     };
 };

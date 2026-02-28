@@ -8,7 +8,7 @@ pub const UpdateAccountSendingEnabledInput = struct {
     /// Describes whether email sending is enabled or disabled for your Amazon SES
     /// account in the
     /// current Amazon Web Services Region.
-    enabled: bool = false,
+    enabled: ?bool = null,
 };
 
 const UpdateAccountSendingEnabledOutput = struct {};

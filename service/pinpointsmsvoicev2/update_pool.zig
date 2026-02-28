@@ -64,7 +64,7 @@ pub const UpdatePoolOutput = struct {
     created_timestamp: ?i64 = null,
 
     /// When set to true the pool can't be deleted.
-    deletion_protection_enabled: bool = false,
+    deletion_protection_enabled: ?bool = null,
 
     /// The type of message for the pool to use.
     message_type: ?MessageType = null,
@@ -84,10 +84,10 @@ pub const UpdatePoolOutput = struct {
     /// to the OptOutList. When set to true you're responsible for responding to
     /// HELP and STOP requests. You're also responsible for tracking and honoring
     /// opt-out requests.
-    self_managed_opt_outs_enabled: bool = false,
+    self_managed_opt_outs_enabled: ?bool = null,
 
     /// Indicates whether shared routes are enabled for the pool.
-    shared_routes_enabled: bool = false,
+    shared_routes_enabled: ?bool = null,
 
     /// The current status of the pool update request.
     status: ?PoolStatus = null,
@@ -101,7 +101,7 @@ pub const UpdatePoolOutput = struct {
 
     /// By default this is set to false. When set to true you can receive incoming
     /// text messages from your end recipients.
-    two_way_enabled: bool = false,
+    two_way_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

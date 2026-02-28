@@ -14,7 +14,7 @@ pub const ListInstancesInput = struct {
     instance_state_filter: ?[]const InstanceState = null,
 
     /// Specify the maximum number of instances to fetch in this paginated request.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The pagination token to fetch the next page of instances.
     next_token: ?[]const u8 = null,

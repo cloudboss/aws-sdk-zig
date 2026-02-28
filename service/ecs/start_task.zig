@@ -27,13 +27,13 @@ pub const StartTaskInput = struct {
     /// see [Tagging Your Amazon ECS
     /// Resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    enable_ecs_managed_tags: bool = false,
+    enable_ecs_managed_tags: ?bool = null,
 
     /// Whether or not the execute command functionality is turned on for the task.
     /// If
     /// `true`, this turns on the execute command functionality on all containers
     /// in the task.
-    enable_execute_command: bool = false,
+    enable_execute_command: ?bool = null,
 
     /// The name of the task group to associate with the task. The default value is
     /// the family

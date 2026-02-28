@@ -15,7 +15,7 @@ pub const ListThingsInThingGroupInput = struct {
 
     /// When true, list things in this thing group and in all child groups as
     /// well.
-    recursive: bool = false,
+    recursive: ?bool = null,
 
     /// The thing group name.
     thing_group_name: []const u8,

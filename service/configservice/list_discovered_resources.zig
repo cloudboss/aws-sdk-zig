@@ -9,12 +9,12 @@ const ResourceIdentifier = @import("resource_identifier.zig").ResourceIdentifier
 pub const ListDiscoveredResourcesInput = struct {
     /// Specifies whether Config includes deleted resources in the
     /// results. By default, deleted resources are not included.
-    include_deleted_resources: bool = false,
+    include_deleted_resources: ?bool = null,
 
     /// The maximum number of resource identifiers returned on each
     /// page. The default is 100. You cannot specify a number greater than
     /// 100. If you specify 0, Config uses the default.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned on a previous page
     /// that you use to get the next page of results in a paginated

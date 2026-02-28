@@ -28,7 +28,7 @@ pub const DescribeJobRunInput = struct {
 
 pub const DescribeJobRunOutput = struct {
     /// The number of times that DataBrew has attempted to run the job.
-    attempt: i32 = 0,
+    attempt: ?i32 = null,
 
     /// The date and time when the job completed processing.
     completed_on: ?i64 = null,
@@ -49,7 +49,7 @@ pub const DescribeJobRunOutput = struct {
     error_message: ?[]const u8 = null,
 
     /// The amount of time, in seconds, during which the job run consumed resources.
-    execution_time: i32 = 0,
+    execution_time: ?i32 = null,
 
     /// The name of the job being processed during this run.
     job_name: []const u8,

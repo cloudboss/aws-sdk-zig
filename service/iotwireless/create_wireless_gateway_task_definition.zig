@@ -11,7 +11,7 @@ pub const CreateWirelessGatewayTaskDefinitionInput = struct {
     /// gateways with
     /// the specified current version. If `false`, the task must me created by
     /// calling `CreateWirelessGatewayTask`.
-    auto_create_tasks: bool = false,
+    auto_create_tasks: ?bool = null,
 
     /// Each resource must have a unique client request token. The client token is
     /// used to

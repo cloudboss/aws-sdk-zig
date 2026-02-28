@@ -12,7 +12,7 @@ pub const UpdateThingGroupsForThingInput = struct {
     /// dynamic thing groups, adding a thing to a static group removes the thing
     /// from the last
     /// dynamic group.
-    override_dynamic_groups: bool = false,
+    override_dynamic_groups: ?bool = null,
 
     /// The groups to which the thing will be added.
     thing_groups_to_add: ?[]const []const u8 = null,

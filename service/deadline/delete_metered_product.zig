@@ -17,7 +17,8 @@ pub const DeleteMeteredProductInput = struct {
     };
 };
 
-pub const DeleteMeteredProductOutput = struct {};
+pub const DeleteMeteredProductOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

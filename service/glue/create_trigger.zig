@@ -39,7 +39,7 @@ pub const CreateTriggerInput = struct {
 
     /// Set to `true` to start `SCHEDULED` and `CONDITIONAL`
     /// triggers when created. True is not supported for `ON_DEMAND` triggers.
-    start_on_creation: bool = false,
+    start_on_creation: ?bool = null,
 
     /// The tags to use with this trigger. You may use tags to limit access to the
     /// trigger.

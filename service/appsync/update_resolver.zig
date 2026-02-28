@@ -44,7 +44,7 @@ pub const UpdateResolverInput = struct {
     kind: ?ResolverKind = null,
 
     /// The maximum batching size for a resolver.
-    max_batch_size: i32 = 0,
+    max_batch_size: ?i32 = null,
 
     /// Enables or disables enhanced resolver metrics for specified resolvers. Note
     /// that

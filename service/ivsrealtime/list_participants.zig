@@ -12,7 +12,7 @@ pub const ListParticipantsInput = struct {
     /// stage session.
     /// Only one of `filterByUserId`, `filterByPublished`,
     /// `filterByState`, or `filterByRecordingState` can be provided per request.
-    filter_by_published: bool = false,
+    filter_by_published: ?bool = null,
 
     /// Filters the response list to only show participants with the specified
     /// recording state.

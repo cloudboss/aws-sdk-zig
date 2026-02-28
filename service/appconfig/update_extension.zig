@@ -55,7 +55,7 @@ pub const UpdateExtensionOutput = struct {
     parameters: ?[]const aws.map.MapEntry(Parameter) = null,
 
     /// The extension version number.
-    version_number: i32 = 0,
+    version_number: ?i32 = null,
 
     pub const json_field_names = .{
         .actions = "Actions",

@@ -33,7 +33,7 @@ pub const GetDataQualityRuleRecommendationRunOutput = struct {
     error_string: ?[]const u8 = null,
 
     /// The amount of time (in seconds) that the run consumed resources.
-    execution_time: i32 = 0,
+    execution_time: ?i32 = null,
 
     /// A timestamp. The last point in time when this data quality rule
     /// recommendation run was modified.

@@ -9,7 +9,7 @@ pub const SetRepositoryPolicyInput = struct {
     /// from setting
     /// another policy in the future, you must force the SetRepositoryPolicy
     /// operation. This prevents accidental repository lockouts.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The JSON repository policy text to apply to the repository. For more
     /// information, see

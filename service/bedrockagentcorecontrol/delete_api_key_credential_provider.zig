@@ -13,7 +13,8 @@ pub const DeleteApiKeyCredentialProviderInput = struct {
     };
 };
 
-pub const DeleteApiKeyCredentialProviderOutput = struct {};
+pub const DeleteApiKeyCredentialProviderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

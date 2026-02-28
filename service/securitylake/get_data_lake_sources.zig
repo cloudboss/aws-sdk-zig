@@ -14,7 +14,7 @@ pub const GetDataLakeSourcesInput = struct {
     /// The maximum limit of accounts for which the static snapshot of the current
     /// Region,
     /// including enabled accounts and log sources, is retrieved.
-    max_results: i32 = 50,
+    max_results: ?i32 = null,
 
     /// Lists if there are more results available. The value of nextToken is a
     /// unique pagination

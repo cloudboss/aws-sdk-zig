@@ -23,7 +23,7 @@ pub const ListIdentityPoolUsageInput = struct {
 pub const ListIdentityPoolUsageOutput = struct {
     /// Total number of identities for the
     /// identity pool.
-    count: i32 = 0,
+    count: ?i32 = null,
 
     /// Usage information for
     /// the identity pools.
@@ -31,7 +31,7 @@ pub const ListIdentityPoolUsageOutput = struct {
 
     /// The maximum number of results to
     /// be returned.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A pagination token for obtaining
     /// the next page of results.

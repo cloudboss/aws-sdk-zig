@@ -60,7 +60,7 @@ pub const GenerateEmbedUrlForRegisteredUserOutput = struct {
     request_id: []const u8,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .embed_url = "EmbedUrl",

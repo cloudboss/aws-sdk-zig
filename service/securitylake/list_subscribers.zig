@@ -7,7 +7,7 @@ const SubscriberResource = @import("subscriber_resource.zig").SubscriberResource
 
 pub const ListSubscribersInput = struct {
     /// The maximum number of accounts for which the configuration is displayed.
-    max_results: i32 = 50,
+    max_results: ?i32 = null,
 
     /// If nextToken is returned, there are more results available. You can repeat
     /// the call

@@ -17,7 +17,7 @@ pub const CreateCommentInput = struct {
     /// Set this parameter to TRUE to send an email out to the document
     /// collaborators after
     /// the comment is created.
-    notify_collaborators: bool = false,
+    notify_collaborators: ?bool = null,
 
     /// The ID of the parent comment.
     parent_id: ?[]const u8 = null,

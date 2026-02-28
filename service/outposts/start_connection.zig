@@ -15,7 +15,7 @@ pub const StartConnectionInput = struct {
     device_serial_number: ?[]const u8 = null,
 
     /// The device index of the network interface on the Outpost server.
-    network_interface_device_index: i32 = 0,
+    network_interface_device_index: ?i32 = null,
 
     pub const json_field_names = .{
         .asset_id = "AssetId",

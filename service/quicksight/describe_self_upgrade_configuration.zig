@@ -28,7 +28,7 @@ pub const DescribeSelfUpgradeConfigurationOutput = struct {
     self_upgrade_configuration: ?SelfUpgradeConfiguration = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .request_id = "RequestId",

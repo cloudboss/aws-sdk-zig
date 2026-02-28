@@ -12,7 +12,7 @@ pub const DeleteCustomMetadataInput = struct {
     /// Flag to indicate removal of all custom metadata properties from the
     /// specified
     /// resource.
-    delete_all: bool = false,
+    delete_all: ?bool = null,
 
     /// List of properties to remove.
     keys: ?[]const []const u8 = null,

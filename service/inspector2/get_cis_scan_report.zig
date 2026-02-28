@@ -9,7 +9,7 @@ const CisReportStatus = @import("cis_report_status.zig").CisReportStatus;
 pub const GetCisScanReportInput = struct {
     /// The format of the report. Valid values are `PDF` and `CSV`. If no
     /// value is specified, the report format defaults to `PDF`.
-    report_format: CisReportFormat = "PDF",
+    report_format: ?CisReportFormat = null,
 
     /// The scan ARN.
     scan_arn: []const u8,

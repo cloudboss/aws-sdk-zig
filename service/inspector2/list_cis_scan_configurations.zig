@@ -15,7 +15,7 @@ pub const ListCisScanConfigurationsInput = struct {
     /// The maximum number of CIS scan configurations to be returned in a single
     /// page of
     /// results.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The pagination token from a previous request that's used to retrieve the
     /// next page of
@@ -23,7 +23,7 @@ pub const ListCisScanConfigurationsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The CIS scan configuration sort by order.
-    sort_by: CisScanConfigurationsSortBy = "SCAN_NAME",
+    sort_by: ?CisScanConfigurationsSortBy = null,
 
     /// The CIS scan configuration sort order order.
     sort_order: ?CisSortOrder = null,

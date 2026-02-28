@@ -21,7 +21,8 @@ pub const DeleteQueueEnvironmentInput = struct {
     };
 };
 
-pub const DeleteQueueEnvironmentOutput = struct {};
+pub const DeleteQueueEnvironmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

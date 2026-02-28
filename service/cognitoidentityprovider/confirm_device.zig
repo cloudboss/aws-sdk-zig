@@ -43,7 +43,7 @@ pub const ConfirmDeviceOutput = struct {
     /// response
     /// is `true`. Configure this option under *Device tracking*
     /// in the *Sign-in* menu of your user pool.
-    user_confirmation_necessary: bool = false,
+    user_confirmation_necessary: ?bool = null,
 
     pub const json_field_names = .{
         .user_confirmation_necessary = "UserConfirmationNecessary",

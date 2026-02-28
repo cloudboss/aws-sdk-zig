@@ -27,7 +27,7 @@ pub const CreateDataAutomationProjectInput = struct {
 
     project_stage: ?DataAutomationProjectStage = null,
 
-    project_type: DataAutomationProjectType = "ASYNC",
+    project_type: ?DataAutomationProjectType = null,
 
     standard_output_configuration: StandardOutputConfiguration,
 

@@ -32,7 +32,7 @@ pub const DescribeMailboxExportJobOutput = struct {
     error_info: ?[]const u8 = null,
 
     /// The estimated progress of the mailbox export job, in percentage points.
-    estimated_progress: i32 = 0,
+    estimated_progress: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service
     /// (AWS KMS)

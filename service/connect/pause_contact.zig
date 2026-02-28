@@ -23,7 +23,8 @@ pub const PauseContactInput = struct {
     };
 };
 
-pub const PauseContactOutput = struct {};
+pub const PauseContactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

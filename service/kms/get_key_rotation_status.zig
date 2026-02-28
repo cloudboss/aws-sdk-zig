@@ -30,7 +30,7 @@ pub const GetKeyRotationStatusOutput = struct {
     key_id: ?[]const u8 = null,
 
     /// A Boolean value that specifies whether key rotation is enabled.
-    key_rotation_enabled: bool = false,
+    key_rotation_enabled: ?bool = null,
 
     /// The next date that KMS will automatically rotate the key material.
     next_rotation_date: ?i64 = null,

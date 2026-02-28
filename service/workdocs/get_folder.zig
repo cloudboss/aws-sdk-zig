@@ -14,7 +14,7 @@ pub const GetFolderInput = struct {
     folder_id: []const u8,
 
     /// Set to TRUE to include custom metadata in the response.
-    include_custom_metadata: bool = false,
+    include_custom_metadata: ?bool = null,
 
     pub const json_field_names = .{
         .authentication_token = "AuthenticationToken",

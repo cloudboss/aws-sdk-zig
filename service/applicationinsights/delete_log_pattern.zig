@@ -21,7 +21,8 @@ pub const DeleteLogPatternInput = struct {
     };
 };
 
-pub const DeleteLogPatternOutput = struct {};
+pub const DeleteLogPatternOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,7 +18,7 @@ pub const ListAutoScalingConfigurationsInput = struct {
     /// Set to `false` to list all revisions for each requested configuration name.
     ///
     /// Default: `true`
-    latest_only: bool = false,
+    latest_only: ?bool = null,
 
     /// The maximum number of results to include in each response (result page).
     /// It's used for a paginated request.

@@ -8,7 +8,7 @@ const AutomatedReasoningPolicyBuildWorkflowSummary = @import("automated_reasonin
 pub const ListAutomatedReasoningPolicyBuildWorkflowsInput = struct {
     /// The maximum number of build workflows to return in a single response. Valid
     /// range is 1-100.
-    max_results: i32 = 25,
+    max_results: ?i32 = null,
 
     /// A pagination token from a previous request to continue listing build
     /// workflows from where the previous request left off.

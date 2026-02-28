@@ -58,7 +58,7 @@ pub const Artifact = struct {
     /// * CUSTOMER_ARTIFACT_LOG
     ///
     /// * TESTSPEC_OUTPUT
-    type: ?ArtifactType,
+    @"type": ?ArtifactType,
 
     /// The presigned Amazon S3 URL that can be used with a GET request to download
     /// the artifact's
@@ -69,7 +69,7 @@ pub const Artifact = struct {
         .arn = "arn",
         .extension = "extension",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
         .url = "url",
     };
 };

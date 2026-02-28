@@ -50,7 +50,7 @@ pub const CreateLaunchConfigurationTemplateInput = struct {
     small_volume_conf: ?LaunchTemplateDiskConf = null,
 
     /// Small volume maximum size.
-    small_volume_max_size: i64 = 0,
+    small_volume_max_size: ?i64 = null,
 
     /// Request to associate tags during creation of a Launch Configuration
     /// Template.

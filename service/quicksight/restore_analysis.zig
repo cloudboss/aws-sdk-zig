@@ -16,7 +16,7 @@ pub const RestoreAnalysisInput = struct {
     /// folders that it previously resided in. A `False` value restores the analysis
     /// but does not restore the analysis back to all previously resided folders.
     /// Restoring a restricted analysis requires this parameter to be set to `True`.
-    restore_to_folders: bool = false,
+    restore_to_folders: ?bool = null,
 
     pub const json_field_names = .{
         .analysis_id = "AnalysisId",
@@ -39,7 +39,7 @@ pub const RestoreAnalysisOutput = struct {
     restoration_failed_folder_arns: ?[]const []const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .analysis_id = "AnalysisId",

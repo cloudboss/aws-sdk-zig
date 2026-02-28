@@ -16,7 +16,7 @@ pub const DeleteFileShareInput = struct {
     /// upload process, and the file share enters the `FORCE_DELETING` status.
     ///
     /// Valid Values: `true` | `false`
-    force_delete: bool = false,
+    force_delete: ?bool = null,
 
     pub const json_field_names = .{
         .file_share_arn = "FileShareARN",

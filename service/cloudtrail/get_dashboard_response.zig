@@ -26,7 +26,7 @@ pub const GetDashboardResponse = struct {
     termination_protection_enabled: ?bool,
 
     /// The type of dashboard.
-    type: ?DashboardType,
+    @"type": ?DashboardType,
 
     /// The timestamp that shows when the dashboard was last updated.
     updated_timestamp: ?i64,
@@ -42,7 +42,7 @@ pub const GetDashboardResponse = struct {
         .refresh_schedule = "RefreshSchedule",
         .status = "Status",
         .termination_protection_enabled = "TerminationProtectionEnabled",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_timestamp = "UpdatedTimestamp",
         .widgets = "Widgets",
     };

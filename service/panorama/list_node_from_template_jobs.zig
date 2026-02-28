@@ -8,7 +8,7 @@ const NodeFromTemplateJob = @import("node_from_template_job.zig").NodeFromTempla
 pub const ListNodeFromTemplateJobsInput = struct {
     /// The maximum number of node from template jobs to return in one page of
     /// results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Specify the pagination token from a previous request to retrieve the next
     /// page of results.

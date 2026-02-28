@@ -14,7 +14,7 @@ pub const GetListingInput = struct {
     identifier: []const u8,
 
     /// The revision of the listing.
-    listing_revision: []const u8 = "latest",
+    listing_revision: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",

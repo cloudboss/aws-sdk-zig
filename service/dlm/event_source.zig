@@ -9,10 +9,10 @@ pub const EventSource = struct {
 
     /// The source of the event. Currently only managed CloudWatch Events rules are
     /// supported.
-    type: EventSourceValues,
+    @"type": EventSourceValues,
 
     pub const json_field_names = .{
         .parameters = "Parameters",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

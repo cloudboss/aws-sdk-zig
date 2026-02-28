@@ -8,7 +8,7 @@ pub const StartProjectSessionInput = struct {
     /// A value that, if true, enables you to take control of a session, even if a
     /// different
     /// client is currently accessing the project.
-    assume_control: bool = false,
+    assume_control: ?bool = null,
 
     /// The name of the project to act upon.
     name: []const u8,

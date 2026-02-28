@@ -9,11 +9,11 @@ pub const MetadataAttributeSchema = struct {
     key: []const u8,
 
     /// The attribute's type.
-    type: AttributeType,
+    @"type": AttributeType,
 
     pub const json_field_names = .{
         .description = "description",
         .key = "key",
-        .type = "type",
+        .@"type" = "type",
     };
 };

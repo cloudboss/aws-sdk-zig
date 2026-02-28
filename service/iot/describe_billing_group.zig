@@ -32,7 +32,7 @@ pub const DescribeBillingGroupOutput = struct {
     billing_group_properties: ?BillingGroupProperties = null,
 
     /// The version of the billing group.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .billing_group_arn = "billingGroupArn",

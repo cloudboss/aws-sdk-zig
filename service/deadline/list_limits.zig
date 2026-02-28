@@ -10,7 +10,7 @@ pub const ListLimitsInput = struct {
     farm_id: []const u8,
 
     /// The maximum number of limits to return in each page of results.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results, or `null` to start from the
     /// beginning.

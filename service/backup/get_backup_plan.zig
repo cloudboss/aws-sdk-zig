@@ -13,7 +13,7 @@ pub const GetBackupPlanInput = struct {
 
     /// Number of future scheduled backup runs to preview. When set to 0 (default),
     /// no scheduled runs preview is included in the response. Valid range is 0-10.
-    max_scheduled_runs_preview: i32 = 0,
+    max_scheduled_runs_preview: ?i32 = null,
 
     /// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
     /// 1,024 bytes

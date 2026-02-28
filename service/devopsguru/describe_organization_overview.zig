@@ -37,12 +37,12 @@ pub const DescribeOrganizationOverviewOutput = struct {
     /// An integer that specifies the number of open proactive insights in your
     /// Amazon Web Services
     /// account.
-    proactive_insights: i32 = 0,
+    proactive_insights: ?i32 = null,
 
     /// An integer that specifies the number of open reactive insights in your
     /// Amazon Web Services
     /// account.
-    reactive_insights: i32 = 0,
+    reactive_insights: ?i32 = null,
 
     pub const json_field_names = .{
         .proactive_insights = "ProactiveInsights",

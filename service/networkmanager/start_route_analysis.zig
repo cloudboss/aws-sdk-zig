@@ -14,7 +14,7 @@ pub const StartRouteAnalysisInput = struct {
     global_network_id: []const u8,
 
     /// Indicates whether to analyze the return path. The default is `false`.
-    include_return_path: bool = false,
+    include_return_path: ?bool = null,
 
     /// The source from which traffic originates.
     source: RouteAnalysisEndpointOptionsSpecification,
@@ -22,7 +22,7 @@ pub const StartRouteAnalysisInput = struct {
     /// Indicates whether to include the location of middlebox appliances in the
     /// route analysis.
     /// The default is `false`.
-    use_middleboxes: bool = false,
+    use_middleboxes: ?bool = null,
 
     pub const json_field_names = .{
         .destination = "Destination",

@@ -69,7 +69,7 @@ pub const DescribeTemplateDefinitionOutput = struct {
     resource_status: ?ResourceStatus = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The ID of the template described.
     template_id: ?[]const u8 = null,

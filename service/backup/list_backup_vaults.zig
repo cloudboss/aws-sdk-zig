@@ -8,7 +8,7 @@ const BackupVaultListMember = @import("backup_vault_list_member.zig").BackupVaul
 
 pub const ListBackupVaultsInput = struct {
     /// This parameter will sort the list of vaults by shared vaults.
-    by_shared: bool = false,
+    by_shared: ?bool = null,
 
     /// This parameter will sort the list of vaults by vault type.
     by_vault_type: ?VaultType = null,

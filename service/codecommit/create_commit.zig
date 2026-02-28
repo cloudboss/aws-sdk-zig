@@ -34,7 +34,7 @@ pub const CreateCommitInput = struct {
     /// changes leave the folders empty. If true, a ..gitkeep file is created for
     /// empty folders.
     /// The default is false.
-    keep_empty_folders: bool = false,
+    keep_empty_folders: ?bool = null,
 
     /// The ID of the commit that is the parent of the commit you create. Not
     /// required if this

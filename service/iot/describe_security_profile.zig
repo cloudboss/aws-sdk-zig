@@ -65,7 +65,7 @@ pub const DescribeSecurityProfileOutput = struct {
 
     /// The version of the security profile. A new version is generated whenever the
     /// security profile is updated.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .additional_metrics_to_retain = "additionalMetricsToRetain",

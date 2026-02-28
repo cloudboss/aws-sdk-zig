@@ -7,7 +7,7 @@ const StoreStatus = @import("store_status.zig").StoreStatus;
 
 pub const DeleteAnnotationStoreInput = struct {
     /// Whether to force deletion.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The store's name.
     name: []const u8,

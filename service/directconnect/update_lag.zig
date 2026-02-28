@@ -24,7 +24,7 @@ pub const UpdateLagInput = struct {
 
     /// The minimum number of physical connections that must be operational for the
     /// LAG itself to be operational.
-    minimum_links: i32 = 0,
+    minimum_links: ?i32 = null,
 
     pub const json_field_names = .{
         .encryption_mode = "encryptionMode",

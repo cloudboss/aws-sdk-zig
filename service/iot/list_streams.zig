@@ -7,7 +7,7 @@ const StreamSummary = @import("stream_summary.zig").StreamSummary;
 
 pub const ListStreamsInput = struct {
     /// Set to true to return the list of streams in ascending order.
-    ascending_order: bool = false,
+    ascending_order: ?bool = null,
 
     /// The maximum number of results to return at a time.
     max_results: ?i32 = null,

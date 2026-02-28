@@ -14,7 +14,7 @@ pub const PutEmailIdentityDkimAttributesInput = struct {
     /// from the
     /// identity are DKIM-signed. When you set this value to `false`, then the
     /// messages that Amazon Pinpoint sends from the identity aren't DKIM-signed.
-    signing_enabled: bool = false,
+    signing_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .email_identity = "EmailIdentity",

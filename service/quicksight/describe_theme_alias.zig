@@ -29,7 +29,7 @@ pub const DescribeThemeAliasOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// Information about the theme alias.
     theme_alias: ?ThemeAlias = null,

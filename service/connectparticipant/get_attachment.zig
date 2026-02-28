@@ -25,7 +25,7 @@ pub const GetAttachmentInput = struct {
 
 pub const GetAttachmentOutput = struct {
     /// The size of the attachment in bytes.
-    attachment_size_in_bytes: i64,
+    attachment_size_in_bytes: ?i64 = null,
 
     /// This is the pre-signed URL that can be used for uploading the file to Amazon
     /// S3 when used in response

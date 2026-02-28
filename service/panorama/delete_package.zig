@@ -8,7 +8,7 @@ pub const DeletePackageInput = struct {
     /// Delete the package even if it has artifacts stored in its access point.
     /// Deletes the package's artifacts from
     /// Amazon S3.
-    force_delete: bool = false,
+    force_delete: ?bool = null,
 
     /// The package's ID.
     package_id: []const u8,

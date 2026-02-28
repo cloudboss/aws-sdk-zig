@@ -65,10 +65,10 @@ pub const UpdatePhoneNumberOutput = struct {
     created_timestamp: ?i64 = null,
 
     /// When set to true the phone number can't be deleted.
-    deletion_protection_enabled: bool = false,
+    deletion_protection_enabled: ?bool = null,
 
     /// When set to true the international sending of phone number is Enabled.
-    international_sending_enabled: bool = false,
+    international_sending_enabled: ?bool = null,
 
     /// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
     /// region.
@@ -104,7 +104,7 @@ pub const UpdatePhoneNumberOutput = struct {
     registration_id: ?[]const u8 = null,
 
     /// This is true if self managed opt-out are enabled.
-    self_managed_opt_outs_enabled: bool = false,
+    self_managed_opt_outs_enabled: ?bool = null,
 
     /// The current status of the request.
     status: ?NumberStatus = null,
@@ -118,7 +118,7 @@ pub const UpdatePhoneNumberOutput = struct {
 
     /// By default this is set to false. When set to true you can receive incoming
     /// text messages from your end recipients.
-    two_way_enabled: bool = false,
+    two_way_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

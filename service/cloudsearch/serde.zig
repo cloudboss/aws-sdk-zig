@@ -848,7 +848,7 @@ pub fn deserializeOptionStatus(reader: *aws.xml.Reader, alloc: std.mem.Allocator
     _ = alloc;
     var result: OptionStatus = undefined;
     result.pending_deletion = null;
-    result.update_version = null;
+    result.update_version = 0;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -877,8 +877,8 @@ pub fn deserializeScalingParameters(reader: *aws.xml.Reader, alloc: std.mem.Allo
     _ = alloc;
     var result: ScalingParameters = undefined;
     result.desired_instance_type = null;
-    result.desired_partition_count = null;
-    result.desired_replication_count = null;
+    result.desired_partition_count = 0;
+    result.desired_replication_count = 0;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1605,3 +1605,4 @@ pub fn serializeTextOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), v
         try buf.appendSlice(alloc, "</SourceField>");
     }
 }
+

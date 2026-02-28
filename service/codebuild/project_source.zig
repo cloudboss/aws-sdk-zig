@@ -174,7 +174,7 @@ pub const ProjectSource = struct {
     /// * `NO_SOURCE`: The project does not have input source code.
     ///
     /// * `S3`: The source code is in an Amazon S3 bucket.
-    type: SourceType,
+    @"type": SourceType,
 
     pub const json_field_names = .{
         .auth = "auth",
@@ -186,6 +186,6 @@ pub const ProjectSource = struct {
         .location = "location",
         .report_build_status = "reportBuildStatus",
         .source_identifier = "sourceIdentifier",
-        .type = "type",
+        .@"type" = "type",
     };
 };

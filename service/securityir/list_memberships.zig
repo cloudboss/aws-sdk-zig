@@ -7,7 +7,7 @@ const ListMembershipItem = @import("list_membership_item.zig").ListMembershipIte
 
 pub const ListMembershipsInput = struct {
     /// Request element for ListMemberships to limit the number of responses.
-    max_results: i32 = 25,
+    max_results: ?i32 = null,
 
     /// An optional string that, if supplied, must be copied from the output of a
     /// previous call to ListMemberships. When provided in this manner, the API

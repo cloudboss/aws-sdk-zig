@@ -13,7 +13,7 @@ pub const UpdateConditionalForwarderInput = struct {
     /// The updated IP addresses of the remote DNS server associated with the
     /// conditional
     /// forwarder.
-    dns_ip_addrs: []const []const u8 = &.{},
+    dns_ip_addrs: ?[]const []const u8 = null,
 
     /// The updated IPv6 addresses of the remote DNS server associated with the
     /// conditional
@@ -33,7 +33,8 @@ pub const UpdateConditionalForwarderInput = struct {
     };
 };
 
-pub const UpdateConditionalForwarderOutput = struct {};
+pub const UpdateConditionalForwarderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

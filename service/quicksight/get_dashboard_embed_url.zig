@@ -35,7 +35,7 @@ pub const GetDashboardEmbedUrlInput = struct {
     /// Remove the reset button on the embedded dashboard. The default is FALSE,
     /// which enables
     /// the reset button.
-    reset_disabled: bool = false,
+    reset_disabled: ?bool = null,
 
     /// How many minutes the session is valid. The session lifetime must be 15-600
     /// minutes.
@@ -53,12 +53,12 @@ pub const GetDashboardEmbedUrlInput = struct {
     /// cookie. If this is set to FALSE, the state of the user session is not
     /// persisted. The
     /// default is `FALSE`.
-    state_persistence_enabled: bool = false,
+    state_persistence_enabled: ?bool = null,
 
     /// Remove the undo/redo button on the embedded dashboard. The default is FALSE,
     /// which
     /// enables the undo/redo button.
-    undo_redo_disabled: bool = false,
+    undo_redo_disabled: ?bool = null,
 
     /// The Amazon Quick Suite user's Amazon Resource Name (ARN), for use with
     /// `QUICKSIGHT` identity type. You can use this for any Amazon Quick Suite
@@ -106,7 +106,7 @@ pub const GetDashboardEmbedUrlOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .embed_url = "EmbedUrl",

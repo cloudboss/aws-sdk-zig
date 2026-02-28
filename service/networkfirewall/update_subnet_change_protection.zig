@@ -22,7 +22,7 @@ pub const UpdateSubnetChangeProtectionInput = struct {
     /// accidentally modifying the subnet associations for a firewall that is in
     /// use. When you create a firewall, the operation initializes this setting to
     /// `TRUE`.
-    subnet_change_protection: bool = false,
+    subnet_change_protection: ?bool = null,
 
     /// An optional token that you can use for optimistic locking. Network Firewall
     /// returns a token to your requests that access the firewall. The token marks
@@ -62,7 +62,7 @@ pub const UpdateSubnetChangeProtectionOutput = struct {
     /// accidentally modifying the subnet associations for a firewall that is in
     /// use. When you create a firewall, the operation initializes this setting to
     /// `TRUE`.
-    subnet_change_protection: bool = false,
+    subnet_change_protection: ?bool = null,
 
     /// An optional token that you can use for optimistic locking. Network Firewall
     /// returns a token to your requests that access the firewall. The token marks

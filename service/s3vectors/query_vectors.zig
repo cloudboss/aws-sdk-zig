@@ -27,11 +27,11 @@ pub const QueryVectorsInput = struct {
 
     /// Indicates whether to include the computed distance in the response. The
     /// default value is `false`.
-    return_distance: bool = false,
+    return_distance: ?bool = null,
 
     /// Indicates whether to include metadata in the response. The default value is
     /// `false`.
-    return_metadata: bool = false,
+    return_metadata: ?bool = null,
 
     /// The number of results to return for each query.
     top_k: i32,

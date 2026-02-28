@@ -24,13 +24,13 @@ pub const DatasetParameter = struct {
 
     /// The type of the dataset parameter, can be one of a 'String', 'Number' or
     /// 'Datetime'.
-    type: ParameterType,
+    @"type": ParameterType,
 
     pub const json_field_names = .{
         .create_column = "CreateColumn",
         .datetime_options = "DatetimeOptions",
         .filter = "Filter",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

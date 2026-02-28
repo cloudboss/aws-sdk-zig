@@ -18,7 +18,7 @@ pub const GetLogObjectInput = struct {
     /// masked or redacted data in the log object will be displayed in its original
     /// form. Default is
     /// false.
-    unmask: bool = false,
+    unmask: ?bool = null,
 
     pub const json_field_names = .{
         .log_object_pointer = "logObjectPointer",

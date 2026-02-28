@@ -3,7 +3,7 @@ pub const ListDeploymentsRequest = struct {
     application_id: []const u8,
 
     /// The maximum number of objects to return.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// A pagination token returned from a previous call to
     /// this operation. This specifies the next item to return. To return to the

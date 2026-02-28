@@ -24,12 +24,12 @@ pub const ListDevicePoolsInput = struct {
     ///
     /// * PRIVATE: A device pool that is created and managed by the device pool
     /// developer.
-    type: ?DevicePoolType = null,
+    @"type": ?DevicePoolType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
         .next_token = "nextToken",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

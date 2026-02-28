@@ -17,7 +17,7 @@ pub const CreateApiKeyInput = struct {
     /// represented as seconds since the epoch, rounded down to the nearest hour.
     /// The default value
     /// for this parameter is 7 days from creation time. For more information, see .
-    expires: i64 = 0,
+    expires: ?i64 = null,
 
     pub const json_field_names = .{
         .api_id = "apiId",

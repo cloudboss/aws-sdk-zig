@@ -37,7 +37,7 @@ pub const ListDashboardsOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .dashboard_summary_list = "DashboardSummaryList",

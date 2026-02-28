@@ -8,7 +8,7 @@ const RepositoryLinkInfo = @import("repository_link_info.zig").RepositoryLinkInf
 pub const ListRepositoryLinksInput = struct {
     /// A non-zero, non-negative integer used to limit the number of returned
     /// results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// An enumeration token that, when provided in a request, returns the next
     /// batch of the results.

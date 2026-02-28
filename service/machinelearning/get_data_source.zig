@@ -17,7 +17,7 @@ pub const GetDataSourceInput = struct {
     /// If true, `DataSourceSchema` is returned.
     ///
     /// If false, `DataSourceSchema` is not returned.
-    verbose: bool = false,
+    verbose: ?bool = null,
 
     pub const json_field_names = .{
         .data_source_id = "DataSourceId",
@@ -28,7 +28,7 @@ pub const GetDataSourceInput = struct {
 pub const GetDataSourceOutput = struct {
     /// The parameter is `true` if statistics need to be generated from the
     /// observation data.
-    compute_statistics: bool = false,
+    compute_statistics: ?bool = null,
 
     /// The approximate CPU time in milliseconds that Amazon Machine Learning spent
     /// processing the `DataSource`, normalized and scaled on computation resources.

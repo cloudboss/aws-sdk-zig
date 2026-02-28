@@ -106,7 +106,7 @@ pub const DescribeDashboardDefinitionOutput = struct {
     resource_status: ?ResourceStatus = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The ARN of the theme of the dashboard.
     theme_arn: ?[]const u8 = null,

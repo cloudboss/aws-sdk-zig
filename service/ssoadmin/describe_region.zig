@@ -31,7 +31,7 @@ pub const DescribeRegionOutput = struct {
     /// between the primary Region and additional Regions, see [IAM Identity Center
     /// User
     /// Guide](https://docs.aws.amazon.com/singlesignon/latest/userguide/multi-region-iam-identity-center.html)
-    is_primary_region: bool = false,
+    is_primary_region: ?bool = null,
 
     /// The Amazon Web Services Region name.
     region_name: ?[]const u8 = null,

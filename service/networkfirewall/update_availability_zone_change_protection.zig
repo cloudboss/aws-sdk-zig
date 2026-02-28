@@ -11,7 +11,7 @@ pub const UpdateAvailabilityZoneChangeProtectionInput = struct {
     /// accidentally modifying the subnet associations for a firewall that is in
     /// use. When you create a firewall, the operation initializes this setting to
     /// `TRUE`.
-    availability_zone_change_protection: bool = false,
+    availability_zone_change_protection: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the firewall.
     ///
@@ -55,7 +55,7 @@ pub const UpdateAvailabilityZoneChangeProtectionOutput = struct {
     /// accidentally modifying the subnet associations for a firewall that is in
     /// use. When you create a firewall, the operation initializes this setting to
     /// `TRUE`.
-    availability_zone_change_protection: bool = false,
+    availability_zone_change_protection: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the firewall.
     firewall_arn: ?[]const u8 = null,

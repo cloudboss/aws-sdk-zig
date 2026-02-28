@@ -16,7 +16,7 @@ pub const DescribeTagsInput = struct {
     /// The total number of items to return in a single page of output. The maximum
     /// value is
     /// 100.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A token to start the list. Use this token to get the next set of results.
     next_token: ?[]const u8 = null,

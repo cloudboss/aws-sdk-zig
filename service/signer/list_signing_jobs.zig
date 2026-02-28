@@ -8,7 +8,7 @@ const SigningJob = @import("signing_job.zig").SigningJob;
 
 pub const ListSigningJobsInput = struct {
     /// Filters results to return only signing jobs with revoked signatures.
-    is_revoked: bool = false,
+    is_revoked: ?bool = null,
 
     /// Filters results to return only signing jobs initiated by a specified IAM
     /// entity.

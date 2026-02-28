@@ -7,10 +7,10 @@ pub const MediaItem = struct {
 
     /// The type of media. Valid values are: `IMAGE_LOGO_FAVICON` and
     /// `IMAGE_LOGO_HORIZONTAL`.
-    type: ?MediaType,
+    @"type": ?MediaType,
 
     pub const json_field_names = .{
         .source = "Source",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

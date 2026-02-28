@@ -25,7 +25,7 @@ pub const GetSigningPlatformOutput = struct {
 
     /// The maximum size (in MB) of the payload that can be signed by the target
     /// platform.
-    max_size_in_mb: i32 = 0,
+    max_size_in_mb: ?i32 = null,
 
     /// A list of partner entities that use the target signing platform.
     partner: ?[]const u8 = null,
@@ -36,7 +36,7 @@ pub const GetSigningPlatformOutput = struct {
     /// A flag indicating whether signatures generated for the signing platform can
     /// be
     /// revoked.
-    revocation_supported: bool = false,
+    revocation_supported: ?bool = null,
 
     /// A list of configurations applied to the target platform at signing.
     signing_configuration: ?SigningConfiguration = null,

@@ -33,7 +33,8 @@ pub const UpdateTrafficDistributionInput = struct {
     };
 };
 
-pub const UpdateTrafficDistributionOutput = struct {};
+pub const UpdateTrafficDistributionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

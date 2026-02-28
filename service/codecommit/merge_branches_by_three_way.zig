@@ -52,7 +52,7 @@ pub const MergeBranchesByThreeWayInput = struct {
     /// changes leave the folders empty. If true, a .gitkeep file is created for
     /// empty folders.
     /// The default is false.
-    keep_empty_folders: bool = false,
+    keep_empty_folders: ?bool = null,
 
     /// The name of the repository where you want to merge two branches.
     repository_name: []const u8,

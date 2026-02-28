@@ -9,7 +9,7 @@ pub const DeleteTapeInput = struct {
     /// tape retention lock. Only archived tapes with tape retention lock set to
     /// `governance` can be deleted. Archived tapes with tape retention lock set to
     /// `compliance` can't be deleted.
-    bypass_governance_retention: bool = false,
+    bypass_governance_retention: ?bool = null,
 
     /// The unique Amazon Resource Name (ARN) of the gateway that the virtual tape
     /// to delete is

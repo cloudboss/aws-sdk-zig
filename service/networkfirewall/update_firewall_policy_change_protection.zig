@@ -22,7 +22,7 @@ pub const UpdateFirewallPolicyChangeProtectionInput = struct {
     /// accidentally modifying the firewall policy for a firewall that is in use.
     /// When you create a firewall, the operation initializes this setting to
     /// `TRUE`.
-    firewall_policy_change_protection: bool = false,
+    firewall_policy_change_protection: ?bool = null,
 
     /// An optional token that you can use for optimistic locking. Network Firewall
     /// returns a token to your requests that access the firewall. The token marks
@@ -62,7 +62,7 @@ pub const UpdateFirewallPolicyChangeProtectionOutput = struct {
     /// accidentally modifying the firewall policy for a firewall that is in use.
     /// When you create a firewall, the operation initializes this setting to
     /// `TRUE`.
-    firewall_policy_change_protection: bool = false,
+    firewall_policy_change_protection: ?bool = null,
 
     /// An optional token that you can use for optimistic locking. Network Firewall
     /// returns a token to your requests that access the firewall. The token marks

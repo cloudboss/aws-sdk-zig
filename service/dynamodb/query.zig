@@ -399,7 +399,7 @@ pub const QueryOutput = struct {
     ///
     /// If you did not use a filter in the request, then `Count` and
     /// `ScannedCount` are the same.
-    count: i32 = 0,
+    count: ?i32 = null,
 
     /// An array of item attributes that match the query criteria. Each element in
     /// this array
@@ -430,7 +430,7 @@ pub const QueryOutput = struct {
     ///
     /// If you did not use a filter in the request, then `ScannedCount` is the same
     /// as `Count`.
-    scanned_count: i32 = 0,
+    scanned_count: ?i32 = null,
 
     pub const json_field_names = .{
         .consumed_capacity = "ConsumedCapacity",

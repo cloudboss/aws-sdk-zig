@@ -26,7 +26,8 @@ pub const UpdateQueueFleetAssociationInput = struct {
     };
 };
 
-pub const UpdateQueueFleetAssociationOutput = struct {};
+pub const UpdateQueueFleetAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

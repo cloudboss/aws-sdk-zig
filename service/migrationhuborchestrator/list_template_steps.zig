@@ -7,7 +7,7 @@ const TemplateStepSummary = @import("template_step_summary.zig").TemplateStepSum
 
 pub const ListTemplateStepsInput = struct {
     /// The maximum number of results that can be returned.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The pagination token.
     next_token: ?[]const u8 = null,

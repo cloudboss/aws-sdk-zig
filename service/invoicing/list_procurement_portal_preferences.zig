@@ -8,7 +8,7 @@ const ProcurementPortalPreferenceSummary = @import("procurement_portal_preferenc
 pub const ListProcurementPortalPreferencesInput = struct {
     /// The maximum number of results to return in a single call. To retrieve the
     /// remaining results, make another call with the returned NextToken value.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results. (You received this token from a
     /// previous call.)

@@ -131,7 +131,7 @@ pub const CreateTokenWithIAMOutput = struct {
     aws_additional_details: ?AwsAdditionalDetails = null,
 
     /// Indicates the time in seconds when an access token will expire.
-    expires_in: i32 = 0,
+    expires_in: ?i32 = null,
 
     /// A JSON Web Token (JWT) that identifies the user associated with the issued
     /// access token.

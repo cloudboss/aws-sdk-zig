@@ -26,7 +26,7 @@ pub const SnapToRoadsInput = struct {
     /// **Unit**: `meters`
     ///
     /// Default value: `300`
-    snap_radius: i64 = 0,
+    snap_radius: ?i64 = null,
 
     /// List of trace points to be snapped onto the road network.
     trace_points: []const RoadSnapTracePoint,

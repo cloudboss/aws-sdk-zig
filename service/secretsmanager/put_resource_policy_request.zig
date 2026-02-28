@@ -25,7 +25,7 @@ pub const PutResourcePolicyRequest = struct {
     /// To review permissions to your secrets, see [Determine who has permissions to
     /// your
     /// secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/determine-acccess_examine-iam-policies.html).
-    block_public_policy: ?bool,
+    block_public_policy: ?bool = null,
 
     /// A JSON-formatted string for an Amazon Web Services resource-based policy.
     /// For example policies, see

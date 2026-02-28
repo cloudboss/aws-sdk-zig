@@ -1,2 +1,3 @@
 /// The connector metadata specific to Upsolver.
-pub const UpsolverMetadata = struct {};
+pub const UpsolverMetadata = struct {
+};

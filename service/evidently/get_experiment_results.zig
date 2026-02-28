@@ -26,7 +26,7 @@ pub const GetExperimentResultsInput = struct {
     metric_names: []const []const u8,
 
     /// In seconds, the amount of time to aggregate results together.
-    period: i64 = 0,
+    period: ?i64 = null,
 
     /// The name or ARN of the project that contains the experiment that you want to
     /// see the results of.

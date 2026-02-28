@@ -103,7 +103,7 @@ pub const Subnet = struct {
     /// *Amazon Elastic VMware Service
     /// API Reference*
     /// ](https://docs.aws.amazon.com/evs/latest/APIReference/Welcome.html).
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The ID of the VPC the subnet is in.
     vpc_id: ?[]const u8,

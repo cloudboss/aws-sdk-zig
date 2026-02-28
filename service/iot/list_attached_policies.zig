@@ -13,7 +13,7 @@ pub const ListAttachedPoliciesInput = struct {
     page_size: ?i32 = null,
 
     /// When true, recursively list attached policies.
-    recursive: bool = false,
+    recursive: ?bool = null,
 
     /// The group or principal for which the policies will be listed. Valid
     /// principals are CertificateArn

@@ -23,7 +23,7 @@ pub const GetDatasetOutput = struct {
     /// The timestamp at which the Dataset was created in FinSpace. The value is
     /// determined as epoch time in milliseconds. For example, the value for Monday,
     /// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
-    create_time: i64 = 0,
+    create_time: ?i64 = null,
 
     /// The ARN identifier of the Dataset.
     dataset_arn: ?[]const u8 = null,
@@ -47,7 +47,7 @@ pub const GetDatasetOutput = struct {
     /// The last time that the Dataset was modified. The value is determined as
     /// epoch time in milliseconds. For example, the value for Monday, November 1,
     /// 2021 12:00:00 PM UTC is specified as 1635768000000.
-    last_modified_time: i64 = 0,
+    last_modified_time: ?i64 = null,
 
     /// Definition for a schema on a tabular Dataset.
     schema_definition: ?SchemaUnion = null,

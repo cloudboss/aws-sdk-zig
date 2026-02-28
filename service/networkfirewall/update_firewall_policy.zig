@@ -25,7 +25,7 @@ pub const UpdateFirewallPolicyInput = struct {
     ///
     /// If set to `FALSE`, Network Firewall makes the requested changes to your
     /// resources.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// A complex type that contains settings for encryption of your firewall policy
     /// resources.

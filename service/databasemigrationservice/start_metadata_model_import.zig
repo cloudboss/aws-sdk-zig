@@ -14,7 +14,7 @@ pub const StartMetadataModelImportInput = struct {
 
     /// If `true`, DMS loads metadata for the specified objects from the source
     /// database.
-    refresh: bool = false,
+    refresh: ?bool = null,
 
     /// A value that specifies the database objects to import.
     selection_rules: []const u8,

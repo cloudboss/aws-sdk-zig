@@ -21,7 +21,7 @@ pub const CreateRecordingConfigurationInput = struct {
     /// interval, the multiple
     /// streams will be considered a single broadcast and merged together. Default:
     /// 0.
-    recording_reconnect_window_seconds: i32 = 0,
+    recording_reconnect_window_seconds: ?i32 = null,
 
     /// Object that describes which renditions should be recorded for a stream.
     rendition_configuration: ?RenditionConfiguration = null,

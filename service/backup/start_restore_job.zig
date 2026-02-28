@@ -10,7 +10,7 @@ pub const StartRestoreJobInput = struct {
     /// will be copied to the restored resource.
     ///
     /// This can only be applied to backups created through Backup.
-    copy_source_tags_to_restored_resource: bool = false,
+    copy_source_tags_to_restored_resource: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create
     /// the target resource; for example:

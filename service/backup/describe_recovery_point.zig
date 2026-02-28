@@ -124,11 +124,11 @@ pub const DescribeRecoveryPointOutput = struct {
     /// A Boolean value that is returned as `TRUE` if the specified recovery point
     /// is
     /// encrypted, or `FALSE` if the recovery point is not encrypted.
-    is_encrypted: bool = false,
+    is_encrypted: ?bool = null,
 
     /// This returns the boolean value that a recovery point is a parent (composite)
     /// job.
-    is_parent: bool = false,
+    is_parent: ?bool = null,
 
     /// The date and time that a recovery point was last restored, in Unix format
     /// and

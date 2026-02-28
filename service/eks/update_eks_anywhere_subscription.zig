@@ -7,7 +7,7 @@ const EksAnywhereSubscription = @import("eks_anywhere_subscription.zig").EksAnyw
 
 pub const UpdateEksAnywhereSubscriptionInput = struct {
     /// A boolean indicating whether or not to automatically renew the subscription.
-    auto_renew: bool = false,
+    auto_renew: ?bool = null,
 
     /// Unique, case-sensitive identifier to ensure the idempotency of the request.
     client_request_token: ?[]const u8 = null,

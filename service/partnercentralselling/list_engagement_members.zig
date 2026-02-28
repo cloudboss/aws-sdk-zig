@@ -13,7 +13,7 @@ pub const ListEngagementMembersInput = struct {
     identifier: []const u8,
 
     /// The maximum number of results to return in a single call.
-    max_results: i32 = 5,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results.
     next_token: ?[]const u8 = null,

@@ -53,7 +53,7 @@ pub const UpdateKxDataviewOutput = struct {
     /// The option to specify whether you want to apply all the future additions and
     /// corrections automatically to the dataview when new changesets are ingested.
     /// The default value is false.
-    auto_update: bool = false,
+    auto_update: ?bool = null,
 
     /// The identifier of the availability zones.
     availability_zone_id: ?[]const u8 = null,
@@ -90,7 +90,7 @@ pub const UpdateKxDataviewOutput = struct {
     last_modified_timestamp: ?i64 = null,
 
     /// Returns True if the dataview is created as writeable and False otherwise.
-    read_write: bool = false,
+    read_write: ?bool = null,
 
     /// The configuration that contains the database path of the data that you want
     /// to place on each selected volume. Each segment must have a unique database

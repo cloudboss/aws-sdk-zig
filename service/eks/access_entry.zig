@@ -50,7 +50,7 @@ pub const AccessEntry = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of the access entry.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The `name` of a user that can authenticate to your cluster.
     username: ?[]const u8,
@@ -63,7 +63,7 @@ pub const AccessEntry = struct {
         .modified_at = "modifiedAt",
         .principal_arn = "principalArn",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .username = "username",
     };
 };

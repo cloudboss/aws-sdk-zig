@@ -39,7 +39,7 @@ pub const RegisterAppInstanceUserEndpointInput = struct {
     /// * `GCM`: The mobile notification service for an Android device.
     ///
     /// Populate the `ResourceArn` value of each type as `PinpointAppArn`.
-    type: AppInstanceUserEndpointType,
+    @"type": AppInstanceUserEndpointType,
 
     pub const json_field_names = .{
         .allow_messages = "AllowMessages",
@@ -48,7 +48,7 @@ pub const RegisterAppInstanceUserEndpointInput = struct {
         .endpoint_attributes = "EndpointAttributes",
         .name = "Name",
         .resource_arn = "ResourceArn",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -137,7 +137,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RegisterAppInstanceUserEndp
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

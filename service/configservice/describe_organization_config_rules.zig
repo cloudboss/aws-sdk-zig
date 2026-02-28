@@ -8,7 +8,7 @@ const OrganizationConfigRule = @import("organization_config_rule.zig").Organizat
 pub const DescribeOrganizationConfigRulesInput = struct {
     /// The maximum number of organization Config rules returned on each page. If
     /// you do no specify a number, Config uses the default. The default is 100.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned on a previous page that you use to get the
     /// next page of results in a paginated response.

@@ -11,7 +11,7 @@ const MethodSetting = @import("method_setting.zig").MethodSetting;
 
 pub const CreateStageInput = struct {
     /// Whether cache clustering is enabled for the stage.
-    cache_cluster_enabled: bool = false,
+    cache_cluster_enabled: ?bool = null,
 
     /// The stage's cache capacity in GB. For more information about choosing a
     /// cache size, see [Enabling API caching to enhance
@@ -43,7 +43,7 @@ pub const CreateStageInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether active tracing with X-ray is enabled for the Stage.
-    tracing_enabled: bool = false,
+    tracing_enabled: ?bool = null,
 
     /// A map that defines the stage variables for the new Stage resource. Variable
     /// names

@@ -82,7 +82,7 @@ pub const CreateHostedConfigurationVersionOutput = struct {
     version_label: ?[]const u8 = null,
 
     /// The configuration version.
-    version_number: i32 = 0,
+    version_number: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

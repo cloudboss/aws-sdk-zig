@@ -18,7 +18,7 @@ pub const ListAccessPointsForObjectLambdaInput = struct {
     /// access points, then the response will include a continuation token in the
     /// `NextToken`
     /// field that you can use to retrieve the next page of access points.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// If the list has more access points than can be returned in one call to this
     /// API, this field

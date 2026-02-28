@@ -86,7 +86,7 @@ pub const CreateDeploymentInput = struct {
     /// `ignoreApplicationStopFailures` to specify that the
     /// `ApplicationStop`, `BeforeBlockTraffic`, and
     /// `AfterBlockTraffic` failures should be ignored.
-    ignore_application_stop_failures: bool = false,
+    ignore_application_stop_failures: ?bool = null,
 
     /// Allows you to specify information about alarms associated with a deployment.
     /// The alarm
@@ -121,7 +121,7 @@ pub const CreateDeploymentInput = struct {
     /// Indicates whether to deploy to all instances or only to instances that are
     /// not
     /// running the latest application revision.
-    update_outdated_instances_only: bool = false,
+    update_outdated_instances_only: ?bool = null,
 
     pub const json_field_names = .{
         .application_name = "applicationName",

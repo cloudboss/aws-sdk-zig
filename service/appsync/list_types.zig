@@ -14,7 +14,7 @@ pub const ListTypesInput = struct {
     format: TypeDefinitionFormat,
 
     /// The maximum number of results that you want the request to return.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// An identifier that was returned from the previous call to this operation,
     /// which you can

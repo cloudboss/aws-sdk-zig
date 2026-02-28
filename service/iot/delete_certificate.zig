@@ -13,7 +13,7 @@ pub const DeleteCertificateInput = struct {
     /// Forces the deletion of a certificate if it is inactive and is not attached
     /// to an IoT
     /// thing.
-    force_delete: bool = false,
+    force_delete: ?bool = null,
 
     pub const json_field_names = .{
         .certificate_id = "certificateId",

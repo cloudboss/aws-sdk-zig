@@ -18,7 +18,8 @@ pub const StopContactMediaProcessingInput = struct {
     };
 };
 
-pub const StopContactMediaProcessingOutput = struct {};
+pub const StopContactMediaProcessingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

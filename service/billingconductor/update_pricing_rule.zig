@@ -26,7 +26,7 @@ pub const UpdatePricingRuleInput = struct {
     tiering: ?UpdateTieringInput = null,
 
     /// The new pricing rule type.
-    type: ?PricingRuleType = null,
+    @"type": ?PricingRuleType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -34,7 +34,7 @@ pub const UpdatePricingRuleInput = struct {
         .modifier_percentage = "ModifierPercentage",
         .name = "Name",
         .tiering = "Tiering",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -43,7 +43,7 @@ pub const UpdatePricingRuleOutput = struct {
     arn: ?[]const u8 = null,
 
     /// The pricing plans count that this pricing rule is associated with.
-    associated_pricing_plan_count: i64 = 0,
+    associated_pricing_plan_count: ?i64 = null,
 
     /// The seller of services provided by Amazon Web Services, their affiliates, or
     /// third-party providers selling services via Amazon Web Services Marketplace.
@@ -53,7 +53,7 @@ pub const UpdatePricingRuleOutput = struct {
     description: ?[]const u8 = null,
 
     /// The most recent time the pricing rule was modified.
-    last_modified_time: i64 = 0,
+    last_modified_time: ?i64 = null,
 
     /// The new modifier to show pricing plan rates as a percentage.
     modifier_percentage: ?f64 = null,
@@ -83,7 +83,7 @@ pub const UpdatePricingRuleOutput = struct {
     tiering: ?UpdateTieringInput = null,
 
     /// The new pricing rule type.
-    type: ?PricingRuleType = null,
+    @"type": ?PricingRuleType = null,
 
     /// Usage type is the unit that each service uses to measure the usage of a
     /// specific type of resource.
@@ -106,7 +106,7 @@ pub const UpdatePricingRuleOutput = struct {
         .scope = "Scope",
         .service = "Service",
         .tiering = "Tiering",
-        .type = "Type",
+        .@"type" = "Type",
         .usage_type = "UsageType",
     };
 };
@@ -181,7 +181,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdatePricingRuleInput, con
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

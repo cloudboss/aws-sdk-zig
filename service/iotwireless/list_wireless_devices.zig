@@ -16,7 +16,7 @@ pub const ListWirelessDevicesInput = struct {
     fuota_task_id: ?[]const u8 = null,
 
     /// The maximum number of results to return in this operation.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     multicast_group_id: ?[]const u8 = null,
 

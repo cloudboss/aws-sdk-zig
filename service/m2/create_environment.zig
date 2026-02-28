@@ -55,7 +55,7 @@ pub const CreateEnvironmentInput = struct {
     preferred_maintenance_window: ?[]const u8 = null,
 
     /// Specifies whether the runtime environment is publicly accessible.
-    publicly_accessible: bool = false,
+    publicly_accessible: ?bool = null,
 
     /// The list of security groups for the VPC associated with this runtime
     /// environment.

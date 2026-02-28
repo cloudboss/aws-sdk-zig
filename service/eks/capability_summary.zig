@@ -21,7 +21,7 @@ pub const CapabilitySummary = struct {
     status: ?CapabilityStatus,
 
     /// The type of capability. Valid values are `ACK`, `ARGOCD`, or `KRO`.
-    type: ?CapabilityType,
+    @"type": ?CapabilityType,
 
     /// The version of the capability software that is currently running.
     version: ?[]const u8,
@@ -32,7 +32,7 @@ pub const CapabilitySummary = struct {
         .created_at = "createdAt",
         .modified_at = "modifiedAt",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
     };
 };

@@ -14,7 +14,7 @@ pub const DecreaseReplicationFactorInput = struct {
     cluster_name: []const u8,
 
     /// The new number of nodes for the DAX cluster.
-    new_replication_factor: i32 = 0,
+    new_replication_factor: ?i32 = null,
 
     /// The unique identifiers of the nodes to be removed from the cluster.
     node_ids_to_remove: ?[]const []const u8 = null,

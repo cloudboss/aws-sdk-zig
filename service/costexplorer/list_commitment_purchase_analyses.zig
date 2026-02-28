@@ -17,7 +17,7 @@ pub const ListCommitmentPurchaseAnalysesInput = struct {
     next_page_token: ?[]const u8 = null,
 
     /// The number of analyses that you want returned in a single response object.
-    page_size: i32 = 0,
+    page_size: ?i32 = null,
 
     pub const json_field_names = .{
         .analysis_ids = "AnalysisIds",

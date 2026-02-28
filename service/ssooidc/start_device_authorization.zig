@@ -36,12 +36,12 @@ pub const StartDeviceAuthorizationOutput = struct {
 
     /// Indicates the number of seconds in which the verification code will become
     /// invalid.
-    expires_in: i32 = 0,
+    expires_in: ?i32 = null,
 
     /// Indicates the number of seconds the client must wait between attempts when
     /// polling for a
     /// session.
-    interval: i32 = 0,
+    interval: ?i32 = null,
 
     /// A one-time user verification code. This is needed to authorize an in-use
     /// device.

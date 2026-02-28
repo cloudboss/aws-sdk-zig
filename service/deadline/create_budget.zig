@@ -23,7 +23,7 @@ pub const CreateBudgetInput = struct {
     /// This field can store any content. Escape or encode this content before
     /// displaying it on a webpage or any other system that might interpret the
     /// content of this field.
-    description: []const u8 = "",
+    description: ?[]const u8 = null,
 
     /// The display name of the budget.
     ///

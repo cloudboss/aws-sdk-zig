@@ -79,11 +79,11 @@ pub const CountClosedWorkflowExecutionsInput = struct {
 
 pub const CountClosedWorkflowExecutionsOutput = struct {
     /// The number of workflow executions.
-    count: i32 = 0,
+    count: ?i32 = null,
 
     /// If set to true, indicates that the actual count was more than the maximum
     /// supported by this API and the count returned is the truncated value.
-    truncated: bool = false,
+    truncated: ?bool = null,
 
     pub const json_field_names = .{
         .count = "count",

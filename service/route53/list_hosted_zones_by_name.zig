@@ -59,7 +59,7 @@ pub const ListHostedZonesByNameOutput = struct {
     /// by calling `ListHostedZonesByName` again and specifying the values of
     /// `NextDNSName` and `NextHostedZoneId` elements in the
     /// `dnsname` and `hostedzoneid` parameters.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// The value that you specified for the `maxitems` parameter in the call to
     /// `ListHostedZonesByName` that produced the current response.

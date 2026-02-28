@@ -18,7 +18,7 @@ pub const UploadArchiveInput = struct {
     archive_description: ?[]const u8 = null,
 
     /// The data to upload.
-    body: aws.http.StreamingBody = "",
+    body: ?[]const u8 = null,
 
     /// The SHA256 tree hash of the data being uploaded.
     checksum: ?[]const u8 = null,

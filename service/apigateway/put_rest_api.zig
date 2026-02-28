@@ -19,7 +19,7 @@ pub const PutRestApiInput = struct {
     /// A query parameter to indicate whether to rollback the API update (`true`) or
     /// not (`false`)
     /// when a warning is encountered. The default value is `false`.
-    fail_on_warnings: bool = false,
+    fail_on_warnings: ?bool = null,
 
     /// The `mode` query parameter to specify the update mode. Valid values are
     /// "merge" and "overwrite". By default,

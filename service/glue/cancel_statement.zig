@@ -6,7 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const CancelStatementInput = struct {
     /// The ID of the statement to be cancelled.
-    id: i32 = 0,
+    id: ?i32 = null,
 
     /// The origin of the request to cancel the statement.
     request_origin: ?[]const u8 = null,

@@ -17,12 +17,12 @@ pub const NodeOutputField = struct {
     next: ?[]const NodeOutputNext,
 
     /// The data type of the output field for compatibility validation.
-    type: ?FlowNodeIODataType,
+    @"type": ?FlowNodeIODataType,
 
     pub const json_field_names = .{
         .content = "content",
         .name = "name",
         .next = "next",
-        .type = "type",
+        .@"type" = "type",
     };
 };

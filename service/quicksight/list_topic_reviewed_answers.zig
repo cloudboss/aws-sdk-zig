@@ -29,7 +29,7 @@ pub const ListTopicReviewedAnswersOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the topic.
     topic_arn: ?[]const u8 = null,

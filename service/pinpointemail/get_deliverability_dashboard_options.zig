@@ -26,7 +26,7 @@ pub const GetDeliverabilityDashboardOptionsOutput = struct {
     /// Specifies whether the Deliverability dashboard is enabled for your Amazon
     /// Pinpoint account. If this value
     /// is `true`, the dashboard is enabled.
-    dashboard_enabled: bool = false,
+    dashboard_enabled: ?bool = null,
 
     /// An array of objects, one for each verified domain that you use to send email
     /// and

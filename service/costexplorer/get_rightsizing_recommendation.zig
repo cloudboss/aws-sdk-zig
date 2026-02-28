@@ -29,7 +29,7 @@ pub const GetRightsizingRecommendationInput = struct {
 
     /// The number of recommendations that you want returned in a single response
     /// object.
-    page_size: i32 = 0,
+    page_size: ?i32 = null,
 
     /// The specific service that you want recommendations for. The only valid value
     /// for

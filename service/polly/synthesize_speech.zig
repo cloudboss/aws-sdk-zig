@@ -94,7 +94,7 @@ pub const SynthesizeSpeechInput = struct {
 
 pub const SynthesizeSpeechOutput = struct {
     /// Stream containing the synthesized speech.
-    audio_stream: aws.http.StreamingBody = "",
+    audio_stream: ?aws.http.StreamingBody = null,
 
     /// Specifies the type audio stream. This should reflect the
     /// `OutputFormat` parameter in your request.
@@ -117,7 +117,7 @@ pub const SynthesizeSpeechOutput = struct {
     content_type: ?[]const u8 = null,
 
     /// Number of characters synthesized.
-    request_characters: i32 = 0,
+    request_characters: ?i32 = null,
 
     pub fn deinit(self: *SynthesizeSpeechOutput) void {
         self.audio_stream.deinit();

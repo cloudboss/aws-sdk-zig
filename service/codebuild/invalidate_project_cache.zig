@@ -13,7 +13,8 @@ pub const InvalidateProjectCacheInput = struct {
     };
 };
 
-pub const InvalidateProjectCacheOutput = struct {};
+pub const InvalidateProjectCacheOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

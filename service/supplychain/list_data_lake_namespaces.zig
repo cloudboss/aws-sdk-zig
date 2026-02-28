@@ -10,7 +10,7 @@ pub const ListDataLakeNamespacesInput = struct {
     instance_id: []const u8,
 
     /// The max number of namespaces to fetch in this paginated request.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The pagination token to fetch next page of namespaces.
     next_token: ?[]const u8 = null,

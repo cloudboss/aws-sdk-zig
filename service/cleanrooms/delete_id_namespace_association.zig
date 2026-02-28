@@ -19,7 +19,8 @@ pub const DeleteIdNamespaceAssociationInput = struct {
     };
 };
 
-pub const DeleteIdNamespaceAssociationOutput = struct {};
+pub const DeleteIdNamespaceAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

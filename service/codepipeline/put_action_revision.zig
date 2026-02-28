@@ -31,7 +31,7 @@ pub const PutActionRevisionOutput = struct {
     /// Indicates whether the artifact revision was previously used in an execution
     /// of the
     /// specified pipeline.
-    new_revision: bool = false,
+    new_revision: ?bool = null,
 
     /// The ID of the current workflow state of the pipeline.
     pipeline_execution_id: ?[]const u8 = null,

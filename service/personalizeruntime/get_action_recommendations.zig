@@ -40,7 +40,7 @@ pub const GetActionRecommendationsInput = struct {
     filter_values: ?[]const aws.map.StringMapEntry = null,
 
     /// The number of results to return. The default is 5. The maximum is 100.
-    num_results: i32 = 0,
+    num_results: ?i32 = null,
 
     /// The user ID of the user to provide action recommendations for.
     user_id: ?[]const u8 = null,

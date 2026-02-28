@@ -32,7 +32,7 @@ pub const DeleteCommandOutput = struct {
     /// request,
     /// the command will be deleted immediately and a 204 status code will be
     /// returned.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

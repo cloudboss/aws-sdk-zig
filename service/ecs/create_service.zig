@@ -98,13 +98,13 @@ pub const CreateServiceInput = struct {
     ///
     /// When you use Amazon ECS managed tags, you must set the `propagateTags`
     /// request parameter.
-    enable_ecs_managed_tags: bool = false,
+    enable_ecs_managed_tags: ?bool = null,
 
     /// Determines whether the execute command functionality is turned on for the
     /// service. If
     /// `true`, this enables execute command functionality on all containers in
     /// the service tasks.
-    enable_execute_command: bool = false,
+    enable_execute_command: ?bool = null,
 
     /// The period of time, in seconds, that the Amazon ECS service scheduler
     /// ignores

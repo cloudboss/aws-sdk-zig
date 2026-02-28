@@ -93,7 +93,7 @@ pub const CreateTrainedModelInput = struct {
     ///   training algorithm, providing faster access for large datasets.
     /// * `Pipe` - The training data is streamed to the training algorithm using
     ///   named pipes, which can improve performance for certain algorithms.
-    training_input_mode: TrainingInputMode = "File",
+    training_input_mode: ?TrainingInputMode = null,
 
     pub const json_field_names = .{
         .configured_model_algorithm_association_arn = "configuredModelAlgorithmAssociationArn",

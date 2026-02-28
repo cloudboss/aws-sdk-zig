@@ -16,7 +16,7 @@ pub const SetIdentityHeadersInNotificationsEnabledInput = struct {
     ///
     /// This value can only be set when `NotificationType` is already set to use a
     /// particular Amazon SNS topic.
-    enabled: bool = false,
+    enabled: ?bool = null,
 
     /// The identity for which to enable or disable headers in notifications.
     /// Examples:

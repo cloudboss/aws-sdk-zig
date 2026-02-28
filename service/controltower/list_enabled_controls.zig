@@ -13,7 +13,7 @@ pub const ListEnabledControlsInput = struct {
 
     /// A boolean value that determines whether to include enabled controls from
     /// child organizational units in the response.
-    include_children: bool = false,
+    include_children: ?bool = null,
 
     /// How many results to return per API call.
     max_results: ?i32 = null,

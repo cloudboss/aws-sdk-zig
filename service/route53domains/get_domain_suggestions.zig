@@ -46,7 +46,7 @@ pub const GetDomainSuggestionsInput = struct {
     /// The number of suggested domain names that you want Route 53 to return.
     /// Specify a value
     /// between 1 and 50.
-    suggestion_count: i32 = 0,
+    suggestion_count: ?i32 = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

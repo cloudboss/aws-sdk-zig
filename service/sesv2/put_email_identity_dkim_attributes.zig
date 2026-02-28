@@ -13,7 +13,7 @@ pub const PutEmailIdentityDkimAttributesInput = struct {
     /// When you set this value `true`, then the messages that are sent from the
     /// identity are signed using DKIM. If you set this value to `false`, your
     /// messages are sent without DKIM signing.
-    signing_enabled: bool = false,
+    signing_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .email_identity = "EmailIdentity",

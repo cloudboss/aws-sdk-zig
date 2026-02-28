@@ -155,7 +155,7 @@ pub const StartBackupJobOutput = struct {
 
     /// This is a returned boolean value indicating this is a parent (composite)
     /// backup job.
-    is_parent: bool = false,
+    is_parent: ?bool = null,
 
     /// *Note: This field is only returned for Amazon EFS and Advanced DynamoDB
     /// resources.*

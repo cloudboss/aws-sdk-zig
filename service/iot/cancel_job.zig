@@ -19,7 +19,7 @@ pub const CancelJobInput = struct {
     /// that each
     /// device executing a job which is canceled is able to recover to a valid
     /// state.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The unique identifier you assigned to this job when it was created.
     job_id: []const u8,

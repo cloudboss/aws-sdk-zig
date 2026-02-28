@@ -11,7 +11,7 @@ pub const ListDataIntegrationFlowsInput = struct {
 
     /// Specify the maximum number of DataIntegrationFlows to fetch in one paginated
     /// request.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The pagination token to fetch the next page of the DataIntegrationFlows.
     next_token: ?[]const u8 = null,

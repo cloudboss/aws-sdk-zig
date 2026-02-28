@@ -14,7 +14,7 @@ pub const RecognizeUtteranceInput = struct {
 
     /// User input in PCM or Opus audio format or text format as described
     /// in the `requestContentType` parameter.
-    input_stream: aws.http.StreamingBody = "",
+    input_stream: ?[]const u8 = null,
 
     /// The locale where the session is in use.
     locale_id: []const u8,
@@ -121,7 +121,7 @@ pub const RecognizeUtteranceOutput = struct {
     /// Lambda function successfully fulfilled the intent, and sent a message
     /// to convey to the user. Then Amazon Lex V2 sends that message in the
     /// response.
-    audio_stream: aws.http.StreamingBody = "",
+    audio_stream: ?aws.http.StreamingBody = null,
 
     /// Content type as specified in the `responseContentType` in
     /// the request.

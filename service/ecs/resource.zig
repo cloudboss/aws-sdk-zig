@@ -22,7 +22,7 @@ pub const Resource = struct {
 
     /// The type of the resource. Valid values: `INTEGER`, `DOUBLE`,
     /// `LONG`, or `STRINGSET`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .double_value = "doubleValue",
@@ -30,6 +30,6 @@ pub const Resource = struct {
         .long_value = "longValue",
         .name = "name",
         .string_set_value = "stringSetValue",
-        .type = "type",
+        .@"type" = "type",
     };
 };

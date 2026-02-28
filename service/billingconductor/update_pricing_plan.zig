@@ -29,14 +29,14 @@ pub const UpdatePricingPlanOutput = struct {
     description: ?[]const u8 = null,
 
     /// The most recent time when the pricing plan was modified.
-    last_modified_time: i64 = 0,
+    last_modified_time: ?i64 = null,
 
     /// The name of the pricing plan. The name must be unique to each pricing plan.
     name: ?[]const u8 = null,
 
     /// The pricing rules count that's currently associated with this pricing plan
     /// list.
-    size: i64 = 0,
+    size: ?i64 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

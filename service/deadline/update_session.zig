@@ -35,7 +35,8 @@ pub const UpdateSessionInput = struct {
     };
 };
 
-pub const UpdateSessionOutput = struct {};
+pub const UpdateSessionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

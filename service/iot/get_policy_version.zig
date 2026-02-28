@@ -25,7 +25,7 @@ pub const GetPolicyVersionOutput = struct {
     generation_id: ?[]const u8 = null,
 
     /// Specifies whether the policy version is the default.
-    is_default_version: bool = false,
+    is_default_version: ?bool = null,
 
     /// The date the policy was last modified.
     last_modified_date: ?i64 = null,

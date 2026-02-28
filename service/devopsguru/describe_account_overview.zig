@@ -33,12 +33,12 @@ pub const DescribeAccountOverviewOutput = struct {
     /// An integer that specifies the number of open proactive insights in your
     /// Amazon Web Services account
     /// that were created during the time range passed in.
-    proactive_insights: i32 = 0,
+    proactive_insights: ?i32 = null,
 
     /// An integer that specifies the number of open reactive insights in your
     /// Amazon Web Services account
     /// that were created during the time range passed in.
-    reactive_insights: i32 = 0,
+    reactive_insights: ?i32 = null,
 
     pub const json_field_names = .{
         .mean_time_to_recover_in_milliseconds = "MeanTimeToRecoverInMilliseconds",

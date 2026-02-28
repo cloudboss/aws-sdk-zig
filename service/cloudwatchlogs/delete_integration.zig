@@ -9,7 +9,7 @@ pub const DeleteIntegrationInput = struct {
     /// dashboards currently exist.
     ///
     /// The default is `false`.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The name of the integration to delete. To find the name of your integration,
     /// use
@@ -22,7 +22,8 @@ pub const DeleteIntegrationInput = struct {
     };
 };
 
-pub const DeleteIntegrationOutput = struct {};
+pub const DeleteIntegrationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

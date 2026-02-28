@@ -13,7 +13,8 @@ pub const DeleteMetricStreamInput = struct {
     };
 };
 
-pub const DeleteMetricStreamOutput = struct {};
+pub const DeleteMetricStreamOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

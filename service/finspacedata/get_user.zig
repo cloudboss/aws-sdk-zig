@@ -34,7 +34,7 @@ pub const GetUserOutput = struct {
 
     /// The timestamp at which the user was created in FinSpace. The value is
     /// determined as epoch time in milliseconds.
-    create_time: i64 = 0,
+    create_time: ?i64 = null,
 
     /// The email address that is associated with the user.
     email_address: ?[]const u8 = null,
@@ -44,19 +44,19 @@ pub const GetUserOutput = struct {
 
     /// Describes the last time the user was deactivated. The value is determined as
     /// epoch time in milliseconds.
-    last_disabled_time: i64 = 0,
+    last_disabled_time: ?i64 = null,
 
     /// Describes the last time the user was activated. The value is determined as
     /// epoch time in milliseconds.
-    last_enabled_time: i64 = 0,
+    last_enabled_time: ?i64 = null,
 
     /// Describes the last time that the user logged into their account. The value
     /// is determined as epoch time in milliseconds.
-    last_login_time: i64 = 0,
+    last_login_time: ?i64 = null,
 
     /// Describes the last time the user details were updated. The value is
     /// determined as epoch time in milliseconds.
-    last_modified_time: i64 = 0,
+    last_modified_time: ?i64 = null,
 
     /// The last name of the user.
     last_name: ?[]const u8 = null,

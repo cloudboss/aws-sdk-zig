@@ -12,7 +12,7 @@ pub const GetHostedConfigurationVersionInput = struct {
     configuration_profile_id: []const u8,
 
     /// The version.
-    version_number: i32,
+    version_number: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",
@@ -51,7 +51,7 @@ pub const GetHostedConfigurationVersionOutput = struct {
     version_label: ?[]const u8 = null,
 
     /// The configuration version.
-    version_number: i32 = 0,
+    version_number: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

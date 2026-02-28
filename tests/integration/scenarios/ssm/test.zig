@@ -71,7 +71,7 @@ test "PutParameter returns version number" {
         .{},
     );
 
-    try std.testing.expect(put_result.version != null);
+    try std.testing.expect(put_result.version > 0);
 
     // Cleanup
     {
@@ -263,7 +263,7 @@ test "PutParameter with SecureString type stores successfully" {
         .{},
     );
 
-    try std.testing.expect(put_result.version != null);
+    try std.testing.expect(put_result.version > 0);
 
     const get_result = try ssm.get_parameter.execute(
         &shared_client,
@@ -345,7 +345,7 @@ test "PutParameter with StringList type stores list value" {
         .{},
     );
 
-    try std.testing.expect(put_result.version != null);
+    try std.testing.expect(put_result.version > 0);
 
     // Cleanup
     {

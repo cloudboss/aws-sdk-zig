@@ -8,7 +8,7 @@ const ProtocolsListData = @import("protocols_list_data.zig").ProtocolsListData;
 pub const GetProtocolsListInput = struct {
     /// Specifies whether the list to retrieve is a default list owned by Firewall
     /// Manager.
-    default_list: bool = false,
+    default_list: ?bool = null,
 
     /// The ID of the Firewall Manager protocols list that you want the details for.
     list_id: []const u8,

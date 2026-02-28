@@ -29,7 +29,7 @@ pub const Certificate = struct {
     /// The function that the registered certificate performs. Valid values include
     /// `ClientLDAPS` or `ClientCertAuth`. The default value is
     /// `ClientLDAPS`.
-    type: ?CertificateType,
+    @"type": ?CertificateType,
 
     pub const json_field_names = .{
         .certificate_id = "CertificateId",
@@ -39,6 +39,6 @@ pub const Certificate = struct {
         .registered_date_time = "RegisteredDateTime",
         .state = "State",
         .state_reason = "StateReason",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

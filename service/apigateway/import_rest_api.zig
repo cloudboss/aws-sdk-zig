@@ -18,7 +18,7 @@ pub const ImportRestApiInput = struct {
     /// A query parameter to indicate whether to rollback the API creation (`true`)
     /// or not (`false`)
     /// when a warning is encountered. The default value is `false`.
-    fail_on_warnings: bool = false,
+    fail_on_warnings: ?bool = null,
 
     /// A key-value map of context-specific query string parameters specifying the
     /// behavior of different API importing operations. The following shows

@@ -24,12 +24,12 @@ pub const ListArtifactsInput = struct {
     /// * LOG
     ///
     /// * SCREENSHOT
-    type: ArtifactCategory,
+    @"type": ArtifactCategory,
 
     pub const json_field_names = .{
         .arn = "arn",
         .next_token = "nextToken",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

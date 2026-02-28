@@ -16,10 +16,10 @@ pub const UpdateDeploymentInput = struct {
     /// actually making the request, and provides an error response. If you have the
     /// required permissions, the error response is `DryRunOperation`. Otherwise, it
     /// is `UnauthorizedOperation`.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// Forces the update even if validation warnings are present.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The settings specified for the deployment. These settings define how to
     /// deploy and configure your resources created by the deployment. For more

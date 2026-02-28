@@ -61,7 +61,7 @@ pub const CreateTapeWithBarcodeInput = struct {
 
     /// Set to `TRUE` if the tape you are creating is to be configured as a
     /// write-once-read-many (WORM) tape.
-    worm: bool = false,
+    worm: ?bool = null,
 
     pub const json_field_names = .{
         .gateway_arn = "GatewayARN",

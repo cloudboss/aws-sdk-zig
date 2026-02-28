@@ -30,7 +30,8 @@ pub const UpdateFieldInput = struct {
     };
 };
 
-pub const UpdateFieldOutput = struct {};
+pub const UpdateFieldOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

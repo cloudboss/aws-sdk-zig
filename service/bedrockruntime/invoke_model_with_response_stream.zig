@@ -64,7 +64,7 @@ pub const InvokeModelWithResponseStreamInput = struct {
     model_id: []const u8,
 
     /// Model performance settings for the request.
-    performance_config_latency: PerformanceConfigLatency = "standard",
+    performance_config_latency: ?PerformanceConfigLatency = null,
 
     /// Specifies the processing tier type used for serving the request.
     service_tier: ?ServiceTierType = null,

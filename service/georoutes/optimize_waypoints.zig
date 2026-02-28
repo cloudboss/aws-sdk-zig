@@ -107,12 +107,12 @@ pub const OptimizeWaypointsOutput = struct {
     connections: ?[]const WaypointOptimizationConnection = null,
 
     /// Overall distance to travel the whole sequence.
-    distance: i64 = 0,
+    distance: ?i64 = null,
 
     /// Overall duration to travel the whole sequence.
     ///
     /// **Unit**: `seconds`
-    duration: i64 = 0,
+    duration: ?i64 = null,
 
     /// Returns waypoints that caused the optimization problem to fail, and the
     /// constraints that were unsatisfied leading to the failure.

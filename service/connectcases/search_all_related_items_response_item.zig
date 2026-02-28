@@ -25,7 +25,7 @@ pub const SearchAllRelatedItemsResponseItem = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// Type of a related item.
-    type: RelatedItemType,
+    @"type": RelatedItemType,
 
     pub const json_field_names = .{
         .association_time = "associationTime",
@@ -34,6 +34,6 @@ pub const SearchAllRelatedItemsResponseItem = struct {
         .performed_by = "performedBy",
         .related_item_id = "relatedItemId",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

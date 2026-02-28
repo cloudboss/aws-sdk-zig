@@ -29,7 +29,8 @@ pub const ResumeContactRecordingInput = struct {
     };
 };
 
-pub const ResumeContactRecordingOutput = struct {};
+pub const ResumeContactRecordingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -52,7 +52,7 @@ pub const AppInstanceUserEndpoint = struct {
     resource_arn: ?[]const u8,
 
     /// The type of the `AppInstanceUserEndpoint`.
-    type: ?AppInstanceUserEndpointType,
+    @"type": ?AppInstanceUserEndpointType,
 
     pub const json_field_names = .{
         .allow_messages = "AllowMessages",
@@ -64,6 +64,6 @@ pub const AppInstanceUserEndpoint = struct {
         .last_updated_timestamp = "LastUpdatedTimestamp",
         .name = "Name",
         .resource_arn = "ResourceArn",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

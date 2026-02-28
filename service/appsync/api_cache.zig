@@ -108,7 +108,7 @@ pub const ApiCache = struct {
     /// * **R4_4XLARGE**: A r4.4xlarge instance type.
     ///
     /// * **R4_8XLARGE**: A r4.8xlarge instance type.
-    type: ?ApiCacheType,
+    @"type": ?ApiCacheType,
 
     pub const json_field_names = .{
         .api_caching_behavior = "apiCachingBehavior",
@@ -117,6 +117,6 @@ pub const ApiCache = struct {
         .status = "status",
         .transit_encryption_enabled = "transitEncryptionEnabled",
         .ttl = "ttl",
-        .type = "type",
+        .@"type" = "type",
     };
 };

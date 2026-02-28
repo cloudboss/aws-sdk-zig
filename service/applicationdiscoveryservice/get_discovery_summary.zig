@@ -8,7 +8,8 @@ const CustomerAgentInfo = @import("customer_agent_info.zig").CustomerAgentInfo;
 const CustomerConnectorInfo = @import("customer_connector_info.zig").CustomerConnectorInfo;
 const CustomerMeCollectorInfo = @import("customer_me_collector_info.zig").CustomerMeCollectorInfo;
 
-pub const GetDiscoverySummaryInput = struct {};
+pub const GetDiscoverySummaryInput = struct {
+};
 
 pub const GetDiscoverySummaryOutput = struct {
     /// Details about Agentless Collector collectors, including status.
@@ -18,7 +19,7 @@ pub const GetDiscoverySummaryOutput = struct {
     agent_summary: ?CustomerAgentInfo = null,
 
     /// The number of applications discovered.
-    applications: i64 = 0,
+    applications: ?i64 = null,
 
     /// Details about discovered connectors, including connector status and health.
     connector_summary: ?CustomerConnectorInfo = null,
@@ -28,13 +29,13 @@ pub const GetDiscoverySummaryOutput = struct {
     me_collector_summary: ?CustomerMeCollectorInfo = null,
 
     /// The number of servers discovered.
-    servers: i64 = 0,
+    servers: ?i64 = null,
 
     /// The number of servers mapped to applications.
-    servers_mapped_to_applications: i64 = 0,
+    servers_mapped_to_applications: ?i64 = null,
 
     /// The number of servers mapped to tags.
-    servers_mappedto_tags: i64 = 0,
+    servers_mappedto_tags: ?i64 = null,
 
     pub const json_field_names = .{
         .agentless_collector_summary = "agentlessCollectorSummary",

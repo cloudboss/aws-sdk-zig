@@ -786,7 +786,7 @@ pub fn deserializeApplicationMetrics(reader: *aws.xml.Reader, alloc: std.mem.All
     var result: ApplicationMetrics = undefined;
     result.duration = null;
     result.latency = null;
-    result.request_count = null;
+    result.request_count = 0;
     result.status_codes = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1343,7 +1343,7 @@ pub fn deserializeEnvironmentResourcesDescription(reader: *aws.xml.Reader, alloc
 pub fn deserializeEnvironmentTier(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EnvironmentTier {
     var result: EnvironmentTier = undefined;
     result.name = null;
-    result.type = null;
+    result.@"type" = null;
     result.version = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1351,7 +1351,7 @@ pub fn deserializeEnvironmentTier(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
                     result.version = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -1549,7 +1549,7 @@ pub fn deserializeLaunchTemplate(reader: *aws.xml.Reader, alloc: std.mem.Allocat
 
 pub fn deserializeListener(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Listener {
     var result: Listener = undefined;
-    result.port = null;
+    result.port = 0;
     result.protocol = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1759,7 +1759,7 @@ pub fn deserializeOptionRestrictionRegex(reader: *aws.xml.Reader, alloc: std.mem
 pub fn deserializePlatformBranchSummary(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PlatformBranchSummary {
     var result: PlatformBranchSummary = undefined;
     result.branch_name = null;
-    result.branch_order = null;
+    result.branch_order = 0;
     result.lifecycle_state = null;
     result.platform_name = null;
     result.supported_tier_list = null;
@@ -2541,7 +2541,7 @@ pub fn serializeEnvironmentTier(alloc: std.mem.Allocator, buf: *std.ArrayList(u8
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Name>");
     }
-    if (value.type) |v| {
+    if (value.@"type") |v| {
         try buf.appendSlice(alloc, "<Type>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Type>");
@@ -2615,7 +2615,7 @@ pub fn serializePlatformFilter(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Operator>");
     }
-    if (value.type) |v| {
+    if (value.@"type") |v| {
         try buf.appendSlice(alloc, "<Type>");
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</Type>");
@@ -2695,3 +2695,4 @@ pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ta
         try buf.appendSlice(alloc, "</Value>");
     }
 }
+

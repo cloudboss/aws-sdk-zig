@@ -12,12 +12,12 @@ pub const BatchGetSchemaAnalysisRuleError = struct {
     name: []const u8,
 
     /// The analysis rule type.
-    type: AnalysisRuleType,
+    @"type": AnalysisRuleType,
 
     pub const json_field_names = .{
         .code = "code",
         .message = "message",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

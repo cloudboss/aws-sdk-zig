@@ -20,7 +20,8 @@ pub const PutManagedScalingPolicyInput = struct {
     };
 };
 
-pub const PutManagedScalingPolicyOutput = struct {};
+pub const PutManagedScalingPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

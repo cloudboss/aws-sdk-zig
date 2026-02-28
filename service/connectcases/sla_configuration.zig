@@ -24,7 +24,7 @@ pub const SlaConfiguration = struct {
     target_time: i64,
 
     /// Type of SLA.
-    type: SlaType,
+    @"type": SlaType,
 
     pub const json_field_names = .{
         .completion_time = "completionTime",
@@ -33,6 +33,6 @@ pub const SlaConfiguration = struct {
         .status = "status",
         .target_field_values = "targetFieldValues",
         .target_time = "targetTime",
-        .type = "type",
+        .@"type" = "type",
     };
 };

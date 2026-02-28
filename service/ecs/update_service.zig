@@ -140,7 +140,7 @@ pub const UpdateServiceInput = struct {
     /// newer Docker
     /// image with the same image/tag combination (`my_image:latest`) or to roll
     /// Fargate tasks onto a newer platform version.
-    force_new_deployment: bool = false,
+    force_new_deployment: ?bool = null,
 
     /// The period of time, in seconds, that the Amazon ECS service scheduler
     /// ignores

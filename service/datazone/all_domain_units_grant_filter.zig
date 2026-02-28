@@ -1,2 +1,3 @@
 /// The grant filter for all domain units.
-pub const AllDomainUnitsGrantFilter = struct {};
+pub const AllDomainUnitsGrantFilter = struct {
+};

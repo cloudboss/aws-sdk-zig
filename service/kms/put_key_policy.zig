@@ -20,7 +20,7 @@ pub const PutKeyPolicyInput = struct {
     /// request from making a subsequent
     /// [PutKeyPolicy](https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html)
     /// request on the KMS key.
-    bypass_policy_lockout_safety_check: bool = false,
+    bypass_policy_lockout_safety_check: ?bool = null,
 
     /// Sets the key policy on the specified KMS key.
     ///

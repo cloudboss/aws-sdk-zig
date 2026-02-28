@@ -54,7 +54,7 @@ pub const GetUnfilteredPartitionMetadataOutput = struct {
 
     /// A Boolean value that indicates whether the partition location is registered
     /// with Lake Formation.
-    is_registered_with_lake_formation: bool = false,
+    is_registered_with_lake_formation: ?bool = null,
 
     /// A Partition object containing the partition metadata.
     partition: ?Partition = null,

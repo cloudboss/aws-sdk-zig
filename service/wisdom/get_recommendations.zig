@@ -25,7 +25,7 @@ pub const GetRecommendationsInput = struct {
     /// `WaitTimeSeconds`. If no messages are available and the wait time expires,
     /// the
     /// call returns successfully with an empty list.
-    wait_time_seconds: i32 = 0,
+    wait_time_seconds: ?i32 = null,
 
     pub const json_field_names = .{
         .assistant_id = "assistantId",

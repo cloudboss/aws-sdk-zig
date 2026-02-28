@@ -17,7 +17,7 @@ pub const DeleteAgentActionGroupInput = struct {
     /// By default, this value is `false` and deletion is stopped if the resource is
     /// in use. If you set it to `true`, the resource will be deleted even if the
     /// resource is in use.
-    skip_resource_in_use_check: bool = false,
+    skip_resource_in_use_check: ?bool = null,
 
     pub const json_field_names = .{
         .action_group_id = "actionGroupId",
@@ -27,7 +27,8 @@ pub const DeleteAgentActionGroupInput = struct {
     };
 };
 
-pub const DeleteAgentActionGroupOutput = struct {};
+pub const DeleteAgentActionGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

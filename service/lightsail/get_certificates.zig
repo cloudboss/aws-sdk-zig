@@ -31,7 +31,7 @@ pub const GetCertificatesInput = struct {
     /// When omitted, the response includes only the certificate names, Amazon
     /// Resource Names
     /// (ARNs), domain names, and tags.
-    include_certificate_details: bool = false,
+    include_certificate_details: ?bool = null,
 
     /// The token to advance to the next page of results from your request.
     ///

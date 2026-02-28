@@ -91,7 +91,8 @@ pub const ContinueUpdateRollbackInput = struct {
     stack_name: []const u8,
 };
 
-pub const ContinueUpdateRollbackOutput = struct {};
+pub const ContinueUpdateRollbackOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

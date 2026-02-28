@@ -8,7 +8,7 @@ const PropertygraphSummaryValueMap = @import("propertygraph_summary_value_map.zi
 
 pub const GetPropertygraphSummaryInput = struct {
     /// Mode can take one of two values: `BASIC` (the default), and `DETAILED`.
-    mode: GraphSummaryType = "basic",
+    mode: ?GraphSummaryType = null,
 
     pub const json_field_names = .{
         .mode = "mode",

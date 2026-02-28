@@ -18,7 +18,7 @@ pub const DeleteJobInput = struct {
     /// Use caution and ensure that each device executing a job which is deleted is
     /// able to
     /// recover to a valid state.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The ID of the job to be deleted.
     ///

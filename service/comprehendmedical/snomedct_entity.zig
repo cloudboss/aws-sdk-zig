@@ -47,7 +47,7 @@ pub const SNOMEDCTEntity = struct {
     /// Describes the specific type of entity with category of entities. Possible
     /// types include DX_NAME, ACUITY, DIRECTION, SYSTEM_ORGAN_SITE, TEST_NAME,
     /// TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, or TREATMENT_NAME.
-    type: ?SNOMEDCTEntityType,
+    @"type": ?SNOMEDCTEntityType,
 
     pub const json_field_names = .{
         .attributes = "Attributes",
@@ -59,6 +59,6 @@ pub const SNOMEDCTEntity = struct {
         .snomedct_concepts = "SNOMEDCTConcepts",
         .text = "Text",
         .traits = "Traits",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

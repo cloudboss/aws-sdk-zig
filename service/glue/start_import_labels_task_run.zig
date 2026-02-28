@@ -10,7 +10,7 @@ pub const StartImportLabelsTaskRunInput = struct {
     input_s3_path: []const u8,
 
     /// Indicates whether to overwrite your existing labels.
-    replace_all_labels: bool = false,
+    replace_all_labels: ?bool = null,
 
     /// The unique identifier of the machine learning transform.
     transform_id: []const u8,

@@ -50,7 +50,7 @@ pub const CreateBucketInput = struct {
     /// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    object_lock_enabled_for_bucket: bool = false,
+    object_lock_enabled_for_bucket: ?bool = null,
 
     /// The ID of the Outposts where the bucket is being created.
     ///

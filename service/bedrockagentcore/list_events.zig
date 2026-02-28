@@ -15,11 +15,11 @@ pub const ListEventsInput = struct {
 
     /// Specifies whether to include event payloads in the response. Set to true to
     /// include payloads, or false to exclude them.
-    include_payloads: bool = true,
+    include_payloads: ?bool = null,
 
     /// The maximum number of results to return in a single call. The default value
     /// is 20.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The identifier of the AgentCore Memory resource for which to list events.
     memory_id: []const u8,

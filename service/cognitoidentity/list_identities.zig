@@ -10,7 +10,7 @@ pub const ListIdentitiesInput = struct {
     /// If
     /// omitted, the ListIdentities API will include disabled identities in the
     /// response.
-    hide_disabled: bool = false,
+    hide_disabled: ?bool = null,
 
     /// An identity pool ID in the format REGION:GUID.
     identity_pool_id: []const u8,

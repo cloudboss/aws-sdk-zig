@@ -1221,7 +1221,7 @@ pub fn deserializeDelegationRequest(reader: *aws.xml.Reader, alloc: std.mem.Allo
     result.description = null;
     result.expiration_time = null;
     result.notes = null;
-    result.only_send_by_owner = null;
+    result.only_send_by_owner = false;
     result.owner_account_id = null;
     result.owner_id = null;
     result.permission_policy = null;
@@ -1538,7 +1538,7 @@ pub fn deserializeListPoliciesGrantingServiceAccessEntry(reader: *aws.xml.Reader
 
 pub fn deserializeLoginProfile(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LoginProfile {
     var result: LoginProfile = undefined;
-    result.password_reset_required = null;
+    result.password_reset_required = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1588,7 +1588,7 @@ pub fn deserializeManagedPolicyDetail(reader: *aws.xml.Reader, alloc: std.mem.Al
     result.create_date = null;
     result.default_version_id = null;
     result.description = null;
-    result.is_attachable = null;
+    result.is_attachable = false;
     result.path = null;
     result.permissions_boundary_usage_count = null;
     result.policy_id = null;
@@ -1655,7 +1655,7 @@ pub fn deserializeOpenIDConnectProviderListEntry(reader: *aws.xml.Reader, alloc:
 pub fn deserializeOrganizationsDecisionDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !OrganizationsDecisionDetail {
     _ = alloc;
     var result: OrganizationsDecisionDetail = undefined;
-    result.allowed_by_organizations = null;
+    result.allowed_by_organizations = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1675,16 +1675,16 @@ pub fn deserializeOrganizationsDecisionDetail(reader: *aws.xml.Reader, alloc: st
 pub fn deserializePasswordPolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PasswordPolicy {
     _ = alloc;
     var result: PasswordPolicy = undefined;
-    result.allow_users_to_change_password = null;
-    result.expire_passwords = null;
+    result.allow_users_to_change_password = false;
+    result.expire_passwords = false;
     result.hard_expiry = null;
     result.max_password_age = null;
     result.minimum_password_length = null;
     result.password_reuse_prevention = null;
-    result.require_lowercase_characters = null;
-    result.require_numbers = null;
-    result.require_symbols = null;
-    result.require_uppercase_characters = null;
+    result.require_lowercase_characters = false;
+    result.require_numbers = false;
+    result.require_symbols = false;
+    result.require_uppercase_characters = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1722,7 +1722,7 @@ pub fn deserializePasswordPolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocat
 pub fn deserializePermissionsBoundaryDecisionDetail(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PermissionsBoundaryDecisionDetail {
     _ = alloc;
     var result: PermissionsBoundaryDecisionDetail = undefined;
-    result.allowed_by_permissions_boundary = null;
+    result.allowed_by_permissions_boundary = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1746,7 +1746,7 @@ pub fn deserializePolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Pol
     result.create_date = null;
     result.default_version_id = null;
     result.description = null;
-    result.is_attachable = null;
+    result.is_attachable = false;
     result.path = null;
     result.permissions_boundary_usage_count = null;
     result.policy_id = null;
@@ -1937,7 +1937,7 @@ pub fn deserializePolicyVersion(reader: *aws.xml.Reader, alloc: std.mem.Allocato
     var result: PolicyVersion = undefined;
     result.create_date = null;
     result.document = null;
-    result.is_default_version = null;
+    result.is_default_version = false;
     result.version_id = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1964,8 +1964,8 @@ pub fn deserializePolicyVersion(reader: *aws.xml.Reader, alloc: std.mem.Allocato
 pub fn deserializePosition(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Position {
     _ = alloc;
     var result: Position = undefined;
-    result.column = null;
-    result.line = null;
+    result.column = 0;
+    result.line = 0;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2352,8 +2352,8 @@ pub fn deserializeServiceSpecificCredential(reader: *aws.xml.Reader, alloc: std.
     result.expiration_date = null;
     result.service_credential_alias = null;
     result.service_credential_secret = null;
-    result.service_password = null;
-    result.service_user_name = null;
+    result.service_password = "";
+    result.service_user_name = "";
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2392,7 +2392,7 @@ pub fn deserializeServiceSpecificCredentialMetadata(reader: *aws.xml.Reader, all
     var result: ServiceSpecificCredentialMetadata = undefined;
     result.expiration_date = null;
     result.service_credential_alias = null;
-    result.service_user_name = null;
+    result.service_user_name = "";
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {

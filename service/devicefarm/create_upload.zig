@@ -86,13 +86,13 @@ pub const CreateUploadInput = struct {
     ///
     /// If you call `CreateUpload` with `WEB_APP` specified, AWS
     /// Device Farm throws an `ArgumentException` error.
-    type: UploadType,
+    @"type": UploadType,
 
     pub const json_field_names = .{
         .content_type = "contentType",
         .name = "name",
         .project_arn = "projectArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

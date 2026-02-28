@@ -7,7 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const CreateGroupInput = struct {
     /// If this parameter is enabled, the group will be hidden from the address
     /// book.
-    hidden_from_global_address_list: bool = false,
+    hidden_from_global_address_list: ?bool = null,
 
     /// The name of the group.
     name: []const u8,

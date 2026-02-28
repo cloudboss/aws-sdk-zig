@@ -27,7 +27,7 @@ pub const GetTemplateOutput = struct {
     created_time: ?i64 = null,
 
     /// Denotes whether or not the resource has been deleted.
-    deleted: bool = false,
+    deleted: ?bool = null,
 
     /// A brief description of the template.
     description: ?[]const u8 = null,

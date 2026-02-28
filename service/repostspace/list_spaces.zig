@@ -7,7 +7,7 @@ const SpaceData = @import("space_data.zig").SpaceData;
 
 pub const ListSpacesInput = struct {
     /// The maximum number of private re:Posts to include in the results.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The token for the next set of private re:Posts to return. You receive this
     /// token from a previous ListSpaces operation.

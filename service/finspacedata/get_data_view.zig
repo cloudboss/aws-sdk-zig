@@ -27,12 +27,12 @@ pub const GetDataViewOutput = struct {
     as_of_timestamp: ?i64 = null,
 
     /// Flag to indicate Dataview should be updated automatically.
-    auto_update: bool = false,
+    auto_update: ?bool = null,
 
     /// The timestamp at which the Dataview was created in FinSpace. The value is
     /// determined as epoch time in milliseconds. For example, the value for Monday,
     /// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
-    create_time: i64 = 0,
+    create_time: ?i64 = null,
 
     /// The unique identifier for the Dataset used in the Dataview.
     dataset_id: ?[]const u8 = null,
@@ -52,7 +52,7 @@ pub const GetDataViewOutput = struct {
     /// The last time that a Dataview was modified. The value is determined as epoch
     /// time in milliseconds. For example, the value for Monday, November 1, 2021
     /// 12:00:00 PM UTC is specified as 1635768000000.
-    last_modified_time: i64 = 0,
+    last_modified_time: ?i64 = null,
 
     /// Ordered set of column names used to partition data.
     partition_columns: ?[]const []const u8 = null,

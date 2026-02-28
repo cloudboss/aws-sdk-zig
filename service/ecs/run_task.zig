@@ -61,7 +61,7 @@ pub const RunTaskInput = struct {
     /// see [Tagging Your Amazon ECS
     /// Resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    enable_ecs_managed_tags: bool = false,
+    enable_ecs_managed_tags: ?bool = null,
 
     /// Determines whether to use the execute command functionality for the
     /// containers in this
@@ -71,7 +71,7 @@ pub const RunTaskInput = struct {
     ///
     /// If `true`, then the task definition must have a task role, or you must
     /// provide one as an override.
-    enable_execute_command: bool = false,
+    enable_execute_command: ?bool = null,
 
     /// The name of the task group to associate with the task. The default value is
     /// the family

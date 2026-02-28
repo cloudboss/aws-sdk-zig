@@ -9,7 +9,7 @@ const ImageVersion = @import("image_version.zig").ImageVersion;
 
 pub const ListImagesInput = struct {
     /// Requests a list of images with a specific recipe name.
-    by_name: bool = false,
+    by_name: ?bool = null,
 
     /// Use the following filters to streamline results:
     ///

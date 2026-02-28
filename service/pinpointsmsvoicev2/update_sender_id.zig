@@ -27,7 +27,7 @@ pub const UpdateSenderIdInput = struct {
 pub const UpdateSenderIdOutput = struct {
     /// By default this is set to false. When set to true the sender ID can't be
     /// deleted.
-    deletion_protection_enabled: bool = false,
+    deletion_protection_enabled: ?bool = null,
 
     /// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
     /// region.
@@ -42,7 +42,7 @@ pub const UpdateSenderIdOutput = struct {
     monthly_leasing_price: []const u8,
 
     /// True if the sender ID is registered..
-    registered: bool = false,
+    registered: ?bool = null,
 
     /// The unique identifier for the registration.
     registration_id: ?[]const u8 = null,

@@ -19,7 +19,7 @@ pub const DeleteBotAliasInput = struct {
     /// being used by another resource. Set this parameter to `true`
     /// to skip this check and remove the alias even if it is being used by
     /// another resource.
-    skip_resource_in_use_check: bool = false,
+    skip_resource_in_use_check: ?bool = null,
 
     pub const json_field_names = .{
         .bot_alias_id = "botAliasId",

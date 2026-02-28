@@ -13,7 +13,8 @@ pub const DeleteServiceLevelObjectiveInput = struct {
     };
 };
 
-pub const DeleteServiceLevelObjectiveOutput = struct {};
+pub const DeleteServiceLevelObjectiveOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

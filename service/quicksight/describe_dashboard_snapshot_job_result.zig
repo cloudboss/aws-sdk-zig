@@ -54,7 +54,7 @@ pub const DescribeDashboardSnapshotJobResultOutput = struct {
     result: ?SnapshotJobResult = null,
 
     /// The HTTP status of the request
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

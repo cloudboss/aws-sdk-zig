@@ -41,7 +41,8 @@ pub const SetTaskStatusInput = struct {
     };
 };
 
-pub const SetTaskStatusOutput = struct {};
+pub const SetTaskStatusOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

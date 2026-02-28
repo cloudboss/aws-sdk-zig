@@ -6,7 +6,7 @@ pub const AggregatorFilterServicePrincipal = struct {
     /// The type of service principal filter to apply. `INCLUDE` specifies that the
     /// list of service principals in the `Value` field will be aggregated and no
     /// other service principals will be filtered.
-    type: ?AggregatorFilterType,
+    @"type": ?AggregatorFilterType,
 
     /// Comma-separated list of service principals for the linked Amazon Web
     /// Services services to filter your aggregated service-linked configuration
@@ -14,7 +14,7 @@ pub const AggregatorFilterServicePrincipal = struct {
     value: ?[]const []const u8,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

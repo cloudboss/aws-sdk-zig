@@ -148,7 +148,8 @@ pub const UpdateLocationSmbInput = struct {
     };
 };
 
-pub const UpdateLocationSmbOutput = struct {};
+pub const UpdateLocationSmbOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -1067,7 +1067,7 @@ pub fn deserializeHostedZone(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
 pub fn deserializeHostedZoneConfig(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !HostedZoneConfig {
     var result: HostedZoneConfig = undefined;
     result.comment = null;
-    result.private_zone = null;
+    result.private_zone = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1196,18 +1196,18 @@ pub fn deserializeKeySigningKey(reader: *aws.xml.Reader, alloc: std.mem.Allocato
     var result: KeySigningKey = undefined;
     result.created_date = null;
     result.digest_algorithm_mnemonic = null;
-    result.digest_algorithm_type = null;
+    result.digest_algorithm_type = 0;
     result.digest_value = null;
     result.dnskey_record = null;
     result.ds_record = null;
-    result.flag = null;
-    result.key_tag = null;
+    result.flag = 0;
+    result.key_tag = 0;
     result.kms_arn = null;
     result.last_modified_date = null;
     result.name = null;
     result.public_key = null;
     result.signing_algorithm_mnemonic = null;
-    result.signing_algorithm_type = null;
+    result.signing_algorithm_type = 0;
     result.status = null;
     result.status_message = null;
     while (try reader.next()) |event| {

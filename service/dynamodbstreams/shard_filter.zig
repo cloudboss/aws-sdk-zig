@@ -11,10 +11,10 @@ pub const ShardFilter = struct {
 
     /// Contains the type of filter to be applied on the `DescribeStream` API.
     /// Currently, the only value this parameter accepts is `CHILD_SHARDS`.
-    type: ?ShardFilterType,
+    @"type": ?ShardFilterType,
 
     pub const json_field_names = .{
         .shard_id = "ShardId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

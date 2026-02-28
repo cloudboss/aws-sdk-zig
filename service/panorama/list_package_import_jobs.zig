@@ -7,7 +7,7 @@ const PackageImportJob = @import("package_import_job.zig").PackageImportJob;
 
 pub const ListPackageImportJobsInput = struct {
     /// The maximum number of package import jobs to return in one page of results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Specify the pagination token from a previous request to retrieve the next
     /// page of results.

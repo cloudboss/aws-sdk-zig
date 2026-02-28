@@ -10,7 +10,7 @@ pub const SelectResourceConfigInput = struct {
     expression: []const u8,
 
     /// The maximum number of query results returned on each page.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned in a previous request that you use to
     /// request the next page of results in a paginated response.

@@ -6,5 +6,5 @@ pub const Authentication = struct {
     password_count: ?i32,
 
     /// Indicates whether the user requires a password to authenticate.
-    type: ?AuthenticationType,
+    @"type": ?AuthenticationType,
 };

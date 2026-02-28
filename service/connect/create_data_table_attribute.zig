@@ -34,7 +34,7 @@ pub const CreateDataTableAttributeInput = struct {
     /// Optional boolean that defaults to false. Determines if the value is used to
     /// identify a record in the table.
     /// Values for primary attributes must not be expressions.
-    primary: bool = false,
+    primary: ?bool = null,
 
     /// Optional validation rules for the attribute. Borrows heavily from JSON
     /// Schema - Draft 2020-12. The maximum

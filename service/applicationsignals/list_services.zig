@@ -18,11 +18,11 @@ pub const ListServicesInput = struct {
 
     /// If you are using this operation in a monitoring account, specify `true` to
     /// include services from source accounts in the returned data.
-    include_linked_accounts: bool = false,
+    include_linked_accounts: ?bool = null,
 
     /// The maximum number of results to return in one operation. If you omit this
     /// parameter, the default of 50 is used.
-    max_results: i32 = 50,
+    max_results: ?i32 = null,
 
     /// Include this value, if it was returned by the previous operation, to get the
     /// next set of services.

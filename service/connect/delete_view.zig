@@ -19,7 +19,8 @@ pub const DeleteViewInput = struct {
     };
 };
 
-pub const DeleteViewOutput = struct {};
+pub const DeleteViewOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

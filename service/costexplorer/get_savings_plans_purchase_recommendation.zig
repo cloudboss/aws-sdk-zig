@@ -46,7 +46,7 @@ pub const GetSavingsPlansPurchaseRecommendationInput = struct {
 
     /// The number of recommendations that you want returned in a single response
     /// object.
-    page_size: i32 = 0,
+    page_size: ?i32 = null,
 
     /// The payment option that's used to generate these recommendations.
     payment_option: PaymentOption,

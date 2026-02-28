@@ -21,7 +21,7 @@ pub const SearchWorkersInput = struct {
     item_offset: i32,
 
     /// Specifies the number of results to return.
-    page_size: i32 = 100,
+    page_size: ?i32 = null,
 
     /// The search terms for a resource.
     sort_expressions: ?[]const SearchSortExpression = null,

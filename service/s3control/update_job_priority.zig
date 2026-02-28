@@ -13,7 +13,7 @@ pub const UpdateJobPriorityInput = struct {
     job_id: []const u8,
 
     /// The priority you want to assign to this job.
-    priority: i32 = 0,
+    priority: ?i32 = null,
 };
 
 pub const UpdateJobPriorityOutput = struct {
@@ -21,7 +21,7 @@ pub const UpdateJobPriorityOutput = struct {
     job_id: []const u8,
 
     /// The new priority assigned to the specified job.
-    priority: i32 = 0,
+    priority: ?i32 = null,
 };
 
 pub const Options = struct {

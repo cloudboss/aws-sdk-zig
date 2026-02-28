@@ -15,7 +15,7 @@ pub const GetWorkflowExecutionHistoryInput = struct {
 
     /// The maximum number of results that are returned per call.
     /// Use `nextPageToken` to obtain further pages of results.
-    maximum_page_size: i32 = 0,
+    maximum_page_size: ?i32 = null,
 
     /// If `NextPageToken` is returned there are more results
     /// available. The value of `NextPageToken` is a unique pagination token for
@@ -33,7 +33,7 @@ pub const GetWorkflowExecutionHistoryInput = struct {
     /// When set to `true`, returns the events in reverse order. By default the
     /// results are returned in ascending order of the `eventTimeStamp` of the
     /// events.
-    reverse_order: bool = false,
+    reverse_order: ?bool = null,
 
     pub const json_field_names = .{
         .domain = "domain",

@@ -17,7 +17,7 @@ pub const ListApplicationAccessScopesInput = struct {
     /// return fewer results than the maximum even when there are more results
     /// available. You should check `NextToken` after every operation to ensure that
     /// you receive all of the results.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// Specifies that you want to receive the next page of results. Valid only if
     /// you received a `NextToken` response in the previous request. If you did, it

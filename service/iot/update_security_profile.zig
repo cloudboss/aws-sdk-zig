@@ -38,20 +38,20 @@ pub const UpdateSecurityProfileInput = struct {
     /// security profile. If any `additionalMetricsToRetain` are defined in the
     /// current
     /// invocation, an exception occurs.
-    delete_additional_metrics_to_retain: bool = false,
+    delete_additional_metrics_to_retain: ?bool = null,
 
     /// If true, delete all `alertTargets` defined for this security profile.
     /// If any `alertTargets` are defined in the current invocation, an exception
     /// occurs.
-    delete_alert_targets: bool = false,
+    delete_alert_targets: ?bool = null,
 
     /// If true, delete all `behaviors` defined for this security profile.
     /// If any `behaviors` are defined in the current invocation, an exception
     /// occurs.
-    delete_behaviors: bool = false,
+    delete_behaviors: ?bool = null,
 
     /// Set the value as true to delete metrics export related configurations.
-    delete_metrics_export_config: bool = false,
+    delete_metrics_export_config: ?bool = null,
 
     /// The expected version of the security profile. A new version is generated
     /// whenever
@@ -129,7 +129,7 @@ pub const UpdateSecurityProfileOutput = struct {
     security_profile_name: ?[]const u8 = null,
 
     /// The updated version of the security profile.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .additional_metrics_to_retain = "additionalMetricsToRetain",

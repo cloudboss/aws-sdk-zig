@@ -7,7 +7,7 @@ const Reservation = @import("reservation.zig").Reservation;
 
 pub const CreateReservationInput = struct {
     /// The number of Redshift Processing Units (RPUs) to reserve.
-    capacity: i32 = 0,
+    capacity: ?i32 = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the request. If not provided, the Amazon Web Services SDK

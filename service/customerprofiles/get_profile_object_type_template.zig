@@ -25,7 +25,7 @@ pub const GetProfileObjectTypeTemplateOutput = struct {
     /// associate this object with the profile. If it is set to `TRUE`, and if no
     /// match
     /// is found, then the service creates a new standard profile.
-    allow_profile_creation: bool = false,
+    allow_profile_creation: ?bool = null,
 
     /// A map of the name and ObjectType field.
     fields: ?[]const aws.map.MapEntry(ObjectTypeField) = null,

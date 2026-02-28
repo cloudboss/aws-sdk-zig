@@ -23,7 +23,7 @@ pub const PutOptedOutNumberInput = struct {
 pub const PutOptedOutNumberOutput = struct {
     /// This is true if it was the end user who requested their phone number be
     /// removed.
-    end_user_opted_out: bool = false,
+    end_user_opted_out: ?bool = null,
 
     /// The phone number that was added to the OptOutList.
     opted_out_number: ?[]const u8 = null,

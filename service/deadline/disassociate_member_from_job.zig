@@ -25,7 +25,8 @@ pub const DisassociateMemberFromJobInput = struct {
     };
 };
 
-pub const DisassociateMemberFromJobOutput = struct {};
+pub const DisassociateMemberFromJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

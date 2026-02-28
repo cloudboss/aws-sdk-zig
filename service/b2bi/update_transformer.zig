@@ -84,7 +84,7 @@ pub const UpdateTransformerOutput = struct {
 
     /// Returns that the currently supported file formats for EDI transformations
     /// are `JSON` and `XML`.
-    file_format: FileFormat = "NOT_USED",
+    file_format: ?FileFormat = null,
 
     /// Returns the `InputConversion` object, which contains the format options for
     /// the inbound transformation.
@@ -96,7 +96,7 @@ pub const UpdateTransformerOutput = struct {
 
     /// Returns the mapping template for the transformer. This template is used to
     /// map the parsed EDI file using JSONata or XSLT.
-    mapping_template: []const u8 = "NOT_USED",
+    mapping_template: ?[]const u8 = null,
 
     /// Returns a timestamp for last time the transformer was modified.
     modified_at: i64,

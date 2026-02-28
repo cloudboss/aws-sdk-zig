@@ -23,7 +23,7 @@ pub const UpdateStateMachineInput = struct {
     /// Specifies whether the state machine version is published. The default is
     /// `false`. To publish a version after updating the state machine, set
     /// `publish` to `true`.
-    publish: bool = false,
+    publish: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role of the state machine.
     role_arn: ?[]const u8 = null,

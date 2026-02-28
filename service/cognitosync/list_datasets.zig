@@ -36,7 +36,7 @@ pub const ListDatasetsInput = struct {
 
 pub const ListDatasetsOutput = struct {
     /// Number of datasets returned.
-    count: i32 = 0,
+    count: ?i32 = null,
 
     /// A set of datasets.
     datasets: ?[]const Dataset = null,

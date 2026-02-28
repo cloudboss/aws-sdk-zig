@@ -18,17 +18,17 @@ pub const CreateDNSViewInput = struct {
     /// Whether to enable DNSSEC validation for DNS queries in this DNS view. When
     /// enabled, the resolver verifies the authenticity and integrity of DNS
     /// responses from public name servers for DNSSEC-signed domains.
-    dnssec_validation: DnsSecValidationType = "DISABLED",
+    dnssec_validation: ?DnsSecValidationType = null,
 
     /// Whether to enable EDNS Client Subnet injection for DNS queries in this DNS
     /// view. When enabled, client subnet information is forwarded to provide more
     /// accurate geographic-based DNS responses.
-    edns_client_subnet: EdnsClientSubnetType = "DISABLED",
+    edns_client_subnet: ?EdnsClientSubnetType = null,
 
     /// Determines the behavior when Route 53 Global Resolver cannot apply DNS
     /// firewall rules due to service impairment. When enabled, DNS queries are
     /// allowed through; when disabled, queries are blocked.
-    firewall_rules_fail_open: FirewallRulesFailOpenType = "DISABLED",
+    firewall_rules_fail_open: ?FirewallRulesFailOpenType = null,
 
     /// The ID of the Route 53 Global Resolver to associate with this DNS view.
     global_resolver_id: []const u8,

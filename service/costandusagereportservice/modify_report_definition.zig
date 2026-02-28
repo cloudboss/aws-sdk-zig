@@ -16,7 +16,8 @@ pub const ModifyReportDefinitionInput = struct {
     };
 };
 
-pub const ModifyReportDefinitionOutput = struct {};
+pub const ModifyReportDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

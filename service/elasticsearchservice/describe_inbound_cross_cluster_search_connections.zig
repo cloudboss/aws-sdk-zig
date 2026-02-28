@@ -24,7 +24,7 @@ pub const DescribeInboundCrossClusterSearchConnectionsInput = struct {
 
     /// Set this value to limit the number of results returned. If not specified,
     /// defaults to 100.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// NextToken is sent in case the earlier API call results contain the
     /// NextToken. It is used for pagination.

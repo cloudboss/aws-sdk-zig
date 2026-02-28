@@ -49,7 +49,7 @@ pub const DescribeThingOutput = struct {
     /// pass
     /// the version information in the `expectedVersion` parameter of the
     /// `UpdateThing` and `DeleteThing` calls.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .attributes = "attributes",

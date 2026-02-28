@@ -22,7 +22,7 @@ pub const ReplicateKeyInput = struct {
     /// request from making a subsequent
     /// [PutKeyPolicy](https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html)
     /// request on the KMS key.
-    bypass_policy_lockout_safety_check: bool = false,
+    bypass_policy_lockout_safety_check: ?bool = null,
 
     /// A description of the KMS key. The default value is an empty string (no
     /// description).

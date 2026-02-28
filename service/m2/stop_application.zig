@@ -13,7 +13,7 @@ pub const StopApplicationInput = struct {
     /// lets you force stop the application so you don't need to wait until the
     /// process finishes to
     /// apply another action on the application. The default value is false.
-    force_stop: bool = false,
+    force_stop: ?bool = null,
 
     pub const json_field_names = .{
         .application_id = "applicationId",

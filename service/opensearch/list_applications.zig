@@ -7,7 +7,7 @@ const ApplicationStatus = @import("application_status.zig").ApplicationStatus;
 const ApplicationSummary = @import("application_summary.zig").ApplicationSummary;
 
 pub const ListApplicationsInput = struct {
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     next_token: ?[]const u8 = null,
 

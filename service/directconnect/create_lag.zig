@@ -32,7 +32,7 @@ pub const CreateLagInput = struct {
     /// You can have a maximum of four connections when the port speed is 1Gbps or
     /// 10Gbps, or two when
     /// the port speed is 100Gbps or 400Gbps.
-    number_of_connections: i32 = 0,
+    number_of_connections: ?i32 = null,
 
     /// The name of the service provider associated with the LAG.
     provider_name: ?[]const u8 = null,

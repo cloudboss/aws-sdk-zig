@@ -32,7 +32,7 @@ pub const UpdateDevEnvironmentInput = struct {
     ///
     /// Changing this value will cause a restart of the Dev Environment if it is
     /// running.
-    inactivity_timeout_minutes: i32 = 0,
+    inactivity_timeout_minutes: ?i32 = null,
 
     /// The Amazon EC2 instace type to use for the Dev Environment.
     ///
@@ -78,7 +78,7 @@ pub const UpdateDevEnvironmentOutput = struct {
 
     /// The amount of time the Dev Environment will run without any activity
     /// detected before stopping, in minutes.
-    inactivity_timeout_minutes: i32 = 0,
+    inactivity_timeout_minutes: ?i32 = null,
 
     /// The Amazon EC2 instace type to use for the Dev Environment.
     instance_type: ?InstanceType = null,

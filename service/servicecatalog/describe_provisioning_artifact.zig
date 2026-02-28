@@ -17,7 +17,7 @@ pub const DescribeProvisioningArtifactInput = struct {
 
     /// Indicates if the API call response does or does not include additional
     /// details about the provisioning parameters.
-    include_provisioning_artifact_parameters: bool = false,
+    include_provisioning_artifact_parameters: ?bool = null,
 
     /// The product identifier.
     product_id: ?[]const u8 = null,
@@ -32,7 +32,7 @@ pub const DescribeProvisioningArtifactInput = struct {
     provisioning_artifact_name: ?[]const u8 = null,
 
     /// Indicates whether a verbose level of detail is enabled.
-    verbose: bool = false,
+    verbose: ?bool = null,
 
     pub const json_field_names = .{
         .accept_language = "AcceptLanguage",

@@ -16,7 +16,7 @@ pub const PutProfileObjectTypeInput = struct {
     /// associate this object with the profile. If it is set to `TRUE`, and if no
     /// match
     /// is found, then the service creates a new standard profile.
-    allow_profile_creation: bool = false,
+    allow_profile_creation: ?bool = null,
 
     /// Description of the profile object type.
     description: []const u8,
@@ -88,7 +88,7 @@ pub const PutProfileObjectTypeOutput = struct {
     /// associate this object with the profile. If it is set to `TRUE`, and if no
     /// match
     /// is found, then the service creates a new standard profile.
-    allow_profile_creation: bool = false,
+    allow_profile_creation: ?bool = null,
 
     /// The timestamp of when the domain was created.
     created_at: ?i64 = null,

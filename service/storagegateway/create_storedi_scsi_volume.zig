@@ -40,7 +40,7 @@ pub const CreateStorediSCSIVolumeInput = struct {
     /// set to `false` to create an empty volume.
     ///
     /// Valid Values: `true` | `false`
-    preserve_existing_data: bool = false,
+    preserve_existing_data: ?bool = null,
 
     /// The snapshot ID (e.g., "snap-1122aabb") of the snapshot to restore as the
     /// new stored
@@ -99,7 +99,7 @@ pub const CreateStorediSCSIVolumeOutput = struct {
     volume_arn: ?[]const u8 = null,
 
     /// The size of the volume in bytes.
-    volume_size_in_bytes: i64 = 0,
+    volume_size_in_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .target_arn = "TargetARN",

@@ -6,7 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const RemoveIpRoutesInput = struct {
     /// IP address blocks that you want to remove.
-    cidr_ips: []const []const u8 = &.{},
+    cidr_ips: ?[]const []const u8 = null,
 
     /// IPv6 address blocks that you want to remove.
     cidr_ipv_6_s: ?[]const []const u8 = null,
@@ -22,7 +22,8 @@ pub const RemoveIpRoutesInput = struct {
     };
 };
 
-pub const RemoveIpRoutesOutput = struct {};
+pub const RemoveIpRoutesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

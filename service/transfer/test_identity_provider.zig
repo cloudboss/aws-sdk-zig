@@ -50,7 +50,7 @@ pub const TestIdentityProviderOutput = struct {
 
     /// The HTTP status code that is the response from your API Gateway or your
     /// Lambda function.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     /// The endpoint of the service used to authenticate a user.
     url: []const u8,

@@ -113,7 +113,7 @@ pub const DescribeDatasetImportJobOutput = struct {
 
     /// Whether `TimeZone` is automatically derived from the geolocation
     /// attribute.
-    use_geolocation_for_time_zone: bool = false,
+    use_geolocation_for_time_zone: ?bool = null,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",

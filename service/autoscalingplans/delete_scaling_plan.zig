@@ -18,7 +18,8 @@ pub const DeleteScalingPlanInput = struct {
     };
 };
 
-pub const DeleteScalingPlanOutput = struct {};
+pub const DeleteScalingPlanOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

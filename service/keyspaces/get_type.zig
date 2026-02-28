@@ -43,7 +43,7 @@ pub const GetTypeOutput = struct {
     last_modified_timestamp: ?i64 = null,
 
     /// The level of nesting implemented for this type.
-    max_nesting_depth: i32 = 0,
+    max_nesting_depth: ?i32 = null,
 
     /// The status of this type.
     status: ?TypeStatus = null,

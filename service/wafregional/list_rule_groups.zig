@@ -10,7 +10,7 @@ pub const ListRuleGroupsInput = struct {
     /// this request. If you have more `RuleGroups` than the number that you specify
     /// for `Limit`, the response includes a `NextMarker` value that you can use to
     /// get another batch of `RuleGroups`.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// If you specify a value for `Limit` and you have more `RuleGroups` than the
     /// value of `Limit`,

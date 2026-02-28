@@ -13,7 +13,7 @@ pub const ListCallerAccessGrantsInput = struct {
     /// If this optional parameter is passed in the request, a filter is applied to
     /// the results. The results will include only the access grants for the
     /// caller's Identity Center application or for any other applications (`ALL`).
-    allowed_by_application: bool = false,
+    allowed_by_application: ?bool = null,
 
     /// The S3 path of the data that you would like to access. Must start with
     /// `s3://`. You can optionally pass only the beginning characters of a path,
@@ -25,7 +25,7 @@ pub const ListCallerAccessGrantsInput = struct {
     /// `List Caller Access Grants` response. If the results include the pagination
     /// token `NextToken`, make another call using the `NextToken` to determine if
     /// there are more results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A pagination token to request the next page of results. Pass this value into
     /// a subsequent `List Caller Access Grants` request in order to retrieve the

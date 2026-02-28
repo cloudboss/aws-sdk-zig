@@ -744,7 +744,7 @@ pub fn deserializeDeliveryOptions(reader: *aws.xml.Reader, alloc: std.mem.Alloca
 pub fn deserializeEventDestination(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !EventDestination {
     var result: EventDestination = undefined;
     result.cloud_watch_destination = null;
-    result.enabled = null;
+    result.enabled = false;
     result.kinesis_firehose_destination = null;
     result.sns_destination = null;
     while (try reader.next()) |event| {
@@ -820,9 +820,9 @@ pub fn deserializeIdentityMailFromDomainAttributes(reader: *aws.xml.Reader, allo
 
 pub fn deserializeIdentityNotificationAttributes(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !IdentityNotificationAttributes {
     var result: IdentityNotificationAttributes = undefined;
-    result.headers_in_bounce_notifications_enabled = null;
-    result.headers_in_complaint_notifications_enabled = null;
-    result.headers_in_delivery_notifications_enabled = null;
+    result.headers_in_bounce_notifications_enabled = false;
+    result.headers_in_complaint_notifications_enabled = false;
+    result.headers_in_delivery_notifications_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -999,9 +999,9 @@ pub fn deserializeReceiptIpFilter(reader: *aws.xml.Reader, alloc: std.mem.Alloca
 pub fn deserializeReceiptRule(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ReceiptRule {
     var result: ReceiptRule = undefined;
     result.actions = null;
-    result.enabled = null;
+    result.enabled = false;
     result.recipients = null;
-    result.scan_enabled = null;
+    result.scan_enabled = false;
     result.tls_policy = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1055,8 +1055,8 @@ pub fn deserializeReputationOptions(reader: *aws.xml.Reader, alloc: std.mem.Allo
     _ = alloc;
     var result: ReputationOptions = undefined;
     result.last_fresh_start = null;
-    result.reputation_metrics_enabled = null;
-    result.sending_enabled = null;
+    result.reputation_metrics_enabled = false;
+    result.sending_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1149,10 +1149,10 @@ pub fn deserializeSNSDestination(reader: *aws.xml.Reader, alloc: std.mem.Allocat
 pub fn deserializeSendDataPoint(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !SendDataPoint {
     _ = alloc;
     var result: SendDataPoint = undefined;
-    result.bounces = null;
-    result.complaints = null;
-    result.delivery_attempts = null;
-    result.rejects = null;
+    result.bounces = 0;
+    result.complaints = 0;
+    result.delivery_attempts = 0;
+    result.rejects = 0;
     result.timestamp = null;
     while (try reader.next()) |event| {
         switch (event) {

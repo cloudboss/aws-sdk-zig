@@ -21,7 +21,7 @@ pub const SearchStepsInput = struct {
     job_id: ?[]const u8 = null,
 
     /// Specifies the number of results to return.
-    page_size: i32 = 100,
+    page_size: ?i32 = null,
 
     /// The queue IDs in the step search.
     queue_ids: []const []const u8,

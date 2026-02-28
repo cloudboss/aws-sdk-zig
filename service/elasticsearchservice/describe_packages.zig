@@ -11,7 +11,7 @@ pub const DescribePackagesInput = struct {
     filters: ?[]const DescribePackagesFilter = null,
 
     /// Limits results to a maximum number of packages.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Used for pagination. Only necessary if a previous API call includes a
     /// non-null NextToken value. If provided, returns results for the next page.

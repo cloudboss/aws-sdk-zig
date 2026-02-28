@@ -7,7 +7,7 @@ const SearchJobBackupsResult = @import("search_job_backups_result.zig").SearchJo
 
 pub const ListSearchJobBackupsInput = struct {
     /// The maximum number of resource list items to be returned.
-    max_results: i32 = 1000,
+    max_results: ?i32 = null,
 
     /// The next item following a partial list of returned backups included in a
     /// search job.

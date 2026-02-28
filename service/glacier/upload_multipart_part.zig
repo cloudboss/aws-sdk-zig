@@ -15,7 +15,7 @@ pub const UploadMultipartPartInput = struct {
     account_id: []const u8,
 
     /// The data to upload.
-    body: aws.http.StreamingBody = "",
+    body: ?[]const u8 = null,
 
     /// The SHA256 tree hash of the data being uploaded.
     checksum: ?[]const u8 = null,

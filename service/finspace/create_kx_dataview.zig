@@ -11,7 +11,7 @@ pub const CreateKxDataviewInput = struct {
     /// The option to specify whether you want to apply all the future additions and
     /// corrections automatically to the dataview, when you ingest new changesets.
     /// The default value is false.
-    auto_update: bool = false,
+    auto_update: ?bool = null,
 
     /// The identifier of the availability zones.
     availability_zone_id: ?[]const u8 = null,
@@ -60,7 +60,7 @@ pub const CreateKxDataviewInput = struct {
     /// * Once you create a dataview as writeable, you cannot change it to
     ///   read-only. So, you cannot
     /// update the `readWrite` parameter later.
-    read_write: bool = false,
+    read_write: ?bool = null,
 
     /// The configuration that contains the database path of the data that you want
     /// to place on each selected volume. Each segment must have a unique database
@@ -93,7 +93,7 @@ pub const CreateKxDataviewOutput = struct {
     /// The option to select whether you want to apply all the future additions and
     /// corrections automatically to the dataview when you ingest new changesets.
     /// The default value is false.
-    auto_update: bool = false,
+    auto_update: ?bool = null,
 
     /// The identifier of the availability zones.
     availability_zone_id: ?[]const u8 = null,
@@ -130,7 +130,7 @@ pub const CreateKxDataviewOutput = struct {
     last_modified_timestamp: ?i64 = null,
 
     /// Returns True if the dataview is created as writeable and False otherwise.
-    read_write: bool = false,
+    read_write: ?bool = null,
 
     /// The configuration that contains the database path of the data that you want
     /// to place on each selected volume. Each segment must have a unique database

@@ -15,7 +15,7 @@ pub const GetPlanExecutionInput = struct {
     execution_id: []const u8,
 
     /// The number of objects that you want to return with this call.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// Specifies that you want to receive the next page of results. Valid only if
     /// you received a `nextToken` response in the previous request. If you did, it

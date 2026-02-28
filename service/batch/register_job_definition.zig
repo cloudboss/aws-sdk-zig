@@ -134,7 +134,7 @@ pub const RegisterJobDefinitionInput = struct {
     /// * If the value is `multinode`, then `nodeProperties` is required.
     ///
     /// If the job is run on Fargate resources, then `multinode` isn't supported.
-    type: JobDefinitionType,
+    @"type": JobDefinitionType,
 
     pub const json_field_names = .{
         .consumable_resource_properties = "consumableResourceProperties",
@@ -150,7 +150,7 @@ pub const RegisterJobDefinitionInput = struct {
         .scheduling_priority = "schedulingPriority",
         .tags = "tags",
         .timeout = "timeout",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -291,7 +291,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RegisterJobDefinitionInput,
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

@@ -9,7 +9,7 @@ const WorkflowVersion = @import("workflow_version.zig").WorkflowVersion;
 
 pub const ListWorkflowsInput = struct {
     /// Specify all or part of the workflow name to streamline results.
-    by_name: bool = false,
+    by_name: ?bool = null,
 
     /// Used to streamline search results.
     filters: ?[]const Filter = null,

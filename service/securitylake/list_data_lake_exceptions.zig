@@ -7,7 +7,7 @@ const DataLakeException = @import("data_lake_exception.zig").DataLakeException;
 
 pub const ListDataLakeExceptionsInput = struct {
     /// Lists the maximum number of failures in Security Lake.
-    max_results: i32 = 50,
+    max_results: ?i32 = null,
 
     /// Lists if there are more results available. The value of nextToken is a
     /// unique pagination

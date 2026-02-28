@@ -17,7 +17,7 @@ pub const DescribeAssetInput = struct {
     asset_id: []const u8,
 
     /// Whether or not to exclude asset properties from the response.
-    exclude_properties: bool = false,
+    exclude_properties: ?bool = null,
 
     pub const json_field_names = .{
         .asset_id = "assetId",

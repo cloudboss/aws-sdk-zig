@@ -10,7 +10,7 @@ pub const DeleteLabelsInput = struct {
     authentication_token: ?[]const u8 = null,
 
     /// Flag to request removal of all labels from the specified resource.
-    delete_all: bool = false,
+    delete_all: ?bool = null,
 
     /// List of labels to delete from the resource.
     labels: ?[]const []const u8 = null,

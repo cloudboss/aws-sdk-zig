@@ -36,5 +36,5 @@ pub const WarningDetail = struct {
     /// indicate if a property
     /// uses a type of `oneOf` or `anyOf`. You need to look at the resource
     /// provider schema.
-    type: ?WarningType,
+    @"type": ?WarningType,
 };

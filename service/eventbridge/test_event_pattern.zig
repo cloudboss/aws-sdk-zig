@@ -40,7 +40,7 @@ pub const TestEventPatternInput = struct {
 
 pub const TestEventPatternOutput = struct {
     /// Indicates whether the event matches the event pattern.
-    result: bool = false,
+    result: ?bool = null,
 
     pub const json_field_names = .{
         .result = "Result",

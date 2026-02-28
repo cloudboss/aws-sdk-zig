@@ -42,10 +42,10 @@ pub const DeletePoolOutput = struct {
     /// message and adds the end recipient to the OptOutList. When set to true
     /// you're responsible for responding to HELP and STOP requests. You're also
     /// responsible for tracking and honoring opt-out requests.
-    self_managed_opt_outs_enabled: bool = false,
+    self_managed_opt_outs_enabled: ?bool = null,
 
     /// Indicates whether shared routes are enabled for the pool.
-    shared_routes_enabled: bool = false,
+    shared_routes_enabled: ?bool = null,
 
     /// The current status of the pool.
     ///
@@ -64,7 +64,7 @@ pub const DeletePoolOutput = struct {
 
     /// By default this is set to false. When set to true you can receive incoming
     /// text messages from your end recipients.
-    two_way_enabled: bool = false,
+    two_way_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",

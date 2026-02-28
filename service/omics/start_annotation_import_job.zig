@@ -23,7 +23,7 @@ pub const StartAnnotationImportJobInput = struct {
     role_arn: []const u8,
 
     /// The job's left normalization setting.
-    run_left_normalization: bool = false,
+    run_left_normalization: ?bool = null,
 
     /// The name of the annotation store version.
     version_name: ?[]const u8 = null,

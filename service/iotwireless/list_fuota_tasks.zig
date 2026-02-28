@@ -6,7 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const FuotaTask = @import("fuota_task.zig").FuotaTask;
 
 pub const ListFuotaTasksInput = struct {
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// To retrieve the next set of results, the `nextToken` value from a previous
     /// response; otherwise **null** to receive the first set of

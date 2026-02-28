@@ -22,7 +22,7 @@ pub const DescribeAgentsInput = struct {
     /// The total number of agents/collectors to return in a single page of output.
     /// The maximum
     /// value is 100.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Token to retrieve the next set of results. For example, if you previously
     /// specified 100

@@ -45,7 +45,7 @@ pub const InvokeDataAutomationOutput = struct {
     output_configuration: ?OutputConfiguration = null,
 
     /// List of outputs for each logical sub-doc
-    output_segments: []const OutputSegment = &.{},
+    output_segments: ?[]const OutputSegment = null,
 
     /// Detected semantic modality
     semantic_modality: SemanticModality,

@@ -42,7 +42,7 @@ pub const CreateSolutionInput = struct {
     /// different values for the hyperparameters.
     /// AutoML lengthens the training process as compared to selecting a specific
     /// recipe.
-    perform_auto_ml: bool = false,
+    perform_auto_ml: ?bool = null,
 
     /// Whether the solution uses automatic training to create new solution versions
     /// (trained models). The default is

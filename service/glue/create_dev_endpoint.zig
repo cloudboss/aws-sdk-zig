@@ -48,7 +48,7 @@ pub const CreateDevEndpointInput = struct {
 
     /// The number of Glue Data Processing Units (DPUs) to allocate to this
     /// `DevEndpoint`.
-    number_of_nodes: i32 = 0,
+    number_of_nodes: ?i32 = null,
 
     /// The number of workers of a defined `workerType` that are allocated to the
     /// development endpoint.
@@ -184,7 +184,7 @@ pub const CreateDevEndpointOutput = struct {
 
     /// The number of Glue Data Processing Units (DPUs) allocated to this
     /// DevEndpoint.
-    number_of_nodes: i32 = 0,
+    number_of_nodes: ?i32 = null,
 
     /// The number of workers of a defined `workerType` that are allocated to the
     /// development endpoint.
@@ -218,7 +218,7 @@ pub const CreateDevEndpointOutput = struct {
     yarn_endpoint_address: ?[]const u8 = null,
 
     /// The Apache Zeppelin port for the remote Apache Spark interpreter.
-    zeppelin_remote_spark_interpreter_port: i32 = 0,
+    zeppelin_remote_spark_interpreter_port: ?i32 = null,
 
     pub const json_field_names = .{
         .arguments = "Arguments",

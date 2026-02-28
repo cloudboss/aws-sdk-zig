@@ -37,7 +37,7 @@ pub const UpdateCustomLineItemOutput = struct {
     arn: ?[]const u8 = null,
 
     /// The number of resources that are associated to the custom line item.
-    association_size: i64 = 0,
+    association_size: ?i64 = null,
 
     /// The ARN of the billing group that the custom line item is applied to.
     billing_group_arn: ?[]const u8 = null,
@@ -50,7 +50,7 @@ pub const UpdateCustomLineItemOutput = struct {
     description: ?[]const u8 = null,
 
     /// The most recent time when the custom line item was modified.
-    last_modified_time: i64 = 0,
+    last_modified_time: ?i64 = null,
 
     /// The name of the successfully updated custom line item.
     name: ?[]const u8 = null,

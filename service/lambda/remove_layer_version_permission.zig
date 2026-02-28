@@ -16,7 +16,7 @@ pub const RemoveLayerVersionPermissionInput = struct {
     statement_id: []const u8,
 
     /// The version number.
-    version_number: i64,
+    version_number: ?i64 = null,
 
     pub const json_field_names = .{
         .layer_name = "LayerName",

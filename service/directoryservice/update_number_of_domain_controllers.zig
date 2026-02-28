@@ -18,7 +18,8 @@ pub const UpdateNumberOfDomainControllersInput = struct {
     };
 };
 
-pub const UpdateNumberOfDomainControllersOutput = struct {};
+pub const UpdateNumberOfDomainControllersOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

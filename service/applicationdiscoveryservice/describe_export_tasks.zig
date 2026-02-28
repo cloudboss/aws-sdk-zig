@@ -22,7 +22,7 @@ pub const DescribeExportTasksInput = struct {
     /// returns
     /// `maxResults` results in a single page along with a `nextToken`
     /// response element.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The `nextToken` value returned from a previous paginated
     /// `DescribeExportTasks` request where `maxResults` was used and the

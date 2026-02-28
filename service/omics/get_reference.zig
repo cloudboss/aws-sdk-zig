@@ -32,7 +32,7 @@ pub const GetReferenceInput = struct {
 
 pub const GetReferenceOutput = struct {
     /// The reference file payload.
-    payload: aws.http.StreamingBody = "",
+    payload: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetReferenceOutput) void {
         self.payload.deinit();

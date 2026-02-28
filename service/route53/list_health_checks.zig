@@ -39,7 +39,7 @@ pub const ListHealthChecksOutput = struct {
     /// submitting
     /// another `ListHealthChecks` request and specifying the value of
     /// `NextMarker` in the `marker` parameter.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// For the second and subsequent calls to `ListHealthChecks`,
     /// `Marker` is the value that you specified for the `marker`

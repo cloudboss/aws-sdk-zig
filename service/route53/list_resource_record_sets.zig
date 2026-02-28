@@ -80,7 +80,7 @@ pub const ListResourceRecordSetsOutput = struct {
     /// results were truncated, you can make a follow-up pagination request by using
     /// the
     /// `NextRecordName` element.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// The maximum number of records you requested.
     max_items: i32,

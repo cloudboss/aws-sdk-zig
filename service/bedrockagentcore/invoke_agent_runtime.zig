@@ -94,7 +94,7 @@ pub const InvokeAgentRuntimeOutput = struct {
     /// the specific agent configuration and the requested accept type. For most
     /// agents, this is a JSON object containing the agent's response to the user's
     /// request.
-    response: aws.http.StreamingBody = "",
+    response: ?aws.http.StreamingBody = null,
 
     /// The identifier of the runtime session.
     runtime_session_id: ?[]const u8 = null,

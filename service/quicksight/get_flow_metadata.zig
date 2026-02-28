@@ -46,13 +46,13 @@ pub const GetFlowMetadataOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The number of runs done for the flow.
-    run_count: i32 = 0,
+    run_count: ?i32 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The number of users who have used the flow.
-    user_count: i32 = 0,
+    user_count: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

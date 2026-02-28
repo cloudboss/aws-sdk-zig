@@ -38,7 +38,7 @@ pub const GetAccountLimitOutput = struct {
     /// example, if you specified `MAX_HEALTH_CHECKS_BY_OWNER` for the value of
     /// `Type` in the request, the value of `Count` is the current
     /// number of health checks that you have created using the current account.
-    count: i64 = 0,
+    count: ?i64 = null,
 
     /// The current setting for the specified limit. For example, if you specified
     /// `MAX_HEALTH_CHECKS_BY_OWNER` for the value of `Type` in the

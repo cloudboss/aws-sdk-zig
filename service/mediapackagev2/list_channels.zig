@@ -12,7 +12,7 @@ pub const ListChannelsInput = struct {
     channel_group_name: []const u8,
 
     /// The maximum number of results to return in the response.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The pagination token from the GET list request. Use the token to fetch the
     /// next page of results.

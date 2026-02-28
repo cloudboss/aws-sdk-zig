@@ -19,7 +19,7 @@ pub const UpdateNodegroupVersionInput = struct {
     /// can't be drained, you can force the update after it fails to terminate the
     /// old node
     /// whether or not any `Pod` is running on the node.
-    force: bool = false,
+    force: ?bool = null,
 
     /// An object representing a node group's launch template specification. You can
     /// only

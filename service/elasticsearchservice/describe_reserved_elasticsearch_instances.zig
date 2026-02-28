@@ -8,7 +8,7 @@ const ReservedElasticsearchInstance = @import("reserved_elasticsearch_instance.z
 pub const DescribeReservedElasticsearchInstancesInput = struct {
     /// Set this value to limit the number of results returned. If not specified,
     /// defaults to 100.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// NextToken should be sent in case if earlier API call produced result
     /// containing NextToken. It is used for pagination.

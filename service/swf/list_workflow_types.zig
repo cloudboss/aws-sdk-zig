@@ -12,7 +12,7 @@ pub const ListWorkflowTypesInput = struct {
 
     /// The maximum number of results that are returned per call.
     /// Use `nextPageToken` to obtain further pages of results.
-    maximum_page_size: i32 = 0,
+    maximum_page_size: ?i32 = null,
 
     /// If specified, lists the workflow type with this name.
     name: ?[]const u8 = null,
@@ -37,7 +37,7 @@ pub const ListWorkflowTypesInput = struct {
     /// results are returned in ascending alphabetical order of the `name` of the
     /// workflow
     /// types.
-    reverse_order: bool = false,
+    reverse_order: ?bool = null,
 
     pub const json_field_names = .{
         .domain = "domain",

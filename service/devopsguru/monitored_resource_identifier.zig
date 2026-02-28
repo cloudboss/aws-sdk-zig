@@ -17,13 +17,13 @@ pub const MonitoredResourceIdentifier = struct {
     resource_permission: ?ResourcePermission,
 
     /// The type of resource being monitored.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .last_updated = "LastUpdated",
         .monitored_resource_name = "MonitoredResourceName",
         .resource_collection = "ResourceCollection",
         .resource_permission = "ResourcePermission",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

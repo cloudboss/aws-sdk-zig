@@ -20,13 +20,13 @@ pub const ListConfigurationProfilesInput = struct {
     /// A filter based on the type of configurations that the configuration profile
     /// contains. A
     /// configuration can be a feature flag or a freeform configuration.
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",
         .max_results = "MaxResults",
         .next_token = "NextToken",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -104,7 +104,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListConfigurationProfilesIn
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);

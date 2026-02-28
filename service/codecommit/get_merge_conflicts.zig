@@ -76,7 +76,7 @@ pub const GetMergeConflictsOutput = struct {
 
     /// A Boolean value that indicates whether the code is mergeable by the
     /// specified merge option.
-    mergeable: bool = false,
+    mergeable: ?bool = null,
 
     /// An enumeration token that can be used in a request to return the next batch
     /// of the results.

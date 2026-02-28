@@ -119,7 +119,7 @@ pub const UpdateUserInput = struct {
     /// it was in before a custom permissions profile was applied. This parameter
     /// defaults to
     /// NULL and it doesn't accept any other value.
-    unapply_custom_permissions: bool = false,
+    unapply_custom_permissions: ?bool = null,
 
     /// The Amazon Quick Sight user name that you want to update.
     user_name: []const u8,
@@ -143,7 +143,7 @@ pub const UpdateUserOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The Amazon Quick Sight user.
     user: ?User = null,

@@ -22,7 +22,7 @@ pub const PublishInput = struct {
     /// `messageExpiry`, see [Amazon Web Services IoT Core message broker and
     /// protocol limits and quotas
     /// ](https://docs.aws.amazon.com/general/latest/gr/iot-core.html#message-broker-limits) from the Amazon Web Services Reference Guide.
-    message_expiry: i64 = 0,
+    message_expiry: ?i64 = null,
 
     /// The message body. MQTT accepts text, binary, and empty (null) message
     /// payloads.
@@ -37,7 +37,7 @@ pub const PublishInput = struct {
     payload_format_indicator: ?PayloadFormatIndicator = null,
 
     /// The Quality of Service (QoS) level. The default QoS level is 0.
-    qos: i32 = 0,
+    qos: ?i32 = null,
 
     /// A UTF-8 encoded string that's used as the topic name for a response message.
     /// The response
@@ -55,7 +55,7 @@ pub const PublishInput = struct {
     /// Valid values: `true` | `false`
     ///
     /// Default value: `false`
-    retain: bool = false,
+    retain: ?bool = null,
 
     /// The name of the MQTT topic.
     topic: []const u8,

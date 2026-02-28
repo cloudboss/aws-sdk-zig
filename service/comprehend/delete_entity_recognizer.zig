@@ -13,7 +13,8 @@ pub const DeleteEntityRecognizerInput = struct {
     };
 };
 
-pub const DeleteEntityRecognizerOutput = struct {};
+pub const DeleteEntityRecognizerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

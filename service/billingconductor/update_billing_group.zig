@@ -51,7 +51,7 @@ pub const UpdateBillingGroupOutput = struct {
     description: ?[]const u8 = null,
 
     /// The most recent time when the billing group was modified.
-    last_modified_time: i64 = 0,
+    last_modified_time: ?i64 = null,
 
     /// The name of the billing group. The names must be unique to each billing
     /// group.
@@ -65,7 +65,7 @@ pub const UpdateBillingGroupOutput = struct {
     primary_account_id: ?[]const u8 = null,
 
     /// The number of accounts in the particular billing group.
-    size: i64 = 0,
+    size: ?i64 = null,
 
     /// The status of the billing group. Only one of the valid values can be used.
     status: ?BillingGroupStatus = null,

@@ -26,7 +26,7 @@ pub const UpdateCACertificateInput = struct {
     registration_config: ?RegistrationConfig = null,
 
     /// If true, removes auto registration.
-    remove_auto_registration: bool = false,
+    remove_auto_registration: ?bool = null,
 
     pub const json_field_names = .{
         .certificate_id = "certificateId",

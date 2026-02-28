@@ -11,7 +11,7 @@ pub const CreateResourceInput = struct {
 
     /// If this parameter is enabled, the resource will be hidden from the address
     /// book.
-    hidden_from_global_address_list: bool = false,
+    hidden_from_global_address_list: ?bool = null,
 
     /// The name of the new resource.
     name: []const u8,

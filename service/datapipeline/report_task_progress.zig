@@ -23,7 +23,7 @@ pub const ReportTaskProgressInput = struct {
 pub const ReportTaskProgressOutput = struct {
     /// If true, the calling task runner should cancel processing of the task. The
     /// task runner does not need to call SetTaskStatus for canceled tasks.
-    canceled: bool = false,
+    canceled: ?bool = null,
 
     pub const json_field_names = .{
         .canceled = "canceled",

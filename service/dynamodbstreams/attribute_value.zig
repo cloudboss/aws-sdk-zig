@@ -48,7 +48,7 @@ pub const AttributeValue = union(enum) {
     /// An attribute of type Null. For example:
     ///
     /// `"NULL": true`
-    null: ?bool,
+    @"null": ?bool,
     /// An attribute of type String. For example:
     ///
     /// `"S": "Hello"`
@@ -66,7 +66,7 @@ pub const AttributeValue = union(enum) {
         .m = "M",
         .n = "N",
         .ns = "NS",
-        .null = "NULL",
+        .@"null" = "NULL",
         .s = "S",
         .ss = "SS",
     };

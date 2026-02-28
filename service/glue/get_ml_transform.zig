@@ -43,7 +43,7 @@ pub const GetMLTransformOutput = struct {
     input_record_tables: ?[]const GlueTable = null,
 
     /// The number of labels available for this transform.
-    label_count: i32 = 0,
+    label_count: ?i32 = null,
 
     /// The date and time when the transform was last modified.
     last_modified_on: ?i64 = null,

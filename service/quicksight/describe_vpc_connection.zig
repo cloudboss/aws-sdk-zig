@@ -27,7 +27,7 @@ pub const DescribeVPCConnectionOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// A response object that provides information for the specified VPC
     /// connection.

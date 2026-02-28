@@ -43,7 +43,7 @@ pub const GetContactOutput = struct {
     /// A boolean value status noting if the contact is unsubscribed from all
     /// contact list
     /// topics.
-    unsubscribe_all: bool = false,
+    unsubscribe_all: ?bool = null,
 
     pub const json_field_names = .{
         .attributes_data = "AttributesData",

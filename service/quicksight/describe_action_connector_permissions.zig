@@ -34,7 +34,7 @@ pub const DescribeActionConnectorPermissionsOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status code of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .action_connector_id = "ActionConnectorId",

@@ -19,12 +19,12 @@ pub const ListNetworkProfilesInput = struct {
 
     /// The type of network profile to return information about. Valid values are
     /// listed here.
-    type: ?NetworkProfileType = null,
+    @"type": ?NetworkProfileType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
         .next_token = "nextToken",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

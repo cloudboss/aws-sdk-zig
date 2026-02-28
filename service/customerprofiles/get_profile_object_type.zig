@@ -29,7 +29,7 @@ pub const GetProfileObjectTypeOutput = struct {
     /// associate this object with the profile. If it is set to `TRUE`, and if no
     /// match
     /// is found, then the service creates a new standard profile.
-    allow_profile_creation: bool = false,
+    allow_profile_creation: ?bool = null,
 
     /// The timestamp of when the domain was created.
     created_at: ?i64 = null,

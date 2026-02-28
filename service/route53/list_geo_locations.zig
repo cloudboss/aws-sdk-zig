@@ -63,7 +63,7 @@ pub const ListGeoLocationsOutput = struct {
     /// `NextSubdivisionCode` in the `startcontinentcode`,
     /// `startcountrycode`, and `startsubdivisioncode`, as
     /// applicable.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// The value that you specified for `MaxItems` in the request.
     max_items: i32,

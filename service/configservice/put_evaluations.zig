@@ -28,7 +28,7 @@ pub const PutEvaluationsInput = struct {
     /// `PutEvaluations` doesn't require a valid value
     /// for the `ResultToken` parameter, but the value cannot
     /// be null.
-    test_mode: bool = false,
+    test_mode: ?bool = null,
 
     pub const json_field_names = .{
         .evaluations = "Evaluations",

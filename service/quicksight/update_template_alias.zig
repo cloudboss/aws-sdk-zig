@@ -37,7 +37,7 @@ pub const UpdateTemplateAliasOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The template alias.
     template_alias: ?TemplateAlias = null,

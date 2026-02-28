@@ -7,7 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const InitializeServiceInput = struct {
     /// The Oracle Cloud Infrastructure (OCI) identity domain configuration for
     /// service initialization.
-    oci_identity_domain: bool = true,
+    oci_identity_domain: ?bool = null,
 
     pub const json_field_names = .{
         .oci_identity_domain = "ociIdentityDomain",

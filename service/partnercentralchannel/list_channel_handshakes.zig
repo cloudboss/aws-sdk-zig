@@ -27,7 +27,7 @@ pub const ListChannelHandshakesInput = struct {
     handshake_type_sort: ?ListChannelHandshakesTypeSort = null,
 
     /// The maximum number of results to return in a single call.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// Token for retrieving the next page of results.
     next_token: ?[]const u8 = null,

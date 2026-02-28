@@ -34,7 +34,7 @@ pub const ListEngagementsInput = struct {
     exclude_created_by: ?[]const []const u8 = null,
 
     /// The maximum number of results to return in a single call.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results. This value is returned from a
     /// previous call.

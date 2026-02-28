@@ -8,7 +8,7 @@ const PipelineObject = @import("pipeline_object.zig").PipelineObject;
 pub const DescribeObjectsInput = struct {
     /// Indicates whether any expressions in the object should be evaluated when the
     /// object descriptions are returned.
-    evaluate_expressions: bool = false,
+    evaluate_expressions: ?bool = null,
 
     /// The starting point for the results to be returned. For the first call, this
     /// value should be empty.
@@ -34,7 +34,7 @@ pub const DescribeObjectsInput = struct {
 
 pub const DescribeObjectsOutput = struct {
     /// Indicates whether there are more results to return.
-    has_more_results: bool = false,
+    has_more_results: ?bool = null,
 
     /// The starting point for the next page of results. To view the next page of
     /// results, call `DescribeObjects`

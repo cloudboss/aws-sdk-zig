@@ -55,7 +55,7 @@ pub const UpdateVPCConnectionOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The update status of the VPC connection's last update.
     update_status: ?VPCConnectionResourceStatus = null,

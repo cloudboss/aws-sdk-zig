@@ -17,7 +17,8 @@ pub const DeleteChannelNamespaceInput = struct {
     };
 };
 
-pub const DeleteChannelNamespaceOutput = struct {};
+pub const DeleteChannelNamespaceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -35,7 +35,7 @@ pub const DescribeMapRunOutput = struct {
 
     /// The maximum number of child workflow executions configured to run in
     /// parallel for the Map Run at the same time.
-    max_concurrency: i32 = 0,
+    max_concurrency: ?i32 = null,
 
     /// The number of times you've redriven a Map Run. If you have not yet redriven
     /// a Map Run, the `redriveCount` is 0. This count is only updated if you
@@ -57,11 +57,11 @@ pub const DescribeMapRunOutput = struct {
 
     /// The maximum number of failed child workflow executions before the Map Run
     /// fails.
-    tolerated_failure_count: i64 = 0,
+    tolerated_failure_count: ?i64 = null,
 
     /// The maximum percentage of failed child workflow executions before the Map
     /// Run fails.
-    tolerated_failure_percentage: f32 = 0,
+    tolerated_failure_percentage: ?f32 = null,
 
     pub const json_field_names = .{
         .execution_arn = "executionArn",

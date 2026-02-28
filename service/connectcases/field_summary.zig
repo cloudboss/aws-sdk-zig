@@ -20,7 +20,7 @@ pub const FieldSummary = struct {
     namespace: FieldNamespace,
 
     /// The type of a field.
-    type: FieldType,
+    @"type": FieldType,
 
     pub const json_field_names = .{
         .attributes = "attributes",
@@ -28,6 +28,6 @@ pub const FieldSummary = struct {
         .field_id = "fieldId",
         .name = "name",
         .namespace = "namespace",
-        .type = "type",
+        .@"type" = "type",
     };
 };

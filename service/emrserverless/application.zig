@@ -95,7 +95,7 @@ pub const Application = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of application, such as Spark or Hive.
-    type: []const u8,
+    @"type": []const u8,
 
     /// The date and time when the application run was last updated.
     updated_at: i64,
@@ -126,7 +126,7 @@ pub const Application = struct {
         .state = "state",
         .state_details = "stateDetails",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
         .worker_type_specifications = "workerTypeSpecifications",
     };

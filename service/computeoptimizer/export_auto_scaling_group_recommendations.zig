@@ -69,7 +69,7 @@ pub const ExportAutoScalingGroupRecommendationsInput = struct {
     /// Recommendations for member accounts are not included in the export if this
     /// parameter,
     /// or the account IDs parameter, is omitted.
-    include_member_accounts: bool = false,
+    include_member_accounts: ?bool = null,
 
     /// An object to specify the preferences for the Amazon EC2 Auto Scaling group
     /// recommendations

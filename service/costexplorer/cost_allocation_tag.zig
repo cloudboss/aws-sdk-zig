@@ -22,13 +22,13 @@ pub const CostAllocationTag = struct {
     /// resources for
     /// cost allocation purposes. `UserDefined` type tags are tags that you define,
     /// create, and apply to resources.
-    type: CostAllocationTagType,
+    @"type": CostAllocationTagType,
 
     pub const json_field_names = .{
         .last_updated_date = "LastUpdatedDate",
         .last_used_date = "LastUsedDate",
         .status = "Status",
         .tag_key = "TagKey",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

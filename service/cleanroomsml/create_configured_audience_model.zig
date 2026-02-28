@@ -38,7 +38,7 @@ pub const CreateConfiguredAudienceModelInput = struct {
 
     /// The minimum number of users from the seed audience that must match with
     /// users in the training data of the audience model. The default value is 500.
-    min_matching_seed_size: i32 = 500,
+    min_matching_seed_size: ?i32 = null,
 
     /// The name of the configured audience model.
     name: []const u8,

@@ -14,12 +14,12 @@ pub const StartCommandExecutionInput = struct {
     sandbox_id: []const u8,
 
     /// The command type.
-    type: ?CommandType = null,
+    @"type": ?CommandType = null,
 
     pub const json_field_names = .{
         .command = "command",
         .sandbox_id = "sandboxId",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

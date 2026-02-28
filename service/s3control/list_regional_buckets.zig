@@ -10,7 +10,7 @@ pub const ListRegionalBucketsInput = struct {
     /// The Amazon Web Services account ID of the Outposts bucket.
     account_id: []const u8,
 
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     next_token: ?[]const u8 = null,
 

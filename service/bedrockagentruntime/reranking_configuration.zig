@@ -7,10 +7,10 @@ pub const RerankingConfiguration = struct {
     bedrock_reranking_configuration: BedrockRerankingConfiguration,
 
     /// The type of reranker that the configurations apply to.
-    type: RerankingConfigurationType,
+    @"type": RerankingConfigurationType,
 
     pub const json_field_names = .{
         .bedrock_reranking_configuration = "bedrockRerankingConfiguration",
-        .type = "type",
+        .@"type" = "type",
     };
 };

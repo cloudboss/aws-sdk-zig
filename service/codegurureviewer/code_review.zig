@@ -82,7 +82,7 @@ pub const CodeReview = struct {
     state_reason: ?[]const u8,
 
     /// The type of code review.
-    type: ?Type,
+    @"type": ?Type,
 
     pub const json_field_names = .{
         .analysis_types = "AnalysisTypes",
@@ -100,6 +100,6 @@ pub const CodeReview = struct {
         .source_code_type = "SourceCodeType",
         .state = "State",
         .state_reason = "StateReason",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

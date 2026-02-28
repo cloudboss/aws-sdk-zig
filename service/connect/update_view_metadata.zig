@@ -27,7 +27,8 @@ pub const UpdateViewMetadataInput = struct {
     };
 };
 
-pub const UpdateViewMetadataOutput = struct {};
+pub const UpdateViewMetadataOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

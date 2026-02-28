@@ -32,7 +32,8 @@ pub const AddEntityOwnerInput = struct {
     };
 };
 
-pub const AddEntityOwnerOutput = struct {};
+pub const AddEntityOwnerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

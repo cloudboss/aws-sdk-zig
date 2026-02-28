@@ -21,7 +21,7 @@ pub const GetAggregateConfigRuleComplianceSummaryInput = struct {
     /// The maximum number of evaluation results returned on each page.
     /// The default is 1000. You cannot specify a number greater than 1000.
     /// If you specify 0, Config uses the default.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned on a previous page that you use
     /// to get the next page of results in a paginated response.

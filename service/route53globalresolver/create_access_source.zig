@@ -20,7 +20,7 @@ pub const CreateAccessSourceInput = struct {
 
     /// The IP address type for this access source. Valid values are IPv4 and IPv6
     /// (if the Route 53 Global Resolver supports dual-stack).
-    ip_address_type: IpAddressType = "IPV4",
+    ip_address_type: ?IpAddressType = null,
 
     /// A descriptive name for the access source.
     name: ?[]const u8 = null,

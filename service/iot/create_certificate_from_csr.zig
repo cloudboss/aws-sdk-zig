@@ -9,7 +9,7 @@ pub const CreateCertificateFromCsrInput = struct {
     certificate_signing_request: []const u8,
 
     /// Specifies whether the certificate is active.
-    set_as_active: bool = false,
+    set_as_active: ?bool = null,
 
     pub const json_field_names = .{
         .certificate_signing_request = "certificateSigningRequest",

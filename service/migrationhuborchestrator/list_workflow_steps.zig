@@ -7,7 +7,7 @@ const WorkflowStepSummary = @import("workflow_step_summary.zig").WorkflowStepSum
 
 pub const ListWorkflowStepsInput = struct {
     /// The maximum number of results that can be returned.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The pagination token.
     next_token: ?[]const u8 = null,

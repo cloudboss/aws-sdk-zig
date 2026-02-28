@@ -131,7 +131,7 @@ pub const CreateDatasetImportJobInput = struct {
     /// is ideal for datasets that contain timestamps in multiple time zones and
     /// those
     /// timestamps are expressed in local time.
-    use_geolocation_for_time_zone: bool = false,
+    use_geolocation_for_time_zone: ?bool = null,
 
     pub const json_field_names = .{
         .dataset_arn = "DatasetArn",

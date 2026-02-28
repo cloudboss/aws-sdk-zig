@@ -51,7 +51,7 @@ pub const CreateUnreferencedMergeCommitInput = struct {
     /// changes leave the folders empty. If this is specified as true, a .gitkeep
     /// file is
     /// created for empty folders. The default is false.
-    keep_empty_folders: bool = false,
+    keep_empty_folders: ?bool = null,
 
     /// The merge option or strategy you want to use to merge the code.
     merge_option: MergeOptionTypeEnum,

@@ -18,7 +18,8 @@ pub const DeleteAssessmentFrameworkShareInput = struct {
     };
 };
 
-pub const DeleteAssessmentFrameworkShareOutput = struct {};
+pub const DeleteAssessmentFrameworkShareOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

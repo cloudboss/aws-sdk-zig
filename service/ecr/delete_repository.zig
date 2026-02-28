@@ -9,7 +9,7 @@ pub const DeleteRepositoryInput = struct {
     /// If true, deleting the repository force deletes the contents of the
     /// repository. If
     /// false, the repository must be empty before attempting to delete it.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The Amazon Web Services account ID associated with the registry that
     /// contains the repository to

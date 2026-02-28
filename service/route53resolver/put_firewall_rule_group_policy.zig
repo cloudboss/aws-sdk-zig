@@ -19,7 +19,7 @@ pub const PutFirewallRuleGroupPolicyInput = struct {
 };
 
 pub const PutFirewallRuleGroupPolicyOutput = struct {
-    return_value: bool = false,
+    return_value: ?bool = null,
 
     pub const json_field_names = .{
         .return_value = "ReturnValue",

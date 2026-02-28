@@ -7,7 +7,7 @@ const PackageListItem = @import("package_list_item.zig").PackageListItem;
 
 pub const ListPackagesInput = struct {
     /// The maximum number of packages to return in one page of results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Specify the pagination token from a previous request to retrieve the next
     /// page of results.

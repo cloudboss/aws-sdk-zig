@@ -12,11 +12,11 @@ pub const ContainerProvider = struct {
     /// The type of the container provider. Amazon EKS is the only supported type as
     /// of
     /// now.
-    type: ContainerProviderType,
+    @"type": ContainerProviderType,
 
     pub const json_field_names = .{
         .id = "id",
         .info = "info",
-        .type = "type",
+        .@"type" = "type",
     };
 };

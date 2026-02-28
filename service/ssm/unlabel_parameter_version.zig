@@ -18,7 +18,7 @@ pub const UnlabelParameterVersionInput = struct {
     /// The specific version of the parameter which you want to delete one or more
     /// labels from. If
     /// it isn't present, the call will fail.
-    parameter_version: i64,
+    parameter_version: ?i64 = null,
 
     pub const json_field_names = .{
         .labels = "Labels",

@@ -62,7 +62,7 @@ pub const CreateDashboardOutput = struct {
     termination_protection_enabled: ?bool = null,
 
     /// The dashboard type.
-    type: ?DashboardType = null,
+    @"type": ?DashboardType = null,
 
     /// An array of widgets for the dashboard.
     widgets: ?[]const Widget = null,
@@ -73,7 +73,7 @@ pub const CreateDashboardOutput = struct {
         .refresh_schedule = "RefreshSchedule",
         .tags_list = "TagsList",
         .termination_protection_enabled = "TerminationProtectionEnabled",
-        .type = "Type",
+        .@"type" = "Type",
         .widgets = "Widgets",
     };
 };

@@ -17,7 +17,7 @@ pub const ListAuditFindingsInput = struct {
     /// Boolean flag indicating whether only the suppressed findings or the
     /// unsuppressed findings should be listed. If this parameter isn't provided,
     /// the response will list both suppressed and unsuppressed findings.
-    list_suppressed_findings: bool = false,
+    list_suppressed_findings: ?bool = null,
 
     /// The maximum number of results to return at one time. The default is 25.
     max_results: ?i32 = null,

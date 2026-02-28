@@ -38,7 +38,7 @@ pub const ConfigureLogsForPlaybackConfigurationInput = struct {
     /// mode](https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html).
     ///
     /// Valid values: `0` - `100`
-    percent_enabled: i32 = 0,
+    percent_enabled: ?i32 = null,
 
     /// The name of the playback configuration.
     playback_configuration_name: []const u8,
@@ -71,7 +71,7 @@ pub const ConfigureLogsForPlaybackConfigurationOutput = struct {
 
     /// The percentage of session logs that MediaTailor sends to your Cloudwatch
     /// Logs account.
-    percent_enabled: i32 = 0,
+    percent_enabled: ?i32 = null,
 
     /// The name of the playback configuration.
     playback_configuration_name: ?[]const u8 = null,

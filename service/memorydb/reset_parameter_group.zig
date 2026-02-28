@@ -9,7 +9,7 @@ pub const ResetParameterGroupInput = struct {
     /// If true, all parameters in the parameter group are reset to their default
     /// values. If false, only the parameters listed by ParameterNames are reset to
     /// their default values.
-    all_parameters: bool = false,
+    all_parameters: ?bool = null,
 
     /// The name of the parameter group to reset.
     parameter_group_name: []const u8,

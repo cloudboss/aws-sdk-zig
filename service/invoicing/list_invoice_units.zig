@@ -20,7 +20,7 @@ pub const ListInvoiceUnitsInput = struct {
     filters: ?Filters = null,
 
     /// The maximum number of invoice units that can be returned.
-    max_results: i32 = 500,
+    max_results: ?i32 = null,
 
     /// The next token used to indicate where the returned list should start from.
     next_token: ?[]const u8 = null,

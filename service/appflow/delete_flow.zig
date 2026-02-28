@@ -13,7 +13,7 @@ pub const DeleteFlowInput = struct {
     /// Indicates whether Amazon AppFlow should delete the flow, even if it is
     /// currently in
     /// use.
-    force_delete: bool = false,
+    force_delete: ?bool = null,
 
     pub const json_field_names = .{
         .flow_name = "flowName",
@@ -21,7 +21,8 @@ pub const DeleteFlowInput = struct {
     };
 };
 
-pub const DeleteFlowOutput = struct {};
+pub const DeleteFlowOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

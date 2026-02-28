@@ -10,7 +10,7 @@ pub const ListWebhooksInput = struct {
     app_id: []const u8,
 
     /// The maximum number of records to list in a single response.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A pagination token. Set to null to start listing webhooks from the start. If
     /// non-null,the pagination token is returned in a result. Pass its value in

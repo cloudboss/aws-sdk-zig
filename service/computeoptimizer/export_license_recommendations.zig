@@ -62,7 +62,7 @@ pub const ExportLicenseRecommendationsInput = struct {
     /// This parameter cannot be specified together with the account IDs parameter.
     /// The
     /// parameters are mutually exclusive.
-    include_member_accounts: bool = false,
+    include_member_accounts: ?bool = null,
 
     s_3_destination_config: S3DestinationConfig,
 

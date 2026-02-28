@@ -11,7 +11,7 @@ pub const SuggestInput = struct {
     query: []const u8,
 
     /// Specifies the maximum number of suggestions to return.
-    size: i64 = 0,
+    size: ?i64 = null,
 
     /// Specifies the name of the suggester to use to find suggested matches.
     suggester: []const u8,

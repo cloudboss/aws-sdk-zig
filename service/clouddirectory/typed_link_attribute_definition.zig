@@ -23,7 +23,7 @@ pub const TypedLinkAttributeDefinition = struct {
     rules: ?[]const aws.map.MapEntry(Rule),
 
     /// The type of the attribute.
-    type: FacetAttributeType,
+    @"type": FacetAttributeType,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",
@@ -31,6 +31,6 @@ pub const TypedLinkAttributeDefinition = struct {
         .name = "Name",
         .required_behavior = "RequiredBehavior",
         .rules = "Rules",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

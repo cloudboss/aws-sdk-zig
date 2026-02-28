@@ -19,7 +19,7 @@ pub const PutAnomalyDetectorInput = struct {
     configuration: AnomalyDetectorConfiguration,
 
     /// The frequency, in seconds, at which the anomaly detector evaluates metrics.
-    evaluation_interval_in_seconds: i32 = 60,
+    evaluation_interval_in_seconds: ?i32 = null,
 
     /// The Amazon Managed Service for Prometheus metric labels to associate with
     /// the anomaly detector.

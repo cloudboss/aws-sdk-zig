@@ -75,7 +75,7 @@ pub const DescribeRestoreJobOutput = struct {
 
     /// This is a boolean value indicating whether the restore job is a parent
     /// (composite) restore job.
-    is_parent: bool = false,
+    is_parent: ?bool = null,
 
     /// This is the unique identifier of the parent restore job for the selected
     /// restore job.

@@ -10,7 +10,7 @@ pub const CreateHomeRegionControlInput = struct {
     /// Optional Boolean flag to indicate whether any effect should take place. It
     /// tests whether
     /// the caller has permission to make the call.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// The name of the home region of the calling account.
     home_region: []const u8,

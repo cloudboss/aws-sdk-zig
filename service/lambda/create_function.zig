@@ -138,7 +138,7 @@ pub const CreateFunctionInput = struct {
     package_type: ?PackageType = null,
 
     /// Set to true to publish the first version of the function during creation.
-    publish: bool = false,
+    publish: ?bool = null,
 
     /// Specifies where to publish the function version or configuration.
     publish_to: ?FunctionVersionLatestPublished = null,

@@ -70,7 +70,7 @@ pub const RegisterClientOutput = struct {
 
     /// Indicates the time at which the `clientId` and `clientSecret` were
     /// issued.
-    client_id_issued_at: i64 = 0,
+    client_id_issued_at: ?i64 = null,
 
     /// A secret string generated for the client. The client will use this string to
     /// get
@@ -79,7 +79,7 @@ pub const RegisterClientOutput = struct {
 
     /// Indicates the time at which the `clientId` and `clientSecret` will
     /// become invalid.
-    client_secret_expires_at: i64 = 0,
+    client_secret_expires_at: ?i64 = null,
 
     /// An endpoint that the client can use to create tokens.
     token_endpoint: ?[]const u8 = null,

@@ -16,7 +16,7 @@ pub const GetMLModelInput = struct {
     /// If true, `Recipe` is returned.
     ///
     /// If false, `Recipe` is not returned.
-    verbose: bool = false,
+    verbose: ?bool = null,
 
     pub const json_field_names = .{
         .ml_model_id = "MLModelId",

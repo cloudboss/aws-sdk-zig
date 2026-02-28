@@ -8,7 +8,7 @@ pub const ExtendLicenseConsumptionInput = struct {
     /// Checks whether you have the required permissions for the action, without
     /// actually making the request. Provides an error response if you do not have
     /// the required permissions.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// License consumption token.
     license_consumption_token: []const u8,

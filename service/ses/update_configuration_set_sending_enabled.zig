@@ -10,7 +10,7 @@ pub const UpdateConfigurationSetSendingEnabledInput = struct {
 
     /// Describes whether email sending is enabled or disabled for the configuration
     /// set.
-    enabled: bool = false,
+    enabled: ?bool = null,
 };
 
 const UpdateConfigurationSetSendingEnabledOutput = struct {};

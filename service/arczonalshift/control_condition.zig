@@ -20,10 +20,10 @@ pub const ControlCondition = struct {
     /// The type of alarm specified for a practice run. You can only specify Amazon
     /// CloudWatch alarms for practice runs, so the only valid value is
     /// `CLOUDWATCH`.
-    type: ControlConditionType,
+    @"type": ControlConditionType,
 
     pub const json_field_names = .{
         .alarm_identifier = "alarmIdentifier",
-        .type = "type",
+        .@"type" = "type",
     };
 };

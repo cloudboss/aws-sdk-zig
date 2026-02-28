@@ -8,7 +8,7 @@ const MulticastGroupByFuotaTask = @import("multicast_group_by_fuota_task.zig").M
 pub const ListMulticastGroupsByFuotaTaskInput = struct {
     id: []const u8,
 
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// To retrieve the next set of results, the `nextToken` value from a previous
     /// response; otherwise **null** to receive the first set of

@@ -21,7 +21,7 @@ pub const ListConfigurationCheckOperationsInput = struct {
     ///   check type.
     /// * ALL_OPERATIONS - Will list all configuration check operations performed on
     ///   the application.
-    list_mode: ConfigurationCheckOperationListingMode = "LATEST_PER_CHECK",
+    list_mode: ?ConfigurationCheckOperationListingMode = null,
 
     /// The maximum number of results to return with a single call. To retrieve the
     /// remaining results, make another call with the returned nextToken value.

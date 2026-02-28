@@ -32,7 +32,7 @@ pub const CancelJobExecutionInput = struct {
     /// unable to update the job execution status. Use caution and ensure that the
     /// device is
     /// able to recover to a valid state.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The ID of the job to be canceled.
     job_id: []const u8,

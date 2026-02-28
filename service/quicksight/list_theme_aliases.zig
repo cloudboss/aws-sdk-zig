@@ -35,7 +35,7 @@ pub const ListThemeAliasesOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// A structure containing the list of the theme's aliases.
     theme_alias_list: ?[]const ThemeAlias = null,

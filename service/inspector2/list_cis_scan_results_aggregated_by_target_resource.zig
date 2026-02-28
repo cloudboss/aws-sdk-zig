@@ -15,7 +15,7 @@ pub const ListCisScanResultsAggregatedByTargetResourceInput = struct {
     /// The maximum number of scan results aggregated by a target resource to be
     /// returned in a
     /// single page of results.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The pagination token from a previous request that's used to retrieve the
     /// next page of
@@ -26,7 +26,7 @@ pub const ListCisScanResultsAggregatedByTargetResourceInput = struct {
     scan_arn: []const u8,
 
     /// The sort by order.
-    sort_by: CisScanResultsAggregatedByTargetResourceSortBy = "FAILED_COUNTS",
+    sort_by: ?CisScanResultsAggregatedByTargetResourceSortBy = null,
 
     /// The sort order.
     sort_order: ?CisSortOrder = null,

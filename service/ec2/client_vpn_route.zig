@@ -26,5 +26,5 @@ pub const ClientVpnRoute = struct {
     target_subnet: ?[]const u8,
 
     /// The route type.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 };

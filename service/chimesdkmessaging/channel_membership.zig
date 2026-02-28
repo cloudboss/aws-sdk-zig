@@ -22,7 +22,7 @@ pub const ChannelMembership = struct {
     sub_channel_id: ?[]const u8,
 
     /// The membership type set for the channel member.
-    type: ?ChannelMembershipType,
+    @"type": ?ChannelMembershipType,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",
@@ -31,6 +31,6 @@ pub const ChannelMembership = struct {
         .last_updated_timestamp = "LastUpdatedTimestamp",
         .member = "Member",
         .sub_channel_id = "SubChannelId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

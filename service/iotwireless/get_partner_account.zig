@@ -21,7 +21,7 @@ pub const GetPartnerAccountInput = struct {
 
 pub const GetPartnerAccountOutput = struct {
     /// Whether the partner account is linked to the AWS account.
-    account_linked: bool = false,
+    account_linked: ?bool = null,
 
     /// The Sidewalk account credentials.
     sidewalk: ?SidewalkAccountInfoWithFingerprint = null,

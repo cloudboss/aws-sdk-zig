@@ -11,7 +11,7 @@ pub const AcceptCertificateTransferInput = struct {
     certificate_id: []const u8,
 
     /// Specifies whether the certificate is active.
-    set_as_active: bool = false,
+    set_as_active: ?bool = null,
 
     pub const json_field_names = .{
         .certificate_id = "certificateId",

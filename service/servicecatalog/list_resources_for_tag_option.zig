@@ -7,7 +7,7 @@ const ResourceDetail = @import("resource_detail.zig").ResourceDetail;
 
 pub const ListResourcesForTagOptionInput = struct {
     /// The maximum number of items to return with this call.
-    page_size: i32 = 0,
+    page_size: ?i32 = null,
 
     /// The page token for the next set of results. To retrieve the first set of
     /// results, use null.

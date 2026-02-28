@@ -7,7 +7,7 @@ const PluginSummary = @import("plugin_summary.zig").PluginSummary;
 
 pub const ListPluginsInput = struct {
     /// The maximum number of plugins that can be returned.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The pagination token.
     next_token: ?[]const u8 = null,

@@ -15,7 +15,7 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
 
     /// Request to configure bandwidth throttling during Replication Settings
     /// template creation.
-    bandwidth_throttling: i64 = 0,
+    bandwidth_throttling: ?i64 = null,
 
     /// Request to create Public IP during Replication Settings template creation.
     create_public_ip: bool,

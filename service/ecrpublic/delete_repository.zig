@@ -9,7 +9,7 @@ pub const DeleteRepositoryInput = struct {
     /// The force option can be used to delete a repository that contains images. If
     /// the force
     /// option is not used, the repository must be empty prior to deletion.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The Amazon Web Services account ID that's associated with the public
     /// registry that contains the

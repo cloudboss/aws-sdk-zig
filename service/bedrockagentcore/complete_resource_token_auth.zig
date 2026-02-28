@@ -22,7 +22,8 @@ pub const CompleteResourceTokenAuthInput = struct {
     };
 };
 
-pub const CompleteResourceTokenAuthOutput = struct {};
+pub const CompleteResourceTokenAuthOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -53,7 +53,7 @@ pub const GetMediaForFragmentListOutput = struct {
     /// * AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the
     ///
     /// * AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the exception
-    payload: aws.http.StreamingBody = "",
+    payload: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetMediaForFragmentListOutput) void {
         self.payload.deinit();

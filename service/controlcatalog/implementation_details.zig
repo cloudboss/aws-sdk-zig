@@ -26,10 +26,10 @@ pub const ImplementationDetails = struct {
     identifier: ?[]const u8,
 
     /// A string that describes a control's implementation type.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .identifier = "Identifier",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

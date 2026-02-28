@@ -53,7 +53,7 @@ pub const ICD10CMAttribute = struct {
     traits: ?[]const ICD10CMTrait,
 
     /// The type of attribute. InferICD10CM detects entities of the type `DX_NAME`.
-    type: ?ICD10CMAttributeType,
+    @"type": ?ICD10CMAttributeType,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",
@@ -65,6 +65,6 @@ pub const ICD10CMAttribute = struct {
         .score = "Score",
         .text = "Text",
         .traits = "Traits",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

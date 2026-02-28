@@ -14,29 +14,29 @@ pub const DescribeCacheInput = struct {
 
 pub const DescribeCacheOutput = struct {
     /// The amount of cache in bytes allocated to a gateway.
-    cache_allocated_in_bytes: i64 = 0,
+    cache_allocated_in_bytes: ?i64 = null,
 
     /// The file share's contribution to the overall percentage of the gateway's
     /// cache
     /// that has not been persisted to Amazon Web Services. The sample is taken at
     /// the end of the
     /// reporting period.
-    cache_dirty_percentage: f64 = 0,
+    cache_dirty_percentage: ?f64 = null,
 
     /// Percent of application read operations from the file shares that are served
     /// from cache.
     /// The sample is taken at the end of the reporting period.
-    cache_hit_percentage: f64 = 0,
+    cache_hit_percentage: ?f64 = null,
 
     /// Percent of application read operations from the file shares that are not
     /// served from
     /// cache. The sample is taken at the end of the reporting period.
-    cache_miss_percentage: f64 = 0,
+    cache_miss_percentage: ?f64 = null,
 
     /// Percent use of the gateway's cache storage. This metric applies only to the
     /// gateway-cached volume setup. The sample is taken at the end of the reporting
     /// period.
-    cache_used_percentage: f64 = 0,
+    cache_used_percentage: ?f64 = null,
 
     /// An array of strings that identify disks that are to be configured as working
     /// storage.

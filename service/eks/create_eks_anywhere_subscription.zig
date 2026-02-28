@@ -10,7 +10,7 @@ const EksAnywhereSubscription = @import("eks_anywhere_subscription.zig").EksAnyw
 pub const CreateEksAnywhereSubscriptionInput = struct {
     /// A boolean indicating whether the subscription auto renews at the end of the
     /// term.
-    auto_renew: bool = false,
+    auto_renew: ?bool = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure
     /// the idempotency of the request.
@@ -19,7 +19,7 @@ pub const CreateEksAnywhereSubscriptionInput = struct {
     /// The number of licenses to purchase with the subscription. Valid values are
     /// between 1
     /// and 100. This value can't be changed after creating the subscription.
-    license_quantity: i32 = 0,
+    license_quantity: ?i32 = null,
 
     /// The license type for all licenses in the subscription. Valid value is
     /// CLUSTER. With

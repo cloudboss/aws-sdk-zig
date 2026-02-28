@@ -9,10 +9,10 @@ pub const SearchContactsTimestampCondition = struct {
     condition_type: SearchContactsTimeRangeConditionType,
 
     /// Type of the timestamps to use for the filter.
-    type: SearchContactsTimeRangeType,
+    @"type": SearchContactsTimeRangeType,
 
     pub const json_field_names = .{
         .condition_type = "ConditionType",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -17,7 +17,7 @@ pub const DescribeSavingsPlansOfferingRatesInput = struct {
     /// The maximum number of results to return with a single call. To retrieve
     /// additional
     /// results, make another call with the returned token value.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The token for the next page of results.
     next_token: ?[]const u8 = null,

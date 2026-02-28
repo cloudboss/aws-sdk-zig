@@ -8,7 +8,7 @@ const AbbreviatedExecution = @import("abbreviated_execution.zig").AbbreviatedExe
 
 pub const ListPlanExecutionsInput = struct {
     /// The number of objects that you want to return with this call.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// Specifies that you want to receive the next page of results. Valid only if
     /// you received a `nextToken` response in the previous request. If you did, it

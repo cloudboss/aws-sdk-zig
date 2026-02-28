@@ -14,7 +14,7 @@ pub const ListConnectionsInput = struct {
     connection_type: ?[]const u8 = null,
 
     /// The maximum number of connections to return in a single response.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// The token for retrieving the next page of results in paginated responses.
     next_token: ?[]const u8 = null,

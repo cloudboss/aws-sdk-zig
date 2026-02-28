@@ -33,7 +33,7 @@ pub const GetLogAnomalyDetectorOutput = struct {
     anomaly_visibility_time: ?i64 = null,
 
     /// The date and time when this anomaly detector was created.
-    creation_time_stamp: i64 = 0,
+    creation_time_stamp: ?i64 = null,
 
     /// The name of the log anomaly detector
     detector_name: ?[]const u8 = null,
@@ -53,7 +53,7 @@ pub const GetLogAnomalyDetectorOutput = struct {
     kms_key_id: ?[]const u8 = null,
 
     /// The date and time when this anomaly detector was most recently modified.
-    last_modified_time_stamp: i64 = 0,
+    last_modified_time_stamp: ?i64 = null,
 
     /// An array of structures, where each structure contains the ARN of a log group
     /// associated

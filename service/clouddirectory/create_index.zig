@@ -12,7 +12,7 @@ pub const CreateIndexInput = struct {
 
     /// Indicates whether the attribute that is being indexed has unique values or
     /// not.
-    is_unique: bool = false,
+    is_unique: ?bool = null,
 
     /// The name of the link between the parent object and the index object.
     link_name: ?[]const u8 = null,

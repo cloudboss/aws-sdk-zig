@@ -1,2 +1,3 @@
 /// The response to the request.
-pub const TagResourceResponse = struct {};
+pub const TagResourceResponse = struct {
+};

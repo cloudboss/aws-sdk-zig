@@ -18,7 +18,7 @@ pub const ListElasticsearchInstanceTypesInput = struct {
 
     /// Set this value to limit the number of results returned.
     /// Value provided must be greater than 30 else it wont be honored.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// NextToken should be sent in case if earlier API call produced result
     /// containing NextToken. It is used for pagination.

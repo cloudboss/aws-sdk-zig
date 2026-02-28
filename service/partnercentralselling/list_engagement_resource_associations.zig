@@ -26,7 +26,7 @@ pub const ListEngagementResourceAssociationsInput = struct {
 
     /// Limits the number of results returned in a single call. Use this to control
     /// the number of results returned, especially useful for pagination.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// A token used for pagination of results. Include this token in subsequent
     /// requests to retrieve the next set of results.

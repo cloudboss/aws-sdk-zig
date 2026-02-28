@@ -15,7 +15,7 @@ pub const ListSavingsPlansPurchaseRecommendationGenerationInput = struct {
 
     /// The number of recommendations that you want returned in a single response
     /// object.
-    page_size: i32 = 0,
+    page_size: ?i32 = null,
 
     /// The IDs for each specific recommendation.
     recommendation_ids: ?[]const []const u8 = null,

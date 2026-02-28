@@ -22,7 +22,7 @@ pub const DeleteAutoScalingConfigurationInput = struct {
     /// When `DeleteAllRevisions` is set to `true`, the only valid value for the
     /// Amazon Resource Name (ARN) is a partial ARN ending
     /// with: `.../name`.
-    delete_all_revisions: bool = false,
+    delete_all_revisions: ?bool = null,
 
     pub const json_field_names = .{
         .auto_scaling_configuration_arn = "AutoScalingConfigurationArn",

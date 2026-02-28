@@ -15,7 +15,7 @@ pub const AssignTapePoolInput = struct {
     /// console.
     ///
     /// Valid values: `TRUE` | `FALSE`
-    bypass_governance_retention: bool = false,
+    bypass_governance_retention: ?bool = null,
 
     /// The ID of the pool that you want to add your tape to for archiving. The tape
     /// in this

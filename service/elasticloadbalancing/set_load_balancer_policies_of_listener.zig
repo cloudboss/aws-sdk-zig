@@ -10,7 +10,7 @@ pub const SetLoadBalancerPoliciesOfListenerInput = struct {
     load_balancer_name: []const u8,
 
     /// The external port of the load balancer.
-    load_balancer_port: i32 = 0,
+    load_balancer_port: ?i32 = null,
 
     /// The names of the policies. This list must include all policies to be
     /// enabled. If you omit a policy that is currently enabled, it is disabled. If
@@ -18,7 +18,8 @@ pub const SetLoadBalancerPoliciesOfListenerInput = struct {
     policy_names: []const []const u8,
 };
 
-pub const SetLoadBalancerPoliciesOfListenerOutput = struct {};
+pub const SetLoadBalancerPoliciesOfListenerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

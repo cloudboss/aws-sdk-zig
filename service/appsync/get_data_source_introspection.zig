@@ -13,7 +13,7 @@ pub const GetDataSourceIntrospectionInput = struct {
     /// contains the SDL for that type. The SDL only contains the type data and no
     /// additional
     /// metadata or directives.
-    include_models_sdl: bool = false,
+    include_models_sdl: ?bool = null,
 
     /// The introspection ID. Each introspection contains a unique ID that can be
     /// used to
@@ -22,7 +22,7 @@ pub const GetDataSourceIntrospectionInput = struct {
 
     /// The maximum number of introspected types that will be returned in a single
     /// response.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Determines the number of types to be returned in a single response before
     /// paginating.

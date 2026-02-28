@@ -12,7 +12,7 @@ pub const DescribeKeyRegistrationInput = struct {
     aws_account_id: []const u8,
 
     /// Determines whether the request returns the default key only.
-    default_key_only: bool = false,
+    default_key_only: ?bool = null,
 
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",
@@ -35,7 +35,7 @@ pub const DescribeKeyRegistrationOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",

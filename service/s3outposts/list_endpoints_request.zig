@@ -1,6 +1,6 @@
 pub const ListEndpointsRequest = struct {
     /// The maximum number of endpoints that will be returned in the response.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// If a previous response from this operation included a `NextToken` value,
     /// provide that value here to retrieve the next page of results.

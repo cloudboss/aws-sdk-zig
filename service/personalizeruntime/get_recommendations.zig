@@ -68,7 +68,7 @@ pub const GetRecommendationsInput = struct {
     /// The number of results to return. The default is 25. If you are including
     /// metadata in recommendations, the maximum is 50. Otherwise, the maximum is
     /// 500.
-    num_results: i32 = 0,
+    num_results: ?i32 = null,
 
     /// The promotions to apply to the recommendation request.
     /// A promotion defines additional business rules that apply to a configurable

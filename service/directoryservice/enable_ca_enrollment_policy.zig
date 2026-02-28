@@ -26,7 +26,8 @@ pub const EnableCAEnrollmentPolicyInput = struct {
     };
 };
 
-pub const EnableCAEnrollmentPolicyOutput = struct {};
+pub const EnableCAEnrollmentPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

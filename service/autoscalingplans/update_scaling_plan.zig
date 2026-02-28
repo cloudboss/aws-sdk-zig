@@ -34,7 +34,8 @@ pub const UpdateScalingPlanInput = struct {
     };
 };
 
-pub const UpdateScalingPlanOutput = struct {};
+pub const UpdateScalingPlanOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

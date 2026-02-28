@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuthorizationData = @import("authorization_data.zig").AuthorizationData;
 
-pub const GetAuthorizationTokenInput = struct {};
+pub const GetAuthorizationTokenInput = struct {
+};
 
 pub const GetAuthorizationTokenOutput = struct {
     /// An authorization token data object that corresponds to a public registry.

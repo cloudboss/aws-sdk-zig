@@ -30,7 +30,7 @@ pub const UpdateDataTableAttributeInput = struct {
     /// Whether the attribute should be treated as a primary key. Converting to
     /// primary attribute requires existing
     /// values to maintain uniqueness.
-    primary: bool = false,
+    primary: ?bool = null,
 
     /// The updated validation rules for the attribute. Changes do not affect
     /// existing values until they are

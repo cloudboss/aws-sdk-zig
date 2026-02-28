@@ -30,7 +30,7 @@ pub const UpdateLogPatternInput = struct {
     /// `High` severity pattern translates to a `250,000` rank. Rank
     /// values less than `1` or greater than `1,000,000` are reserved for
     /// Amazon Web Services provided patterns.
-    rank: i32 = 0,
+    rank: ?i32 = null,
 
     /// The name of the resource group.
     resource_group_name: []const u8,

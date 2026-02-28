@@ -8,7 +8,7 @@ const UpgradeHistory = @import("upgrade_history.zig").UpgradeHistory;
 pub const GetUpgradeHistoryInput = struct {
     domain_name: []const u8,
 
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     next_token: ?[]const u8 = null,
 

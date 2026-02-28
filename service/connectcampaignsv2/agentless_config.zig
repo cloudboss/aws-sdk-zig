@@ -1,2 +1,3 @@
 /// Agentless config
-pub const AgentlessConfig = struct {};
+pub const AgentlessConfig = struct {
+};

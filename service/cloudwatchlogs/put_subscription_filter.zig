@@ -16,7 +16,7 @@ pub const PutSubscriptionFilterInput = struct {
     /// specify `true`, the subscription filter will be applied on the transformed
     /// version
     /// of the log events instead of the original ingested log events.
-    apply_on_transformed_logs: bool = false,
+    apply_on_transformed_logs: ?bool = null,
 
     /// The ARN of the destination to deliver matching log events to. Currently, the
     /// supported

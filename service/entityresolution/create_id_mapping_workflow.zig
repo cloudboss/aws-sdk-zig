@@ -29,7 +29,7 @@ pub const CreateIdMappingWorkflowInput = struct {
 
     /// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes
     /// this role to create resources on your behalf as part of workflow execution.
-    role_arn: []const u8 = "",
+    role_arn: ?[]const u8 = null,
 
     /// The tags used to organize, track, or control access for this resource.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -71,7 +71,7 @@ pub const CreateIdMappingWorkflowOutput = struct {
 
     /// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes
     /// this role to create resources on your behalf as part of workflow execution.
-    role_arn: []const u8 = "",
+    role_arn: ?[]const u8 = null,
 
     /// The ARN (Amazon Resource Name) that Entity Resolution generated for the
     /// `IDMappingWorkflow`.

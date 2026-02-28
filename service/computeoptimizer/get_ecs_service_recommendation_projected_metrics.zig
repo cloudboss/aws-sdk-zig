@@ -11,7 +11,7 @@ pub const GetECSServiceRecommendationProjectedMetricsInput = struct {
     end_time: i64,
 
     /// The granularity, in seconds, of the projected metrics data points.
-    period: i32 = 0,
+    period: ?i32 = null,
 
     /// The ARN that identifies the Amazon ECS service.
     ///

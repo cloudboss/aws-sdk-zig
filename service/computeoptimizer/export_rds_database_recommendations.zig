@@ -64,7 +64,7 @@ pub const ExportRDSDatabaseRecommendationsInput = struct {
     /// If this parameter or the account ID parameter is omitted, recommendations
     /// for
     /// member accounts aren't included in the export.
-    include_member_accounts: bool = false,
+    include_member_accounts: ?bool = null,
 
     recommendation_preferences: ?RecommendationPreferences = null,
 

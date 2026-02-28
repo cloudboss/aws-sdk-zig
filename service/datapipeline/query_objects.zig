@@ -43,7 +43,7 @@ pub const QueryObjectsInput = struct {
 pub const QueryObjectsOutput = struct {
     /// Indicates whether there are more results that can be obtained by a
     /// subsequent call.
-    has_more_results: bool = false,
+    has_more_results: ?bool = null,
 
     /// The identifiers that match the query selectors.
     ids: ?[]const []const u8 = null,

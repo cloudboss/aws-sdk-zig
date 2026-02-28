@@ -39,7 +39,7 @@ pub const GetSnapshotBlockInput = struct {
 
 pub const GetSnapshotBlockOutput = struct {
     /// The data content of the block.
-    block_data: aws.http.StreamingBody = "",
+    block_data: ?aws.http.StreamingBody = null,
 
     /// The checksum generated for the block, which is Base64 encoded.
     checksum: ?[]const u8 = null,

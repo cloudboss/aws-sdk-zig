@@ -14,7 +14,8 @@ pub const DeleteUploadInput = struct {
     };
 };
 
-pub const DeleteUploadOutput = struct {};
+pub const DeleteUploadOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

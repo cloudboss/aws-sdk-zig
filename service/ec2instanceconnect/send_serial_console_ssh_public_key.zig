@@ -11,7 +11,7 @@ pub const SendSerialConsoleSSHPublicKeyInput = struct {
     /// The serial port of the EC2 instance. Currently only port 0 is supported.
     ///
     /// Default: 0
-    serial_port: i32 = 0,
+    serial_port: ?i32 = null,
 
     /// The public key material. To use the public key, you must have the matching
     /// private
@@ -34,7 +34,7 @@ pub const SendSerialConsoleSSHPublicKeyOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// Is true if the request succeeds and an error otherwise.
-    success: bool = false,
+    success: ?bool = null,
 
     pub const json_field_names = .{
         .request_id = "RequestId",

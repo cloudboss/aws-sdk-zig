@@ -26,6 +26,7 @@ import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.XmlFlattenedTrait
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.NamingUtil
+import software.amazon.smithy.zig.DefaultValueUtil
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigWriter
 
@@ -530,11 +531,16 @@ class SerdeGenerator(
         }
         if (hasMembers) {
             writer.write("var result: \$L = undefined;", typeName)
-            // Initialize optional fields to null (required fields stay undefined until parsed)
+            // Initialize fields with @default to their default value, optional fields without @default to null
             for ((memberName, memberShape) in shape.allMembers) {
                 if (!memberShape.isRequired) {
                     val fieldName = NamingUtil.toFieldName(memberName)
-                    writer.write("result.\$L = null;", fieldName)
+                    val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, symbolProvider)
+                    if (defaultValue != null) {
+                        writer.write("result.\$L = \$L;", fieldName, defaultValue.literal)
+                    } else {
+                        writer.write("result.\$L = null;", fieldName)
+                    }
                 }
             }
         } else {

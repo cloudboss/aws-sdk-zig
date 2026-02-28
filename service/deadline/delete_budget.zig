@@ -17,7 +17,8 @@ pub const DeleteBudgetInput = struct {
     };
 };
 
-pub const DeleteBudgetOutput = struct {};
+pub const DeleteBudgetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

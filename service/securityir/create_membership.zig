@@ -24,7 +24,7 @@ pub const CreateMembershipInput = struct {
     ///   and future accounts in the Amazon Web Services Organization.
     /// * If set to *false*: The membership will only apply to explicitly specified
     ///   accounts.
-    cover_entire_organization: bool = true,
+    cover_entire_organization: ?bool = null,
 
     /// Required element used in combination with CreateMembership to add customer
     /// incident response team members and trusted partners to the membership.

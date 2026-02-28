@@ -35,7 +35,8 @@ pub const PutDataExportConfigurationInput = struct {
     };
 };
 
-pub const PutDataExportConfigurationOutput = struct {};
+pub const PutDataExportConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

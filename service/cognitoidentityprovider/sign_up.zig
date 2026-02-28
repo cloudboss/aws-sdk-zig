@@ -146,7 +146,7 @@ pub const SignUpOutput = struct {
     /// users
     /// with a [pre sign-up Lambda
     /// trigger](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-sign-up.html).
-    user_confirmed: bool = false,
+    user_confirmed: ?bool = null,
 
     /// The unique identifier of the new user, for example
     /// `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.

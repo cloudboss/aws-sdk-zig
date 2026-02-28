@@ -8,7 +8,7 @@ pub const UpdateOrganizationConfigurationInput = struct {
     /// Indicates whether to automatically enable new organization accounts as
     /// member accounts
     /// in the organization behavior graph.
-    auto_enable: bool = false,
+    auto_enable: ?bool = null,
 
     /// The ARN of the organization behavior graph.
     graph_arn: []const u8,

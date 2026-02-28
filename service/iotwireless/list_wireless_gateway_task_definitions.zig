@@ -8,7 +8,7 @@ const UpdateWirelessGatewayTaskEntry = @import("update_wireless_gateway_task_ent
 
 pub const ListWirelessGatewayTaskDefinitionsInput = struct {
     /// The maximum number of results to return in this operation.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// To retrieve the next set of results, the `nextToken` value from a previous
     /// response; otherwise **null** to receive the first set of

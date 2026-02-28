@@ -7,7 +7,7 @@ const ChannelGroupListConfiguration = @import("channel_group_list_configuration.
 
 pub const ListChannelGroupsInput = struct {
     /// The maximum number of results to return in the response.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The pagination token from the GET list request. Use the token to fetch the
     /// next page of results.

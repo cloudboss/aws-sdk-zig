@@ -13,7 +13,8 @@ pub const DeleteDirectoryConfigInput = struct {
     };
 };
 
-pub const DeleteDirectoryConfigOutput = struct {};
+pub const DeleteDirectoryConfigOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

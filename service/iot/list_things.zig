@@ -29,7 +29,7 @@ pub const ListThingsInput = struct {
     /// When `false`, or not present, the action returns only the thing
     /// resources with attribute values that match the entire `attributeValue`
     /// provided.
-    use_prefix_attribute_value: bool = false,
+    use_prefix_attribute_value: ?bool = null,
 
     pub const json_field_names = .{
         .attribute_name = "attributeName",

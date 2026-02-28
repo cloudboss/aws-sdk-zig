@@ -17,7 +17,8 @@ pub const DeletePreparedStatementInput = struct {
     };
 };
 
-pub const DeletePreparedStatementOutput = struct {};
+pub const DeletePreparedStatementOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

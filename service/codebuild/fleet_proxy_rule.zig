@@ -10,11 +10,11 @@ pub const FleetProxyRule = struct {
     entities: []const []const u8,
 
     /// The type of proxy rule.
-    type: FleetProxyRuleType,
+    @"type": FleetProxyRuleType,
 
     pub const json_field_names = .{
         .effect = "effect",
         .entities = "entities",
-        .type = "type",
+        .@"type" = "type",
     };
 };

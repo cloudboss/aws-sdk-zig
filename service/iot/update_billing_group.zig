@@ -28,7 +28,7 @@ pub const UpdateBillingGroupInput = struct {
 
 pub const UpdateBillingGroupOutput = struct {
     /// The latest version of the billing group.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .version = "version",

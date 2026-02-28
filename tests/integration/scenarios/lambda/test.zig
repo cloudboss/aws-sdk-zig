@@ -137,8 +137,7 @@ test "GetAccountSettings total_code_size is non-negative" {
     );
 
     const limit = result.account_limit orelse return error.MissingAccountLimit;
-    const total_code_size = limit.total_code_size orelse
-        return error.MissingTotalCodeSize;
+    const total_code_size = limit.total_code_size;
     try std.testing.expect(total_code_size >= 0);
 }
 
@@ -154,8 +153,7 @@ test "GetAccountSettings concurrent_executions is positive" {
     );
 
     const limit = result.account_limit orelse return error.MissingAccountLimit;
-    const concurrent = limit.concurrent_executions orelse
-        return error.MissingConcurrentExecutions;
+    const concurrent = limit.concurrent_executions;
     try std.testing.expect(concurrent > 0);
 }
 
@@ -171,8 +169,7 @@ test "GetAccountSettings code_size_unzipped is positive" {
     );
 
     const limit = result.account_limit orelse return error.MissingAccountLimit;
-    const unzipped = limit.code_size_unzipped orelse
-        return error.MissingCodeSizeUnzipped;
+    const unzipped = limit.code_size_unzipped;
     try std.testing.expect(unzipped > 0);
 }
 
@@ -188,8 +185,7 @@ test "GetAccountSettings account_usage is present" {
     );
 
     const usage = result.account_usage orelse return error.MissingAccountUsage;
-    const function_count = usage.function_count orelse
-        return error.MissingFunctionCount;
+    const function_count = usage.function_count;
     try std.testing.expect(function_count >= 0);
 }
 
@@ -205,9 +201,9 @@ test "GetAccountSettings account_limit has all expected fields" {
     );
 
     const limit = result.account_limit orelse return error.MissingAccountLimit;
-    _ = limit.total_code_size orelse return error.MissingField;
-    _ = limit.concurrent_executions orelse return error.MissingField;
-    _ = limit.code_size_unzipped orelse return error.MissingField;
-    _ = limit.code_size_zipped orelse return error.MissingField;
+    _ = limit.total_code_size;
+    _ = limit.concurrent_executions;
+    _ = limit.code_size_unzipped;
+    _ = limit.code_size_zipped;
     _ = limit.unreserved_concurrent_executions orelse return error.MissingField;
 }

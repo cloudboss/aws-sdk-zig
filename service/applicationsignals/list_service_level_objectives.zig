@@ -19,7 +19,7 @@ pub const ListServiceLevelObjectivesInput = struct {
     /// ID in `KeyAttribute` filter for service source account and
     /// `SloOwnerawsaccountID` for SLO source account with `IncludeLinkedAccounts`
     /// to filter the returned data to only a single source account.
-    include_linked_accounts: bool = false,
+    include_linked_accounts: ?bool = null,
 
     /// You can use this optional field to specify which services you want to
     /// retrieve SLO information for.

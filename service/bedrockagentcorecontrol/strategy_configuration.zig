@@ -19,13 +19,13 @@ pub const StrategyConfiguration = struct {
     self_managed_configuration: ?SelfManagedConfiguration,
 
     /// The type of override for the strategy configuration.
-    type: ?OverrideType,
+    @"type": ?OverrideType,
 
     pub const json_field_names = .{
         .consolidation = "consolidation",
         .extraction = "extraction",
         .reflection = "reflection",
         .self_managed_configuration = "selfManagedConfiguration",
-        .type = "type",
+        .@"type" = "type",
     };
 };

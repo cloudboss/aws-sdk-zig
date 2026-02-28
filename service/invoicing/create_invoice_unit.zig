@@ -28,7 +28,7 @@ pub const CreateInvoiceUnitInput = struct {
 
     /// Whether the invoice unit based tax inheritance is/ should be enabled or
     /// disabled.
-    tax_inheritance_disabled: bool = false,
+    tax_inheritance_disabled: ?bool = null,
 
     pub const json_field_names = .{
         .description = "Description",

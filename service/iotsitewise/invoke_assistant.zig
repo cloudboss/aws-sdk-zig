@@ -15,7 +15,7 @@ pub const InvokeAssistantInput = struct {
     /// Specifies if to turn trace on or not. It is used to track the SiteWise
     /// Assistant's
     /// reasoning, and data access process.
-    enable_trace: bool = false,
+    enable_trace: ?bool = null,
 
     /// A text message sent to the SiteWise Assistant by the user.
     message: []const u8,

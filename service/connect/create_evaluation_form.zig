@@ -12,7 +12,7 @@ const EvaluationFormTargetConfiguration = @import("evaluation_form_target_config
 
 pub const CreateEvaluationFormInput = struct {
     /// A boolean flag indicating whether to create evaluation form in draft state.
-    as_draft: bool = false,
+    as_draft: ?bool = null,
 
     /// Configuration information about automated evaluations.
     auto_evaluation_configuration: ?EvaluationFormAutoEvaluationConfiguration = null,

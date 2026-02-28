@@ -11,7 +11,7 @@ pub const GetMemoryInput = struct {
     memory_id: []const u8,
 
     /// The level of detail to return for the memory.
-    view: MemoryView = "full",
+    view: ?MemoryView = null,
 
     pub const json_field_names = .{
         .memory_id = "memoryId",

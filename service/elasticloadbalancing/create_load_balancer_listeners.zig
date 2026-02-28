@@ -14,7 +14,8 @@ pub const CreateLoadBalancerListenersInput = struct {
     load_balancer_name: []const u8,
 };
 
-pub const CreateLoadBalancerListenersOutput = struct {};
+pub const CreateLoadBalancerListenersOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

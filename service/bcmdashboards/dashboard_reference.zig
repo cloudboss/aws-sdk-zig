@@ -16,7 +16,7 @@ pub const DashboardReference = struct {
     name: []const u8,
 
     /// The dashboard type.
-    type: DashboardType,
+    @"type": DashboardType,
 
     /// The timestamp when the dashboard was last modified.
     updated_at: i64,
@@ -26,7 +26,7 @@ pub const DashboardReference = struct {
         .created_at = "createdAt",
         .description = "description",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

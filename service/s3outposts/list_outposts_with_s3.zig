@@ -7,7 +7,7 @@ const Outpost = @import("outpost.zig").Outpost;
 
 pub const ListOutpostsWithS3Input = struct {
     /// The maximum number of Outposts to return. The limit is 100.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// When you can get additional results from the `ListOutpostsWithS3` call, a
     /// `NextToken` parameter is returned in the output. You can then pass in a

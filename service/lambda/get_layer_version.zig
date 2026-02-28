@@ -12,7 +12,7 @@ pub const GetLayerVersionInput = struct {
     layer_name: []const u8,
 
     /// The version number.
-    version_number: i64,
+    version_number: ?i64 = null,
 
     pub const json_field_names = .{
         .layer_name = "LayerName",
@@ -55,7 +55,7 @@ pub const GetLayerVersionOutput = struct {
     license_info: ?[]const u8 = null,
 
     /// The version number.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .compatible_architectures = "CompatibleArchitectures",

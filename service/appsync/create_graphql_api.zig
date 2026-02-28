@@ -83,14 +83,14 @@ pub const CreateGraphqlApiInput = struct {
     /// produces an error, the error will be thrown upwards to the first nullable
     /// field
     /// available.
-    query_depth_limit: i32 = 0,
+    query_depth_limit: ?i32 = null,
 
     /// The maximum number of resolvers that can be invoked in a single request. The
     /// default
     /// value is `0` (or unspecified), which will set the limit to `10000`.
     /// When specified, the limit value can be between `1` and `10000`. This
     /// field will produce a limit error if the operation falls out of bounds.
-    resolver_count_limit: i32 = 0,
+    resolver_count_limit: ?i32 = null,
 
     /// A `TagMap` object.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -106,7 +106,7 @@ pub const CreateGraphqlApiInput = struct {
 
     /// A flag indicating whether to use X-Ray tracing for the
     /// `GraphqlApi`.
-    xray_enabled: bool = false,
+    xray_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .additional_authentication_providers = "additionalAuthenticationProviders",

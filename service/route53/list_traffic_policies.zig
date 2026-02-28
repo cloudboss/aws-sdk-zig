@@ -37,7 +37,7 @@ pub const ListTrafficPoliciesOutput = struct {
     /// another `ListTrafficPolicies` request and specifying the value of
     /// `TrafficPolicyIdMarker` in the `TrafficPolicyIdMarker` request
     /// parameter.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// The value that you specified for the `MaxItems` parameter in the
     /// `ListTrafficPolicies` request that produced the current response.

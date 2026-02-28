@@ -7,7 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const StartSchemaExtensionInput = struct {
     /// If true, creates a snapshot of the directory before applying the schema
     /// extension.
-    create_snapshot_before_schema_extension: bool = false,
+    create_snapshot_before_schema_extension: ?bool = null,
 
     /// A description of the schema extension.
     description: []const u8,

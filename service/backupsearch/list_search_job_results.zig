@@ -7,7 +7,7 @@ const ResultItem = @import("result_item.zig").ResultItem;
 
 pub const ListSearchJobResultsInput = struct {
     /// The maximum number of resource list items to be returned.
-    max_results: i32 = 1000,
+    max_results: ?i32 = null,
 
     /// The next item following a partial list of returned search job results.
     ///

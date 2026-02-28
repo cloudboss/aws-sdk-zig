@@ -38,7 +38,7 @@ pub const PutResolverRulePolicyInput = struct {
 
 pub const PutResolverRulePolicyOutput = struct {
     /// Whether the `PutResolverRulePolicy` request was successful.
-    return_value: bool = false,
+    return_value: ?bool = null,
 
     pub const json_field_names = .{
         .return_value = "ReturnValue",

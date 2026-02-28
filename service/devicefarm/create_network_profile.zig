@@ -25,7 +25,7 @@ pub const CreateNetworkProfileInput = struct {
     downlink_jitter_ms: ?i64 = null,
 
     /// Proportion of received packets that fail to arrive from 0 to 100 percent.
-    downlink_loss_percent: i32 = 0,
+    downlink_loss_percent: ?i32 = null,
 
     /// The name for the new network profile.
     name: []const u8,
@@ -35,7 +35,7 @@ pub const CreateNetworkProfileInput = struct {
     project_arn: []const u8,
 
     /// The type of network profile to create. Valid values are listed here.
-    type: ?NetworkProfileType = null,
+    @"type": ?NetworkProfileType = null,
 
     /// The data throughput rate in bits per second, as an integer from 0 to
     /// 104857600.
@@ -53,7 +53,7 @@ pub const CreateNetworkProfileInput = struct {
 
     /// Proportion of transmitted packets that fail to arrive from 0 to 100
     /// percent.
-    uplink_loss_percent: i32 = 0,
+    uplink_loss_percent: ?i32 = null,
 
     pub const json_field_names = .{
         .description = "description",
@@ -63,7 +63,7 @@ pub const CreateNetworkProfileInput = struct {
         .downlink_loss_percent = "downlinkLossPercent",
         .name = "name",
         .project_arn = "projectArn",
-        .type = "type",
+        .@"type" = "type",
         .uplink_bandwidth_bits = "uplinkBandwidthBits",
         .uplink_delay_ms = "uplinkDelayMs",
         .uplink_jitter_ms = "uplinkJitterMs",

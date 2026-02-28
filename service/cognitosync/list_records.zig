@@ -51,15 +51,15 @@ pub const ListRecordsInput = struct {
 
 pub const ListRecordsOutput = struct {
     /// Total number of records.
-    count: i32 = 0,
+    count: ?i32 = null,
 
     /// A boolean value
     /// specifying whether to delete the dataset locally.
-    dataset_deleted_after_requested_sync_count: bool = false,
+    dataset_deleted_after_requested_sync_count: ?bool = null,
 
     /// Indicates whether the dataset
     /// exists.
-    dataset_exists: bool = false,
+    dataset_exists: ?bool = null,
 
     /// Server sync count for this
     /// dataset.

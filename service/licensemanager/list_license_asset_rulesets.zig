@@ -19,7 +19,7 @@ pub const ListLicenseAssetRulesetsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// Specifies whether to show License Manager managed license asset rulesets.
-    show_aws_managed_license_asset_rulesets: bool = false,
+    show_aws_managed_license_asset_rulesets: ?bool = null,
 
     pub const json_field_names = .{
         .filters = "Filters",

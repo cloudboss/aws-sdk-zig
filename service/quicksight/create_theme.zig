@@ -70,7 +70,7 @@ pub const CreateThemeOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The ID of the theme.
     theme_id: ?[]const u8 = null,

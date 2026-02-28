@@ -22,7 +22,7 @@ pub const CreateOrganizationInput = struct {
     /// Microsoft Exchange. If `true`, you must include a AD Connector directory ID
     /// in
     /// the request.
-    enable_interoperability: bool = false,
+    enable_interoperability: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of a customer managed key from AWS KMS.
     kms_key_arn: ?[]const u8 = null,

@@ -30,7 +30,7 @@ pub const GetDocumentationPartsInput = struct {
     rest_api_id: []const u8,
 
     /// The type of API entities of the to-be-retrieved documentation parts.
-    type: ?DocumentationPartType = null,
+    @"type": ?DocumentationPartType = null,
 
     pub const json_field_names = .{
         .limit = "limit",
@@ -39,7 +39,7 @@ pub const GetDocumentationPartsInput = struct {
         .path = "path",
         .position = "position",
         .rest_api_id = "restApiId",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -133,7 +133,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetDocumentationPartsInput,
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

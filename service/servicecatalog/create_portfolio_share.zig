@@ -42,12 +42,12 @@ pub const CreatePortfolioShareInput = struct {
     /// `IAM_PATTERN` on their portfolio. You can create the principals in the
     /// recipient account before or
     /// after creating the share.
-    share_principals: bool = false,
+    share_principals: ?bool = null,
 
     /// Enables or disables `TagOptions ` sharing when creating the portfolio share.
     /// If this flag is not
     /// provided, TagOptions sharing is disabled.
-    share_tag_options: bool = false,
+    share_tag_options: ?bool = null,
 
     pub const json_field_names = .{
         .accept_language = "AcceptLanguage",

@@ -16,14 +16,14 @@ pub const CreateQueueInput = struct {
     client_token: ?[]const u8 = null,
 
     /// The default action to take on a queue if a budget isn't configured.
-    default_budget_action: DefaultQueueBudgetAction = "NONE",
+    default_budget_action: ?DefaultQueueBudgetAction = null,
 
     /// The description of the queue.
     ///
     /// This field can store any content. Escape or encode this content before
     /// displaying it on a webpage or any other system that might interpret the
     /// content of this field.
-    description: []const u8 = "",
+    description: ?[]const u8 = null,
 
     /// The display name of the queue.
     ///

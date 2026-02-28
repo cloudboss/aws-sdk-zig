@@ -44,7 +44,7 @@ pub const TransformerJobSucceededWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getTransformerJob(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getTransformerJob(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

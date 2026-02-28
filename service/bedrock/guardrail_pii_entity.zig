@@ -35,7 +35,7 @@ pub const GuardrailPiiEntity = struct {
     output_enabled: ?bool,
 
     /// The type of PII entity. For example, Social Security Number.
-    type: GuardrailPiiEntityType,
+    @"type": GuardrailPiiEntityType,
 
     pub const json_field_names = .{
         .action = "action",
@@ -43,6 +43,6 @@ pub const GuardrailPiiEntity = struct {
         .input_enabled = "inputEnabled",
         .output_action = "outputAction",
         .output_enabled = "outputEnabled",
-        .type = "type",
+        .@"type" = "type",
     };
 };

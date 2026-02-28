@@ -14,7 +14,7 @@ pub const GetFreeTierUsageInput = struct {
     /// The maximum number of results to return in the response. `MaxResults` means
     /// that there can be up to the specified number of values, but there might be
     /// fewer results based on your filters.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The pagination token that indicates the next set of results to retrieve.
     next_token: ?[]const u8 = null,

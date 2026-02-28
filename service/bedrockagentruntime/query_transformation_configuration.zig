@@ -4,9 +4,9 @@ const QueryTransformationType = @import("query_transformation_type.zig").QueryTr
 /// type to `QUERY_DECOMPOSITION`.
 pub const QueryTransformationConfiguration = struct {
     /// The type of transformation to apply to the prompt.
-    type: QueryTransformationType,
+    @"type": QueryTransformationType,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
     };
 };

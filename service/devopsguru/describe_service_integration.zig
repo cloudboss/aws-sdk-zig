@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ServiceIntegrationConfig = @import("service_integration_config.zig").ServiceIntegrationConfig;
 
-pub const DescribeServiceIntegrationInput = struct {};
+pub const DescribeServiceIntegrationInput = struct {
+};
 
 pub const DescribeServiceIntegrationOutput = struct {
     service_integration: ?ServiceIntegrationConfig = null,

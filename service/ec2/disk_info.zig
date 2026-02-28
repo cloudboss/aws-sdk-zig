@@ -9,5 +9,5 @@ pub const DiskInfo = struct {
     size_in_gb: ?i64,
 
     /// The type of disk.
-    type: ?DiskType,
+    @"type": ?DiskType,
 };

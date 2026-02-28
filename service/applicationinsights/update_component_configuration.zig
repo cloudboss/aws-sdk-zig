@@ -43,7 +43,8 @@ pub const UpdateComponentConfigurationInput = struct {
     };
 };
 
-pub const UpdateComponentConfigurationOutput = struct {};
+pub const UpdateComponentConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

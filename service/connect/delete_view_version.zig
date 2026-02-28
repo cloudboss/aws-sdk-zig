@@ -14,7 +14,7 @@ pub const DeleteViewVersionInput = struct {
     view_id: []const u8,
 
     /// The version number of the view.
-    view_version: i32,
+    view_version: ?i32 = null,
 
     pub const json_field_names = .{
         .instance_id = "InstanceId",
@@ -23,7 +23,8 @@ pub const DeleteViewVersionInput = struct {
     };
 };
 
-pub const DeleteViewVersionOutput = struct {};
+pub const DeleteViewVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

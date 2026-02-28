@@ -58,7 +58,7 @@ pub const GetFileOutput = struct {
     file_path: []const u8,
 
     /// The size of the contents of the file, in bytes.
-    file_size: i64 = 0,
+    file_size: ?i64 = null,
 
     pub const json_field_names = .{
         .blob_id = "blobId",

@@ -31,7 +31,7 @@ pub const RemoveSchemaVersionMetadataInput = struct {
 
 pub const RemoveSchemaVersionMetadataOutput = struct {
     /// The latest version of the schema.
-    latest_version: bool = false,
+    latest_version: ?bool = null,
 
     /// The metadata key.
     metadata_key: ?[]const u8 = null,

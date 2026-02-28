@@ -34,7 +34,7 @@ pub const GetMailboxDetailsOutput = struct {
     mailbox_quota: ?i32 = null,
 
     /// The current mailbox size, in MB, for the specified user.
-    mailbox_size: f64 = 0,
+    mailbox_size: ?f64 = null,
 
     pub const json_field_names = .{
         .mailbox_quota = "MailboxQuota",

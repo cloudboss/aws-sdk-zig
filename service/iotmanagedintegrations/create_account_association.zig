@@ -50,7 +50,7 @@ pub const CreateAccountAssociationOutput = struct {
     /// Third-party IoT platform OAuth authorization server URL backed with all the
     /// required parameters to perform end-user authentication. This field will be
     /// empty when using General Authorization flows that do not require OAuth.
-    o_auth_authorization_url: []const u8 = "",
+    o_auth_authorization_url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_association_id = "AccountAssociationId",

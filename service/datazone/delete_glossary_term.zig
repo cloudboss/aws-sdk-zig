@@ -18,7 +18,8 @@ pub const DeleteGlossaryTermInput = struct {
     };
 };
 
-pub const DeleteGlossaryTermOutput = struct {};
+pub const DeleteGlossaryTermOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteEnforcedGuardrailConfigurationInput = struct {
     };
 };
 
-pub const DeleteEnforcedGuardrailConfigurationOutput = struct {};
+pub const DeleteEnforcedGuardrailConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

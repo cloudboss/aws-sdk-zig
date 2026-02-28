@@ -17,7 +17,7 @@ pub const ListDomainMaintenancesInput = struct {
     /// An optional parameter that specifies the maximum number of results to
     /// return. You can
     /// use `nextToken` to get the next page of results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// If your initial `ListDomainMaintenances` operation returns a
     /// `nextToken`, include the returned `nextToken` in subsequent

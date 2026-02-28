@@ -10,7 +10,7 @@ pub const ListSubscribedRuleGroupsInput = struct {
     /// return for this request. If you have more
     /// objects than the number you specify for `Limit`, the response includes a
     /// `NextMarker` value that you can use to get another batch of objects.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// If you specify a value for `Limit` and you have more
     /// `ByteMatchSets`subscribed rule groups than the value of `Limit`,

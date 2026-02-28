@@ -10,10 +10,10 @@ pub const AnomalyResource = struct {
     name: ?[]const u8,
 
     /// The type of the Amazon Web Services resource.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -11,7 +11,7 @@ pub const UpdateFirewallDeleteProtectionInput = struct {
     /// against
     /// accidentally deleting a firewall that is in use. When you create a firewall,
     /// the operation initializes this flag to `TRUE`.
-    delete_protection: bool = false,
+    delete_protection: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the firewall.
     ///
@@ -55,7 +55,7 @@ pub const UpdateFirewallDeleteProtectionOutput = struct {
     /// against
     /// accidentally deleting a firewall that is in use. When you create a firewall,
     /// the operation initializes this flag to `TRUE`.
-    delete_protection: bool = false,
+    delete_protection: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the firewall.
     firewall_arn: ?[]const u8 = null,

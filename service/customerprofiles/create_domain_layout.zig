@@ -20,7 +20,7 @@ pub const CreateDomainLayoutInput = struct {
     /// false, then the layout will not be used by default, but it can be used to
     /// view data by
     /// explicitly selecting it in the console.
-    is_default: bool = false,
+    is_default: ?bool = null,
 
     /// A customizable layout that can be used to view data under a Customer
     /// Profiles domain.
@@ -63,7 +63,7 @@ pub const CreateDomainLayoutOutput = struct {
     /// false, then the layout will not be used by default, but it can be used to
     /// view data by
     /// explicitly selecting it in the console.
-    is_default: bool = false,
+    is_default: ?bool = null,
 
     /// The timestamp of when the layout was most recently updated.
     last_updated_at: ?i64 = null,

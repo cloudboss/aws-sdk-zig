@@ -1,9 +1,9 @@
 pub const GuardrailStreamProcessingMode = enum {
     sync,
-    async,
+    @"async",
 
     pub const json_field_names = .{
         .sync = "SYNC",
-        .async = "ASYNC",
+        .@"async" = "ASYNC",
     };
 };

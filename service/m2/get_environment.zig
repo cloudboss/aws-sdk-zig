@@ -75,7 +75,7 @@ pub const GetEnvironmentOutput = struct {
 
     /// Whether applications running in this runtime environment are publicly
     /// accessible.
-    publicly_accessible: bool = false,
+    publicly_accessible: ?bool = null,
 
     /// The unique identifiers of the security groups assigned to this runtime
     /// environment.

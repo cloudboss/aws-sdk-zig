@@ -32,7 +32,8 @@ pub const RemoveEntityOwnerInput = struct {
     };
 };
 
-pub const RemoveEntityOwnerOutput = struct {};
+pub const RemoveEntityOwnerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

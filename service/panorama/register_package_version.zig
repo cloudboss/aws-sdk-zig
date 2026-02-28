@@ -6,7 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const RegisterPackageVersionInput = struct {
     /// Whether to mark the new version as the latest version.
-    mark_latest: bool = false,
+    mark_latest: ?bool = null,
 
     /// An owner account.
     owner_account: ?[]const u8 = null,

@@ -41,7 +41,7 @@ pub const RetrievalResultLocation = struct {
     sql_location: ?RetrievalResultSqlLocation,
 
     /// The type of data source location.
-    type: RetrievalResultLocationType,
+    @"type": RetrievalResultLocationType,
 
     /// The web URL/URLs data source location.
     web_location: ?RetrievalResultWebLocation,
@@ -54,7 +54,7 @@ pub const RetrievalResultLocation = struct {
         .salesforce_location = "salesforceLocation",
         .share_point_location = "sharePointLocation",
         .sql_location = "sqlLocation",
-        .type = "type",
+        .@"type" = "type",
         .web_location = "webLocation",
     };
 };

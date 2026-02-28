@@ -51,7 +51,7 @@ pub const DescribeResourceOutput = struct {
     enabled_date: ?i64 = null,
 
     /// If enabled, the resource is hidden from the global address list.
-    hidden_from_global_address_list: bool = false,
+    hidden_from_global_address_list: ?bool = null,
 
     /// The name of the described resource.
     name: ?[]const u8 = null,

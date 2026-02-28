@@ -12,7 +12,7 @@ pub const UpdateEnvironmentInput = struct {
     /// only if `applyDuringMaintenanceWindow` is true. If any parameter other than
     /// `engineVersion` is provided in `UpdateEnvironmentRequest`, it will
     /// fail if `applyDuringMaintenanceWindow` is set to true.
-    apply_during_maintenance_window: bool = false,
+    apply_during_maintenance_window: ?bool = null,
 
     /// The desired capacity for the runtime environment to update. The minimum
     /// possible value is 0 and the maximum is 100.
@@ -34,7 +34,7 @@ pub const UpdateEnvironmentInput = struct {
     ///
     /// This option is not needed if the attribute being updated is
     /// `preferredMaintenanceWindow`.
-    force_update: bool = false,
+    force_update: ?bool = null,
 
     /// The instance type for the runtime environment to update.
     instance_type: ?[]const u8 = null,

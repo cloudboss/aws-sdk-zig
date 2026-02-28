@@ -53,7 +53,7 @@ pub const CreateSecretInput = struct {
     /// Specifies whether to overwrite a secret with the same name in the
     /// destination Region.
     /// By default, secrets aren't overwritten.
-    force_overwrite_replica_secret: bool = false,
+    force_overwrite_replica_secret: ?bool = null,
 
     /// The ARN, key ID, or alias of the KMS key that Secrets Manager uses to
     /// encrypt the secret value

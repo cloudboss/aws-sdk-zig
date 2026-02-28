@@ -49,7 +49,7 @@ pub const CreateStateMachineInput = struct {
 
     /// Set to `true` to publish the first version of the state machine during
     /// creation. The default is `false`.
-    publish: bool = false,
+    publish: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to use for this state
     /// machine.

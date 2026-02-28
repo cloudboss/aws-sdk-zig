@@ -13,7 +13,7 @@ pub const ImportDocumentationPartsInput = struct {
     /// A query parameter to specify whether to rollback the documentation
     /// importation (`true`) or not (`false`) when a warning is encountered. The
     /// default value is `false`.
-    fail_on_warnings: bool = false,
+    fail_on_warnings: ?bool = null,
 
     /// A query parameter to indicate whether to overwrite (`overwrite`) any
     /// existing DocumentationParts definition or to merge (`merge`) the new

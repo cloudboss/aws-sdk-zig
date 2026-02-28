@@ -67,7 +67,7 @@ pub const ExportEBSVolumeRecommendationsInput = struct {
     /// Recommendations for member accounts are not included in the export if this
     /// parameter,
     /// or the account IDs parameter, is omitted.
-    include_member_accounts: bool = false,
+    include_member_accounts: ?bool = null,
 
     s_3_destination_config: S3DestinationConfig,
 

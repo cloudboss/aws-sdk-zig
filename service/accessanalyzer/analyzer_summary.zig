@@ -53,7 +53,7 @@ pub const AnalyzerSummary = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type represents the zone of trust or scope for the analyzer.
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -65,6 +65,6 @@ pub const AnalyzerSummary = struct {
         .status = "status",
         .status_reason = "statusReason",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

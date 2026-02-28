@@ -26,7 +26,7 @@ pub const UpdateThingGroupInput = struct {
 
 pub const UpdateThingGroupOutput = struct {
     /// The version of the updated thing group.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .version = "version",

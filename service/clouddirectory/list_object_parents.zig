@@ -19,7 +19,7 @@ pub const ListObjectParentsInput = struct {
 
     /// When set to True, returns all ListObjectParentsResponse$ParentLinks. There
     /// could be multiple links between a parent-child pair.
-    include_all_links_to_each_parent: bool = false,
+    include_all_links_to_each_parent: ?bool = null,
 
     /// The maximum number of items to be retrieved in a single call. This is an
     /// approximate

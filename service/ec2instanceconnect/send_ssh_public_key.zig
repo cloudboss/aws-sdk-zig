@@ -33,7 +33,7 @@ pub const SendSSHPublicKeyOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// Is true if the request succeeds and an error otherwise.
-    success: bool = false,
+    success: ?bool = null,
 
     pub const json_field_names = .{
         .request_id = "RequestId",

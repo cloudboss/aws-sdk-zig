@@ -134,7 +134,7 @@ pub const DirectoryDescription = struct {
     stage_reason: ?[]const u8,
 
     /// The directory type.
-    type: ?DirectoryType,
+    @"type": ?DirectoryType,
 
     /// A DirectoryVpcSettingsDescription object that contains additional
     /// information about a directory. Present only for Simple AD and Managed
@@ -170,7 +170,7 @@ pub const DirectoryDescription = struct {
         .stage = "Stage",
         .stage_last_updated_date_time = "StageLastUpdatedDateTime",
         .stage_reason = "StageReason",
-        .type = "Type",
+        .@"type" = "Type",
         .vpc_settings = "VpcSettings",
     };
 };

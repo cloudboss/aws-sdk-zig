@@ -48,7 +48,7 @@ pub const MergePullRequestBySquashInput = struct {
     /// changes leave the folders empty. If true, a .gitkeep file is created for
     /// empty folders.
     /// The default is false.
-    keep_empty_folders: bool = false,
+    keep_empty_folders: ?bool = null,
 
     /// The system-generated ID of the pull request. To get this ID, use
     /// ListPullRequests.

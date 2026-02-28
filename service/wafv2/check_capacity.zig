@@ -31,7 +31,7 @@ pub const CheckCapacityInput = struct {
 
 pub const CheckCapacityOutput = struct {
     /// The capacity required by the rules and scope.
-    capacity: i64 = 0,
+    capacity: ?i64 = null,
 
     pub const json_field_names = .{
         .capacity = "Capacity",

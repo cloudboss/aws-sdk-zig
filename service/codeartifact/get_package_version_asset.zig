@@ -73,7 +73,7 @@ pub const GetPackageVersionAssetInput = struct {
 
 pub const GetPackageVersionAssetOutput = struct {
     /// The binary file, or asset, that is downloaded.
-    asset: aws.http.StreamingBody = "",
+    asset: ?aws.http.StreamingBody = null,
 
     /// The name of the asset that is downloaded.
     asset_name: ?[]const u8 = null,

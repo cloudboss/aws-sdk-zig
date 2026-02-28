@@ -7,10 +7,10 @@ pub const FilterGroup = struct {
     dimensions: []const FilterDimension,
 
     /// The type of logical relationship between the dimensions of the Filter group.
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -10,7 +10,7 @@ pub const GetSendQuotaOutput = struct {
     /// The maximum number of emails the user is allowed to send in a 24-hour
     /// interval. A
     /// value of -1 signifies an unlimited quota.
-    max_24_hour_send: f64 = 0,
+    max_24_hour_send: ?f64 = null,
 
     /// The maximum number of emails that Amazon SES can accept from the user's
     /// account per
@@ -19,10 +19,10 @@ pub const GetSendQuotaOutput = struct {
     /// The rate at which Amazon SES accepts the user's messages might be less than
     /// the maximum
     /// send rate.
-    max_send_rate: f64 = 0,
+    max_send_rate: ?f64 = null,
 
     /// The number of emails sent during the previous 24 hours.
-    sent_last_24_hours: f64 = 0,
+    sent_last_24_hours: ?f64 = null,
 };
 
 pub const Options = struct {

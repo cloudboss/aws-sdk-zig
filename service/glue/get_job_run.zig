@@ -10,7 +10,7 @@ pub const GetJobRunInput = struct {
     job_name: []const u8,
 
     /// True if a list of predecessor runs should be returned.
-    predecessors_included: bool = false,
+    predecessors_included: ?bool = null,
 
     /// The ID of the job run.
     run_id: []const u8,

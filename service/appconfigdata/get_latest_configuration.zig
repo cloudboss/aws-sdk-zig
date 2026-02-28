@@ -47,7 +47,7 @@ pub const GetLatestConfigurationOutput = struct {
     /// updates
     /// again. Use `RequiredMinimumPollIntervalInSeconds` to set the desired poll
     /// interval.
-    next_poll_interval_in_seconds: i32 = 0,
+    next_poll_interval_in_seconds: ?i32 = null,
 
     /// The user-defined label for the AppConfig hosted configuration version. This
     /// attribute doesn't apply if the configuration is not from an AppConfig hosted

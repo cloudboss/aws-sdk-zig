@@ -21,7 +21,7 @@ pub const ListVectorsInput = struct {
     /// value, the operation stops and returns the vectors that are retrieved up to
     /// that point, along with a `nextToken` that you can use in a subsequent
     /// request to retrieve the next set of results.
-    max_results: i32 = 500,
+    max_results: ?i32 = null,
 
     /// Pagination token from a previous request. The value of this field is empty
     /// for an initial request.
@@ -29,11 +29,11 @@ pub const ListVectorsInput = struct {
 
     /// If true, the vector data of each vector will be included in the response.
     /// The default value is `false`.
-    return_data: bool = false,
+    return_data: ?bool = null,
 
     /// If true, the metadata associated with each vector will be included in the
     /// response. The default value is `false`.
-    return_metadata: bool = false,
+    return_metadata: ?bool = null,
 
     /// For a parallel `ListVectors` request, `segmentCount` represents the total
     /// number of vector segments into which the `ListVectors` operation will be
@@ -46,7 +46,7 @@ pub const ListVectorsInput = struct {
     /// be sequential rather than parallel.
     ///
     /// If you specify `segmentCount`, you must also specify `segmentIndex`.
-    segment_count: i32 = 1,
+    segment_count: ?i32 = null,
 
     /// For a parallel `ListVectors` request, `segmentIndex` is the index of the
     /// segment from which to list vectors in the current request. It identifies an
@@ -61,7 +61,7 @@ pub const ListVectorsInput = struct {
     /// `segmentCount`.
     ///
     /// If you provide `segmentIndex`, you must also provide `segmentCount`.
-    segment_index: i32 = 0,
+    segment_index: ?i32 = null,
 
     /// The name of the vector bucket.
     vector_bucket_name: ?[]const u8 = null,

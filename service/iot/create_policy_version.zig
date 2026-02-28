@@ -18,7 +18,7 @@ pub const CreatePolicyVersionInput = struct {
     /// true, the new policy version becomes the operative version (that is, the
     /// version that is in
     /// effect for the certificates to which the policy is attached).
-    set_as_default: bool = false,
+    set_as_default: ?bool = null,
 
     pub const json_field_names = .{
         .policy_document = "policyDocument",
@@ -29,7 +29,7 @@ pub const CreatePolicyVersionInput = struct {
 
 pub const CreatePolicyVersionOutput = struct {
     /// Specifies whether the policy version is the default.
-    is_default_version: bool = false,
+    is_default_version: ?bool = null,
 
     /// The policy ARN.
     policy_arn: ?[]const u8 = null,

@@ -96,7 +96,7 @@ pub const AddIpRoutesInput = struct {
     /// These security rules impact an internal network interface that is not
     /// exposed
     /// publicly.
-    update_security_group_for_directory_controllers: bool = false,
+    update_security_group_for_directory_controllers: ?bool = null,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
@@ -105,7 +105,8 @@ pub const AddIpRoutesInput = struct {
     };
 };
 
-pub const AddIpRoutesOutput = struct {};
+pub const AddIpRoutesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

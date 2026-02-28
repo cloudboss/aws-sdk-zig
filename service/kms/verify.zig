@@ -147,7 +147,7 @@ pub const VerifyOutput = struct {
     /// `Message` with the specified `KeyID` and
     /// `SigningAlgorithm.` If the signature is not verified, the `Verify`
     /// operation fails with a `KMSInvalidSignatureException` exception.
-    signature_valid: bool = false,
+    signature_valid: ?bool = null,
 
     /// The signing algorithm that was used to verify the signature.
     signing_algorithm: ?SigningAlgorithmSpec = null,

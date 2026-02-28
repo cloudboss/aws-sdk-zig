@@ -11,7 +11,7 @@ pub const CreateClusterInput = struct {
     /// An optional field that controls whether to bypass the lockout prevention
     /// check. When set to true, this parameter allows you to apply a policy that
     /// might lock you out of the cluster. Use with caution.
-    bypass_policy_lockout_safety_check: bool = false,
+    bypass_policy_lockout_safety_check: ?bool = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the request. Idempotency ensures that an API request
@@ -26,7 +26,7 @@ pub const CreateClusterInput = struct {
 
     /// If enabled, you can't delete your cluster. You must first disable this
     /// property before you can delete your cluster.
-    deletion_protection_enabled: bool = true,
+    deletion_protection_enabled: ?bool = null,
 
     /// The KMS key that encrypts and protects the data on your cluster. You can
     /// specify the ARN, ID, or alias of an existing key or have Amazon Web Services

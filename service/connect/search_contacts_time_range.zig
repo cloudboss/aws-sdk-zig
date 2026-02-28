@@ -9,11 +9,11 @@ pub const SearchContactsTimeRange = struct {
     start_time: i64,
 
     /// The type of timestamp to search.
-    type: SearchContactsTimeRangeType,
+    @"type": SearchContactsTimeRangeType,
 
     pub const json_field_names = .{
         .end_time = "EndTime",
         .start_time = "StartTime",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

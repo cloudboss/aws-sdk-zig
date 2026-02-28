@@ -84,7 +84,7 @@ pub const PublishLayerVersionOutput = struct {
     license_info: ?[]const u8 = null,
 
     /// The version number.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .compatible_architectures = "CompatibleArchitectures",

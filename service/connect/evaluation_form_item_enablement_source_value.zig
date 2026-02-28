@@ -6,10 +6,10 @@ pub const EvaluationFormItemEnablementSourceValue = struct {
     ref_id: ?[]const u8,
 
     /// A type of source item value.
-    type: EvaluationFormItemEnablementSourceValueType,
+    @"type": EvaluationFormItemEnablementSourceValueType,
 
     pub const json_field_names = .{
         .ref_id = "RefId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

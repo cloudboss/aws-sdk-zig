@@ -33,7 +33,7 @@ pub const InferenceProfileSummary = struct {
     /// * `APPLICATION` – The inference profile was created by a user. This type of
     ///   inference profile can track metrics and costs when invoking the model in
     ///   it. The inference profile may route requests to one or multiple regions.
-    type: InferenceProfileType,
+    @"type": InferenceProfileType,
 
     /// The time at which the inference profile was last updated.
     updated_at: ?i64,
@@ -46,7 +46,7 @@ pub const InferenceProfileSummary = struct {
         .inference_profile_name = "inferenceProfileName",
         .models = "models",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

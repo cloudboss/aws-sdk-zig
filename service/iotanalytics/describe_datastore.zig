@@ -14,7 +14,7 @@ pub const DescribeDatastoreInput = struct {
     /// in the
     /// response. This feature can't be used with a data store whose S3 storage is
     /// customer-managed.
-    include_statistics: bool = false,
+    include_statistics: ?bool = null,
 
     pub const json_field_names = .{
         .datastore_name = "datastoreName",

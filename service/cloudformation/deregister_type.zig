@@ -16,7 +16,7 @@ pub const DeregisterTypeInput = struct {
     ///
     /// Conditional: You must specify either `TypeName` and `Type`, or
     /// `Arn`.
-    type: ?RegistryType = null,
+    @"type": ?RegistryType = null,
 
     /// The name of the extension.
     ///
@@ -31,7 +31,8 @@ pub const DeregisterTypeInput = struct {
     version_id: ?[]const u8 = null,
 };
 
-pub const DeregisterTypeOutput = struct {};
+pub const DeregisterTypeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
@@ -76,7 +77,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DeregisterTypeInput, config
         try body_buf.appendSlice(alloc, "&Arn=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, v);
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         try body_buf.appendSlice(alloc, "&Type=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }

@@ -187,7 +187,8 @@ pub const DeregisterScalableTargetInput = struct {
     };
 };
 
-pub const DeregisterScalableTargetOutput = struct {};
+pub const DeregisterScalableTargetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

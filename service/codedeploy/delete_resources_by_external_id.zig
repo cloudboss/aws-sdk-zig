@@ -14,7 +14,8 @@ pub const DeleteResourcesByExternalIdInput = struct {
     };
 };
 
-pub const DeleteResourcesByExternalIdOutput = struct {};
+pub const DeleteResourcesByExternalIdOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

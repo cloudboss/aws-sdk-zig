@@ -8,7 +8,7 @@ pub const PutClusterPolicyInput = struct {
     /// A flag that allows you to bypass the policy lockout safety check. When set
     /// to true, this parameter allows you to apply a policy that might lock you out
     /// of the cluster. Use with caution.
-    bypass_policy_lockout_safety_check: bool = false,
+    bypass_policy_lockout_safety_check: ?bool = null,
 
     client_token: ?[]const u8 = null,
 

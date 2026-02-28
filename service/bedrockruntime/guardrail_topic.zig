@@ -15,12 +15,12 @@ pub const GuardrailTopic = struct {
 
     /// The type behavior that the guardrail should perform when the model detects
     /// the topic.
-    type: GuardrailTopicType,
+    @"type": GuardrailTopicType,
 
     pub const json_field_names = .{
         .action = "action",
         .detected = "detected",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -41,7 +41,7 @@ pub const UpdateManagedLoginBrandingInput = struct {
     ///
     /// When you specify `true` for this option, you must also omit values for
     /// `Settings` and `Assets` in the request.
-    use_cognito_provided_values: bool = false,
+    use_cognito_provided_values: ?bool = null,
 
     /// The ID of the user pool that contains the managed login branding style that
     /// you want

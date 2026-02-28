@@ -136,11 +136,11 @@ pub const DescribeBackupJobOutput = struct {
     /// A boolean value indicating whether the backup is encrypted. All backups in
     /// Backup are encrypted, but this field indicates the encryption status for
     /// transparency.
-    is_encrypted: bool = false,
+    is_encrypted: ?bool = null,
 
     /// This returns the boolean value that a backup job is a parent (composite)
     /// job.
-    is_parent: bool = false,
+    is_parent: ?bool = null,
 
     /// The job count for the specified
     /// message category.

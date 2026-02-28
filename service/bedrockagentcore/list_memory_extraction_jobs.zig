@@ -12,7 +12,7 @@ pub const ListMemoryExtractionJobsInput = struct {
 
     /// The maximum number of results to return in a single call. The default value
     /// is 20.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// The unique identifier of the memory to list extraction jobs for.
     memory_id: []const u8,

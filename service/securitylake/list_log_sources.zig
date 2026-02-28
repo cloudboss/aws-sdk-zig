@@ -12,7 +12,7 @@ pub const ListLogSourcesInput = struct {
     accounts: ?[]const []const u8 = null,
 
     /// The maximum number of accounts for which the log sources are displayed.
-    max_results: i32 = 50,
+    max_results: ?i32 = null,
 
     /// If nextToken is returned, there are more results available. You can repeat
     /// the call

@@ -27,12 +27,12 @@ pub const DescribeWorkingStorageOutput = struct {
     /// The total working storage in bytes allocated for the gateway. If no working
     /// storage is
     /// configured for the gateway, this field returns 0.
-    working_storage_allocated_in_bytes: i64 = 0,
+    working_storage_allocated_in_bytes: ?i64 = null,
 
     /// The total working storage in bytes in use by the gateway. If no working
     /// storage is
     /// configured for the gateway, this field returns 0.
-    working_storage_used_in_bytes: i64 = 0,
+    working_storage_used_in_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .disk_ids = "DiskIds",

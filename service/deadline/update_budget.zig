@@ -67,7 +67,8 @@ pub const UpdateBudgetInput = struct {
     };
 };
 
-pub const UpdateBudgetOutput = struct {};
+pub const UpdateBudgetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

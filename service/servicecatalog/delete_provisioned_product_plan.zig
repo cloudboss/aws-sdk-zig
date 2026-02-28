@@ -15,7 +15,7 @@ pub const DeleteProvisionedProductPlanInput = struct {
     /// If set to true, Service Catalog stops managing the specified provisioned
     /// product even
     /// if it cannot delete the underlying resources.
-    ignore_errors: bool = false,
+    ignore_errors: ?bool = null,
 
     /// The plan identifier.
     plan_id: []const u8,

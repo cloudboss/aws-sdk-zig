@@ -13,7 +13,8 @@ pub const StopSearchJobInput = struct {
     };
 };
 
-pub const StopSearchJobOutput = struct {};
+pub const StopSearchJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

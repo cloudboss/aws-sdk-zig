@@ -12,7 +12,7 @@ pub const ListDeviceProfilesInput = struct {
     device_profile_type: ?DeviceProfileType = null,
 
     /// The maximum number of results to return in this operation.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// To retrieve the next set of results, the `nextToken` value from a previous
     /// response; otherwise **null** to receive the first set of

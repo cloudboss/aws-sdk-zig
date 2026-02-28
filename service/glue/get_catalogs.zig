@@ -28,7 +28,7 @@ pub const GetCatalogsInput = struct {
     /// Whether to list all catalogs across the catalog hierarchy, starting from the
     /// `ParentCatalogId`. Defaults to `false` . When `true`, all catalog objects in
     /// the `ParentCatalogID` hierarchy are enumerated in the response.
-    recursive: bool = false,
+    recursive: ?bool = null,
 
     pub const json_field_names = .{
         .include_root = "IncludeRoot",

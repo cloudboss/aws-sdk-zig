@@ -9,7 +9,7 @@ pub const PutDeliverabilityDashboardOptionInput = struct {
     /// Specifies whether to enable the Deliverability dashboard. To enable the
     /// dashboard, set this
     /// value to `true`.
-    dashboard_enabled: bool = false,
+    dashboard_enabled: ?bool = null,
 
     /// An array of objects, one for each verified domain that you use to send email
     /// and

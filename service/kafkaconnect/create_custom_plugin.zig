@@ -43,7 +43,7 @@ pub const CreateCustomPluginOutput = struct {
     name: ?[]const u8 = null,
 
     /// The revision of the custom plugin.
-    revision: i64 = 0,
+    revision: ?i64 = null,
 
     pub const json_field_names = .{
         .custom_plugin_arn = "customPluginArn",

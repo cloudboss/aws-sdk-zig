@@ -13,7 +13,7 @@ pub const CreateUserInput = struct {
     first_name: ?[]const u8 = null,
 
     /// If this parameter is enabled, the user will be hidden from the address book.
-    hidden_from_global_address_list: bool = false,
+    hidden_from_global_address_list: ?bool = null,
 
     /// User ID from the IAM Identity Center. If this parameter is empty it will be
     /// updated automatically when the user logs in for the first time to the

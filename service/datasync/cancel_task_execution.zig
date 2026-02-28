@@ -13,7 +13,8 @@ pub const CancelTaskExecutionInput = struct {
     };
 };
 
-pub const CancelTaskExecutionOutput = struct {};
+pub const CancelTaskExecutionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

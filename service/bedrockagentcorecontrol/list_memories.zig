@@ -8,7 +8,7 @@ const MemorySummary = @import("memory_summary.zig").MemorySummary;
 pub const ListMemoriesInput = struct {
     /// The maximum number of results to return in a single call. The default value
     /// is 10. The maximum value is 50.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results. Use the value returned in the
     /// previous response in the next request to retrieve the next set of results.

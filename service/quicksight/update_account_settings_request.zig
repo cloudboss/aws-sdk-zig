@@ -21,7 +21,7 @@ pub const UpdateAccountSettingsRequest = struct {
     /// deleted. A `True` value doesn't allow the account to be deleted and results
     /// in an error message if a user tries to make a `DeleteAccountSubscription`
     /// request. A `False` value will allow the account to be deleted.
-    termination_protection_enabled: bool = false,
+    termination_protection_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",

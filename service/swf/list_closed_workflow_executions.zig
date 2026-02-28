@@ -48,7 +48,7 @@ pub const ListClosedWorkflowExecutionsInput = struct {
 
     /// The maximum number of results that are returned per call.
     /// Use `nextPageToken` to obtain further pages of results.
-    maximum_page_size: i32 = 0,
+    maximum_page_size: ?i32 = null,
 
     /// If `NextPageToken` is returned there are more results
     /// available. The value of `NextPageToken` is a unique pagination token for
@@ -67,7 +67,7 @@ pub const ListClosedWorkflowExecutionsInput = struct {
     /// results are returned in descending order of the start or the close time of
     /// the
     /// executions.
-    reverse_order: bool = false,
+    reverse_order: ?bool = null,
 
     /// If specified, the workflow executions are included in the returned results
     /// based on

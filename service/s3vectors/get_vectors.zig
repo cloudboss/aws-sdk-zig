@@ -17,11 +17,11 @@ pub const GetVectorsInput = struct {
 
     /// Indicates whether to include the vector data in the response. The default
     /// value is `false`.
-    return_data: bool = false,
+    return_data: ?bool = null,
 
     /// Indicates whether to include metadata in the response. The default value is
     /// `false`.
-    return_metadata: bool = false,
+    return_metadata: ?bool = null,
 
     /// The name of the vector bucket that contains the vector index.
     vector_bucket_name: ?[]const u8 = null,

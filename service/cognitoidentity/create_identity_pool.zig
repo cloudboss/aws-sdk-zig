@@ -14,7 +14,7 @@ pub const CreateIdentityPoolInput = struct {
     allow_classic_flow: ?bool = null,
 
     /// TRUE if the identity pool supports unauthenticated logins.
-    allow_unauthenticated_identities: bool = false,
+    allow_unauthenticated_identities: ?bool = null,
 
     /// An array of Amazon Cognito user pools and their client IDs.
     cognito_identity_providers: ?[]const CognitoIdentityProvider = null,
@@ -75,7 +75,7 @@ pub const CreateIdentityPoolOutput = struct {
     allow_classic_flow: ?bool = null,
 
     /// TRUE if the identity pool supports unauthenticated logins.
-    allow_unauthenticated_identities: bool = false,
+    allow_unauthenticated_identities: ?bool = null,
 
     /// A list representing an Amazon Cognito user pool and its client ID.
     cognito_identity_providers: ?[]const CognitoIdentityProvider = null,

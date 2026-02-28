@@ -33,7 +33,7 @@ pub const BatchDeleteTopicReviewedAnswerOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The definition of Answers that are successfully deleted.
     succeeded_answers: ?[]const SucceededTopicReviewedAnswer = null,

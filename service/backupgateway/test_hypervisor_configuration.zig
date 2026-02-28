@@ -27,7 +27,8 @@ pub const TestHypervisorConfigurationInput = struct {
     };
 };
 
-pub const TestHypervisorConfigurationOutput = struct {};
+pub const TestHypervisorConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

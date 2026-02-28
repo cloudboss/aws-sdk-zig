@@ -57,7 +57,7 @@ pub const DescribeFleetMetricOutput = struct {
     unit: ?FleetMetricUnit = null,
 
     /// The version of the fleet metric.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .aggregation_field = "aggregationField",

@@ -22,7 +22,7 @@ pub const NodeInputField = struct {
     source: ?NodeInputSource,
 
     /// The data type of the input field for compatibility validation.
-    type: ?FlowNodeIODataType,
+    @"type": ?FlowNodeIODataType,
 
     pub const json_field_names = .{
         .category = "category",
@@ -30,6 +30,6 @@ pub const NodeInputField = struct {
         .execution_chain = "executionChain",
         .name = "name",
         .source = "source",
-        .type = "type",
+        .@"type" = "type",
     };
 };

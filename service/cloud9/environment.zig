@@ -59,7 +59,7 @@ pub const Environment = struct {
     ///   the environment.
     ///
     /// * `ssh`: Your own server connects to the environment.
-    type: EnvironmentType,
+    @"type": EnvironmentType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -70,6 +70,6 @@ pub const Environment = struct {
         .managed_credentials_status = "managedCredentialsStatus",
         .name = "name",
         .owner_arn = "ownerArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -29,7 +29,7 @@ pub const CreateWorkflowInput = struct {
     /// parameters, without actually making the request, and provides an error
     /// response. Upon a successful request, the error response is
     /// `DryRunOperationException`.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
     /// encrypt this workflow resource.

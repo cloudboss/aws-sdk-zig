@@ -9,9 +9,9 @@ pub const EgressFilter = struct {
     /// the
     /// egress filter type to `ALLOW_ALL` to allow egress to any endpoint inside or
     /// outside of the service mesh.
-    type: EgressFilterType,
+    @"type": EgressFilterType,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
     };
 };

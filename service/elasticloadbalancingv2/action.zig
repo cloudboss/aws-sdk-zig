@@ -65,5 +65,5 @@ pub const Action = struct {
     target_group_arn: ?[]const u8,
 
     /// The type of action.
-    type: ActionTypeEnum,
+    @"type": ActionTypeEnum,
 };

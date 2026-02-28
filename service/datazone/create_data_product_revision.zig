@@ -87,7 +87,7 @@ pub const CreateDataProductRevisionOutput = struct {
     revision: []const u8,
 
     /// The status of the data product revision.
-    status: DataProductStatus = "CREATED",
+    status: ?DataProductStatus = null,
 
     pub const json_field_names = .{
         .created_at = "createdAt",

@@ -14,7 +14,7 @@ pub const DisassociateFileSystemInput = struct {
     /// association enters the `FORCE_DELETING` status. If this value is set to
     /// false,
     /// the Amazon FSx file system does not disassociate until all data is uploaded.
-    force_delete: bool = false,
+    force_delete: ?bool = null,
 
     pub const json_field_names = .{
         .file_system_association_arn = "FileSystemAssociationARN",

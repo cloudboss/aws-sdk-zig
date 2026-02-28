@@ -45,7 +45,7 @@ pub const CreateExtensionAssociationOutput = struct {
     extension_arn: ?[]const u8 = null,
 
     /// The version number for the extension defined in the association.
-    extension_version_number: i32 = 0,
+    extension_version_number: ?i32 = null,
 
     /// The system-generated ID for the association.
     id: ?[]const u8 = null,

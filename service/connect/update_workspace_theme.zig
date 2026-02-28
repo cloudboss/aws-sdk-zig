@@ -24,7 +24,8 @@ pub const UpdateWorkspaceThemeInput = struct {
     };
 };
 
-pub const UpdateWorkspaceThemeOutput = struct {};
+pub const UpdateWorkspaceThemeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,7 +22,7 @@ pub const ReverseGeocodeInput = struct {
     ///
     /// Example: North is `0` degrees, East is `90` degrees, South is `180` degrees,
     /// and West is `270` degrees.
-    heading: f64 = 0,
+    heading: ?f64 = null,
 
     /// Indicates if the results will be stored. Defaults to `SingleUse`, if left
     /// empty.

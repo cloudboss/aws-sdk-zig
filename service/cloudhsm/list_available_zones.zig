@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const ListAvailableZonesInput = struct {};
+pub const ListAvailableZonesInput = struct {
+};
 
 pub const ListAvailableZonesOutput = struct {
     /// The list of Availability Zones that have available AWS CloudHSM capacity.

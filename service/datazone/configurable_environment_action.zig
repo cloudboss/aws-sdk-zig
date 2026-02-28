@@ -11,11 +11,11 @@ pub const ConfigurableEnvironmentAction = struct {
     parameters: []const ConfigurableActionParameter,
 
     /// The type of a configurable action in a Amazon DataZone environment.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .auth = "auth",
         .parameters = "parameters",
-        .type = "type",
+        .@"type" = "type",
     };
 };

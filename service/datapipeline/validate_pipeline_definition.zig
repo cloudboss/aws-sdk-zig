@@ -33,7 +33,7 @@ pub const ValidatePipelineDefinitionInput = struct {
 
 pub const ValidatePipelineDefinitionOutput = struct {
     /// Indicates whether there were validation errors.
-    errored: bool = false,
+    errored: ?bool = null,
 
     /// Any validation errors that were found.
     validation_errors: ?[]const ValidationError = null,

@@ -11,7 +11,7 @@ pub const ActivateEvaluationFormInput = struct {
     /// The version of the evaluation form to activate. If the version property is
     /// not provided, the latest version of
     /// the evaluation form is activated.
-    evaluation_form_version: i32 = 0,
+    evaluation_form_version: ?i32 = null,
 
     /// The identifier of the Amazon Connect instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
@@ -32,7 +32,7 @@ pub const ActivateEvaluationFormOutput = struct {
     evaluation_form_id: []const u8,
 
     /// A version of the evaluation form.
-    evaluation_form_version: i32 = 0,
+    evaluation_form_version: ?i32 = null,
 
     pub const json_field_names = .{
         .evaluation_form_arn = "EvaluationFormArn",

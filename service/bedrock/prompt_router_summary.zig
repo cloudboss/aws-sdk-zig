@@ -30,7 +30,7 @@ pub const PromptRouterSummary = struct {
     status: PromptRouterStatus,
 
     /// The summary's type.
-    type: PromptRouterType,
+    @"type": PromptRouterType,
 
     /// When the router was updated.
     updated_at: ?i64,
@@ -44,7 +44,7 @@ pub const PromptRouterSummary = struct {
         .prompt_router_name = "promptRouterName",
         .routing_criteria = "routingCriteria",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

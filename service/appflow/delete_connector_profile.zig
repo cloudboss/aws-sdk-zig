@@ -12,7 +12,7 @@ pub const DeleteConnectorProfileInput = struct {
     /// Indicates whether Amazon AppFlow should delete the profile, even if it is
     /// currently
     /// in use in one or more flows.
-    force_delete: bool = false,
+    force_delete: ?bool = null,
 
     pub const json_field_names = .{
         .connector_profile_name = "connectorProfileName",
@@ -20,7 +20,8 @@ pub const DeleteConnectorProfileInput = struct {
     };
 };
 
-pub const DeleteConnectorProfileOutput = struct {};
+pub const DeleteConnectorProfileOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

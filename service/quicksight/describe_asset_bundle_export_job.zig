@@ -75,19 +75,19 @@ pub const DescribeAssetBundleExportJobOutput = struct {
     export_format: ?AssetBundleExportFormat = null,
 
     /// The include dependencies flag.
-    include_all_dependencies: bool = false,
+    include_all_dependencies: ?bool = null,
 
     /// A setting that determines whether folder members are included.
     include_folder_members: ?IncludeFolderMembers = null,
 
     /// The include folder memberships flag.
-    include_folder_memberships: bool = false,
+    include_folder_memberships: ?bool = null,
 
     /// The include permissions flag.
-    include_permissions: bool = false,
+    include_permissions: ?bool = null,
 
     /// The include tags flag.
-    include_tags: bool = false,
+    include_tags: ?bool = null,
 
     /// Indicates the status of a job through its queuing and execution.
     ///
@@ -102,7 +102,7 @@ pub const DescribeAssetBundleExportJobOutput = struct {
     resource_arns: ?[]const []const u8 = null,
 
     /// The HTTP status of the response.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The validation strategy that is used to export the analysis or dashboard.
     validation_strategy: ?AssetBundleExportJobValidationStrategy = null,

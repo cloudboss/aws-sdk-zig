@@ -12,7 +12,7 @@ pub const DeleteBillingViewInput = struct {
     /// If set to true, forces deletion of the billing view even if it has derived
     /// resources (e.g. other billing views or budgets). Use with caution as this
     /// may break dependent resources.
-    force: bool = false,
+    force: ?bool = null,
 
     pub const json_field_names = .{
         .arn = "arn",

@@ -11,7 +11,7 @@ pub const ListActivatedRulesInRuleGroupInput = struct {
     /// specify for `Limit`, the response includes a
     /// `NextMarker` value that you can use to get another batch of
     /// `ActivatedRules`.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// If you specify a value for `Limit` and you have more `ActivatedRules` than
     /// the value of `Limit`,

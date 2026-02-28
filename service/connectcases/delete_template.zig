@@ -17,7 +17,8 @@ pub const DeleteTemplateInput = struct {
     };
 };
 
-pub const DeleteTemplateOutput = struct {};
+pub const DeleteTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,7 @@ pub const PutResourcePolicyInput = struct {
     /// subsequent `PutResourcePolicy` request.
     ///
     /// The default value is false.
-    bypass_policy_lockout_check: bool = false,
+    bypass_policy_lockout_check: ?bool = null,
 
     /// The resource policy document, which can be up to 5kb in size.
     policy_document: []const u8,

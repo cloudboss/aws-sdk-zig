@@ -31,7 +31,7 @@ pub const TestAvailabilityConfigurationOutput = struct {
     failure_reason: ?[]const u8 = null,
 
     /// Boolean indicating whether the test passed or failed.
-    test_passed: bool = false,
+    test_passed: ?bool = null,
 
     pub const json_field_names = .{
         .failure_reason = "FailureReason",

@@ -23,7 +23,7 @@ pub const AssociateUserToPermissionGroupInput = struct {
 
 pub const AssociateUserToPermissionGroupOutput = struct {
     /// The returned status code of the response.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub const json_field_names = .{
         .status_code = "statusCode",

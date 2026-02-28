@@ -42,7 +42,7 @@ pub const GetBucketsAggregationOutput = struct {
     buckets: ?[]const Bucket = null,
 
     /// The total number of things that fit the query string criteria.
-    total_count: i32 = 0,
+    total_count: ?i32 = null,
 
     pub const json_field_names = .{
         .buckets = "buckets",

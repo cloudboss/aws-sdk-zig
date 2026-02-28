@@ -23,7 +23,7 @@ pub const RunStatementInput = struct {
 
 pub const RunStatementOutput = struct {
     /// Returns the Id of the statement that was run.
-    id: i32 = 0,
+    id: ?i32 = null,
 
     pub const json_field_names = .{
         .id = "Id",

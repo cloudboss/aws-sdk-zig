@@ -14,7 +14,7 @@ pub const ListAccessGrantsInstancesInput = struct {
     /// `List Access Grants` response. If the results include the pagination token
     /// `NextToken`, make another call using the `NextToken` to determine if there
     /// are more results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A pagination token to request the next page of results. Pass this value into
     /// a subsequent `List Access Grants Instances` request in order to retrieve the

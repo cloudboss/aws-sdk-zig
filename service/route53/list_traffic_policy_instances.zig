@@ -72,7 +72,7 @@ pub const ListTrafficPolicyInstancesOutput = struct {
     /// `HostedZoneIdMarker`, `TrafficPolicyInstanceNameMarker`, and
     /// `TrafficPolicyInstanceTypeMarker` in the corresponding request
     /// parameters.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// The value that you specified for the `MaxItems` parameter in the call to
     /// `ListTrafficPolicyInstances` that produced the current response.

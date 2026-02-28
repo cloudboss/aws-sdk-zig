@@ -9,7 +9,7 @@ pub const UploadEntityDefinitionsInput = struct {
     /// A Boolean that specifies whether to deprecate all entities in the latest
     /// version before uploading the new `DefinitionDocument`.
     /// If set to `true`, the upload will create a new namespace version.
-    deprecate_existing_entities: bool = false,
+    deprecate_existing_entities: ?bool = null,
 
     /// The `DefinitionDocument` that defines the updated entities.
     document: ?DefinitionDocument = null,
@@ -17,7 +17,7 @@ pub const UploadEntityDefinitionsInput = struct {
     /// A Boolean that specifies whether to synchronize with the latest version of
     /// the public namespace. If set to `true`, the upload will create a new
     /// namespace version.
-    sync_with_public_namespace: bool = false,
+    sync_with_public_namespace: ?bool = null,
 
     pub const json_field_names = .{
         .deprecate_existing_entities = "deprecateExistingEntities",

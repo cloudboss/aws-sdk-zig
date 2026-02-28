@@ -27,7 +27,7 @@ pub const GetMLTaskRunOutput = struct {
     error_string: ?[]const u8 = null,
 
     /// The amount of time (in seconds) that the task run consumed resources.
-    execution_time: i32 = 0,
+    execution_time: ?i32 = null,
 
     /// The date and time when this task run was last modified.
     last_modified_on: ?i64 = null,

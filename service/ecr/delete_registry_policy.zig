@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteRegistryPolicyInput = struct {};
+pub const DeleteRegistryPolicyInput = struct {
+};
 
 pub const DeleteRegistryPolicyOutput = struct {
     /// The contents of the registry permissions policy that was deleted.

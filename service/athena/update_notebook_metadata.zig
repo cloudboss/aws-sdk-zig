@@ -31,7 +31,8 @@ pub const UpdateNotebookMetadataInput = struct {
     };
 };
 
-pub const UpdateNotebookMetadataOutput = struct {};
+pub const UpdateNotebookMetadataOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

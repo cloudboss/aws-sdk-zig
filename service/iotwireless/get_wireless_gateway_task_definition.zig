@@ -22,7 +22,7 @@ pub const GetWirelessGatewayTaskDefinitionOutput = struct {
     /// gateways with
     /// the specified current version. If `false`, the task must me created by
     /// calling `CreateWirelessGatewayTask`.
-    auto_create_tasks: bool = false,
+    auto_create_tasks: ?bool = null,
 
     /// The name of the resource.
     name: ?[]const u8 = null,

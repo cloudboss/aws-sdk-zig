@@ -17,7 +17,8 @@ pub const DeleteAccessEntryInput = struct {
     };
 };
 
-pub const DeleteAccessEntryOutput = struct {};
+pub const DeleteAccessEntryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

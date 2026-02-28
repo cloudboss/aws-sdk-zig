@@ -54,7 +54,7 @@ pub const Finding = struct {
     title: ?[]const u8,
 
     /// The type of finding.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The time when the finding was last updated. Findings are updated when you
     /// remediate them or when the finding code location changes.
@@ -77,7 +77,7 @@ pub const Finding = struct {
         .severity = "severity",
         .status = "status",
         .title = "title",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
         .vulnerability = "vulnerability",
     };

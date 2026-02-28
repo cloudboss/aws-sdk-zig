@@ -15,7 +15,7 @@ pub const GetAccountOutput = struct {
     /// Indicates whether or not the automatic warm-up feature is enabled for
     /// dedicated IP
     /// addresses that are associated with your account.
-    dedicated_ip_auto_warmup_enabled: bool = false,
+    dedicated_ip_auto_warmup_enabled: ?bool = null,
 
     /// An object that defines your account details.
     details: ?AccountDetails = null,
@@ -51,12 +51,12 @@ pub const GetAccountOutput = struct {
     /// account has production access, you can send email to any address. The
     /// sending quota and
     /// maximum sending rate for your account vary based on your specific use case.
-    production_access_enabled: bool = false,
+    production_access_enabled: ?bool = null,
 
     /// Indicates whether or not email sending is enabled for your Amazon SES
     /// account in the
     /// current Amazon Web Services Region.
-    sending_enabled: bool = false,
+    sending_enabled: ?bool = null,
 
     /// An object that contains information about the per-day and per-second sending
     /// limits

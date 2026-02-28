@@ -15,7 +15,7 @@ pub const DescribeInboundDmarcSettingsInput = struct {
 
 pub const DescribeInboundDmarcSettingsOutput = struct {
     /// Lists the enforcement setting of the applied policy.
-    enforced: bool = false,
+    enforced: ?bool = null,
 
     pub const json_field_names = .{
         .enforced = "Enforced",

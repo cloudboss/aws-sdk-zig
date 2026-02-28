@@ -307,7 +307,7 @@ pub const SpotFleetRequestConfigData = struct {
     /// capacity and automatically replenishes any interrupted instances. Default:
     /// `maintain`. `instant` is listed but is not used by Spot
     /// Fleet.
-    type: ?FleetType,
+    @"type": ?FleetType,
 
     /// The start date and time of the request, in UTC format
     /// (*YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).

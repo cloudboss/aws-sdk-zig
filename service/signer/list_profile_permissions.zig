@@ -26,7 +26,7 @@ pub const ListProfilePermissionsOutput = struct {
     permissions: ?[]const Permission = null,
 
     /// Total size of the policy associated with the Signing Profile in bytes.
-    policy_size_bytes: i32 = 0,
+    policy_size_bytes: ?i32 = null,
 
     /// The identifier for the current revision of profile permissions.
     revision_id: ?[]const u8 = null,

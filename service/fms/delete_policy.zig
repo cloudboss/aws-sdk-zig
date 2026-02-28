@@ -40,7 +40,7 @@ pub const DeletePolicyInput = struct {
     /// policy, those accounts and resources are handled by the policy. All others
     /// are out of scope.
     /// If you don't specify tags or accounts, all resources are in scope.
-    delete_all_policy_resources: bool = false,
+    delete_all_policy_resources: ?bool = null,
 
     /// The ID of the policy that you want to delete. You can retrieve this ID from
     /// `PutPolicy` and `ListPolicies`.

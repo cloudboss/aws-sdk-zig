@@ -58,7 +58,7 @@ pub const StartCallAnalyticsStreamTranscriptionInput = struct {
     /// latency in your output, but may impact accuracy. For more information, see
     /// [Partial-result
     /// stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
-    enable_partial_results_stabilization: bool = false,
+    enable_partial_results_stabilization: ?bool = null,
 
     /// Enables automatic language identification for your Call Analytics
     /// transcription.
@@ -77,7 +77,7 @@ pub const StartCallAnalyticsStreamTranscriptionInput = struct {
     /// `IdentifyLanguage` in your request. If you include both parameters, your
     /// transcription job
     /// fails.
-    identify_language: bool = false,
+    identify_language: ?bool = null,
 
     /// Specify the language code that represents the language spoken in your audio.
     ///
@@ -292,11 +292,11 @@ pub const StartCallAnalyticsStreamTranscriptionOutput = struct {
 
     /// Shows whether partial results stabilization was enabled for your Call
     /// Analytics transcription.
-    enable_partial_results_stabilization: bool = false,
+    enable_partial_results_stabilization: ?bool = null,
 
     /// Shows whether automatic language identification was enabled for your Call
     /// Analytics transcription.
-    identify_language: bool = false,
+    identify_language: ?bool = null,
 
     /// Provides the language code that you specified in your Call Analytics
     /// request.

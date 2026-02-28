@@ -7,7 +7,7 @@ const TemplateSummary = @import("template_summary.zig").TemplateSummary;
 
 pub const ListTemplatesInput = struct {
     /// The maximum number of results that can be returned.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The name of the template.
     name: ?[]const u8 = null,

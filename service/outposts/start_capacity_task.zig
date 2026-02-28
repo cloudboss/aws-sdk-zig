@@ -20,7 +20,7 @@ pub const StartCapacityTaskInput = struct {
     /// above or below available instance capacity. Requesting a dry run does not
     /// make any changes to
     /// your plan.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// The instance pools specified in the capacity task.
     instance_pools: []const InstanceTypeCapacity,
@@ -79,7 +79,7 @@ pub const StartCapacityTaskOutput = struct {
     /// Results of the dry run showing if the specified capacity task is above or
     /// below the
     /// available instance capacity.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// Reason that the specified capacity task failed.
     failed: ?CapacityTaskFailure = null,

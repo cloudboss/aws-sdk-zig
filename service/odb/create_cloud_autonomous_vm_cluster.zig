@@ -50,10 +50,10 @@ pub const CreateCloudAutonomousVmClusterInput = struct {
     odb_network_id: []const u8,
 
     /// The SCAN listener port for non-TLS (TCP) protocol.
-    scan_listener_port_non_tls: i32 = 1521,
+    scan_listener_port_non_tls: ?i32 = null,
 
     /// The SCAN listener port for TLS (TCP) protocol.
-    scan_listener_port_tls: i32 = 2484,
+    scan_listener_port_tls: ?i32 = null,
 
     /// Free-form tags for this resource. Each tag is a key-value pair with no
     /// predefined name, type, or namespace.

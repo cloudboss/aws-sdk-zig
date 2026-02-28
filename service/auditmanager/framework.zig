@@ -54,7 +54,7 @@ pub const Framework = struct {
 
     /// Specifies whether the framework is a standard framework or a custom
     /// framework.
-    type: ?FrameworkType,
+    @"type": ?FrameworkType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -70,6 +70,6 @@ pub const Framework = struct {
         .logo = "logo",
         .name = "name",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

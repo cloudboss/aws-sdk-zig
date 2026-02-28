@@ -23,12 +23,12 @@ pub const ExecutionEngineConfig = struct {
 
     /// The type of execution engine. A value of `EMR` specifies an Amazon EMR
     /// cluster.
-    type: ?ExecutionEngineType,
+    @"type": ?ExecutionEngineType,
 
     pub const json_field_names = .{
         .execution_role_arn = "ExecutionRoleArn",
         .id = "Id",
         .master_instance_security_group_id = "MasterInstanceSecurityGroupId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

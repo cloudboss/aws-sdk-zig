@@ -36,7 +36,8 @@ pub const EnableSsoInput = struct {
     };
 };
 
-pub const EnableSsoOutput = struct {};
+pub const EnableSsoOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

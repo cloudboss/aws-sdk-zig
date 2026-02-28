@@ -65,7 +65,7 @@ pub const ValidateE911AddressOutput = struct {
     /// * `2` - Address validation failed. You should re-submit the validation
     /// request with candidates from the `CandidateAddressList` result, if it's a
     /// close match.
-    validation_result: i32 = 0,
+    validation_result: ?i32 = null,
 
     pub const json_field_names = .{
         .address = "Address",

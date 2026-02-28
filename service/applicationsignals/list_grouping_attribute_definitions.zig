@@ -13,7 +13,7 @@ pub const ListGroupingAttributeDefinitionsInput = struct {
 
     /// If you are using this operation in a monitoring account, specify `true` to
     /// include grouping attributes from source accounts in the returned data.
-    include_linked_accounts: bool = false,
+    include_linked_accounts: ?bool = null,
 
     /// Include this value, if it was returned by the previous operation, to get the
     /// next set of grouping attribute definitions.

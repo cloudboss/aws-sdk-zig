@@ -9,7 +9,7 @@ pub const GetMatchIdInput = struct {
     /// example, if an attribute has an `AttributeType` of `PHONE_NUMBER`, and the
     /// data in the input table is in a format of 1234567890, Entity Resolution will
     /// normalize this field in the output to (123)-456-7890.
-    apply_normalization: bool = true,
+    apply_normalization: ?bool = null,
 
     /// The record to fetch the Match ID for.
     record: []const aws.map.StringMapEntry,

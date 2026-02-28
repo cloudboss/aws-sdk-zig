@@ -54,7 +54,8 @@ pub const AddGroupMemberInput = struct {
     };
 };
 
-pub const AddGroupMemberOutput = struct {};
+pub const AddGroupMemberOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

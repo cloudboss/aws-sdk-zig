@@ -13,7 +13,8 @@ pub const DeleteReplicationSubnetGroupInput = struct {
     };
 };
 
-pub const DeleteReplicationSubnetGroupOutput = struct {};
+pub const DeleteReplicationSubnetGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

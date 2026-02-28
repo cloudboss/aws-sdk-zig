@@ -34,7 +34,7 @@ pub const AddCommunicationToCaseInput = struct {
 pub const AddCommunicationToCaseOutput = struct {
     /// True if AddCommunicationToCase succeeds. Otherwise, returns an
     /// error.
-    result: bool = false,
+    result: ?bool = null,
 
     pub const json_field_names = .{
         .result = "result",

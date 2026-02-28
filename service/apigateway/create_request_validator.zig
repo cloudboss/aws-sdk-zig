@@ -13,11 +13,11 @@ pub const CreateRequestValidatorInput = struct {
 
     /// A Boolean flag to indicate whether to validate request body according to the
     /// configured model schema for the method (`true`) or not (`false`).
-    validate_request_body: bool = false,
+    validate_request_body: ?bool = null,
 
     /// A Boolean flag to indicate whether to validate request parameters, `true`,
     /// or not `false`.
-    validate_request_parameters: bool = false,
+    validate_request_parameters: ?bool = null,
 
     pub const json_field_names = .{
         .name = "name",

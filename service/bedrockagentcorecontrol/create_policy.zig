@@ -49,7 +49,7 @@ pub const CreatePolicyInput = struct {
     /// FAIL_ON_ANY_FINDINGS for production policies to ensure correctness, and
     /// IGNORE_ALL_FINDINGS only when you understand and accept the analyzer
     /// findings.
-    validation_mode: PolicyValidationMode = "FAIL_ON_ANY_FINDINGS",
+    validation_mode: ?PolicyValidationMode = null,
 
     pub const json_field_names = .{
         .client_token = "clientToken",

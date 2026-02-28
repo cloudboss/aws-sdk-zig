@@ -34,7 +34,7 @@ pub const UpdateFunctionCodeInput = struct {
 
     /// Set to true to validate the request parameters and access permissions
     /// without modifying the function code.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// The name or ARN of the Lambda function. **Name formats**
     ///
@@ -53,7 +53,7 @@ pub const UpdateFunctionCodeInput = struct {
 
     /// Set to true to publish a new version of the function after updating the
     /// code. This has the same effect as calling PublishVersion separately.
-    publish: bool = false,
+    publish: ?bool = null,
 
     /// Specifies where to publish the function version or configuration.
     publish_to: ?FunctionVersionLatestPublished = null,

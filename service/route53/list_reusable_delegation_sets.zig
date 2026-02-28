@@ -35,7 +35,7 @@ pub const ListReusableDelegationSetsOutput = struct {
 
     /// A flag that indicates whether there are more reusable delegation sets to be
     /// listed.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// For the second and subsequent calls to `ListReusableDelegationSets`,
     /// `Marker` is the value that you specified for the `marker`

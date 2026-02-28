@@ -13,7 +13,7 @@ pub const ListSecurityProfilesForTargetInput = struct {
     next_token: ?[]const u8 = null,
 
     /// If true, return child groups too.
-    recursive: bool = false,
+    recursive: ?bool = null,
 
     /// The ARN of the target (thing group) whose attached security profiles you
     /// want to get.

@@ -27,7 +27,7 @@ pub const GetCardinalityInput = struct {
 
 pub const GetCardinalityOutput = struct {
     /// The approximate count of unique values that match the query.
-    cardinality: i32 = 0,
+    cardinality: ?i32 = null,
 
     pub const json_field_names = .{
         .cardinality = "cardinality",

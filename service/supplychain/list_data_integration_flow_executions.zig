@@ -14,7 +14,7 @@ pub const ListDataIntegrationFlowExecutionsInput = struct {
 
     /// The number to specify the max number of flow executions to fetch in this
     /// paginated request.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The pagination token to fetch next page of flow executions.
     next_token: ?[]const u8 = null,

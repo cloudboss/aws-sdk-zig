@@ -14,7 +14,7 @@ pub const GetDocumentInput = struct {
     document_id: []const u8,
 
     /// Set this to `TRUE` to include custom metadata in the response.
-    include_custom_metadata: bool = false,
+    include_custom_metadata: ?bool = null,
 
     pub const json_field_names = .{
         .authentication_token = "AuthenticationToken",

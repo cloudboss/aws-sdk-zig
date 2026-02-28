@@ -29,7 +29,8 @@ pub const UpdateLocationFsxLustreInput = struct {
     };
 };
 
-pub const UpdateLocationFsxLustreOutput = struct {};
+pub const UpdateLocationFsxLustreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -16,7 +16,7 @@ pub const SearchActionConnectorsInput = struct {
 
     /// The maximum number of action connectors to return in a single response.
     /// Valid range is 1 to 100.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A pagination token to retrieve the next set of results. Use the token
     /// returned from a previous call to continue searching.
@@ -42,7 +42,7 @@ pub const SearchActionConnectorsOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status code of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .action_connector_summaries = "ActionConnectorSummaries",

@@ -139,6 +139,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
 
+
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{
         .code = owned_code,

@@ -16,7 +16,7 @@ pub const PutMetricFilterInput = struct {
     /// specify `true`, the metric filter will be applied on the transformed version
     /// of the
     /// log events instead of the original ingested log events.
-    apply_on_transformed_logs: bool = false,
+    apply_on_transformed_logs: ?bool = null,
 
     /// A list of system fields to emit as additional dimensions in the generated
     /// metrics. Valid

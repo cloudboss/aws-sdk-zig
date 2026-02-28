@@ -40,7 +40,7 @@ pub const CustomerAgreementSummary = struct {
     terminate_terms: ?[]const []const u8,
 
     /// Type of the customer-agreement resource.
-    type: ?AgreementType,
+    @"type": ?AgreementType,
 
     pub const json_field_names = .{
         .acceptance_terms = "acceptanceTerms",
@@ -55,6 +55,6 @@ pub const CustomerAgreementSummary = struct {
         .organization_arn = "organizationArn",
         .state = "state",
         .terminate_terms = "terminateTerms",
-        .type = "type",
+        .@"type" = "type",
     };
 };

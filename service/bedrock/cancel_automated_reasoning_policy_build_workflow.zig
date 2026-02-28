@@ -20,7 +20,8 @@ pub const CancelAutomatedReasoningPolicyBuildWorkflowInput = struct {
     };
 };
 
-pub const CancelAutomatedReasoningPolicyBuildWorkflowOutput = struct {};
+pub const CancelAutomatedReasoningPolicyBuildWorkflowOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

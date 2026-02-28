@@ -69,14 +69,14 @@ pub const StartStreamTranscriptionInput = struct {
     ///
     /// For more information, see [Transcribing multi-channel
     /// audio](https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
-    enable_channel_identification: bool = false,
+    enable_channel_identification: ?bool = null,
 
     /// Enables partial result stabilization for your transcription. Partial result
     /// stabilization can reduce
     /// latency in your output, but may impact accuracy. For more information, see
     /// [Partial-result
     /// stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
-    enable_partial_results_stabilization: bool = false,
+    enable_partial_results_stabilization: ?bool = null,
 
     /// Enables automatic language identification for your transcription.
     ///
@@ -104,7 +104,7 @@ pub const StartStreamTranscriptionInput = struct {
     /// Streaming language identification can't be combined with custom language
     /// models or
     /// redaction.
-    identify_language: bool = false,
+    identify_language: ?bool = null,
 
     /// Enables automatic multi-language identification in your transcription job
     /// request. Use this parameter if your stream contains more than one language.
@@ -121,7 +121,7 @@ pub const StartStreamTranscriptionInput = struct {
     /// Note that you must include one of `LanguageCode`, `IdentifyLanguage`, or
     /// `IdentifyMultipleLanguages` in your request. If you include more than one of
     /// these parameters, your transcription job fails.
-    identify_multiple_languages: bool = false,
+    identify_multiple_languages: ?bool = null,
 
     /// Specify the language code that represents the language spoken in your audio.
     ///
@@ -248,7 +248,7 @@ pub const StartStreamTranscriptionInput = struct {
     ///
     /// For more information, see [Partitioning speakers
     /// (diarization)](https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
-    show_speaker_label: bool = false,
+    show_speaker_label: ?bool = null,
 
     /// Specify how you want your vocabulary filter applied to your transcript.
     ///
@@ -366,19 +366,19 @@ pub const StartStreamTranscriptionOutput = struct {
     content_redaction_type: ?ContentRedactionType = null,
 
     /// Shows whether channel identification was enabled for your transcription.
-    enable_channel_identification: bool = false,
+    enable_channel_identification: ?bool = null,
 
     /// Shows whether partial results stabilization was enabled for your
     /// transcription.
-    enable_partial_results_stabilization: bool = false,
+    enable_partial_results_stabilization: ?bool = null,
 
     /// Shows whether automatic language identification was enabled for your
     /// transcription.
-    identify_language: bool = false,
+    identify_language: ?bool = null,
 
     /// Shows whether automatic multi-language identification was enabled for your
     /// transcription.
-    identify_multiple_languages: bool = false,
+    identify_multiple_languages: ?bool = null,
 
     /// Provides the language code that you specified in your request.
     language_code: ?LanguageCode = null,
@@ -415,7 +415,7 @@ pub const StartStreamTranscriptionOutput = struct {
     session_id: ?[]const u8 = null,
 
     /// Shows whether speaker partitioning was enabled for your transcription.
-    show_speaker_label: bool = false,
+    show_speaker_label: ?bool = null,
 
     /// Provides detailed information about your streaming session.
     transcript_result_stream: ?TranscriptResultStream = null,

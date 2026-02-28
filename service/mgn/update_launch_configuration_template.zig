@@ -53,7 +53,7 @@ pub const UpdateLaunchConfigurationTemplateInput = struct {
     small_volume_conf: ?LaunchTemplateDiskConf = null,
 
     /// Small volume maximum size.
-    small_volume_max_size: i64 = 0,
+    small_volume_max_size: ?i64 = null,
 
     /// Target instance type right-sizing method.
     target_instance_type_right_sizing_method: ?TargetInstanceTypeRightSizingMethod = null,

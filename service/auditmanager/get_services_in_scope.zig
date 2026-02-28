@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ServiceMetadata = @import("service_metadata.zig").ServiceMetadata;
 
-pub const GetServicesInScopeInput = struct {};
+pub const GetServicesInScopeInput = struct {
+};
 
 pub const GetServicesInScopeOutput = struct {
     /// The metadata that's associated with the Amazon Web Services service.

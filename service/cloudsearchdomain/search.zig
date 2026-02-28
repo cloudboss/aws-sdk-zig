@@ -174,7 +174,7 @@ pub const SearchInput = struct {
     /// search experience. For example, rather than displaying no results, you could
     /// display the partial results and a message indicating that the results might
     /// be incomplete due to a temporary system outage.
-    partial: bool = false,
+    partial: ?bool = null,
 
     /// Specifies the search criteria for the request. How you specify the search
     /// criteria depends on the query parser used for the request and the parser
@@ -352,7 +352,7 @@ pub const SearchInput = struct {
     @"return": ?[]const u8 = null,
 
     /// Specifies the maximum number of search hits to include in the response.
-    size: i64 = 0,
+    size: ?i64 = null,
 
     /// Specifies the fields or custom expressions to use to sort the search
     /// results. Multiple fields or expressions are specified as a comma-separated
@@ -378,7 +378,7 @@ pub const SearchInput = struct {
     ///
     /// For more information, see [Paginating
     /// Results](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html) in the *Amazon CloudSearch Developer Guide*.
-    start: i64 = 0,
+    start: ?i64 = null,
 
     /// Specifies one or more fields for which to get statistics information. Each
     /// specified field must be facet-enabled in the domain configuration. The

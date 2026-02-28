@@ -22,7 +22,7 @@ pub const GetSatelliteOutput = struct {
     ground_stations: ?[]const []const u8 = null,
 
     /// NORAD satellite ID number.
-    norad_satellite_id: i32 = 0,
+    norad_satellite_id: ?i32 = null,
 
     /// ARN of a satellite.
     satellite_arn: ?[]const u8 = null,

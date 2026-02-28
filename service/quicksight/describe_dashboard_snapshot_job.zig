@@ -69,7 +69,7 @@ pub const DescribeDashboardSnapshotJobOutput = struct {
     snapshot_job_id: ?[]const u8 = null,
 
     /// The HTTP status of the request
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The user configuration for the snapshot job. This information is provided
     /// when you make a `StartDashboardSnapshotJob` API call.

@@ -12,7 +12,7 @@ pub const ListMultiRegionAccessPointsInput = struct {
     account_id: []const u8,
 
     /// Not currently used. Do not use this parameter.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Not currently used. Do not use this parameter.
     next_token: ?[]const u8 = null,

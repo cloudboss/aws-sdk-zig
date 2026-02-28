@@ -9,7 +9,7 @@ pub const ListPoliciesInput = struct {
     /// Specifies the order for results. If true, the results are returned in
     /// ascending
     /// creation order.
-    ascending_order: bool = false,
+    ascending_order: ?bool = null,
 
     /// The marker for the next set of results.
     marker: ?[]const u8 = null,

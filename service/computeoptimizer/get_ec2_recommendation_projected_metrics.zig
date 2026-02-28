@@ -17,7 +17,7 @@ pub const GetEC2RecommendationProjectedMetricsInput = struct {
     instance_arn: []const u8,
 
     /// The granularity, in seconds, of the projected metrics data points.
-    period: i32 = 0,
+    period: ?i32 = null,
 
     /// An object to specify the preferences for the Amazon EC2 recommendation
     /// projected metrics to return in the response.

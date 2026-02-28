@@ -12,7 +12,8 @@ pub const DeleteSharedTrustStoreAssociationInput = struct {
     trust_store_arn: []const u8,
 };
 
-pub const DeleteSharedTrustStoreAssociationOutput = struct {};
+pub const DeleteSharedTrustStoreAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

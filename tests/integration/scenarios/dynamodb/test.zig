@@ -366,7 +366,7 @@ test "Query returns items matching key condition" {
         },
     }, .{});
 
-    const count = result.count orelse return error.MissingCount;
+    const count = result.count;
     try std.testing.expectEqual(@as(i32, 3), count);
 }
 
@@ -513,7 +513,7 @@ test "BatchWriteItem writes multiple items" {
         .{},
     );
 
-    const count = result.count orelse return error.MissingCount;
+    const count = result.count;
     try std.testing.expectEqual(@as(i32, 3), count);
 }
 
@@ -677,7 +677,7 @@ test "Scan returns all items without filter" {
         .{},
     );
 
-    const count = result.count orelse return error.MissingCount;
+    const count = result.count;
     try std.testing.expectEqual(@as(i32, 3), count);
 }
 
@@ -729,7 +729,7 @@ test "Query with sort key begins_with returns filtered results" {
         },
     }, .{});
 
-    const count = result.count orelse return error.MissingCount;
+    const count = result.count;
     try std.testing.expectEqual(@as(i32, 2), count);
 }
 

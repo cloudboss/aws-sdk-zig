@@ -7,7 +7,7 @@ const Statement = @import("statement.zig").Statement;
 
 pub const GetStatementInput = struct {
     /// The Id of the statement.
-    id: i32 = 0,
+    id: ?i32 = null,
 
     /// The origin of the request.
     request_origin: ?[]const u8 = null,

@@ -81,7 +81,7 @@ pub const GetJobOutputOutput = struct {
     archive_description: ?[]const u8 = null,
 
     /// The job data, either archive data or inventory data.
-    body: aws.http.StreamingBody = "",
+    body: ?aws.http.StreamingBody = null,
 
     /// The checksum of the data in the response. This header is returned only when
     /// retrieving the output for an archive retrieval job. Furthermore, this header
@@ -127,7 +127,7 @@ pub const GetJobOutputOutput = struct {
     /// The HTTP response code for a job output request. The value depends on
     /// whether a range
     /// was specified in the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub fn deinit(self: *GetJobOutputOutput) void {
         self.body.deinit();

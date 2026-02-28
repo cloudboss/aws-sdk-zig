@@ -39,7 +39,7 @@ pub const ListAccessPointsInput = struct {
     /// include a continuation
     /// token in the `NextToken` field that you can use to retrieve the next page of
     /// access points.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A continuation token. If a previous call to `ListAccessPoints` returned a
     /// continuation token in the `NextToken` field, then providing that value here

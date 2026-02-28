@@ -37,7 +37,7 @@ pub const CreateLoadBalancerInput = struct {
     health_check_path: ?[]const u8 = null,
 
     /// The instance port where you're creating your load balancer.
-    instance_port: i32 = 0,
+    instance_port: ?i32 = null,
 
     /// The IP address type for the load balancer.
     ///

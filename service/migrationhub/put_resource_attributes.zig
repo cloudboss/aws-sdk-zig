@@ -9,7 +9,7 @@ pub const PutResourceAttributesInput = struct {
     /// Optional boolean flag to indicate whether any effect should take place. Used
     /// to test if
     /// the caller has permission to make the call.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// Unique identifier that references the migration task. *Do not store personal
     /// data in this field.*

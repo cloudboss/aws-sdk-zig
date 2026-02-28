@@ -7,7 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const PutResourcePolicyInput = struct {
     /// Set this parameter to `true` to confirm that you want to remove your
     /// permissions to change the policy of this resource in the future.
-    confirm_remove_self_resource_access: bool = false,
+    confirm_remove_self_resource_access: ?bool = null,
 
     /// A string value that you can use to conditionally update your policy. You can
     /// provide

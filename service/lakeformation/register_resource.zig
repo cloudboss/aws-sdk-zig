@@ -33,7 +33,7 @@ pub const RegisterResourceInput = struct {
 
     /// Grants the calling principal the permissions to perform all supported Lake
     /// Formation operations on the registered data location.
-    with_privileged_access: bool = false,
+    with_privileged_access: ?bool = null,
 
     pub const json_field_names = .{
         .expected_resource_owner_account = "ExpectedResourceOwnerAccount",

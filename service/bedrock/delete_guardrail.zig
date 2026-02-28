@@ -17,7 +17,8 @@ pub const DeleteGuardrailInput = struct {
     };
 };
 
-pub const DeleteGuardrailOutput = struct {};
+pub const DeleteGuardrailOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -19,7 +19,7 @@ pub const GetPolicyStoreInput = struct {
     /// If this parameter is included in the API call but there are no tags attached
     /// to the policy store, the `tags` response parameter is omitted from the
     /// response.
-    tags: bool = false,
+    tags: ?bool = null,
 
     pub const json_field_names = .{
         .policy_store_id = "policyStoreId",

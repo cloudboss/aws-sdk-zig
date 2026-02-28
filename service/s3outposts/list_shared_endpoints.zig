@@ -7,7 +7,7 @@ const Endpoint = @import("endpoint.zig").Endpoint;
 
 pub const ListSharedEndpointsInput = struct {
     /// The maximum number of endpoints that will be returned in the response.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// If a previous response from this operation included a `NextToken` value, you
     /// can provide that value here to retrieve the next page of results.

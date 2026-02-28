@@ -19,7 +19,7 @@ pub const DeleteBGPPeerInput = struct {
     /// * If you provide a value in the same API call for both `asn`
     /// and `asnLong`, the API will only accept the value for
     /// `asnLong`.
-    asn: i32 = 0,
+    asn: ?i32 = null,
 
     /// The long ASN for the BGP peer to be deleted from a Direct Connect virtual
     /// interface. The valid range is from 1 to 4294967294 for BGP configuration.

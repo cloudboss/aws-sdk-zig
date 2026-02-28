@@ -105,21 +105,21 @@ pub const GetUnfilteredTableMetadataOutput = struct {
     cell_filters: ?[]const ColumnRowFilter = null,
 
     /// Indicates if a table is a materialized view.
-    is_materialized_view: bool = false,
+    is_materialized_view: ?bool = null,
 
     /// Specifies whether the view supports the SQL dialects of one or more
     /// different query engines and can therefore be read by those engines.
-    is_multi_dialect_view: bool = false,
+    is_multi_dialect_view: ?bool = null,
 
     /// A flag that instructs the engine not to push user-provided operations into
     /// the logical plan of the view during query planning. However, if set this
     /// flag does not guarantee that the engine will comply. Refer to the engine's
     /// documentation to understand the guarantees provided, if any.
-    is_protected: bool = false,
+    is_protected: ?bool = null,
 
     /// A Boolean value that indicates whether the partition location is registered
     /// with Lake Formation.
-    is_registered_with_lake_formation: bool = false,
+    is_registered_with_lake_formation: ?bool = null,
 
     /// The Lake Formation data permissions of the caller on the table. Used to
     /// authorize the call when no view context is found.

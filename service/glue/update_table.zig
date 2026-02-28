@@ -19,7 +19,7 @@ pub const UpdateTableInput = struct {
 
     /// A flag that can be set to true to ignore matching storage descriptor and
     /// subobject matching requirements.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The unique identifier for the table within the specified database that will
     /// be

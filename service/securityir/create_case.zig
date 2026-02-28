@@ -36,11 +36,11 @@ pub const CreateCaseInput = struct {
 
     /// An optional element used in combination with CreateCase to provide a list of
     /// impacted regions.
-    impacted_aws_regions: []const ImpactedAwsRegion = &.{},
+    impacted_aws_regions: ?[]const ImpactedAwsRegion = null,
 
     /// An optional element used in combination with CreateCase to provide a list of
     /// services impacted.
-    impacted_services: []const []const u8 = &.{},
+    impacted_services: ?[]const []const u8 = null,
 
     /// Required element used in combination with CreateCase to provide an initial
     /// start date for the unauthorized activity.
@@ -57,7 +57,7 @@ pub const CreateCaseInput = struct {
     /// An optional element used in combination with CreateCase to provide a list of
     /// suspicious internet protocol addresses associated with unauthorized
     /// activity.
-    threat_actor_ip_addresses: []const ThreatActorIp = &.{},
+    threat_actor_ip_addresses: ?[]const ThreatActorIp = null,
 
     /// Required element used in combination with CreateCase to provide a title for
     /// the new case.

@@ -14,7 +14,7 @@ pub const ListEnabledBaselinesInput = struct {
 
     /// A value that can be set to include the child enabled baselines in responses.
     /// The default value is false.
-    include_children: bool = false,
+    include_children: ?bool = null,
 
     /// The maximum number of results to be shown.
     max_results: ?i32 = null,

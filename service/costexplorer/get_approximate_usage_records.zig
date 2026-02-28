@@ -37,7 +37,7 @@ pub const GetApproximateUsageRecordsOutput = struct {
     services: ?[]const aws.map.MapEntry(i64) = null,
 
     /// The total number of usage records for all services in the services list.
-    total_records: i64 = 0,
+    total_records: ?i64 = null,
 
     pub const json_field_names = .{
         .lookback_period = "LookbackPeriod",

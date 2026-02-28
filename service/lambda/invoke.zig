@@ -97,7 +97,7 @@ pub const InvokeOutput = struct {
     /// `RequestResponse` invocation type, this status code is 200. For the `Event`
     /// invocation type, this status code is 202. For the `DryRun` invocation type,
     /// the status code is 204.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub const json_field_names = .{
         .durable_execution_arn = "DurableExecutionArn",

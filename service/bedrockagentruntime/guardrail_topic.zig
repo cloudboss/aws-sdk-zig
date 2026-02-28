@@ -10,11 +10,11 @@ pub const GuardrailTopic = struct {
     name: ?[]const u8,
 
     /// The type details on a specific topic in the Guardrail.
-    type: ?GuardrailTopicType,
+    @"type": ?GuardrailTopicType,
 
     pub const json_field_names = .{
         .action = "action",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

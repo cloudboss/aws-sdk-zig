@@ -90,7 +90,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateUserInput, config: *a
                 try aws.url.appendUrlEncoded(alloc, &body_buf, item);
             }
         }
-        if (v.type) |sv| {
+        if (v.@"type") |sv| {
             try body_buf.appendSlice(alloc, "&AuthenticationMode.Type=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }

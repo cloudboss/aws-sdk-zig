@@ -15,7 +15,7 @@ pub const DeleteReportGroupInput = struct {
     /// [ListReportsForReportGroup](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html) to get the reports in a report group. Use [DeleteReport](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html) to delete the reports. If you call
     /// `DeleteReportGroup` for a report group that contains one or more reports,
     /// an exception is thrown.
-    delete_reports: bool = false,
+    delete_reports: ?bool = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -23,7 +23,8 @@ pub const DeleteReportGroupInput = struct {
     };
 };
 
-pub const DeleteReportGroupOutput = struct {};
+pub const DeleteReportGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,7 @@ pub const ValidateStateMachineDefinitionInput = struct {
     ///
     /// If the number of diagnostics returned in the response exceeds `maxResults`,
     /// the value of the `truncated` field in the response will be set to `true`.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// Minimum level of diagnostics to return. `ERROR` returns only `ERROR`
     /// diagnostics, whereas `WARNING` returns both `WARNING` and `ERROR`

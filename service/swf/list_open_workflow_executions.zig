@@ -23,7 +23,7 @@ pub const ListOpenWorkflowExecutionsInput = struct {
 
     /// The maximum number of results that are returned per call.
     /// Use `nextPageToken` to obtain further pages of results.
-    maximum_page_size: i32 = 0,
+    maximum_page_size: ?i32 = null,
 
     /// If `NextPageToken` is returned there are more results
     /// available. The value of `NextPageToken` is a unique pagination token for
@@ -41,7 +41,7 @@ pub const ListOpenWorkflowExecutionsInput = struct {
     /// When set to `true`, returns the results in reverse order. By default the
     /// results are returned in descending order of the start time of the
     /// executions.
-    reverse_order: bool = false,
+    reverse_order: ?bool = null,
 
     /// Workflow executions are included in the returned results based on whether
     /// their start

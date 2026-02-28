@@ -18,7 +18,7 @@ pub const AdminSetUserPasswordInput = struct {
     /// Set to `false` to set a temporary password that the user must change on
     /// their
     /// next sign-in.
-    permanent: bool = false,
+    permanent: ?bool = null,
 
     /// The name of the user that you want to query or modify. The value of this
     /// parameter
@@ -40,7 +40,8 @@ pub const AdminSetUserPasswordInput = struct {
     };
 };
 
-pub const AdminSetUserPasswordOutput = struct {};
+pub const AdminSetUserPasswordOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

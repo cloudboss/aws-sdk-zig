@@ -24,7 +24,7 @@ pub const CheckSchemaVersionValidityOutput = struct {
     @"error": ?[]const u8 = null,
 
     /// Return true, if the schema is valid and false otherwise.
-    valid: bool = false,
+    valid: ?bool = null,
 
     pub const json_field_names = .{
         .@"error" = "Error",

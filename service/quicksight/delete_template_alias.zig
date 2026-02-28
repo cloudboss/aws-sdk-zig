@@ -37,7 +37,7 @@ pub const DeleteTemplateAliasOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// An ID for the template associated with the deletion.
     template_id: ?[]const u8 = null,

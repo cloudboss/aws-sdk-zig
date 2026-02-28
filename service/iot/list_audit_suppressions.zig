@@ -9,7 +9,7 @@ const AuditSuppression = @import("audit_suppression.zig").AuditSuppression;
 pub const ListAuditSuppressionsInput = struct {
     /// Determines whether suppressions are listed in ascending order by expiration
     /// date or not. If parameter isn't provided, `ascendingOrder=true`.
-    ascending_order: bool = false,
+    ascending_order: ?bool = null,
 
     check_name: ?[]const u8 = null,
 

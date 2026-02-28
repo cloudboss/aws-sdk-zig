@@ -25,7 +25,8 @@ pub const UpdateComponentInput = struct {
     };
 };
 
-pub const UpdateComponentOutput = struct {};
+pub const UpdateComponentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

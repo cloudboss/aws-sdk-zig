@@ -159,7 +159,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateEnvironmentInput, con
             try body_buf.appendSlice(alloc, "&Tier.Name=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
-        if (v.type) |sv| {
+        if (v.@"type") |sv| {
             try body_buf.appendSlice(alloc, "&Tier.Type=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }

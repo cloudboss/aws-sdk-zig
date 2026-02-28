@@ -20,7 +20,7 @@ pub const GetLogRecordInput = struct {
     /// To use this operation with this parameter, you must be signed into an
     /// account with the
     /// `logs:Unmask` permission.
-    unmask: bool = false,
+    unmask: ?bool = null,
 
     pub const json_field_names = .{
         .log_record_pointer = "logRecordPointer",

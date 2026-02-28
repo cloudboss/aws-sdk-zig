@@ -9,11 +9,11 @@ pub const RelatedFindingDetail = struct {
     ip_address: ?[]const u8,
 
     /// The type of finding.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .ip_address = "IpAddress",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

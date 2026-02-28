@@ -11,7 +11,7 @@ pub const DeprecateThingTypeInput = struct {
     /// Whether to undeprecate a deprecated thing type. If **true**, the thing type
     /// will not be deprecated anymore and you can
     /// associate it with things.
-    undo_deprecate: bool = false,
+    undo_deprecate: ?bool = null,
 
     pub const json_field_names = .{
         .thing_type_name = "thingTypeName",

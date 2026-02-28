@@ -35,11 +35,11 @@ pub const KMSServerSideEncryptionIntegrationConfig = struct {
     /// The type of KMS key used. Customer managed keys are the KMS keys that you
     /// create. Amazon Web Services owned keys are keys that are owned and managed
     /// by DevOps Guru.
-    type: ?ServerSideEncryptionType,
+    @"type": ?ServerSideEncryptionType,
 
     pub const json_field_names = .{
         .kms_key_id = "KMSKeyId",
         .opt_in_status = "OptInStatus",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

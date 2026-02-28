@@ -20,7 +20,7 @@ pub const GetAggregateDiscoveredResourceCountsInput = struct {
     /// The maximum number of GroupedResourceCount objects returned on each page.
     /// The default is 1000. You cannot specify a number greater than 1000. If you
     /// specify 0, Config uses the default.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned on a previous page that you use to get the
     /// next page of results in a paginated response.
@@ -49,7 +49,7 @@ pub const GetAggregateDiscoveredResourceCountsOutput = struct {
 
     /// The total number of resources that are present in an aggregator with the
     /// filters that you provide.
-    total_discovered_resources: i64 = 0,
+    total_discovered_resources: ?i64 = null,
 
     pub const json_field_names = .{
         .group_by_key = "GroupByKey",

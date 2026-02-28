@@ -74,7 +74,7 @@ pub const UpdateUserPoolClientInput = struct {
     /// `AllowedOAuthFlowsUserPoolClient` in a request with the CLI or SDKs, it
     /// defaults
     /// to `false`. When `false`, only SDK-based API sign-in is permitted.
-    allowed_o_auth_flows_user_pool_client: bool = false,
+    allowed_o_auth_flows_user_pool_client: ?bool = null,
 
     /// The OAuth, OpenID Connect (OIDC), and custom scopes that you want to permit
     /// your app
@@ -310,7 +310,7 @@ pub const UpdateUserPoolClientInput = struct {
     /// If you don't specify otherwise in the configuration of your app client, your
     /// refresh
     /// tokens are valid for 30 days.
-    refresh_token_validity: i32 = 0,
+    refresh_token_validity: ?i32 = null,
 
     /// A list of provider names for the identity providers (IdPs) that are
     /// supported on this

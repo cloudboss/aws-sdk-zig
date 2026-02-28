@@ -22,7 +22,7 @@ pub const DescribeConfigRuleEvaluationStatusInput = struct {
     /// [Config
     /// Limits](http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config) in the *Amazon Web Services General
     /// Reference Guide*.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned on a previous page
     /// that you use to get the next page of results in a paginated

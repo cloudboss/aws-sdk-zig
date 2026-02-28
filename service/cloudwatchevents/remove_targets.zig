@@ -18,7 +18,7 @@ pub const RemoveTargetsInput = struct {
     /// rule by using
     /// `DescribeRule` or `ListRules` and checking the `ManagedBy`
     /// field of the response.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The IDs of the targets to remove from the rule.
     ids: []const []const u8,
@@ -39,7 +39,7 @@ pub const RemoveTargetsOutput = struct {
     failed_entries: ?[]const RemoveTargetsResultEntry = null,
 
     /// The number of failed entries.
-    failed_entry_count: i32 = 0,
+    failed_entry_count: ?i32 = null,
 
     pub const json_field_names = .{
         .failed_entries = "FailedEntries",

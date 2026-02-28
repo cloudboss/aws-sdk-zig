@@ -38,7 +38,7 @@ pub const UpdateExperimentInput = struct {
 
     /// Removes a segment from being used in an experiment. You can't use this
     /// parameter if the experiment is currently running.
-    remove_segment: bool = false,
+    remove_segment: ?bool = null,
 
     /// The portion of the available audience that you want to allocate to this
     /// experiment, in thousandths of a percent. The available audience is the total

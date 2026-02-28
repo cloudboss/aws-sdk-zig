@@ -8,7 +8,7 @@ pub const RenewDomainInput = struct {
     /// The year when the registration for the domain is set to expire. This value
     /// must match
     /// the current expiration date for the domain.
-    current_expiry_year: i32 = 0,
+    current_expiry_year: ?i32 = null,
 
     /// The name of the domain that you want to renew.
     domain_name: []const u8,

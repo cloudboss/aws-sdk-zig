@@ -9,7 +9,7 @@ const LogEventConfiguration = @import("log_event_configuration.zig").LogEventCon
 pub const GetV2LoggingOptionsInput = struct {
     /// The flag is used to get all the event types and their respective
     /// configuration that event-based logging supports.
-    verbose: bool = false,
+    verbose: ?bool = null,
 
     pub const json_field_names = .{
         .verbose = "verbose",
@@ -21,7 +21,7 @@ pub const GetV2LoggingOptionsOutput = struct {
     default_log_level: ?LogLevel = null,
 
     /// Disables all logs.
-    disable_all_logs: bool = false,
+    disable_all_logs: ?bool = null,
 
     /// The list of event configurations that override account-level logging.
     event_configurations: ?[]const LogEventConfiguration = null,

@@ -19,7 +19,7 @@ pub const DescribeVoicesInput = struct {
     /// voice that speaks both Italian (it-IT) and US English, that voice will be
     /// included if you specify `yes` but not if you specify
     /// `no`.
-    include_additional_language_codes: bool = false,
+    include_additional_language_codes: ?bool = null,
 
     /// The language identification tag (ISO 639 code for the language
     /// name-ISO 3166 country code) for filtering the list of voices returned. If

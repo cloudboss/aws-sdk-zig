@@ -24,7 +24,7 @@ pub const UpdateThingInput = struct {
 
     /// Remove a thing type association. If **true**, the
     /// association is removed.
-    remove_thing_type: bool = false,
+    remove_thing_type: ?bool = null,
 
     /// The name of the thing to update.
     ///

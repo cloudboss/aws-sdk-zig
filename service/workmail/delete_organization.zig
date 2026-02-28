@@ -10,14 +10,14 @@ pub const DeleteOrganizationInput = struct {
 
     /// If true, deletes the AWS Directory Service directory associated with the
     /// organization.
-    delete_directory: bool = false,
+    delete_directory: ?bool = null,
 
     /// Deletes IAM Identity Center application for WorkMail. This action does not
     /// affect authentication settings for any organization.
-    delete_identity_center_application: bool = false,
+    delete_identity_center_application: ?bool = null,
 
     /// Deletes a WorkMail organization even if the organization has enabled users.
-    force_delete: bool = false,
+    force_delete: ?bool = null,
 
     /// The organization ID.
     organization_id: []const u8,

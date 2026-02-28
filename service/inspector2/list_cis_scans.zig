@@ -17,7 +17,7 @@ pub const ListCisScansInput = struct {
     filter_criteria: ?ListCisScansFilterCriteria = null,
 
     /// The maximum number of results to be returned.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The pagination token from a previous request that's used to retrieve the
     /// next page of
@@ -25,7 +25,7 @@ pub const ListCisScansInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The CIS scans sort by order.
-    sort_by: ListCisScansSortBy = "SCAN_START_DATE",
+    sort_by: ?ListCisScansSortBy = null,
 
     /// The CIS scans sort order.
     sort_order: ?CisSortOrder = null,

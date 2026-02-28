@@ -9,7 +9,7 @@ pub const ListPoliciesInput = struct {
     /// The maximum number of items to return in the response. If more results exist
     /// than the specified `MaxResults` value, a token is included in the response
     /// so that you can retrieve the remaining results.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// If present, indicates that more output is available than is included in the
     /// current response. Use this value in the `NextToken` request parameter in a

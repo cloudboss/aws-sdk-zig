@@ -16,7 +16,7 @@ pub const ListRecoveryPointsByResourceInput = struct {
     /// recovery points associated with the selected resource.
     ///
     /// Type: Boolean
-    managed_by_aws_backup_only: bool = false,
+    managed_by_aws_backup_only: ?bool = null,
 
     /// The maximum number of items to be returned.
     ///

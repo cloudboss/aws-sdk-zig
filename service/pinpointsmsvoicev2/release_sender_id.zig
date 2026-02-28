@@ -33,7 +33,7 @@ pub const ReleaseSenderIdOutput = struct {
     monthly_leasing_price: []const u8,
 
     /// True if the sender ID is registered.
-    registered: bool = false,
+    registered: ?bool = null,
 
     /// The unique identifier for the registration.
     registration_id: ?[]const u8 = null,

@@ -58,7 +58,7 @@ pub const TestInvokeMethodOutput = struct {
     headers: ?[]const aws.map.StringMapEntry = null,
 
     /// The execution latency, in ms, of the test invoke request.
-    latency: i64 = 0,
+    latency: ?i64 = null,
 
     /// The API Gateway execution log for the test invoke request.
     log: ?[]const u8 = null,
@@ -67,7 +67,7 @@ pub const TestInvokeMethodOutput = struct {
     multi_value_headers: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The HTTP status code.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .body = "body",

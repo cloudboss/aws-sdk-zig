@@ -11,7 +11,7 @@ pub const UpdateConfigurationSetReputationMetricsEnabledInput = struct {
     /// Describes whether or not Amazon SES publishes reputation metrics for the
     /// configuration set,
     /// such as bounce and complaint rates, to Amazon CloudWatch.
-    enabled: bool = false,
+    enabled: ?bool = null,
 };
 
 const UpdateConfigurationSetReputationMetricsEnabledOutput = struct {};

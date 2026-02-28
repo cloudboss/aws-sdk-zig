@@ -6,10 +6,10 @@ pub const RelationshipsListItem = struct {
     ids: ?[]const []const u8,
 
     /// Only supported relationship is a child relationship.
-    type: ?RelationshipType,
+    @"type": ?RelationshipType,
 
     pub const json_field_names = .{
         .ids = "Ids",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

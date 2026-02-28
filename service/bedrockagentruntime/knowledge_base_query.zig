@@ -15,11 +15,11 @@ pub const KnowledgeBaseQuery = struct {
     text: []const u8 = "",
 
     /// The type of query being performed.
-    type: KnowledgeBaseQueryType = "TEXT",
+    @"type": KnowledgeBaseQueryType = "TEXT",
 
     pub const json_field_names = .{
         .image = "image",
         .text = "text",
-        .type = "type",
+        .@"type" = "type",
     };
 };

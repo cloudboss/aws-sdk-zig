@@ -7,7 +7,7 @@ const TaskInstanceSummary = @import("task_instance_summary.zig").TaskInstanceSum
 
 pub const ListTaskInstancesInput = struct {
     /// The maximum number of task instances to return in a single response.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// The pagination token you need to use to retrieve the next set of results.
     /// This value is returned from a previous call to `ListTaskInstances`.

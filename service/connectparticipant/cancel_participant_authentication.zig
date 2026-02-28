@@ -18,7 +18,8 @@ pub const CancelParticipantAuthenticationInput = struct {
     };
 };
 
-pub const CancelParticipantAuthenticationOutput = struct {};
+pub const CancelParticipantAuthenticationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

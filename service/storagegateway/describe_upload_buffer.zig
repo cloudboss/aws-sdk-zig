@@ -25,10 +25,10 @@ pub const DescribeUploadBufferOutput = struct {
     gateway_arn: ?[]const u8 = null,
 
     /// The total number of bytes allocated in the gateway's as upload buffer.
-    upload_buffer_allocated_in_bytes: i64 = 0,
+    upload_buffer_allocated_in_bytes: ?i64 = null,
 
     /// The total number of bytes being used in the gateway's upload buffer.
-    upload_buffer_used_in_bytes: i64 = 0,
+    upload_buffer_used_in_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .disk_ids = "DiskIds",

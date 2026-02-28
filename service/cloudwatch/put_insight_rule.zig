@@ -69,7 +69,8 @@ pub const PutInsightRuleInput = struct {
     };
 };
 
-pub const PutInsightRuleOutput = struct {};
+pub const PutInsightRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

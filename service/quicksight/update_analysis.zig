@@ -74,7 +74,7 @@ pub const UpdateAnalysisOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// The update status of the last update that was made to the analysis.
     update_status: ?ResourceStatus = null,

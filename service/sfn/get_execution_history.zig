@@ -21,7 +21,7 @@ pub const GetExecutionHistoryInput = struct {
     ///
     /// This is only an upper limit. The actual number of results returned per call
     /// might be fewer than the specified maximum.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// If `nextToken` is returned, there are more results available. The value of
     /// `nextToken` is a unique pagination token for each page.
@@ -32,7 +32,7 @@ pub const GetExecutionHistoryInput = struct {
     next_token: ?[]const u8 = null,
 
     /// Lists events in descending order of their `timeStamp`.
-    reverse_order: bool = false,
+    reverse_order: ?bool = null,
 
     pub const json_field_names = .{
         .execution_arn = "executionArn",

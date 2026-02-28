@@ -18,7 +18,8 @@ pub const DeleteRemediationConfigurationInput = struct {
     };
 };
 
-pub const DeleteRemediationConfigurationOutput = struct {};
+pub const DeleteRemediationConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -10,7 +10,7 @@ pub const ListPlanExecutionEventsInput = struct {
     execution_id: []const u8,
 
     /// The number of objects that you want to return with this call.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The name of the plan execution event.
     name: ?[]const u8 = null,

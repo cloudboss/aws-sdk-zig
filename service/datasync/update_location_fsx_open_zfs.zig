@@ -25,7 +25,8 @@ pub const UpdateLocationFsxOpenZfsInput = struct {
     };
 };
 
-pub const UpdateLocationFsxOpenZfsOutput = struct {};
+pub const UpdateLocationFsxOpenZfsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

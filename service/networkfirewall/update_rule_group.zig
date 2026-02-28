@@ -16,7 +16,7 @@ pub const UpdateRuleGroupInput = struct {
     /// `TRUE`, Network Firewall runs the analysis and then updates the rule group
     /// for you. To run the stateless rule group analyzer without updating the rule
     /// group, set `DryRun` to `TRUE`.
-    analyze_rule_group: bool = false,
+    analyze_rule_group: ?bool = null,
 
     /// A description of the rule group.
     description: ?[]const u8 = null,
@@ -35,7 +35,7 @@ pub const UpdateRuleGroupInput = struct {
     ///
     /// If set to `FALSE`, Network Firewall makes the requested changes to your
     /// resources.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// A complex type that contains settings for encryption of your rule group
     /// resources.

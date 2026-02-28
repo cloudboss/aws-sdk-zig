@@ -6,10 +6,10 @@ pub const Association = struct {
     arn: []const u8,
 
     /// The association type for the specified Amazon Braket resource arn.
-    type: AssociationType,
+    @"type": AssociationType,
 
     pub const json_field_names = .{
         .arn = "arn",
-        .type = "type",
+        .@"type" = "type",
     };
 };

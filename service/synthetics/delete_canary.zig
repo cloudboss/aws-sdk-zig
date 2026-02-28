@@ -16,7 +16,7 @@ pub const DeleteCanaryInput = struct {
     /// Lambda functions and layers will be deleted when this canary is deleted.
     ///
     /// Type: Boolean
-    delete_lambda: bool = false,
+    delete_lambda: ?bool = null,
 
     /// The name of the canary that you want to delete. To find the names of your
     /// canaries, use

@@ -7,7 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const GetJobDocumentInput = struct {
     /// Provides a view of the job document before and after the substitution
     /// parameters have been resolved with their exact values.
-    before_substitution: bool = false,
+    before_substitution: ?bool = null,
 
     /// The unique identifier you assigned to this job when it was created.
     job_id: []const u8,

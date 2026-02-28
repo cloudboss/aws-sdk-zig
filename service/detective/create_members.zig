@@ -26,7 +26,7 @@ pub const CreateMembersInput = struct {
     /// Organization accounts in the organization behavior graph do not receive
     /// email
     /// notifications.
-    disable_email_notification: bool = false,
+    disable_email_notification: ?bool = null,
 
     /// The ARN of the behavior graph.
     graph_arn: []const u8,

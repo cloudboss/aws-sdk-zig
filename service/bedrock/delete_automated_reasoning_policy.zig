@@ -10,7 +10,7 @@ pub const DeleteAutomatedReasoningPolicyInput = struct {
     /// artifacts have been deleted (e.g. policy version, test case, test result)
     /// for a policy before deletion. When `true`, Amazon Bedrock will delete the
     /// policy and all its artifacts without validation. Default is `false`.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the Automated Reasoning policy to delete.
     policy_arn: []const u8,
@@ -21,7 +21,8 @@ pub const DeleteAutomatedReasoningPolicyInput = struct {
     };
 };
 
-pub const DeleteAutomatedReasoningPolicyOutput = struct {};
+pub const DeleteAutomatedReasoningPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

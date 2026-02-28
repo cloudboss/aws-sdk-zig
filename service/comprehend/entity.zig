@@ -34,7 +34,7 @@ pub const Entity = struct {
     ///
     /// For custom entity detection, this field contains one of the
     /// entity types that you specified when you trained your custom model.
-    type: ?EntityType,
+    @"type": ?EntityType,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",
@@ -42,6 +42,6 @@ pub const Entity = struct {
         .end_offset = "EndOffset",
         .score = "Score",
         .text = "Text",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

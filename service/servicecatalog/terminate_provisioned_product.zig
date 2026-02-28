@@ -16,7 +16,7 @@ pub const TerminateProvisionedProductInput = struct {
     /// If set to true, Service Catalog stops managing the specified provisioned
     /// product even
     /// if it cannot delete the underlying resources.
-    ignore_errors: bool = false,
+    ignore_errors: ?bool = null,
 
     /// The identifier of the provisioned product. You cannot specify both
     /// `ProvisionedProductName` and `ProvisionedProductId`.
@@ -33,7 +33,7 @@ pub const TerminateProvisionedProductInput = struct {
     /// stack, stack set, or the underlying resources of the deleted provisioned
     /// product. The
     /// default value is false.
-    retain_physical_resources: bool = false,
+    retain_physical_resources: ?bool = null,
 
     /// An idempotency token that uniquely identifies the termination request. This
     /// token is

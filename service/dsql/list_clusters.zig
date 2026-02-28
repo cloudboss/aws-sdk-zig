@@ -8,7 +8,7 @@ const ClusterSummary = @import("cluster_summary.zig").ClusterSummary;
 pub const ListClustersInput = struct {
     /// An optional parameter that specifies the maximum number of results to
     /// return. You can use nextToken to display the next page of results.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// If your initial ListClusters operation returns a nextToken, you can include
     /// the returned nextToken in following ListClusters operations, which returns

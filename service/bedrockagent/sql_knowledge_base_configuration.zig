@@ -12,10 +12,10 @@ pub const SqlKnowledgeBaseConfiguration = struct {
     redshift_configuration: ?RedshiftConfiguration,
 
     /// The type of SQL database to connect to the knowledge base.
-    type: QueryEngineType,
+    @"type": QueryEngineType,
 
     pub const json_field_names = .{
         .redshift_configuration = "redshiftConfiguration",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -10,7 +10,7 @@ pub const DeleteTargetInput = struct {
     /// default value is FALSE. If set to TRUE, all associations between that target
     /// and every
     /// notification rule in your Amazon Web Services account are deleted.
-    force_unsubscribe_all: bool = false,
+    force_unsubscribe_all: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Q Developer in chat
     /// applications topic or Amazon Q Developer in chat applications client to
@@ -23,7 +23,8 @@ pub const DeleteTargetInput = struct {
     };
 };
 
-pub const DeleteTargetOutput = struct {};
+pub const DeleteTargetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

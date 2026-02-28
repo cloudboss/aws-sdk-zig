@@ -49,7 +49,7 @@ pub const GetApplicationOutput = struct {
     initialization_timeout: ?i32 = null,
 
     /// Indicates whether the application is a service.
-    is_service: bool = false,
+    is_service: ?bool = null,
 
     /// The last modified time of the Application.
     last_modified_time: ?i64 = null,

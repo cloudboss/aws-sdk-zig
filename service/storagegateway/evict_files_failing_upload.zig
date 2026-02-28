@@ -29,7 +29,7 @@ pub const EvictFilesFailingUploadInput = struct {
     /// If `ForceRemove` is set to `True`, the cache clean
     /// operation will delete file data from the gateway which might otherwise be
     /// recoverable.
-    force_remove: bool = false,
+    force_remove: ?bool = null,
 
     pub const json_field_names = .{
         .file_share_arn = "FileShareARN",

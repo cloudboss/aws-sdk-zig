@@ -11,7 +11,7 @@ pub const PutAccountSendingAttributesInput = struct {
     /// If AWS paused your account's ability to send email, you can't use this
     /// operation
     /// to resume your account's ability to send email.
-    sending_enabled: bool = false,
+    sending_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .sending_enabled = "SendingEnabled",

@@ -11,11 +11,11 @@ pub const PushNotificationConfiguration = struct {
     /// Enum value that indicates the type of the push notification for a message.
     /// `DEFAULT`: Normal mobile push notification.
     /// `VOIP`: VOIP mobile push notification.
-    type: ?PushNotificationType,
+    @"type": ?PushNotificationType,
 
     pub const json_field_names = .{
         .body = "Body",
         .title = "Title",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

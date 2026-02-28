@@ -38,7 +38,7 @@ pub const GetClipOutput = struct {
     /// timestamp. For more information, see [Kinesis
     /// Video Streams
     /// Limits](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
-    payload: aws.http.StreamingBody = "",
+    payload: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetClipOutput) void {
         self.payload.deinit();

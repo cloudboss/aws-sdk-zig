@@ -45,7 +45,7 @@ pub const PollForActivityTaskOutput = struct {
     input: ?[]const u8 = null,
 
     /// The ID of the `ActivityTaskStarted` event recorded in the history.
-    started_event_id: i64 = 0,
+    started_event_id: ?i64 = null,
 
     /// The opaque string used as a handle on the task. This token is used by
     /// workers to communicate progress and response information back to the system

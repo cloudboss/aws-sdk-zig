@@ -15,7 +15,8 @@ pub const RemoveTagsInput = struct {
     tags: []const TagKeyOnly,
 };
 
-pub const RemoveTagsOutput = struct {};
+pub const RemoveTagsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

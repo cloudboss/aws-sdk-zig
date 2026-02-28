@@ -26,10 +26,10 @@ pub const CreateJobInput = struct {
 
     /// The number of task failures before the job stops running and is marked as
     /// `FAILED`.
-    max_failed_tasks_count: i32 = 20,
+    max_failed_tasks_count: ?i32 = null,
 
     /// The maximum number of retries for each task.
-    max_retries_per_task: i32 = 5,
+    max_retries_per_task: ?i32 = null,
 
     /// The maximum number of worker hosts that can concurrently process a job. When
     /// the `maxWorkerCount` is reached, no more workers will be assigned to process
@@ -68,7 +68,7 @@ pub const CreateJobInput = struct {
 
     /// The initial job status when it is created. Jobs that are created with a
     /// `SUSPENDED` status will not run until manually requeued.
-    target_task_run_status: CreateJobTargetTaskRunStatus = "READY",
+    target_task_run_status: ?CreateJobTargetTaskRunStatus = null,
 
     /// The job template to use for this job.
     template: ?[]const u8 = null,

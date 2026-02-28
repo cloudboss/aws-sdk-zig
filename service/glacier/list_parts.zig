@@ -74,7 +74,7 @@ pub const ListPartsOutput = struct {
     /// The part size in bytes. This is the same value that you specified in the
     /// Initiate
     /// Multipart Upload request.
-    part_size_in_bytes: i64 = 0,
+    part_size_in_bytes: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the vault to which the multipart upload
     /// was

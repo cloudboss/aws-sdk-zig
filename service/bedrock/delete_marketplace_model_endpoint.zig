@@ -13,7 +13,8 @@ pub const DeleteMarketplaceModelEndpointInput = struct {
     };
 };
 
-pub const DeleteMarketplaceModelEndpointOutput = struct {};
+pub const DeleteMarketplaceModelEndpointOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

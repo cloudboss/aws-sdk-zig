@@ -26,7 +26,8 @@ pub const UpdateRootDomainUnitOwnerInput = struct {
     };
 };
 
-pub const UpdateRootDomainUnitOwnerOutput = struct {};
+pub const UpdateRootDomainUnitOwnerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -74,7 +74,7 @@ pub const InvokeWithResponseStreamOutput = struct {
     /// For a successful request, the HTTP status code is in the 200 range. For the
     /// `RequestResponse` invocation type, this status code is 200. For the `DryRun`
     /// invocation type, this status code is 204.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub const json_field_names = .{
         .event_stream = "EventStream",

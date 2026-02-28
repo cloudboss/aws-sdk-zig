@@ -16,7 +16,7 @@ pub const SendProjectSessionActionInput = struct {
     name: []const u8,
 
     /// If true, the result of the recipe step will be returned, but not applied.
-    preview: bool = false,
+    preview: ?bool = null,
 
     recipe_step: ?RecipeStep = null,
 

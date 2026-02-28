@@ -20,7 +20,8 @@ pub const RemoveAutoScalingPolicyInput = struct {
     };
 };
 
-pub const RemoveAutoScalingPolicyOutput = struct {};
+pub const RemoveAutoScalingPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -11,7 +11,7 @@ pub const DeleteRuleRequest = struct {
     /// is a managed rule
     /// by using `DescribeRule` or `ListRules` and checking the
     /// `ManagedBy` field of the response.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The name of the rule.
     name: []const u8,

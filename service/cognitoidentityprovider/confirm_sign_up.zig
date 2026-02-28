@@ -75,7 +75,7 @@ pub const ConfirmSignUpInput = struct {
     ///
     /// For more information about sign-in aliases, see [Customizing sign-in
     /// attributes](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases).
-    force_alias_creation: bool = false,
+    force_alias_creation: ?bool = null,
 
     /// A keyed-hash message authentication code (HMAC) calculated using the secret
     /// key of a

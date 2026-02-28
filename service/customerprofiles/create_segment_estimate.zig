@@ -32,7 +32,7 @@ pub const CreateSegmentEstimateOutput = struct {
     estimate_id: ?[]const u8 = null,
 
     /// The status code for the response.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

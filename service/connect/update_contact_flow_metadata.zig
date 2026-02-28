@@ -31,7 +31,8 @@ pub const UpdateContactFlowMetadataInput = struct {
     };
 };
 
-pub const UpdateContactFlowMetadataOutput = struct {};
+pub const UpdateContactFlowMetadataOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

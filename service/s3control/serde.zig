@@ -948,7 +948,7 @@ pub fn deserializeUserArguments(reader: *aws.xml.Reader, alloc: std.mem.Allocato
 pub fn deserializeAbortIncompleteMultipartUpload(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AbortIncompleteMultipartUpload {
     _ = alloc;
     var result: AbortIncompleteMultipartUpload = undefined;
-    result.days_after_initiation = null;
+    result.days_after_initiation = 0;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1082,7 +1082,7 @@ pub fn deserializeAccountLevel(reader: *aws.xml.Reader, alloc: std.mem.Allocator
 pub fn deserializeActivityMetrics(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ActivityMetrics {
     _ = alloc;
     var result: ActivityMetrics = undefined;
-    result.is_enabled = null;
+    result.is_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1102,7 +1102,7 @@ pub fn deserializeActivityMetrics(reader: *aws.xml.Reader, alloc: std.mem.Alloca
 pub fn deserializeAdvancedCostOptimizationMetrics(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AdvancedCostOptimizationMetrics {
     _ = alloc;
     var result: AdvancedCostOptimizationMetrics = undefined;
-    result.is_enabled = null;
+    result.is_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1122,7 +1122,7 @@ pub fn deserializeAdvancedCostOptimizationMetrics(reader: *aws.xml.Reader, alloc
 pub fn deserializeAdvancedDataProtectionMetrics(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AdvancedDataProtectionMetrics {
     _ = alloc;
     var result: AdvancedDataProtectionMetrics = undefined;
-    result.is_enabled = null;
+    result.is_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1142,7 +1142,7 @@ pub fn deserializeAdvancedDataProtectionMetrics(reader: *aws.xml.Reader, alloc: 
 pub fn deserializeAdvancedPerformanceMetrics(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !AdvancedPerformanceMetrics {
     _ = alloc;
     var result: AdvancedPerformanceMetrics = undefined;
-    result.is_enabled = null;
+    result.is_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1448,7 +1448,7 @@ pub fn deserializeDestination(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
 pub fn deserializeDetailedStatusCodesMetrics(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !DetailedStatusCodesMetrics {
     _ = alloc;
     var result: DetailedStatusCodesMetrics = undefined;
-    result.is_enabled = null;
+    result.is_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1600,7 +1600,7 @@ pub fn deserializeJobDescriptor(reader: *aws.xml.Reader, alloc: std.mem.Allocato
     result.manifest = null;
     result.manifest_generator = null;
     result.operation = null;
-    result.priority = null;
+    result.priority = 0;
     result.progress_summary = null;
     result.report = null;
     result.role_arn = null;
@@ -1689,7 +1689,7 @@ pub fn deserializeJobListDescriptor(reader: *aws.xml.Reader, alloc: std.mem.Allo
     result.description = null;
     result.job_id = null;
     result.operation = null;
-    result.priority = null;
+    result.priority = 0;
     result.progress_summary = null;
     result.status = null;
     result.termination_date = null;
@@ -1946,8 +1946,8 @@ pub fn deserializeLifecycleExpiration(reader: *aws.xml.Reader, alloc: std.mem.Al
     _ = alloc;
     var result: LifecycleExpiration = undefined;
     result.date = null;
-    result.days = null;
-    result.expired_object_delete_marker = null;
+    result.days = 0;
+    result.expired_object_delete_marker = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2201,7 +2201,7 @@ pub fn deserializeListCallerAccessGrantsEntry(reader: *aws.xml.Reader, alloc: st
 
 pub fn deserializeListStorageLensConfigurationEntry(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ListStorageLensConfigurationEntry {
     var result: ListStorageLensConfigurationEntry = undefined;
-    result.is_enabled = null;
+    result.is_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2249,8 +2249,8 @@ pub fn deserializeListStorageLensGroupEntry(reader: *aws.xml.Reader, alloc: std.
 pub fn deserializeMatchObjectAge(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !MatchObjectAge {
     _ = alloc;
     var result: MatchObjectAge = undefined;
-    result.days_greater_than = null;
-    result.days_less_than = null;
+    result.days_greater_than = 0;
+    result.days_less_than = 0;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2272,8 +2272,8 @@ pub fn deserializeMatchObjectAge(reader: *aws.xml.Reader, alloc: std.mem.Allocat
 pub fn deserializeMatchObjectSize(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !MatchObjectSize {
     _ = alloc;
     var result: MatchObjectSize = undefined;
-    result.bytes_greater_than = null;
-    result.bytes_less_than = null;
+    result.bytes_greater_than = 0;
+    result.bytes_less_than = 0;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2438,7 +2438,7 @@ pub fn deserializeNoncurrentVersionExpiration(reader: *aws.xml.Reader, alloc: st
     _ = alloc;
     var result: NoncurrentVersionExpiration = undefined;
     result.newer_noncurrent_versions = null;
-    result.noncurrent_days = null;
+    result.noncurrent_days = 0;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2460,7 +2460,7 @@ pub fn deserializeNoncurrentVersionExpiration(reader: *aws.xml.Reader, alloc: st
 pub fn deserializeNoncurrentVersionTransition(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !NoncurrentVersionTransition {
     _ = alloc;
     var result: NoncurrentVersionTransition = undefined;
-    result.noncurrent_days = null;
+    result.noncurrent_days = 0;
     result.storage_class = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -2548,7 +2548,7 @@ pub fn deserializeObjectLambdaAccessPointAlias(reader: *aws.xml.Reader, alloc: s
 pub fn deserializeObjectLambdaConfiguration(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ObjectLambdaConfiguration {
     var result: ObjectLambdaConfiguration = undefined;
     result.allowed_features = null;
-    result.cloud_watch_metrics_enabled = null;
+    result.cloud_watch_metrics_enabled = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2594,7 +2594,7 @@ pub fn deserializeObjectLambdaTransformationConfiguration(reader: *aws.xml.Reade
 pub fn deserializePolicyStatus(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PolicyStatus {
     _ = alloc;
     var result: PolicyStatus = undefined;
-    result.is_public = null;
+    result.is_public = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2631,7 +2631,7 @@ pub fn deserializePrefixLevel(reader: *aws.xml.Reader, alloc: std.mem.Allocator)
 
 pub fn deserializePrefixLevelStorageMetrics(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PrefixLevelStorageMetrics {
     var result: PrefixLevelStorageMetrics = undefined;
-    result.is_enabled = null;
+    result.is_enabled = false;
     result.selection_criteria = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -2673,10 +2673,10 @@ pub fn deserializeProposedMultiRegionAccessPointPolicy(reader: *aws.xml.Reader, 
 pub fn deserializePublicAccessBlockConfiguration(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !PublicAccessBlockConfiguration {
     _ = alloc;
     var result: PublicAccessBlockConfiguration = undefined;
-    result.block_public_acls = null;
-    result.block_public_policy = null;
-    result.ignore_public_acls = null;
-    result.restrict_public_buckets = null;
+    result.block_public_acls = false;
+    result.block_public_policy = false;
+    result.ignore_public_acls = false;
+    result.restrict_public_buckets = false;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -3061,7 +3061,7 @@ pub fn deserializeS3ComputeObjectChecksumOperation(reader: *aws.xml.Reader, allo
 pub fn deserializeS3CopyObjectOperation(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !S3CopyObjectOperation {
     var result: S3CopyObjectOperation = undefined;
     result.access_control_grants = null;
-    result.bucket_key_enabled = null;
+    result.bucket_key_enabled = false;
     result.canned_access_control_list = null;
     result.checksum_algorithm = null;
     result.metadata_directive = null;
@@ -3072,7 +3072,7 @@ pub fn deserializeS3CopyObjectOperation(reader: *aws.xml.Reader, alloc: std.mem.
     result.object_lock_mode = null;
     result.object_lock_retain_until_date = null;
     result.redirect_location = null;
-    result.requester_pays = null;
+    result.requester_pays = false;
     result.sse_aws_kms_key_id = null;
     result.storage_class = null;
     result.target_key_prefix = null;
@@ -3264,7 +3264,7 @@ pub fn deserializeS3ObjectMetadata(reader: *aws.xml.Reader, alloc: std.mem.Alloc
     result.content_md5 = null;
     result.content_type = null;
     result.http_expires_date = null;
-    result.requester_charged = null;
+    result.requester_charged = false;
     result.sse_algorithm = null;
     result.user_metadata = null;
     while (try reader.next()) |event| {
@@ -3979,7 +3979,7 @@ pub fn deserializeTransition(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
     _ = alloc;
     var result: Transition = undefined;
     result.date = null;
-    result.days = null;
+    result.days = 0;
     result.storage_class = null;
     while (try reader.next()) |event| {
         switch (event) {

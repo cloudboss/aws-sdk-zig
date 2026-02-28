@@ -20,7 +20,7 @@ pub const ListPipelinesInput = struct {
 pub const ListPipelinesOutput = struct {
     /// Indicates whether there are more results that can be obtained by a
     /// subsequent call.
-    has_more_results: bool = false,
+    has_more_results: ?bool = null,
 
     /// The starting point for the next page of results. To view the next page of
     /// results, call `ListPipelinesOutput`

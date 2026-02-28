@@ -8,13 +8,13 @@ pub const DeleteOTAUpdateInput = struct {
     /// When true, the stream created by the OTAUpdate process is deleted when the
     /// OTA update is deleted.
     /// Ignored if the stream specified in the OTAUpdate is supplied by the user.
-    delete_stream: bool = false,
+    delete_stream: ?bool = null,
 
     /// When true, deletes the IoT job created by the OTAUpdate process even if it
     /// is "IN_PROGRESS". Otherwise, if the
     /// job is not in a terminal state ("COMPLETED" or "CANCELED") an exception will
     /// occur. The default is false.
-    force_delete_aws_job: bool = false,
+    force_delete_aws_job: ?bool = null,
 
     /// The ID of the OTA update to delete.
     ota_update_id: []const u8,

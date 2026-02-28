@@ -7,7 +7,7 @@ const WorkflowSummary = @import("workflow_summary.zig").WorkflowSummary;
 
 pub const ListWorkflowsInput = struct {
     /// The maximum number of workflows you want to return in a single response.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// The pagination token you need to use to retrieve the next set of results.
     /// This value is returned from a previous call to `ListWorkflows`.

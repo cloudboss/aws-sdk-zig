@@ -18,7 +18,7 @@ pub const CreateColumnStatisticsTaskSettingsInput = struct {
     role: []const u8,
 
     /// The percentage of data to sample.
-    sample_size: f64 = 0,
+    sample_size: ?f64 = null,
 
     /// A schedule for running the column statistics, specified in CRON syntax.
     schedule: ?[]const u8 = null,

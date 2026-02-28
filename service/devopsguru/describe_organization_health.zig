@@ -21,17 +21,17 @@ pub const DescribeOrganizationHealthOutput = struct {
     /// An integer that specifies the number of metrics that have been analyzed in
     /// your
     /// organization.
-    metrics_analyzed: i32 = 0,
+    metrics_analyzed: ?i32 = null,
 
     /// An integer that specifies the number of open proactive insights in your
     /// Amazon Web Services
     /// account.
-    open_proactive_insights: i32 = 0,
+    open_proactive_insights: ?i32 = null,
 
     /// An integer that specifies the number of open reactive insights in your
     /// Amazon Web Services
     /// account.
-    open_reactive_insights: i32 = 0,
+    open_reactive_insights: ?i32 = null,
 
     /// The number of Amazon DevOps Guru resource analysis hours billed to the
     /// current Amazon Web Services account in

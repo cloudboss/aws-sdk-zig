@@ -36,7 +36,7 @@ pub const GetSegmentEstimateOutput = struct {
     status: ?EstimateStatus = null,
 
     /// The status code of the segment estimate.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

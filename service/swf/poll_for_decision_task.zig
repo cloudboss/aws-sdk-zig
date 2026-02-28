@@ -25,7 +25,7 @@ pub const PollForDecisionTaskInput = struct {
     /// is an upper limit only; the actual number of results returned per call may
     /// be fewer than the
     /// specified maximum.
-    maximum_page_size: i32 = 0,
+    maximum_page_size: ?i32 = null,
 
     /// If `NextPageToken` is returned there are more results
     /// available. The value of `NextPageToken` is a unique pagination token for
@@ -49,12 +49,12 @@ pub const PollForDecisionTaskInput = struct {
     /// When set to `true`, returns the events in reverse order. By default the
     /// results are returned in ascending order of the `eventTimestamp` of the
     /// events.
-    reverse_order: bool = false,
+    reverse_order: ?bool = null,
 
     /// When set to `true`, returns the events with `eventTimestamp` greater than or
     /// equal to `eventTimestamp` of the most recent `DecisionTaskStarted` event. By
     /// default, this parameter is set to `false`.
-    start_at_previous_started_event: bool = false,
+    start_at_previous_started_event: ?bool = null,
 
     /// Specifies the task list to poll for decision tasks.
     ///
@@ -93,10 +93,10 @@ pub const PollForDecisionTaskOutput = struct {
     /// this workflow execution that was processed by the decider. This can be used
     /// to determine the events in the history new since the last decision task
     /// received by the decider.
-    previous_started_event_id: i64 = 0,
+    previous_started_event_id: ?i64 = null,
 
     /// The ID of the `DecisionTaskStarted` event recorded in the history.
-    started_event_id: i64 = 0,
+    started_event_id: ?i64 = null,
 
     /// The opaque string used as a handle on the task. This token is used by
     /// workers to communicate progress and response information back to the system

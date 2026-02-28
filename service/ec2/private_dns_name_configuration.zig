@@ -14,7 +14,7 @@ pub const PrivateDnsNameConfiguration = struct {
     state: ?DnsNameState,
 
     /// The endpoint service verification type, for example TXT.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The value the service provider adds to the private DNS name domain record
     /// before verification.

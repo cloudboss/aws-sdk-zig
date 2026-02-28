@@ -38,10 +38,10 @@ pub const UpdateRecipeJobInput = struct {
 
     /// The maximum number of nodes that DataBrew can consume when the job processes
     /// data.
-    max_capacity: i32 = 0,
+    max_capacity: ?i32 = null,
 
     /// The maximum number of times to retry the job after a job run fails.
-    max_retries: i32 = 0,
+    max_retries: ?i32 = null,
 
     /// The name of the job to update.
     name: []const u8,
@@ -57,7 +57,7 @@ pub const UpdateRecipeJobInput = struct {
     /// The job's timeout in minutes. A job that attempts to run longer than this
     /// timeout
     /// period ends with a status of `TIMEOUT`.
-    timeout: i32 = 0,
+    timeout: ?i32 = null,
 
     pub const json_field_names = .{
         .database_outputs = "DatabaseOutputs",

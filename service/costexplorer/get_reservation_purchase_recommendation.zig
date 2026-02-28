@@ -37,7 +37,7 @@ pub const GetReservationPurchaseRecommendationInput = struct {
 
     /// The number of recommendations that you want returned in a single response
     /// object.
-    page_size: i32 = 0,
+    page_size: ?i32 = null,
 
     /// The reservation purchase option that you want recommendations for.
     payment_option: ?PaymentOption = null,

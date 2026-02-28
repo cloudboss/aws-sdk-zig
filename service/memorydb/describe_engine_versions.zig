@@ -8,7 +8,7 @@ const EngineVersionInfo = @import("engine_version_info.zig").EngineVersionInfo;
 pub const DescribeEngineVersionsInput = struct {
     /// If true, specifies that only the default version of the specified engine or
     /// engine and major version combination is to be returned.
-    default_only: bool = false,
+    default_only: ?bool = null,
 
     /// The name of the engine for which to list available versions.
     engine: ?[]const u8 = null,

@@ -13,7 +13,7 @@ pub const GetOrganizationConfigRuleDetailedStatusInput = struct {
     /// The maximum number of `OrganizationConfigRuleDetailedStatus` returned on
     /// each page. If you do not specify a number, Config uses the default. The
     /// default is 100.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned on a previous page that you use to get the
     /// next page of results in a paginated response.

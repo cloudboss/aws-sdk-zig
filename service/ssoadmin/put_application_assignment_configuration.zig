@@ -15,7 +15,7 @@ pub const PutApplicationAssignmentConfigurationInput = struct {
     /// to the application unless an assignment is created using the
     /// [CreateApplicationAssignment
     /// API](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html). If `false`, all users have access to the application.
-    assignment_required: bool = true,
+    assignment_required: ?bool = null,
 
     pub const json_field_names = .{
         .application_arn = "ApplicationArn",

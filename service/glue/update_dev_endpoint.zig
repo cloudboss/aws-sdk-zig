@@ -42,7 +42,7 @@ pub const UpdateDevEndpointInput = struct {
     /// `True` if the list of custom libraries to be loaded in the development
     /// endpoint
     /// needs to be updated, or `False` if otherwise.
-    update_etl_libraries: bool = false,
+    update_etl_libraries: ?bool = null,
 
     pub const json_field_names = .{
         .add_arguments = "AddArguments",

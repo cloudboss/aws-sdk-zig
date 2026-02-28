@@ -36,7 +36,7 @@ pub const StartResourceEvaluationInput = struct {
     /// The timeout for an evaluation. The default is 900 seconds. You cannot
     /// specify a number greater than 3600. If you specify 0, Config uses the
     /// default.
-    evaluation_timeout: i32 = 0,
+    evaluation_timeout: ?i32 = null,
 
     /// Returns a `ResourceDetails` object.
     resource_details: ResourceDetails,

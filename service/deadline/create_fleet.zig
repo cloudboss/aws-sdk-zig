@@ -21,7 +21,7 @@ pub const CreateFleetInput = struct {
     /// This field can store any content. Escape or encode this content before
     /// displaying it on a webpage or any other system that might interpret the
     /// content of this field.
-    description: []const u8 = "",
+    description: ?[]const u8 = null,
 
     /// The display name of the fleet.
     ///
@@ -49,7 +49,7 @@ pub const CreateFleetInput = struct {
     max_worker_count: i32,
 
     /// The minimum number of workers for the fleet.
-    min_worker_count: i32 = 0,
+    min_worker_count: ?i32 = null,
 
     /// The IAM role ARN for the role that the fleet's workers will use.
     role_arn: []const u8,

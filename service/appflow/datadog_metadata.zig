@@ -1,2 +1,3 @@
 /// The connector metadata specific to Datadog.
-pub const DatadogMetadata = struct {};
+pub const DatadogMetadata = struct {
+};

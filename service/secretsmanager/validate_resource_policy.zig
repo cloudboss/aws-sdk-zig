@@ -27,7 +27,7 @@ pub const ValidateResourcePolicyInput = struct {
 
 pub const ValidateResourcePolicyOutput = struct {
     /// True if your policy passes validation, otherwise false.
-    policy_validation_passed: bool = false,
+    policy_validation_passed: ?bool = null,
 
     /// Validation errors if your policy didn't pass validation.
     validation_errors: ?[]const ValidationErrorsEntry = null,

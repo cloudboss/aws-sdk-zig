@@ -22,7 +22,7 @@ pub const DeleteJobExecutionInput = struct {
     /// unable to access job information or update the job execution status. Use
     /// caution and
     /// ensure that the device is able to recover to a valid state.
-    force: bool = false,
+    force: ?bool = null,
 
     /// The ID of the job whose execution on a particular device will be deleted.
     job_id: []const u8,

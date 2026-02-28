@@ -88,7 +88,7 @@ pub const CreateTokenOutput = struct {
     access_token: ?[]const u8 = null,
 
     /// Indicates the time in seconds when an access token will expire.
-    expires_in: i32 = 0,
+    expires_in: ?i32 = null,
 
     /// The `idToken` is not implemented or supported. For more information about
     /// the

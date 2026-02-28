@@ -23,7 +23,8 @@ pub const ActivatePipelineInput = struct {
     };
 };
 
-pub const ActivatePipelineOutput = struct {};
+pub const ActivatePipelineOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

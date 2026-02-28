@@ -26,7 +26,7 @@ pub const PutBucketPolicyInput = struct {
     /// this bucket policy in the future.
     ///
     /// This is not supported by Amazon S3 on Outposts buckets.
-    confirm_remove_self_bucket_access: bool = false,
+    confirm_remove_self_bucket_access: ?bool = null,
 
     /// The bucket policy as a JSON document.
     policy: []const u8,

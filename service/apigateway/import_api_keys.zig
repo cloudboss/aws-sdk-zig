@@ -12,7 +12,7 @@ pub const ImportApiKeysInput = struct {
 
     /// A query parameter to indicate whether to rollback ApiKey importation
     /// (`true`) or not (`false`) when error is encountered.
-    fail_on_warnings: bool = false,
+    fail_on_warnings: ?bool = null,
 
     /// A query parameter to specify the input format to imported API keys.
     /// Currently, only the `csv` format is supported.

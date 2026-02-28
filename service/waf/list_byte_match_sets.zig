@@ -12,7 +12,7 @@ pub const ListByteMatchSetsInput = struct {
     /// response includes a
     /// `NextMarker` value that you can use to get another batch of `ByteMatchSet`
     /// objects.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// If you specify a value for `Limit` and you have more `ByteMatchSets` than
     /// the value of `Limit`,

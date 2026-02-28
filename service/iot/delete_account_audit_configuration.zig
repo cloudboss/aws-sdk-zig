@@ -6,7 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteAccountAuditConfigurationInput = struct {
     /// If true, all scheduled audits are deleted.
-    delete_scheduled_audits: bool = false,
+    delete_scheduled_audits: ?bool = null,
 
     pub const json_field_names = .{
         .delete_scheduled_audits = "deleteScheduledAudits",

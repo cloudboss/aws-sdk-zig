@@ -11,7 +11,7 @@ pub const ListInvestigationsInput = struct {
 
     /// Investigation performed by an agent for a security incident request,
     /// returning max results
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// Investigation performed by an agent for a security incident request
     next_token: ?[]const u8 = null,

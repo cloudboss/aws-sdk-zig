@@ -8,7 +8,7 @@ const VersionDeleteError = @import("version_delete_error.zig").VersionDeleteErro
 pub const DeleteAnnotationStoreVersionsInput = struct {
     /// Forces the deletion of an annotation store version when imports are
     /// in-progress..
-    force: bool = false,
+    force: ?bool = null,
 
     /// The name of the annotation store from which versions are being deleted.
     name: []const u8,

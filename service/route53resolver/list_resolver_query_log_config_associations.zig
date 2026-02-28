@@ -123,14 +123,14 @@ pub const ListResolverQueryLogConfigAssociationsOutput = struct {
     /// `ListResolverQueryLogConfigAssociations` response, depending on the values
     /// that you specify
     /// in the request.
-    total_count: i32 = 0,
+    total_count: ?i32 = null,
 
     /// The total number of query logging associations that were created by the
     /// current account in the specified Region and that match the filters
     /// that were specified in the `ListResolverQueryLogConfigAssociations` request.
     /// For the total number of associations that were created by the
     /// current account in the specified Region, see `TotalCount`.
-    total_filtered_count: i32 = 0,
+    total_filtered_count: ?i32 = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

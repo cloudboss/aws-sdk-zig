@@ -37,7 +37,7 @@ pub const GetServiceGraphOutput = struct {
     /// if the returned service graph may show traces from an older version of the
     /// group's filter
     /// expression.
-    contains_old_group_versions: bool = false,
+    contains_old_group_versions: ?bool = null,
 
     /// The end of the time frame for which the graph was generated.
     end_time: ?i64 = null,

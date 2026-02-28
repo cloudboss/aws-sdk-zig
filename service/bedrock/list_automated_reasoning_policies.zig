@@ -7,7 +7,7 @@ const AutomatedReasoningPolicySummary = @import("automated_reasoning_policy_summ
 
 pub const ListAutomatedReasoningPoliciesInput = struct {
     /// The maximum number of policies to return in a single call.
-    max_results: i32 = 25,
+    max_results: ?i32 = null,
 
     /// The pagination token from a previous request to retrieve the next page of
     /// results.

@@ -19,7 +19,7 @@ pub const PutEmailIdentityFeedbackAttributesInput = struct {
     /// by setting up an event destination), you receive an email notification when
     /// these events
     /// occur (even if this setting is disabled).
-    email_forwarding_enabled: bool = false,
+    email_forwarding_enabled: ?bool = null,
 
     /// The email identity.
     email_identity: []const u8,

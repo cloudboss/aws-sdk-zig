@@ -18,7 +18,7 @@ pub const StartAudienceGenerationJobInput = struct {
     description: ?[]const u8 = null,
 
     /// Whether the seed audience is included in the audience generation output.
-    include_seed_in_output: bool = false,
+    include_seed_in_output: ?bool = null,
 
     /// The name of the audience generation job.
     name: []const u8,

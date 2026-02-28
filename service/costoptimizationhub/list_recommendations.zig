@@ -13,7 +13,7 @@ pub const ListRecommendationsInput = struct {
 
     /// List of all recommendations for a resource, or a single recommendation if
     /// de-duped by `resourceId`.
-    include_all_recommendations: bool = false,
+    include_all_recommendations: ?bool = null,
 
     /// The maximum number of recommendations that are returned for the request.
     max_results: ?i32 = null,

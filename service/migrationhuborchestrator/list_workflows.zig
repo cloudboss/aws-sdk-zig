@@ -11,7 +11,7 @@ pub const ListWorkflowsInput = struct {
     ads_application_configuration_name: ?[]const u8 = null,
 
     /// The maximum number of results that can be returned.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The name of the migration workflow.
     name: ?[]const u8 = null,

@@ -71,7 +71,7 @@ pub const RegisterTypeInput = struct {
     schema_handler_package: []const u8,
 
     /// The kind of extension.
-    type: ?RegistryType = null,
+    @"type": ?RegistryType = null,
 
     /// The name of the extension being registered.
     ///
@@ -164,7 +164,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: RegisterTypeInput, config: 
     }
     try body_buf.appendSlice(alloc, "&SchemaHandlerPackage=");
     try aws.url.appendUrlEncoded(alloc, &body_buf, input.schema_handler_package);
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         try body_buf.appendSlice(alloc, "&Type=");
         try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(v));
     }

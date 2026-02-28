@@ -11,7 +11,7 @@ pub const RemovePermissionInput = struct {
     event_bus_name: ?[]const u8 = null,
 
     /// Specifies whether to remove all permissions.
-    remove_all_permissions: bool = false,
+    remove_all_permissions: ?bool = null,
 
     /// The statement ID corresponding to the account that is no longer allowed to
     /// put events to

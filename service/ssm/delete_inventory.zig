@@ -17,7 +17,7 @@ pub const DeleteInventoryInput = struct {
     /// validate that the data to be deleted is what you intend to delete, you can
     /// run the same command
     /// without specifying the `DryRun` option.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// Use the `SchemaDeleteOption` to delete a custom inventory type (schema). If
     /// you

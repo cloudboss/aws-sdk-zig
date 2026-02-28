@@ -12,7 +12,7 @@ pub const CreateDataSourceFromRDSInput = struct {
     /// training.
     /// This parameter must be set to `true` if the ``DataSource`` needs to be used
     /// for `MLModel` training.
-    compute_statistics: bool = false,
+    compute_statistics: ?bool = null,
 
     /// A user-supplied ID that uniquely identifies the `DataSource`. Typically, an
     /// Amazon Resource Number (ARN)

@@ -23,7 +23,8 @@ pub const AdminEnableUserInput = struct {
     };
 };
 
-pub const AdminEnableUserOutput = struct {};
+pub const AdminEnableUserOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

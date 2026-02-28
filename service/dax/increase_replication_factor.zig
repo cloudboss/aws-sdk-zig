@@ -17,7 +17,7 @@ pub const IncreaseReplicationFactorInput = struct {
     cluster_name: []const u8,
 
     /// The new number of nodes for the DAX cluster.
-    new_replication_factor: i32 = 0,
+    new_replication_factor: ?i32 = null,
 
     pub const json_field_names = .{
         .availability_zones = "AvailabilityZones",

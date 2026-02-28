@@ -20,10 +20,10 @@ pub const Finding = struct {
     /// The type or category of the finding. This classifies the finding as an
     /// error, warning, recommendation, or informational message to help users
     /// understand the severity and nature of the issue.
-    type: ?FindingType,
+    @"type": ?FindingType,
 
     pub const json_field_names = .{
         .description = "description",
-        .type = "type",
+        .@"type" = "type",
     };
 };

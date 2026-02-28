@@ -17,7 +17,7 @@ pub const ListHarvestJobsInput = struct {
 
     /// The maximum number of harvest jobs to return in a single request. If not
     /// specified, a default value will be used.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// A token used for pagination. Provide this value in subsequent requests to
     /// retrieve the next set of results.

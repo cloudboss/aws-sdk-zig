@@ -44,13 +44,13 @@ pub const GetKxDatabaseOutput = struct {
     last_modified_timestamp: ?i64 = null,
 
     /// The total number of bytes in the database.
-    num_bytes: i64 = 0,
+    num_bytes: ?i64 = null,
 
     /// The total number of changesets in the database.
-    num_changesets: i32 = 0,
+    num_changesets: ?i32 = null,
 
     /// The total number of files in the database.
-    num_files: i32 = 0,
+    num_files: ?i32 = null,
 
     pub const json_field_names = .{
         .created_timestamp = "createdTimestamp",

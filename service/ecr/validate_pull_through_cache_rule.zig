@@ -43,7 +43,7 @@ pub const ValidatePullThroughCacheRuleOutput = struct {
     /// If
     /// `false`, there was an issue and validation failed. The
     /// `failure` reason indicates the cause.
-    is_valid: bool = false,
+    is_valid: ?bool = null,
 
     /// The registry ID associated with the request.
     registry_id: ?[]const u8 = null,

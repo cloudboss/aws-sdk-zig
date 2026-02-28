@@ -13,7 +13,7 @@ pub const UnregisterConnectorInput = struct {
     /// is
     /// currently in use in one or more connector profiles. The default value is
     /// false.
-    force_delete: bool = false,
+    force_delete: ?bool = null,
 
     pub const json_field_names = .{
         .connector_label = "connectorLabel",
@@ -21,7 +21,8 @@ pub const UnregisterConnectorInput = struct {
     };
 };
 
-pub const UnregisterConnectorOutput = struct {};
+pub const UnregisterConnectorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

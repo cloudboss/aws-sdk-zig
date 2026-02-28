@@ -42,7 +42,7 @@ pub const ListDataSourcesInput = struct {
     status: ?DataSourceStatus = null,
 
     /// The type of the data source.
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .connection_identifier = "connectionIdentifier",
@@ -53,7 +53,7 @@ pub const ListDataSourcesInput = struct {
         .next_token = "nextToken",
         .project_identifier = "projectIdentifier",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -162,7 +162,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListDataSourcesInput, confi
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);

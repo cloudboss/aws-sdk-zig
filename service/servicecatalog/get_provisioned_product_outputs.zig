@@ -18,7 +18,7 @@ pub const GetProvisionedProductOutputsInput = struct {
     output_keys: ?[]const []const u8 = null,
 
     /// The maximum number of items to return with this call.
-    page_size: i32 = 0,
+    page_size: ?i32 = null,
 
     /// The page token for the next set of results. To retrieve the first set of
     /// results, use null.

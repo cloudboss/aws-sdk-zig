@@ -40,7 +40,7 @@ pub const ListTrafficPolicyVersionsOutput = struct {
     /// submitting
     /// another `ListTrafficPolicyVersions` request and specifying the value of
     /// `NextMarker` in the `marker` parameter.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// The value that you specified for the `maxitems` parameter in the
     /// `ListTrafficPolicyVersions` request that produced the current

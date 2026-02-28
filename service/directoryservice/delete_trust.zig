@@ -6,7 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteTrustInput = struct {
     /// Delete a conditional forwarder as part of a DeleteTrustRequest.
-    delete_associated_conditional_forwarder: bool = false,
+    delete_associated_conditional_forwarder: ?bool = null,
 
     /// The Trust ID of the trust relationship to be deleted.
     trust_id: []const u8,

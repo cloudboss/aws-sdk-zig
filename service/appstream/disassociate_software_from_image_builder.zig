@@ -68,7 +68,8 @@ pub const DisassociateSoftwareFromImageBuilderInput = struct {
     };
 };
 
-pub const DisassociateSoftwareFromImageBuilderOutput = struct {};
+pub const DisassociateSoftwareFromImageBuilderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

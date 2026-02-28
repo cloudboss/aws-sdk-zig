@@ -31,7 +31,7 @@ pub const RetrievalResultContent = struct {
     text: []const u8 = "",
 
     /// The type of content in the retrieval result.
-    type: ?RetrievalResultContentType,
+    @"type": ?RetrievalResultContentType,
 
     /// Video segment information when the retrieval result contains video content.
     video: ?VideoSegment,
@@ -41,7 +41,7 @@ pub const RetrievalResultContent = struct {
         .byte_content = "byteContent",
         .row = "row",
         .text = "text",
-        .type = "type",
+        .@"type" = "type",
         .video = "video",
     };
 };

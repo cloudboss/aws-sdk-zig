@@ -19,7 +19,7 @@ pub const GetDocumentVersionInput = struct {
     fields: ?[]const u8 = null,
 
     /// Set this to TRUE to include custom metadata in the response.
-    include_custom_metadata: bool = false,
+    include_custom_metadata: ?bool = null,
 
     /// The version ID of the document.
     version_id: []const u8,

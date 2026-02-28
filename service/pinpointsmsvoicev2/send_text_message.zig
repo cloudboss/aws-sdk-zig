@@ -42,7 +42,7 @@ pub const SendTextMessageInput = struct {
     /// used. For more information about MPS limits, see [Message Parts per Second
     /// (MPS)
     /// limits](https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html) in the *End User Messaging SMS User Guide*..
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// When you register a short code in the US, you must specify a program name.
     /// If you don’t have a US short code, omit this attribute.

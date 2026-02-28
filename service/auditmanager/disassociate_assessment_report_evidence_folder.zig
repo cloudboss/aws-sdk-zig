@@ -17,7 +17,8 @@ pub const DisassociateAssessmentReportEvidenceFolderInput = struct {
     };
 };
 
-pub const DisassociateAssessmentReportEvidenceFolderOutput = struct {};
+pub const DisassociateAssessmentReportEvidenceFolderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

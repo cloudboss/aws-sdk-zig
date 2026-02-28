@@ -14,7 +14,7 @@ pub const ListInvocationStepsInput = struct {
     /// of results is greater than this value, use the token returned in the
     /// response in the `nextToken` field when making another request to return the
     /// next batch of results.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// If the total number of results is greater than the `maxResults` value
     /// provided in the request, enter the token returned in the `nextToken` field

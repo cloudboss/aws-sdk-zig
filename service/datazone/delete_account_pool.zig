@@ -17,7 +17,8 @@ pub const DeleteAccountPoolInput = struct {
     };
 };
 
-pub const DeleteAccountPoolOutput = struct {};
+pub const DeleteAccountPoolOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

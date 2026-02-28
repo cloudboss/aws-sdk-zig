@@ -20,7 +20,7 @@ pub const ViewSummary = struct {
     status: ?ViewStatus,
 
     /// The type of the view.
-    type: ?ViewType,
+    @"type": ?ViewType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -28,6 +28,6 @@ pub const ViewSummary = struct {
         .id = "Id",
         .name = "Name",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

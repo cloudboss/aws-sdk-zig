@@ -13,10 +13,10 @@ pub const ImplementationSummary = struct {
     /// that the control is implemented by Amazon Web Services Config, and
     /// `AWS::SecurityHub::SecurityControl` indicates implementation by Amazon Web
     /// Services Security Hub.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .identifier = "Identifier",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

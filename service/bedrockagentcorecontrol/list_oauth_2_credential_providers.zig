@@ -7,7 +7,7 @@ const Oauth2CredentialProviderItem = @import("oauth_2_credential_provider_item.z
 
 pub const ListOauth2CredentialProvidersInput = struct {
     /// Maximum number of results to return.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// Pagination token.
     next_token: ?[]const u8 = null,

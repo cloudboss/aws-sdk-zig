@@ -54,7 +54,7 @@ pub const SearchCasesOutput = struct {
     next_token: ?[]const u8 = null,
 
     /// The total number of cases that matched the search criteria.
-    total_count: i64 = 0,
+    total_count: ?i64 = null,
 
     pub const json_field_names = .{
         .cases = "cases",

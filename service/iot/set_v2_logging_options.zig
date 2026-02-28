@@ -11,7 +11,7 @@ pub const SetV2LoggingOptionsInput = struct {
     default_log_level: ?LogLevel = null,
 
     /// If true all logs are disabled. The default is false.
-    disable_all_logs: bool = false,
+    disable_all_logs: ?bool = null,
 
     /// The list of event configurations that override account-level logging.
     event_configurations: ?[]const LogEventConfiguration = null,

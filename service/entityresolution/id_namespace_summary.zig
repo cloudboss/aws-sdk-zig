@@ -26,7 +26,7 @@ pub const IdNamespaceSummary = struct {
     ///
     /// The `TARGET` contains a configuration of `targetId` which all `sourceIds`
     /// will resolve to.
-    type: IdNamespaceType,
+    @"type": IdNamespaceType,
 
     /// The timestamp of when the ID namespace was last updated.
     updated_at: i64,
@@ -37,7 +37,7 @@ pub const IdNamespaceSummary = struct {
         .id_mapping_workflow_properties = "idMappingWorkflowProperties",
         .id_namespace_arn = "idNamespaceArn",
         .id_namespace_name = "idNamespaceName",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

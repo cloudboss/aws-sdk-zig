@@ -20,7 +20,7 @@ pub const SendVoiceMessageInput = struct {
 
     /// When set to true, the message is checked and validated, but isn't sent to
     /// the end recipient.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// The maximum amount to spend per voice message, in US dollars.
     max_price_per_minute: ?[]const u8 = null,

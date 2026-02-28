@@ -41,7 +41,7 @@ pub const GetIdMappingWorkflowOutput = struct {
 
     /// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes
     /// this role to access Amazon Web Services resources on your behalf.
-    role_arn: []const u8 = "",
+    role_arn: ?[]const u8 = null,
 
     /// The tags used to organize, track, or control access for this resource.
     tags: ?[]const aws.map.StringMapEntry = null,

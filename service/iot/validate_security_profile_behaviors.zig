@@ -18,7 +18,7 @@ pub const ValidateSecurityProfileBehaviorsInput = struct {
 
 pub const ValidateSecurityProfileBehaviorsOutput = struct {
     /// True if the behaviors were valid.
-    valid: bool = false,
+    valid: ?bool = null,
 
     /// The list of any errors found in the behaviors.
     validation_errors: ?[]const ValidationError = null,

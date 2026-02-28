@@ -24,11 +24,11 @@ pub const GetMailDomainOutput = struct {
     dkim_verification_status: ?DnsRecordVerificationStatus = null,
 
     /// Specifies whether the domain is the default domain for your organization.
-    is_default: bool = false,
+    is_default: ?bool = null,
 
     /// Specifies whether the domain is a test domain provided by WorkMail, or a
     /// custom domain.
-    is_test_domain: bool = false,
+    is_test_domain: ?bool = null,
 
     /// Indicates the status of the domain ownership verification.
     ownership_verification_status: ?DnsRecordVerificationStatus = null,

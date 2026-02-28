@@ -11,9 +11,9 @@ pub const EntityTypesListItem = struct {
     /// (escaped line break, \r (carriage return), \\r (escaped carriage return), \t
     /// (tab), \\t
     /// (escaped tab), and , (comma).
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

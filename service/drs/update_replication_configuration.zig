@@ -20,7 +20,7 @@ pub const UpdateReplicationConfigurationInput = struct {
 
     /// Configure bandwidth throttling for the outbound data transfer rate of the
     /// Source Server in Mbps.
-    bandwidth_throttling: i64 = 0,
+    bandwidth_throttling: ?i64 = null,
 
     /// Whether to create a Public IP for the Recovery Instance by default.
     create_public_ip: ?bool = null,
@@ -98,7 +98,7 @@ pub const UpdateReplicationConfigurationOutput = struct {
 
     /// Configure bandwidth throttling for the outbound data transfer rate of the
     /// Source Server in Mbps.
-    bandwidth_throttling: i64 = 0,
+    bandwidth_throttling: ?i64 = null,
 
     /// Whether to create a Public IP for the Recovery Instance by default.
     create_public_ip: ?bool = null,

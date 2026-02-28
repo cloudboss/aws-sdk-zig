@@ -11,11 +11,11 @@ pub const ParameterDetail = struct {
     required: ?bool,
 
     /// The data type of the parameter.
-    type: ParameterType,
+    @"type": ParameterType,
 
     pub const json_field_names = .{
         .description = "description",
         .required = "required",
-        .type = "type",
+        .@"type" = "type",
     };
 };

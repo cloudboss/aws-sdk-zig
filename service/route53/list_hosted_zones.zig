@@ -49,7 +49,7 @@ pub const ListHostedZonesOutput = struct {
     /// was truncated, you can get more hosted zones by submitting another
     /// `ListHostedZones` request and specifying the value of
     /// `NextMarker` in the `marker` parameter.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// For the second and subsequent calls to `ListHostedZones`,
     /// `Marker` is the value that you specified for the `marker`

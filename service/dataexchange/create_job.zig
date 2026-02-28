@@ -14,11 +14,11 @@ pub const CreateJobInput = struct {
     details: RequestDetails,
 
     /// The type of job to be created.
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .details = "Details",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -42,7 +42,7 @@ pub const CreateJobOutput = struct {
     state: ?State = null,
 
     /// The job type.
-    type: ?Type = null,
+    @"type": ?Type = null,
 
     /// The date and time that the job was last updated, in ISO 8601 format.
     updated_at: ?i64 = null,
@@ -54,7 +54,7 @@ pub const CreateJobOutput = struct {
         .errors = "Errors",
         .id = "Id",
         .state = "State",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_at = "UpdatedAt",
     };
 };
@@ -107,7 +107,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateJobInput, config: *aw
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

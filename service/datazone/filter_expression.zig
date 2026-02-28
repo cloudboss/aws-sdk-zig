@@ -6,10 +6,10 @@ pub const FilterExpression = struct {
     expression: []const u8,
 
     /// The search filter explresison type.
-    type: FilterExpressionType,
+    @"type": FilterExpressionType,
 
     pub const json_field_names = .{
         .expression = "expression",
-        .type = "type",
+        .@"type" = "type",
     };
 };

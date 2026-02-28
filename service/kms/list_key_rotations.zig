@@ -78,7 +78,7 @@ pub const ListKeyRotationsOutput = struct {
     /// pass the value of
     /// the `NextMarker` element in this response to the `Marker` parameter in a
     /// subsequent request.
-    truncated: bool = false,
+    truncated: ?bool = null,
 
     pub const json_field_names = .{
         .next_marker = "NextMarker",

@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Status = @import("status.zig").Status;
 
-pub const GetEnrollmentStatusInput = struct {};
+pub const GetEnrollmentStatusInput = struct {
+};
 
 pub const GetEnrollmentStatusOutput = struct {
     /// The Unix epoch timestamp, in seconds, of when the account enrollment status
@@ -16,7 +17,7 @@ pub const GetEnrollmentStatusOutput = struct {
     /// Confirms the enrollment status of member accounts of the organization, if
     /// the account
     /// is a management account of an organization.
-    member_accounts_enrolled: bool = false,
+    member_accounts_enrolled: ?bool = null,
 
     /// The count of organization member accounts that are opted in to the service,
     /// if your

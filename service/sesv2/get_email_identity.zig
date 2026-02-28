@@ -41,7 +41,7 @@ pub const GetEmailIdentityOutput = struct {
     /// by setting up an event destination), you receive an email notification when
     /// these events
     /// occur (even if this setting is disabled).
-    feedback_forwarding_status: bool = false,
+    feedback_forwarding_status: ?bool = null,
 
     /// The email identity type. Note: the `MANAGED_DOMAIN` identity type is not
     /// supported.
@@ -89,7 +89,7 @@ pub const GetEmailIdentityOutput = struct {
     /// identities,
     /// see the [Amazon Pinpoint User
     /// Guide](https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
-    verified_for_sending_status: bool = false,
+    verified_for_sending_status: ?bool = null,
 
     pub const json_field_names = .{
         .configuration_set_name = "ConfigurationSetName",

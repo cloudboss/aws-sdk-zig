@@ -63,7 +63,7 @@ pub const GetSampledRequestsOutput = struct {
     /// `MaxItems`, the sample includes every request that your Amazon Web Services
     /// resource
     /// received during the specified time range.
-    population_size: i64 = 0,
+    population_size: ?i64 = null,
 
     /// A complex type that contains detailed information about each of the requests
     /// in the

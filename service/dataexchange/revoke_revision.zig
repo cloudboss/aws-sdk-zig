@@ -48,7 +48,7 @@ pub const RevokeRevisionOutput = struct {
     /// AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace
     /// Catalog API action.
     /// When using the API, revisions are uniquely identified by their ARN.
-    finalized: bool = false,
+    finalized: ?bool = null,
 
     /// The unique identifier for the revision.
     id: ?[]const u8 = null,
@@ -59,7 +59,7 @@ pub const RevokeRevisionOutput = struct {
     revocation_comment: ?[]const u8 = null,
 
     /// A status indicating that subscribers' access to the revision was revoked.
-    revoked: bool = false,
+    revoked: ?bool = null,
 
     /// The date and time that the revision was revoked, in ISO 8601 format.
     revoked_at: ?i64 = null,

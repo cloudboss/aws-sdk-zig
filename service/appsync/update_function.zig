@@ -33,7 +33,7 @@ pub const UpdateFunctionInput = struct {
     function_version: ?[]const u8 = null,
 
     /// The maximum batching size for a resolver.
-    max_batch_size: i32 = 0,
+    max_batch_size: ?i32 = null,
 
     /// The `Function` name.
     name: []const u8,

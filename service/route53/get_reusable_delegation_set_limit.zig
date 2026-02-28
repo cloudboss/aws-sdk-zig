@@ -21,7 +21,7 @@ pub const GetReusableDelegationSetLimitOutput = struct {
     /// The current number of hosted zones that you can associate with the specified
     /// reusable
     /// delegation set.
-    count: i64 = 0,
+    count: ?i64 = null,
 
     /// The current setting for the limit on hosted zones that you can associate
     /// with the

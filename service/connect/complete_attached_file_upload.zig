@@ -27,7 +27,8 @@ pub const CompleteAttachedFileUploadInput = struct {
     };
 };
 
-pub const CompleteAttachedFileUploadOutput = struct {};
+pub const CompleteAttachedFileUploadOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

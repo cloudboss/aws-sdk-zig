@@ -13,7 +13,7 @@ pub const ListCommandInvocationsInput = struct {
     /// (Optional) If set this returns the response of the command executions and
     /// any command
     /// output. The default value is `false`.
-    details: bool = false,
+    details: ?bool = null,
 
     /// (Optional) One or more filters. Use a filter to return a more specific list
     /// of

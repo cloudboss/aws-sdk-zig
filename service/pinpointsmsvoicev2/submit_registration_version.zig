@@ -10,7 +10,7 @@ pub const SubmitRegistrationVersionInput = struct {
     /// Set to true to request AWS review of the registration. When enabled, AWS
     /// will perform additional validation and review of the registration submission
     /// before processing.
-    aws_review: bool = false,
+    aws_review: ?bool = null,
 
     /// The unique identifier for the registration.
     registration_id: []const u8,
@@ -23,7 +23,7 @@ pub const SubmitRegistrationVersionInput = struct {
 
 pub const SubmitRegistrationVersionOutput = struct {
     /// Indicates whether AWS review was requested for this registration submission.
-    aws_review: bool = false,
+    aws_review: ?bool = null,
 
     /// The Amazon Resource Name (ARN) for the registration.
     registration_arn: []const u8,

@@ -49,7 +49,7 @@ pub const UpdateWebhookInput = struct {
     /// secret
     /// token should be updated. If you use Bitbucket for your repository,
     /// `rotateSecret` is ignored.
-    rotate_secret: bool = false,
+    rotate_secret: ?bool = null,
 
     pub const json_field_names = .{
         .branch_filter = "branchFilter",

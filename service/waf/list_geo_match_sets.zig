@@ -12,7 +12,7 @@ pub const ListGeoMatchSetsInput = struct {
     /// includes a
     /// `NextMarker` value that you can use to get another batch of `GeoMatchSet`
     /// objects.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// If you specify a value for `Limit` and you have more `GeoMatchSet`s than the
     /// value of `Limit`,

@@ -14,7 +14,8 @@ pub const DeleteVPCEConfigurationInput = struct {
     };
 };
 
-pub const DeleteVPCEConfigurationOutput = struct {};
+pub const DeleteVPCEConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

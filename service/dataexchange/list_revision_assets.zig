@@ -10,7 +10,7 @@ pub const ListRevisionAssetsInput = struct {
     data_set_id: []const u8,
 
     /// The maximum number of results returned by a single call.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// The token value retrieved from a previous call to access the next page of
     /// results.

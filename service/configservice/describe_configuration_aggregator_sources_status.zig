@@ -13,7 +13,7 @@ pub const DescribeConfigurationAggregatorSourcesStatusInput = struct {
     /// The maximum number of AggregatorSourceStatus returned on each
     /// page. The default is maximum. If you specify 0, Config uses the
     /// default.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string returned on a previous page that you use
     /// to get the next page of results in a paginated response.

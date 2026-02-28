@@ -23,7 +23,7 @@ pub const RegisterApplicationInput = struct {
     components_info: ?[]const ComponentInfo = null,
 
     /// The credentials of the SAP application.
-    credentials: []const ApplicationCredential = &.{},
+    credentials: ?[]const ApplicationCredential = null,
 
     /// The Amazon Resource Name of the SAP HANA database.
     database_arn: ?[]const u8 = null,

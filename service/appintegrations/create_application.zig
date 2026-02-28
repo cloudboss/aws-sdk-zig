@@ -39,7 +39,7 @@ pub const CreateApplicationInput = struct {
     initialization_timeout: ?i32 = null,
 
     /// Indicates whether the application is a service.
-    is_service: bool = false,
+    is_service: ?bool = null,
 
     /// The name of the application.
     name: []const u8,

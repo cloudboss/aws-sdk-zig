@@ -21,7 +21,7 @@ pub const StartColumnStatisticsTaskRunInput = struct {
 
     /// The percentage of rows used to generate statistics. If none is supplied, the
     /// entire table will be used to generate stats.
-    sample_size: f64 = 0,
+    sample_size: ?f64 = null,
 
     /// Name of the security configuration that is used to encrypt CloudWatch logs
     /// for the column stats task run.

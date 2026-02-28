@@ -107,13 +107,13 @@ pub const ScheduleRunTest = struct {
     /// * XCTEST
     ///
     /// * XCTEST_UI
-    type: TestType,
+    @"type": TestType,
 
     pub const json_field_names = .{
         .filter = "filter",
         .parameters = "parameters",
         .test_package_arn = "testPackageArn",
         .test_spec_arn = "testSpecArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };

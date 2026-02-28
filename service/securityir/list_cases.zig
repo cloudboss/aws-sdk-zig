@@ -7,7 +7,7 @@ const ListCasesItem = @import("list_cases_item.zig").ListCasesItem;
 
 pub const ListCasesInput = struct {
     /// Optional element for ListCases to limit the number of responses.
-    max_results: i32 = 25,
+    max_results: ?i32 = null,
 
     /// An optional string that, if supplied, must be copied from the output of a
     /// previous call to ListCases. When provided in this manner, the API fetches

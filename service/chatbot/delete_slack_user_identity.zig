@@ -22,7 +22,8 @@ pub const DeleteSlackUserIdentityInput = struct {
     };
 };
 
-pub const DeleteSlackUserIdentityOutput = struct {};
+pub const DeleteSlackUserIdentityOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

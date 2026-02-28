@@ -50,11 +50,11 @@ pub const ProxyConfiguration = struct {
     properties: ?[]const KeyValuePair,
 
     /// The proxy type. The only supported value is `APPMESH`.
-    type: ?ProxyConfigurationType,
+    @"type": ?ProxyConfigurationType,
 
     pub const json_field_names = .{
         .container_name = "containerName",
         .properties = "properties",
-        .type = "type",
+        .@"type" = "type",
     };
 };

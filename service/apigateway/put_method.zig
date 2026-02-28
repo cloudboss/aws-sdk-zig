@@ -8,7 +8,7 @@ const MethodResponse = @import("method_response.zig").MethodResponse;
 
 pub const PutMethodInput = struct {
     /// Specifies whether the method required a valid ApiKey.
-    api_key_required: bool = false,
+    api_key_required: ?bool = null,
 
     /// A list of authorization scopes configured on the method. The scopes are used
     /// with a `COGNITO_USER_POOLS` authorizer to authorize the method invocation.

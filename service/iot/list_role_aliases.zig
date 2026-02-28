@@ -6,7 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const ListRoleAliasesInput = struct {
     /// Return the list of role aliases in ascending alphabetical order.
-    ascending_order: bool = false,
+    ascending_order: ?bool = null,
 
     /// A marker used to get the next set of results.
     marker: ?[]const u8 = null,

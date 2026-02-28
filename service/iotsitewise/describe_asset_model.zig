@@ -27,7 +27,7 @@ pub const DescribeAssetModelInput = struct {
     asset_model_version: ?[]const u8 = null,
 
     /// Whether or not to exclude asset model properties from the response.
-    exclude_properties: bool = false,
+    exclude_properties: ?bool = null,
 
     pub const json_field_names = .{
         .asset_model_id = "assetModelId",

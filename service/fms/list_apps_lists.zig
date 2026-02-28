@@ -8,7 +8,7 @@ const AppsListDataSummary = @import("apps_list_data_summary.zig").AppsListDataSu
 pub const ListAppsListsInput = struct {
     /// Specifies whether the lists to retrieve are default lists owned by Firewall
     /// Manager.
-    default_lists: bool = false,
+    default_lists: ?bool = null,
 
     /// The maximum number of objects that you want Firewall Manager to return for
     /// this request. If more

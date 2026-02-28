@@ -27,7 +27,7 @@ pub const DescribeActivitiesInput = struct {
     /// activity) shares all of the subfolders and documents within the parent
     /// folder (the
     /// indirect activity).
-    include_indirect_activities: bool = false,
+    include_indirect_activities: ?bool = null,
 
     /// The maximum number of items to return.
     limit: ?i32 = null,

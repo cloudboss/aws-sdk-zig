@@ -29,7 +29,7 @@ pub const CreateClusterInput = struct {
     /// (underprovisioned) than what
     /// needed to meet capacity requirement specified with
     /// `OnDeviceServiceConfiguration`.
-    force_create_jobs: bool = false,
+    force_create_jobs: ?bool = null,
 
     /// The forwarding address ID for a cluster. This field is not supported in most
     /// regions.

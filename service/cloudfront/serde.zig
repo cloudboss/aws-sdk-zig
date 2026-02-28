@@ -2046,7 +2046,7 @@ pub fn deserializeCachePolicySummary(reader: *aws.xml.Reader, alloc: std.mem.All
                 if (std.mem.eql(u8, e.local, "CachePolicy")) {
                     result.cache_policy = try deserializeCachePolicy(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(CachePolicyType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(CachePolicyType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -4306,10 +4306,10 @@ pub fn deserializeLambdaFunctionAssociations(reader: *aws.xml.Reader, alloc: std
 
 pub fn deserializeLoggingConfig(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LoggingConfig {
     var result: LoggingConfig = undefined;
-    result.bucket = null;
-    result.enabled = null;
-    result.include_cookies = null;
-    result.prefix = null;
+    result.bucket = "";
+    result.enabled = false;
+    result.include_cookies = false;
+    result.prefix = "";
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -4821,7 +4821,7 @@ pub fn deserializeOriginRequestPolicySummary(reader: *aws.xml.Reader, alloc: std
                 if (std.mem.eql(u8, e.local, "OriginRequestPolicy")) {
                     result.origin_request_policy = try deserializeOriginRequestPolicy(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(OriginRequestPolicyType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(OriginRequestPolicyType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -5729,7 +5729,7 @@ pub fn deserializeResponseHeadersPolicySummary(reader: *aws.xml.Reader, alloc: s
                 if (std.mem.eql(u8, e.local, "ResponseHeadersPolicy")) {
                     result.response_headers_policy = try deserializeResponseHeadersPolicy(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(ResponseHeadersPolicyType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(ResponseHeadersPolicyType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -6192,7 +6192,7 @@ pub fn deserializeTrafficConfig(reader: *aws.xml.Reader, alloc: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "SingleWeightConfig")) {
                     result.single_weight_config = try deserializeContinuousDeploymentSingleWeightConfig(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(ContinuousDeploymentPolicyType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(ContinuousDeploymentPolicyType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -6407,7 +6407,7 @@ pub fn deserializeViewerCertificate(reader: *aws.xml.Reader, alloc: std.mem.Allo
 
 pub fn deserializeViewerMtlsConfig(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ViewerMtlsConfig {
     var result: ViewerMtlsConfig = undefined;
-    result.mode = null;
+    result.mode = "required";
     result.trust_store_config = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -9046,7 +9046,7 @@ pub fn serializeTrafficConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8),
         try buf.appendSlice(alloc, "</SingleWeightConfig>");
     }
     try buf.appendSlice(alloc, "<Type>");
-    try buf.appendSlice(alloc, @tagName(value.type));
+    try buf.appendSlice(alloc, @tagName(value.@"type"));
     try buf.appendSlice(alloc, "</Type>");
 }
 
@@ -9217,3 +9217,4 @@ pub fn serializeWebAclCustomization(alloc: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(alloc, "</Arn>");
     }
 }
+

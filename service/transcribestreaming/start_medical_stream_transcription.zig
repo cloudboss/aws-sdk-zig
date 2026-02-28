@@ -41,7 +41,7 @@ pub const StartMedicalStreamTranscriptionInput = struct {
     ///
     /// For more information, see [Transcribing multi-channel
     /// audio](https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
-    enable_channel_identification: bool = false,
+    enable_channel_identification: ?bool = null,
 
     /// Specify the language code that represents the language spoken in your audio.
     ///
@@ -90,7 +90,7 @@ pub const StartMedicalStreamTranscriptionInput = struct {
     ///
     /// For more information, see [Partitioning speakers
     /// (diarization)](https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
-    show_speaker_label: bool = false,
+    show_speaker_label: ?bool = null,
 
     /// Specify the medical specialty contained in your audio.
     specialty: Specialty,
@@ -126,7 +126,7 @@ pub const StartMedicalStreamTranscriptionOutput = struct {
     content_identification_type: ?MedicalContentIdentificationType = null,
 
     /// Shows whether channel identification was enabled for your transcription.
-    enable_channel_identification: bool = false,
+    enable_channel_identification: ?bool = null,
 
     /// Provides the language code that you specified in your request. This must be
     /// `en-US`.
@@ -148,7 +148,7 @@ pub const StartMedicalStreamTranscriptionOutput = struct {
     session_id: ?[]const u8 = null,
 
     /// Shows whether speaker partitioning was enabled for your transcription.
-    show_speaker_label: bool = false,
+    show_speaker_label: ?bool = null,
 
     /// Provides the medical specialty that you specified in your request.
     specialty: ?Specialty = null,

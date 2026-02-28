@@ -22,7 +22,7 @@ pub const DeleteSlotTypeInput = struct {
     /// slot type used by a slot. Set the `skipResourceInUseCheck`
     /// parameter to `true` to skip this check and remove the slot
     /// type even if a slot uses it.
-    skip_resource_in_use_check: bool = false,
+    skip_resource_in_use_check: ?bool = null,
 
     /// The identifier of the slot type to delete.
     slot_type_id: []const u8,

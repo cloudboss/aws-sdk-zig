@@ -19,7 +19,7 @@ pub const DeleteQueryDefinitionOutput = struct {
     /// A value of TRUE indicates that the operation succeeded. FALSE indicates that
     /// the operation
     /// failed.
-    success: bool = false,
+    success: ?bool = null,
 
     pub const json_field_names = .{
         .success = "success",

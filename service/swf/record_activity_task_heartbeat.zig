@@ -25,7 +25,7 @@ pub const RecordActivityTaskHeartbeatInput = struct {
 
 pub const RecordActivityTaskHeartbeatOutput = struct {
     /// Set to `true` if cancellation of the task is requested.
-    cancel_requested: bool = false,
+    cancel_requested: ?bool = null,
 
     pub const json_field_names = .{
         .cancel_requested = "cancelRequested",

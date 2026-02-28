@@ -15,7 +15,7 @@ pub const CreateChannelInput = struct {
     /// Whether the channel is private (enabled for playback authorization).
     /// Default:
     /// `false`.
-    authorized: bool = false,
+    authorized: ?bool = null,
 
     /// Indicates which content-packaging format is used (MPEG-TS or fMP4). If
     /// `multitrackInputConfiguration` is specified and `enabled` is `true`, then
@@ -25,7 +25,7 @@ pub const CreateChannelInput = struct {
     container_format: ?ContainerFormat = null,
 
     /// Whether the channel allows insecure RTMP and SRT ingest. Default: `false`.
-    insecure_ingest: bool = false,
+    insecure_ingest: ?bool = null,
 
     /// Channel latency mode. Use `NORMAL` to broadcast and deliver live video up to
     /// Full HD. Use `LOW` for near-real-time interaction with viewers. Default:

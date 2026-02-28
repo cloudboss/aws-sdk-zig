@@ -42,7 +42,7 @@ pub const UpdateDynamicThingGroupInput = struct {
 
 pub const UpdateDynamicThingGroupOutput = struct {
     /// The dynamic thing group version.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .version = "version",

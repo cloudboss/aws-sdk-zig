@@ -10,7 +10,7 @@ pub const PutConfigurationSetSendingOptionsInput = struct {
 
     /// If `true`, email sending is enabled for the configuration set. If
     /// `false`, email sending is disabled for the configuration set.
-    sending_enabled: bool = false,
+    sending_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .configuration_set_name = "ConfigurationSetName",

@@ -14,7 +14,8 @@ pub const RemoveRegionInput = struct {
     };
 };
 
-pub const RemoveRegionOutput = struct {};
+pub const RemoveRegionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

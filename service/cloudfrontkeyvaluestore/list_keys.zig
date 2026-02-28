@@ -11,7 +11,7 @@ pub const ListKeysInput = struct {
 
     /// Maximum number of results that are returned per call. The default is 10 and
     /// maximum allowed page is 50.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// If nextToken is returned in the response, there are more results available.
     /// Make the next call using the returned token to retrieve the next page.

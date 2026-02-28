@@ -10,7 +10,7 @@ const Tag = @import("tag.zig").Tag;
 pub const RegisterCACertificateInput = struct {
     /// Allows this CA certificate to be used for auto registration of device
     /// certificates.
-    allow_auto_registration: bool = false,
+    allow_auto_registration: ?bool = null,
 
     /// The CA certificate.
     ca_certificate: []const u8,
@@ -36,7 +36,7 @@ pub const RegisterCACertificateInput = struct {
     /// A boolean value that specifies if the CA certificate is set to active.
     ///
     /// Valid values: `ACTIVE | INACTIVE`
-    set_as_active: bool = false,
+    set_as_active: ?bool = null,
 
     /// Metadata which can be used to manage the CA certificate.
     ///

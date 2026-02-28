@@ -11,11 +11,11 @@ pub const GuardrailPiiEntityFilter = struct {
     match: ?[]const u8,
 
     /// The type of PII the Guardrail filter has identified and removed.
-    type: ?GuardrailPiiEntityType,
+    @"type": ?GuardrailPiiEntityType,
 
     pub const json_field_names = .{
         .action = "action",
         .match = "match",
-        .type = "type",
+        .@"type" = "type",
     };
 };

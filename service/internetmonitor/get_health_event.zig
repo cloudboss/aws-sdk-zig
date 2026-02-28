@@ -49,7 +49,7 @@ pub const GetHealthEventOutput = struct {
     /// other configuration information,
     /// when Internet Monitor creates a health event when there's an internet issue
     /// that affects your application end users.
-    health_score_threshold: f64 = 0,
+    health_score_threshold: ?f64 = null,
 
     /// The locations affected by a health event.
     impacted_locations: ?[]const ImpactedLocation = null,

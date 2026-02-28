@@ -10,7 +10,7 @@ pub const ListCommentsInput = struct {
     case_id: []const u8,
 
     /// Optional element for ListComments to limit the number of responses.
-    max_results: i32 = 25,
+    max_results: ?i32 = null,
 
     /// An optional string that, if supplied, must be copied from the output of a
     /// previous call to ListComments. When provided in this manner, the API fetches

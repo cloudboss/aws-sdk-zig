@@ -45,7 +45,7 @@ pub const DescribeGroupOutput = struct {
     group_id: ?[]const u8 = null,
 
     /// If the value is set to *true*, the group is hidden from the address book.
-    hidden_from_global_address_list: bool = false,
+    hidden_from_global_address_list: ?bool = null,
 
     /// The name of the described group.
     name: ?[]const u8 = null,

@@ -16,7 +16,7 @@ pub const DeleteAnalysisInput = struct {
     /// immediately delete the analysis, add the `ForceDeleteWithoutRecovery`
     /// option.
     /// You can't restore an analysis after it's deleted.
-    force_delete_without_recovery: bool = false,
+    force_delete_without_recovery: ?bool = null,
 
     /// A value that specifies the number of days that Amazon Quick Sight waits
     /// before it deletes the
@@ -46,7 +46,7 @@ pub const DeleteAnalysisOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .analysis_id = "AnalysisId",

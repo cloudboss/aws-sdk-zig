@@ -7,7 +7,7 @@ pub const ResourceRequirement = struct {
     /// The type of resource to assign to a container. The supported resources
     /// include
     /// `GPU`, `MEMORY`, and `VCPU`.
-    type: ResourceType,
+    @"type": ResourceType,
 
     /// The quantity of the specified resource to reserve for the container. The
     /// values vary based
@@ -177,7 +177,7 @@ pub const ResourceRequirement = struct {
     value: []const u8,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

@@ -29,18 +29,18 @@ pub const DescribeTaskExecutionOutput = struct {
     /// The number of physical bytes that DataSync transfers over the network after
     /// compression (if compression is possible). This number is typically less than
     /// [BytesTransferred](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-BytesTransferred) unless the data isn't compressible.
-    bytes_compressed: i64 = 0,
+    bytes_compressed: ?i64 = null,
 
     /// The number of bytes that DataSync sends to the network before compression
     /// (if
     /// compression is possible). For the number of bytes transferred over the
     /// network, see
     /// [BytesCompressed](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-BytesCompressed).
-    bytes_transferred: i64 = 0,
+    bytes_transferred: ?i64 = null,
 
     /// The number of logical bytes that DataSync actually writes to the destination
     /// location.
-    bytes_written: i64 = 0,
+    bytes_written: ?i64 = null,
 
     /// The time that the transfer task ends.
     end_time: ?i64 = null,
@@ -48,7 +48,7 @@ pub const DescribeTaskExecutionOutput = struct {
     /// The number of logical bytes that DataSync expects to write to the
     /// destination
     /// location.
-    estimated_bytes_to_transfer: i64 = 0,
+    estimated_bytes_to_transfer: ?i64 = null,
 
     /// The number of files, objects, and directories that DataSync expects to
     /// delete in
@@ -60,7 +60,7 @@ pub const DescribeTaskExecutionOutput = struct {
     /// For [Enhanced mode
     /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html), this counter only includes files or objects. Directories are counted in
     /// [EstimatedFoldersToDelete](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToDelete).
-    estimated_files_to_delete: i64 = 0,
+    estimated_files_to_delete: ?i64 = null,
 
     /// The number of files, objects, and directories that DataSync expects to
     /// transfer over the network. This value is calculated while DataSync
@@ -92,7 +92,7 @@ pub const DescribeTaskExecutionOutput = struct {
     /// For [Enhanced mode
     /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html), this counter only includes files or objects. Directories are counted in
     /// [EstimatedFoldersToTransfer](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToTransfer).
-    estimated_files_to_transfer: i64 = 0,
+    estimated_files_to_transfer: ?i64 = null,
 
     /// The number of directories that DataSync expects to delete in
     /// your destination location. If you don't configure your task to [delete data
@@ -146,7 +146,7 @@ pub const DescribeTaskExecutionOutput = struct {
     /// For [Enhanced mode
     /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html), this counter only includes files or objects. Directories are counted in
     /// [FoldersDeleted](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersDeleted).
-    files_deleted: i64 = 0,
+    files_deleted: ?i64 = null,
 
     /// The number of files or objects that DataSync fails to prepare, transfer,
     /// verify, and
@@ -173,7 +173,7 @@ pub const DescribeTaskExecutionOutput = struct {
     /// all
     /// data](https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-transfer-mode). In that scenario, DataSync copies everything from the source to
     /// the destination without comparing differences between the locations.
-    files_prepared: i64 = 0,
+    files_prepared: ?i64 = null,
 
     /// The number of files, objects, and directories that DataSync skips during
     /// your
@@ -182,7 +182,7 @@ pub const DescribeTaskExecutionOutput = struct {
     /// For [Enhanced mode
     /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html), this counter only includes files or objects. Directories are counted in
     /// [FoldersSkipped](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersSkipped).
-    files_skipped: i64 = 0,
+    files_skipped: ?i64 = null,
 
     /// The number of files, objects, and directories that DataSync actually
     /// transfers over the network. This value is updated periodically during your
@@ -200,7 +200,7 @@ pub const DescribeTaskExecutionOutput = struct {
     /// For [Enhanced mode
     /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html), this counter only includes files or objects. Directories are counted in
     /// [FoldersTransferred](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersTransferred).
-    files_transferred: i64 = 0,
+    files_transferred: ?i64 = null,
 
     /// The number of files, objects, and directories that DataSync verifies during
     /// your
@@ -214,7 +214,7 @@ pub const DescribeTaskExecutionOutput = struct {
     /// For [Enhanced mode
     /// tasks](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html), this counter only includes files or objects. Directories are counted in
     /// [FoldersVerified](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersVerified).
-    files_verified: i64 = 0,
+    files_verified: ?i64 = null,
 
     /// The number of directories that DataSync actually deletes in
     /// your destination location. If you don't configure your task to [delete data

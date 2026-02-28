@@ -12,7 +12,7 @@ pub const DeleteIngestConfigurationInput = struct {
     /// to `true` when a participant is actively publishing, the participant is
     /// disconnected from the stage, followed by deletion of the
     /// IngestConfiguration. Default: `false`.
-    force: bool = false,
+    force: ?bool = null,
 
     pub const json_field_names = .{
         .arn = "arn",

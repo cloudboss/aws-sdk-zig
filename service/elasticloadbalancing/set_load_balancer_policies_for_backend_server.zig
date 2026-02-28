@@ -17,7 +17,8 @@ pub const SetLoadBalancerPoliciesForBackendServerInput = struct {
     policy_names: []const []const u8,
 };
 
-pub const SetLoadBalancerPoliciesForBackendServerOutput = struct {};
+pub const SetLoadBalancerPoliciesForBackendServerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

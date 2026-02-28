@@ -7,7 +7,7 @@ const KeyPair = @import("key_pair.zig").KeyPair;
 
 pub const CreateKeysAndCertificateInput = struct {
     /// Specifies whether the certificate is active.
-    set_as_active: bool = false,
+    set_as_active: ?bool = null,
 
     pub const json_field_names = .{
         .set_as_active = "setAsActive",

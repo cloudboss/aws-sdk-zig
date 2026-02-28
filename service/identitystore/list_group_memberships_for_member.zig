@@ -13,7 +13,7 @@ pub const ListGroupMembershipsForMemberInput = struct {
     /// The maximum number of results to be returned per request. This parameter is
     /// used in the ` ListUsers` and `ListGroups` requests to specify how many
     /// results to return in one page. The length limit is 50 characters.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// An object that contains the identifier of a group member. Setting the
     /// `UserID` field to the specific identifier for a user indicates that the user

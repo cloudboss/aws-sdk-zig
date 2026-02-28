@@ -51,7 +51,7 @@ pub const GetObjectInput = struct {
 
 pub const GetObjectOutput = struct {
     /// The bytes of the object.
-    body: aws.http.StreamingBody = "",
+    body: ?aws.http.StreamingBody = null,
 
     /// An optional `CacheControl` header that allows the caller to control the
     /// object's cache behavior. Headers can be passed in as specified in the HTTP
@@ -79,7 +79,7 @@ pub const GetObjectOutput = struct {
     /// The HTML status code of the request. Status codes ranging from 200 to 299
     /// indicate
     /// success. All other status codes indicate the type of error that occurred.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub fn deinit(self: *GetObjectOutput) void {
         self.body.deinit();

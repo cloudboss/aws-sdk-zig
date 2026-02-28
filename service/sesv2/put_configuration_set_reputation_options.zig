@@ -11,7 +11,7 @@ pub const PutConfigurationSetReputationOptionsInput = struct {
     /// If `true`, tracking of reputation metrics is enabled for the configuration
     /// set. If `false`, tracking of reputation metrics is disabled for the
     /// configuration set.
-    reputation_metrics_enabled: bool = false,
+    reputation_metrics_enabled: ?bool = null,
 
     pub const json_field_names = .{
         .configuration_set_name = "ConfigurationSetName",

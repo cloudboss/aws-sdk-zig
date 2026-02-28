@@ -13,7 +13,8 @@ pub const DeleteLoadBalancerListenersInput = struct {
     load_balancer_ports: []const i32,
 };
 
-pub const DeleteLoadBalancerListenersOutput = struct {};
+pub const DeleteLoadBalancerListenersOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

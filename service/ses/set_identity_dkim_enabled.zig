@@ -7,7 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const SetIdentityDkimEnabledInput = struct {
     /// Sets whether DKIM signing is enabled for an identity. Set to `true` to
     /// enable DKIM signing for this identity; `false` to disable it.
-    dkim_enabled: bool = false,
+    dkim_enabled: ?bool = null,
 
     /// The identity for which DKIM signing should be enabled or disabled.
     identity: []const u8,

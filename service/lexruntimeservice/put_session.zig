@@ -107,7 +107,7 @@ pub const PutSessionOutput = struct {
     active_contexts: ?[]const u8 = null,
 
     /// The audio version of the message to convey to the user.
-    audio_stream: aws.http.StreamingBody = "",
+    audio_stream: ?aws.http.StreamingBody = null,
 
     /// Content type as specified in the `Accept` HTTP header in
     /// the request.

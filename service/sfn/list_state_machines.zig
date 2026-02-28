@@ -13,7 +13,7 @@ pub const ListStateMachinesInput = struct {
     ///
     /// This is only an upper limit. The actual number of results returned per call
     /// might be fewer than the specified maximum.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// If `nextToken` is returned, there are more results available. The value of
     /// `nextToken` is a unique pagination token for each page.

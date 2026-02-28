@@ -10,7 +10,7 @@ pub const ListServerNeighborsInput = struct {
     configuration_id: []const u8,
 
     /// Maximum number of results to return in a single page of output.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// List of configuration IDs to test for one-hop-away.
     neighbor_configuration_ids: ?[]const []const u8 = null,
@@ -25,7 +25,7 @@ pub const ListServerNeighborsInput = struct {
 
     /// Flag to indicate if port and protocol information is needed as part of the
     /// response.
-    port_information_needed: bool = false,
+    port_information_needed: ?bool = null,
 
     pub const json_field_names = .{
         .configuration_id = "configurationId",
@@ -38,7 +38,7 @@ pub const ListServerNeighborsInput = struct {
 
 pub const ListServerNeighborsOutput = struct {
     /// Count of distinct servers that are one hop away from the given server.
-    known_dependency_count: i64 = 0,
+    known_dependency_count: ?i64 = null,
 
     /// List of distinct servers that are one hop away from the given server.
     neighbors: ?[]const NeighborConnectionDetail = null,

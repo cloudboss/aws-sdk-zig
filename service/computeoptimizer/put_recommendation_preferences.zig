@@ -167,7 +167,8 @@ pub const PutRecommendationPreferencesInput = struct {
     };
 };
 
-pub const PutRecommendationPreferencesOutput = struct {};
+pub const PutRecommendationPreferencesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

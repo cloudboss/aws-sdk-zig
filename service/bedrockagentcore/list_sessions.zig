@@ -11,7 +11,7 @@ pub const ListSessionsInput = struct {
 
     /// The maximum number of results to return in a single call. The default value
     /// is 20.
-    max_results: i32 = 100,
+    max_results: ?i32 = null,
 
     /// The identifier of the AgentCore Memory resource for which to list sessions.
     memory_id: []const u8,

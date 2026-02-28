@@ -77,7 +77,7 @@ pub const CreateCachediSCSIVolumeInput = struct {
     target_name: []const u8,
 
     /// The size of the volume in bytes.
-    volume_size_in_bytes: i64 = 0,
+    volume_size_in_bytes: ?i64 = null,
 
     pub const json_field_names = .{
         .client_token = "ClientToken",

@@ -17,7 +17,7 @@ pub const GetFailbackReplicationConfigurationInput = struct {
 pub const GetFailbackReplicationConfigurationOutput = struct {
     /// Configure bandwidth throttling for the outbound data transfer rate of the
     /// Recovery Instance in Mbps.
-    bandwidth_throttling: i64 = 0,
+    bandwidth_throttling: ?i64 = null,
 
     /// The name of the Failback Replication Configuration.
     name: ?[]const u8 = null,

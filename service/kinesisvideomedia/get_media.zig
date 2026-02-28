@@ -83,7 +83,7 @@ pub const GetMediaOutput = struct {
     /// * 4506 - Unable to find the KMS key specified in the stream
     ///
     /// * 5000 - Internal error
-    payload: aws.http.StreamingBody = "",
+    payload: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetMediaOutput) void {
         self.payload.deinit();

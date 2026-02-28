@@ -18,7 +18,7 @@ pub const ChannelFlowCallbackInput = struct {
 
     /// When a processor determines that a message needs to be `DENIED`, pass this
     /// parameter with a value of true.
-    delete_resource: bool = false,
+    delete_resource: ?bool = null,
 
     pub const json_field_names = .{
         .callback_id = "CallbackId",

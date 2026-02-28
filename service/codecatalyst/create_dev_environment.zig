@@ -31,7 +31,7 @@ pub const CreateDevEnvironmentInput = struct {
     /// The amount of time the Dev Environment will run without any activity
     /// detected before stopping, in minutes. Only whole integers are allowed. Dev
     /// Environments consume compute minutes when running.
-    inactivity_timeout_minutes: i32 = 0,
+    inactivity_timeout_minutes: ?i32 = null,
 
     /// The Amazon EC2 instace type to use for the Dev Environment.
     instance_type: InstanceType,

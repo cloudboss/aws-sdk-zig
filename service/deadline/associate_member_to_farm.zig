@@ -31,7 +31,8 @@ pub const AssociateMemberToFarmInput = struct {
     };
 };
 
-pub const AssociateMemberToFarmOutput = struct {};
+pub const AssociateMemberToFarmOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

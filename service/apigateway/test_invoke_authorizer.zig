@@ -57,10 +57,10 @@ pub const TestInvokeAuthorizerOutput = struct {
 
     /// The HTTP status code that the client would have received. Value is 0 if the
     /// authorizer succeeded.
-    client_status: i32 = 0,
+    client_status: ?i32 = null,
 
     /// The execution latency, in ms, of the test authorizer request.
-    latency: i64 = 0,
+    latency: ?i64 = null,
 
     /// The API Gateway execution log for the test authorizer request.
     log: ?[]const u8 = null,

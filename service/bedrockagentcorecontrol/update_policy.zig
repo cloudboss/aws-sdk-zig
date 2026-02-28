@@ -33,7 +33,7 @@ pub const UpdatePolicyInput = struct {
     /// IGNORE_ALL_FINDINGS runs the Cedar analyzer but allows updates despite
     /// validation warnings. Use FAIL_ON_ANY_FINDINGS to ensure policy correctness
     /// during updates, especially when modifying policy logic or conditions.
-    validation_mode: PolicyValidationMode = "FAIL_ON_ANY_FINDINGS",
+    validation_mode: ?PolicyValidationMode = null,
 
     pub const json_field_names = .{
         .definition = "definition",

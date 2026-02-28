@@ -39,7 +39,7 @@ pub const StartBrowserSessionInput = struct {
     /// there is no activity. The default value is 3600 seconds (1 hour). The
     /// minimum allowed value is 60 seconds, and the maximum allowed value is 28800
     /// seconds (8 hours).
-    session_timeout_seconds: i32 = 3600,
+    session_timeout_seconds: ?i32 = null,
 
     /// The trace identifier for request tracking.
     trace_id: ?[]const u8 = null,

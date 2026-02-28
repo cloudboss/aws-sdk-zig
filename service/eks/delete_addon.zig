@@ -19,7 +19,7 @@ pub const DeleteAddonInput = struct {
     /// managing any settings for the add-on. If an IAM account is associated with
     /// the add-on,
     /// it isn't removed.
-    preserve: bool = false,
+    preserve: ?bool = null,
 
     pub const json_field_names = .{
         .addon_name = "addonName",

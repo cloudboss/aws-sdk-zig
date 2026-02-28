@@ -37,14 +37,14 @@ pub const GetAutoMergingPreviewOutput = struct {
     /// The number of match groups in the domain that have been reviewed in this
     /// preview dry
     /// run.
-    number_of_matches_in_sample: i64 = 0,
+    number_of_matches_in_sample: ?i64 = null,
 
     /// The number of profiles found in this preview dry run.
-    number_of_profiles_in_sample: i64 = 0,
+    number_of_profiles_in_sample: ?i64 = null,
 
     /// The number of profiles that would be merged if this wasn't a preview dry
     /// run.
-    number_of_profiles_will_be_merged: i64 = 0,
+    number_of_profiles_will_be_merged: ?i64 = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",

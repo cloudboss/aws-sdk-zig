@@ -7,7 +7,7 @@ const CACertificate = @import("ca_certificate.zig").CACertificate;
 
 pub const ListCACertificatesInput = struct {
     /// Determines the order of the results.
-    ascending_order: bool = false,
+    ascending_order: ?bool = null,
 
     /// The marker for the next set of results.
     marker: ?[]const u8 = null,

@@ -24,7 +24,7 @@ pub const GetConnectionsInput = struct {
     /// key to decrypt the password, but it does have permission to access the rest
     /// of the connection
     /// properties.
-    hide_password: bool = false,
+    hide_password: ?bool = null,
 
     /// The maximum number of connections to return in one response.
     max_results: ?i32 = null,

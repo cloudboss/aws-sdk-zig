@@ -28,7 +28,7 @@ pub const CreateProtectConfigurationInput = struct {
 pub const CreateProtectConfigurationOutput = struct {
     /// This is true if the protect configuration is set as your account default
     /// protect configuration.
-    account_default: bool = false,
+    account_default: ?bool = null,
 
     /// The time when the protect configuration was created, in [UNIX epoch
     /// time](https://www.epochconverter.com/) format.
@@ -36,7 +36,7 @@ pub const CreateProtectConfigurationOutput = struct {
 
     /// When set to true deletion protection is enabled. By default this is set to
     /// false.
-    deletion_protection_enabled: bool = false,
+    deletion_protection_enabled: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the protect configuration.
     protect_configuration_arn: []const u8,

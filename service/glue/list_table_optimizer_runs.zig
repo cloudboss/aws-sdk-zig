@@ -14,7 +14,7 @@ pub const ListTableOptimizerRunsInput = struct {
     database_name: []const u8,
 
     /// The maximum number of optimizer runs to return on each call.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// A continuation token, if this is a continuation call.
     next_token: ?[]const u8 = null,

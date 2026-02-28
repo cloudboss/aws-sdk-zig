@@ -28,7 +28,7 @@ pub const UpdateTaskProtectionInput = struct {
 
     /// Specify `true` to mark a task for protection and `false` to
     /// unset protection, making it eligible for termination.
-    protection_enabled: bool = false,
+    protection_enabled: ?bool = null,
 
     /// A list of up to 10 task IDs or full ARN entries.
     tasks: []const []const u8,

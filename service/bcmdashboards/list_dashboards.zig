@@ -8,7 +8,7 @@ const DashboardReference = @import("dashboard_reference.zig").DashboardReference
 pub const ListDashboardsInput = struct {
     /// The maximum number of results to return in a single call. The default value
     /// is 20.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// The token for the next page of results. Use the value returned in the
     /// previous response.

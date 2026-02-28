@@ -44,7 +44,7 @@ pub const ListThemesOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// Information about the themes in the list.
     theme_summary_list: ?[]const ThemeSummary = null,

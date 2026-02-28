@@ -26,7 +26,7 @@ pub const CreateKeyInput = struct {
     /// request from making a subsequent
     /// [PutKeyPolicy](https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html)
     /// request on the KMS key.
-    bypass_policy_lockout_safety_check: bool = false,
+    bypass_policy_lockout_safety_check: ?bool = null,
 
     /// Instead, use the `KeySpec` parameter.
     ///

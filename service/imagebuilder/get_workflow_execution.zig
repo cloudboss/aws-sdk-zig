@@ -48,22 +48,22 @@ pub const GetWorkflowExecutionOutput = struct {
     /// This number should equal the sum of the step counts for steps that
     /// succeeded, were skipped,
     /// and failed.
-    total_step_count: i32 = 0,
+    total_step_count: ?i32 = null,
 
     /// A runtime count for the number of steps that failed in the specified runtime
     /// instance
     /// of the workflow.
-    total_steps_failed: i32 = 0,
+    total_steps_failed: ?i32 = null,
 
     /// A runtime count for the number of steps that were skipped in the specified
     /// runtime
     /// instance of the workflow.
-    total_steps_skipped: i32 = 0,
+    total_steps_skipped: ?i32 = null,
 
     /// A runtime count for the number of steps that ran successfully in the
     /// specified runtime
     /// instance of the workflow.
-    total_steps_succeeded: i32 = 0,
+    total_steps_succeeded: ?i32 = null,
 
     /// The type of workflow that Image Builder ran for the specified runtime
     /// instance of the workflow.

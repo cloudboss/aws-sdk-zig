@@ -1,6 +1,6 @@
 pub const ListTagsForResourceRequest = struct {
     /// The maximum number of objects that are returned for the request.
-    max_results: ?i32,
+    max_results: ?i32 = null,
 
     /// The token to retrieve the next set of results.
     next_token: ?[]const u8,

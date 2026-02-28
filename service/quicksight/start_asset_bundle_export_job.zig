@@ -37,7 +37,7 @@ pub const StartAssetBundleExportJobInput = struct {
     /// `ResourceArns` parameter. If you set `IncludeAllDependencies` to
     /// `TRUE`, any theme, dataset, and data source resource that is a dependency of
     /// the dashboard is also exported.
-    include_all_dependencies: bool = false,
+    include_all_dependencies: ?bool = null,
 
     /// A setting that indicates whether you want to include folder assets. You can
     /// also use
@@ -47,19 +47,19 @@ pub const StartAssetBundleExportJobInput = struct {
     /// A Boolean that determines if the exported asset carries over information
     /// about the
     /// folders that the asset is a member of.
-    include_folder_memberships: bool = false,
+    include_folder_memberships: ?bool = null,
 
     /// A Boolean that determines whether all permissions for each resource ARN are
     /// exported
     /// with the job. If you set `IncludePermissions` to `TRUE`, any
     /// permissions associated with each resource are exported.
-    include_permissions: bool = false,
+    include_permissions: ?bool = null,
 
     /// A Boolean that determines whether all tags for each resource ARN are
     /// exported with the
     /// job. If you set `IncludeTags` to `TRUE`, any tags associated with
     /// each resource are exported.
-    include_tags: bool = false,
+    include_tags: ?bool = null,
 
     /// An array of resource ARNs to export. The following resources are supported.
     ///
@@ -119,7 +119,7 @@ pub const StartAssetBundleExportJobOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the response.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",

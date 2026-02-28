@@ -1,5 +1,5 @@
 pub const ListTagsForResourceRequest = struct {
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     next_marker: ?[]const u8,
 

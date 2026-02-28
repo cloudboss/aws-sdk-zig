@@ -17,13 +17,13 @@ pub const ListTestGridSessionArtifactsInput = struct {
     session_arn: []const u8,
 
     /// Limit results to a specified type of artifact.
-    type: ?TestGridSessionArtifactCategory = null,
+    @"type": ?TestGridSessionArtifactCategory = null,
 
     pub const json_field_names = .{
         .max_result = "maxResult",
         .next_token = "nextToken",
         .session_arn = "sessionArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

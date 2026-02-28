@@ -14,7 +14,7 @@ pub const ListConformancePackComplianceScoresInput = struct {
 
     /// The maximum number of conformance pack compliance scores returned on each
     /// page.
-    limit: i32 = 0,
+    limit: ?i32 = null,
 
     /// The `nextToken` string in a prior request that you can use to get the
     /// paginated response for the next set of conformance pack compliance scores.

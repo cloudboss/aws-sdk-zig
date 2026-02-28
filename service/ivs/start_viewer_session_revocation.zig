@@ -16,7 +16,7 @@ pub const StartViewerSessionRevocationInput = struct {
     /// An optional filter on which versions of the viewer session to revoke. All
     /// versions less
     /// than or equal to the specified version will be revoked. Default: 0.
-    viewer_session_versions_less_than_or_equal_to: i32 = 0,
+    viewer_session_versions_less_than_or_equal_to: ?i32 = null,
 
     pub const json_field_names = .{
         .channel_arn = "channelArn",

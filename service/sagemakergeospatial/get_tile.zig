@@ -62,7 +62,7 @@ pub const GetTileInput = struct {
 
 pub const GetTileOutput = struct {
     /// The output binary file.
-    binary_file: aws.http.StreamingBody = "",
+    binary_file: ?aws.http.StreamingBody = null,
 
     pub fn deinit(self: *GetTileOutput) void {
         self.binary_file.deinit();

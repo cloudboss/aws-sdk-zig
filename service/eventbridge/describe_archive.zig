@@ -28,7 +28,7 @@ pub const DescribeArchiveOutput = struct {
     description: ?[]const u8 = null,
 
     /// The number of events in the archive.
-    event_count: i64 = 0,
+    event_count: ?i64 = null,
 
     /// The event pattern used to filter events sent to the archive.
     event_pattern: ?[]const u8 = null,
@@ -48,7 +48,7 @@ pub const DescribeArchiveOutput = struct {
     retention_days: ?i32 = null,
 
     /// The size of the archive in bytes.
-    size_bytes: i64 = 0,
+    size_bytes: ?i64 = null,
 
     /// The state of the archive.
     state: ?ArchiveState = null,

@@ -11,7 +11,7 @@ pub const CreateConditionalForwarderInput = struct {
     directory_id: []const u8,
 
     /// The IP addresses of the remote DNS server associated with RemoteDomainName.
-    dns_ip_addrs: []const []const u8 = &.{},
+    dns_ip_addrs: ?[]const []const u8 = null,
 
     /// The IPv6 addresses of the remote DNS server associated with
     /// RemoteDomainName.
@@ -30,7 +30,8 @@ pub const CreateConditionalForwarderInput = struct {
     };
 };
 
-pub const CreateConditionalForwarderOutput = struct {};
+pub const CreateConditionalForwarderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

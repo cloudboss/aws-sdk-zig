@@ -16,13 +16,13 @@ pub const GetRetainedMessageInput = struct {
 pub const GetRetainedMessageOutput = struct {
     /// The Epoch date and time, in milliseconds, when the retained message was
     /// stored by IoT.
-    last_modified_time: i64 = 0,
+    last_modified_time: ?i64 = null,
 
     /// The Base64-encoded message payload of the retained message body.
     payload: ?[]const u8 = null,
 
     /// The quality of service (QoS) level used to publish the retained message.
-    qos: i32 = 0,
+    qos: ?i32 = null,
 
     /// The topic name to which the retained message was published.
     topic: ?[]const u8 = null,

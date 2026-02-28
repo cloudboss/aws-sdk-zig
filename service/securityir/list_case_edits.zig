@@ -11,7 +11,7 @@ pub const ListCaseEditsInput = struct {
 
     /// Optional element to identify how many results to obtain. There is a maximum
     /// value of 25.
-    max_results: i32 = 25,
+    max_results: ?i32 = null,
 
     /// An optional string that, if supplied, must be copied from the output of a
     /// previous call to ListCaseEdits. When provided in this manner, the API

@@ -11,7 +11,7 @@ pub const UpgradeAppliedSchemaInput = struct {
     /// Used for testing whether the major version schemas are backward compatible
     /// or not. If schema compatibility fails, an exception would be thrown else the
     /// call would succeed but no changes will be saved. This parameter is optional.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// The revision of the published schema to upgrade the directory to.
     published_schema_arn: []const u8,

@@ -16,7 +16,7 @@ pub const StopQueryInput = struct {
 
 pub const StopQueryOutput = struct {
     /// This is true if the query was stopped by the `StopQuery` operation.
-    success: bool = false,
+    success: ?bool = null,
 
     pub const json_field_names = .{
         .success = "success",

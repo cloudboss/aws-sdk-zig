@@ -9,7 +9,7 @@ const SyncConfiguration = @import("sync_configuration.zig").SyncConfiguration;
 pub const ListSyncConfigurationsInput = struct {
     /// A non-zero, non-negative integer used to limit the number of returned
     /// results.
-    max_results: i32 = 0,
+    max_results: ?i32 = null,
 
     /// An enumeration token that allows the operation to batch the results of the
     /// operation.

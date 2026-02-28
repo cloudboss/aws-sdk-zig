@@ -17,7 +17,7 @@ pub const SearchRelevantContentInput = struct {
     content_source: ContentSource,
 
     /// The maximum number of results to return.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The token for the next set of results. (You received this token from a
     /// previous call.)

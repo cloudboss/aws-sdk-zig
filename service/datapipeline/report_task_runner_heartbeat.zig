@@ -33,7 +33,7 @@ pub const ReportTaskRunnerHeartbeatInput = struct {
 
 pub const ReportTaskRunnerHeartbeatOutput = struct {
     /// Indicates whether the calling task runner should terminate.
-    terminate: bool = false,
+    terminate: ?bool = null,
 
     pub const json_field_names = .{
         .terminate = "terminate",

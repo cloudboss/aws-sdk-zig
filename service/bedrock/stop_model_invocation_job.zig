@@ -13,7 +13,8 @@ pub const StopModelInvocationJobInput = struct {
     };
 };
 
-pub const StopModelInvocationJobOutput = struct {};
+pub const StopModelInvocationJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

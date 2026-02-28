@@ -13,7 +13,7 @@ pub const GetDeploymentInput = struct {
     application_id: []const u8,
 
     /// The sequence number of the deployment.
-    deployment_number: i32,
+    deployment_number: ?i32 = null,
 
     /// The ID of the environment that includes the deployment you want to get.
     environment_id: []const u8,
@@ -52,10 +52,10 @@ pub const GetDeploymentOutput = struct {
     configuration_version: ?[]const u8 = null,
 
     /// Total amount of time the deployment lasted.
-    deployment_duration_in_minutes: i32 = 0,
+    deployment_duration_in_minutes: ?i32 = null,
 
     /// The sequence number of the deployment.
-    deployment_number: i32 = 0,
+    deployment_number: ?i32 = null,
 
     /// The ID of the deployment strategy that was deployed.
     deployment_strategy_id: ?[]const u8 = null,
@@ -74,7 +74,7 @@ pub const GetDeploymentOutput = struct {
     /// The amount of time that AppConfig monitored for alarms before considering
     /// the
     /// deployment to be complete and no longer eligible for automatic rollback.
-    final_bake_time_in_minutes: i32 = 0,
+    final_bake_time_in_minutes: ?i32 = null,
 
     /// The percentage of targets to receive a deployed configuration during each
     /// interval.

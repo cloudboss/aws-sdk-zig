@@ -66,7 +66,7 @@ pub const AdminCreateUserInput = struct {
     /// If this parameter is set to `False`, the API throws an
     /// `AliasExistsException` error if the alias already exists. The default
     /// value is `False`.
-    force_alias_creation: bool = false,
+    force_alias_creation: ?bool = null,
 
     /// Set to `RESEND` to resend the invitation message to a user that already
     /// exists, and to reset the temporary-password duration with a new temporary

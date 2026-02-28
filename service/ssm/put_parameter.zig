@@ -323,7 +323,7 @@ pub const PutParameterOutput = struct {
     /// don't specify a specific version, the system returns the latest parameter
     /// value when a parameter
     /// is called.
-    version: i64 = 0,
+    version: ?i64 = null,
 
     pub const json_field_names = .{
         .tier = "Tier",

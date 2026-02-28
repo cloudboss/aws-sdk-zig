@@ -57,7 +57,7 @@ pub const TestStateInput = struct {
     /// state](https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions). Without this permission, Step Functions throws an access denied error.
     ///
     /// By default, `revealSecrets` is set to `false`.
-    reveal_secrets: bool = false,
+    reveal_secrets: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the execution role with the required IAM
     /// permissions for the state.

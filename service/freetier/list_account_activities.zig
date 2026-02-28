@@ -17,7 +17,7 @@ pub const ListAccountActivitiesInput = struct {
 
     /// The maximum number of items to return for this request. To get the next page
     /// of items, make another request with the token returned in the output.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// A token from a previous paginated response. If this is specified, the
     /// response includes records beginning from this token (inclusive), up to the

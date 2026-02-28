@@ -46,7 +46,7 @@ pub const ListCodeReviewsInput = struct {
     states: ?[]const JobState = null,
 
     /// The type of code reviews to list in the response.
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",
@@ -54,7 +54,7 @@ pub const ListCodeReviewsInput = struct {
         .provider_types = "ProviderTypes",
         .repository_names = "RepositoryNames",
         .states = "States",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -146,7 +146,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListCodeReviewsInput, confi
     }
     if (query_has_prev) try query_buf.appendSlice(alloc, "&");
     try query_buf.appendSlice(alloc, "Type=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(input.type));
+    try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(input.@"type"));
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 

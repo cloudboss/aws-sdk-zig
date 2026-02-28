@@ -9,7 +9,7 @@ pub const ListOutgoingCertificatesInput = struct {
     /// Specifies the order for results. If True, the results are returned in
     /// ascending
     /// order, based on the creation date.
-    ascending_order: bool = false,
+    ascending_order: ?bool = null,
 
     /// The marker for the next set of results.
     marker: ?[]const u8 = null,

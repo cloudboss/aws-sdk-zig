@@ -63,7 +63,7 @@ pub const UpdateDomainConfigurationInput = struct {
     domain_configuration_status: ?DomainConfigurationStatus = null,
 
     /// Removes the authorization configuration from a domain.
-    remove_authorizer_config: bool = false,
+    remove_authorizer_config: ?bool = null,
 
     /// The server certificate configuration.
     server_certificate_config: ?ServerCertificateConfig = null,

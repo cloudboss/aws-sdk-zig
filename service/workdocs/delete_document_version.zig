@@ -10,7 +10,7 @@ pub const DeleteDocumentVersionInput = struct {
     authentication_token: ?[]const u8 = null,
 
     /// Deletes all versions of a document prior to the current version.
-    delete_prior_versions: bool = false,
+    delete_prior_versions: ?bool = null,
 
     /// The ID of the document associated with the version being deleted.
     document_id: []const u8,

@@ -7,7 +7,7 @@ const ChannelData = @import("channel_data.zig").ChannelData;
 
 pub const ListChannelsInput = struct {
     /// The maximum number of channels to include in the results.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The token for the next set of channel to return. You receive this token from
     /// a previous ListChannels operation.

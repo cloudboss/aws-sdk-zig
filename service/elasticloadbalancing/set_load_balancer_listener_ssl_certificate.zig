@@ -9,13 +9,14 @@ pub const SetLoadBalancerListenerSSLCertificateInput = struct {
     load_balancer_name: []const u8,
 
     /// The port that uses the specified SSL certificate.
-    load_balancer_port: i32 = 0,
+    load_balancer_port: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the SSL certificate.
     ssl_certificate_id: []const u8,
 };
 
-pub const SetLoadBalancerListenerSSLCertificateOutput = struct {};
+pub const SetLoadBalancerListenerSSLCertificateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

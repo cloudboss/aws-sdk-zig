@@ -13,7 +13,7 @@ pub const AssociateSourceResourceInput = struct {
     /// required to make the call, and that you have specified the other parameters
     /// in the call
     /// correctly.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// A unique identifier that references the migration task. *Do not include
     /// sensitive data in this field.*

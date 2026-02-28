@@ -14,12 +14,12 @@ pub const CreateApiKeyInput = struct {
     description: ?[]const u8 = null,
 
     /// Specifies whether the ApiKey can be used by callers.
-    enabled: bool = false,
+    enabled: ?bool = null,
 
     /// Specifies whether (`true`) or not (`false`) the key identifier is distinct
     /// from the created API key value. This parameter is deprecated and should not
     /// be used.
-    generate_distinct_id: bool = false,
+    generate_distinct_id: ?bool = null,
 
     /// The name of the ApiKey.
     name: ?[]const u8 = null,

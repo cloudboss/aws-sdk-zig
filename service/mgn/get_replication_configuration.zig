@@ -28,7 +28,7 @@ pub const GetReplicationConfigurationOutput = struct {
     associate_default_security_group: ?bool = null,
 
     /// Replication Configuration set bandwidth throttling.
-    bandwidth_throttling: i64 = 0,
+    bandwidth_throttling: ?i64 = null,
 
     /// Replication Configuration create Public IP.
     create_public_ip: ?bool = null,

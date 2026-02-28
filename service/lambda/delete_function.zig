@@ -30,7 +30,7 @@ pub const DeleteFunctionInput = struct {
 
 pub const DeleteFunctionOutput = struct {
     /// The HTTP status code returned by the operation.
-    status_code: i32 = 0,
+    status_code: ?i32 = null,
 
     pub const json_field_names = .{
         .status_code = "StatusCode",

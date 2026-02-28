@@ -81,7 +81,7 @@ pub const UpdateEnvironmentOutput = struct {
     environment_configuration_id: ?[]const u8 = null,
 
     /// The profile identifier of the environment.
-    environment_profile_id: []const u8 = "",
+    environment_profile_id: ?[]const u8 = null,
 
     /// The glossary terms to be updated as part of the `UpdateEnvironment` action.
     glossary_terms: ?[]const []const u8 = null,

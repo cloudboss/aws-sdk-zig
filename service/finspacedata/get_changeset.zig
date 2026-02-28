@@ -53,7 +53,7 @@ pub const GetChangesetOutput = struct {
     /// The timestamp at which the Changeset was created in FinSpace. The value is
     /// determined as epoch time in milliseconds. For example, the value for Monday,
     /// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
-    create_time: i64 = 0,
+    create_time: ?i64 = null,
 
     /// The unique identifier for the FinSpace Dataset where the Changeset is
     /// created.

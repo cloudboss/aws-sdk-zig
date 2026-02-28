@@ -22,7 +22,7 @@ pub const StartPlanExecutionInput = struct {
     /// The plan execution mode. Valid values are `graceful`, for starting the
     /// execution in graceful mode, or `ungraceful`, for starting the execution in
     /// ungraceful mode.
-    mode: ExecutionMode = "graceful",
+    mode: ?ExecutionMode = null,
 
     /// The Amazon Resource Name (ARN) of the plan to execute.
     plan_arn: []const u8,

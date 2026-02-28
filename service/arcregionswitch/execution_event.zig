@@ -29,7 +29,7 @@ pub const ExecutionEvent = struct {
     timestamp: ?i64,
 
     /// The type of an execution event.
-    type: ?ExecutionEventType,
+    @"type": ?ExecutionEventType,
 
     pub const json_field_names = .{
         .description = "description",
@@ -40,6 +40,6 @@ pub const ExecutionEvent = struct {
         .resources = "resources",
         .step_name = "stepName",
         .timestamp = "timestamp",
-        .type = "type",
+        .@"type" = "type",
     };
 };

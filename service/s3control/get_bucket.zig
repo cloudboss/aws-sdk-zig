@@ -29,7 +29,7 @@ pub const GetBucketOutput = struct {
     /// The creation date of the Outposts bucket.
     creation_date: ?i64 = null,
 
-    public_access_block_enabled: bool = false,
+    public_access_block_enabled: ?bool = null,
 };
 
 pub const Options = struct {

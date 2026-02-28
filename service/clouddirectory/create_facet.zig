@@ -48,7 +48,8 @@ pub const CreateFacetInput = struct {
     };
 };
 
-pub const CreateFacetOutput = struct {};
+pub const CreateFacetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

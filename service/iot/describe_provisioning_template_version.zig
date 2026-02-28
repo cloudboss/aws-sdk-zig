@@ -22,7 +22,7 @@ pub const DescribeProvisioningTemplateVersionOutput = struct {
     creation_date: ?i64 = null,
 
     /// True if the provisioning template version is the default version.
-    is_default_version: bool = false,
+    is_default_version: ?bool = null,
 
     /// The JSON formatted contents of the provisioning template version.
     template_body: ?[]const u8 = null,

@@ -11,7 +11,7 @@ pub const ListSearchJobsInput = struct {
     by_status: ?SearchJobState = null,
 
     /// The maximum number of resource list items to be returned.
-    max_results: i32 = 1000,
+    max_results: ?i32 = null,
 
     /// The next item following a partial list of returned search jobs.
     ///

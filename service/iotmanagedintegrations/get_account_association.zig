@@ -44,7 +44,7 @@ pub const GetAccountAssociationOutput = struct {
     /// Third party IoT platform OAuth authorization server URL backed with all the
     /// required parameters to perform end-user authentication. This field will be
     /// empty when using General Authorization flows that do not require OAuth.
-    o_auth_authorization_url: []const u8 = "",
+    o_auth_authorization_url: ?[]const u8 = null,
 
     /// A set of key/value pairs that are used to manage the account association.
     tags: ?[]const aws.map.StringMapEntry = null,

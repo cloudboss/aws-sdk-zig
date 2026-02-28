@@ -47,7 +47,7 @@ pub const StorageConfiguration = struct {
     s_3_vectors_configuration: ?S3VectorsConfiguration,
 
     /// The vector store service in which the knowledge base is stored.
-    type: KnowledgeBaseStorageType,
+    @"type": KnowledgeBaseStorageType,
 
     pub const json_field_names = .{
         .mongo_db_atlas_configuration = "mongoDbAtlasConfiguration",
@@ -58,6 +58,6 @@ pub const StorageConfiguration = struct {
         .rds_configuration = "rdsConfiguration",
         .redis_enterprise_cloud_configuration = "redisEnterpriseCloudConfiguration",
         .s_3_vectors_configuration = "s3VectorsConfiguration",
-        .type = "type",
+        .@"type" = "type",
     };
 };

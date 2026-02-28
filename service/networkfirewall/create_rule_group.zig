@@ -17,7 +17,7 @@ pub const CreateRuleGroupInput = struct {
     /// `TRUE`, Network Firewall runs the analysis and then creates the rule group
     /// for you. To run the stateless rule group analyzer without creating the rule
     /// group, set `DryRun` to `TRUE`.
-    analyze_rule_group: bool = false,
+    analyze_rule_group: ?bool = null,
 
     /// The maximum operating resources that this rule group can use. Rule group
     /// capacity is fixed at creation.
@@ -87,7 +87,7 @@ pub const CreateRuleGroupInput = struct {
     ///
     /// If set to `FALSE`, Network Firewall makes the requested changes to your
     /// resources.
-    dry_run: bool = false,
+    dry_run: ?bool = null,
 
     /// A complex type that contains settings for encryption of your rule group
     /// resources.

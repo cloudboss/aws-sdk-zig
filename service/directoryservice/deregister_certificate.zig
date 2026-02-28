@@ -17,7 +17,8 @@ pub const DeregisterCertificateInput = struct {
     };
 };
 
-pub const DeregisterCertificateOutput = struct {};
+pub const DeregisterCertificateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

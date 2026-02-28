@@ -14,7 +14,7 @@ pub const DescribeChannelInput = struct {
     /// the response.
     /// This feature can't be used with a channel whose S3 storage is
     /// customer-managed.
-    include_statistics: bool = false,
+    include_statistics: ?bool = null,
 
     pub const json_field_names = .{
         .channel_name = "channelName",

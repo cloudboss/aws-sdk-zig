@@ -22,11 +22,11 @@ pub const ListServiceStatesInput = struct {
 
     /// If you are using this operation in a monitoring account, specify `true` to
     /// include service states from source accounts in the returned data.
-    include_linked_accounts: bool = false,
+    include_linked_accounts: ?bool = null,
 
     /// The maximum number of service states to return in one operation. If you omit
     /// this parameter, the default of 20 is used.
-    max_results: i32 = 20,
+    max_results: ?i32 = null,
 
     /// Include this value, if it was returned by the previous operation, to get the
     /// next set of service states.

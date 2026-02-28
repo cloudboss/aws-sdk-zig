@@ -23,7 +23,7 @@ pub const UpdateAgentStatusInput = struct {
     name: ?[]const u8 = null,
 
     /// A number indicating the reset order of the agent status.
-    reset_order_number: bool = false,
+    reset_order_number: ?bool = null,
 
     /// The state of the agent status.
     state: ?AgentStatusState = null,

@@ -47,7 +47,7 @@ pub const GetCostEstimationOutput = struct {
     /// This value is the sum of
     /// the estimated costs to analyze each resource in the `Costs` object in this
     /// response.
-    total_cost: f64 = 0,
+    total_cost: ?f64 = null,
 
     pub const json_field_names = .{
         .costs = "Costs",

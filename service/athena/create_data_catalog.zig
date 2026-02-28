@@ -119,14 +119,14 @@ pub const CreateDataCatalogInput = struct {
     /// you based on the parameters that you pass.
     ///
     /// For `FEDERATED` type, we do not support IAM identity center.
-    type: DataCatalogType,
+    @"type": DataCatalogType,
 
     pub const json_field_names = .{
         .description = "Description",
         .name = "Name",
         .parameters = "Parameters",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

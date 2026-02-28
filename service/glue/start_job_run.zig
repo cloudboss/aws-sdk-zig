@@ -17,7 +17,7 @@ pub const StartJobRunInput = struct {
     /// of memory.
     /// For more information, see the [Glue
     /// pricing page](https://aws.amazon.com/glue/pricing/).
-    allocated_capacity: i32 = 0,
+    allocated_capacity: ?i32 = null,
 
     /// The job arguments associated with this run. For this job run, they replace
     /// the default

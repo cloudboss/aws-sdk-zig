@@ -22,7 +22,7 @@ pub const DescribeInputDeviceThumbnailInput = struct {
 pub const DescribeInputDeviceThumbnailOutput = struct {
     /// The binary data for the thumbnail that the Link device has most recently
     /// sent to MediaLive.
-    body: aws.http.StreamingBody = "",
+    body: ?aws.http.StreamingBody = null,
 
     /// The length of the content.
     content_length: ?i64 = null,

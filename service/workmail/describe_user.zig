@@ -62,7 +62,7 @@ pub const DescribeUserOutput = struct {
     first_name: ?[]const u8 = null,
 
     /// If enabled, the user is hidden from the global address list.
-    hidden_from_global_address_list: bool = false,
+    hidden_from_global_address_list: ?bool = null,
 
     /// Identity Store ID from the IAM Identity Center. If this parameter is empty
     /// it will be updated automatically when the user logs in for the first time to

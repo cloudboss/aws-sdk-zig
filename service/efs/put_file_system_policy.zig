@@ -15,7 +15,7 @@ pub const PutFileSystemPolicyInput = struct {
     /// the IAM principal that is making the request from making subsequent
     /// `PutFileSystemPolicy` requests on this file system.
     /// The default value is `False`.
-    bypass_policy_lockout_safety_check: bool = false,
+    bypass_policy_lockout_safety_check: ?bool = null,
 
     /// The ID of the EFS file system that you want to create or update the
     /// `FileSystemPolicy` for.

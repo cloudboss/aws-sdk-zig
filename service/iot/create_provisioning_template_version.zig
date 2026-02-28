@@ -6,7 +6,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const CreateProvisioningTemplateVersionInput = struct {
     /// Sets a fleet provision template version as the default version.
-    set_as_default: bool = false,
+    set_as_default: ?bool = null,
 
     /// The JSON formatted contents of the provisioning template.
     template_body: []const u8,
@@ -24,7 +24,7 @@ pub const CreateProvisioningTemplateVersionInput = struct {
 pub const CreateProvisioningTemplateVersionOutput = struct {
     /// True if the provisioning template version is the default version, otherwise
     /// false.
-    is_default_version: bool = false,
+    is_default_version: ?bool = null,
 
     /// The ARN that identifies the provisioning template.
     template_arn: ?[]const u8 = null,

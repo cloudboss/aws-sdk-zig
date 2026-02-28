@@ -12,7 +12,7 @@ pub const DeleteHostedConfigurationVersionInput = struct {
     configuration_profile_id: []const u8,
 
     /// The versions number to delete.
-    version_number: i32,
+    version_number: ?i32 = null,
 
     pub const json_field_names = .{
         .application_id = "ApplicationId",

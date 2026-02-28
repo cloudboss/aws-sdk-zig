@@ -122,14 +122,14 @@ pub const ListResolverQueryLogConfigsOutput = struct {
     /// `ListResolverQueryLogConfigs` response, depending on the values that you
     /// specify
     /// in the request.
-    total_count: i32 = 0,
+    total_count: ?i32 = null,
 
     /// The total number of query logging configurations that were created by the
     /// current account in the specified Region and that match the filters
     /// that were specified in the `ListResolverQueryLogConfigs` request. For the
     /// total number of query logging configurations that were created by the
     /// current account in the specified Region, see `TotalCount`.
-    total_filtered_count: i32 = 0,
+    total_filtered_count: ?i32 = null,
 
     pub const json_field_names = .{
         .next_token = "NextToken",

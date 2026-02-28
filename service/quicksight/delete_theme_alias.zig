@@ -34,7 +34,7 @@ pub const DeleteThemeAliasOutput = struct {
     request_id: ?[]const u8 = null,
 
     /// The HTTP status of the request.
-    status: i32 = 0,
+    status: ?i32 = null,
 
     /// An ID for the theme associated with the deletion.
     theme_id: ?[]const u8 = null,

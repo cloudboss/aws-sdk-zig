@@ -46,7 +46,7 @@ pub const CreateJobInput = struct {
 
     /// The numerical priority for this job. Higher numbers indicate higher
     /// priority.
-    priority: i32,
+    priority: ?i32 = null,
 
     /// Configuration parameters for the optional job-completion report.
     report: JobReport,

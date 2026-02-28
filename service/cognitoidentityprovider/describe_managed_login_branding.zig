@@ -15,7 +15,7 @@ pub const DescribeManagedLoginBrandingInput = struct {
     /// Amazon Cognito defaults. When `false` or when you omit this parameter,
     /// returns only
     /// values that you customized in your branding style.
-    return_merged_resources: bool = false,
+    return_merged_resources: ?bool = null,
 
     /// The ID of the user pool that contains the managed login branding style that
     /// you want

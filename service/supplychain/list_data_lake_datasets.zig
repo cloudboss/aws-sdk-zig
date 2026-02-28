@@ -10,7 +10,7 @@ pub const ListDataLakeDatasetsInput = struct {
     instance_id: []const u8,
 
     /// The max number of datasets to fetch in this paginated request.
-    max_results: i32 = 10,
+    max_results: ?i32 = null,
 
     /// The namespace of the dataset, besides the custom defined namespace, every
     /// instance comes with below pre-defined namespaces:
