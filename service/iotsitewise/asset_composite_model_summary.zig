@@ -35,7 +35,7 @@ pub const AssetCompositeModelSummary = struct {
     ///   composite
     /// models of other asset models. You can't create assets directly from this
     /// type of asset model.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .description = "description",
@@ -43,6 +43,6 @@ pub const AssetCompositeModelSummary = struct {
         .id = "id",
         .name = "name",
         .path = "path",
-        .type = "type",
+        .@"type" = "type",
     };
 };

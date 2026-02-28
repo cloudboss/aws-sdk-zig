@@ -53,7 +53,7 @@ pub const AIPromptSummary = struct {
     template_type: AIPromptTemplateType,
 
     /// The type of this AI Prompt.
-    type: AIPromptType,
+    @"type": AIPromptType,
 
     /// The visibility status of the AI Prompt.
     visibility_status: VisibilityStatus,
@@ -72,7 +72,7 @@ pub const AIPromptSummary = struct {
         .status = "status",
         .tags = "tags",
         .template_type = "templateType",
-        .type = "type",
+        .@"type" = "type",
         .visibility_status = "visibilityStatus",
     };
 };

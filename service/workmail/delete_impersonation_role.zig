@@ -17,7 +17,8 @@ pub const DeleteImpersonationRoleInput = struct {
     };
 };
 
-pub const DeleteImpersonationRoleOutput = struct {};
+pub const DeleteImpersonationRoleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

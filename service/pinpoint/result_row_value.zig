@@ -7,7 +7,7 @@ pub const ResultRowValue = struct {
     key: []const u8,
 
     /// The data type of the value specified by the Value property.
-    type: []const u8,
+    @"type": []const u8,
 
     /// In a Values object, the value for the metric that the query retrieved data
     /// for. In a GroupedBys object, the value for the field that was used to group
@@ -16,7 +16,7 @@ pub const ResultRowValue = struct {
 
     pub const json_field_names = .{
         .key = "Key",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

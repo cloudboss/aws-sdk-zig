@@ -21,7 +21,7 @@ pub const GetWorkflowInput = struct {
     id: []const u8,
 
     /// The workflow's type.
-    type: ?WorkflowType = null,
+    @"type": ?WorkflowType = null,
 
     /// The ID of the workflow owner.
     workflow_owner_id: ?[]const u8 = null,
@@ -29,7 +29,7 @@ pub const GetWorkflowInput = struct {
     pub const json_field_names = .{
         .@"export" = "export",
         .id = "id",
-        .type = "type",
+        .@"type" = "type",
         .workflow_owner_id = "workflowOwnerId",
     };
 };
@@ -105,7 +105,7 @@ pub const GetWorkflowOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The workflow's type.
-    type: ?WorkflowType = null,
+    @"type": ?WorkflowType = null,
 
     /// The universally unique identifier (UUID) value for this workflow.
     uuid: ?[]const u8 = null,
@@ -132,7 +132,7 @@ pub const GetWorkflowOutput = struct {
         .storage_capacity = "storageCapacity",
         .storage_type = "storageType",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .uuid = "uuid",
     };
 };
@@ -186,7 +186,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetWorkflowInput, config: *
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

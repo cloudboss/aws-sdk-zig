@@ -53,7 +53,8 @@ pub const UpdateLakeFormationIdentityCenterConfigurationInput = struct {
     };
 };
 
-pub const UpdateLakeFormationIdentityCenterConfigurationOutput = struct {};
+pub const UpdateLakeFormationIdentityCenterConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

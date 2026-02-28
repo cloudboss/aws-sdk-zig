@@ -22,7 +22,8 @@ pub const UpdateLicenseSpecificationsForResourceInput = struct {
     };
 };
 
-pub const UpdateLicenseSpecificationsForResourceOutput = struct {};
+pub const UpdateLicenseSpecificationsForResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

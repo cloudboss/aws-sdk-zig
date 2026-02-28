@@ -16,7 +16,8 @@ pub const PutKMSEncryptionKeyInput = struct {
     };
 };
 
-pub const PutKMSEncryptionKeyOutput = struct {};
+pub const PutKMSEncryptionKeyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

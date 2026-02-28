@@ -130,11 +130,11 @@ pub const HealthCheckConfig = struct {
     /// Determines Whether an Endpoint Is
     /// Healthy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html) in the
     /// *Route 53 Developer Guide*.
-    type: HealthCheckType,
+    @"type": HealthCheckType,
 
     pub const json_field_names = .{
         .failure_threshold = "FailureThreshold",
         .resource_path = "ResourcePath",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

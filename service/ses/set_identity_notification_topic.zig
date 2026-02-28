@@ -29,7 +29,8 @@ pub const SetIdentityNotificationTopicInput = struct {
     sns_topic: ?[]const u8 = null,
 };
 
-pub const SetIdentityNotificationTopicOutput = struct {};
+pub const SetIdentityNotificationTopicOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

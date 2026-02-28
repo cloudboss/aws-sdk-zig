@@ -408,5 +408,5 @@ pub const HealthCheckConfig = struct {
     /// For more information, see [How Route 53 Determines Whether an Endpoint Is
     /// Healthy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html) in the
     /// *Amazon Route 53 Developer Guide*.
-    type: HealthCheckType,
+    @"type": HealthCheckType,
 };

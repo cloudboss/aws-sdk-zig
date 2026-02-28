@@ -61,7 +61,8 @@ pub const PutMailboxPermissionsInput = struct {
     };
 };
 
-pub const PutMailboxPermissionsOutput = struct {};
+pub const PutMailboxPermissionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

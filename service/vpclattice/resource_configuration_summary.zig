@@ -52,7 +52,7 @@ pub const ResourceConfigurationSummary = struct {
     /// * `CHILD` - A single resource that is part of a group resource
     ///   configuration.
     /// * `ARN` - An Amazon Web Services resource.
-    type: ?ResourceConfigurationType,
+    @"type": ?ResourceConfigurationType,
 
     pub const json_field_names = .{
         .amazon_managed = "amazonManaged",
@@ -67,6 +67,6 @@ pub const ResourceConfigurationSummary = struct {
         .resource_configuration_group_id = "resourceConfigurationGroupId",
         .resource_gateway_id = "resourceGatewayId",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };

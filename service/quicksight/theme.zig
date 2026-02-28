@@ -20,7 +20,7 @@ pub const Theme = struct {
 
     /// The type of theme, based on how it was created. Valid values include:
     /// `QUICKSIGHT` and `CUSTOM`.
-    type: ?ThemeType,
+    @"type": ?ThemeType,
 
     version: ?ThemeVersion,
 
@@ -30,7 +30,7 @@ pub const Theme = struct {
         .last_updated_time = "LastUpdatedTime",
         .name = "Name",
         .theme_id = "ThemeId",
-        .type = "Type",
+        .@"type" = "Type",
         .version = "Version",
     };
 };

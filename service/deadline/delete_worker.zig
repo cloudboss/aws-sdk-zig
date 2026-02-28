@@ -21,7 +21,8 @@ pub const DeleteWorkerInput = struct {
     };
 };
 
-pub const DeleteWorkerOutput = struct {};
+pub const DeleteWorkerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

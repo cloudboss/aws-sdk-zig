@@ -46,7 +46,7 @@ pub const GetNextMessageOutput = struct {
     response: ?MessageOutput = null,
 
     /// The type of message response.
-    type: MessageType,
+    @"type": MessageType,
 
     pub const json_field_names = .{
         .chunked_response_terminated = "chunkedResponseTerminated",
@@ -55,7 +55,7 @@ pub const GetNextMessageOutput = struct {
         .next_message_token = "nextMessageToken",
         .request_message_id = "requestMessageId",
         .response = "response",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

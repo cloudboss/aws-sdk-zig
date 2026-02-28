@@ -17,7 +17,8 @@ pub const RejectClientVpcConnectionInput = struct {
     };
 };
 
-pub const RejectClientVpcConnectionOutput = struct {};
+pub const RejectClientVpcConnectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

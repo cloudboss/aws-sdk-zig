@@ -27,7 +27,8 @@ pub const UpdateIntegrationTablePropertiesInput = struct {
     };
 };
 
-pub const UpdateIntegrationTablePropertiesOutput = struct {};
+pub const UpdateIntegrationTablePropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

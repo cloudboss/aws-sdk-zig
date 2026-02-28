@@ -13,7 +13,8 @@ pub const DeleteTrafficPolicyInput = struct {
     };
 };
 
-pub const DeleteTrafficPolicyOutput = struct {};
+pub const DeleteTrafficPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

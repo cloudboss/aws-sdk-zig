@@ -13,7 +13,8 @@ pub const DeleteTokenInput = struct {
     };
 };
 
-pub const DeleteTokenOutput = struct {};
+pub const DeleteTokenOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

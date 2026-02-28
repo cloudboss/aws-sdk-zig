@@ -21,7 +21,8 @@ pub const PutSuppressedDestinationInput = struct {
     };
 };
 
-pub const PutSuppressedDestinationOutput = struct {};
+pub const PutSuppressedDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -40,7 +40,8 @@ pub const UpdateAutomationRuleV2Input = struct {
     };
 };
 
-pub const UpdateAutomationRuleV2Output = struct {};
+pub const UpdateAutomationRuleV2Output = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

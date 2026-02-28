@@ -13,7 +13,8 @@ pub const DeleteAggregatorV2Input = struct {
     };
 };
 
-pub const DeleteAggregatorV2Output = struct {};
+pub const DeleteAggregatorV2Output = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

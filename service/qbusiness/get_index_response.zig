@@ -48,7 +48,7 @@ pub const GetIndexResponse = struct {
     status: ?IndexStatus,
 
     /// The type of index attached to your Amazon Q Business application.
-    type: ?IndexType,
+    @"type": ?IndexType,
 
     /// The Unix timestamp when the Amazon Q Business index was last updated.
     updated_at: ?i64,
@@ -65,7 +65,7 @@ pub const GetIndexResponse = struct {
         .index_id = "indexId",
         .index_statistics = "indexStatistics",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

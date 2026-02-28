@@ -13,11 +13,11 @@ pub const AutomationRulesActionV2 = struct {
     finding_fields_update: ?AutomationRulesFindingFieldsUpdateV2,
 
     /// The category of action to be executed by the automation rule.
-    type: AutomationRulesActionTypeV2,
+    @"type": AutomationRulesActionTypeV2,
 
     pub const json_field_names = .{
         .external_integration_configuration = "ExternalIntegrationConfiguration",
         .finding_fields_update = "FindingFieldsUpdate",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

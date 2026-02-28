@@ -14,9 +14,9 @@ pub const DataLakeDatasetPartitionFieldTransform = struct {
     /// * **DAY** - Partitions data on a timestamp field using day granularity.
     ///
     /// * **HOUR** - Partitions data on a timestamp field using hour granularity.
-    type: DataLakeDatasetPartitionTransformType,
+    @"type": DataLakeDatasetPartitionTransformType,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
     };
 };

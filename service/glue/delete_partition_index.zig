@@ -27,7 +27,8 @@ pub const DeletePartitionIndexInput = struct {
     };
 };
 
-pub const DeletePartitionIndexOutput = struct {};
+pub const DeletePartitionIndexOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

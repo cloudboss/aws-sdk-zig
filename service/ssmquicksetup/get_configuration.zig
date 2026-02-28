@@ -46,7 +46,7 @@ pub const GetConfigurationOutput = struct {
     status_summaries: ?[]const StatusSummary = null,
 
     /// The type of the Quick Setup configuration.
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     /// The version of the Quick Setup type used.
     type_version: ?[]const u8 = null,
@@ -61,7 +61,7 @@ pub const GetConfigurationOutput = struct {
         .parameters = "Parameters",
         .region = "Region",
         .status_summaries = "StatusSummaries",
-        .type = "Type",
+        .@"type" = "Type",
         .type_version = "TypeVersion",
     };
 };

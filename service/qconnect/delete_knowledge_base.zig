@@ -14,7 +14,8 @@ pub const DeleteKnowledgeBaseInput = struct {
     };
 };
 
-pub const DeleteKnowledgeBaseOutput = struct {};
+pub const DeleteKnowledgeBaseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

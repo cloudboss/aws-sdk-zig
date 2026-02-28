@@ -5961,3 +5961,4 @@ pub fn serializeVpcConfiguration(alloc: std.mem.Allocator, buf: *std.ArrayList(u
     try aws.xml.appendXmlEscaped(alloc, buf, value.vpc_id);
     try buf.appendSlice(alloc, "</VpcId>");
 }
+

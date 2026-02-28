@@ -31,7 +31,7 @@ pub const ParameterDropDownControl = struct {
     title: []const u8,
 
     /// The type parameter name of the `ParameterDropDownControl`.
-    type: ?SheetControlListType,
+    @"type": ?SheetControlListType,
 
     pub const json_field_names = .{
         .cascading_control_configuration = "CascadingControlConfiguration",
@@ -41,6 +41,6 @@ pub const ParameterDropDownControl = struct {
         .selectable_values = "SelectableValues",
         .source_parameter_name = "SourceParameterName",
         .title = "Title",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

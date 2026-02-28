@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuthorizerDescription = @import("authorizer_description.zig").AuthorizerDescription;
 
-pub const DescribeDefaultAuthorizerInput = struct {};
+pub const DescribeDefaultAuthorizerInput = struct {
+};
 
 pub const DescribeDefaultAuthorizerOutput = struct {
     /// The default authorizer's description.

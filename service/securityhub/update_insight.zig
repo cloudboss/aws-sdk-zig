@@ -26,7 +26,8 @@ pub const UpdateInsightInput = struct {
     };
 };
 
-pub const UpdateInsightOutput = struct {};
+pub const UpdateInsightOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

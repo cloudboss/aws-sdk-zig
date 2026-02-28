@@ -9,7 +9,8 @@ pub const DeleteCidrCollectionInput = struct {
     id: []const u8,
 };
 
-pub const DeleteCidrCollectionOutput = struct {};
+pub const DeleteCidrCollectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

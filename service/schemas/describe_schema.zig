@@ -44,7 +44,7 @@ pub const DescribeSchemaOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the schema.
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     /// The date the schema version was created.
     version_created_date: ?i64 = null,
@@ -57,7 +57,7 @@ pub const DescribeSchemaOutput = struct {
         .schema_name = "SchemaName",
         .schema_version = "SchemaVersion",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .version_created_date = "VersionCreatedDate",
     };
 };

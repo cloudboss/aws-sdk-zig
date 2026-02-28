@@ -49,7 +49,7 @@ pub const BotAliasAvailableWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeBotAlias(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeBotAlias(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -111,7 +111,7 @@ pub const BotAvailableWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeBot(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeBot(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -178,7 +178,7 @@ pub const BotExportCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeExport(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeExport(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -240,7 +240,7 @@ pub const BotImportCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeImport(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeImport(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -302,7 +302,7 @@ pub const BotLocaleBuiltWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeBotLocale(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeBotLocale(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -369,7 +369,7 @@ pub const BotLocaleCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeBotLocale(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeBotLocale(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -441,7 +441,7 @@ pub const BotLocaleExpressTestingAvailableWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeBotLocale(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeBotLocale(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

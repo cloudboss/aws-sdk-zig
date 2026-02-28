@@ -16,12 +16,12 @@ pub const FreeTrialInfo = struct {
     status: FreeTrialStatus,
 
     /// The type of scan covered by the Amazon Inspector free trail.
-    type: FreeTrialType,
+    @"type": FreeTrialType,
 
     pub const json_field_names = .{
         .end = "end",
         .start = "start",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };

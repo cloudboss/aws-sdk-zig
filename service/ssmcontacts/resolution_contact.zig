@@ -19,11 +19,11 @@ pub const ResolutionContact = struct {
     stage_index: ?i32,
 
     /// The type of contact for a resolution step.
-    type: ContactType,
+    @"type": ContactType,
 
     pub const json_field_names = .{
         .contact_arn = "ContactArn",
         .stage_index = "StageIndex",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

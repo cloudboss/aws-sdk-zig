@@ -17,7 +17,8 @@ pub const UpdateConnectorDefinitionInput = struct {
     };
 };
 
-pub const UpdateConnectorDefinitionOutput = struct {};
+pub const UpdateConnectorDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

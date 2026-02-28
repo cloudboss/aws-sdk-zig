@@ -1,11 +1,11 @@
 pub const FilterName = enum {
     feature,
     severity,
-    @"type",
+    type,
 
     pub const json_field_names = .{
         .feature = "FEATURE",
         .severity = "SEVERITY",
-        .@"type" = "TYPE",
+        .type = "TYPE",
     };
 };

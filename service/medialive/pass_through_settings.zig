@@ -1,2 +1,3 @@
 /// Pass Through Settings
-pub const PassThroughSettings = struct {};
+pub const PassThroughSettings = struct {
+};

@@ -14,7 +14,8 @@ pub const RemoveKnowledgeBaseTemplateUriInput = struct {
     };
 };
 
-pub const RemoveKnowledgeBaseTemplateUriOutput = struct {};
+pub const RemoveKnowledgeBaseTemplateUriOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

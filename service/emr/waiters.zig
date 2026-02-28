@@ -45,7 +45,7 @@ pub const ClusterRunningWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeCluster(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeCluster(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -137,7 +137,7 @@ pub const ClusterTerminatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeCluster(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeCluster(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -202,7 +202,7 @@ pub const StepCompleteWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeStep(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeStep(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

@@ -8,7 +8,7 @@ pub const DiscoveredResource = struct {
     name: ?[]const u8,
 
     /// The type of the discovered resource.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The universal resource identifier (URI) of the discovered resource.
     uri: ?[]const u8,
@@ -16,7 +16,7 @@ pub const DiscoveredResource = struct {
     pub const json_field_names = .{
         .account_id = "AccountId",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
         .uri = "URI",
     };
 };

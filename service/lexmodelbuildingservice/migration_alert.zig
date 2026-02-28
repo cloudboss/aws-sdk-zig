@@ -22,12 +22,12 @@ pub const MigrationAlert = struct {
     /// * `WARN` - There was an issue with the migration that
     /// requires manual changes to the new Amazon Lex V2 bot. The migration
     /// continues.
-    type: ?MigrationAlertType,
+    @"type": ?MigrationAlertType,
 
     pub const json_field_names = .{
         .details = "details",
         .message = "message",
         .reference_ur_ls = "referenceURLs",
-        .type = "type",
+        .@"type" = "type",
     };
 };

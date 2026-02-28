@@ -22,7 +22,8 @@ pub const DeleteThingInput = struct {
     };
 };
 
-pub const DeleteThingOutput = struct {};
+pub const DeleteThingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

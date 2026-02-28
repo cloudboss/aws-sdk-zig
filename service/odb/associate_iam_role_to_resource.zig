@@ -25,7 +25,8 @@ pub const AssociateIamRoleToResourceInput = struct {
     };
 };
 
-pub const AssociateIamRoleToResourceOutput = struct {};
+pub const AssociateIamRoleToResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

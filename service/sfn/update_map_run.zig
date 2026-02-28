@@ -26,7 +26,8 @@ pub const UpdateMapRunInput = struct {
     };
 };
 
-pub const UpdateMapRunOutput = struct {};
+pub const UpdateMapRunOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

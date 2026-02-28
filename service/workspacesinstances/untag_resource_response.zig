@@ -1,2 +1,3 @@
 /// Confirms successful tag removal.
-pub const UntagResourceResponse = struct {};
+pub const UntagResourceResponse = struct {
+};

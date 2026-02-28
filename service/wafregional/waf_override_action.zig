@@ -13,9 +13,9 @@ const WafOverrideActionType = @import("waf_override_action_type.zig").WafOverrid
 pub const WafOverrideAction = struct {
     /// `COUNT` overrides the action specified by the individual rule within a
     /// `RuleGroup` . If set to `NONE`, the rule's action will take place.
-    type: WafOverrideActionType,
+    @"type": WafOverrideActionType,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

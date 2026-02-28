@@ -18,7 +18,8 @@ pub const DeleteTenantResourceAssociationInput = struct {
     };
 };
 
-pub const DeleteTenantResourceAssociationOutput = struct {};
+pub const DeleteTenantResourceAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

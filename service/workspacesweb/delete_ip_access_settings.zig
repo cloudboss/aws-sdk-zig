@@ -13,7 +13,8 @@ pub const DeleteIpAccessSettingsInput = struct {
     };
 };
 
-pub const DeleteIpAccessSettingsOutput = struct {};
+pub const DeleteIpAccessSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

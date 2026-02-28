@@ -26,7 +26,8 @@ pub const UpdateChannelInput = struct {
     };
 };
 
-pub const UpdateChannelOutput = struct {};
+pub const UpdateChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

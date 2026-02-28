@@ -22,7 +22,8 @@ pub const SendTaskSuccessInput = struct {
     };
 };
 
-pub const SendTaskSuccessOutput = struct {};
+pub const SendTaskSuccessOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

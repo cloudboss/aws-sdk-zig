@@ -29,7 +29,8 @@ pub const PutVectorsInput = struct {
     };
 };
 
-pub const PutVectorsOutput = struct {};
+pub const PutVectorsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

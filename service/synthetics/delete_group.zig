@@ -15,7 +15,8 @@ pub const DeleteGroupInput = struct {
     };
 };
 
-pub const DeleteGroupOutput = struct {};
+pub const DeleteGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -56,7 +56,8 @@ pub const UpdateDataSourceInput = struct {
     };
 };
 
-pub const UpdateDataSourceOutput = struct {};
+pub const UpdateDataSourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

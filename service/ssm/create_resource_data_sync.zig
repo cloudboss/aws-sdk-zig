@@ -40,7 +40,8 @@ pub const CreateResourceDataSyncInput = struct {
     };
 };
 
-pub const CreateResourceDataSyncOutput = struct {};
+pub const CreateResourceDataSyncOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

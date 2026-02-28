@@ -39,7 +39,8 @@ pub const AssociateMemberToJobInput = struct {
     };
 };
 
-pub const AssociateMemberToJobOutput = struct {};
+pub const AssociateMemberToJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

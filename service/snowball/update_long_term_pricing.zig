@@ -25,7 +25,8 @@ pub const UpdateLongTermPricingInput = struct {
     };
 };
 
-pub const UpdateLongTermPricingOutput = struct {};
+pub const UpdateLongTermPricingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

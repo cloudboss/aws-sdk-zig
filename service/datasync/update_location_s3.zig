@@ -51,7 +51,8 @@ pub const UpdateLocationS3Input = struct {
     };
 };
 
-pub const UpdateLocationS3Output = struct {};
+pub const UpdateLocationS3Output = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

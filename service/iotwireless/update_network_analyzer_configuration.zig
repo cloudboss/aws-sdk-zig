@@ -55,7 +55,8 @@ pub const UpdateNetworkAnalyzerConfigurationInput = struct {
     };
 };
 
-pub const UpdateNetworkAnalyzerConfigurationOutput = struct {};
+pub const UpdateNetworkAnalyzerConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,7 +18,7 @@ pub const MeasureValue = struct {
     name: []const u8,
 
     /// Contains the data type of the MeasureValue for the time-series data point.
-    type: MeasureValueType,
+    @"type": MeasureValueType,
 
     /// The value for the MeasureValue. For information, see [Data
     /// types](https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types).
@@ -26,7 +26,7 @@ pub const MeasureValue = struct {
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

@@ -14,7 +14,8 @@ pub const CancelAuditTaskInput = struct {
     };
 };
 
-pub const CancelAuditTaskOutput = struct {};
+pub const CancelAuditTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

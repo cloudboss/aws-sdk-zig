@@ -52,7 +52,7 @@ pub const Finding = struct {
     title: ?[]const u8,
 
     /// The type of finding.
-    type: []const u8,
+    @"type": []const u8,
 
     /// The time and date when the finding was last updated.
     updated_at: []const u8,
@@ -72,7 +72,7 @@ pub const Finding = struct {
         .service = "Service",
         .severity = "Severity",
         .title = "Title",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_at = "UpdatedAt",
     };
 };

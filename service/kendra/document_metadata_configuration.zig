@@ -17,12 +17,12 @@ pub const DocumentMetadataConfiguration = struct {
     search: ?Search,
 
     /// The data type of the index field.
-    type: DocumentAttributeValueType,
+    @"type": DocumentAttributeValueType,
 
     pub const json_field_names = .{
         .name = "Name",
         .relevance = "Relevance",
         .search = "Search",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

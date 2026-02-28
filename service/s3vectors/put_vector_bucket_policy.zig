@@ -23,7 +23,8 @@ pub const PutVectorBucketPolicyInput = struct {
     };
 };
 
-pub const PutVectorBucketPolicyOutput = struct {};
+pub const PutVectorBucketPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

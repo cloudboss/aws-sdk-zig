@@ -17,7 +17,8 @@ pub const AssociateWirelessDeviceWithThingInput = struct {
     };
 };
 
-pub const AssociateWirelessDeviceWithThingOutput = struct {};
+pub const AssociateWirelessDeviceWithThingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

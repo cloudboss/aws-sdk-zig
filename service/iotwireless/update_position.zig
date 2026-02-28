@@ -22,7 +22,8 @@ pub const UpdatePositionInput = struct {
     };
 };
 
-pub const UpdatePositionOutput = struct {};
+pub const UpdatePositionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

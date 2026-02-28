@@ -38,7 +38,7 @@ pub const GetRasterDataCollectionOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The raster data collection type.
-    type: DataCollectionType,
+    @"type": DataCollectionType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -48,7 +48,7 @@ pub const GetRasterDataCollectionOutput = struct {
         .name = "Name",
         .supported_filters = "SupportedFilters",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

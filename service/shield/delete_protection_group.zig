@@ -15,7 +15,8 @@ pub const DeleteProtectionGroupInput = struct {
     };
 };
 
-pub const DeleteProtectionGroupOutput = struct {};
+pub const DeleteProtectionGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const AssociateTagOptionWithResourceInput = struct {
     };
 };
 
-pub const AssociateTagOptionWithResourceOutput = struct {};
+pub const AssociateTagOptionWithResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

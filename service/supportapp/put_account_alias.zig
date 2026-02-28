@@ -13,7 +13,8 @@ pub const PutAccountAliasInput = struct {
     };
 };
 
-pub const PutAccountAliasOutput = struct {};
+pub const PutAccountAliasOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

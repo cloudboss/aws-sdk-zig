@@ -30,7 +30,7 @@ pub const CreateIndexRequest = struct {
     /// The index type that's suitable for your needs. For more information on
     /// what's included in each type of index, see [Amazon Q Business
     /// tiers](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#index-tiers).
-    type: ?IndexType,
+    @"type": ?IndexType,
 
     pub const json_field_names = .{
         .application_id = "applicationId",
@@ -39,6 +39,6 @@ pub const CreateIndexRequest = struct {
         .description = "description",
         .display_name = "displayName",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -13,7 +13,8 @@ pub const CancelOrderInput = struct {
     };
 };
 
-pub const CancelOrderOutput = struct {};
+pub const CancelOrderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -19,7 +19,8 @@ pub const PutApplicationSessionConfigurationInput = struct {
     };
 };
 
-pub const PutApplicationSessionConfigurationOutput = struct {};
+pub const PutApplicationSessionConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

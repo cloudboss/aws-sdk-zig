@@ -13,7 +13,8 @@ pub const DisassociateConnectionAliasInput = struct {
     };
 };
 
-pub const DisassociateConnectionAliasOutput = struct {};
+pub const DisassociateConnectionAliasOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -25,7 +25,8 @@ pub const UpdateConnectClientAddInInput = struct {
     };
 };
 
-pub const UpdateConnectClientAddInOutput = struct {};
+pub const UpdateConnectClientAddInOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

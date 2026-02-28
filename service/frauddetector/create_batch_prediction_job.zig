@@ -48,7 +48,8 @@ pub const CreateBatchPredictionJobInput = struct {
     };
 };
 
-pub const CreateBatchPredictionJobOutput = struct {};
+pub const CreateBatchPredictionJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

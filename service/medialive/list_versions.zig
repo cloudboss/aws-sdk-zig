@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChannelEngineVersionResponse = @import("channel_engine_version_response.zig").ChannelEngineVersionResponse;
 
-pub const ListVersionsInput = struct {};
+pub const ListVersionsInput = struct {
+};
 
 pub const ListVersionsOutput = struct {
     /// List of engine versions that are available for this AWS account.

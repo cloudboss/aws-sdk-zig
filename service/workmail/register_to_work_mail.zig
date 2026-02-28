@@ -31,7 +31,8 @@ pub const RegisterToWorkMailInput = struct {
     };
 };
 
-pub const RegisterToWorkMailOutput = struct {};
+pub const RegisterToWorkMailOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

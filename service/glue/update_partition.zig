@@ -36,7 +36,8 @@ pub const UpdatePartitionInput = struct {
     };
 };
 
-pub const UpdatePartitionOutput = struct {};
+pub const UpdatePartitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

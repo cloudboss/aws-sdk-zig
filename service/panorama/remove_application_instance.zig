@@ -13,7 +13,8 @@ pub const RemoveApplicationInstanceInput = struct {
     };
 };
 
-pub const RemoveApplicationInstanceOutput = struct {};
+pub const RemoveApplicationInstanceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

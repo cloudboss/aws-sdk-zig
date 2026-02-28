@@ -149,7 +149,7 @@ pub const DescribeSecretOutput = struct {
     /// For more
     /// information, see [Using Secrets Manager managed external
     /// secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html).
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     /// A list of the versions of the secret that have staging labels attached.
     /// Versions that
@@ -200,7 +200,7 @@ pub const DescribeSecretOutput = struct {
         .rotation_lambda_arn = "RotationLambdaARN",
         .rotation_rules = "RotationRules",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .version_ids_to_stages = "VersionIdsToStages",
     };
 };

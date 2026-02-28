@@ -41,7 +41,8 @@ pub const AssociateMemberToGroupInput = struct {
     };
 };
 
-pub const AssociateMemberToGroupOutput = struct {};
+pub const AssociateMemberToGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

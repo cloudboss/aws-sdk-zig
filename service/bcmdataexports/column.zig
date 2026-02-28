@@ -9,11 +9,11 @@ pub const Column = struct {
     name: ?[]const u8,
 
     /// The kind of data a column stores.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .description = "Description",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

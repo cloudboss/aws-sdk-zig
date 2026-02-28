@@ -21,14 +21,14 @@ pub const CreateAccessPolicyInput = struct {
     policy: []const u8,
 
     /// The type of policy.
-    type: AccessPolicyType,
+    @"type": AccessPolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
         .name = "name",
         .policy = "policy",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

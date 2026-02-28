@@ -18,7 +18,8 @@ pub const ModifyClientPropertiesInput = struct {
     };
 };
 
-pub const ModifyClientPropertiesOutput = struct {};
+pub const ModifyClientPropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

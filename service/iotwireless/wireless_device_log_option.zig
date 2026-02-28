@@ -11,11 +11,11 @@ pub const WirelessDeviceLogOption = struct {
     log_level: LogLevel,
 
     /// The wireless device type.
-    type: WirelessDeviceType,
+    @"type": WirelessDeviceType,
 
     pub const json_field_names = .{
         .events = "Events",
         .log_level = "LogLevel",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

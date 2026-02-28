@@ -36,7 +36,8 @@ pub const UpdateWhatsAppMessageTemplateInput = struct {
     };
 };
 
-pub const UpdateWhatsAppMessageTemplateOutput = struct {};
+pub const UpdateWhatsAppMessageTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

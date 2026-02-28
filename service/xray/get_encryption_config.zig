@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
 
-pub const GetEncryptionConfigInput = struct {};
+pub const GetEncryptionConfigInput = struct {
+};
 
 pub const GetEncryptionConfigOutput = struct {
     /// The encryption configuration document.

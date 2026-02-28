@@ -37,7 +37,7 @@ pub const CreateCollectionDetail = struct {
     status: ?CollectionStatus,
 
     /// The type of collection.
-    type: ?CollectionType,
+    @"type": ?CollectionType,
 
     /// Configuration options for vector search capabilities in the collection.
     vector_options: ?VectorOptions,
@@ -53,7 +53,7 @@ pub const CreateCollectionDetail = struct {
         .name = "name",
         .standby_replicas = "standbyReplicas",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .vector_options = "vectorOptions",
     };
 };

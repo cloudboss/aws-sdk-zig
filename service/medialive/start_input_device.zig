@@ -13,7 +13,8 @@ pub const StartInputDeviceInput = struct {
     };
 };
 
-pub const StartInputDeviceOutput = struct {};
+pub const StartInputDeviceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

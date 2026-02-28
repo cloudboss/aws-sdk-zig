@@ -18,7 +18,8 @@ pub const UpdateDatasetEntriesInput = struct {
     };
 };
 
-pub const UpdateDatasetEntriesOutput = struct {};
+pub const UpdateDatasetEntriesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

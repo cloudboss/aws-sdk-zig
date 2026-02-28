@@ -13,7 +13,8 @@ pub const DeleteTagOptionInput = struct {
     };
 };
 
-pub const DeleteTagOptionOutput = struct {};
+pub const DeleteTagOptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

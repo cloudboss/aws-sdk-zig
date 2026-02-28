@@ -492,6 +492,8 @@ class OperationGenerator(
         val result = mutableSetOf<String>()
 
         fun collectFromShape(shape: software.amazon.smithy.model.shapes.Shape) {
+            // Skip Smithy prelude shapes -- they have no generated files.
+            if (shape.id.namespace == "smithy.api") return
             when (shape) {
                 is StructureShape -> result.add(shape.id.name)
                 is EnumShape -> result.add(shape.id.name)

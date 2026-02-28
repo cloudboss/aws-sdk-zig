@@ -13,7 +13,8 @@ pub const DeleteWorkspaceInstanceInput = struct {
     };
 };
 
-pub const DeleteWorkspaceInstanceOutput = struct {};
+pub const DeleteWorkspaceInstanceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteTopicRuleDestinationInput = struct {
     };
 };
 
-pub const DeleteTopicRuleDestinationOutput = struct {};
+pub const DeleteTopicRuleDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

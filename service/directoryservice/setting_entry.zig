@@ -54,7 +54,7 @@ pub const SettingEntry = struct {
     /// same type. For
     /// example, `Protocol`, `Cipher`, or `Certificate-Based
     /// Authentication`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .allowed_values = "AllowedValues",
@@ -67,6 +67,6 @@ pub const SettingEntry = struct {
         .requested_value = "RequestedValue",
         .request_status = "RequestStatus",
         .request_status_message = "RequestStatusMessage",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

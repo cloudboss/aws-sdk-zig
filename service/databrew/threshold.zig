@@ -10,7 +10,7 @@ pub const Threshold = struct {
     /// The type of a threshold. Used for comparison of an actual count of rows that
     /// satisfy the
     /// rule to the threshold value.
-    type: ?ThresholdType,
+    @"type": ?ThresholdType,
 
     /// Unit of threshold value. Can be either a COUNT or PERCENTAGE of the full
     /// sample size
@@ -21,7 +21,7 @@ pub const Threshold = struct {
     value: f64 = 0,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .unit = "Unit",
         .value = "Value",
     };

@@ -17,7 +17,8 @@ pub const StopEngagementInput = struct {
     };
 };
 
-pub const StopEngagementOutput = struct {};
+pub const StopEngagementOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

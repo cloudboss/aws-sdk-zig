@@ -18,7 +18,8 @@ pub const DisassociateAwsAccountFromPartnerAccountInput = struct {
     };
 };
 
-pub const DisassociateAwsAccountFromPartnerAccountOutput = struct {};
+pub const DisassociateAwsAccountFromPartnerAccountOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

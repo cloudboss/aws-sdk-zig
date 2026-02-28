@@ -50,7 +50,8 @@ pub const CreateCustomVerificationEmailTemplateInput = struct {
     };
 };
 
-pub const CreateCustomVerificationEmailTemplateOutput = struct {};
+pub const CreateCustomVerificationEmailTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

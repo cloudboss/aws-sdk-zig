@@ -50,7 +50,7 @@ pub const Resource = struct {
     /// `Other`.
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 256.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .application_arn = "ApplicationArn",
@@ -62,6 +62,6 @@ pub const Resource = struct {
         .region = "Region",
         .resource_role = "ResourceRole",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

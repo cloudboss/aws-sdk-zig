@@ -15,7 +15,8 @@ pub const AssociateWirelessDeviceWithFuotaTaskInput = struct {
     };
 };
 
-pub const AssociateWirelessDeviceWithFuotaTaskOutput = struct {};
+pub const AssociateWirelessDeviceWithFuotaTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

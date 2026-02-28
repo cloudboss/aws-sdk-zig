@@ -54,7 +54,8 @@ pub const UpdateOrganizationConfigurationInput = struct {
     };
 };
 
-pub const UpdateOrganizationConfigurationOutput = struct {};
+pub const UpdateOrganizationConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

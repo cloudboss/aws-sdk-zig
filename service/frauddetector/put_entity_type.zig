@@ -22,7 +22,8 @@ pub const PutEntityTypeInput = struct {
     };
 };
 
-pub const PutEntityTypeOutput = struct {};
+pub const PutEntityTypeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const CancelTraceRetrievalInput = struct {
     };
 };
 
-pub const CancelTraceRetrievalOutput = struct {};
+pub const CancelTraceRetrievalOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

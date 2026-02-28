@@ -9,7 +9,8 @@ pub const DeleteHealthCheckInput = struct {
     health_check_id: []const u8,
 };
 
-pub const DeleteHealthCheckOutput = struct {};
+pub const DeleteHealthCheckOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

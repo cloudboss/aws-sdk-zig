@@ -4,9 +4,9 @@ const ReplicationTopicNameConfigurationType = @import("replication_topic_name_co
 /// their corresponding upstream topics or prefixed with source cluster alias.
 pub const ReplicationTopicNameConfiguration = struct {
     /// The type of replicated topic name.
-    type: ?ReplicationTopicNameConfigurationType,
+    @"type": ?ReplicationTopicNameConfigurationType,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

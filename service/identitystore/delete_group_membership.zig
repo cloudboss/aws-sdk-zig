@@ -17,7 +17,8 @@ pub const DeleteGroupMembershipInput = struct {
     };
 };
 
-pub const DeleteGroupMembershipOutput = struct {};
+pub const DeleteGroupMembershipOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

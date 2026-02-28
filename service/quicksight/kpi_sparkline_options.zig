@@ -11,7 +11,7 @@ pub const KPISparklineOptions = struct {
     tooltip_visibility: ?Visibility,
 
     /// The type of the sparkline.
-    type: KPISparklineType,
+    @"type": KPISparklineType,
 
     /// The visibility of the sparkline.
     visibility: ?Visibility,
@@ -19,7 +19,7 @@ pub const KPISparklineOptions = struct {
     pub const json_field_names = .{
         .color = "Color",
         .tooltip_visibility = "TooltipVisibility",
-        .type = "Type",
+        .@"type" = "Type",
         .visibility = "Visibility",
     };
 };

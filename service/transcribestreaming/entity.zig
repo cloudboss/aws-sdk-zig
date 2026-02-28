@@ -30,7 +30,7 @@ pub const Entity = struct {
 
     /// The type of PII identified. For example, `NAME` or
     /// `CREDIT_DEBIT_NUMBER`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .category = "Category",
@@ -38,6 +38,6 @@ pub const Entity = struct {
         .content = "Content",
         .end_time = "EndTime",
         .start_time = "StartTime",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

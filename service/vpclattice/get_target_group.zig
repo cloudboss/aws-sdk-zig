@@ -49,7 +49,7 @@ pub const GetTargetGroupOutput = struct {
     status: ?TargetGroupStatus = null,
 
     /// The target group type.
-    type: ?TargetGroupType = null,
+    @"type": ?TargetGroupType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -62,7 +62,7 @@ pub const GetTargetGroupOutput = struct {
         .name = "name",
         .service_arns = "serviceArns",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

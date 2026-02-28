@@ -126,7 +126,8 @@ pub const UpdateOpsItemInput = struct {
     };
 };
 
-pub const UpdateOpsItemOutput = struct {};
+pub const UpdateOpsItemOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

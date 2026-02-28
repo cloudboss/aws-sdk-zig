@@ -19,7 +19,7 @@ pub const Member = struct {
     state: ?EntityState,
 
     /// A member can be a user or group.
-    type: ?MemberType,
+    @"type": ?MemberType,
 
     pub const json_field_names = .{
         .disabled_date = "DisabledDate",
@@ -27,6 +27,6 @@ pub const Member = struct {
         .id = "Id",
         .name = "Name",
         .state = "State",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

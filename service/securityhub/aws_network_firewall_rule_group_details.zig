@@ -26,7 +26,7 @@ pub const AwsNetworkFirewallRuleGroupDetails = struct {
     rule_group_name: ?[]const u8,
 
     /// The type of rule group. A rule group can be stateful or stateless.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .capacity = "Capacity",
@@ -35,6 +35,6 @@ pub const AwsNetworkFirewallRuleGroupDetails = struct {
         .rule_group_arn = "RuleGroupArn",
         .rule_group_id = "RuleGroupId",
         .rule_group_name = "RuleGroupName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -45,7 +45,8 @@ pub const DeleteRuleGroupInput = struct {
     };
 };
 
-pub const DeleteRuleGroupOutput = struct {};
+pub const DeleteRuleGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

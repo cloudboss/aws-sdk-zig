@@ -19,7 +19,8 @@ pub const UpdateDatasetGroupInput = struct {
     };
 };
 
-pub const UpdateDatasetGroupOutput = struct {};
+pub const UpdateDatasetGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

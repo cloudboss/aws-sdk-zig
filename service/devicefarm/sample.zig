@@ -47,7 +47,7 @@ pub const Sample = struct {
     ///
     /// * TX_RATE: The total number of bytes per second (TCP and UDP) that are
     /// received, by app process.
-    type: ?SampleType,
+    @"type": ?SampleType,
 
     /// The presigned Amazon S3 URL that can be used with a GET request to download
     /// the sample's
@@ -56,7 +56,7 @@ pub const Sample = struct {
 
     pub const json_field_names = .{
         .arn = "arn",
-        .type = "type",
+        .@"type" = "type",
         .url = "url",
     };
 };

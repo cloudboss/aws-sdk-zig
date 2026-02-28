@@ -25,7 +25,8 @@ pub const CreateDedicatedIpPoolInput = struct {
     };
 };
 
-pub const CreateDedicatedIpPoolOutput = struct {};
+pub const CreateDedicatedIpPoolOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const DeleteExperienceInput = struct {
     };
 };
 
-pub const DeleteExperienceOutput = struct {};
+pub const DeleteExperienceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

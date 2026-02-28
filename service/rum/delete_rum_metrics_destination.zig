@@ -26,7 +26,8 @@ pub const DeleteRumMetricsDestinationInput = struct {
     };
 };
 
-pub const DeleteRumMetricsDestinationOutput = struct {};
+pub const DeleteRumMetricsDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

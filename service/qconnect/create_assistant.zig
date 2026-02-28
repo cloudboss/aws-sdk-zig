@@ -40,7 +40,7 @@ pub const CreateAssistantInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of assistant.
-    type: AssistantType,
+    @"type": AssistantType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -48,7 +48,7 @@ pub const CreateAssistantInput = struct {
         .name = "name",
         .server_side_encryption_configuration = "serverSideEncryptionConfiguration",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -133,7 +133,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAssistantInput, confi
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

@@ -20,7 +20,8 @@ pub const PutDedicatedIpPoolScalingAttributesInput = struct {
     };
 };
 
-pub const PutDedicatedIpPoolScalingAttributesOutput = struct {};
+pub const PutDedicatedIpPoolScalingAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

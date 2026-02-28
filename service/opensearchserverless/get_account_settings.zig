@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountSettingsDetail = @import("account_settings_detail.zig").AccountSettingsDetail;
 
-pub const GetAccountSettingsInput = struct {};
+pub const GetAccountSettingsInput = struct {
+};
 
 pub const GetAccountSettingsOutput = struct {
     /// OpenSearch Serverless-related details for the current account.

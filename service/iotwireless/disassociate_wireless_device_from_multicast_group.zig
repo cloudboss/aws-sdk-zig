@@ -15,7 +15,8 @@ pub const DisassociateWirelessDeviceFromMulticastGroupInput = struct {
     };
 };
 
-pub const DisassociateWirelessDeviceFromMulticastGroupOutput = struct {};
+pub const DisassociateWirelessDeviceFromMulticastGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

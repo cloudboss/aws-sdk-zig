@@ -17,7 +17,8 @@ pub const SendEmailVerificationCodeInput = struct {
     };
 };
 
-pub const SendEmailVerificationCodeOutput = struct {};
+pub const SendEmailVerificationCodeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

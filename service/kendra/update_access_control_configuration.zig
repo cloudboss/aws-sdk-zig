@@ -42,7 +42,8 @@ pub const UpdateAccessControlConfigurationInput = struct {
     };
 };
 
-pub const UpdateAccessControlConfigurationOutput = struct {};
+pub const UpdateAccessControlConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

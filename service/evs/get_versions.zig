@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const InstanceTypeEsxVersionsInfo = @import("instance_type_esx_versions_info.zig").InstanceTypeEsxVersionsInfo;
 const VcfVersionInfo = @import("vcf_version_info.zig").VcfVersionInfo;
 
-pub const GetVersionsInput = struct {};
+pub const GetVersionsInput = struct {
+};
 
 pub const GetVersionsOutput = struct {
     /// A list of EC2 instance types and their available ESX versions.

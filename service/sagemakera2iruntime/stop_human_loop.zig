@@ -13,7 +13,8 @@ pub const StopHumanLoopInput = struct {
     };
 };
 
-pub const StopHumanLoopOutput = struct {};
+pub const StopHumanLoopOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

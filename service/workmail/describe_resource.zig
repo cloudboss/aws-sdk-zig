@@ -65,7 +65,7 @@ pub const DescribeResourceOutput = struct {
     state: ?EntityState = null,
 
     /// The type of the described resource.
-    type: ?ResourceType = null,
+    @"type": ?ResourceType = null,
 
     pub const json_field_names = .{
         .booking_options = "BookingOptions",
@@ -77,7 +77,7 @@ pub const DescribeResourceOutput = struct {
         .name = "Name",
         .resource_id = "ResourceId",
         .state = "State",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

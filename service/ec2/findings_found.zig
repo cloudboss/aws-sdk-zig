@@ -1,5 +1,5 @@
 pub const FindingsFound = enum {
-    true,
-    false,
+    @"true",
+    @"false",
     unknown,
 };

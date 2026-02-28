@@ -19,7 +19,7 @@ pub const JoinInstruction = struct {
     right_operand: []const u8,
 
     /// The type of join that it is.
-    type: JoinType,
+    @"type": JoinType,
 
     pub const json_field_names = .{
         .left_join_key_properties = "LeftJoinKeyProperties",
@@ -27,6 +27,6 @@ pub const JoinInstruction = struct {
         .on_clause = "OnClause",
         .right_join_key_properties = "RightJoinKeyProperties",
         .right_operand = "RightOperand",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

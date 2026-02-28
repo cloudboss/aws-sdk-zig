@@ -45,7 +45,7 @@ pub const FunctionActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getFunctionConfiguration(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getFunctionConfiguration(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -107,7 +107,7 @@ pub const FunctionActiveV2Waiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getFunction(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getFunction(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -229,7 +229,7 @@ pub const FunctionUpdatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getFunctionConfiguration(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getFunctionConfiguration(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -291,7 +291,7 @@ pub const FunctionUpdatedV2Waiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getFunction(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getFunction(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -359,7 +359,7 @@ pub const PublishedVersionActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getFunctionConfiguration(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getFunctionConfiguration(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

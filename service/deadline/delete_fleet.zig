@@ -22,7 +22,8 @@ pub const DeleteFleetInput = struct {
     };
 };
 
-pub const DeleteFleetOutput = struct {};
+pub const DeleteFleetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

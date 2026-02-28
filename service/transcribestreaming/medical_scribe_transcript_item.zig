@@ -23,7 +23,7 @@ pub const MedicalScribeTranscriptItem = struct {
 
     /// The type of item identified. Options are: `PRONUNCIATION` (spoken words)
     /// and `PUNCTUATION`.
-    type: ?MedicalScribeTranscriptItemType,
+    @"type": ?MedicalScribeTranscriptItemType,
 
     /// Indicates whether the specified item matches a word in the vocabulary filter
     /// included in
@@ -35,7 +35,7 @@ pub const MedicalScribeTranscriptItem = struct {
         .confidence = "Confidence",
         .content = "Content",
         .end_audio_time = "EndAudioTime",
-        .type = "Type",
+        .@"type" = "Type",
         .vocabulary_filter_match = "VocabularyFilterMatch",
     };
 };

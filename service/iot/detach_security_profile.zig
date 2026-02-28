@@ -17,7 +17,8 @@ pub const DetachSecurityProfileInput = struct {
     };
 };
 
-pub const DetachSecurityProfileOutput = struct {};
+pub const DetachSecurityProfileOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

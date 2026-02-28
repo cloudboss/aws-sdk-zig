@@ -5,9 +5,9 @@ const KnownGenderType = @import("known_gender_type.zig").KnownGenderType;
 /// gender identity can be Male, Female, Nonbinary, or Unlisted.
 pub const KnownGender = struct {
     /// A string value of the KnownGender info about the Celebrity.
-    type: ?KnownGenderType,
+    @"type": ?KnownGenderType,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

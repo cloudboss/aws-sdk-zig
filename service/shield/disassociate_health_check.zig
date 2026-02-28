@@ -19,7 +19,8 @@ pub const DisassociateHealthCheckInput = struct {
     };
 };
 
-pub const DisassociateHealthCheckOutput = struct {};
+pub const DisassociateHealthCheckOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

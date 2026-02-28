@@ -6,14 +6,14 @@ pub const ResourceRecord = struct {
     name: ?[]const u8,
 
     /// The DNS record type.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The value for the DNS record.
     value: ?[]const u8,
 
     pub const json_field_names = .{
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

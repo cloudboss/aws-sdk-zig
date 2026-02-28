@@ -60,7 +60,7 @@ pub const Launch = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of launch.
-    type: LaunchType,
+    @"type": LaunchType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -77,6 +77,6 @@ pub const Launch = struct {
         .status = "status",
         .status_reason = "statusReason",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

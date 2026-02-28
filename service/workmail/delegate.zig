@@ -8,10 +8,10 @@ pub const Delegate = struct {
     id: []const u8,
 
     /// The type of the delegate: user or group.
-    type: MemberType,
+    @"type": MemberType,
 
     pub const json_field_names = .{
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

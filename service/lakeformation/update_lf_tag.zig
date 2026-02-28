@@ -28,7 +28,8 @@ pub const UpdateLFTagInput = struct {
     };
 };
 
-pub const UpdateLFTagOutput = struct {};
+pub const UpdateLFTagOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

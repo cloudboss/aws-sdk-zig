@@ -9,10 +9,10 @@ pub const DocumentAclUser = struct {
 
     /// The type of the user. This indicates the scope of the user's applicability
     /// in access control.
-    type: ?MembershipType,
+    @"type": ?MembershipType,
 
     pub const json_field_names = .{
         .id = "id",
-        .type = "type",
+        .@"type" = "type",
     };
 };

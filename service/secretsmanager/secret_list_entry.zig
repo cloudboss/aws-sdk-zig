@@ -113,7 +113,7 @@ pub const SecretListEntry = struct {
     /// external
     /// secret. For more information, see [Managed external secret
     /// partners](https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html).
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .arn = "ARN",
@@ -135,6 +135,6 @@ pub const SecretListEntry = struct {
         .rotation_rules = "RotationRules",
         .secret_versions_to_stages = "SecretVersionsToStages",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -62,7 +62,8 @@ pub const CreateProtectionGroupInput = struct {
     };
 };
 
-pub const CreateProtectionGroupOutput = struct {};
+pub const CreateProtectionGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

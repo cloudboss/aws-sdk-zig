@@ -26,13 +26,13 @@ pub const ListThemesInput = struct {
     ///   Sight.
     ///
     /// * `QUICKSIGHT` - Display only the starting themes defined by Quick Sight.
-    type: ?ThemeType = null,
+    @"type": ?ThemeType = null,
 
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",
         .max_results = "MaxResults",
         .next_token = "NextToken",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -116,7 +116,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListThemesInput, config: *a
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

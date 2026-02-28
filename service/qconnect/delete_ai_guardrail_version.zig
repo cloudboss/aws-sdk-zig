@@ -22,7 +22,8 @@ pub const DeleteAIGuardrailVersionInput = struct {
     };
 };
 
-pub const DeleteAIGuardrailVersionOutput = struct {};
+pub const DeleteAIGuardrailVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

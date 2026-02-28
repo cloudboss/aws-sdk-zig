@@ -14,7 +14,8 @@ pub const InitializeServiceInput = struct {
     };
 };
 
-pub const InitializeServiceOutput = struct {};
+pub const InitializeServiceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

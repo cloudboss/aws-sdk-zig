@@ -27,7 +27,8 @@ pub const CreateProjectMembershipInput = struct {
     };
 };
 
-pub const CreateProjectMembershipOutput = struct {};
+pub const CreateProjectMembershipOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

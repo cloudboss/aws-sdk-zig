@@ -19,7 +19,8 @@ pub const DeleteAIPromptInput = struct {
     };
 };
 
-pub const DeleteAIPromptOutput = struct {};
+pub const DeleteAIPromptOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

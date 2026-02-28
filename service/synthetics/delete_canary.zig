@@ -29,7 +29,8 @@ pub const DeleteCanaryInput = struct {
     };
 };
 
-pub const DeleteCanaryOutput = struct {};
+pub const DeleteCanaryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,8 +21,7 @@ pub const CancelLegalHoldInput = struct {
     };
 };
 
-pub const CancelLegalHoldOutput = struct {
-};
+pub const CancelLegalHoldOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

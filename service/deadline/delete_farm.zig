@@ -13,7 +13,8 @@ pub const DeleteFarmInput = struct {
     };
 };
 
-pub const DeleteFarmOutput = struct {};
+pub const DeleteFarmOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

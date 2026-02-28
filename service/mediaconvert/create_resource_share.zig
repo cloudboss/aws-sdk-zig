@@ -17,7 +17,8 @@ pub const CreateResourceShareInput = struct {
     };
 };
 
-pub const CreateResourceShareOutput = struct {};
+pub const CreateResourceShareOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

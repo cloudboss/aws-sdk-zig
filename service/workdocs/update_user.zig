@@ -34,7 +34,7 @@ pub const UpdateUserInput = struct {
     time_zone_id: ?[]const u8 = null,
 
     /// The type of the user.
-    type: ?UserType = null,
+    @"type": ?UserType = null,
 
     /// The ID of the user.
     user_id: []const u8,
@@ -47,7 +47,7 @@ pub const UpdateUserInput = struct {
         .storage_rule = "StorageRule",
         .surname = "Surname",
         .time_zone_id = "TimeZoneId",
-        .type = "Type",
+        .@"type" = "Type",
         .user_id = "UserId",
     };
 };
@@ -142,7 +142,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateUserInput, config: *a
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

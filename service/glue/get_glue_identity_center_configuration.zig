@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetGlueIdentityCenterConfigurationInput = struct {};
+pub const GetGlueIdentityCenterConfigurationInput = struct {
+};
 
 pub const GetGlueIdentityCenterConfigurationOutput = struct {
     /// The Amazon Resource Name (ARN) of the Identity Center application associated

@@ -8,7 +8,8 @@ const FuotaTaskLogOption = @import("fuota_task_log_option.zig").FuotaTaskLogOpti
 const WirelessDeviceLogOption = @import("wireless_device_log_option.zig").WirelessDeviceLogOption;
 const WirelessGatewayLogOption = @import("wireless_gateway_log_option.zig").WirelessGatewayLogOption;
 
-pub const GetLogLevelsByResourceTypesInput = struct {};
+pub const GetLogLevelsByResourceTypesInput = struct {
+};
 
 pub const GetLogLevelsByResourceTypesOutput = struct {
     default_log_level: ?LogLevel = null,

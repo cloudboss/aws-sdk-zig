@@ -13,7 +13,8 @@ pub const DeleteRoleAliasInput = struct {
     };
 };
 
-pub const DeleteRoleAliasOutput = struct {};
+pub const DeleteRoleAliasOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

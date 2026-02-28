@@ -18,7 +18,8 @@ pub const ModifyWorkspaceStateInput = struct {
     };
 };
 
-pub const ModifyWorkspaceStateOutput = struct {};
+pub const ModifyWorkspaceStateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

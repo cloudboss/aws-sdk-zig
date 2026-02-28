@@ -13,7 +13,8 @@ pub const DisassociateFromMasterAccountInput = struct {
     };
 };
 
-pub const DisassociateFromMasterAccountOutput = struct {};
+pub const DisassociateFromMasterAccountOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

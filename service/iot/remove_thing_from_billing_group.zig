@@ -25,7 +25,8 @@ pub const RemoveThingFromBillingGroupInput = struct {
     };
 };
 
-pub const RemoveThingFromBillingGroupOutput = struct {};
+pub const RemoveThingFromBillingGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

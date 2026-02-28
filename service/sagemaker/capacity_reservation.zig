@@ -8,10 +8,10 @@ pub const CapacityReservation = struct {
 
     /// The type of Capacity Reservation. Valid values are `ODCR` (On-Demand
     /// Capacity Reservation) or `CRG` (Capacity Reservation Group).
-    type: ?CapacityReservationType,
+    @"type": ?CapacityReservationType,
 
     pub const json_field_names = .{
         .arn = "Arn",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

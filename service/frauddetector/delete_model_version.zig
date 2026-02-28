@@ -22,7 +22,8 @@ pub const DeleteModelVersionInput = struct {
     };
 };
 
-pub const DeleteModelVersionOutput = struct {};
+pub const DeleteModelVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

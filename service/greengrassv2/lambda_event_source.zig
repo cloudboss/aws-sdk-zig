@@ -19,10 +19,10 @@ pub const LambdaEventSource = struct {
     ///   event source
     /// type supports MQTT wildcards (`+` and `#`) in the event source
     /// topic.
-    type: LambdaEventSourceType,
+    @"type": LambdaEventSourceType,
 
     pub const json_field_names = .{
         .topic = "topic",
-        .type = "type",
+        .@"type" = "type",
     };
 };

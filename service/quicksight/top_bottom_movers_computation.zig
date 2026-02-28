@@ -28,7 +28,7 @@ pub const TopBottomMoversComputation = struct {
     /// * TOP: Top movers computation.
     ///
     /// * BOTTOM: Bottom movers computation.
-    type: TopBottomComputationType,
+    @"type": TopBottomComputationType,
 
     /// The value field that is used in a computation.
     value: ?MeasureField,
@@ -40,7 +40,7 @@ pub const TopBottomMoversComputation = struct {
         .name = "Name",
         .sort_order = "SortOrder",
         .time = "Time",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

@@ -32,7 +32,8 @@ pub const AddApplicationReferenceDataSourceInput = struct {
     };
 };
 
-pub const AddApplicationReferenceDataSourceOutput = struct {};
+pub const AddApplicationReferenceDataSourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

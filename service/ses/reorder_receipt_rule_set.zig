@@ -13,7 +13,8 @@ pub const ReorderReceiptRuleSetInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const ReorderReceiptRuleSetOutput = struct {};
+pub const ReorderReceiptRuleSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

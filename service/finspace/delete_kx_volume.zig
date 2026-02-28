@@ -22,7 +22,8 @@ pub const DeleteKxVolumeInput = struct {
     };
 };
 
-pub const DeleteKxVolumeOutput = struct {};
+pub const DeleteKxVolumeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

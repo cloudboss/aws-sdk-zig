@@ -17,7 +17,8 @@ pub const DeprecateFlowTemplateInput = struct {
     };
 };
 
-pub const DeprecateFlowTemplateOutput = struct {};
+pub const DeprecateFlowTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

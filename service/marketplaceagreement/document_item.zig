@@ -15,7 +15,7 @@ pub const DocumentItem = struct {
     /// * `StandardDsa` – DSA for AWS Marketplace. For more information about the
     ///   DSA, see the AWS Data Exchange User Guide. You don’t provide a URL for
     ///   this type because it’s managed by AWS Marketplace.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// A URL to the legal document for buyers to read. Required when `Type` is
     /// `CustomEula`.
@@ -26,7 +26,7 @@ pub const DocumentItem = struct {
     version: ?[]const u8,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
         .url = "url",
         .version = "version",
     };

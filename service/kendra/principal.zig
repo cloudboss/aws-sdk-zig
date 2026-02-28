@@ -15,12 +15,12 @@ pub const Principal = struct {
     name: []const u8,
 
     /// The type of principal.
-    type: PrincipalType,
+    @"type": PrincipalType,
 
     pub const json_field_names = .{
         .access = "Access",
         .data_source_id = "DataSourceId",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

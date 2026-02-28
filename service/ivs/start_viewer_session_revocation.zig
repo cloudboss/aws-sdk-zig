@@ -25,7 +25,8 @@ pub const StartViewerSessionRevocationInput = struct {
     };
 };
 
-pub const StartViewerSessionRevocationOutput = struct {};
+pub const StartViewerSessionRevocationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

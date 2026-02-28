@@ -13,7 +13,8 @@ pub const RejectInvitationInput = struct {
     };
 };
 
-pub const RejectInvitationOutput = struct {};
+pub const RejectInvitationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

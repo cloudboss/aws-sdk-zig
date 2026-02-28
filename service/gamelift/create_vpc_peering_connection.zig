@@ -33,7 +33,8 @@ pub const CreateVpcPeeringConnectionInput = struct {
     };
 };
 
-pub const CreateVpcPeeringConnectionOutput = struct {};
+pub const CreateVpcPeeringConnectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

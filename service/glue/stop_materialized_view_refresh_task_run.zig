@@ -22,7 +22,8 @@ pub const StopMaterializedViewRefreshTaskRunInput = struct {
     };
 };
 
-pub const StopMaterializedViewRefreshTaskRunOutput = struct {};
+pub const StopMaterializedViewRefreshTaskRunOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

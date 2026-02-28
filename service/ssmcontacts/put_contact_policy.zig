@@ -17,7 +17,8 @@ pub const PutContactPolicyInput = struct {
     };
 };
 
-pub const PutContactPolicyOutput = struct {};
+pub const PutContactPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

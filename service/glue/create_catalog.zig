@@ -24,7 +24,8 @@ pub const CreateCatalogInput = struct {
     };
 };
 
-pub const CreateCatalogOutput = struct {};
+pub const CreateCatalogOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

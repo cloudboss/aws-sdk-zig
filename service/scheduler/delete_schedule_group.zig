@@ -20,7 +20,8 @@ pub const DeleteScheduleGroupInput = struct {
     };
 };
 
-pub const DeleteScheduleGroupOutput = struct {};
+pub const DeleteScheduleGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

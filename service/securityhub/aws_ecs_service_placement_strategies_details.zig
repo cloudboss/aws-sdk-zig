@@ -24,10 +24,10 @@ pub const AwsEcsServicePlacementStrategiesDetails = struct {
     /// least available amount of the resource that is specified in `Field`.
     ///
     /// Valid values: `random` | `spread` | `binpack`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .field = "Field",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

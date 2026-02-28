@@ -23,7 +23,8 @@ pub const DeletePackageVersionInput = struct {
     };
 };
 
-pub const DeletePackageVersionOutput = struct {};
+pub const DeletePackageVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

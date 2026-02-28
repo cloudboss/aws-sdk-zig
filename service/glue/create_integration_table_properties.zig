@@ -34,7 +34,8 @@ pub const CreateIntegrationTablePropertiesInput = struct {
     };
 };
 
-pub const CreateIntegrationTablePropertiesOutput = struct {};
+pub const CreateIntegrationTablePropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

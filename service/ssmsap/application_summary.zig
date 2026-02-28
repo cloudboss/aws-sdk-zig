@@ -19,13 +19,13 @@ pub const ApplicationSummary = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of the application.
-    type: ?ApplicationType,
+    @"type": ?ApplicationType,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .discovery_status = "DiscoveryStatus",
         .id = "Id",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -17,7 +17,8 @@ pub const AssociateDRTRoleInput = struct {
     };
 };
 
-pub const AssociateDRTRoleOutput = struct {};
+pub const AssociateDRTRoleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

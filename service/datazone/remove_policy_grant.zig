@@ -41,7 +41,8 @@ pub const RemovePolicyGrantInput = struct {
     };
 };
 
-pub const RemovePolicyGrantOutput = struct {};
+pub const RemovePolicyGrantOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

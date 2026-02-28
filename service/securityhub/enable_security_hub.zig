@@ -43,7 +43,8 @@ pub const EnableSecurityHubInput = struct {
     };
 };
 
-pub const EnableSecurityHubOutput = struct {};
+pub const EnableSecurityHubOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

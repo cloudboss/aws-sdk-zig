@@ -10,11 +10,11 @@ pub const WirelessGatewayLogOption = struct {
 
     log_level: LogLevel,
 
-    type: WirelessGatewayType,
+    @"type": WirelessGatewayType,
 
     pub const json_field_names = .{
         .events = "Events",
         .log_level = "LogLevel",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

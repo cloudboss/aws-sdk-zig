@@ -22,7 +22,8 @@ pub const StartConfigurationPolicyDisassociationInput = struct {
     };
 };
 
-pub const StartConfigurationPolicyDisassociationOutput = struct {};
+pub const StartConfigurationPolicyDisassociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

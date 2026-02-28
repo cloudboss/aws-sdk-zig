@@ -26,7 +26,8 @@ pub const UpdateTrustedTokenIssuerInput = struct {
     };
 };
 
-pub const UpdateTrustedTokenIssuerOutput = struct {};
+pub const UpdateTrustedTokenIssuerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

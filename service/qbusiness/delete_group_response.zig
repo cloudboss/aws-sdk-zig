@@ -1,1 +1,2 @@
-pub const DeleteGroupResponse = struct {};
+pub const DeleteGroupResponse = struct {
+};

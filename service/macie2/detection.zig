@@ -33,7 +33,7 @@ pub const Detection = struct {
     /// The type of data identifier that detected the sensitive data. Possible
     /// values are: CUSTOM, for a custom data identifier; and, MANAGED, for a
     /// managed data identifier.
-    type: ?DataIdentifierType,
+    @"type": ?DataIdentifierType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -41,6 +41,6 @@ pub const Detection = struct {
         .id = "id",
         .name = "name",
         .suppressed = "suppressed",
-        .type = "type",
+        .@"type" = "type",
     };
 };

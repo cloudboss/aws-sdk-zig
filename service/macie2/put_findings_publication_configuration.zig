@@ -20,7 +20,8 @@ pub const PutFindingsPublicationConfigurationInput = struct {
     };
 };
 
-pub const PutFindingsPublicationConfigurationOutput = struct {};
+pub const PutFindingsPublicationConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

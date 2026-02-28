@@ -15,13 +15,13 @@ pub const NodeInputPort = struct {
     name: ?[]const u8,
 
     /// The input port's type.
-    type: ?PortType,
+    @"type": ?PortType,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",
         .description = "Description",
         .max_connections = "MaxConnections",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -13,7 +13,8 @@ pub const DeleteCustomMetricInput = struct {
     };
 };
 
-pub const DeleteCustomMetricOutput = struct {};
+pub const DeleteCustomMetricOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

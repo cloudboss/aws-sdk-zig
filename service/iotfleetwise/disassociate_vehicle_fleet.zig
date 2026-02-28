@@ -17,7 +17,8 @@ pub const DisassociateVehicleFleetInput = struct {
     };
 };
 
-pub const DisassociateVehicleFleetOutput = struct {};
+pub const DisassociateVehicleFleetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -12,7 +12,7 @@ pub const User = struct {
     name: []const u8,
 
     /// The type of the user.
-    type: []const u8,
+    @"type": []const u8,
 
     /// The unique identifier of the user.
     uid: []const u8,
@@ -21,7 +21,7 @@ pub const User = struct {
         .account = "Account",
         .credential_uid = "CredentialUid",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
         .uid = "Uid",
     };
 };

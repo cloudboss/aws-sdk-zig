@@ -9,10 +9,10 @@ pub const DocumentAclGroup = struct {
 
     /// The type of the group. This indicates the scope of the group's applicability
     /// in access control.
-    type: ?MembershipType,
+    @"type": ?MembershipType,
 
     pub const json_field_names = .{
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

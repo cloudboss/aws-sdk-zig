@@ -31,7 +31,7 @@ pub const GetTableBucketOutput = struct {
     table_bucket_id: ?[]const u8 = null,
 
     /// The type of the table bucket.
-    type: ?TableBucketType = null,
+    @"type": ?TableBucketType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -39,7 +39,7 @@ pub const GetTableBucketOutput = struct {
         .name = "name",
         .owner_account_id = "ownerAccountId",
         .table_bucket_id = "tableBucketId",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

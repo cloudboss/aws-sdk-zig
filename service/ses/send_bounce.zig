@@ -130,13 +130,13 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SendBounceInput, config: *a
                     const n_2 = idx_2 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.ExtensionFields.member.{d}.Name=", .{ n, n_2 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.ExtensionFields.member.{d}.Name=", .{n, n_2}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.name);
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.ExtensionFields.member.{d}.Value=", .{ n, n_2 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BouncedRecipientInfoList.member.{d}.RecipientDsnFields.ExtensionFields.member.{d}.Value=", .{n, n_2}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_2.value);
                     }

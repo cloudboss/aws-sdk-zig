@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SubscriptionState = @import("subscription_state.zig").SubscriptionState;
 
-pub const GetSubscriptionStateInput = struct {};
+pub const GetSubscriptionStateInput = struct {
+};
 
 pub const GetSubscriptionStateOutput = struct {
     /// The status of the subscription.

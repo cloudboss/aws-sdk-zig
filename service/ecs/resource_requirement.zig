@@ -11,7 +11,7 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// Developer Guide*
 pub const ResourceRequirement = struct {
     /// The type of resource to assign to a container.
-    type: ResourceType,
+    @"type": ResourceType,
 
     /// The value for the specified resource type.
     ///
@@ -27,7 +27,7 @@ pub const ResourceRequirement = struct {
     value: []const u8,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

@@ -25,7 +25,8 @@ pub const UpdateLogLevelsByResourceTypesInput = struct {
     };
 };
 
-pub const UpdateLogLevelsByResourceTypesOutput = struct {};
+pub const UpdateLogLevelsByResourceTypesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

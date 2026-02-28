@@ -19,7 +19,8 @@ pub const DeleteTimelineEventInput = struct {
     };
 };
 
-pub const DeleteTimelineEventOutput = struct {};
+pub const DeleteTimelineEventOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

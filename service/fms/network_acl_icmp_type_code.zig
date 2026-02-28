@@ -4,10 +4,10 @@ pub const NetworkAclIcmpTypeCode = struct {
     code: ?i32,
 
     /// ICMP type.
-    type: ?i32,
+    @"type": ?i32,
 
     pub const json_field_names = .{
         .code = "Code",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

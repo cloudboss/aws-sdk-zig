@@ -8,10 +8,10 @@ pub const ImageFile = struct {
     data: []const u8,
 
     /// The file type of the image.
-    type: ImageFileType,
+    @"type": ImageFileType,
 
     pub const json_field_names = .{
         .data = "data",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -17,7 +17,8 @@ pub const DeleteDetectorVersionInput = struct {
     };
 };
 
-pub const DeleteDetectorVersionOutput = struct {};
+pub const DeleteDetectorVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

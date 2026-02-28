@@ -26,11 +26,11 @@ pub const AwsWafRateBasedRuleMatchPredicate = struct {
     /// * `SqlInjectionMatch`
     ///
     /// * `XssMatch`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .data_id = "DataId",
         .negated = "Negated",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

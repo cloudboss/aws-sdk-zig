@@ -26,7 +26,8 @@ pub const CreateEmailTemplateInput = struct {
     };
 };
 
-pub const CreateEmailTemplateOutput = struct {};
+pub const CreateEmailTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

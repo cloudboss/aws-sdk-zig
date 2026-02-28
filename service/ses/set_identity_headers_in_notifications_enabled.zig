@@ -28,7 +28,8 @@ pub const SetIdentityHeadersInNotificationsEnabledInput = struct {
     notification_type: NotificationType,
 };
 
-pub const SetIdentityHeadersInNotificationsEnabledOutput = struct {};
+pub const SetIdentityHeadersInNotificationsEnabledOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

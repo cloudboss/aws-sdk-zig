@@ -1605,4 +1605,3 @@ pub fn serializeTextOptions(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), v
         try buf.appendSlice(alloc, "</SourceField>");
     }
 }
-

@@ -1,2 +1,3 @@
 /// Smpte Tt Destination Settings
-pub const SmpteTtDestinationSettings = struct {};
+pub const SmpteTtDestinationSettings = struct {
+};

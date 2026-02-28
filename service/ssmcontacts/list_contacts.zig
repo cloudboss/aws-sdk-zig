@@ -17,13 +17,13 @@ pub const ListContactsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of contact.
-    type: ?ContactType = null,
+    @"type": ?ContactType = null,
 
     pub const json_field_names = .{
         .alias_prefix = "AliasPrefix",
         .max_results = "MaxResults",
         .next_token = "NextToken",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

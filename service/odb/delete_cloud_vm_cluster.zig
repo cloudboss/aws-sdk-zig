@@ -13,7 +13,8 @@ pub const DeleteCloudVmClusterInput = struct {
     };
 };
 
-pub const DeleteCloudVmClusterOutput = struct {};
+pub const DeleteCloudVmClusterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

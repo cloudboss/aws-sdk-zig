@@ -23,7 +23,8 @@ pub const AssociateProactiveEngagementDetailsInput = struct {
     };
 };
 
-pub const AssociateProactiveEngagementDetailsOutput = struct {};
+pub const AssociateProactiveEngagementDetailsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

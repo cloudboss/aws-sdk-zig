@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetAccountAliasInput = struct {};
+pub const GetAccountAliasInput = struct {
+};
 
 pub const GetAccountAliasOutput = struct {
     /// An alias or short name for an Amazon Web Services account.

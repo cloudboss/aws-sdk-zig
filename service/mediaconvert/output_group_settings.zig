@@ -52,7 +52,7 @@ pub const OutputGroupSettings = struct {
 
     /// Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth
     /// Streaming, CMAF)
-    type: ?OutputGroupType,
+    @"type": ?OutputGroupType,
 
     pub const json_field_names = .{
         .cmaf_group_settings = "CmafGroupSettings",
@@ -61,6 +61,6 @@ pub const OutputGroupSettings = struct {
         .hls_group_settings = "HlsGroupSettings",
         .ms_smooth_group_settings = "MsSmoothGroupSettings",
         .per_frame_metrics = "PerFrameMetrics",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

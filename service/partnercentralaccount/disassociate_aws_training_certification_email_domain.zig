@@ -26,7 +26,8 @@ pub const DisassociateAwsTrainingCertificationEmailDomainInput = struct {
     };
 };
 
-pub const DisassociateAwsTrainingCertificationEmailDomainOutput = struct {};
+pub const DisassociateAwsTrainingCertificationEmailDomainOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

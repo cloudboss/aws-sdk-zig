@@ -29,11 +29,11 @@ pub const Index = struct {
     ///   the aggregator index. This lets search results in the Region with the
     ///   aggregator index to include resources from all Regions in the account
     ///   where Resource Explorer is turned on.
-    type: ?IndexType,
+    @"type": ?IndexType,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .region = "Region",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -27,7 +27,7 @@ pub const ActionConnectorSummary = struct {
     status: ?ResourceStatus,
 
     /// The type of action connector (e.g., SALESFORCE, JIRA, CUSTOM, BEDROCK).
-    type: ActionConnectorType,
+    @"type": ActionConnectorType,
 
     pub const json_field_names = .{
         .action_connector_id = "ActionConnectorId",
@@ -37,6 +37,6 @@ pub const ActionConnectorSummary = struct {
         .last_updated_time = "LastUpdatedTime",
         .name = "Name",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

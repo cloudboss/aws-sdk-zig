@@ -25,7 +25,8 @@ pub const TagStreamInput = struct {
     };
 };
 
-pub const TagStreamOutput = struct {};
+pub const TagStreamOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

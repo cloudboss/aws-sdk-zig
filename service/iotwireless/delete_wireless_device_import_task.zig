@@ -13,7 +13,8 @@ pub const DeleteWirelessDeviceImportTaskInput = struct {
     };
 };
 
-pub const DeleteWirelessDeviceImportTaskOutput = struct {};
+pub const DeleteWirelessDeviceImportTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

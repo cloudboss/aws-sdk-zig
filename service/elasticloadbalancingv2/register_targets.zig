@@ -14,7 +14,8 @@ pub const RegisterTargetsInput = struct {
     targets: []const TargetDescription,
 };
 
-pub const RegisterTargetsOutput = struct {};
+pub const RegisterTargetsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

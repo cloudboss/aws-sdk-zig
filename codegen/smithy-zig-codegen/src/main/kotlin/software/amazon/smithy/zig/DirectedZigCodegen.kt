@@ -65,6 +65,9 @@ class DirectedZigCodegen :
     override fun generateStructure(
         directive: GenerateStructureDirective<ZigContext, ZigSettings>,
     ) {
+        // Skip Smithy prelude shapes (e.g. smithy.api#Unit) -- they have no generated files.
+        if (directive.shape().id.namespace == "smithy.api") return
+
         // Skip operation input/output shapes -- they are generated inline by OperationGenerator
         if (directive.shape().id in getOperationIoShapeIds(directive.context())) return
 

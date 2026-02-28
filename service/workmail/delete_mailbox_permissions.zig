@@ -44,7 +44,8 @@ pub const DeleteMailboxPermissionsInput = struct {
     };
 };
 
-pub const DeleteMailboxPermissionsOutput = struct {};
+pub const DeleteMailboxPermissionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const DeleteKxEnvironmentInput = struct {
     };
 };
 
-pub const DeleteKxEnvironmentOutput = struct {};
+pub const DeleteKxEnvironmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

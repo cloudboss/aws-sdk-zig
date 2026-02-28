@@ -81,7 +81,7 @@ pub const Experiment = struct {
 
     /// The type of this experiment. Currently, this value must be
     /// `aws.experiment.onlineab`.
-    type: ExperimentType,
+    @"type": ExperimentType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -101,6 +101,6 @@ pub const Experiment = struct {
         .status_reason = "statusReason",
         .tags = "tags",
         .treatments = "treatments",
-        .type = "type",
+        .@"type" = "type",
     };
 };

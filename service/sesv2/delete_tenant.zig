@@ -13,7 +13,8 @@ pub const DeleteTenantInput = struct {
     };
 };
 
-pub const DeleteTenantOutput = struct {};
+pub const DeleteTenantOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

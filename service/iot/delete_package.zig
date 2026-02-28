@@ -19,7 +19,8 @@ pub const DeletePackageInput = struct {
     };
 };
 
-pub const DeletePackageOutput = struct {};
+pub const DeletePackageOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

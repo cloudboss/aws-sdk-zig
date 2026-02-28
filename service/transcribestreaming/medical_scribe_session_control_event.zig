@@ -17,9 +17,9 @@ pub const MedicalScribeSessionControlEvent = struct {
     /// For more information about different streaming statuses, see the
     /// `StreamStatus` description in the
     /// [MedicalScribeStreamDetails](https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_MedicalScribeStreamDetails.html).
-    type: MedicalScribeSessionControlEventType,
+    @"type": MedicalScribeSessionControlEventType,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

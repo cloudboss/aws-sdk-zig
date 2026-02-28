@@ -13,16 +13,17 @@ pub const DeleteLifecyclePolicyInput = struct {
     name: []const u8,
 
     /// The type of lifecycle policy.
-    type: LifecyclePolicyType,
+    @"type": LifecyclePolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
-pub const DeleteLifecyclePolicyOutput = struct {};
+pub const DeleteLifecyclePolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

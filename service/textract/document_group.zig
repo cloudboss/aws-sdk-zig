@@ -14,7 +14,7 @@ pub const DocumentGroup = struct {
     /// The type of document that Amazon Textract has detected. See [Analyze Lending
     /// Response
     /// Objects](https://docs.aws.amazon.com/textract/latest/dg/lending-response-objects.html) for a list of all types returned by Textract.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// A list of any expected signatures not found in a document group.
     undetected_signatures: ?[]const UndetectedSignature,
@@ -22,7 +22,7 @@ pub const DocumentGroup = struct {
     pub const json_field_names = .{
         .detected_signatures = "DetectedSignatures",
         .split_documents = "SplitDocuments",
-        .type = "Type",
+        .@"type" = "Type",
         .undetected_signatures = "UndetectedSignatures",
     };
 };

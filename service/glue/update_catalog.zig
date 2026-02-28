@@ -19,7 +19,8 @@ pub const UpdateCatalogInput = struct {
     };
 };
 
-pub const UpdateCatalogOutput = struct {};
+pub const UpdateCatalogOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

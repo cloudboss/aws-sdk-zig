@@ -114,7 +114,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CopyImageSetInput, config: 
     }
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body = try aws.json.jsonStringify(input.copy_image_set_information, alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

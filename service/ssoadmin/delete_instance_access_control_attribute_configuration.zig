@@ -14,7 +14,8 @@ pub const DeleteInstanceAccessControlAttributeConfigurationInput = struct {
     };
 };
 
-pub const DeleteInstanceAccessControlAttributeConfigurationOutput = struct {};
+pub const DeleteInstanceAccessControlAttributeConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

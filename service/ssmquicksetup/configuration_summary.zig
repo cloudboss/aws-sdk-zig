@@ -32,7 +32,7 @@ pub const ConfigurationSummary = struct {
     status_summaries: ?[]const StatusSummary,
 
     /// The type of the Quick Setup configuration.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The version of the Quick Setup type used.
     type_version: ?[]const u8,
@@ -46,7 +46,7 @@ pub const ConfigurationSummary = struct {
         .manager_arn = "ManagerArn",
         .region = "Region",
         .status_summaries = "StatusSummaries",
-        .type = "Type",
+        .@"type" = "Type",
         .type_version = "TypeVersion",
     };
 };

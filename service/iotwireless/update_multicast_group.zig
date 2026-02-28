@@ -22,7 +22,8 @@ pub const UpdateMulticastGroupInput = struct {
     };
 };
 
-pub const UpdateMulticastGroupOutput = struct {};
+pub const UpdateMulticastGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

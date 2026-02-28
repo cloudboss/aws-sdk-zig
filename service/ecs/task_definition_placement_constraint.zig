@@ -17,10 +17,10 @@ pub const TaskDefinitionPlacementConstraint = struct {
 
     /// The type of constraint. The `MemberOf` constraint restricts selection to be
     /// from a group of valid candidates.
-    type: ?TaskDefinitionPlacementConstraintType,
+    @"type": ?TaskDefinitionPlacementConstraintType,
 
     pub const json_field_names = .{
         .expression = "expression",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -53,7 +53,7 @@ pub const UserByPermissionGroup = struct {
     ///
     /// * `APP_USER` – A user with specific permissions in FinSpace. The users are
     ///   assigned permissions by adding them to a permission group.
-    type: ?UserType,
+    @"type": ?UserType,
 
     /// The unique identifier for the user.
     user_id: ?[]const u8,
@@ -66,7 +66,7 @@ pub const UserByPermissionGroup = struct {
         .last_name = "lastName",
         .membership_status = "membershipStatus",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .user_id = "userId",
     };
 };

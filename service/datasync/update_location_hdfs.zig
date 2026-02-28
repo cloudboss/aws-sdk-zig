@@ -87,7 +87,8 @@ pub const UpdateLocationHdfsInput = struct {
     };
 };
 
-pub const UpdateLocationHdfsOutput = struct {};
+pub const UpdateLocationHdfsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

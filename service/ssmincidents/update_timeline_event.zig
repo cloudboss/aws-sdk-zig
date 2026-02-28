@@ -57,7 +57,8 @@ pub const UpdateTimelineEventInput = struct {
     };
 };
 
-pub const UpdateTimelineEventOutput = struct {};
+pub const UpdateTimelineEventOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

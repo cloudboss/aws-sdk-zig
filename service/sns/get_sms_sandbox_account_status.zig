@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetSMSSandboxAccountStatusInput = struct {};
+pub const GetSMSSandboxAccountStatusInput = struct {
+};
 
 pub const GetSMSSandboxAccountStatusOutput = struct {
     /// Indicates whether the calling Amazon Web Services account is in the SMS

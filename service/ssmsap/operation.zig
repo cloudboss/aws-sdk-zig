@@ -35,7 +35,7 @@ pub const Operation = struct {
     status_message: ?[]const u8,
 
     /// The type of the operation.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .end_time = "EndTime",
@@ -48,6 +48,6 @@ pub const Operation = struct {
         .start_time = "StartTime",
         .status = "Status",
         .status_message = "StatusMessage",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

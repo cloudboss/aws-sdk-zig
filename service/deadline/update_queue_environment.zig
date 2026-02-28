@@ -39,7 +39,8 @@ pub const UpdateQueueEnvironmentInput = struct {
     };
 };
 
-pub const UpdateQueueEnvironmentOutput = struct {};
+pub const UpdateQueueEnvironmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

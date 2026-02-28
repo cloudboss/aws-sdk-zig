@@ -14,7 +14,8 @@ pub const CreateSupportCaseInput = struct {
     };
 };
 
-pub const CreateSupportCaseOutput = struct {};
+pub const CreateSupportCaseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

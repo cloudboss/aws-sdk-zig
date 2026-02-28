@@ -24,7 +24,8 @@ pub const DeleteApplicationSnapshotInput = struct {
     };
 };
 
-pub const DeleteApplicationSnapshotOutput = struct {};
+pub const DeleteApplicationSnapshotOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

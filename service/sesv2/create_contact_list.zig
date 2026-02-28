@@ -29,7 +29,8 @@ pub const CreateContactListInput = struct {
     };
 };
 
-pub const CreateContactListOutput = struct {};
+pub const CreateContactListOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

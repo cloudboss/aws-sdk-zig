@@ -24,13 +24,13 @@ pub const RecommendationTrigger = struct {
     source: RecommendationSourceType,
 
     /// The type of recommendation trigger.
-    type: RecommendationTriggerType,
+    @"type": RecommendationTriggerType,
 
     pub const json_field_names = .{
         .data = "data",
         .id = "id",
         .recommendation_ids = "recommendationIds",
         .source = "source",
-        .type = "type",
+        .@"type" = "type",
     };
 };

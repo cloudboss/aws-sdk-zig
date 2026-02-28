@@ -43,14 +43,14 @@ pub const InventoryFilter = struct {
     /// The `Exists` filter must be used with aggregators. For more information, see
     /// [Aggregating inventory
     /// data](https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-aggregate.html) in the *Amazon Web Services Systems Manager User Guide*.
-    type: ?InventoryQueryOperatorType,
+    @"type": ?InventoryQueryOperatorType,
 
     /// Inventory filter values.
     values: []const []const u8,
 
     pub const json_field_names = .{
         .key = "Key",
-        .type = "Type",
+        .@"type" = "Type",
         .values = "Values",
     };
 };

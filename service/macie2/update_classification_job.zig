@@ -42,7 +42,8 @@ pub const UpdateClassificationJobInput = struct {
     };
 };
 
-pub const UpdateClassificationJobOutput = struct {};
+pub const UpdateClassificationJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -77,7 +77,7 @@ pub const GetUserOutput = struct {
     ///
     /// * `APP_USER` – A user with specific permissions in FinSpace. The users are
     ///   assigned permissions by adding them to a permission group.
-    type: ?UserType = null,
+    @"type": ?UserType = null,
 
     /// The unique identifier for the user that is retrieved.
     user_id: ?[]const u8 = null,
@@ -94,7 +94,7 @@ pub const GetUserOutput = struct {
         .last_modified_time = "lastModifiedTime",
         .last_name = "lastName",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .user_id = "userId",
     };
 };

@@ -13,7 +13,8 @@ pub const DeactivateContactChannelInput = struct {
     };
 };
 
-pub const DeactivateContactChannelOutput = struct {};
+pub const DeactivateContactChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

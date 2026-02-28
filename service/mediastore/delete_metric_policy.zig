@@ -14,7 +14,8 @@ pub const DeleteMetricPolicyInput = struct {
     };
 };
 
-pub const DeleteMetricPolicyOutput = struct {};
+pub const DeleteMetricPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

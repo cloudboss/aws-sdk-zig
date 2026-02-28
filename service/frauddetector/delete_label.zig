@@ -13,7 +13,8 @@ pub const DeleteLabelInput = struct {
     };
 };
 
-pub const DeleteLabelOutput = struct {};
+pub const DeleteLabelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

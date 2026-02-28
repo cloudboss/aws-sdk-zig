@@ -13,7 +13,8 @@ pub const StopSimulationInput = struct {
     };
 };
 
-pub const StopSimulationOutput = struct {};
+pub const StopSimulationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,13 +17,13 @@ pub const RecommendationData = struct {
     relevance_score: f64 = 0,
 
     /// The type of recommendation.
-    type: ?RecommendationType,
+    @"type": ?RecommendationType,
 
     pub const json_field_names = .{
         .document = "document",
         .recommendation_id = "recommendationId",
         .relevance_level = "relevanceLevel",
         .relevance_score = "relevanceScore",
-        .type = "type",
+        .@"type" = "type",
     };
 };

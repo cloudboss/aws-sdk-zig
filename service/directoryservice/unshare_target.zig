@@ -8,10 +8,10 @@ pub const UnshareTarget = struct {
     id: []const u8,
 
     /// Type of identifier to be used in the *Id* field.
-    type: TargetType,
+    @"type": TargetType,
 
     pub const json_field_names = .{
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

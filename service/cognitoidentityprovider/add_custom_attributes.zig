@@ -56,8 +56,7 @@ pub const AddCustomAttributesInput = struct {
     };
 };
 
-pub const AddCustomAttributesOutput = struct {
-};
+pub const AddCustomAttributesOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

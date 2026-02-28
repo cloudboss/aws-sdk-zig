@@ -13,7 +13,8 @@ pub const StopCrawlerScheduleInput = struct {
     };
 };
 
-pub const StopCrawlerScheduleOutput = struct {};
+pub const StopCrawlerScheduleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeletePublicKeyInput = struct {
     };
 };
 
-pub const DeletePublicKeyOutput = struct {};
+pub const DeletePublicKeyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

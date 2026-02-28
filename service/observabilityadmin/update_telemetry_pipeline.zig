@@ -19,7 +19,8 @@ pub const UpdateTelemetryPipelineInput = struct {
     };
 };
 
-pub const UpdateTelemetryPipelineOutput = struct {};
+pub const UpdateTelemetryPipelineOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

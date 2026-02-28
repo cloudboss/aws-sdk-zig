@@ -18,7 +18,8 @@ pub const PutAccountDedicatedIpWarmupAttributesInput = struct {
     };
 };
 
-pub const PutAccountDedicatedIpWarmupAttributesOutput = struct {};
+pub const PutAccountDedicatedIpWarmupAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

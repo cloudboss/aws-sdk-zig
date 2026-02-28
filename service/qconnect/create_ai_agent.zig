@@ -33,7 +33,7 @@ pub const CreateAIAgentInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the AI Agent.
-    type: AIAgentType,
+    @"type": AIAgentType,
 
     /// The visibility status of the AI Agent.
     visibility_status: VisibilityStatus,
@@ -45,7 +45,7 @@ pub const CreateAIAgentInput = struct {
         .description = "description",
         .name = "name",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .visibility_status = "visibilityStatus",
     };
 };
@@ -133,7 +133,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAIAgentInput, config:
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"visibilityStatus\":");

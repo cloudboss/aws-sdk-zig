@@ -86,7 +86,7 @@ pub const CreateDataRepositoryTaskInput = struct {
     ///
     /// * `AUTO_RELEASE_DATA` tasks automatically release files from
     /// an Amazon File Cache resource.
-    type: DataRepositoryTaskType,
+    @"type": DataRepositoryTaskType,
 
     pub const json_field_names = .{
         .capacity_to_release = "CapacityToRelease",
@@ -96,7 +96,7 @@ pub const CreateDataRepositoryTaskInput = struct {
         .release_configuration = "ReleaseConfiguration",
         .report = "Report",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

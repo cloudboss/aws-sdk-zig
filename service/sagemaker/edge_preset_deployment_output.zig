@@ -14,12 +14,12 @@ pub const EdgePresetDeploymentOutput = struct {
 
     /// The deployment type created by SageMaker Edge Manager. Currently only
     /// supports Amazon Web Services IoT Greengrass Version 2 components.
-    type: EdgePresetDeploymentType,
+    @"type": EdgePresetDeploymentType,
 
     pub const json_field_names = .{
         .artifact = "Artifact",
         .status = "Status",
         .status_message = "StatusMessage",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

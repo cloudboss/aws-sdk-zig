@@ -37,7 +37,7 @@ pub const InferenceExperimentSummary = struct {
     status_reason: ?[]const u8,
 
     /// The type of the inference experiment.
-    type: InferenceExperimentType,
+    @"type": InferenceExperimentType,
 
     pub const json_field_names = .{
         .completion_time = "CompletionTime",
@@ -49,6 +49,6 @@ pub const InferenceExperimentSummary = struct {
         .schedule = "Schedule",
         .status = "Status",
         .status_reason = "StatusReason",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

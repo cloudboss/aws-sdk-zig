@@ -13,7 +13,8 @@ pub const DeleteLicenseAssetRulesetInput = struct {
     };
 };
 
-pub const DeleteLicenseAssetRulesetOutput = struct {};
+pub const DeleteLicenseAssetRulesetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

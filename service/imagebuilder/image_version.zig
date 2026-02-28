@@ -64,7 +64,7 @@ pub const ImageVersion = struct {
     platform: ?Platform,
 
     /// Specifies whether this image produces an AMI or a container image.
-    type: ?ImageType,
+    @"type": ?ImageType,
 
     /// Details for a specific version of an Image Builder image. This version
     /// follows the semantic
@@ -103,7 +103,7 @@ pub const ImageVersion = struct {
         .os_version = "osVersion",
         .owner = "owner",
         .platform = "platform",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
     };
 };

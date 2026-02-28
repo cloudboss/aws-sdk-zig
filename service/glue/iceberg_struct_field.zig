@@ -24,7 +24,7 @@ pub const IcebergStructField = struct {
 
     /// The data type definition for this field, specifying the structure and format
     /// of the data it contains.
-    type: []const u8,
+    @"type": []const u8,
 
     /// Default value used to populate the field's value for any records written
     /// after the field was added to the schema, if the writer does not supply the
@@ -37,7 +37,7 @@ pub const IcebergStructField = struct {
         .initial_default = "InitialDefault",
         .name = "Name",
         .required = "Required",
-        .type = "Type",
+        .@"type" = "Type",
         .write_default = "WriteDefault",
     };
 };

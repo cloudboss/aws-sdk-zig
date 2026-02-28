@@ -13,7 +13,8 @@ pub const ClaimDeviceInput = struct {
     };
 };
 
-pub const ClaimDeviceOutput = struct {};
+pub const ClaimDeviceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -47,7 +47,7 @@ pub const ListInferenceExperimentsInput = struct {
     /// Selects inference experiments of this type. For the possible types of
     /// inference experiments, see
     /// [CreateInferenceExperiment](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html).
-    type: ?InferenceExperimentType = null,
+    @"type": ?InferenceExperimentType = null,
 
     pub const json_field_names = .{
         .creation_time_after = "CreationTimeAfter",
@@ -60,7 +60,7 @@ pub const ListInferenceExperimentsInput = struct {
         .sort_by = "SortBy",
         .sort_order = "SortOrder",
         .status_equals = "StatusEquals",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

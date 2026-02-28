@@ -20,14 +20,14 @@ pub const InferenceComponentCapacitySize = struct {
     /// **CAPACITY_PERCENT**
     ///
     /// The endpoint activates based on the specified percentage of capacity.
-    type: InferenceComponentCapacitySizeType,
+    @"type": InferenceComponentCapacitySizeType,
 
     /// Defines the capacity size, either as a number of inference component copies
     /// or a capacity percentage.
     value: i32,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

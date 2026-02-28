@@ -21,7 +21,8 @@ pub const DeleteSignalingChannelInput = struct {
     };
 };
 
-pub const DeleteSignalingChannelOutput = struct {};
+pub const DeleteSignalingChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

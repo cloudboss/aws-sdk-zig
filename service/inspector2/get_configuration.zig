@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Ec2ConfigurationState = @import("ec_2_configuration_state.zig").Ec2ConfigurationState;
 const EcrConfigurationState = @import("ecr_configuration_state.zig").EcrConfigurationState;
 
-pub const GetConfigurationInput = struct {};
+pub const GetConfigurationInput = struct {
+};
 
 pub const GetConfigurationOutput = struct {
     /// Specifies how the Amazon EC2 automated scan mode is currently configured for

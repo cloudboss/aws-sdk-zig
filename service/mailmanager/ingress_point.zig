@@ -17,13 +17,13 @@ pub const IngressPoint = struct {
     status: IngressPointStatus,
 
     /// The type of ingress endpoint resource.
-    type: IngressPointType,
+    @"type": IngressPointType,
 
     pub const json_field_names = .{
         .a_record = "ARecord",
         .ingress_point_id = "IngressPointId",
         .ingress_point_name = "IngressPointName",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

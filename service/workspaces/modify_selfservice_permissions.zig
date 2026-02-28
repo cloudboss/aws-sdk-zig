@@ -18,7 +18,8 @@ pub const ModifySelfservicePermissionsInput = struct {
     };
 };
 
-pub const ModifySelfservicePermissionsOutput = struct {};
+pub const ModifySelfservicePermissionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

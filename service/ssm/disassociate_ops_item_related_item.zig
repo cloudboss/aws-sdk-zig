@@ -21,7 +21,8 @@ pub const DisassociateOpsItemRelatedItemInput = struct {
     };
 };
 
-pub const DisassociateOpsItemRelatedItemOutput = struct {};
+pub const DisassociateOpsItemRelatedItemOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

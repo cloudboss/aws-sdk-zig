@@ -28,7 +28,8 @@ pub const CreatePartitionIndexInput = struct {
     };
 };
 
-pub const CreatePartitionIndexOutput = struct {};
+pub const CreatePartitionIndexOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

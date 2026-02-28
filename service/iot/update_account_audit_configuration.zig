@@ -49,7 +49,8 @@ pub const UpdateAccountAuditConfigurationInput = struct {
     };
 };
 
-pub const UpdateAccountAuditConfigurationOutput = struct {};
+pub const UpdateAccountAuditConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

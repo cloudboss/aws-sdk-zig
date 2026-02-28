@@ -11,7 +11,8 @@ const StorageType = @import("storage_type.zig").StorageType;
 const WarmTierState = @import("warm_tier_state.zig").WarmTierState;
 const WarmTierRetentionPeriod = @import("warm_tier_retention_period.zig").WarmTierRetentionPeriod;
 
-pub const DescribeStorageConfigurationInput = struct {};
+pub const DescribeStorageConfigurationInput = struct {
+};
 
 pub const DescribeStorageConfigurationOutput = struct {
     configuration_status: ?ConfigurationStatus = null,

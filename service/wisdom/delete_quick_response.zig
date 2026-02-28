@@ -19,7 +19,8 @@ pub const DeleteQuickResponseInput = struct {
     };
 };
 
-pub const DeleteQuickResponseOutput = struct {};
+pub const DeleteQuickResponseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,7 +22,8 @@ pub const UpdateConnectorV2Input = struct {
     };
 };
 
-pub const UpdateConnectorV2Output = struct {};
+pub const UpdateConnectorV2Output = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

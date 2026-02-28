@@ -13,7 +13,8 @@ pub const SendDurableExecutionCallbackHeartbeatInput = struct {
     };
 };
 
-pub const SendDurableExecutionCallbackHeartbeatOutput = struct {};
+pub const SendDurableExecutionCallbackHeartbeatOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

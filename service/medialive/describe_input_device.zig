@@ -72,7 +72,7 @@ pub const DescribeInputDeviceOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the input device.
-    type: ?InputDeviceType = null,
+    @"type": ?InputDeviceType = null,
 
     /// Settings that describe an input device that is type UHD.
     uhd_device_settings: ?InputDeviceUhdSettings = null,
@@ -92,7 +92,7 @@ pub const DescribeInputDeviceOutput = struct {
         .output_type = "OutputType",
         .serial_number = "SerialNumber",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .uhd_device_settings = "UhdDeviceSettings",
     };
 };

@@ -26,7 +26,8 @@ pub const CreateApplicationAssignmentInput = struct {
     };
 };
 
-pub const CreateApplicationAssignmentOutput = struct {};
+pub const CreateApplicationAssignmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

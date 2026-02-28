@@ -36,7 +36,8 @@ pub const AssociateServiceActionWithProvisioningArtifactInput = struct {
     };
 };
 
-pub const AssociateServiceActionWithProvisioningArtifactOutput = struct {};
+pub const AssociateServiceActionWithProvisioningArtifactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

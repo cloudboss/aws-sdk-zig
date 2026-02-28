@@ -21,12 +21,12 @@ pub const UsageByAccount = struct {
     /// AUTOMATED_SENSITIVE_DATA_DISCOVERY, to analyze S3 objects for automated
     /// sensitive data discovery; DATA_INVENTORY_EVALUATION, to monitor S3 buckets;
     /// and, SENSITIVE_DATA_DISCOVERY, to run classification jobs.
-    type: ?UsageType,
+    @"type": ?UsageType,
 
     pub const json_field_names = .{
         .currency = "currency",
         .estimated_cost = "estimatedCost",
         .service_limit = "serviceLimit",
-        .type = "type",
+        .@"type" = "type",
     };
 };

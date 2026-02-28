@@ -14,7 +14,8 @@ pub const DeleteDatasetInput = struct {
     };
 };
 
-pub const DeleteDatasetOutput = struct {};
+pub const DeleteDatasetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

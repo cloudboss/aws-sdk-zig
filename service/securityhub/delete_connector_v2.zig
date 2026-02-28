@@ -13,7 +13,8 @@ pub const DeleteConnectorV2Input = struct {
     };
 };
 
-pub const DeleteConnectorV2Output = struct {};
+pub const DeleteConnectorV2Output = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

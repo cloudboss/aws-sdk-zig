@@ -16,7 +16,7 @@ pub const CommandParameter = struct {
     name: []const u8,
 
     /// The type of the command parameter.
-    type: ?CommandParameterType,
+    @"type": ?CommandParameterType,
 
     /// Parameter value that overrides the default value, if set.
     value: ?CommandParameterValue,
@@ -29,7 +29,7 @@ pub const CommandParameter = struct {
         .default_value = "defaultValue",
         .description = "description",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
         .value_conditions = "valueConditions",
     };

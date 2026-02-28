@@ -6,14 +6,14 @@ pub const AwsCertificateManagerCertificateResourceRecord = struct {
     name: ?[]const u8,
 
     /// The type of resource.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The value of the resource.
     value: ?[]const u8,
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

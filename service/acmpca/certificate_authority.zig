@@ -70,7 +70,7 @@ pub const CertificateAuthority = struct {
     status: ?CertificateAuthorityStatus,
 
     /// Type of your private CA.
-    @"type": ?CertificateAuthorityType,
+    type: ?CertificateAuthorityType,
 
     /// Specifies whether the CA issues general-purpose certificates that typically
     /// require a revocation mechanism, or short-lived certificates that may
@@ -94,7 +94,7 @@ pub const CertificateAuthority = struct {
         .revocation_configuration = "RevocationConfiguration",
         .serial = "Serial",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
         .usage_mode = "UsageMode",
     };
 };

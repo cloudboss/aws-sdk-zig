@@ -50,7 +50,8 @@ pub const PutAccountDetailsInput = struct {
     };
 };
 
-pub const PutAccountDetailsOutput = struct {};
+pub const PutAccountDetailsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

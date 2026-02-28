@@ -34,8 +34,7 @@ pub const CreateBudgetInput = struct {
     };
 };
 
-pub const CreateBudgetOutput = struct {
-};
+pub const CreateBudgetOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -25,7 +25,8 @@ pub const EnableApplicationLayerAutomaticResponseInput = struct {
     };
 };
 
-pub const EnableApplicationLayerAutomaticResponseOutput = struct {};
+pub const EnableApplicationLayerAutomaticResponseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

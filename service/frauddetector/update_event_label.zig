@@ -26,7 +26,8 @@ pub const UpdateEventLabelInput = struct {
     };
 };
 
-pub const UpdateEventLabelOutput = struct {};
+pub const UpdateEventLabelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -12,10 +12,10 @@ pub const FindingHistoryUpdateSource = struct {
     /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) (by an integrated Amazon Web Services service or third party partner integration) or [
     /// `BatchUpdateFindings`
     /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) (by a Security Hub customer).
-    type: ?FindingHistoryUpdateSourceType,
+    @"type": ?FindingHistoryUpdateSourceType,
 
     pub const json_field_names = .{
         .identity = "Identity",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

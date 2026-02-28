@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 const PutResourcePolicyInput = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
 
-pub const PutResourcePolicyOutput = struct {};
+pub const PutResourcePolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,7 +18,8 @@ pub const PutLifecyclePolicyInput = struct {
     };
 };
 
-pub const PutLifecyclePolicyOutput = struct {};
+pub const PutLifecyclePolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,7 +14,8 @@ pub const RegisterDataLakeDelegatedAdministratorInput = struct {
     };
 };
 
-pub const RegisterDataLakeDelegatedAdministratorOutput = struct {};
+pub const RegisterDataLakeDelegatedAdministratorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

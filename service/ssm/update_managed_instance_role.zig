@@ -26,7 +26,8 @@ pub const UpdateManagedInstanceRoleInput = struct {
     };
 };
 
-pub const UpdateManagedInstanceRoleOutput = struct {};
+pub const UpdateManagedInstanceRoleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

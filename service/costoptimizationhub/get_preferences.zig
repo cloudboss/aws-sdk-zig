@@ -7,7 +7,8 @@ const MemberAccountDiscountVisibility = @import("member_account_discount_visibil
 const PreferredCommitment = @import("preferred_commitment.zig").PreferredCommitment;
 const SavingsEstimationMode = @import("savings_estimation_mode.zig").SavingsEstimationMode;
 
-pub const GetPreferencesInput = struct {};
+pub const GetPreferencesInput = struct {
+};
 
 pub const GetPreferencesOutput = struct {
     /// Retrieves the status of the "member account discount visibility" preference.

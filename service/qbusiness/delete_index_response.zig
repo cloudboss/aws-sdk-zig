@@ -1,1 +1,2 @@
-pub const DeleteIndexResponse = struct {};
+pub const DeleteIndexResponse = struct {
+};

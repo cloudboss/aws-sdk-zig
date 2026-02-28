@@ -20,13 +20,13 @@ pub const ListSegmentReferencesInput = struct {
 
     /// Specifies whether to return information about launches or experiments that
     /// use this segment.
-    type: SegmentReferenceResourceType,
+    @"type": SegmentReferenceResourceType,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
         .segment = "segment",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -106,7 +106,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListSegmentReferencesInput,
     }
     if (query_has_prev) try query_buf.appendSlice(alloc, "&");
     try query_buf.appendSlice(alloc, "type=");
-    try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(input.type));
+    try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(input.@"type"));
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 

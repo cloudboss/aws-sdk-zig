@@ -13,7 +13,8 @@ pub const DeleteKeyspaceInput = struct {
     };
 };
 
-pub const DeleteKeyspaceOutput = struct {};
+pub const DeleteKeyspaceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

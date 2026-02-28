@@ -74,7 +74,7 @@ pub const GetDataSourceOutput = struct {
     sync_schedule: ?[]const u8 = null,
 
     /// The type of the data source connector. For example, `S3`.
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     /// The Unix timestamp when the data source connector was last updated.
     updated_at: ?i64 = null,
@@ -98,7 +98,7 @@ pub const GetDataSourceOutput = struct {
         .role_arn = "roleArn",
         .status = "status",
         .sync_schedule = "syncSchedule",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
         .vpc_configuration = "vpcConfiguration",
     };

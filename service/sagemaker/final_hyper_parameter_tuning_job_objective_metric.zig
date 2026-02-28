@@ -12,14 +12,14 @@ pub const FinalHyperParameterTuningJobObjectiveMetric = struct {
 
     /// Select if you want to minimize or maximize the objective metric during
     /// hyperparameter tuning.
-    type: ?HyperParameterTuningJobObjectiveType,
+    @"type": ?HyperParameterTuningJobObjectiveType,
 
     /// The value of the objective metric.
     value: f32,
 
     pub const json_field_names = .{
         .metric_name = "MetricName",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

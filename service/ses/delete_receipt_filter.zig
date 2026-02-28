@@ -9,7 +9,8 @@ pub const DeleteReceiptFilterInput = struct {
     filter_name: []const u8,
 };
 
-pub const DeleteReceiptFilterOutput = struct {};
+pub const DeleteReceiptFilterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

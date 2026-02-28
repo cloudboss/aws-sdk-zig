@@ -7,10 +7,10 @@ pub const TemplateParameterConfiguration = struct {
 
     /// The type of the job template parameter. Allowed values are: ‘STRING’,
     /// ‘NUMBER’.
-    type: ?TemplateParameterDataType,
+    @"type": ?TemplateParameterDataType,
 
     pub const json_field_names = .{
         .default_value = "defaultValue",
-        .type = "type",
+        .@"type" = "type",
     };
 };

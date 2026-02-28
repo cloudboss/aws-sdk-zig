@@ -40,10 +40,10 @@ pub const Relationship = struct {
     ///
     /// * *TABLE_FOOTER* - A list of IDs that identify the TABLE_FOOTER
     /// block types in a table.
-    type: ?RelationshipType,
+    @"type": ?RelationshipType,
 
     pub const json_field_names = .{
         .ids = "Ids",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

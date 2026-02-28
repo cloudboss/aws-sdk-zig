@@ -6,10 +6,10 @@ pub const DataSourceErrorInfo = struct {
     message: ?[]const u8,
 
     /// Error type.
-    type: ?DataSourceErrorInfoType,
+    @"type": ?DataSourceErrorInfoType,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

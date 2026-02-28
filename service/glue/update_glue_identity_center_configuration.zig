@@ -19,7 +19,8 @@ pub const UpdateGlueIdentityCenterConfigurationInput = struct {
     };
 };
 
-pub const UpdateGlueIdentityCenterConfigurationOutput = struct {};
+pub const UpdateGlueIdentityCenterConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

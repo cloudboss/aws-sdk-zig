@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeDRTAccessInput = struct {};
+pub const DescribeDRTAccessInput = struct {
+};
 
 pub const DescribeDRTAccessOutput = struct {
     /// The list of Amazon S3 buckets accessed by the SRT.

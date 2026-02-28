@@ -15,11 +15,11 @@ pub const EngagementContextDetails = struct {
     /// Specifies the type of Engagement context. Valid values are "CustomerProject"
     /// or "Document", indicating whether the context relates to a customer project
     /// or a document respectively.
-    type: EngagementContextType,
+    @"type": EngagementContextType,
 
     pub const json_field_names = .{
         .id = "Id",
         .payload = "Payload",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

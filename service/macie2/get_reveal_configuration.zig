@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RevealConfiguration = @import("reveal_configuration.zig").RevealConfiguration;
 const RetrievalConfiguration = @import("retrieval_configuration.zig").RetrievalConfiguration;
 
-pub const GetRevealConfigurationInput = struct {};
+pub const GetRevealConfigurationInput = struct {
+};
 
 pub const GetRevealConfigurationOutput = struct {
     /// The KMS key that's used to encrypt the sensitive data, and the status of the

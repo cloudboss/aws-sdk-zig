@@ -16,7 +16,8 @@ pub const CreateSampleFindingsInput = struct {
     };
 };
 
-pub const CreateSampleFindingsOutput = struct {};
+pub const CreateSampleFindingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

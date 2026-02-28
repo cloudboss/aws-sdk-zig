@@ -29,7 +29,8 @@ pub const UpdateEmailIdentityPolicyInput = struct {
     };
 };
 
-pub const UpdateEmailIdentityPolicyOutput = struct {};
+pub const UpdateEmailIdentityPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

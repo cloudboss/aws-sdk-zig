@@ -13,7 +13,8 @@ pub const CancelDataQualityRulesetEvaluationRunInput = struct {
     };
 };
 
-pub const CancelDataQualityRulesetEvaluationRunOutput = struct {};
+pub const CancelDataQualityRulesetEvaluationRunOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

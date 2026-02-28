@@ -27,7 +27,8 @@ pub const DeleteProvisionedProductPlanInput = struct {
     };
 };
 
-pub const DeleteProvisionedProductPlanOutput = struct {};
+pub const DeleteProvisionedProductPlanOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

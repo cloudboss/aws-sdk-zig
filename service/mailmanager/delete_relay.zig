@@ -13,7 +13,8 @@ pub const DeleteRelayInput = struct {
     };
 };
 
-pub const DeleteRelayOutput = struct {};
+pub const DeleteRelayOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,7 +14,8 @@ pub const DeleteTestGridProjectInput = struct {
     };
 };
 
-pub const DeleteTestGridProjectOutput = struct {};
+pub const DeleteTestGridProjectOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

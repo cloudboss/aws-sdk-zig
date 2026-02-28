@@ -14,7 +14,8 @@ pub const DeleteDevicePoolInput = struct {
     };
 };
 
-pub const DeleteDevicePoolOutput = struct {};
+pub const DeleteDevicePoolOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

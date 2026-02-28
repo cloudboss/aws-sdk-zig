@@ -18,7 +18,8 @@ pub const UpdateWirelessDeviceImportTaskInput = struct {
     };
 };
 
-pub const UpdateWirelessDeviceImportTaskOutput = struct {};
+pub const UpdateWirelessDeviceImportTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

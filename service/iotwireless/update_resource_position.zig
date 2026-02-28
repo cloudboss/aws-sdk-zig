@@ -31,7 +31,8 @@ pub const UpdateResourcePositionInput = struct {
     };
 };
 
-pub const UpdateResourcePositionOutput = struct {};
+pub const UpdateResourcePositionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const CancelTransactionInput = struct {
     };
 };
 
-pub const CancelTransactionOutput = struct {};
+pub const CancelTransactionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

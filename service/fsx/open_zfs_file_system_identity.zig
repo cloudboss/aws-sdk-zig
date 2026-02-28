@@ -8,10 +8,10 @@ pub const OpenZFSFileSystemIdentity = struct {
     posix_user: ?OpenZFSPosixFileSystemUser,
 
     /// Specifies the FSx for OpenZFS user identity type, accepts only `POSIX`.
-    type: OpenZFSFileSystemUserType,
+    @"type": OpenZFSFileSystemUserType,
 
     pub const json_field_names = .{
         .posix_user = "PosixUser",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

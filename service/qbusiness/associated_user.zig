@@ -8,10 +8,10 @@ pub const AssociatedUser = struct {
 
     /// The type of the associated user. This indicates the scope of the user's
     /// association.
-    type: ?MembershipType,
+    @"type": ?MembershipType,
 
     pub const json_field_names = .{
         .id = "id",
-        .type = "type",
+        .@"type" = "type",
     };
 };

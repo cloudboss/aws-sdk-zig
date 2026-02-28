@@ -14,7 +14,8 @@ pub const UpdateHostedZoneFeaturesInput = struct {
     hosted_zone_id: []const u8,
 };
 
-pub const UpdateHostedZoneFeaturesOutput = struct {};
+pub const UpdateHostedZoneFeaturesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

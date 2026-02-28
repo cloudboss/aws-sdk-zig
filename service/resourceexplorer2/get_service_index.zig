@@ -15,11 +15,11 @@ pub const GetServiceIndexOutput = struct {
     /// The type of the index. Valid values are `LOCAL` (contains resources from the
     /// current Region only) or `AGGREGATOR` (contains replicated resource
     /// information from all Regions).
-    type: ?IndexType = null,
+    @"type": ?IndexType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

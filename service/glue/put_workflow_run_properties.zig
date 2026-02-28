@@ -26,7 +26,8 @@ pub const PutWorkflowRunPropertiesInput = struct {
     };
 };
 
-pub const PutWorkflowRunPropertiesOutput = struct {};
+pub const PutWorkflowRunPropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

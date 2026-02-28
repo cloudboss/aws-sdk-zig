@@ -22,7 +22,8 @@ pub const DeleteAIPromptVersionInput = struct {
     };
 };
 
-pub const DeleteAIPromptVersionOutput = struct {};
+pub const DeleteAIPromptVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

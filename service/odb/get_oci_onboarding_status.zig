@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OciIdentityDomain = @import("oci_identity_domain.zig").OciIdentityDomain;
 const OciOnboardingStatus = @import("oci_onboarding_status.zig").OciOnboardingStatus;
 
-pub const GetOciOnboardingStatusInput = struct {};
+pub const GetOciOnboardingStatusInput = struct {
+};
 
 pub const GetOciOnboardingStatusOutput = struct {
     /// The existing OCI tenancy activation link for your Amazon Web Services

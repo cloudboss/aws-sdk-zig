@@ -14,7 +14,8 @@ pub const ConfirmTopicRuleDestinationInput = struct {
     };
 };
 
-pub const ConfirmTopicRuleDestinationOutput = struct {};
+pub const ConfirmTopicRuleDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

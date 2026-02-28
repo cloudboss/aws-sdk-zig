@@ -25,7 +25,7 @@ pub const ListedHostKey = struct {
     /// * `ecdsa-sha2-nistp256`
     /// * `ecdsa-sha2-nistp384`
     /// * `ecdsa-sha2-nistp521`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -33,6 +33,6 @@ pub const ListedHostKey = struct {
         .description = "Description",
         .fingerprint = "Fingerprint",
         .host_key_id = "HostKeyId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

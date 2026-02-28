@@ -85,7 +85,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateIndexInput, config: *
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

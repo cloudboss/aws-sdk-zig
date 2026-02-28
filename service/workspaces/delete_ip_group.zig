@@ -13,7 +13,8 @@ pub const DeleteIpGroupInput = struct {
     };
 };
 
-pub const DeleteIpGroupOutput = struct {};
+pub const DeleteIpGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

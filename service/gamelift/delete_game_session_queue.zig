@@ -15,7 +15,8 @@ pub const DeleteGameSessionQueueInput = struct {
     };
 };
 
-pub const DeleteGameSessionQueueOutput = struct {};
+pub const DeleteGameSessionQueueOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -26,7 +26,8 @@ pub const AttachManagedPolicyToPermissionSetInput = struct {
     };
 };
 
-pub const AttachManagedPolicyToPermissionSetOutput = struct {};
+pub const AttachManagedPolicyToPermissionSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -24,7 +24,8 @@ pub const UpdateSecurityControlInput = struct {
     };
 };
 
-pub const UpdateSecurityControlOutput = struct {};
+pub const UpdateSecurityControlOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

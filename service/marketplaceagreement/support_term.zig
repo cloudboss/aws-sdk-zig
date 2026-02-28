@@ -6,10 +6,10 @@ pub const SupportTerm = struct {
     refund_policy: ?[]const u8,
 
     /// Category of the term being updated.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .refund_policy = "refundPolicy",
-        .type = "type",
+        .@"type" = "type",
     };
 };

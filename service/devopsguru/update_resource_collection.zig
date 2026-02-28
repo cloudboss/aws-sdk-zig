@@ -20,7 +20,8 @@ pub const UpdateResourceCollectionInput = struct {
     };
 };
 
-pub const UpdateResourceCollectionOutput = struct {};
+pub const UpdateResourceCollectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

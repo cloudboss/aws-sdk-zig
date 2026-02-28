@@ -46,13 +46,13 @@ pub const ProvisioningArtifactProperties = struct {
     /// * `TERRAFORM_CLOUD` - Terraform Cloud configuration file
     ///
     /// * `EXTERNAL` - External configuration file
-    type: ?ProvisioningArtifactType,
+    @"type": ?ProvisioningArtifactType,
 
     pub const json_field_names = .{
         .description = "Description",
         .disable_template_validation = "DisableTemplateValidation",
         .info = "Info",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

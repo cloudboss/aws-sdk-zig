@@ -23,7 +23,8 @@ pub const UpdateMemberInput = struct {
     };
 };
 
-pub const UpdateMemberOutput = struct {};
+pub const UpdateMemberOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

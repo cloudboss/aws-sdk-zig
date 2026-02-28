@@ -27,10 +27,10 @@ pub const FulfillmentActivity = struct {
 
     /// How the intent should be fulfilled, either by running a Lambda
     /// function or by returning the slot data to the client application.
-    type: FulfillmentActivityType,
+    @"type": FulfillmentActivityType,
 
     pub const json_field_names = .{
         .code_hook = "codeHook",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -22,7 +22,8 @@ pub const DeletePublishingDestinationInput = struct {
     };
 };
 
-pub const DeletePublishingDestinationOutput = struct {};
+pub const DeletePublishingDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

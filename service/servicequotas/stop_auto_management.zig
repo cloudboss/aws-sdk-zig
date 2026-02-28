@@ -4,9 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const StopAutoManagementInput = struct {};
+pub const StopAutoManagementInput = struct {
+};
 
-pub const StopAutoManagementOutput = struct {};
+pub const StopAutoManagementOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

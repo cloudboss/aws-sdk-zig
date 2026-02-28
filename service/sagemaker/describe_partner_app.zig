@@ -103,7 +103,7 @@ pub const DescribePartnerAppOutput = struct {
 
     /// The type of SageMaker Partner AI App. Must be one of the following:
     /// `lakera-guard`, `comet`, `deepchecks-llm-evaluation`, or `fiddler`.
-    type: ?PartnerAppType = null,
+    @"type": ?PartnerAppType = null,
 
     /// The version of the SageMaker Partner AI App.
     version: ?[]const u8 = null,
@@ -126,7 +126,7 @@ pub const DescribePartnerAppOutput = struct {
         .name = "Name",
         .status = "Status",
         .tier = "Tier",
-        .type = "Type",
+        .@"type" = "Type",
         .version = "Version",
     };
 };

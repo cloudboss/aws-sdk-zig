@@ -19,7 +19,8 @@ pub const DisassociateManagedNotificationAdditionalChannelInput = struct {
     };
 };
 
-pub const DisassociateManagedNotificationAdditionalChannelOutput = struct {};
+pub const DisassociateManagedNotificationAdditionalChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

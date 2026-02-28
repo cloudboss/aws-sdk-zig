@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OrganizationConfiguration = @import("organization_configuration.zig").OrganizationConfiguration;
 const ServiceStatus = @import("service_status.zig").ServiceStatus;
 
-pub const GetServiceSettingsInput = struct {};
+pub const GetServiceSettingsInput = struct {
+};
 
 pub const GetServiceSettingsOutput = struct {
     /// Cross region discovery home region.

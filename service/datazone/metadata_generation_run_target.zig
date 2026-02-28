@@ -9,11 +9,11 @@ pub const MetadataGenerationRunTarget = struct {
     revision: ?[]const u8,
 
     /// The type of the asset for which metadata was generated.
-    type: MetadataGenerationTargetType,
+    @"type": MetadataGenerationTargetType,
 
     pub const json_field_names = .{
         .identifier = "identifier",
         .revision = "revision",
-        .type = "type",
+        .@"type" = "type",
     };
 };

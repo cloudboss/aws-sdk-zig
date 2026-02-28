@@ -18,7 +18,8 @@ pub const PutConfigurationSetSendingOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetSendingOptionsOutput = struct {};
+pub const PutConfigurationSetSendingOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

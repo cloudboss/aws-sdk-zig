@@ -7,10 +7,10 @@ pub const ActionConnectorError = struct {
     message: ?[]const u8,
 
     /// The type or category of the error.
-    type: ?ActionConnectorErrorType,
+    @"type": ?ActionConnectorErrorType,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

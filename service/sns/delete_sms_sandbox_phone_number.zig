@@ -9,7 +9,8 @@ pub const DeleteSMSSandboxPhoneNumberInput = struct {
     phone_number: []const u8,
 };
 
-pub const DeleteSMSSandboxPhoneNumberOutput = struct {};
+pub const DeleteSMSSandboxPhoneNumberOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

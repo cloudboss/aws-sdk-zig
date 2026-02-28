@@ -13,7 +13,8 @@ pub const StopBulkDeploymentInput = struct {
     };
 };
 
-pub const StopBulkDeploymentOutput = struct {};
+pub const StopBulkDeploymentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

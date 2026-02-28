@@ -10,11 +10,11 @@ pub const GetSchemaVersionRequest = struct {
     schema_versioned_id: []const u8,
 
     /// The type of schema version.
-    type: SchemaVersionType,
+    @"type": SchemaVersionType,
 
     pub const json_field_names = .{
         .format = "Format",
         .schema_versioned_id = "SchemaVersionedId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

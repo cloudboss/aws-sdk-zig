@@ -1,2 +1,3 @@
 /// Embedded Destination Settings
-pub const EmbeddedDestinationSettings = struct {};
+pub const EmbeddedDestinationSettings = struct {
+};

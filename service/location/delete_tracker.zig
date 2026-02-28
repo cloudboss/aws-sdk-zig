@@ -13,7 +13,8 @@ pub const DeleteTrackerInput = struct {
     };
 };
 
-pub const DeleteTrackerOutput = struct {};
+pub const DeleteTrackerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

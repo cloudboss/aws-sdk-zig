@@ -11,11 +11,11 @@ pub const FuotaTaskLogOption = struct {
     log_level: LogLevel,
 
     /// The FUOTA task type.
-    type: FuotaTaskType,
+    @"type": FuotaTaskType,
 
     pub const json_field_names = .{
         .events = "Events",
         .log_level = "LogLevel",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

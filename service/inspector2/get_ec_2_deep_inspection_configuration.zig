@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Ec2DeepInspectionStatus = @import("ec_2_deep_inspection_status.zig").Ec2DeepInspectionStatus;
 
-pub const GetEc2DeepInspectionConfigurationInput = struct {};
+pub const GetEc2DeepInspectionConfigurationInput = struct {
+};
 
 pub const GetEc2DeepInspectionConfigurationOutput = struct {
     /// An error message explaining why Amazon Inspector deep inspection

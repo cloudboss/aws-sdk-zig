@@ -21,7 +21,8 @@ pub const StartApplicationInput = struct {
     };
 };
 
-pub const StartApplicationOutput = struct {};
+pub const StartApplicationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

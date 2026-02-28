@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const QueryComputeResponse = @import("query_compute_response.zig").QueryComputeResponse;
 const QueryPricingModel = @import("query_pricing_model.zig").QueryPricingModel;
 
-pub const DescribeAccountSettingsInput = struct {};
+pub const DescribeAccountSettingsInput = struct {
+};
 
 pub const DescribeAccountSettingsOutput = struct {
     /// The maximum number of [Timestream compute

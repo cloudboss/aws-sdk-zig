@@ -171,7 +171,7 @@ pub const StartMedicalTranscriptionJobInput = struct {
     /// For example, `DICTATION` could be used for a medical professional wanting
     /// to transcribe voice memos; `CONVERSATION` could be used for transcribing the
     /// doctor-patient dialogue during the patient's office visit.
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .content_identification_type = "ContentIdentificationType",
@@ -187,7 +187,7 @@ pub const StartMedicalTranscriptionJobInput = struct {
         .settings = "Settings",
         .specialty = "Specialty",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

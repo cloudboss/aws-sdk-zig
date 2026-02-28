@@ -41,7 +41,8 @@ pub const UpdateRumMetricDefinitionInput = struct {
     };
 };
 
-pub const UpdateRumMetricDefinitionOutput = struct {};
+pub const UpdateRumMetricDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

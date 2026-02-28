@@ -21,7 +21,7 @@ pub const AssetModelCompositeModelSummary = struct {
 
     /// The composite model type. Valid values are `AWS/ALARM`, `CUSTOM`, or `
     /// AWS/L4E_ANOMALY`.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .description = "description",
@@ -29,6 +29,6 @@ pub const AssetModelCompositeModelSummary = struct {
         .id = "id",
         .name = "name",
         .path = "path",
-        .type = "type",
+        .@"type" = "type",
     };
 };

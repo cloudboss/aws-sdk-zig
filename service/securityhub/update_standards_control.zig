@@ -24,7 +24,8 @@ pub const UpdateStandardsControlInput = struct {
     };
 };
 
-pub const UpdateStandardsControlOutput = struct {};
+pub const UpdateStandardsControlOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

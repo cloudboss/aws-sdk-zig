@@ -52,7 +52,8 @@ pub const GrantPermissionsInput = struct {
     };
 };
 
-pub const GrantPermissionsOutput = struct {};
+pub const GrantPermissionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

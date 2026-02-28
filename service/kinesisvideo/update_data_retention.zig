@@ -40,7 +40,8 @@ pub const UpdateDataRetentionInput = struct {
     };
 };
 
-pub const UpdateDataRetentionOutput = struct {};
+pub const UpdateDataRetentionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

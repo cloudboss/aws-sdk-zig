@@ -20,10 +20,10 @@ pub const Payload = struct {
 
     /// The value of the payload type can be either `STRING` or
     /// `JSON`.
-    type: PayloadType,
+    @"type": PayloadType,
 
     pub const json_field_names = .{
         .content_expression = "contentExpression",
-        .type = "type",
+        .@"type" = "type",
     };
 };

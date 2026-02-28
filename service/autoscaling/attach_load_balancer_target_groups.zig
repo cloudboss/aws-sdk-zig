@@ -16,8 +16,7 @@ pub const AttachLoadBalancerTargetGroupsInput = struct {
     target_group_ar_ns: []const []const u8,
 };
 
-pub const AttachLoadBalancerTargetGroupsOutput = struct {
-};
+pub const AttachLoadBalancerTargetGroupsOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

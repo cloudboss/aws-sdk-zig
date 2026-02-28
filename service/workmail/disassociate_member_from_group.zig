@@ -41,7 +41,8 @@ pub const DisassociateMemberFromGroupInput = struct {
     };
 };
 
-pub const DisassociateMemberFromGroupOutput = struct {};
+pub const DisassociateMemberFromGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteContainerPolicyInput = struct {
     };
 };
 
-pub const DeleteContainerPolicyOutput = struct {};
+pub const DeleteContainerPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

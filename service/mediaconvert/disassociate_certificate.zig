@@ -14,7 +14,8 @@ pub const DisassociateCertificateInput = struct {
     };
 };
 
-pub const DisassociateCertificateOutput = struct {};
+pub const DisassociateCertificateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

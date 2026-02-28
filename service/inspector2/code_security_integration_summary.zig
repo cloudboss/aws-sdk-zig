@@ -27,7 +27,7 @@ pub const CodeSecurityIntegrationSummary = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of repository provider for the integration.
-    type: IntegrationType,
+    @"type": IntegrationType,
 
     pub const json_field_names = .{
         .created_on = "createdOn",
@@ -37,6 +37,6 @@ pub const CodeSecurityIntegrationSummary = struct {
         .status = "status",
         .status_reason = "statusReason",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

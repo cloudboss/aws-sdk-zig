@@ -31,7 +31,8 @@ pub const CreateModelInput = struct {
     };
 };
 
-pub const CreateModelOutput = struct {};
+pub const CreateModelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

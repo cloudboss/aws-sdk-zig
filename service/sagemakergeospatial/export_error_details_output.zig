@@ -8,10 +8,10 @@ pub const ExportErrorDetailsOutput = struct {
     message: ?[]const u8,
 
     /// The type of error in an export EarthObservationJob operation.
-    type: ?ExportErrorType,
+    @"type": ?ExportErrorType,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

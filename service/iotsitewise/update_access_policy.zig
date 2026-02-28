@@ -37,7 +37,8 @@ pub const UpdateAccessPolicyInput = struct {
     };
 };
 
-pub const UpdateAccessPolicyOutput = struct {};
+pub const UpdateAccessPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

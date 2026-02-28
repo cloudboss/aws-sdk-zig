@@ -62,7 +62,7 @@ pub const Namespace = struct {
     ///
     /// Instances can be discovered using DNS queries in VPCs and using the
     /// `DiscoverInstances` API.
-    type: ?NamespaceType,
+    @"type": ?NamespaceType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -74,6 +74,6 @@ pub const Namespace = struct {
         .properties = "Properties",
         .resource_owner = "ResourceOwner",
         .service_count = "ServiceCount",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

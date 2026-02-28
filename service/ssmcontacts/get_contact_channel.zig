@@ -36,7 +36,7 @@ pub const GetContactChannelOutput = struct {
 
     /// The type of contact channel. The type is `SMS`, `VOICE`, or
     /// `EMAIL`.
-    type: ChannelType,
+    @"type": ChannelType,
 
     pub const json_field_names = .{
         .activation_status = "ActivationStatus",
@@ -44,7 +44,7 @@ pub const GetContactChannelOutput = struct {
         .contact_channel_arn = "ContactChannelArn",
         .delivery_address = "DeliveryAddress",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

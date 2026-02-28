@@ -19,7 +19,8 @@ pub const DeleteSecurityConfigInput = struct {
     };
 };
 
-pub const DeleteSecurityConfigOutput = struct {};
+pub const DeleteSecurityConfigOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

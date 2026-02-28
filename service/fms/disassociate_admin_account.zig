@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DisassociateAdminAccountInput = struct {};
+pub const DisassociateAdminAccountInput = struct {
+};
 
 const DisassociateAdminAccountOutput = struct {};
 

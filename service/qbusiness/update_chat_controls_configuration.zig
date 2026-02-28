@@ -56,7 +56,8 @@ pub const UpdateChatControlsConfigurationInput = struct {
     };
 };
 
-pub const UpdateChatControlsConfigurationOutput = struct {};
+pub const UpdateChatControlsConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

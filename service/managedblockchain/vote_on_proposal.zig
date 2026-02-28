@@ -26,7 +26,8 @@ pub const VoteOnProposalInput = struct {
     };
 };
 
-pub const VoteOnProposalOutput = struct {};
+pub const VoteOnProposalOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

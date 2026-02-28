@@ -29,11 +29,11 @@ pub const EncryptionConfiguration = struct {
     kms_key_id: ?[]const u8,
 
     /// Encryption type
-    type: EncryptionType,
+    @"type": EncryptionType,
 
     pub const json_field_names = .{
         .kms_data_key_reuse_period_seconds = "kmsDataKeyReusePeriodSeconds",
         .kms_key_id = "kmsKeyId",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -1,1 +1,2 @@
-pub const UpdateDestinationResponse = struct {};
+pub const UpdateDestinationResponse = struct {
+};

@@ -13,11 +13,11 @@ pub const Filter = struct {
 
     /// The type of resources to be filtered. You can specify one or more of the
     /// resource types.
-    type: ?[]const ShareResourceType,
+    @"type": ?[]const ShareResourceType,
 
     pub const json_field_names = .{
         .resource_arns = "resourceArns",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };

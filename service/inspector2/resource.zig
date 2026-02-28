@@ -21,7 +21,7 @@ pub const Resource = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of resource.
-    type: ResourceType,
+    @"type": ResourceType,
 
     pub const json_field_names = .{
         .details = "details",
@@ -29,6 +29,6 @@ pub const Resource = struct {
         .partition = "partition",
         .region = "region",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -13,16 +13,17 @@ pub const DeleteAccessPolicyInput = struct {
     name: []const u8,
 
     /// The type of policy.
-    type: AccessPolicyType,
+    @"type": AccessPolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
-pub const DeleteAccessPolicyOutput = struct {};
+pub const DeleteAccessPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

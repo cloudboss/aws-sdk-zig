@@ -15,7 +15,8 @@ pub const SetLoadBalancerListenerSSLCertificateInput = struct {
     ssl_certificate_id: []const u8,
 };
 
-pub const SetLoadBalancerListenerSSLCertificateOutput = struct {};
+pub const SetLoadBalancerListenerSSLCertificateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

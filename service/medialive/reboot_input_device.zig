@@ -22,7 +22,8 @@ pub const RebootInputDeviceInput = struct {
     };
 };
 
-pub const RebootInputDeviceOutput = struct {};
+pub const RebootInputDeviceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

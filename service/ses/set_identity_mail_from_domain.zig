@@ -35,7 +35,8 @@ pub const SetIdentityMailFromDomainInput = struct {
     mail_from_domain: ?[]const u8 = null,
 };
 
-pub const SetIdentityMailFromDomainOutput = struct {};
+pub const SetIdentityMailFromDomainOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

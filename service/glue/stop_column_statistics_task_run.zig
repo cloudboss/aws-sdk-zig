@@ -17,7 +17,8 @@ pub const StopColumnStatisticsTaskRunInput = struct {
     };
 };
 
-pub const StopColumnStatisticsTaskRunOutput = struct {};
+pub const StopColumnStatisticsTaskRunOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

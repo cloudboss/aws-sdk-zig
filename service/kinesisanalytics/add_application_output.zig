@@ -33,7 +33,8 @@ pub const AddApplicationOutputInput = struct {
     };
 };
 
-pub const AddApplicationOutputOutput = struct {};
+pub const AddApplicationOutputOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

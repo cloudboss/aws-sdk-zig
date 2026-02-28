@@ -24,7 +24,8 @@ pub const UpdateReplicationSetInput = struct {
     };
 };
 
-pub const UpdateReplicationSetOutput = struct {};
+pub const UpdateReplicationSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

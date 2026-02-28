@@ -28,7 +28,7 @@ pub const WorkflowListItem = struct {
     status: ?WorkflowStatus,
 
     /// The workflow's type.
-    type: ?WorkflowType,
+    @"type": ?WorkflowType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -38,6 +38,6 @@ pub const WorkflowListItem = struct {
         .metadata = "metadata",
         .name = "name",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };

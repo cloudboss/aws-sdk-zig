@@ -43,7 +43,8 @@ pub const RevokePermissionsInput = struct {
     };
 };
 
-pub const RevokePermissionsOutput = struct {};
+pub const RevokePermissionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

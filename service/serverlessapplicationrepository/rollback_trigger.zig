@@ -12,10 +12,10 @@ pub const RollbackTrigger = struct {
     /// CloudFormation
     /// [RollbackTrigger](https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
     /// * Data Type.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .arn = "Arn",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

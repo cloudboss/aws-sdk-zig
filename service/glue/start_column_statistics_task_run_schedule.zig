@@ -18,7 +18,8 @@ pub const StartColumnStatisticsTaskRunScheduleInput = struct {
     };
 };
 
-pub const StartColumnStatisticsTaskRunScheduleOutput = struct {};
+pub const StartColumnStatisticsTaskRunScheduleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

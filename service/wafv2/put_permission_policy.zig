@@ -37,7 +37,8 @@ pub const PutPermissionPolicyInput = struct {
     };
 };
 
-pub const PutPermissionPolicyOutput = struct {};
+pub const PutPermissionPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

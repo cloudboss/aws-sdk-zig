@@ -16,11 +16,11 @@ pub const DocumentAttributeConfiguration = struct {
     search: ?Status,
 
     /// The type of document attribute.
-    type: ?AttributeType,
+    @"type": ?AttributeType,
 
     pub const json_field_names = .{
         .name = "name",
         .search = "search",
-        .type = "type",
+        .@"type" = "type",
     };
 };

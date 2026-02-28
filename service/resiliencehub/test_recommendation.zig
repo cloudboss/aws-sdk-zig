@@ -44,7 +44,7 @@ pub const TestRecommendation = struct {
     risk: ?TestRisk,
 
     /// Type of test recommendation.
-    type: ?TestType,
+    @"type": ?TestType,
 
     pub const json_field_names = .{
         .app_component_id = "appComponentId",
@@ -59,6 +59,6 @@ pub const TestRecommendation = struct {
         .recommendation_status = "recommendationStatus",
         .reference_id = "referenceId",
         .risk = "risk",
-        .type = "type",
+        .@"type" = "type",
     };
 };

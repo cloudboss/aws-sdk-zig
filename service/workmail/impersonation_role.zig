@@ -15,13 +15,13 @@ pub const ImpersonationRole = struct {
     name: ?[]const u8,
 
     /// The impersonation role type.
-    type: ?ImpersonationRoleType,
+    @"type": ?ImpersonationRoleType,
 
     pub const json_field_names = .{
         .date_created = "DateCreated",
         .date_modified = "DateModified",
         .impersonation_role_id = "ImpersonationRoleId",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

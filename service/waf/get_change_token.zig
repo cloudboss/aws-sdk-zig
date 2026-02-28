@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetChangeTokenInput = struct {};
+pub const GetChangeTokenInput = struct {
+};
 
 pub const GetChangeTokenOutput = struct {
     /// The `ChangeToken` that you used in the request. Use this value in a

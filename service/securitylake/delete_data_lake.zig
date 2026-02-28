@@ -13,7 +13,8 @@ pub const DeleteDataLakeInput = struct {
     };
 };
 
-pub const DeleteDataLakeOutput = struct {};
+pub const DeleteDataLakeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

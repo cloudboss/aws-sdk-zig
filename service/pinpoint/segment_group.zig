@@ -28,12 +28,12 @@ pub const SegmentGroup = struct {
     /// Specifies how to handle multiple dimensions for the segment. For example, if
     /// you specify three dimensions for the segment, whether the resulting segment
     /// includes endpoints that match all, any, or none of the dimensions.
-    type: ?Type,
+    @"type": ?Type,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",
         .source_segments = "SourceSegments",
         .source_type = "SourceType",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

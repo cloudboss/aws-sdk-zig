@@ -92,9 +92,9 @@ pub const DeploymentController = struct {
     /// terminated after a successful deployment. Use this deployment controller to
     /// verify a new deployment of a service before sending production traffic to
     /// it.
-    type: DeploymentControllerType,
+    @"type": DeploymentControllerType,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -28,7 +28,8 @@ pub const UpdateImageGenerationConfigurationInput = struct {
     };
 };
 
-pub const UpdateImageGenerationConfigurationOutput = struct {};
+pub const UpdateImageGenerationConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

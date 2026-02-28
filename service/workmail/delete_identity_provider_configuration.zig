@@ -13,7 +13,8 @@ pub const DeleteIdentityProviderConfigurationInput = struct {
     };
 };
 
-pub const DeleteIdentityProviderConfigurationOutput = struct {};
+pub const DeleteIdentityProviderConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

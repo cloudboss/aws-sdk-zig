@@ -22,7 +22,8 @@ pub const UntagStreamInput = struct {
     };
 };
 
-pub const UntagStreamOutput = struct {};
+pub const UntagStreamOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

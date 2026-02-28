@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataLakeAutoEnableNewAccountConfiguration = @import("data_lake_auto_enable_new_account_configuration.zig").DataLakeAutoEnableNewAccountConfiguration;
 
-pub const GetDataLakeOrganizationConfigurationInput = struct {};
+pub const GetDataLakeOrganizationConfigurationInput = struct {
+};
 
 pub const GetDataLakeOrganizationConfigurationOutput = struct {
     /// The configuration used for new accounts in Security Lake.

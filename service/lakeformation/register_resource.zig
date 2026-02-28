@@ -46,7 +46,8 @@ pub const RegisterResourceInput = struct {
     };
 };
 
-pub const RegisterResourceOutput = struct {};
+pub const RegisterResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

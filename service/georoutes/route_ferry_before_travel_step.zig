@@ -13,11 +13,11 @@ pub const RouteFerryBeforeTravelStep = struct {
     instruction: ?[]const u8,
 
     /// Type of the step.
-    type: RouteFerryBeforeTravelStepType,
+    @"type": RouteFerryBeforeTravelStepType,
 
     pub const json_field_names = .{
         .duration = "Duration",
         .instruction = "Instruction",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -29,7 +29,7 @@ pub const Recommendation = struct {
 
     /// The recommendation type, with values like `DKIM`,
     /// `SPF`, `DMARC`, `BIMI`, or `COMPLAINT`.
-    type: ?RecommendationType,
+    @"type": ?RecommendationType,
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
@@ -38,6 +38,6 @@ pub const Recommendation = struct {
         .last_updated_timestamp = "LastUpdatedTimestamp",
         .resource_arn = "ResourceArn",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

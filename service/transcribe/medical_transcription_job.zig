@@ -139,7 +139,7 @@ pub const MedicalTranscriptionJob = struct {
     /// Indicates whether the input media is a dictation or a conversation, as
     /// specified in
     /// the `StartMedicalTranscriptionJob` request.
-    type: ?Type,
+    @"type": ?Type,
 
     pub const json_field_names = .{
         .completion_time = "CompletionTime",
@@ -157,6 +157,6 @@ pub const MedicalTranscriptionJob = struct {
         .tags = "Tags",
         .transcript = "Transcript",
         .transcription_job_status = "TranscriptionJobStatus",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

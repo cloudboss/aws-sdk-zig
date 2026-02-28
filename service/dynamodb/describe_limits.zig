@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeLimitsInput = struct {};
+pub const DescribeLimitsInput = struct {
+};
 
 pub const DescribeLimitsOutput = struct {
     /// The maximum total read capacity units that your account allows you to

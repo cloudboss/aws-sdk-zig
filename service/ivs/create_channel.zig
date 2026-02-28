@@ -67,7 +67,7 @@ pub const CreateChannelInput = struct {
     /// disconnect
     /// immediately.* Default: `STANDARD`. For details, see [Channel
     /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html).
-    type: ?ChannelType = null,
+    @"type": ?ChannelType = null,
 
     pub const json_field_names = .{
         .authorized = "authorized",
@@ -80,7 +80,7 @@ pub const CreateChannelInput = struct {
         .preset = "preset",
         .recording_configuration_arn = "recordingConfigurationArn",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -197,7 +197,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateChannelInput, config:
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

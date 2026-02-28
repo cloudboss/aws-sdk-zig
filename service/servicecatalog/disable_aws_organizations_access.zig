@@ -4,9 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DisableAWSOrganizationsAccessInput = struct {};
+pub const DisableAWSOrganizationsAccessInput = struct {
+};
 
-pub const DisableAWSOrganizationsAccessOutput = struct {};
+pub const DisableAWSOrganizationsAccessOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

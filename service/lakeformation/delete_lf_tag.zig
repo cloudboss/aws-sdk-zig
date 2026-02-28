@@ -20,7 +20,8 @@ pub const DeleteLFTagInput = struct {
     };
 };
 
-pub const DeleteLFTagOutput = struct {};
+pub const DeleteLFTagOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

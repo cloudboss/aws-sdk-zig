@@ -27,7 +27,7 @@ pub const GetSchemaVersionOutput = struct {
     semantic_version: ?[]const u8 = null,
 
     /// The type of schema version.
-    type: ?SchemaVersionType = null,
+    @"type": ?SchemaVersionType = null,
 
     /// The visibility of the schema version.
     visibility: ?SchemaVersionVisibility = null,
@@ -38,7 +38,7 @@ pub const GetSchemaVersionOutput = struct {
         .schema = "Schema",
         .schema_id = "SchemaId",
         .semantic_version = "SemanticVersion",
-        .type = "Type",
+        .@"type" = "Type",
         .visibility = "Visibility",
     };
 };
@@ -81,7 +81,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetSchemaVersionInput, conf
 
     var path_buf: std.ArrayList(u8) = .{};
     try path_buf.appendSlice(alloc, "/schema-versions/");
-    try path_buf.appendSlice(alloc, input.type);
+    try path_buf.appendSlice(alloc, input.@"type");
     try path_buf.appendSlice(alloc, "/");
     try path_buf.appendSlice(alloc, input.schema_versioned_id);
     const path = try path_buf.toOwnedSlice(alloc);

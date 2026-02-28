@@ -17,7 +17,8 @@ pub const DisassociatePermissionInput = struct {
     };
 };
 
-pub const DisassociatePermissionOutput = struct {};
+pub const DisassociatePermissionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

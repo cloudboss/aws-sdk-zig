@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CloudWatchLogDeliveryOptions = @import("cloud_watch_log_delivery_options.zig").CloudWatchLogDeliveryOptions;
 
-pub const GetLoggingOptionsInput = struct {};
+pub const GetLoggingOptionsInput = struct {
+};
 
 pub const GetLoggingOptionsOutput = struct {
     /// Returns information about log delivery to Amazon CloudWatch Logs.

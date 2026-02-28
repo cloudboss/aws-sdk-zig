@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const LoggingOptions = @import("logging_options.zig").LoggingOptions;
 
-pub const DescribeLoggingOptionsInput = struct {};
+pub const DescribeLoggingOptionsInput = struct {
+};
 
 pub const DescribeLoggingOptionsOutput = struct {
     /// The current settings of the IoT Analytics logging options.

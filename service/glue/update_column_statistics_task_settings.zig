@@ -41,7 +41,8 @@ pub const UpdateColumnStatisticsTaskSettingsInput = struct {
     };
 };
 
-pub const UpdateColumnStatisticsTaskSettingsOutput = struct {};
+pub const UpdateColumnStatisticsTaskSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

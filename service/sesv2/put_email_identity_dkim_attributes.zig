@@ -21,7 +21,8 @@ pub const PutEmailIdentityDkimAttributesInput = struct {
     };
 };
 
-pub const PutEmailIdentityDkimAttributesOutput = struct {};
+pub const PutEmailIdentityDkimAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

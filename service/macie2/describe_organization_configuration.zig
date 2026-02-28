@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeOrganizationConfigurationInput = struct {};
+pub const DescribeOrganizationConfigurationInput = struct {
+};
 
 pub const DescribeOrganizationConfigurationOutput = struct {
     /// Specifies whether Amazon Macie is enabled automatically for accounts that

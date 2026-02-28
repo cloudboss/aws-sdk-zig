@@ -20,7 +20,8 @@ pub const UpdateEmailTemplateInput = struct {
     };
 };
 
-pub const UpdateEmailTemplateOutput = struct {};
+pub const UpdateEmailTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

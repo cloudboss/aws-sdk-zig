@@ -16,7 +16,8 @@ pub const DeleteApplicationInput = struct {
     };
 };
 
-pub const DeleteApplicationOutput = struct {};
+pub const DeleteApplicationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

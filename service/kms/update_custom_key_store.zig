@@ -170,7 +170,8 @@ pub const UpdateCustomKeyStoreInput = struct {
     };
 };
 
-pub const UpdateCustomKeyStoreOutput = struct {};
+pub const UpdateCustomKeyStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

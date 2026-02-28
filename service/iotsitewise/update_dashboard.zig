@@ -39,7 +39,8 @@ pub const UpdateDashboardInput = struct {
     };
 };
 
-pub const UpdateDashboardOutput = struct {};
+pub const UpdateDashboardOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

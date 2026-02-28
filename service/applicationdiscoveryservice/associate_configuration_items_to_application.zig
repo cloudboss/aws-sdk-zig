@@ -18,8 +18,7 @@ pub const AssociateConfigurationItemsToApplicationInput = struct {
     };
 };
 
-pub const AssociateConfigurationItemsToApplicationOutput = struct {
-};
+pub const AssociateConfigurationItemsToApplicationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

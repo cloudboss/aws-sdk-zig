@@ -4,10 +4,10 @@ pub const UltraServerInfo = struct {
     id: ?[]const u8,
 
     /// The type of the UltraServer.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

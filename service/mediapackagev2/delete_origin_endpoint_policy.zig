@@ -27,7 +27,8 @@ pub const DeleteOriginEndpointPolicyInput = struct {
     };
 };
 
-pub const DeleteOriginEndpointPolicyOutput = struct {};
+pub const DeleteOriginEndpointPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

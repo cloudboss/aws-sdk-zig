@@ -8,10 +8,10 @@ pub const LifecyclePolicyRuleAction = struct {
     target_storage_class: ?LifecyclePolicyTargetStorageClass,
 
     /// The type of action to be taken.
-    type: ?ImageActionType,
+    @"type": ?ImageActionType,
 
     pub const json_field_names = .{
         .target_storage_class = "targetStorageClass",
-        .type = "type",
+        .@"type" = "type",
     };
 };

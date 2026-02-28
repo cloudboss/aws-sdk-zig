@@ -9,10 +9,10 @@ pub const AwsEcsServicePlacementConstraintsDetails = struct {
     /// restrict the selection to a group of valid candidates.
     ///
     /// Valid values: `distinctInstance` | `memberOf`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .expression = "Expression",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -32,7 +32,7 @@ pub const WorkflowSummary = struct {
     /// The image creation stage that this workflow applies to. Image Builder
     /// currently
     /// supports build and test stage workflows.
-    type: ?WorkflowType,
+    @"type": ?WorkflowType,
 
     /// The version of the workflow.
     version: ?[]const u8,
@@ -46,7 +46,7 @@ pub const WorkflowSummary = struct {
         .owner = "owner",
         .state = "state",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
     };
 };

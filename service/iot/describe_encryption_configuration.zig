@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ConfigurationDetails = @import("configuration_details.zig").ConfigurationDetails;
 const EncryptionType = @import("encryption_type.zig").EncryptionType;
 
-pub const DescribeEncryptionConfigurationInput = struct {};
+pub const DescribeEncryptionConfigurationInput = struct {
+};
 
 pub const DescribeEncryptionConfigurationOutput = struct {
     /// The encryption configuration details that include the status information of

@@ -82,7 +82,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDhcpOptionsInput, con
                 const n_1 = idx_1 + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DhcpConfiguration.item.{d}.Values.item.{d}=", .{ n, n_1 }) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DhcpConfiguration.item.{d}.Values.item.{d}=", .{n, n_1}) catch continue;
                     try body_buf.appendSlice(alloc, field_prefix);
                     try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                 }
@@ -109,7 +109,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDhcpOptionsInput, con
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -117,7 +117,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDhcpOptionsInput, con
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(alloc, &body_buf, fv_2);
@@ -180,6 +180,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
+
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

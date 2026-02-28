@@ -18,7 +18,7 @@ pub const MaximumMinimumComputation = struct {
     /// * MAXIMUM: A maximum computation.
     ///
     /// * MINIMUM: A minimum computation.
-    type: MaximumMinimumComputationType,
+    @"type": MaximumMinimumComputationType,
 
     /// The value field that is used in a computation.
     value: ?MeasureField,
@@ -27,7 +27,7 @@ pub const MaximumMinimumComputation = struct {
         .computation_id = "ComputationId",
         .name = "Name",
         .time = "Time",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

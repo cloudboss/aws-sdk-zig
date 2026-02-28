@@ -40,7 +40,7 @@ pub const ActionConfigurationProperty = struct {
     secret: bool = false,
 
     /// The type of the configuration property.
-    @"type": ?ActionConfigurationPropertyType,
+    type: ?ActionConfigurationPropertyType,
 
     pub const json_field_names = .{
         .description = "description",
@@ -49,6 +49,6 @@ pub const ActionConfigurationProperty = struct {
         .queryable = "queryable",
         .required = "required",
         .secret = "secret",
-        .@"type" = "type",
+        .type = "type",
     };
 };

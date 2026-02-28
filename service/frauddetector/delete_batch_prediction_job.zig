@@ -13,7 +13,8 @@ pub const DeleteBatchPredictionJobInput = struct {
     };
 };
 
-pub const DeleteBatchPredictionJobOutput = struct {};
+pub const DeleteBatchPredictionJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

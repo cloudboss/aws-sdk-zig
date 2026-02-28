@@ -10,12 +10,12 @@ pub const Filter = struct {
     name: []const u8,
 
     /// The type of the filter being used.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .maximum = "Maximum",
         .minimum = "Minimum",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

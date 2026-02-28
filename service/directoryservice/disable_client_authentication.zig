@@ -11,15 +11,16 @@ pub const DisableClientAuthenticationInput = struct {
 
     /// The type of client authentication to disable. Currently the only parameter
     /// `"SmartCard"` is supported.
-    type: ClientAuthenticationType,
+    @"type": ClientAuthenticationType,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
-pub const DisableClientAuthenticationOutput = struct {};
+pub const DisableClientAuthenticationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

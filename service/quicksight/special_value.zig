@@ -1,11 +1,11 @@
 pub const SpecialValue = enum {
     empty,
-    null,
+    @"null",
     other,
 
     pub const json_field_names = .{
         .empty = "EMPTY",
-        .null = "NULL",
+        .@"null" = "NULL",
         .other = "OTHER",
     };
 };

@@ -13,7 +13,8 @@ pub const DeleteReplicationSetInput = struct {
     };
 };
 
-pub const DeleteReplicationSetOutput = struct {};
+pub const DeleteReplicationSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

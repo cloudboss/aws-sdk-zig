@@ -22,7 +22,8 @@ pub const PutVerificationStateOnViolationInput = struct {
     };
 };
 
-pub const PutVerificationStateOnViolationOutput = struct {};
+pub const PutVerificationStateOnViolationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

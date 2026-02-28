@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetNotificationChannelInput = struct {};
+pub const GetNotificationChannelInput = struct {
+};
 
 pub const GetNotificationChannelOutput = struct {
     /// The IAM role that is used by Firewall Manager to record activity to SNS.

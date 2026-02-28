@@ -20,7 +20,8 @@ pub const UpdateTagsForDomainInput = struct {
     };
 };
 
-pub const UpdateTagsForDomainOutput = struct {};
+pub const UpdateTagsForDomainOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

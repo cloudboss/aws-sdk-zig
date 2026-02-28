@@ -21,7 +21,8 @@ pub const UpdateCrawlerScheduleInput = struct {
     };
 };
 
-pub const UpdateCrawlerScheduleOutput = struct {};
+pub const UpdateCrawlerScheduleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

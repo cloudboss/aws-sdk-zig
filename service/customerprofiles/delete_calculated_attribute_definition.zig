@@ -17,7 +17,8 @@ pub const DeleteCalculatedAttributeDefinitionInput = struct {
     };
 };
 
-pub const DeleteCalculatedAttributeDefinitionOutput = struct {};
+pub const DeleteCalculatedAttributeDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

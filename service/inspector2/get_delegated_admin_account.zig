@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DelegatedAdmin = @import("delegated_admin.zig").DelegatedAdmin;
 
-pub const GetDelegatedAdminAccountInput = struct {};
+pub const GetDelegatedAdminAccountInput = struct {
+};
 
 pub const GetDelegatedAdminAccountOutput = struct {
     /// The Amazon Web Services account ID of the Amazon Inspector delegated

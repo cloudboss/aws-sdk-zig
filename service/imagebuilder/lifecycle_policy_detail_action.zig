@@ -7,10 +7,10 @@ pub const LifecyclePolicyDetailAction = struct {
     include_resources: ?LifecyclePolicyDetailActionIncludeResources,
 
     /// Specifies the lifecycle action to take.
-    type: LifecyclePolicyDetailActionType,
+    @"type": LifecyclePolicyDetailActionType,
 
     pub const json_field_names = .{
         .include_resources = "includeResources",
-        .type = "type",
+        .@"type" = "type",
     };
 };

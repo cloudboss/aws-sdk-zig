@@ -86,7 +86,8 @@ pub const UpdateCrawlerInput = struct {
     };
 };
 
-pub const UpdateCrawlerOutput = struct {};
+pub const UpdateCrawlerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

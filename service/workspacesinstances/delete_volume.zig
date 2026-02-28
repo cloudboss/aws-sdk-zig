@@ -13,7 +13,8 @@ pub const DeleteVolumeInput = struct {
     };
 };
 
-pub const DeleteVolumeOutput = struct {};
+pub const DeleteVolumeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

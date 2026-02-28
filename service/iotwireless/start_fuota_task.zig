@@ -16,7 +16,8 @@ pub const StartFuotaTaskInput = struct {
     };
 };
 
-pub const StartFuotaTaskOutput = struct {};
+pub const StartFuotaTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

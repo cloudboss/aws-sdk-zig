@@ -22,7 +22,8 @@ pub const DisassociateAccessPolicyInput = struct {
     };
 };
 
-pub const DisassociateAccessPolicyOutput = struct {};
+pub const DisassociateAccessPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

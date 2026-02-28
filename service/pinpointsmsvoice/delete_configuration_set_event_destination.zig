@@ -17,7 +17,8 @@ pub const DeleteConfigurationSetEventDestinationInput = struct {
     };
 };
 
-pub const DeleteConfigurationSetEventDestinationOutput = struct {};
+pub const DeleteConfigurationSetEventDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

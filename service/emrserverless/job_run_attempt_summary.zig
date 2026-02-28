@@ -43,7 +43,7 @@ pub const JobRunAttemptSummary = struct {
     state_details: []const u8,
 
     /// The type of the job run, such as Spark or Hive.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The date and time of when the job run attempt was last updated.
     updated_at: i64,
@@ -62,7 +62,7 @@ pub const JobRunAttemptSummary = struct {
         .release_label = "releaseLabel",
         .state = "state",
         .state_details = "stateDetails",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

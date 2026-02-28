@@ -20,7 +20,8 @@ pub const ModifyEndpointEncryptionModeInput = struct {
     };
 };
 
-pub const ModifyEndpointEncryptionModeOutput = struct {};
+pub const ModifyEndpointEncryptionModeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

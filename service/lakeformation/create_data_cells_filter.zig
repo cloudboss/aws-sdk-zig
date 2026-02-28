@@ -15,7 +15,8 @@ pub const CreateDataCellsFilterInput = struct {
     };
 };
 
-pub const CreateDataCellsFilterOutput = struct {};
+pub const CreateDataCellsFilterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

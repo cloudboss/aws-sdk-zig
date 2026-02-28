@@ -26,7 +26,7 @@ pub const FilterDateTimePickerControl = struct {
     /// * `MULTI_SELECT`: The user can select multiple entries from a dropdown menu.
     ///
     /// * `SINGLE_SELECT`: The user can select a single entry from a dropdown menu.
-    type: ?SheetControlDateTimePickerType,
+    @"type": ?SheetControlDateTimePickerType,
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",
@@ -34,6 +34,6 @@ pub const FilterDateTimePickerControl = struct {
         .filter_control_id = "FilterControlId",
         .source_filter_id = "SourceFilterId",
         .title = "Title",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

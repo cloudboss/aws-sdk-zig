@@ -69,7 +69,8 @@ pub const UpdateFleetInput = struct {
     };
 };
 
-pub const UpdateFleetOutput = struct {};
+pub const UpdateFleetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

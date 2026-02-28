@@ -22,7 +22,8 @@ pub const CreateLabelsInput = struct {
     };
 };
 
-pub const CreateLabelsOutput = struct {};
+pub const CreateLabelsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

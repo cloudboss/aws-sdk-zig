@@ -75,7 +75,8 @@ pub const UpdateJobInput = struct {
     };
 };
 
-pub const UpdateJobOutput = struct {};
+pub const UpdateJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

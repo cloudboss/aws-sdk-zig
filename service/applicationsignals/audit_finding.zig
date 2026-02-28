@@ -32,7 +32,7 @@ pub const AuditFinding = struct {
     operation: ?[]const u8,
 
     /// The type of audit finding.
-    @"type": ?[]const u8,
+    type: ?[]const u8,
 
     pub const json_field_names = .{
         .auditor_results = "AuditorResults",
@@ -40,6 +40,6 @@ pub const AuditFinding = struct {
         .key_attributes = "KeyAttributes",
         .metric_graph = "MetricGraph",
         .operation = "Operation",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

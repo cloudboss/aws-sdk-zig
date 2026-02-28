@@ -22,13 +22,13 @@ pub const ListLifecyclePoliciesInput = struct {
     resources: ?[]const []const u8 = null,
 
     /// The type of lifecycle policy.
-    type: LifecyclePolicyType,
+    @"type": LifecyclePolicyType,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
         .resources = "resources",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

@@ -18,7 +18,8 @@ pub const AttachSecurityProfileInput = struct {
     };
 };
 
-pub const AttachSecurityProfileOutput = struct {};
+pub const AttachSecurityProfileOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

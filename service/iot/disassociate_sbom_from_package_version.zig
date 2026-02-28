@@ -23,7 +23,8 @@ pub const DisassociateSbomFromPackageVersionInput = struct {
     };
 };
 
-pub const DisassociateSbomFromPackageVersionOutput = struct {};
+pub const DisassociateSbomFromPackageVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

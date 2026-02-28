@@ -11,7 +11,7 @@ pub const AwsIamAccessKeySessionContextSessionIssuer = struct {
     principal_id: ?[]const u8,
 
     /// The type of principal (user, role, or group) that created the session.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The name of the principal that created the session.
     user_name: ?[]const u8,
@@ -20,7 +20,7 @@ pub const AwsIamAccessKeySessionContextSessionIssuer = struct {
         .account_id = "AccountId",
         .arn = "Arn",
         .principal_id = "PrincipalId",
-        .type = "Type",
+        .@"type" = "Type",
         .user_name = "UserName",
     };
 };

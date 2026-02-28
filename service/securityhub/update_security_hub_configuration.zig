@@ -48,7 +48,8 @@ pub const UpdateSecurityHubConfigurationInput = struct {
     };
 };
 
-pub const UpdateSecurityHubConfigurationOutput = struct {};
+pub const UpdateSecurityHubConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

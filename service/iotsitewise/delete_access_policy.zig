@@ -19,7 +19,8 @@ pub const DeleteAccessPolicyInput = struct {
     };
 };
 
-pub const DeleteAccessPolicyOutput = struct {};
+pub const DeleteAccessPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

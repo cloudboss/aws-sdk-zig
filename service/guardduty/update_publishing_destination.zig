@@ -28,7 +28,8 @@ pub const UpdatePublishingDestinationInput = struct {
     };
 };
 
-pub const UpdatePublishingDestinationOutput = struct {};
+pub const UpdatePublishingDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

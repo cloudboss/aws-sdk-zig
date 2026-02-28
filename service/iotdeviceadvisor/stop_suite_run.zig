@@ -17,7 +17,8 @@ pub const StopSuiteRunInput = struct {
     };
 };
 
-pub const StopSuiteRunOutput = struct {};
+pub const StopSuiteRunOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -10,12 +10,12 @@ pub const ResourceSyncEvent = struct {
     time: i64,
 
     /// The type of event.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .event = "event",
         .external_id = "externalId",
         .time = "time",
-        .type = "type",
+        .@"type" = "type",
     };
 };

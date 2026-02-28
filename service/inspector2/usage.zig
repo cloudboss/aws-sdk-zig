@@ -13,12 +13,12 @@ pub const Usage = struct {
     total: f64 = 0,
 
     /// The type scan.
-    type: ?UsageType,
+    @"type": ?UsageType,
 
     pub const json_field_names = .{
         .currency = "currency",
         .estimated_monthly_cost = "estimatedMonthlyCost",
         .total = "total",
-        .type = "type",
+        .@"type" = "type",
     };
 };

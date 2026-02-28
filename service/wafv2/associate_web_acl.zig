@@ -50,7 +50,8 @@ pub const AssociateWebACLInput = struct {
     };
 };
 
-pub const AssociateWebACLOutput = struct {};
+pub const AssociateWebACLOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

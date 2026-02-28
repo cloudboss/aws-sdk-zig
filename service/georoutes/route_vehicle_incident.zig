@@ -19,13 +19,13 @@ pub const RouteVehicleIncident = struct {
     start_time: ?[]const u8,
 
     /// Type of the incident.
-    type: ?RouteVehicleIncidentType,
+    @"type": ?RouteVehicleIncidentType,
 
     pub const json_field_names = .{
         .description = "Description",
         .end_time = "EndTime",
         .severity = "Severity",
         .start_time = "StartTime",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

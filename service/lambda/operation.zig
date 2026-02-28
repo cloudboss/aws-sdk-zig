@@ -47,7 +47,7 @@ pub const Operation = struct {
     sub_type: ?[]const u8,
 
     /// The type of operation.
-    type: OperationType,
+    @"type": OperationType,
 
     /// Details about the wait operation, if this operation represents a wait.
     wait_details: ?WaitDetails,
@@ -65,7 +65,7 @@ pub const Operation = struct {
         .status = "Status",
         .step_details = "StepDetails",
         .sub_type = "SubType",
-        .type = "Type",
+        .@"type" = "Type",
         .wait_details = "WaitDetails",
     };
 };

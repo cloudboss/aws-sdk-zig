@@ -27,7 +27,8 @@ pub const UpdateProjectInput = struct {
     };
 };
 
-pub const UpdateProjectOutput = struct {};
+pub const UpdateProjectOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

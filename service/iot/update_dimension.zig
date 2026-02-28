@@ -43,7 +43,7 @@ pub const UpdateDimensionOutput = struct {
     string_values: ?[]const []const u8 = null,
 
     /// The type of the dimension.
-    type: ?DimensionType = null,
+    @"type": ?DimensionType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -51,7 +51,7 @@ pub const UpdateDimensionOutput = struct {
         .last_modified_date = "lastModifiedDate",
         .name = "name",
         .string_values = "stringValues",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

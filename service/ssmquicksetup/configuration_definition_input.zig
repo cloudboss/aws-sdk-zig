@@ -769,7 +769,7 @@ pub const ConfigurationDefinitionInput = struct {
     parameters: []const aws.map.StringMapEntry,
 
     /// The type of the Quick Setup configuration.
-    type: []const u8,
+    @"type": []const u8,
 
     /// The version of the Quick Setup type to use.
     type_version: ?[]const u8,
@@ -778,7 +778,7 @@ pub const ConfigurationDefinitionInput = struct {
         .local_deployment_administration_role_arn = "LocalDeploymentAdministrationRoleArn",
         .local_deployment_execution_role_name = "LocalDeploymentExecutionRoleName",
         .parameters = "Parameters",
-        .type = "Type",
+        .@"type" = "Type",
         .type_version = "TypeVersion",
     };
 };

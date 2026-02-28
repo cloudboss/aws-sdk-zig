@@ -1,1 +1,2 @@
-pub const DeleteApplicationResponse = struct {};
+pub const DeleteApplicationResponse = struct {
+};

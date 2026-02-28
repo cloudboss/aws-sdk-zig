@@ -29,7 +29,7 @@ pub const MedicalItem = struct {
 
     /// The type of item identified. Options are: `PRONUNCIATION` (spoken
     /// words) and `PUNCTUATION`.
-    type: ?ItemType,
+    @"type": ?ItemType,
 
     pub const json_field_names = .{
         .confidence = "Confidence",
@@ -37,6 +37,6 @@ pub const MedicalItem = struct {
         .end_time = "EndTime",
         .speaker = "Speaker",
         .start_time = "StartTime",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

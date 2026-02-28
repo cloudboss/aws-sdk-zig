@@ -9,7 +9,8 @@ pub const DeleteQueryLoggingConfigInput = struct {
     id: []const u8,
 };
 
-pub const DeleteQueryLoggingConfigOutput = struct {};
+pub const DeleteQueryLoggingConfigOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

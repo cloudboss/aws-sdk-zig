@@ -16,7 +16,7 @@ pub const TextPartValue = struct {
 
     /// The type of text part. Determines the usage of all other fields and whether
     /// or not they're required.
-    type: TextPartType,
+    @"type": TextPartType,
 
     /// The URL itself.
     url: ?[]const u8,
@@ -24,7 +24,7 @@ pub const TextPartValue = struct {
     pub const json_field_names = .{
         .display_text = "displayText",
         .text_by_locale = "textByLocale",
-        .type = "type",
+        .@"type" = "type",
         .url = "url",
     };
 };

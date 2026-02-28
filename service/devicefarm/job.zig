@@ -110,7 +110,7 @@ pub const Job = struct {
     /// * XCTEST
     ///
     /// * XCTEST_UI
-    type: ?TestType,
+    @"type": ?TestType,
 
     /// This value is set to true if video capture is enabled. Otherwise, it is set
     /// to false.
@@ -132,7 +132,7 @@ pub const Job = struct {
         .started = "started",
         .status = "status",
         .stopped = "stopped",
-        .type = "type",
+        .@"type" = "type",
         .video_capture = "videoCapture",
         .video_endpoint = "videoEndpoint",
     };

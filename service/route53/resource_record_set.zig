@@ -530,7 +530,7 @@ pub const ResourceRecordSet = struct {
     /// alias record must have the same type as the record you're routing traffic
     /// to, and creating a CNAME record for the zone apex isn't supported even for
     /// an alias record.
-    type: RRType,
+    @"type": RRType,
 
     /// *Weighted resource record sets only:* Among resource record sets
     /// that have the same combination of DNS name and type, a value that determines

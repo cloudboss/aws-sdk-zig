@@ -23,7 +23,8 @@ pub const DeleteConversationInput = struct {
     };
 };
 
-pub const DeleteConversationOutput = struct {};
+pub const DeleteConversationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

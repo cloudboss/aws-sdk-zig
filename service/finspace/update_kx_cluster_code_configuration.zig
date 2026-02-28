@@ -48,7 +48,8 @@ pub const UpdateKxClusterCodeConfigurationInput = struct {
     };
 };
 
-pub const UpdateKxClusterCodeConfigurationOutput = struct {};
+pub const UpdateKxClusterCodeConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

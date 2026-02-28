@@ -17,7 +17,8 @@ pub const AssociateBudgetWithResourceInput = struct {
     };
 };
 
-pub const AssociateBudgetWithResourceOutput = struct {};
+pub const AssociateBudgetWithResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

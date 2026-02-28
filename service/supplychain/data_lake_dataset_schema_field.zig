@@ -9,11 +9,11 @@ pub const DataLakeDatasetSchemaField = struct {
     name: []const u8,
 
     /// The dataset field type.
-    type: DataLakeDatasetSchemaFieldType,
+    @"type": DataLakeDatasetSchemaFieldType,
 
     pub const json_field_names = .{
         .is_required = "isRequired",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

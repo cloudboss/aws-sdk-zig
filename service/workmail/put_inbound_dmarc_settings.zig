@@ -17,7 +17,8 @@ pub const PutInboundDmarcSettingsInput = struct {
     };
 };
 
-pub const PutInboundDmarcSettingsOutput = struct {};
+pub const PutInboundDmarcSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

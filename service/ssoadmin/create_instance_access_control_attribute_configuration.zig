@@ -25,7 +25,8 @@ pub const CreateInstanceAccessControlAttributeConfigurationInput = struct {
     };
 };
 
-pub const CreateInstanceAccessControlAttributeConfigurationOutput = struct {};
+pub const CreateInstanceAccessControlAttributeConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

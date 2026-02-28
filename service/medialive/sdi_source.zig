@@ -28,7 +28,7 @@ pub const SdiSource = struct {
     /// (IDLE).
     state: ?SdiSourceState,
 
-    type: ?SdiSourceType,
+    @"type": ?SdiSourceType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -37,6 +37,6 @@ pub const SdiSource = struct {
         .mode = "Mode",
         .name = "Name",
         .state = "State",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

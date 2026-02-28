@@ -13,7 +13,8 @@ pub const DeleteUserSettingsInput = struct {
     };
 };
 
-pub const DeleteUserSettingsOutput = struct {};
+pub const DeleteUserSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

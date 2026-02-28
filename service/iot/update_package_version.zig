@@ -57,7 +57,8 @@ pub const UpdatePackageVersionInput = struct {
     };
 };
 
-pub const UpdatePackageVersionOutput = struct {};
+pub const UpdatePackageVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

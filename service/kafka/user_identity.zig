@@ -6,10 +6,10 @@ pub const UserIdentity = struct {
     principal_id: ?[]const u8,
 
     /// The identity type of the requester that calls the API operation.
-    type: ?UserIdentityType,
+    @"type": ?UserIdentityType,
 
     pub const json_field_names = .{
         .principal_id = "PrincipalId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

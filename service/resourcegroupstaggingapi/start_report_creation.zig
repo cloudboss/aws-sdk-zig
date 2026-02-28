@@ -20,7 +20,8 @@ pub const StartReportCreationInput = struct {
     };
 };
 
-pub const StartReportCreationOutput = struct {};
+pub const StartReportCreationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

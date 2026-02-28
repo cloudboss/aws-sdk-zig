@@ -16,7 +16,8 @@ pub const CreateDataLakeOrganizationConfigurationInput = struct {
     };
 };
 
-pub const CreateDataLakeOrganizationConfigurationOutput = struct {};
+pub const CreateDataLakeOrganizationConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

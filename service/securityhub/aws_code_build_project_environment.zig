@@ -60,7 +60,7 @@ pub const AwsCodeBuildProjectEnvironment = struct {
     ///
     /// Valid values: `WINDOWS_CONTAINER` | `LINUX_CONTAINER` |
     /// `LINUX_GPU_CONTAINER` | `ARM_CONTAINER`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .certificate = "Certificate",
@@ -68,6 +68,6 @@ pub const AwsCodeBuildProjectEnvironment = struct {
         .image_pull_credentials_type = "ImagePullCredentialsType",
         .privileged_mode = "PrivilegedMode",
         .registry_credential = "RegistryCredential",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -35,7 +35,8 @@ pub const CreateListInput = struct {
     };
 };
 
-pub const CreateListOutput = struct {};
+pub const CreateListOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

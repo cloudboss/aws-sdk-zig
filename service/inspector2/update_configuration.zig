@@ -21,7 +21,8 @@ pub const UpdateConfigurationInput = struct {
     };
 };
 
-pub const UpdateConfigurationOutput = struct {};
+pub const UpdateConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

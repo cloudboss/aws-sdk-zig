@@ -23,7 +23,8 @@ pub const UpdateDeletionProtectionInput = struct {
     };
 };
 
-pub const UpdateDeletionProtectionOutput = struct {};
+pub const UpdateDeletionProtectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

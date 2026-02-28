@@ -35,7 +35,7 @@ pub const PutGroupInput = struct {
     role_arn: ?[]const u8 = null,
 
     /// The type of the group.
-    type: MembershipType,
+    @"type": MembershipType,
 
     pub const json_field_names = .{
         .application_id = "applicationId",
@@ -44,11 +44,12 @@ pub const PutGroupInput = struct {
         .group_name = "groupName",
         .index_id = "indexId",
         .role_arn = "roleArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
-pub const PutGroupOutput = struct {};
+pub const PutGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
@@ -120,7 +121,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: PutGroupInput, config: *aws
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

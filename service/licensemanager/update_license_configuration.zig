@@ -52,7 +52,8 @@ pub const UpdateLicenseConfigurationInput = struct {
     };
 };
 
-pub const UpdateLicenseConfigurationOutput = struct {};
+pub const UpdateLicenseConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

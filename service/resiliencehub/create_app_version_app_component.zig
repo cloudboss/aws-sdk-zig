@@ -34,7 +34,7 @@ pub const CreateAppVersionAppComponentInput = struct {
     /// Type of Application Component. For more information about the types of
     /// Application Component, see [Grouping resources in an
     /// AppComponent](https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html).
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .additional_info = "additionalInfo",
@@ -42,7 +42,7 @@ pub const CreateAppVersionAppComponentInput = struct {
         .client_token = "clientToken",
         .id = "id",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -140,7 +140,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateAppVersionAppComponen
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

@@ -13,7 +13,8 @@ pub const DeleteIngressPointInput = struct {
     };
 };
 
-pub const DeleteIngressPointOutput = struct {};
+pub const DeleteIngressPointOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

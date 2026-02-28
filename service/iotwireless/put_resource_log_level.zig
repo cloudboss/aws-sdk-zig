@@ -21,7 +21,8 @@ pub const PutResourceLogLevelInput = struct {
     };
 };
 
-pub const PutResourceLogLevelOutput = struct {};
+pub const PutResourceLogLevelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

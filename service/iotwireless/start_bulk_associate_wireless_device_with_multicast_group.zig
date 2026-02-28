@@ -19,7 +19,8 @@ pub const StartBulkAssociateWirelessDeviceWithMulticastGroupInput = struct {
     };
 };
 
-pub const StartBulkAssociateWirelessDeviceWithMulticastGroupOutput = struct {};
+pub const StartBulkAssociateWirelessDeviceWithMulticastGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

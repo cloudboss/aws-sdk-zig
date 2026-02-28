@@ -13,7 +13,8 @@ pub const DeleteLifecyclePolicyInput = struct {
     };
 };
 
-pub const DeleteLifecyclePolicyOutput = struct {};
+pub const DeleteLifecyclePolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

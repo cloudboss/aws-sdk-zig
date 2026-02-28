@@ -97,7 +97,7 @@ pub const CreateInferenceExperimentInput = struct {
     /// * `ShadowMode`: You can use this type to validate a shadow variant. For more
     ///   information, see [Shadow
     ///   tests](https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html).
-    type: InferenceExperimentType,
+    @"type": InferenceExperimentType,
 
     pub const json_field_names = .{
         .data_storage_config = "DataStorageConfig",
@@ -110,7 +110,7 @@ pub const CreateInferenceExperimentInput = struct {
         .schedule = "Schedule",
         .shadow_mode_config = "ShadowModeConfig",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

@@ -24,7 +24,8 @@ pub const CreateDatabaseInput = struct {
     };
 };
 
-pub const CreateDatabaseOutput = struct {};
+pub const CreateDatabaseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

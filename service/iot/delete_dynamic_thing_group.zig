@@ -17,7 +17,8 @@ pub const DeleteDynamicThingGroupInput = struct {
     };
 };
 
-pub const DeleteDynamicThingGroupOutput = struct {};
+pub const DeleteDynamicThingGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

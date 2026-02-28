@@ -62,10 +62,10 @@ pub const FieldToMatch = struct {
     ///   inspecting a single parameter, AWS WAF will inspect all parameters within
     ///   the query for the value or regex pattern that you specify in
     /// `TargetString`.
-    type: MatchFieldType,
+    @"type": MatchFieldType,
 
     pub const json_field_names = .{
         .data = "Data",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

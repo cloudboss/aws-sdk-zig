@@ -19,7 +19,8 @@ pub const DeprecateThingTypeInput = struct {
     };
 };
 
-pub const DeprecateThingTypeOutput = struct {};
+pub const DeprecateThingTypeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -27,7 +27,8 @@ pub const AssociateGovernedTermsInput = struct {
     };
 };
 
-pub const AssociateGovernedTermsOutput = struct {};
+pub const AssociateGovernedTermsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetHealthCheckCountInput = struct {};
+pub const GetHealthCheckCountInput = struct {
+};
 
 pub const GetHealthCheckCountOutput = struct {
     /// The number of health checks associated with the current Amazon Web Services

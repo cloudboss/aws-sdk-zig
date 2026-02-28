@@ -18,7 +18,8 @@ pub const ModifyStreamingPropertiesInput = struct {
     };
 };
 
-pub const ModifyStreamingPropertiesOutput = struct {};
+pub const ModifyStreamingPropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

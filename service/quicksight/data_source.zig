@@ -66,7 +66,7 @@ pub const DataSource = struct {
     /// The type of the data source. This type indicates which database engine the
     /// data source
     /// connects to.
-    type: ?DataSourceType,
+    @"type": ?DataSourceType,
 
     /// The VPC connection information. You need to use this parameter only when you
     /// want
@@ -86,7 +86,7 @@ pub const DataSource = struct {
         .secret_arn = "SecretArn",
         .ssl_properties = "SslProperties",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
         .vpc_connection_properties = "VpcConnectionProperties",
     };
 };

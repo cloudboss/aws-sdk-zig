@@ -9,10 +9,10 @@ pub const FailureDescription = struct {
     details: []const u8,
 
     /// The type of error that caused the failure.
-    type: DeliveryStreamFailureType,
+    @"type": DeliveryStreamFailureType,
 
     pub const json_field_names = .{
         .details = "Details",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

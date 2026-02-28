@@ -11,10 +11,10 @@ pub const KxNAS1Configuration = struct {
     size: ?i32,
 
     /// The type of the network attached storage.
-    type: ?KxNAS1Type,
+    @"type": ?KxNAS1Type,
 
     pub const json_field_names = .{
         .size = "size",
-        .type = "type",
+        .@"type" = "type",
     };
 };

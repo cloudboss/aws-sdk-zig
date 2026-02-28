@@ -13,7 +13,8 @@ pub const DeleteAddressListInput = struct {
     };
 };
 
-pub const DeleteAddressListOutput = struct {};
+pub const DeleteAddressListOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

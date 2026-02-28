@@ -21,7 +21,8 @@ pub const CancelStatementInput = struct {
     };
 };
 
-pub const CancelStatementOutput = struct {};
+pub const CancelStatementOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

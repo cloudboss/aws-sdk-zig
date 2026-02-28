@@ -13,7 +13,8 @@ pub const DeleteExternalModelInput = struct {
     };
 };
 
-pub const DeleteExternalModelOutput = struct {};
+pub const DeleteExternalModelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

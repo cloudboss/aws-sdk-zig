@@ -18,7 +18,8 @@ pub const AuthorizeIpRulesInput = struct {
     };
 };
 
-pub const AuthorizeIpRulesOutput = struct {};
+pub const AuthorizeIpRulesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,12 +13,12 @@ pub const GuardrailTopicConfig = struct {
     name: []const u8,
 
     /// Specifies to deny the topic.
-    type: GuardrailTopicType,
+    @"type": GuardrailTopicType,
 
     pub const json_field_names = .{
         .definition = "definition",
         .examples = "examples",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

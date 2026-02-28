@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const IsVpcPeeredInput = struct {};
+pub const IsVpcPeeredInput = struct {
+};
 
 pub const IsVpcPeeredOutput = struct {
     /// Returns `true` if the Lightsail VPC is peered; otherwise,

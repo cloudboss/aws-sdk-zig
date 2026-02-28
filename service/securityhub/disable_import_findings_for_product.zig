@@ -13,7 +13,8 @@ pub const DisableImportFindingsForProductInput = struct {
     };
 };
 
-pub const DisableImportFindingsForProductOutput = struct {};
+pub const DisableImportFindingsForProductOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,7 +22,8 @@ pub const SendCisSessionTelemetryInput = struct {
     };
 };
 
-pub const SendCisSessionTelemetryOutput = struct {};
+pub const SendCisSessionTelemetryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

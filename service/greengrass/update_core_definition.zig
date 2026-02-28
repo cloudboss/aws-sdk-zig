@@ -17,7 +17,8 @@ pub const UpdateCoreDefinitionInput = struct {
     };
 };
 
-pub const UpdateCoreDefinitionOutput = struct {};
+pub const UpdateCoreDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

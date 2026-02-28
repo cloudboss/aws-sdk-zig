@@ -35,7 +35,8 @@ pub const CreateAvailabilityConfigurationInput = struct {
     };
 };
 
-pub const CreateAvailabilityConfigurationOutput = struct {};
+pub const CreateAvailabilityConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

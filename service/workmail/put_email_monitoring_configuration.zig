@@ -25,7 +25,8 @@ pub const PutEmailMonitoringConfigurationInput = struct {
     };
 };
 
-pub const PutEmailMonitoringConfigurationOutput = struct {};
+pub const PutEmailMonitoringConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

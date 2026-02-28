@@ -45,7 +45,7 @@ pub const DescribedSecurityPolicy = struct {
 
     /// The resource type to which the security policy applies, either server or
     /// connector.
-    type: ?SecurityPolicyResourceType,
+    @"type": ?SecurityPolicyResourceType,
 
     pub const json_field_names = .{
         .fips = "Fips",
@@ -56,6 +56,6 @@ pub const DescribedSecurityPolicy = struct {
         .ssh_kexs = "SshKexs",
         .ssh_macs = "SshMacs",
         .tls_ciphers = "TlsCiphers",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

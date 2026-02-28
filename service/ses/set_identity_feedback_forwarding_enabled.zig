@@ -24,7 +24,8 @@ pub const SetIdentityFeedbackForwardingEnabledInput = struct {
     identity: []const u8,
 };
 
-pub const SetIdentityFeedbackForwardingEnabledOutput = struct {};
+pub const SetIdentityFeedbackForwardingEnabledOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

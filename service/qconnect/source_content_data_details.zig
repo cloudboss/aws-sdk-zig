@@ -19,13 +19,13 @@ pub const SourceContentDataDetails = struct {
     text_data: TextData,
 
     /// The type of the source content.
-    type: SourceContentType,
+    @"type": SourceContentType,
 
     pub const json_field_names = .{
         .citation_span = "citationSpan",
         .id = "id",
         .ranking_data = "rankingData",
         .text_data = "textData",
-        .type = "type",
+        .@"type" = "type",
     };
 };

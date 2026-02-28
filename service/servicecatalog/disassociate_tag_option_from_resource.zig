@@ -17,7 +17,8 @@ pub const DisassociateTagOptionFromResourceInput = struct {
     };
 };
 
-pub const DisassociateTagOptionFromResourceOutput = struct {};
+pub const DisassociateTagOptionFromResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

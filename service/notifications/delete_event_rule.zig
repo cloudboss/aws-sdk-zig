@@ -13,7 +13,8 @@ pub const DeleteEventRuleInput = struct {
     };
 };
 
-pub const DeleteEventRuleOutput = struct {};
+pub const DeleteEventRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const NamespaceDeletionStatusErrorCodes = @import("namespace_deletion_status_error_codes.zig").NamespaceDeletionStatusErrorCodes;
 const NamespaceDeletionStatus = @import("namespace_deletion_status.zig").NamespaceDeletionStatus;
 
-pub const GetNamespaceDeletionStatusInput = struct {};
+pub const GetNamespaceDeletionStatusInput = struct {
+};
 
 pub const GetNamespaceDeletionStatusOutput = struct {
     /// An error code returned by the namespace deletion task.

@@ -17,7 +17,8 @@ pub const UpdateSubscriptionDefinitionInput = struct {
     };
 };
 
-pub const UpdateSubscriptionDefinitionOutput = struct {};
+pub const UpdateSubscriptionDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

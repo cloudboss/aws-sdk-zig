@@ -45,7 +45,7 @@ pub const SubscriptionTargetSummary = struct {
     subscription_target_config: []const SubscriptionTargetForm,
 
     /// The type of the subscription target.
-    type: []const u8,
+    @"type": []const u8,
 
     /// The timestamp of when the subscription target was updated.
     updated_at: ?i64,
@@ -67,7 +67,7 @@ pub const SubscriptionTargetSummary = struct {
         .provider = "provider",
         .subscription_grant_creation_mode = "subscriptionGrantCreationMode",
         .subscription_target_config = "subscriptionTargetConfig",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
         .updated_by = "updatedBy",
     };

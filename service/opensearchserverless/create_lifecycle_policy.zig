@@ -20,14 +20,14 @@ pub const CreateLifecyclePolicyInput = struct {
     policy: []const u8,
 
     /// The type of lifecycle policy.
-    type: LifecyclePolicyType,
+    @"type": LifecyclePolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
         .name = "name",
         .policy = "policy",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

@@ -9,10 +9,10 @@ pub const AccessScope = struct {
     namespaces: ?[]const []const u8,
 
     /// The scope type of an access policy.
-    type: ?AccessScopeType,
+    @"type": ?AccessScopeType,
 
     pub const json_field_names = .{
         .namespaces = "namespaces",
-        .type = "type",
+        .@"type" = "type",
     };
 };

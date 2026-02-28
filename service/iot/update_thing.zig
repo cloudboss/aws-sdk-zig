@@ -44,7 +44,8 @@ pub const UpdateThingInput = struct {
     };
 };
 
-pub const UpdateThingOutput = struct {};
+pub const UpdateThingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

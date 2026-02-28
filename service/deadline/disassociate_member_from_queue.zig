@@ -21,7 +21,8 @@ pub const DisassociateMemberFromQueueInput = struct {
     };
 };
 
-pub const DisassociateMemberFromQueueOutput = struct {};
+pub const DisassociateMemberFromQueueOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

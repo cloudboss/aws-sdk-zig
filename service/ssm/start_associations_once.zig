@@ -13,7 +13,8 @@ pub const StartAssociationsOnceInput = struct {
     };
 };
 
-pub const StartAssociationsOnceOutput = struct {};
+pub const StartAssociationsOnceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

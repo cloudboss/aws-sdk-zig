@@ -13,11 +13,11 @@ pub const RuleConfig = struct {
     threshold: i32,
 
     /// A rule can be one of the following: ATLEAST, AND, or OR.
-    type: RuleType,
+    @"type": RuleType,
 
     pub const json_field_names = .{
         .inverted = "Inverted",
         .threshold = "Threshold",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

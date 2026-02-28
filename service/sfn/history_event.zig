@@ -150,7 +150,7 @@ pub const HistoryEvent = struct {
     timestamp: i64,
 
     /// The type of the event.
-    type: HistoryEventType,
+    @"type": HistoryEventType,
 
     pub const json_field_names = .{
         .activity_failed_event_details = "activityFailedEventDetails",
@@ -193,6 +193,6 @@ pub const HistoryEvent = struct {
         .task_succeeded_event_details = "taskSucceededEventDetails",
         .task_timed_out_event_details = "taskTimedOutEventDetails",
         .timestamp = "timestamp",
-        .type = "type",
+        .@"type" = "type",
     };
 };

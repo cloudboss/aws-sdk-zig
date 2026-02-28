@@ -13,7 +13,8 @@ pub const StopCompositionInput = struct {
     };
 };
 
-pub const StopCompositionOutput = struct {};
+pub const StopCompositionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

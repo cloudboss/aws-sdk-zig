@@ -13,7 +13,8 @@ pub const ExtendTransactionInput = struct {
     };
 };
 
-pub const ExtendTransactionOutput = struct {};
+pub const ExtendTransactionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

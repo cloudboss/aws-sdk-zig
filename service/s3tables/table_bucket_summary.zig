@@ -18,7 +18,7 @@ pub const TableBucketSummary = struct {
     table_bucket_id: ?[]const u8,
 
     /// The type of the table bucket.
-    type: ?TableBucketType,
+    @"type": ?TableBucketType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -26,6 +26,6 @@ pub const TableBucketSummary = struct {
         .name = "name",
         .owner_account_id = "ownerAccountId",
         .table_bucket_id = "tableBucketId",
-        .type = "type",
+        .@"type" = "type",
     };
 };

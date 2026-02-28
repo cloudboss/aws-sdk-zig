@@ -21,7 +21,8 @@ pub const DetachThingPrincipalInput = struct {
     };
 };
 
-pub const DetachThingPrincipalOutput = struct {};
+pub const DetachThingPrincipalOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

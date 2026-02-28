@@ -32,7 +32,8 @@ pub const UpdateServiceSettingsInput = struct {
     };
 };
 
-pub const UpdateServiceSettingsOutput = struct {};
+pub const UpdateServiceSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

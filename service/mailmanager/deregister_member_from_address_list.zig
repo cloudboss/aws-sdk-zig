@@ -17,7 +17,8 @@ pub const DeregisterMemberFromAddressListInput = struct {
     };
 };
 
-pub const DeregisterMemberFromAddressListOutput = struct {};
+pub const DeregisterMemberFromAddressListOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -8,7 +8,8 @@ const LifecyclePolicyStats = @import("lifecycle_policy_stats.zig").LifecyclePoli
 const SecurityConfigStats = @import("security_config_stats.zig").SecurityConfigStats;
 const SecurityPolicyStats = @import("security_policy_stats.zig").SecurityPolicyStats;
 
-pub const GetPoliciesStatsInput = struct {};
+pub const GetPoliciesStatsInput = struct {
+};
 
 pub const GetPoliciesStatsOutput = struct {
     /// Information about the data access policies in your account.

@@ -19,7 +19,8 @@ pub const ResetEncryptionKeyInput = struct {
     };
 };
 
-pub const ResetEncryptionKeyOutput = struct {};
+pub const ResetEncryptionKeyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

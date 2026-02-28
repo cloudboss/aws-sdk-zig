@@ -224,7 +224,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeSpotInstanceRequest
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.Filter.{d}.Values.item.{d}=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.Filter.{d}.Values.item.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
@@ -304,6 +304,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
+
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

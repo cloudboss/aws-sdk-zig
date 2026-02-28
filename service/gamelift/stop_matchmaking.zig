@@ -13,7 +13,8 @@ pub const StopMatchmakingInput = struct {
     };
 };
 
-pub const StopMatchmakingOutput = struct {};
+pub const StopMatchmakingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

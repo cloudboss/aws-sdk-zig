@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ReceiptFilter = @import("receipt_filter.zig").ReceiptFilter;
 const serde = @import("serde.zig");
 
-pub const ListReceiptFiltersInput = struct {};
+pub const ListReceiptFiltersInput = struct {
+};
 
 pub const ListReceiptFiltersOutput = struct {
     /// A list of IP address filter data structures, which each consist of a name,

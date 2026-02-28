@@ -36,7 +36,8 @@ pub const PutConfigurationSetDeliveryOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetDeliveryOptionsOutput = struct {};
+pub const PutConfigurationSetDeliveryOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

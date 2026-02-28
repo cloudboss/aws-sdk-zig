@@ -24,7 +24,8 @@ pub const UpdateEncryptionConfigurationInput = struct {
     };
 };
 
-pub const UpdateEncryptionConfigurationOutput = struct {};
+pub const UpdateEncryptionConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

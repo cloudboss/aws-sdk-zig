@@ -26,7 +26,8 @@ pub const DeleteOTAUpdateInput = struct {
     };
 };
 
-pub const DeleteOTAUpdateOutput = struct {};
+pub const DeleteOTAUpdateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

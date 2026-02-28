@@ -13,7 +13,8 @@ pub const DisassociateWirelessGatewayFromCertificateInput = struct {
     };
 };
 
-pub const DisassociateWirelessGatewayFromCertificateOutput = struct {};
+pub const DisassociateWirelessGatewayFromCertificateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

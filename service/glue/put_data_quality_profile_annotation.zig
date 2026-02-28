@@ -18,7 +18,8 @@ pub const PutDataQualityProfileAnnotationInput = struct {
     };
 };
 
-pub const PutDataQualityProfileAnnotationOutput = struct {};
+pub const PutDataQualityProfileAnnotationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

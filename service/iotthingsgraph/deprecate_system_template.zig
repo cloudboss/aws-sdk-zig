@@ -17,7 +17,8 @@ pub const DeprecateSystemTemplateInput = struct {
     };
 };
 
-pub const DeprecateSystemTemplateOutput = struct {};
+pub const DeprecateSystemTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

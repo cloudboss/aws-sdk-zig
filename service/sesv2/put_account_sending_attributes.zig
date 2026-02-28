@@ -18,7 +18,8 @@ pub const PutAccountSendingAttributesInput = struct {
     };
 };
 
-pub const PutAccountSendingAttributesOutput = struct {};
+pub const PutAccountSendingAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

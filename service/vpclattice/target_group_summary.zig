@@ -47,7 +47,7 @@ pub const TargetGroupSummary = struct {
     status: ?TargetGroupStatus,
 
     /// The target group type.
-    type: ?TargetGroupType,
+    @"type": ?TargetGroupType,
 
     /// The ID of the VPC of the target group.
     vpc_identifier: ?[]const u8,
@@ -64,7 +64,7 @@ pub const TargetGroupSummary = struct {
         .protocol = "protocol",
         .service_arns = "serviceArns",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .vpc_identifier = "vpcIdentifier",
     };
 };

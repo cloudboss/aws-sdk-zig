@@ -43,12 +43,12 @@ pub const GetImpersonationRoleEffectOutput = struct {
     matched_rules: ?[]const ImpersonationMatchedRule = null,
 
     /// The impersonation role type.
-    type: ?ImpersonationRoleType = null,
+    @"type": ?ImpersonationRoleType = null,
 
     pub const json_field_names = .{
         .effect = "Effect",
         .matched_rules = "MatchedRules",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

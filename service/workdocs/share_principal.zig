@@ -10,11 +10,11 @@ pub const SharePrincipal = struct {
     role: RoleType,
 
     /// The type of the recipient.
-    type: PrincipalType,
+    @"type": PrincipalType,
 
     pub const json_field_names = .{
         .id = "Id",
         .role = "Role",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

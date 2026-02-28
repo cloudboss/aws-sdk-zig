@@ -13,7 +13,8 @@ pub const DeleteCertificateProviderInput = struct {
     };
 };
 
-pub const DeleteCertificateProviderOutput = struct {};
+pub const DeleteCertificateProviderOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -4,4 +4,5 @@
 /// as your custom key, then each method fully defines an aggregation instance.
 ///
 /// JSON specification: `"RateLimitHTTPMethod": {}`
-pub const RateLimitHTTPMethod = struct {};
+pub const RateLimitHTTPMethod = struct {
+};

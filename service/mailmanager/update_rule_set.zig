@@ -23,7 +23,8 @@ pub const UpdateRuleSetInput = struct {
     };
 };
 
-pub const UpdateRuleSetOutput = struct {};
+pub const UpdateRuleSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

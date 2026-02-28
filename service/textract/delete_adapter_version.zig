@@ -18,7 +18,8 @@ pub const DeleteAdapterVersionInput = struct {
     };
 };
 
-pub const DeleteAdapterVersionOutput = struct {};
+pub const DeleteAdapterVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

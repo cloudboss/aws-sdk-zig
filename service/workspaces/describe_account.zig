@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DedicatedTenancyAccountType = @import("dedicated_tenancy_account_type.zig").DedicatedTenancyAccountType;
 const DedicatedTenancySupportResultEnum = @import("dedicated_tenancy_support_result_enum.zig").DedicatedTenancySupportResultEnum;
 
-pub const DescribeAccountInput = struct {};
+pub const DescribeAccountInput = struct {
+};
 
 pub const DescribeAccountOutput = struct {
     /// The type of linked account.

@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ConfigurationStatus = @import("configuration_status.zig").ConfigurationStatus;
 const EncryptionType = @import("encryption_type.zig").EncryptionType;
 
-pub const DescribeDefaultEncryptionConfigurationInput = struct {};
+pub const DescribeDefaultEncryptionConfigurationInput = struct {
+};
 
 pub const DescribeDefaultEncryptionConfigurationOutput = struct {
     /// The status of the account configuration. This contains the

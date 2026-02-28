@@ -78,7 +78,7 @@ pub const Backup = struct {
     tags: ?[]const Tag,
 
     /// The type of the file-system backup.
-    type: BackupType,
+    @"type": BackupType,
 
     volume: ?Volume,
 
@@ -98,7 +98,7 @@ pub const Backup = struct {
         .source_backup_id = "SourceBackupId",
         .source_backup_region = "SourceBackupRegion",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .volume = "Volume",
     };
 };

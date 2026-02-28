@@ -27,10 +27,10 @@ pub const ExecutionError = struct {
     /// to 1800 seconds (30 minutes).
     /// * `THROTTLED`: occurs if you exceed the new execution refill rate of one
     ///   workflow per second.
-    type: ExecutionErrorType,
+    @"type": ExecutionErrorType,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

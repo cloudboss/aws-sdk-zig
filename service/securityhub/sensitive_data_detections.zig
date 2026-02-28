@@ -10,11 +10,11 @@ pub const SensitiveDataDetections = struct {
 
     /// The type of sensitive data that was detected. For example, the type might
     /// indicate that the data is an email address.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .count = "Count",
         .occurrences = "Occurrences",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

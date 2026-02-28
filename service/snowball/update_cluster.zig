@@ -60,7 +60,8 @@ pub const UpdateClusterInput = struct {
     };
 };
 
-pub const UpdateClusterOutput = struct {};
+pub const UpdateClusterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteWorkforceInput = struct {
     };
 };
 
-pub const DeleteWorkforceOutput = struct {};
+pub const DeleteWorkforceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,8 @@ pub const CancelMailboxExportJobInput = struct {
     };
 };
 
-pub const CancelMailboxExportJobOutput = struct {};
+pub const CancelMailboxExportJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

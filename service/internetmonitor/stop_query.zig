@@ -18,7 +18,8 @@ pub const StopQueryInput = struct {
     };
 };
 
-pub const StopQueryOutput = struct {};
+pub const StopQueryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

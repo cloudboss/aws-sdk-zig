@@ -10,11 +10,11 @@ pub const Vertex = struct {
 
     /// The type of the lineage entity resource. For example: `DataSet`, `Model`,
     /// `Endpoint`, etc...
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .lineage_type = "LineageType",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -23,7 +23,8 @@ pub const DeleteMessageTemplateAttachmentInput = struct {
     };
 };
 
-pub const DeleteMessageTemplateAttachmentOutput = struct {};
+pub const DeleteMessageTemplateAttachmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

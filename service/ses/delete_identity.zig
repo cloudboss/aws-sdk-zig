@@ -10,7 +10,8 @@ pub const DeleteIdentityInput = struct {
     identity: []const u8,
 };
 
-pub const DeleteIdentityOutput = struct {};
+pub const DeleteIdentityOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

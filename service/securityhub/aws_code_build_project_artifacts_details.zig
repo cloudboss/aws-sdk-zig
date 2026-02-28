@@ -31,7 +31,7 @@ pub const AwsCodeBuildProjectArtifactsDetails = struct {
     path: ?[]const u8,
 
     /// The type of build artifact.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .artifact_identifier = "ArtifactIdentifier",
@@ -42,6 +42,6 @@ pub const AwsCodeBuildProjectArtifactsDetails = struct {
         .override_artifact_name = "OverrideArtifactName",
         .packaging = "Packaging",
         .path = "Path",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

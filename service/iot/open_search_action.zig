@@ -14,13 +14,13 @@ pub const OpenSearchAction = struct {
     role_arn: []const u8,
 
     /// The type of document you are storing.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .endpoint = "endpoint",
         .id = "id",
         .index = "index",
         .role_arn = "roleArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };

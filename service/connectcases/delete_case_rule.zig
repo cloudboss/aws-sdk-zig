@@ -17,7 +17,8 @@ pub const DeleteCaseRuleInput = struct {
     };
 };
 
-pub const DeleteCaseRuleOutput = struct {};
+pub const DeleteCaseRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

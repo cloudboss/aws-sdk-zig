@@ -13,7 +13,8 @@ pub const DeleteStorageConfigurationInput = struct {
     };
 };
 
-pub const DeleteStorageConfigurationOutput = struct {};
+pub const DeleteStorageConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

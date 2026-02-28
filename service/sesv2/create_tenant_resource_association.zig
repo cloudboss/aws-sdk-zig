@@ -17,7 +17,8 @@ pub const CreateTenantResourceAssociationInput = struct {
     };
 };
 
-pub const CreateTenantResourceAssociationOutput = struct {};
+pub const CreateTenantResourceAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

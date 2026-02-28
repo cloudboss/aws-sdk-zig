@@ -21,7 +21,8 @@ pub const DeletePortfolioInput = struct {
     };
 };
 
-pub const DeletePortfolioOutput = struct {};
+pub const DeletePortfolioOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

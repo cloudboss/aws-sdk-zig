@@ -17,7 +17,8 @@ pub const PutMeteredProductInput = struct {
     };
 };
 
-pub const PutMeteredProductOutput = struct {};
+pub const PutMeteredProductOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

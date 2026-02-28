@@ -17,7 +17,8 @@ pub const DeleteIntegrationTablePropertiesInput = struct {
     };
 };
 
-pub const DeleteIntegrationTablePropertiesOutput = struct {};
+pub const DeleteIntegrationTablePropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

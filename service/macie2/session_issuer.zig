@@ -14,7 +14,7 @@ pub const SessionIssuer = struct {
 
     /// The source of the temporary security credentials, such as Root, IAMUser, or
     /// Role.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The name or alias of the user or role that issued the session. This value is
     /// null if the credentials were obtained from a root account that doesn't have
@@ -25,7 +25,7 @@ pub const SessionIssuer = struct {
         .account_id = "accountId",
         .arn = "arn",
         .principal_id = "principalId",
-        .type = "type",
+        .@"type" = "type",
         .user_name = "userName",
     };
 };

@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const HeritageStatus = @import("heritage_status.zig").HeritageStatus;
 
-pub const GetTaxInheritanceInput = struct {};
+pub const GetTaxInheritanceInput = struct {
+};
 
 pub const GetTaxInheritanceOutput = struct {
     /// The tax inheritance status.

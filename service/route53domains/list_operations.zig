@@ -43,7 +43,7 @@ pub const ListOperationsInput = struct {
     submitted_since: ?i64 = null,
 
     /// An arrays of the domains operation types.
-    type: ?[]const OperationType = null,
+    @"type": ?[]const OperationType = null,
 
     pub const json_field_names = .{
         .marker = "Marker",
@@ -52,7 +52,7 @@ pub const ListOperationsInput = struct {
         .sort_order = "SortOrder",
         .status = "Status",
         .submitted_since = "SubmittedSince",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

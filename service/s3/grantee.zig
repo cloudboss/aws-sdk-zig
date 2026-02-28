@@ -10,7 +10,7 @@ pub const Grantee = struct {
     id: ?[]const u8,
 
     /// Type of grantee
-    type: Type,
+    @"type": Type,
 
     /// URI of the grantee group.
     uri: ?[]const u8,

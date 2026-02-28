@@ -18,7 +18,8 @@ pub const UpdateThingRuntimeConfigurationInput = struct {
     };
 };
 
-pub const UpdateThingRuntimeConfigurationOutput = struct {};
+pub const UpdateThingRuntimeConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

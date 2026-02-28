@@ -17,7 +17,8 @@ pub const RegisterMemberToAddressListInput = struct {
     };
 };
 
-pub const RegisterMemberToAddressListOutput = struct {};
+pub const RegisterMemberToAddressListOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -46,7 +46,8 @@ pub const UpdateLimitInput = struct {
     };
 };
 
-pub const UpdateLimitOutput = struct {};
+pub const UpdateLimitOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

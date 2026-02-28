@@ -18,7 +18,8 @@ pub const UpdateSoftwareSetInput = struct {
     };
 };
 
-pub const UpdateSoftwareSetOutput = struct {};
+pub const UpdateSoftwareSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

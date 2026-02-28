@@ -29,7 +29,8 @@ pub const AssociateProductWithPortfolioInput = struct {
     };
 };
 
-pub const AssociateProductWithPortfolioOutput = struct {};
+pub const AssociateProductWithPortfolioOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

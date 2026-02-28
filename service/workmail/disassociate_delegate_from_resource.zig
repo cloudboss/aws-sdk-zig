@@ -43,7 +43,8 @@ pub const DisassociateDelegateFromResourceInput = struct {
     };
 };
 
-pub const DisassociateDelegateFromResourceOutput = struct {};
+pub const DisassociateDelegateFromResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

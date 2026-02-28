@@ -32,7 +32,8 @@ pub const DeleteObjectsOnCancelInput = struct {
     };
 };
 
-pub const DeleteObjectsOnCancelOutput = struct {};
+pub const DeleteObjectsOnCancelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

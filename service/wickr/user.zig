@@ -58,7 +58,7 @@ pub const User = struct {
     suspended: ?bool,
 
     /// The descriptive type of the user account (e.g., 'user').
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The unique identifier for the user.
     uname: ?[]const u8,
@@ -85,7 +85,7 @@ pub const User = struct {
         .security_groups = "securityGroups",
         .status = "status",
         .suspended = "suspended",
-        .type = "type",
+        .@"type" = "type",
         .uname = "uname",
         .user_id = "userId",
         .username = "username",

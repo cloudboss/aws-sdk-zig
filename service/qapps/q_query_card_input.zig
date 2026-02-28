@@ -21,7 +21,7 @@ pub const QQueryCardInput = struct {
     title: []const u8,
 
     /// The type of the card.
-    type: CardType = "q-query",
+    @"type": CardType = "q-query",
 
     pub const json_field_names = .{
         .attribute_filter = "attributeFilter",
@@ -29,6 +29,6 @@ pub const QQueryCardInput = struct {
         .output_source = "outputSource",
         .prompt = "prompt",
         .title = "title",
-        .type = "type",
+        .@"type" = "type",
     };
 };

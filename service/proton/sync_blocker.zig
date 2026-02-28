@@ -26,7 +26,7 @@ pub const SyncBlocker = struct {
     status: BlockerStatus,
 
     /// The type of the sync blocker.
-    type: BlockerType,
+    @"type": BlockerType,
 
     pub const json_field_names = .{
         .contexts = "contexts",
@@ -36,6 +36,6 @@ pub const SyncBlocker = struct {
         .resolved_at = "resolvedAt",
         .resolved_reason = "resolvedReason",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };

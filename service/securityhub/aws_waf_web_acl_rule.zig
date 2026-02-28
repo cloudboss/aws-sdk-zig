@@ -50,7 +50,7 @@ pub const AwsWafWebAclRule = struct {
     /// Valid values: `REGULAR` | `RATE_BASED` | `GROUP`
     ///
     /// The default is `REGULAR`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .action = "Action",
@@ -58,6 +58,6 @@ pub const AwsWafWebAclRule = struct {
         .override_action = "OverrideAction",
         .priority = "Priority",
         .rule_id = "RuleId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

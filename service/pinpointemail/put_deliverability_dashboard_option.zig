@@ -22,7 +22,8 @@ pub const PutDeliverabilityDashboardOptionInput = struct {
     };
 };
 
-pub const PutDeliverabilityDashboardOptionOutput = struct {};
+pub const PutDeliverabilityDashboardOptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

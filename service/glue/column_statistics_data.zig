@@ -34,7 +34,7 @@ pub const ColumnStatisticsData = struct {
     string_column_statistics_data: ?StringColumnStatisticsData,
 
     /// The type of column statistics data.
-    type: ColumnStatisticsType,
+    @"type": ColumnStatisticsType,
 
     pub const json_field_names = .{
         .binary_column_statistics_data = "BinaryColumnStatisticsData",
@@ -44,6 +44,6 @@ pub const ColumnStatisticsData = struct {
         .double_column_statistics_data = "DoubleColumnStatisticsData",
         .long_column_statistics_data = "LongColumnStatisticsData",
         .string_column_statistics_data = "StringColumnStatisticsData",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -13,7 +13,8 @@ pub const DeleteStreamInput = struct {
     };
 };
 
-pub const DeleteStreamOutput = struct {};
+pub const DeleteStreamOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

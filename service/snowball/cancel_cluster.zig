@@ -14,7 +14,8 @@ pub const CancelClusterInput = struct {
     };
 };
 
-pub const CancelClusterOutput = struct {};
+pub const CancelClusterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

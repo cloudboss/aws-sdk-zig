@@ -24,7 +24,8 @@ pub const DeleteContainerGroupDefinitionInput = struct {
     };
 };
 
-pub const DeleteContainerGroupDefinitionOutput = struct {};
+pub const DeleteContainerGroupDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -19,7 +19,8 @@ pub const UpdateSubscriptionInput = struct {
     };
 };
 
-pub const UpdateSubscriptionOutput = struct {};
+pub const UpdateSubscriptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

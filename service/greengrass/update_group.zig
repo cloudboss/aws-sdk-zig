@@ -17,7 +17,8 @@ pub const UpdateGroupInput = struct {
     };
 };
 
-pub const UpdateGroupOutput = struct {};
+pub const UpdateGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

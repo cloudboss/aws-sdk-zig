@@ -32,14 +32,14 @@ pub const GetContactOutput = struct {
     plan: ?Plan = null,
 
     /// The type of contact.
-    type: ContactType,
+    @"type": ContactType,
 
     pub const json_field_names = .{
         .alias = "Alias",
         .contact_arn = "ContactArn",
         .display_name = "DisplayName",
         .plan = "Plan",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

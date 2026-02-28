@@ -57,7 +57,7 @@ pub const DescribedCertificate = struct {
     /// If a private key has been specified for the certificate, its type is
     /// `CERTIFICATE_WITH_PRIVATE_KEY`. If there is no private key, the type is
     /// `CERTIFICATE`.
-    type: ?CertificateType,
+    @"type": ?CertificateType,
 
     /// Specifies how this certificate is used. It can be used in the following
     /// ways:
@@ -80,7 +80,7 @@ pub const DescribedCertificate = struct {
         .serial = "Serial",
         .status = "Status",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .usage = "Usage",
     };
 };

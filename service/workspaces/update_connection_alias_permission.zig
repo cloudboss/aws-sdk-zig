@@ -20,7 +20,8 @@ pub const UpdateConnectionAliasPermissionInput = struct {
     };
 };
 
-pub const UpdateConnectionAliasPermissionOutput = struct {};
+pub const UpdateConnectionAliasPermissionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

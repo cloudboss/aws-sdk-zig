@@ -36,7 +36,8 @@ pub const AddApplicationInputProcessingConfigurationInput = struct {
     };
 };
 
-pub const AddApplicationInputProcessingConfigurationOutput = struct {};
+pub const AddApplicationInputProcessingConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -9,7 +9,8 @@ pub const VerifyEmailIdentityInput = struct {
     email_address: []const u8,
 };
 
-pub const VerifyEmailIdentityOutput = struct {};
+pub const VerifyEmailIdentityOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

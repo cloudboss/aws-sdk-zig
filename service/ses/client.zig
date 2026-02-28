@@ -73,7 +73,6 @@ const verify_domain_identity = @import("verify_domain_identity.zig");
 const verify_email_address = @import("verify_email_address.zig");
 const verify_email_identity = @import("verify_email_identity.zig");
 const paginator = @import("paginator.zig");
-const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -1361,10 +1360,5 @@ pub const Client = struct {
             .params = params,
             .allocator = self.allocator,
         };
-    }
-
-    pub fn waitUntilIdentityExists(self: *Self, params: get_identity_verification_attributes.GetIdentityVerificationAttributesInput) aws.waiter.WaiterError!void {
-        var w = waiters.IdentityExistsWaiter{ .client = self, .params = params };
-        return w.wait();
     }
 };

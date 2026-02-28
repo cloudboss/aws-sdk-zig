@@ -14,7 +14,8 @@ pub const UpdateMetricConfigurationInput = struct {
     };
 };
 
-pub const UpdateMetricConfigurationOutput = struct {};
+pub const UpdateMetricConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

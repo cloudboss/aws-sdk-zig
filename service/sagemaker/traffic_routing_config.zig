@@ -21,7 +21,7 @@ pub const TrafficRoutingConfig = struct {
     ///   step is the remainder of the traffic.
     /// * `LINEAR`: Endpoint traffic shifts to the new fleet in n steps of a
     ///   configurable size.
-    type: TrafficRoutingConfigType,
+    @"type": TrafficRoutingConfigType,
 
     /// The waiting time (in seconds) between incremental steps to turn on traffic
     /// on the new endpoint fleet.
@@ -30,7 +30,7 @@ pub const TrafficRoutingConfig = struct {
     pub const json_field_names = .{
         .canary_size = "CanarySize",
         .linear_step_size = "LinearStepSize",
-        .type = "Type",
+        .@"type" = "Type",
         .wait_interval_in_seconds = "WaitIntervalInSeconds",
     };
 };

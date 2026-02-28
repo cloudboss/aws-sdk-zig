@@ -17,7 +17,7 @@ pub const RetentionPeriod = struct {
     /// forever. If you set it to
     /// `UNSPECIFIED`, the files are retained until you set an explicit retention
     /// period.
-    type: RetentionPeriodType,
+    @"type": RetentionPeriodType,
 
     /// Defines the amount of time for the retention period of an FSx for ONTAP
     /// SnapLock volume.
@@ -39,7 +39,7 @@ pub const RetentionPeriod = struct {
     value: ?i32,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

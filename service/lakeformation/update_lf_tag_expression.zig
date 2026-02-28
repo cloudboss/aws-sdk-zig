@@ -26,7 +26,8 @@ pub const UpdateLFTagExpressionInput = struct {
     };
 };
 
-pub const UpdateLFTagExpressionOutput = struct {};
+pub const UpdateLFTagExpressionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteRotationInput = struct {
     };
 };
 
-pub const DeleteRotationOutput = struct {};
+pub const DeleteRotationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

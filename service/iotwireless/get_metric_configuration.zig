@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SummaryMetricConfiguration = @import("summary_metric_configuration.zig").SummaryMetricConfiguration;
 
-pub const GetMetricConfigurationInput = struct {};
+pub const GetMetricConfigurationInput = struct {
+};
 
 pub const GetMetricConfigurationOutput = struct {
     /// The configuration status of the AWS account for summary metric aggregation.

@@ -17,7 +17,8 @@ pub const RevokeIpRulesInput = struct {
     };
 };
 
-pub const RevokeIpRulesOutput = struct {};
+pub const RevokeIpRulesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

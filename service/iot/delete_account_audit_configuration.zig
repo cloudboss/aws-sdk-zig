@@ -13,7 +13,8 @@ pub const DeleteAccountAuditConfigurationInput = struct {
     };
 };
 
-pub const DeleteAccountAuditConfigurationOutput = struct {};
+pub const DeleteAccountAuditConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -26,7 +26,7 @@ pub const ProvisioningTemplateSummary = struct {
     /// `FLEET_PROVISIONING`.
     /// For more information about provisioning template, see: [Provisioning
     /// template](https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html).
-    type: ?TemplateType,
+    @"type": ?TemplateType,
 
     pub const json_field_names = .{
         .creation_date = "creationDate",
@@ -35,6 +35,6 @@ pub const ProvisioningTemplateSummary = struct {
         .last_modified_date = "lastModifiedDate",
         .template_arn = "templateArn",
         .template_name = "templateName",
-        .type = "type",
+        .@"type" = "type",
     };
 };

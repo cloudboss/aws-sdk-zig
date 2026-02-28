@@ -18,13 +18,13 @@ pub const ListCloudConnectorsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of cloud connectors to filter by when listing available connectors.
-    type: ?CloudConnectorType = null,
+    @"type": ?CloudConnectorType = null,
 
     pub const json_field_names = .{
         .lambda_arn = "LambdaArn",
         .max_results = "MaxResults",
         .next_token = "NextToken",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -102,7 +102,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListCloudConnectorsInput, c
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "Type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

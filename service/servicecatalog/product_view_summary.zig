@@ -43,7 +43,7 @@ pub const ProductViewSummary = struct {
     /// this
     /// value. If this value is `MARKETPLACE`, the product was created by Amazon Web
     /// Services Marketplace.
-    type: ?ProductType,
+    @"type": ?ProductType,
 
     pub const json_field_names = .{
         .distributor = "Distributor",
@@ -56,6 +56,6 @@ pub const ProductViewSummary = struct {
         .support_description = "SupportDescription",
         .support_email = "SupportEmail",
         .support_url = "SupportUrl",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DisassociateServiceRoleFromAccountInput = struct {};
+pub const DisassociateServiceRoleFromAccountInput = struct {
+};
 
 pub const DisassociateServiceRoleFromAccountOutput = struct {
     /// The time when the service role was disassociated from the account.

@@ -18,13 +18,13 @@ pub const RumEvent = struct {
 
     /// The JSON schema that denotes the type of event this is, such as a page load
     /// or a new session.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .details = "details",
         .id = "id",
         .metadata = "metadata",
         .timestamp = "timestamp",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -8,7 +8,8 @@ const SendQuota = @import("send_quota.zig").SendQuota;
 const SuppressionAttributes = @import("suppression_attributes.zig").SuppressionAttributes;
 const VdmAttributes = @import("vdm_attributes.zig").VdmAttributes;
 
-pub const GetAccountInput = struct {};
+pub const GetAccountInput = struct {
+};
 
 pub const GetAccountOutput = struct {
     /// Indicates whether or not the automatic warm-up feature is enabled for

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetDataLakeExceptionSubscriptionInput = struct {};
+pub const GetDataLakeExceptionSubscriptionInput = struct {
+};
 
 pub const GetDataLakeExceptionSubscriptionOutput = struct {
     /// The expiration period and time-to-live (TTL). It is the duration of time

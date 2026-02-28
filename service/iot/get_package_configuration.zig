@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const VersionUpdateByJobsConfig = @import("version_update_by_jobs_config.zig").VersionUpdateByJobsConfig;
 
-pub const GetPackageConfigurationInput = struct {};
+pub const GetPackageConfigurationInput = struct {
+};
 
 pub const GetPackageConfigurationOutput = struct {
     /// The version that is associated to a specific job.

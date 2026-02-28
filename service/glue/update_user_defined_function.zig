@@ -30,7 +30,8 @@ pub const UpdateUserDefinedFunctionInput = struct {
     };
 };
 
-pub const UpdateUserDefinedFunctionOutput = struct {};
+pub const UpdateUserDefinedFunctionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

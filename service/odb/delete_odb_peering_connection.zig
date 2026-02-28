@@ -13,7 +13,8 @@ pub const DeleteOdbPeeringConnectionInput = struct {
     };
 };
 
-pub const DeleteOdbPeeringConnectionOutput = struct {};
+pub const DeleteOdbPeeringConnectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

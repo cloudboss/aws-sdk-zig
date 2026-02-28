@@ -67,7 +67,7 @@ pub const GetBotChannelAssociationOutput = struct {
     status: ?ChannelStatus = null,
 
     /// The type of the messaging platform.
-    type: ?ChannelType = null,
+    @"type": ?ChannelType = null,
 
     pub const json_field_names = .{
         .bot_alias = "botAlias",
@@ -78,7 +78,7 @@ pub const GetBotChannelAssociationOutput = struct {
         .failure_reason = "failureReason",
         .name = "name",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

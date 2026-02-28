@@ -13,7 +13,8 @@ pub const DeleteConnectionAliasInput = struct {
     };
 };
 
-pub const DeleteConnectionAliasOutput = struct {};
+pub const DeleteConnectionAliasOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

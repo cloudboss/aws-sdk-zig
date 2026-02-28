@@ -45,6 +45,8 @@ class UnionGenerator(
             // Recurses through list elements and map values to find nested named types.
             val referencedTypes = mutableSetOf<software.amazon.smithy.model.shapes.Shape>()
             fun collectFromShape(targetShape: software.amazon.smithy.model.shapes.Shape) {
+                // Skip Smithy prelude shapes -- they have no generated files.
+                if (targetShape.id.namespace == "smithy.api") return
                 when (targetShape) {
                     is StructureShape -> referencedTypes.add(targetShape)
                     is EnumShape -> referencedTypes.add(targetShape)

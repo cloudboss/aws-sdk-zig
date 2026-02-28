@@ -67,7 +67,8 @@ pub const UpdateIncidentRecordInput = struct {
     };
 };
 
-pub const UpdateIncidentRecordOutput = struct {};
+pub const UpdateIncidentRecordOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

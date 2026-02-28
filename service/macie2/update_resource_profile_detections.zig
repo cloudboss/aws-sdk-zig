@@ -21,7 +21,8 @@ pub const UpdateResourceProfileDetectionsInput = struct {
     };
 };
 
-pub const UpdateResourceProfileDetectionsOutput = struct {};
+pub const UpdateResourceProfileDetectionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -26,7 +26,8 @@ pub const DeleteApplicationAssignmentInput = struct {
     };
 };
 
-pub const DeleteApplicationAssignmentOutput = struct {};
+pub const DeleteApplicationAssignmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

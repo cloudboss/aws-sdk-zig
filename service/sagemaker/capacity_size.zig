@@ -14,14 +14,14 @@ pub const CapacitySize = struct {
     /// * `INSTANCE_COUNT`: The endpoint activates based on the number of instances.
     /// * `CAPACITY_PERCENT`: The endpoint activates based on the specified
     ///   percentage of capacity.
-    type: CapacitySizeType,
+    @"type": CapacitySizeType,
 
     /// Defines the capacity size, either as a number of instances or a capacity
     /// percentage.
     value: i32,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

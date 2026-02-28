@@ -27,7 +27,8 @@ pub const CreateCustomMetadataInput = struct {
     };
 };
 
-pub const CreateCustomMetadataOutput = struct {};
+pub const CreateCustomMetadataOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

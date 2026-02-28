@@ -13,7 +13,8 @@ pub const DeleteCloudExadataInfrastructureInput = struct {
     };
 };
 
-pub const DeleteCloudExadataInfrastructureOutput = struct {};
+pub const DeleteCloudExadataInfrastructureOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

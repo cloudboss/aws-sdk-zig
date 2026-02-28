@@ -15,7 +15,8 @@ pub const DisassociateMulticastGroupFromFuotaTaskInput = struct {
     };
 };
 
-pub const DisassociateMulticastGroupFromFuotaTaskOutput = struct {};
+pub const DisassociateMulticastGroupFromFuotaTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

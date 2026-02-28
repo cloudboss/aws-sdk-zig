@@ -1,2 +1,3 @@
 /// Configuration settings for default maintenance scheduling.
-pub const DefaultMaintenanceConfiguration = struct {};
+pub const DefaultMaintenanceConfiguration = struct {
+};

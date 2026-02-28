@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReportStatus = @import("report_status.zig").ReportStatus;
 
-pub const StartQuotaUtilizationReportInput = struct {};
+pub const StartQuotaUtilizationReportInput = struct {
+};
 
 pub const StartQuotaUtilizationReportOutput = struct {
     /// An optional message providing additional information about the report

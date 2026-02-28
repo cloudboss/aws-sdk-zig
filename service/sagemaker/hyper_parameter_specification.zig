@@ -25,7 +25,7 @@ pub const HyperParameterSpecification = struct {
 
     /// The type of this hyperparameter. The valid types are `Integer`,
     /// `Continuous`, `Categorical`, and `FreeText`.
-    type: ParameterType,
+    @"type": ParameterType,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",
@@ -34,6 +34,6 @@ pub const HyperParameterSpecification = struct {
         .is_tunable = "IsTunable",
         .name = "Name",
         .range = "Range",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

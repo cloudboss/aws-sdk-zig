@@ -52,7 +52,7 @@ pub const WorkflowStep = struct {
     ///   uploaded.
     /// * ** `DELETE` ** - Delete the file.
     /// * ** `TAG` ** - Add a tag to the file.
-    type: ?WorkflowStepType,
+    @"type": ?WorkflowStepType,
 
     pub const json_field_names = .{
         .copy_step_details = "CopyStepDetails",
@@ -60,6 +60,6 @@ pub const WorkflowStep = struct {
         .decrypt_step_details = "DecryptStepDetails",
         .delete_step_details = "DeleteStepDetails",
         .tag_step_details = "TagStepDetails",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -90,7 +90,7 @@ pub const Finding = struct {
     /// The type of the finding. The `type` value determines the valid values for
     /// `resource` in your request. For more information, see [Finding
     /// types](https://docs.aws.amazon.com/inspector/latest/user/findings-types.html) in the Amazon Inspector user guide.
-    type: FindingType,
+    @"type": FindingType,
 
     /// The date and time the finding was last updated at.
     updated_at: ?i64,
@@ -115,7 +115,7 @@ pub const Finding = struct {
         .severity = "severity",
         .status = "status",
         .title = "title",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

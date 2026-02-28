@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const LogLevel = @import("log_level.zig").LogLevel;
 
-pub const GetLoggingOptionsInput = struct {};
+pub const GetLoggingOptionsInput = struct {
+};
 
 pub const GetLoggingOptionsOutput = struct {
     /// The logging level.

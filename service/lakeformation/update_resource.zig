@@ -32,7 +32,8 @@ pub const UpdateResourceInput = struct {
     };
 };
 
-pub const UpdateResourceOutput = struct {};
+pub const UpdateResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

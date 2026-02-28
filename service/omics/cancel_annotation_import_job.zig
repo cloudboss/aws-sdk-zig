@@ -13,7 +13,8 @@ pub const CancelAnnotationImportJobInput = struct {
     };
 };
 
-pub const CancelAnnotationImportJobOutput = struct {};
+pub const CancelAnnotationImportJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

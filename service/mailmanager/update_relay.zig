@@ -31,7 +31,8 @@ pub const UpdateRelayInput = struct {
     };
 };
 
-pub const UpdateRelayOutput = struct {};
+pub const UpdateRelayOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

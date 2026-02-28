@@ -13,7 +13,8 @@ pub const DeleteReferenceStoreInput = struct {
     };
 };
 
-pub const DeleteReferenceStoreOutput = struct {};
+pub const DeleteReferenceStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -35,7 +35,8 @@ pub const UpdateAutomatedDiscoveryConfigurationInput = struct {
     };
 };
 
-pub const UpdateAutomatedDiscoveryConfigurationOutput = struct {};
+pub const UpdateAutomatedDiscoveryConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

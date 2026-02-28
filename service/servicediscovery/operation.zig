@@ -79,7 +79,7 @@ pub const Operation = struct {
     targets: ?[]const aws.map.StringMapEntry,
 
     /// The name of the operation that's associated with the specified ID.
-    type: ?OperationType,
+    @"type": ?OperationType,
 
     /// The date and time that the value of `Status` changed to the current value,
     /// in
@@ -98,7 +98,7 @@ pub const Operation = struct {
         .owner_account = "OwnerAccount",
         .status = "Status",
         .targets = "Targets",
-        .type = "Type",
+        .@"type" = "Type",
         .update_date = "UpdateDate",
     };
 };

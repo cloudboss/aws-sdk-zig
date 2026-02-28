@@ -13,7 +13,8 @@ pub const DeleteDedicatedIpPoolInput = struct {
     };
 };
 
-pub const DeleteDedicatedIpPoolOutput = struct {};
+pub const DeleteDedicatedIpPoolOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

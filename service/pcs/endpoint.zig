@@ -25,13 +25,13 @@ pub const Endpoint = struct {
     public_ip_address: ?[]const u8,
 
     /// Indicates the type of endpoint running at the specific IP address.
-    type: EndpointType,
+    @"type": EndpointType,
 
     pub const json_field_names = .{
         .ipv_6_address = "ipv6Address",
         .port = "port",
         .private_ip_address = "privateIpAddress",
         .public_ip_address = "publicIpAddress",
-        .type = "type",
+        .@"type" = "type",
     };
 };

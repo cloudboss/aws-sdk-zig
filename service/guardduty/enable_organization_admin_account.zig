@@ -15,7 +15,8 @@ pub const EnableOrganizationAdminAccountInput = struct {
     };
 };
 
-pub const EnableOrganizationAdminAccountOutput = struct {};
+pub const EnableOrganizationAdminAccountOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

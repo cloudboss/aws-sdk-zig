@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SecurityHubConfiguration = @import("security_hub_configuration.zig").SecurityHubConfiguration;
 
-pub const GetFindingsPublicationConfigurationInput = struct {};
+pub const GetFindingsPublicationConfigurationInput = struct {
+};
 
 pub const GetFindingsPublicationConfigurationOutput = struct {
     /// The configuration settings that determine which findings are published to

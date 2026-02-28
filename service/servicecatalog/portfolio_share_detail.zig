@@ -29,13 +29,13 @@ pub const PortfolioShareDetail = struct {
     share_tag_options: bool = false,
 
     /// The type of the portfolio share.
-    type: ?DescribePortfolioShareType,
+    @"type": ?DescribePortfolioShareType,
 
     pub const json_field_names = .{
         .accepted = "Accepted",
         .principal_id = "PrincipalId",
         .share_principals = "SharePrincipals",
         .share_tag_options = "ShareTagOptions",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -15,7 +15,8 @@ pub const DisassociateWirelessDeviceFromFuotaTaskInput = struct {
     };
 };
 
-pub const DisassociateWirelessDeviceFromFuotaTaskOutput = struct {};
+pub const DisassociateWirelessDeviceFromFuotaTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

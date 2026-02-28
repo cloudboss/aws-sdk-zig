@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountRoleStatus = @import("account_role_status.zig").AccountRoleStatus;
 
-pub const GetAdminAccountInput = struct {};
+pub const GetAdminAccountInput = struct {
+};
 
 pub const GetAdminAccountOutput = struct {
     /// The account that is set as the Firewall Manager default administrator.

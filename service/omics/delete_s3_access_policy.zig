@@ -13,7 +13,8 @@ pub const DeleteS3AccessPolicyInput = struct {
     };
 };
 
-pub const DeleteS3AccessPolicyOutput = struct {};
+pub const DeleteS3AccessPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

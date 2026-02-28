@@ -18,7 +18,8 @@ pub const DeleteEnvironmentBlueprintConfigurationInput = struct {
     };
 };
 
-pub const DeleteEnvironmentBlueprintConfigurationOutput = struct {};
+pub const DeleteEnvironmentBlueprintConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const DeleteDomainObjectTypeInput = struct {
     };
 };
 
-pub const DeleteDomainObjectTypeOutput = struct {};
+pub const DeleteDomainObjectTypeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

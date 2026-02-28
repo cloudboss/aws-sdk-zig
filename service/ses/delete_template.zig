@@ -9,7 +9,8 @@ pub const DeleteTemplateInput = struct {
     template_name: []const u8,
 };
 
-pub const DeleteTemplateOutput = struct {};
+pub const DeleteTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

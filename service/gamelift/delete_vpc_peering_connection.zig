@@ -19,7 +19,8 @@ pub const DeleteVpcPeeringConnectionInput = struct {
     };
 };
 
-pub const DeleteVpcPeeringConnectionOutput = struct {};
+pub const DeleteVpcPeeringConnectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

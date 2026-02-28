@@ -14,7 +14,8 @@ pub const PutLoggingOptionsInput = struct {
     };
 };
 
-pub const PutLoggingOptionsOutput = struct {};
+pub const PutLoggingOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

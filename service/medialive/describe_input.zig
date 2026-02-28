@@ -103,7 +103,7 @@ pub const DescribeInputOutput = struct {
     /// A collection of key-value pairs.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    type: ?InputType = null,
+    @"type": ?InputType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -127,7 +127,7 @@ pub const DescribeInputOutput = struct {
         .srt_settings = "SrtSettings",
         .state = "State",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

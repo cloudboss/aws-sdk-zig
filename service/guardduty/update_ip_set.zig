@@ -39,7 +39,8 @@ pub const UpdateIPSetInput = struct {
     };
 };
 
-pub const UpdateIPSetOutput = struct {};
+pub const UpdateIPSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -9,11 +9,11 @@ pub const NotificationResource = struct {
     name: ?[]const u8,
 
     /// The type of the resource mentioned in a notification.
-    type: NotificationResourceType,
+    @"type": NotificationResourceType,
 
     pub const json_field_names = .{
         .id = "id",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -33,7 +33,8 @@ pub const UpdateMailboxQuotaInput = struct {
     };
 };
 
-pub const UpdateMailboxQuotaOutput = struct {};
+pub const UpdateMailboxQuotaOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

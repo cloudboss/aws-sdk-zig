@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const TaxExemptionType = @import("tax_exemption_type.zig").TaxExemptionType;
 
-pub const GetTaxExemptionTypesInput = struct {};
+pub const GetTaxExemptionTypesInput = struct {
+};
 
 pub const GetTaxExemptionTypesOutput = struct {
     /// The supported types of tax exemptions.

@@ -30,7 +30,8 @@ pub const DeleteMobileDeviceAccessOverrideInput = struct {
     };
 };
 
-pub const DeleteMobileDeviceAccessOverrideOutput = struct {};
+pub const DeleteMobileDeviceAccessOverrideOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -34,7 +34,8 @@ pub const DeleteDocumentInput = struct {
     };
 };
 
-pub const DeleteDocumentOutput = struct {};
+pub const DeleteDocumentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -42,11 +42,11 @@ pub const GuardrailContentFilterConfig = struct {
     output_strength: GuardrailFilterStrength,
 
     /// The harmful category that the content filter is applied to.
-    type: GuardrailContentFilterType,
+    @"type": GuardrailContentFilterType,
 
     pub const json_field_names = .{
         .input_strength = "inputStrength",
         .output_strength = "outputStrength",
-        .type = "type",
+        .@"type" = "type",
     };
 };

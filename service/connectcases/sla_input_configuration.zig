@@ -18,13 +18,13 @@ pub const SlaInputConfiguration = struct {
     target_sla_minutes: i64,
 
     /// Type of SLA.
-    type: SlaType,
+    @"type": SlaType,
 
     pub const json_field_names = .{
         .field_id = "fieldId",
         .name = "name",
         .target_field_values = "targetFieldValues",
         .target_sla_minutes = "targetSlaMinutes",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -25,7 +25,8 @@ pub const DisassociateProductFromPortfolioInput = struct {
     };
 };
 
-pub const DisassociateProductFromPortfolioOutput = struct {};
+pub const DisassociateProductFromPortfolioOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

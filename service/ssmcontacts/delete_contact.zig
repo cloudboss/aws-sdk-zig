@@ -13,7 +13,8 @@ pub const DeleteContactInput = struct {
     };
 };
 
-pub const DeleteContactOutput = struct {};
+pub const DeleteContactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

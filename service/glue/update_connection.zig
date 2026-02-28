@@ -25,7 +25,8 @@ pub const UpdateConnectionInput = struct {
     };
 };
 
-pub const UpdateConnectionOutput = struct {};
+pub const UpdateConnectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

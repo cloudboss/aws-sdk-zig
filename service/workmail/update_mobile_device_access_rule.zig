@@ -67,7 +67,8 @@ pub const UpdateMobileDeviceAccessRuleInput = struct {
     };
 };
 
-pub const UpdateMobileDeviceAccessRuleOutput = struct {};
+pub const UpdateMobileDeviceAccessRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

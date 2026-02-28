@@ -1,2 +1,3 @@
 /// Arib Source Settings
-pub const AribSourceSettings = struct {};
+pub const AribSourceSettings = struct {
+};

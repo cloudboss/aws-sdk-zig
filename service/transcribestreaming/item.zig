@@ -35,7 +35,7 @@ pub const Item = struct {
 
     /// The type of item identified. Options are: `PRONUNCIATION` (spoken words) and
     /// `PUNCTUATION`.
-    type: ?ItemType,
+    @"type": ?ItemType,
 
     /// Indicates whether the specified item matches a word in the vocabulary filter
     /// included in
@@ -49,7 +49,7 @@ pub const Item = struct {
         .speaker = "Speaker",
         .stable = "Stable",
         .start_time = "StartTime",
-        .type = "Type",
+        .@"type" = "Type",
         .vocabulary_filter_match = "VocabularyFilterMatch",
     };
 };

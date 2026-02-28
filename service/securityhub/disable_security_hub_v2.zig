@@ -4,9 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DisableSecurityHubV2Input = struct {};
+pub const DisableSecurityHubV2Input = struct {
+};
 
-pub const DisableSecurityHubV2Output = struct {};
+pub const DisableSecurityHubV2Output = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

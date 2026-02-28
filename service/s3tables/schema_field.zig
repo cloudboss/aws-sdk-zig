@@ -11,11 +11,11 @@ pub const SchemaField = struct {
     /// The field type. S3 Tables supports all Apache Iceberg primitive types. For
     /// more information, see the [Apache Iceberg
     /// documentation](https://iceberg.apache.org/spec/#primitive-types).
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .name = "name",
         .required = "required",
-        .type = "type",
+        .@"type" = "type",
     };
 };

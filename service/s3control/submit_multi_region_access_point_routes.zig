@@ -20,7 +20,8 @@ pub const SubmitMultiRegionAccessPointRoutesInput = struct {
     route_updates: []const MultiRegionAccessPointRoute,
 };
 
-pub const SubmitMultiRegionAccessPointRoutesOutput = struct {};
+pub const SubmitMultiRegionAccessPointRoutesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

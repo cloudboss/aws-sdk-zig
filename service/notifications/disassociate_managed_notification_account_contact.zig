@@ -20,7 +20,8 @@ pub const DisassociateManagedNotificationAccountContactInput = struct {
     };
 };
 
-pub const DisassociateManagedNotificationAccountContactOutput = struct {};
+pub const DisassociateManagedNotificationAccountContactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

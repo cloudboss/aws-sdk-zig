@@ -17,7 +17,8 @@ pub const DeleteColumnStatisticsTaskSettingsInput = struct {
     };
 };
 
-pub const DeleteColumnStatisticsTaskSettingsOutput = struct {};
+pub const DeleteColumnStatisticsTaskSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

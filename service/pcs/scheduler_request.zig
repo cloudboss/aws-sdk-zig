@@ -4,7 +4,7 @@ const SchedulerType = @import("scheduler_type.zig").SchedulerType;
 /// cluster.
 pub const SchedulerRequest = struct {
     /// The software PCS uses to manage cluster scaling and job scheduling.
-    type: SchedulerType,
+    @"type": SchedulerType,
 
     /// The version of the specified scheduling software that PCS uses to manage
     /// cluster scaling and job scheduling. For more information, see [Slurm
@@ -16,7 +16,7 @@ pub const SchedulerRequest = struct {
     version: []const u8,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
     };
 };

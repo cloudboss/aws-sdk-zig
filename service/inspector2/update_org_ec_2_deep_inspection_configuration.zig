@@ -14,7 +14,8 @@ pub const UpdateOrgEc2DeepInspectionConfigurationInput = struct {
     };
 };
 
-pub const UpdateOrgEc2DeepInspectionConfigurationOutput = struct {};
+pub const UpdateOrgEc2DeepInspectionConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

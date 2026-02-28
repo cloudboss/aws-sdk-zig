@@ -31,7 +31,7 @@ pub const S3BucketDetail = struct {
     tags: ?[]const Tag,
 
     /// Describes whether the bucket is a source or destination bucket.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -42,6 +42,6 @@ pub const S3BucketDetail = struct {
         .public_access = "PublicAccess",
         .s3_object_details = "S3ObjectDetails",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

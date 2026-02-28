@@ -5,7 +5,7 @@ pub const ComponentStatus = enum {
     stopping,
     running,
     running_with_error,
-    undefined,
+    @"undefined",
 
     pub const json_field_names = .{
         .activated = "ACTIVATED",
@@ -14,6 +14,6 @@ pub const ComponentStatus = enum {
         .stopping = "STOPPING",
         .running = "RUNNING",
         .running_with_error = "RUNNING_WITH_ERROR",
-        .undefined = "UNDEFINED",
+        .@"undefined" = "UNDEFINED",
     };
 };

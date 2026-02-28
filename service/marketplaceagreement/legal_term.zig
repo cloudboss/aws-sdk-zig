@@ -8,10 +8,10 @@ pub const LegalTerm = struct {
     documents: ?[]const DocumentItem,
 
     /// Category of the term being updated.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .documents = "documents",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -93,7 +93,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ModifyIpamScopeInput, confi
             try body_buf.appendSlice(alloc, "&ExternalAuthorityConfiguration.ExternalResourceIdentifier=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, sv);
         }
-        if (v.type) |sv| {
+        if (v.@"type") |sv| {
             try body_buf.appendSlice(alloc, "&ExternalAuthorityConfiguration.Type=");
             try aws.url.appendUrlEncoded(alloc, &body_buf, @tagName(sv));
         }
@@ -157,6 +157,7 @@ fn parseErrorResponse(body: []const u8, status: u16, alloc: std.mem.Allocator) !
     const arena_alloc = arena.allocator();
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, request_id);
+
 
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{

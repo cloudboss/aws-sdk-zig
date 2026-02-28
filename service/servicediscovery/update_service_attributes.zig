@@ -20,7 +20,8 @@ pub const UpdateServiceAttributesInput = struct {
     };
 };
 
-pub const UpdateServiceAttributesOutput = struct {};
+pub const UpdateServiceAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

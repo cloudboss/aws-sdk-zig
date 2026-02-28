@@ -11,10 +11,10 @@ pub const SuppressDataIdentifier = struct {
     /// The type of data identifier that detected the sensitive data. Possible
     /// values are: CUSTOM, for a custom data identifier; and, MANAGED, for a
     /// managed data identifier.
-    type: ?DataIdentifierType,
+    @"type": ?DataIdentifierType,
 
     pub const json_field_names = .{
         .id = "id",
-        .type = "type",
+        .@"type" = "type",
     };
 };

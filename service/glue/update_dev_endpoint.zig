@@ -56,7 +56,8 @@ pub const UpdateDevEndpointInput = struct {
     };
 };
 
-pub const UpdateDevEndpointOutput = struct {};
+pub const UpdateDevEndpointOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

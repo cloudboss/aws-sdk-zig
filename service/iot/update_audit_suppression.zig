@@ -29,7 +29,8 @@ pub const UpdateAuditSuppressionInput = struct {
     };
 };
 
-pub const UpdateAuditSuppressionOutput = struct {};
+pub const UpdateAuditSuppressionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

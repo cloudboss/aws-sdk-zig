@@ -17,7 +17,7 @@ pub const PlatformFilter = struct {
     /// `PlatformLifecycleState` | `PlatformOwner` |
     /// `SupportedTier` | `SupportedAddon` |
     /// `ProgrammingLanguageName` | `OperatingSystemName`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The list of values applied to the filtering platform version attribute. Only
     /// one value is supported

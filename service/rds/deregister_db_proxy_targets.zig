@@ -20,7 +20,8 @@ pub const DeregisterDBProxyTargetsInput = struct {
     target_group_name: ?[]const u8 = null,
 };
 
-pub const DeregisterDBProxyTargetsOutput = struct {};
+pub const DeregisterDBProxyTargetsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

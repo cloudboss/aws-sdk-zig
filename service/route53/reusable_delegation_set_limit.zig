@@ -8,7 +8,7 @@ pub const ReusableDelegationSetLimit = struct {
     /// maximum number of hosted zones that you can associate with the specified
     /// reusable
     /// delegation set.
-    type: ReusableDelegationSetLimitType,
+    @"type": ReusableDelegationSetLimitType,
 
     /// The current value for the `MAX_ZONES_BY_REUSABLE_DELEGATION_SET`
     /// limit.

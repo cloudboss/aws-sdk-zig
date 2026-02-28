@@ -14,7 +14,8 @@ pub const DeleteFindingAggregatorInput = struct {
     };
 };
 
-pub const DeleteFindingAggregatorOutput = struct {};
+pub const DeleteFindingAggregatorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -16,13 +16,13 @@ pub const EntityDescription = struct {
     id: ?[]const u8,
 
     /// The entity type.
-    type: ?EntityType,
+    @"type": ?EntityType,
 
     pub const json_field_names = .{
         .arn = "arn",
         .created_at = "createdAt",
         .definition = "definition",
         .id = "id",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -13,7 +13,8 @@ pub const StartCrawlerInput = struct {
     };
 };
 
-pub const StartCrawlerOutput = struct {};
+pub const StartCrawlerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

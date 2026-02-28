@@ -43,7 +43,8 @@ pub const PutRumEventsInput = struct {
     };
 };
 
-pub const PutRumEventsOutput = struct {};
+pub const PutRumEventsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

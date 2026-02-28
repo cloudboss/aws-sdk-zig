@@ -27,7 +27,7 @@ pub const Message = struct {
     time: ?i64,
 
     /// The type of Amazon Q Business message, whether `HUMAN` or `AI` generated.
-    type: ?MessageType,
+    @"type": ?MessageType,
 
     pub const json_field_names = .{
         .action_execution = "actionExecution",
@@ -37,6 +37,6 @@ pub const Message = struct {
         .message_id = "messageId",
         .source_attribution = "sourceAttribution",
         .time = "time",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -13,7 +13,8 @@ pub const StartClockInput = struct {
     };
 };
 
-pub const StartClockOutput = struct {};
+pub const StartClockOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

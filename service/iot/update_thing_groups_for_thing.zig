@@ -31,7 +31,8 @@ pub const UpdateThingGroupsForThingInput = struct {
     };
 };
 
-pub const UpdateThingGroupsForThingOutput = struct {};
+pub const UpdateThingGroupsForThingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -44,7 +44,7 @@ pub const ServerOfflineWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeServer(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeServer(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -105,7 +105,7 @@ pub const ServerOnlineWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeServer(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeServer(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

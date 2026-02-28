@@ -35,7 +35,7 @@ pub const ScheduledAction = struct {
     status: ?ActionStatus,
 
     /// The type of action that will be taken on the domain.
-    type: ActionType,
+    @"type": ActionType,
 
     pub const json_field_names = .{
         .cancellable = "Cancellable",
@@ -46,6 +46,6 @@ pub const ScheduledAction = struct {
         .scheduled_time = "ScheduledTime",
         .severity = "Severity",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

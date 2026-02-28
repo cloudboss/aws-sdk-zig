@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DownloadDefaultKeyPairInput = struct {};
+pub const DownloadDefaultKeyPairInput = struct {
+};
 
 pub const DownloadDefaultKeyPairOutput = struct {
     /// The timestamp when the default key pair was created.

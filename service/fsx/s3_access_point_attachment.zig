@@ -41,7 +41,7 @@ pub const S3AccessPointAttachment = struct {
     s3_access_point: ?S3AccessPoint,
 
     /// The type of Amazon FSx volume that the S3 access point is attached to.
-    type: ?S3AccessPointAttachmentType,
+    @"type": ?S3AccessPointAttachmentType,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",
@@ -51,6 +51,6 @@ pub const S3AccessPointAttachment = struct {
         .ontap_configuration = "OntapConfiguration",
         .open_zfs_configuration = "OpenZFSConfiguration",
         .s3_access_point = "S3AccessPoint",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

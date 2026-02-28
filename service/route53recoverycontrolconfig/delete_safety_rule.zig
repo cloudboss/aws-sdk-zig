@@ -13,7 +13,8 @@ pub const DeleteSafetyRuleInput = struct {
     };
 };
 
-pub const DeleteSafetyRuleOutput = struct {};
+pub const DeleteSafetyRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

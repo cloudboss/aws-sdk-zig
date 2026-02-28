@@ -13,7 +13,8 @@ pub const DeleteSessionLoggerInput = struct {
     };
 };
 
-pub const DeleteSessionLoggerOutput = struct {};
+pub const DeleteSessionLoggerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

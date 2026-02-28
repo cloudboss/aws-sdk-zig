@@ -23,7 +23,8 @@ pub const UpdateEncryptionKeyInput = struct {
     };
 };
 
-pub const UpdateEncryptionKeyOutput = struct {};
+pub const UpdateEncryptionKeyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

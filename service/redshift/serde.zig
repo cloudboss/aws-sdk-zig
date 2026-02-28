@@ -3384,7 +3384,7 @@ pub fn deserializeRecommendedAction(reader: *aws.xml.Reader, alloc: std.mem.Allo
     result.command = null;
     result.database = null;
     result.text = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -3395,7 +3395,7 @@ pub fn deserializeRecommendedAction(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "Text")) {
                     result.text = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(RecommendedActionType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(RecommendedActionType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -4969,3 +4969,4 @@ pub fn serializeTag(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: Ta
         try buf.appendSlice(alloc, "</Value>");
     }
 }
+

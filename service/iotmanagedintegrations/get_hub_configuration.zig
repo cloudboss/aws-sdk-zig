@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetHubConfigurationInput = struct {};
+pub const GetHubConfigurationInput = struct {
+};
 
 pub const GetHubConfigurationOutput = struct {
     /// A user-defined integer value that represents the hub token timer expiry

@@ -12,11 +12,11 @@ pub const PaymentScheduleTerm = struct {
     schedule: ?[]const ScheduleItem,
 
     /// Type of the term.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .currency_code = "currencyCode",
         .schedule = "schedule",
-        .type = "type",
+        .@"type" = "type",
     };
 };

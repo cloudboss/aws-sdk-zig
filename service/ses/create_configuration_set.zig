@@ -11,7 +11,8 @@ pub const CreateConfigurationSetInput = struct {
     configuration_set: ConfigurationSet,
 };
 
-pub const CreateConfigurationSetOutput = struct {};
+pub const CreateConfigurationSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

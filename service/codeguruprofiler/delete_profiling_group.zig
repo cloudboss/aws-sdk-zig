@@ -13,8 +13,7 @@ pub const DeleteProfilingGroupInput = struct {
     };
 };
 
-pub const DeleteProfilingGroupOutput = struct {
-};
+pub const DeleteProfilingGroupOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

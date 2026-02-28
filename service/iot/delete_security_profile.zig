@@ -21,7 +21,8 @@ pub const DeleteSecurityProfileInput = struct {
     };
 };
 
-pub const DeleteSecurityProfileOutput = struct {};
+pub const DeleteSecurityProfileOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

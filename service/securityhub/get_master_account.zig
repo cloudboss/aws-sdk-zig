@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Invitation = @import("invitation.zig").Invitation;
 
-pub const GetMasterAccountInput = struct {};
+pub const GetMasterAccountInput = struct {
+};
 
 pub const GetMasterAccountOutput = struct {
     /// A list of details about the Security Hub administrator account for the

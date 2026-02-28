@@ -33,7 +33,8 @@ pub const UpdatePrimaryEmailAddressInput = struct {
     };
 };
 
-pub const UpdatePrimaryEmailAddressOutput = struct {};
+pub const UpdatePrimaryEmailAddressOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

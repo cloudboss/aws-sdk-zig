@@ -13,7 +13,8 @@ pub const StopAddressListImportJobInput = struct {
     };
 };
 
-pub const StopAddressListImportJobOutput = struct {};
+pub const StopAddressListImportJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -403,7 +403,7 @@ pub const AwsSecurityFindingFilters = struct {
 
     /// A finding type in the format of `namespace/category/classifier` that
     /// classifies a finding.
-    type: ?[]const StringFilter,
+    @"type": ?[]const StringFilter,
 
     /// A timestamp that indicates when the security findings provider last
     /// updated the finding record.
@@ -588,7 +588,7 @@ pub const AwsSecurityFindingFilters = struct {
         .threat_intel_indicator_type = "ThreatIntelIndicatorType",
         .threat_intel_indicator_value = "ThreatIntelIndicatorValue",
         .title = "Title",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_at = "UpdatedAt",
         .user_defined_fields = "UserDefinedFields",
         .verification_state = "VerificationState",

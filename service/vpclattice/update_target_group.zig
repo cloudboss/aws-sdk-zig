@@ -38,7 +38,7 @@ pub const UpdateTargetGroupOutput = struct {
     status: ?TargetGroupStatus = null,
 
     /// The target group type.
-    type: ?TargetGroupType = null,
+    @"type": ?TargetGroupType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -46,7 +46,7 @@ pub const UpdateTargetGroupOutput = struct {
         .id = "id",
         .name = "name",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

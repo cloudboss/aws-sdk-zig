@@ -23,7 +23,8 @@ pub const UpdateResourceDataSyncInput = struct {
     };
 };
 
-pub const UpdateResourceDataSyncOutput = struct {};
+pub const UpdateResourceDataSyncOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

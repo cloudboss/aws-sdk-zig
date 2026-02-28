@@ -28,7 +28,7 @@ pub const TableSummary = struct {
     table_bucket_id: ?[]const u8,
 
     /// The type of the table.
-    type: TableType,
+    @"type": TableType,
 
     pub const json_field_names = .{
         .created_at = "createdAt",
@@ -39,6 +39,6 @@ pub const TableSummary = struct {
         .namespace_id = "namespaceId",
         .table_arn = "tableARN",
         .table_bucket_id = "tableBucketId",
-        .type = "type",
+        .@"type" = "type",
     };
 };

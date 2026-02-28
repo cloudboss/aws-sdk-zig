@@ -17,7 +17,8 @@ pub const PutEmailIdentityConfigurationSetAttributesInput = struct {
     };
 };
 
-pub const PutEmailIdentityConfigurationSetAttributesOutput = struct {};
+pub const PutEmailIdentityConfigurationSetAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

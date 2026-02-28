@@ -50,7 +50,8 @@ pub const CreateVariableInput = struct {
     };
 };
 
-pub const CreateVariableOutput = struct {};
+pub const CreateVariableOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

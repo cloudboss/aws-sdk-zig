@@ -13,7 +13,8 @@ pub const DeleteCrawlerInput = struct {
     };
 };
 
-pub const DeleteCrawlerOutput = struct {};
+pub const DeleteCrawlerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -23,7 +23,8 @@ pub const DeleteApplicationCloudWatchLoggingOptionInput = struct {
     };
 };
 
-pub const DeleteApplicationCloudWatchLoggingOptionOutput = struct {};
+pub const DeleteApplicationCloudWatchLoggingOptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

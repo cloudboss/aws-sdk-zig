@@ -19,7 +19,8 @@ pub const UpdateMediaStorageConfigurationInput = struct {
     };
 };
 
-pub const UpdateMediaStorageConfigurationOutput = struct {};
+pub const UpdateMediaStorageConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

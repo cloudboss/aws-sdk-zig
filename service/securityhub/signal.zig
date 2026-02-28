@@ -91,7 +91,7 @@ pub const Signal = struct {
     /// steps to enable it, see [S3
     /// Protection](https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html) in the
     /// *Amazon GuardDuty User Guide*.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The timestamp when this signal was last observed.
     updated_at: ?i64,
@@ -110,7 +110,7 @@ pub const Signal = struct {
         .severity = "Severity",
         .signal_indicators = "SignalIndicators",
         .title = "Title",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_at = "UpdatedAt",
     };
 };

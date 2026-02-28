@@ -35,7 +35,8 @@ pub const UpdateStreamStorageConfigurationInput = struct {
     };
 };
 
-pub const UpdateStreamStorageConfigurationOutput = struct {};
+pub const UpdateStreamStorageConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

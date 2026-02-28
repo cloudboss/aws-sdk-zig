@@ -32,7 +32,7 @@ pub const JobEntry = struct {
     state: State,
 
     /// The job type.
-    type: Type,
+    @"type": Type,
 
     /// The date and time that the job was last updated, in ISO 8601 format.
     updated_at: i64,
@@ -44,7 +44,7 @@ pub const JobEntry = struct {
         .errors = "Errors",
         .id = "Id",
         .state = "State",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_at = "UpdatedAt",
     };
 };

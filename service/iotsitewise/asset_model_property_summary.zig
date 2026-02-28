@@ -38,7 +38,7 @@ pub const AssetModelPropertySummary = struct {
     /// The structured path to the property from the root of the asset model.
     path: ?[]const AssetModelPropertyPathSegment,
 
-    type: PropertyType,
+    @"type": PropertyType,
 
     /// The unit (such as `Newtons` or `RPM`) of the property.
     unit: ?[]const u8,
@@ -52,7 +52,7 @@ pub const AssetModelPropertySummary = struct {
         .interface_summaries = "interfaceSummaries",
         .name = "name",
         .path = "path",
-        .type = "type",
+        .@"type" = "type",
         .unit = "unit",
     };
 };

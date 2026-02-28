@@ -13,7 +13,8 @@ pub const DeleteSequenceStoreInput = struct {
     };
 };
 
-pub const DeleteSequenceStoreOutput = struct {};
+pub const DeleteSequenceStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

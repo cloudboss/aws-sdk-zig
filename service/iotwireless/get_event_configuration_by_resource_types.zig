@@ -9,7 +9,8 @@ const JoinResourceTypeEventConfiguration = @import("join_resource_type_event_con
 const MessageDeliveryStatusResourceTypeEventConfiguration = @import("message_delivery_status_resource_type_event_configuration.zig").MessageDeliveryStatusResourceTypeEventConfiguration;
 const ProximityResourceTypeEventConfiguration = @import("proximity_resource_type_event_configuration.zig").ProximityResourceTypeEventConfiguration;
 
-pub const GetEventConfigurationByResourceTypesInput = struct {};
+pub const GetEventConfigurationByResourceTypesInput = struct {
+};
 
 pub const GetEventConfigurationByResourceTypesOutput = struct {
     /// Resource type event configuration for the connection status event.

@@ -16,7 +16,7 @@ pub const EnvironmentTier = struct {
     /// * For *Web server tier* – `Standard`
     ///
     /// * For *Worker tier* – `SQS/HTTP`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The version of this environment tier. When you don't set a value to it,
     /// Elastic Beanstalk uses the

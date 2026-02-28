@@ -13,7 +13,8 @@ pub const DisableApplicationLayerAutomaticResponseInput = struct {
     };
 };
 
-pub const DisableApplicationLayerAutomaticResponseOutput = struct {};
+pub const DisableApplicationLayerAutomaticResponseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

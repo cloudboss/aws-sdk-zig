@@ -21,7 +21,7 @@ pub const SecurityPolicyDetail = struct {
     policy_version: ?[]const u8,
 
     /// The type of security policy.
-    type: ?SecurityPolicyType,
+    @"type": ?SecurityPolicyType,
 
     pub const json_field_names = .{
         .created_date = "createdDate",
@@ -30,6 +30,6 @@ pub const SecurityPolicyDetail = struct {
         .name = "name",
         .policy = "policy",
         .policy_version = "policyVersion",
-        .type = "type",
+        .@"type" = "type",
     };
 };

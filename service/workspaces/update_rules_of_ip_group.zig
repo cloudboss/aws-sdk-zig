@@ -18,7 +18,8 @@ pub const UpdateRulesOfIpGroupInput = struct {
     };
 };
 
-pub const UpdateRulesOfIpGroupOutput = struct {};
+pub const UpdateRulesOfIpGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

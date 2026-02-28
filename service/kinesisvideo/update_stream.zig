@@ -45,7 +45,8 @@ pub const UpdateStreamInput = struct {
     };
 };
 
-pub const UpdateStreamOutput = struct {};
+pub const UpdateStreamOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

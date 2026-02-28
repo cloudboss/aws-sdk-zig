@@ -26,7 +26,8 @@ pub const DeleteAllowListInput = struct {
     };
 };
 
-pub const DeleteAllowListOutput = struct {};
+pub const DeleteAllowListOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -18,7 +18,7 @@ pub const QPluginCardInput = struct {
     title: []const u8,
 
     /// The type of the card.
-    type: CardType = "q-plugin",
+    @"type": CardType = "q-plugin",
 
     pub const json_field_names = .{
         .action_identifier = "actionIdentifier",
@@ -26,6 +26,6 @@ pub const QPluginCardInput = struct {
         .plugin_id = "pluginId",
         .prompt = "prompt",
         .title = "title",
-        .type = "type",
+        .@"type" = "type",
     };
 };

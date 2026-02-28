@@ -13,7 +13,8 @@ pub const SetIdentityDkimEnabledInput = struct {
     identity: []const u8,
 };
 
-pub const SetIdentityDkimEnabledOutput = struct {};
+pub const SetIdentityDkimEnabledOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

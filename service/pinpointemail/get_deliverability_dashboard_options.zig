@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DeliverabilityDashboardAccountStatus = @import("deliverability_dashboard_account_status.zig").DeliverabilityDashboardAccountStatus;
 const DomainDeliverabilityTrackingOption = @import("domain_deliverability_tracking_option.zig").DomainDeliverabilityTrackingOption;
 
-pub const GetDeliverabilityDashboardOptionsInput = struct {};
+pub const GetDeliverabilityDashboardOptionsInput = struct {
+};
 
 pub const GetDeliverabilityDashboardOptionsOutput = struct {
     /// The current status of your Deliverability dashboard subscription. If this

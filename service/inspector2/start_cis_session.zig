@@ -18,7 +18,8 @@ pub const StartCisSessionInput = struct {
     };
 };
 
-pub const StartCisSessionOutput = struct {};
+pub const StartCisSessionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

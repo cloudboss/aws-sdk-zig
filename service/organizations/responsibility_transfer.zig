@@ -38,7 +38,7 @@ pub const ResponsibilityTransfer = struct {
     target: ?TransferParticipant,
 
     /// The type of transfer. Currently, only `BILLING` is supported.
-    type: ?ResponsibilityTransferType,
+    @"type": ?ResponsibilityTransferType,
 
     pub const json_field_names = .{
         .active_handshake_id = "ActiveHandshakeId",
@@ -50,6 +50,6 @@ pub const ResponsibilityTransfer = struct {
         .start_timestamp = "StartTimestamp",
         .status = "Status",
         .target = "Target",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

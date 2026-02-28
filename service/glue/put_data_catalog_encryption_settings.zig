@@ -20,7 +20,8 @@ pub const PutDataCatalogEncryptionSettingsInput = struct {
     };
 };
 
-pub const PutDataCatalogEncryptionSettingsOutput = struct {};
+pub const PutDataCatalogEncryptionSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

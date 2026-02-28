@@ -27,7 +27,8 @@ pub const DisassociateGovernedTermsInput = struct {
     };
 };
 
-pub const DisassociateGovernedTermsOutput = struct {};
+pub const DisassociateGovernedTermsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

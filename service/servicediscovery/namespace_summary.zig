@@ -37,7 +37,7 @@ pub const NamespaceSummary = struct {
     service_count: ?i32,
 
     /// The type of the namespace, either public or private.
-    type: ?NamespaceType,
+    @"type": ?NamespaceType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -48,6 +48,6 @@ pub const NamespaceSummary = struct {
         .properties = "Properties",
         .resource_owner = "ResourceOwner",
         .service_count = "ServiceCount",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

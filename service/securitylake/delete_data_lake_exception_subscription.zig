@@ -4,9 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteDataLakeExceptionSubscriptionInput = struct {};
+pub const DeleteDataLakeExceptionSubscriptionInput = struct {
+};
 
-pub const DeleteDataLakeExceptionSubscriptionOutput = struct {};
+pub const DeleteDataLakeExceptionSubscriptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

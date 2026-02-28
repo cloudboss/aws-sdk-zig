@@ -19,7 +19,8 @@ pub const PutConfigurationSetTrackingOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetTrackingOptionsOutput = struct {};
+pub const PutConfigurationSetTrackingOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

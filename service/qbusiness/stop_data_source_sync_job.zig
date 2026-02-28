@@ -23,7 +23,8 @@ pub const StopDataSourceSyncJobInput = struct {
     };
 };
 
-pub const StopDataSourceSyncJobOutput = struct {};
+pub const StopDataSourceSyncJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

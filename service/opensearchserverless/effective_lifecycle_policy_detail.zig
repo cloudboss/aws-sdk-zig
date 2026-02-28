@@ -23,7 +23,7 @@ pub const EffectiveLifecyclePolicyDetail = struct {
     retention_period: ?[]const u8,
 
     /// The type of lifecycle policy.
-    type: ?LifecyclePolicyType,
+    @"type": ?LifecyclePolicyType,
 
     pub const json_field_names = .{
         .no_min_retention_period = "noMinRetentionPeriod",
@@ -31,6 +31,6 @@ pub const EffectiveLifecyclePolicyDetail = struct {
         .resource = "resource",
         .resource_type = "resourceType",
         .retention_period = "retentionPeriod",
-        .type = "type",
+        .@"type" = "type",
     };
 };

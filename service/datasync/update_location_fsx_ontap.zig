@@ -37,7 +37,8 @@ pub const UpdateLocationFsxOntapInput = struct {
     };
 };
 
-pub const UpdateLocationFsxOntapOutput = struct {};
+pub const UpdateLocationFsxOntapOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

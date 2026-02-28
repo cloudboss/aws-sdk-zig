@@ -42,14 +42,14 @@ pub const CostCategoryRule = struct {
     /// key. First, choose an inherited value rule type, and then choose the tag
     /// dimension and
     /// specify the tag key to use.
-    type: ?CostCategoryRuleType,
+    @"type": ?CostCategoryRuleType,
 
     value: ?[]const u8,
 
     pub const json_field_names = .{
         .inherited_value = "InheritedValue",
         .rule = "Rule",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

@@ -25,7 +25,8 @@ pub const TransferInputDeviceInput = struct {
     };
 };
 
-pub const TransferInputDeviceOutput = struct {};
+pub const TransferInputDeviceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -34,7 +34,8 @@ pub const DeleteCustomMetadataInput = struct {
     };
 };
 
-pub const DeleteCustomMetadataOutput = struct {};
+pub const DeleteCustomMetadataOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -45,7 +45,7 @@ pub const ProvisioningArtifactDetail = struct {
     /// * `TERRAFORM_CLOUD` - Terraform Cloud configuration file
     ///
     /// * `EXTERNAL` - External configuration file
-    type: ?ProvisioningArtifactType,
+    @"type": ?ProvisioningArtifactType,
 
     pub const json_field_names = .{
         .active = "Active",
@@ -55,6 +55,6 @@ pub const ProvisioningArtifactDetail = struct {
         .id = "Id",
         .name = "Name",
         .source_revision = "SourceRevision",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

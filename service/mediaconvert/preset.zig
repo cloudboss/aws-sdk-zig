@@ -28,7 +28,7 @@ pub const Preset = struct {
 
     /// A preset can be of two types: system or custom. System or built-in preset
     /// can't be modified or deleted by the user.
-    type: ?Type,
+    @"type": ?Type,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -38,6 +38,6 @@ pub const Preset = struct {
         .last_updated = "LastUpdated",
         .name = "Name",
         .settings = "Settings",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

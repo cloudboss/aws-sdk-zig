@@ -13,7 +13,8 @@ pub const DeleteVectorEnrichmentJobInput = struct {
     };
 };
 
-pub const DeleteVectorEnrichmentJobOutput = struct {};
+pub const DeleteVectorEnrichmentJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteLicenseEndpointInput = struct {
     };
 };
 
-pub const DeleteLicenseEndpointOutput = struct {};
+pub const DeleteLicenseEndpointOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

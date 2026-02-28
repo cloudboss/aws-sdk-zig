@@ -15,11 +15,11 @@ pub const Event = struct {
     /// which feature variation that a user sees. `aws.evidently.custom` specifies a
     /// custom event, which generates metrics from user actions such as clicks and
     /// checkouts.
-    type: EventType,
+    @"type": EventType,
 
     pub const json_field_names = .{
         .data = "data",
         .timestamp = "timestamp",
-        .type = "type",
+        .@"type" = "type",
     };
 };

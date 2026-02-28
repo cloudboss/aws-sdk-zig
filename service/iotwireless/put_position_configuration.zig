@@ -31,7 +31,8 @@ pub const PutPositionConfigurationInput = struct {
     };
 };
 
-pub const PutPositionConfigurationOutput = struct {};
+pub const PutPositionConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

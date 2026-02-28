@@ -23,7 +23,8 @@ pub const UpdateMacieSessionInput = struct {
     };
 };
 
-pub const UpdateMacieSessionOutput = struct {};
+pub const UpdateMacieSessionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

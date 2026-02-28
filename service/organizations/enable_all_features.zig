@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Handshake = @import("handshake.zig").Handshake;
 
-pub const EnableAllFeaturesInput = struct {};
+pub const EnableAllFeaturesInput = struct {
+};
 
 pub const EnableAllFeaturesOutput = struct {
     /// A structure that contains details about the handshake created to support

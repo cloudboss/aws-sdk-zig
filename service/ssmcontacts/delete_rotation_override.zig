@@ -17,7 +17,8 @@ pub const DeleteRotationOverrideInput = struct {
     };
 };
 
-pub const DeleteRotationOverrideOutput = struct {};
+pub const DeleteRotationOverrideOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

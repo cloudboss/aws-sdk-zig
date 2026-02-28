@@ -6,7 +6,7 @@ pub const Setting = struct {
     option_name: []const u8,
 
     /// The data type of the setting value (e.g., 'boolean', 'string', 'number').
-    type: []const u8,
+    @"type": []const u8,
 
     /// The current value of the setting as a string. Boolean values are represented
     /// as 'true' or 'false'.
@@ -14,7 +14,7 @@ pub const Setting = struct {
 
     pub const json_field_names = .{
         .option_name = "optionName",
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

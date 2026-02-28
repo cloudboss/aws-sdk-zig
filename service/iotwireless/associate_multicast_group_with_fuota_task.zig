@@ -15,7 +15,8 @@ pub const AssociateMulticastGroupWithFuotaTaskInput = struct {
     };
 };
 
-pub const AssociateMulticastGroupWithFuotaTaskOutput = struct {};
+pub const AssociateMulticastGroupWithFuotaTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

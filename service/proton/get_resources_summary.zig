@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const CountsSummary = @import("counts_summary.zig").CountsSummary;
 
-pub const GetResourcesSummaryInput = struct {};
+pub const GetResourcesSummaryInput = struct {
+};
 
 pub const GetResourcesSummaryOutput = struct {
     /// Summary counts of each Proton resource type.

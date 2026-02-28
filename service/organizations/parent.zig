@@ -22,10 +22,10 @@ pub const Parent = struct {
     id: ?[]const u8,
 
     /// The type of the parent entity.
-    type: ?ParentType,
+    @"type": ?ParentType,
 
     pub const json_field_names = .{
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

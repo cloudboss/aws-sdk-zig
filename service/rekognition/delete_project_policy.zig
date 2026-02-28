@@ -22,7 +22,8 @@ pub const DeleteProjectPolicyInput = struct {
     };
 };
 
-pub const DeleteProjectPolicyOutput = struct {};
+pub const DeleteProjectPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

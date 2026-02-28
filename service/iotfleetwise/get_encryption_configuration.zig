@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const EncryptionStatus = @import("encryption_status.zig").EncryptionStatus;
 const EncryptionType = @import("encryption_type.zig").EncryptionType;
 
-pub const GetEncryptionConfigurationInput = struct {};
+pub const GetEncryptionConfigurationInput = struct {
+};
 
 pub const GetEncryptionConfigurationOutput = struct {
     /// The time when encryption was configured in seconds since epoch (January 1,

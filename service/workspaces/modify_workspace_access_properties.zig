@@ -18,7 +18,8 @@ pub const ModifyWorkspaceAccessPropertiesInput = struct {
     };
 };
 
-pub const ModifyWorkspaceAccessPropertiesOutput = struct {};
+pub const ModifyWorkspaceAccessPropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

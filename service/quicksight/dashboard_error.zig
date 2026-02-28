@@ -7,14 +7,14 @@ pub const DashboardError = struct {
     message: ?[]const u8,
 
     /// Type.
-    type: ?DashboardErrorType,
+    @"type": ?DashboardErrorType,
 
     /// Lists the violated entities that caused the dashboard error.
     violated_entities: ?[]const Entity,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
         .violated_entities = "ViolatedEntities",
     };
 };

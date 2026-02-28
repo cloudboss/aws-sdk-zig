@@ -14,10 +14,10 @@ pub const Emotion = struct {
     confidence: ?f32,
 
     /// Type of emotion detected.
-    type: ?EmotionName,
+    @"type": ?EmotionName,
 
     pub const json_field_names = .{
         .confidence = "Confidence",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

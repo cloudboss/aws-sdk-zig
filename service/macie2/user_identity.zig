@@ -37,7 +37,7 @@ pub const UserIdentity = struct {
     root: ?UserIdentityRoot,
 
     /// The type of entity that performed the action.
-    type: ?UserIdentityType,
+    @"type": ?UserIdentityType,
 
     pub const json_field_names = .{
         .assumed_role = "assumedRole",
@@ -46,6 +46,6 @@ pub const UserIdentity = struct {
         .federated_user = "federatedUser",
         .iam_user = "iamUser",
         .root = "root",
-        .type = "type",
+        .@"type" = "type",
     };
 };

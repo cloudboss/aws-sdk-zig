@@ -5,10 +5,10 @@ pub const ParameterMapping = struct {
     /// Parameter name.
     name: []const u8,
 
-    type: Type,
+    @"type": Type,
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -13,7 +13,8 @@ pub const EnableDirectoryDataAccessInput = struct {
     };
 };
 
-pub const EnableDirectoryDataAccessOutput = struct {};
+pub const EnableDirectoryDataAccessOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

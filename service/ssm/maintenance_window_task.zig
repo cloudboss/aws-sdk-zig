@@ -112,7 +112,7 @@ pub const MaintenanceWindowTask = struct {
     task_parameters: ?[]const aws.map.MapEntry(MaintenanceWindowTaskParameterValueExpression),
 
     /// The type of task.
-    type: ?MaintenanceWindowTaskType,
+    @"type": ?MaintenanceWindowTaskType,
 
     /// The ID of the maintenance window where the task is registered.
     window_id: ?[]const u8,
@@ -133,7 +133,7 @@ pub const MaintenanceWindowTask = struct {
         .targets = "Targets",
         .task_arn = "TaskArn",
         .task_parameters = "TaskParameters",
-        .type = "Type",
+        .@"type" = "Type",
         .window_id = "WindowId",
         .window_task_id = "WindowTaskId",
     };

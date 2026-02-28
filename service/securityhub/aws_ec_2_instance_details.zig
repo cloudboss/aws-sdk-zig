@@ -41,7 +41,7 @@ pub const AwsEc2InstanceDetails = struct {
     subnet_id: ?[]const u8,
 
     /// The instance type of the instance.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The virtualization type of the Amazon Machine Image (AMI) required to launch
     /// the instance.
@@ -61,7 +61,7 @@ pub const AwsEc2InstanceDetails = struct {
         .monitoring = "Monitoring",
         .network_interfaces = "NetworkInterfaces",
         .subnet_id = "SubnetId",
-        .type = "Type",
+        .@"type" = "Type",
         .virtualization_type = "VirtualizationType",
         .vpc_id = "VpcId",
     };

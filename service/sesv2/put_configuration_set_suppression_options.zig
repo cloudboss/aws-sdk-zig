@@ -37,7 +37,8 @@ pub const PutConfigurationSetSuppressionOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetSuppressionOptionsOutput = struct {};
+pub const PutConfigurationSetSuppressionOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

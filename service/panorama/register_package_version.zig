@@ -29,7 +29,8 @@ pub const RegisterPackageVersionInput = struct {
     };
 };
 
-pub const RegisterPackageVersionOutput = struct {};
+pub const RegisterPackageVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

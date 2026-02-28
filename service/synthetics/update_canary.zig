@@ -186,7 +186,8 @@ pub const UpdateCanaryInput = struct {
     };
 };
 
-pub const UpdateCanaryOutput = struct {};
+pub const UpdateCanaryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

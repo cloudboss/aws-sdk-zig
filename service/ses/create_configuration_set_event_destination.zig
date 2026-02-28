@@ -18,7 +18,8 @@ pub const CreateConfigurationSetEventDestinationInput = struct {
     event_destination: EventDestination,
 };
 
-pub const CreateConfigurationSetEventDestinationOutput = struct {};
+pub const CreateConfigurationSetEventDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

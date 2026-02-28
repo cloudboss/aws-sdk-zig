@@ -44,11 +44,11 @@ pub const ShardFilter = struct {
     /// shards. Corrected to `TRIM_HORIZON` of the data stream if
     /// `FROM_TIMESTAMP` is less than the `TRIM_HORIZON`
     /// value.
-    type: ShardFilterType,
+    @"type": ShardFilterType,
 
     pub const json_field_names = .{
         .shard_id = "ShardId",
         .timestamp = "Timestamp",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

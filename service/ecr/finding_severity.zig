@@ -4,7 +4,7 @@ pub const FindingSeverity = enum {
     medium,
     high,
     critical,
-    undefined,
+    @"undefined",
 
     pub const json_field_names = .{
         .informational = "INFORMATIONAL",
@@ -12,6 +12,6 @@ pub const FindingSeverity = enum {
         .medium = "MEDIUM",
         .high = "HIGH",
         .critical = "CRITICAL",
-        .undefined = "UNDEFINED",
+        .@"undefined" = "UNDEFINED",
     };
 };

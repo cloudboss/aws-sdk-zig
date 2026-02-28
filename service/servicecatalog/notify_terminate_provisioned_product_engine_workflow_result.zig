@@ -37,7 +37,8 @@ pub const NotifyTerminateProvisionedProductEngineWorkflowResultInput = struct {
     };
 };
 
-pub const NotifyTerminateProvisionedProductEngineWorkflowResultOutput = struct {};
+pub const NotifyTerminateProvisionedProductEngineWorkflowResultOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

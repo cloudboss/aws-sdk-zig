@@ -14,7 +14,8 @@ pub const CancelInputDeviceTransferInput = struct {
     };
 };
 
-pub const CancelInputDeviceTransferOutput = struct {};
+pub const CancelInputDeviceTransferOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

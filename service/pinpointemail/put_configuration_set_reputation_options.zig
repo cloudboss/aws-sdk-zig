@@ -21,7 +21,8 @@ pub const PutConfigurationSetReputationOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetReputationOptionsOutput = struct {};
+pub const PutConfigurationSetReputationOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

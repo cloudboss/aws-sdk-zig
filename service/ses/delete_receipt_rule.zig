@@ -12,7 +12,8 @@ pub const DeleteReceiptRuleInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const DeleteReceiptRuleOutput = struct {};
+pub const DeleteReceiptRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

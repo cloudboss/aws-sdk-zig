@@ -4,10 +4,10 @@ pub const IcmpTypeCode = struct {
     code: i32 = 0,
 
     /// The ICMP type. A value of *-1* means all types.
-    type: i32 = 0,
+    @"type": i32 = 0,
 
     pub const json_field_names = .{
         .code = "code",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteMediaMessageSpendLimitOverrideInput = struct {};
+pub const DeleteMediaMessageSpendLimitOverrideInput = struct {
+};
 
 pub const DeleteMediaMessageSpendLimitOverrideOutput = struct {
     /// The current monthly limit, in US dollars.

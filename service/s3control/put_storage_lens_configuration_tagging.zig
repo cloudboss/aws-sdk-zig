@@ -19,7 +19,8 @@ pub const PutStorageLensConfigurationTaggingInput = struct {
     tags: []const StorageLensTag,
 };
 
-pub const PutStorageLensConfigurationTaggingOutput = struct {};
+pub const PutStorageLensConfigurationTaggingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

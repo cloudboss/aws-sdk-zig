@@ -18,7 +18,8 @@ pub const DeletePermissionsBoundaryFromPermissionSetInput = struct {
     };
 };
 
-pub const DeletePermissionsBoundaryFromPermissionSetOutput = struct {};
+pub const DeletePermissionsBoundaryFromPermissionSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

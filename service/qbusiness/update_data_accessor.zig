@@ -34,7 +34,8 @@ pub const UpdateDataAccessorInput = struct {
     };
 };
 
-pub const UpdateDataAccessorOutput = struct {};
+pub const UpdateDataAccessorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

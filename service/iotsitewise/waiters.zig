@@ -46,7 +46,7 @@ pub const AssetActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeAsset(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeAsset(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -107,7 +107,7 @@ pub const AssetModelActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeAssetModel(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeAssetModel(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -276,7 +276,7 @@ pub const PortalActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describePortal(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describePortal(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

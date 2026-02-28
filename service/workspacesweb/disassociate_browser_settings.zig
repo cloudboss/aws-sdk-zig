@@ -13,7 +13,8 @@ pub const DisassociateBrowserSettingsInput = struct {
     };
 };
 
-pub const DisassociateBrowserSettingsOutput = struct {};
+pub const DisassociateBrowserSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

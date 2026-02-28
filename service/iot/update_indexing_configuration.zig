@@ -19,7 +19,8 @@ pub const UpdateIndexingConfigurationInput = struct {
     };
 };
 
-pub const UpdateIndexingConfigurationOutput = struct {};
+pub const UpdateIndexingConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

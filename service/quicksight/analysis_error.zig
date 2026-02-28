@@ -7,14 +7,14 @@ pub const AnalysisError = struct {
     message: ?[]const u8,
 
     /// The type of the analysis error.
-    type: ?AnalysisErrorType,
+    @"type": ?AnalysisErrorType,
 
     /// Lists the violated entities that caused the analysis error
     violated_entities: ?[]const Entity,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
         .violated_entities = "ViolatedEntities",
     };
 };

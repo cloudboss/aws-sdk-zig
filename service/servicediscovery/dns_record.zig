@@ -130,10 +130,10 @@ pub const DnsRecord = struct {
     /// HAProxy, see the
     /// [Name](https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html#cloudmap-CreateService-request-Name) element in the documentation about `CreateService` for information
     /// about how to specify the correct name format.
-    type: RecordType,
+    @"type": RecordType,
 
     pub const json_field_names = .{
         .ttl = "TTL",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

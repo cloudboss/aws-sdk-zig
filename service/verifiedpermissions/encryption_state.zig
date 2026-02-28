@@ -1,4 +1,3 @@
-const Unit = @import("unit.zig").Unit;
 const KmsEncryptionState = @import("kms_encryption_state.zig").KmsEncryptionState;
 
 /// A structure that contains the encryption configuration for the policy store
@@ -9,7 +8,7 @@ const KmsEncryptionState = @import("kms_encryption_state.zig").KmsEncryptionStat
 pub const EncryptionState = union(enum) {
     /// This is the default encryption state. The policy store is encrypted using an
     /// Amazon Web Services owned key.
-    default: ?Unit,
+    default: ?struct {},
     /// The KMS encryption settings currently configured for this policy store to
     /// encrypt data with. It contains the customer-managed KMS key, and a
     /// user-defined encryption context.

@@ -13,8 +13,7 @@ pub const CancelCapacityReservationInput = struct {
     };
 };
 
-pub const CancelCapacityReservationOutput = struct {
-};
+pub const CancelCapacityReservationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

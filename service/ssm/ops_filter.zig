@@ -6,14 +6,14 @@ pub const OpsFilter = struct {
     key: []const u8,
 
     /// The type of filter.
-    type: ?OpsFilterOperatorType,
+    @"type": ?OpsFilterOperatorType,
 
     /// The filter value.
     values: []const []const u8,
 
     pub const json_field_names = .{
         .key = "Key",
-        .type = "Type",
+        .@"type" = "Type",
         .values = "Values",
     };
 };

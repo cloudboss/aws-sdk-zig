@@ -18,4 +18,5 @@
 ///
 /// When you use this specification, you must also configure the forwarded IP
 /// address in the rate-based statement's `ForwardedIPConfig`.
-pub const RateLimitForwardedIP = struct {};
+pub const RateLimitForwardedIP = struct {
+};

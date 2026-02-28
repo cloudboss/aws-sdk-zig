@@ -24,7 +24,8 @@ pub const DeleteServiceQuotaIncreaseRequestFromTemplateInput = struct {
     };
 };
 
-pub const DeleteServiceQuotaIncreaseRequestFromTemplateOutput = struct {};
+pub const DeleteServiceQuotaIncreaseRequestFromTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

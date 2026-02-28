@@ -11,11 +11,11 @@ pub const Subscriber = struct {
     status: ?SubscriberStatus,
 
     /// The notification delivery channel.
-    type: ?SubscriberType,
+    @"type": ?SubscriberType,
 
     pub const json_field_names = .{
         .address = "Address",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

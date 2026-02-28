@@ -14,7 +14,7 @@ pub const LifecyclePolicyDetailFilter = struct {
     retain_at_least: ?i32,
 
     /// Filter resources based on either `age` or `count`.
-    type: LifecyclePolicyDetailFilterType,
+    @"type": LifecyclePolicyDetailFilterType,
 
     /// Defines the unit of time that the lifecycle policy uses to determine
     /// impacted
@@ -34,7 +34,7 @@ pub const LifecyclePolicyDetailFilter = struct {
 
     pub const json_field_names = .{
         .retain_at_least = "retainAtLeast",
-        .type = "type",
+        .@"type" = "type",
         .unit = "unit",
         .value = "value",
     };

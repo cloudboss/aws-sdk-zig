@@ -9,7 +9,8 @@ pub const DeleteConfigurationSetInput = struct {
     configuration_set_name: []const u8,
 };
 
-pub const DeleteConfigurationSetOutput = struct {};
+pub const DeleteConfigurationSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

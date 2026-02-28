@@ -32,7 +32,8 @@ pub const UpdateFindingsFeedbackInput = struct {
     };
 };
 
-pub const UpdateFindingsFeedbackOutput = struct {};
+pub const UpdateFindingsFeedbackOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

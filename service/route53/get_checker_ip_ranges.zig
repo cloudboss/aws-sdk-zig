@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-pub const GetCheckerIpRangesInput = struct {};
+pub const GetCheckerIpRangesInput = struct {
+};
 
 pub const GetCheckerIpRangesOutput = struct {
     /// A complex type that contains sorted list of IP ranges in CIDR format for

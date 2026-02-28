@@ -35,7 +35,8 @@ pub const DisassociatePrincipalFromPortfolioInput = struct {
     };
 };
 
-pub const DisassociatePrincipalFromPortfolioOutput = struct {};
+pub const DisassociatePrincipalFromPortfolioOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

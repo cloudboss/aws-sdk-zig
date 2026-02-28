@@ -47,7 +47,7 @@ pub const ContributorInsightsEnabledWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeContributorInsights(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeContributorInsights(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -104,7 +104,7 @@ pub const ExportCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeExport(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeExport(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -165,7 +165,7 @@ pub const ImportCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeImport(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeImport(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

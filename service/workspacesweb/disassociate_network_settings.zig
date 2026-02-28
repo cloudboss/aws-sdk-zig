@@ -13,7 +13,8 @@ pub const DisassociateNetworkSettingsInput = struct {
     };
 };
 
-pub const DisassociateNetworkSettingsOutput = struct {};
+pub const DisassociateNetworkSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,7 +22,8 @@ pub const DeleteKxScalingGroupInput = struct {
     };
 };
 
-pub const DeleteKxScalingGroupOutput = struct {};
+pub const DeleteKxScalingGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

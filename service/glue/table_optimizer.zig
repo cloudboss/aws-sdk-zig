@@ -27,12 +27,12 @@ pub const TableOptimizer = struct {
     ///
     /// * `orphan_file_deletion`: for managing the deletion of orphan files with a
     ///   table optimizer.
-    type: ?TableOptimizerType,
+    @"type": ?TableOptimizerType,
 
     pub const json_field_names = .{
         .configuration = "configuration",
         .configuration_source = "configurationSource",
         .last_run = "lastRun",
-        .type = "type",
+        .@"type" = "type",
     };
 };

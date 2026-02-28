@@ -32,7 +32,7 @@ pub const SecurityConfigDetail = struct {
     saml_options: ?SamlConfigOptions,
 
     /// The type of security configuration.
-    type: ?SecurityConfigType,
+    @"type": ?SecurityConfigType,
 
     pub const json_field_names = .{
         .config_version = "configVersion",
@@ -43,6 +43,6 @@ pub const SecurityConfigDetail = struct {
         .id = "id",
         .last_modified_date = "lastModifiedDate",
         .saml_options = "samlOptions",
-        .type = "type",
+        .@"type" = "type",
     };
 };

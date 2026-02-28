@@ -20,7 +20,8 @@ pub const DeregisterWirelessDeviceInput = struct {
     };
 };
 
-pub const DeregisterWirelessDeviceOutput = struct {};
+pub const DeregisterWirelessDeviceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

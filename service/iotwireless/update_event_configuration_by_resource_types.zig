@@ -44,7 +44,8 @@ pub const UpdateEventConfigurationByResourceTypesInput = struct {
     };
 };
 
-pub const UpdateEventConfigurationByResourceTypesOutput = struct {};
+pub const UpdateEventConfigurationByResourceTypesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

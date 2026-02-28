@@ -15,7 +15,8 @@ pub const DeleteDataLakeOrganizationConfigurationInput = struct {
     };
 };
 
-pub const DeleteDataLakeOrganizationConfigurationOutput = struct {};
+pub const DeleteDataLakeOrganizationConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

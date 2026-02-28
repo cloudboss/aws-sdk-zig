@@ -22,11 +22,11 @@ pub const SourceConnectionDetail = struct {
     last_sync: ?LastSync,
 
     /// The only supported `SourceConnection` type is Codestar.
-    type: ?SourceType,
+    @"type": ?SourceType,
 
     pub const json_field_names = .{
         .connection_parameters = "ConnectionParameters",
         .last_sync = "LastSync",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

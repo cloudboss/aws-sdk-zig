@@ -15,7 +15,8 @@ pub const StopCanaryInput = struct {
     };
 };
 
-pub const StopCanaryOutput = struct {};
+pub const StopCanaryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

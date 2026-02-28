@@ -17,7 +17,8 @@ pub const UpdateWorkspaceBundleInput = struct {
     };
 };
 
-pub const UpdateWorkspaceBundleOutput = struct {};
+pub const UpdateWorkspaceBundleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

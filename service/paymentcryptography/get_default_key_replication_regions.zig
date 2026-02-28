@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetDefaultKeyReplicationRegionsInput = struct {};
+pub const GetDefaultKeyReplicationRegionsInput = struct {
+};
 
 pub const GetDefaultKeyReplicationRegionsOutput = struct {
     /// The list of regions where default key replication is currently enabled for

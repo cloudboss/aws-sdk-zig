@@ -50,7 +50,8 @@ pub const UpdateTopicRuleDestinationInput = struct {
     };
 };
 
-pub const UpdateTopicRuleDestinationOutput = struct {};
+pub const UpdateTopicRuleDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

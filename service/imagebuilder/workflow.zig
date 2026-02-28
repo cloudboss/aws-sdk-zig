@@ -50,7 +50,7 @@ pub const Workflow = struct {
     /// Specifies the image creation stage that the workflow applies to. Image
     /// Builder
     /// currently supports build and test workflows.
-    type: ?WorkflowType,
+    @"type": ?WorkflowType,
 
     /// The workflow resource version. Workflow resources are immutable.
     /// To make a change, you can clone a workflow or create a new version.
@@ -68,7 +68,7 @@ pub const Workflow = struct {
         .parameters = "parameters",
         .state = "state",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
     };
 };

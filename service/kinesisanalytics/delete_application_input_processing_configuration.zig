@@ -24,7 +24,8 @@ pub const DeleteApplicationInputProcessingConfigurationInput = struct {
     };
 };
 
-pub const DeleteApplicationInputProcessingConfigurationOutput = struct {};
+pub const DeleteApplicationInputProcessingConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

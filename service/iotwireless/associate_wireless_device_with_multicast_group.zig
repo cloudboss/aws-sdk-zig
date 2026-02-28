@@ -15,7 +15,8 @@ pub const AssociateWirelessDeviceWithMulticastGroupInput = struct {
     };
 };
 
-pub const AssociateWirelessDeviceWithMulticastGroupOutput = struct {};
+pub const AssociateWirelessDeviceWithMulticastGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

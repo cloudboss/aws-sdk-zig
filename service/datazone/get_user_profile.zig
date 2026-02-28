@@ -13,14 +13,14 @@ pub const GetUserProfileInput = struct {
     domain_identifier: []const u8,
 
     /// The type of the user profile.
-    type: ?UserProfileType = null,
+    @"type": ?UserProfileType = null,
 
     /// The identifier of the user for which you want to get the user profile.
     user_identifier: []const u8,
 
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",
-        .type = "type",
+        .@"type" = "type",
         .user_identifier = "userIdentifier",
     };
 };
@@ -40,14 +40,14 @@ pub const GetUserProfileOutput = struct {
     status: ?UserProfileStatus = null,
 
     /// The type of the user profile.
-    type: ?UserProfileType = null,
+    @"type": ?UserProfileType = null,
 
     pub const json_field_names = .{
         .details = "details",
         .domain_id = "domainId",
         .id = "id",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -96,7 +96,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetUserProfileInput, config
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

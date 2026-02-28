@@ -28,7 +28,8 @@ pub const UpdateWorkspaceImagePermissionInput = struct {
     };
 };
 
-pub const UpdateWorkspaceImagePermissionOutput = struct {};
+pub const UpdateWorkspaceImagePermissionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

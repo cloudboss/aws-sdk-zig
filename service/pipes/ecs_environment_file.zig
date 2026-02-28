@@ -30,14 +30,14 @@ const EcsEnvironmentFileType = @import("ecs_environment_file_type.zig").EcsEnvir
 /// * Windows platform version `1.0.0` or later.
 pub const EcsEnvironmentFile = struct {
     /// The file type to use. The only supported value is `s3`.
-    type: EcsEnvironmentFileType,
+    @"type": EcsEnvironmentFileType,
 
     /// The Amazon Resource Name (ARN) of the Amazon S3 object containing the
     /// environment variable file.
     value: []const u8,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

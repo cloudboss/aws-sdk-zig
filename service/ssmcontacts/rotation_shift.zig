@@ -17,13 +17,13 @@ pub const RotationShift = struct {
     start_time: i64,
 
     /// The type of shift rotation.
-    type: ?ShiftType,
+    @"type": ?ShiftType,
 
     pub const json_field_names = .{
         .contact_ids = "ContactIds",
         .end_time = "EndTime",
         .shift_details = "ShiftDetails",
         .start_time = "StartTime",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

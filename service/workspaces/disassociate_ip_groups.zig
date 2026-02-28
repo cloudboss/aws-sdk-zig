@@ -17,7 +17,8 @@ pub const DisassociateIpGroupsInput = struct {
     };
 };
 
-pub const DisassociateIpGroupsOutput = struct {};
+pub const DisassociateIpGroupsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

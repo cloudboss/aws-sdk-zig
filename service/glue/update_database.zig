@@ -26,7 +26,8 @@ pub const UpdateDatabaseInput = struct {
     };
 };
 
-pub const UpdateDatabaseOutput = struct {};
+pub const UpdateDatabaseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

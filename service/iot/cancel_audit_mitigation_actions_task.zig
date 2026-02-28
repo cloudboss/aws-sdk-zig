@@ -13,7 +13,8 @@ pub const CancelAuditMitigationActionsTaskInput = struct {
     };
 };
 
-pub const CancelAuditMitigationActionsTaskOutput = struct {};
+pub const CancelAuditMitigationActionsTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

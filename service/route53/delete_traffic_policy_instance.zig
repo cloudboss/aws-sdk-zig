@@ -14,7 +14,8 @@ pub const DeleteTrafficPolicyInstanceInput = struct {
     id: []const u8,
 };
 
-pub const DeleteTrafficPolicyInstanceOutput = struct {};
+pub const DeleteTrafficPolicyInstanceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

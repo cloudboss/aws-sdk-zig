@@ -13,7 +13,8 @@ pub const DeleteAuthorizerInput = struct {
     };
 };
 
-pub const DeleteAuthorizerOutput = struct {};
+pub const DeleteAuthorizerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

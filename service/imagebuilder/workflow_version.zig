@@ -20,7 +20,7 @@ pub const WorkflowVersion = struct {
     /// The image creation stage that this workflow applies to. Image Builder
     /// currently
     /// supports build and test stage workflows.
-    type: ?WorkflowType,
+    @"type": ?WorkflowType,
 
     /// The semantic version of the workflow resource. The format includes three
     /// nodes: ...
@@ -32,7 +32,7 @@ pub const WorkflowVersion = struct {
         .description = "description",
         .name = "name",
         .owner = "owner",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
     };
 };

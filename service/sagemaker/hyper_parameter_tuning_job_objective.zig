@@ -12,10 +12,10 @@ pub const HyperParameterTuningJobObjective = struct {
     metric_name: []const u8,
 
     /// Whether to minimize or maximize the objective metric.
-    type: HyperParameterTuningJobObjectiveType,
+    @"type": HyperParameterTuningJobObjectiveType,
 
     pub const json_field_names = .{
         .metric_name = "MetricName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

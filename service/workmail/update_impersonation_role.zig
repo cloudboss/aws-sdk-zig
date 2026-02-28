@@ -23,7 +23,7 @@ pub const UpdateImpersonationRoleInput = struct {
     rules: []const ImpersonationRule,
 
     /// The updated impersonation role type.
-    type: ImpersonationRoleType,
+    @"type": ImpersonationRoleType,
 
     pub const json_field_names = .{
         .description = "Description",
@@ -31,11 +31,12 @@ pub const UpdateImpersonationRoleInput = struct {
         .name = "Name",
         .organization_id = "OrganizationId",
         .rules = "Rules",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
-pub const UpdateImpersonationRoleOutput = struct {};
+pub const UpdateImpersonationRoleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

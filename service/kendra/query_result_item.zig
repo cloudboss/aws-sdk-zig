@@ -81,7 +81,7 @@ pub const QueryResultItem = struct {
     /// The type of document within the response. For example, a response could
     /// include a
     /// question-answer that's relevant to the query.
-    type: ?QueryResultType,
+    @"type": ?QueryResultType,
 
     pub const json_field_names = .{
         .additional_attributes = "AdditionalAttributes",
@@ -96,6 +96,6 @@ pub const QueryResultItem = struct {
         .id = "Id",
         .score_attributes = "ScoreAttributes",
         .table_excerpt = "TableExcerpt",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

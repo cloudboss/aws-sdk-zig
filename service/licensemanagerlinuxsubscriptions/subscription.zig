@@ -12,11 +12,11 @@ pub const Subscription = struct {
     /// Certain subscriptions may use licensing from the
     /// Amazon Web Services Marketplace as well as OS licensing from Amazon EC2 or
     /// BYOS.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .instance_count = "InstanceCount",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

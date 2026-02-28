@@ -13,7 +13,8 @@ pub const DeleteAutomationRuleV2Input = struct {
     };
 };
 
-pub const DeleteAutomationRuleV2Output = struct {};
+pub const DeleteAutomationRuleV2Output = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

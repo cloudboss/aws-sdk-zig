@@ -21,14 +21,14 @@ pub const CreateSecurityPolicyInput = struct {
     policy: []const u8,
 
     /// The type of security policy.
-    type: SecurityPolicyType,
+    @"type": SecurityPolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
         .name = "name",
         .policy = "policy",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

@@ -22,14 +22,14 @@ pub const CreateResourceInput = struct {
 
     /// The type of the new resource. The available types are `equipment` and
     /// `room`.
-    type: ResourceType,
+    @"type": ResourceType,
 
     pub const json_field_names = .{
         .description = "Description",
         .hidden_from_global_address_list = "HiddenFromGlobalAddressList",
         .name = "Name",
         .organization_id = "OrganizationId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

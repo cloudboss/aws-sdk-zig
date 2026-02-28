@@ -21,8 +21,7 @@ pub const DeleteAppAuthorizationInput = struct {
     };
 };
 
-pub const DeleteAppAuthorizationOutput = struct {
-};
+pub const DeleteAppAuthorizationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

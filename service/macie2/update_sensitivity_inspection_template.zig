@@ -37,7 +37,8 @@ pub const UpdateSensitivityInspectionTemplateInput = struct {
     };
 };
 
-pub const UpdateSensitivityInspectionTemplateOutput = struct {};
+pub const UpdateSensitivityInspectionTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

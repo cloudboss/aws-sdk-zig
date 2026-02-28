@@ -9,7 +9,8 @@ pub const DeleteReusableDelegationSetInput = struct {
     id: []const u8,
 };
 
-pub const DeleteReusableDelegationSetOutput = struct {};
+pub const DeleteReusableDelegationSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

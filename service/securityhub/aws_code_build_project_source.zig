@@ -59,12 +59,12 @@ pub const AwsCodeBuildProjectSource = struct {
     /// * `NO_SOURCE` - The project does not have input source code.
     ///
     /// * `S3` - The source code is in an S3 input bucket.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .git_clone_depth = "GitCloneDepth",
         .insecure_ssl = "InsecureSsl",
         .location = "Location",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

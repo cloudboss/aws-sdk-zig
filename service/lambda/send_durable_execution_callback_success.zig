@@ -18,7 +18,8 @@ pub const SendDurableExecutionCallbackSuccessInput = struct {
     };
 };
 
-pub const SendDurableExecutionCallbackSuccessOutput = struct {};
+pub const SendDurableExecutionCallbackSuccessOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

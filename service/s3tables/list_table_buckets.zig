@@ -20,13 +20,13 @@ pub const ListTableBucketsInput = struct {
     prefix: ?[]const u8 = null,
 
     /// The type of table buckets to filter by in the list.
-    type: ?TableBucketType = null,
+    @"type": ?TableBucketType = null,
 
     pub const json_field_names = .{
         .continuation_token = "continuationToken",
         .max_buckets = "maxBuckets",
         .prefix = "prefix",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -104,7 +104,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListTableBucketsInput, conf
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

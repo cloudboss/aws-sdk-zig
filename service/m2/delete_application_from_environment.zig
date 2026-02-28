@@ -19,7 +19,8 @@ pub const DeleteApplicationFromEnvironmentInput = struct {
     };
 };
 
-pub const DeleteApplicationFromEnvironmentOutput = struct {};
+pub const DeleteApplicationFromEnvironmentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

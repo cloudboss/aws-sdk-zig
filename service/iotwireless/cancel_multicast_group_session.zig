@@ -12,7 +12,8 @@ pub const CancelMulticastGroupSessionInput = struct {
     };
 };
 
-pub const CancelMulticastGroupSessionOutput = struct {};
+pub const CancelMulticastGroupSessionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

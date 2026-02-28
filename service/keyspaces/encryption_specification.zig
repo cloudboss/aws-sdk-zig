@@ -34,10 +34,10 @@ pub const EncryptionSpecification = struct {
     ///
     /// For more information, see [Encryption at
     /// rest](https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html) in the *Amazon Keyspaces Developer Guide*.
-    type: EncryptionType,
+    @"type": EncryptionType,
 
     pub const json_field_names = .{
         .kms_key_identifier = "kmsKeyIdentifier",
-        .type = "type",
+        .@"type" = "type",
     };
 };

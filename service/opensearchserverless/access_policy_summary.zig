@@ -18,7 +18,7 @@ pub const AccessPolicySummary = struct {
     policy_version: ?[]const u8,
 
     /// The type of access policy. Currently, the only available type is `data`.
-    type: ?AccessPolicyType,
+    @"type": ?AccessPolicyType,
 
     pub const json_field_names = .{
         .created_date = "createdDate",
@@ -26,6 +26,6 @@ pub const AccessPolicySummary = struct {
         .last_modified_date = "lastModifiedDate",
         .name = "name",
         .policy_version = "policyVersion",
-        .type = "type",
+        .@"type" = "type",
     };
 };

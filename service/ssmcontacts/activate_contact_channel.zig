@@ -17,7 +17,8 @@ pub const ActivateContactChannelInput = struct {
     };
 };
 
-pub const ActivateContactChannelOutput = struct {};
+pub const ActivateContactChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

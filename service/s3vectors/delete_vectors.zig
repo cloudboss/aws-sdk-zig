@@ -25,7 +25,8 @@ pub const DeleteVectorsInput = struct {
     };
 };
 
-pub const DeleteVectorsOutput = struct {};
+pub const DeleteVectorsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

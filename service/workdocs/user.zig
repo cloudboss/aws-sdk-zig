@@ -45,7 +45,7 @@ pub const User = struct {
     time_zone_id: ?[]const u8,
 
     /// The type of user.
-    type: ?UserType,
+    @"type": ?UserType,
 
     /// The login name of the user.
     username: ?[]const u8,
@@ -64,7 +64,7 @@ pub const User = struct {
         .storage = "Storage",
         .surname = "Surname",
         .time_zone_id = "TimeZoneId",
-        .type = "Type",
+        .@"type" = "Type",
         .username = "Username",
     };
 };

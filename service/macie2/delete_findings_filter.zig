@@ -14,7 +14,8 @@ pub const DeleteFindingsFilterInput = struct {
     };
 };
 
-pub const DeleteFindingsFilterOutput = struct {};
+pub const DeleteFindingsFilterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

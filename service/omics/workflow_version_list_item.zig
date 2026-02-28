@@ -24,7 +24,7 @@ pub const WorkflowVersionListItem = struct {
     status: ?WorkflowStatus,
 
     /// The type of the workflow version.
-    type: ?WorkflowType,
+    @"type": ?WorkflowType,
 
     /// The name of the workflow version.
     version_name: ?[]const u8,
@@ -39,7 +39,7 @@ pub const WorkflowVersionListItem = struct {
         .digest = "digest",
         .metadata = "metadata",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .version_name = "versionName",
         .workflow_id = "workflowId",
     };

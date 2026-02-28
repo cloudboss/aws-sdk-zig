@@ -13,7 +13,8 @@ pub const StopThingRegistrationTaskInput = struct {
     };
 };
 
-pub const StopThingRegistrationTaskOutput = struct {};
+pub const StopThingRegistrationTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

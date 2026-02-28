@@ -1,9 +1,9 @@
 pub const ValueWhenUnsetOption = enum {
     recommended_value,
-    null,
+    @"null",
 
     pub const json_field_names = .{
         .recommended_value = "RECOMMENDED_VALUE",
-        .null = "NULL",
+        .@"null" = "NULL",
     };
 };

@@ -27,7 +27,8 @@ pub const AddApplicationInputInput = struct {
     };
 };
 
-pub const AddApplicationInputOutput = struct {};
+pub const AddApplicationInputOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

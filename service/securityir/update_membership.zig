@@ -53,7 +53,8 @@ pub const UpdateMembershipInput = struct {
     };
 };
 
-pub const UpdateMembershipOutput = struct {};
+pub const UpdateMembershipOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

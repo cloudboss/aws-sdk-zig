@@ -17,7 +17,8 @@ pub const StopWorkflowRunInput = struct {
     };
 };
 
-pub const StopWorkflowRunOutput = struct {};
+pub const StopWorkflowRunOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

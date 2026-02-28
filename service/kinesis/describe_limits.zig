@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeLimitsInput = struct {};
+pub const DescribeLimitsInput = struct {
+};
 
 pub const DescribeLimitsOutput = struct {
     /// Indicates the number of data streams with the on-demand capacity mode.

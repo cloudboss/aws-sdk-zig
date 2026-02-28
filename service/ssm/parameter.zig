@@ -35,7 +35,7 @@ pub const Parameter = struct {
     ///
     /// If type is `StringList`, the system returns a comma-separated string with no
     /// spaces between commas in the `Value` field.
-    type: ?ParameterType,
+    @"type": ?ParameterType,
 
     /// The parameter value.
     ///
@@ -53,7 +53,7 @@ pub const Parameter = struct {
         .name = "Name",
         .selector = "Selector",
         .source_result = "SourceResult",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
         .version = "Version",
     };

@@ -14,7 +14,8 @@ pub const DeleteEmailMonitoringConfigurationInput = struct {
     };
 };
 
-pub const DeleteEmailMonitoringConfigurationOutput = struct {};
+pub const DeleteEmailMonitoringConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

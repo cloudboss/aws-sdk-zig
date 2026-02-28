@@ -23,7 +23,8 @@ pub const UpdateJobShipmentStateInput = struct {
     };
 };
 
-pub const UpdateJobShipmentStateOutput = struct {};
+pub const UpdateJobShipmentStateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

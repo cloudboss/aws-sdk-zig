@@ -38,11 +38,11 @@ pub const Predicate = struct {
     negated: bool,
 
     /// The type of predicate in a `Rule`, such as `ByteMatch` or `IPSet`.
-    type: PredicateType,
+    @"type": PredicateType,
 
     pub const json_field_names = .{
         .data_id = "DataId",
         .negated = "Negated",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

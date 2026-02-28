@@ -28,7 +28,8 @@ pub const DeregisterFromWorkMailInput = struct {
     };
 };
 
-pub const DeregisterFromWorkMailOutput = struct {};
+pub const DeregisterFromWorkMailOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

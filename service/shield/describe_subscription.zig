@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Subscription = @import("subscription.zig").Subscription;
 
-pub const DescribeSubscriptionInput = struct {};
+pub const DescribeSubscriptionInput = struct {
+};
 
 pub const DescribeSubscriptionOutput = struct {
     /// The Shield Advanced subscription details for an account.

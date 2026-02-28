@@ -13,7 +13,8 @@ pub const StopAccessLoggingInput = struct {
     };
 };
 
-pub const StopAccessLoggingOutput = struct {};
+pub const StopAccessLoggingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

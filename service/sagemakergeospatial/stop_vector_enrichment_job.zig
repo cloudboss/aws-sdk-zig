@@ -13,7 +13,8 @@ pub const StopVectorEnrichmentJobInput = struct {
     };
 };
 
-pub const StopVectorEnrichmentJobOutput = struct {};
+pub const StopVectorEnrichmentJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

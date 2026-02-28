@@ -21,7 +21,8 @@ pub const DeletePermissionSetInput = struct {
     };
 };
 
-pub const DeletePermissionSetOutput = struct {};
+pub const DeletePermissionSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

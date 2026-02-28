@@ -76,7 +76,7 @@ pub const RouteVehicleTravelStep = struct {
     turn_step_details: ?RouteTurnStepDetails,
 
     /// Type of the step.
-    type: RouteVehicleTravelStepType,
+    @"type": RouteVehicleTravelStepType,
 
     /// Details that are specific to a Turn step.
     u_turn_step_details: ?RouteUTurnStepDetails,
@@ -100,7 +100,7 @@ pub const RouteVehicleTravelStep = struct {
         .roundabout_pass_step_details = "RoundaboutPassStepDetails",
         .signpost = "Signpost",
         .turn_step_details = "TurnStepDetails",
-        .type = "Type",
+        .@"type" = "Type",
         .u_turn_step_details = "UTurnStepDetails",
     };
 };

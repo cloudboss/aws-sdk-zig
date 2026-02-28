@@ -20,7 +20,7 @@ pub const GetHostedZoneLimitInput = struct {
     /// number of Amazon VPCs that you can associate with the specified private
     /// hosted
     /// zone.
-    type: HostedZoneLimitType,
+    @"type": HostedZoneLimitType,
 };
 
 pub const GetHostedZoneLimitOutput = struct {
@@ -78,7 +78,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: GetHostedZoneLimitInput, co
     try path_buf.appendSlice(alloc, "/2013-04-01/hostedzonelimit/");
     try path_buf.appendSlice(alloc, input.hosted_zone_id);
     try path_buf.appendSlice(alloc, "/");
-    try path_buf.appendSlice(alloc, input.type);
+    try path_buf.appendSlice(alloc, input.@"type");
     const path = try path_buf.toOwnedSlice(alloc);
 
     const body: ?[]const u8 = null;

@@ -47,7 +47,7 @@ pub const Device = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The device's type.
-    type: ?DeviceType,
+    @"type": ?DeviceType,
 
     pub const json_field_names = .{
         .brand = "Brand",
@@ -62,6 +62,6 @@ pub const Device = struct {
         .name = "Name",
         .provisioning_status = "ProvisioningStatus",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

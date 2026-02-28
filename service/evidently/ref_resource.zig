@@ -21,7 +21,7 @@ pub const RefResource = struct {
 
     /// Specifies whether the resource that this structure contains information
     /// about is an experiment or a launch.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -30,6 +30,6 @@ pub const RefResource = struct {
         .name = "name",
         .start_time = "startTime",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };

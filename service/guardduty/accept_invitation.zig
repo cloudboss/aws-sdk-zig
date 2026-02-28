@@ -28,7 +28,8 @@ pub const AcceptInvitationInput = struct {
     };
 };
 
-pub const AcceptInvitationOutput = struct {};
+pub const AcceptInvitationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

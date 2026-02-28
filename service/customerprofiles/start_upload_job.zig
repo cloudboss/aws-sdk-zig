@@ -17,7 +17,8 @@ pub const StartUploadJobInput = struct {
     };
 };
 
-pub const StartUploadJobOutput = struct {};
+pub const StartUploadJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

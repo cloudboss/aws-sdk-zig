@@ -13,7 +13,8 @@ pub const DisassociateUserAccessLoggingSettingsInput = struct {
     };
 };
 
-pub const DisassociateUserAccessLoggingSettingsOutput = struct {};
+pub const DisassociateUserAccessLoggingSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

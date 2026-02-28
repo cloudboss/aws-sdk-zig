@@ -43,7 +43,8 @@ pub const NotifyUpdateProvisionedProductEngineWorkflowResultInput = struct {
     };
 };
 
-pub const NotifyUpdateProvisionedProductEngineWorkflowResultOutput = struct {};
+pub const NotifyUpdateProvisionedProductEngineWorkflowResultOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

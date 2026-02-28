@@ -21,7 +21,8 @@ pub const DeleteConstraintInput = struct {
     };
 };
 
-pub const DeleteConstraintOutput = struct {};
+pub const DeleteConstraintOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

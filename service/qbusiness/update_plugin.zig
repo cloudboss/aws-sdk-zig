@@ -40,7 +40,8 @@ pub const UpdatePluginInput = struct {
     };
 };
 
-pub const UpdatePluginOutput = struct {};
+pub const UpdatePluginOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

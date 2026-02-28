@@ -20,7 +20,7 @@ pub const DataSourceSummary = struct {
     name: ?[]const u8,
 
     /// The type of the data source.
-    type: ?DataSourceType,
+    @"type": ?DataSourceType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -28,6 +28,6 @@ pub const DataSourceSummary = struct {
         .data_source_id = "DataSourceId",
         .last_updated_time = "LastUpdatedTime",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

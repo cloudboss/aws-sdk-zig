@@ -91,7 +91,8 @@ pub const AssociatePrincipalWithPortfolioInput = struct {
     };
 };
 
-pub const AssociatePrincipalWithPortfolioOutput = struct {};
+pub const AssociatePrincipalWithPortfolioOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

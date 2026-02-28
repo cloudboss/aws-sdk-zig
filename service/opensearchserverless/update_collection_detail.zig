@@ -25,7 +25,7 @@ pub const UpdateCollectionDetail = struct {
     status: ?CollectionStatus,
 
     /// The collection type.
-    type: ?CollectionType,
+    @"type": ?CollectionType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -35,6 +35,6 @@ pub const UpdateCollectionDetail = struct {
         .last_modified_date = "lastModifiedDate",
         .name = "name",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };

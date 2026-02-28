@@ -26,7 +26,8 @@ pub const PutDetectorInput = struct {
     };
 };
 
-pub const PutDetectorOutput = struct {};
+pub const PutDetectorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

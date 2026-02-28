@@ -11,11 +11,11 @@ pub const GetAccessPolicyInput = struct {
     name: []const u8,
 
     /// Tye type of policy. Currently, the only supported value is `data`.
-    type: AccessPolicyType,
+    @"type": AccessPolicyType,
 
     pub const json_field_names = .{
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

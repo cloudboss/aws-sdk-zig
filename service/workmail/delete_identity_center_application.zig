@@ -13,7 +13,8 @@ pub const DeleteIdentityCenterApplicationInput = struct {
     };
 };
 
-pub const DeleteIdentityCenterApplicationOutput = struct {};
+pub const DeleteIdentityCenterApplicationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

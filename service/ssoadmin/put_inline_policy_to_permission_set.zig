@@ -25,7 +25,8 @@ pub const PutInlinePolicyToPermissionSetInput = struct {
     };
 };
 
-pub const PutInlinePolicyToPermissionSetOutput = struct {};
+pub const PutInlinePolicyToPermissionSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

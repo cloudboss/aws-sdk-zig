@@ -97,7 +97,7 @@ pub const Compute = struct {
 
     /// The Amazon EC2 instance type that the fleet uses. For registered computes in
     /// an Amazon GameLift Servers Anywhere fleet, this property is empty.
-    type: ?EC2InstanceType,
+    @"type": ?EC2InstanceType,
 
     pub const json_field_names = .{
         .compute_arn = "ComputeArn",
@@ -115,6 +115,6 @@ pub const Compute = struct {
         .ip_address = "IpAddress",
         .location = "Location",
         .operating_system = "OperatingSystem",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetContainerAPIMetadataInput = struct {};
+pub const GetContainerAPIMetadataInput = struct {
+};
 
 pub const GetContainerAPIMetadataOutput = struct {
     /// Metadata about Lightsail containers, such as the current version of the

@@ -4,14 +4,14 @@ pub const DnsRecord = struct {
     hostname: ?[]const u8,
 
     /// The RFC 1035 record type. Possible values: `CNAME`, `A`, `MX`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The value returned by the DNS for a query to that hostname and record type.
     value: ?[]const u8,
 
     pub const json_field_names = .{
         .hostname = "Hostname",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

@@ -11,7 +11,7 @@ pub const KxSavedownStorageConfiguration = struct {
     /// data. The valid values are:
     ///
     /// * SDS01 – This type represents 3000 IOPS and io2 ebs volume type.
-    type: ?KxSavedownStorageType,
+    @"type": ?KxSavedownStorageType,
 
     /// The name of the kdb volume that you want to use as writeable save-down
     /// storage for clusters.
@@ -19,7 +19,7 @@ pub const KxSavedownStorageConfiguration = struct {
 
     pub const json_field_names = .{
         .size = "size",
-        .type = "type",
+        .@"type" = "type",
         .volume_name = "volumeName",
     };
 };

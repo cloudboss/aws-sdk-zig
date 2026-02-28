@@ -18,13 +18,13 @@ const RuntimeEnvironmentType = @import("runtime_environment_type.zig").RuntimeEn
 pub const RuntimeEnvironment = struct {
     /// The operating system and other drivers. For Proton, this also includes the
     /// Proton compatibility layer.
-    type: RuntimeEnvironmentType,
+    @"type": RuntimeEnvironmentType,
 
     /// Versioned container environment for the application operating system.
     version: []const u8,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .version = "Version",
     };
 };

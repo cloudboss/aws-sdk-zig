@@ -35,7 +35,8 @@ pub const UpdateActInput = struct {
     };
 };
 
-pub const UpdateActOutput = struct {};
+pub const UpdateActOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

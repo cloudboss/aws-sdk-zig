@@ -18,7 +18,8 @@ pub const SubmitBenefitApplicationInput = struct {
     };
 };
 
-pub const SubmitBenefitApplicationOutput = struct {};
+pub const SubmitBenefitApplicationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

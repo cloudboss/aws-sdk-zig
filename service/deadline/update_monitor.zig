@@ -29,7 +29,8 @@ pub const UpdateMonitorInput = struct {
     };
 };
 
-pub const UpdateMonitorOutput = struct {};
+pub const UpdateMonitorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

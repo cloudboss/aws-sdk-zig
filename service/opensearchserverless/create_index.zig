@@ -23,7 +23,8 @@ pub const CreateIndexInput = struct {
     };
 };
 
-pub const CreateIndexOutput = struct {};
+pub const CreateIndexOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

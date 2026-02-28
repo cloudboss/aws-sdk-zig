@@ -71,7 +71,7 @@ pub const LineChartConfiguration = struct {
     tooltip: ?TooltipOptions,
 
     /// Determines the type of the line chart.
-    type: ?LineChartType,
+    @"type": ?LineChartType,
 
     /// The visual palette configuration of a line chart.
     visual_palette: ?VisualPalette,
@@ -100,7 +100,7 @@ pub const LineChartConfiguration = struct {
         .small_multiples_options = "SmallMultiplesOptions",
         .sort_configuration = "SortConfiguration",
         .tooltip = "Tooltip",
-        .type = "Type",
+        .@"type" = "Type",
         .visual_palette = "VisualPalette",
         .x_axis_display_options = "XAxisDisplayOptions",
         .x_axis_label_options = "XAxisLabelOptions",

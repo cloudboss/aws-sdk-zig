@@ -28,7 +28,8 @@ pub const CancelBenefitApplicationInput = struct {
     };
 };
 
-pub const CancelBenefitApplicationOutput = struct {};
+pub const CancelBenefitApplicationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

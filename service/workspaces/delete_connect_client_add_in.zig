@@ -17,7 +17,8 @@ pub const DeleteConnectClientAddInInput = struct {
     };
 };
 
-pub const DeleteConnectClientAddInOutput = struct {};
+pub const DeleteConnectClientAddInOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

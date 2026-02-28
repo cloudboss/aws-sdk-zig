@@ -25,7 +25,8 @@ pub const CreateUserDefinedFunctionInput = struct {
     };
 };
 
-pub const CreateUserDefinedFunctionOutput = struct {};
+pub const CreateUserDefinedFunctionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

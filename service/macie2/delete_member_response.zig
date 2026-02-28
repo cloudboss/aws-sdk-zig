@@ -1,1 +1,2 @@
-pub const DeleteMemberResponse = struct {};
+pub const DeleteMemberResponse = struct {
+};

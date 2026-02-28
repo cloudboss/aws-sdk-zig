@@ -24,7 +24,7 @@ pub const MaintenanceWindow = struct {
     start_time_minute: ?i32,
 
     /// An option to select the default or custom maintenance window.
-    type: MaintenanceWindowType,
+    @"type": MaintenanceWindowType,
 
     pub const json_field_names = .{
         .apply_time_of = "applyTimeOf",
@@ -33,6 +33,6 @@ pub const MaintenanceWindow = struct {
         .end_time_minute = "endTimeMinute",
         .start_time_hour = "startTimeHour",
         .start_time_minute = "startTimeMinute",
-        .type = "type",
+        .@"type" = "type",
     };
 };

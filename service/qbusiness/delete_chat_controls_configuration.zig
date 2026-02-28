@@ -14,7 +14,8 @@ pub const DeleteChatControlsConfigurationInput = struct {
     };
 };
 
-pub const DeleteChatControlsConfigurationOutput = struct {};
+pub const DeleteChatControlsConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

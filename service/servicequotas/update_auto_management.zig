@@ -30,7 +30,8 @@ pub const UpdateAutoManagementInput = struct {
     };
 };
 
-pub const UpdateAutoManagementOutput = struct {};
+pub const UpdateAutoManagementOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -19,13 +19,13 @@ pub const PartnerAppSummary = struct {
     /// The type of SageMaker Partner AI App to create. Must be one of the
     /// following: `lakera-guard`, `comet`, `deepchecks-llm-evaluation`, or
     /// `fiddler`.
-    type: ?PartnerAppType,
+    @"type": ?PartnerAppType,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .creation_time = "CreationTime",
         .name = "Name",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

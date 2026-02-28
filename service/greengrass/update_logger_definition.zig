@@ -17,7 +17,8 @@ pub const UpdateLoggerDefinitionInput = struct {
     };
 };
 
-pub const UpdateLoggerDefinitionOutput = struct {};
+pub const UpdateLoggerDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

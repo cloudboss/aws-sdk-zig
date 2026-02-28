@@ -24,10 +24,10 @@ pub const BucketServerSideEncryption = struct {
     ///   a customer managed key.
     /// * NONE - The bucket's default encryption settings don't specify server-side
     ///   encryption behavior for new objects.
-    type: ?Type,
+    @"type": ?Type,
 
     pub const json_field_names = .{
         .kms_master_key_id = "kmsMasterKeyId",
-        .type = "type",
+        .@"type" = "type",
     };
 };

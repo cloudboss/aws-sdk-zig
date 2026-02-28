@@ -9,7 +9,7 @@ pub const MediaElement = struct {
     media_id: []const u8,
 
     /// The type of media.
-    type: MediaElementType,
+    @"type": MediaElementType,
 
     /// The URL of the media.
     url: []const u8,
@@ -17,7 +17,7 @@ pub const MediaElement = struct {
     pub const json_field_names = .{
         .caption = "caption",
         .media_id = "mediaId",
-        .type = "type",
+        .@"type" = "type",
         .url = "url",
     };
 };

@@ -32,7 +32,8 @@ pub const UpdateKxClusterDatabasesInput = struct {
     };
 };
 
-pub const UpdateKxClusterDatabasesOutput = struct {};
+pub const UpdateKxClusterDatabasesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

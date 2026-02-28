@@ -36,5 +36,5 @@ pub const DBProxyTarget = struct {
 
     /// Specifies the kind of database, such as an RDS DB instance or an Aurora DB
     /// cluster, that the target represents.
-    type: ?TargetType,
+    @"type": ?TargetType,
 };

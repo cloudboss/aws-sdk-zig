@@ -27,7 +27,8 @@ pub const UpdateModelVersionStatusInput = struct {
     };
 };
 
-pub const UpdateModelVersionStatusOutput = struct {};
+pub const UpdateModelVersionStatusOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

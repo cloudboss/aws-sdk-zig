@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetInvitationsCountInput = struct {};
+pub const GetInvitationsCountInput = struct {
+};
 
 pub const GetInvitationsCountOutput = struct {
     /// The number of all membership invitations sent to this Security Hub member

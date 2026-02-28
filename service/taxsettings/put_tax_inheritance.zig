@@ -14,7 +14,8 @@ pub const PutTaxInheritanceInput = struct {
     };
 };
 
-pub const PutTaxInheritanceOutput = struct {};
+pub const PutTaxInheritanceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

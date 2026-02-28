@@ -4095,7 +4095,7 @@ pub fn deserializeDBProxyTarget(reader: *aws.xml.Reader, alloc: std.mem.Allocato
     result.target_arn = null;
     result.target_health = null;
     result.tracked_cluster_id = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -4114,7 +4114,7 @@ pub fn deserializeDBProxyTarget(reader: *aws.xml.Reader, alloc: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "TrackedClusterId")) {
                     result.tracked_cluster_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(TargetType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(TargetType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -7709,3 +7709,4 @@ pub fn serializeUserAuthConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(alloc, "</UserName>");
     }
 }
+

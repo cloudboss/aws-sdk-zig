@@ -74,7 +74,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SetVaultNotificationsInput,
     try path_buf.appendSlice(alloc, "/notification-configuration");
     const path = try path_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = if (input.vault_notification_config) |v| try aws.json.jsonStringify(v, alloc) else null;
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

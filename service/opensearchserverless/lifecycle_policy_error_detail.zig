@@ -13,12 +13,12 @@ pub const LifecyclePolicyErrorDetail = struct {
     name: ?[]const u8,
 
     /// The type of lifecycle policy.
-    type: ?LifecyclePolicyType,
+    @"type": ?LifecyclePolicyType,
 
     pub const json_field_names = .{
         .error_code = "errorCode",
         .error_message = "errorMessage",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

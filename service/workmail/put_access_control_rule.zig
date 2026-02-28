@@ -62,7 +62,8 @@ pub const PutAccessControlRuleInput = struct {
     };
 };
 
-pub const PutAccessControlRuleOutput = struct {};
+pub const PutAccessControlRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

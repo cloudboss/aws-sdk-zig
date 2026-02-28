@@ -21,7 +21,8 @@ pub const RegisterMailDomainInput = struct {
     };
 };
 
-pub const RegisterMailDomainOutput = struct {};
+pub const RegisterMailDomainOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

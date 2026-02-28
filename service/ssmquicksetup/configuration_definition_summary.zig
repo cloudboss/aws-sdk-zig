@@ -10,7 +10,7 @@ pub const ConfigurationDefinitionSummary = struct {
 
     /// The type of the Quick Setup configuration used by the configuration
     /// definition.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The version of the Quick Setup type used by the configuration definition.
     type_version: ?[]const u8,
@@ -18,7 +18,7 @@ pub const ConfigurationDefinitionSummary = struct {
     pub const json_field_names = .{
         .first_class_parameters = "FirstClassParameters",
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
         .type_version = "TypeVersion",
     };
 };

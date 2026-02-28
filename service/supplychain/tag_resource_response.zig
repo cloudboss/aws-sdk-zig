@@ -1,2 +1,3 @@
 /// The response parameters for TagResource.
-pub const TagResourceResponse = struct {};
+pub const TagResourceResponse = struct {
+};

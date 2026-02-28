@@ -26,7 +26,8 @@ pub const DeleteVpcPeeringAuthorizationInput = struct {
     };
 };
 
-pub const DeleteVpcPeeringAuthorizationOutput = struct {};
+pub const DeleteVpcPeeringAuthorizationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

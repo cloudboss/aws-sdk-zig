@@ -14,7 +14,8 @@ pub const DeleteMatchmakingConfigurationInput = struct {
     };
 };
 
-pub const DeleteMatchmakingConfigurationOutput = struct {};
+pub const DeleteMatchmakingConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

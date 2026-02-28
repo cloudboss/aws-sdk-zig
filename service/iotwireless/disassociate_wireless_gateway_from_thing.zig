@@ -13,7 +13,8 @@ pub const DisassociateWirelessGatewayFromThingInput = struct {
     };
 };
 
-pub const DisassociateWirelessGatewayFromThingOutput = struct {};
+pub const DisassociateWirelessGatewayFromThingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

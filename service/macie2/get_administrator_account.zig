@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Invitation = @import("invitation.zig").Invitation;
 
-pub const GetAdministratorAccountInput = struct {};
+pub const GetAdministratorAccountInput = struct {
+};
 
 pub const GetAdministratorAccountOutput = struct {
     /// The Amazon Web Services account ID for the administrator account. If the

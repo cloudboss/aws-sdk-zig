@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetCustomEndpointInput = struct {};
+pub const GetCustomEndpointInput = struct {
+};
 
 pub const GetCustomEndpointOutput = struct {
     /// The IoT managed integrations dedicated, custom endpoint for the device to

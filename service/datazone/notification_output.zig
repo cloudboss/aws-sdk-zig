@@ -37,7 +37,7 @@ pub const NotificationOutput = struct {
     topic: Topic,
 
     /// The type of the notification.
-    type: NotificationType,
+    @"type": NotificationType,
 
     pub const json_field_names = .{
         .action_link = "actionLink",
@@ -50,6 +50,6 @@ pub const NotificationOutput = struct {
         .status = "status",
         .title = "title",
         .topic = "topic",
-        .type = "type",
+        .@"type" = "type",
     };
 };

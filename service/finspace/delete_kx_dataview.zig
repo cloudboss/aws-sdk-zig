@@ -26,7 +26,8 @@ pub const DeleteKxDataviewInput = struct {
     };
 };
 
-pub const DeleteKxDataviewOutput = struct {};
+pub const DeleteKxDataviewOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

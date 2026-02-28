@@ -23,7 +23,8 @@ pub const ModifyCertificateBasedAuthPropertiesInput = struct {
     };
 };
 
-pub const ModifyCertificateBasedAuthPropertiesOutput = struct {};
+pub const ModifyCertificateBasedAuthPropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

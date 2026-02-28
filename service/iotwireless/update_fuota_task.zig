@@ -40,7 +40,8 @@ pub const UpdateFuotaTaskInput = struct {
     };
 };
 
-pub const UpdateFuotaTaskOutput = struct {};
+pub const UpdateFuotaTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

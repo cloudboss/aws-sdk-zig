@@ -35,7 +35,7 @@ pub const GetCloudConnectorOutput = struct {
     name: []const u8,
 
     /// The type of cloud connector created.
-    type: ?CloudConnectorType = null,
+    @"type": ?CloudConnectorType = null,
 
     pub const json_field_names = .{
         .description = "Description",
@@ -43,7 +43,7 @@ pub const GetCloudConnectorOutput = struct {
         .endpoint_type = "EndpointType",
         .id = "Id",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

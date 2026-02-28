@@ -53,12 +53,12 @@ pub const StreamEvent = struct {
     name: ?[]const u8,
 
     /// Logical group for certain events.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .code = "code",
         .event_time = "eventTime",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

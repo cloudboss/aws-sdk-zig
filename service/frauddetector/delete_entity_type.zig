@@ -13,7 +13,8 @@ pub const DeleteEntityTypeInput = struct {
     };
 };
 
-pub const DeleteEntityTypeOutput = struct {};
+pub const DeleteEntityTypeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

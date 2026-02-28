@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutoEnable = @import("auto_enable.zig").AutoEnable;
 
-pub const DescribeOrganizationConfigurationInput = struct {};
+pub const DescribeOrganizationConfigurationInput = struct {
+};
 
 pub const DescribeOrganizationConfigurationOutput = struct {
     /// The scan types are automatically enabled for new members of your

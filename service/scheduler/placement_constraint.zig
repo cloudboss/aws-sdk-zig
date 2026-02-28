@@ -11,10 +11,10 @@ pub const PlacementConstraint = struct {
     /// The type of constraint. Use `distinctInstance` to ensure that each task in a
     /// particular group is running on a different container instance. Use
     /// `memberOf` to restrict the selection to a group of valid candidates.
-    type: ?PlacementConstraintType,
+    @"type": ?PlacementConstraintType,
 
     pub const json_field_names = .{
         .expression = "expression",
-        .type = "type",
+        .@"type" = "type",
     };
 };

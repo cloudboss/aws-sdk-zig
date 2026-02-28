@@ -30,7 +30,8 @@ pub const ModifySamlPropertiesInput = struct {
     };
 };
 
-pub const ModifySamlPropertiesOutput = struct {};
+pub const ModifySamlPropertiesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

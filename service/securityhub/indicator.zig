@@ -16,7 +16,7 @@ pub const Indicator = struct {
     title: ?[]const u8,
 
     /// The type of indicator.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// Values associated with each indicator key. For example, if the indicator key
     /// is
@@ -28,7 +28,7 @@ pub const Indicator = struct {
     pub const json_field_names = .{
         .key = "Key",
         .title = "Title",
-        .type = "Type",
+        .@"type" = "Type",
         .values = "Values",
     };
 };

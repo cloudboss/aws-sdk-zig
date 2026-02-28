@@ -13,7 +13,8 @@ pub const DeleteDomainVerificationInput = struct {
     };
 };
 
-pub const DeleteDomainVerificationOutput = struct {};
+pub const DeleteDomainVerificationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

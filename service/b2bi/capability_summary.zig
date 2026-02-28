@@ -18,13 +18,13 @@ pub const CapabilitySummary = struct {
     name: []const u8,
 
     /// Returns the type of the capability. Currently, only `edi` is supported.
-    @"type": CapabilityType,
+    type: CapabilityType,
 
     pub const json_field_names = .{
         .capability_id = "capabilityId",
         .created_at = "createdAt",
         .modified_at = "modifiedAt",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

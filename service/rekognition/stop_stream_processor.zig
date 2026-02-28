@@ -13,7 +13,8 @@ pub const StopStreamProcessorInput = struct {
     };
 };
 
-pub const StopStreamProcessorOutput = struct {};
+pub const StopStreamProcessorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteEarthObservationJobInput = struct {
     };
 };
 
-pub const DeleteEarthObservationJobOutput = struct {};
+pub const DeleteEarthObservationJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -30,12 +30,12 @@ pub const StateMachineListItem = struct {
     /// The Amazon Resource Name (ARN) that identifies the state machine.
     state_machine_arn: []const u8,
 
-    type: StateMachineType,
+    @"type": StateMachineType,
 
     pub const json_field_names = .{
         .creation_date = "creationDate",
         .name = "name",
         .state_machine_arn = "stateMachineArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };

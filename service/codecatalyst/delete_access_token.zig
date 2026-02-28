@@ -15,8 +15,7 @@ pub const DeleteAccessTokenInput = struct {
     };
 };
 
-pub const DeleteAccessTokenOutput = struct {
-};
+pub const DeleteAccessTokenOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

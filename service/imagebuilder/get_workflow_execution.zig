@@ -67,7 +67,7 @@ pub const GetWorkflowExecutionOutput = struct {
 
     /// The type of workflow that Image Builder ran for the specified runtime
     /// instance of the workflow.
-    type: ?WorkflowType = null,
+    @"type": ?WorkflowType = null,
 
     /// The Amazon Resource Name (ARN) of the build version for the Image Builder
     /// workflow resource
@@ -91,7 +91,7 @@ pub const GetWorkflowExecutionOutput = struct {
         .total_steps_failed = "totalStepsFailed",
         .total_steps_skipped = "totalStepsSkipped",
         .total_steps_succeeded = "totalStepsSucceeded",
-        .type = "type",
+        .@"type" = "type",
         .workflow_build_version_arn = "workflowBuildVersionArn",
         .workflow_execution_id = "workflowExecutionId",
     };

@@ -26,12 +26,12 @@ pub const DescribeEntityOutput = struct {
     name: ?[]const u8 = null,
 
     /// Entity type.
-    type: ?EntityType = null,
+    @"type": ?EntityType = null,
 
     pub const json_field_names = .{
         .entity_id = "EntityId",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

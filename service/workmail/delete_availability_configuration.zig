@@ -18,7 +18,8 @@ pub const DeleteAvailabilityConfigurationInput = struct {
     };
 };
 
-pub const DeleteAvailabilityConfigurationOutput = struct {};
+pub const DeleteAvailabilityConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

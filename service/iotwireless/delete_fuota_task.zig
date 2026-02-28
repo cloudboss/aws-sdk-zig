@@ -12,7 +12,8 @@ pub const DeleteFuotaTaskInput = struct {
     };
 };
 
-pub const DeleteFuotaTaskOutput = struct {};
+pub const DeleteFuotaTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

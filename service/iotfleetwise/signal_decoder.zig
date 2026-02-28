@@ -39,7 +39,7 @@ pub const SignalDecoder = struct {
     /// units (ECUs).
     /// `OBD_SIGNAL` specifies a protocol that defines how self-diagnostic data
     /// is communicated between ECUs.
-    type: SignalDecoderType,
+    @"type": SignalDecoderType,
 
     pub const json_field_names = .{
         .can_signal = "canSignal",
@@ -48,6 +48,6 @@ pub const SignalDecoder = struct {
         .interface_id = "interfaceId",
         .message_signal = "messageSignal",
         .obd_signal = "obdSignal",
-        .type = "type",
+        .@"type" = "type",
     };
 };

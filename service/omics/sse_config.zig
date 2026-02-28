@@ -6,10 +6,10 @@ pub const SseConfig = struct {
     key_arn: ?[]const u8,
 
     /// The encryption type.
-    type: EncryptionType,
+    @"type": EncryptionType,
 
     pub const json_field_names = .{
         .key_arn = "keyArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -20,7 +20,8 @@ pub const UpdateClassificationScopeInput = struct {
     };
 };
 
-pub const UpdateClassificationScopeOutput = struct {};
+pub const UpdateClassificationScopeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

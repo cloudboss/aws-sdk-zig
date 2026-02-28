@@ -13,7 +13,8 @@ pub const DeleteDataProtectionSettingsInput = struct {
     };
 };
 
-pub const DeleteDataProtectionSettingsOutput = struct {};
+pub const DeleteDataProtectionSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteTrustStoreInput = struct {
     };
 };
 
-pub const DeleteTrustStoreOutput = struct {};
+pub const DeleteTrustStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

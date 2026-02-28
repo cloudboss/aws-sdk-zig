@@ -22,7 +22,8 @@ pub const DisassociateEnvironmentRoleInput = struct {
     };
 };
 
-pub const DisassociateEnvironmentRoleOutput = struct {};
+pub const DisassociateEnvironmentRoleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

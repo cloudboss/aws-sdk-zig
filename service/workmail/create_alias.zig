@@ -21,7 +21,8 @@ pub const CreateAliasInput = struct {
     };
 };
 
-pub const CreateAliasOutput = struct {};
+pub const CreateAliasOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

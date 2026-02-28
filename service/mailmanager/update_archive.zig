@@ -22,7 +22,8 @@ pub const UpdateArchiveInput = struct {
     };
 };
 
-pub const UpdateArchiveOutput = struct {};
+pub const UpdateArchiveOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

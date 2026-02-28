@@ -96,7 +96,8 @@ pub const UpdateResponsePlanInput = struct {
     };
 };
 
-pub const UpdateResponsePlanOutput = struct {};
+pub const UpdateResponsePlanOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

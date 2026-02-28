@@ -13,7 +13,8 @@ pub const DeleteDetectorModelInput = struct {
     };
 };
 
-pub const DeleteDetectorModelOutput = struct {};
+pub const DeleteDetectorModelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

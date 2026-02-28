@@ -24,10 +24,10 @@ pub const PlacementStrategy = struct {
     /// parameter. For example, if you binpack on memory, a task is placed on the
     /// instance with
     /// the least amount of remaining memory but still enough to run the task.
-    type: ?PlacementStrategyType,
+    @"type": ?PlacementStrategyType,
 
     pub const json_field_names = .{
         .field = "field",
-        .type = "type",
+        .@"type" = "type",
     };
 };

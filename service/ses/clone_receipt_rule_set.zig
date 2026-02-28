@@ -20,7 +20,8 @@ pub const CloneReceiptRuleSetInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const CloneReceiptRuleSetOutput = struct {};
+pub const CloneReceiptRuleSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

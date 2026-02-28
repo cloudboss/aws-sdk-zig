@@ -91,7 +91,7 @@ pub const ProvisionedProductDetail = struct {
     /// The supported values are `CFN_STACK`, `CFN_STACKSET`,
     /// `TERRAFORM_OPEN_SOURCE`,
     /// `TERRAFORM_CLOUD`, and `EXTERNAL`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -107,6 +107,6 @@ pub const ProvisionedProductDetail = struct {
         .provisioning_artifact_id = "ProvisioningArtifactId",
         .status = "Status",
         .status_message = "StatusMessage",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

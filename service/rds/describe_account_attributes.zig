@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AccountQuota = @import("account_quota.zig").AccountQuota;
 const serde = @import("serde.zig");
 
-pub const DescribeAccountAttributesInput = struct {};
+pub const DescribeAccountAttributesInput = struct {
+};
 
 pub const DescribeAccountAttributesOutput = struct {
     /// A list of `AccountQuota` objects. Within this list, each quota has a name, a

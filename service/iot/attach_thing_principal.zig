@@ -32,7 +32,8 @@ pub const AttachThingPrincipalInput = struct {
     };
 };
 
-pub const AttachThingPrincipalOutput = struct {};
+pub const AttachThingPrincipalOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

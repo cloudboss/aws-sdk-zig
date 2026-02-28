@@ -14,11 +14,11 @@ pub const OpenZFSUserOrGroupQuota = struct {
     storage_capacity_quota_gi_b: i32,
 
     /// Specifies whether the quota applies to a user or group.
-    type: OpenZFSQuotaType,
+    @"type": OpenZFSQuotaType,
 
     pub const json_field_names = .{
         .id = "Id",
         .storage_capacity_quota_gi_b = "StorageCapacityQuotaGiB",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

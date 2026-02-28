@@ -44,7 +44,7 @@ pub const ContactScheduledWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeContact(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.describeContact(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

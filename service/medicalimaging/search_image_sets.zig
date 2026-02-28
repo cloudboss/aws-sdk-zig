@@ -109,7 +109,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SearchImageSetsInput, confi
     }
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = if (input.search_criteria) |v| try aws.json.jsonStringify(v, alloc) else null;
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

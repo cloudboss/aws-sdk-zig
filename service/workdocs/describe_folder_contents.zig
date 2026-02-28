@@ -36,7 +36,7 @@ pub const DescribeFolderContentsInput = struct {
     sort: ?ResourceSortType = null,
 
     /// The type of items.
-    type: ?FolderContentType = null,
+    @"type": ?FolderContentType = null,
 
     pub const json_field_names = .{
         .authentication_token = "AuthenticationToken",
@@ -46,7 +46,7 @@ pub const DescribeFolderContentsInput = struct {
         .marker = "Marker",
         .order = "Order",
         .sort = "Sort",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -145,7 +145,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: DescribeFolderContentsInput
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

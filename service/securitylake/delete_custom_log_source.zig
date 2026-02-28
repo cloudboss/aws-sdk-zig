@@ -19,7 +19,8 @@ pub const DeleteCustomLogSourceInput = struct {
     };
 };
 
-pub const DeleteCustomLogSourceOutput = struct {};
+pub const DeleteCustomLogSourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

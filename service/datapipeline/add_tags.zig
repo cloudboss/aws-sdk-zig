@@ -18,7 +18,8 @@ pub const AddTagsInput = struct {
     };
 };
 
-pub const AddTagsOutput = struct {};
+pub const AddTagsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

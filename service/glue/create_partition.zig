@@ -29,7 +29,8 @@ pub const CreatePartitionInput = struct {
     };
 };
 
-pub const CreatePartitionOutput = struct {};
+pub const CreatePartitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

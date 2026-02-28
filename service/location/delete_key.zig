@@ -26,7 +26,8 @@ pub const DeleteKeyInput = struct {
     };
 };
 
-pub const DeleteKeyOutput = struct {};
+pub const DeleteKeyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

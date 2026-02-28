@@ -7,14 +7,14 @@ pub const TemplateError = struct {
     message: ?[]const u8,
 
     /// Type of error.
-    type: ?TemplateErrorType,
+    @"type": ?TemplateErrorType,
 
     /// An error path that shows which entities caused the template error.
     violated_entities: ?[]const Entity,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
         .violated_entities = "ViolatedEntities",
     };
 };

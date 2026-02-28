@@ -23,7 +23,8 @@ pub const UpdateConfigurationSetEventDestinationInput = struct {
     };
 };
 
-pub const UpdateConfigurationSetEventDestinationOutput = struct {};
+pub const UpdateConfigurationSetEventDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

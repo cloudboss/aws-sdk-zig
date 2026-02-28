@@ -8,7 +8,7 @@ const OntapWindowsFileSystemUser = @import("ontap_windows_file_system_user.zig")
 pub const OntapFileSystemIdentity = struct {
     /// Specifies the FSx for ONTAP user identity type. Valid values are `UNIX` and
     /// `WINDOWS`.
-    type: OntapFileSystemUserType,
+    @"type": OntapFileSystemUserType,
 
     /// Specifies the UNIX user identity for file system operations.
     unix_user: ?OntapUnixFileSystemUser,
@@ -17,7 +17,7 @@ pub const OntapFileSystemIdentity = struct {
     windows_user: ?OntapWindowsFileSystemUser,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .unix_user = "UnixUser",
         .windows_user = "WindowsUser",
     };

@@ -28,7 +28,8 @@ pub const PutIdentityProviderConfigurationInput = struct {
     };
 };
 
-pub const PutIdentityProviderConfigurationOutput = struct {};
+pub const PutIdentityProviderConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

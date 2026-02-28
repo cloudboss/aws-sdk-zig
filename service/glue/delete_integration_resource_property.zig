@@ -13,7 +13,8 @@ pub const DeleteIntegrationResourcePropertyInput = struct {
     };
 };
 
-pub const DeleteIntegrationResourcePropertyOutput = struct {};
+pub const DeleteIntegrationResourcePropertyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

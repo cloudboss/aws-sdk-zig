@@ -35,7 +35,8 @@ pub const AddThingToThingGroupInput = struct {
     };
 };
 
-pub const AddThingToThingGroupOutput = struct {};
+pub const AddThingToThingGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

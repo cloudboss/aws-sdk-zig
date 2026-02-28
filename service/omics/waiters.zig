@@ -56,7 +56,7 @@ pub const AnnotationImportJobCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getAnnotationImportJob(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getAnnotationImportJob(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -128,7 +128,7 @@ pub const AnnotationStoreCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getAnnotationStore(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getAnnotationStore(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -259,7 +259,7 @@ pub const AnnotationStoreVersionCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getAnnotationStoreVersion(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getAnnotationStoreVersion(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -390,7 +390,7 @@ pub const ReadSetActivationJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getReadSetActivationJob(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getReadSetActivationJob(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -472,7 +472,7 @@ pub const ReadSetExportJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getReadSetExportJob(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getReadSetExportJob(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -554,7 +554,7 @@ pub const ReadSetImportJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getReadSetImportJob(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getReadSetImportJob(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -636,7 +636,7 @@ pub const ReferenceImportJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getReferenceImportJob(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getReferenceImportJob(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -718,7 +718,7 @@ pub const RunCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getRun(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getRun(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -795,7 +795,7 @@ pub const RunRunningWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getRun(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getRun(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -867,7 +867,7 @@ pub const TaskCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getRunTask(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getRunTask(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -944,7 +944,7 @@ pub const TaskRunningWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getRunTask(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getRunTask(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -1016,7 +1016,7 @@ pub const VariantImportJobCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getVariantImportJob(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getVariantImportJob(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -1088,7 +1088,7 @@ pub const VariantStoreCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getVariantStore(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getVariantStore(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -1219,7 +1219,7 @@ pub const WorkflowActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getWorkflow(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getWorkflow(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -1286,7 +1286,7 @@ pub const WorkflowVersionActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getWorkflowVersion(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getWorkflowVersion(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

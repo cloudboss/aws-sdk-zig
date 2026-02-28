@@ -13,7 +13,8 @@ pub const DisassociateSessionLoggerInput = struct {
     };
 };
 
-pub const DisassociateSessionLoggerOutput = struct {};
+pub const DisassociateSessionLoggerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

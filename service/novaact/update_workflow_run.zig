@@ -22,7 +22,8 @@ pub const UpdateWorkflowRunInput = struct {
     };
 };
 
-pub const UpdateWorkflowRunOutput = struct {};
+pub const UpdateWorkflowRunOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

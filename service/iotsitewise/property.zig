@@ -36,7 +36,7 @@ pub const Property = struct {
     path: ?[]const AssetPropertyPathSegment,
 
     /// The property type (see `PropertyType`). A property contains one type.
-    type: ?PropertyType,
+    @"type": ?PropertyType,
 
     /// The unit (such as `Newtons` or `RPM`) of the asset property.
     unit: ?[]const u8,
@@ -49,7 +49,7 @@ pub const Property = struct {
         .name = "name",
         .notification = "notification",
         .path = "path",
-        .type = "type",
+        .@"type" = "type",
         .unit = "unit",
     };
 };

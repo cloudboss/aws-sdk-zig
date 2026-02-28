@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 const TestConnectionInput = @import("test_connection_request.zig").TestConnectionRequest;
 
-pub const TestConnectionOutput = struct {};
+pub const TestConnectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

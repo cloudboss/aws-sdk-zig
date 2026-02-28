@@ -61,7 +61,7 @@ pub const ReactiveAnomalySummary = struct {
     ///
     /// * `CONTEXTUAL` - the anomaly contains additional information about an
     ///   insight or its causal anomaly.
-    type: ?AnomalyType,
+    @"type": ?AnomalyType,
 
     pub const json_field_names = .{
         .anomaly_reported_time_range = "AnomalyReportedTimeRange",
@@ -76,6 +76,6 @@ pub const ReactiveAnomalySummary = struct {
         .severity = "Severity",
         .source_details = "SourceDetails",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

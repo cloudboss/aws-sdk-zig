@@ -21,7 +21,8 @@ pub const StopAppInput = struct {
     };
 };
 
-pub const StopAppOutput = struct {};
+pub const StopAppOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

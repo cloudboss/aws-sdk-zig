@@ -126,7 +126,8 @@ pub const UpdateNotebookInstanceInput = struct {
     };
 };
 
-pub const UpdateNotebookInstanceOutput = struct {};
+pub const UpdateNotebookInstanceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

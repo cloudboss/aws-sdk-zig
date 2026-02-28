@@ -19,7 +19,7 @@ pub const ListSchemaVersionsRequest = struct {
     semantic_version: ?[]const u8,
 
     /// Filter on the type of schema version.
-    type: SchemaVersionType,
+    @"type": SchemaVersionType,
 
     /// The visibility of the schema version.
     visibility: ?SchemaVersionVisibility,
@@ -30,7 +30,7 @@ pub const ListSchemaVersionsRequest = struct {
         .next_token = "NextToken",
         .schema_id = "SchemaId",
         .semantic_version = "SemanticVersion",
-        .type = "Type",
+        .@"type" = "Type",
         .visibility = "Visibility",
     };
 };

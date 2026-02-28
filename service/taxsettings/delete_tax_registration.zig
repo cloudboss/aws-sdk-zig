@@ -17,7 +17,8 @@ pub const DeleteTaxRegistrationInput = struct {
     };
 };
 
-pub const DeleteTaxRegistrationOutput = struct {};
+pub const DeleteTaxRegistrationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

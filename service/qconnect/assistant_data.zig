@@ -59,7 +59,7 @@ pub const AssistantData = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of assistant.
-    type: AssistantType,
+    @"type": AssistantType,
 
     pub const json_field_names = .{
         .ai_agent_configuration = "aiAgentConfiguration",
@@ -73,6 +73,6 @@ pub const AssistantData = struct {
         .server_side_encryption_configuration = "serverSideEncryptionConfiguration",
         .status = "status",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

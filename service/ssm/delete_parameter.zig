@@ -17,7 +17,8 @@ pub const DeleteParameterInput = struct {
     };
 };
 
-pub const DeleteParameterOutput = struct {};
+pub const DeleteParameterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

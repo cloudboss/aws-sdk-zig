@@ -13,7 +13,7 @@ pub const EcsResourceRequirement = struct {
     /// The type of resource to assign to a container. The supported values are
     /// `GPU`
     /// or `InferenceAccelerator`.
-    type: EcsResourceRequirementType,
+    @"type": EcsResourceRequirementType,
 
     /// The value for the specified resource type.
     ///
@@ -29,7 +29,7 @@ pub const EcsResourceRequirement = struct {
     value: []const u8,
 
     pub const json_field_names = .{
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

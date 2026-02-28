@@ -50,7 +50,8 @@ pub const UpdateLocationFsxWindowsInput = struct {
     };
 };
 
-pub const UpdateLocationFsxWindowsOutput = struct {};
+pub const UpdateLocationFsxWindowsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

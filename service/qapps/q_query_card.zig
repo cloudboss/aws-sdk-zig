@@ -29,7 +29,7 @@ pub const QQueryCard = struct {
     title: []const u8,
 
     /// The type of the card.
-    type: CardType,
+    @"type": CardType,
 
     pub const json_field_names = .{
         .attribute_filter = "attributeFilter",
@@ -39,6 +39,6 @@ pub const QQueryCard = struct {
         .output_source = "outputSource",
         .prompt = "prompt",
         .title = "title",
-        .type = "type",
+        .@"type" = "type",
     };
 };

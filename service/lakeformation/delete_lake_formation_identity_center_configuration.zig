@@ -18,7 +18,8 @@ pub const DeleteLakeFormationIdentityCenterConfigurationInput = struct {
     };
 };
 
-pub const DeleteLakeFormationIdentityCenterConfigurationOutput = struct {};
+pub const DeleteLakeFormationIdentityCenterConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

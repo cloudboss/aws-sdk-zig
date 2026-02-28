@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProfileTemplate = @import("profile_template.zig").ProfileTemplate;
 
-pub const GetProfileTemplateInput = struct {};
+pub const GetProfileTemplateInput = struct {
+};
 
 pub const GetProfileTemplateOutput = struct {
     /// The profile template.

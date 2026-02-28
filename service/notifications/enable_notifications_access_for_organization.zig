@@ -4,9 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const EnableNotificationsAccessForOrganizationInput = struct {};
+pub const EnableNotificationsAccessForOrganizationInput = struct {
+};
 
-pub const EnableNotificationsAccessForOrganizationOutput = struct {};
+pub const EnableNotificationsAccessForOrganizationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

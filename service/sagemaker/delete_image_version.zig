@@ -21,7 +21,8 @@ pub const DeleteImageVersionInput = struct {
     };
 };
 
-pub const DeleteImageVersionOutput = struct {};
+pub const DeleteImageVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

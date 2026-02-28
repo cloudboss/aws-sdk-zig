@@ -21,7 +21,8 @@ pub const DeleteThreatIntelSetInput = struct {
     };
 };
 
-pub const DeleteThreatIntelSetOutput = struct {};
+pub const DeleteThreatIntelSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

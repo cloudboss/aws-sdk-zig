@@ -47,7 +47,8 @@ pub const CreateTableInput = struct {
     };
 };
 
-pub const CreateTableOutput = struct {};
+pub const CreateTableOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

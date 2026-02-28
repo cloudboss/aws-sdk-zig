@@ -16,7 +16,8 @@ pub const DeregisterWorkspaceDirectoryInput = struct {
     };
 };
 
-pub const DeregisterWorkspaceDirectoryOutput = struct {};
+pub const DeregisterWorkspaceDirectoryOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

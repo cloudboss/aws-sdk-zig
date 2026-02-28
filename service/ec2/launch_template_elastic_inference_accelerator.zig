@@ -8,5 +8,5 @@ pub const LaunchTemplateElasticInferenceAccelerator = struct {
     /// The type of elastic inference accelerator. The possible values are
     /// eia1.medium,
     /// eia1.large, and eia1.xlarge.
-    type: []const u8,
+    @"type": []const u8,
 };

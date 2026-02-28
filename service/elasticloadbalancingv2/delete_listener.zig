@@ -9,7 +9,8 @@ pub const DeleteListenerInput = struct {
     listener_arn: []const u8,
 };
 
-pub const DeleteListenerOutput = struct {};
+pub const DeleteListenerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

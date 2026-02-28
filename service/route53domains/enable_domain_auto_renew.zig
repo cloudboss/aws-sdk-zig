@@ -13,7 +13,8 @@ pub const EnableDomainAutoRenewInput = struct {
     };
 };
 
-pub const EnableDomainAutoRenewOutput = struct {};
+pub const EnableDomainAutoRenewOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

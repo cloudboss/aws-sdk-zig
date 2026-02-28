@@ -29,13 +29,13 @@ pub const DescribePortfolioSharesInput = struct {
     ///
     /// 4. `ORGANIZATION_MEMBER_ACCOUNT` - Represents a share to an account in the
     /// organization.
-    type: DescribePortfolioShareType,
+    @"type": DescribePortfolioShareType,
 
     pub const json_field_names = .{
         .page_size = "PageSize",
         .page_token = "PageToken",
         .portfolio_id = "PortfolioId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

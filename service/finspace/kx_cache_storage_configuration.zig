@@ -14,10 +14,10 @@ pub const KxCacheStorageConfiguration = struct {
     /// For cache type `CACHE_1000` and `CACHE_250` you can select cache size as
     /// 1200 GB or increments of 2400 GB. For cache type `CACHE_12` you can select
     /// the cache size in increments of 6000 GB.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .size = "size",
-        .type = "type",
+        .@"type" = "type",
     };
 };

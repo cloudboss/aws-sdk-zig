@@ -6,10 +6,10 @@ pub const ColumnInfo = struct {
     name: ?[]const u8,
 
     /// The type of the column description.
-    type: ?ColumnType,
+    @"type": ?ColumnType,
 
     pub const json_field_names = .{
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

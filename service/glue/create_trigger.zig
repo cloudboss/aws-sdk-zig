@@ -50,7 +50,7 @@ pub const CreateTriggerInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the new trigger.
-    type: TriggerType,
+    @"type": TriggerType,
 
     /// The name of the workflow associated with the trigger.
     workflow_name: ?[]const u8 = null,
@@ -64,7 +64,7 @@ pub const CreateTriggerInput = struct {
         .schedule = "Schedule",
         .start_on_creation = "StartOnCreation",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .workflow_name = "WorkflowName",
     };
 };

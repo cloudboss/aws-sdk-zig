@@ -15,7 +15,7 @@ pub const LibraryTemplateButtonList = struct {
     text: ?[]const u8,
 
     /// The type of button (for example, QUICK_REPLY, CALL, or URL).
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The URL for URL-type buttons.
     url: ?[]const u8,
@@ -28,7 +28,7 @@ pub const LibraryTemplateButtonList = struct {
         .phone_number = "phoneNumber",
         .supported_apps = "supportedApps",
         .text = "text",
-        .type = "type",
+        .@"type" = "type",
         .url = "url",
         .zero_tap_terms_accepted = "zeroTapTermsAccepted",
     };

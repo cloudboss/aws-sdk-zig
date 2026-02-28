@@ -45,11 +45,11 @@ pub const PermissionModel = struct {
     /// using a pre-existing role in your Amazon Web Services account, or by using
     /// the credentials of
     /// the current IAM user.
-    type: PermissionModelType,
+    @"type": PermissionModelType,
 
     pub const json_field_names = .{
         .cross_account_role_arns = "crossAccountRoleArns",
         .invoker_role_name = "invokerRoleName",
-        .type = "type",
+        .@"type" = "type",
     };
 };

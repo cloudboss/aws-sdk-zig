@@ -26,7 +26,7 @@ pub const KubernetesWorkloadDetails = struct {
     service_account_name: ?[]const u8,
 
     /// Kubernetes workload type (e.g. Pod, Deployment, etc.).
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// Kubernetes workload ID.
     uid: ?[]const u8,
@@ -42,7 +42,7 @@ pub const KubernetesWorkloadDetails = struct {
         .name = "Name",
         .namespace = "Namespace",
         .service_account_name = "ServiceAccountName",
-        .type = "Type",
+        .@"type" = "Type",
         .uid = "Uid",
         .volumes = "Volumes",
     };

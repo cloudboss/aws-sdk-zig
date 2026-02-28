@@ -23,12 +23,12 @@ pub const AwsS3BucketNotificationConfigurationDetail = struct {
     /// * `QueueConfiguration`
     ///
     /// * `TopicConfiguration`
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .destination = "Destination",
         .events = "Events",
         .filter = "Filter",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

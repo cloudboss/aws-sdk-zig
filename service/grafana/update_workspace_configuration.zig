@@ -34,7 +34,8 @@ pub const UpdateWorkspaceConfigurationInput = struct {
     };
 };
 
-pub const UpdateWorkspaceConfigurationOutput = struct {};
+pub const UpdateWorkspaceConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

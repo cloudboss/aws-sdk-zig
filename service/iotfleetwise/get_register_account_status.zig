@@ -7,7 +7,8 @@ const RegistrationStatus = @import("registration_status.zig").RegistrationStatus
 const IamRegistrationResponse = @import("iam_registration_response.zig").IamRegistrationResponse;
 const TimestreamRegistrationResponse = @import("timestream_registration_response.zig").TimestreamRegistrationResponse;
 
-pub const GetRegisterAccountStatusInput = struct {};
+pub const GetRegisterAccountStatusInput = struct {
+};
 
 pub const GetRegisterAccountStatusOutput = struct {
     /// The status of registering your account and resources. The status can be one

@@ -25,7 +25,8 @@ pub const DeleteProvisioningArtifactInput = struct {
     };
 };
 
-pub const DeleteProvisioningArtifactOutput = struct {};
+pub const DeleteProvisioningArtifactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

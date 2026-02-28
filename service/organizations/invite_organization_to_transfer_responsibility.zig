@@ -51,7 +51,7 @@ pub const InviteOrganizationToTransferResponsibilityInput = struct {
     /// The type of responsibility you want to designate to your organization.
     /// Currently, only
     /// `BILLING` is supported.
-    type: ResponsibilityTransferType,
+    @"type": ResponsibilityTransferType,
 
     pub const json_field_names = .{
         .notes = "Notes",
@@ -59,7 +59,7 @@ pub const InviteOrganizationToTransferResponsibilityInput = struct {
         .start_timestamp = "StartTimestamp",
         .tags = "Tags",
         .target = "Target",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

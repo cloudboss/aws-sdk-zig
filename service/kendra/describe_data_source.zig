@@ -83,7 +83,7 @@ pub const DescribeDataSourceOutput = struct {
     status: ?DataSourceStatus = null,
 
     /// The type of the data source. For example, `SHAREPOINT`.
-    type: ?DataSourceType = null,
+    @"type": ?DataSourceType = null,
 
     /// The Unix timestamp when the data source connector was last updated.
     updated_at: ?i64 = null,
@@ -107,7 +107,7 @@ pub const DescribeDataSourceOutput = struct {
         .role_arn = "RoleArn",
         .schedule = "Schedule",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
         .updated_at = "UpdatedAt",
         .vpc_configuration = "VpcConfiguration",
     };

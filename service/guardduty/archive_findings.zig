@@ -23,7 +23,8 @@ pub const ArchiveFindingsInput = struct {
     };
 };
 
-pub const ArchiveFindingsOutput = struct {};
+pub const ArchiveFindingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const DeleteMobileDeviceAccessRuleInput = struct {
     };
 };
 
-pub const DeleteMobileDeviceAccessRuleOutput = struct {};
+pub const DeleteMobileDeviceAccessRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

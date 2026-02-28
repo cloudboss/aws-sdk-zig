@@ -50,7 +50,8 @@ pub const UpdateRotationInput = struct {
     };
 };
 
-pub const UpdateRotationOutput = struct {};
+pub const UpdateRotationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

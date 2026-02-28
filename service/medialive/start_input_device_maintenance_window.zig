@@ -14,7 +14,8 @@ pub const StartInputDeviceMaintenanceWindowInput = struct {
     };
 };
 
-pub const StartInputDeviceMaintenanceWindowOutput = struct {};
+pub const StartInputDeviceMaintenanceWindowOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

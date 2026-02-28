@@ -48,7 +48,8 @@ pub const UpdateThreatEntitySetInput = struct {
     };
 };
 
-pub const UpdateThreatEntitySetOutput = struct {};
+pub const UpdateThreatEntitySetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -15,7 +15,8 @@ pub const DeleteChannelGroupInput = struct {
     };
 };
 
-pub const DeleteChannelGroupOutput = struct {};
+pub const DeleteChannelGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

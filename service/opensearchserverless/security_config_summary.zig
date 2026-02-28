@@ -18,7 +18,7 @@ pub const SecurityConfigSummary = struct {
     last_modified_date: ?i64,
 
     /// The type of security configuration.
-    type: ?SecurityConfigType,
+    @"type": ?SecurityConfigType,
 
     pub const json_field_names = .{
         .config_version = "configVersion",
@@ -26,6 +26,6 @@ pub const SecurityConfigSummary = struct {
         .description = "description",
         .id = "id",
         .last_modified_date = "lastModifiedDate",
-        .type = "type",
+        .@"type" = "type",
     };
 };

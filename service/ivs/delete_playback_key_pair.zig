@@ -13,7 +13,8 @@ pub const DeletePlaybackKeyPairInput = struct {
     };
 };
 
-pub const DeletePlaybackKeyPairOutput = struct {};
+pub const DeletePlaybackKeyPairOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

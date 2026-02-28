@@ -7,7 +7,7 @@ pub const Resource = struct {
     provider: ?[]const u8,
 
     /// The type of a provisioned resource of this Amazon DataZone environment.
-    type: []const u8,
+    @"type": []const u8,
 
     /// The value of a provisioned resource of this Amazon DataZone environment.
     value: []const u8,
@@ -15,7 +15,7 @@ pub const Resource = struct {
     pub const json_field_names = .{
         .name = "name",
         .provider = "provider",
-        .type = "type",
+        .@"type" = "type",
         .value = "value",
     };
 };

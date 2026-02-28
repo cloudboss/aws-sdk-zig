@@ -18,7 +18,8 @@ pub const AddTagsToResourceInput = struct {
     };
 };
 
-pub const AddTagsToResourceOutput = struct {};
+pub const AddTagsToResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

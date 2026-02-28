@@ -60,7 +60,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListSchemaVersionsInput, co
 
     var path_buf: std.ArrayList(u8) = .{};
     try path_buf.appendSlice(alloc, "/schema-versions/");
-    try path_buf.appendSlice(alloc, input.type);
+    try path_buf.appendSlice(alloc, input.@"type");
     const path = try path_buf.toOwnedSlice(alloc);
 
     var query_buf: std.ArrayList(u8) = .{};

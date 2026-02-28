@@ -21,7 +21,8 @@ pub const UnarchiveFindingsInput = struct {
     };
 };
 
-pub const UnarchiveFindingsOutput = struct {};
+pub const UnarchiveFindingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

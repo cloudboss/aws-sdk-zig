@@ -18,7 +18,8 @@ pub const DisassociateOrganizationalUnitInput = struct {
     };
 };
 
-pub const DisassociateOrganizationalUnitOutput = struct {};
+pub const DisassociateOrganizationalUnitOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -20,7 +20,8 @@ pub const DeregisterComputeInput = struct {
     };
 };
 
-pub const DeregisterComputeOutput = struct {};
+pub const DeregisterComputeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

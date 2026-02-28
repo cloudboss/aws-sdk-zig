@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SigningConfiguration = @import("signing_configuration.zig").SigningConfiguration;
 
-pub const GetSigningConfigurationInput = struct {};
+pub const GetSigningConfigurationInput = struct {
+};
 
 pub const GetSigningConfigurationOutput = struct {
     /// The Amazon Web Services account ID associated with the registry.

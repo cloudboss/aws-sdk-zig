@@ -17,7 +17,7 @@ pub const SchemaVersionListItem = struct {
     semantic_version: ?[]const u8,
 
     /// The type of schema version.
-    type: ?SchemaVersionType,
+    @"type": ?SchemaVersionType,
 
     /// The visibility of the schema version.
     visibility: ?SchemaVersionVisibility,
@@ -27,7 +27,7 @@ pub const SchemaVersionListItem = struct {
         .namespace = "Namespace",
         .schema_id = "SchemaId",
         .semantic_version = "SemanticVersion",
-        .type = "Type",
+        .@"type" = "Type",
         .visibility = "Visibility",
     };
 };

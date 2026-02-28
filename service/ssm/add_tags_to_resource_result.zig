@@ -1,1 +1,2 @@
-pub const AddTagsToResourceResult = struct {};
+pub const AddTagsToResourceResult = struct {
+};

@@ -32,7 +32,8 @@ pub const UpdateReputationEntityCustomerManagedStatusInput = struct {
     };
 };
 
-pub const UpdateReputationEntityCustomerManagedStatusOutput = struct {};
+pub const UpdateReputationEntityCustomerManagedStatusOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

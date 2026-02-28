@@ -21,13 +21,13 @@ pub const ListAccessPoliciesInput = struct {
     resource: ?[]const []const u8 = null,
 
     /// The type of access policy.
-    type: AccessPolicyType,
+    @"type": AccessPolicyType,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
         .resource = "resource",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

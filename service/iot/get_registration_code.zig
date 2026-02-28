@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetRegistrationCodeInput = struct {};
+pub const GetRegistrationCodeInput = struct {
+};
 
 pub const GetRegistrationCodeOutput = struct {
     /// The CA certificate registration code.

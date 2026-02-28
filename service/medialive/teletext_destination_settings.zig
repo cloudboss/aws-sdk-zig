@@ -1,2 +1,3 @@
 /// Teletext Destination Settings
-pub const TeletextDestinationSettings = struct {};
+pub const TeletextDestinationSettings = struct {
+};

@@ -14,12 +14,12 @@ pub const Group = struct {
     source_type: IncludeOptions = "ALL",
 
     /// Defines how to interact with the profiles found in the current filtering.
-    type: IncludeOptions = "ALL",
+    @"type": IncludeOptions = "ALL",
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",
         .source_segments = "SourceSegments",
         .source_type = "SourceType",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -20,7 +20,8 @@ pub const DeleteClientBrandingInput = struct {
     };
 };
 
-pub const DeleteClientBrandingOutput = struct {};
+pub const DeleteClientBrandingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

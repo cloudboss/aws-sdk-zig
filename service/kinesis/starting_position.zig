@@ -36,11 +36,11 @@ pub const StartingPosition = struct {
     ///
     /// `LATEST`: Start streaming just after the most recent record in the shard,
     /// so that you always read the most recent data in the shard.
-    type: ShardIteratorType,
+    @"type": ShardIteratorType,
 
     pub const json_field_names = .{
         .sequence_number = "SequenceNumber",
         .timestamp = "Timestamp",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

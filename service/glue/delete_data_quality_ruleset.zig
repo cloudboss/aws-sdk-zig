@@ -13,7 +13,8 @@ pub const DeleteDataQualityRulesetInput = struct {
     };
 };
 
-pub const DeleteDataQualityRulesetOutput = struct {};
+pub const DeleteDataQualityRulesetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

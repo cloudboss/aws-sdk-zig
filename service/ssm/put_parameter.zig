@@ -283,7 +283,7 @@ pub const PutParameterInput = struct {
     /// Specifying a parameter type isn't required when updating a parameter. You
     /// must specify a
     /// parameter type when creating a parameter.
-    type: ?ParameterType = null,
+    @"type": ?ParameterType = null,
 
     /// The parameter value that you want to add to the system. Standard parameters
     /// have a value
@@ -305,7 +305,7 @@ pub const PutParameterInput = struct {
         .policies = "Policies",
         .tags = "Tags",
         .tier = "Tier",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

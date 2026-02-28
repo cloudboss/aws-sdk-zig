@@ -21,7 +21,8 @@ pub const DeleteKxDatabaseInput = struct {
     };
 };
 
-pub const DeleteKxDatabaseOutput = struct {};
+pub const DeleteKxDatabaseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const DeleteSceneInput = struct {
     };
 };
 
-pub const DeleteSceneOutput = struct {};
+pub const DeleteSceneOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

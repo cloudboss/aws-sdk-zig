@@ -31,7 +31,8 @@ pub const DeleteApplicationReferenceDataSourceInput = struct {
     };
 };
 
-pub const DeleteApplicationReferenceDataSourceOutput = struct {};
+pub const DeleteApplicationReferenceDataSourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

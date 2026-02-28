@@ -22,7 +22,8 @@ pub const PutDataLakeSettingsInput = struct {
     };
 };
 
-pub const PutDataLakeSettingsOutput = struct {};
+pub const PutDataLakeSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

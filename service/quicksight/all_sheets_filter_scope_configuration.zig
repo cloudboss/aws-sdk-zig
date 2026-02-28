@@ -5,4 +5,5 @@
 ///
 /// This is a union type structure. For this structure to be valid, only one of
 /// the attributes can be defined.
-pub const AllSheetsFilterScopeConfiguration = struct {};
+pub const AllSheetsFilterScopeConfiguration = struct {
+};

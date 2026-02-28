@@ -14,7 +14,7 @@ pub const FinalAutoMLJobObjectiveMetric = struct {
     standard_metric_name: ?AutoMLMetricEnum,
 
     /// The type of metric with the best result.
-    type: ?AutoMLJobObjectiveType,
+    @"type": ?AutoMLJobObjectiveType,
 
     /// The value of the metric with the best result.
     value: f32,
@@ -22,7 +22,7 @@ pub const FinalAutoMLJobObjectiveMetric = struct {
     pub const json_field_names = .{
         .metric_name = "MetricName",
         .standard_metric_name = "StandardMetricName",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

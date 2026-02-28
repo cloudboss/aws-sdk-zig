@@ -12,7 +12,8 @@ pub const DeleteNetworkAnalyzerConfigurationInput = struct {
     };
 };
 
-pub const DeleteNetworkAnalyzerConfigurationOutput = struct {};
+pub const DeleteNetworkAnalyzerConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

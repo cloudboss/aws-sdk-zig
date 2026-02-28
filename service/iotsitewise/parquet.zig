@@ -1,2 +1,3 @@
 /// A parquet file.
-pub const Parquet = struct {};
+pub const Parquet = struct {
+};

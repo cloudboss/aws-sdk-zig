@@ -33,7 +33,8 @@ pub const UpdateWirelessGatewayInput = struct {
     };
 };
 
-pub const UpdateWirelessGatewayOutput = struct {};
+pub const UpdateWirelessGatewayOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

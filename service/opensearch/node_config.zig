@@ -11,11 +11,11 @@ pub const NodeConfig = struct {
     enabled: ?bool,
 
     /// The instance type of a particular node within the cluster.
-    type: ?OpenSearchPartitionInstanceType,
+    @"type": ?OpenSearchPartitionInstanceType,
 
     pub const json_field_names = .{
         .count = "Count",
         .enabled = "Enabled",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

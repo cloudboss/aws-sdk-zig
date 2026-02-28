@@ -31,7 +31,8 @@ pub const NotifyResourceDeploymentStatusChangeInput = struct {
     };
 };
 
-pub const NotifyResourceDeploymentStatusChangeOutput = struct {};
+pub const NotifyResourceDeploymentStatusChangeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

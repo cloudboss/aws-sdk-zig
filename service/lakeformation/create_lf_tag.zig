@@ -24,7 +24,8 @@ pub const CreateLFTagInput = struct {
     };
 };
 
-pub const CreateLFTagOutput = struct {};
+pub const CreateLFTagOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

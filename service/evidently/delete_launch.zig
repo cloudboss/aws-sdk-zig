@@ -17,7 +17,8 @@ pub const DeleteLaunchInput = struct {
     };
 };
 
-pub const DeleteLaunchOutput = struct {};
+pub const DeleteLaunchOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

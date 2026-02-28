@@ -28,7 +28,7 @@ pub const ComputationModelSummary = struct {
     status: ComputationModelStatus,
 
     /// The type of the computation model.
-    type: ComputationModelType,
+    @"type": ComputationModelType,
 
     /// The version of the computation model.
     version: []const u8,
@@ -41,7 +41,7 @@ pub const ComputationModelSummary = struct {
         .last_update_date = "lastUpdateDate",
         .name = "name",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
     };
 };

@@ -58,7 +58,7 @@ pub const GetOperationDetailOutput = struct {
     submitted_date: ?i64 = null,
 
     /// The type of operation that was requested.
-    type: ?OperationType = null,
+    @"type": ?OperationType = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",
@@ -68,7 +68,7 @@ pub const GetOperationDetailOutput = struct {
         .status = "Status",
         .status_flag = "StatusFlag",
         .submitted_date = "SubmittedDate",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

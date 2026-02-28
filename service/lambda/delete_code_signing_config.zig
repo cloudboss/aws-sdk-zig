@@ -13,7 +13,8 @@ pub const DeleteCodeSigningConfigInput = struct {
     };
 };
 
-pub const DeleteCodeSigningConfigOutput = struct {};
+pub const DeleteCodeSigningConfigOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

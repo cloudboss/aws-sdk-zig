@@ -21,8 +21,7 @@ pub const AssociateApplicationToEntitlementInput = struct {
     };
 };
 
-pub const AssociateApplicationToEntitlementOutput = struct {
-};
+pub const AssociateApplicationToEntitlementOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

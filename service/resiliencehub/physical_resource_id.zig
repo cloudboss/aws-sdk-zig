@@ -71,12 +71,12 @@ pub const PhysicalResourceId = struct {
     /// * `AWS::S3::Bucket`
     ///
     /// * `AWS::SQS::Queue`
-    type: PhysicalIdentifierType,
+    @"type": PhysicalIdentifierType,
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",
         .aws_region = "awsRegion",
         .identifier = "identifier",
-        .type = "type",
+        .@"type" = "type",
     };
 };

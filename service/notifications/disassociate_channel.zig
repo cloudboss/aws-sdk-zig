@@ -17,7 +17,8 @@ pub const DisassociateChannelInput = struct {
     };
 };
 
-pub const DisassociateChannelOutput = struct {};
+pub const DisassociateChannelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

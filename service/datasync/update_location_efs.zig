@@ -59,7 +59,8 @@ pub const UpdateLocationEfsInput = struct {
     };
 };
 
-pub const UpdateLocationEfsOutput = struct {};
+pub const UpdateLocationEfsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

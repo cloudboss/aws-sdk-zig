@@ -38,11 +38,11 @@ pub const InsightsEvent = struct {
     ///
     /// * `CLICK` - Click event for emails including wrapped links.
     /// Excludes clicks for emails addressed to more than one recipient.
-    type: ?EventType,
+    @"type": ?EventType,
 
     pub const json_field_names = .{
         .details = "Details",
         .timestamp = "Timestamp",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

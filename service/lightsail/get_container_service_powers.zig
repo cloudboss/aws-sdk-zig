@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContainerServicePower = @import("container_service_power.zig").ContainerServicePower;
 
-pub const GetContainerServicePowersInput = struct {};
+pub const GetContainerServicePowersInput = struct {
+};
 
 pub const GetContainerServicePowersOutput = struct {
     /// An array of objects that describe the powers that can be specified for a

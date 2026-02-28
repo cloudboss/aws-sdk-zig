@@ -17,7 +17,8 @@ pub const DeletePersonalAccessTokenInput = struct {
     };
 };
 
-pub const DeletePersonalAccessTokenOutput = struct {};
+pub const DeletePersonalAccessTokenOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

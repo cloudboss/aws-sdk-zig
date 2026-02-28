@@ -22,12 +22,12 @@ pub const AppComponent = struct {
     name: []const u8,
 
     /// The type of Application Component.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .additional_info = "additionalInfo",
         .id = "id",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

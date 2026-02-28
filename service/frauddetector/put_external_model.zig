@@ -42,7 +42,8 @@ pub const PutExternalModelInput = struct {
     };
 };
 
-pub const PutExternalModelOutput = struct {};
+pub const PutExternalModelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const RemoveTrustStoreRevocationsInput = struct {
     trust_store_arn: []const u8,
 };
 
-pub const RemoveTrustStoreRevocationsOutput = struct {};
+pub const RemoveTrustStoreRevocationsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

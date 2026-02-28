@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const FeatureType = @import("feature_type.zig").FeatureType;
 const serde = @import("serde.zig");
 
-pub const ListOrganizationsFeaturesInput = struct {};
+pub const ListOrganizationsFeaturesInput = struct {
+};
 
 pub const ListOrganizationsFeaturesOutput = struct {
     /// Specifies the features that are currently available in your organization.

@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetServiceRoleForAccountInput = struct {};
+pub const GetServiceRoleForAccountInput = struct {
+};
 
 pub const GetServiceRoleForAccountOutput = struct {
     /// The time when the service role was associated with IoT Greengrass for your

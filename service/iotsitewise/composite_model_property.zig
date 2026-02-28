@@ -16,13 +16,13 @@ pub const CompositeModelProperty = struct {
     name: []const u8,
 
     /// The type of the composite model that defines this property.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .asset_property = "assetProperty",
         .external_id = "externalId",
         .id = "id",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

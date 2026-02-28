@@ -27,14 +27,14 @@ pub const CreateTargetGroupInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of target group.
-    type: TargetGroupType,
+    @"type": TargetGroupType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .config = "config",
         .name = "name",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -57,7 +57,7 @@ pub const CreateTargetGroupOutput = struct {
     status: ?TargetGroupStatus = null,
 
     /// The type of target group.
-    type: ?TargetGroupType = null,
+    @"type": ?TargetGroupType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -65,7 +65,7 @@ pub const CreateTargetGroupOutput = struct {
         .id = "id",
         .name = "name",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -135,7 +135,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateTargetGroupInput, con
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

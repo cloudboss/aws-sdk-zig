@@ -82,7 +82,8 @@ pub const UpdateWebExperienceInput = struct {
     };
 };
 
-pub const UpdateWebExperienceOutput = struct {};
+pub const UpdateWebExperienceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

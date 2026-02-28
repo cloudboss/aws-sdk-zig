@@ -7,14 +7,14 @@ pub const TopicIRComparisonMethod = struct {
     period: ?TopicTimeGranularity,
 
     /// The type for the `TopicIRComparisonMethod`.
-    type: ?ComparisonMethodType,
+    @"type": ?ComparisonMethodType,
 
     /// The window size for the `TopicIRComparisonMethod`.
     window_size: i32 = 0,
 
     pub const json_field_names = .{
         .period = "Period",
-        .type = "Type",
+        .@"type" = "Type",
         .window_size = "WindowSize",
     };
 };

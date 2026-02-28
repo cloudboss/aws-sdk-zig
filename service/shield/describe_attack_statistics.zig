@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AttackStatisticsDataItem = @import("attack_statistics_data_item.zig").AttackStatisticsDataItem;
 const TimeRange = @import("time_range.zig").TimeRange;
 
-pub const DescribeAttackStatisticsInput = struct {};
+pub const DescribeAttackStatisticsInput = struct {
+};
 
 pub const DescribeAttackStatisticsOutput = struct {
     /// The data that describes the attacks detected during the time period.

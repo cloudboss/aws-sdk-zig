@@ -19,7 +19,8 @@ pub const PutConfigurationSetArchivingOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetArchivingOptionsOutput = struct {};
+pub const PutConfigurationSetArchivingOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

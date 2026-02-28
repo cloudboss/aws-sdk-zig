@@ -23,7 +23,8 @@ pub const DeleteThreatEntitySetInput = struct {
     };
 };
 
-pub const DeleteThreatEntitySetOutput = struct {};
+pub const DeleteThreatEntitySetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

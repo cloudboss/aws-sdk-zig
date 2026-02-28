@@ -34,7 +34,7 @@ pub const AgentStatus = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// The type of agent status.
-    @"type": ?AgentStatusType,
+    type: ?AgentStatusType,
 
     pub const json_field_names = .{
         .agent_status_arn = "AgentStatusARN",
@@ -46,6 +46,6 @@ pub const AgentStatus = struct {
         .name = "Name",
         .state = "State",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

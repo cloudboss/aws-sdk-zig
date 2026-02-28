@@ -57,7 +57,7 @@ pub const GetWirelessDeviceOutput = struct {
     thing_name: ?[]const u8 = null,
 
     /// The wireless device type.
-    type: ?WirelessDeviceType = null,
+    @"type": ?WirelessDeviceType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -70,7 +70,7 @@ pub const GetWirelessDeviceOutput = struct {
         .sidewalk = "Sidewalk",
         .thing_arn = "ThingArn",
         .thing_name = "ThingName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

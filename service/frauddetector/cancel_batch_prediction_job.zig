@@ -13,7 +13,8 @@ pub const CancelBatchPredictionJobInput = struct {
     };
 };
 
-pub const CancelBatchPredictionJobOutput = struct {};
+pub const CancelBatchPredictionJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

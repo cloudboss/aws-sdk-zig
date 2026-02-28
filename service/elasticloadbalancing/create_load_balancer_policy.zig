@@ -22,7 +22,8 @@ pub const CreateLoadBalancerPolicyInput = struct {
     policy_type_name: []const u8,
 };
 
-pub const CreateLoadBalancerPolicyOutput = struct {};
+pub const CreateLoadBalancerPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

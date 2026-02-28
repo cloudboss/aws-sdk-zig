@@ -22,7 +22,8 @@ pub const PutContainerPolicyInput = struct {
     };
 };
 
-pub const PutContainerPolicyOutput = struct {};
+pub const PutContainerPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

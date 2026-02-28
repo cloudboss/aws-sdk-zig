@@ -17,13 +17,13 @@ pub const BatchGetTableOptimizerError = struct {
     table_name: ?[]const u8,
 
     /// The type of table optimizer.
-    type: ?TableOptimizerType,
+    @"type": ?TableOptimizerType,
 
     pub const json_field_names = .{
         .catalog_id = "catalogId",
         .database_name = "databaseName",
         .@"error" = "error",
         .table_name = "tableName",
-        .type = "type",
+        .@"type" = "type",
     };
 };

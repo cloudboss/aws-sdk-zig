@@ -21,7 +21,8 @@ pub const DeleteFilterInput = struct {
     };
 };
 
-pub const DeleteFilterOutput = struct {};
+pub const DeleteFilterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

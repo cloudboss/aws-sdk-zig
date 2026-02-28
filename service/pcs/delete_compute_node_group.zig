@@ -27,7 +27,8 @@ pub const DeleteComputeNodeGroupInput = struct {
     };
 };
 
-pub const DeleteComputeNodeGroupOutput = struct {};
+pub const DeleteComputeNodeGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

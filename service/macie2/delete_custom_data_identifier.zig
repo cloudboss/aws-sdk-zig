@@ -14,7 +14,8 @@ pub const DeleteCustomDataIdentifierInput = struct {
     };
 };
 
-pub const DeleteCustomDataIdentifierOutput = struct {};
+pub const DeleteCustomDataIdentifierOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

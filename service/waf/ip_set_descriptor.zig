@@ -13,7 +13,7 @@ const IPSetDescriptorType = @import("ip_set_descriptor_type.zig").IPSetDescripto
 /// (in CIDR format) that web requests originate from.
 pub const IPSetDescriptor = struct {
     /// Specify `IPV4` or `IPV6`.
-    type: IPSetDescriptorType,
+    @"type": IPSetDescriptorType,
 
     /// Specify an IPv4 address by using CIDR notation. For example:
     ///
@@ -41,7 +41,7 @@ pub const IPSetDescriptor = struct {
     value: []const u8,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

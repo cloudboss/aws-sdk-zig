@@ -14,7 +14,7 @@ pub const DataType = struct {
     relationship: ?Relationship,
 
     /// The underlying type of the data type.
-    type: Type,
+    @"type": Type,
 
     /// The unit of measure used in this data type.
     unit_of_measure: ?[]const u8,
@@ -23,7 +23,7 @@ pub const DataType = struct {
         .allowed_values = "allowedValues",
         .nested_type = "nestedType",
         .relationship = "relationship",
-        .type = "type",
+        .@"type" = "type",
         .unit_of_measure = "unitOfMeasure",
     };
 };

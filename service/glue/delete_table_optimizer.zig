@@ -16,17 +16,18 @@ pub const DeleteTableOptimizerInput = struct {
     table_name: []const u8,
 
     /// The type of table optimizer.
-    type: TableOptimizerType,
+    @"type": TableOptimizerType,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogId",
         .database_name = "DatabaseName",
         .table_name = "TableName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
-pub const DeleteTableOptimizerOutput = struct {};
+pub const DeleteTableOptimizerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -19,7 +19,8 @@ pub const DeleteSlackChannelConfigurationInput = struct {
     };
 };
 
-pub const DeleteSlackChannelConfigurationOutput = struct {};
+pub const DeleteSlackChannelConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

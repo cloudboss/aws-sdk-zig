@@ -39,7 +39,8 @@ pub const PutRumMetricsDestinationInput = struct {
     };
 };
 
-pub const PutRumMetricsDestinationOutput = struct {};
+pub const PutRumMetricsDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

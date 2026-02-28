@@ -84,7 +84,7 @@ pub const Instance = struct {
     status: ?InstanceStatus,
 
     /// EC2 instance type that defines the computing resources of this instance.
-    type: ?EC2InstanceType,
+    @"type": ?EC2InstanceType,
 
     pub const json_field_names = .{
         .creation_time = "CreationTime",
@@ -96,6 +96,6 @@ pub const Instance = struct {
         .location = "Location",
         .operating_system = "OperatingSystem",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -24,7 +24,7 @@ pub const HandshakeResource = struct {
     ///
     /// * **NOTES**: Additional text included by the sender
     /// for the recipient.
-    type: ?HandshakeResourceType,
+    @"type": ?HandshakeResourceType,
 
     /// Additional information for the handshake. The format of the value string
     /// must match
@@ -33,7 +33,7 @@ pub const HandshakeResource = struct {
 
     pub const json_field_names = .{
         .resources = "Resources",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

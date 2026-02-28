@@ -23,7 +23,7 @@ pub const AssetModelCompositeModel = struct {
 
     /// The type of the composite model. For alarm composite models, this type is
     /// `AWS/ALARM`.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .description = "description",
@@ -31,6 +31,6 @@ pub const AssetModelCompositeModel = struct {
         .id = "id",
         .name = "name",
         .properties = "properties",
-        .type = "type",
+        .@"type" = "type",
     };
 };

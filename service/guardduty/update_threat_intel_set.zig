@@ -42,7 +42,8 @@ pub const UpdateThreatIntelSetInput = struct {
     };
 };
 
-pub const UpdateThreatIntelSetOutput = struct {};
+pub const UpdateThreatIntelSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

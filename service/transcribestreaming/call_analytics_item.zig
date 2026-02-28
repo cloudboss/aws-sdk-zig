@@ -32,7 +32,7 @@ pub const CallAnalyticsItem = struct {
 
     /// The type of item identified. Options are: `PRONUNCIATION` (spoken words) and
     /// `PUNCTUATION`.
-    type: ?ItemType,
+    @"type": ?ItemType,
 
     /// Indicates whether the specified item matches a word in the vocabulary filter
     /// included in
@@ -45,7 +45,7 @@ pub const CallAnalyticsItem = struct {
         .content = "Content",
         .end_offset_millis = "EndOffsetMillis",
         .stable = "Stable",
-        .type = "Type",
+        .@"type" = "Type",
         .vocabulary_filter_match = "VocabularyFilterMatch",
     };
 };

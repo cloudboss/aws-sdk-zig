@@ -779,7 +779,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateReplicationGroupInput
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.ReplicaAvailabilityZones.AvailabilityZone.{d}=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.ReplicaAvailabilityZones.AvailabilityZone.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }
@@ -798,7 +798,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateReplicationGroupInput
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.ReplicaOutpostArns.OutpostArn.{d}=", .{ n, n_1 }) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.ReplicaOutpostArns.OutpostArn.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(alloc, field_prefix);
                         try aws.url.appendUrlEncoded(alloc, &body_buf, item_1);
                     }

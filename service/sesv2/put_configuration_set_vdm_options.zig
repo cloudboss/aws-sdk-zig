@@ -18,7 +18,8 @@ pub const PutConfigurationSetVdmOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetVdmOptionsOutput = struct {};
+pub const PutConfigurationSetVdmOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

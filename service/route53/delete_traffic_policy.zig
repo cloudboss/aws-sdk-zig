@@ -12,7 +12,8 @@ pub const DeleteTrafficPolicyInput = struct {
     version: i32,
 };
 
-pub const DeleteTrafficPolicyOutput = struct {};
+pub const DeleteTrafficPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

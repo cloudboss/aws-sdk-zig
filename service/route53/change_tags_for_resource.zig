@@ -32,7 +32,8 @@ pub const ChangeTagsForResourceInput = struct {
     resource_type: TagResourceType,
 };
 
-pub const ChangeTagsForResourceOutput = struct {};
+pub const ChangeTagsForResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

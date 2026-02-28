@@ -14,7 +14,8 @@ pub const RemoveManagedScalingPolicyInput = struct {
     };
 };
 
-pub const RemoveManagedScalingPolicyOutput = struct {};
+pub const RemoveManagedScalingPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

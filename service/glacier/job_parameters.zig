@@ -67,7 +67,7 @@ pub const JobParameters = struct {
     /// archive,
     /// retrieve an archive, or get an inventory of a vault.
     /// Valid values are "select", "archive-retrieval" and "inventory-retrieval".
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .archive_id = "ArchiveId",
@@ -79,6 +79,6 @@ pub const JobParameters = struct {
         .select_parameters = "SelectParameters",
         .sns_topic = "SNSTopic",
         .tier = "Tier",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

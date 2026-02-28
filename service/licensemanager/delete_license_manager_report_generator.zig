@@ -13,7 +13,8 @@ pub const DeleteLicenseManagerReportGeneratorInput = struct {
     };
 };
 
-pub const DeleteLicenseManagerReportGeneratorOutput = struct {};
+pub const DeleteLicenseManagerReportGeneratorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -20,13 +20,13 @@ pub const Logger = struct {
     space: ?i32,
 
     /// The type of log output which will be used.
-    type: LoggerType,
+    @"type": LoggerType,
 
     pub const json_field_names = .{
         .component = "Component",
         .id = "Id",
         .level = "Level",
         .space = "Space",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

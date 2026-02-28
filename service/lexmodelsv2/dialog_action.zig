@@ -11,11 +11,11 @@ pub const DialogAction = struct {
     suppress_next_message: ?bool,
 
     /// The action that the bot should execute.
-    type: DialogActionType,
+    @"type": DialogActionType,
 
     pub const json_field_names = .{
         .slot_to_elicit = "slotToElicit",
         .suppress_next_message = "suppressNextMessage",
-        .type = "type",
+        .@"type" = "type",
     };
 };

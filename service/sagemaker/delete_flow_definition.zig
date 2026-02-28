@@ -13,7 +13,8 @@ pub const DeleteFlowDefinitionInput = struct {
     };
 };
 
-pub const DeleteFlowDefinitionOutput = struct {};
+pub const DeleteFlowDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

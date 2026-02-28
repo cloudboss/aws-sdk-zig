@@ -13,8 +13,7 @@ pub const DeleteDocumentClassifierInput = struct {
     };
 };
 
-pub const DeleteDocumentClassifierOutput = struct {
-};
+pub const DeleteDocumentClassifierOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

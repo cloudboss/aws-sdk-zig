@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AutoEnableMode = @import("auto_enable_mode.zig").AutoEnableMode;
 const AutomatedDiscoveryStatus = @import("automated_discovery_status.zig").AutomatedDiscoveryStatus;
 
-pub const GetAutomatedDiscoveryConfigurationInput = struct {};
+pub const GetAutomatedDiscoveryConfigurationInput = struct {
+};
 
 pub const GetAutomatedDiscoveryConfigurationOutput = struct {
     /// Specifies whether automated sensitive data discovery is enabled

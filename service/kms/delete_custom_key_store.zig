@@ -14,7 +14,8 @@ pub const DeleteCustomKeyStoreInput = struct {
     };
 };
 
-pub const DeleteCustomKeyStoreOutput = struct {};
+pub const DeleteCustomKeyStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

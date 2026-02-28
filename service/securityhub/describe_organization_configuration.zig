@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AutoEnableStandards = @import("auto_enable_standards.zig").AutoEnableStandards;
 const OrganizationConfiguration = @import("organization_configuration.zig").OrganizationConfiguration;
 
-pub const DescribeOrganizationConfigurationInput = struct {};
+pub const DescribeOrganizationConfigurationInput = struct {
+};
 
 pub const DescribeOrganizationConfigurationOutput = struct {
     /// Whether to automatically enable Security Hub in new member accounts when

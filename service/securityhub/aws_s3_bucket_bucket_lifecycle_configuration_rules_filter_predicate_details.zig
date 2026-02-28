@@ -14,12 +14,12 @@ pub const AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails = s
 
     /// Whether to use `AND` or `OR` to join the operands.
     /// Valid values are `LifecycleAndOperator` or `LifecycleOrOperator`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .operands = "Operands",
         .prefix = "Prefix",
         .tag = "Tag",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

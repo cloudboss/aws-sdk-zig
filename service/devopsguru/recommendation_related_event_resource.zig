@@ -8,10 +8,10 @@ pub const RecommendationRelatedEventResource = struct {
 
     /// The type of the resource that emitted the event. This corresponds to the
     /// `Type` field in an `EventResource` object.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

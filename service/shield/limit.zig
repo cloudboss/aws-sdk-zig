@@ -5,10 +5,10 @@ pub const Limit = struct {
     max: i64 = 0,
 
     /// The type of protection.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .max = "Max",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

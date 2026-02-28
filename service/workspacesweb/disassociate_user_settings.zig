@@ -13,7 +13,8 @@ pub const DisassociateUserSettingsInput = struct {
     };
 };
 
-pub const DisassociateUserSettingsOutput = struct {};
+pub const DisassociateUserSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

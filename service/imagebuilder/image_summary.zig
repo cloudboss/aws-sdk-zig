@@ -72,7 +72,7 @@ pub const ImageSummary = struct {
     tags: ?[]const aws.map.StringMapEntry,
 
     /// Specifies whether this image produces an AMI or a container image.
-    type: ?ImageType,
+    @"type": ?ImageType,
 
     /// The version of the image.
     version: ?[]const u8,
@@ -92,7 +92,7 @@ pub const ImageSummary = struct {
         .platform = "platform",
         .state = "state",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
     };
 };

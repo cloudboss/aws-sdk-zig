@@ -46,7 +46,8 @@ pub const PutEventTypeInput = struct {
     };
 };
 
-pub const PutEventTypeOutput = struct {};
+pub const PutEventTypeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

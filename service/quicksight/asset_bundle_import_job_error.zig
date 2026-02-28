@@ -7,11 +7,11 @@ pub const AssetBundleImportJobError = struct {
     message: ?[]const u8,
 
     /// The specific error type or the error that occurred.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

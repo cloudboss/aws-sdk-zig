@@ -38,7 +38,7 @@ pub const HlsEncryptionSettings = struct {
     /// Specify whether your DRM encryption key is static or from a key provider
     /// that follows the SPEKE standard. For more information about SPEKE, see
     /// https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.
-    type: ?HlsKeyProviderType,
+    @"type": ?HlsKeyProviderType,
 
     pub const json_field_names = .{
         .constant_initialization_vector = "ConstantInitializationVector",
@@ -47,6 +47,6 @@ pub const HlsEncryptionSettings = struct {
         .offline_encrypted = "OfflineEncrypted",
         .speke_key_provider = "SpekeKeyProvider",
         .static_key_provider = "StaticKeyProvider",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

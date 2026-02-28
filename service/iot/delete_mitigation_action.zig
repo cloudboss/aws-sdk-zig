@@ -13,7 +13,8 @@ pub const DeleteMitigationActionInput = struct {
     };
 };
 
-pub const DeleteMitigationActionOutput = struct {};
+pub const DeleteMitigationActionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

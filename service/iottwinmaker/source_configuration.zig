@@ -15,12 +15,12 @@ pub const SourceConfiguration = struct {
     s_3_configuration: ?S3SourceConfiguration,
 
     /// The source configuration type.
-    type: SourceType,
+    @"type": SourceType,
 
     pub const json_field_names = .{
         .iot_site_wise_configuration = "iotSiteWiseConfiguration",
         .iot_twin_maker_configuration = "iotTwinMakerConfiguration",
         .s_3_configuration = "s3Configuration",
-        .type = "type",
+        .@"type" = "type",
     };
 };

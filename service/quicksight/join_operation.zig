@@ -27,7 +27,7 @@ pub const JoinOperation = struct {
     right_operand_properties: ?JoinOperandProperties,
 
     /// The type of join to perform, such as `INNER`, `LEFT`, `RIGHT`, or `OUTER`.
-    type: JoinOperationType,
+    @"type": JoinOperationType,
 
     pub const json_field_names = .{
         .alias = "Alias",
@@ -36,6 +36,6 @@ pub const JoinOperation = struct {
         .on_clause = "OnClause",
         .right_operand = "RightOperand",
         .right_operand_properties = "RightOperandProperties",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

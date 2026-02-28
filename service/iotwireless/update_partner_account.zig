@@ -23,7 +23,8 @@ pub const UpdatePartnerAccountInput = struct {
     };
 };
 
-pub const UpdatePartnerAccountOutput = struct {};
+pub const UpdatePartnerAccountOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

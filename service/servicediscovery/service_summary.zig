@@ -97,7 +97,7 @@ pub const ServiceSummary = struct {
     /// **DNS**
     ///
     /// Reserved.
-    type: ?ServiceType,
+    @"type": ?ServiceType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -111,6 +111,6 @@ pub const ServiceSummary = struct {
         .instance_count = "InstanceCount",
         .name = "Name",
         .resource_owner = "ResourceOwner",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

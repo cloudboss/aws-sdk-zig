@@ -13,7 +13,8 @@ pub const StartAccessLoggingInput = struct {
     };
 };
 
-pub const StartAccessLoggingOutput = struct {};
+pub const StartAccessLoggingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

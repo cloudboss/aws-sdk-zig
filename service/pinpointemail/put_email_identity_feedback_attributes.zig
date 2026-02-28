@@ -35,7 +35,8 @@ pub const PutEmailIdentityFeedbackAttributesInput = struct {
     };
 };
 
-pub const PutEmailIdentityFeedbackAttributesOutput = struct {};
+pub const PutEmailIdentityFeedbackAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

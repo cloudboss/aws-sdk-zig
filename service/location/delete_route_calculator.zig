@@ -13,7 +13,8 @@ pub const DeleteRouteCalculatorInput = struct {
     };
 };
 
-pub const DeleteRouteCalculatorOutput = struct {};
+pub const DeleteRouteCalculatorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

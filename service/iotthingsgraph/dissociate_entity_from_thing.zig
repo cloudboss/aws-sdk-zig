@@ -18,7 +18,8 @@ pub const DissociateEntityFromThingInput = struct {
     };
 };
 
-pub const DissociateEntityFromThingOutput = struct {};
+pub const DissociateEntityFromThingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const SendTaskHeartbeatInput = struct {
     };
 };
 
-pub const SendTaskHeartbeatOutput = struct {};
+pub const SendTaskHeartbeatOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

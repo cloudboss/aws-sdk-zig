@@ -13,10 +13,10 @@ pub const RenewalTerm = struct {
     configuration: ?RenewalTermConfiguration,
 
     /// Category of the term being updated.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .configuration = "configuration",
-        .type = "type",
+        .@"type" = "type",
     };
 };

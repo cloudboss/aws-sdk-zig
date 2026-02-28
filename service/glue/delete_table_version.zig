@@ -30,7 +30,8 @@ pub const DeleteTableVersionInput = struct {
     };
 };
 
-pub const DeleteTableVersionOutput = struct {};
+pub const DeleteTableVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

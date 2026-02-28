@@ -16,11 +16,11 @@ pub const IdMappingWorkflowInputSource = struct {
     ///
     /// The `TARGET` contains a configuration of `targetId` which all `sourceIds`
     /// will resolve to.
-    type: ?IdNamespaceType,
+    @"type": ?IdNamespaceType,
 
     pub const json_field_names = .{
         .input_source_arn = "inputSourceARN",
         .schema_name = "schemaName",
-        .type = "type",
+        .@"type" = "type",
     };
 };

@@ -28,7 +28,8 @@ pub const RecallBenefitApplicationInput = struct {
     };
 };
 
-pub const RecallBenefitApplicationOutput = struct {};
+pub const RecallBenefitApplicationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,7 +14,8 @@ pub const DeregisterManagedInstanceInput = struct {
     };
 };
 
-pub const DeregisterManagedInstanceOutput = struct {};
+pub const DeregisterManagedInstanceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

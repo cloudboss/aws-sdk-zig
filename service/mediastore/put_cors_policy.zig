@@ -18,7 +18,8 @@ pub const PutCorsPolicyInput = struct {
     };
 };
 
-pub const PutCorsPolicyOutput = struct {};
+pub const PutCorsPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

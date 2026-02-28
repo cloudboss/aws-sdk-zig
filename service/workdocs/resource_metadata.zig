@@ -19,7 +19,7 @@ pub const ResourceMetadata = struct {
     parent_id: ?[]const u8,
 
     /// The type of resource.
-    type: ?ResourceType,
+    @"type": ?ResourceType,
 
     /// The version ID of the resource. This is an optional field and is filled for
     /// action
@@ -32,7 +32,7 @@ pub const ResourceMetadata = struct {
         .original_name = "OriginalName",
         .owner = "Owner",
         .parent_id = "ParentId",
-        .type = "Type",
+        .@"type" = "Type",
         .version_id = "VersionId",
     };
 };

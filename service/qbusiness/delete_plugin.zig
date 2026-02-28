@@ -17,7 +17,8 @@ pub const DeletePluginInput = struct {
     };
 };
 
-pub const DeletePluginOutput = struct {};
+pub const DeletePluginOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

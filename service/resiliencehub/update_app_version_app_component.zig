@@ -29,14 +29,14 @@ pub const UpdateAppVersionAppComponentInput = struct {
     /// Type of Application Component. For more information about the types of
     /// Application Component, see [Grouping resources in an
     /// AppComponent](https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html).
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_info = "additionalInfo",
         .app_arn = "appArn",
         .id = "id",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -126,7 +126,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateAppVersionAppComponen
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

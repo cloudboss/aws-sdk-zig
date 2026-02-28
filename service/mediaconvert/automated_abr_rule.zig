@@ -68,13 +68,13 @@ pub const AutomatedAbrRule = struct {
     /// in Min top rendition size or Min bottom rendition size. * If you specify
     /// Allowed renditions, you must not specify a separate rule for Force include
     /// renditions.
-    type: ?RuleType,
+    @"type": ?RuleType,
 
     pub const json_field_names = .{
         .allowed_renditions = "AllowedRenditions",
         .force_include_renditions = "ForceIncludeRenditions",
         .min_bottom_rendition_size = "MinBottomRenditionSize",
         .min_top_rendition_size = "MinTopRenditionSize",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

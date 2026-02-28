@@ -14,12 +14,12 @@ pub const InputColumn = struct {
     sub_type: ?ColumnDataSubType,
 
     /// The data type of the column.
-    type: InputColumnDataType,
+    @"type": InputColumnDataType,
 
     pub const json_field_names = .{
         .id = "Id",
         .name = "Name",
         .sub_type = "SubType",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

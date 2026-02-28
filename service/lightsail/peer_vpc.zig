@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Operation = @import("operation.zig").Operation;
 
-pub const PeerVpcInput = struct {};
+pub const PeerVpcInput = struct {
+};
 
 pub const PeerVpcOutput = struct {
     /// An array of objects that describe the result of the action, such as the

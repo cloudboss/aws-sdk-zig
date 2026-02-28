@@ -13,7 +13,8 @@ pub const DeleteSourceNetworkInput = struct {
     };
 };
 
-pub const DeleteSourceNetworkOutput = struct {};
+pub const DeleteSourceNetworkOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

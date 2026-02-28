@@ -19,7 +19,8 @@ pub const DeleteAIAgentInput = struct {
     };
 };
 
-pub const DeleteAIAgentOutput = struct {};
+pub const DeleteAIAgentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteEmailTemplateInput = struct {
     };
 };
 
-pub const DeleteEmailTemplateOutput = struct {};
+pub const DeleteEmailTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

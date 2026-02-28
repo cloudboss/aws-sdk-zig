@@ -28,9 +28,9 @@ pub const WafAction = struct {
     /// AWS WAF then continues to inspect the web request based on the remaining
     /// rules in the web ACL. You can't specify `COUNT`
     /// for the default action for a `WebACL`.
-    type: WafActionType,
+    @"type": WafActionType,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -30,7 +30,7 @@ pub const AwsStepFunctionStateMachineDetails = struct {
     tracing_configuration: ?AwsStepFunctionStateMachineTracingConfigurationDetails,
 
     /// The type of the state machine (STANDARD or EXPRESS).
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .label = "Label",
@@ -40,6 +40,6 @@ pub const AwsStepFunctionStateMachineDetails = struct {
         .state_machine_arn = "StateMachineArn",
         .status = "Status",
         .tracing_configuration = "TracingConfiguration",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

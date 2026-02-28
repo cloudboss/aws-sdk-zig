@@ -26,13 +26,13 @@ pub const UpdateSdiSourceInput = struct {
     /// Include this parameter only if you want to change the mode. Specify the type
     /// of the SDI source: SINGLE: The source is a single-link source. QUAD: The
     /// source is one part of a quad-link source.
-    type: ?SdiSourceType = null,
+    @"type": ?SdiSourceType = null,
 
     pub const json_field_names = .{
         .mode = "Mode",
         .name = "Name",
         .sdi_source_id = "SdiSourceId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
@@ -102,7 +102,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateSdiSourceInput, confi
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

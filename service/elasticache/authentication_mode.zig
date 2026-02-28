@@ -9,5 +9,5 @@ pub const AuthenticationMode = struct {
     /// Specifies the authentication type. Possible options are IAM authentication,
     /// password
     /// and no password.
-    type: ?InputAuthenticationType,
+    @"type": ?InputAuthenticationType,
 };

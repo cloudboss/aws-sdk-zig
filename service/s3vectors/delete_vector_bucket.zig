@@ -17,7 +17,8 @@ pub const DeleteVectorBucketInput = struct {
     };
 };
 
-pub const DeleteVectorBucketOutput = struct {};
+pub const DeleteVectorBucketOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

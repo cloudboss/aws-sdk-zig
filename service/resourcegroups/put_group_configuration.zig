@@ -32,7 +32,8 @@ pub const PutGroupConfigurationInput = struct {
     };
 };
 
-pub const PutGroupConfigurationOutput = struct {};
+pub const PutGroupConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

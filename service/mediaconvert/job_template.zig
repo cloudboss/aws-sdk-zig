@@ -53,7 +53,7 @@ pub const JobTemplate = struct {
 
     /// A job template can be of two types: system or custom. System or built-in job
     /// templates can't be modified or deleted by the user.
-    type: ?Type,
+    @"type": ?Type,
 
     pub const json_field_names = .{
         .acceleration_settings = "AccelerationSettings",
@@ -68,6 +68,6 @@ pub const JobTemplate = struct {
         .queue = "Queue",
         .settings = "Settings",
         .status_update_interval = "StatusUpdateInterval",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

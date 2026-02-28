@@ -20,5 +20,5 @@ pub const EntityInfo = struct {
     path: ?[]const u8,
 
     /// The type of entity (user or role).
-    type: policyOwnerEntityType,
+    @"type": policyOwnerEntityType,
 };

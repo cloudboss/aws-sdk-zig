@@ -39,7 +39,7 @@ pub const AwsElbv2LoadBalancerDetails = struct {
     state: ?LoadBalancerState,
 
     /// The type of load balancer.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The ID of the VPC for the load balancer.
     vpc_id: ?[]const u8,
@@ -54,7 +54,7 @@ pub const AwsElbv2LoadBalancerDetails = struct {
         .scheme = "Scheme",
         .security_groups = "SecurityGroups",
         .state = "State",
-        .type = "Type",
+        .@"type" = "Type",
         .vpc_id = "VpcId",
     };
 };

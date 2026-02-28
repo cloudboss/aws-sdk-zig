@@ -32,7 +32,7 @@ pub const ListedCertificate = struct {
     /// The type for the certificate. If a private key has been specified for the
     /// certificate, its type is `CERTIFICATE_WITH_PRIVATE_KEY`. If there is no
     /// private key, the type is `CERTIFICATE`.
-    type: ?CertificateType,
+    @"type": ?CertificateType,
 
     /// Specifies how this certificate is used. It can be used in the following
     /// ways:
@@ -49,7 +49,7 @@ pub const ListedCertificate = struct {
         .description = "Description",
         .inactive_date = "InactiveDate",
         .status = "Status",
-        .type = "Type",
+        .@"type" = "Type",
         .usage = "Usage",
     };
 };

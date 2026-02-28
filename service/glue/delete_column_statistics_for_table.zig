@@ -26,7 +26,8 @@ pub const DeleteColumnStatisticsForTableInput = struct {
     };
 };
 
-pub const DeleteColumnStatisticsForTableOutput = struct {};
+pub const DeleteColumnStatisticsForTableOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

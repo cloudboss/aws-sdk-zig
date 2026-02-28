@@ -13,7 +13,8 @@ pub const StartJobInput = struct {
     };
 };
 
-pub const StartJobOutput = struct {};
+pub const StartJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

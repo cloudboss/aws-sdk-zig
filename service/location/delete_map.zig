@@ -13,7 +13,8 @@ pub const DeleteMapInput = struct {
     };
 };
 
-pub const DeleteMapOutput = struct {};
+pub const DeleteMapOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

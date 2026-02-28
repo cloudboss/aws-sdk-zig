@@ -69,7 +69,7 @@ pub const ImageRecipe = struct {
     /// Specifies which type of image is created by the recipe - an AMI or a
     /// container
     /// image.
-    type: ?ImageType,
+    @"type": ?ImageType,
 
     /// The version of the image recipe.
     version: ?[]const u8,
@@ -90,7 +90,7 @@ pub const ImageRecipe = struct {
         .parent_image = "parentImage",
         .platform = "platform",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .version = "version",
         .working_directory = "workingDirectory",
     };

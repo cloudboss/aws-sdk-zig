@@ -6,7 +6,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 const OpenIDConnectProviderListEntry = @import("open_id_connect_provider_list_entry.zig").OpenIDConnectProviderListEntry;
 const serde = @import("serde.zig");
 
-pub const ListOpenIDConnectProvidersInput = struct {};
+pub const ListOpenIDConnectProvidersInput = struct {
+};
 
 pub const ListOpenIDConnectProvidersOutput = struct {
     /// The list of IAM OIDC provider resource objects defined in the Amazon Web

@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Policy = @import("policy.zig").Policy;
 
-pub const GetPolicyInput = struct {};
+pub const GetPolicyInput = struct {
+};
 
 pub const GetPolicyOutput = struct {
     /// A policy configures behavior that you allow or disallow for your account.

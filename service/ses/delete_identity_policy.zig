@@ -19,7 +19,8 @@ pub const DeleteIdentityPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const DeleteIdentityPolicyOutput = struct {};
+pub const DeleteIdentityPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const DeleteVectorBucketPolicyInput = struct {
     };
 };
 
-pub const DeleteVectorBucketPolicyOutput = struct {};
+pub const DeleteVectorBucketPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

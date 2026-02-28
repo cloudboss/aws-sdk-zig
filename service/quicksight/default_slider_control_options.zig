@@ -21,13 +21,13 @@ pub const DefaultSliderControlOptions = struct {
     /// * `SINGLE_POINT`: Filter against(equals) a single data point.
     ///
     /// * `RANGE`: Filter data that is in a specified range.
-    type: ?SheetControlSliderType,
+    @"type": ?SheetControlSliderType,
 
     pub const json_field_names = .{
         .display_options = "DisplayOptions",
         .maximum_value = "MaximumValue",
         .minimum_value = "MinimumValue",
         .step_size = "StepSize",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const SendQuota = @import("send_quota.zig").SendQuota;
 
-pub const GetAccountInput = struct {};
+pub const GetAccountInput = struct {
+};
 
 pub const GetAccountOutput = struct {
     /// Indicates whether or not the automatic warm-up feature is enabled for

@@ -59,7 +59,7 @@ pub const RoutePedestrianTravelStep = struct {
     turn_step_details: ?RouteTurnStepDetails,
 
     /// Type of the step.
-    type: RoutePedestrianTravelStepType,
+    @"type": RoutePedestrianTravelStepType,
 
     pub const json_field_names = .{
         .continue_step_details = "ContinueStepDetails",
@@ -76,6 +76,6 @@ pub const RoutePedestrianTravelStep = struct {
         .roundabout_pass_step_details = "RoundaboutPassStepDetails",
         .signpost = "Signpost",
         .turn_step_details = "TurnStepDetails",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

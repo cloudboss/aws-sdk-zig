@@ -20,7 +20,8 @@ pub const DeleteDatabaseInput = struct {
     };
 };
 
-pub const DeleteDatabaseOutput = struct {};
+pub const DeleteDatabaseOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

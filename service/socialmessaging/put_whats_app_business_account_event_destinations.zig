@@ -21,7 +21,8 @@ pub const PutWhatsAppBusinessAccountEventDestinationsInput = struct {
     };
 };
 
-pub const PutWhatsAppBusinessAccountEventDestinationsOutput = struct {};
+pub const PutWhatsAppBusinessAccountEventDestinationsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

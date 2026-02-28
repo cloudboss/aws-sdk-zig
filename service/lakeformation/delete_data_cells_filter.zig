@@ -25,7 +25,8 @@ pub const DeleteDataCellsFilterInput = struct {
     };
 };
 
-pub const DeleteDataCellsFilterOutput = struct {};
+pub const DeleteDataCellsFilterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

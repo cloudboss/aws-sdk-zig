@@ -13,7 +13,8 @@ pub const DeleteProvisioningTemplateInput = struct {
     };
 };
 
-pub const DeleteProvisioningTemplateOutput = struct {};
+pub const DeleteProvisioningTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

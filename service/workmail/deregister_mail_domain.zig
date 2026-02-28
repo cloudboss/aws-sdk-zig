@@ -17,7 +17,8 @@ pub const DeregisterMailDomainInput = struct {
     };
 };
 
-pub const DeregisterMailDomainOutput = struct {};
+pub const DeregisterMailDomainOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

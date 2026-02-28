@@ -6,10 +6,10 @@ pub const MemberGroup = struct {
     group_name: []const u8,
 
     /// The type of the sub group.
-    type: ?MembershipType,
+    @"type": ?MembershipType,
 
     pub const json_field_names = .{
         .group_name = "groupName",
-        .type = "type",
+        .@"type" = "type",
     };
 };

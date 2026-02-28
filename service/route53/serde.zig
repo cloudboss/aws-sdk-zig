@@ -521,7 +521,7 @@ pub fn deserializeAccountLimit(reader: *aws.xml.Reader, alloc: std.mem.Allocator
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(AccountLimitType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(AccountLimitType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
                     result.value = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
                 } else {
@@ -993,7 +993,7 @@ pub fn deserializeHealthCheckConfig(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "SearchString")) {
                     result.search_string = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(HealthCheckType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(HealthCheckType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1134,7 +1134,7 @@ pub fn deserializeHostedZoneLimit(reader: *aws.xml.Reader, alloc: std.mem.Alloca
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(HostedZoneLimitType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(HostedZoneLimitType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
                     result.value = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
                 } else {
@@ -1382,7 +1382,7 @@ pub fn deserializeResourceRecordSet(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "TTL")) {
                     result.ttl = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(RRType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Weight")) {
                     result.weight = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else {
@@ -1428,7 +1428,7 @@ pub fn deserializeReusableDelegationSetLimit(reader: *aws.xml.Reader, alloc: std
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(ReusableDelegationSetLimitType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(ReusableDelegationSetLimitType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Value")) {
                     result.value = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
                 } else {
@@ -1501,7 +1501,7 @@ pub fn deserializeTrafficPolicy(reader: *aws.xml.Reader, alloc: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(RRType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
                     result.version = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else {
@@ -1563,7 +1563,7 @@ pub fn deserializeTrafficPolicySummary(reader: *aws.xml.Reader, alloc: std.mem.A
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicyCount")) {
                     result.traffic_policy_count = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = std.meta.stringToEnum(RRType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(RRType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1931,7 +1931,7 @@ pub fn serializeHealthCheckConfig(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "</SearchString>");
     }
     try buf.appendSlice(alloc, "<Type>");
-    try buf.appendSlice(alloc, @tagName(value.type));
+    try buf.appendSlice(alloc, @tagName(value.@"type"));
     try buf.appendSlice(alloc, "</Type>");
 }
 
@@ -2022,7 +2022,7 @@ pub fn serializeResourceRecordSet(alloc: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(alloc, "</TTL>");
     }
     try buf.appendSlice(alloc, "<Type>");
-    try buf.appendSlice(alloc, @tagName(value.type));
+    try buf.appendSlice(alloc, @tagName(value.@"type"));
     try buf.appendSlice(alloc, "</Type>");
     if (value.weight) |v| {
         try buf.appendSlice(alloc, "<Weight>");
@@ -2059,3 +2059,4 @@ pub fn serializeVPC(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: VP
         try buf.appendSlice(alloc, "</VPCRegion>");
     }
 }
+

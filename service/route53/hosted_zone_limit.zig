@@ -13,7 +13,7 @@ pub const HostedZoneLimit = struct {
     /// number of Amazon VPCs that you can associate with the specified private
     /// hosted
     /// zone.
-    type: HostedZoneLimitType,
+    @"type": HostedZoneLimitType,
 
     /// The current value for the limit that is specified by `Type`.
     value: i64,

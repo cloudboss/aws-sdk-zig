@@ -83,7 +83,7 @@ pub const DescribeDeviceOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The device's type.
-    type: ?DeviceType = null,
+    @"type": ?DeviceType = null,
 
     pub const json_field_names = .{
         .alternate_softwares = "AlternateSoftwares",
@@ -105,7 +105,7 @@ pub const DescribeDeviceOutput = struct {
         .provisioning_status = "ProvisioningStatus",
         .serial_number = "SerialNumber",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

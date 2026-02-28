@@ -24,7 +24,7 @@ pub const UpdateSecurityPolicyInput = struct {
     policy_version: []const u8,
 
     /// The type of access policy.
-    type: SecurityPolicyType,
+    @"type": SecurityPolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -32,7 +32,7 @@ pub const UpdateSecurityPolicyInput = struct {
         .name = "name",
         .policy = "policy",
         .policy_version = "policyVersion",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

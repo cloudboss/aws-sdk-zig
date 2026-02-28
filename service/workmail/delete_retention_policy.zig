@@ -17,7 +17,8 @@ pub const DeleteRetentionPolicyInput = struct {
     };
 };
 
-pub const DeleteRetentionPolicyOutput = struct {};
+pub const DeleteRetentionPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

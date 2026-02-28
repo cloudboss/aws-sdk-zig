@@ -19,7 +19,8 @@ pub const DeleteDashboardInput = struct {
     };
 };
 
-pub const DeleteDashboardOutput = struct {};
+pub const DeleteDashboardOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

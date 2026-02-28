@@ -18,12 +18,12 @@ pub const IcebergSchema = struct {
 
     /// The root type of the schema structure, typically "struct" for Iceberg table
     /// schemas.
-    type: ?IcebergStructTypeEnum,
+    @"type": ?IcebergStructTypeEnum,
 
     pub const json_field_names = .{
         .fields = "Fields",
         .identifier_field_ids = "IdentifierFieldIds",
         .schema_id = "SchemaId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

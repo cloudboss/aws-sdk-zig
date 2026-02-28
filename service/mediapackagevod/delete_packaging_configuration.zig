@@ -13,7 +13,8 @@ pub const DeletePackagingConfigurationInput = struct {
     };
 };
 
-pub const DeletePackagingConfigurationOutput = struct {};
+pub const DeletePackagingConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

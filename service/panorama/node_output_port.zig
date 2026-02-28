@@ -9,11 +9,11 @@ pub const NodeOutputPort = struct {
     name: ?[]const u8,
 
     /// The output port's type.
-    type: ?PortType,
+    @"type": ?PortType,
 
     pub const json_field_names = .{
         .description = "Description",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

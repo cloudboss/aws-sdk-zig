@@ -56,7 +56,7 @@ pub const ChannelSummary = struct {
     /// disconnect
     /// immediately.* Default: `STANDARD`. For details, see [Channel
     /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html).
-    type: ?ChannelType,
+    @"type": ?ChannelType,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -68,6 +68,6 @@ pub const ChannelSummary = struct {
         .preset = "preset",
         .recording_configuration_arn = "recordingConfigurationArn",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };

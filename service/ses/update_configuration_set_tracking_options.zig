@@ -13,7 +13,8 @@ pub const UpdateConfigurationSetTrackingOptionsInput = struct {
     tracking_options: TrackingOptions,
 };
 
-pub const UpdateConfigurationSetTrackingOptionsOutput = struct {};
+pub const UpdateConfigurationSetTrackingOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

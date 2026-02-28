@@ -79,7 +79,7 @@ pub const Authorizer = struct {
     /// single authorization token submitted in a custom header, `REQUEST` for a
     /// Lambda function using incoming request parameters, and `COGNITO_USER_POOLS`
     /// for using an Amazon Cognito user pool.
-    @"type": ?AuthorizerType,
+    type: ?AuthorizerType,
 
     pub const json_field_names = .{
         .authorizer_credentials = "authorizerCredentials",
@@ -91,6 +91,6 @@ pub const Authorizer = struct {
         .identity_validation_expression = "identityValidationExpression",
         .name = "name",
         .provider_ar_ns = "providerARNs",
-        .@"type" = "type",
+        .type = "type",
     };
 };

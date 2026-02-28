@@ -24,13 +24,13 @@ pub const ListInboundResponsibilityTransfersInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of responsibility. Currently, only `BILLING` is supported.
-    type: ResponsibilityTransferType,
+    @"type": ResponsibilityTransferType,
 
     pub const json_field_names = .{
         .id = "Id",
         .max_results = "MaxResults",
         .next_token = "NextToken",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

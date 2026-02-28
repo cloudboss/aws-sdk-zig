@@ -31,7 +31,8 @@ pub const PutAccountSuppressionAttributesInput = struct {
     };
 };
 
-pub const PutAccountSuppressionAttributesOutput = struct {};
+pub const PutAccountSuppressionAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

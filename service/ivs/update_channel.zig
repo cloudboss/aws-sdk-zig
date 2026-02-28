@@ -60,7 +60,7 @@ pub const UpdateChannelInput = struct {
     /// disconnect
     /// immediately.* Default: `STANDARD`. For details, see [Channel
     /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html).
-    type: ?ChannelType = null,
+    @"type": ?ChannelType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -73,7 +73,7 @@ pub const UpdateChannelInput = struct {
         .playback_restriction_policy_arn = "playbackRestrictionPolicyArn",
         .preset = "preset",
         .recording_configuration_arn = "recordingConfigurationArn",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -186,7 +186,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateChannelInput, config:
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);
         has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

@@ -1,11 +1,11 @@
 pub const IsMonitoredByJob = enum {
-    true,
-    false,
+    @"true",
+    @"false",
     unknown,
 
     pub const json_field_names = .{
-        .true = "TRUE",
-        .false = "FALSE",
+        .@"true" = "TRUE",
+        .@"false" = "FALSE",
         .unknown = "UNKNOWN",
     };
 };

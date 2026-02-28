@@ -18,11 +18,11 @@ pub const DefaultDateTimePickerControlOptions = struct {
     /// * `SINGLE_VALUED`: The filter condition is a fixed date.
     ///
     /// * `DATE_RANGE`: The filter condition is a date time range.
-    type: ?SheetControlDateTimePickerType,
+    @"type": ?SheetControlDateTimePickerType,
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",
         .display_options = "DisplayOptions",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

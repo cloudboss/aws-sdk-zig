@@ -23,7 +23,8 @@ pub const PutPermissionsBoundaryToPermissionSetInput = struct {
     };
 };
 
-pub const PutPermissionsBoundaryToPermissionSetOutput = struct {};
+pub const PutPermissionsBoundaryToPermissionSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

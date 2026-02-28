@@ -30,7 +30,8 @@ pub const DeleteColumnStatisticsForPartitionInput = struct {
     };
 };
 
-pub const DeleteColumnStatisticsForPartitionOutput = struct {};
+pub const DeleteColumnStatisticsForPartitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

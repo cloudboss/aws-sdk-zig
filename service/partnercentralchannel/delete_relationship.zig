@@ -26,7 +26,8 @@ pub const DeleteRelationshipInput = struct {
     };
 };
 
-pub const DeleteRelationshipOutput = struct {};
+pub const DeleteRelationshipOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,7 +14,8 @@ pub const DeleteSuppressedDestinationInput = struct {
     };
 };
 
-pub const DeleteSuppressedDestinationOutput = struct {};
+pub const DeleteSuppressedDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

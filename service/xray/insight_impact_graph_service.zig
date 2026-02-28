@@ -35,7 +35,7 @@ pub const InsightImpactGraphService = struct {
     /// DynamoDB that didn't target a specific table.
     ///
     /// * remote - A downstream service of indeterminate type.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .account_id = "AccountId",
@@ -43,6 +43,6 @@ pub const InsightImpactGraphService = struct {
         .name = "Name",
         .names = "Names",
         .reference_id = "ReferenceId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

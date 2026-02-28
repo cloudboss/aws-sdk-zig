@@ -6,10 +6,10 @@ pub const LifecyclePolicyResourceIdentifier = struct {
     resource: []const u8,
 
     /// The type of lifecycle policy.
-    type: LifecyclePolicyType,
+    @"type": LifecyclePolicyType,
 
     pub const json_field_names = .{
         .resource = "resource",
-        .type = "type",
+        .@"type" = "type",
     };
 };

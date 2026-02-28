@@ -13,7 +13,8 @@ pub const DeleteFunctionDefinitionInput = struct {
     };
 };
 
-pub const DeleteFunctionDefinitionOutput = struct {};
+pub const DeleteFunctionDefinitionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

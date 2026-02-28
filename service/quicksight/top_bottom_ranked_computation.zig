@@ -21,7 +21,7 @@ pub const TopBottomRankedComputation = struct {
     /// * TOP: A top ranked computation.
     ///
     /// * BOTTOM: A bottom ranked computation.
-    type: TopBottomComputationType,
+    @"type": TopBottomComputationType,
 
     /// The value field that is used in a computation.
     value: ?MeasureField,
@@ -31,7 +31,7 @@ pub const TopBottomRankedComputation = struct {
         .computation_id = "ComputationId",
         .name = "Name",
         .result_size = "ResultSize",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

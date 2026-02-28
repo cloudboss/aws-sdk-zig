@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Configuration = @import("configuration.zig").Configuration;
 
-pub const DescribeEventConfigurationsInput = struct {};
+pub const DescribeEventConfigurationsInput = struct {
+};
 
 pub const DescribeEventConfigurationsOutput = struct {
     /// The creation date of the event configuration.

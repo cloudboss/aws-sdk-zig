@@ -18,7 +18,8 @@ pub const SendDurableExecutionCallbackFailureInput = struct {
     };
 };
 
-pub const SendDurableExecutionCallbackFailureOutput = struct {};
+pub const SendDurableExecutionCallbackFailureOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
@@ -62,7 +63,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SendDurableExecutionCallbac
     try path_buf.appendSlice(alloc, "/fail");
     const path = try path_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = if (input.@"error") |v| try aws.json.jsonStringify(v, alloc) else null;
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

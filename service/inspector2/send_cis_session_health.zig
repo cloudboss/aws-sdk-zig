@@ -17,7 +17,8 @@ pub const SendCisSessionHealthInput = struct {
     };
 };
 
-pub const SendCisSessionHealthOutput = struct {};
+pub const SendCisSessionHealthOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

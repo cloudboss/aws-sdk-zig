@@ -21,7 +21,8 @@ pub const DeleteKxClusterNodeInput = struct {
     };
 };
 
-pub const DeleteKxClusterNodeOutput = struct {};
+pub const DeleteKxClusterNodeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

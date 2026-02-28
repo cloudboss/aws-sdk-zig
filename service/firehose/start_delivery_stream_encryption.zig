@@ -22,7 +22,8 @@ pub const StartDeliveryStreamEncryptionInput = struct {
     };
 };
 
-pub const StartDeliveryStreamEncryptionOutput = struct {};
+pub const StartDeliveryStreamEncryptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

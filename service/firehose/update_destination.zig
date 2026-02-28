@@ -80,7 +80,8 @@ pub const UpdateDestinationInput = struct {
     };
 };
 
-pub const UpdateDestinationOutput = struct {};
+pub const UpdateDestinationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

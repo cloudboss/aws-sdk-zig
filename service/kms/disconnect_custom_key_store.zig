@@ -14,7 +14,8 @@ pub const DisconnectCustomKeyStoreInput = struct {
     };
 };
 
-pub const DisconnectCustomKeyStoreOutput = struct {};
+pub const DisconnectCustomKeyStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

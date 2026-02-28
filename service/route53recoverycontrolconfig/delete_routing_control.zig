@@ -13,7 +13,8 @@ pub const DeleteRoutingControlInput = struct {
     };
 };
 
-pub const DeleteRoutingControlOutput = struct {};
+pub const DeleteRoutingControlOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -21,7 +21,8 @@ pub const DeleteQueueFleetAssociationInput = struct {
     };
 };
 
-pub const DeleteQueueFleetAssociationOutput = struct {};
+pub const DeleteQueueFleetAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DisassociateWirelessDeviceFromThingInput = struct {
     };
 };
 
-pub const DisassociateWirelessDeviceFromThingOutput = struct {};
+pub const DisassociateWirelessDeviceFromThingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

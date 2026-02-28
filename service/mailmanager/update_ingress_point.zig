@@ -38,7 +38,8 @@ pub const UpdateIngressPointInput = struct {
     };
 };
 
-pub const UpdateIngressPointOutput = struct {};
+pub const UpdateIngressPointOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

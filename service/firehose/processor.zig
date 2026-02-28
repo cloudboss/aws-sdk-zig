@@ -12,10 +12,10 @@ pub const Processor = struct {
     parameters: ?[]const ProcessorParameter,
 
     /// The type of processor.
-    type: ProcessorType,
+    @"type": ProcessorType,
 
     pub const json_field_names = .{
         .parameters = "Parameters",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

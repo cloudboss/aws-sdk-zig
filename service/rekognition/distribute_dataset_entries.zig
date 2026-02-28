@@ -16,7 +16,8 @@ pub const DistributeDatasetEntriesInput = struct {
     };
 };
 
-pub const DistributeDatasetEntriesOutput = struct {};
+pub const DistributeDatasetEntriesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

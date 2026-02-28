@@ -18,12 +18,12 @@ pub const ListSecurityConfigsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of security configuration.
-    type: SecurityConfigType,
+    @"type": SecurityConfigType,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

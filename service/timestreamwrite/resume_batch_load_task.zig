@@ -13,7 +13,8 @@ pub const ResumeBatchLoadTaskInput = struct {
     };
 };
 
-pub const ResumeBatchLoadTaskOutput = struct {};
+pub const ResumeBatchLoadTaskOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

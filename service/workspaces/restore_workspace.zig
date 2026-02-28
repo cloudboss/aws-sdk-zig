@@ -13,7 +13,8 @@ pub const RestoreWorkspaceInput = struct {
     };
 };
 
-pub const RestoreWorkspaceOutput = struct {};
+pub const RestoreWorkspaceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

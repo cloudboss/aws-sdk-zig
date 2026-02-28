@@ -21,11 +21,11 @@ pub const PartitionKey = struct {
     /// The type of the partition key. Options are DIMENSION (dimension key) and
     /// MEASURE
     /// (measure key).
-    type: PartitionKeyType,
+    @"type": PartitionKeyType,
 
     pub const json_field_names = .{
         .enforcement_in_record = "EnforcementInRecord",
         .name = "Name",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

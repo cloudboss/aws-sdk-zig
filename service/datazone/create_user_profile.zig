@@ -46,14 +46,14 @@ pub const CreateUserProfileOutput = struct {
     status: ?UserProfileStatus = null,
 
     /// The type of the user profile.
-    type: ?UserProfileType = null,
+    @"type": ?UserProfileType = null,
 
     pub const json_field_names = .{
         .details = "details",
         .domain_id = "domainId",
         .id = "id",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

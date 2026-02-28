@@ -33,7 +33,8 @@ pub const PutMetricPolicyInput = struct {
     };
 };
 
-pub const PutMetricPolicyOutput = struct {};
+pub const PutMetricPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

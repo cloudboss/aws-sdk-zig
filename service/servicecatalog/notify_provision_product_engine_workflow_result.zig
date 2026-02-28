@@ -51,7 +51,8 @@ pub const NotifyProvisionProductEngineWorkflowResultInput = struct {
     };
 };
 
-pub const NotifyProvisionProductEngineWorkflowResultOutput = struct {};
+pub const NotifyProvisionProductEngineWorkflowResultOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

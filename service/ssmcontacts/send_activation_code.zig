@@ -13,7 +13,8 @@ pub const SendActivationCodeInput = struct {
     };
 };
 
-pub const SendActivationCodeOutput = struct {};
+pub const SendActivationCodeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

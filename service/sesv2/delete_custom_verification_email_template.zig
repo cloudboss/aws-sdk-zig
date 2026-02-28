@@ -13,7 +13,8 @@ pub const DeleteCustomVerificationEmailTemplateInput = struct {
     };
 };
 
-pub const DeleteCustomVerificationEmailTemplateOutput = struct {};
+pub const DeleteCustomVerificationEmailTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

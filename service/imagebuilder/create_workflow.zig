@@ -66,7 +66,7 @@ pub const CreateWorkflowInput = struct {
 
     /// The phase in the image build process for which the workflow resource
     /// is responsible.
-    type: WorkflowType,
+    @"type": WorkflowType,
 
     /// The `uri` of a YAML component document file. This must be an S3 URL
     /// (`s3://bucket/key`), and the requester must have permission to access the
@@ -88,7 +88,7 @@ pub const CreateWorkflowInput = struct {
         .name = "name",
         .semantic_version = "semanticVersion",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
         .uri = "uri",
     };
 };
@@ -203,7 +203,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateWorkflowInput, config
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
     if (input.uri) |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");

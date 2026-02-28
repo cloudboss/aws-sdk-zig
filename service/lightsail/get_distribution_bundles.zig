@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const DistributionBundle = @import("distribution_bundle.zig").DistributionBundle;
 
-pub const GetDistributionBundlesInput = struct {};
+pub const GetDistributionBundlesInput = struct {
+};
 
 pub const GetDistributionBundlesOutput = struct {
     /// An object that describes a distribution bundle.

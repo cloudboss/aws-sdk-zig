@@ -13,7 +13,8 @@ pub const CancelVariantImportJobInput = struct {
     };
 };
 
-pub const CancelVariantImportJobOutput = struct {};
+pub const CancelVariantImportJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

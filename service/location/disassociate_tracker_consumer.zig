@@ -22,7 +22,8 @@ pub const DisassociateTrackerConsumerInput = struct {
     };
 };
 
-pub const DisassociateTrackerConsumerOutput = struct {};
+pub const DisassociateTrackerConsumerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

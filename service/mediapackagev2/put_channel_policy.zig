@@ -25,7 +25,8 @@ pub const PutChannelPolicyInput = struct {
     };
 };
 
-pub const PutChannelPolicyOutput = struct {};
+pub const PutChannelPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

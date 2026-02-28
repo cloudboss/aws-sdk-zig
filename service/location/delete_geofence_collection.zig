@@ -13,7 +13,8 @@ pub const DeleteGeofenceCollectionInput = struct {
     };
 };
 
-pub const DeleteGeofenceCollectionOutput = struct {};
+pub const DeleteGeofenceCollectionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

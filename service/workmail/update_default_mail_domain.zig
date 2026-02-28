@@ -17,7 +17,8 @@ pub const UpdateDefaultMailDomainInput = struct {
     };
 };
 
-pub const UpdateDefaultMailDomainOutput = struct {};
+pub const UpdateDefaultMailDomainOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

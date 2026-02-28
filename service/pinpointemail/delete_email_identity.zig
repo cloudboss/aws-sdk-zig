@@ -15,7 +15,8 @@ pub const DeleteEmailIdentityInput = struct {
     };
 };
 
-pub const DeleteEmailIdentityOutput = struct {};
+pub const DeleteEmailIdentityOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

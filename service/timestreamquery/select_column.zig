@@ -14,13 +14,13 @@ pub const SelectColumn = struct {
     /// Table within the database that has this column.
     table_name: ?[]const u8,
 
-    type: ?Type,
+    @"type": ?Type,
 
     pub const json_field_names = .{
         .aliased = "Aliased",
         .database_name = "DatabaseName",
         .name = "Name",
         .table_name = "TableName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

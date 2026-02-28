@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContainerServiceRegistryLogin = @import("container_service_registry_login.zig").ContainerServiceRegistryLogin;
 
-pub const CreateContainerServiceRegistryLoginInput = struct {};
+pub const CreateContainerServiceRegistryLoginInput = struct {
+};
 
 pub const CreateContainerServiceRegistryLoginOutput = struct {
     /// An object that describes the log in information for the container service

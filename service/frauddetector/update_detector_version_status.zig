@@ -24,7 +24,8 @@ pub const UpdateDetectorVersionStatusInput = struct {
     };
 };
 
-pub const UpdateDetectorVersionStatusOutput = struct {};
+pub const UpdateDetectorVersionStatusOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

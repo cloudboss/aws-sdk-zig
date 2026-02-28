@@ -13,7 +13,8 @@ pub const DeleteDimensionInput = struct {
     };
 };
 
-pub const DeleteDimensionOutput = struct {};
+pub const DeleteDimensionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -57,7 +57,7 @@ pub const SegmentDetection = struct {
     technical_cue_segment: ?TechnicalCueSegment,
 
     /// The type of the segment. Valid values are `TECHNICAL_CUE` and `SHOT`.
-    type: ?SegmentType,
+    @"type": ?SegmentType,
 
     pub const json_field_names = .{
         .duration_frames = "DurationFrames",
@@ -71,6 +71,6 @@ pub const SegmentDetection = struct {
         .start_timecode_smpte = "StartTimecodeSMPTE",
         .start_timestamp_millis = "StartTimestampMillis",
         .technical_cue_segment = "TechnicalCueSegment",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

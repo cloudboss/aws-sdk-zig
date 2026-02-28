@@ -137,10 +137,10 @@ pub const ResourceQuery = struct {
     /// `TAG_FILTERS_1_0:`
     /// * Specifies that you want the
     /// group to include resource that have tags that match the query.
-    type: QueryType,
+    @"type": QueryType,
 
     pub const json_field_names = .{
         .query = "Query",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

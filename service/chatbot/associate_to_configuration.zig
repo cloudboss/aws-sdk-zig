@@ -17,8 +17,7 @@ pub const AssociateToConfigurationInput = struct {
     };
 };
 
-pub const AssociateToConfigurationOutput = struct {
-};
+pub const AssociateToConfigurationOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

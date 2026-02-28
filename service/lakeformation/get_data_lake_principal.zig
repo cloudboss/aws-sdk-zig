@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetDataLakePrincipalInput = struct {};
+pub const GetDataLakePrincipalInput = struct {
+};
 
 pub const GetDataLakePrincipalOutput = struct {
     /// A unique identifier of the invoking principal.

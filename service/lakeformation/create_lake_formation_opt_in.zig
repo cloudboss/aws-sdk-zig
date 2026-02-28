@@ -21,7 +21,8 @@ pub const CreateLakeFormationOptInInput = struct {
     };
 };
 
-pub const CreateLakeFormationOptInOutput = struct {};
+pub const CreateLakeFormationOptInOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -17,7 +17,8 @@ pub const SetReceiptRulePositionInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const SetReceiptRulePositionOutput = struct {};
+pub const SetReceiptRulePositionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

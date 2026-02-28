@@ -25,7 +25,8 @@ pub const DisassociateWebACLInput = struct {
     };
 };
 
-pub const DisassociateWebACLOutput = struct {};
+pub const DisassociateWebACLOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -5,7 +5,7 @@ pub const PhoneNumber = struct {
     primary: bool = false,
 
     /// A string representing the type of a phone number. For example, "Mobile."
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// A string containing a phone number. For example, "8675309" or "+1 (800)
     /// 123-4567".
@@ -13,7 +13,7 @@ pub const PhoneNumber = struct {
 
     pub const json_field_names = .{
         .primary = "Primary",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

@@ -13,7 +13,8 @@ pub const DeregisterResourceInput = struct {
     };
 };
 
-pub const DeregisterResourceOutput = struct {};
+pub const DeregisterResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -25,7 +25,8 @@ pub const UpdateReputationEntityPolicyInput = struct {
     };
 };
 
-pub const UpdateReputationEntityPolicyOutput = struct {};
+pub const UpdateReputationEntityPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

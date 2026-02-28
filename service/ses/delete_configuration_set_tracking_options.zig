@@ -9,7 +9,8 @@ pub const DeleteConfigurationSetTrackingOptionsInput = struct {
     configuration_set_name: []const u8,
 };
 
-pub const DeleteConfigurationSetTrackingOptionsOutput = struct {};
+pub const DeleteConfigurationSetTrackingOptionsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

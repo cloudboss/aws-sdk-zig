@@ -105,7 +105,8 @@ pub const SetSMSAttributesInput = struct {
     attributes: []const aws.map.StringMapEntry,
 };
 
-pub const SetSMSAttributesOutput = struct {};
+pub const SetSMSAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeletePresetInput = struct {
     };
 };
 
-pub const DeletePresetOutput = struct {};
+pub const DeletePresetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -5,7 +5,7 @@ pub const ParamType = enum {
     complex,
     bool,
     list,
-    null,
+    @"null",
 
     pub const json_field_names = .{
         .str = "STR",
@@ -14,6 +14,6 @@ pub const ParamType = enum {
         .complex = "COMPLEX",
         .bool = "BOOL",
         .list = "LIST",
-        .null = "NULL",
+        .@"null" = "NULL",
     };
 };

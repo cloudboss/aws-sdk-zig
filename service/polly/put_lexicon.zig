@@ -19,7 +19,8 @@ pub const PutLexiconInput = struct {
     };
 };
 
-pub const PutLexiconOutput = struct {};
+pub const PutLexiconOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

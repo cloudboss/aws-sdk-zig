@@ -9,10 +9,10 @@ pub const DocumentReviewCommentSource = struct {
 
     /// The type of information added to a review request. Currently, only the value
     /// `Comment` is supported.
-    type: ?DocumentReviewCommentType,
+    @"type": ?DocumentReviewCommentType,
 
     pub const json_field_names = .{
         .content = "Content",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

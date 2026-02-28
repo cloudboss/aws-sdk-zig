@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteNamespaceInput = struct {};
+pub const DeleteNamespaceInput = struct {
+};
 
 pub const DeleteNamespaceOutput = struct {
     /// The ARN of the namespace to be deleted.

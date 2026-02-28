@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetHostedZoneCountInput = struct {};
+pub const GetHostedZoneCountInput = struct {
+};
 
 pub const GetHostedZoneCountOutput = struct {
     /// The total number of public and private hosted zones that are associated with

@@ -23,10 +23,10 @@ pub const PlacementConstraint = struct {
     /// a particular group is running on a different container instance. Use
     /// `memberOf` to restrict the selection to a group of valid
     /// candidates.
-    type: ?PlacementConstraintType,
+    @"type": ?PlacementConstraintType,
 
     pub const json_field_names = .{
         .expression = "expression",
-        .type = "type",
+        .@"type" = "type",
     };
 };

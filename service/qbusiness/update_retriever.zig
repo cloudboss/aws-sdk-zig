@@ -30,7 +30,8 @@ pub const UpdateRetrieverInput = struct {
     };
 };
 
-pub const UpdateRetrieverOutput = struct {};
+pub const UpdateRetrieverOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

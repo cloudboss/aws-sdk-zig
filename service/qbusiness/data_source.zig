@@ -15,7 +15,7 @@ pub const DataSource = struct {
     status: ?DataSourceStatus,
 
     /// The type of the Amazon Q Business data source.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The Unix timestamp when the Amazon Q Business data source was last updated.
     updated_at: ?i64,
@@ -25,7 +25,7 @@ pub const DataSource = struct {
         .data_source_id = "dataSourceId",
         .display_name = "displayName",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

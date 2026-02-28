@@ -39,7 +39,8 @@ pub const PutMobileDeviceAccessOverrideInput = struct {
     };
 };
 
-pub const PutMobileDeviceAccessOverrideOutput = struct {};
+pub const PutMobileDeviceAccessOverrideOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

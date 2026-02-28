@@ -22,7 +22,8 @@ pub const StopCisSessionInput = struct {
     };
 };
 
-pub const StopCisSessionOutput = struct {};
+pub const StopCisSessionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

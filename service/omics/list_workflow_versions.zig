@@ -15,7 +15,7 @@ pub const ListWorkflowVersionsInput = struct {
     starting_token: ?[]const u8 = null,
 
     /// The workflow type.
-    type: ?WorkflowType = null,
+    @"type": ?WorkflowType = null,
 
     /// The workflow's ID. The `workflowId` is not the UUID.
     workflow_id: []const u8,
@@ -28,7 +28,7 @@ pub const ListWorkflowVersionsInput = struct {
     pub const json_field_names = .{
         .max_results = "maxResults",
         .starting_token = "startingToken",
-        .type = "type",
+        .@"type" = "type",
         .workflow_id = "workflowId",
         .workflow_owner_id = "workflowOwnerId",
     };
@@ -106,7 +106,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListWorkflowVersionsInput, 
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

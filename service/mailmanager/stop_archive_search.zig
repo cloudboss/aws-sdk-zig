@@ -13,7 +13,8 @@ pub const StopArchiveSearchInput = struct {
     };
 };
 
-pub const StopArchiveSearchOutput = struct {};
+pub const StopArchiveSearchOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

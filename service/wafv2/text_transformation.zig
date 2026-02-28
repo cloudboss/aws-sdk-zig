@@ -14,10 +14,10 @@ pub const TextTransformation = struct {
     /// For detailed descriptions of each of the transformation types, see [Text
     /// transformations](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-transformation.html)
     /// in the *WAF Developer Guide*.
-    type: TextTransformationType,
+    @"type": TextTransformationType,
 
     pub const json_field_names = .{
         .priority = "Priority",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

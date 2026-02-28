@@ -23,7 +23,7 @@ pub const TrafficPolicy = struct {
     /// The DNS type of the resource record sets that Amazon Route 53 creates when
     /// you use a
     /// traffic policy to create a traffic policy instance.
-    type: RRType,
+    @"type": RRType,
 
     /// The version number that Amazon Route 53 assigns to a traffic policy. For a
     /// new traffic

@@ -6,10 +6,10 @@ pub const NamespaceError = struct {
     message: ?[]const u8,
 
     /// The error type.
-    type: ?NamespaceErrorType,
+    @"type": ?NamespaceErrorType,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

@@ -33,7 +33,8 @@ pub const DeleteAssociationInput = struct {
     };
 };
 
-pub const DeleteAssociationOutput = struct {};
+pub const DeleteAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

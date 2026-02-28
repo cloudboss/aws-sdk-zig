@@ -10,11 +10,11 @@ pub const StepParameter = struct {
     name: []const u8,
 
     /// The data type of the parameter.
-    type: StepParameterType,
+    @"type": StepParameterType,
 
     pub const json_field_names = .{
         .chunks = "chunks",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

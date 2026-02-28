@@ -45,7 +45,8 @@ pub const DeleteIPSetInput = struct {
     };
 };
 
-pub const DeleteIPSetOutput = struct {};
+pub const DeleteIPSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

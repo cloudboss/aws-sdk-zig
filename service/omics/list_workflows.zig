@@ -18,13 +18,13 @@ pub const ListWorkflowsInput = struct {
     starting_token: ?[]const u8 = null,
 
     /// Filter the list by workflow type.
-    type: ?WorkflowType = null,
+    @"type": ?WorkflowType = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .name = "name",
         .starting_token = "startingToken",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -102,7 +102,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: ListWorkflowsInput, config:
         try aws.url.appendUrlEncoded(alloc, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(alloc, "&");
         try query_buf.appendSlice(alloc, "type=");
         try aws.url.appendUrlEncoded(alloc, &query_buf, @tagName(v));

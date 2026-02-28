@@ -22,7 +22,8 @@ pub const DeleteContentAssociationInput = struct {
     };
 };
 
-pub const DeleteContentAssociationOutput = struct {};
+pub const DeleteContentAssociationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

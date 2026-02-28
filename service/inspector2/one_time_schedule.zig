@@ -1,2 +1,3 @@
 /// A one time schedule.
-pub const OneTimeSchedule = struct {};
+pub const OneTimeSchedule = struct {
+};

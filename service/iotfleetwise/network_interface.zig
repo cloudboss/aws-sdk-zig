@@ -35,7 +35,7 @@ pub const NetworkInterface = struct {
     /// units (ECUs).
     /// `OBD_SIGNAL` specifies a protocol that defines how self-diagnostic data
     /// is communicated between ECUs.
-    type: NetworkInterfaceType,
+    @"type": NetworkInterfaceType,
 
     /// The vehicle middleware defined as a type of network interface. Examples of
     /// vehicle
@@ -47,7 +47,7 @@ pub const NetworkInterface = struct {
         .custom_decoding_interface = "customDecodingInterface",
         .interface_id = "interfaceId",
         .obd_interface = "obdInterface",
-        .type = "type",
+        .@"type" = "type",
         .vehicle_middleware = "vehicleMiddleware",
     };
 };

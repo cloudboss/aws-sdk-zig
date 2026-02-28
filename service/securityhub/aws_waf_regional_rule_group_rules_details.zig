@@ -15,12 +15,12 @@ pub const AwsWafRegionalRuleGroupRulesDetails = struct {
     rule_id: ?[]const u8,
 
     /// The type of rule in the rule group.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .action = "Action",
         .priority = "Priority",
         .rule_id = "RuleId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

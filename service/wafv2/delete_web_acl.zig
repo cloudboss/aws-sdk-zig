@@ -45,7 +45,8 @@ pub const DeleteWebACLInput = struct {
     };
 };
 
-pub const DeleteWebACLOutput = struct {};
+pub const DeleteWebACLOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

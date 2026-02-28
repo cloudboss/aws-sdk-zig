@@ -13,7 +13,7 @@ pub const LibraryTemplateButtonInput = struct {
     supported_apps: ?[]const []const aws.map.StringMapEntry,
 
     /// The type of button (for example, QUICK_REPLY, CALL, or URL).
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The URL with dynamic parameters for URL-type buttons.
     url: ?[]const aws.map.StringMapEntry,
@@ -25,7 +25,7 @@ pub const LibraryTemplateButtonInput = struct {
         .otp_type = "otpType",
         .phone_number = "phoneNumber",
         .supported_apps = "supportedApps",
-        .type = "type",
+        .@"type" = "type",
         .url = "url",
         .zero_tap_terms_accepted = "zeroTapTermsAccepted",
     };

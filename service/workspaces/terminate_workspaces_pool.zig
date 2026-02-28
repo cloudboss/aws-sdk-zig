@@ -13,7 +13,8 @@ pub const TerminateWorkspacesPoolInput = struct {
     };
 };
 
-pub const TerminateWorkspacesPoolOutput = struct {};
+pub const TerminateWorkspacesPoolOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

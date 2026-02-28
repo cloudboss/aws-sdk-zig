@@ -24,7 +24,8 @@ pub const RemoveAssistantAIAgentInput = struct {
     };
 };
 
-pub const RemoveAssistantAIAgentOutput = struct {};
+pub const RemoveAssistantAIAgentOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

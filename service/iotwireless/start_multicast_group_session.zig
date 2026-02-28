@@ -16,7 +16,8 @@ pub const StartMulticastGroupSessionInput = struct {
     };
 };
 
-pub const StartMulticastGroupSessionOutput = struct {};
+pub const StartMulticastGroupSessionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -10,10 +10,10 @@ pub const HandshakeParty = struct {
     id: []const u8,
 
     /// The type of ID for the participant.
-    type: HandshakePartyType,
+    @"type": HandshakePartyType,
 
     pub const json_field_names = .{
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

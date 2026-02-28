@@ -6,13 +6,13 @@ const NodeUnavailabilityType = @import("node_unavailability_type.zig").NodeUnava
 pub const CapacitySizeConfig = struct {
     /// Specifies whether SageMaker should process the update by amount or
     /// percentage of instances.
-    type: NodeUnavailabilityType,
+    @"type": NodeUnavailabilityType,
 
     /// Specifies the amount or percentage of instances SageMaker updates at a time.
     value: i32,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

@@ -14,7 +14,8 @@ pub const UpdateReceiptRuleInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const UpdateReceiptRuleOutput = struct {};
+pub const UpdateReceiptRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

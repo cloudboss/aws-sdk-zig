@@ -13,7 +13,8 @@ pub const StopEarthObservationJobInput = struct {
     };
 };
 
-pub const StopEarthObservationJobOutput = struct {};
+pub const StopEarthObservationJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

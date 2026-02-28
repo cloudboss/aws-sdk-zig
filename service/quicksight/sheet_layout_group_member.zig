@@ -6,10 +6,10 @@ pub const SheetLayoutGroupMember = struct {
     id: []const u8,
 
     /// The type of the group member.
-    type: SheetLayoutGroupMemberType,
+    @"type": SheetLayoutGroupMemberType,
 
     pub const json_field_names = .{
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

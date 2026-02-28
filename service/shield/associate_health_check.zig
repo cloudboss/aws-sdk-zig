@@ -19,7 +19,8 @@ pub const AssociateHealthCheckInput = struct {
     };
 };
 
-pub const AssociateHealthCheckOutput = struct {};
+pub const AssociateHealthCheckOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

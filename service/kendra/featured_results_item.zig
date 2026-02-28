@@ -40,7 +40,7 @@ pub const FeaturedResultsItem = struct {
     /// The type of document within the featured result response. For example,
     /// a response could include a question-answer type that's relevant to the
     /// query.
-    type: ?QueryResultType,
+    @"type": ?QueryResultType,
 
     pub const json_field_names = .{
         .additional_attributes = "AdditionalAttributes",
@@ -51,6 +51,6 @@ pub const FeaturedResultsItem = struct {
         .document_uri = "DocumentURI",
         .feedback_token = "FeedbackToken",
         .id = "Id",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

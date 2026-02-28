@@ -20,12 +20,12 @@ pub const Contact = struct {
     /// * `ESCALATION`: An escalation plan.
     ///
     /// * `ONCALL_SCHEDULE`: An on-call schedule.
-    type: ContactType,
+    @"type": ContactType,
 
     pub const json_field_names = .{
         .alias = "Alias",
         .contact_arn = "ContactArn",
         .display_name = "DisplayName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

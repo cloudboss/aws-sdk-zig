@@ -8,7 +8,8 @@ const OptInLevel = @import("opt_in_level.zig").OptInLevel;
 const OptInStatus = @import("opt_in_status.zig").OptInStatus;
 const OptInType = @import("opt_in_type.zig").OptInType;
 
-pub const GetAutoManagementConfigurationInput = struct {};
+pub const GetAutoManagementConfigurationInput = struct {
+};
 
 pub const GetAutoManagementConfigurationOutput = struct {
     /// List of Amazon Web Services services excluded from Automatic Management.

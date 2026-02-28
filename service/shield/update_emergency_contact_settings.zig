@@ -19,7 +19,8 @@ pub const UpdateEmergencyContactSettingsInput = struct {
     };
 };
 
-pub const UpdateEmergencyContactSettingsOutput = struct {};
+pub const UpdateEmergencyContactSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -7,7 +7,7 @@ pub const BatchResourceRequirement = struct {
     /// The type of resource to assign to a container. The supported resources
     /// include
     /// `GPU`, `MEMORY`, and `VCPU`.
-    type: BatchResourceRequirementType,
+    @"type": BatchResourceRequirementType,
 
     /// The quantity of the specified resource to reserve for the container. The
     /// values vary
@@ -177,7 +177,7 @@ pub const BatchResourceRequirement = struct {
     value: []const u8,
 
     pub const json_field_names = .{
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

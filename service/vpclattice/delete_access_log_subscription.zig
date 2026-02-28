@@ -13,7 +13,8 @@ pub const DeleteAccessLogSubscriptionInput = struct {
     };
 };
 
-pub const DeleteAccessLogSubscriptionOutput = struct {};
+pub const DeleteAccessLogSubscriptionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

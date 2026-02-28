@@ -26,7 +26,7 @@ pub const ThreatIntelIndicator = struct {
     source_url: ?[]const u8,
 
     /// The type of threat intelligence indicator.
-    type: ?ThreatIntelIndicatorType,
+    @"type": ?ThreatIntelIndicatorType,
 
     /// The value of a threat intelligence indicator.
     ///
@@ -38,7 +38,7 @@ pub const ThreatIntelIndicator = struct {
         .last_observed_at = "LastObservedAt",
         .source = "Source",
         .source_url = "SourceUrl",
-        .type = "Type",
+        .@"type" = "Type",
         .value = "Value",
     };
 };

@@ -206,7 +206,7 @@ pub const GitHubConfiguration = struct {
 
     /// The type of GitHub service you want to connect to—GitHub Enterprise Cloud
     /// (SaaS) or GitHub Enterprise Server (on premises).
-    type: ?Type,
+    @"type": ?Type,
 
     /// `TRUE` to use the GitHub change log to determine which documents require
     /// updating in the index. Depending on the GitHub change log's size, it may
@@ -241,7 +241,7 @@ pub const GitHubConfiguration = struct {
         .repository_filter = "RepositoryFilter",
         .saa_s_configuration = "SaaSConfiguration",
         .secret_arn = "SecretArn",
-        .type = "Type",
+        .@"type" = "Type",
         .use_change_log = "UseChangeLog",
         .vpc_configuration = "VpcConfiguration",
     };

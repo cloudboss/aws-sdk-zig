@@ -74,7 +74,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: SetVaultAccessPolicyInput, 
     try path_buf.appendSlice(alloc, "/access-policy");
     const path = try path_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body: ?[]const u8 = if (input.policy) |v| try aws.json.jsonStringify(v, alloc) else null;
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;

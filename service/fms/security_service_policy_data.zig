@@ -313,11 +313,11 @@ pub const SecurityServicePolicyData = struct {
     /// each common policy and for each content audit policy. This is an adjustable
     /// limit that you can
     /// increase by contacting Amazon Web Services Support.
-    type: SecurityServiceType,
+    @"type": SecurityServiceType,
 
     pub const json_field_names = .{
         .managed_service_data = "ManagedServiceData",
         .policy_option = "PolicyOption",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

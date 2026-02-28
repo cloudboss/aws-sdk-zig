@@ -17,7 +17,8 @@ pub const DisassociateWhatsAppBusinessAccountInput = struct {
     };
 };
 
-pub const DisassociateWhatsAppBusinessAccountOutput = struct {};
+pub const DisassociateWhatsAppBusinessAccountOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

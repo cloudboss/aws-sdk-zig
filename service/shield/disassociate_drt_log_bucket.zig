@@ -13,7 +13,8 @@ pub const DisassociateDRTLogBucketInput = struct {
     };
 };
 
-pub const DisassociateDRTLogBucketOutput = struct {};
+pub const DisassociateDRTLogBucketOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

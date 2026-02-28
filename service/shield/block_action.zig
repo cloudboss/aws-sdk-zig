@@ -4,4 +4,5 @@
 /// This is only used in the context of the `ResponseAction` setting.
 ///
 /// JSON specification: `"Block": {}`
-pub const BlockAction = struct {};
+pub const BlockAction = struct {
+};

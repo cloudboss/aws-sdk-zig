@@ -23,7 +23,8 @@ pub const UpdateDocumentMetadataInput = struct {
     };
 };
 
-pub const UpdateDocumentMetadataOutput = struct {};
+pub const UpdateDocumentMetadataOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

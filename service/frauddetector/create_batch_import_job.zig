@@ -42,7 +42,8 @@ pub const CreateBatchImportJobInput = struct {
     };
 };
 
-pub const CreateBatchImportJobOutput = struct {};
+pub const CreateBatchImportJobOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -12275,7 +12275,7 @@ pub fn deserializeClientVpnAuthentication(reader: *aws.xml.Reader, alloc: std.me
     result.active_directory = null;
     result.federated_authentication = null;
     result.mutual_authentication = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -12286,7 +12286,7 @@ pub fn deserializeClientVpnAuthentication(reader: *aws.xml.Reader, alloc: std.me
                 } else if (std.mem.eql(u8, e.local, "mutualAuthentication")) {
                     result.mutual_authentication = try deserializeCertificateAuthentication(reader, alloc);
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(ClientVpnAuthenticationType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(ClientVpnAuthenticationType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -12552,7 +12552,7 @@ pub fn deserializeClientVpnRoute(reader: *aws.xml.Reader, alloc: std.mem.Allocat
     result.origin = null;
     result.status = null;
     result.target_subnet = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -12569,7 +12569,7 @@ pub fn deserializeClientVpnRoute(reader: *aws.xml.Reader, alloc: std.mem.Allocat
                 } else if (std.mem.eql(u8, e.local, "targetSubnet")) {
                     result.target_subnet = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13103,7 +13103,7 @@ pub fn deserializeCustomerGateway(reader: *aws.xml.Reader, alloc: std.mem.Alloca
     result.ip_address = null;
     result.state = null;
     result.tags = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -13124,7 +13124,7 @@ pub fn deserializeCustomerGateway(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -13847,7 +13847,7 @@ pub fn deserializeDiskInfo(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !D
     var result: DiskInfo = undefined;
     result.count = null;
     result.size_in_gb = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -13856,7 +13856,7 @@ pub fn deserializeDiskInfo(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !D
                 } else if (std.mem.eql(u8, e.local, "sizeInGB")) {
                     result.size_in_gb = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(DiskType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(DiskType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -14379,12 +14379,12 @@ pub fn deserializeElasticGpuHealth(reader: *aws.xml.Reader, alloc: std.mem.Alloc
 
 pub fn deserializeElasticGpuSpecificationResponse(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !ElasticGpuSpecificationResponse {
     var result: ElasticGpuSpecificationResponse = undefined;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -15280,7 +15280,7 @@ pub fn deserializeFleetData(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
     result.tags = null;
     result.target_capacity_specification = null;
     result.terminate_instances_with_expiration = null;
-    result.type = null;
+    result.@"type" = null;
     result.valid_from = null;
     result.valid_until = null;
     while (try reader.next()) |event| {
@@ -15323,7 +15323,7 @@ pub fn deserializeFleetData(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
                 } else if (std.mem.eql(u8, e.local, "terminateInstancesWithExpiration")) {
                     result.terminate_instances_with_expiration = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(FleetType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(FleetType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
                     result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
@@ -16225,14 +16225,14 @@ pub fn deserializeIcmpTypeCode(reader: *aws.xml.Reader, alloc: std.mem.Allocator
     _ = alloc;
     var result: IcmpTypeCode = undefined;
     result.code = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "code")) {
                     result.code = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                    result.@"type" = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -19931,14 +19931,14 @@ pub fn deserializeIpamScope(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !
 pub fn deserializeIpamScopeExternalAuthorityConfiguration(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !IpamScopeExternalAuthorityConfiguration {
     var result: IpamScopeExternalAuthorityConfiguration = undefined;
     result.external_resource_identifier = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "externalResourceIdentifier")) {
                     result.external_resource_identifier = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(IpamScopeExternalAuthorityType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(IpamScopeExternalAuthorityType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20513,14 +20513,14 @@ pub fn deserializeLaunchTemplateEbsBlockDevice(reader: *aws.xml.Reader, alloc: s
 pub fn deserializeLaunchTemplateElasticInferenceAcceleratorResponse(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !LaunchTemplateElasticInferenceAcceleratorResponse {
     var result: LaunchTemplateElasticInferenceAcceleratorResponse = undefined;
     result.count = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "count")) {
                     result.count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -21172,7 +21172,7 @@ pub fn deserializeLocalGatewayRoute(reader: *aws.xml.Reader, alloc: std.mem.Allo
     result.owner_id = null;
     result.state = null;
     result.subnet_id = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -21197,7 +21197,7 @@ pub fn deserializeLocalGatewayRoute(reader: *aws.xml.Reader, alloc: std.mem.Allo
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(LocalGatewayRouteType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(LocalGatewayRouteType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -22027,7 +22027,7 @@ pub fn deserializeNatGatewayAttachedAppliance(reader: *aws.xml.Reader, alloc: st
     result.failure_code = null;
     result.failure_message = null;
     result.modification_state = null;
-    result.type = null;
+    result.@"type" = null;
     result.vpc_endpoint_id = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -22043,7 +22043,7 @@ pub fn deserializeNatGatewayAttachedAppliance(reader: *aws.xml.Reader, alloc: st
                 } else if (std.mem.eql(u8, e.local, "modificationState")) {
                     result.modification_state = std.meta.stringToEnum(NatGatewayApplianceModifyState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(NatGatewayApplianceType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(NatGatewayApplianceType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcEndpointId")) {
                     result.vpc_endpoint_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -23881,7 +23881,7 @@ pub fn deserializePrivateDnsNameConfiguration(reader: *aws.xml.Reader, alloc: st
     var result: PrivateDnsNameConfiguration = undefined;
     result.name = null;
     result.state = null;
-    result.type = null;
+    result.@"type" = null;
     result.value = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -23891,7 +23891,7 @@ pub fn deserializePrivateDnsNameConfiguration(reader: *aws.xml.Reader, alloc: st
                 } else if (std.mem.eql(u8, e.local, "state")) {
                     result.state = std.meta.stringToEnum(DnsNameState, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "value")) {
                     result.value = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -26711,7 +26711,7 @@ pub fn deserializeSpotFleetRequestConfigData(reader: *aws.xml.Reader, alloc: std
     result.tag_specifications = null;
     result.target_capacity_unit_type = null;
     result.terminate_instances_with_expiration = null;
-    result.type = null;
+    result.@"type" = null;
     result.valid_from = null;
     result.valid_until = null;
     while (try reader.next()) |event| {
@@ -26764,7 +26764,7 @@ pub fn deserializeSpotFleetRequestConfigData(reader: *aws.xml.Reader, alloc: std
                 } else if (std.mem.eql(u8, e.local, "terminateInstancesWithExpiration")) {
                     result.terminate_instances_with_expiration = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(FleetType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(FleetType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
                     result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
@@ -26821,7 +26821,7 @@ pub fn deserializeSpotInstanceRequest(reader: *aws.xml.Reader, alloc: std.mem.Al
     result.state = null;
     result.status = null;
     result.tags = null;
-    result.type = null;
+    result.@"type" = null;
     result.valid_from = null;
     result.valid_until = null;
     while (try reader.next()) |event| {
@@ -26862,7 +26862,7 @@ pub fn deserializeSpotInstanceRequest(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(SpotInstanceType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(SpotInstanceType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "validFrom")) {
                     result.valid_from = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "validUntil")) {
@@ -27241,7 +27241,7 @@ pub fn deserializeSubnet(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Sub
     result.subnet_arn = null;
     result.subnet_id = null;
     result.tags = null;
-    result.type = null;
+    result.@"type" = null;
     result.vpc_id = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -27289,7 +27289,7 @@ pub fn deserializeSubnet(reader: *aws.xml.Reader, alloc: std.mem.Allocator) !Sub
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
                     result.vpc_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -27979,7 +27979,7 @@ pub fn deserializeTrafficMirrorTarget(reader: *aws.xml.Reader, alloc: std.mem.Al
     result.owner_id = null;
     result.tags = null;
     result.traffic_mirror_target_id = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -27998,7 +27998,7 @@ pub fn deserializeTrafficMirrorTarget(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "trafficMirrorTargetId")) {
                     result.traffic_mirror_target_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(TrafficMirrorTargetType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(TrafficMirrorTargetType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -29073,7 +29073,7 @@ pub fn deserializeTransitGatewayRoute(reader: *aws.xml.Reader, alloc: std.mem.Al
     result.state = null;
     result.transit_gateway_attachments = null;
     result.transit_gateway_route_table_announcement_id = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -29088,7 +29088,7 @@ pub fn deserializeTransitGatewayRoute(reader: *aws.xml.Reader, alloc: std.mem.Al
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableAnnouncementId")) {
                     result.transit_gateway_route_table_announcement_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(TransitGatewayRouteType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(TransitGatewayRouteType, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -30191,7 +30191,7 @@ pub fn deserializeVerifiedAccessInstanceUserTrustProviderClientConfiguration(rea
     result.public_signing_key_endpoint = null;
     result.scopes = null;
     result.token_endpoint = null;
-    result.type = null;
+    result.@"type" = null;
     result.user_info_endpoint = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -30213,7 +30213,7 @@ pub fn deserializeVerifiedAccessInstanceUserTrustProviderClientConfiguration(rea
                 } else if (std.mem.eql(u8, e.local, "tokenEndpoint")) {
                     result.token_endpoint = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(UserTrustProviderType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(UserTrustProviderType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "userInfoEndpoint")) {
                     result.user_info_endpoint = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -31254,7 +31254,7 @@ pub fn deserializeVpcEncryptionNonCompliantResource(reader: *aws.xml.Reader, all
     result.description = null;
     result.id = null;
     result.is_excludable = null;
-    result.type = null;
+    result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -31265,7 +31265,7 @@ pub fn deserializeVpcEncryptionNonCompliantResource(reader: *aws.xml.Reader, all
                 } else if (std.mem.eql(u8, e.local, "isExcludable")) {
                     result.is_excludable = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -31634,7 +31634,7 @@ pub fn deserializeVpnConcentrator(reader: *aws.xml.Reader, alloc: std.mem.Alloca
     result.tags = null;
     result.transit_gateway_attachment_id = null;
     result.transit_gateway_id = null;
-    result.type = null;
+    result.@"type" = null;
     result.vpn_concentrator_id = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -31648,7 +31648,7 @@ pub fn deserializeVpnConcentrator(reader: *aws.xml.Reader, alloc: std.mem.Alloca
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
                     result.transit_gateway_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = try alloc.dupe(u8, try reader.readElementText());
+                    result.@"type" = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpnConcentratorId")) {
                     result.vpn_concentrator_id = try alloc.dupe(u8, try reader.readElementText());
                 } else {
@@ -31676,7 +31676,7 @@ pub fn deserializeVpnConnection(reader: *aws.xml.Reader, alloc: std.mem.Allocato
     result.state = null;
     result.tags = null;
     result.transit_gateway_id = null;
-    result.type = null;
+    result.@"type" = null;
     result.vgw_telemetry = null;
     result.vpn_concentrator_id = null;
     result.vpn_connection_id = null;
@@ -31709,7 +31709,7 @@ pub fn deserializeVpnConnection(reader: *aws.xml.Reader, alloc: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
                     result.transit_gateway_id = try alloc.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(GatewayType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(GatewayType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vgwTelemetry")) {
                     result.vgw_telemetry = try deserializeVgwTelemetryList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "vpnConcentratorId")) {
@@ -31812,7 +31812,7 @@ pub fn deserializeVpnGateway(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
     result.availability_zone = null;
     result.state = null;
     result.tags = null;
-    result.type = null;
+    result.@"type" = null;
     result.vpc_attachments = null;
     result.vpn_gateway_id = null;
     while (try reader.next()) |event| {
@@ -31827,7 +31827,7 @@ pub fn deserializeVpnGateway(reader: *aws.xml.Reader, alloc: std.mem.Allocator) 
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
                     result.tags = try deserializeTagList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "type")) {
-                    result.type = std.meta.stringToEnum(GatewayType, try reader.readElementText());
+                    result.@"type" = std.meta.stringToEnum(GatewayType, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "attachments")) {
                     result.vpc_attachments = try deserializeVpcAttachmentList(reader, alloc, "item");
                 } else if (std.mem.eql(u8, e.local, "vpnGatewayId")) {
@@ -35766,7 +35766,7 @@ pub fn serializeClientVpnAuthenticationRequest(alloc: std.mem.Allocator, buf: *s
         try serializeCertificateAuthenticationRequest(alloc, buf, v);
         try buf.appendSlice(alloc, "</MutualAuthentication>");
     }
-    if (value.type) |v| {
+    if (value.@"type") |v| {
         try buf.appendSlice(alloc, "<Type>");
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</Type>");
@@ -36491,7 +36491,7 @@ pub fn serializeEbsInstanceBlockDeviceSpecification(alloc: std.mem.Allocator, bu
 
 pub fn serializeElasticGpuSpecification(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value: ElasticGpuSpecification) !void {
     try buf.appendSlice(alloc, "<Type>");
-    try aws.xml.appendXmlEscaped(alloc, buf, value.type);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.@"type");
     try buf.appendSlice(alloc, "</Type>");
 }
 
@@ -36505,7 +36505,7 @@ pub fn serializeElasticInferenceAccelerator(alloc: std.mem.Allocator, buf: *std.
         try buf.appendSlice(alloc, "</Count>");
     }
     try buf.appendSlice(alloc, "<Type>");
-    try aws.xml.appendXmlEscaped(alloc, buf, value.type);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.@"type");
     try buf.appendSlice(alloc, "</Type>");
 }
 
@@ -36599,7 +36599,7 @@ pub fn serializeExternalAuthorityConfiguration(alloc: std.mem.Allocator, buf: *s
         try aws.xml.appendXmlEscaped(alloc, buf, v);
         try buf.appendSlice(alloc, "</ExternalResourceIdentifier>");
     }
-    if (value.type) |v| {
+    if (value.@"type") |v| {
         try buf.appendSlice(alloc, "<Type>");
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</Type>");
@@ -36922,7 +36922,7 @@ pub fn serializeIcmpTypeCode(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), 
         }
         try buf.appendSlice(alloc, "</code>");
     }
-    if (value.type) |v| {
+    if (value.@"type") |v| {
         try buf.appendSlice(alloc, "<type>");
         {
             const num_str = std.fmt.allocPrint(alloc, "{d}", .{v}) catch "";
@@ -38105,7 +38105,7 @@ pub fn serializeLaunchTemplateElasticInferenceAccelerator(alloc: std.mem.Allocat
         try buf.appendSlice(alloc, "</Count>");
     }
     try buf.appendSlice(alloc, "<Type>");
-    try aws.xml.appendXmlEscaped(alloc, buf, value.type);
+    try aws.xml.appendXmlEscaped(alloc, buf, value.@"type");
     try buf.appendSlice(alloc, "</Type>");
 }
 
@@ -40752,7 +40752,7 @@ pub fn serializeSpotFleetRequestConfigData(alloc: std.mem.Allocator, buf: *std.A
         try buf.appendSlice(alloc, if (v) "true" else "false");
         try buf.appendSlice(alloc, "</terminateInstancesWithExpiration>");
     }
-    if (value.type) |v| {
+    if (value.@"type") |v| {
         try buf.appendSlice(alloc, "<type>");
         try buf.appendSlice(alloc, @tagName(v));
         try buf.appendSlice(alloc, "</type>");
@@ -41579,3 +41579,4 @@ pub fn serializeVpnTunnelOptionsSpecification(alloc: std.mem.Allocator, buf: *st
         try buf.appendSlice(alloc, "</TunnelInsideIpv6Cidr>");
     }
 }
+

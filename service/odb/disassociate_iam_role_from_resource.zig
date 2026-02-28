@@ -26,7 +26,8 @@ pub const DisassociateIamRoleFromResourceInput = struct {
     };
 };
 
-pub const DisassociateIamRoleFromResourceOutput = struct {};
+pub const DisassociateIamRoleFromResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

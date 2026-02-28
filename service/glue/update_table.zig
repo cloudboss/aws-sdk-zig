@@ -63,7 +63,8 @@ pub const UpdateTableInput = struct {
     };
 };
 
-pub const UpdateTableOutput = struct {};
+pub const UpdateTableOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

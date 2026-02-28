@@ -19,7 +19,8 @@ pub const PutResourcePolicyInput = struct {
     };
 };
 
-pub const PutResourcePolicyOutput = struct {};
+pub const PutResourcePolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

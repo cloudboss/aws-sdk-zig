@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const PricingPlan = @import("pricing_plan.zig").PricingPlan;
 
-pub const GetPricingPlanInput = struct {};
+pub const GetPricingPlanInput = struct {
+};
 
 pub const GetPricingPlanOutput = struct {
     /// The chosen pricing plan for the current billing cycle.

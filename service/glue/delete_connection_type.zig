@@ -14,7 +14,8 @@ pub const DeleteConnectionTypeInput = struct {
     };
 };
 
-pub const DeleteConnectionTypeOutput = struct {};
+pub const DeleteConnectionTypeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

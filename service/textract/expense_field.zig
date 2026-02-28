@@ -24,7 +24,7 @@ pub const ExpenseField = struct {
 
     /// The implied label of a detected element. Present alongside LabelDetection
     /// for explicit elements.
-    type: ?ExpenseType,
+    @"type": ?ExpenseType,
 
     /// The value of a detected element. Present in explicit and implicit elements.
     value_detection: ?ExpenseDetection,
@@ -34,7 +34,7 @@ pub const ExpenseField = struct {
         .group_properties = "GroupProperties",
         .label_detection = "LabelDetection",
         .page_number = "PageNumber",
-        .type = "Type",
+        .@"type" = "Type",
         .value_detection = "ValueDetection",
     };
 };

@@ -34,7 +34,8 @@ pub const StartAutoManagementInput = struct {
     };
 };
 
-pub const StartAutoManagementOutput = struct {};
+pub const StartAutoManagementOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

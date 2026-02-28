@@ -17,7 +17,8 @@ pub const DeleteAccessControlRuleInput = struct {
     };
 };
 
-pub const DeleteAccessControlRuleOutput = struct {};
+pub const DeleteAccessControlRuleOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

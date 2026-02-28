@@ -23,7 +23,8 @@ pub const DeleteAIAgentVersionInput = struct {
     };
 };
 
-pub const DeleteAIAgentVersionOutput = struct {};
+pub const DeleteAIAgentVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

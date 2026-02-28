@@ -36,7 +36,8 @@ pub const DisassociateServiceActionFromProvisioningArtifactInput = struct {
     };
 };
 
-pub const DisassociateServiceActionFromProvisioningArtifactOutput = struct {};
+pub const DisassociateServiceActionFromProvisioningArtifactOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -25,7 +25,7 @@ pub const NatGatewayAttachedAppliance = struct {
 
     /// The type of appliance attached to the NAT Gateway. For network firewall
     /// proxy functionality, this will be "network-firewall-proxy".
-    type: ?NatGatewayApplianceType,
+    @"type": ?NatGatewayApplianceType,
 
     /// The VPC endpoint ID used to route traffic from application VPCs to the proxy
     /// for inspection and filtering.

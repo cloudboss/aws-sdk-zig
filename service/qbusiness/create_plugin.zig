@@ -35,7 +35,7 @@ pub const CreatePluginInput = struct {
     tags: ?[]const Tag = null,
 
     /// The type of plugin you want to create.
-    type: PluginType,
+    @"type": PluginType,
 
     pub const json_field_names = .{
         .application_id = "applicationId",
@@ -45,7 +45,7 @@ pub const CreatePluginInput = struct {
         .display_name = "displayName",
         .server_url = "serverUrl",
         .tags = "tags",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -146,7 +146,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreatePluginInput, config: 
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

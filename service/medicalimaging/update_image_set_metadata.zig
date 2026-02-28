@@ -132,7 +132,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: UpdateImageSetMetadataInput
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(alloc);
 
-    const body: ?[]const u8 = null;
+    const body = try aws.json.jsonStringify(input.update_image_set_metadata_updates, alloc);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

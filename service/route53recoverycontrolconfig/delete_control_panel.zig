@@ -13,7 +13,8 @@ pub const DeleteControlPanelInput = struct {
     };
 };
 
-pub const DeleteControlPanelOutput = struct {};
+pub const DeleteControlPanelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

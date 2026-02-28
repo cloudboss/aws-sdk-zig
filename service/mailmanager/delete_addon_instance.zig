@@ -13,7 +13,8 @@ pub const DeleteAddonInstanceInput = struct {
     };
 };
 
-pub const DeleteAddonInstanceOutput = struct {};
+pub const DeleteAddonInstanceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -14,7 +14,8 @@ pub const PutAccountVdmAttributesInput = struct {
     };
 };
 
-pub const PutAccountVdmAttributesOutput = struct {};
+pub const PutAccountVdmAttributesOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

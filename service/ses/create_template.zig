@@ -13,7 +13,8 @@ pub const CreateTemplateInput = struct {
     template: Template,
 };
 
-pub const CreateTemplateOutput = struct {};
+pub const CreateTemplateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

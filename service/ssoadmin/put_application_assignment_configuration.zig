@@ -23,7 +23,8 @@ pub const PutApplicationAssignmentConfigurationInput = struct {
     };
 };
 
-pub const PutApplicationAssignmentConfigurationOutput = struct {};
+pub const PutApplicationAssignmentConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

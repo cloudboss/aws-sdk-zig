@@ -25,7 +25,8 @@ pub const UpdateNotebookInstanceLifecycleConfigInput = struct {
     };
 };
 
-pub const UpdateNotebookInstanceLifecycleConfigOutput = struct {};
+pub const UpdateNotebookInstanceLifecycleConfigOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

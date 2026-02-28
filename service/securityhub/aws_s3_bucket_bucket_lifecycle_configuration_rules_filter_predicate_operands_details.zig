@@ -10,11 +10,11 @@ pub const AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDet
 
     /// The type of filter value.
     /// Valid values are `LifecyclePrefixPredicate` or `LifecycleTagPredicate`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .prefix = "Prefix",
         .tag = "Tag",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

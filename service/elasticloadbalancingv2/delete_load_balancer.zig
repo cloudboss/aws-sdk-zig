@@ -9,7 +9,8 @@ pub const DeleteLoadBalancerInput = struct {
     load_balancer_arn: []const u8,
 };
 
-pub const DeleteLoadBalancerOutput = struct {};
+pub const DeleteLoadBalancerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

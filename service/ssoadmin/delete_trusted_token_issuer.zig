@@ -13,7 +13,8 @@ pub const DeleteTrustedTokenIssuerInput = struct {
     };
 };
 
-pub const DeleteTrustedTokenIssuerOutput = struct {};
+pub const DeleteTrustedTokenIssuerOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

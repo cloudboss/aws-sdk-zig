@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetDefaultApplicationSettingInput = struct {};
+pub const GetDefaultApplicationSettingInput = struct {
+};
 
 pub const GetDefaultApplicationSettingOutput = struct {
     application_arn: ?[]const u8 = null,

@@ -13,7 +13,8 @@ pub const DeleteSimulationInput = struct {
     };
 };
 
-pub const DeleteSimulationOutput = struct {};
+pub const DeleteSimulationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

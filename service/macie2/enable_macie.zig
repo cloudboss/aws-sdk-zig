@@ -27,7 +27,8 @@ pub const EnableMacieInput = struct {
     };
 };
 
-pub const EnableMacieOutput = struct {};
+pub const EnableMacieOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

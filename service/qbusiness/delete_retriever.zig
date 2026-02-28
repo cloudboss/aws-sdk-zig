@@ -17,7 +17,8 @@ pub const DeleteRetrieverInput = struct {
     };
 };
 
-pub const DeleteRetrieverOutput = struct {};
+pub const DeleteRetrieverOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,7 +22,8 @@ pub const PutTelemetryRecordsInput = struct {
     };
 };
 
-pub const PutTelemetryRecordsOutput = struct {};
+pub const PutTelemetryRecordsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

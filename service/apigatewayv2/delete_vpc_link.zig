@@ -13,8 +13,7 @@ pub const DeleteVpcLinkInput = struct {
     };
 };
 
-pub const DeleteVpcLinkOutput = struct {
-};
+pub const DeleteVpcLinkOutput = struct {};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -94,7 +94,7 @@ pub const DescribeInferenceExperimentOutput = struct {
     status_reason: ?[]const u8 = null,
 
     /// The type of the inference experiment.
-    type: InferenceExperimentType,
+    @"type": InferenceExperimentType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -112,7 +112,7 @@ pub const DescribeInferenceExperimentOutput = struct {
         .shadow_mode_config = "ShadowModeConfig",
         .status = "Status",
         .status_reason = "StatusReason",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

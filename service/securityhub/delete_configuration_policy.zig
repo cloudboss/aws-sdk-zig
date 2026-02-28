@@ -14,7 +14,8 @@ pub const DeleteConfigurationPolicyInput = struct {
     };
 };
 
-pub const DeleteConfigurationPolicyOutput = struct {};
+pub const DeleteConfigurationPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

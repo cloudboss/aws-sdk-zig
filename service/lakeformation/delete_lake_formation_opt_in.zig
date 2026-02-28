@@ -21,7 +21,8 @@ pub const DeleteLakeFormationOptInInput = struct {
     };
 };
 
-pub const DeleteLakeFormationOptInOutput = struct {};
+pub const DeleteLakeFormationOptInOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

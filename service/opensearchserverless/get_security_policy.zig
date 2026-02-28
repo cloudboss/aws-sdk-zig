@@ -11,11 +11,11 @@ pub const GetSecurityPolicyInput = struct {
     name: []const u8,
 
     /// The type of security policy.
-    type: SecurityPolicyType,
+    @"type": SecurityPolicyType,
 
     pub const json_field_names = .{
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

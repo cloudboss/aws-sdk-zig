@@ -29,7 +29,8 @@ pub const UpdateClassifierInput = struct {
     };
 };
 
-pub const UpdateClassifierOutput = struct {};
+pub const UpdateClassifierOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

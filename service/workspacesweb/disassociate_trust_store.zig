@@ -13,7 +13,8 @@ pub const DisassociateTrustStoreInput = struct {
     };
 };
 
-pub const DisassociateTrustStoreOutput = struct {};
+pub const DisassociateTrustStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

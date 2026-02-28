@@ -14,7 +14,8 @@ pub const ImportCatalogToGlueInput = struct {
     };
 };
 
-pub const ImportCatalogToGlueOutput = struct {};
+pub const ImportCatalogToGlueOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

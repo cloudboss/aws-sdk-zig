@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessStatus = @import("access_status.zig").AccessStatus;
 
-pub const GetAWSOrganizationsAccessStatusInput = struct {};
+pub const GetAWSOrganizationsAccessStatusInput = struct {
+};
 
 pub const GetAWSOrganizationsAccessStatusOutput = struct {
     /// The status of the portfolio share feature.

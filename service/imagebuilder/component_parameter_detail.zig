@@ -12,12 +12,12 @@ pub const ComponentParameterDetail = struct {
 
     /// The type of input this parameter provides. The currently supported value is
     /// "string".
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .default_value = "defaultValue",
         .description = "description",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
     };
 };

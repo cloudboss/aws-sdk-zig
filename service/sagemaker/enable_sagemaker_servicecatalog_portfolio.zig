@@ -4,9 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const EnableSagemakerServicecatalogPortfolioInput = struct {};
+pub const EnableSagemakerServicecatalogPortfolioInput = struct {
+};
 
-pub const EnableSagemakerServicecatalogPortfolioOutput = struct {};
+pub const EnableSagemakerServicecatalogPortfolioOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

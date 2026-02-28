@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClassificationExportConfiguration = @import("classification_export_configuration.zig").ClassificationExportConfiguration;
 
-pub const GetClassificationExportConfigurationInput = struct {};
+pub const GetClassificationExportConfigurationInput = struct {
+};
 
 pub const GetClassificationExportConfigurationOutput = struct {
     /// The location where data classification results are stored, and the

@@ -9,10 +9,10 @@ pub const User = struct {
     id: []const u8,
 
     /// Specifies whether this is a single user or a group.
-    type: UserType,
+    @"type": UserType,
 
     pub const json_field_names = .{
         .id = "id",
-        .type = "type",
+        .@"type" = "type",
     };
 };

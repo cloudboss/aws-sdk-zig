@@ -13,7 +13,8 @@ pub const DeleteStateMachineInput = struct {
     };
 };
 
-pub const DeleteStateMachineOutput = struct {};
+pub const DeleteStateMachineOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

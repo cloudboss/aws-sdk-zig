@@ -12,7 +12,8 @@ pub const DeleteMulticastGroupInput = struct {
     };
 };
 
-pub const DeleteMulticastGroupOutput = struct {};
+pub const DeleteMulticastGroupOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

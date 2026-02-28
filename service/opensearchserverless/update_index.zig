@@ -22,7 +22,8 @@ pub const UpdateIndexInput = struct {
     };
 };
 
-pub const UpdateIndexOutput = struct {};
+pub const UpdateIndexOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

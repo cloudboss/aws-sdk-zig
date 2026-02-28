@@ -29,7 +29,8 @@ pub const DeregisterPackageVersionInput = struct {
     };
 };
 
-pub const DeregisterPackageVersionOutput = struct {};
+pub const DeregisterPackageVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

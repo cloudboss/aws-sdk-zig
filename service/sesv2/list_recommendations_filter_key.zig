@@ -12,13 +12,13 @@
 /// * `RESOURCE_ARN` – The resource affected by the recommendation,
 /// with values like `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
 pub const ListRecommendationsFilterKey = enum {
-    type,
+    @"type",
     impact,
     status,
     resource_arn,
 
     pub const json_field_names = .{
-        .type = "TYPE",
+        .@"type" = "TYPE",
         .impact = "IMPACT",
         .status = "STATUS",
         .resource_arn = "RESOURCE_ARN",

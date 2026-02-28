@@ -27,7 +27,8 @@ pub const DeleteAPIKeyInput = struct {
     };
 };
 
-pub const DeleteAPIKeyOutput = struct {};
+pub const DeleteAPIKeyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

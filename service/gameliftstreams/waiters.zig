@@ -100,7 +100,7 @@ pub const ApplicationReadyWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getApplication(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getApplication(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -157,7 +157,7 @@ pub const StreamGroupActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getStreamGroup(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getStreamGroup(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 
@@ -278,7 +278,7 @@ pub const StreamSessionActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getStreamSession(arena.allocator(), self.params, .{}) catch {
+        const output = self.client.getStreamSession(arena.allocator(), self.params, .{}) catch  {
             return .retry;
         };
 

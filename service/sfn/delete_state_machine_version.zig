@@ -13,7 +13,8 @@ pub const DeleteStateMachineVersionInput = struct {
     };
 };
 
-pub const DeleteStateMachineVersionOutput = struct {};
+pub const DeleteStateMachineVersionOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

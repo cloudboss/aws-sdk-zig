@@ -44,7 +44,8 @@ pub const DeleteRegexPatternSetInput = struct {
     };
 };
 
-pub const DeleteRegexPatternSetOutput = struct {};
+pub const DeleteRegexPatternSetOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

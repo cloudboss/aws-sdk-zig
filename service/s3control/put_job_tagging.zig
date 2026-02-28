@@ -18,7 +18,8 @@ pub const PutJobTaggingInput = struct {
     tags: []const S3Tag,
 };
 
-pub const PutJobTaggingOutput = struct {};
+pub const PutJobTaggingOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

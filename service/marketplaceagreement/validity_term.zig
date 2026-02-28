@@ -18,12 +18,12 @@ pub const ValidityTerm = struct {
     agreement_start_date: ?i64,
 
     /// Category of the term being updated.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     pub const json_field_names = .{
         .agreement_duration = "agreementDuration",
         .agreement_end_date = "agreementEndDate",
         .agreement_start_date = "agreementStartDate",
-        .type = "type",
+        .@"type" = "type",
     };
 };

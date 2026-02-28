@@ -41,7 +41,8 @@ pub const SendAutomationSignalInput = struct {
     };
 };
 
-pub const SendAutomationSignalOutput = struct {};
+pub const SendAutomationSignalOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

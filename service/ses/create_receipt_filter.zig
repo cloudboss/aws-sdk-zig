@@ -13,7 +13,8 @@ pub const CreateReceiptFilterInput = struct {
     filter: ReceiptFilter,
 };
 
-pub const CreateReceiptFilterOutput = struct {};
+pub const CreateReceiptFilterOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

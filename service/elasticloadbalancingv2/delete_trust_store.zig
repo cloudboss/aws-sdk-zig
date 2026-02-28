@@ -9,7 +9,8 @@ pub const DeleteTrustStoreInput = struct {
     trust_store_arn: []const u8,
 };
 
-pub const DeleteTrustStoreOutput = struct {};
+pub const DeleteTrustStoreOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

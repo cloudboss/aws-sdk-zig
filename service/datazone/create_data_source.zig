@@ -66,7 +66,7 @@ pub const CreateDataSourceInput = struct {
     /// warehouses into Amazon DataZone. In the current release of Amazon DataZone,
     /// you can create and run data sources for Amazon Web Services Glue and Amazon
     /// Redshift.
-    type: []const u8,
+    @"type": []const u8,
 
     pub const json_field_names = .{
         .asset_forms_input = "assetFormsInput",
@@ -82,7 +82,7 @@ pub const CreateDataSourceInput = struct {
         .publish_on_import = "publishOnImport",
         .recommendation = "recommendation",
         .schedule = "schedule",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -151,7 +151,7 @@ pub const CreateDataSourceOutput = struct {
     status: ?DataSourceStatus = null,
 
     /// The type of the data source.
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     /// The timestamp of when the data source was updated.
     updated_at: ?i64 = null,
@@ -176,7 +176,7 @@ pub const CreateDataSourceOutput = struct {
         .recommendation = "recommendation",
         .schedule = "schedule",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };
@@ -297,7 +297,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateDataSourceInput, conf
     }
     if (has_prev) try body_buf.appendSlice(alloc, ",");
     try body_buf.appendSlice(alloc, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.type), input.type, alloc, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", alloc, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(alloc, "}");

@@ -33,7 +33,8 @@ pub const CreateClassifierInput = struct {
     };
 };
 
-pub const CreateClassifierOutput = struct {};
+pub const CreateClassifierOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

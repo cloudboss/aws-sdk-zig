@@ -4,7 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DescribeSecurityHubV2Input = struct {};
+pub const DescribeSecurityHubV2Input = struct {
+};
 
 pub const DescribeSecurityHubV2Output = struct {
     /// The ARN of the service resource.

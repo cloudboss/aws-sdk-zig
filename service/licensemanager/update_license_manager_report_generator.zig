@@ -34,7 +34,7 @@ pub const UpdateLicenseManagerReportGeneratorInput = struct {
     ///
     /// * Resource report - Reports the tracked licenses and resource consumption
     ///   for a license configuration.
-    type: []const ReportType,
+    @"type": []const ReportType,
 
     pub const json_field_names = .{
         .client_token = "ClientToken",
@@ -43,11 +43,12 @@ pub const UpdateLicenseManagerReportGeneratorInput = struct {
         .report_context = "ReportContext",
         .report_frequency = "ReportFrequency",
         .report_generator_name = "ReportGeneratorName",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 
-pub const UpdateLicenseManagerReportGeneratorOutput = struct {};
+pub const UpdateLicenseManagerReportGeneratorOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DisassociateDataProtectionSettingsInput = struct {
     };
 };
 
-pub const DisassociateDataProtectionSettingsOutput = struct {};
+pub const DisassociateDataProtectionSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

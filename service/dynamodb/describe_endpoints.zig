@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const Endpoint = @import("endpoint.zig").Endpoint;
 
-pub const DescribeEndpointsInput = struct {};
+pub const DescribeEndpointsInput = struct {
+};
 
 pub const DescribeEndpointsOutput = struct {
     /// List of endpoints.

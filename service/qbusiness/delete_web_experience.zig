@@ -18,7 +18,8 @@ pub const DeleteWebExperienceInput = struct {
     };
 };
 
-pub const DeleteWebExperienceOutput = struct {};
+pub const DeleteWebExperienceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

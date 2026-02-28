@@ -45,7 +45,8 @@ pub const DeleteLoggingConfigurationInput = struct {
     };
 };
 
-pub const DeleteLoggingConfigurationOutput = struct {};
+pub const DeleteLoggingConfigurationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

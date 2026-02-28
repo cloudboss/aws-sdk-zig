@@ -47,7 +47,7 @@ pub const DataSourceSummary = struct {
     status: DataSourceStatus,
 
     /// The type of the data source.
-    type: []const u8,
+    @"type": []const u8,
 
     /// The timestamp of when the data source was updated.
     updated_at: ?i64,
@@ -67,7 +67,7 @@ pub const DataSourceSummary = struct {
         .name = "name",
         .schedule = "schedule",
         .status = "status",
-        .type = "type",
+        .@"type" = "type",
         .updated_at = "updatedAt",
     };
 };

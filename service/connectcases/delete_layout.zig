@@ -17,7 +17,8 @@ pub const DeleteLayoutInput = struct {
     };
 };
 
-pub const DeleteLayoutOutput = struct {};
+pub const DeleteLayoutOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -54,7 +54,7 @@ pub const GetIngressPointOutput = struct {
     traffic_policy_id: ?[]const u8 = null,
 
     /// The type of ingress endpoint.
-    type: ?IngressPointType = null,
+    @"type": ?IngressPointType = null,
 
     pub const json_field_names = .{
         .a_record = "ARecord",
@@ -68,7 +68,7 @@ pub const GetIngressPointOutput = struct {
         .rule_set_id = "RuleSetId",
         .status = "Status",
         .traffic_policy_id = "TrafficPolicyId",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

@@ -26,7 +26,8 @@ pub const DisassociateVolumeInput = struct {
     };
 };
 
-pub const DisassociateVolumeOutput = struct {};
+pub const DisassociateVolumeOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -13,7 +13,8 @@ pub const DeleteSinkInput = struct {
     };
 };
 
-pub const DeleteSinkOutput = struct {};
+pub const DeleteSinkOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

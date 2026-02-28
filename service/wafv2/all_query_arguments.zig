@@ -4,4 +4,5 @@
 /// component types.
 ///
 /// JSON specification: `"AllQueryArguments": {}`
-pub const AllQueryArguments = struct {};
+pub const AllQueryArguments = struct {
+};

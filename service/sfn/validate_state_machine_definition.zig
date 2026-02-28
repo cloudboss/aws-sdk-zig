@@ -30,13 +30,13 @@ pub const ValidateStateMachineDefinitionInput = struct {
 
     /// The target type of state machine for this definition. The default is
     /// `STANDARD`.
-    type: ?StateMachineType = null,
+    @"type": ?StateMachineType = null,
 
     pub const json_field_names = .{
         .definition = "definition",
         .max_results = "maxResults",
         .severity = "severity",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 

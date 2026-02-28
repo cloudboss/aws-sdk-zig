@@ -42,7 +42,7 @@ pub const AssetModelPropertyDefinition = struct {
 
     /// The property definition type (see `PropertyType`). You can only specify one
     /// type in a property definition.
-    type: PropertyType,
+    @"type": PropertyType,
 
     /// The unit of the property definition, such as `Newtons` or
     /// `RPM`.
@@ -54,7 +54,7 @@ pub const AssetModelPropertyDefinition = struct {
         .external_id = "externalId",
         .id = "id",
         .name = "name",
-        .type = "type",
+        .@"type" = "type",
         .unit = "unit",
     };
 };

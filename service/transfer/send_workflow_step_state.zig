@@ -27,7 +27,8 @@ pub const SendWorkflowStepStateInput = struct {
     };
 };
 
-pub const SendWorkflowStepStateOutput = struct {};
+pub const SendWorkflowStepStateOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

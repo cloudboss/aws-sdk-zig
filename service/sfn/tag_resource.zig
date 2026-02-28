@@ -22,7 +22,8 @@ pub const TagResourceInput = struct {
     };
 };
 
-pub const TagResourceOutput = struct {};
+pub const TagResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

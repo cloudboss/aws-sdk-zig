@@ -7,10 +7,10 @@ pub const PermissionInfo = struct {
     role: ?RoleType,
 
     /// The type of permissions.
-    type: ?RolePermissionType,
+    @"type": ?RolePermissionType,
 
     pub const json_field_names = .{
         .role = "Role",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };

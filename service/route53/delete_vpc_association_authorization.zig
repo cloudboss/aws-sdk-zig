@@ -20,7 +20,8 @@ pub const DeleteVPCAssociationAuthorizationInput = struct {
     vpc: VPC,
 };
 
-pub const DeleteVPCAssociationAuthorizationOutput = struct {};
+pub const DeleteVPCAssociationAuthorizationOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

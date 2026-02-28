@@ -101,7 +101,7 @@ pub const ProvisionedProductAttribute = struct {
     /// The supported values are `CFN_STACK`, `CFN_STACKSET`,
     /// `TERRAFORM_OPEN_SOURCE`,
     /// `TERRAFORM_CLOUD`, and `EXTERNAL`.
-    type: ?[]const u8,
+    @"type": ?[]const u8,
 
     /// The Amazon Resource Name (ARN) of the user.
     user_arn: ?[]const u8,
@@ -126,7 +126,7 @@ pub const ProvisionedProductAttribute = struct {
         .status = "Status",
         .status_message = "StatusMessage",
         .tags = "Tags",
-        .type = "Type",
+        .@"type" = "Type",
         .user_arn = "UserArn",
         .user_arn_session = "UserArnSession",
     };

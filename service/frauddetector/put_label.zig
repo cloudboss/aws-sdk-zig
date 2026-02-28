@@ -22,7 +22,8 @@ pub const PutLabelInput = struct {
     };
 };
 
-pub const PutLabelOutput = struct {};
+pub const PutLabelOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

@@ -22,7 +22,8 @@ pub const RevokeVpcEndpointAccessInput = struct {
     };
 };
 
-pub const RevokeVpcEndpointAccessOutput = struct {};
+pub const RevokeVpcEndpointAccessOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

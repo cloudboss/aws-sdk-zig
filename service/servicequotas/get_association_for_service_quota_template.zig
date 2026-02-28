@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const ServiceQuotaTemplateAssociationStatus = @import("service_quota_template_association_status.zig").ServiceQuotaTemplateAssociationStatus;
 
-pub const GetAssociationForServiceQuotaTemplateInput = struct {};
+pub const GetAssociationForServiceQuotaTemplateInput = struct {
+};
 
 pub const GetAssociationForServiceQuotaTemplateOutput = struct {
     /// The association status. If the status is `ASSOCIATED`, the quota increase

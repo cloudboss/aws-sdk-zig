@@ -49,7 +49,7 @@ pub const CreateProvisioningTemplateInput = struct {
     /// `FLEET_PROVISIONING`.
     /// For more information about provisioning template, see: [Provisioning
     /// template](https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html).
-    type: ?TemplateType = null,
+    @"type": ?TemplateType = null,
 
     pub const json_field_names = .{
         .description = "description",
@@ -59,7 +59,7 @@ pub const CreateProvisioningTemplateInput = struct {
         .tags = "tags",
         .template_body = "templateBody",
         .template_name = "templateName",
-        .type = "type",
+        .@"type" = "type",
     };
 };
 
@@ -158,7 +158,7 @@ fn serializeRequest(alloc: std.mem.Allocator, input: CreateProvisioningTemplateI
     try body_buf.appendSlice(alloc, "\"templateName\":");
     try aws.json.writeValue(@TypeOf(input.template_name), input.template_name, alloc, &body_buf);
     has_prev = true;
-    if (input.type) |v| {
+    if (input.@"type") |v| {
         if (has_prev) try body_buf.appendSlice(alloc, ",");
         try body_buf.appendSlice(alloc, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, alloc, &body_buf);

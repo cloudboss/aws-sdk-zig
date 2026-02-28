@@ -13,7 +13,8 @@ pub const DisassociateIpAccessSettingsInput = struct {
     };
 };
 
-pub const DisassociateIpAccessSettingsOutput = struct {};
+pub const DisassociateIpAccessSettingsOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

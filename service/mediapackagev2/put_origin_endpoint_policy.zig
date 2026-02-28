@@ -40,7 +40,8 @@ pub const PutOriginEndpointPolicyInput = struct {
     };
 };
 
-pub const PutOriginEndpointPolicyOutput = struct {};
+pub const PutOriginEndpointPolicyOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,
