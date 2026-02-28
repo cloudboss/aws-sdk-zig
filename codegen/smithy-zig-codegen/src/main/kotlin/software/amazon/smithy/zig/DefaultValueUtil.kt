@@ -8,6 +8,7 @@ import software.amazon.smithy.model.node.Node
 import software.amazon.smithy.model.node.NullNode
 import software.amazon.smithy.model.node.NumberNode
 import software.amazon.smithy.model.node.StringNode
+import software.amazon.smithy.model.shapes.BlobShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.traits.DefaultTrait
 
@@ -25,8 +26,10 @@ object DefaultValueUtil {
         if (!memberShape.hasTrait(DefaultTrait::class.java)) return null
 
         val node = memberShape.getTrait(DefaultTrait::class.java).get().toNode()
+        val targetShape = model.expectShape(memberShape.target)
+        if (node is StringNode && targetShape is BlobShape) return null
         val literal = nodeToZigLiteral(node) ?: return null
-        val typeName = symbolProvider.toSymbol(model.expectShape(memberShape.target)).name
+        val typeName = symbolProvider.toSymbol(targetShape).name
 
         return DefaultValue(typeName = typeName, literal = literal)
     }

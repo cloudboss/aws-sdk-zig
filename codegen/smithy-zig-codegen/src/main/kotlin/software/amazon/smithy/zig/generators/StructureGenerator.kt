@@ -14,6 +14,7 @@ import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.EnumTrait
+import software.amazon.smithy.model.traits.InputTrait
 import software.amazon.smithy.codegen.core.directed.GenerateStructureDirective
 import software.amazon.smithy.zig.DefaultValueUtil
 import software.amazon.smithy.zig.NamingUtil
@@ -37,6 +38,7 @@ class StructureGenerator(
 
     fun run() {
         context.writerDelegator().useShapeWriter(shape) { writer ->
+            val isInputStruct = shape.hasTrait(InputTrait::class.java)
             // Import aws runtime if any member transitively uses map types
             fun containsMap(target: software.amazon.smithy.model.shapes.Shape): Boolean {
                 return when (target) {
@@ -81,8 +83,12 @@ class StructureGenerator(
                     .orElse(null)
 
                 val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, symbolProvider)
+                val hasMemberDefault = memberShape.hasTrait(software.amazon.smithy.model.traits.DefaultTrait::class.java)
                 val baseZigType = memberSymbol.name
-                val zigType = if (defaultValue != null) {
+                val defaultBaseType = (defaultValue?.typeName ?: baseZigType).removePrefix("?")
+                val zigType = if (isInputStruct && hasMemberDefault) {
+                    "?$defaultBaseType"
+                } else if (defaultValue != null) {
                     defaultValue.typeName
                 } else if (isRecursiveStructMember(memberShape)) {
                     // Recursive struct members need pointer indirection so Zig can compute the struct size.
@@ -91,7 +97,7 @@ class StructureGenerator(
                 } else {
                     baseZigType
                 }
-                val defaultSuffix = if (defaultValue != null) " = ${defaultValue.literal}" else if (zigType.startsWith("?*")) " = null" else ""
+                val defaultSuffix = if (isInputStruct && hasMemberDefault) " = null" else if (defaultValue != null) " = ${defaultValue.literal}" else if (zigType.startsWith("?*")) " = null" else ""
 
                 if (!firstField) {
                     writer.blankLine()

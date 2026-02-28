@@ -10,7 +10,7 @@ const ServerSideEncryption = @import("server_side_encryption.zig").ServerSideEnc
 
 pub const UploadPartInput = struct {
     /// Object data.
-    body: aws.http.StreamingBody = "",
+    body: ?[]const u8 = null,
 
     /// The name of the bucket to which the multipart upload was initiated.
     ///

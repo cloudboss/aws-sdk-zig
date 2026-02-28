@@ -29,7 +29,7 @@ pub const CreateDelegationRequestInput = struct {
     /// sent
     /// to a more privileged user for approval due to the owner lacking sufficient
     /// delegation permissions.
-    only_send_by_owner: bool = false,
+    only_send_by_owner: ?bool = null,
 
     /// The Amazon Web Services account ID this delegation request is targeted to.
     ///

@@ -55,7 +55,7 @@ pub const PutObjectInput = struct {
     acl: ?ObjectCannedACL = null,
 
     /// Object data.
-    body: aws.http.StreamingBody = "",
+    body: ?[]const u8 = null,
 
     /// The bucket name to which the PUT action was initiated.
     ///

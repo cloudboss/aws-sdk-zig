@@ -4,123 +4,27 @@
         "model"
     ],
     "projections": {
-        "vpclattice": {
+        "iam": {
             "plugins": {
                 "zig-codegen": {
-                    "service": "com.amazonaws.vpclattice#MercuryControlPlane",
-                    "package": "vpclattice"
+                    "service": "com.amazonaws.iam#AWSIdentityManagementV20100508",
+                    "package": "iam"
                 }
             }
         },
-        "waf": {
+        "s3": {
             "plugins": {
                 "zig-codegen": {
-                    "service": "com.amazonaws.waf#AWSWAF_20150824",
-                    "package": "waf"
+                    "service": "com.amazonaws.s3#AmazonS3",
+                    "package": "s3"
                 }
             }
         },
-        "wafregional": {
+        "sns": {
             "plugins": {
                 "zig-codegen": {
-                    "service": "com.amazonaws.wafregional#AWSWAF_Regional_20161128",
-                    "package": "wafregional"
-                }
-            }
-        },
-        "wafv2": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.wafv2#AWSWAF_20190729",
-                    "package": "wafv2"
-                }
-            }
-        },
-        "wellarchitected": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.wellarchitected#WellArchitectedApiServiceLambda",
-                    "package": "wellarchitected"
-                }
-            }
-        },
-        "wickr": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.wickr#WickrAdminApi",
-                    "package": "wickr"
-                }
-            }
-        },
-        "wisdom": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.wisdom#WisdomService",
-                    "package": "wisdom"
-                }
-            }
-        },
-        "workdocs": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.workdocs#AWSGorillaBoyService",
-                    "package": "workdocs"
-                }
-            }
-        },
-        "workmail": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.workmail#WorkMailService",
-                    "package": "workmail"
-                }
-            }
-        },
-        "workmailmessageflow": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.workmailmessageflow#GiraffeMessageInTransitService",
-                    "package": "workmailmessageflow"
-                }
-            }
-        },
-        "workspaces": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.workspaces#WorkspacesService",
-                    "package": "workspaces"
-                }
-            }
-        },
-        "workspacesinstances": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.workspacesinstances#EUCMIFrontendAPIService",
-                    "package": "workspacesinstances"
-                }
-            }
-        },
-        "workspacesthinclient": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.workspacesthinclient#ThinClient",
-                    "package": "workspacesthinclient"
-                }
-            }
-        },
-        "workspacesweb": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.workspacesweb#AWSErmineControlPlaneService",
-                    "package": "workspacesweb"
-                }
-            }
-        },
-        "xray": {
-            "plugins": {
-                "zig-codegen": {
-                    "service": "com.amazonaws.xray#AWSXRay",
-                    "package": "xray"
+                    "service": "com.amazonaws.sns#AmazonSimpleNotificationService",
+                    "package": "sns"
                 }
             }
         }

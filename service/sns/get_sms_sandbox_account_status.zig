@@ -10,7 +10,7 @@ pub const GetSMSSandboxAccountStatusInput = struct {
 pub const GetSMSSandboxAccountStatusOutput = struct {
     /// Indicates whether the calling Amazon Web Services account is in the SMS
     /// sandbox.
-    is_in_sandbox: bool = false,
+    is_in_sandbox: ?bool = null,
 };
 
 pub const Options = struct {

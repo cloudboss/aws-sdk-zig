@@ -16,7 +16,7 @@ pub const WriteGetObjectResponseInput = struct {
     accept_ranges: ?[]const u8 = null,
 
     /// The object data.
-    body: aws.http.StreamingBody = "",
+    body: ?[]const u8 = null,
 
     /// Indicates whether the object stored in Amazon S3 uses an S3 bucket key for
     /// server-side encryption with

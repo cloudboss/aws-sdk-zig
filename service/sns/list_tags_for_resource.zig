@@ -6,9 +6,15 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The ARN of the topic for which to list tags.
+    resource_arn: []const u8,
+};
 
-const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const ListTagsForResourceOutput = struct {
+    /// The tags associated with the specified topic.
+    tags: ?[]const Tag = null,
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

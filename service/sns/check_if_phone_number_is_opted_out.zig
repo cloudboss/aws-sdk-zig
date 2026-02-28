@@ -17,7 +17,7 @@ pub const CheckIfPhoneNumberIsOptedOutOutput = struct {
     ///
     /// * `false` – The phone number is opted in, meaning you can publish SMS
     /// messages to it.
-    is_opted_out: bool = false,
+    is_opted_out: ?bool = null,
 };
 
 pub const Options = struct {

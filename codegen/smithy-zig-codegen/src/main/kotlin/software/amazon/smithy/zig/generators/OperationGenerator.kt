@@ -189,7 +189,8 @@ class OperationGenerator(
             val fieldName = NamingUtil.toFieldName(memberName)
             val targetShape = model.expectShape(memberShape.target)
             // Override streaming blob input types to []const u8 (input streaming deferred)
-            val zigType = if (ctx.isStreamingBlob(targetShape)) {
+            val hasMemberDefault = memberShape.hasTrait(software.amazon.smithy.model.traits.DefaultTrait::class.java)
+            val zigType = if (ctx.isStreamingBlob(targetShape) && !hasMemberDefault) {
                 if (memberShape.isRequired) "[]const u8" else "?[]const u8"
             } else {
                 ctx.resolveZigType(memberShape, targetShape)
@@ -207,9 +208,14 @@ class OperationGenerator(
             }
 
             val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, context.symbolProvider())
-            val defaultSuffix = defaultValue?.let { " = ${it.literal}" }
+            val defaultBaseType = (defaultValue?.typeName ?: zigType).removePrefix("?")
+            val outputType = if (hasMemberDefault) {
+                "?$defaultBaseType"
+            } else {
+                defaultValue?.typeName ?: zigType
+            }
+            val defaultSuffix = if (hasMemberDefault) " = null" else defaultValue?.let { " = ${it.literal}" }
                 ?: if (!memberShape.isRequired) " = null" else ""
-            val outputType = defaultValue?.typeName ?: zigType
             writer.write("\$L: \$L\$L,", fieldName, outputType, defaultSuffix)
             firstField = false
         }
@@ -232,13 +238,16 @@ class OperationGenerator(
             val baseType = ctx.resolveBaseZigType(targetShape)
             val isScalar = ctx.isScalarType(targetShape)
             val isStreamingBlobField = ctx.isStreamingBlob(targetShape)
+            val hasMemberDefault = memberShape.hasTrait(software.amazon.smithy.model.traits.DefaultTrait::class.java)
 
             // Streaming blob fields are not optional -- they always hold the connection
             // They use `= undefined` default since deserializeStreamingResponse sets them immediately
             val isOptional = if (isStreamingBlobField) false
                 else !memberShape.isRequired || !isScalar
             val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, context.symbolProvider())
-            val zigType = if (defaultValue != null) {
+            val zigType = if (hasMemberDefault) {
+                "?$baseType"
+            } else if (defaultValue != null) {
                 defaultValue.typeName
             } else if (isOptional) {
                 "?$baseType"
@@ -246,6 +255,7 @@ class OperationGenerator(
                 baseType
             }
             val defaultSuffix = when {
+                hasMemberDefault -> " = null"
                 defaultValue != null -> " = ${defaultValue.literal}"
                 isStreamingBlobField -> " = undefined"
                 isOptional -> " = null"

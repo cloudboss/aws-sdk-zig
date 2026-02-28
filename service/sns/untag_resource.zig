@@ -5,9 +5,16 @@ const Client = @import("client.zig").Client;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The ARN of the topic from which to remove tags.
+    resource_arn: []const u8,
 
-const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// The list of tag keys to remove from the specified topic.
+    tag_keys: []const []const u8,
+};
+
+pub const UntagResourceOutput = struct {
+};
 
 pub const Options = struct {
     diagnostic: ?*ServiceError = null,

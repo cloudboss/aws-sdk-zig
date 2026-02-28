@@ -601,7 +601,7 @@ class RestJsonProtocolTest {
         val op = files["list_functions.zig"]!!
 
         assertTrue(
-            op.contains("max_items: []const u8 = \"\""),
+            op.contains("max_items: ?[]const u8 = null"),
             "ListFunctionsInput should use default value for MaxItems",
         )
     }

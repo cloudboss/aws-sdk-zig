@@ -38,7 +38,7 @@ pub const ListPoliciesInput = struct {
     /// the policies that are attached to an IAM user, group, or role. When
     /// `OnlyAttached` is `false`, or when the parameter is not
     /// included, all policies are returned.
-    only_attached: bool = false,
+    only_attached: ?bool = null,
 
     /// The path prefix for filtering the results. This parameter is optional. If it
     /// is not
@@ -86,7 +86,7 @@ pub const ListPoliciesOutput = struct {
     /// that you check `IsTruncated` after every call to ensure that you receive all
     /// your
     /// results.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// When `IsTruncated` is `true`, this element
     /// is present and contains the value to use for the `Marker` parameter in a

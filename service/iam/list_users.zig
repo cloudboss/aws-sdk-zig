@@ -57,7 +57,7 @@ pub const ListUsersOutput = struct {
     /// that you check `IsTruncated` after every call to ensure that you receive all
     /// your
     /// results.
-    is_truncated: bool = false,
+    is_truncated: ?bool = null,
 
     /// When `IsTruncated` is `true`, this element
     /// is present and contains the value to use for the `Marker` parameter in a
