@@ -173,3 +173,68 @@ fn expectHeadersEqual(
         }
     }
 }
+
+test "event stream reader iterates multiple events" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    const names = [_][]const u8{
+        "Records",
+        "Stats",
+        "End",
+    };
+    var total_len: usize = 0;
+    var frame_bufs: [3][]const u8 = undefined;
+    for (names, 0..) |name, i| {
+        const hdrs = [_]aws.event_stream.Header{
+            .{
+                .name = ":message-type",
+                .value = .{ .string = "event" },
+            },
+            .{
+                .name = ":event-type",
+                .value = .{ .string = name },
+            },
+            .{
+                .name = ":content-type",
+                .value = .{ .string = "application/octet-stream" },
+            },
+        };
+        frame_bufs[i] = try aws.event_stream.encodeMessage(
+            alloc,
+            .{ .headers = &hdrs, .payload = name },
+        );
+        total_len += frame_bufs[i].len;
+    }
+
+    const combined = try alloc.alloc(u8, total_len);
+    var offset: usize = 0;
+    for (&frame_bufs) |buf| {
+        @memcpy(combined[offset .. offset + buf.len], buf);
+        offset += buf.len;
+    }
+
+    var fbs = std.io.fixedBufferStream(combined);
+    const Reader = aws.event_stream_reader.EventStreamReader;
+    var reader = try Reader.init(alloc, fbs.reader().any());
+    defer reader.deinit();
+
+    for (names) |name| {
+        const event = (try reader.next()) orelse
+            return error.TestUnexpectedResult;
+        try std.testing.expectEqualStrings(
+            name,
+            event.event_type,
+        );
+        try std.testing.expectEqualStrings(
+            "application/octet-stream",
+            event.content_type.?,
+        );
+        try std.testing.expectEqualStrings(
+            name,
+            event.payload,
+        );
+    }
+    try std.testing.expectEqual(null, try reader.next());
+}

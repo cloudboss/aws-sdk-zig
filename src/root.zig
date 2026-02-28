@@ -28,6 +28,7 @@ pub const sso = @import("sso.zig");
 pub const assume_role = @import("assume_role.zig");
 pub const user_agent = @import("user_agent.zig");
 pub const event_stream = @import("event_stream.zig");
+pub const event_stream_reader = @import("event_stream_reader.zig");
 pub const gzip = @import("gzip.zig");
 
 // Re-exports
@@ -35,6 +36,7 @@ pub const Credentials = credentials.Credentials;
 pub const CredentialsProvider = credentials.CredentialsProvider;
 pub const Config = config.Config;
 pub const RetryMode = config.RetryMode;
+pub const StsRegionalEndpoints = config.StsRegionalEndpoints;
 pub const Diagnostic = errors.Diagnostic;
 pub const ImdsClient = imds.Client;
 pub const EcsProvider = ecs.Provider;
